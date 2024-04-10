@@ -1,0 +1,398 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ClassWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.internal.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: ClassWriter (com.alibaba.fastjson2.internal.asm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClassWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.5%
+  </span>
+  <span class="absValue">
+    (86/93)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;// ASM: a very small and fast Java bytecode manipulation framework
+&nbsp;// Copyright (c) 2000-2011 INRIA, France Telecom
+&nbsp;// All rights reserved.
+&nbsp;//
+&nbsp;// Redistribution and use in source and binary forms, with or without
+&nbsp;// modification, are permitted provided that the following conditions
+&nbsp;// are met:
+&nbsp;// 1. Redistributions of source code must retain the above copyright
+&nbsp;//    notice, this list of conditions and the following disclaimer.
+&nbsp;// 2. Redistributions in binary form must reproduce the above copyright
+&nbsp;//    notice, this list of conditions and the following disclaimer in the
+&nbsp;//    documentation and/or other materials provided with the distribution.
+&nbsp;// 3. Neither the name of the copyright holders nor the names of its
+&nbsp;//    contributors may be used to endorse or promote products derived from
+&nbsp;//    this software without specific prior written permission.
+&nbsp;//
+&nbsp;// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+&nbsp;// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+&nbsp;// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+&nbsp;// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+&nbsp;// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+&nbsp;// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+&nbsp;// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+&nbsp;// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+&nbsp;// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+&nbsp;// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+&nbsp;// THE POSSIBILITY OF SUCH DAMAGE.
+&nbsp;package com.alibaba.fastjson2.internal.asm;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;public class ClassWriter {
+&nbsp;    private Function&lt;String, Class&gt; typeProvider;
+&nbsp;    /**
+&nbsp;     * The minor_version and major_version fields of the JVMS ClassFile structure. minor_version is
+&nbsp;     * stored in the 16 most significant bits, and major_version in the 16 least significant bits.
+&nbsp;     */
+&nbsp;    private int version;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The symbol table for this class (contains the constant_pool and the BootstrapMethods).
+&nbsp;     */
+&nbsp;    private final SymbolTable symbolTable;
+&nbsp;
+&nbsp;    private int accessFlags;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The this_class field of the JVMS ClassFile structure.
+&nbsp;     */
+&nbsp;    private int thisClass;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The super_class field of the JVMS ClassFile structure.
+&nbsp;     */
+&nbsp;    private int superClass;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The interface_count field of the JVMS ClassFile structure.
+&nbsp;     */
+&nbsp;    private int interfaceCount;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The &#39;interfaces&#39; array of the JVMS ClassFile structure.
+&nbsp;     */
+&nbsp;    private int[] interfaces;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The fields of this class, stored in a linked list of {@link FieldWriter} linked via their
+&nbsp;     * {@link FieldWriter#fv} field. This field stores the first element of this list.
+&nbsp;     */
+&nbsp;    private FieldWriter firstField;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The fields of this class, stored in a linked list of {@link FieldWriter} linked via their
+&nbsp;     * {@link FieldWriter#fv} field. This field stores the last element of this list.
+&nbsp;     */
+&nbsp;    private FieldWriter lastField;
+&nbsp;
+&nbsp;    private MethodWriter firstMethod;
+&nbsp;
+&nbsp;    private MethodWriter lastMethod;
+&nbsp;
+<b class="fc">&nbsp;    public ClassWriter(Function&lt;String, Class&gt; typeProvider) {</b>
+<b class="fc">&nbsp;        symbolTable = new SymbolTable(this);</b>
+<b class="fc">&nbsp;        this.typeProvider = typeProvider;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void visit(
+&nbsp;            final int version,
+&nbsp;            final int access,
+&nbsp;            final String name,
+&nbsp;            final String superName,
+&nbsp;            final String[] interfaces) {
+<b class="fc">&nbsp;        this.version = version;</b>
+<b class="fc">&nbsp;        this.accessFlags = access;</b>
+<b class="fc">&nbsp;        this.thisClass = symbolTable.setMajorVersionAndClassName(version &amp; 0xFFFF, name);</b>
+<b class="fc">&nbsp;        this.superClass = superName == null ? 0 : symbolTable.addConstantUtf8Reference(/*CONSTANT_CLASS_TAG*/ 7, superName).index;</b>
+<b class="fc">&nbsp;        if (interfaces != null &amp;&amp; interfaces.length &gt; 0) {</b>
+<b class="fc">&nbsp;            interfaceCount = interfaces.length;</b>
+<b class="fc">&nbsp;            this.interfaces = new int[interfaceCount];</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; interfaceCount; ++i) {</b>
+<b class="fc">&nbsp;                this.interfaces[i] = symbolTable.addConstantUtf8Reference(/*CONSTANT_CLASS_TAG*/ 7, interfaces[i]).index;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public final FieldWriter visitField(
+&nbsp;            final int access,
+&nbsp;            final String name,
+&nbsp;            final String descriptor) {
+<b class="fc">&nbsp;        FieldWriter fieldWriter =</b>
+&nbsp;                new FieldWriter(symbolTable, access, name, descriptor);
+<b class="fc">&nbsp;        if (firstField == null) {</b>
+<b class="fc">&nbsp;            firstField = fieldWriter;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            lastField.fv = fieldWriter;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return lastField = fieldWriter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final MethodWriter visitMethod(
+&nbsp;            int access,
+&nbsp;            String name,
+&nbsp;            String descriptor,
+&nbsp;            int codeInitCapacity
+&nbsp;    ) {
+<b class="fc">&nbsp;        MethodWriter methodWriter =</b>
+&nbsp;                new MethodWriter(symbolTable, access, name, descriptor, codeInitCapacity);
+<b class="fc">&nbsp;        if (firstMethod == null) {</b>
+<b class="fc">&nbsp;            firstMethod = methodWriter;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            lastMethod.mv = methodWriter;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return lastMethod = methodWriter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the content of the class file that was built by this ClassWriter.
+&nbsp;     *
+&nbsp;     * @return the binary content of the JVMS ClassFile structure that was built by this ClassWriter.
+&nbsp;     */
+&nbsp;    public byte[] toByteArray() {
+&nbsp;        // First step: compute the size in bytes of the ClassFile structure.
+&nbsp;        // The magic field uses 4 bytes, 10 mandatory fields (minor_version, major_version,
+&nbsp;        // constant_pool_count, access_flags, this_class, super_class, interfaces_count, fields_count,
+&nbsp;        // methods_count and attributes_count) use 2 bytes each, and each interface uses 2 bytes too.
+<b class="fc">&nbsp;        int size = 24 + 2 * interfaceCount;</b>
+<b class="fc">&nbsp;        int fieldsCount = 0;</b>
+<b class="fc">&nbsp;        FieldWriter fieldWriter = firstField;</b>
+<b class="fc">&nbsp;        while (fieldWriter != null) {</b>
+<b class="fc">&nbsp;            ++fieldsCount;</b>
+<b class="fc">&nbsp;            size += 8;</b>
+<b class="fc">&nbsp;            fieldWriter = (FieldWriter) fieldWriter.fv;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        int methodsCount = 0;</b>
+<b class="fc">&nbsp;        MethodWriter methodWriter = firstMethod;</b>
+<b class="fc">&nbsp;        while (methodWriter != null) {</b>
+<b class="fc">&nbsp;            ++methodsCount;</b>
+<b class="fc">&nbsp;            size += methodWriter.computeMethodInfoSize();</b>
+<b class="fc">&nbsp;            methodWriter = (MethodWriter) methodWriter.mv;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // For ease of reference, we use here the same attribute order as in Section 4.7 of the JVMS.
+<b class="fc">&nbsp;        int attributesCount = 0;</b>
+&nbsp;//        if (symbolTable.computeBootstrapMethodsSize() &gt; 0) {
+&nbsp;//            ++attributesCount;
+&nbsp;//            size += symbolTable.computeBootstrapMethodsSize();
+&nbsp;//        }
+&nbsp;
+&nbsp;        // IMPORTANT: this must be the last part of the ClassFile size computation, because the previous
+&nbsp;        // statements can add attribute names to the constant pool, thereby changing its size!
+<b class="fc">&nbsp;        size += symbolTable.constantPool.length;</b>
+<b class="fc">&nbsp;        int constantPoolCount = symbolTable.constantPoolCount;</b>
+<b class="fc">&nbsp;        if (constantPoolCount &gt; 0xFFFF) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;Class too large: &quot; + symbolTable.className + &quot;, constantPoolCount &quot; + constantPoolCount);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Second step: allocate a ByteVector of the correct size (in order to avoid any array copy in
+&nbsp;        // dynamic resizes) and fill it with the ClassFile content.
+<b class="fc">&nbsp;        ByteVector result = new ByteVector(size);</b>
+<b class="fc">&nbsp;        result.putInt(0xCAFEBABE).putInt(version);</b>
+<b class="fc">&nbsp;        result.putShort(constantPoolCount)</b>
+<b class="fc">&nbsp;                .putByteArray(</b>
+&nbsp;                        symbolTable.constantPool.data,
+&nbsp;                        0,
+&nbsp;                        symbolTable.constantPool.length
+&nbsp;                ); // symbolTable.putConstantPool(result);
+<b class="fc">&nbsp;        int mask = 0;</b>
+<b class="fc">&nbsp;        result.putShort(accessFlags &amp; ~mask).putShort(thisClass).putShort(superClass);</b>
+<b class="fc">&nbsp;        result.putShort(interfaceCount);</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; interfaceCount; ++i) {</b>
+<b class="fc">&nbsp;            result.putShort(interfaces[i]);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        result.putShort(fieldsCount);</b>
+<b class="fc">&nbsp;        fieldWriter = firstField;</b>
+<b class="fc">&nbsp;        while (fieldWriter != null) {</b>
+<b class="fc">&nbsp;            fieldWriter.putFieldInfo(result);</b>
+<b class="fc">&nbsp;            fieldWriter = (FieldWriter) fieldWriter.fv;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        result.putShort(methodsCount);</b>
+<b class="fc">&nbsp;        boolean hasFrames = false;</b>
+<b class="fc">&nbsp;        boolean hasAsmInstructions = false;</b>
+<b class="fc">&nbsp;        methodWriter = firstMethod;</b>
+<b class="fc">&nbsp;        while (methodWriter != null) {</b>
+<b class="fc">&nbsp;            hasFrames |= methodWriter.stackMapTableNumberOfEntries &gt; 0;</b>
+<b class="fc">&nbsp;            hasAsmInstructions |= methodWriter.hasAsmInstructions;</b>
+<b class="fc">&nbsp;            methodWriter.putMethodInfo(result);</b>
+<b class="fc">&nbsp;            methodWriter = (MethodWriter) methodWriter.mv;</b>
+&nbsp;        }
+&nbsp;        // For ease of reference, we use here the same attribute order as in Section 4.7 of the JVMS.
+<b class="fc">&nbsp;        result.putShort(attributesCount);</b>
+&nbsp;//        symbolTable.putBootstrapMethods(result);
+&nbsp;
+&nbsp;        // Third step: replace the ASM specific instructions, if any.
+<b class="fc">&nbsp;        if (hasAsmInstructions) {</b>
+<b class="nc">&nbsp;            throw new UnsupportedOperationException();</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return result.data;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Class loadClass(String type) {
+<b class="fc">&nbsp;        switch (type) {</b>
+&nbsp;            case &quot;java/util/List&quot;:
+<b class="fc">&nbsp;                return List.class;</b>
+&nbsp;            case &quot;java/util/ArrayList&quot;:
+<b class="fc">&nbsp;                return ArrayList.class;</b>
+&nbsp;            case &quot;java/lang/Object&quot;:
+<b class="fc">&nbsp;                return Object.class;</b>
+&nbsp;            default:
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        String className1 = type.replace(&#39;/&#39;, &#39;.&#39;);</b>
+&nbsp;
+<b class="fc">&nbsp;        Class clazz = null;</b>
+<b class="fc">&nbsp;        if (typeProvider != null) {</b>
+<b class="fc">&nbsp;            clazz = typeProvider.apply(className1);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (clazz == null) {</b>
+<b class="fc">&nbsp;            clazz = TypeUtils.loadClass(className1);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return clazz;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the common super type of the two given types. The default implementation of this method
+&nbsp;     * &lt;i&gt;loads&lt;/i&gt; the two given classes and uses the java.lang.Class methods to find the common
+&nbsp;     * super class. It can be overridden to compute this common super type in other ways, in
+&nbsp;     * particular without actually loading any class, or to take into account the class that is
+&nbsp;     * currently being generated by this ClassWriter, which can of course not be loaded since it is
+&nbsp;     * under construction.
+&nbsp;     *
+&nbsp;     * @param type1 the internal name of a class.
+&nbsp;     * @param type2 the internal name of another class.
+&nbsp;     * @return the internal name of the common super class of the two given classes.
+&nbsp;     */
+&nbsp;    protected String getCommonSuperClass(final String type1, final String type2) {
+<b class="fc">&nbsp;        Class&lt;?&gt; class1 = loadClass(type1);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (class1 == null) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;class not found &quot; + type1);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Class&lt;?&gt; class2 = loadClass(type2);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (class2 == null) {</b>
+<b class="nc">&nbsp;            return &quot;java/lang/Object&quot;;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (class1.isAssignableFrom(class2)) {</b>
+<b class="fc">&nbsp;            return type1;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (class2.isAssignableFrom(class1)) {</b>
+<b class="fc">&nbsp;            return type2;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (class1.isInterface() || class2.isInterface()) {</b>
+<b class="fc">&nbsp;            return &quot;java/lang/Object&quot;;</b>
+&nbsp;        } else {
+&nbsp;            do {
+<b class="nc">&nbsp;                class1 = class1.getSuperclass();</b>
+<b class="nc">&nbsp;            } while (!class1.isAssignableFrom(class2));</b>
+&nbsp;
+<b class="nc">&nbsp;            return class1.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:18</div>
+</div>
+</body>
+</html>

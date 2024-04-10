@@ -1,0 +1,353 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONLexerBase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.parser</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONLexerBase (com.alibaba.fastjson.parser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONLexerBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;  // IntelliJ API Decompiler stub source generated from a class file
+<b class="nc">&nbsp;  // Implementation of methods is not available</b>
+&nbsp;
+&nbsp;package com.alibaba.fastjson.parser;
+&nbsp;
+&nbsp;public abstract class JSONLexerBase implements com.alibaba.fastjson.parser.JSONLexer, java.io.Closeable {
+&nbsp;    protected int token;
+&nbsp;    protected int pos;
+&nbsp;    protected int features;
+&nbsp;    protected char ch;
+&nbsp;    protected int bp;
+&nbsp;    protected int eofPos;
+&nbsp;    protected char[] sbuf;
+&nbsp;    protected int sp;
+&nbsp;    protected int np;
+&nbsp;    protected boolean hasSpecial;
+&nbsp;    protected java.util.Calendar calendar;
+&nbsp;    protected java.util.TimeZone timeZone;
+&nbsp;    protected java.util.Locale locale;
+&nbsp;    public int matchStat;
+&nbsp;    private static final java.lang.ThreadLocal&lt;char[]&gt; SBUF_LOCAL;
+&nbsp;    protected java.lang.String stringDefaultValue;
+&nbsp;    protected int nanos;
+&nbsp;    protected static final char[] typeFieldName;
+&nbsp;    protected static final long MULTMIN_RADIX_TEN = -922337203685477580L;
+&nbsp;    protected static final int INT_MULTMIN_RADIX_TEN = -214748364;
+&nbsp;    protected static final int[] digits;
+&nbsp;
+&nbsp;    protected void lexError(java.lang.String key, java.lang.Object... args) { /* compiled code */ }
+&nbsp;
+&nbsp;    public JSONLexerBase(int features) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final int matchStat() { /* compiled code */ }
+&nbsp;
+&nbsp;    public void setToken(int token) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void nextToken() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void nextToken(int expect) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void nextIdent() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void nextTokenWithColon() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void nextTokenWithChar(char expect) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final int token() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final java.lang.String tokenName() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final int pos() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final java.lang.String stringDefaultValue() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final java.lang.Number integerValue() throws java.lang.NumberFormatException { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void nextTokenWithColon(int expect) { /* compiled code */ }
+&nbsp;
+&nbsp;    public float floatValue() { /* compiled code */ }
+&nbsp;
+&nbsp;    public double doubleValue() { /* compiled code */ }
+&nbsp;
+&nbsp;    public void config(com.alibaba.fastjson.parser.Feature feature, boolean state) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final boolean isEnabled(com.alibaba.fastjson.parser.Feature feature) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final boolean isEnabled(int feature) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final boolean isEnabled(int features, int feature) { /* compiled code */ }
+&nbsp;
+&nbsp;    public abstract java.lang.String numberString();
+&nbsp;
+&nbsp;    public abstract boolean isEOF();
+&nbsp;
+&nbsp;    public final char getCurrent() { /* compiled code */ }
+&nbsp;
+&nbsp;    public abstract char charAt(int i);
+&nbsp;
+&nbsp;    public abstract char next();
+&nbsp;
+&nbsp;    protected void skipComment() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final java.lang.String scanSymbol(com.alibaba.fastjson.parser.SymbolTable symbolTable) { /* compiled code */ }
+&nbsp;
+&nbsp;    protected abstract void arrayCopy(int i, char[] chars, int i1, int i2);
+&nbsp;
+&nbsp;    public final java.lang.String scanSymbol(com.alibaba.fastjson.parser.SymbolTable symbolTable, char quote) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void resetStringPosition() { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.String info() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final java.lang.String scanSymbolUnQuoted(com.alibaba.fastjson.parser.SymbolTable symbolTable) { /* compiled code */ }
+&nbsp;
+&nbsp;    protected abstract void copyTo(int i, int i1, char[] chars);
+&nbsp;
+&nbsp;    public final void scanString() { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.util.Calendar getCalendar() { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.util.TimeZone getTimeZone() { /* compiled code */ }
+&nbsp;
+&nbsp;    public void setTimeZone(java.util.TimeZone timeZone) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.util.Locale getLocale() { /* compiled code */ }
+&nbsp;
+&nbsp;    public void setLocale(java.util.Locale locale) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final int intValue() { /* compiled code */ }
+&nbsp;
+&nbsp;    public abstract byte[] bytesValue();
+&nbsp;
+&nbsp;    public void close() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final boolean isRef() { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.String scanTypeName(com.alibaba.fastjson.parser.SymbolTable symbolTable) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final int scanType(java.lang.String type) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final boolean matchField(char[] fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public int matchField(long fieldNameHash) { /* compiled code */ }
+&nbsp;
+&nbsp;    public boolean seekArrayToItem(int index) { /* compiled code */ }
+&nbsp;
+&nbsp;    public int seekObjectToField(long fieldNameHash, boolean deepScan) { /* compiled code */ }
+&nbsp;
+&nbsp;    public int seekObjectToField(long[] fieldNameHash) { /* compiled code */ }
+&nbsp;
+&nbsp;    public int seekObjectToFieldDeepScan(long fieldNameHash) { /* compiled code */ }
+&nbsp;
+&nbsp;    public void skipObject() { /* compiled code */ }
+&nbsp;
+&nbsp;    public void skipObject(boolean valid) { /* compiled code */ }
+&nbsp;
+&nbsp;    public void skipArray() { /* compiled code */ }
+&nbsp;
+&nbsp;    public abstract int indexOf(char c, int i);
+&nbsp;
+&nbsp;    public abstract java.lang.String addSymbol(int i, int i1, int i2, com.alibaba.fastjson.parser.SymbolTable symbolTable);
+&nbsp;
+&nbsp;    public java.lang.String scanFieldString(char[] fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.String scanString(char expectNextChar) { /* compiled code */ }
+&nbsp;
+&nbsp;    public long scanFieldSymbol(char[] fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public long scanEnumSymbol(char[] fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.Enum&lt;?&gt; scanEnum(java.lang.Class&lt;?&gt; enumClass, com.alibaba.fastjson.parser.SymbolTable symbolTable, char serperator) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.String scanSymbolWithSeperator(com.alibaba.fastjson.parser.SymbolTable symbolTable, char serperator) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.util.Collection&lt;java.lang.String&gt; newCollectionByType(java.lang.Class&lt;?&gt; type) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.util.Collection&lt;java.lang.String&gt; scanFieldStringArray(char[] fieldName, java.lang.Class&lt;?&gt; type) { /* compiled code */ }
+&nbsp;
+&nbsp;    public void scanStringArray(java.util.Collection&lt;java.lang.String&gt; list, char seperator) { /* compiled code */ }
+&nbsp;
+&nbsp;    public int scanFieldInt(char[] fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final int[] scanFieldIntArray(char[] fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public boolean scanBoolean(char expectNext) { /* compiled code */ }
+&nbsp;
+&nbsp;    public int scanInt(char expectNext) { /* compiled code */ }
+&nbsp;
+&nbsp;    public boolean scanFieldBoolean(char[] fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public long scanFieldLong(char[] fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public long scanLong(char expectNextChar) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final float scanFieldFloat(char[] fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final float scanFloat(char seperator) { /* compiled code */ }
+&nbsp;
+&nbsp;    public double scanDouble(char seperator) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.math.BigDecimal scanDecimal(char seperator) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final float[] scanFieldFloatArray(char[] fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final float[][] scanFieldFloatArray2(char[] fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final double scanFieldDouble(char[] fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.math.BigDecimal scanFieldDecimal(char[] fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.math.BigInteger scanFieldBigInteger(char[] fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.util.Date scanFieldDate(char[] fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.util.Date scanDate(char seperator) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.util.UUID scanFieldUUID(char[] fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.util.UUID scanUUID(char seperator) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void scanTrue() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void scanNullOrNew() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void scanNullOrNew(boolean acceptColon) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void scanFalse() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void scanIdent() { /* compiled code */ }
+&nbsp;
+&nbsp;    public abstract java.lang.String stringVal();
+&nbsp;
+&nbsp;    public abstract java.lang.String subString(int i, int i1);
+&nbsp;
+&nbsp;    protected abstract char[] sub_chars(int i, int i1);
+&nbsp;
+&nbsp;    public static java.lang.String readString(char[] chars, int chars_len) { /* compiled code */ }
+&nbsp;
+&nbsp;    protected abstract boolean charArrayCompare(char[] chars);
+&nbsp;
+&nbsp;    public boolean isBlankInput() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void skipWhitespace() { /* compiled code */ }
+&nbsp;
+&nbsp;    private void scanStringSingleQuote() { /* compiled code */ }
+&nbsp;
+&nbsp;    protected final void putChar(char ch) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void scanHex() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void scanNumber() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final long longValue() throws java.lang.NumberFormatException { /* compiled code */ }
+&nbsp;
+&nbsp;    public final java.lang.Number decimalValue(boolean decimal) { /* compiled code */ }
+&nbsp;
+&nbsp;    public abstract java.math.BigDecimal decimalValue();
+&nbsp;
+&nbsp;    public static boolean isWhitespace(char ch) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.String[] scanFieldStringArray(char[] fieldName, int argTypesCount, com.alibaba.fastjson.parser.SymbolTable typeSymbolTable) { /* compiled code */ }
+&nbsp;
+&nbsp;    public boolean matchField2(char[] fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public int getFeatures() { /* compiled code */ }
+&nbsp;
+&nbsp;    public void setFeatures(int features) { /* compiled code */ }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:33</div>
+</div>
+</body>
+</html>

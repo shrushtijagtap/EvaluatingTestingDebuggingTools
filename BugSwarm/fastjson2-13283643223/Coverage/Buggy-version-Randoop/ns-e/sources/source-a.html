@@ -1,0 +1,2166 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONObject</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONObject (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONObject</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/85)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/702)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JSONObject$NameConsumer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/87)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/711)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.annotation.JSONField;
+&nbsp;import com.alibaba.fastjson2.filter.NameFilter;
+&nbsp;import com.alibaba.fastjson2.filter.ValueFilter;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReader;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReaderImplEnum;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReaderProvider;
+&nbsp;import com.alibaba.fastjson2.schema.JSONSchema;
+&nbsp;import com.alibaba.fastjson2.util.*;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriter;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriterAdapter;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.invoke.MethodHandle;
+&nbsp;import java.lang.invoke.MethodHandles;
+&nbsp;import java.lang.invoke.MethodType;
+&nbsp;import java.lang.reflect.*;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.time.Instant;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.Consumer;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONWriter.Feature.*;
+&nbsp;import static com.alibaba.fastjson2.util.BeanUtils.getAnnotations;
+&nbsp;import static com.alibaba.fastjson2.util.TypeUtils.toBigDecimal;
+&nbsp;
+&nbsp;public class JSONObject
+&nbsp;        extends LinkedHashMap&lt;String, Object&gt;
+&nbsp;        implements InvocationHandler {
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    static ObjectReader&lt;JSONArray&gt; arrayReader;
+<b class="nc">&nbsp;    static final long NONE_DIRECT_FEATURES = ReferenceDetection.mask</b>
+&nbsp;            | PrettyFormat.mask
+&nbsp;            | NotWriteEmptyArray.mask
+&nbsp;            | NotWriteDefaultValue.mask;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * default
+&nbsp;     */
+&nbsp;    public JSONObject() {
+<b class="nc">&nbsp;        super();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param initialCapacity the initial capacity = (number of elements to store / load factor) + 1
+&nbsp;     * @throws IllegalArgumentException If the initial capacity is negative
+&nbsp;     */
+&nbsp;    public JSONObject(int initialCapacity) {
+<b class="nc">&nbsp;        super(initialCapacity);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param initialCapacity the initial capacity = (number of elements to store / load factor) + 1
+&nbsp;     * @param loadFactor the load factor
+&nbsp;     * @throws IllegalArgumentException If the initial capacity is negative or the load factor is negative
+&nbsp;     * @since 2.0.2
+&nbsp;     */
+&nbsp;    public JSONObject(int initialCapacity, float loadFactor) {
+<b class="nc">&nbsp;        super(initialCapacity, loadFactor);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param initialCapacity the initial capacity = (number of elements to store / load factor) + 1
+&nbsp;     * @param loadFactor the load factor
+&nbsp;     * @param accessOrder the ordering mode - true for access-order, false for insertion-order
+&nbsp;     * @throws IllegalArgumentException If the initial capacity is negative or the load factor is negative
+&nbsp;     * @since 2.0.2
+&nbsp;     */
+&nbsp;    public JSONObject(int initialCapacity, float loadFactor, boolean accessOrder) {
+<b class="nc">&nbsp;        super(initialCapacity, loadFactor, accessOrder);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param map the map whose mappings are to be placed in this map
+&nbsp;     * @throws NullPointerException If the specified map is null
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public JSONObject(Map map) {
+<b class="nc">&nbsp;        super(map);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the Object of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     */
+&nbsp;    public Object get(String key) {
+<b class="nc">&nbsp;        return super.get(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the Object of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @since 2.0.2
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Object get(Object key) {
+<b class="nc">&nbsp;        if (key instanceof Number</b>
+&nbsp;                || key instanceof Character
+&nbsp;                || key instanceof Boolean
+&nbsp;                || key instanceof UUID
+&nbsp;        ) {
+<b class="nc">&nbsp;            Object value = super.get(key.toString());</b>
+<b class="nc">&nbsp;            if (value != null) {</b>
+<b class="nc">&nbsp;                return value;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return super.get(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object getByPath(String jsonPath) {
+<b class="nc">&nbsp;        JSONPath path = JSONPath.of(jsonPath);</b>
+<b class="nc">&nbsp;        if (path instanceof JSONPathSingleName) {</b>
+<b class="nc">&nbsp;            String name = ((JSONPathSingleName) path).name;</b>
+<b class="nc">&nbsp;            return get(name);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return path.eval(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if this map contains a mapping for the specified key
+&nbsp;     *
+&nbsp;     * @param key the key whose presence in this map is to be tested
+&nbsp;     */
+&nbsp;    public boolean containsKey(String key) {
+<b class="nc">&nbsp;        return super.containsKey(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if this map contains a mapping for the specified key
+&nbsp;     *
+&nbsp;     * @param key the key whose presence in this map is to be tested
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean containsKey(Object key) {
+<b class="nc">&nbsp;        if (key instanceof Number</b>
+&nbsp;                || key instanceof Character
+&nbsp;                || key instanceof Boolean
+&nbsp;                || key instanceof UUID
+&nbsp;        ) {
+<b class="nc">&nbsp;            return super.containsKey(key) || super.containsKey(key.toString());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return super.containsKey(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @param defaultValue the default mapping of the key
+&nbsp;     */
+&nbsp;    public Object getOrDefault(String key, Object defaultValue) {
+<b class="nc">&nbsp;        return super.getOrDefault(key, defaultValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @param defaultValue the default mapping of the key
+&nbsp;     * @since 2.0.2
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Object getOrDefault(Object key, Object defaultValue) {
+<b class="nc">&nbsp;        if (key instanceof Number</b>
+&nbsp;                || key instanceof Character
+&nbsp;                || key instanceof Boolean
+&nbsp;                || key instanceof UUID
+&nbsp;        ) {
+<b class="nc">&nbsp;            return super.getOrDefault(</b>
+<b class="nc">&nbsp;                    key.toString(), defaultValue</b>
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return super.getOrDefault(</b>
+&nbsp;                key, defaultValue
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@link JSONArray} of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return {@link JSONArray} or null
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public JSONArray getJSONArray(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof JSONArray) {</b>
+<b class="nc">&nbsp;            return (JSONArray) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof JSONObject) {</b>
+<b class="nc">&nbsp;            return JSONArray.of(value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            JSONReader reader = JSONReader.of(str);</b>
+<b class="nc">&nbsp;            if (arrayReader == null) {</b>
+<b class="nc">&nbsp;                arrayReader = reader.getObjectReader(JSONArray.class);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return arrayReader.readObject(reader, null, null, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Collection) {</b>
+<b class="nc">&nbsp;            JSONArray array = new JSONArray((Collection&lt;?&gt;) value);</b>
+<b class="nc">&nbsp;            put(key, array);</b>
+<b class="nc">&nbsp;            return array;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Object[]) {</b>
+<b class="nc">&nbsp;            return JSONArray.of((Object[]) value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Class&lt;?&gt; valueClass = value.getClass();</b>
+<b class="nc">&nbsp;        if (valueClass.isArray()) {</b>
+<b class="nc">&nbsp;            int length = Array.getLength(value);</b>
+<b class="nc">&nbsp;            JSONArray jsonArray = new JSONArray(length);</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; length; i++) {</b>
+<b class="nc">&nbsp;                Object item = Array.get(value, i);</b>
+<b class="nc">&nbsp;                jsonArray.add(item);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return jsonArray;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; List&lt;T&gt; getList(String key, Class&lt;T&gt; itemClass, JSONReader.Feature... features) {
+<b class="nc">&nbsp;        JSONArray jsonArray = getJSONArray(key);</b>
+<b class="nc">&nbsp;        if (jsonArray == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return jsonArray.toList(itemClass, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@link JSONObject} of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return {@link JSONObject} or null
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;unchecked&quot;, &quot;rawtypes&quot;})
+&nbsp;    public JSONObject getJSONObject(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof JSONObject) {</b>
+<b class="nc">&nbsp;            return (JSONObject) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            JSONReader reader = JSONReader.of(str);</b>
+<b class="nc">&nbsp;            return JSONFactory.OBJECT_READER.readObject(reader, null, null, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Map) {</b>
+<b class="nc">&nbsp;            JSONObject object = new JSONObject((Map) value);</b>
+<b class="nc">&nbsp;            put(key, object);</b>
+<b class="nc">&nbsp;            return object;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Class valueClass = value.getClass();</b>
+<b class="nc">&nbsp;        ObjectWriter objectWriter = JSONFactory.getDefaultObjectWriterProvider().getObjectWriter(valueClass);</b>
+<b class="nc">&nbsp;        if (objectWriter instanceof ObjectWriterAdapter) {</b>
+<b class="nc">&nbsp;            ObjectWriterAdapter writerAdapter = (ObjectWriterAdapter) objectWriter;</b>
+<b class="nc">&nbsp;            return writerAdapter.toJSONObject(value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@link String} of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return {@link String} or null
+&nbsp;     */
+&nbsp;    public String getString(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            return (String) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Date) {</b>
+<b class="nc">&nbsp;            long timeMillis = ((Date) value).getTime();</b>
+<b class="nc">&nbsp;            return DateUtils.toString(timeMillis, false, DateUtils.DEFAULT_ZONE_ID);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Boolean</b>
+&nbsp;                || value instanceof Character
+&nbsp;                || value instanceof Number
+&nbsp;                || value instanceof UUID
+&nbsp;                || value instanceof Enum) {
+<b class="nc">&nbsp;            return value.toString();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return JSON.toJSONString(value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@link Double} of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return {@link Double} or null
+&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it contains no parsable double
+&nbsp;     * @throws JSONException Unsupported type conversion to {@link Double}
+&nbsp;     */
+&nbsp;    public Double getDouble(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Double) {</b>
+<b class="nc">&nbsp;            return (Double) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) value).doubleValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return Double.parseDouble(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Double&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a double value of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return double
+&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it contains no parsable double
+&nbsp;     * @throws JSONException Unsupported type conversion to double value
+&nbsp;     */
+&nbsp;    public double getDoubleValue(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return 0D;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) value).doubleValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return 0D;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return Double.parseDouble(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to double value&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@link Float} of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return {@link Float} or null
+&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it contains no parsable float
+&nbsp;     * @throws JSONException Unsupported type conversion to {@link Float}
+&nbsp;     */
+&nbsp;    public Float getFloat(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Float) {</b>
+<b class="nc">&nbsp;            return (Float) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) value).floatValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return Float.parseFloat(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Float&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a float value of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return float
+&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it contains no parsable float
+&nbsp;     * @throws JSONException Unsupported type conversion to float value
+&nbsp;     */
+&nbsp;    public float getFloatValue(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return 0F;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) value).floatValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return 0F;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return Float.parseFloat(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to float value&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@link Long} of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return {@link Long} or null
+&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it contains no parsable long
+&nbsp;     * @throws JSONException Unsupported type conversion to {@link Long}
+&nbsp;     */
+&nbsp;    public Long getLong(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Long) {</b>
+<b class="nc">&nbsp;            return ((Long) value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) value).longValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (str.indexOf(&#39;.&#39;) != -1) {</b>
+<b class="nc">&nbsp;                return (long) Double.parseDouble(str);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return Long.parseLong(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Long&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a long value of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return long
+&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it contains no parsable long
+&nbsp;     * @throws JSONException Unsupported type conversion to long value
+&nbsp;     */
+&nbsp;    public long getLongValue(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) value).longValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return 0;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (str.indexOf(&#39;.&#39;) != -1) {</b>
+<b class="nc">&nbsp;                return (long) Double.parseDouble(str);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return Long.parseLong(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to long value&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a long value of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @param defaultValue the default mapping of the key
+&nbsp;     * @return long
+&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it contains no parsable long
+&nbsp;     * @throws JSONException Unsupported type conversion to long value
+&nbsp;     */
+&nbsp;    public long getLongValue(String key, long defaultValue) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return defaultValue;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) value).longValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return defaultValue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (str.indexOf(&#39;.&#39;) != -1) {</b>
+<b class="nc">&nbsp;                return (long) Double.parseDouble(str);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return Long.parseLong(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to long value&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@link Integer} of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return {@link Integer} or null
+&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it contains no parsable int
+&nbsp;     * @throws JSONException Unsupported type conversion to {@link Integer}
+&nbsp;     */
+&nbsp;    public Integer getInteger(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Integer) {</b>
+<b class="nc">&nbsp;            return ((Integer) value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) value).intValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (str.indexOf(&#39;.&#39;) != -1) {</b>
+<b class="nc">&nbsp;                return (int) Double.parseDouble(str);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return Integer.parseInt(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Integer&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an int value of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return int
+&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it contains no parsable int
+&nbsp;     * @throws JSONException Unsupported type conversion to int value
+&nbsp;     */
+&nbsp;    public int getIntValue(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) value).intValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return 0;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (str.indexOf(&#39;.&#39;) != -1) {</b>
+<b class="nc">&nbsp;                return (int) Double.parseDouble(str);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return Integer.parseInt(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to int value&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an int value of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @param defaultValue the default mapping of the key
+&nbsp;     * @return int
+&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it contains no parsable int
+&nbsp;     * @throws JSONException Unsupported type conversion to int value
+&nbsp;     */
+&nbsp;    public int getIntValue(String key, int defaultValue) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return defaultValue;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) value).intValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return defaultValue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (str.indexOf(&#39;.&#39;) != -1) {</b>
+<b class="nc">&nbsp;                return (int) Double.parseDouble(str);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return Integer.parseInt(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to int value&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@link Short} of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return {@link Short} or null
+&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it contains no parsable short
+&nbsp;     * @throws JSONException Unsupported type conversion to {@link Short}
+&nbsp;     */
+&nbsp;    public Short getShort(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Short) {</b>
+<b class="nc">&nbsp;            return (Short) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) value).shortValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return Short.parseShort(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Short&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a short value of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return short
+&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it contains no parsable short
+&nbsp;     * @throws JSONException Unsupported type conversion to short value
+&nbsp;     */
+&nbsp;    public short getShortValue(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) value).shortValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return 0;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return Short.parseShort(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to short value&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@link Byte} of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return {@link Byte} or null
+&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it contains no parsable byte
+&nbsp;     * @throws JSONException Unsupported type conversion to {@link Byte}
+&nbsp;     */
+&nbsp;    public Byte getByte(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) value).byteValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return Byte.parseByte(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Byte&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a byte value of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return byte
+&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it contains no parsable byte
+&nbsp;     * @throws JSONException Unsupported type conversion to byte value
+&nbsp;     */
+&nbsp;    public byte getByteValue(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) value).byteValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return 0;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return Byte.parseByte(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to byte value&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public byte[] getBytes(String key) {
+<b class="nc">&nbsp;        Object value = get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof byte[]) {</b>
+<b class="nc">&nbsp;            return (byte[]) value;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            return IOUtils.decodeBase64((String) value);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new JSONException(&quot;can not cast to byte[], value : &quot; + value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@link Boolean} of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return {@link Boolean} or null
+&nbsp;     * @throws JSONException Unsupported type conversion to {@link Boolean}
+&nbsp;     */
+&nbsp;    public Boolean getBoolean(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Boolean) {</b>
+<b class="nc">&nbsp;            return (Boolean) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) value).intValue() == 1;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return &quot;true&quot;.equalsIgnoreCase(str) || &quot;1&quot;.equals(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Boolean&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a boolean value of the associated key in this object.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return boolean
+&nbsp;     * @throws JSONException Unsupported type conversion to boolean value
+&nbsp;     */
+&nbsp;    public boolean getBooleanValue(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Boolean) {</b>
+<b class="nc">&nbsp;            return (Boolean) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) value).intValue() == 1;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+<b class="nc">&nbsp;            return &quot;true&quot;.equalsIgnoreCase(str) || &quot;1&quot;.equals(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to boolean value&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a boolean value of the associated key in this object.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @param defaultValue the default mapping of the key
+&nbsp;     * @return boolean
+&nbsp;     * @throws JSONException Unsupported type conversion to boolean value
+&nbsp;     */
+&nbsp;    public boolean getBooleanValue(String key, boolean defaultValue) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return defaultValue;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Boolean) {</b>
+<b class="nc">&nbsp;            return (Boolean) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) value).intValue() == 1;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+<b class="nc">&nbsp;            return &quot;true&quot;.equalsIgnoreCase(str) || &quot;1&quot;.equals(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to boolean value&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@link BigInteger} of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return {@link BigInteger} or null
+&nbsp;     * @throws JSONException Unsupported type conversion to {@link BigInteger}
+&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it is not a valid representation of {@link BigInteger}
+&nbsp;     */
+&nbsp;    public BigInteger getBigInteger(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof BigInteger) {</b>
+<b class="nc">&nbsp;            return (BigInteger) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            if (value instanceof BigDecimal) {</b>
+<b class="nc">&nbsp;                return ((BigDecimal) value).toBigInteger();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            long longValue = ((Number) value).longValue();</b>
+<b class="nc">&nbsp;            return BigInteger.valueOf(longValue);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return new BigInteger(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to BigInteger&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@link BigDecimal} of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return {@link BigDecimal} or null
+&nbsp;     * @throws JSONException Unsupported type conversion to {@link BigDecimal}
+&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it is not a valid representation of {@link BigDecimal}
+&nbsp;     */
+&nbsp;    public BigDecimal getBigDecimal(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            if (value instanceof BigDecimal) {</b>
+<b class="nc">&nbsp;                return (BigDecimal) value;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (value instanceof BigInteger) {</b>
+<b class="nc">&nbsp;                return new BigDecimal((BigInteger) value);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (value instanceof Float) {</b>
+<b class="nc">&nbsp;                float floatValue = ((Float) value).floatValue();</b>
+<b class="nc">&nbsp;                return toBigDecimal(floatValue);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (value instanceof Double) {</b>
+<b class="nc">&nbsp;                double doubleValue = ((Double) value).doubleValue();</b>
+<b class="nc">&nbsp;                return toBigDecimal(doubleValue);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            long longValue = ((Number) value).longValue();</b>
+<b class="nc">&nbsp;            return BigDecimal.valueOf(longValue);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+<b class="nc">&nbsp;            return toBigDecimal(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Boolean) {</b>
+<b class="nc">&nbsp;            return (boolean) value ? BigDecimal.ONE : BigDecimal.ZERO;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to BigDecimal&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@link Date} of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return {@link Date} or null
+&nbsp;     */
+&nbsp;    public Date getDate(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Date) {</b>
+<b class="nc">&nbsp;            return (Date) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            return DateUtils.parseDate((String) value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            long millis = ((Number) value).longValue();</b>
+<b class="nc">&nbsp;            return new Date(millis);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return TypeUtils.toDate(value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0.27
+&nbsp;     */
+&nbsp;    public Date getDate(String key, Date defaultValue) {
+<b class="nc">&nbsp;        Date date = getDate(key);</b>
+<b class="nc">&nbsp;        if (date == null) {</b>
+<b class="nc">&nbsp;            date = defaultValue;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return date;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@link BigInteger} of the associated keys in this {@link JSONObject}.
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @return {@link BigInteger} or null
+&nbsp;     */
+&nbsp;    public Instant getInstant(String key) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Instant) {</b>
+<b class="nc">&nbsp;            return (Instant) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            long millis = ((Number) value).longValue();</b>
+<b class="nc">&nbsp;            if (millis == 0) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return Instant.ofEpochMilli(millis);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return TypeUtils.toInstant(value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serialize to JSON {@link String}
+&nbsp;     *
+&nbsp;     * @return JSON {@link String}
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        try (JSONWriter writer = JSONWriter.of()) {</b>
+<b class="nc">&nbsp;            writer.setRootObject(this);</b>
+<b class="nc">&nbsp;            writer.write(this);</b>
+<b class="nc">&nbsp;            return writer.toString();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serialize to JSON {@link String}
+&nbsp;     *
+&nbsp;     * @param features features to be enabled in serialization
+&nbsp;     * @return JSON {@link String}
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public String toString(JSONWriter.Feature... features) {
+<b class="nc">&nbsp;        try (JSONWriter writer = JSONWriter.of(features)) {</b>
+<b class="nc">&nbsp;            writer.setRootObject(this);</b>
+<b class="nc">&nbsp;            writer.write(this);</b>
+<b class="nc">&nbsp;            return writer.toString();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serialize to JSON {@link String}
+&nbsp;     *
+&nbsp;     * @param features features to be enabled in serialization
+&nbsp;     * @return JSON {@link String}
+&nbsp;     */
+&nbsp;    public String toJSONString(JSONWriter.Feature... features) {
+<b class="nc">&nbsp;        return toString(features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serialize Java Object to JSON {@link String} with specified {@link JSONReader.Feature}s enabled
+&nbsp;     *
+&nbsp;     * @param object Java Object to be serialized into JSON {@link String}
+&nbsp;     * @param features features to be enabled in serialization
+&nbsp;     * @since 2.0.6
+&nbsp;     */
+&nbsp;    public static String toJSONString(Object object, JSONWriter.Feature... features) {
+<b class="nc">&nbsp;        return JSON.toJSONString(object, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serialize to JSONB bytes
+&nbsp;     *
+&nbsp;     * @param features features to be enabled in serialization
+&nbsp;     * @return JSONB bytes
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public byte[] toJSONBBytes(JSONWriter.Feature... features) {
+<b class="nc">&nbsp;        try (JSONWriter writer = JSONWriter.ofJSONB(features)) {</b>
+<b class="nc">&nbsp;            writer.setRootObject(this);</b>
+<b class="nc">&nbsp;            writer.write(this);</b>
+<b class="nc">&nbsp;            return writer.getBytes();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0.4
+&nbsp;     */
+&nbsp;    public &lt;T&gt; T to(Function&lt;JSONObject, T&gt; function) {
+<b class="nc">&nbsp;        return function.apply(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convert this {@link JSONObject} to the specified Object
+&nbsp;     *
+&nbsp;     * &lt;pre&gt;{@code
+&nbsp;     * JSONObject obj = ...
+&nbsp;     * Map&lt;String, User&gt; users = obj.to(new TypeReference&lt;HashMap&lt;String, User&gt;&gt;(){}.getType());
+&nbsp;     * }&lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param type specify the {@link Type} to be converted
+&nbsp;     * @param features features to be enabled in parsing
+&nbsp;     * @since 2.0.4
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public &lt;T&gt; T to(Type type, JSONReader.Feature... features) {
+<b class="nc">&nbsp;        long featuresValue = 0L;</b>
+<b class="nc">&nbsp;        boolean fieldBased = false;</b>
+<b class="nc">&nbsp;        for (JSONReader.Feature feature : features) {</b>
+<b class="nc">&nbsp;            if (feature == JSONReader.Feature.FieldBased) {</b>
+<b class="nc">&nbsp;                fieldBased = true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            featuresValue |= feature.mask;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == String.class) {</b>
+<b class="nc">&nbsp;            return (T) toString();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+<b class="nc">&nbsp;        ObjectReader&lt;T&gt; objectReader = provider.getObjectReader(type, fieldBased);</b>
+<b class="nc">&nbsp;        return objectReader.createInstance(this, featuresValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convert this {@link JSONObject} to the specified Object
+&nbsp;     *
+&nbsp;     * &lt;pre&gt;{@code
+&nbsp;     * JSONObject obj = ...
+&nbsp;     * Map&lt;String, User&gt; users = obj.to(new TypeReference&lt;HashMap&lt;String, User&gt;&gt;(){});
+&nbsp;     * }&lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param typeReference specify the {@link TypeReference} to be converted
+&nbsp;     * @param features features to be enabled in parsing
+&nbsp;     * @since 2.0.7
+&nbsp;     */
+&nbsp;    public &lt;T&gt; T to(TypeReference&lt;T&gt; typeReference, JSONReader.Feature... features) {
+<b class="nc">&nbsp;        return to(typeReference.getType(), features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convert this {@link JSONObject} to the specified Object
+&nbsp;     *
+&nbsp;     * &lt;pre&gt;{@code
+&nbsp;     * JSONObject obj = ...
+&nbsp;     * User user = obj.to(User.class);
+&nbsp;     * }&lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param clazz specify the {@code Class&lt;T&gt;} to be converted
+&nbsp;     * @param features features to be enabled in parsing
+&nbsp;     * @since 2.0.4
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public &lt;T&gt; T to(Class&lt;T&gt; clazz, JSONReader.Feature... features) {
+<b class="nc">&nbsp;        long featuresValue = 0L;</b>
+<b class="nc">&nbsp;        boolean fieldBased = false;</b>
+<b class="nc">&nbsp;        for (JSONReader.Feature feature : features) {</b>
+<b class="nc">&nbsp;            if (feature == JSONReader.Feature.FieldBased) {</b>
+<b class="nc">&nbsp;                fieldBased = true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            featuresValue |= feature.mask;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (clazz == String.class) {</b>
+<b class="nc">&nbsp;            return (T) toString();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+<b class="nc">&nbsp;        ObjectReader&lt;T&gt; objectReader = provider.getObjectReader(clazz, fieldBased);</b>
+<b class="nc">&nbsp;        return objectReader.createInstance(this, featuresValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convert this {@link JSONObject} to the specified Object
+&nbsp;     *
+&nbsp;     * @param clazz specify the {@code Class&lt;T&gt;} to be converted
+&nbsp;     * @param features features to be enabled in parsing
+&nbsp;     */
+&nbsp;    public &lt;T&gt; T toJavaObject(Class&lt;T&gt; clazz, JSONReader.Feature... features) {
+<b class="nc">&nbsp;        return to(clazz, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convert this {@link JSONObject} to the specified Object
+&nbsp;     *
+&nbsp;     * @param type specify the {@link Type} to be converted
+&nbsp;     * @param features features to be enabled in parsing
+&nbsp;     * @deprecated since 2.0.4, please use {@link #to(Type, JSONReader.Feature...)}
+&nbsp;     */
+&nbsp;    public &lt;T&gt; T toJavaObject(Type type, JSONReader.Feature... features) {
+<b class="nc">&nbsp;        return to(type, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convert this {@link JSONObject} to the specified Object
+&nbsp;     *
+&nbsp;     * @param typeReference specify the {@link TypeReference} to be converted
+&nbsp;     * @param features features to be enabled in parsing
+&nbsp;     * @deprecated since 2.0.4, please use {@link #to(Type, JSONReader.Feature...)}
+&nbsp;     */
+&nbsp;    public &lt;T&gt; T toJavaObject(TypeReference&lt;T&gt; typeReference, JSONReader.Feature... features) {
+<b class="nc">&nbsp;        return to(typeReference, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the result of the {@link Type} converter conversion of the associated value in this {@link JSONObject}.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * {@code User user = jsonObject.getObject(&quot;user&quot;, User.class);}
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @param type specify the {@link Class} to be converted
+&nbsp;     * @return {@code &lt;T&gt;} or null
+&nbsp;     * @throws JSONException If no suitable conversion method is found
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;unchecked&quot;, &quot;rawtypes&quot;})
+&nbsp;    public &lt;T&gt; T getObject(String key, Class&lt;T&gt; type, JSONReader.Feature... features) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == Object.class &amp;&amp; features.length == 0) {</b>
+<b class="nc">&nbsp;            return (T) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean fieldBased = false;</b>
+<b class="nc">&nbsp;        for (JSONReader.Feature feature : features) {</b>
+<b class="nc">&nbsp;            if (feature == JSONReader.Feature.FieldBased) {</b>
+<b class="nc">&nbsp;                fieldBased = true;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Class&lt;?&gt; valueClass = value.getClass();</b>
+<b class="nc">&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+<b class="nc">&nbsp;        Function typeConvert = provider.getTypeConvert(valueClass, type);</b>
+<b class="nc">&nbsp;        if (typeConvert != null) {</b>
+<b class="nc">&nbsp;            return (T) typeConvert.apply(value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Map) {</b>
+<b class="nc">&nbsp;            ObjectReader&lt;T&gt; objectReader = provider.getObjectReader(type, fieldBased);</b>
+<b class="nc">&nbsp;            return objectReader.createInstance((Map) value, features);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Collection) {</b>
+<b class="nc">&nbsp;            ObjectReader&lt;T&gt; objectReader = provider.getObjectReader(type, fieldBased);</b>
+<b class="nc">&nbsp;            return objectReader.createInstance((Collection) value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Class clazz = TypeUtils.getMapping(type);</b>
+<b class="nc">&nbsp;        if (clazz.isInstance(value)) {</b>
+<b class="nc">&nbsp;            return (T) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectReader objectReader = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (clazz.isEnum()) {</b>
+<b class="nc">&nbsp;                objectReader = provider.getObjectReader(clazz, fieldBased);</b>
+<b class="nc">&nbsp;                if (objectReader instanceof ObjectReaderImplEnum) {</b>
+<b class="nc">&nbsp;                    long hashCode64 = Fnv.hashCode64(str);</b>
+<b class="nc">&nbsp;                    ObjectReaderImplEnum enumReader = (ObjectReaderImplEnum) objectReader;</b>
+<b class="nc">&nbsp;                    return (T) enumReader.getEnumByHashCode(hashCode64);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String json = JSON.toJSONString(value);</b>
+<b class="nc">&nbsp;        JSONReader jsonReader = JSONReader.of(json);</b>
+<b class="nc">&nbsp;        jsonReader.context.config(features);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (objectReader == null) {</b>
+<b class="nc">&nbsp;            objectReader = provider.getObjectReader(clazz, fieldBased);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        T object = (T) objectReader.readObject(jsonReader, null, null, 0L);</b>
+<b class="nc">&nbsp;        if (!jsonReader.isEnd()) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;not support input &quot; + json);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return object;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the result of the {@link Type} converter conversion of the associated value in this {@link JSONObject}.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * {@code User user = jsonObject.getObject(&quot;user&quot;, User.class);}
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @param type specify the {@link Type} to be converted
+&nbsp;     * @param features features to be enabled in parsing
+&nbsp;     * @return {@code &lt;T&gt;} or {@code null}
+&nbsp;     * @throws JSONException If no suitable conversion method is found
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;unchecked&quot;, &quot;rawtypes&quot;})
+&nbsp;    public &lt;T&gt; T getObject(String key, Type type, JSONReader.Feature... features) {
+<b class="nc">&nbsp;        Object value = super.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == Object.class &amp;&amp; features.length == 0) {</b>
+<b class="nc">&nbsp;            return (T) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean fieldBased = false;</b>
+<b class="nc">&nbsp;        for (JSONReader.Feature feature : features) {</b>
+<b class="nc">&nbsp;            if (feature == JSONReader.Feature.FieldBased) {</b>
+<b class="nc">&nbsp;                fieldBased = true;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Class&lt;?&gt; valueClass = value.getClass();</b>
+<b class="nc">&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+<b class="nc">&nbsp;        Function typeConvert = provider.getTypeConvert(valueClass, type);</b>
+<b class="nc">&nbsp;        if (typeConvert != null) {</b>
+<b class="nc">&nbsp;            return (T) typeConvert.apply(value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Map) {</b>
+<b class="nc">&nbsp;            ObjectReader&lt;T&gt; objectReader = provider.getObjectReader(type, fieldBased);</b>
+<b class="nc">&nbsp;            return objectReader.createInstance((Map) value, features);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Collection) {</b>
+<b class="nc">&nbsp;            ObjectReader&lt;T&gt; objectReader = provider.getObjectReader(type, fieldBased);</b>
+<b class="nc">&nbsp;            return objectReader.createInstance((Collection) value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type instanceof Class) {</b>
+<b class="nc">&nbsp;            Class clazz = (Class) type;</b>
+<b class="nc">&nbsp;            if (clazz.isInstance(value)) {</b>
+<b class="nc">&nbsp;                return (T) value;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String json = JSON.toJSONString(value);</b>
+<b class="nc">&nbsp;        JSONReader jsonReader = JSONReader.of(json);</b>
+<b class="nc">&nbsp;        jsonReader.context.config(features);</b>
+&nbsp;
+<b class="nc">&nbsp;        ObjectReader objectReader = provider.getObjectReader(type, fieldBased);</b>
+<b class="nc">&nbsp;        return (T) objectReader.readObject(jsonReader, null, null, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the result of the {@link Type} converter conversion of the associated value in this {@link JSONObject}.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * {@code User user = jsonObject.getObject(&quot;user&quot;, User.class);}
+&nbsp;     *
+&nbsp;     * @param key the key whose associated value is to be returned
+&nbsp;     * @param typeReference specify the {@link TypeReference} to be converted
+&nbsp;     * @param features features to be enabled in parsing
+&nbsp;     * @return {@code &lt;T&gt;} or {@code null}
+&nbsp;     * @throws JSONException If no suitable conversion method is found
+&nbsp;     * @since 2.0.3
+&nbsp;     */
+&nbsp;    public &lt;T&gt; T getObject(String key, TypeReference&lt;T&gt; typeReference, JSONReader.Feature... features) {
+<b class="nc">&nbsp;        return getObject(key, typeReference.type, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0.4
+&nbsp;     */
+&nbsp;    public &lt;T&gt; T getObject(String key, Function&lt;JSONObject, T&gt; creator) {
+<b class="nc">&nbsp;        JSONObject object = getJSONObject(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return creator.apply(object);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param proxy proxy object, currently useless
+&nbsp;     * @param method methods that need reflection
+&nbsp;     * @param args parameters of invoke
+&nbsp;     * @throws UnsupportedOperationException If reflection for this method is not supported
+&nbsp;     * @throws ArrayIndexOutOfBoundsException If the length of args does not match the length of the method parameter
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    @SuppressWarnings({&quot;rawtypes&quot;, &quot;unchecked&quot;})
+&nbsp;    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+<b class="nc">&nbsp;        final String methodName = method.getName();</b>
+<b class="nc">&nbsp;        int parameterCount = method.getParameterCount();</b>
+&nbsp;
+<b class="nc">&nbsp;        Class&lt;?&gt; returnType = method.getReturnType();</b>
+<b class="nc">&nbsp;        if (parameterCount == 1) {</b>
+<b class="nc">&nbsp;            if (&quot;equals&quot;.equals(methodName)) {</b>
+<b class="nc">&nbsp;                return this.equals(args[0]);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Class proxyInterface = null;</b>
+<b class="nc">&nbsp;            Class&lt;?&gt;[] interfaces = proxy.getClass().getInterfaces();</b>
+<b class="nc">&nbsp;            if (interfaces.length == 1) {</b>
+<b class="nc">&nbsp;                proxyInterface = interfaces[0];</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (returnType != void.class &amp;&amp; returnType != proxyInterface) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;This method &#39;&quot; + methodName + &quot;&#39; is not a setter&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String name = getJSONFieldName(method);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (name == null) {</b>
+<b class="nc">&nbsp;                name = methodName;</b>
+&nbsp;
+<b class="nc">&nbsp;                if (!name.startsWith(&quot;set&quot;)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;This method &#39;&quot; + methodName + &quot;&#39; is not a setter&quot;);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                name = name.substring(3);</b>
+<b class="nc">&nbsp;                if (name.length() == 0) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;This method &#39;&quot; + methodName + &quot;&#39; is an illegal setter&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                name = Character.toLowerCase(name.charAt(0)) + name.substring(1);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            put(name, args[0]);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (returnType != void.class) {</b>
+<b class="nc">&nbsp;                return proxy;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (parameterCount == 0) {</b>
+<b class="nc">&nbsp;            if (returnType == void.class) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;This method &#39;&quot; + methodName + &quot;&#39; is not a getter&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String name = getJSONFieldName(method);</b>
+&nbsp;
+&nbsp;            Object value;
+<b class="nc">&nbsp;            if (name == null) {</b>
+<b class="nc">&nbsp;                name = methodName;</b>
+<b class="nc">&nbsp;                boolean with = false;</b>
+&nbsp;                int prefix;
+<b class="nc">&nbsp;                if ((name.startsWith(&quot;get&quot;) || (with = name.startsWith(&quot;with&quot;)))</b>
+<b class="nc">&nbsp;                        &amp;&amp; name.length() &gt; (prefix = with ? 4 : 3)</b>
+&nbsp;                ) {
+<b class="nc">&nbsp;                    char[] chars = new char[name.length() - prefix];</b>
+<b class="nc">&nbsp;                    name.getChars(prefix, name.length(), chars, 0);</b>
+<b class="nc">&nbsp;                    if (chars[0] &gt;= &#39;A&#39; &amp;&amp; chars[0] &lt;= &#39;Z&#39;) {</b>
+<b class="nc">&nbsp;                        chars[0] = (char) (chars[0] + 32);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    String fieldName = new String(chars);</b>
+<b class="nc">&nbsp;                    if (fieldName.isEmpty()) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(&quot;This method &#39;&quot; + methodName + &quot;&#39; is an illegal getter&quot;);</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    value = get(fieldName);</b>
+<b class="nc">&nbsp;                    if (value == null) {</b>
+<b class="nc">&nbsp;                        return null;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } else if (name.startsWith(&quot;is&quot;)) {</b>
+<b class="nc">&nbsp;                    if (&quot;isEmpty&quot;.equals(name)) {</b>
+<b class="nc">&nbsp;                        value = get(&quot;empty&quot;);</b>
+<b class="nc">&nbsp;                        if (value == null) {</b>
+<b class="nc">&nbsp;                            return this.isEmpty();</b>
+&nbsp;                        }
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        name = name.substring(2);</b>
+<b class="nc">&nbsp;                        if (name.isEmpty()) {</b>
+<b class="nc">&nbsp;                            throw new JSONException(&quot;This method &#39;&quot; + methodName + &quot;&#39; is an illegal getter&quot;);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        name = Character.toLowerCase(name.charAt(0)) + name.substring(1);</b>
+&nbsp;
+<b class="nc">&nbsp;                        value = get(name);</b>
+<b class="nc">&nbsp;                        if (value == null) {</b>
+<b class="nc">&nbsp;                            return false;</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                } else if (&quot;hashCode&quot;.equals(name)) {</b>
+<b class="nc">&nbsp;                    return this.hashCode();</b>
+<b class="nc">&nbsp;                } else if (&quot;toString&quot;.equals(name)) {</b>
+<b class="nc">&nbsp;                    return this.toString();</b>
+<b class="nc">&nbsp;                } else if (name.startsWith(&quot;entrySet&quot;)) {</b>
+<b class="nc">&nbsp;                    return this.entrySet();</b>
+<b class="nc">&nbsp;                } else if (&quot;size&quot;.equals(name)) {</b>
+<b class="nc">&nbsp;                    return this.size();</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    Class&lt;?&gt; declaringClass = method.getDeclaringClass();</b>
+<b class="nc">&nbsp;                    if (declaringClass.isInterface()</b>
+<b class="nc">&nbsp;                            &amp;&amp; method.getParameterCount() == 0</b>
+<b class="nc">&nbsp;                            &amp;&amp; !Modifier.isAbstract(method.getModifiers())</b>
+&nbsp;                    ) {
+&nbsp;                        // interface default method
+<b class="nc">&nbsp;                        MethodHandles.Lookup lookup = JDKUtils.trustedLookup(declaringClass);</b>
+<b class="nc">&nbsp;                        MethodHandle methodHandle = lookup.findSpecial(</b>
+&nbsp;                                declaringClass,
+<b class="nc">&nbsp;                                method.getName(),</b>
+<b class="nc">&nbsp;                                MethodType.methodType(returnType),</b>
+&nbsp;                                declaringClass
+&nbsp;                        );
+<b class="nc">&nbsp;                        return methodHandle.invoke(proxy);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    throw new JSONException(&quot;This method &#39;&quot; + methodName + &quot;&#39; is not a getter&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                value = get(name);</b>
+<b class="nc">&nbsp;                if (value == null) {</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (value != null &amp;&amp; !returnType.isInstance(value)) {</b>
+&nbsp;                Function typeConvert = JSONFactory
+<b class="nc">&nbsp;                        .getDefaultObjectReaderProvider()</b>
+<b class="nc">&nbsp;                        .getTypeConvert(</b>
+<b class="nc">&nbsp;                                value.getClass(), method.getGenericReturnType()</b>
+&nbsp;                        );
+&nbsp;
+<b class="nc">&nbsp;                if (typeConvert != null) {</b>
+<b class="nc">&nbsp;                    value = typeConvert.apply(value);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(method.toGenericString());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0.4
+&nbsp;     */
+&nbsp;    private String getJSONFieldName(Method method) {
+<b class="nc">&nbsp;        String name = null;</b>
+<b class="nc">&nbsp;        Annotation[] annotations = getAnnotations(method);</b>
+<b class="nc">&nbsp;        for (Annotation annotation : annotations) {</b>
+<b class="nc">&nbsp;            Class&lt;? extends Annotation&gt; annotationType = annotation.annotationType();</b>
+<b class="nc">&nbsp;            JSONField jsonField = BeanUtils.findAnnotation(annotation, JSONField.class);</b>
+<b class="nc">&nbsp;            if (Objects.nonNull(jsonField)) {</b>
+<b class="nc">&nbsp;                name = jsonField.name();</b>
+<b class="nc">&nbsp;                if (name.isEmpty()) {</b>
+<b class="nc">&nbsp;                    name = null;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (&quot;com.alibaba.fastjson.annotation.JSONField&quot;.equals(annotationType.getName())) {</b>
+<b class="nc">&nbsp;                NameConsumer nameConsumer = new NameConsumer(annotation);</b>
+<b class="nc">&nbsp;                BeanUtils.annotationMethods(annotationType, nameConsumer);</b>
+<b class="nc">&nbsp;                if (nameConsumer.name != null) {</b>
+<b class="nc">&nbsp;                    name = nameConsumer.name;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONArray putArray(String name) {
+<b class="nc">&nbsp;        JSONArray array = new JSONArray();</b>
+<b class="nc">&nbsp;        put(name, array);</b>
+<b class="nc">&nbsp;        return array;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONObject putObject(String name) {
+<b class="nc">&nbsp;        JSONObject object = new JSONObject();</b>
+<b class="nc">&nbsp;        put(name, object);</b>
+<b class="nc">&nbsp;        return object;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0.3
+&nbsp;     */
+&nbsp;    static class NameConsumer
+&nbsp;            implements Consumer&lt;Method&gt; {
+&nbsp;        final Annotation annotation;
+&nbsp;        String name;
+&nbsp;
+<b class="nc">&nbsp;        NameConsumer(Annotation annotation) {</b>
+<b class="nc">&nbsp;            this.annotation = annotation;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(Method method) {
+<b class="nc">&nbsp;            String methodName = method.getName();</b>
+<b class="nc">&nbsp;            if (&quot;name&quot;.equals(methodName)) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    String result = (String) method.invoke(annotation);</b>
+<b class="nc">&nbsp;                    if (!result.isEmpty()) {</b>
+<b class="nc">&nbsp;                        name = result;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (IllegalAccessException | InvocationTargetException e) {</b>
+&nbsp;                    // nothing
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Chained addition of elements
+&nbsp;     *
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * JSONObject object = new JSONObject().fluentPut(&quot;a&quot;, 1).fluentPut(&quot;b&quot;, 2).fluentPut(&quot;c&quot;, 3);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param key key with which the specified value is to be associated
+&nbsp;     * @param value value to be associated with the specified key
+&nbsp;     */
+&nbsp;    public JSONObject fluentPut(String key, Object value) {
+<b class="nc">&nbsp;        put(key, value);</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0.4
+&nbsp;     */
+&nbsp;    public boolean isValid(JSONSchema schema) {
+<b class="nc">&nbsp;        return schema.isValid(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0.3
+&nbsp;     */
+&nbsp;    static void nameFilter(Iterable&lt;?&gt; iterable, NameFilter nameFilter) {
+<b class="nc">&nbsp;        for (Object item : iterable) {</b>
+<b class="nc">&nbsp;            if (item instanceof JSONObject) {</b>
+<b class="nc">&nbsp;                ((JSONObject) item).nameFilter(nameFilter);</b>
+<b class="nc">&nbsp;            } else if (item instanceof Iterable) {</b>
+<b class="nc">&nbsp;                nameFilter((Iterable&lt;?&gt;) item, nameFilter);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0.3
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;rawtypes&quot;, &quot;unchecked&quot;})
+&nbsp;    static void nameFilter(Map map, NameFilter nameFilter) {
+<b class="nc">&nbsp;        JSONObject changed = null;</b>
+<b class="nc">&nbsp;        for (Iterator&lt;?&gt; it = map.entrySet().iterator(); it.hasNext(); ) {</b>
+<b class="nc">&nbsp;            Map.Entry entry = (Map.Entry) it.next();</b>
+<b class="nc">&nbsp;            Object entryKey = entry.getKey();</b>
+<b class="nc">&nbsp;            Object entryValue = entry.getValue();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (entryValue instanceof JSONObject) {</b>
+<b class="nc">&nbsp;                ((JSONObject) entryValue).nameFilter(nameFilter);</b>
+<b class="nc">&nbsp;            } else if (entryValue instanceof Iterable) {</b>
+<b class="nc">&nbsp;                nameFilter((Iterable&lt;?&gt;) entryValue, nameFilter);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (entryKey instanceof String) {</b>
+<b class="nc">&nbsp;                String key = (String) entryKey;</b>
+<b class="nc">&nbsp;                String processName = nameFilter.process(map, key, entryValue);</b>
+<b class="nc">&nbsp;                if (processName != null &amp;&amp; !processName.equals(key)) {</b>
+<b class="nc">&nbsp;                    if (changed == null) {</b>
+<b class="nc">&nbsp;                        changed = new JSONObject();</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    changed.put(processName, entryValue);</b>
+<b class="nc">&nbsp;                    it.remove();</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        if (changed != null) {</b>
+<b class="nc">&nbsp;            map.putAll(changed);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0.3
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;rawtypes&quot;)
+&nbsp;    static void valueFilter(Iterable&lt;?&gt; iterable, ValueFilter valueFilter) {
+<b class="nc">&nbsp;        for (Object item : iterable) {</b>
+<b class="nc">&nbsp;            if (item instanceof Map) {</b>
+<b class="nc">&nbsp;                valueFilter((Map) item, valueFilter);</b>
+<b class="nc">&nbsp;            } else if (item instanceof Iterable) {</b>
+<b class="nc">&nbsp;                valueFilter((Iterable&lt;?&gt;) item, valueFilter);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0.3
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;rawtypes&quot;, &quot;unchecked&quot;})
+&nbsp;    static void valueFilter(Map map, ValueFilter valueFilter) {
+<b class="nc">&nbsp;        for (Object o : map.entrySet()) {</b>
+<b class="nc">&nbsp;            Map.Entry entry = (Map.Entry) o;</b>
+<b class="nc">&nbsp;            Object entryKey = entry.getKey();</b>
+<b class="nc">&nbsp;            Object entryValue = entry.getValue();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (entryValue instanceof Map) {</b>
+<b class="nc">&nbsp;                valueFilter((Map) entryValue, valueFilter);</b>
+<b class="nc">&nbsp;            } else if (entryValue instanceof Iterable) {</b>
+<b class="nc">&nbsp;                valueFilter((Iterable&lt;?&gt;) entryValue, valueFilter);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (entryKey instanceof String) {</b>
+<b class="nc">&nbsp;                String key = (String) entryKey;</b>
+<b class="nc">&nbsp;                Object applyValue = valueFilter.apply(map, key, entryValue);</b>
+<b class="nc">&nbsp;                if (applyValue != entryValue) {</b>
+<b class="nc">&nbsp;                    entry.setValue(applyValue);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0.3
+&nbsp;     */
+&nbsp;    public void valueFilter(ValueFilter valueFilter) {
+<b class="nc">&nbsp;        valueFilter(this, valueFilter);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0.3
+&nbsp;     */
+&nbsp;    public void nameFilter(NameFilter nameFilter) {
+<b class="nc">&nbsp;        nameFilter(this, nameFilter);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see JSONObject#JSONObject(Map)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public JSONObject clone() {
+<b class="nc">&nbsp;        return new JSONObject(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see JSONPath#paths(Object)
+&nbsp;     */
+&nbsp;    public Object eval(JSONPath path) {
+<b class="nc">&nbsp;        return path.eval(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * if value instance of Map or Collection, return size, other return 0
+&nbsp;     *
+&nbsp;     * @param key
+&nbsp;     * @since 2.0.24
+&nbsp;     */
+&nbsp;    public int getSize(String key) {
+<b class="nc">&nbsp;        Object value = get(key);</b>
+<b class="nc">&nbsp;        if (value instanceof Map) {</b>
+<b class="nc">&nbsp;            return ((Map&lt;?, ?&gt;) value).size();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (value instanceof Collection) {</b>
+<b class="nc">&nbsp;            return ((Collection&lt;?&gt;) value).size();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * JSONObject jsonObject = JSONObject.of();
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     */
+&nbsp;    public static JSONObject of() {
+<b class="nc">&nbsp;        return new JSONObject();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Pack a pair of key-values as {@link JSONObject}
+&nbsp;     *
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * JSONObject jsonObject = JSONObject.of(&quot;name&quot;, &quot;fastjson2&quot;);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param key the key of the element
+&nbsp;     * @param value the value of the element
+&nbsp;     */
+&nbsp;    public static JSONObject of(String key, Object value) {
+<b class="nc">&nbsp;        JSONObject object = new JSONObject(1);</b>
+<b class="nc">&nbsp;        object.put(key, value);</b>
+<b class="nc">&nbsp;        return object;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Pack two key-value pairs as {@link JSONObject}
+&nbsp;     *
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * JSONObject jsonObject = JSONObject.of(&quot;key1&quot;, &quot;value1&quot;, &quot;key2&quot;, &quot;value2&quot;);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param k1 first key
+&nbsp;     * @param v1 first value
+&nbsp;     * @param k2 second key
+&nbsp;     * @param v2 second value
+&nbsp;     * @since 2.0.2
+&nbsp;     */
+&nbsp;    public static JSONObject of(String k1, Object v1, String k2, Object v2) {
+<b class="nc">&nbsp;        JSONObject object = new JSONObject(2);</b>
+<b class="nc">&nbsp;        object.put(k1, v1);</b>
+<b class="nc">&nbsp;        object.put(k2, v2);</b>
+<b class="nc">&nbsp;        return object;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Pack three key-value pairs as {@link JSONObject}
+&nbsp;     *
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * JSONObject jsonObject = JSONObject.of(&quot;key1&quot;, &quot;value1&quot;, &quot;key2&quot;, &quot;value2&quot;, &quot;key3&quot;, &quot;value3&quot;);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param k1 first key
+&nbsp;     * @param v1 first value
+&nbsp;     * @param k2 second key
+&nbsp;     * @param v2 second value
+&nbsp;     * @param k3 third key
+&nbsp;     * @param v3 third value
+&nbsp;     * @since 2.0.2
+&nbsp;     */
+&nbsp;    public static JSONObject of(String k1, Object v1, String k2, Object v2, String k3, Object v3) {
+<b class="nc">&nbsp;        JSONObject object = new JSONObject(3);</b>
+<b class="nc">&nbsp;        object.put(k1, v1);</b>
+<b class="nc">&nbsp;        object.put(k2, v2);</b>
+<b class="nc">&nbsp;        object.put(k3, v3);</b>
+<b class="nc">&nbsp;        return object;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Pack three key-value pairs as {@link JSONObject}
+&nbsp;     *
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * JSONObject jsonObject = JSONObject.of(&quot;key1&quot;, &quot;value1&quot;, &quot;key2&quot;, &quot;value2&quot;, &quot;key3&quot;, &quot;value3&quot;, &quot;key4&quot;, &quot;value4&quot;);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param k1 first key
+&nbsp;     * @param v1 first value
+&nbsp;     * @param k2 second key
+&nbsp;     * @param v2 second value
+&nbsp;     * @param k3 third key
+&nbsp;     * @param v3 third value
+&nbsp;     * @param k4 foud key
+&nbsp;     * @param v4 foud value
+&nbsp;     * @since 2.0.8
+&nbsp;     */
+&nbsp;    public static JSONObject of(
+&nbsp;            String k1,
+&nbsp;            Object v1,
+&nbsp;            String k2,
+&nbsp;            Object v2,
+&nbsp;            String k3,
+&nbsp;            Object v3,
+&nbsp;            String k4,
+&nbsp;            Object v4) {
+<b class="nc">&nbsp;        JSONObject object = new JSONObject(4);</b>
+<b class="nc">&nbsp;        object.put(k1, v1);</b>
+<b class="nc">&nbsp;        object.put(k2, v2);</b>
+<b class="nc">&nbsp;        object.put(k3, v3);</b>
+<b class="nc">&nbsp;        object.put(k4, v4);</b>
+<b class="nc">&nbsp;        return object;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Pack three key-value pairs as {@link JSONObject}
+&nbsp;     *
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * JSONObject jsonObject = JSONObject.of(&quot;key1&quot;, &quot;value1&quot;, &quot;key2&quot;, &quot;value2&quot;, &quot;key3&quot;, &quot;value3&quot;, &quot;key4&quot;, &quot;value4&quot;, &quot;key5&quot;, &quot;value5&quot;);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param k1 first key
+&nbsp;     * @param v1 first value
+&nbsp;     * @param k2 second key
+&nbsp;     * @param v2 second value
+&nbsp;     * @param k3 third key
+&nbsp;     * @param v3 third value
+&nbsp;     * @param k4 foud key
+&nbsp;     * @param v4 foud value
+&nbsp;     * @param k5 five key
+&nbsp;     * @param v5 five value
+&nbsp;     * @since 2.0.21
+&nbsp;     */
+&nbsp;    public static JSONObject of(
+&nbsp;            String k1,
+&nbsp;            Object v1,
+&nbsp;            String k2,
+&nbsp;            Object v2,
+&nbsp;            String k3,
+&nbsp;            Object v3,
+&nbsp;            String k4,
+&nbsp;            Object v4,
+&nbsp;            String k5,
+&nbsp;            Object v5
+&nbsp;
+&nbsp;    ) {
+<b class="nc">&nbsp;        JSONObject object = new JSONObject(5);</b>
+<b class="nc">&nbsp;        object.put(k1, v1);</b>
+<b class="nc">&nbsp;        object.put(k2, v2);</b>
+<b class="nc">&nbsp;        object.put(k3, v3);</b>
+<b class="nc">&nbsp;        object.put(k4, v4);</b>
+<b class="nc">&nbsp;        object.put(k5, v5);</b>
+<b class="nc">&nbsp;        return object;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * See {@link JSON#parseObject} for details
+&nbsp;     */
+&nbsp;    public static &lt;T&gt; T parseObject(String text, Class&lt;T&gt; objectClass) {
+<b class="nc">&nbsp;        return JSON.parseObject(text, objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * See {@link JSON#parseObject} for details
+&nbsp;     */
+&nbsp;    public static &lt;T&gt; T parseObject(String text, Class&lt;T&gt; objectClass, JSONReader.Feature... features) {
+<b class="nc">&nbsp;        return JSON.parseObject(text, objectClass, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * See {@link JSON#parseObject} for details
+&nbsp;     */
+&nbsp;    public static &lt;T&gt; T parseObject(String text, Type objectType, JSONReader.Feature... features) {
+<b class="nc">&nbsp;        return JSON.parseObject(text, objectType, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * See {@link JSON#parseObject} for details
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public static &lt;T&gt; T parseObject(String text, TypeReference&lt;T&gt; typeReference, JSONReader.Feature... features) {
+<b class="nc">&nbsp;        return (T) JSON.parseObject(text, typeReference, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * See {@link JSON#parseObject} for details
+&nbsp;     */
+&nbsp;    public static JSONObject parseObject(String text) {
+<b class="nc">&nbsp;        return JSON.parseObject(text);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * See {@link JSON#parse} for details
+&nbsp;     *
+&nbsp;     * @since 2.0.13
+&nbsp;     */
+&nbsp;    public static JSONObject parse(String text, JSONReader.Feature... features) {
+<b class="nc">&nbsp;        return JSON.parseObject(text, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * See {@link JSON#toJSON} for details
+&nbsp;     */
+&nbsp;    public static JSONObject from(Object obj) {
+<b class="nc">&nbsp;        return (JSONObject) JSON.toJSON(obj);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * See {@link JSON#toJSON} for details
+&nbsp;     */
+&nbsp;    public static JSONObject from(Object obj, JSONWriter.Feature... writeFeatures) {
+<b class="nc">&nbsp;        return (JSONObject) JSON.toJSON(obj, writeFeatures);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:22</div>
+</div>
+</body>
+</html>

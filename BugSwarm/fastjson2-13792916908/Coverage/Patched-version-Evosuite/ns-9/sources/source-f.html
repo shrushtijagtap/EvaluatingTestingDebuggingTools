@@ -1,0 +1,168 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StringFormatBenchmark</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.fastcode</a>
+</div>
+
+<h1>Coverage Summary for Class: StringFormatBenchmark (com.alibaba.fastjson2.benchmark.fastcode)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StringFormatBenchmark</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.fastcode;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.util.IOUtils;
+&nbsp;import com.alibaba.fastjson2.util.JDKUtils;
+&nbsp;import org.openjdk.jmh.annotations.Benchmark;
+&nbsp;import org.openjdk.jmh.annotations.Mode;
+&nbsp;import org.openjdk.jmh.infra.Blackhole;
+&nbsp;import org.openjdk.jmh.runner.Runner;
+&nbsp;import org.openjdk.jmh.runner.RunnerException;
+&nbsp;import org.openjdk.jmh.runner.options.Options;
+&nbsp;import org.openjdk.jmh.runner.options.OptionsBuilder;
+&nbsp;
+&nbsp;import java.util.concurrent.TimeUnit;
+&nbsp;
+<b class="nc">&nbsp;public class StringFormatBenchmark {</b>
+<b class="nc">&nbsp;    static int value = 10245;</b>
+&nbsp;    static final String PREFIX = &quot;id : &quot;;
+<b class="nc">&nbsp;    static final char[] PREFIX_CHARS = PREFIX.toCharArray();</b>
+<b class="nc">&nbsp;    static final byte[] PREFIX_BYTES = PREFIX.getBytes();</b>
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void format(Blackhole bh) throws Exception {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                String.format(&quot;id : %s&quot;, value)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void StringBuffer(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                new StringBuilder().append(PREFIX).append(value).toString()</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void creator(Blackhole bh) {
+<b class="nc">&nbsp;        int i = value;</b>
+<b class="nc">&nbsp;        int size = (i &lt; 0) ? IOUtils.stringSize(-i) + 1 : IOUtils.stringSize(i);</b>
+&nbsp;        String str;
+<b class="nc">&nbsp;        if (JDKUtils.JVM_VERSION == 8) {</b>
+<b class="nc">&nbsp;            char[] chars = new char[PREFIX_CHARS.length + size];</b>
+<b class="nc">&nbsp;            System.arraycopy(PREFIX_CHARS, 0, chars, 0, PREFIX_CHARS.length);</b>
+<b class="nc">&nbsp;            IOUtils.getChars(i, chars.length, chars);</b>
+<b class="nc">&nbsp;            str = JDKUtils.STRING_CREATOR_JDK8.apply(chars, Boolean.TRUE);</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            byte[] chars = new byte[PREFIX_BYTES.length + size];</b>
+<b class="nc">&nbsp;            System.arraycopy(PREFIX_BYTES, 0, chars, 0, PREFIX_BYTES.length);</b>
+<b class="nc">&nbsp;            IOUtils.getChars(i, chars.length, chars);</b>
+<b class="nc">&nbsp;            str = JDKUtils.STRING_CREATOR_JDK11.apply(chars, JDKUtils.LATIN1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        bh.consume(str);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void main(String[] args) throws RunnerException {
+<b class="nc">&nbsp;        Options options = new OptionsBuilder()</b>
+<b class="nc">&nbsp;                .include(StringFormatBenchmark.class.getName())</b>
+<b class="nc">&nbsp;                .mode(Mode.Throughput)</b>
+<b class="nc">&nbsp;                .timeUnit(TimeUnit.MILLISECONDS)</b>
+<b class="nc">&nbsp;                .warmupIterations(1)</b>
+<b class="nc">&nbsp;                .forks(1)</b>
+<b class="nc">&nbsp;                .build();</b>
+<b class="nc">&nbsp;        new Runner(options).run();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:27</div>
+</div>
+</body>
+</html>

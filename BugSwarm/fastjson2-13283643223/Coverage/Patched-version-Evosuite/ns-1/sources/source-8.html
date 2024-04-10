@@ -1,0 +1,779 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONFactory (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    26.7%
+  </span>
+  <span class="absValue">
+    (8/30)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    45.8%
+  </span>
+  <span class="absValue">
+    (82/179)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JSONFactory$CacheItem</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONFactory$JSONPathCompiler</td>
+  </tr>
+  <tr>
+    <td class="name">JSONFactory$JSONReaderUTF16Creator</td>
+  </tr>
+  <tr>
+    <td class="name">JSONFactory$JSONReaderUTF8Creator</td>
+  </tr>
+  <tr>
+    <td class="name">JSONFactory$NameCacheEntry</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONFactory$NameCacheEntry2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONFactory$SymbolTableImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    37.5%
+  </span>
+  <span class="absValue">
+    (3/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (36/45)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    29.3%
+  </span>
+  <span class="absValue">
+    (12/41)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50.9%
+  </span>
+  <span class="absValue">
+    (119/234)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReader;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReaderCreator;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReaderProvider;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.IOUtils;
+&nbsp;import com.alibaba.fastjson2.util.JDKUtils;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriterCreator;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriterProvider;
+&nbsp;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.security.AccessController;
+&nbsp;import java.security.PrivilegedAction;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
+&nbsp;import java.util.function.Function;
+&nbsp;import java.util.function.Supplier;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.JVM_VERSION;
+&nbsp;
+<b class="nc">&nbsp;public final class JSONFactory {</b>
+&nbsp;    static volatile Throwable initErrorLast;
+&nbsp;
+&nbsp;    public static final String CREATOR;
+&nbsp;
+&nbsp;    public static final String PROPERTY_DENY_PROPERTY = &quot;fastjson2.parser.deny&quot;;
+&nbsp;    public static final String PROPERTY_AUTO_TYPE_ACCEPT = &quot;fastjson2.autoTypeAccept&quot;;
+&nbsp;    public static final String PROPERTY_AUTO_TYPE_HANDLER = &quot;fastjson2.autoTypeHandler&quot;;
+&nbsp;    public static final String PROPERTY_AUTO_TYPE_BEFORE_HANDLER = &quot;fastjson2.autoTypeBeforeHandler&quot;;
+&nbsp;
+&nbsp;    public static final boolean MIXED_HASH_ALGORITHM;
+&nbsp;
+&nbsp;    protected static boolean useJacksonAnnotation;
+&nbsp;
+&nbsp;    public static String getProperty(String key) {
+<b class="fc">&nbsp;        return DEFAULT_PROPERTIES.getProperty(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static long defaultReaderFeatures;
+&nbsp;    static String defaultReaderFormat;
+&nbsp;
+&nbsp;    static long defaultWriterFeatures;
+&nbsp;    static String defaultWriterFormat;
+&nbsp;
+&nbsp;    static Supplier&lt;Map&gt; defaultObjectSupplier;
+&nbsp;    static Supplier&lt;List&gt; defaultArraySupplier;
+&nbsp;
+<b class="fc">&nbsp;    static final NameCacheEntry[] NAME_CACHE = new NameCacheEntry[8192];</b>
+<b class="fc">&nbsp;    static final NameCacheEntry2[] NAME_CACHE2 = new NameCacheEntry2[8192];</b>
+&nbsp;
+&nbsp;    static final Function&lt;JSONWriter.Context, JSONWriter&gt; INCUBATOR_VECTOR_WRITER_CREATOR_UTF8;
+&nbsp;    static final Function&lt;JSONWriter.Context, JSONWriter&gt; INCUBATOR_VECTOR_WRITER_CREATOR_UTF16;
+&nbsp;    static final JSONReaderUTF8Creator INCUBATOR_VECTOR_READER_CREATOR_ASCII;
+&nbsp;    static final JSONReaderUTF8Creator INCUBATOR_VECTOR_READER_CREATOR_UTF8;
+&nbsp;    static final JSONReaderUTF16Creator INCUBATOR_VECTOR_READER_CREATOR_UTF16;
+&nbsp;
+&nbsp;    interface JSONReaderUTF8Creator {
+&nbsp;        JSONReader create(JSONReader.Context ctx, String str, byte[] bytes, int offset, int length);
+&nbsp;    }
+&nbsp;
+&nbsp;    interface JSONReaderUTF16Creator {
+&nbsp;        JSONReader create(JSONReader.Context ctx, String str, char[] chars, int offset, int length);
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class NameCacheEntry {
+&nbsp;        final String name;
+&nbsp;        final long value;
+&nbsp;
+<b class="nc">&nbsp;        public NameCacheEntry(String name, long value) {</b>
+<b class="nc">&nbsp;            this.name = name;</b>
+<b class="nc">&nbsp;            this.value = value;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class NameCacheEntry2 {
+&nbsp;        final String name;
+&nbsp;        final long value0;
+&nbsp;        final long value1;
+&nbsp;
+<b class="nc">&nbsp;        public NameCacheEntry2(String name, long value0, long value1) {</b>
+<b class="nc">&nbsp;            this.name = name;</b>
+<b class="nc">&nbsp;            this.value0 = value0;</b>
+<b class="nc">&nbsp;            this.value1 = value1;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    static final BigDecimal LOW = BigDecimal.valueOf(-9007199254740991L);</b>
+<b class="fc">&nbsp;    static final BigDecimal HIGH = BigDecimal.valueOf(9007199254740991L);</b>
+<b class="fc">&nbsp;    static final BigInteger LOW_BIGINT = BigInteger.valueOf(-9007199254740991L);</b>
+<b class="fc">&nbsp;    static final BigInteger HIGH_BIGINT = BigInteger.valueOf(9007199254740991L);</b>
+&nbsp;
+<b class="fc">&nbsp;    static final char[] CA = new char[]{</b>
+&nbsp;            &#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;, &#39;G&#39;, &#39;H&#39;,
+&nbsp;            &#39;I&#39;, &#39;J&#39;, &#39;K&#39;, &#39;L&#39;, &#39;M&#39;, &#39;N&#39;, &#39;O&#39;, &#39;P&#39;,
+&nbsp;            &#39;Q&#39;, &#39;R&#39;, &#39;S&#39;, &#39;T&#39;, &#39;U&#39;, &#39;V&#39;, &#39;W&#39;, &#39;X&#39;,
+&nbsp;            &#39;Y&#39;, &#39;Z&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;,
+&nbsp;            &#39;g&#39;, &#39;h&#39;, &#39;i&#39;, &#39;j&#39;, &#39;k&#39;, &#39;l&#39;, &#39;m&#39;, &#39;n&#39;,
+&nbsp;            &#39;o&#39;, &#39;p&#39;, &#39;q&#39;, &#39;r&#39;, &#39;s&#39;, &#39;t&#39;, &#39;u&#39;, &#39;v&#39;,
+&nbsp;            &#39;w&#39;, &#39;x&#39;, &#39;y&#39;, &#39;z&#39;, &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;,
+&nbsp;            &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;+&#39;, &#39;/&#39;
+&nbsp;    };
+&nbsp;
+<b class="fc">&nbsp;    static final int[] DIGITS2 = new int[]{</b>
+&nbsp;            +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0,
+&nbsp;            +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0,
+&nbsp;            +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0,
+&nbsp;            +0, +1, +2, +3, +4, +5, +6, +7, +8, +9, +0, +0, +0, +0, +0, +0,
+&nbsp;            +0, 10, 11, 12, 13, 14, 15, +0, +0, +0, +0, +0, +0, +0, +0, +0,
+&nbsp;            +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0,
+&nbsp;            +0, 10, 11, 12, 13, 14, 15
+&nbsp;    };
+&nbsp;
+&nbsp;    static final long INFLATED = Long.MIN_VALUE;
+&nbsp;
+<b class="fc">&nbsp;    static final double[] SMALL_10_POW = {</b>
+&nbsp;            1.0e0,
+&nbsp;            1.0e1, 1.0e2, 1.0e3, 1.0e4, 1.0e5,
+&nbsp;            1.0e6, 1.0e7, 1.0e8, 1.0e9, 1.0e10,
+&nbsp;            1.0e11, 1.0e12, 1.0e13, 1.0e14, 1.0e15
+&nbsp;    };
+&nbsp;
+<b class="fc">&nbsp;    static final float[] FLOAT_10_POW = {</b>
+&nbsp;            1.0e0f, 1.0e1f, 1.0e2f, 1.0e3f, 1.0e4f, 1.0e5f,
+&nbsp;            1.0e6f, 1.0e7f, 1.0e8f, 1.0e9f, 1.0e10f
+&nbsp;    };
+&nbsp;
+<b class="fc">&nbsp;    static final double[] DOUBLE_10_POW = {</b>
+&nbsp;            1.0e0, 1.0e1, 1.0e2, 1.0e3, 1.0e4, 1.0e5,
+&nbsp;            1.0e6, 1.0e7, 1.0e8, 1.0e9, 1.0e10, 1.0e11,
+&nbsp;            1.0e12, 1.0e13, 1.0e14, 1.0e15, 1.0e16, 1.0e17,
+&nbsp;            1.0e18, 1.0e19, 1.0e20, 1.0e21, 1.0e22
+&nbsp;    };
+&nbsp;
+<b class="fc">&nbsp;    static final Double DOUBLE_ZERO = Double.valueOf(0);</b>
+&nbsp;
+&nbsp;    static {
+<b class="fc">&nbsp;        Properties properties = new Properties();</b>
+&nbsp;
+<b class="fc">&nbsp;        InputStream inputStream = AccessController.doPrivileged((PrivilegedAction&lt;InputStream&gt;) () -&gt; {</b>
+<b class="fc">&nbsp;            ClassLoader cl = Thread.currentThread().getContextClassLoader();</b>
+&nbsp;
+<b class="fc">&nbsp;            final String resourceFile = &quot;fastjson2.properties&quot;;</b>
+&nbsp;
+<b class="fc">&nbsp;            if (cl != null) {</b>
+<b class="fc">&nbsp;                return cl.getResourceAsStream(resourceFile);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return ClassLoader.getSystemResourceAsStream(resourceFile);</b>
+&nbsp;            }
+&nbsp;        });
+<b class="fc">&nbsp;        if (inputStream != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                properties.load(inputStream);</b>
+<b class="nc">&nbsp;            } catch (java.io.IOException ignored) {</b>
+&nbsp;            } finally {
+<b class="nc">&nbsp;                IOUtils.close(inputStream);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="fc">&nbsp;        DEFAULT_PROPERTIES = properties;</b>
+&nbsp;
+&nbsp;        {
+<b class="fc">&nbsp;            String property = System.getProperty(&quot;fastjson2.creator&quot;);</b>
+<b class="fc">&nbsp;            if (property != null) {</b>
+<b class="nc">&nbsp;                property = property.trim();</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (property == null || property.isEmpty()) {</b>
+<b class="fc">&nbsp;                property = properties.getProperty(&quot;fastjson2.creator&quot;);</b>
+<b class="fc">&nbsp;                if (property != null) {</b>
+<b class="nc">&nbsp;                    property = property.trim();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            CREATOR = property == null ? &quot;asm&quot; : property;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="fc">&nbsp;            String property = System.getProperty(&quot;fastjson2.hash-algorithm&quot;);</b>
+<b class="fc">&nbsp;            if (property != null) {</b>
+<b class="nc">&nbsp;                property = property.trim();</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (property == null || property.isEmpty()) {</b>
+<b class="fc">&nbsp;                property = properties.getProperty(&quot;fastjson2.hash-algorithm&quot;);</b>
+<b class="fc">&nbsp;                if (property != null) {</b>
+<b class="nc">&nbsp;                    property = property.trim();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (&quot;mixed&quot;.equals(property)) {</b>
+<b class="nc">&nbsp;                MIXED_HASH_ALGORITHM = true;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                MIXED_HASH_ALGORITHM = JVM_VERSION &gt; 8;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="fc">&nbsp;            String property = System.getProperty(&quot;fastjson2.useJacksonAnnotation&quot;);</b>
+<b class="fc">&nbsp;            if (property != null) {</b>
+<b class="nc">&nbsp;                property = property.trim();</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (property == null || property.isEmpty()) {</b>
+<b class="fc">&nbsp;                property = properties.getProperty(&quot;fastjson2.useJacksonAnnotation&quot;);</b>
+<b class="fc">&nbsp;                if (property != null) {</b>
+<b class="nc">&nbsp;                    property = property.trim();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            useJacksonAnnotation = !&quot;false&quot;.equals(property);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function&lt;JSONWriter.Context, JSONWriter&gt; incubatorVectorCreatorUTF8 = null;</b>
+<b class="fc">&nbsp;        Function&lt;JSONWriter.Context, JSONWriter&gt; incubatorVectorCreatorUTF16 = null;</b>
+<b class="fc">&nbsp;        JSONReaderUTF8Creator readerCreatorASCII = null;</b>
+<b class="fc">&nbsp;        JSONReaderUTF8Creator readerCreatorUTF8 = null;</b>
+<b class="fc">&nbsp;        JSONReaderUTF16Creator readerCreatorUTF16 = null;</b>
+<b class="fc">&nbsp;        if (JDKUtils.VECTOR_SUPPORT) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                Class&lt;?&gt; factoryClass = Class.forName(&quot;com.alibaba.fastjson2.JSONWriterUTF8Vector$Factory&quot;);</b>
+<b class="nc">&nbsp;                incubatorVectorCreatorUTF8 = (Function&lt;JSONWriter.Context, JSONWriter&gt;) factoryClass.newInstance();</b>
+<b class="nc">&nbsp;            } catch (Throwable ignored) {</b>
+&nbsp;                // skip
+<b class="nc">&nbsp;                initErrorLast = ignored;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            try {
+<b class="nc">&nbsp;                Class&lt;?&gt; factoryClass = Class.forName(&quot;com.alibaba.fastjson2.JSONWriterUTF16Vector$Factory&quot;);</b>
+<b class="nc">&nbsp;                incubatorVectorCreatorUTF16 = (Function&lt;JSONWriter.Context, JSONWriter&gt;) factoryClass.newInstance();</b>
+<b class="nc">&nbsp;            } catch (Throwable ignored) {</b>
+&nbsp;                // skip
+<b class="nc">&nbsp;                initErrorLast = ignored;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            try {
+<b class="nc">&nbsp;                Class&lt;?&gt; factoryClass = Class.forName(&quot;com.alibaba.fastjson2.JSONReaderASCIIVector$Factory&quot;);</b>
+<b class="nc">&nbsp;                readerCreatorASCII = (JSONReaderUTF8Creator) factoryClass.newInstance();</b>
+<b class="nc">&nbsp;            } catch (Throwable ignored) {</b>
+&nbsp;                // skip
+<b class="nc">&nbsp;                initErrorLast = ignored;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            try {
+<b class="nc">&nbsp;                Class&lt;?&gt; factoryClass = Class.forName(&quot;com.alibaba.fastjson2.JSONReaderUTF8Vector$Factory&quot;);</b>
+<b class="nc">&nbsp;                readerCreatorUTF8 = (JSONReaderUTF8Creator) factoryClass.newInstance();</b>
+<b class="nc">&nbsp;            } catch (Throwable ignored) {</b>
+&nbsp;                // skip
+<b class="nc">&nbsp;                initErrorLast = ignored;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            try {
+<b class="nc">&nbsp;                Class&lt;?&gt; factoryClass = Class.forName(&quot;com.alibaba.fastjson2.JSONReaderUTF16Vector$Factory&quot;);</b>
+<b class="nc">&nbsp;                readerCreatorUTF16 = (JSONReaderUTF16Creator) factoryClass.newInstance();</b>
+<b class="nc">&nbsp;            } catch (Throwable ignored) {</b>
+&nbsp;                // skip
+<b class="nc">&nbsp;                initErrorLast = ignored;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="fc">&nbsp;        INCUBATOR_VECTOR_WRITER_CREATOR_UTF8 = incubatorVectorCreatorUTF8;</b>
+<b class="fc">&nbsp;        INCUBATOR_VECTOR_WRITER_CREATOR_UTF16 = incubatorVectorCreatorUTF16;</b>
+<b class="fc">&nbsp;        INCUBATOR_VECTOR_READER_CREATOR_ASCII = readerCreatorASCII;</b>
+<b class="fc">&nbsp;        INCUBATOR_VECTOR_READER_CREATOR_UTF8 = readerCreatorUTF8;</b>
+<b class="fc">&nbsp;        INCUBATOR_VECTOR_READER_CREATOR_UTF16 = readerCreatorUTF16;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isUseJacksonAnnotation() {
+<b class="nc">&nbsp;        return useJacksonAnnotation;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setUseJacksonAnnotation(boolean useJacksonAnnotation) {
+<b class="nc">&nbsp;        JSONFactory.useJacksonAnnotation = useJacksonAnnotation;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    static final CacheItem[] CACHE_ITEMS;
+&nbsp;    static {
+<b class="fc">&nbsp;        final CacheItem[] items = new CacheItem[16];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; items.length; i++) {</b>
+<b class="fc">&nbsp;            items[i] = new CacheItem();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        CACHE_ITEMS = items;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static final int CACHE_THRESHOLD = 1024 * 1024;
+<b class="fc">&nbsp;    static final AtomicReferenceFieldUpdater&lt;CacheItem, char[]&gt; CHARS_UPDATER</b>
+<b class="fc">&nbsp;            = AtomicReferenceFieldUpdater.newUpdater(CacheItem.class, char[].class, &quot;chars&quot;);</b>
+<b class="fc">&nbsp;    static final AtomicReferenceFieldUpdater&lt;CacheItem, byte[]&gt; BYTES_UPDATER</b>
+<b class="fc">&nbsp;            = AtomicReferenceFieldUpdater.newUpdater(CacheItem.class, byte[].class, &quot;bytes&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;    static final class CacheItem {</b>
+&nbsp;        volatile char[] chars;
+&nbsp;        volatile byte[] bytes;
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class SymbolTableImpl
+&nbsp;            implements SymbolTable {
+&nbsp;        private final String[] names;
+&nbsp;        private final long hashCode64;
+&nbsp;        private final short[] mapping;
+&nbsp;
+&nbsp;        private final long[] hashCodes;
+&nbsp;        private final long[] hashCodesOrigin;
+&nbsp;
+<b class="fc">&nbsp;        SymbolTableImpl(String... input) {</b>
+<b class="fc">&nbsp;            Set&lt;String&gt; set = new TreeSet&lt;&gt;();</b>
+<b class="fc">&nbsp;            for (String name : input) {</b>
+<b class="fc">&nbsp;                set.add(name);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            names = new String[set.size()];</b>
+<b class="fc">&nbsp;            Iterator&lt;String&gt; it = set.iterator();</b>
+&nbsp;
+<b class="fc">&nbsp;            for (int i = 0; i &lt; names.length; i++) {</b>
+<b class="fc">&nbsp;                if (it.hasNext()) {</b>
+<b class="fc">&nbsp;                    names[i] = it.next();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            long[] hashCodes = new long[names.length];</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; names.length; i++) {</b>
+<b class="fc">&nbsp;                long hashCode = Fnv.hashCode64(names[i]);</b>
+<b class="fc">&nbsp;                hashCodes[i] = hashCode;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            this.hashCodesOrigin = hashCodes;</b>
+&nbsp;
+<b class="fc">&nbsp;            this.hashCodes = Arrays.copyOf(hashCodes, hashCodes.length);</b>
+<b class="fc">&nbsp;            Arrays.sort(this.hashCodes);</b>
+&nbsp;
+<b class="fc">&nbsp;            mapping = new short[this.hashCodes.length];</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; hashCodes.length; i++) {</b>
+<b class="fc">&nbsp;                long hashCode = hashCodes[i];</b>
+<b class="fc">&nbsp;                int index = Arrays.binarySearch(this.hashCodes, hashCode);</b>
+<b class="fc">&nbsp;                mapping[index] = (short) i;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            long hashCode64 = Fnv.MAGIC_HASH_CODE;</b>
+<b class="fc">&nbsp;            for (long hashCode : hashCodes) {</b>
+<b class="fc">&nbsp;                hashCode64 ^= hashCode;</b>
+<b class="fc">&nbsp;                hashCode64 *= Fnv.MAGIC_PRIME;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            this.hashCode64 = hashCode64;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public int size() {
+<b class="nc">&nbsp;            return names.length;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public long hashCode64() {
+<b class="nc">&nbsp;            return hashCode64;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String getNameByHashCode(long hashCode) {
+<b class="nc">&nbsp;            int m = Arrays.binarySearch(hashCodes, hashCode);</b>
+<b class="nc">&nbsp;            if (m &lt; 0) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            int index = this.mapping[m];</b>
+<b class="nc">&nbsp;            return names[index];</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public int getOrdinalByHashCode(long hashCode) {
+<b class="fc">&nbsp;            int m = Arrays.binarySearch(hashCodes, hashCode);</b>
+<b class="fc">&nbsp;            if (m &lt; 0) {</b>
+<b class="fc">&nbsp;                return -1;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return this.mapping[m] + 1;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public int getOrdinal(String name) {
+<b class="fc">&nbsp;            long hashCode = Fnv.hashCode64(name);</b>
+<b class="fc">&nbsp;            int m = Arrays.binarySearch(hashCodes, hashCode);</b>
+<b class="fc">&nbsp;            if (m &lt; 0) {</b>
+<b class="fc">&nbsp;                return -1;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return this.mapping[m] + 1;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String getName(int ordinal) {
+<b class="nc">&nbsp;            return names[ordinal - 1];</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public long getHashCode(int ordinal) {
+<b class="nc">&nbsp;            return hashCodesOrigin[ordinal - 1];</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final Properties DEFAULT_PROPERTIES;
+&nbsp;
+<b class="fc">&nbsp;    static ObjectWriterProvider defaultObjectWriterProvider = new ObjectWriterProvider();</b>
+<b class="fc">&nbsp;    static ObjectReaderProvider defaultObjectReaderProvider = new ObjectReaderProvider();</b>
+&nbsp;
+&nbsp;    static final JSONPathCompiler defaultJSONPathCompiler;
+&nbsp;
+&nbsp;    static {
+<b class="fc">&nbsp;        JSONPathCompilerReflect compiler = null;</b>
+<b class="fc">&nbsp;        switch (JSONFactory.CREATOR) {</b>
+&nbsp;            case &quot;reflect&quot;:
+&nbsp;            case &quot;lambda&quot;:
+<b class="nc">&nbsp;                compiler = JSONPathCompilerReflect.INSTANCE;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            default:
+&nbsp;                try {
+<b class="fc">&nbsp;                    if (!JDKUtils.ANDROID &amp;&amp; !JDKUtils.GRAAL) {</b>
+<b class="fc">&nbsp;                        compiler = JSONPathCompilerReflectASM.INSTANCE;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;                if (compiler == null) {</b>
+<b class="nc">&nbsp;                    compiler = JSONPathCompilerReflect.INSTANCE;</b>
+&nbsp;                }
+&nbsp;                break;
+&nbsp;        }
+<b class="fc">&nbsp;        defaultJSONPathCompiler = compiler;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    static final ThreadLocal&lt;ObjectReaderCreator&gt; readerCreatorLocal = new ThreadLocal&lt;&gt;();</b>
+<b class="fc">&nbsp;    static final ThreadLocal&lt;ObjectReaderProvider&gt; readerProviderLocal = new ThreadLocal&lt;&gt;();</b>
+<b class="fc">&nbsp;    static final ThreadLocal&lt;ObjectWriterCreator&gt; writerCreatorLocal = new ThreadLocal&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;    static final ThreadLocal&lt;JSONPathCompiler&gt; jsonPathCompilerLocal = new ThreadLocal&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;    static final ObjectReader&lt;JSONArray&gt; ARRAY_READER = JSONFactory.getDefaultObjectReaderProvider().getObjectReader(JSONArray.class);</b>
+<b class="fc">&nbsp;    static final ObjectReader&lt;JSONObject&gt; OBJECT_READER = JSONFactory.getDefaultObjectReaderProvider().getObjectReader(JSONObject.class);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param objectSupplier
+&nbsp;     * @since 2.0.15
+&nbsp;     */
+&nbsp;    public static void setDefaultObjectSupplier(Supplier&lt;Map&gt; objectSupplier) {
+<b class="nc">&nbsp;        defaultObjectSupplier = objectSupplier;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param arraySupplier
+&nbsp;     * @since 2.0.15
+&nbsp;     */
+&nbsp;    public static void setDefaultArraySupplier(Supplier&lt;List&gt; arraySupplier) {
+<b class="nc">&nbsp;        defaultArraySupplier = arraySupplier;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static Supplier&lt;Map&gt; getDefaultObjectSupplier() {
+<b class="nc">&nbsp;        return defaultObjectSupplier;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Supplier&lt;List&gt; getDefaultArraySupplier() {
+<b class="nc">&nbsp;        return defaultArraySupplier;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONWriter.Context createWriteContext() {
+<b class="fc">&nbsp;        return new JSONWriter.Context(defaultObjectWriterProvider);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONWriter.Context createWriteContext(ObjectWriterProvider provider, JSONWriter.Feature... features) {
+<b class="nc">&nbsp;        JSONWriter.Context context = new JSONWriter.Context(provider);</b>
+<b class="nc">&nbsp;        context.config(features);</b>
+<b class="nc">&nbsp;        return context;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONWriter.Context createWriteContext(JSONWriter.Feature... features) {
+<b class="nc">&nbsp;        return new JSONWriter.Context(defaultObjectWriterProvider, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader.Context createReadContext() {
+<b class="fc">&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+<b class="fc">&nbsp;        return new JSONReader.Context(provider);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader.Context createReadContext(long features) {
+<b class="nc">&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+<b class="nc">&nbsp;        return new JSONReader.Context(provider, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader.Context createReadContext(JSONReader.Feature... features) {
+<b class="nc">&nbsp;        JSONReader.Context context = new JSONReader.Context(</b>
+<b class="nc">&nbsp;                JSONFactory.getDefaultObjectReaderProvider()</b>
+&nbsp;        );
+<b class="nc">&nbsp;        context.config(features);</b>
+<b class="nc">&nbsp;        return context;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader.Context createReadContext(ObjectReaderProvider provider, JSONReader.Feature... features) {
+<b class="nc">&nbsp;        if (provider == null) {</b>
+<b class="nc">&nbsp;            provider = getDefaultObjectReaderProvider();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONReader.Context context = new JSONReader.Context(provider);</b>
+<b class="nc">&nbsp;        context.config(features);</b>
+<b class="nc">&nbsp;        return context;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader.Context createReadContext(SymbolTable symbolTable) {
+<b class="nc">&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+<b class="nc">&nbsp;        return new JSONReader.Context(provider, symbolTable);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader.Context createReadContext(SymbolTable symbolTable, JSONReader.Feature... features) {
+<b class="nc">&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+<b class="nc">&nbsp;        JSONReader.Context context = new JSONReader.Context(provider, symbolTable);</b>
+<b class="nc">&nbsp;        context.config(features);</b>
+<b class="nc">&nbsp;        return context;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader.Context createReadContext(Supplier&lt;Map&gt; objectSupplier, JSONReader.Feature... features) {
+<b class="nc">&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+<b class="nc">&nbsp;        JSONReader.Context context = new JSONReader.Context(provider);</b>
+<b class="nc">&nbsp;        context.setObjectSupplier(objectSupplier);</b>
+<b class="nc">&nbsp;        context.config(features);</b>
+<b class="nc">&nbsp;        return context;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader.Context createReadContext(
+&nbsp;            Supplier&lt;Map&gt; objectSupplier,
+&nbsp;            Supplier&lt;List&gt; arraySupplier,
+&nbsp;            JSONReader.Feature... features) {
+<b class="nc">&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+<b class="nc">&nbsp;        JSONReader.Context context = new JSONReader.Context(provider);</b>
+<b class="nc">&nbsp;        context.setObjectSupplier(objectSupplier);</b>
+<b class="nc">&nbsp;        context.setArraySupplier(arraySupplier);</b>
+<b class="nc">&nbsp;        context.config(features);</b>
+<b class="nc">&nbsp;        return context;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ObjectWriterProvider getDefaultObjectWriterProvider() {
+<b class="fc">&nbsp;        return defaultObjectWriterProvider;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ObjectReaderProvider getDefaultObjectReaderProvider() {
+<b class="fc">&nbsp;        ObjectReaderProvider providerLocal = readerProviderLocal.get();</b>
+<b class="fc">&nbsp;        if (providerLocal != null) {</b>
+<b class="nc">&nbsp;            return providerLocal;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return defaultObjectReaderProvider;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONPathCompiler getDefaultJSONPathCompiler() {
+<b class="nc">&nbsp;        JSONPathCompiler compilerLocal = jsonPathCompilerLocal.get();</b>
+<b class="nc">&nbsp;        if (compilerLocal != null) {</b>
+<b class="nc">&nbsp;            return compilerLocal;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return defaultJSONPathCompiler;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setContextReaderCreator(ObjectReaderCreator creator) {
+<b class="nc">&nbsp;        readerCreatorLocal.set(creator);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static void setContextObjectReaderProvider(ObjectReaderProvider creator) {
+<b class="nc">&nbsp;        readerProviderLocal.set(creator);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static ObjectReaderCreator getContextReaderCreator() {
+<b class="nc">&nbsp;        return readerCreatorLocal.get();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setContextJSONPathCompiler(JSONPathCompiler compiler) {
+<b class="nc">&nbsp;        jsonPathCompilerLocal.set(compiler);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static void setContextWriterCreator(ObjectWriterCreator creator) {
+<b class="nc">&nbsp;        writerCreatorLocal.set(creator);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static ObjectWriterCreator getContextWriterCreator() {
+<b class="fc">&nbsp;        return writerCreatorLocal.get();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface JSONPathCompiler {
+&nbsp;        JSONPath compile(Class objectClass, JSONPath path);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:38</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,197 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONWriter (com.alibaba.fastjson)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/40)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JSONWriter$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/41)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;  // IntelliJ API Decompiler stub source generated from a class file
+&nbsp;  // Implementation of methods is not available
+&nbsp;
+&nbsp;package com.alibaba.fastjson;
+&nbsp;
+&nbsp;public class JSONWriter implements java.io.Closeable, java.io.Flushable {
+&nbsp;    private com.alibaba.fastjson.serializer.SerializeWriter writer;
+&nbsp;    private com.alibaba.fastjson.serializer.JSONSerializer serializer;
+&nbsp;    private com.alibaba.fastjson.JSONStreamContext context;
+&nbsp;
+<b class="nc">&nbsp;    public JSONWriter(java.io.Writer out) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public void config(com.alibaba.fastjson.serializer.SerializerFeature feature, boolean state) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public void startObject() { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public void endObject() { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public void writeKey(java.lang.String key) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public void writeValue(java.lang.Object object) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public void writeObject(java.lang.String object) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public void writeObject(java.lang.Object object) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public void startArray() { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    private void beginStructure() { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public void endArray() { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    private void endStructure() { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    private void beforeWrite() { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    private void afterWrite() { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public void flush() throws java.io.IOException { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public void close() throws java.io.IOException { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    /**</b>
+<b class="nc">&nbsp;     * @deprecated</b>
+&nbsp;     */
+<b class="nc">&nbsp;    @java.lang.Deprecated</b>
+<b class="nc">&nbsp;    public void writeStartObject() { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    /**</b>
+<b class="nc">&nbsp;     * @deprecated</b>
+&nbsp;     */
+<b class="nc">&nbsp;    @java.lang.Deprecated</b>
+<b class="nc">&nbsp;    public void writeEndObject() { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    /**</b>
+<b class="nc">&nbsp;     * @deprecated</b>
+&nbsp;     */
+<b class="nc">&nbsp;    @java.lang.Deprecated</b>
+<b class="nc">&nbsp;    public void writeStartArray() { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated
+<b class="nc">&nbsp;     */</b>
+<b class="nc">&nbsp;    @java.lang.Deprecated</b>
+&nbsp;    public void writeEndArray() { /* compiled code */ }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:31</div>
+</div>
+</body>
+</html>

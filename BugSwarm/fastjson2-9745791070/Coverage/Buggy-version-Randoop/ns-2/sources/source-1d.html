@@ -1,0 +1,190 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONPathTypedMultiNamesPrefixIndex1</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONPathTypedMultiNamesPrefixIndex1 (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONPathTypedMultiNamesPrefixIndex1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/37)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.reader.FieldReader;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.time.ZoneId;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;public class JSONPathTypedMultiNamesPrefixIndex1
+&nbsp;        extends JSONPathTypedMultiNames {
+&nbsp;    final int index;
+&nbsp;
+&nbsp;    JSONPathTypedMultiNamesPrefixIndex1(
+&nbsp;            JSONPath[] paths,
+&nbsp;            JSONPathSingleIndex prefix,
+&nbsp;            JSONPath[] namePaths,
+&nbsp;            Type[] types,
+&nbsp;            String[] formats,
+&nbsp;            long[] pathFeatures,
+&nbsp;            ZoneId zoneId,
+&nbsp;            long features) {
+<b class="nc">&nbsp;        super(paths, prefix, namePaths, types, formats, pathFeatures, zoneId, features);</b>
+<b class="nc">&nbsp;        index = prefix.index;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object extract(JSONReader jsonReader) {
+<b class="nc">&nbsp;        if (jsonReader.nextIfNull()) {</b>
+<b class="nc">&nbsp;            return new Object[paths.length];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!jsonReader.nextIfMatch(&#39;[&#39;)) {</b>
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info(&quot;illegal input, expect &#39;[&#39;, but &quot; + jsonReader.current()));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; index; ++i) {</b>
+<b class="nc">&nbsp;            if (jsonReader.nextIfMatch(&#39;]&#39;)) {</b>
+<b class="nc">&nbsp;                return new Object[paths.length];</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (jsonReader.isEnd()) {</b>
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;illegal input, expect &#39;[&#39;, but &quot; + jsonReader.current()));</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            jsonReader.skipValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.nextIfNull()) {</b>
+<b class="nc">&nbsp;            return new Object[paths.length];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!jsonReader.nextIfObjectStart()) {</b>
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info(&quot;illegal input, expect &#39;[&#39;, but &quot; + jsonReader.current()));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Object[] values = new Object[paths.length];</b>
+<b class="nc">&nbsp;        while (!jsonReader.nextIfObjectEnd()) {</b>
+<b class="nc">&nbsp;            long nameHashCode = jsonReader.readFieldNameHashCode();</b>
+&nbsp;
+<b class="nc">&nbsp;            int m = Arrays.binarySearch(hashCodes, nameHashCode);</b>
+<b class="nc">&nbsp;            if (m &lt; 0) {</b>
+<b class="nc">&nbsp;                jsonReader.skipValue();</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            int index = this.mapping[m];</b>
+<b class="nc">&nbsp;            FieldReader fieldReader = fieldReaders[index];</b>
+&nbsp;            Object fieldValue;
+&nbsp;            try {
+<b class="nc">&nbsp;                fieldValue = fieldReader.readFieldValue(jsonReader);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                long features = 0;</b>
+<b class="nc">&nbsp;                if (index &lt; this.pathFeatures.length) {</b>
+<b class="nc">&nbsp;                    features = this.pathFeatures[index];</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if ((features &amp; Feature.NullOnError.mask) == 0) {</b>
+<b class="nc">&nbsp;                    throw e;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                fieldValue = null;</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            values[index] = fieldValue;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return values;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:47</div>
+</div>
+</body>
+</html>

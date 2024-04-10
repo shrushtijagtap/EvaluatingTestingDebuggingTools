@@ -1,0 +1,401 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NumberSchema</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.schema</a>
+</div>
+
+<h1>Coverage Summary for Class: NumberSchema (com.alibaba.fastjson2.schema)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NumberSchema</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82.3%
+  </span>
+  <span class="absValue">
+    (116/141)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.schema;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONObject;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;final class NumberSchema
+&nbsp;        extends JSONSchema {
+&nbsp;    final BigDecimal minimum;
+&nbsp;    final long minimumLongValue;
+&nbsp;    final boolean exclusiveMinimum;
+&nbsp;
+&nbsp;    final BigDecimal maximum;
+&nbsp;    final long maximumLongValue;
+&nbsp;    final boolean exclusiveMaximum;
+&nbsp;
+&nbsp;    final BigDecimal multipleOf;
+&nbsp;    final long multipleOfLongValue;
+&nbsp;    final boolean typed;
+&nbsp;
+&nbsp;    NumberSchema(JSONObject input) {
+<b class="fc">&nbsp;        super(input);</b>
+&nbsp;
+<b class="fc">&nbsp;        this.typed = &quot;number&quot;.equals(input.get(&quot;type&quot;));</b>
+&nbsp;
+<b class="fc">&nbsp;        Object exclusiveMinimum = input.get(&quot;exclusiveMinimum&quot;);</b>
+<b class="fc">&nbsp;        BigDecimal minimum = input.getBigDecimal(&quot;minimum&quot;);</b>
+<b class="fc">&nbsp;        if (exclusiveMinimum == Boolean.TRUE) {</b>
+<b class="fc">&nbsp;            this.minimum = minimum;</b>
+<b class="fc">&nbsp;            this.exclusiveMinimum = true;</b>
+<b class="fc">&nbsp;        } else if (exclusiveMinimum instanceof Number) {</b>
+<b class="fc">&nbsp;            this.minimum = input.getBigDecimal(&quot;exclusiveMinimum&quot;);</b>
+<b class="fc">&nbsp;            this.exclusiveMinimum = true;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            this.minimum = minimum;</b>
+<b class="fc">&nbsp;            this.exclusiveMinimum = false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (this.minimum == null || !this.minimum.equals(BigDecimal.valueOf(this.minimum.longValue()))) {</b>
+<b class="fc">&nbsp;            minimumLongValue = Long.MIN_VALUE;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            minimumLongValue = this.minimum.longValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        BigDecimal maximum = input.getBigDecimal(&quot;maximum&quot;);</b>
+<b class="fc">&nbsp;        Object exclusiveMaximum = input.get(&quot;exclusiveMaximum&quot;);</b>
+<b class="fc">&nbsp;        if (exclusiveMaximum == Boolean.TRUE) {</b>
+<b class="fc">&nbsp;            this.maximum = maximum;</b>
+<b class="fc">&nbsp;            this.exclusiveMaximum = true;</b>
+<b class="fc">&nbsp;        } else if (exclusiveMaximum instanceof Number) {</b>
+<b class="fc">&nbsp;            this.maximum = input.getBigDecimal(&quot;exclusiveMaximum&quot;);</b>
+<b class="fc">&nbsp;            this.exclusiveMaximum = true;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            this.maximum = maximum;</b>
+<b class="fc">&nbsp;            this.exclusiveMaximum = false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (this.maximum == null || !this.maximum.equals(BigDecimal.valueOf(this.maximum.longValue()))) {</b>
+<b class="fc">&nbsp;            maximumLongValue = Long.MIN_VALUE;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            maximumLongValue = this.maximum.longValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        this.multipleOf = input.getBigDecimal(&quot;multipleOf&quot;);</b>
+<b class="fc">&nbsp;        if (this.multipleOf == null) {</b>
+<b class="fc">&nbsp;            this.multipleOfLongValue = Long.MIN_VALUE;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            long longValue = multipleOf.longValue();</b>
+<b class="fc">&nbsp;            if (multipleOf.equals(BigDecimal.valueOf(longValue))) {</b>
+<b class="fc">&nbsp;                this.multipleOfLongValue = longValue;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                this.multipleOfLongValue = Long.MIN_VALUE;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Type getType() {
+<b class="fc">&nbsp;        return Type.Number;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ValidateResult validate(Object value) {
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            return typed ? FAIL_INPUT_NULL : SUCCESS;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Number) {</b>
+<b class="fc">&nbsp;            Number number = (Number) value;</b>
+&nbsp;
+<b class="fc">&nbsp;            if (number instanceof Byte || number instanceof Short || number instanceof Integer || number instanceof Long) {</b>
+<b class="fc">&nbsp;                return validate(number.longValue());</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (number instanceof Float || number instanceof Double) {</b>
+<b class="fc">&nbsp;                return validate(number.doubleValue());</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            BigDecimal decimalValue;
+<b class="fc">&nbsp;            if (number instanceof BigInteger) {</b>
+<b class="fc">&nbsp;                decimalValue = new BigDecimal((BigInteger) number);</b>
+<b class="fc">&nbsp;            } else if (number instanceof BigDecimal) {</b>
+<b class="fc">&nbsp;                decimalValue = (BigDecimal) number;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return new ValidateResult(false, &quot;expect type %s, but %s&quot;, Type.Number, value.getClass());</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (minimum != null) {</b>
+<b class="fc">&nbsp;                if (exclusiveMinimum</b>
+<b class="fc">&nbsp;                        ? minimum.compareTo(decimalValue) &gt;= 0</b>
+<b class="fc">&nbsp;                        : minimum.compareTo(decimalValue) &gt; 0) {</b>
+<b class="fc">&nbsp;                    return new ValidateResult(false, exclusiveMinimum ? &quot;exclusiveMinimum not match, expect &gt;= %s, but %s&quot; : &quot;minimum not match, expect &gt;= %s, but %s&quot;, minimum, value);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (maximum != null) {</b>
+<b class="fc">&nbsp;                if (exclusiveMaximum</b>
+<b class="fc">&nbsp;                        ? maximum.compareTo(decimalValue) &lt;= 0</b>
+<b class="fc">&nbsp;                        : maximum.compareTo(decimalValue) &lt; 0) {</b>
+<b class="fc">&nbsp;                    return new ValidateResult(false, exclusiveMaximum ? &quot;exclusiveMaximum not match, expect &gt;= %s, but %s&quot; : &quot;maximum not match, expect &gt;= %s, but %s&quot;, maximum, value);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (multipleOf != null) {</b>
+<b class="fc">&nbsp;                if (decimalValue.divideAndRemainder(multipleOf)[1].abs().compareTo(BigDecimal.ZERO) &gt; 0) {</b>
+<b class="fc">&nbsp;                    return new ValidateResult(false, &quot;multipleOf not match, expect multipleOf %s, but %s&quot;, multipleOf, decimalValue);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return SUCCESS;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return typed ? FAIL_TYPE_NOT_MATCH : SUCCESS;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ValidateResult validate(Integer value) {
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            return SUCCESS;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return validate(value.longValue());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ValidateResult validate(Float value) {
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            return SUCCESS;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return validate(value.doubleValue());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ValidateResult validate(Double value) {
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            return SUCCESS;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return validate(value.doubleValue());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ValidateResult validate(Long value) {
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            return SUCCESS;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return validate(value.longValue());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ValidateResult validate(long value) {
+<b class="fc">&nbsp;        BigDecimal decimalValue = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (minimum != null) {</b>
+<b class="fc">&nbsp;            if (minimumLongValue != Long.MIN_VALUE) {</b>
+<b class="fc">&nbsp;                if (exclusiveMinimum ? value &lt;= minimumLongValue : value &lt; minimumLongValue) {</b>
+<b class="fc">&nbsp;                    return new ValidateResult(false, exclusiveMinimum ? &quot;exclusiveMinimum not match, expect &gt;= %s, but %s&quot; : &quot;minimum not match, expect &gt;= %s, but %s&quot;, minimum, value);</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (decimalValue == null) {</b>
+<b class="nc">&nbsp;                    decimalValue = BigDecimal.valueOf(value);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (exclusiveMinimum</b>
+<b class="nc">&nbsp;                        ? minimum.compareTo(decimalValue) &gt;= 0</b>
+<b class="nc">&nbsp;                        : minimum.compareTo(decimalValue) &gt; 0) {</b>
+<b class="nc">&nbsp;                    return new ValidateResult(false, exclusiveMinimum ? &quot;exclusiveMinimum not match, expect &gt;= %s, but %s&quot; : &quot;minimum not match, expect &gt;= %s, but %s&quot;, minimum, value);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (maximum != null) {</b>
+<b class="fc">&nbsp;            if (maximumLongValue != Long.MIN_VALUE) {</b>
+<b class="fc">&nbsp;                if (exclusiveMaximum ? value &gt;= maximumLongValue : value &gt; maximumLongValue) {</b>
+<b class="fc">&nbsp;                    return new ValidateResult(false, exclusiveMaximum ? &quot;exclusiveMaximum not match, expect &gt;= %s, but %s&quot; : &quot;maximum not match, expect &gt;= %s, but %s&quot;, maximum, value);</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (decimalValue == null) {</b>
+<b class="nc">&nbsp;                    decimalValue = BigDecimal.valueOf(value);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (exclusiveMaximum</b>
+<b class="nc">&nbsp;                        ? maximum.compareTo(decimalValue) &lt;= 0</b>
+<b class="nc">&nbsp;                        : maximum.compareTo(decimalValue) &lt; 0) {</b>
+<b class="nc">&nbsp;                    return new ValidateResult(false, exclusiveMaximum ? &quot;exclusiveMaximum not match, expect &gt;= %s, but %s&quot; : &quot;maximum not match, expect &gt;= %s, but %s&quot;, maximum, value);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (multipleOf != null) {</b>
+<b class="fc">&nbsp;            if (multipleOfLongValue != Long.MIN_VALUE) {</b>
+<b class="fc">&nbsp;                if (value % multipleOfLongValue != 0) {</b>
+<b class="fc">&nbsp;                    return new ValidateResult(false, &quot;multipleOf not match, expect multipleOf %s, but %s&quot;, multipleOf, decimalValue);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (decimalValue == null) {</b>
+<b class="fc">&nbsp;                decimalValue = BigDecimal.valueOf(value);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (decimalValue.divideAndRemainder(multipleOf)[1].abs().compareTo(BigDecimal.ZERO) &gt; 0) {</b>
+<b class="fc">&nbsp;                return new ValidateResult(false, &quot;multipleOf not match, expect multipleOf %s, but %s&quot;, multipleOf, value);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return SUCCESS;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ValidateResult validate(double value) {
+<b class="fc">&nbsp;        if (minimum != null) {</b>
+<b class="fc">&nbsp;            if (minimumLongValue != Long.MIN_VALUE) {</b>
+<b class="fc">&nbsp;                if (exclusiveMinimum ? value &lt;= minimumLongValue : value &lt; minimumLongValue) {</b>
+<b class="fc">&nbsp;                    return new ValidateResult(false, exclusiveMinimum ? &quot;exclusiveMinimum not match, expect &gt;= %s, but %s&quot; : &quot;minimum not match, expect &gt;= %s, but %s&quot;, minimum, value);</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                double minimumDoubleValue = minimum.doubleValue();</b>
+<b class="nc">&nbsp;                if (exclusiveMinimum ? value &lt;= minimumDoubleValue : value &lt; minimumDoubleValue) {</b>
+<b class="nc">&nbsp;                    return new ValidateResult(false, exclusiveMinimum ? &quot;exclusiveMinimum not match, expect &gt;= %s, but %s&quot; : &quot;minimum not match, expect &gt;= %s, but %s&quot;, minimum, value);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (maximum != null) {</b>
+<b class="fc">&nbsp;            if (maximumLongValue != Long.MIN_VALUE) {</b>
+<b class="fc">&nbsp;                if (exclusiveMaximum ? value &gt;= maximumLongValue : value &gt; maximumLongValue) {</b>
+<b class="fc">&nbsp;                    return new ValidateResult(false, exclusiveMaximum ? &quot;exclusiveMaximum not match, expect &gt;= %s, but %s&quot; : &quot;maximum not match, expect &gt;= %s, but %s&quot;, maximum, value);</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                double maximumDoubleValue = maximum.doubleValue();</b>
+<b class="nc">&nbsp;                if (exclusiveMaximum ? value &gt;= maximumDoubleValue : value &gt; maximumDoubleValue) {</b>
+<b class="nc">&nbsp;                    return new ValidateResult(false, exclusiveMaximum ? &quot;exclusiveMaximum not match, expect &gt;= %s, but %s&quot; : &quot;maximum not match, expect &gt;= %s, but %s&quot;, maximum, value);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (multipleOf != null) {</b>
+<b class="nc">&nbsp;            if (multipleOfLongValue != Long.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                if (value % multipleOfLongValue != 0) {</b>
+<b class="nc">&nbsp;                    return new ValidateResult(false, &quot;multipleOf not match, expect multipleOf %s, but %s&quot;, multipleOf, value);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            BigDecimal decimalValue = BigDecimal.valueOf(value);</b>
+<b class="nc">&nbsp;            if (decimalValue.divideAndRemainder(multipleOf)[1].abs().compareTo(BigDecimal.ZERO) &gt; 0) {</b>
+<b class="nc">&nbsp;                return new ValidateResult(false, &quot;multipleOf not match, expect multipleOf %s, but %s&quot;, multipleOf, decimalValue);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return SUCCESS;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="fc">&nbsp;        if (this == o) {</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (o == null || getClass() != o.getClass()) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        com.alibaba.fastjson2.schema.NumberSchema that = (com.alibaba.fastjson2.schema.NumberSchema) o;</b>
+<b class="fc">&nbsp;        return Objects.equals(title, that.title)</b>
+<b class="fc">&nbsp;                &amp;&amp; Objects.equals(description, that.description)</b>
+<b class="fc">&nbsp;                &amp;&amp; Objects.equals(minimum, that.minimum)</b>
+<b class="fc">&nbsp;                &amp;&amp; Objects.equals(exclusiveMinimum, that.exclusiveMinimum)</b>
+<b class="fc">&nbsp;                &amp;&amp; Objects.equals(maximum, that.maximum)</b>
+<b class="fc">&nbsp;                &amp;&amp; Objects.equals(exclusiveMaximum, that.exclusiveMaximum)</b>
+<b class="fc">&nbsp;                &amp;&amp; Objects.equals(multipleOf, that.multipleOf);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="fc">&nbsp;        return Objects.hash(title, description, minimum, exclusiveMinimum, maximum, exclusiveMaximum, multipleOf);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:49</div>
+</div>
+</body>
+</html>

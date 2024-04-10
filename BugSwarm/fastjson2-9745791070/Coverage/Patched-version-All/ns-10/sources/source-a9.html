@@ -1,0 +1,233 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderImplMethod</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderImplMethod (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderImplMethod</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.4%
+  </span>
+  <span class="absValue">
+    (51/59)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.List;
+&nbsp;
+<b class="fc">&nbsp;public class ObjectReaderImplMethod</b>
+&nbsp;        implements ObjectReader&lt;Method&gt; {
+<b class="fc">&nbsp;    static final long HASH_DECLARING_CLASS = Fnv.hashCode64(&quot;declaringClass&quot;);</b>
+<b class="fc">&nbsp;    static final long HASH_NAME = Fnv.hashCode64(&quot;name&quot;);</b>
+<b class="fc">&nbsp;    static final long HASH_PARAMETER_TYPES = Fnv.hashCode64(&quot;parameterTypes&quot;);</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Method readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="fc">&nbsp;        return readObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Method readArrayMappingJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="fc">&nbsp;        int entryCount = jsonReader.startArray();</b>
+<b class="fc">&nbsp;        if (entryCount != 3) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;not support input &quot; + jsonReader.info());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        String declaringClassName = jsonReader.readString();</b>
+<b class="fc">&nbsp;        String methodName = jsonReader.readString();</b>
+<b class="fc">&nbsp;        List&lt;String&gt; paramTypeNames = jsonReader.readArray(String.class);</b>
+&nbsp;
+<b class="fc">&nbsp;        return getMethod(jsonReader.getContext().getFeatures() | features, methodName, declaringClassName, paramTypeNames);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Method readArrayMappingObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="fc">&nbsp;        boolean arrayStart = jsonReader.nextIfMatch(&#39;[&#39;);</b>
+<b class="fc">&nbsp;        if (!arrayStart) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;not support input &quot; + jsonReader.info());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        String declaringClassName = jsonReader.readString();</b>
+<b class="fc">&nbsp;        String methodName = jsonReader.readString();</b>
+<b class="fc">&nbsp;        List&lt;String&gt; paramTypeNames = jsonReader.readArray(String.class);</b>
+&nbsp;
+<b class="fc">&nbsp;        boolean arrayEnd = jsonReader.nextIfMatch(&#39;]&#39;);</b>
+<b class="fc">&nbsp;        if (!arrayEnd) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;not support input &quot; + jsonReader.info());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        jsonReader.nextIfMatch(&#39;,&#39;);</b>
+&nbsp;
+<b class="fc">&nbsp;        return getMethod(jsonReader.getContext().getFeatures() | features, methodName, declaringClassName, paramTypeNames);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Method readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="fc">&nbsp;        boolean objectStart = jsonReader.nextIfObjectStart();</b>
+<b class="fc">&nbsp;        if (!objectStart) {</b>
+<b class="fc">&nbsp;            if (jsonReader.isSupportBeanArray(features)) {</b>
+<b class="fc">&nbsp;                if (jsonReader.isJSONB()) {</b>
+<b class="fc">&nbsp;                    return readArrayMappingJSONBObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    return readArrayMappingObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            throw new JSONException(&quot;not support input &quot; + jsonReader.info());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        String methodName = null, declaringClassName = null;</b>
+<b class="fc">&nbsp;        List&lt;String&gt; paramTypeNames = null;</b>
+&nbsp;
+&nbsp;        for (;;) {
+<b class="fc">&nbsp;            if (jsonReader.nextIfObjectEnd()) {</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            long nameHashCode = jsonReader.readFieldNameHashCode();</b>
+<b class="fc">&nbsp;            if (nameHashCode == HASH_DECLARING_CLASS) {</b>
+<b class="fc">&nbsp;                declaringClassName = jsonReader.readString();</b>
+<b class="fc">&nbsp;            } else if (nameHashCode == HASH_NAME) {</b>
+<b class="fc">&nbsp;                methodName = jsonReader.readString();</b>
+<b class="fc">&nbsp;            } else if (nameHashCode == HASH_PARAMETER_TYPES) {</b>
+<b class="fc">&nbsp;                paramTypeNames = jsonReader.readArray(String.class);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                jsonReader.skipValue();</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        if (!jsonReader.isJSONB()) {</b>
+<b class="fc">&nbsp;            jsonReader.nextIfMatch(&#39;,&#39;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return getMethod(jsonReader.getContext().getFeatures() | features, methodName, declaringClassName, paramTypeNames);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Method getMethod(long features,
+&nbsp;                             String methodName,
+&nbsp;                             String declaringClassName,
+&nbsp;                             List&lt;String&gt; paramTypeNames) {
+&nbsp;        Class declaringClass;
+&nbsp;
+<b class="fc">&nbsp;        boolean supportClassForName = (features &amp; JSONReader.Feature.SupportClassForName.mask) != 0;</b>
+<b class="fc">&nbsp;        if (supportClassForName) {</b>
+<b class="fc">&nbsp;            declaringClass = TypeUtils.loadClass(declaringClassName);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            throw new JSONException(&quot;ClassForName not support&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        Class[] paramTypes;
+<b class="fc">&nbsp;        if (paramTypeNames == null) {</b>
+<b class="nc">&nbsp;            paramTypes = new Class[0];</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            paramTypes = new Class[paramTypeNames.size()];</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; paramTypeNames.size(); i++) {</b>
+<b class="fc">&nbsp;                String paramTypeName = paramTypeNames.get(i);</b>
+<b class="fc">&nbsp;                paramTypes[i] = TypeUtils.loadClass(paramTypeName);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="fc">&nbsp;            return declaringClass.getDeclaredMethod(methodName, paramTypes);</b>
+<b class="nc">&nbsp;        } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;method not found&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:02</div>
+</div>
+</body>
+</html>

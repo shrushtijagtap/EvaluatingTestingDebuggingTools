@@ -1,0 +1,146 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReader</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.adapter.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReader (com.alibaba.fastjson2.adapter.jackson.databind)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.adapter.jackson.databind;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.adapter.jackson.core.JsonFactory;
+&nbsp;import com.alibaba.fastjson2.support.csv.CSVParser;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;
+&nbsp;public class ObjectReader {
+&nbsp;    final ObjectMapper mapper;
+&nbsp;    final DeserializationConfig config;
+&nbsp;    final Type objectType;
+&nbsp;    final Class objectClass;
+&nbsp;    final JsonFactory jsonFactory;
+&nbsp;
+<b class="nc">&nbsp;    public ObjectReader(ObjectMapper mapper, DeserializationConfig config, Type objectType) {</b>
+<b class="nc">&nbsp;        this.mapper = mapper;</b>
+<b class="nc">&nbsp;        this.config = config;</b>
+<b class="nc">&nbsp;        this.objectType = objectType;</b>
+<b class="nc">&nbsp;        this.objectClass = TypeUtils.getClass(objectType);</b>
+<b class="nc">&nbsp;        this.jsonFactory = mapper.factory;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T readValue(String src, Class&lt;T&gt; valueType) throws IOException {
+<b class="nc">&nbsp;        if (jsonFactory.isCSV()) {</b>
+<b class="nc">&nbsp;            JSONReader.Context context = jsonFactory.createReaderContext();</b>
+<b class="nc">&nbsp;            com.alibaba.fastjson2.reader.ObjectReader objectReader = context.getObjectReader(valueType);</b>
+<b class="nc">&nbsp;            CSVParser csvParser = CSVParser.of(src, objectClass);</b>
+<b class="nc">&nbsp;            return (T) csvParser.readLoneObject();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONReader jsonReader = this.jsonFactory.createJSONReader(src);</b>
+<b class="nc">&nbsp;        JSONReader.Context context = jsonReader.getContext();</b>
+<b class="nc">&nbsp;        com.alibaba.fastjson2.reader.ObjectReader objectReader = context.getObjectReader(objectType);</b>
+&nbsp;
+<b class="nc">&nbsp;        Object object = objectReader</b>
+<b class="nc">&nbsp;                .readObject(jsonReader, null, null, 0L);</b>
+<b class="nc">&nbsp;        return (T) object;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:31</div>
+</div>
+</body>
+</html>

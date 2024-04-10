@@ -1,0 +1,214 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectArrayReaderMultiType</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectArrayReaderMultiType (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectArrayReaderMultiType</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/53)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.util.MultiType;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Collection;
+&nbsp;
+&nbsp;final class ObjectArrayReaderMultiType
+&nbsp;        implements ObjectReader {
+&nbsp;    final Type[] types;
+&nbsp;    final ObjectReader[] readers;
+&nbsp;
+<b class="nc">&nbsp;    ObjectArrayReaderMultiType(MultiType multiType) {</b>
+<b class="nc">&nbsp;        Type[] types = new Type[multiType.size()];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; multiType.size(); i++) {</b>
+<b class="nc">&nbsp;            types[i] = multiType.getType(i);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.types = types;</b>
+<b class="nc">&nbsp;        this.readers = new ObjectReader[types.length];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    ObjectReader getObjectReader(JSONReader jsonReader, int index) {
+<b class="nc">&nbsp;        ObjectReader objectReader = readers[index];</b>
+<b class="nc">&nbsp;        if (objectReader == null) {</b>
+<b class="nc">&nbsp;            Type type = types[index];</b>
+<b class="nc">&nbsp;            objectReader = jsonReader.getObjectReader(type);</b>
+<b class="nc">&nbsp;            readers[index] = objectReader;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return objectReader;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        if (jsonReader.isJSONB()) {</b>
+<b class="nc">&nbsp;            return readJSONBObject(jsonReader, fieldType, fieldName, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.nextIfNullOrEmptyString()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Object[] values = new Object[types.length];</b>
+<b class="nc">&nbsp;        if (jsonReader.nextIfMatch(&#39;[&#39;)) {</b>
+<b class="nc">&nbsp;            for (int i = 0; ; ++i) {</b>
+<b class="nc">&nbsp;                if (jsonReader.nextIfMatch(&#39;]&#39;)) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                Object value;
+&nbsp;
+<b class="nc">&nbsp;                if (jsonReader.isReference()) {</b>
+<b class="nc">&nbsp;                    String reference = jsonReader.readReference();</b>
+<b class="nc">&nbsp;                    if (&quot;..&quot;.equals(reference)) {</b>
+<b class="nc">&nbsp;                        value = values;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        value = null;</b>
+<b class="nc">&nbsp;                        jsonReader.addResolveTask(values, i, JSONPath.of(reference));</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    ObjectReader objectReader = getObjectReader(jsonReader, i);</b>
+<b class="nc">&nbsp;                    value = objectReader.readObject(jsonReader, types[i], i, features);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                values[i] = value;</b>
+&nbsp;
+<b class="nc">&nbsp;                jsonReader.nextIfMatch(&#39;,&#39;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            jsonReader.nextIfMatch(&#39;,&#39;);</b>
+&nbsp;
+<b class="nc">&nbsp;            return values;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(jsonReader.info(&quot;TODO&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        int entryCnt = jsonReader.startArray();</b>
+<b class="nc">&nbsp;        if (entryCnt == -1) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Object[] values = new Object[types.length];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; entryCnt; ++i) {</b>
+&nbsp;            Object value;
+&nbsp;
+<b class="nc">&nbsp;            if (jsonReader.isReference()) {</b>
+<b class="nc">&nbsp;                String reference = jsonReader.readReference();</b>
+<b class="nc">&nbsp;                if (&quot;..&quot;.equals(reference)) {</b>
+<b class="nc">&nbsp;                    value = values;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    value = null;</b>
+<b class="nc">&nbsp;                    jsonReader.addResolveTask(values, i, JSONPath.of(reference));</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                ObjectReader objectReader = getObjectReader(jsonReader, i);</b>
+<b class="nc">&nbsp;                value = objectReader.readObject(jsonReader, types[i], i, features);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            values[i] = value;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return values;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createInstance(Collection collection) {
+<b class="nc">&nbsp;        Object[] array = new Object[types.length];</b>
+<b class="nc">&nbsp;        return array;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:33</div>
+</div>
+</body>
+</html>

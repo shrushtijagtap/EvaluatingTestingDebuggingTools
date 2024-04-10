@@ -1,0 +1,181 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ChatMessageHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.example.springtest.config</a>
+</div>
+
+<h1>Coverage Summary for Class: ChatMessageHandler (com.alibaba.fastjson2.example.springtest.config)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ChatMessageHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.example.springtest.config;
+&nbsp;
+&nbsp;import org.springframework.web.socket.TextMessage;
+&nbsp;import org.springframework.web.socket.WebSocketSession;
+&nbsp;import org.springframework.web.socket.handler.TextWebSocketHandler;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;
+&nbsp;/**
+&nbsp; * Created by jackiechan on 2018/2/5/下午4:11
+&nbsp; * 文本消息的处理器
+&nbsp; */
+<b class="nc">&nbsp;public class ChatMessageHandler</b>
+&nbsp;        extends TextWebSocketHandler {
+&nbsp;    //用于缓存所有的用户和连接之间的关系
+&nbsp;    private static final Map&lt;String, WebSocketSession&gt; allClients;
+&nbsp;
+&nbsp;    static {
+&nbsp;        //初始化连接
+<b class="nc">&nbsp;        allClients = new ConcurrentHashMap();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 当和用户成功建立连接的时候会调用此方法,在此方法内部应该保存连接
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 给某个用户发送消息
+&nbsp;     *
+&nbsp;     * @param userName
+&nbsp;     * @param message
+&nbsp;     */
+&nbsp;    public void sendMessageToUser(String userName, TextMessage message) {
+&nbsp;        //根据接收方的名字找到对应的连接
+<b class="nc">&nbsp;        WebSocketSession webSocketSession = allClients.get(userName);</b>
+&nbsp;
+&nbsp;        //如果没有离线,如果离线,请根据实际业务需求来处理,可能会需要保存离线消息
+<b class="nc">&nbsp;        if (webSocketSession != null &amp;&amp; webSocketSession.isOpen()) {</b>
+&nbsp;            try {
+&nbsp;                //发送消息
+<b class="nc">&nbsp;                webSocketSession.sendMessage(message);</b>
+<b class="nc">&nbsp;            } catch (IOException e) {</b>
+<b class="nc">&nbsp;                e.printStackTrace();</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 给所有在线用户发送消息,此处以文本消息为例子
+&nbsp;     *
+&nbsp;     * @param message
+&nbsp;     */
+&nbsp;    public void sendMessageToUsers(TextMessage message) {
+&nbsp;        //获取所有的连接
+<b class="nc">&nbsp;        for (Map.Entry&lt;String, WebSocketSession&gt; webSocketSessionEntry : allClients.entrySet()) {</b>
+&nbsp;            //找到每个连接
+<b class="nc">&nbsp;            WebSocketSession session = webSocketSessionEntry.getValue();</b>
+<b class="nc">&nbsp;            if (session != null &amp;&amp; session.isOpen()) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    session.sendMessage(message);</b>
+<b class="nc">&nbsp;                } catch (IOException e) {</b>
+<b class="nc">&nbsp;                    e.printStackTrace();</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean supportsPartialMessages() {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:28</div>
+</div>
+</body>
+</html>

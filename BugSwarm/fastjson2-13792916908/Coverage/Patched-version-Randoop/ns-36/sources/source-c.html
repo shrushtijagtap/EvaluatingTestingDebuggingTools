@@ -1,0 +1,191 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FieldReaderAtomicLongArrayReadOnly</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldReaderAtomicLongArrayReadOnly (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FieldReaderAtomicLongArrayReadOnly</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.schema.JSONSchema;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.util.List;
+&nbsp;import java.util.concurrent.atomic.AtomicLongArray;
+&nbsp;
+&nbsp;final class FieldReaderAtomicLongArrayReadOnly&lt;T&gt;
+&nbsp;        extends FieldReader&lt;T&gt; {
+&nbsp;    FieldReaderAtomicLongArrayReadOnly(
+&nbsp;            String fieldName,
+&nbsp;            Class fieldType,
+&nbsp;            int ordinal,
+&nbsp;            JSONSchema jsonSchema,
+&nbsp;            Method method
+&nbsp;    ) {
+<b class="nc">&nbsp;        super(fieldName, fieldType, fieldType, ordinal, 0, null, null, null, jsonSchema, method, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isReadOnly() {
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, Object value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            AtomicLongArray atomic = (AtomicLongArray) method.invoke(object);</b>
+<b class="nc">&nbsp;            if (value instanceof AtomicLongArray) {</b>
+<b class="nc">&nbsp;                AtomicLongArray array = (AtomicLongArray) value;</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; array.length(); i++) {</b>
+<b class="nc">&nbsp;                    atomic.set(i, array.get(i));</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                List values = (List) value;</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; values.size(); i++) {</b>
+<b class="nc">&nbsp;                    int itemValue = TypeUtils.toIntValue(values.get(i));</b>
+<b class="nc">&nbsp;                    atomic.set(i, itemValue);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;set &quot; + fieldName + &quot; error&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void readFieldValue(JSONReader jsonReader, T object) {
+<b class="nc">&nbsp;        if (jsonReader.readIfNull()) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        AtomicLongArray atomic;
+&nbsp;        try {
+<b class="nc">&nbsp;            atomic = (AtomicLongArray) method.invoke(object);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info(&quot;set &quot; + fieldName + &quot; error&quot;), e);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        if (jsonReader.nextIfMatch(&#39;[&#39;)) {</b>
+<b class="nc">&nbsp;            for (int i = 0; ; ++i) {</b>
+<b class="nc">&nbsp;                if (jsonReader.nextIfMatch(&#39;]&#39;)) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                long value = jsonReader.readInt64Value();</b>
+<b class="nc">&nbsp;                if (atomic != null &amp;&amp; i &lt; atomic.length()) {</b>
+<b class="nc">&nbsp;                    atomic.set(i, value);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readFieldValue(JSONReader jsonReader) {
+<b class="nc">&nbsp;        if (jsonReader.nextIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return jsonReader.readArray(Long.class);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:28</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,556 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ASMUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.internal.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: ASMUtils (com.alibaba.fastjson2.internal.asm)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ASMUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (3/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    51.7%
+  </span>
+  <span class="absValue">
+    (93/180)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ASMUtils$MethodInfo</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    42.9%
+  </span>
+  <span class="absValue">
+    (9/21)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    55.6%
+  </span>
+  <span class="absValue">
+    (5/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50.7%
+  </span>
+  <span class="absValue">
+    (102/201)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.internal.asm;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.annotation.JSONType;
+&nbsp;import com.alibaba.fastjson2.function.*;
+&nbsp;import com.alibaba.fastjson2.reader.*;
+&nbsp;import com.alibaba.fastjson2.schema.JSONSchema;
+&nbsp;import com.alibaba.fastjson2.util.DateUtils;
+&nbsp;import com.alibaba.fastjson2.util.IOUtils;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;import com.alibaba.fastjson2.util.UnsafeUtils;
+&nbsp;import com.alibaba.fastjson2.writer.*;
+&nbsp;import com.alibaba.fastjson2.writer.FieldWriter;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.lang.reflect.AccessibleObject;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import java.time.format.DateTimeParseException;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Objects;
+&nbsp;import java.util.concurrent.atomic.AtomicReference;
+&nbsp;import java.util.function.*;
+&nbsp;
+<b class="nc">&nbsp;public class ASMUtils {</b>
+<b class="fc">&nbsp;    public static final String TYPE_UNSAFE_UTILS = UnsafeUtils.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+&nbsp;
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_WRITER_ADAPTER</b>
+<b class="fc">&nbsp;            = ObjectWriterAdapter.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_WRITER_1 = ObjectWriter1.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_WRITER_2 = ObjectWriter2.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_WRITER_3 = ObjectWriter3.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_WRITER_4 = ObjectWriter4.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_WRITER_5 = ObjectWriter5.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_WRITER_6 = ObjectWriter6.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_WRITER_7 = ObjectWriter7.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_WRITER_8 = ObjectWriter8.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_WRITER_9 = ObjectWriter9.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_WRITER_10 = ObjectWriter10.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_WRITER_11 = ObjectWriter11.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_WRITER_12 = ObjectWriter12.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_FIELD_READE = FieldReader.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_JSON_READER = JSONReader.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+&nbsp;
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_READER = ObjectReader.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_READER_ADAPTER</b>
+<b class="fc">&nbsp;            = ObjectReaderAdapter.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_READER_1 = ObjectReader1.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_READER_2 = ObjectReader2.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_READER_3 = ObjectReader3.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_READER_4 = ObjectReader4.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_READER_5 = ObjectReader5.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_READER_6 = ObjectReader6.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_READER_7 = ObjectReader7.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_READER_8 = ObjectReader8.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_READER_9 = ObjectReader9.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_READER_10 = ObjectReader10.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_READER_11 = ObjectReader11.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_READER_12 = ObjectReader12.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_BYTE_ARRAY_VALUE_CONSUMER = ByteArrayValueConsumer.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_CHAR_ARRAY_VALUE_CONSUMER = CharArrayValueConsumer.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_TYPE_UTILS = TypeUtils.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_DATE_UTILS = DateUtils.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+&nbsp;
+<b class="fc">&nbsp;    public static final String TYPE_OBJECT_WRITER = ObjectWriter.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_JSON_WRITER = JSONWriter.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;    public static final String TYPE_FIELD_WRITER = FieldWriter.class.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+&nbsp;
+<b class="fc">&nbsp;    public static final String DESC_FIELD_WRITER = &#39;L&#39; + FieldWriter.class.getName().replace(&#39;.&#39;, &#39;/&#39;) + &#39;;&#39;;</b>
+<b class="fc">&nbsp;    public static final String DESC_FIELD_WRITER_ARRAY = &quot;[&quot; + DESC_FIELD_WRITER;</b>
+<b class="fc">&nbsp;    public static final String DESC_FIELD_READER = &#39;L&#39; + FieldReader.class.getName().replace(&#39;.&#39;, &#39;/&#39;) + &#39;;&#39;;</b>
+<b class="fc">&nbsp;    public static final String DESC_FIELD_READER_ARRAY = &quot;[&quot; + DESC_FIELD_READER;</b>
+<b class="fc">&nbsp;    public static final String DESC_JSON_READER = &#39;L&#39; + TYPE_JSON_READER + &#39;;&#39;;</b>
+<b class="fc">&nbsp;    public static final String DESC_JSON_WRITER = &#39;L&#39; + TYPE_JSON_WRITER + &#39;;&#39;;</b>
+<b class="fc">&nbsp;    public static final String DESC_OBJECT_READER = &#39;L&#39; + TYPE_OBJECT_READER + &#39;;&#39;;</b>
+<b class="fc">&nbsp;    public static final String DESC_OBJECT_WRITER = &#39;L&#39; + TYPE_OBJECT_WRITER + &#39;;&#39;;</b>
+&nbsp;    public static final String DESC_SUPPLIER = &quot;Ljava/util/function/Supplier;&quot;;
+<b class="fc">&nbsp;    public static final String DESC_JSONSCHEMA = &#39;L&#39; + JSONSchema.class.getName().replace(&#39;.&#39;, &#39;/&#39;) + &#39;;&#39;;</b>
+&nbsp;
+<b class="fc">&nbsp;    static final Map&lt;MethodInfo, String[]&gt; paramMapping = new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;    static final Map&lt;Class, String&gt; descMapping = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;    static final Map&lt;Class, String&gt; typeMapping = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    static {
+<b class="fc">&nbsp;        paramMapping.put(</b>
+&nbsp;                new MethodInfo(
+&nbsp;                        &quot;com.alibaba.fastjson2.util.ParameterizedTypeImpl&quot;,
+&nbsp;                        &quot;&lt;init&gt;&quot;,
+&nbsp;                        new String[]{&quot;[Ljava.lang.reflect.Type;&quot;, &quot;java.lang.reflect.Type&quot;, &quot;java.lang.reflect.Type&quot;}
+&nbsp;                ),
+&nbsp;                new String[]{&quot;actualTypeArguments&quot;, &quot;ownerType&quot;, &quot;rawType&quot;}
+&nbsp;        );
+&nbsp;
+<b class="fc">&nbsp;        paramMapping.put(</b>
+&nbsp;                new MethodInfo(
+&nbsp;                        &quot;org.apache.commons.lang3.tuple.Triple&quot;,
+&nbsp;                        &quot;of&quot;,
+&nbsp;                        new String[]{&quot;java.lang.Object&quot;, &quot;java.lang.Object&quot;, &quot;java.lang.Object&quot;}
+&nbsp;                ),
+&nbsp;                new String[]{&quot;left&quot;, &quot;middle&quot;, &quot;right&quot;}
+&nbsp;        );
+<b class="fc">&nbsp;        paramMapping.put(</b>
+&nbsp;                new MethodInfo(
+&nbsp;                        &quot;org.apache.commons.lang3.tuple.MutableTriple&quot;,
+&nbsp;                        &quot;&lt;init&gt;&quot;,
+&nbsp;                        new String[]{&quot;java.lang.Object&quot;, &quot;java.lang.Object&quot;, &quot;java.lang.Object&quot;}
+&nbsp;                ),
+&nbsp;                new String[]{&quot;left&quot;, &quot;middle&quot;, &quot;right&quot;}
+&nbsp;        );
+&nbsp;
+<b class="fc">&nbsp;        paramMapping.put(</b>
+&nbsp;                new MethodInfo(
+&nbsp;                        &quot;org.javamoney.moneta.Money&quot;,
+&nbsp;                        &quot;&lt;init&gt;&quot;,
+&nbsp;                        new String[]{&quot;java.math.BigDecimal&quot;, &quot;javax.money.CurrencyUnit&quot;, &quot;javax.money.MonetaryContext&quot;}
+&nbsp;                ),
+&nbsp;                new String[]{&quot;number&quot;, &quot;currency&quot;, &quot;monetaryContext&quot;}
+&nbsp;        );
+<b class="fc">&nbsp;        paramMapping.put(</b>
+&nbsp;                new MethodInfo(
+&nbsp;                        &quot;org.javamoney.moneta.Money&quot;,
+&nbsp;                        &quot;&lt;init&gt;&quot;,
+&nbsp;                        new String[]{&quot;java.math.BigDecimal&quot;, &quot;javax.money.CurrencyUnit&quot;}
+&nbsp;                ),
+&nbsp;                new String[]{&quot;number&quot;, &quot;currency&quot;}
+&nbsp;        );
+&nbsp;
+<b class="fc">&nbsp;        descMapping.put(int.class, &quot;I&quot;);</b>
+<b class="fc">&nbsp;        descMapping.put(void.class, &quot;V&quot;);</b>
+<b class="fc">&nbsp;        descMapping.put(boolean.class, &quot;Z&quot;);</b>
+<b class="fc">&nbsp;        descMapping.put(char.class, &quot;C&quot;);</b>
+<b class="fc">&nbsp;        descMapping.put(byte.class, &quot;B&quot;);</b>
+<b class="fc">&nbsp;        descMapping.put(short.class, &quot;S&quot;);</b>
+<b class="fc">&nbsp;        descMapping.put(float.class, &quot;F&quot;);</b>
+<b class="fc">&nbsp;        descMapping.put(long.class, &quot;J&quot;);</b>
+<b class="fc">&nbsp;        descMapping.put(double.class, &quot;D&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        typeMapping.put(int.class, &quot;I&quot;);</b>
+<b class="fc">&nbsp;        typeMapping.put(void.class, &quot;V&quot;);</b>
+<b class="fc">&nbsp;        typeMapping.put(boolean.class, &quot;Z&quot;);</b>
+<b class="fc">&nbsp;        typeMapping.put(char.class, &quot;C&quot;);</b>
+<b class="fc">&nbsp;        typeMapping.put(byte.class, &quot;B&quot;);</b>
+<b class="fc">&nbsp;        typeMapping.put(short.class, &quot;S&quot;);</b>
+<b class="fc">&nbsp;        typeMapping.put(float.class, &quot;F&quot;);</b>
+<b class="fc">&nbsp;        typeMapping.put(long.class, &quot;J&quot;);</b>
+<b class="fc">&nbsp;        typeMapping.put(double.class, &quot;D&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        Class[] classes = new Class[]{</b>
+&nbsp;                String.class,
+&nbsp;                java.util.List.class,
+&nbsp;                java.util.Collection.class,
+&nbsp;                ObjectReader.class,
+&nbsp;                ObjectReader1.class,
+&nbsp;                ObjectReader2.class,
+&nbsp;                ObjectReader3.class,
+&nbsp;                ObjectReader4.class,
+&nbsp;                ObjectReader5.class,
+&nbsp;                ObjectReader6.class,
+&nbsp;                ObjectReader7.class,
+&nbsp;                ObjectReader8.class,
+&nbsp;                ObjectReader9.class,
+&nbsp;                ObjectReader10.class,
+&nbsp;                ObjectReader11.class,
+&nbsp;                ObjectReader12.class,
+&nbsp;                ObjectReaderAdapter.class,
+&nbsp;                FieldReader.class,
+&nbsp;                JSONReader.class,
+&nbsp;                ObjBoolConsumer.class,
+&nbsp;                ObjCharConsumer.class,
+&nbsp;                ObjByteConsumer.class,
+&nbsp;                ObjShortConsumer.class,
+&nbsp;                ObjIntConsumer.class,
+&nbsp;                ObjLongConsumer.class,
+&nbsp;                ObjFloatConsumer.class,
+&nbsp;                ObjDoubleConsumer.class,
+&nbsp;                BiConsumer.class,
+&nbsp;                UnsafeUtils.class,
+&nbsp;                ObjectWriterAdapter.class,
+&nbsp;                ObjectWriter1.class,
+&nbsp;                ObjectWriter2.class,
+&nbsp;                ObjectWriter3.class,
+&nbsp;                ObjectWriter4.class,
+&nbsp;                ObjectWriter5.class,
+&nbsp;                ObjectWriter6.class,
+&nbsp;                ObjectWriter7.class,
+&nbsp;                ObjectWriter8.class,
+&nbsp;                ObjectWriter9.class,
+&nbsp;                ObjectWriter10.class,
+&nbsp;                ObjectWriter11.class,
+&nbsp;                ObjectWriter12.class,
+&nbsp;                com.alibaba.fastjson2.writer.FieldWriter.class,
+&nbsp;                JSONPathCompilerReflect.SingleNamePathTyped.class,
+&nbsp;                JSONWriter.Context.class,
+&nbsp;                JSONB.class,
+&nbsp;                JSONSchema.class,
+&nbsp;                JSONType.class,
+&nbsp;                java.util.Date.class,
+&nbsp;                java.util.function.Supplier.class
+&nbsp;        };
+<b class="fc">&nbsp;        for (Class objectType : classes) {</b>
+<b class="fc">&nbsp;            String type = objectType.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+<b class="fc">&nbsp;            typeMapping.put(objectType, type);</b>
+<b class="fc">&nbsp;            String desc = &#39;L&#39; + type + &#39;;&#39;;</b>
+<b class="fc">&nbsp;            descMapping.put(objectType, desc);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        typeMapping.put(JSONWriter.class, TYPE_JSON_WRITER);</b>
+<b class="fc">&nbsp;        descMapping.put(JSONWriter.class, DESC_JSON_WRITER);</b>
+<b class="fc">&nbsp;        typeMapping.put(ObjectWriter.class, TYPE_OBJECT_WRITER);</b>
+<b class="fc">&nbsp;        descMapping.put(ObjectWriter.class, DESC_OBJECT_WRITER);</b>
+&nbsp;
+<b class="fc">&nbsp;        descMapping.put(FieldWriter[].class, DESC_FIELD_WRITER_ARRAY);</b>
+<b class="fc">&nbsp;        descMapping.put(FieldReader[].class, DESC_FIELD_READER_ARRAY);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String type(Class&lt;?&gt; clazz) {
+<b class="fc">&nbsp;        String type = typeMapping.get(clazz);</b>
+<b class="fc">&nbsp;        if (type != null) {</b>
+<b class="fc">&nbsp;            return type;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (clazz.isArray()) {</b>
+<b class="nc">&nbsp;            return &quot;[&quot; + desc(clazz.getComponentType());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // 直接基于字符串替换，不使用正则替换
+<b class="nc">&nbsp;        return clazz.getName().replace(&#39;.&#39;, &#39;/&#39;);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    static final AtomicReference&lt;char[]&gt; descCacheRef = new AtomicReference&lt;&gt;();</b>
+&nbsp;
+&nbsp;    public static String desc(Class&lt;?&gt; clazz) {
+<b class="fc">&nbsp;        String desc = descMapping.get(clazz);</b>
+<b class="fc">&nbsp;        if (desc != null) {</b>
+<b class="fc">&nbsp;            return desc;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (clazz.isArray()) {</b>
+<b class="nc">&nbsp;            Class&lt;?&gt; componentType = clazz.getComponentType();</b>
+<b class="nc">&nbsp;            return &quot;[&quot; + desc(componentType);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String className = clazz.getName();</b>
+<b class="nc">&nbsp;        char[] chars = descCacheRef.getAndSet(null);</b>
+<b class="nc">&nbsp;        if (chars == null) {</b>
+<b class="nc">&nbsp;            chars = new char[512];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        chars[0] = &#39;L&#39;;</b>
+<b class="nc">&nbsp;        className.getChars(0, className.length(), chars, 1);</b>
+<b class="nc">&nbsp;        for (int i = 1; i &lt; chars.length; i++) {</b>
+<b class="nc">&nbsp;            if (chars[i] == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;                chars[i] = &#39;/&#39;;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        chars[className.length() + 1] = &#39;;&#39;;</b>
+&nbsp;
+<b class="nc">&nbsp;        String str = new String(chars, 0, className.length() + 2);</b>
+<b class="nc">&nbsp;        descCacheRef.compareAndSet(null, chars);</b>
+<b class="nc">&nbsp;        return str;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String[] lookupParameterNames(AccessibleObject methodOrCtor) {
+<b class="nc">&nbsp;        if (methodOrCtor instanceof Constructor) {</b>
+<b class="nc">&nbsp;            Constructor constructor = (Constructor) methodOrCtor;</b>
+<b class="nc">&nbsp;            Class[] parameterTypes = constructor.getParameterTypes();</b>
+&nbsp;
+<b class="nc">&nbsp;            Class declaringClass = constructor.getDeclaringClass();</b>
+<b class="nc">&nbsp;            if (declaringClass == DateTimeParseException.class) {</b>
+<b class="nc">&nbsp;                if (parameterTypes.length == 3) {</b>
+<b class="nc">&nbsp;                    if (parameterTypes[0] == String.class &amp;&amp; parameterTypes[1] == CharSequence.class &amp;&amp; parameterTypes[2] == int.class) {</b>
+<b class="nc">&nbsp;                        return new String[]{&quot;message&quot;, &quot;parsedString&quot;, &quot;errorIndex&quot;};</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } else if (parameterTypes.length == 4) {</b>
+<b class="nc">&nbsp;                    if (parameterTypes[0] == String.class &amp;&amp; parameterTypes[1] == CharSequence.class &amp;&amp; parameterTypes[2] == int.class &amp;&amp; parameterTypes[3] == Throwable.class) {</b>
+<b class="nc">&nbsp;                        return new String[]{&quot;message&quot;, &quot;parsedString&quot;, &quot;errorIndex&quot;, &quot;cause&quot;};</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (Throwable.class.isAssignableFrom(declaringClass)) {</b>
+<b class="nc">&nbsp;                switch (parameterTypes.length) {</b>
+&nbsp;                    case 1:
+<b class="nc">&nbsp;                        if (parameterTypes[0] == String.class) {</b>
+<b class="nc">&nbsp;                            return new String[]{&quot;message&quot;};</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        if (Throwable.class.isAssignableFrom(parameterTypes[0])) {</b>
+<b class="nc">&nbsp;                            return new String[]{&quot;cause&quot;};</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case 2:
+<b class="nc">&nbsp;                        if (parameterTypes[0] == String.class &amp;&amp; Throwable.class.isAssignableFrom(parameterTypes[1])) {</b>
+<b class="nc">&nbsp;                            return new String[]{&quot;message&quot;, &quot;cause&quot;};</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    default:
+&nbsp;                        break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        final Class&lt;?&gt;[] types;
+&nbsp;        final Class&lt;?&gt; declaringClass;
+&nbsp;        final String name;
+&nbsp;
+&nbsp;        int paramCount;
+<b class="nc">&nbsp;        if (methodOrCtor instanceof Method) {</b>
+<b class="nc">&nbsp;            Method method = (Method) methodOrCtor;</b>
+<b class="nc">&nbsp;            types = method.getParameterTypes();</b>
+<b class="nc">&nbsp;            name = method.getName();</b>
+<b class="nc">&nbsp;            declaringClass = method.getDeclaringClass();</b>
+<b class="nc">&nbsp;            paramCount = method.getParameterCount();</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            Constructor&lt;?&gt; constructor = (Constructor&lt;?&gt;) methodOrCtor;</b>
+<b class="nc">&nbsp;            types = constructor.getParameterTypes();</b>
+<b class="nc">&nbsp;            declaringClass = constructor.getDeclaringClass();</b>
+<b class="nc">&nbsp;            name = &quot;&lt;init&gt;&quot;;</b>
+<b class="nc">&nbsp;            paramCount = constructor.getParameterCount();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (types.length == 0) {</b>
+<b class="nc">&nbsp;            return new String[paramCount];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String[] paramNames = paramMapping.get(new MethodInfo(declaringClass.getName(), name, types));</b>
+<b class="nc">&nbsp;        if (paramNames != null) {</b>
+<b class="nc">&nbsp;            return paramNames;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ClassLoader classLoader = declaringClass.getClassLoader();</b>
+<b class="nc">&nbsp;        if (classLoader == null) {</b>
+<b class="nc">&nbsp;            classLoader = ClassLoader.getSystemClassLoader();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String className = declaringClass.getName();</b>
+<b class="nc">&nbsp;        String resourceName = className.replace(&#39;.&#39;, &#39;/&#39;) + &quot;.class&quot;;</b>
+<b class="nc">&nbsp;        InputStream is = classLoader.getResourceAsStream(resourceName);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (is != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                ClassReader reader = new ClassReader(is);</b>
+<b class="nc">&nbsp;                TypeCollector visitor = new TypeCollector(name, types);</b>
+<b class="nc">&nbsp;                reader.accept(visitor);</b>
+&nbsp;
+<b class="nc">&nbsp;                paramNames = visitor.getParameterNamesForMethod();</b>
+<b class="nc">&nbsp;                if (paramNames != null &amp;&amp; paramNames.length == paramCount - 1) {</b>
+<b class="nc">&nbsp;                    Class&lt;?&gt; dd = declaringClass.getDeclaringClass();</b>
+<b class="nc">&nbsp;                    if (dd != null &amp;&amp; dd.equals(types[0])) {</b>
+<b class="nc">&nbsp;                        String[] strings = new String[paramCount];</b>
+<b class="nc">&nbsp;                        strings[0] = &quot;this$0&quot;;</b>
+<b class="nc">&nbsp;                        System.arraycopy(paramNames, 0, strings, 1, paramNames.length);</b>
+<b class="nc">&nbsp;                        paramNames = strings;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                return paramNames;</b>
+<b class="nc">&nbsp;            } catch (IOException ignored) {</b>
+&nbsp;                // ignored
+&nbsp;            } finally {
+<b class="nc">&nbsp;                IOUtils.close(is);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        paramNames = new String[paramCount];</b>
+&nbsp;        int i;
+<b class="nc">&nbsp;        if (types[0] == declaringClass.getDeclaringClass()</b>
+<b class="nc">&nbsp;                &amp;&amp; !Modifier.isStatic(declaringClass.getModifiers())) {</b>
+<b class="nc">&nbsp;            paramNames[0] = &quot;this.$0&quot;;</b>
+<b class="nc">&nbsp;            i = 1;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            i = 0;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        for (; i &lt; paramNames.length; i++) {</b>
+<b class="nc">&nbsp;            paramNames[i] = &quot;arg&quot; + i;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return paramNames;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static class MethodInfo {
+&nbsp;        final String className;
+&nbsp;        final String methodName;
+&nbsp;        final String[] paramTypeNames;
+&nbsp;        int hash;
+&nbsp;
+<b class="fc">&nbsp;        public MethodInfo(String className, String methodName, String[] paramTypeNames) {</b>
+<b class="fc">&nbsp;            this.className = className;</b>
+<b class="fc">&nbsp;            this.methodName = methodName;</b>
+<b class="fc">&nbsp;            this.paramTypeNames = paramTypeNames;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        public MethodInfo(String className, String methodName, Class[] paramTypes) {</b>
+<b class="nc">&nbsp;            this.className = className;</b>
+<b class="nc">&nbsp;            this.methodName = methodName;</b>
+<b class="nc">&nbsp;            this.paramTypeNames = new String[paramTypes.length];</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; paramTypes.length; i++) {</b>
+<b class="nc">&nbsp;                paramTypeNames[i] = paramTypes[i].getName();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean equals(Object o) {
+<b class="nc">&nbsp;            if (this == o) {</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (o == null || getClass() != o.getClass()) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            MethodInfo that = (MethodInfo) o;</b>
+<b class="nc">&nbsp;            return Objects.equals(className, that.className) &amp;&amp; Objects.equals(methodName, that.methodName) &amp;&amp; Arrays.equals(paramTypeNames, that.paramTypeNames);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public int hashCode() {
+<b class="fc">&nbsp;            if (hash == 0) {</b>
+<b class="fc">&nbsp;                int result = Objects.hash(className, methodName);</b>
+<b class="fc">&nbsp;                result = 31 * result + Arrays.hashCode(paramTypeNames);</b>
+<b class="fc">&nbsp;                hash = result;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return hash;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:15</div>
+</div>
+</body>
+</html>

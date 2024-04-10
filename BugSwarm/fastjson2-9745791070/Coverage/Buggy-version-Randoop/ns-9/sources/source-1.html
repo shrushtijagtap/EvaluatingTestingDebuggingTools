@@ -1,0 +1,570 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TLongIntHashMap</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.internal.trove.map.hash</a>
+</div>
+
+<h1>Coverage Summary for Class: TLongIntHashMap (com.alibaba.fastjson2.internal.trove.map.hash)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TLongIntHashMap</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/189)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TLongIntHashMap$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/198)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;///////////////////////////////////////////////////////////////////////////////
+&nbsp;// Copyright (c) 2001, Eric D. Friedman All Rights Reserved.
+&nbsp;// Copyright (c) 2009, Rob Eden All Rights Reserved.
+&nbsp;// Copyright (c) 2009, Jeff Randall All Rights Reserved.
+&nbsp;//
+&nbsp;// This library is free software; you can redistribute it and/or
+&nbsp;// modify it under the terms of the GNU Lesser General Public
+&nbsp;// License as published by the Free Software Foundation; either
+&nbsp;// version 2.1 of the License, or (at your option) any later version.
+&nbsp;//
+&nbsp;// This library is distributed in the hope that it will be useful,
+&nbsp;// but WITHOUT ANY WARRANTY; without even the implied warranty of
+&nbsp;// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+&nbsp;// GNU General Public License for more details.
+&nbsp;//
+&nbsp;// You should have received a copy of the GNU Lesser General Public
+&nbsp;// License along with this program; if not, write to the Free Software
+&nbsp;// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+&nbsp;///////////////////////////////////////////////////////////////////////////////
+&nbsp;
+&nbsp;package com.alibaba.fastjson2.internal.trove.map.hash;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.internal.trove.impl.PrimeFinder;
+&nbsp;import com.alibaba.fastjson2.internal.trove.procedure.TLongIntProcedure;
+&nbsp;
+&nbsp;/**
+&nbsp; * An open addressed Map implementation for long keys and int values.
+&nbsp; *
+&nbsp; * @author Eric D. Friedman
+&nbsp; * @author Rob Eden
+&nbsp; * @author Jeff Randall
+&nbsp; */
+&nbsp;public class TLongIntHashMap {
+&nbsp;    public static final int DEFAULT_ENTRY_VALUE = -1;
+&nbsp;
+&nbsp;    static final byte FREE = 0;
+&nbsp;    static final byte FULL = 1;
+&nbsp;
+&nbsp;    protected int[] values;
+&nbsp;    protected long[] set;
+&nbsp;    protected boolean consumeFreeSlot;
+&nbsp;    protected byte[] states;
+&nbsp;    protected int size;
+&nbsp;    protected int free;
+&nbsp;    protected int maxSize;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new &lt;code&gt;TLongIntHashMap&lt;/code&gt; instance with the default
+&nbsp;     * capacity and load factor.
+&nbsp;     */
+<b class="nc">&nbsp;    public TLongIntHashMap() {</b>
+<b class="nc">&nbsp;        int capacity = 37;</b>
+<b class="nc">&nbsp;        maxSize = 18;</b>
+<b class="nc">&nbsp;        free = capacity; // reset the free element count</b>
+&nbsp;
+<b class="nc">&nbsp;        states = new byte[capacity];</b>
+<b class="nc">&nbsp;        set = new long[capacity];</b>
+<b class="nc">&nbsp;        values = new int[capacity];</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public TLongIntHashMap(long key, int value) {</b>
+<b class="nc">&nbsp;        int capacity = 37;</b>
+<b class="nc">&nbsp;        maxSize = 18;</b>
+&nbsp;
+<b class="nc">&nbsp;        states = new byte[capacity];</b>
+<b class="nc">&nbsp;        set = new long[capacity];</b>
+<b class="nc">&nbsp;        values = new int[capacity];</b>
+&nbsp;
+<b class="nc">&nbsp;        int hash = ((int) (key ^ (key &gt;&gt;&gt; 32))) &amp; 0x7fffffff;</b>
+<b class="nc">&nbsp;        int index = hash % states.length;</b>
+<b class="nc">&nbsp;        consumeFreeSlot = true;</b>
+<b class="nc">&nbsp;        set[index] = key;</b>
+<b class="nc">&nbsp;        states[index] = FULL;</b>
+&nbsp;
+<b class="nc">&nbsp;        values[index] = value;</b>
+&nbsp;
+<b class="nc">&nbsp;        free = capacity - 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void put(long key, int value) {
+&nbsp;//        int index = insertKey( key );
+&nbsp;        int index;
+&nbsp;        {
+<b class="nc">&nbsp;            int hash = ((int) (key ^ (key &gt;&gt;&gt; 32))) &amp; 0x7fffffff;</b>
+<b class="nc">&nbsp;            index = hash % states.length;</b>
+<b class="nc">&nbsp;            byte state = states[index];</b>
+&nbsp;
+<b class="nc">&nbsp;            consumeFreeSlot = false;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (state == FREE) {</b>
+<b class="nc">&nbsp;                consumeFreeSlot = true;</b>
+&nbsp;//                insertKeyAt(index, key);
+<b class="nc">&nbsp;                set[index] = key;</b>
+<b class="nc">&nbsp;                states[index] = FULL;</b>
+<b class="nc">&nbsp;            } else if (state == FULL &amp;&amp; set[index] == key) {</b>
+<b class="nc">&nbsp;                index = -index - 1;   // already stored</b>
+&nbsp;            } else {
+&nbsp;                // already FULL or REMOVED, must probe
+&nbsp;//                index = insertKeyRehash(key, index, hash);
+&nbsp;                {
+&nbsp;                    // compute the double hash
+<b class="nc">&nbsp;                    final int length = set.length;</b>
+<b class="nc">&nbsp;                    int probe = 1 + (hash % (length - 2));</b>
+<b class="nc">&nbsp;                    final int loopIndex = index;</b>
+&nbsp;
+&nbsp;                    /**
+&nbsp;                     * Look until FREE slot or we start to loop
+&nbsp;                     */
+&nbsp;                    do {
+<b class="nc">&nbsp;                        index -= probe;</b>
+<b class="nc">&nbsp;                        if (index &lt; 0) {</b>
+<b class="nc">&nbsp;                            index += length;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        state = states[index];</b>
+&nbsp;
+&nbsp;                        // A FREE slot stops the search
+<b class="nc">&nbsp;                        if (state == FREE) {</b>
+<b class="nc">&nbsp;                            consumeFreeSlot = true;</b>
+<b class="nc">&nbsp;                            set[index] = key;  // insert value</b>
+<b class="nc">&nbsp;                            states[index] = FULL;</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        if (state == FULL &amp;&amp; set[index] == key) {</b>
+<b class="nc">&nbsp;                            index = -index - 1;</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;
+&nbsp;                        // Detect loop
+<b class="nc">&nbsp;                    } while (index != loopIndex);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean isNewMapping = true;</b>
+<b class="nc">&nbsp;        if (index &lt; 0) {</b>
+<b class="nc">&nbsp;            index = -index - 1;</b>
+<b class="nc">&nbsp;            isNewMapping = false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        values[index] = value;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (isNewMapping) {</b>
+<b class="nc">&nbsp;            if (consumeFreeSlot) {</b>
+<b class="nc">&nbsp;                free--;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // rehash whenever we exhaust the available space in the table
+<b class="nc">&nbsp;            if (++size &gt; maxSize || free == 0) {</b>
+&nbsp;                // choose a new capacity suited to the new state of the table
+&nbsp;                // if we&#39;ve grown beyond our maximum size, double capacity;
+&nbsp;                // if we&#39;ve exhausted the free spots, rehash to the same capacity,
+&nbsp;                // which will free up any stale removed slots for reuse.
+<b class="nc">&nbsp;                int capacity = states.length;</b>
+<b class="nc">&nbsp;                int newCapacity = size &gt; maxSize ? PrimeFinder.nextPrime(capacity &lt;&lt; 1) : capacity;</b>
+&nbsp;//                rehash(newCapacity);
+&nbsp;                {
+<b class="nc">&nbsp;                    int oldCapacity = set.length;</b>
+&nbsp;
+<b class="nc">&nbsp;                    long[] oldKeys = set;</b>
+<b class="nc">&nbsp;                    int[] oldVals = values;</b>
+<b class="nc">&nbsp;                    byte[] oldStates = states;</b>
+&nbsp;
+<b class="nc">&nbsp;                    set = new long[newCapacity];</b>
+<b class="nc">&nbsp;                    values = new int[newCapacity];</b>
+<b class="nc">&nbsp;                    states = new byte[newCapacity];</b>
+&nbsp;
+<b class="nc">&nbsp;                    for (int i = oldCapacity; i-- &gt; 0; ) {</b>
+<b class="nc">&nbsp;                        if (oldStates[i] == FULL) {</b>
+<b class="nc">&nbsp;                            long o = oldKeys[i];</b>
+<b class="nc">&nbsp;                            index = insertKey(o);</b>
+<b class="nc">&nbsp;                            values[index] = oldVals[i];</b>
+<b class="nc">&nbsp;                        }</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                capacity = states.length;</b>
+&nbsp;                // computeMaxSize(capacity);
+<b class="nc">&nbsp;                maxSize = Math.min(capacity - 1, (int) (capacity * 0.5f));</b>
+<b class="nc">&nbsp;                free = capacity - size; // reset the free element count</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public int putIfAbsent(long key, int value) {
+&nbsp;//        int index = insertKey( key );
+&nbsp;        int index;
+&nbsp;        {
+<b class="nc">&nbsp;            int hash = ((int) (key ^ (key &gt;&gt;&gt; 32))) &amp; 0x7fffffff;</b>
+<b class="nc">&nbsp;            index = hash % states.length;</b>
+<b class="nc">&nbsp;            byte state = states[index];</b>
+&nbsp;
+<b class="nc">&nbsp;            consumeFreeSlot = false;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (state == FREE) {</b>
+<b class="nc">&nbsp;                consumeFreeSlot = true;</b>
+&nbsp;//                insertKeyAt(index, key);
+<b class="nc">&nbsp;                set[index] = key;</b>
+<b class="nc">&nbsp;                states[index] = FULL;</b>
+<b class="nc">&nbsp;            } else if (state == FULL &amp;&amp; set[index] == key) {</b>
+<b class="nc">&nbsp;                index = -index - 1;   // already stored</b>
+&nbsp;            } else {
+&nbsp;                // already FULL or REMOVED, must probe
+&nbsp;//                index = insertKeyRehash(key, index, hash);
+&nbsp;                {
+&nbsp;                    // compute the double hash
+<b class="nc">&nbsp;                    final int length = set.length;</b>
+<b class="nc">&nbsp;                    int probe = 1 + (hash % (length - 2));</b>
+<b class="nc">&nbsp;                    final int loopIndex = index;</b>
+&nbsp;
+&nbsp;                    /**
+&nbsp;                     * Look until FREE slot or we start to loop
+&nbsp;                     */
+&nbsp;                    do {
+<b class="nc">&nbsp;                        index -= probe;</b>
+<b class="nc">&nbsp;                        if (index &lt; 0) {</b>
+<b class="nc">&nbsp;                            index += length;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        state = states[index];</b>
+&nbsp;
+&nbsp;                        // A FREE slot stops the search
+<b class="nc">&nbsp;                        if (state == FREE) {</b>
+<b class="nc">&nbsp;                            consumeFreeSlot = true;</b>
+<b class="nc">&nbsp;                            set[index] = key;  // insert value</b>
+<b class="nc">&nbsp;                            states[index] = FULL;</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        if (state == FULL &amp;&amp; set[index] == key) {</b>
+<b class="nc">&nbsp;                            index = -index - 1;</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;
+&nbsp;                        // Detect loop
+<b class="nc">&nbsp;                    } while (index != loopIndex);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (index &lt; 0) {</b>
+<b class="nc">&nbsp;            return values[-index - 1];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean isNewMapping = true;</b>
+<b class="nc">&nbsp;        if (index &lt; 0) {</b>
+<b class="nc">&nbsp;            index = -index - 1;</b>
+<b class="nc">&nbsp;            isNewMapping = false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        values[index] = value;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (isNewMapping) {</b>
+<b class="nc">&nbsp;            if (consumeFreeSlot) {</b>
+<b class="nc">&nbsp;                free--;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // rehash whenever we exhaust the available space in the table
+<b class="nc">&nbsp;            if (++size &gt; maxSize || free == 0) {</b>
+&nbsp;                // choose a new capacity suited to the new state of the table
+&nbsp;                // if we&#39;ve grown beyond our maximum size, double capacity;
+&nbsp;                // if we&#39;ve exhausted the free spots, rehash to the same capacity,
+&nbsp;                // which will free up any stale removed slots for reuse.
+<b class="nc">&nbsp;                int capacity = states.length;</b>
+<b class="nc">&nbsp;                int newCapacity = size &gt; maxSize ? PrimeFinder.nextPrime(capacity &lt;&lt; 1) : capacity;</b>
+&nbsp;//                rehash(newCapacity);
+&nbsp;                {
+<b class="nc">&nbsp;                    int oldCapacity = set.length;</b>
+&nbsp;
+<b class="nc">&nbsp;                    long[] oldKeys = set;</b>
+<b class="nc">&nbsp;                    int[] oldVals = values;</b>
+<b class="nc">&nbsp;                    byte[] oldStates = states;</b>
+&nbsp;
+<b class="nc">&nbsp;                    set = new long[newCapacity];</b>
+<b class="nc">&nbsp;                    values = new int[newCapacity];</b>
+<b class="nc">&nbsp;                    states = new byte[newCapacity];</b>
+&nbsp;
+<b class="nc">&nbsp;                    for (int i = oldCapacity; i-- &gt; 0; ) {</b>
+<b class="nc">&nbsp;                        if (oldStates[i] == FULL) {</b>
+<b class="nc">&nbsp;                            long o = oldKeys[i];</b>
+<b class="nc">&nbsp;                            index = insertKey(o);</b>
+<b class="nc">&nbsp;                            values[index] = oldVals[i];</b>
+<b class="nc">&nbsp;                        }</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                capacity = states.length;</b>
+&nbsp;                // computeMaxSize(capacity);
+<b class="nc">&nbsp;                maxSize = Math.min(capacity - 1, (int) (capacity * 0.5f));</b>
+<b class="nc">&nbsp;                free = capacity - size; // reset the free element count</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int get(long key) {
+<b class="nc">&nbsp;        int length = states.length;</b>
+<b class="nc">&nbsp;        int hash = ((int) (key ^ (key &gt;&gt;&gt; 32))) &amp; 0x7fffffff;</b>
+<b class="nc">&nbsp;        int index = hash % length;</b>
+<b class="nc">&nbsp;        byte state = states[index];</b>
+&nbsp;
+<b class="nc">&nbsp;        if (state == FREE) {</b>
+<b class="nc">&nbsp;            return DEFAULT_ENTRY_VALUE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (state == FULL &amp;&amp; set[index] == key) {</b>
+<b class="nc">&nbsp;            return values[index];</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // indexRehashed
+<b class="nc">&nbsp;        int setLength = set.length;</b>
+<b class="nc">&nbsp;        int probe = 1 + (hash % (setLength - 2));</b>
+<b class="nc">&nbsp;        final int loopIndex = index;</b>
+&nbsp;
+&nbsp;        do {
+<b class="nc">&nbsp;            index -= probe;</b>
+<b class="nc">&nbsp;            if (index &lt; 0) {</b>
+<b class="nc">&nbsp;                index += setLength;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            state = states[index];</b>
+&nbsp;
+<b class="nc">&nbsp;            if (state == FREE) {</b>
+<b class="nc">&nbsp;                return DEFAULT_ENTRY_VALUE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (key == set[index]) {</b>
+<b class="nc">&nbsp;                return values[index];</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } while (index != loopIndex);</b>
+&nbsp;
+<b class="nc">&nbsp;        return DEFAULT_ENTRY_VALUE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean forEachEntry(TLongIntProcedure procedure) {
+<b class="nc">&nbsp;        byte[] states = this.states;</b>
+<b class="nc">&nbsp;        long[] keys = set;</b>
+<b class="nc">&nbsp;        int[] values = this.values;</b>
+<b class="nc">&nbsp;        for (int i = keys.length; i-- &gt; 0; ) {</b>
+<b class="nc">&nbsp;            if (states[i] == FULL &amp;&amp; !procedure.execute(keys[i], values[i])) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        final StringBuilder buf = new StringBuilder(&quot;{&quot;);</b>
+<b class="nc">&nbsp;        forEachEntry(new TLongIntProcedure() {</b>
+<b class="nc">&nbsp;            private boolean first = true;</b>
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public boolean execute(long key, int value) {
+<b class="nc">&nbsp;                if (first) {</b>
+<b class="nc">&nbsp;                    first = false;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    buf.append(&quot;, &quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                buf.append(key);</b>
+<b class="nc">&nbsp;                buf.append(&quot;=&quot;);</b>
+<b class="nc">&nbsp;                buf.append(value);</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+&nbsp;        });
+<b class="nc">&nbsp;        buf.append(&quot;}&quot;);</b>
+<b class="nc">&nbsp;        return buf.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int size() {
+<b class="nc">&nbsp;        return size;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Locates the index at which &lt;tt&gt;val&lt;/tt&gt; can be inserted.  if
+&nbsp;     * there is already a value equal()ing &lt;tt&gt;val&lt;/tt&gt; in the set,
+&nbsp;     * returns that value as a negative integer.
+&nbsp;     *
+&nbsp;     * @param key an &lt;code&gt;long&lt;/code&gt; value
+&nbsp;     * @return an &lt;code&gt;int&lt;/code&gt; value
+&nbsp;     */
+&nbsp;    protected int insertKey(long key) {
+&nbsp;        int hash, index;
+&nbsp;
+<b class="nc">&nbsp;        hash = ((int) (key ^ (key &gt;&gt;&gt; 32))) &amp; 0x7fffffff;</b>
+<b class="nc">&nbsp;        index = hash % states.length;</b>
+<b class="nc">&nbsp;        byte state = states[index];</b>
+&nbsp;
+<b class="nc">&nbsp;        consumeFreeSlot = false;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (state == FREE) {</b>
+<b class="nc">&nbsp;            consumeFreeSlot = true;</b>
+&nbsp;//            insertKeyAt(index, key);
+<b class="nc">&nbsp;            set[index] = key;  // insert value</b>
+<b class="nc">&nbsp;            states[index] = FULL;</b>
+&nbsp;
+<b class="nc">&nbsp;            return index;      // empty, all done</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (state == FULL &amp;&amp; set[index] == key) {</b>
+<b class="nc">&nbsp;            return -index - 1;   // already stored</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // already FULL or REMOVED, must probe
+&nbsp;//        return insertKeyRehash(key, index, hash);
+&nbsp;        {
+&nbsp;            // compute the double hash
+<b class="nc">&nbsp;            final int length = set.length;</b>
+<b class="nc">&nbsp;            int probe = 1 + (hash % (length - 2));</b>
+<b class="nc">&nbsp;            final int loopIndex = index;</b>
+&nbsp;
+&nbsp;            /**
+&nbsp;             * Look until FREE slot or we start to loop
+&nbsp;             */
+&nbsp;            do {
+<b class="nc">&nbsp;                index -= probe;</b>
+<b class="nc">&nbsp;                if (index &lt; 0) {</b>
+<b class="nc">&nbsp;                    index += length;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                state = states[index];</b>
+&nbsp;
+&nbsp;                // A FREE slot stops the search
+<b class="nc">&nbsp;                if (state == FREE) {</b>
+<b class="nc">&nbsp;                    consumeFreeSlot = true;</b>
+&nbsp;//                    insertKeyAt(index, val);
+<b class="nc">&nbsp;                    set[index] = key;  // insert value</b>
+<b class="nc">&nbsp;                    states[index] = FULL;</b>
+<b class="nc">&nbsp;                    return index;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (state == FULL &amp;&amp; set[index] == key) {</b>
+<b class="nc">&nbsp;                    return -index - 1;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // Detect loop
+<b class="nc">&nbsp;            } while (index != loopIndex);</b>
+&nbsp;
+&nbsp;            // Can a resizing strategy be found that resizes the set?
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;No free or removed slots available. Key set full?!!&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;} // TLongIntHashMap
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:47</div>
+</div>
+</body>
+</html>

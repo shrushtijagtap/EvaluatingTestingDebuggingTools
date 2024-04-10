@@ -1,0 +1,164 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONPathSingleIndex</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONPathSingleIndex (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONPathSingleIndex</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;final class JSONPathSingleIndex
+&nbsp;        extends JSONPathSingle {
+&nbsp;    final JSONPathSegmentIndex segment;
+&nbsp;    final int index;
+&nbsp;
+&nbsp;    public JSONPathSingleIndex(String path, JSONPathSegmentIndex segment, Feature... features) {
+<b class="nc">&nbsp;        super(segment, path, features);</b>
+<b class="nc">&nbsp;        this.segment = segment;</b>
+<b class="nc">&nbsp;        this.index = segment.index;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object eval(Object object) {
+<b class="nc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (object instanceof java.util.List) {</b>
+<b class="nc">&nbsp;            Object value = null;</b>
+<b class="nc">&nbsp;            List list = (List) object;</b>
+<b class="nc">&nbsp;            if (index &lt; list.size()) {</b>
+<b class="nc">&nbsp;                value = list.get(index);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Context context = new Context(this, null, segment, null, 0);</b>
+<b class="nc">&nbsp;        context.root = object;</b>
+<b class="nc">&nbsp;        segment.eval(context);</b>
+<b class="nc">&nbsp;        return context.value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object extract(JSONReader jsonReader) {
+<b class="nc">&nbsp;        if (jsonReader.nextIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int max = jsonReader.startArray();</b>
+<b class="nc">&nbsp;        if (jsonReader.isJSONB() &amp;&amp; index &gt;= max) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if ((!jsonReader.isJSONB()) &amp;&amp; jsonReader.nextIfMatch(&#39;]&#39;)) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; index &amp;&amp; i &lt; max; i++) {</b>
+<b class="nc">&nbsp;            jsonReader.skipValue();</b>
+<b class="nc">&nbsp;            if ((!jsonReader.isJSONB()) &amp;&amp; jsonReader.nextIfMatch(&#39;]&#39;)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return jsonReader.readAny();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:21</div>
+</div>
+</body>
+</html>

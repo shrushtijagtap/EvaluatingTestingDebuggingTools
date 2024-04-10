@@ -1,0 +1,161 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MapMultiValueType</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.util</a>
+</div>
+
+<h1>Coverage Summary for Class: MapMultiValueType (com.alibaba.fastjson2.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MapMultiValueType</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.util;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONObject;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * @since 2.0.34
+&nbsp; */
+&nbsp;public class MapMultiValueType&lt;T extends Map&gt;
+&nbsp;        implements Type {
+&nbsp;    private final Class&lt;T&gt; mapType;
+<b class="nc">&nbsp;    private final Map&lt;String, Type&gt; valueTypes = new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;    MapMultiValueType(Class&lt;T&gt; mapType, String name, Type type) {</b>
+<b class="nc">&nbsp;        this.mapType = mapType;</b>
+<b class="nc">&nbsp;        this.valueTypes.put(name, type);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    MapMultiValueType(Class&lt;T&gt; mapType, Map&lt;String, Type&gt; types) {</b>
+<b class="nc">&nbsp;        this.mapType = mapType;</b>
+<b class="nc">&nbsp;        this.valueTypes.putAll(types);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Class&lt;T&gt; getMapType() {
+<b class="nc">&nbsp;        return mapType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Type getType(String name) {
+<b class="nc">&nbsp;        return this.valueTypes.get(name);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MapMultiValueType&lt;JSONObject&gt; of(String name, Type type) {
+<b class="nc">&nbsp;        return new MapMultiValueType&lt;&gt;(JSONObject.class, name, type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MapMultiValueType&lt;JSONObject&gt; of(Map&lt;String, Type&gt; types) {
+<b class="nc">&nbsp;        return new MapMultiValueType&lt;&gt;(JSONObject.class, types);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T extends Map&gt; MapMultiValueType&lt;T&gt; of(
+&nbsp;            Class&lt;T&gt; mapType,
+&nbsp;            String name,
+&nbsp;            Type type
+&nbsp;    ) {
+<b class="nc">&nbsp;        return new MapMultiValueType&lt;&gt;(mapType, name, type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T extends Map&gt; MapMultiValueType&lt;T&gt; of(
+&nbsp;            Class&lt;T&gt; mapType,
+&nbsp;            Map&lt;String, Type&gt; types
+&nbsp;    ) {
+<b class="nc">&nbsp;        return new MapMultiValueType&lt;&gt;(mapType, types);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:15</div>
+</div>
+</body>
+</html>

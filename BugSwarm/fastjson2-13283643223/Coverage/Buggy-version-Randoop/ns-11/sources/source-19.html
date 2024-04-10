@@ -1,0 +1,218 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EishayWriteBinaryAutoType</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.eishay</a>
+</div>
+
+<h1>Coverage Summary for Class: EishayWriteBinaryAutoType (com.alibaba.fastjson2.benchmark.eishay)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EishayWriteBinaryAutoType</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/32)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.eishay;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.benchmark.eishay.vo.MediaContent;
+&nbsp;import com.caucho.hessian.io.Hessian2Output;
+&nbsp;import org.apache.commons.io.IOUtils;
+&nbsp;import org.openjdk.jmh.annotations.Benchmark;
+&nbsp;import org.openjdk.jmh.annotations.Mode;
+&nbsp;import org.openjdk.jmh.infra.Blackhole;
+&nbsp;import org.openjdk.jmh.runner.Runner;
+&nbsp;import org.openjdk.jmh.runner.RunnerException;
+&nbsp;import org.openjdk.jmh.runner.options.Options;
+&nbsp;import org.openjdk.jmh.runner.options.OptionsBuilder;
+&nbsp;
+&nbsp;import java.io.ByteArrayOutputStream;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.io.ObjectOutputStream;
+&nbsp;import java.util.concurrent.TimeUnit;
+&nbsp;
+<b class="nc">&nbsp;public class EishayWriteBinaryAutoType {</b>
+&nbsp;    static MediaContent mc;
+<b class="nc">&nbsp;    static SymbolTable symbolTable = JSONB.symbolTable(</b>
+&nbsp;            &quot;com.alibaba.fastjson2.benchmark.eishay.vo.MediaContent&quot;,
+&nbsp;            &quot;media&quot;,
+&nbsp;            &quot;images&quot;,
+&nbsp;            &quot;height&quot;,
+&nbsp;            &quot;size&quot;,
+&nbsp;            &quot;title&quot;,
+&nbsp;            &quot;uri&quot;,
+&nbsp;            &quot;width&quot;,
+&nbsp;            &quot;bitrate&quot;,
+&nbsp;            &quot;duration&quot;,
+&nbsp;            &quot;format&quot;,
+&nbsp;            &quot;persons&quot;,
+&nbsp;            &quot;player&quot;
+&nbsp;    );
+&nbsp;
+&nbsp;    static {
+&nbsp;        try {
+<b class="nc">&nbsp;            InputStream is = EishayWriteBinaryAutoType.class.getClassLoader().getResourceAsStream(&quot;data/eishay.json&quot;);</b>
+<b class="nc">&nbsp;            String str = IOUtils.toString(is, &quot;UTF-8&quot;);</b>
+<b class="nc">&nbsp;            mc = JSONReader.of(str)</b>
+<b class="nc">&nbsp;                    .read(MediaContent.class);</b>
+<b class="nc">&nbsp;        } catch (Throwable ex) {</b>
+<b class="nc">&nbsp;            ex.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;//    @Benchmark
+&nbsp;    public void fastjson2UTF8Bytes(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(JSON.toJSONBytes(mc, JSONWriter.Feature.WriteClassName));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void fastjson2JSONB(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                JSONB.toBytes(</b>
+&nbsp;                        mc,
+&nbsp;                        JSONWriter.Feature.WriteClassName,
+&nbsp;                        JSONWriter.Feature.IgnoreNoneSerializable,
+&nbsp;                        JSONWriter.Feature.FieldBased,
+&nbsp;                        JSONWriter.Feature.ReferenceDetection,
+&nbsp;                        JSONWriter.Feature.WriteNulls,
+&nbsp;                        JSONWriter.Feature.NotWriteDefaultValue,
+&nbsp;                        JSONWriter.Feature.NotWriteHashMapArrayListClassName,
+&nbsp;                        JSONWriter.Feature.WriteNameAsSymbol)
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public void fastjson2JSONB_symbols(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                JSONB.toBytes(</b>
+&nbsp;                        mc,
+&nbsp;                        symbolTable,
+&nbsp;                        JSONWriter.Feature.WriteClassName,
+&nbsp;                        JSONWriter.Feature.IgnoreNoneSerializable,
+&nbsp;                        JSONWriter.Feature.FieldBased,
+&nbsp;                        JSONWriter.Feature.ReferenceDetection,
+&nbsp;                        JSONWriter.Feature.WriteNulls,
+&nbsp;                        JSONWriter.Feature.NotWriteDefaultValue,
+&nbsp;                        JSONWriter.Feature.NotWriteHashMapArrayListClassName,
+&nbsp;                        JSONWriter.Feature.WriteNameAsSymbol)
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void javaSerialize(Blackhole bh) throws Exception {
+<b class="nc">&nbsp;        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();</b>
+<b class="nc">&nbsp;        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);</b>
+<b class="nc">&nbsp;        objectOutputStream.writeObject(mc);</b>
+<b class="nc">&nbsp;        objectOutputStream.flush();</b>
+<b class="nc">&nbsp;        bh.consume(byteArrayOutputStream.toByteArray());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void hessian(Blackhole bh) throws Exception {
+<b class="nc">&nbsp;        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();</b>
+<b class="nc">&nbsp;        Hessian2Output hessian2Output = new Hessian2Output(byteArrayOutputStream);</b>
+<b class="nc">&nbsp;        hessian2Output.writeObject(mc);</b>
+<b class="nc">&nbsp;        hessian2Output.flush();</b>
+<b class="nc">&nbsp;        bh.consume(byteArrayOutputStream.toByteArray());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void main(String[] args) throws RunnerException {
+<b class="nc">&nbsp;        Options options = new OptionsBuilder()</b>
+<b class="nc">&nbsp;                .include(EishayWriteBinaryAutoType.class.getName())</b>
+<b class="nc">&nbsp;                .mode(Mode.Throughput)</b>
+<b class="nc">&nbsp;                .timeUnit(TimeUnit.MILLISECONDS)</b>
+<b class="nc">&nbsp;                .warmupIterations(3)</b>
+<b class="nc">&nbsp;                .forks(1)</b>
+<b class="nc">&nbsp;                .build();</b>
+<b class="nc">&nbsp;        new Runner(options).run();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:22</div>
+</div>
+</body>
+</html>

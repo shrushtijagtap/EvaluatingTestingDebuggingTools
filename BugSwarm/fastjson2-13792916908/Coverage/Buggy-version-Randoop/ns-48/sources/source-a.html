@@ -1,0 +1,559 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JDKUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.util</a>
+</div>
+
+<h1>Coverage Summary for Class: JDKUtils (com.alibaba.fastjson2.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JDKUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (5/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    48.4%
+  </span>
+  <span class="absValue">
+    (118/244)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.util;
+&nbsp;
+&nbsp;import java.lang.invoke.*;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.nio.ByteOrder;
+&nbsp;import java.util.List;
+&nbsp;import java.util.concurrent.atomic.AtomicInteger;
+&nbsp;import java.util.function.*;
+&nbsp;
+&nbsp;import static java.lang.invoke.MethodType.methodType;
+&nbsp;
+<b class="nc">&nbsp;public class JDKUtils {</b>
+&nbsp;    public static final int JVM_VERSION;
+<b class="fc">&nbsp;    public static final Byte LATIN1 = 0;</b>
+<b class="fc">&nbsp;    public static final Byte UTF16 = 1;</b>
+&nbsp;
+&nbsp;    public static final Field FIELD_STRING_VALUE;
+&nbsp;    public static final long FIELD_STRING_VALUE_OFFSET;
+&nbsp;    public static volatile boolean FIELD_STRING_VALUE_ERROR;
+&nbsp;
+&nbsp;    public static final long FIELD_DECIMAL_INT_COMPACT_OFFSET;
+&nbsp;
+&nbsp;    public static final Field FIELD_STRING_CODER;
+&nbsp;    public static final long FIELD_STRING_CODER_OFFSET;
+&nbsp;    public static volatile boolean FIELD_STRING_CODER_ERROR;
+&nbsp;
+&nbsp;    static final Class&lt;?&gt; CLASS_SQL_DATASOURCE;
+&nbsp;    static final Class&lt;?&gt; CLASS_SQL_ROW_SET;
+&nbsp;    public static final boolean HAS_SQL;
+&nbsp;    public static final boolean ANDROID;
+&nbsp;    public static final boolean GRAAL;
+&nbsp;    public static final boolean OPENJ9;
+&nbsp;
+&nbsp;    // Android not support
+&nbsp;    public static final Class CLASS_TRANSIENT;
+&nbsp;    public static final boolean BIG_ENDIAN;
+&nbsp;
+&nbsp;    public static final boolean UNSAFE_SUPPORT;
+&nbsp;    public static final boolean VECTOR_SUPPORT;
+&nbsp;    public static final int VECTOR_BIT_LENGTH;
+&nbsp;
+&nbsp;    // GraalVM not support
+&nbsp;    // Android not support
+&nbsp;    public static final BiFunction&lt;char[], Boolean, String&gt; STRING_CREATOR_JDK8;
+&nbsp;    public static final BiFunction&lt;byte[], Byte, String&gt; STRING_CREATOR_JDK11;
+&nbsp;    public static final ToIntFunction&lt;String&gt; STRING_CODER;
+&nbsp;    public static final Function&lt;String, byte[]&gt; STRING_VALUE;
+&nbsp;
+&nbsp;    public static final MethodHandle METHOD_HANDLE_HAS_NEGATIVE;
+&nbsp;    public static final Predicate&lt;byte[]&gt; PREDICATE_IS_ASCII;
+&nbsp;
+&nbsp;    static final MethodHandles.Lookup IMPL_LOOKUP;
+&nbsp;    static volatile MethodHandle CONSTRUCTOR_LOOKUP;
+&nbsp;    static volatile boolean CONSTRUCTOR_LOOKUP_ERROR;
+&nbsp;    static volatile Throwable initErrorLast;
+&nbsp;    static volatile Throwable reflectErrorLast;
+<b class="fc">&nbsp;    static final AtomicInteger reflectErrorCount = new AtomicInteger();</b>
+&nbsp;
+&nbsp;    static {
+<b class="fc">&nbsp;        int jvmVersion = -1;</b>
+<b class="fc">&nbsp;        boolean openj9 = false, android = false, graal = false;</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            String jmvName = System.getProperty(&quot;java.vm.name&quot;);</b>
+<b class="fc">&nbsp;            openj9 = jmvName.contains(&quot;OpenJ9&quot;);</b>
+<b class="fc">&nbsp;            android = jmvName.equals(&quot;Dalvik&quot;);</b>
+<b class="fc">&nbsp;            graal = System.getProperty(&quot;org.graalvm.nativeimage.imagecode&quot;) != null;</b>
+<b class="fc">&nbsp;            if (openj9 || android || graal) {</b>
+<b class="nc">&nbsp;                FIELD_STRING_VALUE_ERROR = true;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            String javaSpecVer = System.getProperty(&quot;java.specification.version&quot;);</b>
+&nbsp;            // android is 0.9
+<b class="fc">&nbsp;            if (javaSpecVer.startsWith(&quot;1.&quot;)) {</b>
+<b class="fc">&nbsp;                javaSpecVer = javaSpecVer.substring(2);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (javaSpecVer.indexOf(&#39;.&#39;) == -1) {</b>
+<b class="fc">&nbsp;                jvmVersion = Integer.parseInt(javaSpecVer);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;            initErrorLast = ignored;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        OPENJ9 = openj9;</b>
+<b class="fc">&nbsp;        ANDROID = android;</b>
+<b class="fc">&nbsp;        GRAAL = graal;</b>
+&nbsp;
+<b class="fc">&nbsp;        boolean hasJavaSql = true;</b>
+<b class="fc">&nbsp;        Class dataSourceClass = null;</b>
+<b class="fc">&nbsp;        Class rowSetClass = null;</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            dataSourceClass = Class.forName(&quot;javax.sql.DataSource&quot;);</b>
+<b class="fc">&nbsp;            rowSetClass = Class.forName(&quot;javax.sql.RowSet&quot;);</b>
+<b class="nc">&nbsp;        } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;            hasJavaSql = false;</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        CLASS_SQL_DATASOURCE = dataSourceClass;</b>
+<b class="fc">&nbsp;        CLASS_SQL_ROW_SET = rowSetClass;</b>
+<b class="fc">&nbsp;        HAS_SQL = hasJavaSql;</b>
+&nbsp;
+<b class="fc">&nbsp;        Class transientClass = null;</b>
+<b class="fc">&nbsp;        if (!android) {</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                transientClass = Class.forName(&quot;java.beans.Transient&quot;);</b>
+<b class="nc">&nbsp;            } catch (Throwable ignored) {</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+<b class="fc">&nbsp;        CLASS_TRANSIENT = transientClass;</b>
+&nbsp;
+<b class="fc">&nbsp;        JVM_VERSION = jvmVersion;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (JVM_VERSION == 8) {</b>
+<b class="fc">&nbsp;            Field field = null;</b>
+<b class="fc">&nbsp;            long fieldOffset = -1;</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                field = String.class.getDeclaredField(&quot;value&quot;);</b>
+<b class="fc">&nbsp;                field.setAccessible(true);</b>
+<b class="fc">&nbsp;                fieldOffset = UnsafeUtils.objectFieldOffset(field);</b>
+<b class="nc">&nbsp;            } catch (Exception ignored) {</b>
+<b class="nc">&nbsp;                FIELD_STRING_VALUE_ERROR = true;</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+<b class="fc">&nbsp;            FIELD_STRING_VALUE = field;</b>
+<b class="fc">&nbsp;            FIELD_STRING_VALUE_OFFSET = fieldOffset;</b>
+&nbsp;
+<b class="fc">&nbsp;            FIELD_STRING_CODER = null;</b>
+<b class="fc">&nbsp;            FIELD_STRING_CODER_OFFSET = -1;</b>
+<b class="fc">&nbsp;            FIELD_STRING_CODER_ERROR = true;</b>
+<b class="fc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            Field fieldValue = null;</b>
+<b class="nc">&nbsp;            long fieldValueOffset = -1;</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                fieldValue = String.class.getDeclaredField(&quot;value&quot;);</b>
+<b class="nc">&nbsp;                fieldValueOffset = UnsafeUtils.objectFieldOffset(fieldValue);</b>
+<b class="nc">&nbsp;            } catch (Exception ignored) {</b>
+<b class="nc">&nbsp;                FIELD_STRING_VALUE_ERROR = true;</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            FIELD_STRING_VALUE_OFFSET = fieldValueOffset;</b>
+<b class="nc">&nbsp;            FIELD_STRING_VALUE = fieldValue;</b>
+&nbsp;
+<b class="nc">&nbsp;            Field fieldCode = null;</b>
+<b class="nc">&nbsp;            long fieldCodeOffset = -1;</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                fieldCode = String.class.getDeclaredField(&quot;coder&quot;);</b>
+<b class="nc">&nbsp;                fieldCodeOffset = UnsafeUtils.objectFieldOffset(fieldCode);</b>
+<b class="nc">&nbsp;            } catch (Exception ignored) {</b>
+<b class="nc">&nbsp;                FIELD_STRING_CODER_ERROR = true;</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            FIELD_STRING_CODER_OFFSET = fieldCodeOffset;</b>
+<b class="nc">&nbsp;            FIELD_STRING_CODER = fieldCode;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        boolean unsafeSupport;
+<b class="fc">&nbsp;        unsafeSupport = ((Predicate) o -&gt; {</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                return UnsafeUtils.UNSAFE != null;</b>
+<b class="nc">&nbsp;            } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }).test(null);</b>
+<b class="fc">&nbsp;        UNSAFE_SUPPORT = unsafeSupport;</b>
+&nbsp;
+&nbsp;        {
+<b class="fc">&nbsp;            long fieldOffset = -1;</b>
+<b class="fc">&nbsp;            if (UNSAFE_SUPPORT) {</b>
+&nbsp;                try {
+<b class="fc">&nbsp;                    Field field = BigDecimal.class.getDeclaredField(&quot;intCompact&quot;);</b>
+<b class="fc">&nbsp;                    fieldOffset = UnsafeUtils.objectFieldOffset(field);</b>
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+<b class="fc">&nbsp;                }</b>
+&nbsp;            }
+<b class="fc">&nbsp;            FIELD_DECIMAL_INT_COMPACT_OFFSET = fieldOffset;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        BIG_ENDIAN = ByteOrder.nativeOrder() == ByteOrder.BIG_ENDIAN;</b>
+&nbsp;
+<b class="fc">&nbsp;        BiFunction&lt;char[], Boolean, String&gt; stringCreatorJDK8 = null;</b>
+<b class="fc">&nbsp;        BiFunction&lt;byte[], Byte, String&gt; stringCreatorJDK11 = null;</b>
+<b class="fc">&nbsp;        ToIntFunction&lt;String&gt; stringCoder = null;</b>
+<b class="fc">&nbsp;        Function&lt;String, byte[]&gt; stringValue = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        MethodHandles.Lookup trustedLookup = null;</b>
+&nbsp;        {
+&nbsp;            try {
+<b class="fc">&nbsp;                Class lookupClass = MethodHandles.Lookup.class;</b>
+<b class="fc">&nbsp;                Field implLookup = lookupClass.getDeclaredField(&quot;IMPL_LOOKUP&quot;);</b>
+<b class="fc">&nbsp;                long fieldOffset = UnsafeUtils.UNSAFE.staticFieldOffset(implLookup);</b>
+<b class="fc">&nbsp;                trustedLookup = (MethodHandles.Lookup) UnsafeUtils.UNSAFE.getObject(lookupClass, fieldOffset);</b>
+<b class="nc">&nbsp;            } catch (Throwable ignored) {</b>
+&nbsp;                // ignored
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            if (trustedLookup == null) {</b>
+<b class="nc">&nbsp;                trustedLookup = MethodHandles.lookup();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            IMPL_LOOKUP = trustedLookup;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int vector_bit_length = -1;</b>
+<b class="fc">&nbsp;        boolean vector_support = false;</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            if (JVM_VERSION &gt;= 11 &amp;&amp; trustedLookup != null) {</b>
+<b class="nc">&nbsp;                Class&lt;?&gt; factorClass = Class.forName(&quot;java.lang.management.ManagementFactory&quot;);</b>
+<b class="nc">&nbsp;                Class&lt;?&gt; runtimeMXBeanClass = Class.forName(&quot;java.lang.management.RuntimeMXBean&quot;);</b>
+<b class="nc">&nbsp;                Method getRuntimeMXBean = factorClass.getMethod(&quot;getRuntimeMXBean&quot;);</b>
+<b class="nc">&nbsp;                Object runtimeMXBean = getRuntimeMXBean.invoke(null);</b>
+<b class="nc">&nbsp;                Method getInputArguments = runtimeMXBeanClass.getMethod(&quot;getInputArguments&quot;);</b>
+<b class="nc">&nbsp;                List&lt;String&gt; inputArguments = (List&lt;String&gt;) getInputArguments.invoke(runtimeMXBean);</b>
+<b class="nc">&nbsp;                vector_support = inputArguments.contains(&quot;--add-modules=jdk.incubator.vector&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (vector_support) {</b>
+<b class="nc">&nbsp;                    Class&lt;?&gt; byteVectorClass = Class.forName(&quot;jdk.incubator.vector.ByteVector&quot;);</b>
+<b class="nc">&nbsp;                    Class&lt;?&gt; vectorSpeciesClass = Class.forName(&quot;jdk.incubator.vector.VectorSpecies&quot;);</b>
+<b class="nc">&nbsp;                    Field speciesMax = byteVectorClass.getField(&quot;SPECIES_MAX&quot;);</b>
+<b class="nc">&nbsp;                    Object species = speciesMax.get(null);</b>
+<b class="nc">&nbsp;                    Method lengthMethod = vectorSpeciesClass.getMethod(&quot;length&quot;);</b>
+<b class="nc">&nbsp;                    int length = (Integer) lengthMethod.invoke(species);</b>
+<b class="nc">&nbsp;                    vector_bit_length = length * 8;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;            initErrorLast = ignored;</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        VECTOR_SUPPORT = vector_support;</b>
+<b class="fc">&nbsp;        VECTOR_BIT_LENGTH = vector_bit_length;</b>
+&nbsp;
+&nbsp;        {
+<b class="fc">&nbsp;            Predicate&lt;byte[]&gt; isAscii = null;</b>
+&nbsp;            // isASCII
+<b class="fc">&nbsp;            MethodHandle handle = null;</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; classStringCoding = null;</b>
+<b class="fc">&nbsp;            if (trustedLookup != null &amp;&amp; JVM_VERSION &gt;= 17) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    handle = trustedLookup.findStatic(</b>
+&nbsp;                            classStringCoding = String.class,
+&nbsp;                            &quot;isASCII&quot;,
+<b class="nc">&nbsp;                            MethodType.methodType(boolean.class, byte[].class)</b>
+&nbsp;                    );
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;                    initErrorLast = ignored;</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (handle == null &amp;&amp; trustedLookup != null &amp;&amp; JVM_VERSION &gt;= 11) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    classStringCoding = Class.forName(&quot;java.lang.StringCoding&quot;);</b>
+<b class="nc">&nbsp;                    handle = trustedLookup.findStatic(</b>
+&nbsp;                            classStringCoding,
+&nbsp;                            &quot;isASCII&quot;,
+<b class="nc">&nbsp;                            MethodType.methodType(boolean.class, byte[].class)</b>
+&nbsp;                    );
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;                    initErrorLast = ignored;</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (handle != null &amp;&amp; classStringCoding != null) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    MethodHandles.Lookup lookup = trustedLookup(classStringCoding);</b>
+<b class="nc">&nbsp;                    CallSite callSite = LambdaMetafactory.metafactory(</b>
+&nbsp;                            lookup,
+&nbsp;                            &quot;test&quot;,
+<b class="nc">&nbsp;                            methodType(Predicate.class),</b>
+<b class="nc">&nbsp;                            methodType(boolean.class, Object.class),</b>
+&nbsp;                            handle,
+<b class="nc">&nbsp;                            methodType(boolean.class, byte[].class)</b>
+&nbsp;                    );
+<b class="nc">&nbsp;                    isAscii = (Predicate&lt;byte[]&gt;) callSite.getTarget().invokeExact();</b>
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;                    initErrorLast = ignored;</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            PREDICATE_IS_ASCII = isAscii;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="fc">&nbsp;            MethodHandle handle = null;</b>
+<b class="fc">&nbsp;            if (trustedLookup != null &amp;&amp; JVM_VERSION &gt;= 11) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    Class&lt;?&gt; classStringCoding = Class.forName(&quot;java.lang.StringCoding&quot;);</b>
+<b class="nc">&nbsp;                    handle = trustedLookup.findStatic(</b>
+&nbsp;                            classStringCoding,
+&nbsp;                            &quot;hasNegatives&quot;,
+<b class="nc">&nbsp;                            MethodType.methodType(boolean.class, byte[].class, int.class, int.class)</b>
+&nbsp;                    );
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;                    initErrorLast = ignored;</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+<b class="fc">&nbsp;            METHOD_HANDLE_HAS_NEGATIVE = handle;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Boolean compact_strings = null;</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            if (JVM_VERSION == 8 &amp;&amp; trustedLookup != null) {</b>
+<b class="fc">&nbsp;                MethodHandles.Lookup lookup = trustedLookup(String.class);</b>
+&nbsp;
+<b class="fc">&nbsp;                MethodHandle handle = lookup.findConstructor(</b>
+<b class="fc">&nbsp;                        String.class, methodType(void.class, char[].class, boolean.class)</b>
+&nbsp;                );
+&nbsp;
+<b class="fc">&nbsp;                CallSite callSite = LambdaMetafactory.metafactory(</b>
+&nbsp;                        lookup,
+&nbsp;                        &quot;apply&quot;,
+<b class="fc">&nbsp;                        methodType(BiFunction.class),</b>
+<b class="fc">&nbsp;                        methodType(Object.class, Object.class, Object.class),</b>
+&nbsp;                        handle,
+<b class="fc">&nbsp;                        methodType(String.class, char[].class, boolean.class)</b>
+&nbsp;                );
+<b class="fc">&nbsp;                stringCreatorJDK8 = (BiFunction&lt;char[], Boolean, String&gt;) callSite.getTarget().invokeExact();</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            boolean lookupLambda = false;</b>
+<b class="fc">&nbsp;            if (JVM_VERSION &gt; 8 &amp;&amp; trustedLookup != null &amp;&amp; !android) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    Field compact_strings_field = String.class.getDeclaredField(&quot;COMPACT_STRINGS&quot;);</b>
+<b class="nc">&nbsp;                    if (compact_strings_field != null) {</b>
+<b class="nc">&nbsp;                        if (UNSAFE_SUPPORT) {</b>
+<b class="nc">&nbsp;                            long fieldOffset = UnsafeUtils.UNSAFE.staticFieldOffset(compact_strings_field);</b>
+<b class="nc">&nbsp;                            compact_strings = UnsafeUtils.UNSAFE.getBoolean(String.class, fieldOffset);</b>
+<b class="nc">&nbsp;                        } else {</b>
+<b class="nc">&nbsp;                            compact_strings_field.setAccessible(true);</b>
+<b class="nc">&nbsp;                            compact_strings = (Boolean) compact_strings_field.get(null);</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;                    initErrorLast = ignored;</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;                lookupLambda = compact_strings != null &amp;&amp; compact_strings.booleanValue();</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (lookupLambda) {</b>
+<b class="nc">&nbsp;                MethodHandles.Lookup lookup = trustedLookup.in(String.class);</b>
+<b class="nc">&nbsp;                MethodHandle handle = lookup.findConstructor(</b>
+<b class="nc">&nbsp;                        String.class, methodType(void.class, byte[].class, byte.class)</b>
+&nbsp;                );
+<b class="nc">&nbsp;                CallSite callSite = LambdaMetafactory.metafactory(</b>
+&nbsp;                        lookup,
+&nbsp;                        &quot;apply&quot;,
+<b class="nc">&nbsp;                        methodType(BiFunction.class),</b>
+<b class="nc">&nbsp;                        methodType(Object.class, Object.class, Object.class),</b>
+&nbsp;                        handle,
+<b class="nc">&nbsp;                        methodType(String.class, byte[].class, Byte.class)</b>
+&nbsp;                );
+<b class="nc">&nbsp;                stringCreatorJDK11 = (BiFunction&lt;byte[], Byte, String&gt;) callSite.getTarget().invokeExact();</b>
+&nbsp;
+<b class="nc">&nbsp;                MethodHandle coder = lookup.findSpecial(</b>
+&nbsp;                        String.class,
+&nbsp;                        &quot;coder&quot;,
+<b class="nc">&nbsp;                        methodType(byte.class),</b>
+&nbsp;                        String.class
+&nbsp;                );
+<b class="nc">&nbsp;                CallSite applyAsInt = LambdaMetafactory.metafactory(</b>
+&nbsp;                        lookup,
+&nbsp;                        &quot;applyAsInt&quot;,
+<b class="nc">&nbsp;                        methodType(ToIntFunction.class),</b>
+<b class="nc">&nbsp;                        methodType(int.class, Object.class),</b>
+&nbsp;                        coder,
+<b class="nc">&nbsp;                        methodType(byte.class, String.class)</b>
+&nbsp;                );
+<b class="nc">&nbsp;                stringCoder = (ToIntFunction&lt;String&gt;) applyAsInt.getTarget().invokeExact();</b>
+&nbsp;
+<b class="nc">&nbsp;                MethodHandle value = lookup.findSpecial(</b>
+&nbsp;                        String.class,
+&nbsp;                        &quot;value&quot;,
+<b class="nc">&nbsp;                        methodType(byte[].class),</b>
+&nbsp;                        String.class
+&nbsp;                );
+<b class="nc">&nbsp;                CallSite apply = LambdaMetafactory.metafactory(</b>
+&nbsp;                        lookup,
+&nbsp;                        &quot;apply&quot;,
+<b class="nc">&nbsp;                        methodType(Function.class),</b>
+<b class="nc">&nbsp;                        methodType(Object.class, Object.class),</b>
+&nbsp;                        value,
+<b class="nc">&nbsp;                        methodType(byte[].class, String.class)</b>
+&nbsp;                );
+<b class="nc">&nbsp;                stringValue = (Function&lt;String, byte[]&gt;) apply.getTarget().invokeExact();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;            initErrorLast = ignored;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        if (stringCoder == null) {</b>
+<b class="fc">&nbsp;            stringCoder = (str) -&gt; 1;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        STRING_CREATOR_JDK8 = stringCreatorJDK8;</b>
+<b class="fc">&nbsp;        STRING_CREATOR_JDK11 = stringCreatorJDK11;</b>
+<b class="fc">&nbsp;        STRING_CODER = stringCoder;</b>
+<b class="fc">&nbsp;        STRING_VALUE = stringValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isSQLDataSourceOrRowSet(Class&lt;?&gt; type) {
+<b class="nc">&nbsp;        return (CLASS_SQL_DATASOURCE != null &amp;&amp; CLASS_SQL_DATASOURCE.isAssignableFrom(type))</b>
+<b class="nc">&nbsp;                || (CLASS_SQL_ROW_SET != null &amp;&amp; CLASS_SQL_ROW_SET.isAssignableFrom(type));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setReflectErrorLast(Throwable error) {
+<b class="nc">&nbsp;        reflectErrorCount.incrementAndGet();</b>
+<b class="nc">&nbsp;        reflectErrorLast = error;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static char[] getCharArray(String str) {
+&nbsp;        // GraalVM not support
+&nbsp;        // Android not support
+<b class="fc">&nbsp;        if (!FIELD_STRING_VALUE_ERROR) {</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                return (char[]) UnsafeUtils.UNSAFE.getObject(str, FIELD_STRING_VALUE_OFFSET);</b>
+<b class="nc">&nbsp;            } catch (Exception ignored) {</b>
+<b class="nc">&nbsp;                FIELD_STRING_VALUE_ERROR = true;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return str.toCharArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodHandles.Lookup trustedLookup(Class objectClass) {
+<b class="fc">&nbsp;        if (!CONSTRUCTOR_LOOKUP_ERROR) {</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                int TRUSTED = -1;</b>
+&nbsp;
+<b class="fc">&nbsp;                MethodHandle constructor = CONSTRUCTOR_LOOKUP;</b>
+<b class="fc">&nbsp;                if (JVM_VERSION &lt; 15) {</b>
+<b class="fc">&nbsp;                    if (constructor == null) {</b>
+<b class="fc">&nbsp;                        constructor = IMPL_LOOKUP.findConstructor(</b>
+&nbsp;                                MethodHandles.Lookup.class,
+<b class="fc">&nbsp;                                methodType(void.class, Class.class, int.class)</b>
+&nbsp;                        );
+<b class="fc">&nbsp;                        CONSTRUCTOR_LOOKUP = constructor;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    int FULL_ACCESS_MASK = 31; // for IBM Open J9 JDK</b>
+<b class="fc">&nbsp;                    return (MethodHandles.Lookup) constructor.invoke(</b>
+&nbsp;                            objectClass,
+&nbsp;                            OPENJ9 ? FULL_ACCESS_MASK : TRUSTED
+&nbsp;                    );
+&nbsp;                } else {
+<b class="nc">&nbsp;                    if (constructor == null) {</b>
+<b class="nc">&nbsp;                        constructor = IMPL_LOOKUP.findConstructor(</b>
+&nbsp;                                MethodHandles.Lookup.class,
+<b class="nc">&nbsp;                                methodType(void.class, Class.class, Class.class, int.class)</b>
+&nbsp;                        );
+<b class="nc">&nbsp;                        CONSTRUCTOR_LOOKUP = constructor;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    return (MethodHandles.Lookup) constructor.invoke(objectClass, null, TRUSTED);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;                CONSTRUCTOR_LOOKUP_ERROR = true;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return IMPL_LOOKUP.in(objectClass);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:21</div>
+</div>
+</body>
+</html>

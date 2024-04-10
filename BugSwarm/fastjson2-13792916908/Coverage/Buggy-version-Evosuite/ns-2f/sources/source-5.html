@@ -1,0 +1,889 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CSVReaderUTF8</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.support.csv</a>
+</div>
+
+<h1>Coverage Summary for Class: CSVReaderUTF8 (com.alibaba.fastjson2.support.csv)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CSVReaderUTF8</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/414)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CSVReaderUTF8$ByteArrayConsumerImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/424)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.support.csv;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONFactory;
+&nbsp;import com.alibaba.fastjson2.reader.*;
+&nbsp;import com.alibaba.fastjson2.stream.StreamReader;
+&nbsp;import com.alibaba.fastjson2.util.DateUtils;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.IOUtils;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;import java.util.function.Consumer;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.util.DateUtils.DEFAULT_ZONE_ID;
+&nbsp;
+<b class="nc">&nbsp;final class CSVReaderUTF8&lt;T&gt;</b>
+&nbsp;        extends CSVReader&lt;T&gt; {
+<b class="nc">&nbsp;    static final Map&lt;Long, Function&lt;Consumer, ByteArrayValueConsumer&gt;&gt; valueConsumerCreators</b>
+&nbsp;            = new ConcurrentHashMap&lt;&gt;();
+&nbsp;
+&nbsp;    byte[] buf;
+&nbsp;    InputStream input;
+<b class="nc">&nbsp;    Charset charset = StandardCharsets.UTF_8;</b>
+&nbsp;    ByteArrayValueConsumer valueConsumer;
+&nbsp;
+<b class="nc">&nbsp;    CSVReaderUTF8(Feature... features) {</b>
+<b class="nc">&nbsp;        for (Feature feature : features) {</b>
+<b class="nc">&nbsp;            this.features |= feature.mask;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    CSVReaderUTF8(byte[] bytes, int off, int len, Charset charset, Class&lt;T&gt; objectClass) {
+<b class="nc">&nbsp;        super(objectClass);</b>
+<b class="nc">&nbsp;        this.buf = bytes;</b>
+<b class="nc">&nbsp;        this.off = off;</b>
+<b class="nc">&nbsp;        this.end = off + len;</b>
+<b class="nc">&nbsp;        this.charset = charset;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    CSVReaderUTF8(byte[] bytes, int off, int len, Charset charset, ByteArrayValueConsumer valueConsumer) {</b>
+<b class="nc">&nbsp;        this.valueConsumer = valueConsumer;</b>
+<b class="nc">&nbsp;        this.buf = bytes;</b>
+<b class="nc">&nbsp;        this.off = off;</b>
+<b class="nc">&nbsp;        this.end = off + len;</b>
+<b class="nc">&nbsp;        this.charset = charset;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    CSVReaderUTF8(byte[] bytes, int off, int len, Type[] types) {
+<b class="nc">&nbsp;        super(types);</b>
+<b class="nc">&nbsp;        this.buf = bytes;</b>
+<b class="nc">&nbsp;        this.off = off;</b>
+<b class="nc">&nbsp;        this.end = off + len;</b>
+<b class="nc">&nbsp;        this.types = types;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    CSVReaderUTF8(byte[] bytes, int off, int len, Class&lt;T&gt; objectClass) {
+<b class="nc">&nbsp;        super(objectClass);</b>
+<b class="nc">&nbsp;        this.buf = bytes;</b>
+<b class="nc">&nbsp;        this.off = off;</b>
+<b class="nc">&nbsp;        this.end = off + len;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    CSVReaderUTF8(InputStream input, Charset charset, Type[] types) {
+<b class="nc">&nbsp;        super(types);</b>
+<b class="nc">&nbsp;        this.charset = charset;</b>
+<b class="nc">&nbsp;        this.input = input;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    CSVReaderUTF8(InputStream input, Charset charset, Class&lt;T&gt; objectClass) {
+<b class="nc">&nbsp;        super(objectClass);</b>
+<b class="nc">&nbsp;        this.charset = charset;</b>
+<b class="nc">&nbsp;        this.input = input;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    CSVReaderUTF8(InputStream input, Charset charset, ByteArrayValueConsumer valueConsumer) {</b>
+<b class="nc">&nbsp;        this.charset = charset;</b>
+<b class="nc">&nbsp;        this.input = input;</b>
+<b class="nc">&nbsp;        this.valueConsumer = valueConsumer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean seekLine() throws IOException {
+<b class="nc">&nbsp;        if (buf == null) {</b>
+<b class="nc">&nbsp;            if (input != null) {</b>
+<b class="nc">&nbsp;                buf = new byte[SIZE_512K];</b>
+<b class="nc">&nbsp;                int cnt = input.read(buf);</b>
+<b class="nc">&nbsp;                if (cnt == -1) {</b>
+<b class="nc">&nbsp;                    inputEnd = true;</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                this.end = cnt;</b>
+&nbsp;
+<b class="nc">&nbsp;                if (end &gt; 3) {</b>
+&nbsp;                    // UTF8-BOM EF BB BF
+<b class="nc">&nbsp;                    if (buf[0] == -17 &amp;&amp; buf[1] == -69 &amp;&amp; buf[2] == -65) {</b>
+<b class="nc">&nbsp;                        off = 3;</b>
+<b class="nc">&nbsp;                        lineNextStart = off;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int k = 0; k &lt; 3; ++k) {</b>
+<b class="nc">&nbsp;            lineTerminated = false;</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = off; i &lt; end; i++) {</b>
+<b class="nc">&nbsp;                if (i + 4 &lt; end) {</b>
+<b class="nc">&nbsp;                    byte b0 = buf[i];</b>
+<b class="nc">&nbsp;                    byte b1 = buf[i + 1];</b>
+<b class="nc">&nbsp;                    byte b2 = buf[i + 2];</b>
+<b class="nc">&nbsp;                    byte b3 = buf[i + 3];</b>
+<b class="nc">&nbsp;                    if (b0 &gt; &#39;&quot;&#39; &amp;&amp; b1 &gt; &#39;&quot;&#39; &amp;&amp; b2 &gt; &#39;&quot;&#39; &amp;&amp; b3 &gt; &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                        lineSize += 4;</b>
+<b class="nc">&nbsp;                        i += 3;</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                byte ch = buf[i];</b>
+<b class="nc">&nbsp;                if (ch == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                    lineSize++;</b>
+<b class="nc">&nbsp;                    if (!quote) {</b>
+<b class="nc">&nbsp;                        quote = true;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        int n = i + 1;</b>
+<b class="nc">&nbsp;                        if (n &gt;= end) {</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        if (buf[n] == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                            lineSize++;</b>
+<b class="nc">&nbsp;                            i++;</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            quote = false;</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (quote) {</b>
+<b class="nc">&nbsp;                    lineSize++;</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (ch == &#39;\n&#39;) {</b>
+<b class="nc">&nbsp;                    if (lineSize &gt; 0 || (features &amp; Feature.IgnoreEmptyLine.mask) == 0) {</b>
+<b class="nc">&nbsp;                        rowCount++;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    lineTerminated = true;</b>
+<b class="nc">&nbsp;                    lineSize = 0;</b>
+<b class="nc">&nbsp;                    lineEnd = i;</b>
+<b class="nc">&nbsp;                    lineStart = lineNextStart;</b>
+<b class="nc">&nbsp;                    lineNextStart = off = i + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;                    break;</b>
+<b class="nc">&nbsp;                } else if (ch == &#39;\r&#39;) {</b>
+<b class="nc">&nbsp;                    if (lineSize &gt; 0 || (features &amp; Feature.IgnoreEmptyLine.mask) == 0) {</b>
+<b class="nc">&nbsp;                        rowCount++;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    lineTerminated = true;</b>
+<b class="nc">&nbsp;                    lineSize = 0;</b>
+<b class="nc">&nbsp;                    lineEnd = i;</b>
+&nbsp;
+<b class="nc">&nbsp;                    int n = i + 1;</b>
+<b class="nc">&nbsp;                    if (n &gt;= end) {</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (buf[n] == &#39;\n&#39;) {</b>
+<b class="nc">&nbsp;                        i++;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    lineStart = lineNextStart;</b>
+<b class="nc">&nbsp;                    lineNextStart = off = i + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    lineSize++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (!lineTerminated) {</b>
+<b class="nc">&nbsp;                if (input != null &amp;&amp; !inputEnd) {</b>
+<b class="nc">&nbsp;                    int len = end - off;</b>
+<b class="nc">&nbsp;                    if (off &gt; 0) {</b>
+<b class="nc">&nbsp;                        if (len &gt; 0) {</b>
+<b class="nc">&nbsp;                            System.arraycopy(buf, off, buf, 0, len);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        lineStart = lineNextStart = 0;</b>
+<b class="nc">&nbsp;                        off = 0;</b>
+<b class="nc">&nbsp;                        end = len;</b>
+<b class="nc">&nbsp;                        quote = false;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    int cnt = input.read(buf, end, buf.length - end);</b>
+<b class="nc">&nbsp;                    if (cnt == -1) {</b>
+<b class="nc">&nbsp;                        inputEnd = true;</b>
+<b class="nc">&nbsp;                        if (off == end) {</b>
+<b class="nc">&nbsp;                            return false;</b>
+&nbsp;                        }
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        end += cnt;</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                lineStart = lineNextStart;</b>
+<b class="nc">&nbsp;                lineEnd = end;</b>
+<b class="nc">&nbsp;                rowCount++;</b>
+<b class="nc">&nbsp;                lineSize = 0;</b>
+<b class="nc">&nbsp;                off = end;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            lineTerminated = off == end;</b>
+<b class="nc">&nbsp;            break;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    Object readValue(byte[] bytes, int off, int len, Type type) {
+<b class="nc">&nbsp;        if (len == 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == Integer.class) {</b>
+<b class="nc">&nbsp;            return TypeUtils.parseInt(bytes, off, len);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == Long.class) {</b>
+<b class="nc">&nbsp;            return TypeUtils.parseLong(bytes, off, len);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == BigDecimal.class) {</b>
+<b class="nc">&nbsp;            return TypeUtils.parseBigDecimal(bytes, off, len);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == Float.class) {</b>
+<b class="nc">&nbsp;            if (len == 0) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return TypeUtils.parseFloat(bytes, off, len);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == Double.class) {</b>
+<b class="nc">&nbsp;            return TypeUtils.parseDouble(bytes, off, len);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == Date.class) {</b>
+<b class="nc">&nbsp;            long millis = DateUtils.parseMillis(bytes, off, len, charset, DEFAULT_ZONE_ID);</b>
+<b class="nc">&nbsp;            return new Date(millis);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == Boolean.class) {</b>
+<b class="nc">&nbsp;            return TypeUtils.parseBoolean(bytes, off, len);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String str = new String(bytes, off, len, charset);</b>
+<b class="nc">&nbsp;        return TypeUtils.cast(str, type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isEnd() {
+<b class="nc">&nbsp;        return inputEnd;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object[] readLineValues(boolean strings) {
+&nbsp;        try {
+<b class="nc">&nbsp;            if (inputEnd) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (input == null) {</b>
+<b class="nc">&nbsp;                if (off &gt;= end) {</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            boolean result = seekLine();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (!result) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;seekLine error&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        Object[] values = null;</b>
+<b class="nc">&nbsp;        List&lt;Object&gt; valueList = null;</b>
+<b class="nc">&nbsp;        if (columns != null) {</b>
+<b class="nc">&nbsp;            if (strings) {</b>
+<b class="nc">&nbsp;                values = new String[columns.size()];</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                values = new Object[columns.size()];</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean quote = false;</b>
+<b class="nc">&nbsp;        int valueStart = lineStart;</b>
+<b class="nc">&nbsp;        int valueSize = 0;</b>
+<b class="nc">&nbsp;        int escapeCount = 0;</b>
+<b class="nc">&nbsp;        int columnIndex = 0;</b>
+<b class="nc">&nbsp;        for (int i = lineStart; i &lt; lineEnd; ++i) {</b>
+<b class="nc">&nbsp;            byte ch = buf[i];</b>
+&nbsp;
+<b class="nc">&nbsp;            if (quote) {</b>
+<b class="nc">&nbsp;                if (ch == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                    int n = i + 1;</b>
+<b class="nc">&nbsp;                    if (n &lt; lineEnd) {</b>
+<b class="nc">&nbsp;                        byte c1 = buf[n];</b>
+<b class="nc">&nbsp;                        if (c1 == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                            valueSize += 2;</b>
+<b class="nc">&nbsp;                            escapeCount++;</b>
+<b class="nc">&nbsp;                            ++i;</b>
+<b class="nc">&nbsp;                            continue;</b>
+<b class="nc">&nbsp;                        } else if (c1 == &#39;,&#39;) {</b>
+<b class="nc">&nbsp;                            ++i;</b>
+<b class="nc">&nbsp;                            ch = c1;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    } else if (n == lineEnd) {</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    valueSize++;</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (ch == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                    quote = true;</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (ch == &#39;,&#39;) {</b>
+<b class="nc">&nbsp;                Type type = types != null &amp;&amp; columnIndex &lt; types.length ? types[columnIndex] : null;</b>
+&nbsp;
+&nbsp;                Object value;
+<b class="nc">&nbsp;                if (quote) {</b>
+<b class="nc">&nbsp;                    if (escapeCount == 0) {</b>
+<b class="nc">&nbsp;                        if (type == null || type == String.class || type == Object.class) {</b>
+<b class="nc">&nbsp;                            value = new String(buf, valueStart + 1, valueSize, charset);</b>
+&nbsp;                        } else {
+&nbsp;                            try {
+<b class="nc">&nbsp;                                value = readValue(buf, valueStart + 1, valueSize, type);</b>
+<b class="nc">&nbsp;                            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                                value = error(columnIndex, e);</b>
+<b class="nc">&nbsp;                            }</b>
+&nbsp;                        }
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        byte[] bytes = new byte[valueSize - escapeCount];</b>
+<b class="nc">&nbsp;                        int valueEnd = valueStart + valueSize;</b>
+<b class="nc">&nbsp;                        for (int j = valueStart + 1, k = 0; j &lt; valueEnd; ++j) {</b>
+<b class="nc">&nbsp;                            byte c = buf[j];</b>
+<b class="nc">&nbsp;                            bytes[k++] = c;</b>
+<b class="nc">&nbsp;                            if (c == &#39;&quot;&#39; &amp;&amp; buf[j + 1] == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                                ++j;</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        if (type == null || type == String.class || type == Object.class) {</b>
+<b class="nc">&nbsp;                            value = new String(bytes, 0, bytes.length, charset);</b>
+&nbsp;                        } else {
+&nbsp;                            try {
+<b class="nc">&nbsp;                                value = readValue(bytes, 0, bytes.length, type);</b>
+<b class="nc">&nbsp;                            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                                value = error(columnIndex, e);</b>
+<b class="nc">&nbsp;                            }</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    if (type == null || type == String.class || type == Object.class || strings) {</b>
+&nbsp;                        byte c0, c1;
+<b class="nc">&nbsp;                        if (valueSize == 1 &amp;&amp; (c0 = buf[valueStart]) &gt;= 0) {</b>
+<b class="nc">&nbsp;                            value = TypeUtils.toString((char) c0);</b>
+<b class="nc">&nbsp;                        } else if (valueSize == 2</b>
+&nbsp;                                &amp;&amp; (c0 = buf[valueStart]) &gt;= 0
+&nbsp;                                &amp;&amp; (c1 = buf[valueStart + 1]) &gt;= 0
+&nbsp;                        ) {
+<b class="nc">&nbsp;                            value = TypeUtils.toString((char) c0, (char) c1);</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            value = new String(buf, valueStart, valueSize, charset);</b>
+&nbsp;                        }
+&nbsp;                    } else {
+&nbsp;                        try {
+<b class="nc">&nbsp;                            value = readValue(buf, valueStart, valueSize, type);</b>
+<b class="nc">&nbsp;                        } catch (Exception e) {</b>
+<b class="nc">&nbsp;                            value = error(columnIndex, e);</b>
+<b class="nc">&nbsp;                        }</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (values != null) {</b>
+<b class="nc">&nbsp;                    if (columnIndex &lt; values.length) {</b>
+<b class="nc">&nbsp;                        values[columnIndex] = value;</b>
+&nbsp;                    }
+&nbsp;                } else {
+<b class="nc">&nbsp;                    if (valueList == null) {</b>
+<b class="nc">&nbsp;                        valueList = new ArrayList&lt;&gt;();</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    valueList.add(value);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                quote = false;</b>
+<b class="nc">&nbsp;                valueStart = i + 1;</b>
+<b class="nc">&nbsp;                valueSize = 0;</b>
+<b class="nc">&nbsp;                escapeCount = 0;</b>
+<b class="nc">&nbsp;                columnIndex++;</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            valueSize++;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (valueSize &gt; 0) {</b>
+<b class="nc">&nbsp;            Type type = types != null &amp;&amp; columnIndex &lt; types.length ? types[columnIndex] : null;</b>
+&nbsp;
+&nbsp;            Object value;
+<b class="nc">&nbsp;            if (quote) {</b>
+<b class="nc">&nbsp;                if (escapeCount == 0) {</b>
+<b class="nc">&nbsp;                    if (type == null || type == String.class || type == Object.class) {</b>
+<b class="nc">&nbsp;                        value = new String(buf, valueStart + 1, valueSize, charset);</b>
+&nbsp;                    } else {
+&nbsp;                        try {
+<b class="nc">&nbsp;                            value = readValue(buf, valueStart + 1, valueSize, type);</b>
+<b class="nc">&nbsp;                        } catch (Exception e) {</b>
+<b class="nc">&nbsp;                            value = error(columnIndex, e);</b>
+<b class="nc">&nbsp;                        }</b>
+&nbsp;                    }
+&nbsp;                } else {
+<b class="nc">&nbsp;                    byte[] bytes = new byte[valueSize - escapeCount];</b>
+<b class="nc">&nbsp;                    int valueEnd = lineEnd;</b>
+<b class="nc">&nbsp;                    for (int j = valueStart + 1, k = 0; j &lt; valueEnd; ++j) {</b>
+<b class="nc">&nbsp;                        byte c = buf[j];</b>
+<b class="nc">&nbsp;                        bytes[k++] = c;</b>
+<b class="nc">&nbsp;                        if (c == &#39;&quot;&#39; &amp;&amp; buf[j + 1] == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                            ++j;</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (type == null || type == String.class || type == Object.class) {</b>
+<b class="nc">&nbsp;                        value = new String(bytes, 0, bytes.length, charset);</b>
+&nbsp;                    } else {
+&nbsp;                        try {
+<b class="nc">&nbsp;                            value = readValue(bytes, 0, bytes.length, type);</b>
+<b class="nc">&nbsp;                        } catch (Exception e) {</b>
+<b class="nc">&nbsp;                            value = error(columnIndex, e);</b>
+<b class="nc">&nbsp;                        }</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (type == null || type == String.class || type == Object.class || strings) {</b>
+&nbsp;                    byte c0, c1;
+<b class="nc">&nbsp;                    if (valueSize == 1 &amp;&amp; (c0 = buf[valueStart]) &gt;= 0) {</b>
+<b class="nc">&nbsp;                        value = TypeUtils.toString((char) c0);</b>
+<b class="nc">&nbsp;                    } else if (valueSize == 2</b>
+&nbsp;                            &amp;&amp; (c0 = buf[valueStart]) &gt;= 0
+&nbsp;                            &amp;&amp; (c1 = buf[valueStart + 1]) &gt;= 0
+&nbsp;                    ) {
+<b class="nc">&nbsp;                        value = TypeUtils.toString((char) c0, (char) c1);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        value = new String(buf, valueStart, valueSize, charset);</b>
+&nbsp;                    }
+&nbsp;                } else {
+&nbsp;                    try {
+<b class="nc">&nbsp;                        value = readValue(buf, valueStart, valueSize, type);</b>
+<b class="nc">&nbsp;                    } catch (Exception e) {</b>
+<b class="nc">&nbsp;                        value = error(columnIndex, e);</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (values != null) {</b>
+<b class="nc">&nbsp;                if (columnIndex &lt; values.length) {</b>
+<b class="nc">&nbsp;                    values[columnIndex] = value;</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (valueList == null) {</b>
+<b class="nc">&nbsp;                    valueList = new ArrayList&lt;&gt;();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                valueList.add(value);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (values == null) {</b>
+<b class="nc">&nbsp;            if (valueList != null) {</b>
+<b class="nc">&nbsp;                if (strings) {</b>
+<b class="nc">&nbsp;                    values = new String[valueList.size()];</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    values = new Object[valueList.size()];</b>
+&nbsp;                }
+<b class="nc">&nbsp;                valueList.toArray(values);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (input == null &amp;&amp; off == end) {</b>
+<b class="nc">&nbsp;            inputEnd = true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return values;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void close() {
+<b class="nc">&nbsp;        if (input != null) {</b>
+<b class="nc">&nbsp;            IOUtils.close(input);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void statAll() {
+<b class="nc">&nbsp;        ByteArrayValueConsumer consumer = (row, column, bytes, off, len, charset) -&gt; {</b>
+<b class="nc">&nbsp;            StreamReader.ColumnStat stat = getColumnStat(column);</b>
+<b class="nc">&nbsp;            stat.stat(bytes, off, len, charset);</b>
+&nbsp;        };
+<b class="nc">&nbsp;        readAll(consumer, Integer.MAX_VALUE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void statAll(int maxRows) {
+<b class="nc">&nbsp;        ByteArrayValueConsumer consumer = (row, column, bytes, off, len, charset) -&gt; {</b>
+<b class="nc">&nbsp;            StreamReader.ColumnStat stat = getColumnStat(column);</b>
+<b class="nc">&nbsp;            stat.stat(bytes, off, len, charset);</b>
+&nbsp;        };
+<b class="nc">&nbsp;        readAll(consumer, maxRows);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void readAll() {
+<b class="nc">&nbsp;        if (valueConsumer == null) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;unsupported operation, consumer is null&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        readAll(valueConsumer, Integer.MAX_VALUE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void readAll(int maxRows) {
+<b class="nc">&nbsp;        if (valueConsumer == null) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;unsupported operation, consumer is null&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        readAll(valueConsumer, maxRows);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void readLineObjectAll(boolean readHeader, Consumer&lt;T&gt; consumer) {
+<b class="nc">&nbsp;        if (readHeader) {</b>
+<b class="nc">&nbsp;            readHeader();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldReaders == null) {</b>
+&nbsp;            while (true) {
+<b class="nc">&nbsp;                Object[] line = readLineValues(false);</b>
+<b class="nc">&nbsp;                if (line == null) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                consumer.accept((T) line);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+&nbsp;
+&nbsp;        // valueConsumerCreators
+<b class="nc">&nbsp;        if (this.fieldReaders == null) {</b>
+<b class="nc">&nbsp;            if (objectClass != null) {</b>
+<b class="nc">&nbsp;                ObjectReaderAdapter objectReader = (ObjectReaderAdapter) provider.getObjectReader(objectClass);</b>
+<b class="nc">&nbsp;                this.fieldReaders = objectReader.getFieldReaders();</b>
+<b class="nc">&nbsp;                this.objectCreator = provider.createObjectCreator(objectClass, features);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        Function&lt;Consumer, ByteArrayValueConsumer&gt; valueConsumerCreator;
+<b class="nc">&nbsp;        String[] strings = new String[this.fieldReaders.length + 1];</b>
+<b class="nc">&nbsp;        strings[0] = objectClass.getName();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; this.fieldReaders.length; i++) {</b>
+<b class="nc">&nbsp;            strings[i + 1] = this.fieldReaders[i].fieldName;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        long fullNameHash = Fnv.hashCode64(strings);</b>
+<b class="nc">&nbsp;        valueConsumerCreator = valueConsumerCreators.get(fullNameHash);</b>
+<b class="nc">&nbsp;        if (valueConsumerCreator == null) {</b>
+<b class="nc">&nbsp;            valueConsumerCreator = provider</b>
+<b class="nc">&nbsp;                    .createValueConsumerCreator(objectClass, fieldReaders);</b>
+<b class="nc">&nbsp;            if (valueConsumerCreator != null) {</b>
+<b class="nc">&nbsp;                valueConsumerCreators.putIfAbsent(fullNameHash, valueConsumerCreator);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ByteArrayValueConsumer bytesConsumer = null;</b>
+<b class="nc">&nbsp;        if (valueConsumerCreator != null) {</b>
+<b class="nc">&nbsp;            bytesConsumer = valueConsumerCreator.apply(consumer);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (bytesConsumer == null) {</b>
+<b class="nc">&nbsp;            bytesConsumer = new ByteArrayConsumerImpl(consumer);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        readAll(bytesConsumer, Integer.MAX_VALUE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    class ByteArrayConsumerImpl
+&nbsp;            implements ByteArrayValueConsumer {
+&nbsp;        protected Object object;
+&nbsp;        final Consumer consumer;
+&nbsp;
+<b class="nc">&nbsp;        public ByteArrayConsumerImpl(Consumer consumer) {</b>
+<b class="nc">&nbsp;            this.consumer = consumer;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public final void beforeRow(int row) {
+<b class="nc">&nbsp;            if (objectCreator != null) {</b>
+<b class="nc">&nbsp;                object = objectCreator.get();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(int row, int column, byte[] bytes, int off, int len, Charset charset) {
+<b class="nc">&nbsp;            if (column &gt;= fieldReaders.length || len == 0) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            FieldReader fieldReader = fieldReaders[column];</b>
+<b class="nc">&nbsp;            Object fieldValue = readValue(bytes, off, len, fieldReader.fieldType);</b>
+<b class="nc">&nbsp;            fieldReader.accept(object, fieldValue);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public final void afterRow(int row) {
+<b class="nc">&nbsp;            consumer.accept(object);</b>
+<b class="nc">&nbsp;            object = null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void readAll(ByteArrayValueConsumer consumer, int maxRows) {
+<b class="nc">&nbsp;        consumer.start();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int r = 0; r &lt; maxRows || maxRows &lt; 0; ++r) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                if (inputEnd) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (input == null) {</b>
+<b class="nc">&nbsp;                    if (off &gt;= end) {</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                boolean result = seekLine();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (!result) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (IOException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;seekLine error&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            consumer.beforeRow(rowCount);</b>
+&nbsp;
+<b class="nc">&nbsp;            boolean quote = false;</b>
+<b class="nc">&nbsp;            int valueStart = lineStart;</b>
+<b class="nc">&nbsp;            int valueSize = 0;</b>
+<b class="nc">&nbsp;            int escapeCount = 0;</b>
+<b class="nc">&nbsp;            int columnIndex = 0;</b>
+<b class="nc">&nbsp;            for (int i = lineStart; i &lt; lineEnd; ++i) {</b>
+<b class="nc">&nbsp;                byte ch = buf[i];</b>
+&nbsp;
+<b class="nc">&nbsp;                if (quote) {</b>
+<b class="nc">&nbsp;                    if (ch == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                        int n = i + 1;</b>
+<b class="nc">&nbsp;                        if (n &lt; lineEnd) {</b>
+<b class="nc">&nbsp;                            byte c1 = buf[n];</b>
+<b class="nc">&nbsp;                            if (c1 == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                                valueSize += 2;</b>
+<b class="nc">&nbsp;                                escapeCount++;</b>
+<b class="nc">&nbsp;                                ++i;</b>
+<b class="nc">&nbsp;                                continue;</b>
+<b class="nc">&nbsp;                            } else if (c1 == &#39;,&#39;) {</b>
+<b class="nc">&nbsp;                                ++i;</b>
+<b class="nc">&nbsp;                                ch = c1;</b>
+&nbsp;                            }
+<b class="nc">&nbsp;                        } else if (n == lineEnd) {</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    } else {</b>
+<b class="nc">&nbsp;                        valueSize++;</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;                } else {
+<b class="nc">&nbsp;                    if (ch == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                        quote = true;</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (ch == &#39;,&#39;) {</b>
+<b class="nc">&nbsp;                    if (quote) {</b>
+<b class="nc">&nbsp;                        if (escapeCount == 0) {</b>
+&nbsp;//                            value = new String(buf, valueStart + 1, valueSize, charset);
+<b class="nc">&nbsp;                            consumer.accept(rowCount, columnIndex, buf, valueStart + 1, valueSize, charset);</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            byte[] bytes = new byte[valueSize - escapeCount];</b>
+<b class="nc">&nbsp;                            int valueEnd = valueStart + valueSize;</b>
+<b class="nc">&nbsp;                            for (int j = valueStart + 1, k = 0; j &lt; valueEnd; ++j) {</b>
+<b class="nc">&nbsp;                                byte c = buf[j];</b>
+<b class="nc">&nbsp;                                bytes[k++] = c;</b>
+<b class="nc">&nbsp;                                if (c == &#39;&quot;&#39; &amp;&amp; buf[j + 1] == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                                    ++j;</b>
+&nbsp;                                }
+&nbsp;                            }
+&nbsp;
+<b class="nc">&nbsp;                            consumer.accept(rowCount, columnIndex, bytes, 0, bytes.length, charset);</b>
+<b class="nc">&nbsp;                        }</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        consumer.accept(rowCount, columnIndex, buf, valueStart, valueSize, charset);</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    quote = false;</b>
+<b class="nc">&nbsp;                    valueStart = i + 1;</b>
+<b class="nc">&nbsp;                    valueSize = 0;</b>
+<b class="nc">&nbsp;                    escapeCount = 0;</b>
+<b class="nc">&nbsp;                    columnIndex++;</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                valueSize++;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (valueSize &gt; 0) {</b>
+<b class="nc">&nbsp;                if (quote) {</b>
+<b class="nc">&nbsp;                    if (escapeCount == 0) {</b>
+&nbsp;//                        value = new String(buf, valueStart + 1, valueSize, charset);
+<b class="nc">&nbsp;                        consumer.accept(rowCount, columnIndex, buf, valueStart + 1, valueSize, charset);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        byte[] bytes = new byte[valueSize - escapeCount];</b>
+<b class="nc">&nbsp;                        int valueEnd = lineEnd;</b>
+<b class="nc">&nbsp;                        for (int j = valueStart + 1, k = 0; j &lt; valueEnd; ++j) {</b>
+<b class="nc">&nbsp;                            byte c = buf[j];</b>
+<b class="nc">&nbsp;                            bytes[k++] = c;</b>
+<b class="nc">&nbsp;                            if (c == &#39;&quot;&#39; &amp;&amp; buf[j + 1] == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                                ++j;</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;
+&nbsp;//                        value = new String(bytes, 0, bytes.length, charset);
+<b class="nc">&nbsp;                        consumer.accept(rowCount, columnIndex, bytes, 0, bytes.length, charset);</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                } else {
+&nbsp;//                    value = new String(buf, valueStart, valueSize, charset);
+<b class="nc">&nbsp;                    consumer.accept(rowCount, columnIndex, buf, valueStart, valueSize, charset);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            consumer.afterRow(rowCount);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        consumer.end();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:20</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,149 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FieldWriterInt16ValField</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldWriterInt16ValField (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FieldWriterInt16ValField</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;
+&nbsp;final class FieldWriterInt16ValField&lt;T&gt;
+&nbsp;        extends FieldWriterInt16&lt;T&gt; {
+&nbsp;    FieldWriterInt16ValField(String name, int ordinal, long features, String format, String label, Field field) {
+<b class="nc">&nbsp;        super(name, ordinal, features, format, label, short.class, field, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object getFieldValue(T object) {
+&nbsp;        try {
+<b class="nc">&nbsp;            return field.get(object);</b>
+<b class="nc">&nbsp;        } catch (IllegalArgumentException | IllegalAccessException e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;field.get error, &quot; + fieldName, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean write(JSONWriter jsonWriter, T o) {
+&nbsp;        short value;
+&nbsp;        try {
+<b class="nc">&nbsp;            value = field.getShort(o);</b>
+<b class="nc">&nbsp;        } catch (IllegalArgumentException | IllegalAccessException e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;field.get error, &quot; + fieldName, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        writeInt16(jsonWriter, value);</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeValue(JSONWriter jsonWriter, Object object) {
+&nbsp;        try {
+<b class="nc">&nbsp;            short value = field.getShort(object);</b>
+<b class="nc">&nbsp;            jsonWriter.writeInt32(value);</b>
+<b class="nc">&nbsp;        } catch (IllegalArgumentException | IllegalAccessException e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;field.get error, &quot; + fieldName, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:47</div>
+</div>
+</body>
+</html>

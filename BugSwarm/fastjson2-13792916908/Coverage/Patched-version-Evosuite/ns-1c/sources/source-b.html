@@ -1,0 +1,230 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SimpleBean</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.wast</a>
+</div>
+
+<h1>Coverage Summary for Class: SimpleBean (com.alibaba.fastjson2.benchmark.wast)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SimpleBean</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SimpleBean$SimpleEnum</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.wast;
+&nbsp;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+<b class="nc">&nbsp;public class SimpleBean {</b>
+&nbsp;    private int id;
+&nbsp;    private long version;
+&nbsp;    private double percent;
+&nbsp;    private String name;
+&nbsp;
+&nbsp;    @com.alibaba.fastjson.annotation.JSONField(format = &quot;yyyy-MM-dd HH:mm:ss&quot;)
+&nbsp;    @com.alibaba.fastjson2.annotation.JSONField(format = &quot;yyyy-MM-dd HH:mm:ss&quot;)
+&nbsp;    @com.fasterxml.jackson.annotation.JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;, timezone = &quot;GMT+8&quot;)
+&nbsp;    private Date date;
+&nbsp;    private SimpleEnum simpleEnum;
+&nbsp;    private Map&lt;String, Object&gt; mapInstance;
+&nbsp;    private List&lt;Object&gt; list;
+&nbsp;
+&nbsp;    private List&lt;Object&gt; versions;
+&nbsp;
+<b class="nc">&nbsp;    public enum SimpleEnum {</b>
+<b class="nc">&nbsp;        EnumOne,</b>
+<b class="nc">&nbsp;        EnumTwo,</b>
+<b class="nc">&nbsp;        EnumThree</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getId() {
+<b class="nc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setId(int id) {
+<b class="nc">&nbsp;        this.id = id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getVersion() {
+<b class="nc">&nbsp;        return version;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setVersion(long version) {
+<b class="nc">&nbsp;        this.version = version;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getPercent() {
+<b class="nc">&nbsp;        return percent;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPercent(double percent) {
+<b class="nc">&nbsp;        this.percent = percent;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getName() {
+<b class="nc">&nbsp;        return name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setName(String name) {
+<b class="nc">&nbsp;        this.name = name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Date getDate() {
+<b class="nc">&nbsp;        return date;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDate(Date date) {
+<b class="nc">&nbsp;        this.date = date;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SimpleEnum getSimpleEnum() {
+<b class="nc">&nbsp;        return simpleEnum;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setSimpleEnum(SimpleEnum simpleEnum) {
+<b class="nc">&nbsp;        this.simpleEnum = simpleEnum;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;String, Object&gt; getMapInstance() {
+<b class="nc">&nbsp;        return mapInstance;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMapInstance(Map&lt;String, Object&gt; mapInstance) {
+<b class="nc">&nbsp;        this.mapInstance = mapInstance;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;Object&gt; getList() {
+<b class="nc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setList(List&lt;Object&gt; list) {
+<b class="nc">&nbsp;        this.list = list;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;Object&gt; getVersions() {
+<b class="nc">&nbsp;        return versions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setVersions(List&lt;Object&gt; versions) {
+<b class="nc">&nbsp;        this.versions = versions;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:27</div>
+</div>
+</body>
+</html>

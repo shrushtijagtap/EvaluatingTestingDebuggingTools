@@ -1,0 +1,423 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReader</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReader (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (15/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    61.4%
+  </span>
+  <span class="absValue">
+    (78/127)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;@SuppressWarnings({&quot;rawtypes&quot;, &quot;unchecked&quot;})
+&nbsp;public interface ObjectReader&lt;T&gt; {
+<b class="fc">&nbsp;    long HASH_TYPE = Fnv.hashCode64(&quot;@type&quot;);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return {@link T}
+&nbsp;     * @throws UnsupportedOperationException If the method is not overloaded or otherwise
+&nbsp;     */
+&nbsp;    default T createInstance() {
+<b class="fc">&nbsp;        return createInstance(0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return {@link T}
+&nbsp;     * @throws UnsupportedOperationException If the method is not overloaded or otherwise
+&nbsp;     */
+&nbsp;    default T createInstance(long features) {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return {@link T}
+&nbsp;     * @throws UnsupportedOperationException If the method is not overloaded or otherwise
+&nbsp;     */
+&nbsp;    default T createInstance(Collection collection) {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(this.getClass().getName());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default void acceptExtra(Object object, String fieldName, Object fieldValue) {
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    default T createInstance(Map map, JSONReader.Feature... features) {
+<b class="fc">&nbsp;        long featuresValue = 0;</b>
+<b class="fc">&nbsp;        for (JSONReader.Feature feature : features) {</b>
+<b class="fc">&nbsp;            featuresValue |= feature.mask;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return createInstance(map, featuresValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return {@link T}
+&nbsp;     * @throws JSONException If a suitable ObjectReader is not found
+&nbsp;     */
+&nbsp;    default T createInstance(Map map, long features) {
+<b class="fc">&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+<b class="fc">&nbsp;        Object typeKey = map.get(getTypeKey());</b>
+&nbsp;
+<b class="fc">&nbsp;        if (typeKey instanceof String) {</b>
+<b class="fc">&nbsp;            String typeName = (String) typeKey;</b>
+<b class="fc">&nbsp;            long typeHash = Fnv.hashCode64(typeName);</b>
+<b class="fc">&nbsp;            ObjectReader&lt;T&gt; reader = null;</b>
+<b class="fc">&nbsp;            if ((features &amp; JSONReader.Feature.SupportAutoType.mask) != 0 || this instanceof ObjectReaderSeeAlso) {</b>
+<b class="fc">&nbsp;                reader = autoType(provider, typeHash);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (reader == null) {</b>
+<b class="fc">&nbsp;                reader = provider.getObjectReader(</b>
+<b class="fc">&nbsp;                        typeName, getObjectClass(), features | getFeatures()</b>
+&nbsp;                );
+&nbsp;
+<b class="fc">&nbsp;                if (reader == null) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;No suitable ObjectReader found for&quot; + typeName);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (reader != this) {</b>
+<b class="fc">&nbsp;                return reader.createInstance(map, features);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        T object = createInstance(0L);</b>
+<b class="fc">&nbsp;        for (Map.Entry entry : (Iterable&lt;Map.Entry&gt;) map.entrySet()) {</b>
+<b class="fc">&nbsp;            String entryKey = entry.getKey().toString();</b>
+<b class="fc">&nbsp;            Object fieldValue = entry.getValue();</b>
+&nbsp;
+<b class="fc">&nbsp;            FieldReader fieldReader = getFieldReader(entryKey);</b>
+<b class="fc">&nbsp;            if (fieldReader == null) {</b>
+<b class="fc">&nbsp;                acceptExtra(object, entryKey, entry.getValue());</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Class fieldClass = fieldReader.fieldClass;</b>
+<b class="fc">&nbsp;            Type fieldType = fieldReader.fieldType;</b>
+&nbsp;
+<b class="fc">&nbsp;            if (fieldValue != null) {</b>
+<b class="fc">&nbsp;                Class&lt;?&gt; valueClass = fieldValue.getClass();</b>
+&nbsp;
+<b class="fc">&nbsp;                if (valueClass != fieldReader.fieldClass) {</b>
+<b class="fc">&nbsp;                    Function typeConvert = provider.getTypeConvert(valueClass, fieldReader.fieldClass);</b>
+&nbsp;
+<b class="fc">&nbsp;                    if (typeConvert != null) {</b>
+<b class="fc">&nbsp;                        fieldValue = typeConvert.apply(fieldValue);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            Object typedFieldValue;
+<b class="fc">&nbsp;            if (fieldValue == null || fieldType == fieldValue.getClass()) {</b>
+<b class="fc">&nbsp;                typedFieldValue = fieldValue;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                if (fieldValue instanceof JSONObject) {</b>
+<b class="fc">&nbsp;                    typedFieldValue = ((JSONObject) fieldValue).to(fieldType);</b>
+<b class="fc">&nbsp;                } else if (fieldValue instanceof JSONArray) {</b>
+<b class="fc">&nbsp;                    typedFieldValue = ((JSONArray) fieldValue).to(fieldType);</b>
+<b class="fc">&nbsp;                } else if (features == 0 &amp;&amp; !fieldClass.isInstance(fieldValue) &amp;&amp; fieldReader.format == null) {</b>
+<b class="fc">&nbsp;                    typedFieldValue = TypeUtils.cast(fieldValue, fieldClass, provider);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    String fieldValueJSONString = JSON.toJSONString(fieldValue);</b>
+<b class="fc">&nbsp;                    try (JSONReader jsonReader = JSONReader.of(fieldValueJSONString)) {</b>
+<b class="fc">&nbsp;                        ObjectReader fieldObjectReader = fieldReader.getObjectReader(jsonReader);</b>
+<b class="fc">&nbsp;                        typedFieldValue = fieldObjectReader.readObject(jsonReader, null, entry.getKey(), features);</b>
+<b class="fc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            fieldReader.accept(object, typedFieldValue);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        Function buildFunction = getBuildFunction();</b>
+<b class="fc">&nbsp;        if (buildFunction != null) {</b>
+<b class="fc">&nbsp;            return (T) buildFunction.apply(object);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return object;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @throws UnsupportedOperationException If the method is not overloaded or otherwise
+&nbsp;     */
+&nbsp;    default T createInstanceNoneDefaultConstructor(Map&lt;Long, Object&gt; values) {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Features enabled by ObjectReader
+&nbsp;     */
+&nbsp;    default long getFeatures() {
+<b class="fc">&nbsp;        return 0L;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default String getTypeKey() {
+<b class="fc">&nbsp;        return &quot;@type&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default long getTypeKeyHash() {
+<b class="fc">&nbsp;        return HASH_TYPE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default Class&lt;T&gt; getObjectClass() {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default FieldReader getFieldReader(long hashCode) {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default FieldReader getFieldReaderLCase(long hashCode) {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default boolean setFieldValue(Object object, String fieldName, long fieldNameHashCode, int value) {
+<b class="fc">&nbsp;        FieldReader fieldReader = getFieldReader(fieldNameHashCode);</b>
+<b class="fc">&nbsp;        if (fieldReader == null) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        fieldReader.accept(object, value);</b>
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default boolean setFieldValue(Object object, String fieldName, long fieldNameHashCode, long value) {
+<b class="fc">&nbsp;        FieldReader fieldReader = getFieldReader(fieldNameHashCode);</b>
+<b class="fc">&nbsp;        if (fieldReader == null) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        fieldReader.accept(object, value);</b>
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default FieldReader getFieldReader(String fieldName) {
+<b class="fc">&nbsp;        long fieldNameHash = Fnv.hashCode64(fieldName);</b>
+<b class="fc">&nbsp;        FieldReader fieldReader = getFieldReader(fieldNameHash);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (fieldReader == null) {</b>
+<b class="fc">&nbsp;            long fieldNameHashLCase = Fnv.hashCode64LCase(fieldName);</b>
+<b class="fc">&nbsp;            if (fieldNameHashLCase != fieldNameHash) {</b>
+<b class="fc">&nbsp;                fieldReader = getFieldReaderLCase(fieldNameHashLCase);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return fieldReader;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default Function getBuildFunction() {
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default ObjectReader autoType(JSONReader.Context context, long typeHash) {
+<b class="fc">&nbsp;        return context.getObjectReaderAutoType(typeHash);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default ObjectReader autoType(ObjectReaderProvider provider, long typeHash) {
+<b class="fc">&nbsp;        return provider.getObjectReader(typeHash);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return {@link T}
+&nbsp;     * @throws JSONException If a suitable ObjectReader is not found
+&nbsp;     */
+&nbsp;    default T readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        if (jsonReader.isArray() &amp;&amp;</b>
+<b class="nc">&nbsp;                jsonReader.isSupportBeanArray()) {</b>
+<b class="nc">&nbsp;            return readArrayMappingJSONBObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        T object = null;</b>
+<b class="nc">&nbsp;        jsonReader.nextIfObjectStart();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; ; ++i) {</b>
+<b class="nc">&nbsp;            if (jsonReader.nextIfObjectEnd()) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            long hash = jsonReader.readFieldNameHashCode();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (hash == getTypeKeyHash() &amp;&amp; i == 0) {</b>
+<b class="nc">&nbsp;                long typeHash = jsonReader.readTypeHashCode();</b>
+<b class="nc">&nbsp;                JSONReader.Context context = jsonReader.getContext();</b>
+<b class="nc">&nbsp;                ObjectReader reader = autoType(context, typeHash);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (reader == null) {</b>
+<b class="nc">&nbsp;                    String typeName = jsonReader.getString();</b>
+<b class="nc">&nbsp;                    reader = context.getObjectReaderAutoType(typeName, null);</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (reader == null) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(jsonReader.info(&quot;No suitable ObjectReader found for&quot; + typeName));</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (reader == this) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return (T) reader.readJSONBObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (hash == 0) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            FieldReader fieldReader = getFieldReader(hash);</b>
+<b class="nc">&nbsp;            if (fieldReader == null &amp;&amp; jsonReader.isSupportSmartMatch(features | getFeatures())) {</b>
+<b class="nc">&nbsp;                long nameHashCodeLCase = jsonReader.getNameHashCodeLCase();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (nameHashCodeLCase != hash) {</b>
+<b class="nc">&nbsp;                    fieldReader = getFieldReaderLCase(nameHashCodeLCase);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (fieldReader == null) {</b>
+<b class="nc">&nbsp;                jsonReader.skipValue();</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (object == null) {</b>
+<b class="nc">&nbsp;                object = createInstance(jsonReader.getContext().getFeatures() | features);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            fieldReader.readFieldValue(jsonReader, object);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            object = createInstance(jsonReader.getContext().getFeatures() | features);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return object;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return {@link T}
+&nbsp;     * @throws UnsupportedOperationException If the method is not overloaded or otherwise
+&nbsp;     */
+&nbsp;    default T readArrayMappingJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return {@link T}
+&nbsp;     * @throws UnsupportedOperationException If the method is not overloaded or otherwise
+&nbsp;     */
+&nbsp;    default T readArrayMappingObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return {@link T}
+&nbsp;     */
+&nbsp;    default T readObject(JSONReader jsonReader) {
+<b class="fc">&nbsp;        return readObject(jsonReader, null, null, getFeatures());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default T readObject(JSONReader jsonReader, long features) {
+<b class="fc">&nbsp;        return readObject(jsonReader, null, null, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return {@link T}
+&nbsp;     * @throws JSONException If a suitable ObjectReader is not found
+&nbsp;     */
+&nbsp;    T readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:18</div>
+</div>
+</body>
+</html>

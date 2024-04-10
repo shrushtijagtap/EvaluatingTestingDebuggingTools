@@ -1,0 +1,426 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FieldReaderObject</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldReaderObject (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FieldReaderObject</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/138)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONB;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.JSONSchemaValidException;
+&nbsp;import com.alibaba.fastjson2.schema.JSONSchema;
+&nbsp;import com.alibaba.fastjson2.util.BeanUtils;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.Member;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.BiConsumer;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;public class FieldReaderObject&lt;T&gt;
+&nbsp;        extends FieldReader&lt;T&gt; {
+&nbsp;    protected ObjectReader initReader;
+&nbsp;    protected final BiConsumer function;
+&nbsp;
+&nbsp;    public FieldReaderObject(
+&nbsp;            String fieldName,
+&nbsp;            Type fieldType,
+&nbsp;            Class fieldClass,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            Locale locale,
+&nbsp;            Object defaultValue,
+&nbsp;            JSONSchema schema,
+&nbsp;            Method method,
+&nbsp;            Field field,
+&nbsp;            BiConsumer function
+&nbsp;    ) {
+<b class="nc">&nbsp;        super(fieldName, fieldType, fieldClass, ordinal, features, format, locale, defaultValue, schema, method, field);</b>
+<b class="nc">&nbsp;        this.function = function;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObjectReader getInitReader() {
+<b class="nc">&nbsp;        return initReader;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObjectReader getObjectReader(JSONReader jsonReader) {
+<b class="nc">&nbsp;        if (initReader != null) {</b>
+<b class="nc">&nbsp;            return initReader;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (reader != null) {</b>
+<b class="nc">&nbsp;            return reader;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectReader formattedObjectReader = createFormattedObjectReader(fieldType, fieldClass, format, locale);</b>
+<b class="nc">&nbsp;        if (formattedObjectReader != null) {</b>
+<b class="nc">&nbsp;            return reader = formattedObjectReader;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass != null &amp;&amp; Map.class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;            return reader = ObjectReaderImplMap.of(fieldType, fieldClass, features);</b>
+<b class="nc">&nbsp;        } else if (fieldClass != null &amp;&amp; Collection.class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;            return reader = ObjectReaderImplList.of(fieldType, fieldClass, features);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return reader = jsonReader.getObjectReader(fieldType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReader getObjectReader(JSONReader.Context context) {
+<b class="nc">&nbsp;        if (reader != null) {</b>
+<b class="nc">&nbsp;            return reader;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectReader formattedObjectReader = createFormattedObjectReader(fieldType, fieldClass, format, locale);</b>
+<b class="nc">&nbsp;        if (formattedObjectReader != null) {</b>
+<b class="nc">&nbsp;            return reader = formattedObjectReader;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Map.class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;            return reader = ObjectReaderImplMap.of(fieldType, fieldClass, features);</b>
+<b class="nc">&nbsp;        } else if (Collection.class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;            return reader = ObjectReaderImplList.of(fieldType, fieldClass, features);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return reader = context.getObjectReader(fieldType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void readFieldValue(JSONReader jsonReader, T object) {
+<b class="nc">&nbsp;        if (!fieldClassSerializable) {</b>
+<b class="nc">&nbsp;            long contextFeatures = jsonReader.getContext().getFeatures();</b>
+<b class="nc">&nbsp;            if ((contextFeatures &amp; JSONReader.Feature.IgnoreNoneSerializable.mask) != 0) {</b>
+<b class="nc">&nbsp;                jsonReader.skipValue();</b>
+&nbsp;                return;
+<b class="nc">&nbsp;            } else if ((contextFeatures &amp; JSONReader.Feature.ErrorOnNoneSerializable.mask) != 0) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;not support none-Serializable&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        ObjectReader objectReader;
+<b class="nc">&nbsp;        if (this.initReader != null) {</b>
+<b class="nc">&nbsp;            objectReader = this.initReader;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            ObjectReader formattedObjectReader = createFormattedObjectReader(fieldType, fieldClass, format, locale);</b>
+<b class="nc">&nbsp;            if (formattedObjectReader != null) {</b>
+<b class="nc">&nbsp;                objectReader = this.initReader = formattedObjectReader;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                objectReader = this.initReader = jsonReader.getContext().getObjectReader(fieldType);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.isReference()) {</b>
+<b class="nc">&nbsp;            String reference = jsonReader.readReference();</b>
+<b class="nc">&nbsp;            if (&quot;..&quot;.equals(reference)) {</b>
+<b class="nc">&nbsp;                accept(object, object);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                addResolveTask(jsonReader, object, reference);</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+&nbsp;            Object value;
+<b class="nc">&nbsp;            if (jsonReader.nextIfNull()) {</b>
+<b class="nc">&nbsp;                if (fieldClass == OptionalInt.class) {</b>
+<b class="nc">&nbsp;                    value = OptionalInt.empty();</b>
+<b class="nc">&nbsp;                } else if (fieldClass == OptionalLong.class) {</b>
+<b class="nc">&nbsp;                    value = OptionalLong.empty();</b>
+<b class="nc">&nbsp;                } else if (fieldClass == OptionalDouble.class) {</b>
+<b class="nc">&nbsp;                    value = OptionalDouble.empty();</b>
+<b class="nc">&nbsp;                } else if (fieldClass == Optional.class) {</b>
+<b class="nc">&nbsp;                    value = Optional.empty();</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    value = null;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (jsonReader.isJSONB()) {</b>
+<b class="nc">&nbsp;                if (fieldClass == Object.class) {</b>
+<b class="nc">&nbsp;                    ObjectReader autoTypeObjectReader = jsonReader.checkAutoType(Object.class, 0, features);</b>
+<b class="nc">&nbsp;                    if (autoTypeObjectReader != null) {</b>
+<b class="nc">&nbsp;                        value = autoTypeObjectReader.readJSONBObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        value = jsonReader.readAny();</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    value = objectReader.readJSONBObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                value = objectReader.readObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            accept(object, value);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (noneStaticMemberClass) {</b>
+<b class="nc">&nbsp;                BeanUtils.setNoneStaticMemberClassParent(value, object);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (JSONSchemaValidException ex) {</b>
+<b class="nc">&nbsp;            throw ex;</b>
+<b class="nc">&nbsp;        } catch (Exception | IllegalAccessError ex) {</b>
+<b class="nc">&nbsp;            Member member = this.field != null ? this.field : this.method;</b>
+&nbsp;            String message;
+<b class="nc">&nbsp;            if (member != null) {</b>
+<b class="nc">&nbsp;                message = &quot;read field &#39;&quot; + member.getDeclaringClass().getName() + &quot;.&quot; + member.getName();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                message = &quot;read field &quot; + fieldName + &quot; error&quot;;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info(message), ex);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void readFieldValueJSONB(JSONReader jsonReader, T object) {
+<b class="nc">&nbsp;        if (!fieldClassSerializable &amp;&amp; jsonReader.getType() != JSONB.Constants.BC_TYPED_ANY) {</b>
+<b class="nc">&nbsp;            long contextFeatures = jsonReader.getContext().getFeatures();</b>
+<b class="nc">&nbsp;            if ((contextFeatures &amp; JSONReader.Feature.IgnoreNoneSerializable.mask) != 0) {</b>
+<b class="nc">&nbsp;                jsonReader.skipValue();</b>
+&nbsp;                return;
+<b class="nc">&nbsp;            } else if ((contextFeatures &amp; JSONReader.Feature.ErrorOnNoneSerializable.mask) != 0) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;not support none-Serializable&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (initReader == null) {</b>
+<b class="nc">&nbsp;            initReader = jsonReader.getContext().getObjectReader(fieldType);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.isReference()) {</b>
+<b class="nc">&nbsp;            String reference = jsonReader.readReference();</b>
+<b class="nc">&nbsp;            if (&quot;..&quot;.equals(reference)) {</b>
+<b class="nc">&nbsp;                accept(object, object);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                addResolveTask(jsonReader, object, reference);</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Object value = initReader.readJSONBObject(jsonReader, fieldType, fieldName, features);</b>
+<b class="nc">&nbsp;        accept(object, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, boolean value) {
+<b class="nc">&nbsp;        accept(object, Boolean.valueOf(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, byte value) {
+<b class="nc">&nbsp;        accept(object, Byte.valueOf(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, short value) {
+<b class="nc">&nbsp;        accept(object, Short.valueOf(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, int value) {
+<b class="nc">&nbsp;        accept(object, Integer.valueOf(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, long value) {
+<b class="nc">&nbsp;        accept(object, Long.valueOf(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, float value) {
+<b class="nc">&nbsp;        accept(object, Float.valueOf(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, double value) {
+<b class="nc">&nbsp;        accept(object, Double.valueOf(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, char value) {
+<b class="nc">&nbsp;        accept(object, Character.valueOf(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, Object value) {
+<b class="nc">&nbsp;        if (schema != null) {</b>
+<b class="nc">&nbsp;            schema.assertValidate(value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value == null &amp;&amp; (features &amp; JSONReader.Feature.IgnoreSetNullValue.mask) != 0) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == char.class) {</b>
+<b class="nc">&nbsp;            if (value instanceof String) {</b>
+<b class="nc">&nbsp;                String str = (String) value;</b>
+<b class="nc">&nbsp;                if (str.length() &gt; 0) {</b>
+<b class="nc">&nbsp;                    value = str.charAt(0);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    value = &#39;\0&#39;;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value != null &amp;&amp; !fieldClass.isInstance(value)) {</b>
+<b class="nc">&nbsp;            value = TypeUtils.cast(value, fieldType);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            if (function != null) {</b>
+<b class="nc">&nbsp;                function.accept(object, value);</b>
+<b class="nc">&nbsp;            } else if (method != null) {</b>
+<b class="nc">&nbsp;                method.invoke(object, value);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                field.set(object, value);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;set &quot; + (function != null ? super.toString() : fieldName) + &quot; error&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readFieldValue(JSONReader jsonReader) {
+<b class="nc">&nbsp;        if (initReader == null) {</b>
+<b class="nc">&nbsp;            initReader = getObjectReader(jsonReader);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Object object = jsonReader.isJSONB()</b>
+<b class="nc">&nbsp;                ? initReader.readJSONBObject(jsonReader, fieldType, fieldName, features)</b>
+<b class="nc">&nbsp;                : initReader.readObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;
+<b class="nc">&nbsp;        Function builder = initReader.getBuildFunction();</b>
+<b class="nc">&nbsp;        if (builder != null) {</b>
+<b class="nc">&nbsp;            object = builder.apply(object);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return object;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void processExtra(JSONReader jsonReader, Object object) {
+<b class="nc">&nbsp;        if (initReader == null) {</b>
+<b class="nc">&nbsp;            initReader = getObjectReader(jsonReader);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (initReader instanceof ObjectReaderBean &amp;&amp; field != null) {</b>
+<b class="nc">&nbsp;            String name = jsonReader.getFieldName();</b>
+<b class="nc">&nbsp;            FieldReader extraField = initReader.getFieldReader(name);</b>
+<b class="nc">&nbsp;            if (extraField != null) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    Object unwrappedFieldValue = field.get(object);</b>
+<b class="nc">&nbsp;                    if (unwrappedFieldValue == null) {</b>
+<b class="nc">&nbsp;                        unwrappedFieldValue = initReader.createInstance(features);</b>
+<b class="nc">&nbsp;                        accept((T) object, unwrappedFieldValue);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    extraField.readFieldValue(jsonReader, unwrappedFieldValue);</b>
+&nbsp;                    return;
+<b class="nc">&nbsp;                } catch (Exception e) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;read unwrapped field error&quot;, e);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        jsonReader.skipValue();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:05</div>
+</div>
+</body>
+</html>

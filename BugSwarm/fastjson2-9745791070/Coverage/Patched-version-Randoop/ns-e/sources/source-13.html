@@ -1,0 +1,1187 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RyuDouble</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.util</a>
+</div>
+
+<h1>Coverage Summary for Class: RyuDouble (com.alibaba.fastjson2.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RyuDouble</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/705)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;// Copyright 2018 Ulf Adams
+&nbsp;//
+&nbsp;// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp;// you may not use this file except in compliance with the License.
+&nbsp;// You may obtain a copy of the License at
+&nbsp;//
+&nbsp;//     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp;//
+&nbsp;// Unless required by applicable law or agreed to in writing, software
+&nbsp;// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp;// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp;// See the License for the specific language governing permissions and
+&nbsp;// limitations under the License.
+&nbsp;
+&nbsp;package com.alibaba.fastjson2.util;
+&nbsp;
+&nbsp;import java.math.BigInteger;
+&nbsp;
+&nbsp;/**
+&nbsp; * An implementation of Ryu for double.
+&nbsp; */
+<b class="nc">&nbsp;public final class RyuDouble {</b>
+<b class="nc">&nbsp;    private static final int[][] POW5_SPLIT = new int[326][4];</b>
+<b class="nc">&nbsp;    private static final int[][] POW5_INV_SPLIT = new int[291][4];</b>
+&nbsp;
+&nbsp;    static {
+<b class="nc">&nbsp;        BigInteger mask = BigInteger.ONE.shiftLeft(31).subtract(BigInteger.ONE);</b>
+<b class="nc">&nbsp;        BigInteger invMask = BigInteger.ONE.shiftLeft(31).subtract(BigInteger.ONE);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; 326; i++) {</b>
+<b class="nc">&nbsp;            BigInteger pow = BigInteger.valueOf(5).pow(i);</b>
+<b class="nc">&nbsp;            int pow5len = pow.bitLength();</b>
+<b class="nc">&nbsp;            int expectedPow5Bits = i == 0 ? 1 : (int) ((i * 23219280L + 10000000L - 1) / 10000000L);</b>
+<b class="nc">&nbsp;            if (expectedPow5Bits != pow5len) {</b>
+<b class="nc">&nbsp;                throw new IllegalStateException(pow5len + &quot; != &quot; + expectedPow5Bits);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (i &lt; POW5_SPLIT.length) {</b>
+<b class="nc">&nbsp;                for (int j = 0; j &lt; 4; j++) {</b>
+<b class="nc">&nbsp;                    POW5_SPLIT[i][j] = pow</b>
+<b class="nc">&nbsp;                            .shiftRight(pow5len - 121 + (3 - j) * 31)</b>
+<b class="nc">&nbsp;                            .and(mask)</b>
+<b class="nc">&nbsp;                            .intValue();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (i &lt; POW5_INV_SPLIT.length) {</b>
+&nbsp;                // We want floor(log_2 5^q) here, which is pow5len - 1.
+<b class="nc">&nbsp;                int j = pow5len + 121;</b>
+<b class="nc">&nbsp;                BigInteger inv = BigInteger.ONE</b>
+<b class="nc">&nbsp;                        .shiftLeft(j)</b>
+<b class="nc">&nbsp;                        .divide(pow)</b>
+<b class="nc">&nbsp;                        .add(BigInteger.ONE);</b>
+<b class="nc">&nbsp;                for (int k = 0; k &lt; 4; k++) {</b>
+<b class="nc">&nbsp;                    if (k == 0) {</b>
+<b class="nc">&nbsp;                        POW5_INV_SPLIT[i][k] = inv</b>
+<b class="nc">&nbsp;                                .shiftRight((3 - k) * 31)</b>
+<b class="nc">&nbsp;                                .intValue();</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        POW5_INV_SPLIT[i][k] = inv</b>
+<b class="nc">&nbsp;                                .shiftRight((3 - k) * 31)</b>
+<b class="nc">&nbsp;                                .and(invMask)</b>
+<b class="nc">&nbsp;                                .intValue();</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String toString(double value) {
+<b class="nc">&nbsp;        char[] result = new char[24];</b>
+<b class="nc">&nbsp;        int len = toString(value, result, 0);</b>
+<b class="nc">&nbsp;        return new String(result, 0, len);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int toString(double value, char[] result, int off) {
+<b class="nc">&nbsp;        final long DOUBLE_MANTISSA_MASK = 4503599627370495L; // (1L &lt;&lt; 52) - 1;</b>
+<b class="nc">&nbsp;        final int DOUBLE_EXPONENT_MASK = 2047; // (1 &lt;&lt; 11) - 1;</b>
+<b class="nc">&nbsp;        final int DOUBLE_EXPONENT_BIAS = 1023; // (1 &lt;&lt; (11 - 1)) - 1;</b>
+<b class="nc">&nbsp;        final long LOG10_5_NUMERATOR = 6989700L; // (long) (10000000L * Math.log10(5));</b>
+<b class="nc">&nbsp;        final long LOG10_2_NUMERATOR = 3010299L; // (long) (10000000L * Math.log10(2));</b>
+&nbsp;
+&nbsp;        // Step 1: Decode the floating point number, and unify normalized and subnormal cases.
+&nbsp;        // First, handle all the trivial cases.
+<b class="nc">&nbsp;        int index = off;</b>
+<b class="nc">&nbsp;        if (Double.isNaN(value)) {</b>
+<b class="nc">&nbsp;            result[index++] = &#39;N&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;a&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;N&#39;;</b>
+<b class="nc">&nbsp;            return index - off;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value == Double.POSITIVE_INFINITY) {</b>
+<b class="nc">&nbsp;            result[index++] = &#39;I&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;n&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;f&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;i&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;n&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;i&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;t&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;y&#39;;</b>
+<b class="nc">&nbsp;            return index - off;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value == Double.NEGATIVE_INFINITY) {</b>
+<b class="nc">&nbsp;            result[index++] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;I&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;n&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;f&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;i&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;n&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;i&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;t&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;y&#39;;</b>
+<b class="nc">&nbsp;            return index - off;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long bits = Double.doubleToLongBits(value);</b>
+<b class="nc">&nbsp;        if (bits == 0) {</b>
+<b class="nc">&nbsp;            result[index++] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;.&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            return index - off;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (bits == 0x8000000000000000L) {</b>
+<b class="nc">&nbsp;            result[index++] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;.&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            return index - off;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final int DOUBLE_MANTISSA_BITS = 52;</b>
+&nbsp;        // Otherwise extract the mantissa and exponent bits and run the full algorithm.
+<b class="nc">&nbsp;        int ieeeExponent = (int) ((bits &gt;&gt;&gt; DOUBLE_MANTISSA_BITS) &amp; DOUBLE_EXPONENT_MASK);</b>
+<b class="nc">&nbsp;        long ieeeMantissa = bits &amp; DOUBLE_MANTISSA_MASK;</b>
+&nbsp;        int e2;
+&nbsp;        long m2;
+<b class="nc">&nbsp;        if (ieeeExponent == 0) {</b>
+&nbsp;            // Denormal number - no implicit leading 1, and the exponent is 1, not 0.
+<b class="nc">&nbsp;            e2 = 1 - DOUBLE_EXPONENT_BIAS - DOUBLE_MANTISSA_BITS;</b>
+<b class="nc">&nbsp;            m2 = ieeeMantissa;</b>
+&nbsp;        } else {
+&nbsp;            // Add implicit leading 1.
+<b class="nc">&nbsp;            e2 = ieeeExponent - DOUBLE_EXPONENT_BIAS - DOUBLE_MANTISSA_BITS;</b>
+<b class="nc">&nbsp;            m2 = ieeeMantissa | (1L &lt;&lt; DOUBLE_MANTISSA_BITS);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean sign = bits &lt; 0;</b>
+&nbsp;
+&nbsp;        // Step 2: Determine the interval of legal decimal representations.
+<b class="nc">&nbsp;        boolean even = (m2 &amp; 1) == 0;</b>
+<b class="nc">&nbsp;        final long mv = 4 * m2;</b>
+<b class="nc">&nbsp;        final long mp = 4 * m2 + 2;</b>
+<b class="nc">&nbsp;        final int mmShift = ((m2 != (1L &lt;&lt; DOUBLE_MANTISSA_BITS)) || (ieeeExponent &lt;= 1)) ? 1 : 0;</b>
+<b class="nc">&nbsp;        final long mm = 4 * m2 - 1 - mmShift;</b>
+<b class="nc">&nbsp;        e2 -= 2;</b>
+&nbsp;
+&nbsp;        // Step 3: Convert to a decimal power base using 128-bit arithmetic.
+&nbsp;        // -1077 = 1 - 1023 - 53 - 2 &lt;= e_2 - 2 &lt;= 2046 - 1023 - 53 - 2 = 968
+&nbsp;        long dv, dp, dm;
+&nbsp;        final int e10;
+<b class="nc">&nbsp;        boolean dmIsTrailingZeros = false, dvIsTrailingZeros = false;</b>
+<b class="nc">&nbsp;        if (e2 &gt;= 0) {</b>
+<b class="nc">&nbsp;            final int q = Math.max(0, (int) (e2 * LOG10_2_NUMERATOR / 10000000L) - 1);</b>
+&nbsp;            // k = constant + floor(log_2(5^q))
+&nbsp;            // q == 0 ? 1 : (int) ((q * 23219280L + 10000000L - 1) / 10000000L)
+<b class="nc">&nbsp;            final int k = 122 + (q == 0 ? 1 : (int) ((q * 23219280L + 10000000L - 1) / 10000000L)) - 1;</b>
+<b class="nc">&nbsp;            final int i = -e2 + q + k;</b>
+&nbsp;
+<b class="nc">&nbsp;            int actualShift = i - 3 * 31 - 21;</b>
+<b class="nc">&nbsp;            if (actualShift &lt; 0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;&quot; + actualShift);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            final int[] ints = POW5_INV_SPLIT[q];</b>
+&nbsp;            {
+<b class="nc">&nbsp;                long mHigh = mv &gt;&gt;&gt; 31;</b>
+<b class="nc">&nbsp;                long mLow = mv &amp; 0x7fffffff;</b>
+<b class="nc">&nbsp;                long bits13 = mHigh * ints[0];</b>
+<b class="nc">&nbsp;                long bits03 = mLow * ints[0];</b>
+<b class="nc">&nbsp;                long bits12 = mHigh * ints[1];</b>
+<b class="nc">&nbsp;                long bits02 = mLow * ints[1];</b>
+<b class="nc">&nbsp;                long bits11 = mHigh * ints[2];</b>
+<b class="nc">&nbsp;                long bits01 = mLow * ints[2];</b>
+<b class="nc">&nbsp;                long bits10 = mHigh * ints[3];</b>
+<b class="nc">&nbsp;                long bits00 = mLow * ints[3];</b>
+&nbsp;
+<b class="nc">&nbsp;                dv = ((((((</b>
+&nbsp;                        ((bits00 &gt;&gt;&gt; 31) + bits01 + bits10) &gt;&gt;&gt; 31)
+&nbsp;                        + bits02 + bits11) &gt;&gt;&gt; 31)
+&nbsp;                        + bits03 + bits12) &gt;&gt;&gt; 21)
+&nbsp;                        + (bits13 &lt;&lt; 10)) &gt;&gt;&gt; actualShift;
+&nbsp;            }
+&nbsp;            {
+<b class="nc">&nbsp;                long mHigh = mp &gt;&gt;&gt; 31;</b>
+<b class="nc">&nbsp;                long mLow = mp &amp; 0x7fffffff;</b>
+<b class="nc">&nbsp;                long bits13 = mHigh * ints[0];</b>
+<b class="nc">&nbsp;                long bits03 = mLow * ints[0];</b>
+<b class="nc">&nbsp;                long bits12 = mHigh * ints[1];</b>
+<b class="nc">&nbsp;                long bits02 = mLow * ints[1];</b>
+<b class="nc">&nbsp;                long bits11 = mHigh * ints[2];</b>
+<b class="nc">&nbsp;                long bits01 = mLow * ints[2];</b>
+<b class="nc">&nbsp;                long bits10 = mHigh * ints[3];</b>
+<b class="nc">&nbsp;                long bits00 = mLow * ints[3];</b>
+&nbsp;
+<b class="nc">&nbsp;                dp = ((((((</b>
+&nbsp;                        ((bits00 &gt;&gt;&gt; 31) + bits01 + bits10) &gt;&gt;&gt; 31)
+&nbsp;                        + bits02 + bits11) &gt;&gt;&gt; 31)
+&nbsp;                        + bits03 + bits12) &gt;&gt;&gt; 21)
+&nbsp;                        + (bits13 &lt;&lt; 10)) &gt;&gt;&gt; actualShift;
+&nbsp;            }
+&nbsp;            {
+<b class="nc">&nbsp;                long mHigh = mm &gt;&gt;&gt; 31;</b>
+<b class="nc">&nbsp;                long mLow = mm &amp; 0x7fffffff;</b>
+<b class="nc">&nbsp;                long bits13 = mHigh * ints[0];</b>
+<b class="nc">&nbsp;                long bits03 = mLow * ints[0];</b>
+<b class="nc">&nbsp;                long bits12 = mHigh * ints[1];</b>
+<b class="nc">&nbsp;                long bits02 = mLow * ints[1];</b>
+<b class="nc">&nbsp;                long bits11 = mHigh * ints[2];</b>
+<b class="nc">&nbsp;                long bits01 = mLow * ints[2];</b>
+<b class="nc">&nbsp;                long bits10 = mHigh * ints[3];</b>
+<b class="nc">&nbsp;                long bits00 = mLow * ints[3];</b>
+&nbsp;
+<b class="nc">&nbsp;                dm = ((((((</b>
+&nbsp;                        ((bits00 &gt;&gt;&gt; 31) + bits01 + bits10) &gt;&gt;&gt; 31)
+&nbsp;                        + bits02 + bits11) &gt;&gt;&gt; 31)
+&nbsp;                        + bits03 + bits12) &gt;&gt;&gt; 21)
+&nbsp;                        + (bits13 &lt;&lt; 10)) &gt;&gt;&gt; actualShift;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            e10 = q;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (q &lt;= 21) {</b>
+<b class="nc">&nbsp;                if (mv % 5 == 0) {</b>
+&nbsp;                    int pow5Factor_mv;
+&nbsp;                    {
+<b class="nc">&nbsp;                        long v = mv;</b>
+<b class="nc">&nbsp;                        if ((v % 5) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mv = 0;</b>
+<b class="nc">&nbsp;                        } else if ((v % 25) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mv = 1;</b>
+<b class="nc">&nbsp;                        } else if ((v % 125) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mv = 2;</b>
+<b class="nc">&nbsp;                        } else if ((v % 625) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mv = 3;</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            pow5Factor_mv = 4;</b>
+<b class="nc">&nbsp;                            v /= 625;</b>
+<b class="nc">&nbsp;                            while (v &gt; 0) {</b>
+<b class="nc">&nbsp;                                if (v % 5 != 0) {</b>
+<b class="nc">&nbsp;                                    break;</b>
+&nbsp;                                }
+<b class="nc">&nbsp;                                v /= 5;</b>
+<b class="nc">&nbsp;                                pow5Factor_mv++;</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                    dvIsTrailingZeros = pow5Factor_mv &gt;= q;</b>
+<b class="nc">&nbsp;                } else if (even) {</b>
+&nbsp;                    int pow5Factor_mm;
+&nbsp;                    {
+<b class="nc">&nbsp;                        long v = mm;</b>
+<b class="nc">&nbsp;                        if ((v % 5) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mm = 0;</b>
+<b class="nc">&nbsp;                        } else if ((v % 25) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mm = 1;</b>
+<b class="nc">&nbsp;                        } else if ((v % 125) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mm = 2;</b>
+<b class="nc">&nbsp;                        } else if ((v % 625) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mm = 3;</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            pow5Factor_mm = 4;</b>
+<b class="nc">&nbsp;                            v /= 625;</b>
+<b class="nc">&nbsp;                            while (v &gt; 0) {</b>
+<b class="nc">&nbsp;                                if (v % 5 != 0) {</b>
+<b class="nc">&nbsp;                                    break;</b>
+&nbsp;                                }
+<b class="nc">&nbsp;                                v /= 5;</b>
+<b class="nc">&nbsp;                                pow5Factor_mm++;</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    dmIsTrailingZeros = pow5Factor_mm &gt;= q; //</b>
+<b class="nc">&nbsp;                } else {</b>
+&nbsp;                    int pow5Factor_mp;
+&nbsp;                    {
+<b class="nc">&nbsp;                        long v = mp;</b>
+<b class="nc">&nbsp;                        if ((v % 5) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mp = 0;</b>
+<b class="nc">&nbsp;                        } else if ((v % 25) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mp = 1;</b>
+<b class="nc">&nbsp;                        } else if ((v % 125) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mp = 2;</b>
+<b class="nc">&nbsp;                        } else if ((v % 625) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mp = 3;</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            pow5Factor_mp = 4;</b>
+<b class="nc">&nbsp;                            v /= 625;</b>
+<b class="nc">&nbsp;                            while (v &gt; 0) {</b>
+<b class="nc">&nbsp;                                if (v % 5 != 0) {</b>
+<b class="nc">&nbsp;                                    break;</b>
+&nbsp;                                }
+<b class="nc">&nbsp;                                v /= 5;</b>
+<b class="nc">&nbsp;                                pow5Factor_mp++;</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (pow5Factor_mp &gt;= q) {</b>
+<b class="nc">&nbsp;                        dp--;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            final int q = Math.max(0, (int) (-e2 * LOG10_5_NUMERATOR / 10000000L) - 1);</b>
+<b class="nc">&nbsp;            final int i = -e2 - q;</b>
+<b class="nc">&nbsp;            final int k = (i == 0 ? 1 : (int) ((i * 23219280L + 10000000L - 1) / 10000000L)) - 121;</b>
+<b class="nc">&nbsp;            final int j = q - k;</b>
+&nbsp;
+<b class="nc">&nbsp;            int actualShift = j - 3 * 31 - 21;</b>
+<b class="nc">&nbsp;            if (actualShift &lt; 0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;&quot; + actualShift);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            int[] ints = POW5_SPLIT[i];</b>
+&nbsp;            {
+<b class="nc">&nbsp;                long mHigh = mv &gt;&gt;&gt; 31;</b>
+<b class="nc">&nbsp;                long mLow = mv &amp; 0x7fffffff;</b>
+<b class="nc">&nbsp;                long bits13 = mHigh * ints[0]; // 124</b>
+<b class="nc">&nbsp;                long bits03 = mLow * ints[0];  // 93</b>
+<b class="nc">&nbsp;                long bits12 = mHigh * ints[1]; // 93</b>
+<b class="nc">&nbsp;                long bits02 = mLow * ints[1];  // 62</b>
+<b class="nc">&nbsp;                long bits11 = mHigh * ints[2]; // 62</b>
+<b class="nc">&nbsp;                long bits01 = mLow * ints[2];  // 31</b>
+<b class="nc">&nbsp;                long bits10 = mHigh * ints[3]; // 31</b>
+<b class="nc">&nbsp;                long bits00 = mLow * ints[3];  // 0</b>
+&nbsp;
+<b class="nc">&nbsp;                dv = ((((((</b>
+&nbsp;                        ((bits00 &gt;&gt;&gt; 31) + bits01 + bits10) &gt;&gt;&gt; 31)
+&nbsp;                        + bits02 + bits11) &gt;&gt;&gt; 31)
+&nbsp;                        + bits03 + bits12) &gt;&gt;&gt; 21)
+&nbsp;                        + (bits13 &lt;&lt; 10)) &gt;&gt;&gt; actualShift;
+&nbsp;            }
+&nbsp;            {
+<b class="nc">&nbsp;                long mHigh = mp &gt;&gt;&gt; 31;</b>
+<b class="nc">&nbsp;                long mLow = mp &amp; 0x7fffffff;</b>
+<b class="nc">&nbsp;                long bits13 = mHigh * ints[0]; // 124</b>
+<b class="nc">&nbsp;                long bits03 = mLow * ints[0];  // 93</b>
+<b class="nc">&nbsp;                long bits12 = mHigh * ints[1]; // 93</b>
+<b class="nc">&nbsp;                long bits02 = mLow * ints[1];  // 62</b>
+<b class="nc">&nbsp;                long bits11 = mHigh * ints[2]; // 62</b>
+<b class="nc">&nbsp;                long bits01 = mLow * ints[2];  // 31</b>
+<b class="nc">&nbsp;                long bits10 = mHigh * ints[3]; // 31</b>
+<b class="nc">&nbsp;                long bits00 = mLow * ints[3];  // 0</b>
+<b class="nc">&nbsp;                dp = ((((((</b>
+&nbsp;                        ((bits00 &gt;&gt;&gt; 31) + bits01 + bits10) &gt;&gt;&gt; 31)
+&nbsp;                        + bits02 + bits11) &gt;&gt;&gt; 31)
+&nbsp;                        + bits03 + bits12) &gt;&gt;&gt; 21)
+&nbsp;                        + (bits13 &lt;&lt; 10)) &gt;&gt;&gt; actualShift;
+&nbsp;            }
+&nbsp;            {
+<b class="nc">&nbsp;                long mHigh = mm &gt;&gt;&gt; 31;</b>
+<b class="nc">&nbsp;                long mLow = mm &amp; 0x7fffffff;</b>
+<b class="nc">&nbsp;                long bits13 = mHigh * ints[0]; // 124</b>
+<b class="nc">&nbsp;                long bits03 = mLow * ints[0];  // 93</b>
+<b class="nc">&nbsp;                long bits12 = mHigh * ints[1]; // 93</b>
+<b class="nc">&nbsp;                long bits02 = mLow * ints[1];  // 62</b>
+<b class="nc">&nbsp;                long bits11 = mHigh * ints[2]; // 62</b>
+<b class="nc">&nbsp;                long bits01 = mLow * ints[2];  // 31</b>
+<b class="nc">&nbsp;                long bits10 = mHigh * ints[3]; // 31</b>
+<b class="nc">&nbsp;                long bits00 = mLow * ints[3];  // 0</b>
+<b class="nc">&nbsp;                dm = ((((((</b>
+&nbsp;                        ((bits00 &gt;&gt;&gt; 31) + bits01 + bits10) &gt;&gt;&gt; 31)
+&nbsp;                        + bits02 + bits11) &gt;&gt;&gt; 31)
+&nbsp;                        + bits03 + bits12) &gt;&gt;&gt; 21)
+&nbsp;                        + (bits13 &lt;&lt; 10)) &gt;&gt;&gt; actualShift;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            e10 = q + e2;</b>
+<b class="nc">&nbsp;            if (q &lt;= 1) {</b>
+<b class="nc">&nbsp;                dvIsTrailingZeros = true;</b>
+<b class="nc">&nbsp;                if (even) {</b>
+<b class="nc">&nbsp;                    dmIsTrailingZeros = mmShift == 1;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    dp--;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (q &lt; 63) {</b>
+<b class="nc">&nbsp;                dvIsTrailingZeros = (mv &amp; ((1L &lt;&lt; (q - 1)) - 1)) == 0;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Step 4: Find the shortest decimal representation in the interval of legal representations.
+&nbsp;        //
+&nbsp;        // We do some extra work here in order to follow Float/Double.toString semantics. In particular,
+&nbsp;        // that requires printing in scientific format if and only if the exponent is between -3 and 7,
+&nbsp;        // and it requires printing at least two decimal digits.
+&nbsp;        //
+&nbsp;        // Above, we moved the decimal dot all the way to the right, so now we need to count digits to
+&nbsp;        // figure out the correct exponent for scientific notation.
+&nbsp;        final int vplength; //  = decimalLength(dp);
+<b class="nc">&nbsp;        if (dp &gt;= 1000000000000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 19;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 100000000000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 18;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 10000000000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 17;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 1000000000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 16;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 100000000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 15;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 10000000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 14;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 1000000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 13;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 100000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 12;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 10000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 11;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 1000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 10;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 100000000L) {</b>
+<b class="nc">&nbsp;            vplength = 9;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 10000000L) {</b>
+<b class="nc">&nbsp;            vplength = 8;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 1000000L) {</b>
+<b class="nc">&nbsp;            vplength = 7;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 100000L) {</b>
+<b class="nc">&nbsp;            vplength = 6;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 10000L) {</b>
+<b class="nc">&nbsp;            vplength = 5;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 1000L) {</b>
+<b class="nc">&nbsp;            vplength = 4;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 100L) {</b>
+<b class="nc">&nbsp;            vplength = 3;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 10L) {</b>
+<b class="nc">&nbsp;            vplength = 2;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            vplength = 1;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int exp = e10 + vplength - 1;</b>
+&nbsp;
+&nbsp;        // Double.toString semantics requires using scientific notation if and only if outside this range.
+<b class="nc">&nbsp;        boolean scientificNotation = !((exp &gt;= -3) &amp;&amp; (exp &lt; 7));</b>
+&nbsp;
+<b class="nc">&nbsp;        int removed = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int lastRemovedDigit = 0;</b>
+&nbsp;        long output;
+<b class="nc">&nbsp;        if (dmIsTrailingZeros || dvIsTrailingZeros) {</b>
+<b class="nc">&nbsp;            while (dp / 10 &gt; dm / 10) {</b>
+<b class="nc">&nbsp;                if ((dp &lt; 100) &amp;&amp; scientificNotation) {</b>
+&nbsp;                    // Double.toString semantics requires printing at least two digits.
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                dmIsTrailingZeros &amp;= dm % 10 == 0;</b>
+<b class="nc">&nbsp;                dvIsTrailingZeros &amp;= lastRemovedDigit == 0;</b>
+<b class="nc">&nbsp;                lastRemovedDigit = (int) (dv % 10);</b>
+<b class="nc">&nbsp;                dp /= 10;</b>
+<b class="nc">&nbsp;                dv /= 10;</b>
+<b class="nc">&nbsp;                dm /= 10;</b>
+<b class="nc">&nbsp;                removed++;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (dmIsTrailingZeros &amp;&amp; even) {</b>
+<b class="nc">&nbsp;                while (dm % 10 == 0) {</b>
+<b class="nc">&nbsp;                    if ((dp &lt; 100) &amp;&amp; scientificNotation) {</b>
+&nbsp;                        // Double.toString semantics requires printing at least two digits.
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    dvIsTrailingZeros &amp;= lastRemovedDigit == 0;</b>
+<b class="nc">&nbsp;                    lastRemovedDigit = (int) (dv % 10);</b>
+<b class="nc">&nbsp;                    dp /= 10;</b>
+<b class="nc">&nbsp;                    dv /= 10;</b>
+<b class="nc">&nbsp;                    dm /= 10;</b>
+<b class="nc">&nbsp;                    removed++;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            if (dvIsTrailingZeros &amp;&amp; (lastRemovedDigit == 5) &amp;&amp; (dv % 2 == 0)) {</b>
+&nbsp;                // Round even if the exact numbers is .....50..0.
+<b class="nc">&nbsp;                lastRemovedDigit = 4;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            output = dv +</b>
+&nbsp;                    ((dv == dm &amp;&amp; !(dmIsTrailingZeros &amp;&amp; even)) || (lastRemovedDigit &gt;= 5) ? 1 : 0);
+&nbsp;        } else {
+<b class="nc">&nbsp;            while (dp / 10 &gt; dm / 10) {</b>
+<b class="nc">&nbsp;                if ((dp &lt; 100) &amp;&amp; scientificNotation) {</b>
+&nbsp;                    // Double.toString semantics requires printing at least two digits.
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                lastRemovedDigit = (int) (dv % 10);</b>
+<b class="nc">&nbsp;                dp /= 10;</b>
+<b class="nc">&nbsp;                dv /= 10;</b>
+<b class="nc">&nbsp;                dm /= 10;</b>
+<b class="nc">&nbsp;                removed++;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            output = dv + ((dv == dm || (lastRemovedDigit &gt;= 5)) ? 1 : 0);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int olength = vplength - removed;</b>
+&nbsp;
+&nbsp;        // Step 5: Print the decimal representation.
+&nbsp;        // We follow Double.toString semantics here.
+<b class="nc">&nbsp;        if (sign) {</b>
+<b class="nc">&nbsp;            result[index++] = &#39;-&#39;;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Values in the interval [1E-3, 1E7) are special.
+<b class="nc">&nbsp;        if (scientificNotation) {</b>
+&nbsp;            // Print in the format x.xxxxxE-yy.
+<b class="nc">&nbsp;            for (int i = 0; i &lt; olength - 1; i++) {</b>
+<b class="nc">&nbsp;                int c = (int) (output % 10);</b>
+<b class="nc">&nbsp;                output /= 10;</b>
+<b class="nc">&nbsp;                result[index + olength - i] = (char) (&#39;0&#39; + c);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            result[index] = (char) (&#39;0&#39; + output % 10);</b>
+<b class="nc">&nbsp;            result[index + 1] = &#39;.&#39;;</b>
+<b class="nc">&nbsp;            index += olength + 1;</b>
+<b class="nc">&nbsp;            if (olength == 1) {</b>
+<b class="nc">&nbsp;                result[index++] = &#39;0&#39;;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // Print &#39;E&#39;, the exponent sign, and the exponent, which has at most three digits.
+<b class="nc">&nbsp;            result[index++] = &#39;E&#39;;</b>
+<b class="nc">&nbsp;            if (exp &lt; 0) {</b>
+<b class="nc">&nbsp;                result[index++] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;                exp = -exp;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (exp &gt;= 100) {</b>
+<b class="nc">&nbsp;                result[index++] = (char) (&#39;0&#39; + exp / 100);</b>
+<b class="nc">&nbsp;                exp %= 100;</b>
+<b class="nc">&nbsp;                result[index++] = (char) (&#39;0&#39; + exp / 10);</b>
+<b class="nc">&nbsp;            } else if (exp &gt;= 10) {</b>
+<b class="nc">&nbsp;                result[index++] = (char) (&#39;0&#39; + exp / 10);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            result[index++] = (char) (&#39;0&#39; + exp % 10);</b>
+<b class="nc">&nbsp;            return index - off;</b>
+&nbsp;        } else {
+&nbsp;            // Otherwise follow the Java spec for values in the interval [1E-3, 1E7).
+<b class="nc">&nbsp;            if (exp &lt; 0) {</b>
+&nbsp;                // Decimal dot is before any of the digits.
+<b class="nc">&nbsp;                result[index++] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                result[index++] = &#39;.&#39;;</b>
+<b class="nc">&nbsp;                for (int i = -1; i &gt; exp; i--) {</b>
+<b class="nc">&nbsp;                    result[index++] = &#39;0&#39;;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                int current = index;</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; olength; i++) {</b>
+<b class="nc">&nbsp;                    result[current + olength - i - 1] = (char) (&#39;0&#39; + output % 10);</b>
+<b class="nc">&nbsp;                    output /= 10;</b>
+<b class="nc">&nbsp;                    index++;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (exp + 1 &gt;= olength) {</b>
+&nbsp;                // Decimal dot is after any of the digits.
+<b class="nc">&nbsp;                for (int i = 0; i &lt; olength; i++) {</b>
+<b class="nc">&nbsp;                    result[index + olength - i - 1] = (char) (&#39;0&#39; + output % 10);</b>
+<b class="nc">&nbsp;                    output /= 10;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                index += olength;</b>
+<b class="nc">&nbsp;                for (int i = olength; i &lt; exp + 1; i++) {</b>
+<b class="nc">&nbsp;                    result[index++] = &#39;0&#39;;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                result[index++] = &#39;.&#39;;</b>
+<b class="nc">&nbsp;                result[index++] = &#39;0&#39;;</b>
+&nbsp;            } else {
+&nbsp;                // Decimal dot is somewhere between the digits.
+<b class="nc">&nbsp;                int current = index + 1;</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; olength; i++) {</b>
+<b class="nc">&nbsp;                    if (olength - i - 1 == exp) {</b>
+<b class="nc">&nbsp;                        result[current + olength - i - 1] = &#39;.&#39;;</b>
+<b class="nc">&nbsp;                        current--;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    result[current + olength - i - 1] = (char) (&#39;0&#39; + output % 10);</b>
+<b class="nc">&nbsp;                    output /= 10;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                index += olength + 1;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return index - off;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int toString(double value, byte[] result, int off) {
+<b class="nc">&nbsp;        final long DOUBLE_MANTISSA_MASK = 4503599627370495L; // (1L &lt;&lt; 52) - 1;</b>
+<b class="nc">&nbsp;        final int DOUBLE_EXPONENT_MASK = 2047; // (1 &lt;&lt; 11) - 1;</b>
+<b class="nc">&nbsp;        final int DOUBLE_EXPONENT_BIAS = 1023; // (1 &lt;&lt; (11 - 1)) - 1;</b>
+<b class="nc">&nbsp;        final long LOG10_5_NUMERATOR = 6989700L; // (long) (10000000L * Math.log10(5));</b>
+<b class="nc">&nbsp;        final long LOG10_2_NUMERATOR = 3010299L; // (long) (10000000L * Math.log10(2));</b>
+&nbsp;
+&nbsp;        // Step 1: Decode the floating point number, and unify normalized and subnormal cases.
+&nbsp;        // First, handle all the trivial cases.
+<b class="nc">&nbsp;        int index = off;</b>
+<b class="nc">&nbsp;        if (Double.isNaN(value)) {</b>
+<b class="nc">&nbsp;            result[index++] = &#39;N&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;a&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;N&#39;;</b>
+<b class="nc">&nbsp;            return index - off;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value == Double.POSITIVE_INFINITY) {</b>
+<b class="nc">&nbsp;            result[index++] = &#39;I&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;n&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;f&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;i&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;n&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;i&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;t&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;y&#39;;</b>
+<b class="nc">&nbsp;            return index - off;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value == Double.NEGATIVE_INFINITY) {</b>
+<b class="nc">&nbsp;            result[index++] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;I&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;n&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;f&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;i&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;n&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;i&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;t&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;y&#39;;</b>
+<b class="nc">&nbsp;            return index - off;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long bits = Double.doubleToLongBits(value);</b>
+<b class="nc">&nbsp;        if (bits == 0) {</b>
+<b class="nc">&nbsp;            result[index++] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;.&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            return index - off;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (bits == 0x8000000000000000L) {</b>
+<b class="nc">&nbsp;            result[index++] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;.&#39;;</b>
+<b class="nc">&nbsp;            result[index++] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            return index - off;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final int DOUBLE_MANTISSA_BITS = 52;</b>
+&nbsp;        // Otherwise extract the mantissa and exponent bits and run the full algorithm.
+<b class="nc">&nbsp;        int ieeeExponent = (int) ((bits &gt;&gt;&gt; DOUBLE_MANTISSA_BITS) &amp; DOUBLE_EXPONENT_MASK);</b>
+<b class="nc">&nbsp;        long ieeeMantissa = bits &amp; DOUBLE_MANTISSA_MASK;</b>
+&nbsp;        int e2;
+&nbsp;        long m2;
+<b class="nc">&nbsp;        if (ieeeExponent == 0) {</b>
+&nbsp;            // Denormal number - no implicit leading 1, and the exponent is 1, not 0.
+<b class="nc">&nbsp;            e2 = 1 - DOUBLE_EXPONENT_BIAS - DOUBLE_MANTISSA_BITS;</b>
+<b class="nc">&nbsp;            m2 = ieeeMantissa;</b>
+&nbsp;        } else {
+&nbsp;            // Add implicit leading 1.
+<b class="nc">&nbsp;            e2 = ieeeExponent - DOUBLE_EXPONENT_BIAS - DOUBLE_MANTISSA_BITS;</b>
+<b class="nc">&nbsp;            m2 = ieeeMantissa | (1L &lt;&lt; DOUBLE_MANTISSA_BITS);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean sign = bits &lt; 0;</b>
+&nbsp;
+&nbsp;        // Step 2: Determine the interval of legal decimal representations.
+<b class="nc">&nbsp;        boolean even = (m2 &amp; 1) == 0;</b>
+<b class="nc">&nbsp;        final long mv = 4 * m2;</b>
+<b class="nc">&nbsp;        final long mp = 4 * m2 + 2;</b>
+<b class="nc">&nbsp;        final int mmShift = ((m2 != (1L &lt;&lt; DOUBLE_MANTISSA_BITS)) || (ieeeExponent &lt;= 1)) ? 1 : 0;</b>
+<b class="nc">&nbsp;        final long mm = 4 * m2 - 1 - mmShift;</b>
+<b class="nc">&nbsp;        e2 -= 2;</b>
+&nbsp;
+&nbsp;        // Step 3: Convert to a decimal power base using 128-bit arithmetic.
+&nbsp;        // -1077 = 1 - 1023 - 53 - 2 &lt;= e_2 - 2 &lt;= 2046 - 1023 - 53 - 2 = 968
+&nbsp;        long dv, dp, dm;
+&nbsp;        final int e10;
+<b class="nc">&nbsp;        boolean dmIsTrailingZeros = false, dvIsTrailingZeros = false;</b>
+<b class="nc">&nbsp;        if (e2 &gt;= 0) {</b>
+<b class="nc">&nbsp;            final int q = Math.max(0, (int) (e2 * LOG10_2_NUMERATOR / 10000000L) - 1);</b>
+&nbsp;            // k = constant + floor(log_2(5^q))
+&nbsp;            // q == 0 ? 1 : (int) ((q * 23219280L + 10000000L - 1) / 10000000L)
+<b class="nc">&nbsp;            final int k = 122 + (q == 0 ? 1 : (int) ((q * 23219280L + 10000000L - 1) / 10000000L)) - 1;</b>
+<b class="nc">&nbsp;            final int i = -e2 + q + k;</b>
+&nbsp;
+<b class="nc">&nbsp;            int actualShift = i - 3 * 31 - 21;</b>
+<b class="nc">&nbsp;            if (actualShift &lt; 0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;&quot; + actualShift);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            final int[] ints = POW5_INV_SPLIT[q];</b>
+&nbsp;            {
+<b class="nc">&nbsp;                long mHigh = mv &gt;&gt;&gt; 31;</b>
+<b class="nc">&nbsp;                long mLow = mv &amp; 0x7fffffff;</b>
+<b class="nc">&nbsp;                long bits13 = mHigh * ints[0];</b>
+<b class="nc">&nbsp;                long bits03 = mLow * ints[0];</b>
+<b class="nc">&nbsp;                long bits12 = mHigh * ints[1];</b>
+<b class="nc">&nbsp;                long bits02 = mLow * ints[1];</b>
+<b class="nc">&nbsp;                long bits11 = mHigh * ints[2];</b>
+<b class="nc">&nbsp;                long bits01 = mLow * ints[2];</b>
+<b class="nc">&nbsp;                long bits10 = mHigh * ints[3];</b>
+<b class="nc">&nbsp;                long bits00 = mLow * ints[3];</b>
+&nbsp;
+<b class="nc">&nbsp;                dv = ((((((</b>
+&nbsp;                        ((bits00 &gt;&gt;&gt; 31) + bits01 + bits10) &gt;&gt;&gt; 31)
+&nbsp;                        + bits02 + bits11) &gt;&gt;&gt; 31)
+&nbsp;                        + bits03 + bits12) &gt;&gt;&gt; 21)
+&nbsp;                        + (bits13 &lt;&lt; 10)) &gt;&gt;&gt; actualShift;
+&nbsp;            }
+&nbsp;            {
+<b class="nc">&nbsp;                long mHigh = mp &gt;&gt;&gt; 31;</b>
+<b class="nc">&nbsp;                long mLow = mp &amp; 0x7fffffff;</b>
+<b class="nc">&nbsp;                long bits13 = mHigh * ints[0];</b>
+<b class="nc">&nbsp;                long bits03 = mLow * ints[0];</b>
+<b class="nc">&nbsp;                long bits12 = mHigh * ints[1];</b>
+<b class="nc">&nbsp;                long bits02 = mLow * ints[1];</b>
+<b class="nc">&nbsp;                long bits11 = mHigh * ints[2];</b>
+<b class="nc">&nbsp;                long bits01 = mLow * ints[2];</b>
+<b class="nc">&nbsp;                long bits10 = mHigh * ints[3];</b>
+<b class="nc">&nbsp;                long bits00 = mLow * ints[3];</b>
+&nbsp;
+<b class="nc">&nbsp;                dp = ((((((</b>
+&nbsp;                        ((bits00 &gt;&gt;&gt; 31) + bits01 + bits10) &gt;&gt;&gt; 31)
+&nbsp;                        + bits02 + bits11) &gt;&gt;&gt; 31)
+&nbsp;                        + bits03 + bits12) &gt;&gt;&gt; 21)
+&nbsp;                        + (bits13 &lt;&lt; 10)) &gt;&gt;&gt; actualShift;
+&nbsp;            }
+&nbsp;            {
+<b class="nc">&nbsp;                long mHigh = mm &gt;&gt;&gt; 31;</b>
+<b class="nc">&nbsp;                long mLow = mm &amp; 0x7fffffff;</b>
+<b class="nc">&nbsp;                long bits13 = mHigh * ints[0];</b>
+<b class="nc">&nbsp;                long bits03 = mLow * ints[0];</b>
+<b class="nc">&nbsp;                long bits12 = mHigh * ints[1];</b>
+<b class="nc">&nbsp;                long bits02 = mLow * ints[1];</b>
+<b class="nc">&nbsp;                long bits11 = mHigh * ints[2];</b>
+<b class="nc">&nbsp;                long bits01 = mLow * ints[2];</b>
+<b class="nc">&nbsp;                long bits10 = mHigh * ints[3];</b>
+<b class="nc">&nbsp;                long bits00 = mLow * ints[3];</b>
+&nbsp;
+<b class="nc">&nbsp;                dm = ((((((</b>
+&nbsp;                        ((bits00 &gt;&gt;&gt; 31) + bits01 + bits10) &gt;&gt;&gt; 31)
+&nbsp;                        + bits02 + bits11) &gt;&gt;&gt; 31)
+&nbsp;                        + bits03 + bits12) &gt;&gt;&gt; 21)
+&nbsp;                        + (bits13 &lt;&lt; 10)) &gt;&gt;&gt; actualShift;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            e10 = q;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (q &lt;= 21) {</b>
+<b class="nc">&nbsp;                if (mv % 5 == 0) {</b>
+&nbsp;                    int pow5Factor_mv;
+&nbsp;                    {
+<b class="nc">&nbsp;                        long v = mv;</b>
+<b class="nc">&nbsp;                        if ((v % 5) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mv = 0;</b>
+<b class="nc">&nbsp;                        } else if ((v % 25) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mv = 1;</b>
+<b class="nc">&nbsp;                        } else if ((v % 125) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mv = 2;</b>
+<b class="nc">&nbsp;                        } else if ((v % 625) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mv = 3;</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            pow5Factor_mv = 4;</b>
+<b class="nc">&nbsp;                            v /= 625;</b>
+<b class="nc">&nbsp;                            while (v &gt; 0) {</b>
+<b class="nc">&nbsp;                                if (v % 5 != 0) {</b>
+<b class="nc">&nbsp;                                    break;</b>
+&nbsp;                                }
+<b class="nc">&nbsp;                                v /= 5;</b>
+<b class="nc">&nbsp;                                pow5Factor_mv++;</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                    dvIsTrailingZeros = pow5Factor_mv &gt;= q;</b>
+<b class="nc">&nbsp;                } else if (even) {</b>
+&nbsp;                    int pow5Factor_mm;
+&nbsp;                    {
+<b class="nc">&nbsp;                        long v = mm;</b>
+<b class="nc">&nbsp;                        if ((v % 5) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mm = 0;</b>
+<b class="nc">&nbsp;                        } else if ((v % 25) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mm = 1;</b>
+<b class="nc">&nbsp;                        } else if ((v % 125) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mm = 2;</b>
+<b class="nc">&nbsp;                        } else if ((v % 625) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mm = 3;</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            pow5Factor_mm = 4;</b>
+<b class="nc">&nbsp;                            v /= 625;</b>
+<b class="nc">&nbsp;                            while (v &gt; 0) {</b>
+<b class="nc">&nbsp;                                if (v % 5 != 0) {</b>
+<b class="nc">&nbsp;                                    break;</b>
+&nbsp;                                }
+<b class="nc">&nbsp;                                v /= 5;</b>
+<b class="nc">&nbsp;                                pow5Factor_mm++;</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    dmIsTrailingZeros = pow5Factor_mm &gt;= q; //</b>
+<b class="nc">&nbsp;                } else {</b>
+&nbsp;                    int pow5Factor_mp;
+&nbsp;                    {
+<b class="nc">&nbsp;                        long v = mp;</b>
+<b class="nc">&nbsp;                        if ((v % 5) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mp = 0;</b>
+<b class="nc">&nbsp;                        } else if ((v % 25) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mp = 1;</b>
+<b class="nc">&nbsp;                        } else if ((v % 125) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mp = 2;</b>
+<b class="nc">&nbsp;                        } else if ((v % 625) != 0) {</b>
+<b class="nc">&nbsp;                            pow5Factor_mp = 3;</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            pow5Factor_mp = 4;</b>
+<b class="nc">&nbsp;                            v /= 625;</b>
+<b class="nc">&nbsp;                            while (v &gt; 0) {</b>
+<b class="nc">&nbsp;                                if (v % 5 != 0) {</b>
+<b class="nc">&nbsp;                                    break;</b>
+&nbsp;                                }
+<b class="nc">&nbsp;                                v /= 5;</b>
+<b class="nc">&nbsp;                                pow5Factor_mp++;</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (pow5Factor_mp &gt;= q) {</b>
+<b class="nc">&nbsp;                        dp--;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            final int q = Math.max(0, (int) (-e2 * LOG10_5_NUMERATOR / 10000000L) - 1);</b>
+<b class="nc">&nbsp;            final int i = -e2 - q;</b>
+<b class="nc">&nbsp;            final int k = (i == 0 ? 1 : (int) ((i * 23219280L + 10000000L - 1) / 10000000L)) - 121;</b>
+<b class="nc">&nbsp;            final int j = q - k;</b>
+&nbsp;
+<b class="nc">&nbsp;            int actualShift = j - 3 * 31 - 21;</b>
+<b class="nc">&nbsp;            if (actualShift &lt; 0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;&quot; + actualShift);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            int[] ints = POW5_SPLIT[i];</b>
+&nbsp;            {
+<b class="nc">&nbsp;                long mHigh = mv &gt;&gt;&gt; 31;</b>
+<b class="nc">&nbsp;                long mLow = mv &amp; 0x7fffffff;</b>
+<b class="nc">&nbsp;                long bits13 = mHigh * ints[0]; // 124</b>
+<b class="nc">&nbsp;                long bits03 = mLow * ints[0];  // 93</b>
+<b class="nc">&nbsp;                long bits12 = mHigh * ints[1]; // 93</b>
+<b class="nc">&nbsp;                long bits02 = mLow * ints[1];  // 62</b>
+<b class="nc">&nbsp;                long bits11 = mHigh * ints[2]; // 62</b>
+<b class="nc">&nbsp;                long bits01 = mLow * ints[2];  // 31</b>
+<b class="nc">&nbsp;                long bits10 = mHigh * ints[3]; // 31</b>
+<b class="nc">&nbsp;                long bits00 = mLow * ints[3];  // 0</b>
+&nbsp;
+<b class="nc">&nbsp;                dv = ((((((</b>
+&nbsp;                        ((bits00 &gt;&gt;&gt; 31) + bits01 + bits10) &gt;&gt;&gt; 31)
+&nbsp;                        + bits02 + bits11) &gt;&gt;&gt; 31)
+&nbsp;                        + bits03 + bits12) &gt;&gt;&gt; 21)
+&nbsp;                        + (bits13 &lt;&lt; 10)) &gt;&gt;&gt; actualShift;
+&nbsp;            }
+&nbsp;            {
+<b class="nc">&nbsp;                long mHigh = mp &gt;&gt;&gt; 31;</b>
+<b class="nc">&nbsp;                long mLow = mp &amp; 0x7fffffff;</b>
+<b class="nc">&nbsp;                long bits13 = mHigh * ints[0]; // 124</b>
+<b class="nc">&nbsp;                long bits03 = mLow * ints[0];  // 93</b>
+<b class="nc">&nbsp;                long bits12 = mHigh * ints[1]; // 93</b>
+<b class="nc">&nbsp;                long bits02 = mLow * ints[1];  // 62</b>
+<b class="nc">&nbsp;                long bits11 = mHigh * ints[2]; // 62</b>
+<b class="nc">&nbsp;                long bits01 = mLow * ints[2];  // 31</b>
+<b class="nc">&nbsp;                long bits10 = mHigh * ints[3]; // 31</b>
+<b class="nc">&nbsp;                long bits00 = mLow * ints[3];  // 0</b>
+<b class="nc">&nbsp;                dp = ((((((</b>
+&nbsp;                        ((bits00 &gt;&gt;&gt; 31) + bits01 + bits10) &gt;&gt;&gt; 31)
+&nbsp;                        + bits02 + bits11) &gt;&gt;&gt; 31)
+&nbsp;                        + bits03 + bits12) &gt;&gt;&gt; 21)
+&nbsp;                        + (bits13 &lt;&lt; 10)) &gt;&gt;&gt; actualShift;
+&nbsp;            }
+&nbsp;            {
+<b class="nc">&nbsp;                long mHigh = mm &gt;&gt;&gt; 31;</b>
+<b class="nc">&nbsp;                long mLow = mm &amp; 0x7fffffff;</b>
+<b class="nc">&nbsp;                long bits13 = mHigh * ints[0]; // 124</b>
+<b class="nc">&nbsp;                long bits03 = mLow * ints[0];  // 93</b>
+<b class="nc">&nbsp;                long bits12 = mHigh * ints[1]; // 93</b>
+<b class="nc">&nbsp;                long bits02 = mLow * ints[1];  // 62</b>
+<b class="nc">&nbsp;                long bits11 = mHigh * ints[2]; // 62</b>
+<b class="nc">&nbsp;                long bits01 = mLow * ints[2];  // 31</b>
+<b class="nc">&nbsp;                long bits10 = mHigh * ints[3]; // 31</b>
+<b class="nc">&nbsp;                long bits00 = mLow * ints[3];  // 0</b>
+<b class="nc">&nbsp;                dm = ((((((</b>
+&nbsp;                        ((bits00 &gt;&gt;&gt; 31) + bits01 + bits10) &gt;&gt;&gt; 31)
+&nbsp;                        + bits02 + bits11) &gt;&gt;&gt; 31)
+&nbsp;                        + bits03 + bits12) &gt;&gt;&gt; 21)
+&nbsp;                        + (bits13 &lt;&lt; 10)) &gt;&gt;&gt; actualShift;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            e10 = q + e2;</b>
+<b class="nc">&nbsp;            if (q &lt;= 1) {</b>
+<b class="nc">&nbsp;                dvIsTrailingZeros = true;</b>
+<b class="nc">&nbsp;                if (even) {</b>
+<b class="nc">&nbsp;                    dmIsTrailingZeros = mmShift == 1;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    dp--;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (q &lt; 63) {</b>
+<b class="nc">&nbsp;                dvIsTrailingZeros = (mv &amp; ((1L &lt;&lt; (q - 1)) - 1)) == 0;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Step 4: Find the shortest decimal representation in the interval of legal representations.
+&nbsp;        //
+&nbsp;        // We do some extra work here in order to follow Float/Double.toString semantics. In particular,
+&nbsp;        // that requires printing in scientific format if and only if the exponent is between -3 and 7,
+&nbsp;        // and it requires printing at least two decimal digits.
+&nbsp;        //
+&nbsp;        // Above, we moved the decimal dot all the way to the right, so now we need to count digits to
+&nbsp;        // figure out the correct exponent for scientific notation.
+&nbsp;        final int vplength; //  = decimalLength(dp);
+<b class="nc">&nbsp;        if (dp &gt;= 1000000000000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 19;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 100000000000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 18;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 10000000000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 17;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 1000000000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 16;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 100000000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 15;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 10000000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 14;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 1000000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 13;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 100000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 12;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 10000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 11;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 1000000000L) {</b>
+<b class="nc">&nbsp;            vplength = 10;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 100000000L) {</b>
+<b class="nc">&nbsp;            vplength = 9;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 10000000L) {</b>
+<b class="nc">&nbsp;            vplength = 8;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 1000000L) {</b>
+<b class="nc">&nbsp;            vplength = 7;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 100000L) {</b>
+<b class="nc">&nbsp;            vplength = 6;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 10000L) {</b>
+<b class="nc">&nbsp;            vplength = 5;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 1000L) {</b>
+<b class="nc">&nbsp;            vplength = 4;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 100L) {</b>
+<b class="nc">&nbsp;            vplength = 3;</b>
+<b class="nc">&nbsp;        } else if (dp &gt;= 10L) {</b>
+<b class="nc">&nbsp;            vplength = 2;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            vplength = 1;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int exp = e10 + vplength - 1;</b>
+&nbsp;
+&nbsp;        // Double.toString semantics requires using scientific notation if and only if outside this range.
+<b class="nc">&nbsp;        boolean scientificNotation = !((exp &gt;= -3) &amp;&amp; (exp &lt; 7));</b>
+&nbsp;
+<b class="nc">&nbsp;        int removed = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int lastRemovedDigit = 0;</b>
+&nbsp;        long output;
+<b class="nc">&nbsp;        if (dmIsTrailingZeros || dvIsTrailingZeros) {</b>
+<b class="nc">&nbsp;            while (dp / 10 &gt; dm / 10) {</b>
+<b class="nc">&nbsp;                if ((dp &lt; 100) &amp;&amp; scientificNotation) {</b>
+&nbsp;                    // Double.toString semantics requires printing at least two digits.
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                dmIsTrailingZeros &amp;= dm % 10 == 0;</b>
+<b class="nc">&nbsp;                dvIsTrailingZeros &amp;= lastRemovedDigit == 0;</b>
+<b class="nc">&nbsp;                lastRemovedDigit = (int) (dv % 10);</b>
+<b class="nc">&nbsp;                dp /= 10;</b>
+<b class="nc">&nbsp;                dv /= 10;</b>
+<b class="nc">&nbsp;                dm /= 10;</b>
+<b class="nc">&nbsp;                removed++;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (dmIsTrailingZeros &amp;&amp; even) {</b>
+<b class="nc">&nbsp;                while (dm % 10 == 0) {</b>
+<b class="nc">&nbsp;                    if ((dp &lt; 100) &amp;&amp; scientificNotation) {</b>
+&nbsp;                        // Double.toString semantics requires printing at least two digits.
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    dvIsTrailingZeros &amp;= lastRemovedDigit == 0;</b>
+<b class="nc">&nbsp;                    lastRemovedDigit = (int) (dv % 10);</b>
+<b class="nc">&nbsp;                    dp /= 10;</b>
+<b class="nc">&nbsp;                    dv /= 10;</b>
+<b class="nc">&nbsp;                    dm /= 10;</b>
+<b class="nc">&nbsp;                    removed++;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            if (dvIsTrailingZeros &amp;&amp; (lastRemovedDigit == 5) &amp;&amp; (dv % 2 == 0)) {</b>
+&nbsp;                // Round even if the exact numbers is .....50..0.
+<b class="nc">&nbsp;                lastRemovedDigit = 4;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            output = dv +</b>
+&nbsp;                    ((dv == dm &amp;&amp; !(dmIsTrailingZeros &amp;&amp; even)) || (lastRemovedDigit &gt;= 5) ? 1 : 0);
+&nbsp;        } else {
+<b class="nc">&nbsp;            while (dp / 10 &gt; dm / 10) {</b>
+<b class="nc">&nbsp;                if ((dp &lt; 100) &amp;&amp; scientificNotation) {</b>
+&nbsp;                    // Double.toString semantics requires printing at least two digits.
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                lastRemovedDigit = (int) (dv % 10);</b>
+<b class="nc">&nbsp;                dp /= 10;</b>
+<b class="nc">&nbsp;                dv /= 10;</b>
+<b class="nc">&nbsp;                dm /= 10;</b>
+<b class="nc">&nbsp;                removed++;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            output = dv + ((dv == dm || (lastRemovedDigit &gt;= 5)) ? 1 : 0);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int olength = vplength - removed;</b>
+&nbsp;
+&nbsp;        // Step 5: Print the decimal representation.
+&nbsp;        // We follow Double.toString semantics here.
+<b class="nc">&nbsp;        if (sign) {</b>
+<b class="nc">&nbsp;            result[index++] = &#39;-&#39;;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Values in the interval [1E-3, 1E7) are special.
+<b class="nc">&nbsp;        if (scientificNotation) {</b>
+&nbsp;            // Print in the format x.xxxxxE-yy.
+<b class="nc">&nbsp;            for (int i = 0; i &lt; olength - 1; i++) {</b>
+<b class="nc">&nbsp;                int c = (int) (output % 10);</b>
+<b class="nc">&nbsp;                output /= 10;</b>
+<b class="nc">&nbsp;                result[index + olength - i] = (byte) (&#39;0&#39; + c);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            result[index] = (byte) (&#39;0&#39; + output % 10);</b>
+<b class="nc">&nbsp;            result[index + 1] = &#39;.&#39;;</b>
+<b class="nc">&nbsp;            index += olength + 1;</b>
+<b class="nc">&nbsp;            if (olength == 1) {</b>
+<b class="nc">&nbsp;                result[index++] = &#39;0&#39;;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // Print &#39;E&#39;, the exponent sign, and the exponent, which has at most three digits.
+<b class="nc">&nbsp;            result[index++] = &#39;E&#39;;</b>
+<b class="nc">&nbsp;            if (exp &lt; 0) {</b>
+<b class="nc">&nbsp;                result[index++] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;                exp = -exp;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (exp &gt;= 100) {</b>
+<b class="nc">&nbsp;                result[index++] = (byte) (&#39;0&#39; + exp / 100);</b>
+<b class="nc">&nbsp;                exp %= 100;</b>
+<b class="nc">&nbsp;                result[index++] = (byte) (&#39;0&#39; + exp / 10);</b>
+<b class="nc">&nbsp;            } else if (exp &gt;= 10) {</b>
+<b class="nc">&nbsp;                result[index++] = (byte) (&#39;0&#39; + exp / 10);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            result[index++] = (byte) (&#39;0&#39; + exp % 10);</b>
+<b class="nc">&nbsp;            return index - off;</b>
+&nbsp;        } else {
+&nbsp;            // Otherwise follow the Java spec for values in the interval [1E-3, 1E7).
+<b class="nc">&nbsp;            if (exp &lt; 0) {</b>
+&nbsp;                // Decimal dot is before any of the digits.
+<b class="nc">&nbsp;                result[index++] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                result[index++] = &#39;.&#39;;</b>
+<b class="nc">&nbsp;                for (int i = -1; i &gt; exp; i--) {</b>
+<b class="nc">&nbsp;                    result[index++] = &#39;0&#39;;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                int current = index;</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; olength; i++) {</b>
+<b class="nc">&nbsp;                    result[current + olength - i - 1] = (byte) (&#39;0&#39; + output % 10);</b>
+<b class="nc">&nbsp;                    output /= 10;</b>
+<b class="nc">&nbsp;                    index++;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (exp + 1 &gt;= olength) {</b>
+&nbsp;                // Decimal dot is after any of the digits.
+<b class="nc">&nbsp;                for (int i = 0; i &lt; olength; i++) {</b>
+<b class="nc">&nbsp;                    result[index + olength - i - 1] = (byte) (&#39;0&#39; + output % 10);</b>
+<b class="nc">&nbsp;                    output /= 10;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                index += olength;</b>
+<b class="nc">&nbsp;                for (int i = olength; i &lt; exp + 1; i++) {</b>
+<b class="nc">&nbsp;                    result[index++] = &#39;0&#39;;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                result[index++] = &#39;.&#39;;</b>
+<b class="nc">&nbsp;                result[index++] = &#39;0&#39;;</b>
+&nbsp;            } else {
+&nbsp;                // Decimal dot is somewhere between the digits.
+<b class="nc">&nbsp;                int current = index + 1;</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; olength; i++) {</b>
+<b class="nc">&nbsp;                    if (olength - i - 1 == exp) {</b>
+<b class="nc">&nbsp;                        result[current + olength - i - 1] = &#39;.&#39;;</b>
+<b class="nc">&nbsp;                        current--;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    result[current + olength - i - 1] = (byte) (&#39;0&#39; + output % 10);</b>
+<b class="nc">&nbsp;                    output /= 10;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                index += olength + 1;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return index - off;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:00</div>
+</div>
+</body>
+</html>

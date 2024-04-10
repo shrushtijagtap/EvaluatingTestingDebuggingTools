@@ -1,0 +1,2651 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderCreatorASM</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderCreatorASM (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderCreatorASM</td>
+<td class="coverageStat">
+  <span class="percent">
+    9.1%
+  </span>
+  <span class="absValue">
+    (2/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    3.6%
+  </span>
+  <span class="absValue">
+    (53/1466)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ObjectReaderCreatorASM$FieldReaderInfo</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    13%
+  </span>
+  <span class="absValue">
+    (3/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    4.1%
+  </span>
+  <span class="absValue">
+    (61/1474)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONArray;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONObject;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.codec.BeanInfo;
+&nbsp;import com.alibaba.fastjson2.codec.FieldInfo;
+&nbsp;import com.alibaba.fastjson2.function.*;
+&nbsp;import com.alibaba.fastjson2.internal.asm.*;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectReaderAnnotationProcessor;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectReaderModule;
+&nbsp;import com.alibaba.fastjson2.schema.JSONSchema;
+&nbsp;import com.alibaba.fastjson2.util.*;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriterProvider;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.lang.reflect.*;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.atomic.AtomicLong;
+&nbsp;import java.util.function.*;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.internal.asm.Opcodes.ALOAD;
+&nbsp;import static com.alibaba.fastjson2.internal.asm.Opcodes.PUTFIELD;
+&nbsp;import static com.alibaba.fastjson2.reader.ObjectReader.HASH_TYPE;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.JVM_VERSION;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.UNSAFE_SUPPORT;
+&nbsp;
+&nbsp;public class ObjectReaderCreatorASM
+&nbsp;        extends ObjectReaderCreator {
+&nbsp;    // GraalVM not support
+&nbsp;    // Android not support
+<b class="fc">&nbsp;    public static ObjectReaderCreatorASM INSTANCE = new ObjectReaderCreatorASM();</b>
+&nbsp;
+<b class="fc">&nbsp;    protected static final AtomicLong seed = new AtomicLong();</b>
+&nbsp;
+&nbsp;    protected final DynamicClassLoader classLoader;
+&nbsp;
+<b class="fc">&nbsp;    static final String TYPE_UNSAFE_UTILS = ASMUtils.type(UnsafeUtils.class);</b>
+&nbsp;
+<b class="fc">&nbsp;    static final String TYPE_JSON_READER = ASMUtils.type(JSONReader.class);</b>
+<b class="fc">&nbsp;    static final String TYPE_OBJECT_READER_ADAPTER = ASMUtils.type(ObjectReaderAdapter.class);</b>
+<b class="fc">&nbsp;    static final String TYPE_OBJECT_READER_1 = ASMUtils.type(ObjectReader1.class);</b>
+<b class="fc">&nbsp;    static final String TYPE_OBJECT_READER_2 = ASMUtils.type(ObjectReader2.class);</b>
+<b class="fc">&nbsp;    static final String TYPE_OBJECT_READER_3 = ASMUtils.type(ObjectReader3.class);</b>
+<b class="fc">&nbsp;    static final String TYPE_OBJECT_READER_4 = ASMUtils.type(ObjectReader4.class);</b>
+<b class="fc">&nbsp;    static final String TYPE_OBJECT_READER_5 = ASMUtils.type(ObjectReader5.class);</b>
+<b class="fc">&nbsp;    static final String TYPE_OBJECT_READER_6 = ASMUtils.type(ObjectReader6.class);</b>
+<b class="fc">&nbsp;    static final String TYPE_OBJECT_READER_7 = ASMUtils.type(ObjectReader7.class);</b>
+<b class="fc">&nbsp;    static final String TYPE_OBJECT_READER_8 = ASMUtils.type(ObjectReader8.class);</b>
+<b class="fc">&nbsp;    static final String TYPE_OBJECT_READER_9 = ASMUtils.type(ObjectReader9.class);</b>
+<b class="fc">&nbsp;    static final String TYPE_OBJECT_READER_10 = ASMUtils.type(ObjectReader10.class);</b>
+<b class="fc">&nbsp;    static final String TYPE_OBJECT_READER_11 = ASMUtils.type(ObjectReader11.class);</b>
+<b class="fc">&nbsp;    static final String TYPE_OBJECT_READER_12 = ASMUtils.type(ObjectReader12.class);</b>
+<b class="fc">&nbsp;    static final String TYPE_OBJECT_READER = ASMUtils.type(ObjectReader.class);</b>
+<b class="fc">&nbsp;    static final String TYPE_FIELD_READE = ASMUtils.type(FieldReader.class);</b>
+&nbsp;
+<b class="fc">&nbsp;    static final String DESC_JSON_READER = ASMUtils.desc(JSONReader.class);</b>
+<b class="fc">&nbsp;    static final String DESC_FIELD_READER = ASMUtils.desc(FieldReader.class);</b>
+<b class="fc">&nbsp;    static final String DESC_OBJECT_READER = ASMUtils.desc(ObjectReader.class);</b>
+<b class="fc">&nbsp;    static final String DESC_SUPPLIER = ASMUtils.desc(Supplier.class);</b>
+<b class="fc">&nbsp;    static final String DESC_JSONSCHEMA = ASMUtils.desc(JSONSchema.class);</b>
+<b class="fc">&nbsp;    static final String DESC_FIELD_READER_ARRAY = ASMUtils.desc(FieldReader[].class);</b>
+<b class="fc">&nbsp;    static final String METHOD_DESC_GET_ITEM_OBJECT_READER = &quot;(&quot; + DESC_JSON_READER + &quot;)&quot; + DESC_OBJECT_READER;</b>
+<b class="fc">&nbsp;    static final String METHOD_DESC_GET_OBJECT_READER_1 = &quot;(&quot; + DESC_JSON_READER + &quot;)&quot; + DESC_OBJECT_READER;</b>
+<b class="fc">&nbsp;    static final String METHOD_DESC_INIT = &quot;(Ljava/lang/Class;&quot; + DESC_SUPPLIER + DESC_FIELD_READER_ARRAY + &quot;)V&quot;;</b>
+<b class="fc">&nbsp;    static final String METHOD_DESC_ADAPTER_INIT = &quot;(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;J&quot; + DESC_JSONSCHEMA + DESC_SUPPLIER + &quot;Ljava/util/function/Function;&quot; + DESC_FIELD_READER_ARRAY + &quot;)V&quot;;</b>
+<b class="fc">&nbsp;    static final String METHOD_DESC_READ_OBJECT = &quot;(&quot; + DESC_JSON_READER + &quot;Ljava/lang/reflect/Type;Ljava/lang/Object;J)Ljava/lang/Object;&quot;;</b>
+<b class="fc">&nbsp;    static final String METHOD_DESC_GET_FIELD_READER = &quot;(J)&quot; + DESC_FIELD_READER;</b>
+<b class="fc">&nbsp;    static final String METHOD_DESC_READ_FIELD_VALUE = &quot;(&quot; + DESC_JSON_READER + &quot;Ljava/lang/Object;)V&quot;;</b>
+<b class="fc">&nbsp;    static final String METHOD_DESC_ADD_RESOLVE_TASK = &quot;(&quot; + DESC_JSON_READER + &quot;Ljava/lang/Object;Ljava/lang/String;)V&quot;;</b>
+<b class="fc">&nbsp;    static final String METHOD_DESC_ADD_RESOLVE_TASK_2 = &quot;(&quot; + DESC_JSON_READER + &quot;Ljava/util/List;ILjava/lang/String;)V&quot;;</b>
+<b class="fc">&nbsp;    static final String METHOD_DESC_CHECK_ARRAY_AUTO_TYPE = &quot;(&quot; + DESC_JSON_READER + &quot;)&quot; + DESC_OBJECT_READER;</b>
+<b class="fc">&nbsp;    static final String METHOD_DESC_PROCESS_EXTRA = &quot;(&quot; + DESC_JSON_READER + &quot;Ljava/lang/Object;)V&quot;;</b>
+&nbsp;
+<b class="fc">&nbsp;    static final String METHOD_DESC_JSON_READER_CHECK_ARRAY_AUTO_TYPE = &quot;(&quot; + DESC_JSON_READER + &quot;Ljava/lang/Class;J)&quot; + DESC_OBJECT_READER;</b>
+&nbsp;
+&nbsp;    static final int THIS = 0;
+&nbsp;
+&nbsp;    static final String packageName;
+<b class="fc">&nbsp;    static Map&lt;Class, FieldReaderInfo&gt; infos = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    static {
+<b class="fc">&nbsp;        Package pkg = ObjectReaderCreatorASM.class.getPackage();</b>
+<b class="fc">&nbsp;        packageName = pkg != null ? pkg.getName() : &quot;&quot;;</b>
+&nbsp;
+<b class="fc">&nbsp;        infos.put(boolean.class, new FieldReaderInfo(ASMUtils.type(ObjBoolConsumer.class), &quot;(Ljava/lang/Object;Z)V&quot;, &quot;(Z)V&quot;, Opcodes.ILOAD, &quot;readFieldBoolValue&quot;, &quot;()Z&quot;, Opcodes.ISTORE));</b>
+<b class="fc">&nbsp;        infos.put(char.class, new FieldReaderInfo(ASMUtils.type(ObjCharConsumer.class), &quot;(Ljava/lang/Object;C)V&quot;, &quot;(C)V&quot;, Opcodes.ILOAD, &quot;readInt32Value&quot;, &quot;()C&quot;, Opcodes.ISTORE));</b>
+<b class="fc">&nbsp;        infos.put(byte.class, new FieldReaderInfo(ASMUtils.type(ObjByteConsumer.class), &quot;(Ljava/lang/Object;B)V&quot;, &quot;(B)V&quot;, Opcodes.ILOAD, &quot;readInt32Value&quot;, &quot;()B&quot;, Opcodes.ISTORE));</b>
+<b class="fc">&nbsp;        infos.put(short.class, new FieldReaderInfo(ASMUtils.type(ObjShortConsumer.class), &quot;(Ljava/lang/Object;S)V&quot;, &quot;(S)V&quot;, Opcodes.ILOAD, &quot;readInt32Value&quot;, &quot;()S&quot;, Opcodes.ISTORE));</b>
+<b class="fc">&nbsp;        infos.put(int.class, new FieldReaderInfo(ASMUtils.type(ObjIntConsumer.class), &quot;(Ljava/lang/Object;I)V&quot;, &quot;(I)V&quot;, Opcodes.ILOAD, &quot;readInt32Value&quot;, &quot;()I&quot;, Opcodes.ISTORE));</b>
+<b class="fc">&nbsp;        infos.put(long.class, new FieldReaderInfo(ASMUtils.type(ObjLongConsumer.class), &quot;(Ljava/lang/Object;J)V&quot;, &quot;(J)V&quot;, Opcodes.LLOAD, &quot;readInt64Value&quot;, &quot;()V&quot;, Opcodes.LSTORE));</b>
+<b class="fc">&nbsp;        infos.put(float.class, new FieldReaderInfo(ASMUtils.type(ObjFloatConsumer.class), &quot;(Ljava/lang/Object;F)V&quot;, &quot;(F)V&quot;, Opcodes.FLOAD, &quot;readFieldFloatValue&quot;, &quot;()F&quot;, Opcodes.FSTORE));</b>
+<b class="fc">&nbsp;        infos.put(double.class, new FieldReaderInfo(ASMUtils.type(ObjDoubleConsumer.class), &quot;(Ljava/lang/Object;D)V&quot;, &quot;(D)V&quot;, Opcodes.DLOAD, &quot;readFloatDoubleValue&quot;, &quot;()D&quot;, Opcodes.DSTORE));</b>
+&nbsp;
+<b class="fc">&nbsp;        infos.put(String.class, new FieldReaderInfo(ASMUtils.type(BiConsumer.class), &quot;(Ljava/lang/Object;Ljava/lang/Object;)V&quot;, &quot;(Ljava/lang/String;)V&quot;, Opcodes.ALOAD, &quot;readString&quot;, &quot;()Ljava/lang/String;&quot;, Opcodes.ASTORE));</b>
+<b class="fc">&nbsp;        infos.put(Integer.class, new FieldReaderInfo(ASMUtils.type(BiConsumer.class), &quot;(Ljava/lang/Object;Ljava/lang/Integer;)V&quot;, &quot;(Ljava/lang/Integer;)V&quot;, Opcodes.ALOAD, &quot;readInt32&quot;, &quot;()Ljava/lang/Integer;&quot;, Opcodes.ASTORE));</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    static String[] fieldItemObjectReader = new String[1024];</b>
+&nbsp;
+&nbsp;    static String fieldReader(int i) {
+<b class="nc">&nbsp;        switch (i) {</b>
+&nbsp;            case 0:
+<b class="nc">&nbsp;                return &quot;fieldReader0&quot;;</b>
+&nbsp;            case 1:
+<b class="nc">&nbsp;                return &quot;fieldReader1&quot;;</b>
+&nbsp;            case 2:
+<b class="nc">&nbsp;                return &quot;fieldReader2&quot;;</b>
+&nbsp;            case 3:
+<b class="nc">&nbsp;                return &quot;fieldReader3&quot;;</b>
+&nbsp;            case 4:
+<b class="nc">&nbsp;                return &quot;fieldReader4&quot;;</b>
+&nbsp;            case 5:
+<b class="nc">&nbsp;                return &quot;fieldReader5&quot;;</b>
+&nbsp;            case 6:
+<b class="nc">&nbsp;                return &quot;fieldReader6&quot;;</b>
+&nbsp;            case 7:
+<b class="nc">&nbsp;                return &quot;fieldReader7&quot;;</b>
+&nbsp;            case 8:
+<b class="nc">&nbsp;                return &quot;fieldReader8&quot;;</b>
+&nbsp;            case 9:
+<b class="nc">&nbsp;                return &quot;fieldReader9&quot;;</b>
+&nbsp;            case 10:
+<b class="nc">&nbsp;                return &quot;fieldReader10&quot;;</b>
+&nbsp;            case 11:
+<b class="nc">&nbsp;                return &quot;fieldReader11&quot;;</b>
+&nbsp;            case 12:
+<b class="nc">&nbsp;                return &quot;fieldReader12&quot;;</b>
+&nbsp;            case 13:
+<b class="nc">&nbsp;                return &quot;fieldReader13&quot;;</b>
+&nbsp;            case 14:
+<b class="nc">&nbsp;                return &quot;fieldReader14&quot;;</b>
+&nbsp;            case 15:
+<b class="nc">&nbsp;                return &quot;fieldReader15&quot;;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                String base = &quot;fieldReader&quot;;</b>
+<b class="nc">&nbsp;                int size = IOUtils.stringSize(i);</b>
+<b class="nc">&nbsp;                char[] chars = new char[base.length() + size];</b>
+<b class="nc">&nbsp;                base.getChars(0, base.length(), chars, 0);</b>
+<b class="nc">&nbsp;                IOUtils.getChars(i, chars.length, chars);</b>
+<b class="nc">&nbsp;                return new String(chars);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static String fieldObjectReader(int i) {
+<b class="nc">&nbsp;        switch (i) {</b>
+&nbsp;            case 0:
+<b class="nc">&nbsp;                return &quot;objectReader0&quot;;</b>
+&nbsp;            case 1:
+<b class="nc">&nbsp;                return &quot;objectReader1&quot;;</b>
+&nbsp;            case 2:
+<b class="nc">&nbsp;                return &quot;objectReader2&quot;;</b>
+&nbsp;            case 3:
+<b class="nc">&nbsp;                return &quot;objectReader3&quot;;</b>
+&nbsp;            case 4:
+<b class="nc">&nbsp;                return &quot;objectReader4&quot;;</b>
+&nbsp;            case 5:
+<b class="nc">&nbsp;                return &quot;objectReader5&quot;;</b>
+&nbsp;            case 6:
+<b class="nc">&nbsp;                return &quot;objectReader6&quot;;</b>
+&nbsp;            case 7:
+<b class="nc">&nbsp;                return &quot;objectReader7&quot;;</b>
+&nbsp;            case 8:
+<b class="nc">&nbsp;                return &quot;objectReader8&quot;;</b>
+&nbsp;            case 9:
+<b class="nc">&nbsp;                return &quot;objectReader9&quot;;</b>
+&nbsp;            case 10:
+<b class="nc">&nbsp;                return &quot;objectReader10&quot;;</b>
+&nbsp;            case 11:
+<b class="nc">&nbsp;                return &quot;objectReader11&quot;;</b>
+&nbsp;            case 12:
+<b class="nc">&nbsp;                return &quot;objectReader12&quot;;</b>
+&nbsp;            case 13:
+<b class="nc">&nbsp;                return &quot;objectReader13&quot;;</b>
+&nbsp;            case 14:
+<b class="nc">&nbsp;                return &quot;objectReader14&quot;;</b>
+&nbsp;            case 15:
+<b class="nc">&nbsp;                return &quot;objectReader15&quot;;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                String base = &quot;objectReader&quot;;</b>
+<b class="nc">&nbsp;                int size = IOUtils.stringSize(i);</b>
+<b class="nc">&nbsp;                char[] chars = new char[base.length() + size];</b>
+<b class="nc">&nbsp;                base.getChars(0, base.length(), chars, 0);</b>
+<b class="nc">&nbsp;                IOUtils.getChars(i, chars.length, chars);</b>
+<b class="nc">&nbsp;                return new String(chars);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static String fieldItemObjectReader(int i) {
+<b class="nc">&nbsp;        String fieldName = fieldItemObjectReader[i];</b>
+&nbsp;
+<b class="nc">&nbsp;        if (fieldName != null) {</b>
+<b class="nc">&nbsp;            return fieldName;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String base = &quot;itemObjectReader_&quot;;</b>
+<b class="nc">&nbsp;        int size = IOUtils.stringSize(i);</b>
+<b class="nc">&nbsp;        char[] chars = new char[base.length() + size];</b>
+<b class="nc">&nbsp;        base.getChars(0, base.length(), chars, 0);</b>
+<b class="nc">&nbsp;        IOUtils.getChars(i, chars.length, chars);</b>
+<b class="nc">&nbsp;        fieldItemObjectReader[i] = fieldName = new String(chars);</b>
+<b class="nc">&nbsp;        return fieldName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;T&gt; FieldReader&lt;T&gt; createFieldReader(
+&nbsp;            Class objectClass,
+&nbsp;            Type objectType,
+&nbsp;            String fieldName,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            Locale locale,
+&nbsp;            Object defaultValue,
+&nbsp;            String schema,
+&nbsp;            Type fieldType,
+&nbsp;            Class fieldClass,
+&nbsp;            Field field,
+&nbsp;            ObjectReader initReader
+&nbsp;    ) {
+<b class="nc">&nbsp;        return super.createFieldReader(</b>
+&nbsp;                objectClass,
+&nbsp;                objectType,
+&nbsp;                fieldName,
+&nbsp;                ordinal,
+&nbsp;                features,
+&nbsp;                format,
+&nbsp;                locale,
+&nbsp;                defaultValue,
+&nbsp;                schema,
+&nbsp;                fieldType,
+&nbsp;                fieldClass,
+&nbsp;                field,
+&nbsp;                initReader
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    private static class FieldReaderInfo {
+&nbsp;        final String interfaceDesc;
+&nbsp;        final String acceptDesc;
+&nbsp;        final String setterDesc;
+&nbsp;        final int loadCode;
+&nbsp;        final String readMethodName;
+&nbsp;        final String readMethodDesc;
+&nbsp;        final int storeCode;
+&nbsp;
+&nbsp;        FieldReaderInfo(
+&nbsp;                String interfaceDesc,
+&nbsp;                String acceptDesc,
+&nbsp;                String setterDesc,
+&nbsp;                int loadCode,
+&nbsp;                String readMethodName,
+&nbsp;                String readMethodDesc,
+<b class="fc">&nbsp;                int storeCode) {</b>
+<b class="fc">&nbsp;            this.interfaceDesc = interfaceDesc;</b>
+<b class="fc">&nbsp;            this.acceptDesc = acceptDesc;</b>
+<b class="fc">&nbsp;            this.setterDesc = setterDesc;</b>
+<b class="fc">&nbsp;            this.loadCode = loadCode;</b>
+<b class="fc">&nbsp;            this.readMethodName = readMethodName;</b>
+<b class="fc">&nbsp;            this.readMethodDesc = readMethodDesc;</b>
+<b class="fc">&nbsp;            this.storeCode = storeCode;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public ObjectReaderCreatorASM() {</b>
+<b class="fc">&nbsp;        this.classLoader = new DynamicClassLoader();</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public ObjectReaderCreatorASM(ClassLoader classLoader) {</b>
+<b class="nc">&nbsp;        this.classLoader = new DynamicClassLoader(classLoader);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;T&gt; ObjectReader&lt;T&gt; createObjectReader(Class&lt;T&gt; objectClass, Type objectType, boolean fieldBased, ObjectReaderProvider provider) {
+<b class="nc">&nbsp;        boolean externalClass = classLoader.isExternalClass(objectClass);</b>
+<b class="nc">&nbsp;        int objectClassModifiers = objectClass.getModifiers();</b>
+<b class="nc">&nbsp;        boolean publicClass = Modifier.isPublic(objectClassModifiers);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (Modifier.isAbstract(objectClassModifiers) || Modifier.isInterface(objectClassModifiers)) {</b>
+<b class="nc">&nbsp;            return super.createObjectReader(objectClass, objectType, fieldBased, provider);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (externalClass || !publicClass) {</b>
+<b class="nc">&nbsp;            if (!fieldBased || !UNSAFE_SUPPORT) {</b>
+<b class="nc">&nbsp;                return super.createObjectReader(objectClass, objectType, fieldBased, provider);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        BeanInfo beanInfo = new BeanInfo();</b>
+<b class="nc">&nbsp;        for (ObjectReaderModule module : provider.modules) {</b>
+<b class="nc">&nbsp;            ObjectReaderAnnotationProcessor annotationProcessor = module.getAnnotationProcessor();</b>
+<b class="nc">&nbsp;            if (annotationProcessor != null) {</b>
+<b class="nc">&nbsp;                annotationProcessor.getBeanInfo(beanInfo, objectClass);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (beanInfo.deserializer != null &amp;&amp; ObjectReader.class.isAssignableFrom(beanInfo.deserializer)) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                return (ObjectReader&lt;T&gt;) beanInfo.deserializer.newInstance();</b>
+<b class="nc">&nbsp;            } catch (InstantiationException | IllegalAccessException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;create deserializer error&quot;, e);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectReader annotatedObjectReader = getAnnotatedObjectReader(provider, objectClass, beanInfo);</b>
+<b class="nc">&nbsp;        if (annotatedObjectReader != null) {</b>
+<b class="nc">&nbsp;            return annotatedObjectReader;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldBased &amp;&amp; (objectClass.isInterface() || objectClass.isInterface())) {</b>
+<b class="nc">&nbsp;            fieldBased = false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Enum.class.isAssignableFrom(objectClass) &amp;&amp; (beanInfo.createMethod == null || beanInfo.createMethod.getParameterCount() == 1)) {</b>
+<b class="nc">&nbsp;            return createEnumReader(objectClass, beanInfo.createMethod, provider);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (beanInfo.creatorConstructor != null || beanInfo.createMethod != null) {</b>
+<b class="nc">&nbsp;            return createObjectReaderWithCreator(objectClass, objectType, provider, beanInfo);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (beanInfo.builder != null) {</b>
+<b class="nc">&nbsp;            return createObjectReaderWithBuilder(objectClass, objectType, provider, beanInfo);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Throwable.class.isAssignableFrom(objectClass)) {</b>
+<b class="nc">&nbsp;            return super.createObjectReader(objectClass, objectType, fieldBased, provider);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        FieldReader[] fieldReaderArray = createFieldReaders(objectClass, objectType, beanInfo, fieldBased, provider);</b>
+<b class="nc">&nbsp;        boolean match = true;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (!fieldBased) {</b>
+<b class="nc">&nbsp;            if (JVM_VERSION &gt;= 9 &amp;&amp; objectClass == StackTraceElement.class) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    Constructor&lt;StackTraceElement&gt; constructor = StackTraceElement.class.getConstructor(String.class, String.class, String.class, String.class, String.class, String.class, int.class);</b>
+<b class="nc">&nbsp;                    return createObjectReaderNoneDefaultConstructor(constructor, &quot;&quot;, &quot;classLoaderName&quot;, &quot;moduleName&quot;, &quot;moduleVersion&quot;, &quot;declaringClass&quot;, &quot;methodName&quot;, &quot;fileName&quot;, &quot;lineNumber&quot;);</b>
+<b class="nc">&nbsp;                } catch (NoSuchMethodException | SecurityException ignored) {</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            for (FieldReader fieldReader : fieldReaderArray) {</b>
+<b class="nc">&nbsp;                Method method = fieldReader.method;</b>
+<b class="nc">&nbsp;                if (method != null &amp;&amp; method.getReturnType() != void.class) {</b>
+<b class="nc">&nbsp;                    match = false;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (fieldReader.isReadOnly()</b>
+<b class="nc">&nbsp;                        || fieldReader.isUnwrapped()</b>
+&nbsp;                ) {
+<b class="nc">&nbsp;                    match = false;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if ((fieldReader.features &amp; FieldInfo.READ_USING_MASK) != 0) {</b>
+<b class="nc">&nbsp;                    match = false;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (FieldReader fieldReader : fieldReaderArray) {</b>
+<b class="nc">&nbsp;            if (fieldReader.defaultValue != null || fieldReader.schema != null) {</b>
+<b class="nc">&nbsp;                match = false;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Class fieldClass = fieldReader.fieldClass;</b>
+<b class="nc">&nbsp;            if (!Modifier.isPublic(fieldClass.getModifiers())) {</b>
+<b class="nc">&nbsp;                match = false;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (match &amp;&amp; beanInfo.schema != null &amp;&amp; !beanInfo.schema.isEmpty()) {</b>
+<b class="nc">&nbsp;            match = false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!match) {</b>
+<b class="nc">&nbsp;            return super.createObjectReader(objectClass, objectType, fieldBased, provider);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Supplier&lt;T&gt; supplier = null;</b>
+<b class="nc">&nbsp;        Constructor defaultConstructor = null;</b>
+<b class="nc">&nbsp;        if (!Modifier.isInterface(objectClassModifiers) &amp;&amp; !Modifier.isAbstract(objectClassModifiers)) {</b>
+<b class="nc">&nbsp;            Constructor constructor = BeanUtils.getDefaultConstructor(objectClass, true);</b>
+<b class="nc">&nbsp;            if (constructor != null) {</b>
+<b class="nc">&nbsp;                defaultConstructor = constructor;</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    constructor.setAccessible(true);</b>
+<b class="nc">&nbsp;                    supplier = createInstanceSupplier(constructor);</b>
+<b class="nc">&nbsp;                } catch (SecurityException ignored) {</b>
+&nbsp;                    // ignored
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (beanInfo.seeAlso != null &amp;&amp; beanInfo.seeAlso.length != 0) {</b>
+<b class="nc">&nbsp;            return createObjectReaderSeeAlso(objectClass, supplier, beanInfo.typeKey, beanInfo.seeAlso, beanInfo.seeAlsoNames, fieldReaderArray);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!fieldBased) {</b>
+<b class="nc">&nbsp;            if (supplier == null) {</b>
+<b class="nc">&nbsp;                return super.createObjectReader(objectClass, objectType, fieldBased, provider);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ClassWriter cw = new ClassWriter(</b>
+<b class="nc">&nbsp;                (e) -&gt; objectClass.getName().equals(e) ? objectClass : null</b>
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        String className = &quot;ObjectReader_&quot; + seed.incrementAndGet();</b>
+&nbsp;        String classNameType;
+&nbsp;        String classNameFull;
+&nbsp;
+<b class="nc">&nbsp;        Package pkg = ObjectReaderCreatorASM.class.getPackage();</b>
+<b class="nc">&nbsp;        if (pkg != null) {</b>
+<b class="nc">&nbsp;            String packageName = pkg.getName();</b>
+<b class="nc">&nbsp;            int packageNameLength = packageName.length();</b>
+<b class="nc">&nbsp;            int charsLength = packageNameLength + 1 + className.length();</b>
+<b class="nc">&nbsp;            char[] chars = new char[charsLength];</b>
+<b class="nc">&nbsp;            packageName.getChars(0, packageName.length(), chars, 0);</b>
+<b class="nc">&nbsp;            chars[packageNameLength] = &#39;.&#39;;</b>
+<b class="nc">&nbsp;            className.getChars(0, className.length(), chars, packageNameLength + 1);</b>
+<b class="nc">&nbsp;            classNameFull = new String(chars);</b>
+&nbsp;
+<b class="nc">&nbsp;            chars[packageNameLength] = &#39;/&#39;;</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; packageNameLength; ++i) {</b>
+<b class="nc">&nbsp;                if (chars[i] == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;                    chars[i] = &#39;/&#39;;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            classNameType = new String(chars);</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            classNameType = className;</b>
+<b class="nc">&nbsp;            classNameFull = className;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final boolean generatedFields = fieldReaderArray.length &lt; 128;</b>
+&nbsp;
+&nbsp;        String objectReaderSuper;
+<b class="nc">&nbsp;        switch (fieldReaderArray.length) {</b>
+&nbsp;            case 1:
+<b class="nc">&nbsp;                objectReaderSuper = TYPE_OBJECT_READER_1;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 2:
+<b class="nc">&nbsp;                objectReaderSuper = TYPE_OBJECT_READER_2;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 3:
+<b class="nc">&nbsp;                objectReaderSuper = TYPE_OBJECT_READER_3;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 4:
+<b class="nc">&nbsp;                objectReaderSuper = TYPE_OBJECT_READER_4;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 5:
+<b class="nc">&nbsp;                objectReaderSuper = TYPE_OBJECT_READER_5;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 6:
+<b class="nc">&nbsp;                objectReaderSuper = TYPE_OBJECT_READER_6;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 7:
+<b class="nc">&nbsp;                objectReaderSuper = TYPE_OBJECT_READER_7;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 8:
+<b class="nc">&nbsp;                objectReaderSuper = TYPE_OBJECT_READER_8;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 9:
+<b class="nc">&nbsp;                objectReaderSuper = TYPE_OBJECT_READER_9;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 10:
+<b class="nc">&nbsp;                objectReaderSuper = TYPE_OBJECT_READER_10;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 11:
+<b class="nc">&nbsp;                objectReaderSuper = TYPE_OBJECT_READER_11;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 12:
+<b class="nc">&nbsp;                objectReaderSuper = TYPE_OBJECT_READER_12;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                objectReaderSuper = TYPE_OBJECT_READER_ADAPTER;</b>
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (generatedFields) {</b>
+<b class="nc">&nbsp;            genFields(fieldReaderArray, cw, objectReaderSuper);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        cw.visit(Opcodes.V1_8, Opcodes.ACC_PUBLIC + Opcodes.ACC_FINAL + Opcodes.ACC_SUPER, classNameType, objectReaderSuper, new String[]{});</b>
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            final int CLASS = 1, SUPPLIER = 2, FIELD_READER_ARRAY = 3;</b>
+&nbsp;
+<b class="nc">&nbsp;            MethodWriter mw = cw.visitMethod(</b>
+&nbsp;                    Opcodes.ACC_PUBLIC,
+&nbsp;                    &quot;&lt;init&gt;&quot;,
+&nbsp;                    METHOD_DESC_INIT,
+&nbsp;                    fieldReaderArray.length &lt;= 12 ? 32 : 128);
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, CLASS);</b>
+<b class="nc">&nbsp;            if (beanInfo.typeKey != null) {</b>
+<b class="nc">&nbsp;                mw.visitLdcInsn(beanInfo.typeKey);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                mw.visitInsn(Opcodes.ACONST_NULL);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ACONST_NULL);</b>
+<b class="nc">&nbsp;            mw.visitLdcInsn(beanInfo.readerFeatures);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ACONST_NULL);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, SUPPLIER);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ACONST_NULL);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_READER_ARRAY);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKESPECIAL, objectReaderSuper, &quot;&lt;init&gt;&quot;, METHOD_DESC_ADAPTER_INIT, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            genInitFields(fieldReaderArray, classNameType, generatedFields, THIS, FIELD_READER_ARRAY, mw, objectReaderSuper);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.RETURN);</b>
+<b class="nc">&nbsp;            mw.visitMaxs(3, 3);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String TYPE_OBJECT = ASMUtils.type(objectClass);</b>
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            String methodName = fieldBased &amp;&amp; defaultConstructor == null ? &quot;createInstance0&quot; : &quot;createInstance&quot;;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (fieldBased &amp;&amp; (defaultConstructor == null || !Modifier.isPublic(defaultConstructor.getModifiers()) || !Modifier.isPublic(objectClass.getModifiers()))) {</b>
+<b class="nc">&nbsp;                MethodWriter mw = cw.visitMethod(</b>
+&nbsp;                        Opcodes.ACC_PUBLIC,
+&nbsp;                        methodName,
+&nbsp;                        &quot;(J)Ljava/lang/Object;&quot;,
+&nbsp;                        32
+&nbsp;                );
+<b class="nc">&nbsp;                mw.visitFieldInsn(Opcodes.GETSTATIC, TYPE_UNSAFE_UTILS, &quot;UNSAFE&quot;, &quot;Lsun/misc/Unsafe;&quot;);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, 0);</b>
+<b class="nc">&nbsp;                mw.visitFieldInsn(Opcodes.GETFIELD, TYPE_OBJECT_READER_ADAPTER, &quot;objectClass&quot;, &quot;Ljava/lang/Class;&quot;);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, &quot;sun/misc/Unsafe&quot;, &quot;allocateInstance&quot;, &quot;(Ljava/lang/Class;)Ljava/lang/Object;&quot;, false);</b>
+<b class="nc">&nbsp;                mw.visitInsn(Opcodes.ARETURN);</b>
+<b class="nc">&nbsp;                mw.visitMaxs(3, 3);</b>
+<b class="nc">&nbsp;            } else if (defaultConstructor != null &amp;&amp; Modifier.isPublic(defaultConstructor.getModifiers()) &amp;&amp; Modifier.isPublic(objectClass.getModifiers())) {</b>
+<b class="nc">&nbsp;                MethodWriter mw = cw.visitMethod(</b>
+&nbsp;                        Opcodes.ACC_PUBLIC,
+&nbsp;                        methodName,
+&nbsp;                        &quot;(J)Ljava/lang/Object;&quot;,
+&nbsp;                        32
+&nbsp;                );
+<b class="nc">&nbsp;                mw.visitTypeInsn(Opcodes.NEW, TYPE_OBJECT);</b>
+<b class="nc">&nbsp;                mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;                if (defaultConstructor.getParameterCount() == 0) {</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKESPECIAL, TYPE_OBJECT, &quot;&lt;init&gt;&quot;, &quot;()V&quot;, false);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    Class paramType = defaultConstructor.getParameterTypes()[0];</b>
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.ACONST_NULL);</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKESPECIAL, TYPE_OBJECT, &quot;&lt;init&gt;&quot;, &quot;(&quot; + ASMUtils.desc(paramType) + &quot;)V&quot;, false);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                mw.visitInsn(Opcodes.ARETURN);</b>
+<b class="nc">&nbsp;                mw.visitMaxs(3, 3);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (generatedFields) {</b>
+<b class="nc">&nbsp;            long readerFeatures = beanInfo.readerFeatures;</b>
+<b class="nc">&nbsp;            if (fieldBased) {</b>
+<b class="nc">&nbsp;                readerFeatures |= JSONReader.Feature.FieldBased.mask;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            ObjectReaderAdapter objectReaderAdapter = new ObjectReaderAdapter(objectClass, beanInfo.typeKey, beanInfo.typeName, readerFeatures, null, supplier, null, fieldReaderArray);</b>
+&nbsp;
+<b class="nc">&nbsp;            genMethodReadJSONBObject(objectClass, defaultConstructor, readerFeatures, TYPE_OBJECT, fieldReaderArray, cw, classNameType, objectReaderAdapter);</b>
+<b class="nc">&nbsp;            genMethodReadJSONBObjectArrayMapping(objectClass, defaultConstructor, readerFeatures, TYPE_OBJECT, fieldReaderArray, cw, classNameType, objectReaderAdapter);</b>
+&nbsp;
+<b class="nc">&nbsp;            genMethodReadObject(objectClass, defaultConstructor, readerFeatures, TYPE_OBJECT, supplier, fieldReaderArray, cw, classNameType, objectReaderAdapter);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (objectReaderSuper == TYPE_OBJECT_READER_ADAPTER) {</b>
+<b class="nc">&nbsp;                genMethodGetFieldReader(fieldReaderArray, cw, classNameType, objectReaderAdapter);</b>
+<b class="nc">&nbsp;                genMethodGetFieldReaderLCase(fieldReaderArray, cw, classNameType, objectReaderAdapter);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        byte[] code = cw.toByteArray();</b>
+&nbsp;
+<b class="nc">&nbsp;        Class&lt;?&gt; readerClass = classLoader.defineClassPublic(classNameFull, code, 0, code.length);</b>
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            Constructor&lt;?&gt; constructor = readerClass.getConstructors()[0];</b>
+<b class="nc">&nbsp;            return (ObjectReader) constructor</b>
+<b class="nc">&nbsp;                    .newInstance(objectClass, supplier, fieldReaderArray);</b>
+<b class="nc">&nbsp;        } catch (Throwable e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;create objectReader error, objectType &quot; + objectType.getTypeName(), e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void genMethodGetFieldReader(
+&nbsp;            FieldReader[] fieldReaderArray,
+&nbsp;            ClassWriter cw,
+&nbsp;            String classNameType,
+&nbsp;            ObjectReaderAdapter objectReaderAdapter) {
+<b class="nc">&nbsp;        MethodWriter mw = cw.visitMethod(</b>
+&nbsp;                Opcodes.ACC_PUBLIC,
+&nbsp;                &quot;getFieldReader&quot;,
+&nbsp;                &quot;(J)&quot; + DESC_FIELD_READER,
+&nbsp;                512
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        final int HASH_CODE_64 = 1;</b>
+<b class="nc">&nbsp;        final int HASH_CODE_32 = 3;</b>
+&nbsp;
+<b class="nc">&nbsp;        Label rtnlt = new Label();</b>
+<b class="nc">&nbsp;        if (fieldReaderArray.length &lt;= 6) {</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; fieldReaderArray.length; ++i) {</b>
+<b class="nc">&nbsp;                Label next_ = new Label(), get_ = new Label();</b>
+<b class="nc">&nbsp;                String fieldName = fieldReaderArray[i].fieldName;</b>
+<b class="nc">&nbsp;                long hashCode64 = fieldReaderArray[i].fieldNameHash;</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE_64);</b>
+<b class="nc">&nbsp;                mw.visitLdcInsn(hashCode64);</b>
+<b class="nc">&nbsp;                mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.IFNE, next_);</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLabel(get_);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;                mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldReader(i), DESC_FIELD_READER);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.GOTO, rtnlt);</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLabel(next_);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ACONST_NULL);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ARETURN);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            Map&lt;Integer, List&lt;Long&gt;&gt; map = new TreeMap();</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; objectReaderAdapter.hashCodes.length; i++) {</b>
+<b class="nc">&nbsp;                long hashCode64 = objectReaderAdapter.hashCodes[i];</b>
+<b class="nc">&nbsp;                int hashCode32 = (int) (hashCode64 ^ (hashCode64 &gt;&gt;&gt; 32));</b>
+<b class="nc">&nbsp;                List&lt;Long&gt; hashCode64List = map.get(hashCode32);</b>
+<b class="nc">&nbsp;                if (hashCode64List == null) {</b>
+<b class="nc">&nbsp;                    hashCode64List = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                    map.put(hashCode32, hashCode64List);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                hashCode64List.add(hashCode64);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            int[] hashCode32Keys = new int[map.size()];</b>
+&nbsp;            {
+<b class="nc">&nbsp;                int off = 0;</b>
+<b class="nc">&nbsp;                for (Integer key : map.keySet()) {</b>
+<b class="nc">&nbsp;                    hashCode32Keys[off++] = key;</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Arrays.sort(hashCode32Keys);</b>
+&nbsp;
+&nbsp;            // // int hashCode32 = (int)(hashCode64 ^ (hashCode64 &gt;&gt;&gt; 32));
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE_64);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE_64);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.BIPUSH, 32);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LUSHR);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LXOR);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.L2I);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ISTORE, HASH_CODE_32);</b>
+&nbsp;
+<b class="nc">&nbsp;            Label dflt = new Label();</b>
+<b class="nc">&nbsp;            Label[] labels = new Label[hashCode32Keys.length];</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; labels.length; i++) {</b>
+<b class="nc">&nbsp;                labels[i] = new Label();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ILOAD, HASH_CODE_32);</b>
+<b class="nc">&nbsp;            mw.visitLookupSwitchInsn(dflt, hashCode32Keys, labels);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; labels.length; i++) {</b>
+<b class="nc">&nbsp;                mw.visitLabel(labels[i]);</b>
+&nbsp;
+<b class="nc">&nbsp;                int hashCode32 = hashCode32Keys[i];</b>
+<b class="nc">&nbsp;                List&lt;Long&gt; hashCode64Array = map.get(hashCode32);</b>
+<b class="nc">&nbsp;                for (int j = 0; j &lt; hashCode64Array.size(); ++j) {</b>
+<b class="nc">&nbsp;                    long hashCode64 = hashCode64Array.get(j);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE_64);</b>
+<b class="nc">&nbsp;                    mw.visitLdcInsn(hashCode64);</b>
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.IFNE, dflt);</b>
+&nbsp;
+<b class="nc">&nbsp;                    int m = Arrays.binarySearch(objectReaderAdapter.hashCodes, hashCode64);</b>
+<b class="nc">&nbsp;                    int index = objectReaderAdapter.mapping[m];</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;                    mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldReader(index), DESC_FIELD_READER);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.GOTO, rtnlt);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.GOTO, dflt);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(dflt);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ACONST_NULL);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ARETURN);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(rtnlt);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.ARETURN);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitMaxs(5, 5);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void genMethodGetFieldReaderLCase(
+&nbsp;            FieldReader[] fieldReaderArray,
+&nbsp;            ClassWriter cw,
+&nbsp;            String classNameType,
+&nbsp;            ObjectReaderAdapter objectReaderAdapter) {
+<b class="nc">&nbsp;        MethodWriter mw = cw.visitMethod(</b>
+&nbsp;                Opcodes.ACC_PUBLIC,
+&nbsp;                &quot;getFieldReaderLCase&quot;,
+&nbsp;                &quot;(J)&quot; + DESC_FIELD_READER,
+&nbsp;                512
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        final int HASH_CODE_64 = 1;</b>
+<b class="nc">&nbsp;        final int HASH_CODE_32 = 3;</b>
+&nbsp;
+<b class="nc">&nbsp;        Label rtnlt = new Label();</b>
+<b class="nc">&nbsp;        if (fieldReaderArray.length &lt;= 6) {</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; fieldReaderArray.length; ++i) {</b>
+<b class="nc">&nbsp;                Label next_ = new Label(), get_ = new Label();</b>
+<b class="nc">&nbsp;                String fieldName = fieldReaderArray[i].fieldName;</b>
+<b class="nc">&nbsp;                long hashCode64 = fieldReaderArray[i].fieldNameHashLCase;</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE_64);</b>
+<b class="nc">&nbsp;                mw.visitLdcInsn(hashCode64);</b>
+<b class="nc">&nbsp;                mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.IFNE, next_);</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLabel(get_);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;                mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldReader(i), DESC_FIELD_READER);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.GOTO, rtnlt);</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLabel(next_);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ACONST_NULL);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ARETURN);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            Map&lt;Integer, List&lt;Long&gt;&gt; map = new TreeMap();</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; objectReaderAdapter.hashCodesLCase.length; i++) {</b>
+<b class="nc">&nbsp;                long hashCode64 = objectReaderAdapter.hashCodesLCase[i];</b>
+<b class="nc">&nbsp;                int hashCode32 = (int) (hashCode64 ^ (hashCode64 &gt;&gt;&gt; 32));</b>
+<b class="nc">&nbsp;                List&lt;Long&gt; hashCode64List = map.get(hashCode32);</b>
+<b class="nc">&nbsp;                if (hashCode64List == null) {</b>
+<b class="nc">&nbsp;                    hashCode64List = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                    map.put(hashCode32, hashCode64List);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                hashCode64List.add(hashCode64);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            int[] hashCode32Keys = new int[map.size()];</b>
+&nbsp;            {
+<b class="nc">&nbsp;                int off = 0;</b>
+<b class="nc">&nbsp;                for (Integer key : map.keySet()) {</b>
+<b class="nc">&nbsp;                    hashCode32Keys[off++] = key;</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Arrays.sort(hashCode32Keys);</b>
+&nbsp;
+&nbsp;            // // int hashCode32 = (int)(hashCode64 ^ (hashCode64 &gt;&gt;&gt; 32));
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE_64);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE_64);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.BIPUSH, 32);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LUSHR);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LXOR);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.L2I);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ISTORE, HASH_CODE_32);</b>
+&nbsp;
+<b class="nc">&nbsp;            Label dflt = new Label();</b>
+<b class="nc">&nbsp;            Label[] labels = new Label[hashCode32Keys.length];</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; labels.length; i++) {</b>
+<b class="nc">&nbsp;                labels[i] = new Label();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ILOAD, HASH_CODE_32);</b>
+<b class="nc">&nbsp;            mw.visitLookupSwitchInsn(dflt, hashCode32Keys, labels);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; labels.length; i++) {</b>
+<b class="nc">&nbsp;                mw.visitLabel(labels[i]);</b>
+&nbsp;
+<b class="nc">&nbsp;                int hashCode32 = hashCode32Keys[i];</b>
+<b class="nc">&nbsp;                List&lt;Long&gt; hashCode64Array = map.get(hashCode32);</b>
+<b class="nc">&nbsp;                for (int j = 0; j &lt; hashCode64Array.size(); ++j) {</b>
+<b class="nc">&nbsp;                    long hashCode64 = hashCode64Array.get(j);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE_64);</b>
+<b class="nc">&nbsp;                    mw.visitLdcInsn(hashCode64);</b>
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.IFNE, dflt);</b>
+&nbsp;
+<b class="nc">&nbsp;                    int m = Arrays.binarySearch(objectReaderAdapter.hashCodesLCase, hashCode64);</b>
+<b class="nc">&nbsp;                    int index = objectReaderAdapter.mappingLCase[m];</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;                    mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldReader(index), DESC_FIELD_READER);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.GOTO, rtnlt);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.GOTO, dflt);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(dflt);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ACONST_NULL);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ARETURN);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(rtnlt);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.ARETURN);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitMaxs(5, 5);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void genInitFields(
+&nbsp;            FieldReader[] fieldReaderArray,
+&nbsp;            String classNameType,
+&nbsp;            boolean generatedFields,
+&nbsp;            int THIS,
+&nbsp;            int FIELD_READER_ARRAY,
+&nbsp;            MethodWriter mw,
+&nbsp;            String objectReaderSuper
+&nbsp;    ) {
+<b class="nc">&nbsp;        if (objectReaderSuper != TYPE_OBJECT_READER_ADAPTER || !generatedFields) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; fieldReaderArray.length; i++) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_READER_ARRAY);</b>
+<b class="nc">&nbsp;            switch (i) {</b>
+&nbsp;                case 0:
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.ICONST_0);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 1:
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.ICONST_1);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 2:
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.ICONST_2);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 3:
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.ICONST_3);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 4:
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.ICONST_4);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 5:
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.ICONST_5);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+<b class="nc">&nbsp;                    if (i &gt;= 128) {</b>
+<b class="nc">&nbsp;                        mw.visitIntInsn(Opcodes.SIPUSH, i);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        mw.visitIntInsn(Opcodes.BIPUSH, i);</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;            }
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.AALOAD);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(PUTFIELD, classNameType, fieldReader(i), DESC_FIELD_READER);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void genFields(FieldReader[] fieldReaderArray, ClassWriter cw, String objectReaderSuper) {
+<b class="nc">&nbsp;        if (objectReaderSuper == TYPE_OBJECT_READER_ADAPTER) {</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; fieldReaderArray.length; i++) {</b>
+<b class="nc">&nbsp;                FieldWriter fv = cw.visitField(Opcodes.ACC_PUBLIC, fieldReader(i), DESC_FIELD_READER);</b>
+<b class="nc">&nbsp;                fv.visitEnd();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; fieldReaderArray.length; i++) {</b>
+<b class="nc">&nbsp;                FieldWriter fv = cw.visitField(Opcodes.ACC_PUBLIC, fieldObjectReader(i), DESC_OBJECT_READER);</b>
+<b class="nc">&nbsp;                fv.visitEnd();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; fieldReaderArray.length; i++) {</b>
+<b class="nc">&nbsp;            Class fieldClass = fieldReaderArray[i].fieldClass;</b>
+<b class="nc">&nbsp;            if (List.class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;                FieldWriter fv = cw.visitField(Opcodes.ACC_PUBLIC, fieldItemObjectReader(i), DESC_OBJECT_READER);</b>
+<b class="nc">&nbsp;                fv.visitEnd();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private &lt;T&gt; void genMethodReadJSONBObject(
+&nbsp;            Class&lt;T&gt; objectType,
+&nbsp;            Constructor defaultConstructor,
+&nbsp;            long readerFeatures,
+&nbsp;            String TYPE_OBJECT,
+&nbsp;            FieldReader[] fieldReaderArray,
+&nbsp;            ClassWriter cw,
+&nbsp;            String classNameType,
+&nbsp;            ObjectReaderAdapter objectReaderAdapter
+&nbsp;    ) {
+<b class="nc">&nbsp;        boolean fieldBased = (readerFeatures &amp; JSONReader.Feature.FieldBased.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        MethodWriter mw = cw.visitMethod(Opcodes.ACC_PUBLIC,</b>
+&nbsp;                &quot;readJSONBObject&quot;,
+&nbsp;                METHOD_DESC_READ_OBJECT,
+&nbsp;                2048
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        final int JSON_READER = 1;</b>
+<b class="nc">&nbsp;        final int FIELD_TYPE = 2;</b>
+<b class="nc">&nbsp;        final int FIELD_NAME = 3;</b>
+<b class="nc">&nbsp;        final int FEATURES = 4;</b>
+<b class="nc">&nbsp;        final int OBJECT = 6;</b>
+<b class="nc">&nbsp;        final int ENTRY_CNT = 7;</b>
+<b class="nc">&nbsp;        final int I = 8;</b>
+<b class="nc">&nbsp;        final int HASH_CODE64 = 9;</b>
+<b class="nc">&nbsp;        final int HASH_CODE_32 = 11;</b>
+<b class="nc">&nbsp;        final int ITEM_CNT = 12;</b>
+<b class="nc">&nbsp;        final int J = 13;</b>
+<b class="nc">&nbsp;        final int FIELD_READER = 14;</b>
+<b class="nc">&nbsp;        final int AUTO_TYPE_OBJECT_READER = 15;</b>
+&nbsp;
+<b class="nc">&nbsp;        genCheckAutoType(classNameType, mw, JSON_READER, FIELD_TYPE, FIELD_NAME, FEATURES, AUTO_TYPE_OBJECT_READER);</b>
+&nbsp;
+<b class="nc">&nbsp;        int varIndex = 16;</b>
+<b class="nc">&nbsp;        Map&lt;Object, Integer&gt; variants = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            Label notNull_ = new Label();</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;nextIfNull&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFEQ, notNull_);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ACONST_NULL);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ARETURN);</b>
+<b class="nc">&nbsp;            mw.visitLabel(notNull_);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!Serializable.class.isAssignableFrom(objectType)) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, &quot;objectClass&quot;, &quot;Ljava/lang/Class;&quot;);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;errorOnNoneSerializable&quot;, &quot;(Ljava/lang/Class;)V&quot;, false);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Label object_ = new Label();</b>
+&nbsp;
+&nbsp;        // if (jsonReader.isArray() &amp;&amp; jsonReader.isSupportBeanArray()) {
+&nbsp;        {
+<b class="nc">&nbsp;            Label startArray_ = new Label(), endArray_ = new Label();</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;isArray&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFEQ, object_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;isSupportBeanArray&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFEQ, endArray_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(startArray_);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;startArray&quot;, &quot;()I&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ISTORE, ENTRY_CNT);</b>
+&nbsp;
+<b class="nc">&nbsp;            genCreateObject(mw, objectType, classNameType, TYPE_OBJECT, FEATURES, fieldBased, defaultConstructor);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ASTORE, OBJECT);</b>
+&nbsp;
+<b class="nc">&nbsp;            Label fieldEnd_ = new Label();</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; fieldReaderArray.length; ++i) {</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ILOAD, ENTRY_CNT);</b>
+<b class="nc">&nbsp;                mw.visitLdcInsn(i + 1);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.IF_ICMPLT, fieldEnd_);</b>
+&nbsp;
+<b class="nc">&nbsp;                FieldReader fieldReader = fieldReaderArray[i];</b>
+<b class="nc">&nbsp;                varIndex = genReadFieldValue(objectType,</b>
+&nbsp;                        fieldReader,
+&nbsp;                        fieldBased,
+&nbsp;                        classNameType,
+&nbsp;                        mw,
+&nbsp;                        THIS,
+&nbsp;                        JSON_READER,
+&nbsp;                        OBJECT,
+&nbsp;                        FEATURES,
+&nbsp;                        varIndex,
+&nbsp;                        variants,
+&nbsp;                        ITEM_CNT,
+&nbsp;                        J,
+&nbsp;                        i,
+&nbsp;                        true,   // JSONB
+&nbsp;                        TYPE_OBJECT
+&nbsp;                );
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            skipRest(mw, JSON_READER, fieldReaderArray.length, ENTRY_CNT, J, fieldEnd_);</b>
+<b class="nc">&nbsp;            mw.visitLabel(fieldEnd_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ARETURN);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(endArray_);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(object_);</b>
+&nbsp;
+<b class="nc">&nbsp;        genCreateObject(mw, objectType, classNameType, TYPE_OBJECT, FEATURES, fieldBased, defaultConstructor);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, OBJECT);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;nextIfObjectStart&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.POP);</b>
+&nbsp;
+<b class="nc">&nbsp;        genCreateObject(mw, objectType, classNameType, TYPE_OBJECT, FEATURES, fieldBased, defaultConstructor);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, OBJECT);</b>
+&nbsp;
+&nbsp;        // for (int i = 0; i &lt; entry_cnt; ++i) {
+<b class="nc">&nbsp;        Label for_start_i_ = new Label(), for_end_i_ = new Label(), for_inc_i_ = new Label();</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.ICONST_0);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ISTORE, I);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(for_start_i_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;nextIfObjectEnd&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNE, for_end_i_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readFieldNameHashCode&quot;, &quot;()J&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP2);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LSTORE, HASH_CODE64);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.LCONST_0);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFEQ, for_inc_i_);</b>
+&nbsp;
+<b class="nc">&nbsp;        Label endAutoType_ = new Label();</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE64);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, &quot;typeKeyHashCode&quot;, &quot;J&quot;);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNE, endAutoType_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE64);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.LCONST_0);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFEQ, endAutoType_);</b>
+&nbsp;
+&nbsp;        // protected T autoType(JSONReader jsonReader, int entryCnt) {
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, classNameType, &quot;autoType&quot;, &quot;(&quot; + DESC_JSON_READER + &quot;)Ljava/lang/Object;&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, for_end_i_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(endAutoType_);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (fieldReaderArray.length &lt;= 6) {</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; fieldReaderArray.length; ++i) {</b>
+<b class="nc">&nbsp;                Label next_ = new Label();</b>
+&nbsp;
+&nbsp;                // if (hashCode64 == &lt;nameHashCode&gt;) {
+<b class="nc">&nbsp;                FieldReader fieldReader = fieldReaderArray[i];</b>
+&nbsp;
+<b class="nc">&nbsp;                long hashCode64 = Fnv.hashCode64(fieldReader.fieldName);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE64);</b>
+<b class="nc">&nbsp;                mw.visitLdcInsn(hashCode64);</b>
+<b class="nc">&nbsp;                mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.IFNE, next_);</b>
+&nbsp;
+<b class="nc">&nbsp;                varIndex = genReadFieldValue(objectType,</b>
+&nbsp;                        fieldReader,
+&nbsp;                        fieldBased,
+&nbsp;                        classNameType,
+&nbsp;                        mw,
+&nbsp;                        THIS,
+&nbsp;                        JSON_READER,
+&nbsp;                        OBJECT,
+&nbsp;                        FEATURES,
+&nbsp;                        varIndex,
+&nbsp;                        variants,
+&nbsp;                        ITEM_CNT,
+&nbsp;                        J,
+&nbsp;                        i,
+&nbsp;                        true, // JSONB
+&nbsp;                        TYPE_OBJECT
+&nbsp;                );
+&nbsp;
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.GOTO, for_inc_i_); // continue</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLabel(next_);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Label noneSmartMatch_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;            if ((readerFeatures &amp; JSONReader.Feature.SupportSmartMatch.mask) == 0) {</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.LLOAD, FEATURES);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;isSupportSmartMatch&quot;, &quot;(J)Z&quot;, false);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.IFEQ, noneSmartMatch_);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;getNameHashCodeLCase&quot;, &quot;()J&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LSTORE, HASH_CODE64);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(noneSmartMatch_);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; fieldReaderArray.length; ++i) {</b>
+<b class="nc">&nbsp;                Label next_ = new Label();</b>
+&nbsp;
+&nbsp;                // if (hashCode64 == &lt;nameHashCode&gt;) {
+<b class="nc">&nbsp;                FieldReader fieldReader = fieldReaderArray[i];</b>
+&nbsp;
+<b class="nc">&nbsp;                long hashCode64 = Fnv.hashCode64(fieldReader.fieldName);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE64);</b>
+<b class="nc">&nbsp;                mw.visitLdcInsn(hashCode64);</b>
+<b class="nc">&nbsp;                mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.IFNE, next_);</b>
+&nbsp;
+<b class="nc">&nbsp;                varIndex = genReadFieldValue(objectType,</b>
+&nbsp;                        fieldReader,
+&nbsp;                        fieldBased,
+&nbsp;                        classNameType,
+&nbsp;                        mw,
+&nbsp;                        THIS,
+&nbsp;                        JSON_READER,
+&nbsp;                        OBJECT,
+&nbsp;                        FEATURES,
+&nbsp;                        varIndex,
+&nbsp;                        variants,
+&nbsp;                        ITEM_CNT,
+&nbsp;                        J,
+&nbsp;                        i,
+&nbsp;                        false, // JSONB
+&nbsp;                        TYPE_OBJECT
+&nbsp;                );
+&nbsp;
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.GOTO, for_inc_i_); // continue</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLabel(next_);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_OBJECT_READER_ADAPTER, &quot;processExtra&quot;, METHOD_DESC_PROCESS_EXTRA, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, for_inc_i_); // continue</b>
+<b class="nc">&nbsp;        } else {</b>
+&nbsp;            // use switch
+<b class="nc">&nbsp;            Map&lt;Integer, List&lt;Long&gt;&gt; map = new TreeMap();</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; objectReaderAdapter.hashCodes.length; i++) {</b>
+<b class="nc">&nbsp;                long hashCode64 = objectReaderAdapter.hashCodes[i];</b>
+<b class="nc">&nbsp;                int hashCode32 = (int) (hashCode64 ^ (hashCode64 &gt;&gt;&gt; 32));</b>
+<b class="nc">&nbsp;                List&lt;Long&gt; hashCode64List = map.get(hashCode32);</b>
+<b class="nc">&nbsp;                if (hashCode64List == null) {</b>
+<b class="nc">&nbsp;                    hashCode64List = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                    map.put(hashCode32, hashCode64List);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                hashCode64List.add(hashCode64);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            int[] hashCode32Keys = new int[map.size()];</b>
+&nbsp;            {
+<b class="nc">&nbsp;                int off = 0;</b>
+<b class="nc">&nbsp;                for (Integer key : map.keySet()) {</b>
+<b class="nc">&nbsp;                    hashCode32Keys[off++] = key;</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Arrays.sort(hashCode32Keys);</b>
+&nbsp;
+&nbsp;            // int hashCode32 = (int)(hashCode64 ^ (hashCode64 &gt;&gt;&gt; 32));
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE64);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE64);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.BIPUSH, 32);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LUSHR);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LXOR);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.L2I);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ISTORE, HASH_CODE_32);</b>
+&nbsp;
+<b class="nc">&nbsp;            Label dflt = new Label();</b>
+<b class="nc">&nbsp;            Label[] labels = new Label[hashCode32Keys.length];</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; labels.length; i++) {</b>
+<b class="nc">&nbsp;                labels[i] = new Label();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ILOAD, HASH_CODE_32);</b>
+<b class="nc">&nbsp;            mw.visitLookupSwitchInsn(dflt, hashCode32Keys, labels);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; labels.length; i++) {</b>
+<b class="nc">&nbsp;                mw.visitLabel(labels[i]);</b>
+&nbsp;
+<b class="nc">&nbsp;                int hashCode32 = hashCode32Keys[i];</b>
+<b class="nc">&nbsp;                List&lt;Long&gt; hashCode64Array = map.get(hashCode32);</b>
+<b class="nc">&nbsp;                for (int j = 0; j &lt; hashCode64Array.size(); ++j) {</b>
+<b class="nc">&nbsp;                    long hashCode64 = hashCode64Array.get(j);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE64);</b>
+<b class="nc">&nbsp;                    mw.visitLdcInsn(hashCode64);</b>
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.IFNE, dflt);</b>
+&nbsp;
+<b class="nc">&nbsp;                    int m = Arrays.binarySearch(objectReaderAdapter.hashCodes, hashCode64);</b>
+<b class="nc">&nbsp;                    int index = objectReaderAdapter.mapping[m];</b>
+&nbsp;
+<b class="nc">&nbsp;                    FieldReader fieldReader = fieldReaderArray[index];</b>
+&nbsp;
+<b class="nc">&nbsp;                    varIndex = genReadFieldValue(objectType,</b>
+&nbsp;                            fieldReader,
+&nbsp;                            fieldBased,
+&nbsp;                            classNameType,
+&nbsp;                            mw,
+&nbsp;                            THIS,
+&nbsp;                            JSON_READER,
+&nbsp;                            OBJECT,
+&nbsp;                            FEATURES,
+&nbsp;                            varIndex,
+&nbsp;                            variants,
+&nbsp;                            ITEM_CNT,
+&nbsp;                            J,
+&nbsp;                            index,
+&nbsp;                            true, // JSONB
+&nbsp;                            TYPE_OBJECT
+&nbsp;                    );
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.GOTO, for_inc_i_);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.GOTO, for_inc_i_);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // switch_default
+<b class="nc">&nbsp;            mw.visitLabel(dflt);</b>
+&nbsp;
+<b class="nc">&nbsp;            Label fieldReaderNull_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;            if ((readerFeatures &amp; JSONReader.Feature.SupportSmartMatch.mask) == 0) {</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.LLOAD, FEATURES);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;isSupportSmartMatch&quot;, &quot;(J)Z&quot;, false);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.IFEQ, fieldReaderNull_);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;getNameHashCodeLCase&quot;, &quot;()J&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, TYPE_OBJECT_READER, &quot;getFieldReaderLCase&quot;, METHOD_DESC_GET_FIELD_READER, true);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ASTORE, FIELD_READER);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFNULL, fieldReaderNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_READER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_READE, &quot;readFieldValueJSONB&quot;, METHOD_DESC_READ_FIELD_VALUE, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, for_inc_i_); // continue</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(fieldReaderNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_OBJECT_READER_ADAPTER, &quot;processExtra&quot;, METHOD_DESC_PROCESS_EXTRA, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, for_inc_i_); // continue</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(for_inc_i_);</b>
+<b class="nc">&nbsp;        mw.visitIincInsn(I, 1);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, for_start_i_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(for_end_i_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.ARETURN);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitMaxs(5, 10);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void skipRest(
+&nbsp;            MethodWriter mw,
+&nbsp;            int JSON_READER,
+&nbsp;            int start,
+&nbsp;            int ENTRY_CNT,
+&nbsp;            int J,
+&nbsp;            Label label
+&nbsp;    ) {
+<b class="nc">&nbsp;        Label for_start_j_ = new Label(), for_inc_j_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLdcInsn(start);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ISTORE, J);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(for_start_j_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ILOAD, J);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ILOAD, ENTRY_CNT);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IF_ICMPGE, label);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;skipValue&quot;, &quot;()V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(for_inc_j_);</b>
+<b class="nc">&nbsp;        mw.visitIincInsn(J, 1);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, for_start_j_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private &lt;T&gt; void genMethodReadJSONBObjectArrayMapping(
+&nbsp;            Class&lt;T&gt; objectType,
+&nbsp;            Constructor defaultConstructor,
+&nbsp;            long readerFeatures,
+&nbsp;            String TYPE_OBJECT,
+&nbsp;            FieldReader[] fieldReaderArray,
+&nbsp;            ClassWriter cw,
+&nbsp;            String classNameType,
+&nbsp;            ObjectReaderAdapter objectReaderAdapter
+&nbsp;    ) {
+<b class="nc">&nbsp;        boolean fieldBased = (readerFeatures &amp; JSONReader.Feature.FieldBased.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        MethodWriter mw = cw.visitMethod(Opcodes.ACC_PUBLIC,</b>
+&nbsp;                &quot;readArrayMappingJSONBObject&quot;,
+&nbsp;                METHOD_DESC_READ_OBJECT,
+&nbsp;                512
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        final int JSON_READER = 1;</b>
+<b class="nc">&nbsp;        final int FIELD_TYPE = 2;</b>
+<b class="nc">&nbsp;        final int FIELD_NAME = 3;</b>
+<b class="nc">&nbsp;        final int FEATURES = 4;</b>
+<b class="nc">&nbsp;        final int OBJECT = 6;</b>
+<b class="nc">&nbsp;        final int ENTRY_CNT = 7;</b>
+<b class="nc">&nbsp;        final int ITEM_CNT = 8;</b>
+<b class="nc">&nbsp;        final int J = 9;</b>
+<b class="nc">&nbsp;        final int AUTO_TYPE_OBJECT_READER = 10;</b>
+&nbsp;
+<b class="nc">&nbsp;        genCheckAutoType(classNameType, mw, JSON_READER, FIELD_TYPE, FIELD_NAME, FEATURES, AUTO_TYPE_OBJECT_READER);</b>
+&nbsp;
+<b class="nc">&nbsp;        int varIndex = 11;</b>
+<b class="nc">&nbsp;        Map&lt;Object, Integer&gt; variants = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            Label notNull_ = new Label();</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;nextIfNull&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFEQ, notNull_);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ACONST_NULL);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ARETURN);</b>
+<b class="nc">&nbsp;            mw.visitLabel(notNull_);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;startArray&quot;, &quot;()I&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ISTORE, ENTRY_CNT);</b>
+&nbsp;
+<b class="nc">&nbsp;        genCreateObject(mw, objectType, classNameType, TYPE_OBJECT, FEATURES, fieldBased, defaultConstructor);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, OBJECT);</b>
+&nbsp;
+<b class="nc">&nbsp;        Label fieldEnd_ = new Label();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; fieldReaderArray.length; ++i) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ILOAD, ENTRY_CNT);</b>
+<b class="nc">&nbsp;            mw.visitLdcInsn(i + 1);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IF_ICMPLT, fieldEnd_);</b>
+&nbsp;
+<b class="nc">&nbsp;            FieldReader fieldReader = fieldReaderArray[i];</b>
+<b class="nc">&nbsp;            varIndex = genReadFieldValue(objectType,</b>
+&nbsp;                    fieldReader,
+&nbsp;                    fieldBased,
+&nbsp;                    classNameType,
+&nbsp;                    mw,
+&nbsp;                    THIS,
+&nbsp;                    JSON_READER,
+&nbsp;                    OBJECT,
+&nbsp;                    FEATURES,
+&nbsp;                    varIndex,
+&nbsp;                    variants,
+&nbsp;                    ITEM_CNT,
+&nbsp;                    J,
+&nbsp;                    i,
+&nbsp;                    true,   // JSONB
+&nbsp;                    TYPE_OBJECT
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        skipRest(mw, JSON_READER, fieldReaderArray.length, ENTRY_CNT, J, fieldEnd_);</b>
+<b class="nc">&nbsp;        mw.visitLabel(fieldEnd_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.ARETURN);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitMaxs(5, 10);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void genCheckAutoType(
+&nbsp;            String classNameType,
+&nbsp;            MethodWriter mw,
+&nbsp;            int JSON_READER,
+&nbsp;            int FIELD_TYPE,
+&nbsp;            int FIELD_NAME,
+&nbsp;            int FEATURES,
+&nbsp;            int AUTO_TYPE_OBJECT_READER) {
+<b class="nc">&nbsp;        Label checkArrayAutoTypeNull_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, &quot;objectClass&quot;, &quot;Ljava/lang/Class;&quot;);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LLOAD, FEATURES);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, classNameType, &quot;checkAutoType&quot;, METHOD_DESC_JSON_READER_CHECK_ARRAY_AUTO_TYPE, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, AUTO_TYPE_OBJECT_READER);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNULL, checkArrayAutoTypeNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, AUTO_TYPE_OBJECT_READER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, TYPE_OBJECT_READER, &quot;getObjectClass&quot;, &quot;()Ljava/lang/Class;&quot;, true);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, &quot;objectClass&quot;, &quot;Ljava/lang/Class;&quot;);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IF_ACMPEQ, checkArrayAutoTypeNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, AUTO_TYPE_OBJECT_READER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_TYPE);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_NAME);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LLOAD, FEATURES);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, TYPE_OBJECT_READER, &quot;readJSONBObject&quot;, METHOD_DESC_READ_OBJECT, true);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.ARETURN);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(checkArrayAutoTypeNull_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private &lt;T&gt; void genMethodReadObject(
+&nbsp;            Class&lt;T&gt; objectType,
+&nbsp;            Constructor defaultConstructor,
+&nbsp;            long readerFeatures,
+&nbsp;            String TYPE_OBJECT,
+&nbsp;            Supplier&lt;T&gt; supplier,
+&nbsp;            FieldReader[] fieldReaderArray,
+&nbsp;            ClassWriter cw,
+&nbsp;            String classNameType,
+&nbsp;            ObjectReaderAdapter objectReaderAdapter
+&nbsp;    ) {
+<b class="nc">&nbsp;        boolean fieldBased = (readerFeatures &amp; JSONReader.Feature.FieldBased.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        MethodWriter mw = cw.visitMethod(</b>
+&nbsp;                Opcodes.ACC_PUBLIC,
+&nbsp;                &quot;readObject&quot;,
+&nbsp;                METHOD_DESC_READ_OBJECT,
+&nbsp;                2048
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        final int JSON_READER = 1;</b>
+<b class="nc">&nbsp;        final int FIELD_TYPE = 2;</b>
+<b class="nc">&nbsp;        final int FIELD_NAME = 3;</b>
+<b class="nc">&nbsp;        final int FEATURES = 4;</b>
+<b class="nc">&nbsp;        final int OBJECT = 6;</b>
+<b class="nc">&nbsp;        final int I = 7;</b>
+<b class="nc">&nbsp;        final int HASH_CODE64 = 8;</b>
+<b class="nc">&nbsp;        final int HASH_CODE_32 = 10;</b>
+<b class="nc">&nbsp;        final int ITEM_CNT = 11;</b>
+<b class="nc">&nbsp;        final int J = 12;</b>
+<b class="nc">&nbsp;        final int FIELD_READER = 13;</b>
+&nbsp;
+<b class="nc">&nbsp;        int varIndex = 14;</b>
+<b class="nc">&nbsp;        Map&lt;Object, Integer&gt; variants = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;        // if (isJSONB()) ...
+<b class="nc">&nbsp;        Label json_ = new Label();</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;isJSONB&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFEQ, json_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_TYPE);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_NAME);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LLOAD, FEATURES);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, classNameType, &quot;readJSONBObject&quot;, METHOD_DESC_READ_OBJECT, false);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.ARETURN);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(json_);</b>
+&nbsp;
+&nbsp;        // if (jsonReader.isArray() &amp;&amp; jsonReader.isSupportBeanArray()) {
+<b class="nc">&nbsp;        Label object_ = new Label(), singleItemArray_ = new Label();</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;isArray&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFEQ, object_);</b>
+&nbsp;
+<b class="nc">&nbsp;        if ((readerFeatures &amp; JSONReader.Feature.SupportArrayToBean.mask) == 0) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LLOAD, FEATURES);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;isSupportBeanArray&quot;, &quot;(J)Z&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFEQ, singleItemArray_);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitIntInsn(Opcodes.BIPUSH, &#39;[&#39;);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;nextIfMatch&quot;, &quot;(C)Z&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        genCreateObject(mw, objectType, classNameType, TYPE_OBJECT, FEATURES, fieldBased, defaultConstructor);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, OBJECT);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; fieldReaderArray.length; ++i) {</b>
+<b class="nc">&nbsp;            FieldReader fieldReader = fieldReaderArray[i];</b>
+&nbsp;
+<b class="nc">&nbsp;            varIndex = genReadFieldValue(</b>
+&nbsp;                    objectType,
+&nbsp;                    fieldReader,
+&nbsp;                    fieldBased,
+&nbsp;                    classNameType,
+&nbsp;                    mw,
+&nbsp;                    THIS,
+&nbsp;                    JSON_READER,
+&nbsp;                    OBJECT,
+&nbsp;                    FEATURES,
+&nbsp;                    varIndex,
+&nbsp;                    variants,
+&nbsp;                    ITEM_CNT,
+&nbsp;                    J,
+&nbsp;                    i,
+&nbsp;                    false, // JSONB
+&nbsp;                    TYPE_OBJECT
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitIntInsn(Opcodes.BIPUSH, &#39;]&#39;);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;nextIfMatch&quot;, &quot;(C)Z&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.POP); // TODO HANDLE ERROR</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitIntInsn(Opcodes.BIPUSH, &#39;,&#39;);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;nextIfMatch&quot;, &quot;(C)Z&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.POP);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.ARETURN);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(singleItemArray_);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_TYPE);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_NAME);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LLOAD, FEATURES);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, classNameType, &quot;processObjectInputSingleItemArray&quot;, METHOD_DESC_READ_OBJECT, false);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.ARETURN);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(object_);</b>
+&nbsp;
+<b class="nc">&nbsp;        Label notNull_ = new Label(), end_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitIntInsn(Opcodes.BIPUSH, &#39;{&#39;);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;nextIfMatch&quot;, &quot;(C)Z&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNE, notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;nextIfNull&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFEQ, notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.ACONST_NULL);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, end_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        genCreateObject(mw, objectType, classNameType, TYPE_OBJECT, FEATURES, fieldBased, defaultConstructor);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, OBJECT);</b>
+&nbsp;
+&nbsp;        // for (int i = 0; i &lt; entry_cnt; ++i) {
+<b class="nc">&nbsp;        Label for_start_i_ = new Label(), for_end_i_ = new Label(), for_inc_i_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.ICONST_0);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ISTORE, I);</b>
+<b class="nc">&nbsp;        mw.visitLabel(for_start_i_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitIntInsn(Opcodes.BIPUSH, &#39;}&#39;);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;nextIfMatch&quot;, &quot;(C)Z&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNE, for_end_i_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readFieldNameHashCode&quot;, &quot;()J&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP2);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LSTORE, HASH_CODE64);</b>
+<b class="nc">&nbsp;        mw.visitLdcInsn(-1L);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFEQ, for_end_i_);</b>
+&nbsp;
+<b class="nc">&nbsp;        Label noneAutoType_ = new Label();</b>
+&nbsp;
+&nbsp;        // if (i != 0 &amp;&amp; hash == HASH_TYPE &amp;&amp; jsonReader.isSupportAutoType())
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ILOAD, I);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNE, noneAutoType_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE64);</b>
+<b class="nc">&nbsp;        mw.visitLdcInsn(HASH_TYPE);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNE, noneAutoType_);</b>
+&nbsp;
+<b class="nc">&nbsp;        if ((readerFeatures &amp; JSONReader.Feature.SupportAutoType.mask) == 0) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LLOAD, FEATURES);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;isSupportAutoType&quot;, &quot;(J)Z&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFEQ, noneAutoType_);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, &quot;objectClass&quot;, &quot;Ljava/lang/Class;&quot;);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LLOAD, FEATURES);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_OBJECT_READER_ADAPTER, &quot;auoType&quot;, &quot;(&quot; + ASMUtils.desc(JSONReader.class) + &quot;Ljava/lang/Class;J)Ljava/lang/Object;&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.ARETURN);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(noneAutoType_);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (fieldReaderArray.length &lt;= 6) {</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; fieldReaderArray.length; ++i) {</b>
+<b class="nc">&nbsp;                Label next_ = new Label(), get_ = new Label();</b>
+&nbsp;
+&nbsp;                // if (hashCode64 == &lt;nameHashCode&gt;) {
+<b class="nc">&nbsp;                FieldReader fieldReader = fieldReaderArray[i];</b>
+&nbsp;
+<b class="nc">&nbsp;                String fieldName = fieldReader.fieldName;</b>
+<b class="nc">&nbsp;                long hashCode64 = fieldReader.fieldNameHash;</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE64);</b>
+<b class="nc">&nbsp;                mw.visitLdcInsn(hashCode64);</b>
+<b class="nc">&nbsp;                mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.IFNE, next_);</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLabel(get_);</b>
+<b class="nc">&nbsp;                varIndex = genReadFieldValue(objectType,</b>
+&nbsp;                        fieldReader,
+&nbsp;                        fieldBased,
+&nbsp;                        classNameType,
+&nbsp;                        mw,
+&nbsp;                        THIS,
+&nbsp;                        JSON_READER,
+&nbsp;                        OBJECT,
+&nbsp;                        FEATURES,
+&nbsp;                        varIndex,
+&nbsp;                        variants,
+&nbsp;                        ITEM_CNT,
+&nbsp;                        J,
+&nbsp;                        i,
+&nbsp;                        false,
+&nbsp;                        TYPE_OBJECT
+&nbsp;                );
+&nbsp;
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.GOTO, for_inc_i_); // continue</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLabel(next_);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Label noneSmartMatch_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;            if ((readerFeatures &amp; JSONReader.Feature.SupportSmartMatch.mask) == 0) {</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.LLOAD, FEATURES);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;isSupportSmartMatch&quot;, &quot;(J)Z&quot;, false);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.IFEQ, noneSmartMatch_);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;getNameHashCodeLCase&quot;, &quot;()J&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LSTORE, HASH_CODE64);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(noneSmartMatch_);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; fieldReaderArray.length; ++i) {</b>
+<b class="nc">&nbsp;                Label next_ = new Label(), get_ = new Label();</b>
+&nbsp;
+&nbsp;                // if (hashCode64 == &lt;nameHashCode&gt;) {
+<b class="nc">&nbsp;                FieldReader fieldReader = fieldReaderArray[i];</b>
+&nbsp;
+<b class="nc">&nbsp;                String fieldName = fieldReader.fieldName;</b>
+<b class="nc">&nbsp;                long hashCode64 = fieldReader.fieldNameHash;</b>
+<b class="nc">&nbsp;                long hashCode64LCase = fieldReader.fieldNameHashLCase;</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE64);</b>
+<b class="nc">&nbsp;                mw.visitLdcInsn(hashCode64);</b>
+<b class="nc">&nbsp;                mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.IFEQ, get_);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (hashCode64LCase != hashCode64) {</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE64);</b>
+<b class="nc">&nbsp;                    mw.visitLdcInsn(hashCode64LCase);</b>
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.IFNE, next_);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.GOTO, next_);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLabel(get_);</b>
+<b class="nc">&nbsp;                varIndex = genReadFieldValue(objectType,</b>
+&nbsp;                        fieldReader,
+&nbsp;                        fieldBased,
+&nbsp;                        classNameType,
+&nbsp;                        mw,
+&nbsp;                        THIS,
+&nbsp;                        JSON_READER,
+&nbsp;                        OBJECT,
+&nbsp;                        FEATURES,
+&nbsp;                        varIndex,
+&nbsp;                        variants,
+&nbsp;                        ITEM_CNT,
+&nbsp;                        J,
+&nbsp;                        i,
+&nbsp;                        false,
+&nbsp;                        TYPE_OBJECT
+&nbsp;                );
+&nbsp;
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.GOTO, for_inc_i_); // continue</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLabel(next_);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_OBJECT_READER_ADAPTER, &quot;processExtra&quot;, METHOD_DESC_PROCESS_EXTRA, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, for_inc_i_); // continue</b>
+<b class="nc">&nbsp;        } else {</b>
+&nbsp;            // use switch
+<b class="nc">&nbsp;            Map&lt;Integer, List&lt;Long&gt;&gt; map = new TreeMap();</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; objectReaderAdapter.hashCodes.length; i++) {</b>
+<b class="nc">&nbsp;                long hashCode64 = objectReaderAdapter.hashCodes[i];</b>
+<b class="nc">&nbsp;                int hashCode32 = (int) (hashCode64 ^ (hashCode64 &gt;&gt;&gt; 32));</b>
+<b class="nc">&nbsp;                List&lt;Long&gt; hashCode64List = map.get(hashCode32);</b>
+<b class="nc">&nbsp;                if (hashCode64List == null) {</b>
+<b class="nc">&nbsp;                    hashCode64List = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                    map.put(hashCode32, hashCode64List);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                hashCode64List.add(hashCode64);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            int[] hashCode32Keys = new int[map.size()];</b>
+&nbsp;            {
+<b class="nc">&nbsp;                int off = 0;</b>
+<b class="nc">&nbsp;                for (Integer key : map.keySet()) {</b>
+<b class="nc">&nbsp;                    hashCode32Keys[off++] = key;</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Arrays.sort(hashCode32Keys);</b>
+&nbsp;
+&nbsp;            // int hashCode32 = (int)(hashCode64 ^ (hashCode64 &gt;&gt;&gt; 32));
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE64);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE64);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.BIPUSH, 32);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LUSHR);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LXOR);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.L2I);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ISTORE, HASH_CODE_32);</b>
+&nbsp;
+<b class="nc">&nbsp;            Label dflt = new Label();</b>
+<b class="nc">&nbsp;            Label[] labels = new Label[hashCode32Keys.length];</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; labels.length; i++) {</b>
+<b class="nc">&nbsp;                labels[i] = new Label();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ILOAD, HASH_CODE_32);</b>
+<b class="nc">&nbsp;            mw.visitLookupSwitchInsn(dflt, hashCode32Keys, labels);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; labels.length; i++) {</b>
+<b class="nc">&nbsp;                mw.visitLabel(labels[i]);</b>
+&nbsp;
+<b class="nc">&nbsp;                int hashCode32 = hashCode32Keys[i];</b>
+<b class="nc">&nbsp;                List&lt;Long&gt; hashCode64Array = map.get(hashCode32);</b>
+<b class="nc">&nbsp;                for (int j = 0; j &lt; hashCode64Array.size(); ++j) {</b>
+<b class="nc">&nbsp;                    long hashCode64 = hashCode64Array.get(j);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.LLOAD, HASH_CODE64);</b>
+<b class="nc">&nbsp;                    mw.visitLdcInsn(hashCode64);</b>
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.IFNE, dflt);</b>
+&nbsp;
+<b class="nc">&nbsp;                    int m = Arrays.binarySearch(objectReaderAdapter.hashCodes, hashCode64);</b>
+<b class="nc">&nbsp;                    int index = objectReaderAdapter.mapping[m];</b>
+&nbsp;
+<b class="nc">&nbsp;                    FieldReader fieldReader = fieldReaderArray[index];</b>
+&nbsp;
+<b class="nc">&nbsp;                    varIndex = genReadFieldValue(objectType,</b>
+&nbsp;                            fieldReader,
+&nbsp;                            fieldBased,
+&nbsp;                            classNameType,
+&nbsp;                            mw,
+&nbsp;                            THIS,
+&nbsp;                            JSON_READER,
+&nbsp;                            OBJECT,
+&nbsp;                            FEATURES,
+&nbsp;                            varIndex,
+&nbsp;                            variants,
+&nbsp;                            ITEM_CNT,
+&nbsp;                            J,
+&nbsp;                            index,
+&nbsp;                            false,
+&nbsp;                            TYPE_OBJECT
+&nbsp;                    );
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.GOTO, for_inc_i_);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.GOTO, for_inc_i_);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(dflt);</b>
+<b class="nc">&nbsp;            Label fieldReaderNull_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;            if ((readerFeatures &amp; JSONReader.Feature.SupportSmartMatch.mask) == 0) {</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.LLOAD, FEATURES);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;isSupportSmartMatch&quot;, &quot;(J)Z&quot;, false);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.IFEQ, fieldReaderNull_);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;getNameHashCodeLCase&quot;, &quot;()J&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, TYPE_OBJECT_READER, &quot;getFieldReaderLCase&quot;, METHOD_DESC_GET_FIELD_READER, true);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ASTORE, FIELD_READER);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFNULL, fieldReaderNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_READER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_READE, &quot;readFieldValue&quot;, METHOD_DESC_READ_FIELD_VALUE, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, for_inc_i_); // continue</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(fieldReaderNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_OBJECT_READER_ADAPTER, &quot;processExtra&quot;, METHOD_DESC_PROCESS_EXTRA, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, for_inc_i_); // continue</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(for_inc_i_);</b>
+<b class="nc">&nbsp;        mw.visitIincInsn(I, 1);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, for_start_i_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(for_end_i_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(end_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;        mw.visitIntInsn(Opcodes.BIPUSH, &#39;,&#39;);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;nextIfMatch&quot;, &quot;(C)Z&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.POP);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.ARETURN);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitMaxs(5, 10);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private &lt;T&gt; void genCreateObject(
+&nbsp;            MethodWriter mw,
+&nbsp;            Class&lt;T&gt; objectType,
+&nbsp;            String classNameType,
+&nbsp;            String TYPE_OBJECT,
+&nbsp;            int FEATURES,
+&nbsp;            boolean fieldBased,
+&nbsp;            Constructor defaultConstructor
+&nbsp;    ) {
+<b class="nc">&nbsp;        final int JSON_READER = 1;</b>
+&nbsp;
+<b class="nc">&nbsp;        int objectModifiers = objectType.getModifiers();</b>
+<b class="nc">&nbsp;        boolean publicObject = Modifier.isPublic(objectModifiers) &amp;&amp; !classLoader.isExternalClass(objectType);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (fieldBased || defaultConstructor == null || !Modifier.isPublic(defaultConstructor.getModifiers())) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LLOAD, FEATURES);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;features&quot;, &quot;(J)J&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, classNameType, &quot;createInstance&quot;, &quot;(J)Ljava/lang/Object;&quot;, false);</b>
+<b class="nc">&nbsp;            if (publicObject) {</b>
+<b class="nc">&nbsp;                mw.visitTypeInsn(Opcodes.CHECKCAST, TYPE_OBJECT);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            mw.visitTypeInsn(Opcodes.NEW, TYPE_OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;            if (defaultConstructor.getParameterCount() == 0) {</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKESPECIAL, TYPE_OBJECT, &quot;&lt;init&gt;&quot;, &quot;()V&quot;, false);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                Class paramType = defaultConstructor.getParameterTypes()[0];</b>
+<b class="nc">&nbsp;                mw.visitInsn(Opcodes.ACONST_NULL);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKESPECIAL, TYPE_OBJECT, &quot;&lt;init&gt;&quot;, &quot;(&quot; + ASMUtils.desc(paramType) + &quot;)V&quot;, false);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private &lt;T&gt; int genReadFieldValue(
+&nbsp;            Class&lt;T&gt; objectType,
+&nbsp;            FieldReader fieldReader,
+&nbsp;            boolean fieldBased,
+&nbsp;            String classNameType,
+&nbsp;            MethodWriter mw,
+&nbsp;            int THIS,
+&nbsp;            int JSON_READER,
+&nbsp;            int OBJECT,
+&nbsp;            int FEATURES,
+&nbsp;            int varIndex,
+&nbsp;            Map&lt;Object, Integer&gt; variants,
+&nbsp;            int ITEM_CNT,
+&nbsp;            int J,
+&nbsp;            int i,
+&nbsp;            boolean jsonb,
+&nbsp;            String TYPE_OBJECT
+&nbsp;    ) {
+<b class="nc">&nbsp;        Class fieldClass = fieldReader.fieldClass;</b>
+<b class="nc">&nbsp;        Type fieldType = fieldReader.fieldType;</b>
+<b class="nc">&nbsp;        long fieldFeatures = fieldReader.features;</b>
+<b class="nc">&nbsp;        String format = fieldReader.format;</b>
+<b class="nc">&nbsp;        Type itemType = fieldReader.itemType;</b>
+&nbsp;
+<b class="nc">&nbsp;        Field field = fieldReader.field;</b>
+<b class="nc">&nbsp;        Method method = fieldReader.method;</b>
+&nbsp;
+<b class="nc">&nbsp;        Label endSet_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        String TYPE_FIELD_CLASS = ASMUtils.type(fieldClass);</b>
+<b class="nc">&nbsp;        String DESC_FIELD_CLASS = ASMUtils.desc(fieldClass);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;        int fieldModifers = fieldBased || (method == null &amp;&amp; field != null) ? field.getModifiers() : 0;</b>
+<b class="nc">&nbsp;        if (fieldBased</b>
+<b class="nc">&nbsp;                &amp;&amp; Modifier.isPublic(objectType.getModifiers())</b>
+<b class="nc">&nbsp;                &amp;&amp; Modifier.isPublic(fieldModifers)</b>
+<b class="nc">&nbsp;                &amp;&amp; !Modifier.isFinal(fieldModifers)</b>
+<b class="nc">&nbsp;                &amp;&amp; !classLoader.isExternalClass(objectType)</b>
+&nbsp;        ) {
+<b class="nc">&nbsp;            mw.visitTypeInsn(Opcodes.CHECKCAST, TYPE_OBJECT);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == boolean.class) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readBoolValue&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == byte.class) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readInt32Value&quot;, &quot;()I&quot;, false);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == short.class) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readInt32Value&quot;, &quot;()I&quot;, false);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == int.class) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readInt32Value&quot;, &quot;()I&quot;, false);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == long.class) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readInt64Value&quot;, &quot;()J&quot;, false);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == float.class) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readFloatValue&quot;, &quot;()F&quot;, false);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == double.class) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readDoubleValue&quot;, &quot;()D&quot;, false);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == char.class) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readCharValue&quot;, &quot;()C&quot;, false);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == String.class) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            Label null_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readString&quot;, &quot;()Ljava/lang/String;&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFNULL, null_);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (&quot;trim&quot;.equals(format)) {</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, &quot;java/lang/String&quot;, &quot;trim&quot;, &quot;()Ljava/lang/String;&quot;, false);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            mw.visitLabel(null_);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == Integer.class) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readInt32&quot;, &quot;()Ljava/lang/Integer;&quot;, false);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == Long.class) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readInt64&quot;, &quot;()Ljava/lang/Long;&quot;, false);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == Float.class) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readFloat&quot;, &quot;()Ljava/lang/Float;&quot;, false);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == Double.class) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readDouble&quot;, &quot;()Ljava/lang/Double;&quot;, false);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == BigDecimal.class) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readBigDecimal&quot;, &quot;()Ljava/math/BigDecimal;&quot;, false);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == BigInteger.class) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readBigInteger&quot;, &quot;()Ljava/math/BigInteger;&quot;, false);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == UUID.class) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readUUID&quot;, &quot;()Ljava/util/UUID;&quot;, false);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            Label endObject_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;            Integer REFERENCE = variants.get(&quot;REFERENCE&quot;);</b>
+<b class="nc">&nbsp;            if (REFERENCE == null) {</b>
+<b class="nc">&nbsp;                variants.put(&quot;REFERENCE&quot;, REFERENCE = varIndex);</b>
+<b class="nc">&nbsp;                varIndex++;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (!ObjectWriterProvider.isPrimitiveOrEnum(fieldClass)) {</b>
+<b class="nc">&nbsp;                Label endReference_ = new Label(), addResolveTask_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;isReference&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.IFEQ, endReference_);</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readReference&quot;, &quot;()Ljava/lang/String;&quot;, false);</b>
+<b class="nc">&nbsp;                mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ASTORE, REFERENCE);</b>
+<b class="nc">&nbsp;                mw.visitLdcInsn(&quot;..&quot;);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, &quot;java/lang/String&quot;, &quot;equals&quot;, &quot;(Ljava/lang/Object;)Z&quot;, false);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.IFEQ, addResolveTask_);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (fieldClass.isAssignableFrom(objectType)) {</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+&nbsp;//                    mw.visitTypeInsn(CHECKCAST, TYPE_FIELD_CLASS); // cast
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.GOTO, endObject_);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLabel(addResolveTask_);</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;                mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldReader(i), DESC_FIELD_READER);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, REFERENCE);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_READE, &quot;addResolveTask&quot;, METHOD_DESC_ADD_RESOLVE_TASK, false);</b>
+<b class="nc">&nbsp;                mw.visitInsn(Opcodes.POP);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.GOTO, endSet_);</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLabel(endReference_);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (!fieldReader.fieldClassSerializable) {</b>
+<b class="nc">&nbsp;                Label endIgnoreCheck_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;isIgnoreNoneSerializable&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.IFEQ, endIgnoreCheck_);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;skipValue&quot;, &quot;()V&quot;, false);</b>
+<b class="nc">&nbsp;                mw.visitInsn(Opcodes.POP);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.GOTO, endSet_);</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLabel(endIgnoreCheck_);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            boolean list = List.class.isAssignableFrom(fieldClass)</b>
+<b class="nc">&nbsp;                    &amp;&amp; !fieldClass.getName().startsWith(&quot;com.google.common.collect.Immutable&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (list) {</b>
+<b class="nc">&nbsp;                if (itemType == null) {</b>
+<b class="nc">&nbsp;                    itemType = Object.class;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Class itemClass = TypeUtils.getMapping(itemType);</b>
+<b class="nc">&nbsp;                String ITEM_OBJECT_READER = fieldItemObjectReader(i);</b>
+&nbsp;
+<b class="nc">&nbsp;                Integer LIST = variants.get(fieldClass);</b>
+<b class="nc">&nbsp;                if (LIST == null) {</b>
+<b class="nc">&nbsp;                    variants.put(fieldClass, LIST = varIndex);</b>
+<b class="nc">&nbsp;                    varIndex++;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                Integer AUTO_TYPE_OBJECT_READER = variants.get(ObjectReader.class);</b>
+<b class="nc">&nbsp;                if (AUTO_TYPE_OBJECT_READER == null) {</b>
+<b class="nc">&nbsp;                    variants.put(fieldClass, AUTO_TYPE_OBJECT_READER = varIndex);</b>
+<b class="nc">&nbsp;                    varIndex++;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                String LIST_TYPE = fieldClass.isInterface() ? &quot;java/util/ArrayList&quot; : TYPE_FIELD_CLASS;</b>
+&nbsp;
+<b class="nc">&nbsp;                Label loadList_ = new Label(), listNotNull_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;                boolean initCapacity = JVM_VERSION == 8 &amp;&amp; &quot;java/util/ArrayList&quot;.equals(LIST_TYPE);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (jsonb) {</b>
+<b class="nc">&nbsp;                    Label checkAutoTypeNull_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;                    mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldReader(i), DESC_FIELD_READER);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_READE, &quot;checkObjectAutoType&quot;, METHOD_DESC_CHECK_ARRAY_AUTO_TYPE, false);</b>
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ASTORE, AUTO_TYPE_OBJECT_READER);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.IFNULL, checkAutoTypeNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, AUTO_TYPE_OBJECT_READER);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                    gwGetFieldType(classNameType, mw, THIS, i, fieldType);</b>
+<b class="nc">&nbsp;                    mw.visitLdcInsn(fieldReader.fieldName);</b>
+<b class="nc">&nbsp;                    mw.visitLdcInsn(fieldFeatures);</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, TYPE_OBJECT_READER, &quot;readJSONBObject&quot;, METHOD_DESC_READ_OBJECT, true);</b>
+<b class="nc">&nbsp;                    mw.visitTypeInsn(Opcodes.CHECKCAST, TYPE_FIELD_CLASS);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ASTORE, LIST);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.GOTO, loadList_);</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitLabel(checkAutoTypeNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;startArray&quot;, &quot;()I&quot;, false);</b>
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ISTORE, ITEM_CNT);</b>
+<b class="nc">&nbsp;                    mw.visitLdcInsn(-1);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.IF_ICMPNE, listNotNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.ACONST_NULL);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ASTORE, LIST);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.GOTO, loadList_);</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitLabel(listNotNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitTypeInsn(Opcodes.NEW, LIST_TYPE);</b>
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;                    if (initCapacity) {</b>
+<b class="nc">&nbsp;                        mw.visitVarInsn(Opcodes.ILOAD, ITEM_CNT);</b>
+<b class="nc">&nbsp;                        mw.visitMethodInsn(Opcodes.INVOKESPECIAL, LIST_TYPE, &quot;&lt;init&gt;&quot;, &quot;(I)V&quot;, false);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        mw.visitMethodInsn(Opcodes.INVOKESPECIAL, LIST_TYPE, &quot;&lt;init&gt;&quot;, &quot;()V&quot;, false);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ASTORE, LIST);</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    Label match_ = new Label(), skipValue_ = new Label(), loadNull_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;nextIfNull&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.IFNE, loadNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                    mw.visitIntInsn(Opcodes.BIPUSH, &#39;[&#39;);</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;nextIfMatch&quot;, &quot;(C)Z&quot;, false);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.IFNE, match_);</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (itemClass == String.class) {</b>
+<b class="nc">&nbsp;                        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;isString&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;                        mw.visitJumpInsn(Opcodes.IFEQ, skipValue_);</b>
+&nbsp;
+<b class="nc">&nbsp;                        mw.visitTypeInsn(Opcodes.NEW, LIST_TYPE);</b>
+<b class="nc">&nbsp;                        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;                        if (initCapacity) {</b>
+<b class="nc">&nbsp;                            mw.visitLdcInsn(10);</b>
+<b class="nc">&nbsp;                            mw.visitMethodInsn(Opcodes.INVOKESPECIAL, LIST_TYPE, &quot;&lt;init&gt;&quot;, &quot;(I)V&quot;, false);</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            mw.visitMethodInsn(Opcodes.INVOKESPECIAL, LIST_TYPE, &quot;&lt;init&gt;&quot;, &quot;()V&quot;, false);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        mw.visitVarInsn(Opcodes.ASTORE, LIST);</b>
+&nbsp;
+<b class="nc">&nbsp;                        mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;                        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readString&quot;, &quot;()Ljava/lang/String;&quot;, false);</b>
+<b class="nc">&nbsp;                        mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, &quot;java/util/List&quot;, &quot;add&quot;, &quot;(Ljava/lang/Object;)Z&quot;, true);</b>
+<b class="nc">&nbsp;                        mw.visitInsn(Opcodes.POP);</b>
+&nbsp;
+<b class="nc">&nbsp;                        mw.visitJumpInsn(Opcodes.GOTO, loadList_);</b>
+<b class="nc">&nbsp;                    } else if (itemType instanceof Class) {</b>
+<b class="nc">&nbsp;                        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;nextIfEmptyString&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;                        mw.visitJumpInsn(Opcodes.IFNE, loadNull_);</b>
+&nbsp;
+&nbsp;                        // nextIfEmptyString
+<b class="nc">&nbsp;                        mw.visitTypeInsn(Opcodes.NEW, LIST_TYPE);</b>
+<b class="nc">&nbsp;                        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;                        if (initCapacity) {</b>
+<b class="nc">&nbsp;                            mw.visitLdcInsn(10);</b>
+<b class="nc">&nbsp;                            mw.visitMethodInsn(Opcodes.INVOKESPECIAL, LIST_TYPE, &quot;&lt;init&gt;&quot;, &quot;(I)V&quot;, false);</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            mw.visitMethodInsn(Opcodes.INVOKESPECIAL, LIST_TYPE, &quot;&lt;init&gt;&quot;, &quot;()V&quot;, false);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        mw.visitVarInsn(Opcodes.ASTORE, LIST);</b>
+&nbsp;
+<b class="nc">&nbsp;                        mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                        mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;                        mw.visitLdcInsn((Class) itemType);</b>
+<b class="nc">&nbsp;                        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readArray&quot;, &quot;(Ljava/util/List;Ljava/lang/reflect/Type;)V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;                        mw.visitJumpInsn(Opcodes.GOTO, loadList_);</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitLabel(skipValue_);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;skipValue&quot;, &quot;()V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitLabel(loadNull_);</b>
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.ACONST_NULL);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ASTORE, LIST);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.GOTO, loadList_);</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitLabel(match_);</b>
+<b class="nc">&nbsp;                    mw.visitTypeInsn(Opcodes.NEW, LIST_TYPE);</b>
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;                    if (initCapacity) {</b>
+<b class="nc">&nbsp;                        mw.visitLdcInsn(10);</b>
+<b class="nc">&nbsp;                        mw.visitMethodInsn(Opcodes.INVOKESPECIAL, LIST_TYPE, &quot;&lt;init&gt;&quot;, &quot;(I)V&quot;, false);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        mw.visitMethodInsn(Opcodes.INVOKESPECIAL, LIST_TYPE, &quot;&lt;init&gt;&quot;, &quot;()V&quot;, false);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ASTORE, LIST);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Label for_start_j_ = new Label(), for_end_j_ = new Label(), for_inc_j_ = new Label();</b>
+<b class="nc">&nbsp;                mw.visitInsn(Opcodes.ICONST_0);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ISTORE, J);</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLabel(for_start_j_);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (jsonb) {</b>
+&nbsp;                    // j &lt; item_cnt
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ILOAD, J);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ILOAD, ITEM_CNT);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.IF_ICMPGE, for_end_j_);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                    mw.visitIntInsn(Opcodes.BIPUSH, &#39;]&#39;);</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;nextIfMatch&quot;, &quot;(C)Z&quot;, false);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.IFNE, for_end_j_);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (itemType == String.class) {</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readString&quot;, &quot;()Ljava/lang/String;&quot;, false);</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, &quot;java/util/List&quot;, &quot;add&quot;, &quot;(Ljava/lang/Object;)Z&quot;, true);</b>
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.POP);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    Label notNull_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;                    mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, ITEM_OBJECT_READER, DESC_OBJECT_READER);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.IFNONNULL, notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+&nbsp;//                    mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;                    mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldReader(i), DESC_FIELD_READER);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_READE, &quot;getItemObjectReader&quot;, METHOD_DESC_GET_ITEM_OBJECT_READER, false);</b>
+&nbsp;//
+&nbsp;//                    mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL,  TYPE_FIELD_READE, &quot;getItemType&quot;, &quot;()Ljava/lang/reflect/Type;&quot;, false);
+&nbsp;//                    mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL,  TYPE_JSON_READER, &quot;getObjectReader&quot;, METHOD_DESC_GET_OBJECT_READER, false);
+<b class="nc">&nbsp;                    mw.visitFieldInsn(PUTFIELD, classNameType, ITEM_OBJECT_READER, DESC_OBJECT_READER);</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitLabel(notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;                    Label endReference_ = new Label(), addResolveTask_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;isReference&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.IFEQ, endReference_);</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;readReference&quot;, &quot;()Ljava/lang/String;&quot;, false);</b>
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ASTORE, REFERENCE);</b>
+<b class="nc">&nbsp;                    mw.visitLdcInsn(&quot;..&quot;);</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, &quot;java/lang/String&quot;, &quot;equals&quot;, &quot;(Ljava/lang/Object;)Z&quot;, false);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.IFEQ, addResolveTask_);</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (fieldClass.isAssignableFrom(objectType)) {</b>
+<b class="nc">&nbsp;                        mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;                        mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;                        mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, &quot;java/util/List&quot;, &quot;add&quot;, &quot;(Ljava/lang/Object;)Z&quot;, true);</b>
+<b class="nc">&nbsp;                        mw.visitInsn(Opcodes.POP);</b>
+<b class="nc">&nbsp;                        mw.visitJumpInsn(Opcodes.GOTO, for_inc_j_);</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitLabel(addResolveTask_);</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.ACONST_NULL);</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, &quot;java/util/List&quot;, &quot;add&quot;, &quot;(Ljava/lang/Object;)Z&quot;, true);</b>
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.POP);</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;                    mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldReader(i), DESC_FIELD_READER);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ILOAD, J);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, REFERENCE);</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_READE, &quot;addResolveTask&quot;, METHOD_DESC_ADD_RESOLVE_TASK_2, false);</b>
+<b class="nc">&nbsp;                    mw.visitJumpInsn(Opcodes.GOTO, for_inc_j_);</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitLabel(endReference_);</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;                    mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, ITEM_OBJECT_READER, DESC_OBJECT_READER);</b>
+&nbsp;
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                    gwGetFieldType(classNameType, mw, THIS, i, fieldType);</b>
+<b class="nc">&nbsp;                    mw.visitLdcInsn(fieldReader.fieldName);</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.LLOAD, FEATURES);</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKEINTERFACE,</b>
+&nbsp;                            TYPE_OBJECT_READER,
+&nbsp;                            jsonb ? &quot;readJSONBObject&quot; : &quot;readObject&quot;,
+&nbsp;                            METHOD_DESC_READ_OBJECT,
+&nbsp;                            true);
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, &quot;java/util/List&quot;, &quot;add&quot;, &quot;(Ljava/lang/Object;)Z&quot;, true);</b>
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.POP);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (!jsonb) {</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                    mw.visitIntInsn(Opcodes.BIPUSH, &#39;,&#39;);</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;nextIfMatch&quot;, &quot;(C)Z&quot;, false);</b>
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.POP);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLabel(for_inc_j_);</b>
+<b class="nc">&nbsp;                mw.visitIincInsn(J, 1);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.GOTO, for_start_j_);</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLabel(for_end_j_);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (!jsonb) {</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                    mw.visitIntInsn(Opcodes.BIPUSH, &#39;,&#39;);</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;nextIfMatch&quot;, &quot;(C)Z&quot;, false);</b>
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.POP);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLabel(loadList_);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                final String FIELD_OBJECT_READER = fieldObjectReader(i);</b>
+&nbsp;
+<b class="nc">&nbsp;                Label valueNotNull_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;nextIfNull&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.IFEQ, valueNotNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (fieldClass == Optional.class) {</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKESTATIC, &quot;java/util/Optional&quot;, &quot;empty&quot;, &quot;()Ljava/util/Optional;&quot;, false);</b>
+<b class="nc">&nbsp;                } else if (fieldClass == OptionalInt.class) {</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKESTATIC, &quot;java/util/OptionalInt&quot;, &quot;empty&quot;, &quot;()Ljava/util/OptionalInt;&quot;, false);</b>
+<b class="nc">&nbsp;                } else if (fieldClass == OptionalLong.class) {</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKESTATIC, &quot;java/util/OptionalLong&quot;, &quot;empty&quot;, &quot;()Ljava/util/OptionalLong;&quot;, false);</b>
+<b class="nc">&nbsp;                } else if (fieldClass == OptionalDouble.class) {</b>
+<b class="nc">&nbsp;                    mw.visitMethodInsn(Opcodes.INVOKESTATIC, &quot;java/util/OptionalDouble&quot;, &quot;empty&quot;, &quot;()Ljava/util/OptionalDouble;&quot;, false);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    mw.visitInsn(Opcodes.ACONST_NULL);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.GOTO, endObject_);</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLabel(valueNotNull_);</b>
+&nbsp;
+&nbsp;                // object.&lt;setMethod&gt;(this.objectReader_&lt;i&gt;.readObject(jsonReader))
+<b class="nc">&nbsp;                Label notNull_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;                mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, FIELD_OBJECT_READER, DESC_OBJECT_READER);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.IFNONNULL, notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;                mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldReader(i), DESC_FIELD_READER);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_READE, &quot;getObjectReader&quot;, METHOD_DESC_GET_OBJECT_READER_1, false);</b>
+<b class="nc">&nbsp;                mw.visitFieldInsn(PUTFIELD, classNameType, FIELD_OBJECT_READER, DESC_OBJECT_READER);</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLabel(notNull_);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;                mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, FIELD_OBJECT_READER, DESC_OBJECT_READER);</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                gwGetFieldType(classNameType, mw, THIS, i, fieldType);</b>
+<b class="nc">&nbsp;                mw.visitLdcInsn(fieldReader.fieldName);</b>
+<b class="nc">&nbsp;                mw.visitLdcInsn(fieldFeatures);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEINTERFACE,</b>
+&nbsp;                        TYPE_OBJECT_READER,
+&nbsp;                        jsonb ? &quot;readJSONBObject&quot; : &quot;readObject&quot;,
+&nbsp;                        METHOD_DESC_READ_OBJECT,
+&nbsp;                        true);
+&nbsp;
+<b class="nc">&nbsp;                if (method != null || (Modifier.isPublic(objectType.getModifiers())</b>
+<b class="nc">&nbsp;                        &amp;&amp; Modifier.isPublic(fieldModifers)</b>
+<b class="nc">&nbsp;                        &amp;&amp; !Modifier.isFinal(fieldModifers)</b>
+<b class="nc">&nbsp;                        &amp;&amp; !classLoader.isExternalClass(objectType))</b>
+&nbsp;                ) {
+<b class="nc">&nbsp;                    mw.visitTypeInsn(Opcodes.CHECKCAST, TYPE_FIELD_CLASS); // cast</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (fieldReader.noneStaticMemberClass) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        Field this0 = fieldClass.getDeclaredField(&quot;this$0&quot;);</b>
+<b class="nc">&nbsp;                        long fieldOffset = UnsafeUtils.objectFieldOffset(this0);</b>
+&nbsp;
+<b class="nc">&nbsp;                        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;                        mw.visitFieldInsn(Opcodes.GETSTATIC, TYPE_UNSAFE_UTILS, &quot;UNSAFE&quot;, &quot;Lsun/misc/Unsafe;&quot;);</b>
+<b class="nc">&nbsp;                        mw.visitInsn(Opcodes.SWAP);</b>
+<b class="nc">&nbsp;                        mw.visitLdcInsn(fieldOffset);</b>
+<b class="nc">&nbsp;                        mw.visitVarInsn(ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;                        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, &quot;sun/misc/Unsafe&quot;, &quot;putObject&quot;, &quot;(Ljava/lang/Object;JLjava/lang/Object;)V&quot;, false);</b>
+<b class="nc">&nbsp;                    } catch (NoSuchFieldException e) {</b>
+&nbsp;                        // ignored
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(endObject_);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (!jsonb) {</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, JSON_READER);</b>
+<b class="nc">&nbsp;                mw.visitIntInsn(Opcodes.BIPUSH, &#39;,&#39;);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_READER, &quot;nextIfMatch&quot;, &quot;(C)Z&quot;, false);</b>
+<b class="nc">&nbsp;                mw.visitInsn(Opcodes.POP);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (method != null) {</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL,</b>
+&nbsp;                    TYPE_OBJECT,
+<b class="nc">&nbsp;                    method.getName(),</b>
+&nbsp;                    &quot;(&quot; + DESC_FIELD_CLASS + &quot;)V&quot;, false);
+&nbsp;            // TODO BUILD METHOD
+<b class="nc">&nbsp;        } else if (field != null) {</b>
+<b class="nc">&nbsp;            if (Modifier.isPublic(objectType.getModifiers())</b>
+<b class="nc">&nbsp;                    &amp;&amp; Modifier.isPublic(fieldModifers)</b>
+<b class="nc">&nbsp;                    &amp;&amp; !Modifier.isFinal(fieldModifers)</b>
+<b class="nc">&nbsp;                    &amp;&amp; ObjectWriterProvider.isPrimitiveOrEnum(fieldClass)</b>
+<b class="nc">&nbsp;                    &amp;&amp; !classLoader.isExternalClass(objectType)</b>
+<b class="nc">&nbsp;                    &amp;&amp; field.getDeclaringClass() == objectType</b>
+&nbsp;            ) {
+<b class="nc">&nbsp;                mw.visitFieldInsn(PUTFIELD, TYPE_OBJECT, field.getName(), DESC_FIELD_CLASS);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                Integer FIELD_VALUE = variants.get(fieldClass);</b>
+<b class="nc">&nbsp;                if (FIELD_VALUE == null) {</b>
+<b class="nc">&nbsp;                    variants.put(fieldClass, FIELD_VALUE = varIndex);</b>
+<b class="nc">&nbsp;                    if (fieldClass == long.class || fieldClass == double.class) {</b>
+<b class="nc">&nbsp;                        varIndex += 2;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        varIndex++;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                String methodName, methodDes;
+&nbsp;                int LOAD;
+<b class="nc">&nbsp;                if (fieldClass == int.class) {</b>
+<b class="nc">&nbsp;                    methodName = &quot;putInt&quot;;</b>
+<b class="nc">&nbsp;                    methodDes = &quot;(Ljava/lang/Object;JI)V&quot;;</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ISTORE, FIELD_VALUE);</b>
+<b class="nc">&nbsp;                    LOAD = Opcodes.ILOAD;</b>
+<b class="nc">&nbsp;                } else if (fieldClass == long.class) {</b>
+<b class="nc">&nbsp;                    methodName = &quot;putLong&quot;;</b>
+<b class="nc">&nbsp;                    methodDes = &quot;(Ljava/lang/Object;JJ)V&quot;;</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.LSTORE, FIELD_VALUE);</b>
+<b class="nc">&nbsp;                    LOAD = Opcodes.LLOAD;</b>
+<b class="nc">&nbsp;                } else if (fieldClass == float.class) {</b>
+<b class="nc">&nbsp;                    methodName = &quot;putFloat&quot;;</b>
+<b class="nc">&nbsp;                    methodDes = &quot;(Ljava/lang/Object;JF)V&quot;;</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.FSTORE, FIELD_VALUE);</b>
+<b class="nc">&nbsp;                    LOAD = Opcodes.FLOAD;</b>
+<b class="nc">&nbsp;                } else if (fieldClass == double.class) {</b>
+<b class="nc">&nbsp;                    methodName = &quot;putDouble&quot;;</b>
+<b class="nc">&nbsp;                    methodDes = &quot;(Ljava/lang/Object;JD)V&quot;;</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.DSTORE, FIELD_VALUE);</b>
+<b class="nc">&nbsp;                    LOAD = Opcodes.DLOAD;</b>
+<b class="nc">&nbsp;                } else if (fieldClass == char.class) {</b>
+<b class="nc">&nbsp;                    methodName = &quot;putChar&quot;;</b>
+<b class="nc">&nbsp;                    methodDes = &quot;(Ljava/lang/Object;JC)V&quot;;</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ISTORE, FIELD_VALUE);</b>
+<b class="nc">&nbsp;                    LOAD = Opcodes.ILOAD;</b>
+<b class="nc">&nbsp;                } else if (fieldClass == byte.class) {</b>
+<b class="nc">&nbsp;                    methodName = &quot;putByte&quot;;</b>
+<b class="nc">&nbsp;                    methodDes = &quot;(Ljava/lang/Object;JB)V&quot;;</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ISTORE, FIELD_VALUE);</b>
+<b class="nc">&nbsp;                    LOAD = Opcodes.ILOAD;</b>
+<b class="nc">&nbsp;                } else if (fieldClass == short.class) {</b>
+<b class="nc">&nbsp;                    methodName = &quot;putShort&quot;;</b>
+<b class="nc">&nbsp;                    methodDes = &quot;(Ljava/lang/Object;JS)V&quot;;</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ISTORE, FIELD_VALUE);</b>
+<b class="nc">&nbsp;                    LOAD = Opcodes.ILOAD;</b>
+<b class="nc">&nbsp;                } else if (fieldClass == boolean.class) {</b>
+<b class="nc">&nbsp;                    methodName = &quot;putBoolean&quot;;</b>
+<b class="nc">&nbsp;                    methodDes = &quot;(Ljava/lang/Object;JZ)V&quot;;</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ISTORE, FIELD_VALUE);</b>
+<b class="nc">&nbsp;                    LOAD = Opcodes.ILOAD;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    methodName = &quot;putObject&quot;;</b>
+<b class="nc">&nbsp;                    methodDes = &quot;(Ljava/lang/Object;JLjava/lang/Object;)V&quot;;</b>
+<b class="nc">&nbsp;                    mw.visitVarInsn(Opcodes.ASTORE, FIELD_VALUE);</b>
+<b class="nc">&nbsp;                    LOAD = Opcodes.ALOAD;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                mw.visitFieldInsn(Opcodes.GETSTATIC, TYPE_UNSAFE_UTILS, &quot;UNSAFE&quot;, &quot;Lsun/misc/Unsafe;&quot;);</b>
+<b class="nc">&nbsp;                mw.visitInsn(Opcodes.SWAP);</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitLdcInsn(</b>
+<b class="nc">&nbsp;                        UnsafeUtils.objectFieldOffset(field));</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(LOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, &quot;sun/misc/Unsafe&quot;, methodName, methodDes, false);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new JSONException(&quot;TODO&quot;); // TODO Lambda Getter</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(endSet_);</b>
+&nbsp;
+<b class="nc">&nbsp;        return varIndex;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwGetFieldType(String classNameType, MethodWriter mw, int THIS, int i, Type fieldType) {
+<b class="nc">&nbsp;        if (fieldType instanceof Class) {</b>
+<b class="nc">&nbsp;            Class fieldClass = (Class) fieldType;</b>
+<b class="nc">&nbsp;            String fieldClassName = fieldClass.getName();</b>
+<b class="nc">&nbsp;            boolean publicClass = Modifier.isPublic(fieldClass.getModifiers());</b>
+<b class="nc">&nbsp;            boolean internalClass = fieldClassName.startsWith(&quot;java.&quot;)</b>
+&nbsp;                    || fieldClass == JSONArray.class
+&nbsp;                    || fieldClass == JSONObject.class;
+<b class="nc">&nbsp;            if (publicClass &amp;&amp; internalClass) {</b>
+<b class="nc">&nbsp;                mw.visitLdcInsn((Class) fieldType);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldReader(i), DESC_FIELD_READER);</b>
+<b class="nc">&nbsp;        mw.visitFieldInsn(Opcodes.GETFIELD, TYPE_FIELD_READE, &quot;fieldType&quot;, &quot;Ljava/lang/reflect/Type;&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    void genIsEnabled(MethodWriter mw, int var, long features, Label elseLabel) {
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LLOAD, var);</b>
+<b class="nc">&nbsp;        mw.visitLdcInsn(features);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.LAND);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.LCONST_0);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFEQ, elseLabel);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:47</div>
+</div>
+</body>
+</html>

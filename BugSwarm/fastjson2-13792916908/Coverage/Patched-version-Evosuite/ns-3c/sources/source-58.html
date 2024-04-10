@@ -1,0 +1,1707 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectWriterBaseModule</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectWriterBaseModule (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectWriterBaseModule</td>
+<td class="coverageStat">
+  <span class="percent">
+    14.3%
+  </span>
+  <span class="absValue">
+    (1/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    1.5%
+  </span>
+  <span class="absValue">
+    (4/266)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ObjectWriterBaseModule$VoidObjectWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ObjectWriterBaseModule$WriterAnnotationProcessor</td>
+<td class="coverageStat">
+  <span class="percent">
+    4%
+  </span>
+  <span class="absValue">
+    (1/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0.2%
+  </span>
+  <span class="absValue">
+    (1/477)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    11.4%
+  </span>
+  <span class="absValue">
+    (4/35)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0.9%
+  </span>
+  <span class="absValue">
+    (7/746)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONFactory;
+&nbsp;import com.alibaba.fastjson2.JSONPObject;
+&nbsp;import com.alibaba.fastjson2.JSONPath;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.annotation.*;
+&nbsp;import com.alibaba.fastjson2.codec.BeanInfo;
+&nbsp;import com.alibaba.fastjson2.codec.FieldInfo;
+&nbsp;import com.alibaba.fastjson2.filter.Filter;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectWriterAnnotationProcessor;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectWriterModule;
+&nbsp;import com.alibaba.fastjson2.support.LambdaMiscCodec;
+&nbsp;import com.alibaba.fastjson2.support.money.MoneySupport;
+&nbsp;import com.alibaba.fastjson2.util.*;
+&nbsp;
+&nbsp;import java.io.File;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.*;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.net.URI;
+&nbsp;import java.net.URL;
+&nbsp;import java.nio.ByteBuffer;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.time.*;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.TimeUnit;
+&nbsp;import java.util.concurrent.atomic.*;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.codec.FieldInfo.JSON_AUTO_WIRED_ANNOTATED;
+&nbsp;import static com.alibaba.fastjson2.util.BeanUtils.*;
+&nbsp;
+&nbsp;public class ObjectWriterBaseModule
+&nbsp;        implements ObjectWriterModule {
+&nbsp;    static ObjectWriterAdapter STACK_TRACE_ELEMENT_WRITER;
+&nbsp;
+&nbsp;    final ObjectWriterProvider provider;
+&nbsp;    final WriterAnnotationProcessor annotationProcessor;
+&nbsp;
+<b class="fc">&nbsp;    public ObjectWriterBaseModule(ObjectWriterProvider provider) {</b>
+<b class="fc">&nbsp;        this.provider = provider;</b>
+<b class="fc">&nbsp;        this.annotationProcessor = new WriterAnnotationProcessor();</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObjectWriterProvider getProvider() {
+<b class="nc">&nbsp;        return provider;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObjectWriterAnnotationProcessor getAnnotationProcessor() {
+<b class="nc">&nbsp;        return annotationProcessor;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public class WriterAnnotationProcessor</b>
+&nbsp;            implements ObjectWriterAnnotationProcessor {
+&nbsp;        @Override
+&nbsp;        public void getBeanInfo(BeanInfo beanInfo, Class objectClass) {
+<b class="nc">&nbsp;            if (objectClass != null) {</b>
+<b class="nc">&nbsp;                Class superclass = objectClass.getSuperclass();</b>
+<b class="nc">&nbsp;                if (superclass != Object.class &amp;&amp; superclass != null &amp;&amp; superclass != Enum.class) {</b>
+<b class="nc">&nbsp;                    getBeanInfo(beanInfo, superclass);</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (beanInfo.seeAlso != null &amp;&amp; beanInfo.seeAlsoNames != null) {</b>
+<b class="nc">&nbsp;                        for (int i = 0; i &lt; beanInfo.seeAlso.length; i++) {</b>
+<b class="nc">&nbsp;                            Class seeAlso = beanInfo.seeAlso[i];</b>
+<b class="nc">&nbsp;                            if (seeAlso == objectClass &amp;&amp; i &lt; beanInfo.seeAlsoNames.length) {</b>
+<b class="nc">&nbsp;                                String seeAlsoName = beanInfo.seeAlsoNames[i];</b>
+<b class="nc">&nbsp;                                if (seeAlsoName != null &amp;&amp; seeAlsoName.length() != 0) {</b>
+<b class="nc">&nbsp;                                    beanInfo.typeName = seeAlsoName;</b>
+<b class="nc">&nbsp;                                    break;</b>
+&nbsp;                                }
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Annotation jsonType1x = null;</b>
+<b class="nc">&nbsp;            JSONType jsonType = null;</b>
+<b class="nc">&nbsp;            Annotation[] annotations = getAnnotations(objectClass);</b>
+<b class="nc">&nbsp;            for (Annotation annotation : annotations) {</b>
+<b class="nc">&nbsp;                Class annotationType = annotation.annotationType();</b>
+<b class="nc">&nbsp;                jsonType = findAnnotation(annotation, JSONType.class);</b>
+<b class="nc">&nbsp;                if (jsonType == annotation) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (annotationType == JSONCompiler.class) {</b>
+<b class="nc">&nbsp;                    JSONCompiler compiler = (JSONCompiler) annotation;</b>
+<b class="nc">&nbsp;                    if (compiler.value() == JSONCompiler.CompilerOption.LAMBDA) {</b>
+<b class="nc">&nbsp;                        beanInfo.writerFeatures |= FieldInfo.JIT;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (annotationType == JSONAutowired.class) {</b>
+<b class="nc">&nbsp;                    beanInfo.writerFeatures |= JSON_AUTO_WIRED_ANNOTATED;</b>
+&nbsp;
+<b class="nc">&nbsp;                    JSONAutowired autowired = (JSONAutowired) annotation;</b>
+<b class="nc">&nbsp;                    String fieldName = autowired.writer();</b>
+<b class="nc">&nbsp;                    if (!fieldName.isEmpty()) {</b>
+<b class="nc">&nbsp;                        beanInfo.objectWriterFieldName = fieldName;</b>
+&nbsp;                    }
+&nbsp;                    continue;
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                boolean useJacksonAnnotation = JSONFactory.isUseJacksonAnnotation();</b>
+<b class="nc">&nbsp;                switch (annotationType.getName()) {</b>
+&nbsp;                    case &quot;com.alibaba.fastjson.annotation.JSONType&quot;:
+<b class="nc">&nbsp;                        jsonType1x = annotation;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonIgnoreProperties&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonIgnoreProperties&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonIgnoreProperties(beanInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonPropertyOrder&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonPropertyOrder&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonPropertyOrder(beanInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonFormat&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonFormat&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonFormat(beanInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonInclude&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonInclude&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonInclude(beanInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonTypeInfo&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonTypeInfo&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonTypeInfo(beanInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.databind.annotation.JsonSerialize&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.databind.annotation.JsonSerialize&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonSerialize(beanInfo, annotation);</b>
+<b class="nc">&nbsp;                            if (beanInfo.serializer != null &amp;&amp; Enum.class.isAssignableFrom(objectClass)) {</b>
+<b class="nc">&nbsp;                                beanInfo.writeEnumAsJavaBean = true;</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonTypeName&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonTypeName&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonTypeName(beanInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonSubTypes&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonSubTypes&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonSubTypes(beanInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;kotlin.Metadata&quot;:
+<b class="nc">&nbsp;                        beanInfo.kotlin = true;</b>
+<b class="nc">&nbsp;                        BeanUtils.getKotlinConstructor(objectClass, beanInfo);</b>
+<b class="nc">&nbsp;                        beanInfo.createParameterNames = BeanUtils.getKotlinConstructorParameters(objectClass);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    default:
+&nbsp;                        break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (jsonType == null) {</b>
+<b class="nc">&nbsp;                Class mixInSource = provider.mixInCache.get(objectClass);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (mixInSource != null) {</b>
+<b class="nc">&nbsp;                    beanInfo.mixIn = true;</b>
+&nbsp;
+<b class="nc">&nbsp;                    Annotation[] mixInAnnotations = getAnnotations(mixInSource);</b>
+<b class="nc">&nbsp;                    for (Annotation annotation : mixInAnnotations) {</b>
+<b class="nc">&nbsp;                        Class&lt;? extends Annotation&gt; annotationType = annotation.annotationType();</b>
+<b class="nc">&nbsp;                        jsonType = findAnnotation(annotation, JSONType.class);</b>
+<b class="nc">&nbsp;                        if (jsonType == annotation) {</b>
+<b class="nc">&nbsp;                            continue;</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        if (annotationType == JSONAutowired.class) {</b>
+<b class="nc">&nbsp;                            beanInfo.writerFeatures |= JSON_AUTO_WIRED_ANNOTATED;</b>
+&nbsp;
+<b class="nc">&nbsp;                            JSONAutowired autowired = (JSONAutowired) annotation;</b>
+<b class="nc">&nbsp;                            String fieldName = autowired.writer();</b>
+<b class="nc">&nbsp;                            if (!fieldName.isEmpty()) {</b>
+<b class="nc">&nbsp;                                beanInfo.objectWriterFieldName = fieldName;</b>
+&nbsp;                            }
+&nbsp;                            continue;
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        String annotationTypeName = annotationType.getName();</b>
+<b class="nc">&nbsp;                        switch (annotationTypeName) {</b>
+&nbsp;                            case &quot;com.alibaba.fastjson.annotation.JSONType&quot;:
+<b class="nc">&nbsp;                                jsonType1x = annotation;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            default:
+&nbsp;                                break;
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (jsonType != null) {</b>
+<b class="nc">&nbsp;                Class&lt;?&gt;[] classes = jsonType.seeAlso();</b>
+<b class="nc">&nbsp;                if (classes.length != 0) {</b>
+<b class="nc">&nbsp;                    beanInfo.seeAlso = classes;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                String typeKey = jsonType.typeKey();</b>
+<b class="nc">&nbsp;                if (!typeKey.isEmpty()) {</b>
+<b class="nc">&nbsp;                    beanInfo.typeKey = typeKey;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                String typeName = jsonType.typeName();</b>
+<b class="nc">&nbsp;                if (!typeName.isEmpty()) {</b>
+<b class="nc">&nbsp;                    beanInfo.typeName = typeName;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                for (JSONWriter.Feature feature : jsonType.serializeFeatures()) {</b>
+<b class="nc">&nbsp;                    beanInfo.writerFeatures |= feature.mask;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                beanInfo.namingStrategy =</b>
+<b class="nc">&nbsp;                        jsonType.naming().name();</b>
+&nbsp;
+<b class="nc">&nbsp;                String[] ignores = jsonType.ignores();</b>
+<b class="nc">&nbsp;                if (ignores.length &gt; 0) {</b>
+<b class="nc">&nbsp;                    beanInfo.ignores = ignores;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                String[] includes = jsonType.includes();</b>
+<b class="nc">&nbsp;                if (includes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                    beanInfo.includes = includes;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                String[] orders = jsonType.orders();</b>
+<b class="nc">&nbsp;                if (orders.length &gt; 0) {</b>
+<b class="nc">&nbsp;                    beanInfo.orders = orders;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Class&lt;?&gt; serializer = jsonType.serializer();</b>
+<b class="nc">&nbsp;                if (ObjectWriter.class.isAssignableFrom(serializer)) {</b>
+<b class="nc">&nbsp;                    beanInfo.serializer = serializer;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Class&lt;? extends Filter&gt;[] serializeFilters = jsonType.serializeFilters();</b>
+<b class="nc">&nbsp;                if (serializeFilters.length != 0) {</b>
+<b class="nc">&nbsp;                    beanInfo.serializeFilters = serializeFilters;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                String format = jsonType.format();</b>
+<b class="nc">&nbsp;                if (!format.isEmpty()) {</b>
+<b class="nc">&nbsp;                    beanInfo.format = format;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                String locale = jsonType.locale();</b>
+<b class="nc">&nbsp;                if (!locale.isEmpty()) {</b>
+<b class="nc">&nbsp;                    String[] parts = locale.split(&quot;_&quot;);</b>
+<b class="nc">&nbsp;                    if (parts.length == 2) {</b>
+<b class="nc">&nbsp;                        beanInfo.locale = new Locale(parts[0], parts[1]);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (!jsonType.alphabetic()) {</b>
+<b class="nc">&nbsp;                    beanInfo.alphabetic = false;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (jsonType.writeEnumAsJavaBean()) {</b>
+<b class="nc">&nbsp;                    beanInfo.writeEnumAsJavaBean = true;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (jsonType1x != null) {</b>
+<b class="nc">&nbsp;                final Annotation annotation = jsonType1x;</b>
+<b class="nc">&nbsp;                BeanUtils.annotationMethods(jsonType1x.annotationType(), method -&gt; BeanUtils.processJSONType1x(beanInfo, annotation, method));</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (beanInfo.seeAlso != null &amp;&amp; beanInfo.seeAlso.length != 0</b>
+<b class="nc">&nbsp;                    &amp;&amp; (beanInfo.typeName == null || beanInfo.typeName.length() == 0)) {</b>
+<b class="nc">&nbsp;                for (Class seeAlsoClass : beanInfo.seeAlso) {</b>
+<b class="nc">&nbsp;                    if (seeAlsoClass == objectClass) {</b>
+<b class="nc">&nbsp;                        beanInfo.typeName = objectClass.getSimpleName();</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void getFieldInfo(BeanInfo beanInfo, FieldInfo fieldInfo, Class objectClass, Field field) {
+<b class="nc">&nbsp;            if (objectClass != null) {</b>
+<b class="nc">&nbsp;                Class mixInSource = provider.mixInCache.get(objectClass);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (mixInSource != null &amp;&amp; mixInSource != objectClass) {</b>
+<b class="nc">&nbsp;                    Field mixInField = null;</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        mixInField = mixInSource.getDeclaredField(field.getName());</b>
+<b class="nc">&nbsp;                    } catch (Exception ignored) {</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (mixInField != null) {</b>
+<b class="nc">&nbsp;                        getFieldInfo(beanInfo, fieldInfo, mixInSource, mixInField);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Class fieldClassMixInSource = provider.mixInCache.get(field.getType());</b>
+<b class="nc">&nbsp;            if (fieldClassMixInSource != null) {</b>
+<b class="nc">&nbsp;                fieldInfo.fieldClassMixIn = true;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            int modifiers = field.getModifiers();</b>
+<b class="nc">&nbsp;            boolean isTransient = Modifier.isTransient(modifiers);</b>
+<b class="nc">&nbsp;            if (isTransient) {</b>
+<b class="nc">&nbsp;                fieldInfo.ignore = true;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            JSONField jsonField = null;</b>
+<b class="nc">&nbsp;            Annotation[] annotations = getAnnotations(field);</b>
+<b class="nc">&nbsp;            for (Annotation annotation : annotations) {</b>
+<b class="nc">&nbsp;                Class&lt;? extends Annotation&gt; annotationType = annotation.annotationType();</b>
+<b class="nc">&nbsp;                if (jsonField == null) {</b>
+<b class="nc">&nbsp;                    jsonField = findAnnotation(annotation, JSONField.class);</b>
+<b class="nc">&nbsp;                    if (jsonField == annotation) {</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                String annotationTypeName = annotationType.getName();</b>
+<b class="nc">&nbsp;                boolean useJacksonAnnotation = JSONFactory.isUseJacksonAnnotation();</b>
+<b class="nc">&nbsp;                switch (annotationTypeName) {</b>
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonIgnore&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonIgnore&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonIgnore(fieldInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonAnyGetter&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonAnyGetter&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            fieldInfo.features |= FieldInfo.UNWRAPPED_MASK;</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonValue&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonValue&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            fieldInfo.features |= FieldInfo.VALUE_MASK;</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonRawValue&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonRawValue&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            fieldInfo.features |= FieldInfo.RAW_VALUE_MASK;</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.alibaba.fastjson.annotation.JSONField&quot;:
+<b class="nc">&nbsp;                        processJSONField1x(fieldInfo, annotation);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonProperty&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonProperty&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonProperty(fieldInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonFormat&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonFormat&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonFormat(fieldInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonInclude&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonInclude&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonInclude(beanInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.databind.annotation.JsonSerialize&quot;:
+&nbsp;                    case &quot;com.fasterxml.jackson.databind.annotation.JsonSerialize&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonSerialize(fieldInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.google.gson.annotations.SerializedName&quot;:
+<b class="nc">&nbsp;                        processGsonSerializedName(fieldInfo, annotation);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    default:
+&nbsp;                        break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (jsonField == null) {</b>
+<b class="nc">&nbsp;                return;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            loadFieldInfo(fieldInfo, jsonField);</b>
+&nbsp;
+<b class="nc">&nbsp;            Class writeUsing = jsonField.writeUsing();</b>
+<b class="nc">&nbsp;            if (ObjectWriter.class.isAssignableFrom(writeUsing)) {</b>
+<b class="nc">&nbsp;                fieldInfo.writeUsing = writeUsing;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Class serializeUsing = jsonField.serializeUsing();</b>
+<b class="nc">&nbsp;            if (ObjectWriter.class.isAssignableFrom(serializeUsing)) {</b>
+<b class="nc">&nbsp;                fieldInfo.writeUsing = serializeUsing;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (jsonField.jsonDirect()) {</b>
+<b class="nc">&nbsp;                fieldInfo.features |= FieldInfo.RAW_VALUE_MASK;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if ((fieldInfo.features &amp; JSONWriter.Feature.WriteNonStringValueAsString.mask) != 0</b>
+<b class="nc">&nbsp;                    &amp;&amp; !String.class.equals(field.getType())</b>
+&nbsp;                    &amp;&amp; fieldInfo.writeUsing == null
+&nbsp;            ) {
+<b class="nc">&nbsp;                fieldInfo.writeUsing = ObjectWriterImplToString.class;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        private void processJacksonJsonSubTypes(BeanInfo beanInfo, Annotation annotation) {
+<b class="nc">&nbsp;            Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="nc">&nbsp;            BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="nc">&nbsp;                String name = m.getName();</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    Object result = m.invoke(annotation);</b>
+<b class="nc">&nbsp;                    switch (name) {</b>
+&nbsp;                        case &quot;value&quot;: {
+<b class="nc">&nbsp;                            Annotation[] value = (Annotation[]) result;</b>
+<b class="nc">&nbsp;                            if (value.length != 0) {</b>
+<b class="nc">&nbsp;                                beanInfo.seeAlso = new Class[value.length];</b>
+<b class="nc">&nbsp;                                beanInfo.seeAlsoNames = new String[value.length];</b>
+<b class="nc">&nbsp;                                for (int i = 0; i &lt; value.length; i++) {</b>
+<b class="nc">&nbsp;                                    Annotation item = value[i];</b>
+<b class="nc">&nbsp;                                    processJacksonJsonSubTypesType(beanInfo, i, item);</b>
+&nbsp;                                }
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        default:
+&nbsp;                            break;
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+<b class="nc">&nbsp;                }</b>
+&nbsp;            });
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        private void processJacksonJsonSerialize(BeanInfo beanInfo, Annotation annotation) {
+<b class="nc">&nbsp;            Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="nc">&nbsp;            BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="nc">&nbsp;                String name = m.getName();</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    Object result = m.invoke(annotation);</b>
+<b class="nc">&nbsp;                    switch (name) {</b>
+&nbsp;                        case &quot;using&quot;: {
+<b class="nc">&nbsp;                            Class using = processUsing((Class) result);</b>
+<b class="nc">&nbsp;                            if (using != null) {</b>
+<b class="nc">&nbsp;                                beanInfo.serializer = using;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;keyUsing&quot;:
+<b class="nc">&nbsp;                            Class keyUsing = processUsing((Class) result);</b>
+<b class="nc">&nbsp;                            if (keyUsing != null) {</b>
+<b class="nc">&nbsp;                                beanInfo.serializer = keyUsing;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        default:
+&nbsp;                            break;
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+<b class="nc">&nbsp;                }</b>
+&nbsp;            });
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        private Class processUsing(Class result) {
+<b class="nc">&nbsp;            Class writeUsing = result;</b>
+<b class="nc">&nbsp;            String usingName = writeUsing.getName();</b>
+<b class="nc">&nbsp;            String noneClassName0 = &quot;com.alibaba.fastjson2.adapter.jackson.databind.JsonSerializer$None&quot;;</b>
+<b class="nc">&nbsp;            String noneClassName1 = &quot;com.fasterxml.jackson.databind.JsonSerializer$None&quot;;</b>
+<b class="nc">&nbsp;            if (!noneClassName0.equals(usingName)</b>
+<b class="nc">&nbsp;                    &amp;&amp; !noneClassName1.equals(usingName)</b>
+<b class="nc">&nbsp;                    &amp;&amp; ObjectWriter.class.isAssignableFrom(writeUsing)</b>
+&nbsp;            ) {
+<b class="nc">&nbsp;                return writeUsing;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (&quot;com.fasterxml.jackson.databind.ser.std.ToStringSerializer&quot;.equals(usingName)) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplToString.class;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private void processJacksonJsonTypeInfo(BeanInfo beanInfo, Annotation annotation) {
+<b class="nc">&nbsp;            Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="nc">&nbsp;            BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="nc">&nbsp;                String name = m.getName();</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    Object result = m.invoke(annotation);</b>
+<b class="nc">&nbsp;                    switch (name) {</b>
+&nbsp;                        case &quot;property&quot;: {
+<b class="nc">&nbsp;                            String value = (String) result;</b>
+<b class="nc">&nbsp;                            if (!value.isEmpty()) {</b>
+<b class="nc">&nbsp;                                beanInfo.typeKey = value;</b>
+<b class="nc">&nbsp;                                beanInfo.writerFeatures |= JSONWriter.Feature.WriteClassName.mask;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        default:
+&nbsp;                            break;
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+<b class="nc">&nbsp;                }</b>
+&nbsp;            });
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        private void processJacksonJsonPropertyOrder(BeanInfo beanInfo, Annotation annotation) {
+<b class="nc">&nbsp;            Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="nc">&nbsp;            BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="nc">&nbsp;                String name = m.getName();</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    Object result = m.invoke(annotation);</b>
+<b class="nc">&nbsp;                    switch (name) {</b>
+&nbsp;                        case &quot;value&quot;: {
+<b class="nc">&nbsp;                            String[] value = (String[]) result;</b>
+<b class="nc">&nbsp;                            if (value.length != 0) {</b>
+<b class="nc">&nbsp;                                beanInfo.orders = value;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        default:
+&nbsp;                            break;
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+<b class="nc">&nbsp;                }</b>
+&nbsp;            });
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        private void processJacksonJsonSerialize(FieldInfo fieldInfo, Annotation annotation) {
+<b class="nc">&nbsp;            Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="nc">&nbsp;            BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="nc">&nbsp;                String name = m.getName();</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    Object result = m.invoke(annotation);</b>
+<b class="nc">&nbsp;                    switch (name) {</b>
+&nbsp;                        case &quot;using&quot;:
+<b class="nc">&nbsp;                            Class using = processUsing((Class) result);</b>
+<b class="nc">&nbsp;                            if (using != null) {</b>
+<b class="nc">&nbsp;                                fieldInfo.writeUsing = using;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        case &quot;keyUsing&quot;:
+<b class="nc">&nbsp;                            Class keyUsing = processUsing((Class) result);</b>
+<b class="nc">&nbsp;                            if (keyUsing != null) {</b>
+<b class="nc">&nbsp;                                fieldInfo.keyUsing = keyUsing;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        case &quot;valueUsing&quot;:
+<b class="nc">&nbsp;                            Class valueUsing = processUsing((Class) result);</b>
+<b class="nc">&nbsp;                            if (valueUsing != null) {</b>
+<b class="nc">&nbsp;                                fieldInfo.valueUsing = valueUsing;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        default:
+&nbsp;                            break;
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+<b class="nc">&nbsp;                }</b>
+&nbsp;            });
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        private void processJacksonJsonProperty(FieldInfo fieldInfo, Annotation annotation) {
+<b class="nc">&nbsp;            Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="nc">&nbsp;            BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="nc">&nbsp;                String name = m.getName();</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    Object result = m.invoke(annotation);</b>
+<b class="nc">&nbsp;                    switch (name) {</b>
+&nbsp;                        case &quot;value&quot;:
+<b class="nc">&nbsp;                            String value = (String) result;</b>
+<b class="nc">&nbsp;                            if (!value.isEmpty()) {</b>
+<b class="nc">&nbsp;                                fieldInfo.fieldName = value;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        case &quot;access&quot;: {
+<b class="nc">&nbsp;                            String access = ((Enum) result).name();</b>
+<b class="nc">&nbsp;                            switch (access) {</b>
+&nbsp;                                case &quot;WRITE_ONLY&quot;:
+<b class="nc">&nbsp;                                    fieldInfo.ignore = true;</b>
+<b class="nc">&nbsp;                                    break;</b>
+&nbsp;                                default:
+<b class="nc">&nbsp;                                    fieldInfo.ignore = false;</b>
+&nbsp;                                    break;
+&nbsp;                            }
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        default:
+&nbsp;                            break;
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+<b class="nc">&nbsp;                }</b>
+&nbsp;            });
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        private void processJacksonJsonIgnoreProperties(BeanInfo beanInfo, Annotation annotation) {
+<b class="nc">&nbsp;            Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="nc">&nbsp;            BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="nc">&nbsp;                String name = m.getName();</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    Object result = m.invoke(annotation);</b>
+<b class="nc">&nbsp;                    switch (name) {</b>
+&nbsp;                        case &quot;value&quot;: {
+<b class="nc">&nbsp;                            String[] value = (String[]) result;</b>
+<b class="nc">&nbsp;                            if (value.length != 0) {</b>
+<b class="nc">&nbsp;                                beanInfo.ignores = value;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        default:
+&nbsp;                            break;
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+<b class="nc">&nbsp;                }</b>
+&nbsp;            });
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        private void processJSONField1x(FieldInfo fieldInfo, Annotation annotation) {
+<b class="nc">&nbsp;            Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="nc">&nbsp;            BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="nc">&nbsp;                String name = m.getName();</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    Object result = m.invoke(annotation);</b>
+<b class="nc">&nbsp;                    switch (name) {</b>
+&nbsp;                        case &quot;name&quot;: {
+<b class="nc">&nbsp;                            String value = (String) result;</b>
+<b class="nc">&nbsp;                            if (!value.isEmpty()) {</b>
+<b class="nc">&nbsp;                                fieldInfo.fieldName = value;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;format&quot;: {
+<b class="nc">&nbsp;                            loadJsonFieldFormat(fieldInfo, (String) result);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case &quot;label&quot;: {
+<b class="nc">&nbsp;                            String value = (String) result;</b>
+<b class="nc">&nbsp;                            if (!value.isEmpty()) {</b>
+<b class="nc">&nbsp;                                fieldInfo.label = value;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;defaultValue&quot;: {
+<b class="nc">&nbsp;                            String value = (String) result;</b>
+<b class="nc">&nbsp;                            if (!value.isEmpty()) {</b>
+<b class="nc">&nbsp;                                fieldInfo.defaultValue = value;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;ordinal&quot;: {
+<b class="nc">&nbsp;                            Integer ordinal = (Integer) result;</b>
+<b class="nc">&nbsp;                            if (ordinal.intValue() != 0) {</b>
+<b class="nc">&nbsp;                                fieldInfo.ordinal = ordinal;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;serialize&quot;: {
+<b class="nc">&nbsp;                            Boolean serialize = (Boolean) result;</b>
+<b class="nc">&nbsp;                            if (!serialize.booleanValue()) {</b>
+<b class="nc">&nbsp;                                fieldInfo.ignore = true;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;unwrapped&quot;: {
+<b class="nc">&nbsp;                            Boolean unwrapped = (Boolean) result;</b>
+<b class="nc">&nbsp;                            if (unwrapped.booleanValue()) {</b>
+<b class="nc">&nbsp;                                fieldInfo.features |= FieldInfo.UNWRAPPED_MASK;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;serialzeFeatures&quot;: {
+<b class="nc">&nbsp;                            Enum[] features = (Enum[]) result;</b>
+<b class="nc">&nbsp;                            applyFeatures(fieldInfo, features);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case &quot;serializeUsing&quot;: {
+<b class="nc">&nbsp;                            Class writeUsing = (Class) result;</b>
+<b class="nc">&nbsp;                            if (ObjectWriter.class.isAssignableFrom(writeUsing)) {</b>
+<b class="nc">&nbsp;                                fieldInfo.writeUsing = writeUsing;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;jsonDirect&quot;: {
+<b class="nc">&nbsp;                            Boolean jsonDirect = (Boolean) result;</b>
+<b class="nc">&nbsp;                            if (jsonDirect) {</b>
+<b class="nc">&nbsp;                                fieldInfo.features |= FieldInfo.RAW_VALUE_MASK;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        default:
+&nbsp;                            break;
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+<b class="nc">&nbsp;                }</b>
+&nbsp;            });
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        private void applyFeatures(FieldInfo fieldInfo, Enum[] features) {
+<b class="nc">&nbsp;            for (Enum feature : features) {</b>
+<b class="nc">&nbsp;                switch (feature.name()) {</b>
+&nbsp;                    case &quot;UseISO8601DateFormat&quot;:
+<b class="nc">&nbsp;                        fieldInfo.format = &quot;iso8601&quot;;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;WriteMapNullValue&quot;:
+<b class="nc">&nbsp;                        fieldInfo.features |= JSONWriter.Feature.WriteNulls.mask;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;WriteNullListAsEmpty&quot;:
+<b class="nc">&nbsp;                        fieldInfo.features |= JSONWriter.Feature.WriteNullListAsEmpty.mask;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;WriteNullStringAsEmpty&quot;:
+<b class="nc">&nbsp;                        fieldInfo.features |= JSONWriter.Feature.WriteNullStringAsEmpty.mask;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;WriteNullNumberAsZero&quot;:
+<b class="nc">&nbsp;                        fieldInfo.features |= JSONWriter.Feature.WriteNullNumberAsZero.mask;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;WriteNullBooleanAsFalse&quot;:
+<b class="nc">&nbsp;                        fieldInfo.features |= JSONWriter.Feature.WriteNullBooleanAsFalse.mask;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;BrowserCompatible&quot;:
+<b class="nc">&nbsp;                        fieldInfo.features |= JSONWriter.Feature.BrowserCompatible.mask;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;WriteClassName&quot;:
+<b class="nc">&nbsp;                        fieldInfo.features |= JSONWriter.Feature.WriteClassName.mask;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;WriteNonStringValueAsString&quot;:
+<b class="nc">&nbsp;                        fieldInfo.features |= JSONWriter.Feature.WriteNonStringValueAsString.mask;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;WriteEnumUsingToString&quot;:
+<b class="nc">&nbsp;                        fieldInfo.features |= JSONWriter.Feature.WriteEnumUsingToString.mask;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;NotWriteRootClassName&quot;:
+<b class="nc">&nbsp;                        fieldInfo.features |= JSONWriter.Feature.NotWriteRootClassName.mask;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;IgnoreErrorGetter&quot;:
+<b class="nc">&nbsp;                        fieldInfo.features |= JSONWriter.Feature.IgnoreErrorGetter.mask;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;WriteBigDecimalAsPlain&quot;:
+<b class="nc">&nbsp;                        fieldInfo.features |= JSONWriter.Feature.WriteBigDecimalAsPlain.mask;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    default:
+&nbsp;                        break;
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void getFieldInfo(BeanInfo beanInfo, FieldInfo fieldInfo, Class objectClass, Method method) {
+<b class="nc">&nbsp;            Class mixInSource = provider.mixInCache.get(objectClass);</b>
+<b class="nc">&nbsp;            String methodName = method.getName();</b>
+&nbsp;
+<b class="nc">&nbsp;            switch (methodName) {</b>
+&nbsp;                case &quot;getTargetSql&quot;:
+<b class="nc">&nbsp;                    if (objectClass != null</b>
+<b class="nc">&nbsp;                            &amp;&amp; objectClass.getName().startsWith(&quot;com.baomidou.mybatisplus.&quot;)</b>
+&nbsp;                    ) {
+<b class="nc">&nbsp;                        fieldInfo.features |= JSONWriter.Feature.IgnoreErrorGetter.mask;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (mixInSource != null &amp;&amp; mixInSource != objectClass) {</b>
+<b class="nc">&nbsp;                Method mixInMethod = null;</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    mixInMethod = mixInSource.getDeclaredMethod(methodName, method.getParameterTypes());</b>
+<b class="nc">&nbsp;                } catch (Exception ignored) {</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+<b class="nc">&nbsp;                if (mixInMethod != null) {</b>
+<b class="nc">&nbsp;                    getFieldInfo(beanInfo, fieldInfo, mixInSource, mixInMethod);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Class fieldClassMixInSource = provider.mixInCache.get(method.getReturnType());</b>
+<b class="nc">&nbsp;            if (fieldClassMixInSource != null) {</b>
+<b class="nc">&nbsp;                fieldInfo.fieldClassMixIn = true;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (JDKUtils.CLASS_TRANSIENT != null &amp;&amp; method.getAnnotation(JDKUtils.CLASS_TRANSIENT) != null) {</b>
+<b class="nc">&nbsp;                fieldInfo.ignore = true;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (objectClass != null) {</b>
+<b class="nc">&nbsp;                Class superclass = objectClass.getSuperclass();</b>
+<b class="nc">&nbsp;                Method supperMethod = BeanUtils.getMethod(superclass, method);</b>
+<b class="nc">&nbsp;                if (supperMethod != null) {</b>
+<b class="nc">&nbsp;                    getFieldInfo(beanInfo, fieldInfo, superclass, supperMethod);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Class[] interfaces = objectClass.getInterfaces();</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; interfaces.length; i++) {</b>
+<b class="nc">&nbsp;                    Method interfaceMethod = BeanUtils.getMethod(interfaces[i], method);</b>
+<b class="nc">&nbsp;                    if (interfaceMethod != null) {</b>
+<b class="nc">&nbsp;                        getFieldInfo(beanInfo, fieldInfo, superclass, interfaceMethod);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Annotation[] annotations = getAnnotations(method);</b>
+<b class="nc">&nbsp;            processAnnotations(fieldInfo, annotations);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (!objectClass.getName().startsWith(&quot;java.lang&quot;) &amp;&amp; !BeanUtils.isRecord(objectClass)) {</b>
+<b class="nc">&nbsp;                Field methodField = getField(objectClass, method);</b>
+<b class="nc">&nbsp;                if (methodField != null) {</b>
+<b class="nc">&nbsp;                    fieldInfo.features |= FieldInfo.FIELD_MASK;</b>
+<b class="nc">&nbsp;                    getFieldInfo(beanInfo, fieldInfo, objectClass, methodField);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (beanInfo.kotlin</b>
+&nbsp;                    &amp;&amp; beanInfo.creatorConstructor != null
+&nbsp;                    &amp;&amp; beanInfo.createParameterNames != null
+&nbsp;            ) {
+<b class="nc">&nbsp;                String fieldName = BeanUtils.getterName(method, null);</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; beanInfo.createParameterNames.length; i++) {</b>
+<b class="nc">&nbsp;                    if (fieldName.equals(beanInfo.createParameterNames[i])) {</b>
+<b class="nc">&nbsp;                        Annotation[][] creatorConsParamAnnotations</b>
+<b class="nc">&nbsp;                                = beanInfo.creatorConstructor.getParameterAnnotations();</b>
+<b class="nc">&nbsp;                        if (i &lt; creatorConsParamAnnotations.length) {</b>
+<b class="nc">&nbsp;                            Annotation[] parameterAnnotations = creatorConsParamAnnotations[i];</b>
+<b class="nc">&nbsp;                            processAnnotations(fieldInfo, parameterAnnotations);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        private void processAnnotations(FieldInfo fieldInfo, Annotation[] annotations) {
+<b class="nc">&nbsp;            for (Annotation annotation : annotations) {</b>
+<b class="nc">&nbsp;                Class&lt;? extends Annotation&gt; annotationType = annotation.annotationType();</b>
+<b class="nc">&nbsp;                JSONField jsonField = findAnnotation(annotation, JSONField.class);</b>
+<b class="nc">&nbsp;                if (Objects.nonNull(jsonField)) {</b>
+<b class="nc">&nbsp;                    loadFieldInfo(fieldInfo, jsonField);</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (annotationType == JSONCompiler.class) {</b>
+<b class="nc">&nbsp;                    JSONCompiler compiler = (JSONCompiler) annotation;</b>
+<b class="nc">&nbsp;                    if (compiler.value() == JSONCompiler.CompilerOption.LAMBDA) {</b>
+<b class="nc">&nbsp;                        fieldInfo.features |= FieldInfo.JIT;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                boolean useJacksonAnnotation = JSONFactory.isUseJacksonAnnotation();</b>
+<b class="nc">&nbsp;                String annotationTypeName = annotationType.getName();</b>
+<b class="nc">&nbsp;                switch (annotationTypeName) {</b>
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonIgnore&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonIgnore&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonIgnore(fieldInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonAnyGetter&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonAnyGetter&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            fieldInfo.features |= FieldInfo.UNWRAPPED_MASK;</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.alibaba.fastjson.annotation.JSONField&quot;:
+<b class="nc">&nbsp;                        processJSONField1x(fieldInfo, annotation);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;java.beans.Transient&quot;:
+<b class="nc">&nbsp;                        fieldInfo.ignore = true;</b>
+<b class="nc">&nbsp;                        fieldInfo.isTransient = true;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonProperty&quot;:
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonProperty&quot;: {
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonProperty(fieldInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    }
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonFormat&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonFormat&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonFormat(fieldInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonValue&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonValue&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            fieldInfo.features |= FieldInfo.VALUE_MASK;</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonRawValue&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonRawValue&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            fieldInfo.features |= FieldInfo.RAW_VALUE_MASK;</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.databind.annotation.JsonSerialize&quot;:
+&nbsp;                    case &quot;com.fasterxml.jackson.databind.annotation.JsonSerialize&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonSerialize(fieldInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    default:
+&nbsp;                        break;
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * load {@link JSONField} into {@link FieldInfo} params
+&nbsp;         *
+&nbsp;         * @param fieldInfo Java Field Info
+&nbsp;         * @param jsonField {@link JSONField} JSON Field Info
+&nbsp;         */
+&nbsp;        private void loadFieldInfo(FieldInfo fieldInfo, JSONField jsonField) {
+<b class="nc">&nbsp;            String jsonFieldName = jsonField.name();</b>
+<b class="nc">&nbsp;            if (!jsonFieldName.isEmpty()) {</b>
+<b class="nc">&nbsp;                fieldInfo.fieldName = jsonFieldName;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String defaultValue = jsonField.defaultValue();</b>
+<b class="nc">&nbsp;            if (!defaultValue.isEmpty()) {</b>
+<b class="nc">&nbsp;                fieldInfo.defaultValue = defaultValue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            loadJsonFieldFormat(fieldInfo, jsonField.format());</b>
+&nbsp;
+<b class="nc">&nbsp;            String label = jsonField.label();</b>
+<b class="nc">&nbsp;            if (!label.isEmpty()) {</b>
+<b class="nc">&nbsp;                fieldInfo.label = label;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (!fieldInfo.ignore) {</b>
+<b class="nc">&nbsp;                fieldInfo.ignore = !jsonField.serialize();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (jsonField.unwrapped()) {</b>
+<b class="nc">&nbsp;                fieldInfo.features |= FieldInfo.UNWRAPPED_MASK;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            for (JSONWriter.Feature feature : jsonField.serializeFeatures()) {</b>
+<b class="nc">&nbsp;                fieldInfo.features |= feature.mask;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            int ordinal = jsonField.ordinal();</b>
+<b class="nc">&nbsp;            if (ordinal != 0) {</b>
+<b class="nc">&nbsp;                fieldInfo.ordinal = ordinal;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (jsonField.value()) {</b>
+<b class="nc">&nbsp;                fieldInfo.features |= FieldInfo.VALUE_MASK;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (jsonField.jsonDirect()) {</b>
+<b class="nc">&nbsp;                fieldInfo.features |= FieldInfo.RAW_VALUE_MASK;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Class serializeUsing = jsonField.serializeUsing();</b>
+<b class="nc">&nbsp;            if (ObjectWriter.class.isAssignableFrom(serializeUsing)) {</b>
+<b class="nc">&nbsp;                fieldInfo.writeUsing = serializeUsing;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * load {@link JSONField} format params into FieldInfo
+&nbsp;         *
+&nbsp;         * @param fieldInfo Java Field Info
+&nbsp;         * @param jsonFieldFormat {@link JSONField} format params
+&nbsp;         */
+&nbsp;        private void loadJsonFieldFormat(FieldInfo fieldInfo, String jsonFieldFormat) {
+<b class="nc">&nbsp;            if (!jsonFieldFormat.isEmpty()) {</b>
+<b class="nc">&nbsp;                jsonFieldFormat = jsonFieldFormat.trim();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (jsonFieldFormat.indexOf(&#39;T&#39;) != -1 &amp;&amp; !jsonFieldFormat.contains(&quot;&#39;T&#39;&quot;)) {</b>
+<b class="nc">&nbsp;                    jsonFieldFormat = jsonFieldFormat.replaceAll(&quot;T&quot;, &quot;&#39;T&#39;&quot;);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (!jsonFieldFormat.isEmpty()) {</b>
+<b class="nc">&nbsp;                    fieldInfo.format = jsonFieldFormat;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    ObjectWriter getExternalObjectWriter(String className, Class objectClass) {
+<b class="nc">&nbsp;        switch (className) {</b>
+&nbsp;            case &quot;java.sql.Time&quot;:
+<b class="nc">&nbsp;                return JdbcSupport.createTimeWriter(null);</b>
+&nbsp;            case &quot;java.sql.Timestamp&quot;:
+<b class="nc">&nbsp;                return JdbcSupport.createTimestampWriter(objectClass, null);</b>
+&nbsp;            case &quot;org.joda.time.chrono.GregorianChronology&quot;:
+<b class="nc">&nbsp;                return JodaSupport.createGregorianChronologyWriter(objectClass);</b>
+&nbsp;            case &quot;org.joda.time.chrono.ISOChronology&quot;:
+<b class="nc">&nbsp;                return JodaSupport.createISOChronologyWriter(objectClass);</b>
+&nbsp;            case &quot;org.joda.time.LocalDate&quot;:
+<b class="nc">&nbsp;                return JodaSupport.createLocalDateWriter(objectClass, null);</b>
+&nbsp;            case &quot;org.joda.time.LocalDateTime&quot;:
+<b class="nc">&nbsp;                return JodaSupport.createLocalDateTimeWriter(objectClass, null);</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                if (JdbcSupport.isClob(objectClass)) {</b>
+<b class="nc">&nbsp;                    return JdbcSupport.createClobWriter(objectClass);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObjectWriter getObjectWriter(Type objectType, Class objectClass) {
+<b class="nc">&nbsp;        if (objectType == String.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplString.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectClass == null) {</b>
+<b class="nc">&nbsp;            if (objectType instanceof Class) {</b>
+<b class="nc">&nbsp;                objectClass = (Class) objectType;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                objectClass = TypeUtils.getMapping(objectType);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String className = objectClass.getName();</b>
+<b class="nc">&nbsp;        ObjectWriter externalObjectWriter = getExternalObjectWriter(className, objectClass);</b>
+<b class="nc">&nbsp;        if (externalObjectWriter != null) {</b>
+<b class="nc">&nbsp;            return externalObjectWriter;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        switch (className) {</b>
+&nbsp;            case &quot;com.google.common.collect.AbstractMapBasedMultimap$RandomAccessWrappedList&quot;:
+&nbsp;            case &quot;com.google.common.collect.AbstractMapBasedMultimap$WrappedSet&quot;:
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            case &quot;org.javamoney.moneta.internal.JDKCurrencyAdapter&quot;:
+<b class="nc">&nbsp;                return ObjectWriterImplToString.INSTANCE;</b>
+&nbsp;            case &quot;com.fasterxml.jackson.databind.node.ObjectNode&quot;:
+<b class="nc">&nbsp;                return ObjectWriterImplToString.DIRECT;</b>
+&nbsp;            case &quot;org.javamoney.moneta.Money&quot;:
+<b class="nc">&nbsp;                return MoneySupport.createMonetaryAmountWriter();</b>
+&nbsp;            case &quot;org.javamoney.moneta.spi.DefaultNumberValue&quot;:
+<b class="nc">&nbsp;                return MoneySupport.createNumberValueWriter();</b>
+&nbsp;            case &quot;net.sf.json.JSONNull&quot;:
+&nbsp;            case &quot;java.net.Inet4Address&quot;:
+&nbsp;            case &quot;java.net.Inet6Address&quot;:
+&nbsp;            case &quot;java.net.InetSocketAddress&quot;:
+&nbsp;            case &quot;java.text.SimpleDateFormat&quot;:
+&nbsp;            case &quot;java.util.regex.Pattern&quot;:
+&nbsp;            case &quot;com.fasterxml.jackson.databind.node.ArrayNode&quot;:
+<b class="nc">&nbsp;                return ObjectWriterMisc.INSTANCE;</b>
+&nbsp;            case &quot;org.apache.commons.lang3.tuple.Pair&quot;:
+&nbsp;            case &quot;org.apache.commons.lang3.tuple.MutablePair&quot;:
+&nbsp;            case &quot;org.apache.commons.lang3.tuple.ImmutablePair&quot;:
+<b class="nc">&nbsp;                return new ApacheLang3Support.PairWriter(objectClass);</b>
+&nbsp;            case &quot;com.carrotsearch.hppc.ByteArrayList&quot;:
+&nbsp;            case &quot;com.carrotsearch.hppc.ShortArrayList&quot;:
+&nbsp;            case &quot;com.carrotsearch.hppc.IntArrayList&quot;:
+&nbsp;            case &quot;com.carrotsearch.hppc.IntHashSet&quot;:
+&nbsp;            case &quot;com.carrotsearch.hppc.LongArrayList&quot;:
+&nbsp;            case &quot;com.carrotsearch.hppc.LongHashSet&quot;:
+&nbsp;            case &quot;com.carrotsearch.hppc.CharArrayList&quot;:
+&nbsp;            case &quot;com.carrotsearch.hppc.CharHashSet&quot;:
+&nbsp;            case &quot;com.carrotsearch.hppc.FloatArrayList&quot;:
+&nbsp;            case &quot;com.carrotsearch.hppc.DoubleArrayList&quot;:
+&nbsp;            case &quot;com.carrotsearch.hppc.BitSet&quot;:
+&nbsp;            case &quot;gnu.trove.list.array.TByteArrayList&quot;:
+&nbsp;            case &quot;gnu.trove.list.array.TCharArrayList&quot;:
+&nbsp;            case &quot;gnu.trove.list.array.TShortArrayList&quot;:
+&nbsp;            case &quot;gnu.trove.list.array.TIntArrayList&quot;:
+&nbsp;            case &quot;gnu.trove.list.array.TLongArrayList&quot;:
+&nbsp;            case &quot;gnu.trove.list.array.TFloatArrayList&quot;:
+&nbsp;            case &quot;gnu.trove.list.array.TDoubleArrayList&quot;:
+&nbsp;            case &quot;gnu.trove.set.hash.TByteHashSet&quot;:
+&nbsp;            case &quot;gnu.trove.set.hash.TShortHashSet&quot;:
+&nbsp;            case &quot;gnu.trove.set.hash.TIntHashSet&quot;:
+&nbsp;            case &quot;gnu.trove.set.hash.TLongHashSet&quot;:
+&nbsp;            case &quot;gnu.trove.stack.array.TByteArrayStack&quot;:
+&nbsp;            case &quot;org.bson.types.Decimal128&quot;:
+<b class="nc">&nbsp;                return LambdaMiscCodec.getObjectWriter(objectType, objectClass);</b>
+&nbsp;            case &quot;java.nio.HeapByteBuffer&quot;:
+&nbsp;            case &quot;java.nio.DirectByteBuffer&quot;:
+<b class="nc">&nbsp;                return new ObjectWriterImplInt8ValueArray(</b>
+<b class="nc">&nbsp;                        o -&gt; ((ByteBuffer) o).array()</b>
+&nbsp;                );
+&nbsp;            default:
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;            ParameterizedType parameterizedType = (ParameterizedType) objectType;</b>
+<b class="nc">&nbsp;            Type rawType = parameterizedType.getRawType();</b>
+<b class="nc">&nbsp;            Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (rawType == List.class || rawType == ArrayList.class) {</b>
+<b class="nc">&nbsp;                if (actualTypeArguments.length == 1</b>
+&nbsp;                        &amp;&amp; actualTypeArguments[0] == String.class) {
+<b class="nc">&nbsp;                    return ObjectWriterImplListStr.INSTANCE;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                objectType = rawType;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (Map.class.isAssignableFrom(objectClass)) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplMap.of(objectType, objectClass);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (objectClass == Optional.class) {</b>
+<b class="nc">&nbsp;                if (actualTypeArguments.length == 1) {</b>
+<b class="nc">&nbsp;                    return new ObjectWriterImplOptional(actualTypeArguments[0], null, null);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == LinkedList.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplList.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == ArrayList.class</b>
+&nbsp;                || objectType == List.class
+<b class="nc">&nbsp;                || List.class.isAssignableFrom(objectClass)) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplList.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Collection.class.isAssignableFrom(objectClass)) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplCollection.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (isExtendedMap(objectClass)) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Map.class.isAssignableFrom(objectClass)) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplMap.of(objectClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Map.Entry.class.isAssignableFrom(objectClass)) {</b>
+<b class="nc">&nbsp;            String objectClassName = objectClass.getName();</b>
+<b class="nc">&nbsp;            if (!&quot;org.apache.commons.lang3.tuple.ImmutablePair&quot;.equals(objectClassName)</b>
+<b class="nc">&nbsp;                    &amp;&amp; !&quot;org.apache.commons.lang3.tuple.MutablePair&quot;.equals(objectClassName)</b>
+&nbsp;            ) {
+<b class="nc">&nbsp;                return ObjectWriterImplMapEntry.INSTANCE;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (java.nio.file.Path.class.isAssignableFrom(objectClass)) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplToString.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == Integer.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplInt32.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == AtomicInteger.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplAtomicInteger.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == Byte.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplInt8.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == Short.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplInt16.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == Long.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplInt64.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == AtomicLong.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplAtomicLong.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == AtomicReference.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplAtomicReference.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == Float.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplFloat.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == Double.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplDouble.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == BigInteger.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterBigInteger.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == BigDecimal.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplBigDecimal.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == BitSet.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplBitSet.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == OptionalInt.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplOptionalInt.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == OptionalLong.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplOptionalLong.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == OptionalDouble.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplOptionalDouble.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == Optional.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplOptional.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == Boolean.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplBoolean.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == AtomicBoolean.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplAtomicBoolean.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == AtomicIntegerArray.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplAtomicIntegerArray.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == AtomicLongArray.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplAtomicLongArray.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType == Character.class) {</b>
+<b class="nc">&nbsp;            return ObjectWriterImplCharacter.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectType instanceof Class) {</b>
+<b class="nc">&nbsp;            Class clazz = (Class) objectType;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (TimeUnit.class.isAssignableFrom(clazz)) {</b>
+<b class="nc">&nbsp;                return new ObjectWriterImplEnum(null, TimeUnit.class, null, null, 0);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (Enum.class.isAssignableFrom(clazz)) {</b>
+<b class="nc">&nbsp;                ObjectWriter enumWriter = createEnumWriter(clazz);</b>
+<b class="nc">&nbsp;                if (enumWriter != null) {</b>
+<b class="nc">&nbsp;                    return enumWriter;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (JSONPath.class.isAssignableFrom(clazz)) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplToString.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (clazz == boolean[].class) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplBoolValueArray.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (clazz == char[].class) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplCharValueArray.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (clazz == StringBuffer.class || clazz == StringBuilder.class) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplToString.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (clazz == byte[].class) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplInt8ValueArray.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (clazz == short[].class) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplInt16ValueArray.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (clazz == int[].class) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplInt32ValueArray.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (clazz == long[].class) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplInt64ValueArray.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (clazz == float[].class) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplFloatValueArray.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (clazz == double[].class) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplDoubleValueArray.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (clazz == Byte[].class) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplInt8Array.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (clazz == Integer[].class) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplInt32Array.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (clazz == Long[].class) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplInt64Array.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (clazz == AtomicLongArray.class) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplAtomicLongArray.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (String[].class == clazz) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplStringArray.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (BigDecimal[].class == clazz) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImpDecimalArray.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (Object[].class.isAssignableFrom(clazz)) {</b>
+<b class="nc">&nbsp;                if (clazz == Object[].class) {</b>
+<b class="nc">&nbsp;                    return ObjectWriterArray.INSTANCE;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    Class componentType = clazz.getComponentType();</b>
+<b class="nc">&nbsp;                    if (Modifier.isFinal(componentType.getModifiers())) {</b>
+<b class="nc">&nbsp;                        return new ObjectWriterArrayFinal(componentType, null);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        return new ObjectWriterArray(componentType);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (clazz == UUID.class) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplUUID.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (clazz == Locale.class) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplLocale.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (clazz == Currency.class) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplCurrency.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (TimeZone.class.isAssignableFrom(clazz)) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplTimeZone.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (JSONPObject.class.isAssignableFrom(clazz)) {</b>
+<b class="nc">&nbsp;                return new ObjectWriterImplJSONP();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (clazz == URI.class</b>
+&nbsp;                    || clazz == URL.class
+&nbsp;                    || clazz == File.class
+<b class="nc">&nbsp;                    || ZoneId.class.isAssignableFrom(clazz)</b>
+<b class="nc">&nbsp;                    || Charset.class.isAssignableFrom(clazz)) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplToString.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            externalObjectWriter = getExternalObjectWriter(clazz.getName(), clazz);</b>
+<b class="nc">&nbsp;            if (externalObjectWriter != null) {</b>
+<b class="nc">&nbsp;                return externalObjectWriter;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            BeanInfo beanInfo = new BeanInfo();</b>
+<b class="nc">&nbsp;            Class mixIn = provider.getMixIn(clazz);</b>
+<b class="nc">&nbsp;            if (mixIn != null) {</b>
+<b class="nc">&nbsp;                annotationProcessor.getBeanInfo(beanInfo, mixIn);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (Date.class.isAssignableFrom(clazz)) {</b>
+<b class="nc">&nbsp;                if (beanInfo.format != null || beanInfo.locale != null) {</b>
+<b class="nc">&nbsp;                    return new ObjectWriterImplDate(beanInfo.format, beanInfo.locale);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return ObjectWriterImplDate.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (Calendar.class.isAssignableFrom(clazz)) {</b>
+<b class="nc">&nbsp;                if (beanInfo.format != null || beanInfo.locale != null) {</b>
+<b class="nc">&nbsp;                    return new ObjectWriterImplCalendar(beanInfo.format, beanInfo.locale);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return ObjectWriterImplCalendar.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (ZonedDateTime.class == clazz) {</b>
+<b class="nc">&nbsp;                if (beanInfo.format != null || beanInfo.locale != null) {</b>
+<b class="nc">&nbsp;                    return new ObjectWriterImplZonedDateTime(beanInfo.format, beanInfo.locale);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return ObjectWriterImplZonedDateTime.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (OffsetDateTime.class == clazz) {</b>
+<b class="nc">&nbsp;                if (beanInfo.format != null || beanInfo.locale != null) {</b>
+<b class="nc">&nbsp;                    return new ObjectWriterImplOffsetDateTime(beanInfo.format, beanInfo.locale);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return ObjectWriterImplOffsetDateTime.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (LocalDateTime.class == clazz) {</b>
+<b class="nc">&nbsp;                if (beanInfo.format != null || beanInfo.locale != null) {</b>
+<b class="nc">&nbsp;                    return new ObjectWriterImplLocalDateTime(beanInfo.format, beanInfo.locale);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return ObjectWriterImplLocalDateTime.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (LocalDate.class == clazz) {</b>
+<b class="nc">&nbsp;                if (beanInfo.format != null || beanInfo.locale != null) {</b>
+<b class="nc">&nbsp;                    return new ObjectWriterImplLocalDate(beanInfo.format, beanInfo.locale);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return ObjectWriterImplLocalDate.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (LocalTime.class == clazz) {</b>
+<b class="nc">&nbsp;                if (beanInfo.format != null || beanInfo.locale != null) {</b>
+<b class="nc">&nbsp;                    return new ObjectWriterImplLocalTime(beanInfo.format, beanInfo.locale);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return ObjectWriterImplLocalTime.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (OffsetTime.class == clazz) {</b>
+<b class="nc">&nbsp;                if (beanInfo.format != null || beanInfo.locale != null) {</b>
+<b class="nc">&nbsp;                    return new ObjectWriterImplOffsetTime(beanInfo.format, beanInfo.locale);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return ObjectWriterImplOffsetTime.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (Instant.class == clazz) {</b>
+<b class="nc">&nbsp;                if (beanInfo.format != null || beanInfo.locale != null) {</b>
+<b class="nc">&nbsp;                    return new ObjectWriterImplInstant(beanInfo.format, beanInfo.locale);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return ObjectWriterImplInstant.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (Duration.class == clazz) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplToString.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (StackTraceElement.class == clazz) {</b>
+<b class="nc">&nbsp;                if (STACK_TRACE_ELEMENT_WRITER == null) {</b>
+<b class="nc">&nbsp;                    STACK_TRACE_ELEMENT_WRITER = new ObjectWriterAdapter(</b>
+&nbsp;                            StackTraceElement.class,
+&nbsp;                            null,
+&nbsp;                            null,
+&nbsp;                            0,
+<b class="nc">&nbsp;                            Arrays.asList(</b>
+&nbsp;                                    new FieldWriter[]{
+<b class="nc">&nbsp;                                            ObjectWriters.fieldWriter(&quot;fileName&quot;, String.class, StackTraceElement::getFileName),</b>
+<b class="nc">&nbsp;                                            ObjectWriters.fieldWriter(&quot;lineNumber&quot;, StackTraceElement::getLineNumber),</b>
+<b class="nc">&nbsp;                                            ObjectWriters.fieldWriter(&quot;className&quot;, String.class, StackTraceElement::getClassName),</b>
+<b class="nc">&nbsp;                                            ObjectWriters.fieldWriter(&quot;methodName&quot;, String.class, StackTraceElement::getMethodName),</b>
+&nbsp;                                    }
+&nbsp;                            ));
+&nbsp;                }
+<b class="nc">&nbsp;                return STACK_TRACE_ELEMENT_WRITER;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (Class.class == clazz) {</b>
+<b class="nc">&nbsp;                return ObjectWriterImplClass.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (Method.class == clazz) {</b>
+<b class="nc">&nbsp;                return new ObjectWriterAdapter&lt;&gt;(</b>
+&nbsp;                        Method.class,
+&nbsp;                        null,
+&nbsp;                        null,
+&nbsp;                        0,
+<b class="nc">&nbsp;                        Arrays.asList(</b>
+<b class="nc">&nbsp;                                ObjectWriters.fieldWriter(&quot;declaringClass&quot;, Class.class, Method::getDeclaringClass),</b>
+<b class="nc">&nbsp;                                ObjectWriters.fieldWriter(&quot;name&quot;, String.class, Method::getName),</b>
+<b class="nc">&nbsp;                                ObjectWriters.fieldWriter(&quot;parameterTypes&quot;, Class[].class, Method::getParameterTypes)</b>
+&nbsp;                        )
+&nbsp;                );
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (Field.class == clazz) {</b>
+<b class="nc">&nbsp;                return new ObjectWriterAdapter&lt;&gt;(</b>
+&nbsp;                        Method.class,
+&nbsp;                        null,
+&nbsp;                        null,
+&nbsp;                        0,
+<b class="nc">&nbsp;                        Arrays.asList(</b>
+<b class="nc">&nbsp;                                ObjectWriters.fieldWriter(&quot;declaringClass&quot;, Class.class, Field::getDeclaringClass),</b>
+<b class="nc">&nbsp;                                ObjectWriters.fieldWriter(&quot;name&quot;, String.class, Field::getName)</b>
+&nbsp;                        )
+&nbsp;                );
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (ParameterizedType.class.isAssignableFrom(clazz)) {</b>
+<b class="nc">&nbsp;                return ObjectWriters.objectWriter(</b>
+&nbsp;                        ParameterizedType.class,
+<b class="nc">&nbsp;                        ObjectWriters.fieldWriter(&quot;actualTypeArguments&quot;, Type[].class, ParameterizedType::getActualTypeArguments),</b>
+<b class="nc">&nbsp;                        ObjectWriters.fieldWriter(&quot;ownerType&quot;, Type.class, ParameterizedType::getOwnerType),</b>
+<b class="nc">&nbsp;                        ObjectWriters.fieldWriter(&quot;rawType&quot;, Type.class, ParameterizedType::getRawType)</b>
+&nbsp;                );
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private ObjectWriter createEnumWriter(Class enumClass) {
+<b class="nc">&nbsp;        if (!enumClass.isEnum()) {</b>
+<b class="nc">&nbsp;            Class superclass = enumClass.getSuperclass();</b>
+<b class="nc">&nbsp;            if (superclass.isEnum()) {</b>
+<b class="nc">&nbsp;                enumClass = superclass;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Member valueField = BeanUtils.getEnumValueField(enumClass, provider);</b>
+<b class="nc">&nbsp;        if (valueField == null) {</b>
+<b class="nc">&nbsp;            Class mixInSource = provider.mixInCache.get(enumClass);</b>
+<b class="nc">&nbsp;            Member mixedValueField = BeanUtils.getEnumValueField(mixInSource, provider);</b>
+<b class="nc">&nbsp;            if (mixedValueField instanceof Field) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    valueField = enumClass.getField(mixedValueField.getName());</b>
+<b class="nc">&nbsp;                } catch (NoSuchFieldException ignored) {</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            } else if (mixedValueField instanceof Method) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    valueField = enumClass.getMethod(mixedValueField.getName());</b>
+<b class="nc">&nbsp;                } catch (NoSuchMethodException ignored) {</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        BeanInfo beanInfo = new BeanInfo();</b>
+<b class="nc">&nbsp;        annotationProcessor.getBeanInfo(beanInfo, enumClass);</b>
+<b class="nc">&nbsp;        if (beanInfo.writeEnumAsJavaBean) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String[] annotationNames = BeanUtils.getEnumAnnotationNames(enumClass);</b>
+<b class="nc">&nbsp;        return new ObjectWriterImplEnum(null, enumClass, valueField, annotationNames, 0);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    static class VoidObjectWriter</b>
+&nbsp;            implements ObjectWriter {
+<b class="fc">&nbsp;        public static final VoidObjectWriter INSTANCE = new VoidObjectWriter();</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:27</div>
+</div>
+</body>
+</html>

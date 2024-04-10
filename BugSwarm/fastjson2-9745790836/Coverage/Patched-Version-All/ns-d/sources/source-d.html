@@ -1,0 +1,1260 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONPath</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONPath (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONPath</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (43/43)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.9%
+  </span>
+  <span class="absValue">
+    (342/398)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JSONPath$Context</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONPath$Feature</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONPath$PreviousPath</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONPath$RootPath</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/16)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONPath$Sequence</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (74/74)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.3%
+  </span>
+  <span class="absValue">
+    (385/441)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.reader.*;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriter;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriterAdapter;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriterProvider;
+&nbsp;
+&nbsp;import java.lang.reflect.Array;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.time.ZoneId;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.BiFunction;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;public abstract class JSONPath {
+<b class="fc">&nbsp;    static final JSONReader.Context PARSE_CONTEXT = JSONFactory.createReadContext();</b>
+&nbsp;
+&nbsp;    JSONReader.Context readerContext;
+&nbsp;    JSONWriter.Context writerContext;
+&nbsp;    final String path;
+&nbsp;    final long features;
+&nbsp;
+<b class="fc">&nbsp;    protected JSONPath(String path, Feature... features) {</b>
+<b class="fc">&nbsp;        this.path = path;</b>
+<b class="fc">&nbsp;        long featuresValue = 0;</b>
+<b class="fc">&nbsp;        for (Feature feature : features) {</b>
+<b class="fc">&nbsp;            featuresValue |= feature.mask;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.features = featuresValue;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    protected JSONPath(String path, long features) {</b>
+<b class="fc">&nbsp;        this.path = path;</b>
+<b class="fc">&nbsp;        this.features = features;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isPrevious() {
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final String toString() {
+<b class="fc">&nbsp;        return path;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Object extract(String json, String path) {
+<b class="fc">&nbsp;        JSONReader jsonReader = JSONReader.of(json);</b>
+<b class="fc">&nbsp;        JSONPath jsonPath = JSONPath.of(path);</b>
+<b class="fc">&nbsp;        return jsonPath.extract(jsonReader);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Object extract(String json, String path, Feature... features) {
+<b class="fc">&nbsp;        JSONReader jsonReader = JSONReader.of(json);</b>
+<b class="fc">&nbsp;        JSONPath jsonPath = JSONPath.of(path, features);</b>
+<b class="fc">&nbsp;        return jsonPath.extract(jsonReader);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Object eval(String str, String path) {
+<b class="fc">&nbsp;        return extract(str, path);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Object eval(Object rootObject, String path) {
+<b class="fc">&nbsp;        return JSONPath.of(path)</b>
+<b class="fc">&nbsp;                .eval(rootObject);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String set(String json, String path, Object value) {
+<b class="fc">&nbsp;        Object object = JSON.parse(json);</b>
+<b class="fc">&nbsp;        JSONPath.of(path)</b>
+<b class="fc">&nbsp;                .set(object, value);</b>
+<b class="fc">&nbsp;        return JSON.toJSONString(object);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean contains(Object rootObject, String path) {
+<b class="fc">&nbsp;        if (rootObject == null) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        JSONPath jsonPath = JSONPath.of(path);</b>
+<b class="fc">&nbsp;        return jsonPath.contains(rootObject);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Object set(Object rootObject, String path, Object value) {
+<b class="fc">&nbsp;        JSONPath.of(path)</b>
+<b class="fc">&nbsp;                .set(rootObject, value);</b>
+&nbsp;
+<b class="fc">&nbsp;        return rootObject;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Object setCallback(Object rootObject, String path, Function callback) {
+<b class="fc">&nbsp;        JSONPath.of(path)</b>
+<b class="fc">&nbsp;                .setCallback(rootObject, callback);</b>
+&nbsp;
+<b class="fc">&nbsp;        return rootObject;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Object setCallback(Object rootObject, String path, BiFunction callback) {
+<b class="fc">&nbsp;        JSONPath.of(path)</b>
+<b class="fc">&nbsp;                .setCallback(rootObject, callback);</b>
+&nbsp;
+<b class="fc">&nbsp;        return rootObject;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String remove(String json, String path) {
+<b class="fc">&nbsp;        Object object = JSON.parse(json);</b>
+&nbsp;
+<b class="fc">&nbsp;        JSONPath.of(path)</b>
+<b class="fc">&nbsp;                .remove(object);</b>
+&nbsp;
+<b class="fc">&nbsp;        return JSON.toJSONString(object);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void remove(Object rootObject, String path) {
+<b class="fc">&nbsp;        JSONPath.of(path)</b>
+<b class="fc">&nbsp;                .remove(rootObject);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Map&lt;String, Object&gt; paths(Object javaObject) {
+<b class="fc">&nbsp;        Map&lt;Object, String&gt; values = new IdentityHashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        Map&lt;String, Object&gt; paths = new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        RootPath.INSTANCE.paths(values, paths, &quot;$&quot;, javaObject);</b>
+<b class="fc">&nbsp;        return paths;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    void paths(Map&lt;Object, String&gt; values, Map&lt;String, Object&gt; paths, String parent, Object javaObject) {
+<b class="fc">&nbsp;        if (javaObject == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        String p = values.put(javaObject, parent);</b>
+<b class="fc">&nbsp;        if (p != null) {</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; type = javaObject.getClass();</b>
+<b class="fc">&nbsp;            boolean basicType = type == String.class</b>
+&nbsp;                    || type == Boolean.class
+&nbsp;                    || type == Character.class
+&nbsp;                    || type == UUID.class
+&nbsp;                    || javaObject instanceof Enum
+&nbsp;                    || javaObject instanceof Number
+&nbsp;                    || javaObject instanceof Date;
+&nbsp;
+<b class="fc">&nbsp;            if (!basicType) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        paths.put(parent, javaObject);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (javaObject instanceof Map) {</b>
+<b class="fc">&nbsp;            Map map = (Map) javaObject;</b>
+&nbsp;
+<b class="fc">&nbsp;            for (Object entryObj : map.entrySet()) {</b>
+<b class="fc">&nbsp;                Map.Entry entry = (Map.Entry) entryObj;</b>
+<b class="fc">&nbsp;                Object key = entry.getKey();</b>
+&nbsp;
+<b class="fc">&nbsp;                if (key instanceof String) {</b>
+<b class="fc">&nbsp;                    String path = parent + &quot;.&quot; + key;</b>
+<b class="fc">&nbsp;                    paths(values, paths, path, entry.getValue());</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (javaObject instanceof Collection) {</b>
+<b class="fc">&nbsp;            Collection collection = (Collection) javaObject;</b>
+&nbsp;
+<b class="fc">&nbsp;            int i = 0;</b>
+<b class="fc">&nbsp;            for (Object item : collection) {</b>
+<b class="fc">&nbsp;                String path = parent + &quot;[&quot; + i + &quot;]&quot;;</b>
+<b class="fc">&nbsp;                paths(values, paths, path, item);</b>
+<b class="fc">&nbsp;                ++i;</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Class&lt;?&gt; clazz = javaObject.getClass();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (clazz.isArray()) {</b>
+<b class="nc">&nbsp;            int len = Array.getLength(javaObject);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;                Object item = Array.get(javaObject, i);</b>
+&nbsp;
+<b class="nc">&nbsp;                String path = parent + &quot;[&quot; + i + &quot;]&quot;;</b>
+<b class="nc">&nbsp;                paths(values, paths, path, item);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (ObjectWriterProvider.isPrimitiveOrEnum(clazz)) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        ObjectWriter serializer = getWriterContext().getObjectWriter(clazz);</b>
+<b class="fc">&nbsp;        if (serializer instanceof ObjectWriterAdapter) {</b>
+<b class="fc">&nbsp;            ObjectWriterAdapter javaBeanSerializer = (ObjectWriterAdapter) serializer;</b>
+&nbsp;
+&nbsp;            try {
+<b class="fc">&nbsp;                Map&lt;String, Object&gt; fieldValues = javaBeanSerializer.toMap(javaObject);</b>
+<b class="fc">&nbsp;                for (Map.Entry&lt;String, Object&gt; entry : fieldValues.entrySet()) {</b>
+<b class="fc">&nbsp;                    String key = entry.getKey();</b>
+&nbsp;
+<b class="fc">&nbsp;                    if (key != null) {</b>
+<b class="fc">&nbsp;                        String path = parent + &quot;.&quot; + key;</b>
+<b class="fc">&nbsp;                        paths(values, paths, path, entry.getValue());</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                }</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;toJSON error&quot;, e);</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract boolean isRef();
+&nbsp;
+&nbsp;    public void arrayAdd(Object root, Object... values) {
+<b class="fc">&nbsp;        Object result = eval(root);</b>
+<b class="fc">&nbsp;        if (result == null) {</b>
+<b class="fc">&nbsp;            set(root, JSONArray.of(values));</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (result instanceof Collection) {</b>
+<b class="fc">&nbsp;            Collection collection = (Collection) result;</b>
+<b class="fc">&nbsp;            for (Object value : values) {</b>
+<b class="fc">&nbsp;                collection.add(value);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract boolean contains(Object object);
+&nbsp;
+&nbsp;    public abstract Object eval(Object object);
+&nbsp;
+&nbsp;    protected JSONReader.Context createContext() {
+<b class="fc">&nbsp;        return JSONFactory.createReadContext();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object extract(String jsonStr) {
+<b class="fc">&nbsp;        if (jsonStr == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        try (JSONReader jsonReader = JSONReader.of(jsonStr, createContext())) {</b>
+<b class="fc">&nbsp;            return extract(jsonReader);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object extract(byte[] jsonBytes) {
+<b class="fc">&nbsp;        if (jsonBytes == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        try (JSONReader jsonReader = JSONReader.of(jsonBytes, createContext())) {</b>
+<b class="fc">&nbsp;            return extract(jsonReader);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object extract(byte[] jsonBytes, int off, int len, Charset charset) {
+<b class="fc">&nbsp;        if (jsonBytes == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        try (JSONReader jsonReader = JSONReader.of(jsonBytes, off, len, charset, createContext())) {</b>
+<b class="fc">&nbsp;            return extract(jsonReader);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract Object extract(JSONReader jsonReader);
+&nbsp;
+&nbsp;    public abstract String extractScalar(JSONReader jsonReader);
+&nbsp;
+&nbsp;    public JSONReader.Context getReaderContext() {
+<b class="fc">&nbsp;        if (readerContext == null) {</b>
+<b class="fc">&nbsp;            readerContext = JSONFactory.createReadContext();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return readerContext;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONPath setReaderContext(JSONReader.Context context) {
+<b class="fc">&nbsp;        this.readerContext = context;</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONWriter.Context getWriterContext() {
+<b class="fc">&nbsp;        if (writerContext == null) {</b>
+<b class="fc">&nbsp;            writerContext = JSONFactory.createWriteContext();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return writerContext;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONPath setWriterContext(JSONWriter.Context writerContext) {
+<b class="fc">&nbsp;        this.writerContext = writerContext;</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract void set(Object object, Object value);
+&nbsp;
+&nbsp;    public abstract void set(Object object, Object value, JSONReader.Feature... readerFeatures);
+&nbsp;
+&nbsp;    public void setCallback(Object object, Function callback) {
+<b class="fc">&nbsp;        setCallback(</b>
+&nbsp;                object,
+&nbsp;                new JSONPathFunction.BiFunctionAdapter(callback)
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract void setCallback(Object object, BiFunction callback);
+&nbsp;
+&nbsp;    public abstract void setInt(Object object, int value);
+&nbsp;
+&nbsp;    public abstract void setLong(Object object, long value);
+&nbsp;
+&nbsp;    public abstract boolean remove(Object object);
+&nbsp;
+&nbsp;    public void extract(JSONReader jsonReader, ValueConsumer consumer) {
+<b class="fc">&nbsp;        Object object = extract(jsonReader);</b>
+<b class="fc">&nbsp;        if (object == null) {</b>
+<b class="fc">&nbsp;            consumer.acceptNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (object instanceof Number) {</b>
+<b class="fc">&nbsp;            consumer.accept((Number) object);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (object instanceof String) {</b>
+<b class="fc">&nbsp;            consumer.accept((String) object);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (object instanceof Boolean) {</b>
+<b class="fc">&nbsp;            consumer.accept((Boolean) object);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (object instanceof Map) {</b>
+<b class="fc">&nbsp;            consumer.accept((Map) object);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (object instanceof List) {</b>
+<b class="fc">&nbsp;            consumer.accept((List) object);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;TODO : &quot; + object.getClass());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void extractScalar(JSONReader jsonReader, ValueConsumer consumer) {
+<b class="fc">&nbsp;        Object object = extractScalar(jsonReader);</b>
+<b class="fc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            consumer.acceptNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        String str = object.toString();</b>
+<b class="fc">&nbsp;        consumer.accept(str);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Long extractInt64(JSONReader jsonReader) {
+<b class="fc">&nbsp;        long value = extractInt64Value(jsonReader);</b>
+<b class="fc">&nbsp;        if (jsonReader.wasNull) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long extractInt64Value(JSONReader jsonReader) {
+<b class="fc">&nbsp;        Object object = extract(jsonReader);</b>
+<b class="fc">&nbsp;        if (object == null) {</b>
+<b class="fc">&nbsp;            jsonReader.wasNull = true;</b>
+<b class="fc">&nbsp;            return 0L;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (object instanceof Number) {</b>
+<b class="fc">&nbsp;            return ((Number) object).longValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        java.util.function.Function typeConvert = JSONFactory.getDefaultObjectReaderProvider().getTypeConvert(object.getClass(), long.class);</b>
+<b class="fc">&nbsp;        if (typeConvert == null) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;can not convert to long : &quot; + object);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Object converted = typeConvert.apply(object);</b>
+<b class="fc">&nbsp;        return ((Long) converted).longValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Integer extractInt32(JSONReader jsonReader) {
+<b class="fc">&nbsp;        int intValue = extractInt32Value(jsonReader);</b>
+<b class="fc">&nbsp;        if (jsonReader.wasNull) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return intValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int extractInt32Value(JSONReader jsonReader) {
+<b class="fc">&nbsp;        Object object = extract(jsonReader);</b>
+<b class="fc">&nbsp;        if (object == null) {</b>
+<b class="fc">&nbsp;            jsonReader.wasNull = true;</b>
+<b class="fc">&nbsp;            return 0;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (object instanceof Number) {</b>
+<b class="fc">&nbsp;            return ((Number) object).intValue();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        java.util.function.Function typeConvert = JSONFactory.getDefaultObjectReaderProvider().getTypeConvert(object.getClass(), int.class);</b>
+<b class="fc">&nbsp;        if (typeConvert == null) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;can not convert to int : &quot; + object);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Object converted = typeConvert.apply(object);</b>
+<b class="fc">&nbsp;        return ((Integer) converted).intValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    public static JSONPath compile(String path) {
+<b class="fc">&nbsp;        return of(path);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONPath compile(String strPath, Class objectClass) {
+<b class="fc">&nbsp;        JSONPath path = of(strPath);</b>
+<b class="fc">&nbsp;        JSONFactory.JSONPathCompiler compiler = JSONFactory.getDefaultJSONPathCompiler();</b>
+<b class="fc">&nbsp;        return compiler.compile(objectClass, path);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONPath of(String path) {
+<b class="fc">&nbsp;        if (&quot;#-1&quot;.equals(path)) {</b>
+<b class="fc">&nbsp;            return PreviousPath.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return new JSONPathParser(path)</b>
+<b class="fc">&nbsp;                .parse();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONPath of(String path, Type type) {
+<b class="fc">&nbsp;        JSONPath jsonPath = of(path);</b>
+<b class="fc">&nbsp;        return JSONPathTyped.of(jsonPath, type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * create multi-path jsonpath
+&nbsp;     *
+&nbsp;     * @param paths jsonpath array
+&nbsp;     * @param types item types
+&nbsp;     * @since 2.0.20
+&nbsp;     */
+&nbsp;    public static JSONPath of(String[] paths, Type[] types) {
+<b class="fc">&nbsp;        return of(paths, types, null, null, (ZoneId) null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * create multi-path jsonpath
+&nbsp;     *
+&nbsp;     * @param paths jsonpath array
+&nbsp;     * @param types item types
+&nbsp;     * @since 2.0.20
+&nbsp;     */
+&nbsp;    public static JSONPath of(String[] paths, Type[] types, JSONReader.Feature... features) {
+<b class="fc">&nbsp;        return of(paths, types, null, null, null, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * create multi-path jsonpath
+&nbsp;     *
+&nbsp;     * @param paths jsonpath array
+&nbsp;     * @param types item types
+&nbsp;     * @param formats item format
+&nbsp;     * @param zoneId zonedId
+&nbsp;     * @param features parse use JSONReader.Features
+&nbsp;     * @since 2.0.20
+&nbsp;     */
+&nbsp;    public static JSONPath of(
+&nbsp;            String[] paths,
+&nbsp;            Type[] types,
+&nbsp;            String[] formats,
+&nbsp;            long[] pathFeatures,
+&nbsp;            ZoneId zoneId,
+&nbsp;            JSONReader.Feature... features
+&nbsp;    ) {
+<b class="fc">&nbsp;        if (paths.length == 0) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;illegal paths, not support 0 length&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (types == null) {</b>
+<b class="nc">&nbsp;            types = new Type[paths.length];</b>
+<b class="nc">&nbsp;            Arrays.fill(types, Object.class);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (types.length != paths.length) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;types.length not equals paths.length&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        JSONPath[] jsonPaths = new JSONPath[paths.length];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; paths.length; i++) {</b>
+<b class="fc">&nbsp;            jsonPaths[i] = of(paths[i]);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        boolean allSingleName = true, allSinglePositiveIndex = true;</b>
+<b class="fc">&nbsp;        boolean allTwoName = true, allTwoIndexPositive = true;</b>
+<b class="fc">&nbsp;        boolean allThreeName = true;</b>
+<b class="fc">&nbsp;        for (JSONPath path : jsonPaths) {</b>
+<b class="fc">&nbsp;            if (allSingleName &amp;&amp; !(path instanceof JSONPathSingleName)) {</b>
+<b class="fc">&nbsp;                allSingleName = false;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (allSinglePositiveIndex) {</b>
+<b class="fc">&nbsp;                if (!(path instanceof JSONPathSingleIndex)</b>
+&nbsp;                        || ((JSONPathSingleIndex) path).index &lt; 0) {
+<b class="fc">&nbsp;                    allSinglePositiveIndex = false;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (allTwoName) {</b>
+<b class="fc">&nbsp;                if (path instanceof JSONPathTwoSegment) {</b>
+<b class="fc">&nbsp;                    JSONPathTwoSegment two = (JSONPathTwoSegment) path;</b>
+<b class="fc">&nbsp;                    if (!(two.second instanceof JSONPathSegmentName)) {</b>
+<b class="fc">&nbsp;                        allTwoName = false;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                } else {</b>
+<b class="fc">&nbsp;                    allTwoName = false;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (allTwoIndexPositive) {</b>
+<b class="fc">&nbsp;                if (path instanceof JSONPathTwoSegment) {</b>
+<b class="fc">&nbsp;                    JSONPathTwoSegment two = (JSONPathTwoSegment) path;</b>
+<b class="fc">&nbsp;                    if (!(two.second instanceof JSONPathSegmentIndex) || ((JSONPathSegmentIndex) two.second).index &lt; 0) {</b>
+<b class="fc">&nbsp;                        allTwoIndexPositive = false;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                } else {</b>
+<b class="fc">&nbsp;                    allTwoIndexPositive = false;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (allThreeName) {</b>
+<b class="fc">&nbsp;                if (path instanceof JSONPathMulti) {</b>
+<b class="fc">&nbsp;                    JSONPathMulti multi = (JSONPathMulti) path;</b>
+<b class="fc">&nbsp;                    if (multi.segments.size() == 3) {</b>
+<b class="fc">&nbsp;                        JSONPathSegment three = multi.segments.get(2);</b>
+<b class="fc">&nbsp;                        if (!(three instanceof JSONPathSegmentName)) {</b>
+<b class="fc">&nbsp;                            allThreeName = false;</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                    } else {</b>
+<b class="nc">&nbsp;                        allThreeName = false;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                } else {</b>
+<b class="fc">&nbsp;                    allThreeName = false;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        long featuresValue = JSONReader.Feature.of(features);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (allSingleName) {</b>
+<b class="fc">&nbsp;            return new JSONPathTypedMultiNames(</b>
+&nbsp;                    jsonPaths,
+&nbsp;                    null,
+&nbsp;                    jsonPaths,
+&nbsp;                    types,
+&nbsp;                    formats,
+&nbsp;                    pathFeatures,
+&nbsp;                    zoneId,
+&nbsp;                    featuresValue
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (allSinglePositiveIndex) {</b>
+<b class="fc">&nbsp;            return new JSONPathTypedMultiIndexes(jsonPaths, null, jsonPaths, types, formats, pathFeatures, zoneId, featuresValue);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (allTwoName || allTwoIndexPositive) {</b>
+<b class="fc">&nbsp;            boolean samePrefix = true;</b>
+<b class="fc">&nbsp;            JSONPathSegment first0 = ((JSONPathTwoSegment) jsonPaths[0]).first;</b>
+<b class="fc">&nbsp;            for (int i = 1; i &lt; jsonPaths.length; i++) {</b>
+<b class="fc">&nbsp;                JSONPathTwoSegment two = (JSONPathTwoSegment) jsonPaths[i];</b>
+<b class="fc">&nbsp;                if (!first0.equals(two.first)) {</b>
+<b class="nc">&nbsp;                    samePrefix = false;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (samePrefix) {</b>
+<b class="fc">&nbsp;                JSONPath firstPath = jsonPaths[0];</b>
+&nbsp;
+<b class="fc">&nbsp;                if (allTwoName) {</b>
+<b class="fc">&nbsp;                    JSONPathSingleName[] names = new JSONPathSingleName[jsonPaths.length];</b>
+<b class="fc">&nbsp;                    for (int i = 0; i &lt; jsonPaths.length; i++) {</b>
+<b class="fc">&nbsp;                        JSONPathTwoSegment two = (JSONPathTwoSegment) jsonPaths[i];</b>
+<b class="fc">&nbsp;                        JSONPathSegmentName name = (JSONPathSegmentName) two.second;</b>
+<b class="fc">&nbsp;                        names[i] = new JSONPathSingleName(&quot;$.&quot; + name, name);</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    String prefixPath = firstPath.path.substring(0, firstPath.path.length() - names[0].name.length() - 1);</b>
+<b class="fc">&nbsp;                    if (first0 instanceof JSONPathSegmentName) {</b>
+<b class="fc">&nbsp;                        JSONPathSegmentName name = (JSONPathSegmentName) first0;</b>
+<b class="fc">&nbsp;                        JSONPath prefix = new JSONPathSingleName(prefixPath, name);</b>
+&nbsp;
+<b class="fc">&nbsp;                        return new JSONPathTypedMultiNamesPrefixName1(</b>
+&nbsp;                                jsonPaths,
+&nbsp;                                prefix,
+&nbsp;                                names,
+&nbsp;                                types,
+&nbsp;                                formats,
+&nbsp;                                pathFeatures,
+&nbsp;                                zoneId,
+&nbsp;                                featuresValue
+&nbsp;                        );
+<b class="fc">&nbsp;                    } else if (first0 instanceof JSONPathSegmentIndex) {</b>
+<b class="fc">&nbsp;                        JSONPathSegmentIndex first0Index = ((JSONPathSegmentIndex) first0);</b>
+<b class="fc">&nbsp;                        if (first0Index.index &gt;= 0) {</b>
+<b class="fc">&nbsp;                            JSONPathSingleIndex prefix = new JSONPathSingleIndex(prefixPath, first0Index);</b>
+<b class="fc">&nbsp;                            return new JSONPathTypedMultiNamesPrefixIndex1(</b>
+&nbsp;                                    jsonPaths,
+&nbsp;                                    prefix,
+&nbsp;                                    names,
+&nbsp;                                    types,
+&nbsp;                                    formats,
+&nbsp;                                    pathFeatures,
+&nbsp;                                    zoneId,
+&nbsp;                                    featuresValue
+&nbsp;                            );
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                } else if (allTwoIndexPositive) {</b>
+<b class="fc">&nbsp;                    JSONPathSingleIndex[] indexes = new JSONPathSingleIndex[jsonPaths.length];</b>
+<b class="fc">&nbsp;                    for (int i = 0; i &lt; jsonPaths.length; i++) {</b>
+<b class="fc">&nbsp;                        JSONPathTwoSegment two = (JSONPathTwoSegment) jsonPaths[i];</b>
+<b class="fc">&nbsp;                        JSONPathSegmentIndex name = (JSONPathSegmentIndex) two.second;</b>
+<b class="fc">&nbsp;                        indexes[i] = new JSONPathSingleIndex(&quot;$&quot; + name, name);</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    JSONPath prefix = null;</b>
+<b class="fc">&nbsp;                    if (first0 instanceof JSONPathSegmentName) {</b>
+<b class="fc">&nbsp;                        JSONPathSegmentName name = (JSONPathSegmentName) first0;</b>
+<b class="fc">&nbsp;                        prefix = new JSONPathSingleName(&quot;$.&quot; + name.name, name);</b>
+<b class="fc">&nbsp;                    } else if (first0 instanceof JSONPathSegmentIndex) {</b>
+<b class="fc">&nbsp;                        JSONPathSegmentIndex index = (JSONPathSegmentIndex) first0;</b>
+<b class="fc">&nbsp;                        prefix = new JSONPathSingleIndex(&quot;$[&quot; + index.index + &quot;]&quot;, index);</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    if (prefix != null) {</b>
+<b class="fc">&nbsp;                        return new JSONPathTypedMultiIndexes(</b>
+&nbsp;                                jsonPaths,
+&nbsp;                                prefix,
+&nbsp;                                indexes,
+&nbsp;                                types,
+&nbsp;                                formats,
+&nbsp;                                pathFeatures,
+&nbsp;                                zoneId,
+&nbsp;                                featuresValue
+&nbsp;                        );
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (allThreeName) {</b>
+<b class="fc">&nbsp;            boolean samePrefix = true;</b>
+<b class="fc">&nbsp;            JSONPathSegment first0 = ((JSONPathMulti) jsonPaths[0]).segments.get(0);</b>
+<b class="fc">&nbsp;            JSONPathSegment first1 = ((JSONPathMulti) jsonPaths[0]).segments.get(1);</b>
+<b class="fc">&nbsp;            for (int i = 1; i &lt; jsonPaths.length; i++) {</b>
+<b class="fc">&nbsp;                JSONPathMulti multi = (JSONPathMulti) jsonPaths[i];</b>
+<b class="fc">&nbsp;                if (!first0.equals(multi.segments.get(0))) {</b>
+<b class="nc">&nbsp;                    samePrefix = false;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if (!first1.equals(multi.segments.get(1))) {</b>
+<b class="nc">&nbsp;                    samePrefix = false;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (samePrefix) {</b>
+<b class="fc">&nbsp;                JSONPathSingleName[] names = new JSONPathSingleName[jsonPaths.length];</b>
+<b class="fc">&nbsp;                for (int i = 0; i &lt; jsonPaths.length; i++) {</b>
+<b class="fc">&nbsp;                    JSONPathMulti multi = (JSONPathMulti) jsonPaths[i];</b>
+<b class="fc">&nbsp;                    JSONPathSegmentName name = (JSONPathSegmentName) multi.segments.get(2);</b>
+<b class="fc">&nbsp;                    names[i] = new JSONPathSingleName(&quot;$.&quot; + name, name);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                JSONPath firstPath = jsonPaths[0];</b>
+<b class="fc">&nbsp;                String prefixPath = firstPath.path.substring(0, firstPath.path.length() - names[0].name.length() - 1);</b>
+<b class="fc">&nbsp;                JSONPathTwoSegment prefix = new JSONPathTwoSegment(prefixPath, first0, first1);</b>
+&nbsp;
+<b class="fc">&nbsp;                if (first0 instanceof JSONPathSegmentName &amp;&amp; first1 instanceof JSONPathSegmentName) {</b>
+<b class="fc">&nbsp;                    return new JSONPathTypedMultiNamesPrefixName2(</b>
+&nbsp;                            jsonPaths,
+&nbsp;                            prefix,
+&nbsp;                            names,
+&nbsp;                            types,
+&nbsp;                            formats,
+&nbsp;                            pathFeatures,
+&nbsp;                            zoneId,
+&nbsp;                            featuresValue
+&nbsp;                    );
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                return new JSONPathTypedMultiNames(</b>
+&nbsp;                        jsonPaths,
+&nbsp;                        prefix,
+&nbsp;                        names,
+&nbsp;                        types,
+&nbsp;                        formats,
+&nbsp;                        pathFeatures,
+&nbsp;                        zoneId,
+&nbsp;                        featuresValue
+&nbsp;                );
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return new JSONPathTypedMulti(jsonPaths, types, formats, pathFeatures, zoneId, featuresValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONPath of(String path, Feature... features) {
+<b class="fc">&nbsp;        if (&quot;#-1&quot;.equals(path)) {</b>
+<b class="fc">&nbsp;            return PreviousPath.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return new JSONPathParser(path)</b>
+<b class="fc">&nbsp;                .parse(features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static JSONPathFilter.Operator parseOperator(JSONReader jsonReader) {
+&nbsp;        JSONPathFilter.Operator operator;
+<b class="fc">&nbsp;        switch (jsonReader.ch) {</b>
+&nbsp;            case &#39;&lt;&#39;:
+<b class="fc">&nbsp;                jsonReader.next();</b>
+<b class="fc">&nbsp;                if (jsonReader.ch == &#39;=&#39;) {</b>
+<b class="fc">&nbsp;                    jsonReader.next();</b>
+<b class="fc">&nbsp;                    operator = JSONPathFilter.Operator.LE;</b>
+<b class="fc">&nbsp;                } else if (jsonReader.ch == &#39;&gt;&#39;) {</b>
+<b class="fc">&nbsp;                    jsonReader.next();</b>
+<b class="fc">&nbsp;                    operator = JSONPathFilter.Operator.NE;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    operator = JSONPathFilter.Operator.LT;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case &#39;=&#39;:
+<b class="fc">&nbsp;                jsonReader.next();</b>
+<b class="fc">&nbsp;                if (jsonReader.ch == &#39;~&#39;) {</b>
+<b class="fc">&nbsp;                    jsonReader.next();</b>
+<b class="fc">&nbsp;                    operator = JSONPathFilter.Operator.REG_MATCH;</b>
+<b class="fc">&nbsp;                } else if (jsonReader.ch == &#39;=&#39;) {</b>
+<b class="fc">&nbsp;                    jsonReader.next();</b>
+<b class="fc">&nbsp;                    operator = JSONPathFilter.Operator.EQ;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    operator = JSONPathFilter.Operator.EQ;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case &#39;!&#39;:
+<b class="fc">&nbsp;                jsonReader.next();</b>
+<b class="fc">&nbsp;                if (jsonReader.ch == &#39;=&#39;) {</b>
+<b class="fc">&nbsp;                    jsonReader.next();</b>
+<b class="fc">&nbsp;                    operator = JSONPathFilter.Operator.NE;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    throw new JSONException(&quot;not support operator : !&quot; + jsonReader.ch);</b>
+&nbsp;                }
+&nbsp;                break;
+&nbsp;            case &#39;&gt;&#39;:
+<b class="fc">&nbsp;                jsonReader.next();</b>
+<b class="fc">&nbsp;                if (jsonReader.ch == &#39;=&#39;) {</b>
+<b class="fc">&nbsp;                    jsonReader.next();</b>
+<b class="fc">&nbsp;                    operator = JSONPathFilter.Operator.GE;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    operator = JSONPathFilter.Operator.GT;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case &#39;l&#39;:
+&nbsp;            case &#39;L&#39;: {
+<b class="fc">&nbsp;                jsonReader.readFieldNameHashCodeUnquote();</b>
+<b class="fc">&nbsp;                String fieldName = jsonReader.getFieldName();</b>
+<b class="fc">&nbsp;                if (&quot;like&quot;.equalsIgnoreCase(fieldName)) {</b>
+<b class="fc">&nbsp;                    operator = JSONPathFilter.Operator.LIKE;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    throw new JSONException(&quot;not support operator : &quot; + fieldName);</b>
+&nbsp;                }
+&nbsp;                break;
+&nbsp;            }
+&nbsp;            case &#39;n&#39;:
+&nbsp;            case &#39;N&#39;: {
+<b class="fc">&nbsp;                jsonReader.readFieldNameHashCodeUnquote();</b>
+<b class="fc">&nbsp;                String fieldName = jsonReader.getFieldName();</b>
+&nbsp;
+<b class="fc">&nbsp;                if (&quot;nin&quot;.equalsIgnoreCase(fieldName)) {</b>
+<b class="fc">&nbsp;                    operator = JSONPathFilter.Operator.NOT_IN;</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (!&quot;not&quot;.equalsIgnoreCase(fieldName)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;not support operator : &quot; + fieldName);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                jsonReader.readFieldNameHashCodeUnquote();</b>
+<b class="fc">&nbsp;                fieldName = jsonReader.getFieldName();</b>
+<b class="fc">&nbsp;                if (&quot;like&quot;.equalsIgnoreCase(fieldName)) {</b>
+<b class="fc">&nbsp;                    operator = JSONPathFilter.Operator.NOT_LIKE;</b>
+<b class="fc">&nbsp;                } else if (&quot;rlike&quot;.equalsIgnoreCase(fieldName)) {</b>
+<b class="nc">&nbsp;                    operator = JSONPathFilter.Operator.NOT_RLIKE;</b>
+<b class="fc">&nbsp;                } else if (&quot;in&quot;.equalsIgnoreCase(fieldName)) {</b>
+<b class="fc">&nbsp;                    operator = JSONPathFilter.Operator.NOT_IN;</b>
+<b class="fc">&nbsp;                } else if (&quot;between&quot;.equalsIgnoreCase(fieldName)) {</b>
+<b class="fc">&nbsp;                    operator = JSONPathFilter.Operator.NOT_BETWEEN;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    throw new JSONException(&quot;not support operator : &quot; + fieldName);</b>
+&nbsp;                }
+&nbsp;                break;
+&nbsp;            }
+&nbsp;            case &#39;i&#39;:
+&nbsp;            case &#39;I&#39;: {
+<b class="fc">&nbsp;                jsonReader.readFieldNameHashCodeUnquote();</b>
+<b class="fc">&nbsp;                String fieldName = jsonReader.getFieldName();</b>
+<b class="fc">&nbsp;                if (&quot;in&quot;.equalsIgnoreCase(fieldName)) {</b>
+<b class="fc">&nbsp;                    operator = JSONPathFilter.Operator.IN;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    throw new JSONException(&quot;not support operator : &quot; + fieldName);</b>
+&nbsp;                }
+&nbsp;                break;
+&nbsp;            }
+&nbsp;            case &#39;r&#39;:
+&nbsp;            case &#39;R&#39;: {
+<b class="fc">&nbsp;                jsonReader.readFieldNameHashCodeUnquote();</b>
+<b class="fc">&nbsp;                String fieldName = jsonReader.getFieldName();</b>
+<b class="fc">&nbsp;                if (&quot;rlike&quot;.equalsIgnoreCase(fieldName)) {</b>
+<b class="fc">&nbsp;                    operator = JSONPathFilter.Operator.RLIKE;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    throw new JSONException(&quot;not support operator : &quot; + fieldName);</b>
+&nbsp;                }
+&nbsp;                break;
+&nbsp;            }
+&nbsp;            case &#39;b&#39;:
+&nbsp;            case &#39;B&#39;: {
+<b class="fc">&nbsp;                jsonReader.readFieldNameHashCodeUnquote();</b>
+<b class="fc">&nbsp;                String fieldName = jsonReader.getFieldName();</b>
+<b class="fc">&nbsp;                if (&quot;between&quot;.equalsIgnoreCase(fieldName)) {</b>
+<b class="fc">&nbsp;                    operator = JSONPathFilter.Operator.BETWEEN;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    throw new JSONException(&quot;not support operator : &quot; + fieldName);</b>
+&nbsp;                }
+&nbsp;                break;
+&nbsp;            }
+&nbsp;            case &#39;s&#39;:
+&nbsp;            case &#39;S&#39;: {
+<b class="nc">&nbsp;                jsonReader.readFieldNameHashCodeUnquote();</b>
+<b class="nc">&nbsp;                String fieldName = jsonReader.getFieldName();</b>
+<b class="nc">&nbsp;                if (!&quot;starts&quot;.equalsIgnoreCase(fieldName)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;not support operator : &quot; + fieldName);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                jsonReader.readFieldNameHashCodeUnquote();</b>
+<b class="nc">&nbsp;                fieldName = jsonReader.getFieldName();</b>
+<b class="nc">&nbsp;                if (!&quot;with&quot;.equalsIgnoreCase(fieldName)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;not support operator : &quot; + fieldName);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                operator = JSONPathFilter.Operator.STARTS_WITH;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;            case &#39;e&#39;:
+&nbsp;            case &#39;E&#39;:
+<b class="nc">&nbsp;                jsonReader.readFieldNameHashCodeUnquote();</b>
+<b class="nc">&nbsp;                String fieldName = jsonReader.getFieldName();</b>
+<b class="nc">&nbsp;                if (!&quot;ends&quot;.equalsIgnoreCase(fieldName)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;not support operator : &quot; + fieldName);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                jsonReader.readFieldNameHashCodeUnquote();</b>
+<b class="nc">&nbsp;                fieldName = jsonReader.getFieldName();</b>
+<b class="nc">&nbsp;                if (!&quot;with&quot;.equalsIgnoreCase(fieldName)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;not support operator : &quot; + fieldName);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                operator = JSONPathFilter.Operator.ENDS_WITH;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            default: {
+<b class="nc">&nbsp;                jsonReader.readFieldNameHashCodeUnquote();</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;not support operator : &quot; + jsonReader.getFieldName());</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return operator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class PreviousPath
+&nbsp;            extends JSONPath {
+<b class="fc">&nbsp;        static final PreviousPath INSTANCE = new PreviousPath(&quot;#-1&quot;);</b>
+&nbsp;
+&nbsp;        PreviousPath(String path) {
+<b class="fc">&nbsp;            super(path);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean isRef() {
+<b class="fc">&nbsp;            throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean isPrevious() {
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean contains(Object rootObject) {
+<b class="fc">&nbsp;            throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object eval(Object rootObject) {
+<b class="fc">&nbsp;            throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object extract(JSONReader jsonReader) {
+<b class="fc">&nbsp;            throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String extractScalar(JSONReader jsonReader) {
+<b class="fc">&nbsp;            throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void set(Object rootObject, Object value) {
+<b class="fc">&nbsp;            throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void set(Object rootObject, Object value, JSONReader.Feature... readerFeatures) {
+<b class="fc">&nbsp;            throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void setCallback(Object rootObject, BiFunction callback) {
+<b class="fc">&nbsp;            throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void setInt(Object rootObject, int value) {
+<b class="fc">&nbsp;            throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void setLong(Object rootObject, long value) {
+<b class="fc">&nbsp;            throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean remove(Object rootObject) {
+<b class="fc">&nbsp;            throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class RootPath
+&nbsp;            extends JSONPath {
+<b class="fc">&nbsp;        static final RootPath INSTANCE = new RootPath();</b>
+&nbsp;
+&nbsp;        protected RootPath() {
+<b class="fc">&nbsp;            super(&quot;$&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean isRef() {
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean contains(Object object) {
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object eval(Object object) {
+<b class="fc">&nbsp;            return object;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object extract(JSONReader jsonReader) {
+<b class="fc">&nbsp;            if (jsonReader == null) {</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return jsonReader.readAny();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String extractScalar(JSONReader jsonReader) {
+<b class="fc">&nbsp;            Object any = jsonReader.readAny();</b>
+<b class="fc">&nbsp;            return JSON.toJSONString(any);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void set(Object object, Object value) {
+<b class="fc">&nbsp;            throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void set(Object object, Object value, JSONReader.Feature... readerFeatures) {
+<b class="fc">&nbsp;            throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void setCallback(Object object, BiFunction callback) {
+<b class="fc">&nbsp;            throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void setInt(Object object, int value) {
+<b class="fc">&nbsp;            throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void setLong(Object object, long value) {
+<b class="fc">&nbsp;            throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean remove(Object object) {
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class Context {
+&nbsp;        final JSONPath path;
+&nbsp;        final Context parent;
+&nbsp;        final JSONPathSegment current;
+&nbsp;        final JSONPathSegment next;
+&nbsp;        final long readerFeatures;
+&nbsp;        Object root;
+&nbsp;        Object value;
+&nbsp;
+&nbsp;        boolean eval;
+&nbsp;
+<b class="fc">&nbsp;        Context(JSONPath path, Context parent, JSONPathSegment current, JSONPathSegment next, long readerFeatures) {</b>
+<b class="fc">&nbsp;            this.path = path;</b>
+<b class="fc">&nbsp;            this.current = current;</b>
+<b class="fc">&nbsp;            this.next = next;</b>
+<b class="fc">&nbsp;            this.parent = parent;</b>
+<b class="fc">&nbsp;            this.readerFeatures = readerFeatures;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static class Sequence {
+&nbsp;        final List values;
+&nbsp;
+<b class="fc">&nbsp;        public Sequence(List values) {</b>
+<b class="fc">&nbsp;            this.values = values;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public enum Feature {</b>
+<b class="fc">&nbsp;        AlwaysReturnList(1),</b>
+<b class="fc">&nbsp;        NullOnError(1 &lt;&lt; 1);</b>
+&nbsp;        public final long mask;
+&nbsp;
+<b class="fc">&nbsp;        Feature(long mask) {</b>
+<b class="fc">&nbsp;            this.mask = mask;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:32</div>
+</div>
+</body>
+</html>

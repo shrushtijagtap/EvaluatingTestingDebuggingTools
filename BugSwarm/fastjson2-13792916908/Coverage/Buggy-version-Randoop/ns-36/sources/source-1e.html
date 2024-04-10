@@ -1,0 +1,162 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FieldReaderCharValueFunc</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldReaderCharValueFunc (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FieldReaderCharValueFunc</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.function.ObjCharConsumer;
+&nbsp;import com.alibaba.fastjson2.schema.JSONSchema;
+&nbsp;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;
+&nbsp;final class FieldReaderCharValueFunc&lt;T&gt;
+&nbsp;        extends FieldReader&lt;T&gt; {
+&nbsp;    final ObjCharConsumer&lt;T&gt; function;
+&nbsp;
+&nbsp;    FieldReaderCharValueFunc(
+&nbsp;            String fieldName,
+&nbsp;            int ordinal,
+&nbsp;            String format,
+&nbsp;            Character defaultValue,
+&nbsp;            JSONSchema schema,
+&nbsp;            Method method,
+&nbsp;            ObjCharConsumer&lt;T&gt; function
+&nbsp;    ) {
+<b class="nc">&nbsp;        super(fieldName, char.class, char.class, ordinal, 0, format, null, defaultValue, schema, method, null);</b>
+<b class="nc">&nbsp;        this.function = function;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, char value) {
+<b class="nc">&nbsp;        function.accept(object, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, Object value) {
+&nbsp;        char charValue;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            charValue = ((String) value).charAt(0);</b>
+<b class="nc">&nbsp;        } else if (value instanceof Character) {</b>
+<b class="nc">&nbsp;            charValue = (Character) value;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new JSONException(&quot;cast to char error&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        accept(object, charValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void readFieldValue(JSONReader jsonReader, T object) {
+<b class="nc">&nbsp;        char ch = jsonReader.readCharValue();</b>
+<b class="nc">&nbsp;        if (ch == &#39;\0&#39; &amp;&amp; jsonReader.wasNull()) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        function.accept(object, ch);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String readFieldValue(JSONReader jsonReader) {
+<b class="nc">&nbsp;        return jsonReader.readString();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:21</div>
+</div>
+</body>
+</html>

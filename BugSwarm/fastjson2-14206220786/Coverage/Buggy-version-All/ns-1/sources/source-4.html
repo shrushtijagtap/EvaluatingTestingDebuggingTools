@@ -1,0 +1,254 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONArray</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONArray (com.alibaba.fastjson)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONArray</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/68)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/368)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;  // IntelliJ API Decompiler stub source generated from a class file
+&nbsp;  // Implementation of methods is not available
+&nbsp;
+&nbsp;package com.alibaba.fastjson;
+&nbsp;
+&nbsp;public class JSONArray extends com.alibaba.fastjson.JSON implements java.util.List&lt;java.lang.Object&gt;, java.lang.Cloneable, java.util.RandomAccess, java.io.Serializable {
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;    private final java.util.List&lt;java.lang.Object&gt; list;
+&nbsp;    protected transient java.lang.Object relatedArray;
+&nbsp;    protected transient java.lang.reflect.Type componentType;
+&nbsp;
+&nbsp;    public JSONArray() { /* compiled code */ }
+&nbsp;
+&nbsp;    public JSONArray(java.util.List&lt;java.lang.Object&gt; list) { /* compiled code */ }
+&nbsp;
+&nbsp;    public JSONArray(int initialCapacity) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.Object getRelatedArray() { /* compiled code */ }
+&nbsp;
+&nbsp;    public void setRelatedArray(java.lang.Object relatedArray) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.reflect.Type getComponentType() { /* compiled code */ }
+&nbsp;
+&nbsp;    public void setComponentType(java.lang.reflect.Type componentType) { /* compiled code */ }
+&nbsp;
+&nbsp;    public int size() { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    public boolean isEmpty() { /* compiled code */ }
+&nbsp;
+&nbsp;    public boolean contains(java.lang.Object o) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public java.util.Iterator&lt;java.lang.Object&gt; iterator() { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public java.lang.Object[] toArray() { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public &lt;T&gt; T[] toArray(T[] a) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public boolean add(java.lang.Object e) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public com.alibaba.fastjson.JSONArray fluentAdd(java.lang.Object e) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public boolean remove(java.lang.Object o) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public com.alibaba.fastjson.JSONArray fluentRemove(java.lang.Object o) { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public boolean containsAll(java.util.Collection&lt;?&gt; c) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public boolean addAll(java.util.Collection&lt;?&gt; c) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public com.alibaba.fastjson.JSONArray fluentAddAll(java.util.Collection&lt;?&gt; c) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public boolean addAll(int index, java.util.Collection&lt;?&gt; c) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public com.alibaba.fastjson.JSONArray fluentAddAll(int index, java.util.Collection&lt;?&gt; c) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public boolean removeAll(java.util.Collection&lt;?&gt; c) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public com.alibaba.fastjson.JSONArray fluentRemoveAll(java.util.Collection&lt;?&gt; c) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public boolean retainAll(java.util.Collection&lt;?&gt; c) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    public com.alibaba.fastjson.JSONArray fluentRetainAll(java.util.Collection&lt;?&gt; c) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public void clear() { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public com.alibaba.fastjson.JSONArray fluentClear() { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public java.lang.Object set(int index, java.lang.Object element) { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public com.alibaba.fastjson.JSONArray fluentSet(int index, java.lang.Object element) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public void add(int index, java.lang.Object element) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public com.alibaba.fastjson.JSONArray fluentAdd(int index, java.lang.Object element) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public java.lang.Object remove(int index) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public com.alibaba.fastjson.JSONArray fluentRemove(int index) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public int indexOf(java.lang.Object o) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public int lastIndexOf(java.lang.Object o) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public java.util.ListIterator&lt;java.lang.Object&gt; listIterator() { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public java.util.ListIterator&lt;java.lang.Object&gt; listIterator(int index) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public java.util.List&lt;java.lang.Object&gt; subList(int fromIndex, int toIndex) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    public java.lang.Object get(int index) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public com.alibaba.fastjson.JSONObject getJSONObject(int index) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public com.alibaba.fastjson.JSONArray getJSONArray(int index) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public &lt;T&gt; T getObject(int index, java.lang.Class&lt;T&gt; clazz) { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public &lt;T&gt; T getObject(int index, java.lang.reflect.Type type) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public java.lang.Boolean getBoolean(int index) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public boolean getBooleanValue(int index) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public java.lang.Byte getByte(int index) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public byte getByteValue(int index) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public java.lang.Short getShort(int index) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public short getShortValue(int index) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public java.lang.Integer getInteger(int index) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public int getIntValue(int index) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public java.lang.Long getLong(int index) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    public long getLongValue(int index) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public java.lang.Float getFloat(int index) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public float getFloatValue(int index) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public java.lang.Double getDouble(int index) { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public double getDoubleValue(int index) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public java.math.BigDecimal getBigDecimal(int index) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public java.math.BigInteger getBigInteger(int index) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public java.lang.String getString(int index) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public java.util.Date getDate(int index) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public java.lang.Object getSqlDate(int index) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public java.lang.Object getTimestamp(int index) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public &lt;T&gt; java.util.List&lt;T&gt; toJavaList(java.lang.Class&lt;T&gt; clazz) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public java.lang.Object clone() { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public boolean equals(java.lang.Object obj) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    public int hashCode() { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException { /* compiled code */ }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:05</div>
+</div>
+</body>
+</html>

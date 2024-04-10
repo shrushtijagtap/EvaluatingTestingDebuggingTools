@@ -1,0 +1,288 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MapperFeature</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.adapter.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: MapperFeature (com.alibaba.fastjson2.adapter.jackson.databind)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MapperFeature</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/46)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.adapter.jackson.databind;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.adapter.jackson.databind.cfg.ConfigFeature;
+&nbsp;
+<b class="nc">&nbsp;public enum MapperFeature implements ConfigFeature {</b>
+<b class="nc">&nbsp;    USE_ANNOTATIONS(true),</b>
+<b class="nc">&nbsp;    USE_GETTERS_AS_SETTERS(true),</b>
+<b class="nc">&nbsp;    PROPAGATE_TRANSIENT_MARKER(false),</b>
+<b class="nc">&nbsp;    AUTO_DETECT_CREATORS(true),</b>
+<b class="nc">&nbsp;    AUTO_DETECT_FIELDS(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether regular &quot;getter&quot; methods are
+&nbsp;     * automatically detected based on standard Bean naming convention
+&nbsp;     * or not. If yes, then all public zero-argument methods that
+&nbsp;     * start with prefix &quot;get&quot;
+&nbsp;     * are considered as getters.
+&nbsp;     * If disabled, only methods explicitly  annotated are considered getters.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note that since version 1.3, this does &lt;b&gt;NOT&lt;/b&gt; include
+&nbsp;     * &quot;is getters&quot; (see {@link #AUTO_DETECT_IS_GETTERS} for details)
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note that this feature has lower precedence than per-class
+&nbsp;     * annotations, and is only used if there isn&#39;t more granular
+&nbsp;     * configuration available.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     */
+<b class="nc">&nbsp;    AUTO_DETECT_GETTERS(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether &quot;is getter&quot; methods are
+&nbsp;     * automatically detected based on standard Bean naming convention
+&nbsp;     * or not. If yes, then all public zero-argument methods that
+&nbsp;     * start with prefix &quot;is&quot;, and whose return type is boolean
+&nbsp;     * are considered as &quot;is getters&quot;.
+&nbsp;     * If disabled, only methods explicitly annotated are considered getters.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note that this feature has lower precedence than per-class
+&nbsp;     * annotations, and is only used if there isn&#39;t more granular
+&nbsp;     * configuration available.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     */
+<b class="nc">&nbsp;    AUTO_DETECT_IS_GETTERS(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether &quot;setter&quot; methods are
+&nbsp;     * automatically detected based on standard Bean naming convention
+&nbsp;     * or not. If yes, then all public one-argument methods that
+&nbsp;     * start with prefix &quot;set&quot;
+&nbsp;     * are considered setters. If disabled, only methods explicitly
+&nbsp;     * annotated are considered setters.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note that this feature has lower precedence than per-class
+&nbsp;     * annotations, and is only used if there isn&#39;t more granular
+&nbsp;     * configuration available.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     */
+<b class="nc">&nbsp;    AUTO_DETECT_SETTERS(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether getters (getter methods)
+&nbsp;     * can be auto-detected if there is no matching mutator (setter,
+&nbsp;     * constructor parameter or field) or not: if set to true,
+&nbsp;     * only getters that match a mutator are auto-discovered; if
+&nbsp;     * false, all auto-detectable getters can be discovered.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Feature is disabled by default.
+&nbsp;     */
+<b class="nc">&nbsp;    REQUIRE_SETTERS_FOR_GETTERS(false),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether member fields declared as &#39;final&#39; may
+&nbsp;     * be auto-detected to be used mutators (used to change value of the logical
+&nbsp;     * property) or not. If enabled, &#39;final&#39; access modifier has no effect, and
+&nbsp;     * such fields may be detected according to usual visibility and inference
+&nbsp;     * rules; if disabled, such fields are NOT used as mutators except if
+&nbsp;     * explicitly annotated for such use.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Feature is enabled by default, for backwards compatibility reasons.
+&nbsp;     *
+&nbsp;     * @since 2.2
+&nbsp;     */
+<b class="nc">&nbsp;    ALLOW_FINAL_FIELDS_AS_MUTATORS(true),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Feature that determines whether member mutators (fields and
+&nbsp;     * setters) may be &quot;pulled in&quot; even if they are not visible,
+&nbsp;     * as long as there is a visible accessor (getter or field) with same name.
+&nbsp;     * For example: field &quot;value&quot; may be inferred as mutator,
+&nbsp;     * if there is visible or explicitly marked getter &quot;getValue()&quot;.
+&nbsp;     * If enabled, inferring is enabled; otherwise (disabled) only visible and
+&nbsp;     * explicitly annotated accessors are ever used.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note that &#39;getters&#39; are never inferred and need to be either visible (including
+&nbsp;     * bean-style naming) or explicitly annotated.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Feature is enabled by default.
+&nbsp;     *
+&nbsp;     * @since 2.2
+&nbsp;     */
+<b class="nc">&nbsp;    INFER_PROPERTY_MUTATORS(true),</b>
+<b class="nc">&nbsp;    INFER_CREATOR_FROM_CONSTRUCTOR_PROPERTIES(true),</b>
+<b class="nc">&nbsp;    ALLOW_VOID_VALUED_PROPERTIES(false),</b>
+<b class="nc">&nbsp;    CAN_OVERRIDE_ACCESS_MODIFIERS(true),</b>
+<b class="nc">&nbsp;    OVERRIDE_PUBLIC_ACCESS_MODIFIERS(true),</b>
+&nbsp;
+<b class="nc">&nbsp;    USE_STATIC_TYPING(false),</b>
+<b class="nc">&nbsp;    USE_BASE_TYPE_AS_DEFAULT_IMPL(false),</b>
+<b class="nc">&nbsp;    INFER_BUILDER_TYPE_BINDINGS(true),</b>
+<b class="nc">&nbsp;    DEFAULT_VIEW_INCLUSION(true),</b>
+<b class="nc">&nbsp;    SORT_PROPERTIES_ALPHABETICALLY(false),</b>
+<b class="nc">&nbsp;    SORT_CREATOR_PROPERTIES_FIRST(true),</b>
+<b class="nc">&nbsp;    ACCEPT_CASE_INSENSITIVE_PROPERTIES(false),</b>
+<b class="nc">&nbsp;    ACCEPT_CASE_INSENSITIVE_ENUMS(false),</b>
+<b class="nc">&nbsp;    ACCEPT_CASE_INSENSITIVE_VALUES(false),</b>
+&nbsp;
+<b class="nc">&nbsp;    USE_WRAPPER_NAME_AS_PROPERTY_NAME(false),</b>
+<b class="nc">&nbsp;    USE_STD_BEAN_NAMING(false),</b>
+<b class="nc">&nbsp;    ALLOW_EXPLICIT_PROPERTY_RENAMING(false),</b>
+<b class="nc">&nbsp;    ALLOW_COERCION_OF_SCALARS(true),</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;    /******************************************************
+&nbsp;    /* Other features
+&nbsp;    /******************************************************
+&nbsp;     */
+&nbsp;
+<b class="nc">&nbsp;    IGNORE_DUPLICATE_MODULE_REGISTRATIONS(true),</b>
+<b class="nc">&nbsp;    IGNORE_MERGE_FOR_UNMERGEABLE(true),</b>
+&nbsp;
+<b class="nc">&nbsp;    BLOCK_UNSAFE_POLYMORPHIC_BASE_TYPES(false),</b>
+<b class="nc">&nbsp;    APPLY_DEFAULT_VALUES(true);</b>
+&nbsp;
+&nbsp;    private final boolean defaultState;
+&nbsp;    private final long mask;
+&nbsp;
+&nbsp;    // @since 2.13
+&nbsp;    public static long collectLongDefaults() {
+<b class="nc">&nbsp;        long flags = 0;</b>
+<b class="nc">&nbsp;        for (MapperFeature value : MapperFeature.values()) {</b>
+<b class="nc">&nbsp;            if (value.enabledByDefault()) {</b>
+<b class="nc">&nbsp;                flags |= value.getLongMask();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return flags;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private MapperFeature(boolean defaultState) {</b>
+<b class="nc">&nbsp;        this.defaultState = defaultState;</b>
+<b class="nc">&nbsp;        mask = (1L &lt;&lt; ordinal());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean enabledByDefault() {
+<b class="nc">&nbsp;        return defaultState;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated // 2.13
+&nbsp;    public int getMask() {
+&nbsp;        // 25-Feb-2021, tatu: Not 100% sure what to do here; should not be
+&nbsp;        //     called any more
+<b class="nc">&nbsp;        return (int) mask;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // @since 2.13
+&nbsp;    public long getLongMask() {
+<b class="nc">&nbsp;        return mask;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Deprecated
+&nbsp;    public boolean enabledIn(int flags) {
+<b class="nc">&nbsp;        return (flags &amp; mask) != 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // @since 2.13
+&nbsp;    public boolean enabledIn(long flags) {
+<b class="nc">&nbsp;        return (flags &amp; mask) != 0;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:18</div>
+</div>
+</body>
+</html>

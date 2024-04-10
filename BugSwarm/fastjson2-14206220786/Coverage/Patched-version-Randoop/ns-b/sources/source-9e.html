@@ -1,0 +1,171 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderImplJSONP</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderImplJSONP (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderImplJSONP</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONObject;
+&nbsp;import com.alibaba.fastjson2.JSONPObject;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;
+&nbsp;public class ObjectReaderImplJSONP
+&nbsp;        implements ObjectReader {
+&nbsp;    private final Class objectClass;
+&nbsp;
+<b class="nc">&nbsp;    public ObjectReaderImplJSONP(Class objectClass) {</b>
+<b class="nc">&nbsp;        this.objectClass = objectClass;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        String funcName = jsonReader.readFieldNameUnquote();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.nextIfMatch(&#39;.&#39;)) {</b>
+<b class="nc">&nbsp;            String name2 = jsonReader.readFieldNameUnquote();</b>
+<b class="nc">&nbsp;            funcName += &#39;.&#39; + name2;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char ch = jsonReader.current();</b>
+<b class="nc">&nbsp;        if (ch == &#39;/&#39;) {</b>
+<b class="nc">&nbsp;            if (jsonReader.nextIfMatchIdent(&#39;/&#39;, &#39;*&#39;, &#39;*&#39;, &#39;/&#39;)) {</b>
+<b class="nc">&nbsp;                ch = jsonReader.current();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (ch != &#39;(&#39;) {</b>
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info(&quot;illegal jsonp input&quot;));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        jsonReader.next();</b>
+&nbsp;
+&nbsp;        JSONPObject jsonp;
+<b class="nc">&nbsp;        if (objectClass == JSONObject.class) {</b>
+<b class="nc">&nbsp;            jsonp = new JSONPObject(funcName);</b>
+&nbsp;        } else {
+&nbsp;            try {
+<b class="nc">&nbsp;                jsonp = (JSONPObject) objectClass.newInstance();</b>
+<b class="nc">&nbsp;            } catch (InstantiationException | IllegalAccessException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;create jsonp instance error&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            jsonp.setFunction(funcName);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        for (;;) {
+<b class="nc">&nbsp;            if (jsonReader.isEnd()) {</b>
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;illegal jsonp input&quot;));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (jsonReader.nextIfMatch(&#39;)&#39;)) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Object param = jsonReader.readAny();</b>
+<b class="nc">&nbsp;            jsonp.addParameter(param);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        jsonReader.nextIfMatch(&#39;;&#39;);</b>
+<b class="nc">&nbsp;        jsonReader.nextIfMatchIdent(&#39;/&#39;, &#39;*&#39;, &#39;*&#39;, &#39;/&#39;);</b>
+&nbsp;
+<b class="nc">&nbsp;        return jsonp;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:15</div>
+</div>
+</body>
+</html>

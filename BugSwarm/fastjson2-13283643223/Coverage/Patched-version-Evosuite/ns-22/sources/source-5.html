@@ -1,0 +1,165 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Edge</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.internal.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: Edge (com.alibaba.fastjson2.internal.asm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Edge</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;// ASM: a very small and fast Java bytecode manipulation framework
+&nbsp;// Copyright (c) 2000-2011 INRIA, France Telecom
+&nbsp;// All rights reserved.
+&nbsp;//
+&nbsp;// Redistribution and use in source and binary forms, with or without
+&nbsp;// modification, are permitted provided that the following conditions
+&nbsp;// are met:
+&nbsp;// 1. Redistributions of source code must retain the above copyright
+&nbsp;//    notice, this list of conditions and the following disclaimer.
+&nbsp;// 2. Redistributions in binary form must reproduce the above copyright
+&nbsp;//    notice, this list of conditions and the following disclaimer in the
+&nbsp;//    documentation and/or other materials provided with the distribution.
+&nbsp;// 3. Neither the name of the copyright holders nor the names of its
+&nbsp;//    contributors may be used to endorse or promote products derived from
+&nbsp;//    this software without specific prior written permission.
+&nbsp;//
+&nbsp;// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+&nbsp;// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+&nbsp;// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+&nbsp;// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+&nbsp;// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+&nbsp;// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+&nbsp;// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+&nbsp;// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+&nbsp;// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+&nbsp;// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+&nbsp;// THE POSSIBILITY OF SUCH DAMAGE.
+&nbsp;package com.alibaba.fastjson2.internal.asm;
+&nbsp;
+&nbsp;/**
+&nbsp; * An edge in the control flow graph of a method. Each node of this graph is a basic block,
+&nbsp; * represented with the Label corresponding to its first instruction. Each edge goes from one node
+&nbsp; * to another, i.e. from one basic block to another (called the predecessor and successor blocks,
+&nbsp; * respectively). An edge corresponds either to a jump or ret instruction or to an exception
+&nbsp; * handler.
+&nbsp; *
+&nbsp; * @author Eric Bruneton
+&nbsp; * @see Label
+&nbsp; */
+&nbsp;final class Edge {
+&nbsp;    /**
+&nbsp;     * The successor block of this control flow graph edge.
+&nbsp;     */
+&nbsp;    final Label successor;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The next edge in the list of outgoing edges of a basic block. See {@link Label#outgoingEdges}.
+&nbsp;     */
+&nbsp;    Edge nextEdge;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new Edge.
+&nbsp;     *
+&nbsp;     * @param successor see {@link #successor}.
+&nbsp;     * @param nextEdge  see {@link #nextEdge}.
+&nbsp;     */
+<b class="fc">&nbsp;    Edge(final Label successor, final Edge nextEdge) {</b>
+<b class="fc">&nbsp;        this.successor = successor;</b>
+<b class="fc">&nbsp;        this.nextEdge = nextEdge;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:38</div>
+</div>
+</body>
+</html>

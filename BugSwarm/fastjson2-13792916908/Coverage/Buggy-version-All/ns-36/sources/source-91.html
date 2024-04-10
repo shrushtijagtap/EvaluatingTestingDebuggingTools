@@ -1,0 +1,233 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderImplInt16ValueArray</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderImplInt16ValueArray (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderImplInt16ValueArray</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    14.5%
+  </span>
+  <span class="absValue">
+    (9/62)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONB;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONFactory;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;class ObjectReaderImplInt16ValueArray
+&nbsp;        extends ObjectReaderPrimitive {
+<b class="nc">&nbsp;    static final ObjectReaderImplInt16ValueArray INSTANCE = new ObjectReaderImplInt16ValueArray(null);</b>
+<b class="nc">&nbsp;    static final long HASH_TYPE = Fnv.hashCode64(&quot;[S&quot;);</b>
+&nbsp;
+&nbsp;    final Function&lt;short[], Object&gt; builder;
+&nbsp;
+&nbsp;    ObjectReaderImplInt16ValueArray(Function&lt;short[], Object&gt; builder) {
+<b class="fc">&nbsp;        super(short[].class);</b>
+<b class="fc">&nbsp;        this.builder = builder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        if (jsonReader.readIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.nextIfMatch(&#39;[&#39;)) {</b>
+<b class="nc">&nbsp;            short[] values = new short[16];</b>
+<b class="nc">&nbsp;            int size = 0;</b>
+&nbsp;            for (; ; ) {
+<b class="nc">&nbsp;                if (jsonReader.nextIfMatch(&#39;]&#39;)) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (jsonReader.isEnd()) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info(&quot;input end&quot;));</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                int minCapacity = size + 1;</b>
+<b class="nc">&nbsp;                if (minCapacity - values.length &gt; 0) {</b>
+<b class="nc">&nbsp;                    int oldCapacity = values.length;</b>
+<b class="nc">&nbsp;                    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                    if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                        newCapacity = minCapacity;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    values = Arrays.copyOf(values, newCapacity);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                values[size++] = (short) jsonReader.readInt32Value();</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            jsonReader.nextIfMatch(&#39;,&#39;);</b>
+&nbsp;
+<b class="nc">&nbsp;            short[] array = Arrays.copyOf(values, size);</b>
+<b class="nc">&nbsp;            if (builder != null) {</b>
+<b class="nc">&nbsp;                return builder.apply(array);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return array;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.isString()) {</b>
+<b class="nc">&nbsp;            String str = jsonReader.readString();</b>
+<b class="nc">&nbsp;            if (str.isEmpty()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info(&quot;not support input &quot; + str));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(jsonReader.info(&quot;TODO&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="fc">&nbsp;        if (jsonReader.nextIfMatch(JSONB.Constants.BC_TYPED_ANY)) {</b>
+<b class="nc">&nbsp;            long typeHashCode = jsonReader.readTypeHashCode();</b>
+<b class="nc">&nbsp;            if (typeHashCode != HASH_TYPE &amp;&amp; typeHashCode != ObjectReaderImplInt16Array.HASH_TYPE) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;not support autoType : &quot; + jsonReader.getString());</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int entryCnt = jsonReader.startArray();</b>
+<b class="fc">&nbsp;        if (entryCnt == -1) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        short[] array = new short[entryCnt];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; entryCnt; i++) {</b>
+<b class="nc">&nbsp;            array[i] = (short) jsonReader.readInt32Value();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (builder != null) {</b>
+<b class="nc">&nbsp;            return builder.apply(array);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return array;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createInstance(Collection collection) {
+<b class="nc">&nbsp;        short[] array = new short[collection.size()];</b>
+<b class="nc">&nbsp;        int i = 0;</b>
+<b class="nc">&nbsp;        for (Object item : collection) {</b>
+&nbsp;            short value;
+<b class="nc">&nbsp;            if (item == null) {</b>
+<b class="nc">&nbsp;                value = 0;</b>
+<b class="nc">&nbsp;            } else if (item instanceof Number) {</b>
+<b class="nc">&nbsp;                value = ((Number) item).shortValue();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                Function typeConvert = JSONFactory.getDefaultObjectReaderProvider().getTypeConvert(item.getClass(), short.class);</b>
+<b class="nc">&nbsp;                if (typeConvert == null) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;can not cast to short &quot; + item.getClass());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                value = (Short) typeConvert.apply(item);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            array[i++] = value;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (builder != null) {</b>
+<b class="nc">&nbsp;            return builder.apply(array);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return array;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:22</div>
+</div>
+</body>
+</html>

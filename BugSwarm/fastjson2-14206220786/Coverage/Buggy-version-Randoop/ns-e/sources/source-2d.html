@@ -1,0 +1,2779 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONWriterUTF16</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONWriterUTF16 (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONWriterUTF16</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/69)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1594)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.util.*;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriter;
+&nbsp;import sun.misc.Unsafe;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.OutputStream;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.text.DecimalFormat;
+&nbsp;import java.time.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONFactory.*;
+&nbsp;import static com.alibaba.fastjson2.JSONWriter.Feature.*;
+&nbsp;import static com.alibaba.fastjson2.util.IOUtils.*;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.FIELD_DECIMAL_INT_COMPACT_OFFSET;
+&nbsp;import static com.alibaba.fastjson2.util.UnsafeUtils.UNSAFE;
+&nbsp;
+&nbsp;class JSONWriterUTF16
+&nbsp;        extends JSONWriter {
+<b class="nc">&nbsp;    static final char[] REF_PREF = &quot;{\&quot;$ref\&quot;:&quot;.toCharArray();</b>
+&nbsp;
+&nbsp;    protected char[] chars;
+&nbsp;    final CacheItem cacheItem;
+&nbsp;
+&nbsp;    JSONWriterUTF16(Context ctx) {
+<b class="nc">&nbsp;        super(ctx, null, false, StandardCharsets.UTF_16);</b>
+<b class="nc">&nbsp;        int cacheIndex = System.identityHashCode(Thread.currentThread()) &amp; (CACHE_ITEMS.length - 1);</b>
+<b class="nc">&nbsp;        cacheItem = CACHE_ITEMS[cacheIndex];</b>
+<b class="nc">&nbsp;        char[] chars = CHARS_UPDATER.getAndSet(cacheItem, null);</b>
+<b class="nc">&nbsp;        if (chars == null) {</b>
+<b class="nc">&nbsp;            chars = new char[8192];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.chars = chars;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void flushTo(java.io.Writer to) {
+&nbsp;        try {
+<b class="nc">&nbsp;            int off = this.off;</b>
+<b class="nc">&nbsp;            if (off &gt; 0) {</b>
+<b class="nc">&nbsp;                to.write(chars, 0, off);</b>
+<b class="nc">&nbsp;                this.off = 0;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;flushTo error&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void close() {
+<b class="nc">&nbsp;        char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        if (chars.length &gt; CACHE_THRESHOLD) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        CHARS_UPDATER.lazySet(cacheItem, chars);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected final void write0(char c) {
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        if (off == chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(off + 1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off] = c;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeColon() {
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        if (off == chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(off + 1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void startObject() {
+<b class="nc">&nbsp;        if (level &gt;= context.maxLevel) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;level too large : &quot; + level);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        level++;</b>
+<b class="nc">&nbsp;        startObject = true;</b>
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + (pretty ? 2 + indent : 1);</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = (byte) &#39;{&#39;;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (pretty) {</b>
+<b class="nc">&nbsp;            indent++;</b>
+<b class="nc">&nbsp;            chars[off++] = (byte) &#39;\n&#39;;</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; indent; ++i) {</b>
+<b class="nc">&nbsp;                chars[off++] = (byte) &#39;\t&#39;;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        this.off = off;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void endObject() {
+<b class="nc">&nbsp;        level--;</b>
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + (pretty ? 2 + indent : 1);</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        if (pretty) {</b>
+<b class="nc">&nbsp;            indent--;</b>
+<b class="nc">&nbsp;            chars[off++] = (byte) &#39;\n&#39;;</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; indent; ++i) {</b>
+<b class="nc">&nbsp;                chars[off++] = (byte) &#39;\t&#39;;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        chars[off] = (byte) &#39;}&#39;;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+<b class="nc">&nbsp;        startObject = false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeComma() {
+<b class="nc">&nbsp;        startObject = false;</b>
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + (pretty ? 2 + indent : 1);</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = (byte) &#39;,&#39;;</b>
+<b class="nc">&nbsp;        if (pretty) {</b>
+<b class="nc">&nbsp;            chars[off++] = (byte) &#39;\n&#39;;</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; indent; ++i) {</b>
+<b class="nc">&nbsp;                chars[off++] = (byte) &#39;\t&#39;;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        this.off = off;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void startArray() {
+<b class="nc">&nbsp;        if (level &gt;= context.maxLevel) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;level too large : &quot; + level);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        level++;</b>
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + (pretty ? 2 + indent : 1);</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = (byte) &#39;[&#39;;</b>
+<b class="nc">&nbsp;        if (pretty) {</b>
+<b class="nc">&nbsp;            indent++;</b>
+<b class="nc">&nbsp;            chars[off++] = (byte) &#39;\n&#39;;</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; indent; ++i) {</b>
+<b class="nc">&nbsp;                chars[off++] = (byte) &#39;\t&#39;;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        this.off = off;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void endArray() {
+<b class="nc">&nbsp;        level--;</b>
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + (pretty ? 2 + indent : 1);</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        if (pretty) {</b>
+<b class="nc">&nbsp;            indent--;</b>
+<b class="nc">&nbsp;            chars[off++] = (byte) &#39;\n&#39;;</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; indent; ++i) {</b>
+<b class="nc">&nbsp;                chars[off++] = (byte) &#39;\t&#39;;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off] = (byte) &#39;]&#39;;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+<b class="nc">&nbsp;        startObject = false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void writeString(List&lt;String&gt; list) {
+&nbsp;        // startArray();
+<b class="nc">&nbsp;        if (off == chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(off + 1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off++] = &#39;[&#39;;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0, size = list.size(); i &lt; size; i++) {</b>
+<b class="nc">&nbsp;            if (i != 0) {</b>
+<b class="nc">&nbsp;                if (off == chars.length) {</b>
+<b class="nc">&nbsp;                    ensureCapacity(off + 1);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                chars[off++] = &#39;,&#39;;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String str = list.get(i);</b>
+<b class="nc">&nbsp;            writeString(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (off == chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(off + 1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off++] = &#39;]&#39;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeStringLatin1(byte[] value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            writeStringNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean browserSecure = (context.features &amp; BrowserSecure.mask) != 0;</b>
+<b class="nc">&nbsp;        boolean escape = false;</b>
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + value.length + 2;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final int start = off;</b>
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = quote;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (byte c : value) {</b>
+<b class="nc">&nbsp;            if (c == &#39;\\&#39; || c == quote || c &lt; &#39; &#39;) {</b>
+<b class="nc">&nbsp;                escape = true;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (browserSecure &amp;&amp; (c == &#39;&lt;&#39; || c == &#39;&gt;&#39; || c == &#39;(&#39; || c == &#39;)&#39;)) {</b>
+<b class="nc">&nbsp;                escape = true;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            chars[off++] = (char) c;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!escape) {</b>
+<b class="nc">&nbsp;            chars[off] = quote;</b>
+<b class="nc">&nbsp;            this.off = off + 1;</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.off = start;</b>
+<b class="nc">&nbsp;        writeStringEscape(value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeStringUTF16(final byte[] value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            writeStringNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean browserSecure = (context.features &amp; BrowserSecure.mask) != 0;</b>
+<b class="nc">&nbsp;        boolean escapeNoneAscii = (context.features &amp; Feature.EscapeNoneAscii.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean escape = false;</b>
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + value.length + 2;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = quote;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; value.length; i += 2) {</b>
+<b class="nc">&nbsp;            char c = UNSAFE.getChar(value, (long) Unsafe.ARRAY_BYTE_BASE_OFFSET + i);</b>
+<b class="nc">&nbsp;            if (c == &#39;\\&#39;</b>
+&nbsp;                    || c == quote
+&nbsp;                    || c &lt; &#39; &#39;
+&nbsp;                    || (browserSecure &amp;&amp; (c == &#39;&lt;&#39; || c == &#39;&gt;&#39; || c == &#39;(&#39; || c == &#39;)&#39;))
+&nbsp;                    || (escapeNoneAscii &amp;&amp; c &gt; 0x007F)
+&nbsp;            ) {
+<b class="nc">&nbsp;                escape = true;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            chars[off++] = c;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!escape) {</b>
+<b class="nc">&nbsp;            chars[off] = quote;</b>
+<b class="nc">&nbsp;            this.off = off + 1;</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        writeStringEscapeUTF16(value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeString(String str) {
+<b class="nc">&nbsp;        if (str == null) {</b>
+<b class="nc">&nbsp;            writeStringNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean escapeNoneAscii = (context.features &amp; Feature.EscapeNoneAscii.mask) != 0;</b>
+<b class="nc">&nbsp;        boolean browserSecure = (context.features &amp; BrowserSecure.mask) != 0;</b>
+<b class="nc">&nbsp;        boolean escape = false;</b>
+<b class="nc">&nbsp;        final char quote = this.quote;</b>
+&nbsp;
+<b class="nc">&nbsp;        final int strlen = str.length();</b>
+<b class="nc">&nbsp;        int minCapacity = off + strlen + 2;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; strlen; i++) {</b>
+<b class="nc">&nbsp;            char c = str.charAt(i);</b>
+<b class="nc">&nbsp;            if (c == &#39;\\&#39;</b>
+&nbsp;                    || c == quote
+&nbsp;                    || c &lt; &#39; &#39;
+&nbsp;                    || (browserSecure &amp;&amp; (c == &#39;&lt;&#39; || c == &#39;&gt;&#39; || c == &#39;(&#39; || c == &#39;)&#39;))
+&nbsp;                    || (escapeNoneAscii &amp;&amp; c &gt; 0x007F)
+&nbsp;            ) {
+<b class="nc">&nbsp;                escape = true;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!escape) {</b>
+<b class="nc">&nbsp;            int off = this.off;</b>
+<b class="nc">&nbsp;            final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;            chars[off++] = quote;</b>
+<b class="nc">&nbsp;            str.getChars(0, strlen, chars, off);</b>
+<b class="nc">&nbsp;            off += strlen;</b>
+<b class="nc">&nbsp;            chars[off] = quote;</b>
+<b class="nc">&nbsp;            this.off = off + 1;</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        writeStringEscape(str);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final void writeStringEscape(String str) {
+<b class="nc">&nbsp;        final int strlen = str.length();</b>
+<b class="nc">&nbsp;        final char quote = this.quote;</b>
+<b class="nc">&nbsp;        boolean escapeNoneAscii = (context.features &amp; Feature.EscapeNoneAscii.mask) != 0;</b>
+<b class="nc">&nbsp;        boolean browserSecure = (context.features &amp; BrowserSecure.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        ensureCapacity(off + strlen * 6 + 2);</b>
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = quote;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; strlen; ++i) {</b>
+<b class="nc">&nbsp;            char ch = str.charAt(i);</b>
+<b class="nc">&nbsp;            switch (ch) {</b>
+&nbsp;                case &#39;&quot;&#39;:
+&nbsp;                case &#39;\&#39;&#39;:
+<b class="nc">&nbsp;                    if (ch == quote) {</b>
+<b class="nc">&nbsp;                        chars[off++] = &#39;\\&#39;;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    chars[off++] = ch;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\\&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = ch;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\r&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;r&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\n&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;n&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\b&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;b&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\f&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;f&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\t&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;t&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 0:
+&nbsp;                case 1:
+&nbsp;                case 2:
+&nbsp;                case 3:
+&nbsp;                case 4:
+&nbsp;                case 5:
+&nbsp;                case 6:
+&nbsp;                case 7:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;0&#39; + (int) ch);</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 11:
+&nbsp;                case 14:
+&nbsp;                case 15:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;a&#39; + (ch - 10));</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 16:
+&nbsp;                case 17:
+&nbsp;                case 18:
+&nbsp;                case 19:
+&nbsp;                case 20:
+&nbsp;                case 21:
+&nbsp;                case 22:
+&nbsp;                case 23:
+&nbsp;                case 24:
+&nbsp;                case 25:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;1&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;0&#39; + (ch - 16));</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 26:
+&nbsp;                case 27:
+&nbsp;                case 28:
+&nbsp;                case 29:
+&nbsp;                case 30:
+&nbsp;                case 31:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;1&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;a&#39; + (ch - 26));</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;&lt;&#39;:
+&nbsp;                case &#39;&gt;&#39;:
+&nbsp;                case &#39;(&#39;:
+&nbsp;                case &#39;)&#39;:
+<b class="nc">&nbsp;                    if (browserSecure) {</b>
+<b class="nc">&nbsp;                        chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 4] = DIGITS[(ch &gt;&gt;&gt; 4) &amp; 15];</b>
+<b class="nc">&nbsp;                        chars[off + 5] = DIGITS[ch &amp; 15];</b>
+<b class="nc">&nbsp;                        off += 6;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        chars[off++] = ch;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+<b class="nc">&nbsp;                    if (escapeNoneAscii &amp;&amp; ch &gt; 0x007F) {</b>
+<b class="nc">&nbsp;                        chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 2] = DIGITS[(ch &gt;&gt;&gt; 12) &amp; 15];</b>
+<b class="nc">&nbsp;                        chars[off + 3] = DIGITS[(ch &gt;&gt;&gt; 8) &amp; 15];</b>
+<b class="nc">&nbsp;                        chars[off + 4] = DIGITS[(ch &gt;&gt;&gt; 4) &amp; 15];</b>
+<b class="nc">&nbsp;                        chars[off + 5] = DIGITS[ch &amp; 15];</b>
+<b class="nc">&nbsp;                        off += 6;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        chars[off++] = ch;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off] = quote;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final void writeStringEscapeUTF16(byte[] str) {
+<b class="nc">&nbsp;        final int strlen = str.length;</b>
+<b class="nc">&nbsp;        final char quote = this.quote;</b>
+<b class="nc">&nbsp;        boolean escapeNoneAscii = (context.features &amp; Feature.EscapeNoneAscii.mask) != 0;</b>
+<b class="nc">&nbsp;        boolean browserSecure = (context.features &amp; BrowserSecure.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        ensureCapacity(off + strlen * 6 + 2);</b>
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = quote;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; strlen; i += 2) {</b>
+<b class="nc">&nbsp;            char ch = UNSAFE.getChar(str, (long) Unsafe.ARRAY_CHAR_BASE_OFFSET + i);</b>
+<b class="nc">&nbsp;            switch (ch) {</b>
+&nbsp;                case &#39;&quot;&#39;:
+&nbsp;                case &#39;\&#39;&#39;:
+<b class="nc">&nbsp;                    if (ch == quote) {</b>
+<b class="nc">&nbsp;                        chars[off++] = &#39;\\&#39;;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    chars[off++] = ch;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\\&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = ch;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\r&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;r&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\n&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;n&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\b&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;b&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\f&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;f&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\t&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;t&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 0:
+&nbsp;                case 1:
+&nbsp;                case 2:
+&nbsp;                case 3:
+&nbsp;                case 4:
+&nbsp;                case 5:
+&nbsp;                case 6:
+&nbsp;                case 7:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;0&#39; + (int) ch);</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 11:
+&nbsp;                case 14:
+&nbsp;                case 15:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;a&#39; + (ch - 10));</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 16:
+&nbsp;                case 17:
+&nbsp;                case 18:
+&nbsp;                case 19:
+&nbsp;                case 20:
+&nbsp;                case 21:
+&nbsp;                case 22:
+&nbsp;                case 23:
+&nbsp;                case 24:
+&nbsp;                case 25:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;1&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;0&#39; + (ch - 16));</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 26:
+&nbsp;                case 27:
+&nbsp;                case 28:
+&nbsp;                case 29:
+&nbsp;                case 30:
+&nbsp;                case 31:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;1&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;a&#39; + (ch - 26));</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;&lt;&#39;:
+&nbsp;                case &#39;&gt;&#39;:
+&nbsp;                case &#39;(&#39;:
+&nbsp;                case &#39;)&#39;:
+<b class="nc">&nbsp;                    if (browserSecure) {</b>
+<b class="nc">&nbsp;                        chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 4] = DIGITS[(ch &gt;&gt;&gt; 4) &amp; 15];</b>
+<b class="nc">&nbsp;                        chars[off + 5] = DIGITS[ch &amp; 15];</b>
+<b class="nc">&nbsp;                        off += 6;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        chars[off++] = ch;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+<b class="nc">&nbsp;                    if (escapeNoneAscii &amp;&amp; ch &gt; 0x007F) {</b>
+<b class="nc">&nbsp;                        chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 2] = DIGITS[(ch &gt;&gt;&gt; 12) &amp; 15];</b>
+<b class="nc">&nbsp;                        chars[off + 3] = DIGITS[(ch &gt;&gt;&gt; 8) &amp; 15];</b>
+<b class="nc">&nbsp;                        chars[off + 4] = DIGITS[(ch &gt;&gt;&gt; 4) &amp; 15];</b>
+<b class="nc">&nbsp;                        chars[off + 5] = DIGITS[ch &amp; 15];</b>
+<b class="nc">&nbsp;                        off += 6;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        chars[off++] = ch;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off] = quote;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final void writeStringEscape(char[] str) {
+<b class="nc">&nbsp;        final int strlen = str.length;</b>
+<b class="nc">&nbsp;        final char quote = this.quote;</b>
+<b class="nc">&nbsp;        boolean escapeNoneAscii = (context.features &amp; Feature.EscapeNoneAscii.mask) != 0;</b>
+<b class="nc">&nbsp;        boolean browserSecure = (context.features &amp; BrowserSecure.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        ensureCapacity(off + strlen * 6 + 2);</b>
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = quote;</b>
+<b class="nc">&nbsp;        for (char ch : str) {</b>
+<b class="nc">&nbsp;            switch (ch) {</b>
+&nbsp;                case &#39;&quot;&#39;:
+&nbsp;                case &#39;\&#39;&#39;:
+<b class="nc">&nbsp;                    if (ch == quote) {</b>
+<b class="nc">&nbsp;                        chars[off++] = &#39;\\&#39;;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    chars[off++] = ch;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\\&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = ch;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\r&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;r&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\n&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;n&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\b&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;b&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\f&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;f&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\t&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;t&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 0:
+&nbsp;                case 1:
+&nbsp;                case 2:
+&nbsp;                case 3:
+&nbsp;                case 4:
+&nbsp;                case 5:
+&nbsp;                case 6:
+&nbsp;                case 7:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;0&#39; + (int) ch);</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 11:
+&nbsp;                case 14:
+&nbsp;                case 15:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;a&#39; + (ch - 10));</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 16:
+&nbsp;                case 17:
+&nbsp;                case 18:
+&nbsp;                case 19:
+&nbsp;                case 20:
+&nbsp;                case 21:
+&nbsp;                case 22:
+&nbsp;                case 23:
+&nbsp;                case 24:
+&nbsp;                case 25:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;1&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;0&#39; + (ch - 16));</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 26:
+&nbsp;                case 27:
+&nbsp;                case 28:
+&nbsp;                case 29:
+&nbsp;                case 30:
+&nbsp;                case 31:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;1&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;a&#39; + (ch - 26));</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;&lt;&#39;:
+&nbsp;                case &#39;&gt;&#39;:
+&nbsp;                case &#39;(&#39;:
+&nbsp;                case &#39;)&#39;:
+<b class="nc">&nbsp;                    if (browserSecure) {</b>
+<b class="nc">&nbsp;                        chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 4] = DIGITS[(ch &gt;&gt;&gt; 4) &amp; 15];</b>
+<b class="nc">&nbsp;                        chars[off + 5] = DIGITS[ch &amp; 15];</b>
+<b class="nc">&nbsp;                        off += 6;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        chars[off++] = ch;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+<b class="nc">&nbsp;                    if (escapeNoneAscii &amp;&amp; ch &gt; 0x007F) {</b>
+<b class="nc">&nbsp;                        chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 2] = DIGITS[(ch &gt;&gt;&gt; 12) &amp; 15];</b>
+<b class="nc">&nbsp;                        chars[off + 3] = DIGITS[(ch &gt;&gt;&gt; 8) &amp; 15];</b>
+<b class="nc">&nbsp;                        chars[off + 4] = DIGITS[(ch &gt;&gt;&gt; 4) &amp; 15];</b>
+<b class="nc">&nbsp;                        chars[off + 5] = DIGITS[ch &amp; 15];</b>
+<b class="nc">&nbsp;                        off += 6;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        chars[off++] = ch;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off] = quote;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final void writeStringEscape(byte[] str) {
+<b class="nc">&nbsp;        final int strlen = str.length;</b>
+<b class="nc">&nbsp;        final char quote = this.quote;</b>
+<b class="nc">&nbsp;        boolean escapeNoneAscii = (context.features &amp; Feature.EscapeNoneAscii.mask) != 0;</b>
+<b class="nc">&nbsp;        boolean browserSecure = (context.features &amp; BrowserSecure.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        ensureCapacity(off + strlen * 6 + 2);</b>
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = quote;</b>
+<b class="nc">&nbsp;        for (byte b : str) {</b>
+<b class="nc">&nbsp;            char ch = (char) (b &amp; 0xff);</b>
+<b class="nc">&nbsp;            switch (ch) {</b>
+&nbsp;                case &#39;&quot;&#39;:
+&nbsp;                case &#39;\&#39;&#39;:
+<b class="nc">&nbsp;                    if (ch == quote) {</b>
+<b class="nc">&nbsp;                        chars[off++] = &#39;\\&#39;;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    chars[off++] = ch;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\\&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = ch;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\r&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;r&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\n&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;n&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\b&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;b&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\f&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;f&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\t&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;t&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 0:
+&nbsp;                case 1:
+&nbsp;                case 2:
+&nbsp;                case 3:
+&nbsp;                case 4:
+&nbsp;                case 5:
+&nbsp;                case 6:
+&nbsp;                case 7:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;0&#39; + (int) ch);</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 11:
+&nbsp;                case 14:
+&nbsp;                case 15:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;a&#39; + (ch - 10));</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 16:
+&nbsp;                case 17:
+&nbsp;                case 18:
+&nbsp;                case 19:
+&nbsp;                case 20:
+&nbsp;                case 21:
+&nbsp;                case 22:
+&nbsp;                case 23:
+&nbsp;                case 24:
+&nbsp;                case 25:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;1&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;0&#39; + (ch - 16));</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 26:
+&nbsp;                case 27:
+&nbsp;                case 28:
+&nbsp;                case 29:
+&nbsp;                case 30:
+&nbsp;                case 31:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;1&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;a&#39; + (ch - 26));</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;&lt;&#39;:
+&nbsp;                case &#39;&gt;&#39;:
+&nbsp;                case &#39;(&#39;:
+&nbsp;                case &#39;)&#39;:
+<b class="nc">&nbsp;                    if (browserSecure) {</b>
+<b class="nc">&nbsp;                        chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 4] = DIGITS[(ch &gt;&gt;&gt; 4) &amp; 15];</b>
+<b class="nc">&nbsp;                        chars[off + 5] = DIGITS[ch &amp; 15];</b>
+<b class="nc">&nbsp;                        off += 6;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        chars[off++] = ch;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+<b class="nc">&nbsp;                    if (escapeNoneAscii &amp;&amp; ch &gt; 0x007F) {</b>
+<b class="nc">&nbsp;                        chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 4] = DIGITS[(ch &gt;&gt;&gt; 4) &amp; 15];</b>
+<b class="nc">&nbsp;                        chars[off + 5] = DIGITS[ch &amp; 15];</b>
+<b class="nc">&nbsp;                        off += 6;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        chars[off++] = ch;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off] = quote;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeString(char[] str, int offset, int len, boolean quoted) {
+<b class="nc">&nbsp;        boolean escapeNoneAscii = (context.features &amp; Feature.EscapeNoneAscii.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        final char quote = this.quote;</b>
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = quoted ? off + 2 : off;</b>
+<b class="nc">&nbsp;        if (escapeNoneAscii) {</b>
+<b class="nc">&nbsp;            minCapacity += len * 6;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            minCapacity += len * 2;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (minCapacity - chars.length &gt; 0) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        if (quoted) {</b>
+<b class="nc">&nbsp;            chars[off++] = quote;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = offset; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;            char ch = str[i];</b>
+<b class="nc">&nbsp;            switch (ch) {</b>
+&nbsp;                case &#39;&quot;&#39;:
+&nbsp;                case &#39;\&#39;&#39;:
+<b class="nc">&nbsp;                    if (ch == quote) {</b>
+<b class="nc">&nbsp;                        chars[off++] = &#39;\\&#39;;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    chars[off++] = ch;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\\&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = ch;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\r&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;r&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\n&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;n&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\b&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;b&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\f&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;f&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &#39;\t&#39;:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;t&#39;;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 0:
+&nbsp;                case 1:
+&nbsp;                case 2:
+&nbsp;                case 3:
+&nbsp;                case 4:
+&nbsp;                case 5:
+&nbsp;                case 6:
+&nbsp;                case 7:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;0&#39; + (int) ch);</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 11:
+&nbsp;                case 14:
+&nbsp;                case 15:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;a&#39; + (ch - 10));</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 16:
+&nbsp;                case 17:
+&nbsp;                case 18:
+&nbsp;                case 19:
+&nbsp;                case 20:
+&nbsp;                case 21:
+&nbsp;                case 22:
+&nbsp;                case 23:
+&nbsp;                case 24:
+&nbsp;                case 25:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;1&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;0&#39; + (ch - 16));</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 26:
+&nbsp;                case 27:
+&nbsp;                case 28:
+&nbsp;                case 29:
+&nbsp;                case 30:
+&nbsp;                case 31:
+<b class="nc">&nbsp;                    chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 4] = &#39;1&#39;;</b>
+<b class="nc">&nbsp;                    chars[off + 5] = (char) (&#39;a&#39; + (ch - 26));</b>
+<b class="nc">&nbsp;                    off += 6;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+<b class="nc">&nbsp;                    if (escapeNoneAscii &amp;&amp; ch &gt; 0x007F) {</b>
+<b class="nc">&nbsp;                        chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                        chars[off + 2] = DIGITS[(ch &gt;&gt;&gt; 12) &amp; 15];</b>
+<b class="nc">&nbsp;                        chars[off + 3] = DIGITS[(ch &gt;&gt;&gt; 8) &amp; 15];</b>
+<b class="nc">&nbsp;                        chars[off + 4] = DIGITS[(ch &gt;&gt;&gt; 4) &amp; 15];</b>
+<b class="nc">&nbsp;                        chars[off + 5] = DIGITS[ch &amp; 15];</b>
+<b class="nc">&nbsp;                        off += 6;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        chars[off++] = ch;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (quoted) {</b>
+<b class="nc">&nbsp;            chars[off++] = quote;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.off = off;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void writeString(String[] strings) {
+<b class="nc">&nbsp;        if (strings == null) {</b>
+<b class="nc">&nbsp;            writeArrayNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        startArray();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; strings.length; i++) {</b>
+<b class="nc">&nbsp;            if (i != 0) {</b>
+<b class="nc">&nbsp;                writeComma();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String item = strings[i];</b>
+<b class="nc">&nbsp;            if (item == null) {</b>
+<b class="nc">&nbsp;                if (isEnabled(Feature.NullAsDefaultValue.mask | Feature.WriteNullStringAsEmpty.mask)) {</b>
+<b class="nc">&nbsp;                    writeString(&quot;&quot;);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    writeNull();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            writeString(item);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        endArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeReference(String path) {
+<b class="nc">&nbsp;        this.lastReference = path;</b>
+&nbsp;
+<b class="nc">&nbsp;        writeRaw(REF_PREF, 0, REF_PREF.length);</b>
+<b class="nc">&nbsp;        writeString(path);</b>
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        if (off == chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(off + 1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off] = &#39;}&#39;;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeBase64(byte[] bytes) {
+<b class="nc">&nbsp;        if (bytes == null) {</b>
+<b class="nc">&nbsp;            writeArrayNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int charsLen = ((bytes.length - 1) / 3 + 1) &lt;&lt; 2; // base64 character count</b>
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        ensureCapacity(off + charsLen + 2);</b>
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = quote;</b>
+&nbsp;
+<b class="nc">&nbsp;        int eLen = (bytes.length / 3) * 3; // Length of even 24-bits.</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int s = 0; s &lt; eLen; ) {</b>
+&nbsp;            // Copy next three bytes into lower 24 bits of int, paying attension to sign.
+<b class="nc">&nbsp;            int i = (bytes[s++] &amp; 0xff) &lt;&lt; 16 | (bytes[s++] &amp; 0xff) &lt;&lt; 8 | (bytes[s++] &amp; 0xff);</b>
+&nbsp;
+&nbsp;            // Encode the int into four chars
+<b class="nc">&nbsp;            chars[off] = CA[(i &gt;&gt;&gt; 18) &amp; 0x3f];</b>
+<b class="nc">&nbsp;            chars[off + 1] = CA[(i &gt;&gt;&gt; 12) &amp; 0x3f];</b>
+<b class="nc">&nbsp;            chars[off + 2] = CA[(i &gt;&gt;&gt; 6) &amp; 0x3f];</b>
+<b class="nc">&nbsp;            chars[off + 3] = CA[i &amp; 0x3f];</b>
+<b class="nc">&nbsp;            off += 4;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // Pad and encode last bits if source isn&#39;t even 24 bits.
+<b class="nc">&nbsp;        int left = bytes.length - eLen; // 0 - 2.</b>
+<b class="nc">&nbsp;        if (left &gt; 0) {</b>
+&nbsp;            // Prepare the int
+<b class="nc">&nbsp;            int i = ((bytes[eLen] &amp; 0xff) &lt;&lt; 10) | (left == 2 ? ((bytes[bytes.length - 1] &amp; 0xff) &lt;&lt; 2) : 0);</b>
+&nbsp;
+&nbsp;            // Set last four chars
+<b class="nc">&nbsp;            chars[off] = CA[i &gt;&gt; 12];</b>
+<b class="nc">&nbsp;            chars[off + 1] = CA[(i &gt;&gt;&gt; 6) &amp; 0x3f];</b>
+<b class="nc">&nbsp;            chars[off + 2] = left == 2 ? CA[i &amp; 0x3f] : &#39;=&#39;;</b>
+<b class="nc">&nbsp;            chars[off + 3] = &#39;=&#39;;</b>
+<b class="nc">&nbsp;            off += 4;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        chars[off] = quote;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeHex(byte[] bytes) {
+<b class="nc">&nbsp;        if (bytes == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int charsLen = bytes.length * 2 + 3;</b>
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        ensureCapacity(off + charsLen + 2);</b>
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off] = &#39;x&#39;;</b>
+<b class="nc">&nbsp;        chars[off + 1] = &#39;\&#39;&#39;;</b>
+<b class="nc">&nbsp;        off += 2;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (byte b : bytes) {</b>
+<b class="nc">&nbsp;            int a = b &amp; 0xFF;</b>
+<b class="nc">&nbsp;            int b0 = a &gt;&gt; 4;</b>
+<b class="nc">&nbsp;            int b1 = a &amp; 0xf;</b>
+&nbsp;
+<b class="nc">&nbsp;            chars[off] = (char) (b0 + (b0 &lt; 10 ? 48 : 55));</b>
+<b class="nc">&nbsp;            chars[off + 1] = (char) (b1 + (b1 &lt; 10 ? 48 : 55));</b>
+<b class="nc">&nbsp;            off += 2;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        chars[off] = &#39;\&#39;&#39;;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeBigInt(BigInteger value, long features) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            writeNumberNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String str = value.toString(10);</b>
+&nbsp;
+<b class="nc">&nbsp;        features |= context.features;</b>
+<b class="nc">&nbsp;        boolean browserCompatible = (features &amp; Feature.BrowserCompatible.mask) != 0</b>
+<b class="nc">&nbsp;                &amp;&amp; (value.compareTo(LOW_BIGINT) &lt; 0 || value.compareTo(HIGH_BIGINT) &gt; 0);</b>
+<b class="nc">&nbsp;        boolean nonStringAsString = (features &amp; (WriteNonStringValueAsString.mask | WriteLongAsString.mask)) != 0;</b>
+<b class="nc">&nbsp;        boolean writeAsString = browserCompatible || nonStringAsString;</b>
+&nbsp;
+<b class="nc">&nbsp;        final int strlen = str.length();</b>
+<b class="nc">&nbsp;        ensureCapacity(off + strlen + 2);</b>
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            chars[off++] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;            str.getChars(0, strlen, chars, off);</b>
+<b class="nc">&nbsp;            off += strlen;</b>
+<b class="nc">&nbsp;            chars[off++] = &#39;&quot;&#39;;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            str.getChars(0, strlen, chars, off);</b>
+<b class="nc">&nbsp;            off += strlen;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.off = off;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void writeDecimal(BigDecimal value, long features, DecimalFormat format) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            writeNumberNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (format != null) {</b>
+<b class="nc">&nbsp;            String str = format.format(value);</b>
+<b class="nc">&nbsp;            writeRaw(str);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        features |= context.features;</b>
+&nbsp;
+<b class="nc">&nbsp;        int precision = value.precision();</b>
+<b class="nc">&nbsp;        boolean nonStringAsString = (features &amp; WriteNonStringValueAsString.mask) != 0;</b>
+<b class="nc">&nbsp;        boolean writeAsString = nonStringAsString</b>
+&nbsp;                || ((features &amp; BrowserCompatible.mask) != 0
+&nbsp;                &amp;&amp; precision &gt;= 16
+<b class="nc">&nbsp;                &amp;&amp; (value.compareTo(LOW) &lt; 0 || value.compareTo(HIGH) &gt; 0));</b>
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + precision + 7;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            chars[off++] = &#39;&quot;&#39;;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean asPlain = (features &amp; WriteBigDecimalAsPlain.mask) != 0;</b>
+&nbsp;        long unscaleValue;
+&nbsp;        int scale;
+<b class="nc">&nbsp;        if (precision &lt; 19</b>
+<b class="nc">&nbsp;                &amp;&amp; (scale = value.scale()) &gt;= 0</b>
+&nbsp;                &amp;&amp; FIELD_DECIMAL_INT_COMPACT_OFFSET != -1
+<b class="nc">&nbsp;                &amp;&amp; (unscaleValue = UnsafeUtils.getLong(value, FIELD_DECIMAL_INT_COMPACT_OFFSET)) != Long.MIN_VALUE</b>
+&nbsp;                &amp;&amp; !asPlain
+&nbsp;        ) {
+<b class="nc">&nbsp;            off = IOUtils.writeDecimal(chars, off, unscaleValue, scale);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String str = asPlain ? value.toPlainString() : value.toString();</b>
+<b class="nc">&nbsp;            str.getChars(0, str.length(), chars, off);</b>
+<b class="nc">&nbsp;            off += str.length();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            chars[off++] = &#39;&quot;&#39;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.off = off;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeUUID(UUID value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long hi = value.getMostSignificantBits();</b>
+<b class="nc">&nbsp;        long lo = value.getLeastSignificantBits();</b>
+&nbsp;
+<b class="nc">&nbsp;        int minCapacity = off + 38;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] lookup = JSONFactory.UUID_LOOKUP;</b>
+<b class="nc">&nbsp;        final char[] bytes = this.chars;</b>
+<b class="nc">&nbsp;        final int off = this.off;</b>
+<b class="nc">&nbsp;        bytes[off] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;        int i = lookup[((int) (hi &gt;&gt; 56)) &amp; 255];</b>
+<b class="nc">&nbsp;        int i1 = lookup[((int) (hi &gt;&gt; 48)) &amp; 255];</b>
+<b class="nc">&nbsp;        int i2 = lookup[((int) (hi &gt;&gt; 40)) &amp; 255];</b>
+<b class="nc">&nbsp;        int i3 = lookup[((int) (hi &gt;&gt; 32)) &amp; 255];</b>
+<b class="nc">&nbsp;        int i4 = lookup[(((int) hi) &gt;&gt; 24) &amp; 255];</b>
+<b class="nc">&nbsp;        int i5 = lookup[(((int) hi) &gt;&gt; 16) &amp; 255];</b>
+<b class="nc">&nbsp;        int i6 = lookup[(((int) hi) &gt;&gt; 8) &amp; 255];</b>
+<b class="nc">&nbsp;        int i7 = lookup[((int) hi) &amp; 255];</b>
+<b class="nc">&nbsp;        int i8 = lookup[(((int) (lo &gt;&gt; 56))) &amp; 255];</b>
+<b class="nc">&nbsp;        int i9 = lookup[(((int) (lo &gt;&gt; 48))) &amp; 255];</b>
+<b class="nc">&nbsp;        int i10 = lookup[(((int) (lo &gt;&gt; 40))) &amp; 255];</b>
+<b class="nc">&nbsp;        int i11 = lookup[((int) (lo &gt;&gt; 32)) &amp; 255];</b>
+<b class="nc">&nbsp;        int i12 = lookup[(((int) lo) &gt;&gt; 24) &amp; 255];</b>
+<b class="nc">&nbsp;        int i13 = lookup[(((int) lo) &gt;&gt; 16) &amp; 255];</b>
+<b class="nc">&nbsp;        int i14 = lookup[(((int) lo) &gt;&gt; 8) &amp; 255];</b>
+<b class="nc">&nbsp;        int i15 = lookup[((int) lo) &amp; 255];</b>
+&nbsp;
+<b class="nc">&nbsp;        bytes[off + 1] = (char) (byte) (i &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 2] = (char) (byte) i;</b>
+<b class="nc">&nbsp;        bytes[off + 3] = (char) (byte) (i1 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 4] = (char) (byte) i1;</b>
+<b class="nc">&nbsp;        bytes[off + 5] = (char) (byte) (i2 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 6] = (char) (byte) i2;</b>
+<b class="nc">&nbsp;        bytes[off + 7] = (char) (byte) (i3 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 8] = (char) (byte) i3;</b>
+<b class="nc">&nbsp;        bytes[off + 9] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;        bytes[off + 10] = (char) (byte) (i4 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 11] = (char) (byte) i4;</b>
+<b class="nc">&nbsp;        bytes[off + 12] = (char) (byte) (i5 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 13] = (char) (byte) i5;</b>
+<b class="nc">&nbsp;        bytes[off + 14] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;        bytes[off + 15] = (char) (byte) (i6 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 16] = (char) (byte) i6;</b>
+<b class="nc">&nbsp;        bytes[off + 17] = (char) (byte) (i7 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 18] = (char) (byte) i7;</b>
+<b class="nc">&nbsp;        bytes[off + 19] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;        bytes[off + 20] = (char) (byte) (i8 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 21] = (char) (byte) i8;</b>
+<b class="nc">&nbsp;        bytes[off + 22] = (char) (byte) (i9 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 23] = (char) (byte) i9;</b>
+<b class="nc">&nbsp;        bytes[off + 24] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;        bytes[off + 25] = (char) (byte) (i10 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 26] = (char) (byte) i10;</b>
+<b class="nc">&nbsp;        bytes[off + 27] = (char) (byte) (i11 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 28] = (char) (byte) i11;</b>
+<b class="nc">&nbsp;        bytes[off + 29] = (char) (byte) (i12 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 30] = (char) (byte) i12;</b>
+<b class="nc">&nbsp;        bytes[off + 31] = (char) (byte) (i13 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 32] = (char) (byte) i13;</b>
+<b class="nc">&nbsp;        bytes[off + 33] = (char) (byte) (i14 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 34] = (char) (byte) i14;</b>
+<b class="nc">&nbsp;        bytes[off + 35] = (char) (byte) (i15 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 36] = (char) (byte) i15;</b>
+<b class="nc">&nbsp;        bytes[off + 37] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;        this.off += 38;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeRaw(String str) {
+<b class="nc">&nbsp;        ensureCapacity(off + str.length());</b>
+<b class="nc">&nbsp;        str.getChars(0, str.length(), chars, off);</b>
+<b class="nc">&nbsp;        off += str.length();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeRaw(char[] chars, int off, int charslen) {
+&nbsp;        {
+&nbsp;            // inline ensureCapacity
+<b class="nc">&nbsp;            int minCapacity = this.off + charslen;</b>
+<b class="nc">&nbsp;            if (minCapacity &gt;= this.chars.length) {</b>
+<b class="nc">&nbsp;                ensureCapacity(minCapacity);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        System.arraycopy(chars, off, this.chars, this.off, charslen);</b>
+<b class="nc">&nbsp;        this.off += charslen;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeChar(char ch) {
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + 8;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = quote;</b>
+<b class="nc">&nbsp;        switch (ch) {</b>
+&nbsp;            case &#39;&quot;&#39;:
+&nbsp;            case &#39;\&#39;&#39;:
+<b class="nc">&nbsp;                if (ch == quote) {</b>
+<b class="nc">&nbsp;                    chars[off++] = &#39;\\&#39;;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                chars[off++] = ch;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;\\&#39;:
+<b class="nc">&nbsp;                chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 1] = ch;</b>
+<b class="nc">&nbsp;                off += 2;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;\r&#39;:
+<b class="nc">&nbsp;                chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 1] = &#39;r&#39;;</b>
+<b class="nc">&nbsp;                off += 2;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;\n&#39;:
+<b class="nc">&nbsp;                chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 1] = &#39;n&#39;;</b>
+<b class="nc">&nbsp;                off += 2;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;\b&#39;:
+<b class="nc">&nbsp;                chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 1] = &#39;b&#39;;</b>
+<b class="nc">&nbsp;                off += 2;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;\f&#39;:
+<b class="nc">&nbsp;                chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 1] = &#39;f&#39;;</b>
+<b class="nc">&nbsp;                off += 2;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;\t&#39;:
+<b class="nc">&nbsp;                chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 1] = &#39;t&#39;;</b>
+<b class="nc">&nbsp;                off += 2;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 0:
+&nbsp;            case 1:
+&nbsp;            case 2:
+&nbsp;            case 3:
+&nbsp;            case 4:
+&nbsp;            case 5:
+&nbsp;            case 6:
+&nbsp;            case 7:
+<b class="nc">&nbsp;                chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 4] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 5] = (char) (&#39;0&#39; + (int) ch);</b>
+<b class="nc">&nbsp;                off += 6;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 11:
+&nbsp;            case 14:
+&nbsp;            case 15:
+<b class="nc">&nbsp;                chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 4] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 5] = (char) (&#39;a&#39; + (ch - 10));</b>
+<b class="nc">&nbsp;                off += 6;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 16:
+&nbsp;            case 17:
+&nbsp;            case 18:
+&nbsp;            case 19:
+&nbsp;            case 20:
+&nbsp;            case 21:
+&nbsp;            case 22:
+&nbsp;            case 23:
+&nbsp;            case 24:
+&nbsp;            case 25:
+<b class="nc">&nbsp;                chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 4] = &#39;1&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 5] = (char) (&#39;0&#39; + (ch - 16));</b>
+<b class="nc">&nbsp;                off += 6;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 26:
+&nbsp;            case 27:
+&nbsp;            case 28:
+&nbsp;            case 29:
+&nbsp;            case 30:
+&nbsp;            case 31:
+<b class="nc">&nbsp;                chars[off] = &#39;\\&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 1] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 2] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 3] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 4] = &#39;1&#39;;</b>
+<b class="nc">&nbsp;                chars[off + 5] = (char) (&#39;a&#39; + (ch - 26));</b>
+<b class="nc">&nbsp;                off += 6;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                chars[off++] = ch;</b>
+&nbsp;                break;
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off] = quote;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeRaw(char ch) {
+<b class="nc">&nbsp;        if (off == chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(off + 1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off++] = ch;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeRaw(char c0, char c1) {
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        if (off + 1 &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(off + 2);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off] = c0;</b>
+<b class="nc">&nbsp;        chars[off + 1] = c1;</b>
+<b class="nc">&nbsp;        this.off = off + 2;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeNameRaw(char[] name) {
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + name.length + 2 + indent;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= this.chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (startObject) {</b>
+<b class="nc">&nbsp;            startObject = false;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;            chars[off++] = &#39;,&#39;;</b>
+<b class="nc">&nbsp;            if (pretty) {</b>
+<b class="nc">&nbsp;                chars[off++] = (byte) &#39;\n&#39;;</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; indent; ++i) {</b>
+<b class="nc">&nbsp;                    chars[off++] = (byte) &#39;\t&#39;;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        System.arraycopy(name, 0, chars, off, name.length);</b>
+<b class="nc">&nbsp;        this.off = off + name.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeNameRaw(char[] chars, int off, int len) {
+<b class="nc">&nbsp;        int minCapacity = this.off + len + 2 + indent;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= this.chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (startObject) {</b>
+<b class="nc">&nbsp;            startObject = false;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            this.chars[this.off++] = &#39;,&#39;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        System.arraycopy(chars, off, this.chars, this.off, len);</b>
+<b class="nc">&nbsp;        this.off += len;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    final void ensureCapacity(int minCapacity) {
+<b class="nc">&nbsp;        if (minCapacity - chars.length &gt; 0) {</b>
+<b class="nc">&nbsp;            int oldCapacity = chars.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            chars = Arrays.copyOf(chars, newCapacity);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void writeInt32(int[] value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean writeAsString = (context.features &amp; Feature.WriteNonStringValueAsString.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + value.length * 13 + 2;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = &#39;[&#39;;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; value.length; i++) {</b>
+<b class="nc">&nbsp;            if (i != 0) {</b>
+<b class="nc">&nbsp;                chars[off++] = &#39;,&#39;;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (writeAsString) {</b>
+<b class="nc">&nbsp;                chars[off++] = quote;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            off = IOUtils.writeInt32(chars, off, value[i]);</b>
+<b class="nc">&nbsp;            if (writeAsString) {</b>
+<b class="nc">&nbsp;                chars[off++] = quote;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        chars[off] = &#39;]&#39;;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeInt8(byte i) {
+<b class="nc">&nbsp;        boolean writeAsString = (context.features &amp; Feature.WriteNonStringValueAsString.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + 7;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            chars[off++] = quote;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        off = IOUtils.writeInt32(chars, off, i);</b>
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            chars[off++] = quote;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.off = off;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeInt16(short i) {
+<b class="nc">&nbsp;        boolean writeAsString = (context.features &amp; Feature.WriteNonStringValueAsString.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + 7;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            chars[off++] = quote;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        off = IOUtils.writeInt32(chars, off, i);</b>
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            chars[off++] = quote;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.off = off;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeInt32(int i) {
+<b class="nc">&nbsp;        boolean writeAsString = (context.features &amp; Feature.WriteNonStringValueAsString.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + 13;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            chars[off++] = quote;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        off = IOUtils.writeInt32(chars, off, i);</b>
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            chars[off++] = quote;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.off = off;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void writeInt64(long[] values) {
+<b class="nc">&nbsp;        if (values == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long features = context.features;</b>
+<b class="nc">&nbsp;        boolean browserCompatible = (features &amp; BrowserCompatible.mask) != 0;</b>
+<b class="nc">&nbsp;        boolean nonStringAsString = (features &amp; (WriteNonStringValueAsString.mask | WriteLongAsString.mask)) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + 2 + values.length * 23;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = &#39;[&#39;;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; values.length; i++) {</b>
+<b class="nc">&nbsp;            if (i != 0) {</b>
+<b class="nc">&nbsp;                chars[off++] = &#39;,&#39;;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            long v = values[i];</b>
+<b class="nc">&nbsp;            boolean writeAsString = nonStringAsString</b>
+&nbsp;                    || (browserCompatible &amp;&amp; v &lt;= 9007199254740991L &amp;&amp; v &gt;= -9007199254740991L);
+<b class="nc">&nbsp;            if (writeAsString) {</b>
+<b class="nc">&nbsp;                chars[off++] = this.quote;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            off = IOUtils.writeInt64(chars, off, v);</b>
+<b class="nc">&nbsp;            if (writeAsString) {</b>
+<b class="nc">&nbsp;                chars[off++] = this.quote;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        chars[off] = &#39;]&#39;;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeInt64(long i) {
+<b class="nc">&nbsp;        final long features = context.features;</b>
+<b class="nc">&nbsp;        boolean writeAsString = (features &amp; (WriteNonStringValueAsString.mask | WriteLongAsString.mask)) != 0</b>
+&nbsp;                || ((features &amp; BrowserCompatible.mask) != 0 &amp;&amp; (i &gt; 9007199254740991L || i &lt; -9007199254740991L));
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + 23;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            chars[off++] = quote;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        off = IOUtils.writeInt64(chars, off, i);</b>
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            chars[off++] = quote;</b>
+<b class="nc">&nbsp;        } else if ((features &amp; WriteClassName.mask) != 0</b>
+&nbsp;                &amp;&amp; (features &amp; NotWriteNumberClassName.mask) == 0
+&nbsp;                &amp;&amp; i &gt;= Integer.MIN_VALUE &amp;&amp; i &lt;= Integer.MAX_VALUE
+&nbsp;        ) {
+<b class="nc">&nbsp;            chars[off++] = &#39;L&#39;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.off = off;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeFloat(float value) {
+<b class="nc">&nbsp;        boolean writeAsString = (context.features &amp; Feature.WriteNonStringValueAsString.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + 15;</b>
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            minCapacity += 2;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ensureCapacity(minCapacity);</b>
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            chars[off++] = &#39;&quot;&#39;;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int len = DoubleToDecimal.toString(value, chars, off, true);</b>
+<b class="nc">&nbsp;        off += len;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            chars[off++] = &#39;&quot;&#39;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.off = off;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeFloat(float[] values) {
+<b class="nc">&nbsp;        if (values == null) {</b>
+<b class="nc">&nbsp;            writeArrayNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean writeAsString = (context.features &amp; Feature.WriteNonStringValueAsString.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + values.length * (writeAsString ? 16 : 18) + 1;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = &#39;[&#39;;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; values.length; i++) {</b>
+<b class="nc">&nbsp;            if (i != 0) {</b>
+<b class="nc">&nbsp;                chars[off++] = &#39;,&#39;;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (writeAsString) {</b>
+<b class="nc">&nbsp;                chars[off++] = &#39;&quot;&#39;;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            float value = values[i];</b>
+<b class="nc">&nbsp;            int len = DoubleToDecimal.toString(value, chars, off, true);</b>
+<b class="nc">&nbsp;            off += len;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (writeAsString) {</b>
+<b class="nc">&nbsp;                chars[off++] = &#39;&quot;&#39;;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off] = &#39;]&#39;;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeDouble(double value) {
+<b class="nc">&nbsp;        boolean writeAsString = (context.features &amp; Feature.WriteNonStringValueAsString.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + 24;</b>
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            minCapacity += 2;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            chars[off++] = &#39;&quot;&#39;;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int len = DoubleToDecimal.toString(value, chars, off, true);</b>
+<b class="nc">&nbsp;        off += len;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            chars[off++] = &#39;&quot;&#39;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.off = off;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeDoubleArray(double value0, double value1) {
+<b class="nc">&nbsp;        boolean writeAsString = (context.features &amp; Feature.WriteNonStringValueAsString.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + 48 + 3;</b>
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            minCapacity += 2;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ensureCapacity(minCapacity);</b>
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = &#39;[&#39;;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            chars[off++] = &#39;&quot;&#39;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int len0 = DoubleToDecimal.toString(value0, chars, off, true);</b>
+<b class="nc">&nbsp;        off += len0;</b>
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            chars[off++] = &#39;&quot;&#39;;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        chars[off++] = &#39;,&#39;;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            chars[off++] = &#39;&quot;&#39;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int len1 = DoubleToDecimal.toString(value1, chars, off, true);</b>
+<b class="nc">&nbsp;        off += len1;</b>
+<b class="nc">&nbsp;        if (writeAsString) {</b>
+<b class="nc">&nbsp;            chars[off++] = &#39;&quot;&#39;;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        chars[off] = &#39;]&#39;;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeDouble(double[] values) {
+<b class="nc">&nbsp;        if (values == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean writeAsString = (context.features &amp; Feature.WriteNonStringValueAsString.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + values.length * 27 + 1;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = &#39;[&#39;;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; values.length; i++) {</b>
+<b class="nc">&nbsp;            if (i != 0) {</b>
+<b class="nc">&nbsp;                chars[off++] = &#39;,&#39;;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (writeAsString) {</b>
+<b class="nc">&nbsp;                chars[off++] = &#39;&quot;&#39;;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            double value = values[i];</b>
+<b class="nc">&nbsp;            int len = DoubleToDecimal.toString(value, chars, off, true);</b>
+<b class="nc">&nbsp;            off += len;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (writeAsString) {</b>
+<b class="nc">&nbsp;                chars[off++] = &#39;&quot;&#39;;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off] = &#39;]&#39;;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeDateTime14(
+&nbsp;            int year,
+&nbsp;            int month,
+&nbsp;            int dayOfMonth,
+&nbsp;            int hour,
+&nbsp;            int minute,
+&nbsp;            int second
+&nbsp;    ) {
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + 16;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= this.chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] bytes = this.chars;</b>
+<b class="nc">&nbsp;        bytes[off] = quote;</b>
+<b class="nc">&nbsp;        if (year &lt; 0 || year &gt; 9999) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Only 4 digits numbers are supported. Provided: &quot; + year);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        final int q = year / 1000;</b>
+<b class="nc">&nbsp;        int v = DIGITS_K[year - q * 1000];</b>
+<b class="nc">&nbsp;        bytes[off + 1] = (char) (byte) (q + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        bytes[off + 2] = (char) (byte) (v &gt;&gt; 16);</b>
+<b class="nc">&nbsp;        bytes[off + 3] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 4] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        v = DIGITS_K[month];</b>
+<b class="nc">&nbsp;        bytes[off + 5] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 6] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        v = DIGITS_K[dayOfMonth];</b>
+<b class="nc">&nbsp;        bytes[off + 7] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 8] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        v = DIGITS_K[hour];</b>
+<b class="nc">&nbsp;        bytes[off + 9] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 10] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        v = DIGITS_K[minute];</b>
+<b class="nc">&nbsp;        bytes[off + 11] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 12] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        v = DIGITS_K[second];</b>
+<b class="nc">&nbsp;        bytes[off + 13] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 14] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        bytes[off + 15] = quote;</b>
+<b class="nc">&nbsp;        this.off = off + 16;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeDateTime19(
+&nbsp;            int year,
+&nbsp;            int month,
+&nbsp;            int dayOfMonth,
+&nbsp;            int hour,
+&nbsp;            int minute,
+&nbsp;            int second) {
+<b class="nc">&nbsp;        ensureCapacity(off + 21);</b>
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        chars[off] = quote;</b>
+<b class="nc">&nbsp;        if (year &lt; 0 || year &gt; 9999) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Only 4 digits numbers are supported. Provided: &quot; + year);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        final int q = year / 1000;</b>
+<b class="nc">&nbsp;        int v = DIGITS_K[year - q * 1000];</b>
+<b class="nc">&nbsp;        chars[off + 1] = (char) (byte) (q + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        chars[off + 2] = (char) (byte) (v &gt;&gt; 16);</b>
+<b class="nc">&nbsp;        chars[off + 3] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        chars[off + 4] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        chars[off + 5] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;        v = DIGITS_K[month];</b>
+<b class="nc">&nbsp;        chars[off + 6] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        chars[off + 7] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        chars[off + 8] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;        v = DIGITS_K[dayOfMonth];</b>
+<b class="nc">&nbsp;        chars[off + 9] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        chars[off + 10] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        chars[off + 11] = &#39; &#39;;</b>
+<b class="nc">&nbsp;        v = DIGITS_K[hour];</b>
+<b class="nc">&nbsp;        chars[off + 12] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        chars[off + 13] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        chars[off + 14] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;        v = DIGITS_K[minute];</b>
+<b class="nc">&nbsp;        chars[off + 15] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        chars[off + 16] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        chars[off + 17] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;        v = DIGITS_K[second];</b>
+<b class="nc">&nbsp;        chars[off + 18] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        chars[off + 19] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        chars[off + 20] = (char) (byte) quote;</b>
+<b class="nc">&nbsp;        this.off = off + 21;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeLocalDate(LocalDate date) {
+<b class="nc">&nbsp;        if (date == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final Context context = this.context;</b>
+<b class="nc">&nbsp;        if (context.dateFormat != null) {</b>
+<b class="nc">&nbsp;            if (writeLocalDateWithFormat(date, context)) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + 18;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = quote;</b>
+<b class="nc">&nbsp;        off = IOUtils.writeLocalDate(chars, off, date.getYear(), date.getMonthValue(), date.getDayOfMonth());</b>
+<b class="nc">&nbsp;        chars[off] = quote;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeLocalDateTime(LocalDateTime dateTime) {
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + 38;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = quote;</b>
+<b class="nc">&nbsp;        LocalDate localDate = dateTime.toLocalDate();</b>
+<b class="nc">&nbsp;        off = IOUtils.writeLocalDate(chars, off, localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth());</b>
+<b class="nc">&nbsp;        chars[off++] = &#39; &#39;;</b>
+<b class="nc">&nbsp;        off = IOUtils.writeLocalTime(chars, off, dateTime.toLocalTime());</b>
+<b class="nc">&nbsp;        chars[off] = quote;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeDateTimeISO8601(
+&nbsp;            int year,
+&nbsp;            int month,
+&nbsp;            int dayOfMonth,
+&nbsp;            int hour,
+&nbsp;            int minute,
+&nbsp;            int second,
+&nbsp;            int millis,
+&nbsp;            int offsetSeconds,
+&nbsp;            boolean timeZone
+&nbsp;    ) {
+&nbsp;        int zonelen;
+<b class="nc">&nbsp;        if (timeZone) {</b>
+<b class="nc">&nbsp;            zonelen = offsetSeconds == 0 ? 1 : 6;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            zonelen = 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + 25 + zonelen;</b>
+<b class="nc">&nbsp;        if (off + minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] bytes = this.chars;</b>
+<b class="nc">&nbsp;        bytes[off] = quote;</b>
+<b class="nc">&nbsp;        off = IOUtils.writeInt32(bytes, off + 1, year);</b>
+<b class="nc">&nbsp;        bytes[off] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;        int v = DIGITS_K[month];</b>
+<b class="nc">&nbsp;        bytes[off + 1] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 2] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        bytes[off + 3] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;        v = DIGITS_K[dayOfMonth];</b>
+<b class="nc">&nbsp;        bytes[off + 4] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 5] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        bytes[off + 6] = (char) (byte) (timeZone ? &#39;T&#39; : &#39; &#39;);</b>
+<b class="nc">&nbsp;        v = DIGITS_K[hour];</b>
+<b class="nc">&nbsp;        bytes[off + 7] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 8] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        bytes[off + 9] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;        v = DIGITS_K[minute];</b>
+<b class="nc">&nbsp;        bytes[off + 10] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 11] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        bytes[off + 12] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;        v = DIGITS_K[second];</b>
+<b class="nc">&nbsp;        bytes[off + 13] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off + 14] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        off += 15;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (millis &gt; 0) {</b>
+<b class="nc">&nbsp;            bytes[off++] = &#39;.&#39;;</b>
+<b class="nc">&nbsp;            int div = millis / 10;</b>
+<b class="nc">&nbsp;            int div2 = div / 10;</b>
+<b class="nc">&nbsp;            final int rem1 = millis - div * 10;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (rem1 != 0) {</b>
+<b class="nc">&nbsp;                v = DIGITS_K[millis];</b>
+<b class="nc">&nbsp;                bytes[off] = (char) (byte) (v &gt;&gt; 16);</b>
+<b class="nc">&nbsp;                bytes[off + 1] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;                bytes[off + 2] = (char) (byte) v;</b>
+<b class="nc">&nbsp;                off += 3;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                final int rem2 = div - div2 * 10;</b>
+<b class="nc">&nbsp;                if (rem2 != 0) {</b>
+<b class="nc">&nbsp;                    v = DIGITS_K[div];</b>
+<b class="nc">&nbsp;                    bytes[off] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;                    bytes[off + 1] = (char) (byte) v;</b>
+<b class="nc">&nbsp;                    off += 2;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    bytes[off++] = (char) (byte) (div2 + &#39;0&#39;);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (timeZone) {</b>
+<b class="nc">&nbsp;            int offset = offsetSeconds / 3600;</b>
+<b class="nc">&nbsp;            if (offsetSeconds == 0) {</b>
+<b class="nc">&nbsp;                bytes[off++] = &#39;Z&#39;;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                int offsetAbs = Math.abs(offset);</b>
+<b class="nc">&nbsp;                bytes[off] = offset &gt;= 0 ? &#39;+&#39; : &#39;-&#39;;</b>
+<b class="nc">&nbsp;                v = DIGITS_K[offsetAbs];</b>
+<b class="nc">&nbsp;                bytes[off + 1] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;                bytes[off + 2] = (char) (byte) v;</b>
+<b class="nc">&nbsp;                bytes[off + 3] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;                int offsetMinutes = (offsetSeconds - offset * 3600) / 60;</b>
+<b class="nc">&nbsp;                if (offsetMinutes &lt; 0) {</b>
+<b class="nc">&nbsp;                    offsetMinutes = -offsetMinutes;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                v = DIGITS_K[offsetMinutes];</b>
+<b class="nc">&nbsp;                bytes[off + 4] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;                bytes[off + 5] = (char) (byte) v;</b>
+<b class="nc">&nbsp;                off += 6;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        bytes[off] = quote;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeDateYYYMMDD8(int year, int month, int dayOfMonth) {
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + 10;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= this.chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off] = quote;</b>
+<b class="nc">&nbsp;        if (year &lt; 0 || year &gt; 9999) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Only 4 digits numbers are supported. Provided: &quot; + year);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        final int q = year / 1000;</b>
+<b class="nc">&nbsp;        int v = DIGITS_K[year - q * 1000];</b>
+<b class="nc">&nbsp;        chars[off + 1] = (char) (byte) (q + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        chars[off + 2] = (char) (byte) (v &gt;&gt; 16);</b>
+<b class="nc">&nbsp;        chars[off + 3] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        chars[off + 4] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        v = DIGITS_K[month];</b>
+<b class="nc">&nbsp;        chars[off + 5] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        chars[off + 6] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        v = DIGITS_K[dayOfMonth];</b>
+<b class="nc">&nbsp;        chars[off + 7] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        chars[off + 8] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        chars[off + 9] = quote;</b>
+<b class="nc">&nbsp;        this.off = off + 10;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeDateYYYMMDD10(int year, int month, int dayOfMonth) {
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + 13;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = quote;</b>
+<b class="nc">&nbsp;        off = IOUtils.writeLocalDate(chars, off, year, month, dayOfMonth);</b>
+<b class="nc">&nbsp;        chars[off] = quote;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeTimeHHMMSS8(int hour, int minute, int second) {
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + 10;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= this.chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off] = (char) (byte) quote;</b>
+<b class="nc">&nbsp;        int v = DIGITS_K[hour];</b>
+<b class="nc">&nbsp;        chars[off + 1] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        chars[off + 2] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        chars[off + 3] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;        v = DIGITS_K[minute];</b>
+<b class="nc">&nbsp;        chars[off + 4] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        chars[off + 5] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        chars[off + 6] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;        v = DIGITS_K[second];</b>
+<b class="nc">&nbsp;        chars[off + 7] = (char) (byte) (v &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        chars[off + 8] = (char) (byte) v;</b>
+<b class="nc">&nbsp;        chars[off + 9] = (char) (byte) quote;</b>
+<b class="nc">&nbsp;        this.off = off + 10;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeLocalTime(LocalTime time) {
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + 20;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = quote;</b>
+<b class="nc">&nbsp;        off = IOUtils.writeLocalTime(chars, off, time);</b>
+<b class="nc">&nbsp;        chars[off] = quote;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeZonedDateTime(ZonedDateTime dateTime) {
+<b class="nc">&nbsp;        if (dateTime == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        ZoneId zone = dateTime.getZone();</b>
+<b class="nc">&nbsp;        String zoneId = zone.getId();</b>
+<b class="nc">&nbsp;        int zoneIdLength = zoneId.length();</b>
+&nbsp;
+<b class="nc">&nbsp;        char firstZoneChar = &#39;\0&#39;;</b>
+&nbsp;        int zoneSize;
+<b class="nc">&nbsp;        if (ZoneOffset.UTC == zone || (zoneIdLength &lt;= 3 &amp;&amp; (&quot;UTC&quot;.equals(zoneId) || &quot;Z&quot;.equals(zoneId)))) {</b>
+<b class="nc">&nbsp;            zoneId = &quot;Z&quot;;</b>
+<b class="nc">&nbsp;            zoneSize = 1;</b>
+<b class="nc">&nbsp;        } else if (zoneIdLength != 0 &amp;&amp; ((firstZoneChar = zoneId.charAt(0)) == &#39;+&#39; || firstZoneChar == &#39;-&#39;)) {</b>
+<b class="nc">&nbsp;            zoneSize = zoneIdLength;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            zoneSize = 2 + zoneIdLength;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + zoneSize + 38;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = quote;</b>
+<b class="nc">&nbsp;        LocalDate localDate = dateTime.toLocalDate();</b>
+<b class="nc">&nbsp;        off = IOUtils.writeLocalDate(chars, off, localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth());</b>
+<b class="nc">&nbsp;        chars[off++] = &#39;T&#39;;</b>
+<b class="nc">&nbsp;        off = IOUtils.writeLocalTime(chars, off, dateTime.toLocalTime());</b>
+<b class="nc">&nbsp;        if (zoneSize == 1) {</b>
+<b class="nc">&nbsp;            chars[off++] = &#39;Z&#39;;</b>
+<b class="nc">&nbsp;        } else if (firstZoneChar == &#39;+&#39; || firstZoneChar == &#39;-&#39;) {</b>
+<b class="nc">&nbsp;            zoneId.getChars(0, zoneIdLength, chars, off);</b>
+<b class="nc">&nbsp;            off += zoneIdLength;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            chars[off++] = &#39;[&#39;;</b>
+<b class="nc">&nbsp;            zoneId.getChars(0, zoneIdLength, chars, off);</b>
+<b class="nc">&nbsp;            off += zoneIdLength;</b>
+<b class="nc">&nbsp;            chars[off++] = &#39;]&#39;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off] = quote;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeOffsetDateTime(OffsetDateTime dateTime) {
+<b class="nc">&nbsp;        if (dateTime == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ZoneOffset offset = dateTime.getOffset();</b>
+<b class="nc">&nbsp;        String zoneId = offset.getId();</b>
+<b class="nc">&nbsp;        int zoneIdLength = zoneId.length();</b>
+<b class="nc">&nbsp;        boolean utc = ZoneOffset.UTC == offset</b>
+<b class="nc">&nbsp;                || (zoneIdLength &lt;= 3 &amp;&amp; (&quot;UTC&quot;.equals(zoneId) || &quot;Z&quot;.equals(zoneId)));</b>
+<b class="nc">&nbsp;        if (utc) {</b>
+<b class="nc">&nbsp;            zoneId = &quot;Z&quot;;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int off = this.off;</b>
+<b class="nc">&nbsp;        int minCapacity = off + zoneIdLength + 40;</b>
+<b class="nc">&nbsp;        if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(minCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char[] chars = this.chars;</b>
+<b class="nc">&nbsp;        chars[off++] = quote;</b>
+<b class="nc">&nbsp;        LocalDateTime ldt = dateTime.toLocalDateTime();</b>
+<b class="nc">&nbsp;        LocalDate date = ldt.toLocalDate();</b>
+<b class="nc">&nbsp;        off = IOUtils.writeLocalDate(chars, off, date.getYear(), date.getMonthValue(), date.getDayOfMonth());</b>
+<b class="nc">&nbsp;        chars[off++] = &#39;T&#39;;</b>
+<b class="nc">&nbsp;        LocalTime time = ldt.toLocalTime();</b>
+<b class="nc">&nbsp;        off = IOUtils.writeLocalTime(chars, off, time);</b>
+<b class="nc">&nbsp;        if (utc) {</b>
+<b class="nc">&nbsp;            chars[off++] = &#39;Z&#39;;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            zoneId.getChars(0, zoneIdLength, chars, off);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off] = quote;</b>
+<b class="nc">&nbsp;        this.off = off + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeNameRaw(byte[] bytes) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;UnsupportedOperation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final int flushTo(OutputStream out) throws IOException {
+<b class="nc">&nbsp;        if (out == null) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;out is nulll&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean ascii = true;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; off; i++) {</b>
+<b class="nc">&nbsp;            if (chars[i] &gt;= 0x80) {</b>
+<b class="nc">&nbsp;                ascii = false;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (ascii) {</b>
+<b class="nc">&nbsp;            byte[] bytes = new byte[off];</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; off; i++) {</b>
+<b class="nc">&nbsp;                bytes[i] = (byte) chars[i];</b>
+&nbsp;            }
+<b class="nc">&nbsp;            out.write(bytes);</b>
+<b class="nc">&nbsp;            off = 0;</b>
+<b class="nc">&nbsp;            return bytes.length;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        byte[] utf8 = new byte[off * 3];</b>
+<b class="nc">&nbsp;        int utf8Length = encodeUTF8(chars, 0, off, utf8, 0);</b>
+<b class="nc">&nbsp;        out.write(utf8, 0, utf8Length);</b>
+<b class="nc">&nbsp;        off = 0;</b>
+<b class="nc">&nbsp;        return utf8Length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final int flushTo(OutputStream out, Charset charset) throws IOException {
+<b class="nc">&nbsp;        if (off == 0) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (out == null) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;out is null&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        byte[] bytes = getBytes(charset);</b>
+<b class="nc">&nbsp;        out.write(bytes);</b>
+<b class="nc">&nbsp;        off = 0;</b>
+<b class="nc">&nbsp;        return bytes.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final String toString() {
+<b class="nc">&nbsp;        return new String(chars, 0, off);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final byte[] getBytes() {
+<b class="nc">&nbsp;        boolean ascii = true;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; off; i++) {</b>
+<b class="nc">&nbsp;            if (chars[i] &gt;= 0x80) {</b>
+<b class="nc">&nbsp;                ascii = false;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (ascii) {</b>
+<b class="nc">&nbsp;            byte[] bytes = new byte[off];</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; off; i++) {</b>
+<b class="nc">&nbsp;                bytes[i] = (byte) chars[i];</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return bytes;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        byte[] utf8 = new byte[off * 3];</b>
+<b class="nc">&nbsp;        int utf8Length = encodeUTF8(chars, 0, off, utf8, 0);</b>
+<b class="nc">&nbsp;        return Arrays.copyOf(utf8, utf8Length);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final int size() {
+<b class="nc">&nbsp;        return off;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final byte[] getBytes(Charset charset) {
+<b class="nc">&nbsp;        boolean ascii = true;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; off; i++) {</b>
+<b class="nc">&nbsp;            if (chars[i] &gt;= 0x80) {</b>
+<b class="nc">&nbsp;                ascii = false;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (ascii) {</b>
+<b class="nc">&nbsp;            if (charset == StandardCharsets.UTF_8</b>
+&nbsp;                    || charset == StandardCharsets.ISO_8859_1
+&nbsp;                    || charset == StandardCharsets.US_ASCII
+&nbsp;            ) {
+<b class="nc">&nbsp;                byte[] bytes = new byte[off];</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; off; i++) {</b>
+<b class="nc">&nbsp;                    bytes[i] = (byte) chars[i];</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return bytes;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String str = new String(chars, 0, off);</b>
+<b class="nc">&nbsp;        if (charset == null) {</b>
+<b class="nc">&nbsp;            charset = StandardCharsets.UTF_8;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return str.getBytes(charset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeRaw(byte[] bytes) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;UnsupportedOperation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void write(JSONObject map) {
+<b class="nc">&nbsp;        if (map == null) {</b>
+<b class="nc">&nbsp;            this.writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final long NONE_DIRECT_FEATURES = ReferenceDetection.mask</b>
+&nbsp;                | PrettyFormat.mask
+&nbsp;                | NotWriteEmptyArray.mask
+&nbsp;                | NotWriteDefaultValue.mask;
+&nbsp;
+<b class="nc">&nbsp;        if ((context.features &amp; NONE_DIRECT_FEATURES) != 0) {</b>
+<b class="nc">&nbsp;            ObjectWriter objectWriter = context.getObjectWriter(map.getClass());</b>
+<b class="nc">&nbsp;            objectWriter.write(this, map, null, null, 0);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (off == chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(off + 1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off++] = &#39;{&#39;;</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean first = true;</b>
+<b class="nc">&nbsp;        for (Map.Entry entry : map.entrySet()) {</b>
+<b class="nc">&nbsp;            Object value = entry.getValue();</b>
+<b class="nc">&nbsp;            if (value == null &amp;&amp; (context.features &amp; Feature.WriteMapNullValue.mask) == 0) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (!first) {</b>
+<b class="nc">&nbsp;                if (off == chars.length) {</b>
+<b class="nc">&nbsp;                    ensureCapacity(off + 1);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                chars[off++] = &#39;,&#39;;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            first = false;</b>
+<b class="nc">&nbsp;            Object key = entry.getKey();</b>
+<b class="nc">&nbsp;            if (key instanceof String) {</b>
+<b class="nc">&nbsp;                writeString((String) key);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                writeAny(key);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (off == chars.length) {</b>
+<b class="nc">&nbsp;                ensureCapacity(off + 1);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            chars[off++] = &#39;:&#39;;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (value == null) {</b>
+<b class="nc">&nbsp;                writeNull();</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Class&lt;?&gt; valueClass = value.getClass();</b>
+<b class="nc">&nbsp;            if (valueClass == String.class) {</b>
+<b class="nc">&nbsp;                writeString((String) value);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (valueClass == Integer.class) {</b>
+<b class="nc">&nbsp;                writeInt32((Integer) value);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (valueClass == Long.class) {</b>
+<b class="nc">&nbsp;                writeInt64((Long) value);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (valueClass == Boolean.class) {</b>
+<b class="nc">&nbsp;                writeBool((Boolean) value);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (valueClass == BigDecimal.class) {</b>
+<b class="nc">&nbsp;                writeDecimal((BigDecimal) value, 0, null);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (valueClass == JSONArray.class) {</b>
+<b class="nc">&nbsp;                write((JSONArray) value);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (valueClass == JSONObject.class) {</b>
+<b class="nc">&nbsp;                write((JSONObject) value);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            ObjectWriter objectWriter = context.getObjectWriter(valueClass, valueClass);</b>
+<b class="nc">&nbsp;            objectWriter.write(this, value, null, null, 0);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (off == chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(off + 1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off++] = &#39;}&#39;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void write(List array) {
+<b class="nc">&nbsp;        if (array == null) {</b>
+<b class="nc">&nbsp;            this.writeArrayNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final long NONE_DIRECT_FEATURES = ReferenceDetection.mask</b>
+&nbsp;                | PrettyFormat.mask
+&nbsp;                | NotWriteEmptyArray.mask
+&nbsp;                | NotWriteDefaultValue.mask;
+&nbsp;
+<b class="nc">&nbsp;        if ((context.features &amp; NONE_DIRECT_FEATURES) != 0) {</b>
+<b class="nc">&nbsp;            ObjectWriter objectWriter = context.getObjectWriter(array.getClass());</b>
+<b class="nc">&nbsp;            objectWriter.write(this, array, null, null, 0);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (off == chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(off + 1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off++] = &#39;[&#39;;</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean first = true;</b>
+<b class="nc">&nbsp;        for (Object o : array) {</b>
+<b class="nc">&nbsp;            if (!first) {</b>
+<b class="nc">&nbsp;                if (off == chars.length) {</b>
+<b class="nc">&nbsp;                    ensureCapacity(off + 1);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                chars[off++] = &#39;,&#39;;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            first = false;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (o == null) {</b>
+<b class="nc">&nbsp;                writeNull();</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Class&lt;?&gt; valueClass = o.getClass();</b>
+<b class="nc">&nbsp;            if (valueClass == String.class) {</b>
+<b class="nc">&nbsp;                writeString((String) o);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (valueClass == Integer.class) {</b>
+<b class="nc">&nbsp;                writeInt32((Integer) o);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (valueClass == Long.class) {</b>
+<b class="nc">&nbsp;                writeInt64((Long) o);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (valueClass == Boolean.class) {</b>
+<b class="nc">&nbsp;                writeBool((Boolean) o);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (valueClass == BigDecimal.class) {</b>
+<b class="nc">&nbsp;                writeDecimal((BigDecimal) o, 0, null);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (valueClass == JSONArray.class) {</b>
+<b class="nc">&nbsp;                write((JSONArray) o);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (valueClass == JSONObject.class) {</b>
+<b class="nc">&nbsp;                write((JSONObject) o);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            ObjectWriter objectWriter = context.getObjectWriter(valueClass, valueClass);</b>
+<b class="nc">&nbsp;            objectWriter.write(this, o, null, null, 0);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        if (off == chars.length) {</b>
+<b class="nc">&nbsp;            ensureCapacity(off + 1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        chars[off++] = &#39;]&#39;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void writeString(final char[] chars) {
+<b class="nc">&nbsp;        if (chars == null) {</b>
+<b class="nc">&nbsp;            writeStringNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean browserSecure = (context.features &amp; BrowserSecure.mask) != 0;</b>
+<b class="nc">&nbsp;        boolean special = false;</b>
+<b class="nc">&nbsp;        for (char c : chars) {</b>
+<b class="nc">&nbsp;            if (c == &#39;\\&#39; || c == quote || c &lt; &#39; &#39;) {</b>
+<b class="nc">&nbsp;                special = true;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (browserSecure &amp;&amp; (c == &#39;&lt;&#39; || c == &#39;&gt;&#39; || c == &#39;(&#39; || c == &#39;)&#39;)) {</b>
+<b class="nc">&nbsp;                special = true;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!special) {</b>
+&nbsp;            // inline ensureCapacity
+<b class="nc">&nbsp;            int minCapacity = this.off + chars.length + 2;</b>
+<b class="nc">&nbsp;            if (minCapacity &gt; this.chars.length) {</b>
+<b class="nc">&nbsp;                ensureCapacity(minCapacity);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            this.chars[this.off++] = quote;</b>
+<b class="nc">&nbsp;            System.arraycopy(chars, 0, this.chars, this.off, chars.length);</b>
+<b class="nc">&nbsp;            this.off += chars.length;</b>
+<b class="nc">&nbsp;            this.chars[this.off++] = quote;</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        writeStringEscape(chars);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void writeString(char[] chars, int off, int len) {
+<b class="nc">&nbsp;        if (chars == null) {</b>
+<b class="nc">&nbsp;            writeStringNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean special = false;</b>
+<b class="nc">&nbsp;        for (int i = off; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;            if (chars[i] == &#39;\\&#39; || chars[i] == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                special = true;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!special) {</b>
+&nbsp;            // inline ensureCapacity
+<b class="nc">&nbsp;            int minCapacity = this.off + len + 2;</b>
+<b class="nc">&nbsp;            if (minCapacity &gt;= this.chars.length) {</b>
+<b class="nc">&nbsp;                ensureCapacity(minCapacity);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            this.chars[this.off++] = quote;</b>
+<b class="nc">&nbsp;            System.arraycopy(chars, off, this.chars, this.off, len);</b>
+<b class="nc">&nbsp;            this.off += len;</b>
+<b class="nc">&nbsp;            this.chars[this.off++] = quote;</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        writeStringEscape(new String(chars, off, len));</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:00</div>
+</div>
+</body>
+</html>

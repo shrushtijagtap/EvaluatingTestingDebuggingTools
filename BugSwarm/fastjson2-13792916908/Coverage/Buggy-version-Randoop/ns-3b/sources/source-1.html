@@ -1,0 +1,352 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FastJsonConfig</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.support.config</a>
+</div>
+
+<h1>Coverage Summary for Class: FastJsonConfig (com.alibaba.fastjson2.support.config)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FastJsonConfig</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.support.config;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONB;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.SymbolTable;
+&nbsp;import com.alibaba.fastjson2.filter.Filter;
+&nbsp;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;
+&nbsp;/**
+&nbsp; * Configuration for FastJson.
+&nbsp; *
+&nbsp; * @author Victor.Zxy
+&nbsp; * @see JSONReader.Feature
+&nbsp; * @see JSONWriter.Feature
+&nbsp; * @see Filter
+&nbsp; * @since 2.0.2
+&nbsp; */
+&nbsp;public class FastJsonConfig {
+&nbsp;    /**
+&nbsp;     * default charset
+&nbsp;     */
+&nbsp;    private Charset charset;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * format date type
+&nbsp;     */
+&nbsp;    private String dateFormat;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * JSONReader Features
+&nbsp;     */
+&nbsp;    private JSONReader.Feature[] readerFeatures;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * JSONWriter Features
+&nbsp;     */
+&nbsp;    private JSONWriter.Feature[] writerFeatures;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * JSONReader Filters
+&nbsp;     */
+&nbsp;    private Filter[] readerFilters;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * JSONWriter Filters
+&nbsp;     */
+&nbsp;    private Filter[] writerFilters;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The Write content length.
+&nbsp;     */
+&nbsp;    private boolean writeContentLength;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * JSONB flag.
+&nbsp;     */
+&nbsp;    private boolean jsonb;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * JSONB symbol table.
+&nbsp;     */
+&nbsp;    private SymbolTable symbolTable;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * init param.
+&nbsp;     */
+<b class="nc">&nbsp;    public FastJsonConfig() {</b>
+<b class="nc">&nbsp;        this.dateFormat = &quot;yyyy-MM-dd HH:mm:ss&quot;;</b>
+<b class="nc">&nbsp;        this.charset = StandardCharsets.UTF_8;</b>
+<b class="nc">&nbsp;        this.readerFeatures = new JSONReader.Feature[0];</b>
+<b class="nc">&nbsp;        this.writerFeatures = new JSONWriter.Feature[] {</b>
+&nbsp;                JSONWriter.Feature.WriteByteArrayAsBase64,
+&nbsp;                JSONWriter.Feature.BrowserSecure
+&nbsp;        };
+<b class="nc">&nbsp;        this.readerFilters = new Filter[0];</b>
+<b class="nc">&nbsp;        this.writerFilters = new Filter[0];</b>
+<b class="nc">&nbsp;        this.writeContentLength = true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets charset.
+&nbsp;     *
+&nbsp;     * @return the charset
+&nbsp;     */
+&nbsp;    public Charset getCharset() {
+<b class="nc">&nbsp;        return charset;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets charset.
+&nbsp;     *
+&nbsp;     * @param charset the charset
+&nbsp;     */
+&nbsp;    public void setCharset(Charset charset) {
+<b class="nc">&nbsp;        this.charset = charset;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets date format.
+&nbsp;     *
+&nbsp;     * @return the date format
+&nbsp;     */
+&nbsp;    public String getDateFormat() {
+<b class="nc">&nbsp;        return dateFormat;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets date format.
+&nbsp;     *
+&nbsp;     * @param dateFormat the date format
+&nbsp;     */
+&nbsp;    public void setDateFormat(String dateFormat) {
+<b class="nc">&nbsp;        this.dateFormat = dateFormat;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get reader features json reader . feature [ ].
+&nbsp;     *
+&nbsp;     * @return the json reader . feature [ ]
+&nbsp;     */
+&nbsp;    public JSONReader.Feature[] getReaderFeatures() {
+<b class="nc">&nbsp;        return readerFeatures;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets reader features.
+&nbsp;     *
+&nbsp;     * @param readerFeatures the reader features
+&nbsp;     */
+&nbsp;    public void setReaderFeatures(JSONReader.Feature... readerFeatures) {
+<b class="nc">&nbsp;        this.readerFeatures = readerFeatures;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get writer features json writer . feature [ ].
+&nbsp;     *
+&nbsp;     * @return the json writer . feature [ ]
+&nbsp;     */
+&nbsp;    public JSONWriter.Feature[] getWriterFeatures() {
+<b class="nc">&nbsp;        return writerFeatures;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets writer features.
+&nbsp;     *
+&nbsp;     * @param writerFeatures the writer features
+&nbsp;     */
+&nbsp;    public void setWriterFeatures(JSONWriter.Feature... writerFeatures) {
+<b class="nc">&nbsp;        this.writerFeatures = writerFeatures;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get reader filters filter [ ].
+&nbsp;     *
+&nbsp;     * @return the filter [ ]
+&nbsp;     */
+&nbsp;    public Filter[] getReaderFilters() {
+<b class="nc">&nbsp;        return readerFilters;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets reader filters.
+&nbsp;     *
+&nbsp;     * @param readerFilters the reader filters
+&nbsp;     */
+&nbsp;    public void setReaderFilters(Filter... readerFilters) {
+<b class="nc">&nbsp;        this.readerFilters = readerFilters;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get writer filters filter [ ].
+&nbsp;     *
+&nbsp;     * @return the filter [ ]
+&nbsp;     */
+&nbsp;    public Filter[] getWriterFilters() {
+<b class="nc">&nbsp;        return writerFilters;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets writer filters.
+&nbsp;     *
+&nbsp;     * @param writerFilters the writer filters
+&nbsp;     */
+&nbsp;    public void setWriterFilters(Filter... writerFilters) {
+<b class="nc">&nbsp;        this.writerFilters = writerFilters;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Is write content length boolean.
+&nbsp;     *
+&nbsp;     * @return the boolean
+&nbsp;     */
+&nbsp;    public boolean isWriteContentLength() {
+<b class="nc">&nbsp;        return writeContentLength;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets write content length.
+&nbsp;     *
+&nbsp;     * @param writeContentLength the write content length
+&nbsp;     */
+&nbsp;    public void setWriteContentLength(boolean writeContentLength) {
+<b class="nc">&nbsp;        this.writeContentLength = writeContentLength;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Is jsonb boolean.
+&nbsp;     *
+&nbsp;     * @return the boolean
+&nbsp;     * @since 2.0.5
+&nbsp;     */
+&nbsp;    public boolean isJSONB() {
+<b class="nc">&nbsp;        return jsonb;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets jsonb flag.
+&nbsp;     *
+&nbsp;     * @param jsonb the jsonb
+&nbsp;     * @since 2.0.5
+&nbsp;     */
+&nbsp;    public void setJSONB(boolean jsonb) {
+<b class="nc">&nbsp;        this.jsonb = jsonb;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets symbol table.
+&nbsp;     *
+&nbsp;     * @return the symbol table
+&nbsp;     * @since 2.0.5
+&nbsp;     */
+&nbsp;    public SymbolTable getSymbolTable() {
+<b class="nc">&nbsp;        return symbolTable;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets symbol table.
+&nbsp;     *
+&nbsp;     * @param names the names
+&nbsp;     * @since 2.0.5
+&nbsp;     */
+&nbsp;    public void setSymbolTable(String... names) {
+<b class="nc">&nbsp;        this.symbolTable = JSONB.symbolTable(names);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:21</div>
+</div>
+</body>
+</html>

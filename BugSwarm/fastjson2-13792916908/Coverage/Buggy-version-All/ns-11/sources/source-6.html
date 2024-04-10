@@ -1,0 +1,240 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EishayFuryParseNoneCache</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.eishay</a>
+</div>
+
+<h1>Coverage Summary for Class: EishayFuryParseNoneCache (com.alibaba.fastjson2.benchmark.eishay)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EishayFuryParseNoneCache</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/64)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.eishay;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.util.DynamicClassLoader;
+&nbsp;import com.alibaba.fastjson2.util.IOUtils;
+&nbsp;import org.openjdk.jmh.annotations.Benchmark;
+&nbsp;import org.openjdk.jmh.annotations.Mode;
+&nbsp;import org.openjdk.jmh.infra.Blackhole;
+&nbsp;import org.openjdk.jmh.runner.Runner;
+&nbsp;import org.openjdk.jmh.runner.options.Options;
+&nbsp;import org.openjdk.jmh.runner.options.OptionsBuilder;
+&nbsp;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.io.ObjectInputStream;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.concurrent.TimeUnit;
+&nbsp;import java.util.zip.ZipInputStream;
+&nbsp;
+<b class="nc">&nbsp;public class EishayFuryParseNoneCache {</b>
+&nbsp;    static final int COUNT = 10_000;
+<b class="nc">&nbsp;    static final Class[] classes = new Class[COUNT];</b>
+&nbsp;
+<b class="nc">&nbsp;    static JSONReader.Feature[] features = {</b>
+&nbsp;            JSONReader.Feature.SupportAutoType,
+&nbsp;            JSONReader.Feature.IgnoreNoneSerializable,
+&nbsp;            JSONReader.Feature.UseDefaultConstructorAsPossible,
+&nbsp;            JSONReader.Feature.UseNativeObject,
+&nbsp;            JSONReader.Feature.FieldBased,
+&nbsp;            JSONReader.Feature.SupportArrayToBean
+&nbsp;    };
+&nbsp;
+<b class="nc">&nbsp;    static DynamicClassLoader classLoader = DynamicClassLoader.getInstance();</b>
+&nbsp;
+<b class="nc">&nbsp;    static byte[][] fastjson2JSONBBytes = new byte[COUNT][];</b>
+<b class="nc">&nbsp;    static byte[][] furyBytes = new byte[COUNT][];</b>
+&nbsp;    static int index;
+&nbsp;//
+&nbsp;//    static io.fury.ThreadSafeFury fury = io.fury.Fury.builder()
+&nbsp;//            .withLanguage(io.fury.Language.JAVA)
+&nbsp;//            .withReferenceTracking(true)
+&nbsp;//            .disableSecureMode()
+&nbsp;//            .withClassLoader(classLoader)
+&nbsp;//            .buildThreadSafeFury();
+&nbsp;
+&nbsp;    static {
+<b class="nc">&nbsp;        String classZipDataFile = &quot;data/EishayFuryParseNoneCache_classes.bin.zip&quot;;</b>
+<b class="nc">&nbsp;        String jsonbZipDataFile = &quot;data/EishayFuryParseNoneCache_data_fastjson.bin.zip&quot;;</b>
+<b class="nc">&nbsp;        String furyZipDataFile = &quot;data/EishayFuryParseNoneCache_data_fury.bin.zip&quot;;</b>
+&nbsp;
+&nbsp;        try {
+&nbsp;            {
+<b class="nc">&nbsp;                InputStream fis = EishayFuryParseNoneCache.class.getClassLoader().getResourceAsStream(classZipDataFile);</b>
+<b class="nc">&nbsp;                ZipInputStream zipIn = new ZipInputStream(fis);</b>
+<b class="nc">&nbsp;                zipIn.getNextEntry();</b>
+&nbsp;
+<b class="nc">&nbsp;                ObjectInputStream is = new ObjectInputStream(zipIn);</b>
+<b class="nc">&nbsp;                Map&lt;String, byte[]&gt; codeMap = (Map&lt;String, byte[]&gt;) is.readObject();</b>
+<b class="nc">&nbsp;                Map&lt;String, Class&gt; classMap = new HashMap&lt;&gt;(codeMap.size());</b>
+<b class="nc">&nbsp;                String prefix = &quot;com.alibaba.fastjson2.benchmark.eishay&quot;;</b>
+<b class="nc">&nbsp;                codeMap.forEach((name, code) -&gt; {</b>
+<b class="nc">&nbsp;                    int index = Integer.parseInt(name.substring(prefix.length(), name.indexOf(&#39;.&#39;, prefix.length())));</b>
+<b class="nc">&nbsp;                    if (index &gt; COUNT) {</b>
+&nbsp;                        return;
+&nbsp;                    }
+<b class="nc">&nbsp;                    Class&lt;?&gt; clazz = classLoader.loadClass(name, code, 0, code.length);</b>
+<b class="nc">&nbsp;                    classMap.put(name, clazz);</b>
+&nbsp;                });
+&nbsp;
+<b class="nc">&nbsp;                for (int i = 0; i &lt; COUNT; i++) {</b>
+<b class="nc">&nbsp;                    String packageName = prefix + i;</b>
+<b class="nc">&nbsp;                    classLoader.definePackage(packageName);</b>
+<b class="nc">&nbsp;                    String className = packageName + &quot;.MediaContent&quot;;</b>
+<b class="nc">&nbsp;                    Class mediaClass = classMap.get(className);</b>
+<b class="nc">&nbsp;                    classes[i] = mediaClass;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                IOUtils.close(zipIn);</b>
+<b class="nc">&nbsp;                IOUtils.close(is);</b>
+<b class="nc">&nbsp;                IOUtils.close(fis);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            {
+<b class="nc">&nbsp;                InputStream fis = EishayFuryParseNoneCache.class.getClassLoader().getResourceAsStream(jsonbZipDataFile);</b>
+<b class="nc">&nbsp;                ZipInputStream zipIn = new ZipInputStream(fis);</b>
+<b class="nc">&nbsp;                zipIn.getNextEntry();</b>
+&nbsp;
+<b class="nc">&nbsp;                ObjectInputStream is = new ObjectInputStream(zipIn);</b>
+<b class="nc">&nbsp;                fastjson2JSONBBytes = (byte[][]) is.readObject();</b>
+<b class="nc">&nbsp;                IOUtils.close(zipIn);</b>
+<b class="nc">&nbsp;                IOUtils.close(is);</b>
+<b class="nc">&nbsp;                IOUtils.close(fis);</b>
+&nbsp;            }
+&nbsp;            {
+<b class="nc">&nbsp;                InputStream fis = EishayFuryParseNoneCache.class.getClassLoader().getResourceAsStream(furyZipDataFile);</b>
+<b class="nc">&nbsp;                ZipInputStream zipIn = new ZipInputStream(fis);</b>
+<b class="nc">&nbsp;                zipIn.getNextEntry();</b>
+&nbsp;
+<b class="nc">&nbsp;                ObjectInputStream is = new ObjectInputStream(zipIn);</b>
+<b class="nc">&nbsp;                furyBytes = (byte[][]) is.readObject();</b>
+<b class="nc">&nbsp;                IOUtils.close(zipIn);</b>
+<b class="nc">&nbsp;                IOUtils.close(is);</b>
+<b class="nc">&nbsp;                IOUtils.close(fis);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Throwable ex) {</b>
+<b class="nc">&nbsp;            ex.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void fastjson2JSONB(Blackhole bh) {
+<b class="nc">&nbsp;        Thread.currentThread().setContextClassLoader(classLoader);</b>
+<b class="nc">&nbsp;        byte[] bytes = fastjson2JSONBBytes[index++];</b>
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                JSONB.parseObject(bytes, Object.class, features)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    //    @Benchmark
+&nbsp;    public void fury(Blackhole bh) {
+<b class="nc">&nbsp;        Thread.currentThread().setContextClassLoader(classLoader);</b>
+<b class="nc">&nbsp;        byte[] bytes = furyBytes[index++];</b>
+&nbsp;//        bh.consume(fury.deserialize(bytes));
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void main(String[] args) throws Exception {
+<b class="nc">&nbsp;        Options options = new OptionsBuilder()</b>
+<b class="nc">&nbsp;                .include(EishayFuryParseNoneCache.class.getName())</b>
+<b class="nc">&nbsp;                .mode(Mode.Throughput)</b>
+<b class="nc">&nbsp;                .timeUnit(TimeUnit.MILLISECONDS)</b>
+<b class="nc">&nbsp;                .warmupIterations(1)</b>
+<b class="nc">&nbsp;                .forks(1)</b>
+<b class="nc">&nbsp;                .threads(16)</b>
+<b class="nc">&nbsp;                .build();</b>
+<b class="nc">&nbsp;        new Runner(options).run();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:22</div>
+</div>
+</body>
+</html>

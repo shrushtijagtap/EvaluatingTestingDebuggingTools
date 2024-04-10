@@ -1,0 +1,836 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RyuFloat</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.util</a>
+</div>
+
+<h1>Coverage Summary for Class: RyuFloat (com.alibaba.fastjson2.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RyuFloat</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.2%
+  </span>
+  <span class="absValue">
+    (354/406)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;// Copyright 2018 Ulf Adams
+&nbsp;//
+&nbsp;// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp;// you may not use this file except in compliance with the License.
+&nbsp;// You may obtain a copy of the License at
+&nbsp;//
+&nbsp;//     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp;//
+&nbsp;// Unless required by applicable law or agreed to in writing, software
+&nbsp;// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp;// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp;// See the License for the specific language governing permissions and
+&nbsp;// limitations under the License.
+&nbsp;
+&nbsp;package com.alibaba.fastjson2.util;
+&nbsp;
+&nbsp;/**
+&nbsp; * An implementation of Ryu for float.
+&nbsp; */
+<b class="nc">&nbsp;public final class RyuFloat {</b>
+<b class="fc">&nbsp;    private static final int[][] POW5_SPLIT = {</b>
+&nbsp;            {536870912, 0},
+&nbsp;            {671088640, 0},
+&nbsp;            {838860800, 0},
+&nbsp;            {1048576000, 0},
+&nbsp;            {655360000, 0},
+&nbsp;            {819200000, 0},
+&nbsp;            {1024000000, 0},
+&nbsp;            {640000000, 0},
+&nbsp;            {800000000, 0},
+&nbsp;            {1000000000, 0},
+&nbsp;            {625000000, 0},
+&nbsp;            {781250000, 0},
+&nbsp;            {976562500, 0},
+&nbsp;            {610351562, 1073741824},
+&nbsp;            {762939453, 268435456},
+&nbsp;            {953674316, 872415232},
+&nbsp;            {596046447, 1619001344},
+&nbsp;            {745058059, 1486880768},
+&nbsp;            {931322574, 1321730048},
+&nbsp;            {582076609, 289210368},
+&nbsp;            {727595761, 898383872},
+&nbsp;            {909494701, 1659850752},
+&nbsp;            {568434188, 1305842176},
+&nbsp;            {710542735, 1632302720},
+&nbsp;            {888178419, 1503507488},
+&nbsp;            {555111512, 671256724},
+&nbsp;            {693889390, 839070905},
+&nbsp;            {867361737, 2122580455},
+&nbsp;            {542101086, 521306416},
+&nbsp;            {677626357, 1725374844},
+&nbsp;            {847032947, 546105819},
+&nbsp;            {1058791184, 145761362},
+&nbsp;            {661744490, 91100851},
+&nbsp;            {827180612, 1187617888},
+&nbsp;            {1033975765, 1484522360},
+&nbsp;            {646234853, 1196261931},
+&nbsp;            {807793566, 2032198326},
+&nbsp;            {1009741958, 1466506084},
+&nbsp;            {631088724, 379695390},
+&nbsp;            {788860905, 474619238},
+&nbsp;            {986076131, 1130144959},
+&nbsp;            {616297582, 437905143},
+&nbsp;            {770371977, 1621123253},
+&nbsp;            {962964972, 415791331},
+&nbsp;            {601853107, 1333611405},
+&nbsp;            {752316384, 1130143345},
+&nbsp;            {940395480, 1412679181},
+&nbsp;    };
+&nbsp;
+<b class="fc">&nbsp;    private static final int[][] POW5_INV_SPLIT = {</b>
+&nbsp;            {268435456, 1},
+&nbsp;            {214748364, 1717986919},
+&nbsp;            {171798691, 1803886265},
+&nbsp;            {137438953, 1013612282},
+&nbsp;            {219902325, 1192282922},
+&nbsp;            {175921860, 953826338},
+&nbsp;            {140737488, 763061070},
+&nbsp;            {225179981, 791400982},
+&nbsp;            {180143985, 203624056},
+&nbsp;            {144115188, 162899245},
+&nbsp;            {230584300, 1978625710},
+&nbsp;            {184467440, 1582900568},
+&nbsp;            {147573952, 1266320455},
+&nbsp;            {236118324, 308125809},
+&nbsp;            {188894659, 675997377},
+&nbsp;            {151115727, 970294631},
+&nbsp;            {241785163, 1981968139},
+&nbsp;            {193428131, 297084323},
+&nbsp;            {154742504, 1955654377},
+&nbsp;            {247588007, 1840556814},
+&nbsp;            {198070406, 613451992},
+&nbsp;            {158456325, 61264864},
+&nbsp;            {253530120, 98023782},
+&nbsp;            {202824096, 78419026},
+&nbsp;            {162259276, 1780722139},
+&nbsp;            {259614842, 1990161963},
+&nbsp;            {207691874, 733136111},
+&nbsp;            {166153499, 1016005619},
+&nbsp;            {265845599, 337118801},
+&nbsp;            {212676479, 699191770},
+&nbsp;            {170141183, 988850146},
+&nbsp;    };
+&nbsp;
+&nbsp;    public static String toString(float value) {
+<b class="fc">&nbsp;        char[] result = new char[15];</b>
+<b class="fc">&nbsp;        int len = toString(value, result, 0);</b>
+<b class="fc">&nbsp;        return new String(result, 0, len);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int toString(float value, char[] result, int off) {
+<b class="fc">&nbsp;        final int FLOAT_MANTISSA_MASK = 8388607; // (1 &lt;&lt; 23) - 1;</b>
+<b class="fc">&nbsp;        final int FLOAT_EXPONENT_MASK = 255; // (1 &lt;&lt; 8) - 1;</b>
+<b class="fc">&nbsp;        final int FLOAT_EXPONENT_BIAS = 127; // (1 &lt;&lt; (8 - 1)) - 1;</b>
+<b class="fc">&nbsp;        final long LOG10_2_NUMERATOR = 3010299; // (long) (10000000L * Math.log10(2));</b>
+<b class="fc">&nbsp;        final long LOG10_5_DENOMINATOR = 10000000L;</b>
+<b class="fc">&nbsp;        final long LOG10_5_NUMERATOR = 6989700L; // (long) (LOG10_5_DENOMINATOR * Math.log10(5));</b>
+&nbsp;
+&nbsp;        // Step 1: Decode the floating point number, and unify normalized and subnormal cases.
+&nbsp;        // First, handle all the trivial cases.
+<b class="fc">&nbsp;        int index = off;</b>
+<b class="fc">&nbsp;        if (Float.isNaN(value)) {</b>
+<b class="fc">&nbsp;            result[index++] = &#39;N&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;a&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;N&#39;;</b>
+<b class="fc">&nbsp;            return index - off;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value == Float.POSITIVE_INFINITY) {</b>
+<b class="fc">&nbsp;            result[index++] = &#39;I&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;n&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;f&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;i&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;n&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;i&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;t&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;y&#39;;</b>
+<b class="fc">&nbsp;            return index - off;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value == Float.NEGATIVE_INFINITY) {</b>
+<b class="fc">&nbsp;            result[index++] = &#39;-&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;I&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;n&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;f&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;i&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;n&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;i&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;t&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;y&#39;;</b>
+<b class="fc">&nbsp;            return index - off;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int bits = Float.floatToIntBits(value);</b>
+<b class="fc">&nbsp;        if (bits == 0) {</b>
+<b class="fc">&nbsp;            result[index++] = &#39;0&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;.&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;0&#39;;</b>
+<b class="fc">&nbsp;            return index - off;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (bits == 0x80000000) {</b>
+<b class="fc">&nbsp;            result[index++] = &#39;-&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;0&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;.&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;0&#39;;</b>
+<b class="fc">&nbsp;            return index - off;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Otherwise extract the mantissa and exponent bits and run the full algorithm.
+<b class="fc">&nbsp;        int ieeeExponent = (bits &gt;&gt; 23) &amp; FLOAT_EXPONENT_MASK;</b>
+<b class="fc">&nbsp;        int ieeeMantissa = bits &amp; FLOAT_MANTISSA_MASK;</b>
+&nbsp;        // By default, the correct mantissa starts with a 1, except for denormal numbers.
+&nbsp;        int e2;
+&nbsp;        int m2;
+<b class="fc">&nbsp;        if (ieeeExponent == 0) {</b>
+<b class="fc">&nbsp;            e2 = 1 - FLOAT_EXPONENT_BIAS - 23;</b>
+<b class="fc">&nbsp;            m2 = ieeeMantissa;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            e2 = ieeeExponent - FLOAT_EXPONENT_BIAS - 23;</b>
+<b class="fc">&nbsp;            m2 = ieeeMantissa | (1 &lt;&lt; 23);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        boolean sign = bits &lt; 0;</b>
+&nbsp;
+&nbsp;        // Step 2: Determine the interval of legal decimal representations.
+<b class="fc">&nbsp;        boolean even = (m2 &amp; 1) == 0;</b>
+<b class="fc">&nbsp;        int mv = 4 * m2;</b>
+<b class="fc">&nbsp;        int mp = 4 * m2 + 2;</b>
+<b class="fc">&nbsp;        int mm = 4 * m2 - ((m2 != (1L &lt;&lt; 23)) || (ieeeExponent &lt;= 1) ? 2 : 1);</b>
+<b class="fc">&nbsp;        e2 -= 2;</b>
+&nbsp;
+&nbsp;        // Step 3: Convert to a decimal power base using 128-bit arithmetic.
+&nbsp;        // -151 = 1 - 127 - 23 - 2 &lt;= e_2 - 2 &lt;= 254 - 127 - 23 - 2 = 102
+&nbsp;        int dp, dv, dm;
+&nbsp;        int e10;
+&nbsp;        boolean dpIsTrailingZeros, dvIsTrailingZeros, dmIsTrailingZeros;
+<b class="fc">&nbsp;        int lastRemovedDigit = 0;</b>
+<b class="fc">&nbsp;        if (e2 &gt;= 0) {</b>
+&nbsp;            // Compute m * 2^e_2 / 10^q = m * 2^(e_2 - q) / 5^q
+<b class="fc">&nbsp;            int q = (int) (e2 * LOG10_2_NUMERATOR / 10000000L);</b>
+<b class="fc">&nbsp;            int k = 59 + (q == 0 ? 1 : (int) ((q * 23219280L + 10000000L - 1) / 10000000L)) - 1;</b>
+<b class="fc">&nbsp;            int i = -e2 + q + k;</b>
+<b class="fc">&nbsp;            long pis0 = (long) POW5_INV_SPLIT[q][0];</b>
+<b class="fc">&nbsp;            long pis1 = (long) POW5_INV_SPLIT[q][1];</b>
+<b class="fc">&nbsp;            dv = (int) ((mv * pis0 + ((mv * pis1) &gt;&gt; 31)) &gt;&gt; (i - 31));</b>
+<b class="fc">&nbsp;            dp = (int) ((mp * pis0 + ((mp * pis1) &gt;&gt; 31)) &gt;&gt; (i - 31));</b>
+<b class="fc">&nbsp;            dm = (int) ((mm * pis0 + ((mm * pis1) &gt;&gt; 31)) &gt;&gt; (i - 31));</b>
+<b class="fc">&nbsp;            if (q != 0 &amp;&amp; ((dp - 1) / 10 &lt;= dm / 10)) {</b>
+&nbsp;                // We need to know one removed digit even if we are not going to loop below. We could use
+&nbsp;                // q = X - 1 above, except that would require 33 bits for the result, and we&#39;ve found that
+&nbsp;                // 32-bit arithmetic is faster even on 64-bit machines.
+<b class="nc">&nbsp;                int e = q - 1;</b>
+<b class="nc">&nbsp;                int l = 59 + (e == 0 ? 1 : (int) ((e * 23219280L + 10000000L - 1) / 10000000L)) - 1;</b>
+<b class="nc">&nbsp;                int qx = q - 1, ii = -e2 + q - 1 + l;</b>
+<b class="nc">&nbsp;                long mulPow5InvDivPow2 = (mv * (long) POW5_INV_SPLIT[qx][0] + ((mv * (long) POW5_INV_SPLIT[qx][1]) &gt;&gt; 31)) &gt;&gt; (ii - 31);</b>
+<b class="nc">&nbsp;                lastRemovedDigit = (int) (mulPow5InvDivPow2 % 10);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            e10 = q;</b>
+&nbsp;
+<b class="fc">&nbsp;            int pow5Factor_mp = 0;</b>
+&nbsp;            {
+<b class="fc">&nbsp;                int v = mp;</b>
+<b class="fc">&nbsp;                while (v &gt; 0) {</b>
+<b class="fc">&nbsp;                    if (v % 5 != 0) {</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    v /= 5;</b>
+<b class="nc">&nbsp;                    pow5Factor_mp++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            int pow5Factor_mv = 0;</b>
+&nbsp;            {
+<b class="fc">&nbsp;                int v = mv;</b>
+<b class="fc">&nbsp;                while (v &gt; 0) {</b>
+<b class="fc">&nbsp;                    if (v % 5 != 0) {</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    v /= 5;</b>
+<b class="fc">&nbsp;                    pow5Factor_mv++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            int pow5Factor_mm = 0;</b>
+&nbsp;            {
+<b class="fc">&nbsp;                int v = mm;</b>
+<b class="fc">&nbsp;                while (v &gt; 0) {</b>
+<b class="fc">&nbsp;                    if (v % 5 != 0) {</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    v /= 5;</b>
+<b class="nc">&nbsp;                    pow5Factor_mm++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            dpIsTrailingZeros = pow5Factor_mp &gt;= q;</b>
+<b class="fc">&nbsp;            dvIsTrailingZeros = pow5Factor_mv &gt;= q;</b>
+<b class="fc">&nbsp;            dmIsTrailingZeros = pow5Factor_mm &gt;= q;</b>
+<b class="fc">&nbsp;        } else {</b>
+&nbsp;            // Compute m * 5^(-e_2) / 10^q = m * 5^(-e_2 - q) / 2^q
+<b class="fc">&nbsp;            int q = (int) (-e2 * LOG10_5_NUMERATOR / LOG10_5_DENOMINATOR);</b>
+<b class="fc">&nbsp;            int i = -e2 - q;</b>
+<b class="fc">&nbsp;            int k = (i == 0 ? 1 : (int) ((i * 23219280L + 10000000L - 1) / 10000000L)) - 61;</b>
+<b class="fc">&nbsp;            int j = q - k;</b>
+&nbsp;
+<b class="fc">&nbsp;            long ps0 = POW5_SPLIT[i][0];</b>
+<b class="fc">&nbsp;            long ps1 = POW5_SPLIT[i][1];</b>
+<b class="fc">&nbsp;            int j31 = j - 31;</b>
+<b class="fc">&nbsp;            dv = (int) ((mv * ps0 + ((mv * ps1) &gt;&gt; 31)) &gt;&gt; j31);</b>
+<b class="fc">&nbsp;            dp = (int) ((mp * ps0 + ((mp * ps1) &gt;&gt; 31)) &gt;&gt; j31);</b>
+<b class="fc">&nbsp;            dm = (int) ((mm * ps0 + ((mm * ps1) &gt;&gt; 31)) &gt;&gt; j31);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (q != 0 &amp;&amp; ((dp - 1) / 10 &lt;= dm / 10)) {</b>
+<b class="fc">&nbsp;                int e = i + 1;</b>
+<b class="fc">&nbsp;                j = q - 1 - ((e == 0 ? 1 : (int) ((e * 23219280L + 10000000L - 1) / 10000000L)) - 61);</b>
+<b class="fc">&nbsp;                int ix = i + 1;</b>
+<b class="fc">&nbsp;                long mulPow5divPow2 = (mv * (long) POW5_SPLIT[ix][0] + ((mv * (long) POW5_SPLIT[ix][1]) &gt;&gt; 31)) &gt;&gt; (j - 31);</b>
+<b class="fc">&nbsp;                lastRemovedDigit = (int) (mulPow5divPow2 % 10);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            e10 = q + e2; // Note: e2 and e10 are both negative here.</b>
+&nbsp;
+<b class="fc">&nbsp;            dpIsTrailingZeros = 1 &gt;= q;</b>
+<b class="fc">&nbsp;            dvIsTrailingZeros = (q &lt; 23) &amp;&amp; (mv &amp; ((1 &lt;&lt; (q - 1)) - 1)) == 0;</b>
+<b class="fc">&nbsp;            dmIsTrailingZeros = (mm % 2 == 1 ? 0 : 1) &gt;= q;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Step 4: Find the shortest decimal representation in the interval of legal representations.
+&nbsp;        //
+&nbsp;        // We do some extra work here in order to follow Float/Double.toString semantics. In particular,
+&nbsp;        // that requires printing in scientific format if and only if the exponent is between -3 and 7,
+&nbsp;        // and it requires printing at least two decimal digits.
+&nbsp;        //
+&nbsp;        // Above, we moved the decimal dot all the way to the right, so now we need to count digits to
+&nbsp;        // figure out the correct exponent for scientific notation.
+&nbsp;
+<b class="fc">&nbsp;        int dplength = 10;</b>
+<b class="fc">&nbsp;        int factor = 1000000000;</b>
+<b class="fc">&nbsp;        for (; dplength &gt; 0; dplength--) {</b>
+<b class="fc">&nbsp;            if (dp &gt;= factor) {</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            factor /= 10;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        int exp = e10 + dplength - 1;</b>
+&nbsp;
+&nbsp;        // Float.toString semantics requires using scientific notation if and only if outside this range.
+<b class="fc">&nbsp;        boolean scientificNotation = !((exp &gt;= -3) &amp;&amp; (exp &lt; 7));</b>
+&nbsp;
+<b class="fc">&nbsp;        int removed = 0;</b>
+<b class="fc">&nbsp;        if (dpIsTrailingZeros &amp;&amp; !even) {</b>
+<b class="fc">&nbsp;            dp--;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        while (dp / 10 &gt; dm / 10) {</b>
+<b class="fc">&nbsp;            if ((dp &lt; 100) &amp;&amp; scientificNotation) {</b>
+&nbsp;                // We print at least two digits, so we might as well stop now.
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            dmIsTrailingZeros &amp;= dm % 10 == 0;</b>
+<b class="fc">&nbsp;            dp /= 10;</b>
+<b class="fc">&nbsp;            lastRemovedDigit = dv % 10;</b>
+<b class="fc">&nbsp;            dv /= 10;</b>
+<b class="fc">&nbsp;            dm /= 10;</b>
+<b class="fc">&nbsp;            removed++;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (dmIsTrailingZeros &amp;&amp; even) {</b>
+<b class="nc">&nbsp;            while (dm % 10 == 0) {</b>
+<b class="nc">&nbsp;                if ((dp &lt; 100) &amp;&amp; scientificNotation) {</b>
+&nbsp;                    // We print at least two digits, so we might as well stop now.
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                dp /= 10;</b>
+<b class="nc">&nbsp;                lastRemovedDigit = dv % 10;</b>
+<b class="nc">&nbsp;                dv /= 10;</b>
+<b class="nc">&nbsp;                dm /= 10;</b>
+<b class="nc">&nbsp;                removed++;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (dvIsTrailingZeros &amp;&amp; (lastRemovedDigit == 5) &amp;&amp; (dv % 2 == 0)) {</b>
+&nbsp;            // Round down not up if the number ends in X50000 and the number is even.
+<b class="fc">&nbsp;            lastRemovedDigit = 4;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        int output = dv +</b>
+&nbsp;                ((dv == dm &amp;&amp; !(dmIsTrailingZeros &amp;&amp; even)) || (lastRemovedDigit &gt;= 5) ? 1 : 0);
+<b class="fc">&nbsp;        int olength = dplength - removed;</b>
+&nbsp;
+&nbsp;        // Step 5: Print the decimal representation.
+&nbsp;        // We follow Float.toString semantics here.
+<b class="fc">&nbsp;        if (sign) {</b>
+<b class="fc">&nbsp;            result[index++] = &#39;-&#39;;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (scientificNotation) {</b>
+&nbsp;            // Print in the format x.xxxxxE-yy.
+<b class="fc">&nbsp;            for (int i = 0; i &lt; olength - 1; i++) {</b>
+<b class="fc">&nbsp;                int c = output % 10;</b>
+<b class="fc">&nbsp;                output /= 10;</b>
+<b class="fc">&nbsp;                result[index + olength - i] = (char) (&#39;0&#39; + c);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            result[index] = (char) (&#39;0&#39; + output % 10);</b>
+<b class="fc">&nbsp;            result[index + 1] = &#39;.&#39;;</b>
+<b class="fc">&nbsp;            index += olength + 1;</b>
+<b class="fc">&nbsp;            if (olength == 1) {</b>
+<b class="nc">&nbsp;                result[index++] = &#39;0&#39;;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // Print &#39;E&#39;, the exponent sign, and the exponent, which has at most two digits.
+<b class="fc">&nbsp;            result[index++] = &#39;E&#39;;</b>
+<b class="fc">&nbsp;            if (exp &lt; 0) {</b>
+<b class="fc">&nbsp;                result[index++] = &#39;-&#39;;</b>
+<b class="fc">&nbsp;                exp = -exp;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (exp &gt;= 10) {</b>
+<b class="fc">&nbsp;                result[index++] = (char) (&#39;0&#39; + exp / 10);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            result[index++] = (char) (&#39;0&#39; + exp % 10);</b>
+&nbsp;        } else {
+&nbsp;            // Otherwise follow the Java spec for values in the interval [1E-3, 1E7).
+<b class="fc">&nbsp;            if (exp &lt; 0) {</b>
+&nbsp;                // Decimal dot is before any of the digits.
+<b class="fc">&nbsp;                result[index++] = &#39;0&#39;;</b>
+<b class="fc">&nbsp;                result[index++] = &#39;.&#39;;</b>
+<b class="fc">&nbsp;                for (int i = -1; i &gt; exp; i--) {</b>
+<b class="fc">&nbsp;                    result[index++] = &#39;0&#39;;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                int current = index;</b>
+<b class="fc">&nbsp;                for (int i = 0; i &lt; olength; i++) {</b>
+<b class="fc">&nbsp;                    result[current + olength - i - 1] = (char) (&#39;0&#39; + output % 10);</b>
+<b class="fc">&nbsp;                    output /= 10;</b>
+<b class="fc">&nbsp;                    index++;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } else if (exp + 1 &gt;= olength) {</b>
+&nbsp;                // Decimal dot is after any of the digits.
+<b class="fc">&nbsp;                for (int i = 0; i &lt; olength; i++) {</b>
+<b class="fc">&nbsp;                    result[index + olength - i - 1] = (char) (&#39;0&#39; + output % 10);</b>
+<b class="fc">&nbsp;                    output /= 10;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                index += olength;</b>
+<b class="fc">&nbsp;                for (int i = olength; i &lt; exp + 1; i++) {</b>
+<b class="fc">&nbsp;                    result[index++] = &#39;0&#39;;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                result[index++] = &#39;.&#39;;</b>
+<b class="fc">&nbsp;                result[index++] = &#39;0&#39;;</b>
+&nbsp;            } else {
+&nbsp;                // Decimal dot is somewhere between the digits.
+<b class="fc">&nbsp;                int current = index + 1;</b>
+<b class="fc">&nbsp;                for (int i = 0; i &lt; olength; i++) {</b>
+<b class="fc">&nbsp;                    if (olength - i - 1 == exp) {</b>
+<b class="fc">&nbsp;                        result[current + olength - i - 1] = &#39;.&#39;;</b>
+<b class="fc">&nbsp;                        current--;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    result[current + olength - i - 1] = (char) (&#39;0&#39; + output % 10);</b>
+<b class="fc">&nbsp;                    output /= 10;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                index += olength + 1;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return index - off;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int toString(float value, byte[] result, int off) {
+<b class="fc">&nbsp;        final int FLOAT_MANTISSA_MASK = 8388607; // (1 &lt;&lt; 23) - 1;</b>
+<b class="fc">&nbsp;        final int FLOAT_EXPONENT_MASK = 255; // (1 &lt;&lt; 8) - 1;</b>
+<b class="fc">&nbsp;        final int FLOAT_EXPONENT_BIAS = 127; // (1 &lt;&lt; (8 - 1)) - 1;</b>
+<b class="fc">&nbsp;        final long LOG10_2_NUMERATOR = 3010299; // (long) (10000000L * Math.log10(2));</b>
+<b class="fc">&nbsp;        final long LOG10_5_DENOMINATOR = 10000000L;</b>
+<b class="fc">&nbsp;        final long LOG10_5_NUMERATOR = 6989700L; // (long) (LOG10_5_DENOMINATOR * Math.log10(5));</b>
+&nbsp;
+&nbsp;        // Step 1: Decode the floating point number, and unify normalized and subnormal cases.
+&nbsp;        // First, handle all the trivial cases.
+<b class="fc">&nbsp;        int index = off;</b>
+<b class="fc">&nbsp;        if (Float.isNaN(value)) {</b>
+<b class="fc">&nbsp;            result[index++] = &#39;N&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;a&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;N&#39;;</b>
+<b class="fc">&nbsp;            return index - off;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value == Float.POSITIVE_INFINITY) {</b>
+<b class="fc">&nbsp;            result[index++] = &#39;I&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;n&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;f&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;i&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;n&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;i&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;t&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;y&#39;;</b>
+<b class="fc">&nbsp;            return index - off;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value == Float.NEGATIVE_INFINITY) {</b>
+<b class="fc">&nbsp;            result[index++] = &#39;-&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;I&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;n&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;f&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;i&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;n&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;i&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;t&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;y&#39;;</b>
+<b class="fc">&nbsp;            return index - off;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int bits = Float.floatToIntBits(value);</b>
+<b class="fc">&nbsp;        if (bits == 0) {</b>
+<b class="fc">&nbsp;            result[index++] = &#39;0&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;.&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;0&#39;;</b>
+<b class="fc">&nbsp;            return index - off;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (bits == 0x80000000) {</b>
+<b class="fc">&nbsp;            result[index++] = &#39;-&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;0&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;.&#39;;</b>
+<b class="fc">&nbsp;            result[index++] = &#39;0&#39;;</b>
+<b class="fc">&nbsp;            return index - off;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Otherwise extract the mantissa and exponent bits and run the full algorithm.
+<b class="fc">&nbsp;        int ieeeExponent = (bits &gt;&gt; 23) &amp; FLOAT_EXPONENT_MASK;</b>
+<b class="fc">&nbsp;        int ieeeMantissa = bits &amp; FLOAT_MANTISSA_MASK;</b>
+&nbsp;        // By default, the correct mantissa starts with a 1, except for denormal numbers.
+&nbsp;        int e2;
+&nbsp;        int m2;
+<b class="fc">&nbsp;        if (ieeeExponent == 0) {</b>
+<b class="fc">&nbsp;            e2 = 1 - FLOAT_EXPONENT_BIAS - 23;</b>
+<b class="fc">&nbsp;            m2 = ieeeMantissa;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            e2 = ieeeExponent - FLOAT_EXPONENT_BIAS - 23;</b>
+<b class="fc">&nbsp;            m2 = ieeeMantissa | (1 &lt;&lt; 23);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        boolean sign = bits &lt; 0;</b>
+&nbsp;
+&nbsp;        // Step 2: Determine the interval of legal decimal representations.
+<b class="fc">&nbsp;        boolean even = (m2 &amp; 1) == 0;</b>
+<b class="fc">&nbsp;        int mv = 4 * m2;</b>
+<b class="fc">&nbsp;        int mp = 4 * m2 + 2;</b>
+<b class="fc">&nbsp;        int mm = 4 * m2 - ((m2 != (1L &lt;&lt; 23)) || (ieeeExponent &lt;= 1) ? 2 : 1);</b>
+<b class="fc">&nbsp;        e2 -= 2;</b>
+&nbsp;
+&nbsp;        // Step 3: Convert to a decimal power base using 128-bit arithmetic.
+&nbsp;        // -151 = 1 - 127 - 23 - 2 &lt;= e_2 - 2 &lt;= 254 - 127 - 23 - 2 = 102
+&nbsp;        int dp, dv, dm;
+&nbsp;        int e10;
+&nbsp;        boolean dpIsTrailingZeros, dvIsTrailingZeros, dmIsTrailingZeros;
+<b class="fc">&nbsp;        int lastRemovedDigit = 0;</b>
+<b class="fc">&nbsp;        if (e2 &gt;= 0) {</b>
+&nbsp;            // Compute m * 2^e_2 / 10^q = m * 2^(e_2 - q) / 5^q
+<b class="fc">&nbsp;            int q = (int) (e2 * LOG10_2_NUMERATOR / 10000000L);</b>
+<b class="fc">&nbsp;            int k = 59 + (q == 0 ? 1 : (int) ((q * 23219280L + 10000000L - 1) / 10000000L)) - 1;</b>
+<b class="fc">&nbsp;            int i = -e2 + q + k;</b>
+<b class="fc">&nbsp;            long pis0 = (long) POW5_INV_SPLIT[q][0];</b>
+<b class="fc">&nbsp;            long pis1 = (long) POW5_INV_SPLIT[q][1];</b>
+<b class="fc">&nbsp;            dv = (int) ((mv * pis0 + ((mv * pis1) &gt;&gt; 31)) &gt;&gt; (i - 31));</b>
+<b class="fc">&nbsp;            dp = (int) ((mp * pis0 + ((mp * pis1) &gt;&gt; 31)) &gt;&gt; (i - 31));</b>
+<b class="fc">&nbsp;            dm = (int) ((mm * pis0 + ((mm * pis1) &gt;&gt; 31)) &gt;&gt; (i - 31));</b>
+<b class="fc">&nbsp;            if (q != 0 &amp;&amp; ((dp - 1) / 10 &lt;= dm / 10)) {</b>
+&nbsp;                // We need to know one removed digit even if we are not going to loop below. We could use
+&nbsp;                // q = X - 1 above, except that would require 33 bits for the result, and we&#39;ve found that
+&nbsp;                // 32-bit arithmetic is faster even on 64-bit machines.
+<b class="nc">&nbsp;                int e = q - 1;</b>
+<b class="nc">&nbsp;                int l = 59 + (e == 0 ? 1 : (int) ((e * 23219280L + 10000000L - 1) / 10000000L)) - 1;</b>
+<b class="nc">&nbsp;                int qx = q - 1, ii = -e2 + q - 1 + l;</b>
+<b class="nc">&nbsp;                long mulPow5InvDivPow2 = (mv * (long) POW5_INV_SPLIT[qx][0] + ((mv * (long) POW5_INV_SPLIT[qx][1]) &gt;&gt; 31)) &gt;&gt; (ii - 31);</b>
+<b class="nc">&nbsp;                lastRemovedDigit = (int) (mulPow5InvDivPow2 % 10);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            e10 = q;</b>
+&nbsp;
+<b class="fc">&nbsp;            int pow5Factor_mp = 0;</b>
+&nbsp;            {
+<b class="fc">&nbsp;                int v = mp;</b>
+<b class="fc">&nbsp;                while (v &gt; 0) {</b>
+<b class="fc">&nbsp;                    if (v % 5 != 0) {</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    v /= 5;</b>
+<b class="nc">&nbsp;                    pow5Factor_mp++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            int pow5Factor_mv = 0;</b>
+&nbsp;            {
+<b class="fc">&nbsp;                int v = mv;</b>
+<b class="fc">&nbsp;                while (v &gt; 0) {</b>
+<b class="fc">&nbsp;                    if (v % 5 != 0) {</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    v /= 5;</b>
+<b class="fc">&nbsp;                    pow5Factor_mv++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            int pow5Factor_mm = 0;</b>
+&nbsp;            {
+<b class="fc">&nbsp;                int v = mm;</b>
+<b class="fc">&nbsp;                while (v &gt; 0) {</b>
+<b class="fc">&nbsp;                    if (v % 5 != 0) {</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    v /= 5;</b>
+<b class="nc">&nbsp;                    pow5Factor_mm++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            dpIsTrailingZeros = pow5Factor_mp &gt;= q;</b>
+<b class="fc">&nbsp;            dvIsTrailingZeros = pow5Factor_mv &gt;= q;</b>
+<b class="fc">&nbsp;            dmIsTrailingZeros = pow5Factor_mm &gt;= q;</b>
+<b class="fc">&nbsp;        } else {</b>
+&nbsp;            // Compute m * 5^(-e_2) / 10^q = m * 5^(-e_2 - q) / 2^q
+<b class="fc">&nbsp;            int q = (int) (-e2 * LOG10_5_NUMERATOR / LOG10_5_DENOMINATOR);</b>
+<b class="fc">&nbsp;            int i = -e2 - q;</b>
+<b class="fc">&nbsp;            int k = (i == 0 ? 1 : (int) ((i * 23219280L + 10000000L - 1) / 10000000L)) - 61;</b>
+<b class="fc">&nbsp;            int j = q - k;</b>
+&nbsp;
+<b class="fc">&nbsp;            long ps0 = POW5_SPLIT[i][0];</b>
+<b class="fc">&nbsp;            long ps1 = POW5_SPLIT[i][1];</b>
+<b class="fc">&nbsp;            int j31 = j - 31;</b>
+<b class="fc">&nbsp;            dv = (int) ((mv * ps0 + ((mv * ps1) &gt;&gt; 31)) &gt;&gt; j31);</b>
+<b class="fc">&nbsp;            dp = (int) ((mp * ps0 + ((mp * ps1) &gt;&gt; 31)) &gt;&gt; j31);</b>
+<b class="fc">&nbsp;            dm = (int) ((mm * ps0 + ((mm * ps1) &gt;&gt; 31)) &gt;&gt; j31);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (q != 0 &amp;&amp; ((dp - 1) / 10 &lt;= dm / 10)) {</b>
+<b class="nc">&nbsp;                int e = i + 1;</b>
+<b class="nc">&nbsp;                j = q - 1 - ((e == 0 ? 1 : (int) ((e * 23219280L + 10000000L - 1) / 10000000L)) - 61);</b>
+<b class="nc">&nbsp;                int ix = i + 1;</b>
+<b class="nc">&nbsp;                long mulPow5divPow2 = (mv * (long) POW5_SPLIT[ix][0] + ((mv * (long) POW5_SPLIT[ix][1]) &gt;&gt; 31)) &gt;&gt; (j - 31);</b>
+<b class="nc">&nbsp;                lastRemovedDigit = (int) (mulPow5divPow2 % 10);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            e10 = q + e2; // Note: e2 and e10 are both negative here.</b>
+&nbsp;
+<b class="fc">&nbsp;            dpIsTrailingZeros = 1 &gt;= q;</b>
+<b class="fc">&nbsp;            dvIsTrailingZeros = (q &lt; 23) &amp;&amp; (mv &amp; ((1 &lt;&lt; (q - 1)) - 1)) == 0;</b>
+<b class="fc">&nbsp;            dmIsTrailingZeros = (mm % 2 == 1 ? 0 : 1) &gt;= q;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Step 4: Find the shortest decimal representation in the interval of legal representations.
+&nbsp;        //
+&nbsp;        // We do some extra work here in order to follow Float/Double.toString semantics. In particular,
+&nbsp;        // that requires printing in scientific format if and only if the exponent is between -3 and 7,
+&nbsp;        // and it requires printing at least two decimal digits.
+&nbsp;        //
+&nbsp;        // Above, we moved the decimal dot all the way to the right, so now we need to count digits to
+&nbsp;        // figure out the correct exponent for scientific notation.
+&nbsp;
+<b class="fc">&nbsp;        int dplength = 10;</b>
+<b class="fc">&nbsp;        int factor = 1000000000;</b>
+<b class="fc">&nbsp;        for (; dplength &gt; 0; dplength--) {</b>
+<b class="fc">&nbsp;            if (dp &gt;= factor) {</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            factor /= 10;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        int exp = e10 + dplength - 1;</b>
+&nbsp;
+&nbsp;        // Float.toString semantics requires using scientific notation if and only if outside this range.
+<b class="fc">&nbsp;        boolean scientificNotation = !((exp &gt;= -3) &amp;&amp; (exp &lt; 7));</b>
+&nbsp;
+<b class="fc">&nbsp;        int removed = 0;</b>
+<b class="fc">&nbsp;        if (dpIsTrailingZeros &amp;&amp; !even) {</b>
+<b class="fc">&nbsp;            dp--;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        while (dp / 10 &gt; dm / 10) {</b>
+<b class="fc">&nbsp;            if ((dp &lt; 100) &amp;&amp; scientificNotation) {</b>
+&nbsp;                // We print at least two digits, so we might as well stop now.
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            dmIsTrailingZeros &amp;= dm % 10 == 0;</b>
+<b class="fc">&nbsp;            dp /= 10;</b>
+<b class="fc">&nbsp;            lastRemovedDigit = dv % 10;</b>
+<b class="fc">&nbsp;            dv /= 10;</b>
+<b class="fc">&nbsp;            dm /= 10;</b>
+<b class="fc">&nbsp;            removed++;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (dmIsTrailingZeros &amp;&amp; even) {</b>
+<b class="nc">&nbsp;            while (dm % 10 == 0) {</b>
+<b class="nc">&nbsp;                if ((dp &lt; 100) &amp;&amp; scientificNotation) {</b>
+&nbsp;                    // We print at least two digits, so we might as well stop now.
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                dp /= 10;</b>
+<b class="nc">&nbsp;                lastRemovedDigit = dv % 10;</b>
+<b class="nc">&nbsp;                dv /= 10;</b>
+<b class="nc">&nbsp;                dm /= 10;</b>
+<b class="nc">&nbsp;                removed++;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (dvIsTrailingZeros &amp;&amp; (lastRemovedDigit == 5) &amp;&amp; (dv % 2 == 0)) {</b>
+&nbsp;            // Round down not up if the number ends in X50000 and the number is even.
+<b class="nc">&nbsp;            lastRemovedDigit = 4;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        int output = dv +</b>
+&nbsp;                ((dv == dm &amp;&amp; !(dmIsTrailingZeros &amp;&amp; even)) || (lastRemovedDigit &gt;= 5) ? 1 : 0);
+<b class="fc">&nbsp;        int olength = dplength - removed;</b>
+&nbsp;
+&nbsp;        // Step 5: Print the decimal representation.
+&nbsp;        // We follow Float.toString semantics here.
+<b class="fc">&nbsp;        if (sign) {</b>
+<b class="fc">&nbsp;            result[index++] = &#39;-&#39;;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (scientificNotation) {</b>
+&nbsp;            // Print in the format x.xxxxxE-yy.
+<b class="fc">&nbsp;            for (int i = 0; i &lt; olength - 1; i++) {</b>
+<b class="fc">&nbsp;                int c = output % 10;</b>
+<b class="fc">&nbsp;                output /= 10;</b>
+<b class="fc">&nbsp;                result[index + olength - i] = (byte) (&#39;0&#39; + c);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            result[index] = (byte) (&#39;0&#39; + output % 10);</b>
+<b class="fc">&nbsp;            result[index + 1] = &#39;.&#39;;</b>
+<b class="fc">&nbsp;            index += olength + 1;</b>
+<b class="fc">&nbsp;            if (olength == 1) {</b>
+<b class="nc">&nbsp;                result[index++] = &#39;0&#39;;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // Print &#39;E&#39;, the exponent sign, and the exponent, which has at most two digits.
+<b class="fc">&nbsp;            result[index++] = &#39;E&#39;;</b>
+<b class="fc">&nbsp;            if (exp &lt; 0) {</b>
+<b class="fc">&nbsp;                result[index++] = &#39;-&#39;;</b>
+<b class="fc">&nbsp;                exp = -exp;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (exp &gt;= 10) {</b>
+<b class="fc">&nbsp;                result[index++] = (byte) (&#39;0&#39; + exp / 10);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            result[index++] = (byte) (&#39;0&#39; + exp % 10);</b>
+&nbsp;        } else {
+&nbsp;            // Otherwise follow the Java spec for values in the interval [1E-3, 1E7).
+<b class="fc">&nbsp;            if (exp &lt; 0) {</b>
+&nbsp;                // Decimal dot is before any of the digits.
+<b class="fc">&nbsp;                result[index++] = &#39;0&#39;;</b>
+<b class="fc">&nbsp;                result[index++] = &#39;.&#39;;</b>
+<b class="fc">&nbsp;                for (int i = -1; i &gt; exp; i--) {</b>
+<b class="nc">&nbsp;                    result[index++] = &#39;0&#39;;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                int current = index;</b>
+<b class="fc">&nbsp;                for (int i = 0; i &lt; olength; i++) {</b>
+<b class="fc">&nbsp;                    result[current + olength - i - 1] = (byte) (&#39;0&#39; + output % 10);</b>
+<b class="fc">&nbsp;                    output /= 10;</b>
+<b class="fc">&nbsp;                    index++;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } else if (exp + 1 &gt;= olength) {</b>
+&nbsp;                // Decimal dot is after any of the digits.
+<b class="fc">&nbsp;                for (int i = 0; i &lt; olength; i++) {</b>
+<b class="fc">&nbsp;                    result[index + olength - i - 1] = (byte) (&#39;0&#39; + output % 10);</b>
+<b class="fc">&nbsp;                    output /= 10;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                index += olength;</b>
+<b class="fc">&nbsp;                for (int i = olength; i &lt; exp + 1; i++) {</b>
+<b class="fc">&nbsp;                    result[index++] = &#39;0&#39;;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                result[index++] = &#39;.&#39;;</b>
+<b class="fc">&nbsp;                result[index++] = &#39;0&#39;;</b>
+&nbsp;            } else {
+&nbsp;                // Decimal dot is somewhere between the digits.
+<b class="nc">&nbsp;                int current = index + 1;</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; olength; i++) {</b>
+<b class="nc">&nbsp;                    if (olength - i - 1 == exp) {</b>
+<b class="nc">&nbsp;                        result[current + olength - i - 1] = &#39;.&#39;;</b>
+<b class="nc">&nbsp;                        current--;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    result[current + olength - i - 1] = (byte) (&#39;0&#39; + output % 10);</b>
+<b class="nc">&nbsp;                    output /= 10;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                index += olength + 1;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return index - off;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:49</div>
+</div>
+</body>
+</html>

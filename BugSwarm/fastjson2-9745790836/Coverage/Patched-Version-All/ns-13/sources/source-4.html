@@ -1,0 +1,162 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DeserializationFeature</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.adapter.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: DeserializationFeature (com.alibaba.fastjson2.adapter.jackson.databind)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DeserializationFeature</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.adapter.jackson.databind;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.adapter.jackson.databind.cfg.ConfigFeature;
+&nbsp;
+<b class="nc">&nbsp;public enum DeserializationFeature</b>
+&nbsp;        implements ConfigFeature {
+<b class="nc">&nbsp;    USE_BIG_DECIMAL_FOR_FLOATS(false),</b>
+<b class="nc">&nbsp;    USE_BIG_INTEGER_FOR_INTS(false),</b>
+<b class="nc">&nbsp;    USE_LONG_FOR_INTS(false),</b>
+<b class="nc">&nbsp;    USE_JAVA_ARRAY_FOR_JSON_ARRAY(false),</b>
+<b class="nc">&nbsp;    FAIL_ON_UNKNOWN_PROPERTIES(true),</b>
+<b class="nc">&nbsp;    FAIL_ON_NULL_FOR_PRIMITIVES(false),</b>
+<b class="nc">&nbsp;    FAIL_ON_NUMBERS_FOR_ENUMS(false),</b>
+<b class="nc">&nbsp;    FAIL_ON_INVALID_SUBTYPE(true),</b>
+<b class="nc">&nbsp;    FAIL_ON_READING_DUP_TREE_KEY(false),</b>
+<b class="nc">&nbsp;    FAIL_ON_IGNORED_PROPERTIES(false),</b>
+<b class="nc">&nbsp;    FAIL_ON_UNRESOLVED_OBJECT_IDS(true),</b>
+<b class="nc">&nbsp;    FAIL_ON_MISSING_CREATOR_PROPERTIES(false),</b>
+<b class="nc">&nbsp;    FAIL_ON_NULL_CREATOR_PROPERTIES(false),</b>
+<b class="nc">&nbsp;    FAIL_ON_MISSING_EXTERNAL_TYPE_ID_PROPERTY(true),</b>
+<b class="nc">&nbsp;    FAIL_ON_TRAILING_TOKENS(false),</b>
+<b class="nc">&nbsp;    WRAP_EXCEPTIONS(true),</b>
+<b class="nc">&nbsp;    ACCEPT_SINGLE_VALUE_AS_ARRAY(false),</b>
+<b class="nc">&nbsp;    UNWRAP_SINGLE_VALUE_ARRAYS(false),</b>
+<b class="nc">&nbsp;    UNWRAP_ROOT_VALUE(false),</b>
+<b class="nc">&nbsp;    ACCEPT_EMPTY_STRING_AS_NULL_OBJECT(false),</b>
+<b class="nc">&nbsp;    ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT(false),</b>
+<b class="nc">&nbsp;    ACCEPT_FLOAT_AS_INT(true),</b>
+<b class="nc">&nbsp;    READ_ENUMS_USING_TO_STRING(false),</b>
+<b class="nc">&nbsp;    READ_UNKNOWN_ENUM_VALUES_AS_NULL(false),</b>
+<b class="nc">&nbsp;    READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE(false),</b>
+<b class="nc">&nbsp;    READ_DATE_TIMESTAMPS_AS_NANOSECONDS(true),</b>
+<b class="nc">&nbsp;    ADJUST_DATES_TO_CONTEXT_TIME_ZONE(true),</b>
+<b class="nc">&nbsp;    EAGER_DESERIALIZER_FETCH(true);</b>
+&nbsp;
+&nbsp;    private final boolean defaultState;
+&nbsp;    private final int mask;
+&nbsp;
+<b class="nc">&nbsp;    DeserializationFeature(boolean defaultState) {</b>
+<b class="nc">&nbsp;        this.defaultState = defaultState;</b>
+<b class="nc">&nbsp;        mask = (1 &lt;&lt; ordinal());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean enabledByDefault() {
+<b class="nc">&nbsp;        return defaultState;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int getMask() {
+<b class="nc">&nbsp;        return mask;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean enabledIn(int flags) {
+<b class="nc">&nbsp;        return (flags &amp; mask) != 0;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:32</div>
+</div>
+</body>
+</html>

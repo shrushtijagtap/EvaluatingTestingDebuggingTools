@@ -1,0 +1,145 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ToBigInteger</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.function.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: ToBigInteger (com.alibaba.fastjson2.function.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ToBigInteger</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.function.impl;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.util.concurrent.atomic.AtomicInteger;
+&nbsp;import java.util.concurrent.atomic.AtomicLong;
+&nbsp;import java.util.function.Function;
+&nbsp;
+<b class="fc">&nbsp;public class ToBigInteger</b>
+&nbsp;        implements Function {
+&nbsp;    @Override
+&nbsp;    public Object apply(Object o) {
+<b class="fc">&nbsp;        if (o == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (o instanceof Boolean) {</b>
+<b class="fc">&nbsp;            return ((Boolean) o).booleanValue() ? BigInteger.ONE : BigInteger.ZERO;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (o instanceof Byte</b>
+&nbsp;                || o instanceof Short
+&nbsp;                || o instanceof Integer
+&nbsp;                || o instanceof Long
+&nbsp;                || o instanceof AtomicInteger
+&nbsp;                || o instanceof AtomicLong
+&nbsp;                || o instanceof Float
+&nbsp;                || o instanceof Double
+&nbsp;        ) {
+<b class="fc">&nbsp;            return BigInteger.valueOf(((Number) o).longValue());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (o instanceof BigDecimal) {</b>
+<b class="fc">&nbsp;            return ((BigDecimal) o).toBigInteger();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        throw new JSONException(&quot;can not cast to BigInteger &quot; + o.getClass());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:02</div>
+</div>
+</body>
+</html>

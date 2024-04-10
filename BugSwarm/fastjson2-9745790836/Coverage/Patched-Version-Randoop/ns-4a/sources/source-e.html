@@ -1,0 +1,832 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JdbcSupport</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.util</a>
+</div>
+
+<h1>Coverage Summary for Class: JdbcSupport (com.alibaba.fastjson2.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JdbcSupport</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JdbcSupport$ClobWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JdbcSupport$DateReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/46)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JdbcSupport$TimeReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/51)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JdbcSupport$TimestampReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/52)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JdbcSupport$TimestampWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/65)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JdbcSupport$TimeWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/41)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/288)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.util;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.codec.DateTimeCodec;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReader;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReaderImplDate;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriter;
+&nbsp;
+&nbsp;import java.io.Reader;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.InvocationTargetException;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.time.*;
+&nbsp;import java.time.format.DateTimeFormatter;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.Locale;
+&nbsp;
+<b class="nc">&nbsp;public class JdbcSupport {</b>
+&nbsp;    static Class CLASS_CLOB;
+&nbsp;    static volatile boolean CLASS_CLOB_ERROR;
+&nbsp;
+&nbsp;    public static ObjectReader createTimeReader(Class objectClass, String format, Locale locale) {
+<b class="nc">&nbsp;        return new TimeReader(objectClass, format, locale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ObjectReader createTimestampReader(Class objectClass, String format, Locale locale) {
+<b class="nc">&nbsp;        return new TimestampReader(objectClass, format, locale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ObjectReader createDateReader(Class objectClass, String format, Locale locale) {
+<b class="nc">&nbsp;        return new DateReader(objectClass, format, locale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ObjectWriter createTimeWriter(String format) {
+<b class="nc">&nbsp;        if (format == null) {</b>
+<b class="nc">&nbsp;            return TimeWriter.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new TimeWriter(format);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ObjectWriter createClobWriter(Class objectClass) {
+<b class="nc">&nbsp;        return new ClobWriter(objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ObjectWriter createTimestampWriter(Class objectClass, String format) {
+<b class="nc">&nbsp;        return new TimestampWriter(objectClass, format);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isClob(Class objectClass) {
+<b class="nc">&nbsp;        if (CLASS_CLOB == null &amp;&amp; !CLASS_CLOB_ERROR) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                CLASS_CLOB = Class.forName(&quot;java.sql.Clob&quot;);</b>
+<b class="nc">&nbsp;            } catch (Throwable e) {</b>
+<b class="nc">&nbsp;                CLASS_CLOB_ERROR = true;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return CLASS_CLOB != null &amp;&amp; CLASS_CLOB.isAssignableFrom(objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static class ClobWriter
+&nbsp;            implements ObjectWriter {
+&nbsp;        final Class objectClass;
+&nbsp;        final Method getCharacterStream;
+&nbsp;
+<b class="nc">&nbsp;        public ClobWriter(Class objectClass) {</b>
+<b class="nc">&nbsp;            if (CLASS_CLOB == null &amp;&amp; !CLASS_CLOB_ERROR) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    CLASS_CLOB = Class.forName(&quot;java.sql.Clob&quot;);</b>
+<b class="nc">&nbsp;                } catch (Throwable e) {</b>
+<b class="nc">&nbsp;                    CLASS_CLOB_ERROR = true;</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (CLASS_CLOB == null) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;class java.sql.Clob not found&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            this.objectClass = objectClass;</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                getCharacterStream = CLASS_CLOB.getMethod(&quot;getCharacterStream&quot;);</b>
+<b class="nc">&nbsp;            } catch (Throwable e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;getMethod getCharacterStream error&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+&nbsp;            Reader reader;
+&nbsp;            try {
+<b class="nc">&nbsp;                reader = (Reader) getCharacterStream.invoke(object);</b>
+<b class="nc">&nbsp;            } catch (Throwable e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;invoke method getCharacterStream error&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            jsonWriter.writeString(reader);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static class TimeReader
+&nbsp;            extends ObjectReaderImplDate {
+&nbsp;        final Constructor constructor;
+&nbsp;        final Method methodValueOf;
+&nbsp;
+&nbsp;        public TimeReader(Class objectClass, String format, Locale locale) {
+<b class="nc">&nbsp;            super(format, locale);</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                constructor = objectClass.getConstructor(long.class);</b>
+<b class="nc">&nbsp;                methodValueOf = objectClass.getMethod(&quot;valueOf&quot;, String.class);</b>
+<b class="nc">&nbsp;            } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;                throw new IllegalStateException(&quot;illegal stat&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        Object createTime(long millis) {
+&nbsp;            try {
+<b class="nc">&nbsp;                return constructor.newInstance(millis);</b>
+<b class="nc">&nbsp;            } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;create java.sql.Timestamp error&quot;, e);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;            return readObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;            if (jsonReader.isInt()) {</b>
+<b class="nc">&nbsp;                long millis = jsonReader.readInt64Value();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (formatUnixTime) {</b>
+<b class="nc">&nbsp;                    millis *= 1000;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return createTime(millis);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (jsonReader.readIfNull()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (formatISO8601 || formatMillis) {</b>
+<b class="nc">&nbsp;                long millis = jsonReader.readMillisFromString();</b>
+<b class="nc">&nbsp;                return createTime(millis);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (formatUnixTime) {</b>
+<b class="nc">&nbsp;                long seconds = jsonReader.readInt64();</b>
+<b class="nc">&nbsp;                return createTime(seconds * 1000L);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            long millis;
+<b class="nc">&nbsp;            if (format != null) {</b>
+<b class="nc">&nbsp;                DateTimeFormatter formatter = getDateFormatter(jsonReader.getLocale());</b>
+&nbsp;
+&nbsp;                ZonedDateTime zdt;
+<b class="nc">&nbsp;                if (formatter != null) {</b>
+<b class="nc">&nbsp;                    String str = jsonReader.readString();</b>
+<b class="nc">&nbsp;                    if (str.isEmpty()) {</b>
+<b class="nc">&nbsp;                        return null;</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    LocalDateTime ldt;
+<b class="nc">&nbsp;                    if (!formatHasHour) {</b>
+<b class="nc">&nbsp;                        ldt = LocalDateTime.of(</b>
+<b class="nc">&nbsp;                                LocalDate.parse(str, formatter),</b>
+&nbsp;                                LocalTime.MIN
+&nbsp;                        );
+<b class="nc">&nbsp;                    } else if (!formatHasDay) {</b>
+<b class="nc">&nbsp;                        ldt = LocalDateTime.of(</b>
+<b class="nc">&nbsp;                                LocalDate.of(1970, 1, 1),</b>
+<b class="nc">&nbsp;                                LocalTime.parse(str, formatter)</b>
+&nbsp;                        );
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        ldt = LocalDateTime.parse(str, formatter);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    zdt = ldt.atZone(jsonReader.getContext().getZoneId());</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    zdt = jsonReader.readZonedDateTime();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                millis = zdt.toInstant().toEpochMilli();</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                String str = jsonReader.readString();</b>
+<b class="nc">&nbsp;                if (&quot;0000-00-00&quot;.equals(str) || &quot;0000-00-00 00:00:00&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;                    return createTime(0);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                try {
+<b class="nc">&nbsp;                    return methodValueOf.invoke(null, str);</b>
+<b class="nc">&nbsp;                } catch (IllegalAccessException | InvocationTargetException e) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info(&quot;invoke java.sql.Time.valueOf error&quot;), e);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return createTime(millis);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static class TimeWriter
+&nbsp;            extends DateTimeCodec
+&nbsp;            implements ObjectWriter {
+<b class="nc">&nbsp;        public static TimeWriter INSTANCE = new TimeWriter(null);</b>
+&nbsp;
+&nbsp;        public TimeWriter(String format) {
+<b class="nc">&nbsp;            super(format);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;            if (object == null) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeNull();</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            JSONWriter.Context context = jsonWriter.getContext();</b>
+<b class="nc">&nbsp;            if (formatUnixTime || context.isDateFormatUnixTime()) {</b>
+<b class="nc">&nbsp;                long millis = ((Date) object).getTime();</b>
+<b class="nc">&nbsp;                long seconds = millis / 1000;</b>
+<b class="nc">&nbsp;                jsonWriter.writeInt64(seconds);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (formatMillis || context.isDateFormatMillis()) {</b>
+<b class="nc">&nbsp;                long millis = ((Date) object).getTime();</b>
+<b class="nc">&nbsp;                jsonWriter.writeInt64(millis);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (formatISO8601 || context.isDateFormatISO8601()) {</b>
+<b class="nc">&nbsp;                ZoneId zoneId = context.getZoneId();</b>
+<b class="nc">&nbsp;                long millis = ((Date) object).getTime();</b>
+<b class="nc">&nbsp;                Instant instant = Instant.ofEpochMilli(millis);</b>
+<b class="nc">&nbsp;                ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);</b>
+<b class="nc">&nbsp;                int offsetSeconds = zdt.getOffset().getTotalSeconds();</b>
+&nbsp;
+<b class="nc">&nbsp;                int year = zdt.getYear();</b>
+<b class="nc">&nbsp;                int month = zdt.getMonthValue();</b>
+<b class="nc">&nbsp;                int dayOfMonth = zdt.getDayOfMonth();</b>
+<b class="nc">&nbsp;                int hour = zdt.getHour();</b>
+<b class="nc">&nbsp;                int minute = zdt.getMinute();</b>
+<b class="nc">&nbsp;                int second = zdt.getSecond();</b>
+<b class="nc">&nbsp;                int nano = 0;</b>
+<b class="nc">&nbsp;                jsonWriter.writeDateTimeISO8601(year, month, dayOfMonth, hour, minute, second, nano, offsetSeconds, true);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            DateTimeFormatter dateFormatter = null;</b>
+<b class="nc">&nbsp;            if (format != null &amp;&amp; !format.contains(&quot;dd&quot;)) {</b>
+<b class="nc">&nbsp;                dateFormatter = getDateFormatter();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (dateFormatter == null) {</b>
+<b class="nc">&nbsp;                String format = context.getDateFormat();</b>
+<b class="nc">&nbsp;                if (format != null &amp;&amp; !format.contains(&quot;dd&quot;)) {</b>
+<b class="nc">&nbsp;                    dateFormatter = context.getDateFormatter();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (dateFormatter == null) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeString(object.toString());</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Date time = (Date) object;</b>
+&nbsp;
+<b class="nc">&nbsp;            ZoneId zoneId = context.getZoneId();</b>
+<b class="nc">&nbsp;            Instant instant = Instant.ofEpochMilli(time.getTime());</b>
+<b class="nc">&nbsp;            ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);</b>
+&nbsp;
+<b class="nc">&nbsp;            String str = dateFormatter.format(zdt);</b>
+<b class="nc">&nbsp;            jsonWriter.writeString(str);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static class TimestampWriter
+&nbsp;            extends DateTimeCodec
+&nbsp;            implements ObjectWriter {
+&nbsp;        final Method methodGetNano;
+&nbsp;        final Method methodToLocalDateTime;
+&nbsp;
+&nbsp;        public TimestampWriter(Class objectClass, String format) {
+<b class="nc">&nbsp;            super(format);</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                methodGetNano = objectClass.getMethod(&quot;getNanos&quot;);</b>
+<b class="nc">&nbsp;                methodToLocalDateTime = objectClass.getMethod(&quot;toLocalDateTime&quot;);</b>
+<b class="nc">&nbsp;            } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;illegal stat&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void writeJSONB(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;            if (object == null) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeNull();</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Date date = (Date) object;</b>
+&nbsp;
+&nbsp;            int nanos;
+<b class="nc">&nbsp;            nanos = getNanos(object);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (nanos == 0) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeMillis(date.getTime());</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            LocalDateTime localDateTime;
+&nbsp;            try {
+<b class="nc">&nbsp;                localDateTime = (LocalDateTime) methodToLocalDateTime.invoke(object);</b>
+<b class="nc">&nbsp;            } catch (IllegalAccessException | InvocationTargetException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;localDateTime error&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            jsonWriter.writeLocalDateTime(localDateTime);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private int getNanos(Object object) {
+&nbsp;            try {
+<b class="nc">&nbsp;                return (Integer) methodGetNano.invoke(object);</b>
+<b class="nc">&nbsp;            } catch (IllegalAccessException | InvocationTargetException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;getNanos error&quot;, e);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;            if (object == null) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeNull();</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            JSONWriter.Context ctx = jsonWriter.getContext();</b>
+&nbsp;
+<b class="nc">&nbsp;            Date date = (Date) object;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (formatUnixTime || ctx.isDateFormatUnixTime()) {</b>
+<b class="nc">&nbsp;                long millis = date.getTime();</b>
+<b class="nc">&nbsp;                jsonWriter.writeInt64(millis / 1000L);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            ZoneId zoneId = ctx.getZoneId();</b>
+<b class="nc">&nbsp;            Instant instant = date.toInstant();</b>
+<b class="nc">&nbsp;            ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);</b>
+<b class="nc">&nbsp;            int offsetSeconds = zdt.getOffset().getTotalSeconds();</b>
+&nbsp;
+<b class="nc">&nbsp;            if ((formatISO8601 || ctx.isDateFormatISO8601()) &amp;&amp; (zdt.getNano() % 1000_000 == 0)) {</b>
+<b class="nc">&nbsp;                int year = zdt.getYear();</b>
+<b class="nc">&nbsp;                int month = zdt.getMonthValue();</b>
+<b class="nc">&nbsp;                int dayOfMonth = zdt.getDayOfMonth();</b>
+<b class="nc">&nbsp;                int hour = zdt.getHour();</b>
+<b class="nc">&nbsp;                int minute = zdt.getMinute();</b>
+<b class="nc">&nbsp;                int second = zdt.getSecond();</b>
+<b class="nc">&nbsp;                int nano = zdt.getNano();</b>
+<b class="nc">&nbsp;                int millis = nano / 1000_000;</b>
+<b class="nc">&nbsp;                jsonWriter.writeDateTimeISO8601(year, month, dayOfMonth, hour, minute, second, millis, offsetSeconds, true);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            DateTimeFormatter dateFormatter = getDateFormatter();</b>
+<b class="nc">&nbsp;            if (dateFormatter == null) {</b>
+<b class="nc">&nbsp;                dateFormatter = ctx.getDateFormatter();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (dateFormatter == null) {</b>
+<b class="nc">&nbsp;                if (formatMillis || ctx.isDateFormatMillis()) {</b>
+<b class="nc">&nbsp;                    long millis = date.getTime();</b>
+<b class="nc">&nbsp;                    jsonWriter.writeInt64(millis);</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                int nanos = getNanos(date);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (nanos == 0) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeInt64(date.getTime());</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                int year = zdt.getYear();</b>
+<b class="nc">&nbsp;                int month = zdt.getMonthValue();</b>
+<b class="nc">&nbsp;                int dayOfMonth = zdt.getDayOfMonth();</b>
+<b class="nc">&nbsp;                int hour = zdt.getHour();</b>
+<b class="nc">&nbsp;                int minute = zdt.getMinute();</b>
+<b class="nc">&nbsp;                int second = zdt.getSecond();</b>
+<b class="nc">&nbsp;                if (nanos == 0) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeDateTime19(year, month, dayOfMonth, hour, minute, second);</b>
+<b class="nc">&nbsp;                } else if (nanos % 1000_000 == 0) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeDateTimeISO8601(year, month, dayOfMonth, hour, minute, second, nanos / 1000_000, offsetSeconds, false);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    jsonWriter.writeLocalDateTime(zdt.toLocalDateTime());</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                String str = dateFormatter.format(zdt);</b>
+<b class="nc">&nbsp;                jsonWriter.writeString(str);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static class TimestampReader
+&nbsp;            extends ObjectReaderImplDate {
+&nbsp;        final Constructor constructor;
+&nbsp;        final Method methodSetNanos;
+&nbsp;        final Method methodValueOf;
+&nbsp;
+&nbsp;        public TimestampReader(Class objectClass, String format, Locale locale) {
+<b class="nc">&nbsp;            super(format, locale);</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                constructor = objectClass.getConstructor(long.class);</b>
+<b class="nc">&nbsp;                methodSetNanos = objectClass.getMethod(&quot;setNanos&quot;, int.class);</b>
+<b class="nc">&nbsp;                methodValueOf = objectClass.getMethod(&quot;valueOf&quot;, LocalDateTime.class);</b>
+<b class="nc">&nbsp;            } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;                throw new IllegalStateException(&quot;illegal stat&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;            if (jsonReader.isInt()) {</b>
+<b class="nc">&nbsp;                long millis = jsonReader.readInt64Value();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (formatUnixTime) {</b>
+<b class="nc">&nbsp;                    millis *= 1000;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return createTimestamp(millis, 0);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (jsonReader.readIfNull()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return readObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        Object createTimestamp(long millis, int nanos) {
+&nbsp;            try {
+<b class="nc">&nbsp;                Object timestamp = constructor.newInstance(millis);</b>
+<b class="nc">&nbsp;                if (nanos != 0) {</b>
+<b class="nc">&nbsp;                    methodSetNanos.invoke(timestamp, nanos);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return timestamp;</b>
+<b class="nc">&nbsp;            } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;create java.sql.Timestamp error&quot;, e);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;            if (jsonReader.isInt()) {</b>
+<b class="nc">&nbsp;                long millis = jsonReader.readInt64Value();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (formatUnixTime) {</b>
+<b class="nc">&nbsp;                    millis *= 1000L;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return createTimestamp(millis, 0);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (jsonReader.readIfNull()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (format == null || formatISO8601 || formatMillis) {</b>
+<b class="nc">&nbsp;                LocalDateTime localDateTime = jsonReader.readLocalDateTime();</b>
+<b class="nc">&nbsp;                if (localDateTime != null) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        return methodValueOf.invoke(null, localDateTime);</b>
+<b class="nc">&nbsp;                    } catch (IllegalAccessException | InvocationTargetException e) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(&quot;invoke java.sql.Timestamp.valueOf error&quot;, e);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (jsonReader.wasNull()) {</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                long millis = jsonReader.readMillisFromString();</b>
+<b class="nc">&nbsp;                return createTimestamp(millis, 0);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String str = jsonReader.readString();</b>
+<b class="nc">&nbsp;            if (str.isEmpty()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            DateTimeFormatter dateFormatter = getDateFormatter();</b>
+&nbsp;
+&nbsp;            Instant instant;
+<b class="nc">&nbsp;            if (!formatHasHour) {</b>
+<b class="nc">&nbsp;                LocalDate localDate = LocalDate.parse(str, dateFormatter);</b>
+<b class="nc">&nbsp;                LocalDateTime ldt = LocalDateTime.of(localDate, LocalTime.MIN);</b>
+<b class="nc">&nbsp;                instant = ldt.atZone(jsonReader.getContext().getZoneId()).toInstant();</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                LocalDateTime ldt = LocalDateTime.parse(str, dateFormatter);</b>
+<b class="nc">&nbsp;                instant = ldt.atZone(jsonReader.getContext().getZoneId()).toInstant();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            long millis = instant.toEpochMilli();</b>
+<b class="nc">&nbsp;            int nanos = instant.getNano();</b>
+&nbsp;
+<b class="nc">&nbsp;            return createTimestamp(millis, nanos);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static class DateReader
+&nbsp;            extends ObjectReaderImplDate {
+&nbsp;        final Constructor constructor;
+&nbsp;        final Method methodValueOf;
+&nbsp;
+&nbsp;        public DateReader(Class objectClass, String format, Locale locale) {
+<b class="nc">&nbsp;            super(format, locale);</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                constructor = objectClass.getConstructor(long.class);</b>
+<b class="nc">&nbsp;                methodValueOf = objectClass.getMethod(&quot;valueOf&quot;, LocalDate.class);</b>
+<b class="nc">&nbsp;            } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;                throw new IllegalStateException(&quot;illegal stat&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        Object createDate(long millis) {
+&nbsp;            try {
+<b class="nc">&nbsp;                return constructor.newInstance(millis);</b>
+<b class="nc">&nbsp;            } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;create java.sql.Date error&quot;, e);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;            return readObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;            if (jsonReader.isInt()) {</b>
+<b class="nc">&nbsp;                long millis = jsonReader.readInt64Value();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (formatUnixTime) {</b>
+<b class="nc">&nbsp;                    millis *= 1000L;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return createDate(millis);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (jsonReader.readIfNull()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (formatUnixTime) {</b>
+<b class="nc">&nbsp;                if (jsonReader.isString()) {</b>
+<b class="nc">&nbsp;                    String str = jsonReader.readString();</b>
+<b class="nc">&nbsp;                    long millis = Long.parseLong(str);</b>
+<b class="nc">&nbsp;                    millis *= 1000L;</b>
+<b class="nc">&nbsp;                    return createDate(millis);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (format == null || formatISO8601 || formatMillis) {</b>
+<b class="nc">&nbsp;                LocalDateTime localDateTime = jsonReader.readLocalDateTime();</b>
+<b class="nc">&nbsp;                if (localDateTime != null) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        return methodValueOf.invoke(null, localDateTime.toLocalDate());</b>
+<b class="nc">&nbsp;                    } catch (IllegalAccessException | InvocationTargetException e) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(jsonReader.info(&quot;invoke method java.sql.Date.valueOf error&quot;), e);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (jsonReader.wasNull()) {</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                long millis = jsonReader.readMillisFromString();</b>
+<b class="nc">&nbsp;                return createDate(millis);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String str = jsonReader.readString();</b>
+<b class="nc">&nbsp;            if (str.isEmpty()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            DateTimeFormatter dateFormatter = getDateFormatter();</b>
+&nbsp;
+&nbsp;            Instant instant;
+<b class="nc">&nbsp;            if (format != null &amp;&amp; !formatHasHour) {</b>
+<b class="nc">&nbsp;                LocalDate localDate = LocalDate.parse(str, dateFormatter);</b>
+<b class="nc">&nbsp;                LocalDateTime ldt = LocalDateTime.of(localDate, LocalTime.MIN);</b>
+<b class="nc">&nbsp;                instant = ldt.atZone(jsonReader.getContext().getZoneId()).toInstant();</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                LocalDateTime ldt = LocalDateTime.parse(str, dateFormatter);</b>
+<b class="nc">&nbsp;                instant = ldt.atZone(jsonReader.getContext().getZoneId()).toInstant();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return createDate(</b>
+<b class="nc">&nbsp;                    instant.toEpochMilli()</b>
+&nbsp;            );
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:31</div>
+</div>
+</body>
+</html>

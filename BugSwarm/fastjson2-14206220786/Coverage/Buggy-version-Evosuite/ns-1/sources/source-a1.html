@@ -1,0 +1,305 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderImplListStr</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderImplListStr (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderImplListStr</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/114)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSON;
+&nbsp;import com.alibaba.fastjson2.JSONArray;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.util.GuavaSupport;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.reader.ObjectReaderImplList.*;
+&nbsp;
+&nbsp;public final class ObjectReaderImplListStr
+&nbsp;        implements ObjectReader {
+&nbsp;    final Class listType;
+&nbsp;    final Class instanceType;
+&nbsp;
+<b class="nc">&nbsp;    public ObjectReaderImplListStr(Class listType, Class instanceType) {</b>
+<b class="nc">&nbsp;        this.listType = listType;</b>
+<b class="nc">&nbsp;        this.instanceType = instanceType;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createInstance(long features) {
+<b class="nc">&nbsp;        if (instanceType == ArrayList.class) {</b>
+<b class="nc">&nbsp;            return new ArrayList();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (instanceType == LinkedList.class) {</b>
+<b class="nc">&nbsp;            return new LinkedList();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            return instanceType.newInstance();</b>
+<b class="nc">&nbsp;        } catch (InstantiationException | IllegalAccessException e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;create list error, type &quot; + instanceType);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createInstance(Collection collection) {
+<b class="nc">&nbsp;        if (listType.isInstance(collection)) {</b>
+<b class="nc">&nbsp;            boolean typeMatch = true;</b>
+<b class="nc">&nbsp;            for (Object item : collection) {</b>
+<b class="nc">&nbsp;                if (!(item instanceof String)) {</b>
+<b class="nc">&nbsp;                    typeMatch = false;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            if (typeMatch) {</b>
+<b class="nc">&nbsp;                return collection;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Collection typedList = (Collection) createInstance(0L);</b>
+<b class="nc">&nbsp;        for (Object item : collection) {</b>
+<b class="nc">&nbsp;            if (item == null || item instanceof String) {</b>
+<b class="nc">&nbsp;                typedList.add(item);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            typedList.add(</b>
+<b class="nc">&nbsp;                    JSON.toJSONString(item)</b>
+&nbsp;            );
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return typedList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class getObjectClass() {
+<b class="nc">&nbsp;        return listType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        Class instanceType = this.instanceType;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.nextIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectReader objectReader = jsonReader.checkAutoType(this.listType, 0, features);</b>
+<b class="nc">&nbsp;        if (objectReader != null) {</b>
+<b class="nc">&nbsp;            instanceType = objectReader.getObjectClass();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (instanceType == CLASS_ARRAYS_LIST) {</b>
+<b class="nc">&nbsp;            int entryCnt = jsonReader.startArray();</b>
+<b class="nc">&nbsp;            String[] array = new String[entryCnt];</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; entryCnt; ++i) {</b>
+<b class="nc">&nbsp;                array[i] = jsonReader.readString();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return Arrays.asList(array);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int entryCnt = jsonReader.startArray();</b>
+&nbsp;
+<b class="nc">&nbsp;        Function builder = null;</b>
+&nbsp;        Collection list;
+<b class="nc">&nbsp;        if (instanceType == ArrayList.class) {</b>
+<b class="nc">&nbsp;            list = entryCnt &gt; 0 ? new ArrayList(entryCnt) : new ArrayList();</b>
+<b class="nc">&nbsp;        } else if (instanceType == JSONArray.class) {</b>
+<b class="nc">&nbsp;            list = entryCnt &gt; 0 ? new JSONArray(entryCnt) : new JSONArray();</b>
+<b class="nc">&nbsp;        } else if (instanceType == CLASS_UNMODIFIABLE_COLLECTION) {</b>
+<b class="nc">&nbsp;            list = new ArrayList();</b>
+<b class="nc">&nbsp;            builder = (Function&lt;Collection, Collection&gt;) Collections::unmodifiableCollection;</b>
+<b class="nc">&nbsp;        } else if (instanceType == CLASS_UNMODIFIABLE_LIST) {</b>
+<b class="nc">&nbsp;            list = new ArrayList();</b>
+<b class="nc">&nbsp;            builder = (Function&lt;List, List&gt;) Collections::unmodifiableList;</b>
+<b class="nc">&nbsp;        } else if (instanceType == CLASS_UNMODIFIABLE_SET) {</b>
+<b class="nc">&nbsp;            list = new LinkedHashSet();</b>
+<b class="nc">&nbsp;            builder = (Function&lt;Set, Set&gt;) Collections::unmodifiableSet;</b>
+<b class="nc">&nbsp;        } else if (instanceType == CLASS_UNMODIFIABLE_SORTED_SET) {</b>
+<b class="nc">&nbsp;            list = new TreeSet();</b>
+<b class="nc">&nbsp;            builder = (Function&lt;SortedSet, SortedSet&gt;) Collections::unmodifiableSortedSet;</b>
+<b class="nc">&nbsp;        } else if (instanceType == CLASS_UNMODIFIABLE_NAVIGABLE_SET) {</b>
+<b class="nc">&nbsp;            list = new TreeSet();</b>
+<b class="nc">&nbsp;            builder = (Function&lt;NavigableSet, NavigableSet&gt;) Collections::unmodifiableNavigableSet;</b>
+<b class="nc">&nbsp;        } else if (instanceType == CLASS_SINGLETON) {</b>
+<b class="nc">&nbsp;            list = new ArrayList();</b>
+<b class="nc">&nbsp;            builder = (Function&lt;Collection, Collection&gt;) ((Collection collection) -&gt; Collections.singleton(collection.iterator().next()));</b>
+<b class="nc">&nbsp;        } else if (instanceType == CLASS_SINGLETON_LIST) {</b>
+<b class="nc">&nbsp;            list = new ArrayList();</b>
+<b class="nc">&nbsp;            builder = (Function&lt;Collection, Collection&gt;) ((Collection collection) -&gt; Collections.singletonList(collection.iterator().next()));</b>
+<b class="nc">&nbsp;        } else if (instanceType != null &amp;&amp; instanceType != this.listType) {</b>
+<b class="nc">&nbsp;            String typeName = instanceType.getTypeName();</b>
+<b class="nc">&nbsp;            switch (typeName) {</b>
+&nbsp;                case &quot;com.google.common.collect.ImmutableList&quot;:
+<b class="nc">&nbsp;                    list = new ArrayList();</b>
+<b class="nc">&nbsp;                    builder = GuavaSupport.immutableListConverter();</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;com.google.common.collect.ImmutableSet&quot;:
+<b class="nc">&nbsp;                    list = new ArrayList();</b>
+<b class="nc">&nbsp;                    builder = GuavaSupport.immutableSetConverter();</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;com.google.common.collect.Lists$TransformingRandomAccessList&quot;:
+<b class="nc">&nbsp;                    list = new ArrayList();</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;com.google.common.collect.Lists.TransformingSequentialList&quot;:
+<b class="nc">&nbsp;                    list = new LinkedList();</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+&nbsp;                    try {
+<b class="nc">&nbsp;                        list = (Collection) instanceType.newInstance();</b>
+<b class="nc">&nbsp;                    } catch (InstantiationException | IllegalAccessException e) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(jsonReader.info(&quot;create instance error &quot; + instanceType), e);</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                    break;
+&nbsp;            }
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            list = (Collection) createInstance(jsonReader.getContext().getFeatures() | features);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; entryCnt; ++i) {</b>
+<b class="nc">&nbsp;            list.add(jsonReader.readString());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (builder != null) {</b>
+<b class="nc">&nbsp;            list = (Collection) builder.apply(list);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        if (jsonReader.isJSONB()) {</b>
+<b class="nc">&nbsp;            return readJSONBObject(jsonReader, fieldType, fieldName, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.readIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean set = jsonReader.nextIfSet();</b>
+<b class="nc">&nbsp;        Collection list = set</b>
+&nbsp;                ? new HashSet()
+<b class="nc">&nbsp;                : (Collection) createInstance(jsonReader.getContext().getFeatures() | features);</b>
+&nbsp;
+<b class="nc">&nbsp;        char ch = jsonReader.current();</b>
+<b class="nc">&nbsp;        if (ch == &#39;[&#39;) {</b>
+<b class="nc">&nbsp;            jsonReader.next();</b>
+<b class="nc">&nbsp;            while (!jsonReader.nextIfMatch(&#39;]&#39;)) {</b>
+<b class="nc">&nbsp;                list.add(</b>
+<b class="nc">&nbsp;                        jsonReader.readString());</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (ch == &#39;&quot;&#39; || ch == &#39;\&#39;&#39; || ch == &#39;{&#39;) {</b>
+<b class="nc">&nbsp;            String str = jsonReader.readString();</b>
+<b class="nc">&nbsp;            if (!str.isEmpty()) {</b>
+<b class="nc">&nbsp;                list.add(str);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        jsonReader.nextIfMatch(&#39;,&#39;);</b>
+&nbsp;
+<b class="nc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:59</div>
+</div>
+</body>
+</html>

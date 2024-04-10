@@ -1,0 +1,1029 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderProvider</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderProvider (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderProvider</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.9%
+  </span>
+  <span class="absValue">
+    (34/37)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.3%
+  </span>
+  <span class="absValue">
+    (315/365)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ObjectReaderProvider$LRUAutoTypeCache</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    92.3%
+  </span>
+  <span class="absValue">
+    (36/39)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.4%
+  </span>
+  <span class="absValue">
+    (318/368)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSON;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONFactory;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.JSONReader.AutoTypeBeforeHandler;
+&nbsp;import com.alibaba.fastjson2.codec.FieldInfo;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectCodecProvider;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectReaderAnnotationProcessor;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectReaderModule;
+&nbsp;import com.alibaba.fastjson2.util.BeanUtils;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.JDKUtils;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.*;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;import java.util.concurrent.ConcurrentMap;
+&nbsp;import java.util.function.Consumer;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONFactory.*;
+&nbsp;import static com.alibaba.fastjson2.util.Fnv.MAGIC_HASH_CODE;
+&nbsp;import static com.alibaba.fastjson2.util.Fnv.MAGIC_PRIME;
+&nbsp;import static com.alibaba.fastjson2.util.TypeUtils.loadClass;
+&nbsp;
+&nbsp;public class ObjectReaderProvider
+&nbsp;        implements ObjectCodecProvider {
+&nbsp;    public static final boolean SAFE_MODE;
+&nbsp;    static final String[] DENYS;
+&nbsp;    static final String[] AUTO_TYPE_ACCEPT_LIST;
+&nbsp;
+&nbsp;    static AutoTypeBeforeHandler DEFAULT_AUTO_TYPE_BEFORE_HANDLER;
+&nbsp;    static Consumer&lt;Class&gt; DEFAULT_AUTO_TYPE_HANDLER;
+&nbsp;    static boolean DEFAULT_AUTO_TYPE_HANDLER_INIT_ERROR;
+&nbsp;
+&nbsp;    static Long hashCodeCache;
+&nbsp;
+&nbsp;    static {
+&nbsp;        {
+<b class="fc">&nbsp;            String property = System.getProperty(PROPERTY_DENY_PROPERTY);</b>
+<b class="fc">&nbsp;            if (property == null) {</b>
+<b class="fc">&nbsp;                property = JSONFactory.getProperty(PROPERTY_DENY_PROPERTY);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (property != null &amp;&amp; property.length() &gt; 0) {</b>
+<b class="nc">&nbsp;                DENYS = property.split(&quot;,&quot;);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                DENYS = new String[0];</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="fc">&nbsp;            String property = System.getProperty(PROPERTY_AUTO_TYPE_ACCEPT);</b>
+<b class="fc">&nbsp;            if (property == null) {</b>
+<b class="fc">&nbsp;                property = JSONFactory.getProperty(PROPERTY_AUTO_TYPE_ACCEPT);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (property != null &amp;&amp; property.length() &gt; 0) {</b>
+<b class="nc">&nbsp;                AUTO_TYPE_ACCEPT_LIST = property.split(&quot;,&quot;);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                AUTO_TYPE_ACCEPT_LIST = new String[0];</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="fc">&nbsp;            String property = System.getProperty(PROPERTY_AUTO_TYPE_BEFORE_HANDLER);</b>
+<b class="fc">&nbsp;            if (property == null || property.isEmpty()) {</b>
+<b class="fc">&nbsp;                property = JSONFactory.getProperty(PROPERTY_AUTO_TYPE_BEFORE_HANDLER);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (property != null) {</b>
+<b class="nc">&nbsp;                property = property.trim();</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (property != null &amp;&amp; !property.isEmpty()) {</b>
+<b class="nc">&nbsp;                Class handlerClass = TypeUtils.loadClass(property);</b>
+<b class="nc">&nbsp;                if (handlerClass != null) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        DEFAULT_AUTO_TYPE_BEFORE_HANDLER = (AutoTypeBeforeHandler) handlerClass.newInstance();</b>
+<b class="nc">&nbsp;                    } catch (Exception ignored) {</b>
+<b class="nc">&nbsp;                        DEFAULT_AUTO_TYPE_HANDLER_INIT_ERROR = true;</b>
+&nbsp;                        // skip
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="fc">&nbsp;            String property = System.getProperty(PROPERTY_AUTO_TYPE_HANDLER);</b>
+<b class="fc">&nbsp;            if (property == null || property.isEmpty()) {</b>
+<b class="fc">&nbsp;                property = JSONFactory.getProperty(PROPERTY_AUTO_TYPE_HANDLER);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (property != null) {</b>
+<b class="nc">&nbsp;                property = property.trim();</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (property != null &amp;&amp; !property.isEmpty()) {</b>
+<b class="nc">&nbsp;                Class handlerClass = TypeUtils.loadClass(property);</b>
+<b class="nc">&nbsp;                if (handlerClass != null) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        DEFAULT_AUTO_TYPE_HANDLER = (Consumer&lt;Class&gt;) handlerClass.newInstance();</b>
+<b class="nc">&nbsp;                    } catch (Exception ignored) {</b>
+<b class="nc">&nbsp;                        DEFAULT_AUTO_TYPE_HANDLER_INIT_ERROR = true;</b>
+&nbsp;                        // skip
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="fc">&nbsp;            String property = System.getProperty(&quot;fastjson.parser.safeMode&quot;);</b>
+<b class="fc">&nbsp;            if (property == null || property.isEmpty()) {</b>
+<b class="fc">&nbsp;                property = JSONFactory.getProperty(&quot;fastjson.parser.safeMode&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (property == null || property.isEmpty()) {</b>
+<b class="fc">&nbsp;                property = System.getProperty(&quot;fastjson2.parser.safeMode&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (property == null || property.isEmpty()) {</b>
+<b class="fc">&nbsp;                property = JSONFactory.getProperty(&quot;fastjson2.parser.safeMode&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (property != null) {</b>
+<b class="nc">&nbsp;                property = property.trim();</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            SAFE_MODE = &quot;true&quot;.equals(property);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    final ConcurrentMap&lt;Type, ObjectReader&gt; cache = new ConcurrentHashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;    final ConcurrentMap&lt;Type, ObjectReader&gt; cacheFieldBased = new ConcurrentHashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;    final ConcurrentMap&lt;Integer, ConcurrentHashMap&lt;Long, ObjectReader&gt;&gt; tclHashCaches = new ConcurrentHashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;    final ConcurrentMap&lt;Long, ObjectReader&gt; hashCache = new ConcurrentHashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;    final ConcurrentMap&lt;Class, Class&gt; mixInCache = new ConcurrentHashMap&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;    final LRUAutoTypeCache autoTypeList = new LRUAutoTypeCache(1024);</b>
+&nbsp;
+<b class="fc">&nbsp;    private ConcurrentMap&lt;Type, Map&lt;Type, Function&gt;&gt; typeConverts = new ConcurrentHashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    final ObjectReaderCreator creator;
+<b class="fc">&nbsp;    final List&lt;ObjectReaderModule&gt; modules = new ArrayList&lt;&gt;();</b>
+&nbsp;
+&nbsp;    private long[] denyHashCodes;
+&nbsp;    private long[] acceptHashCodes;
+&nbsp;
+<b class="fc">&nbsp;    private AutoTypeBeforeHandler autoTypeBeforeHandler = DEFAULT_AUTO_TYPE_BEFORE_HANDLER;</b>
+<b class="fc">&nbsp;    private Consumer&lt;Class&gt; autoTypeHandler = DEFAULT_AUTO_TYPE_HANDLER;</b>
+&nbsp;
+&nbsp;    {
+<b class="fc">&nbsp;        denyHashCodes = new long[]{</b>
+&nbsp;                -9164606388214699518L,
+&nbsp;                -8754006975464705441L,
+&nbsp;                -8720046426850100497L,
+&nbsp;                -8649961213709896794L,
+&nbsp;                -8614556368991373401L,
+&nbsp;                -8382625455832334425L,
+&nbsp;                -8165637398350707645L,
+&nbsp;                -8109300701639721088L,
+&nbsp;                -7966123100503199569L,
+&nbsp;                -7921218830998286408L,
+&nbsp;                -7775351613326101303L,
+&nbsp;                -7768608037458185275L,
+&nbsp;                -7766605818834748097L,
+&nbsp;                -6835437086156813536L,
+&nbsp;                -6316154655839304624L,
+&nbsp;                -6179589609550493385L,
+&nbsp;                -6149130139291498841L,
+&nbsp;                -6149093380703242441L,
+&nbsp;                -6088208984980396913L,
+&nbsp;                -6025144546313590215L,
+&nbsp;                -5939269048541779808L,
+&nbsp;                -5885964883385605994L,
+&nbsp;                -5767141746063564198L,
+&nbsp;                -5764804792063216819L,
+&nbsp;                -5472097725414717105L,
+&nbsp;                -5194641081268104286L,
+&nbsp;                -5076846148177416215L,
+&nbsp;                -4837536971810737970L,
+&nbsp;                -4836620931940850535L,
+&nbsp;                -4733542790109620528L,
+&nbsp;                -4703320437989596122L,
+&nbsp;                -4608341446948126581L,
+&nbsp;                -4537258998789938600L,
+&nbsp;                -4438775680185074100L,
+&nbsp;                -4314457471973557243L,
+&nbsp;                -4150995715611818742L,
+&nbsp;                -4082057040235125754L,
+&nbsp;                -3975378478825053783L,
+&nbsp;                -3967588558552655563L,
+&nbsp;                -3935185854875733362L,
+&nbsp;                -3319207949486691020L,
+&nbsp;                -3077205613010077203L,
+&nbsp;                -3053747177772160511L,
+&nbsp;                -2995060141064716555L,
+&nbsp;                -2825378362173150292L,
+&nbsp;                -2533039401923731906L,
+&nbsp;                -2439930098895578154L,
+&nbsp;                -2378990704010641148L,
+&nbsp;                -2364987994247679115L,
+&nbsp;                -2262244760619952081L,
+&nbsp;                -2192804397019347313L,
+&nbsp;                -2095516571388852610L,
+&nbsp;                -1872417015366588117L,
+&nbsp;                -1650485814983027158L,
+&nbsp;                -1589194880214235129L,
+&nbsp;                -965955008570215305L,
+&nbsp;                -905177026366752536L,
+&nbsp;                -831789045734283466L,
+&nbsp;                -803541446955902575L,
+&nbsp;                -731978084025273882L,
+&nbsp;                -666475508176557463L,
+&nbsp;                -582813228520337988L,
+&nbsp;                -254670111376247151L,
+&nbsp;                -219577392946377768L,
+&nbsp;                -190281065685395680L,
+&nbsp;                -26639035867733124L,
+&nbsp;                -9822483067882491L,
+&nbsp;                4750336058574309L,
+&nbsp;                33238344207745342L,
+&nbsp;                156405680656087946L,
+&nbsp;                218512992947536312L,
+&nbsp;                313864100207897507L,
+&nbsp;                386461436234701831L,
+&nbsp;                744602970950881621L,
+&nbsp;                823641066473609950L,
+&nbsp;                1073634739308289776L,
+&nbsp;                1153291637701043748L,
+&nbsp;                1203232727967308606L,
+&nbsp;                1214780596910349029L,
+&nbsp;                1268707909007641340L,
+&nbsp;                1459860845934817624L,
+&nbsp;                1502845958873959152L,
+&nbsp;                1534439610567445754L,
+&nbsp;                1698504441317515818L,
+&nbsp;                1818089308493370394L,
+&nbsp;                2078113382421334967L,
+&nbsp;                2164696723069287854L,
+&nbsp;                2622551729063269307L,
+&nbsp;                2653453629929770569L,
+&nbsp;                2660670623866180977L,
+&nbsp;                2731823439467737506L,
+&nbsp;                2836431254737891113L,
+&nbsp;                2930861374593775110L,
+&nbsp;                3058452313624178956L,
+&nbsp;                3085473968517218653L,
+&nbsp;                3089451460101527857L,
+&nbsp;                3114862868117605599L,
+&nbsp;                3129395579983849527L,
+&nbsp;                3256258368248066264L,
+&nbsp;                3452379460455804429L,
+&nbsp;                3547627781654598988L,
+&nbsp;                3637939656440441093L,
+&nbsp;                3688179072722109200L,
+&nbsp;                3718352661124136681L,
+&nbsp;                3730752432285826863L,
+&nbsp;                3740226159580918099L,
+&nbsp;                3794316665763266033L,
+&nbsp;                3977090344859527316L,
+&nbsp;                4000049462512838776L,
+&nbsp;                4046190361520671643L,
+&nbsp;                4147696707147271408L,
+&nbsp;                4193204392725694463L,
+&nbsp;                4215053018660518963L,
+&nbsp;                4241163808635564644L,
+&nbsp;                4254584350247334433L,
+&nbsp;                4814658433570175913L,
+&nbsp;                4841947709850912914L,
+&nbsp;                4904007817188630457L,
+&nbsp;                5100336081510080343L,
+&nbsp;                5120543992130540564L,
+&nbsp;                5274044858141538265L,
+&nbsp;                5347909877633654828L,
+&nbsp;                5450448828334921485L,
+&nbsp;                5474268165959054640L,
+&nbsp;                5545425291794704408L,
+&nbsp;                5596129856135573697L,
+&nbsp;                5688200883751798389L,
+&nbsp;                5751393439502795295L,
+&nbsp;                5916409771425455946L,
+&nbsp;                5944107969236155580L,
+&nbsp;                6007332606592876737L,
+&nbsp;                6090377589998869205L,
+&nbsp;                6280357960959217660L,
+&nbsp;                6456855723474196908L,
+&nbsp;                6511035576063254270L,
+&nbsp;                6534946468240507089L,
+&nbsp;                6584624952928234050L,
+&nbsp;                6734240326434096246L,
+&nbsp;                6742705432718011780L,
+&nbsp;                6800727078373023163L,
+&nbsp;                6854854816081053523L,
+&nbsp;                7045245923763966215L,
+&nbsp;                7123326897294507060L,
+&nbsp;                7164889056054194741L,
+&nbsp;                7179336928365889465L,
+&nbsp;                7240293012336844478L,
+&nbsp;                7347653049056829645L,
+&nbsp;                7375862386996623731L,
+&nbsp;                7442624256860549330L,
+&nbsp;                7617522210483516279L,
+&nbsp;                7658177784286215602L,
+&nbsp;                8055461369741094911L,
+&nbsp;                8064026652676081192L,
+&nbsp;                8389032537095247355L,
+&nbsp;                8488266005336625107L,
+&nbsp;                8537233257283452655L,
+&nbsp;                8735538376409180149L,
+&nbsp;                8838294710098435315L,
+&nbsp;                8861402923078831179L,
+&nbsp;                9140390920032557669L,
+&nbsp;                9140416208800006522L,
+&nbsp;                9144212112462101475L
+&nbsp;        };
+&nbsp;
+&nbsp;        long[] hashCodes;
+<b class="fc">&nbsp;        if (AUTO_TYPE_ACCEPT_LIST == null) {</b>
+<b class="nc">&nbsp;            hashCodes = new long[1];</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            hashCodes = new long[AUTO_TYPE_ACCEPT_LIST.length + 1];</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; AUTO_TYPE_ACCEPT_LIST.length; i++) {</b>
+<b class="nc">&nbsp;                hashCodes[i] = Fnv.hashCode64(AUTO_TYPE_ACCEPT_LIST[i]);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        hashCodes[hashCodes.length - 1] = -6293031534589903644L;</b>
+&nbsp;
+<b class="fc">&nbsp;        Arrays.sort(hashCodes);</b>
+<b class="fc">&nbsp;        acceptHashCodes = hashCodes;</b>
+&nbsp;
+<b class="fc">&nbsp;        hashCache.put(ObjectArrayReader.TYPE_HASH_CODE, ObjectArrayReader.INSTANCE);</b>
+<b class="fc">&nbsp;        hashCache.put(Fnv.hashCode64(String.class.getName()), ObjectReaderImplString.INSTANCE);</b>
+<b class="fc">&nbsp;        hashCache.put(Fnv.hashCode64(TypeUtils.getTypeName(HashMap.class)), ObjectReaderImplMap.INSTANCE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void registerIfAbsent(long hashCode, ObjectReader objectReader) {
+<b class="fc">&nbsp;        ClassLoader tcl = Thread.currentThread().getContextClassLoader();</b>
+<b class="fc">&nbsp;        if (tcl != null &amp;&amp; tcl != JSON.class.getClassLoader()) {</b>
+<b class="fc">&nbsp;            int tclHash = System.identityHashCode(tcl);</b>
+<b class="fc">&nbsp;            ConcurrentHashMap&lt;Long, ObjectReader&gt; tclHashCache = tclHashCaches.get(tclHash);</b>
+<b class="fc">&nbsp;            if (tclHashCache == null) {</b>
+<b class="fc">&nbsp;                tclHashCaches.putIfAbsent(tclHash, new ConcurrentHashMap&lt;&gt;());</b>
+<b class="fc">&nbsp;                tclHashCache = tclHashCaches.get(tclHash);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            tclHashCache.putIfAbsent(hashCode, objectReader);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        hashCache.putIfAbsent(hashCode, objectReader);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addAutoTypeAccept(String name) {
+<b class="fc">&nbsp;        if (name != null &amp;&amp; name.length() != 0) {</b>
+<b class="fc">&nbsp;            long hash = Fnv.hashCode64(name);</b>
+<b class="fc">&nbsp;            if (Arrays.binarySearch(this.acceptHashCodes, hash) &lt; 0) {</b>
+<b class="fc">&nbsp;                long[] hashCodes = new long[this.acceptHashCodes.length + 1];</b>
+<b class="fc">&nbsp;                hashCodes[hashCodes.length - 1] = hash;</b>
+<b class="fc">&nbsp;                System.arraycopy(this.acceptHashCodes, 0, hashCodes, 0, this.acceptHashCodes.length);</b>
+<b class="fc">&nbsp;                Arrays.sort(hashCodes);</b>
+<b class="fc">&nbsp;                this.acceptHashCodes = hashCodes;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addAutoTypeDeny(String name) {
+<b class="nc">&nbsp;        if (name != null &amp;&amp; name.length() != 0) {</b>
+<b class="nc">&nbsp;            long hash = Fnv.hashCode64(name);</b>
+<b class="nc">&nbsp;            if (Arrays.binarySearch(this.denyHashCodes, hash) &lt; 0) {</b>
+<b class="nc">&nbsp;                long[] hashCodes = new long[this.denyHashCodes.length + 1];</b>
+<b class="nc">&nbsp;                hashCodes[hashCodes.length - 1] = hash;</b>
+<b class="nc">&nbsp;                System.arraycopy(this.denyHashCodes, 0, hashCodes, 0, this.denyHashCodes.length);</b>
+<b class="nc">&nbsp;                Arrays.sort(hashCodes);</b>
+<b class="nc">&nbsp;                this.denyHashCodes = hashCodes;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Consumer&lt;Class&gt; getAutoTypeHandler() {
+<b class="fc">&nbsp;        return autoTypeHandler;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAutoTypeHandler(Consumer&lt;Class&gt; autoTypeHandler) {
+<b class="fc">&nbsp;        this.autoTypeHandler = autoTypeHandler;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Class getMixIn(Class target) {
+<b class="fc">&nbsp;        return mixInCache.get(target);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void cleanupMixIn() {
+<b class="nc">&nbsp;        mixInCache.clear();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void mixIn(Class target, Class mixinSource) {
+<b class="fc">&nbsp;        if (mixinSource == null) {</b>
+<b class="fc">&nbsp;            mixInCache.remove(target);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            mixInCache.put(target, mixinSource);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        cache.remove(target);</b>
+<b class="fc">&nbsp;        cacheFieldBased.remove(target);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReader register(Type type, ObjectReader objectReader) {
+<b class="fc">&nbsp;        if (objectReader == null) {</b>
+<b class="fc">&nbsp;            return cache.remove(type);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return cache.put(type, objectReader);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReader registerIfAbsent(Type type, ObjectReader objectReader) {
+<b class="fc">&nbsp;        return cache.putIfAbsent(type, objectReader);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReader unregisterObjectReader(Type type) {
+<b class="fc">&nbsp;        return cache.remove(type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean unregisterObjectReader(Type type, ObjectReader reader) {
+<b class="fc">&nbsp;        return cache.remove(type, reader);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean register(ObjectReaderModule module) {
+<b class="fc">&nbsp;        for (int i = modules.size() - 1; i &gt;= 0; i--) {</b>
+<b class="fc">&nbsp;            if (modules.get(i) == module) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        module.init(this);</b>
+&nbsp;
+<b class="fc">&nbsp;        modules.add(0, module);</b>
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean unregister(ObjectReaderModule module) {
+<b class="fc">&nbsp;        return modules.remove(module);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void cleanup(Class objectClass) {
+<b class="fc">&nbsp;        mixInCache.remove(objectClass);</b>
+<b class="fc">&nbsp;        cache.remove(objectClass);</b>
+<b class="fc">&nbsp;        cacheFieldBased.remove(objectClass);</b>
+<b class="fc">&nbsp;        for (ConcurrentHashMap&lt;Long, ObjectReader&gt; tlc : tclHashCaches.values()) {</b>
+<b class="nc">&nbsp;            for (Iterator&lt;Map.Entry&lt;Long, ObjectReader&gt;&gt; it = tlc.entrySet().iterator(); it.hasNext();) {</b>
+<b class="nc">&nbsp;                Map.Entry&lt;Long, ObjectReader&gt; entry = it.next();</b>
+<b class="nc">&nbsp;                ObjectReader reader = entry.getValue();</b>
+<b class="nc">&nbsp;                if (reader.getObjectClass() == objectClass) {</b>
+<b class="nc">&nbsp;                    it.remove();</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+<b class="fc">&nbsp;        BeanUtils.cleanupCache(objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void cleanup(ClassLoader classLoader) {
+<b class="fc">&nbsp;        for (Iterator&lt;Map.Entry&lt;Class, Class&gt;&gt; it = mixInCache.entrySet().iterator(); it.hasNext();) {</b>
+<b class="fc">&nbsp;            Map.Entry&lt;Class, Class&gt; entry = it.next();</b>
+<b class="fc">&nbsp;            if (entry.getKey().getClassLoader() == classLoader) {</b>
+<b class="nc">&nbsp;                it.remove();</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        for (Iterator&lt;Map.Entry&lt;Type, ObjectReader&gt;&gt; it = cache.entrySet().iterator(); it.hasNext();) {</b>
+<b class="fc">&nbsp;            Map.Entry&lt;Type, ObjectReader&gt; entry = it.next();</b>
+<b class="fc">&nbsp;            Type keyType = entry.getKey();</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; keyClass = TypeUtils.getClass(keyType);</b>
+<b class="fc">&nbsp;            if (keyClass != null &amp;&amp; keyClass.getClassLoader() == classLoader) {</b>
+<b class="fc">&nbsp;                it.remove();</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        for (Iterator&lt;Map.Entry&lt;Type, ObjectReader&gt;&gt; it = cacheFieldBased.entrySet().iterator(); it.hasNext();) {</b>
+<b class="fc">&nbsp;            Map.Entry&lt;Type, ObjectReader&gt; entry = it.next();</b>
+<b class="fc">&nbsp;            Type keyType = entry.getKey();</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; keyClass = TypeUtils.getClass(keyType);</b>
+<b class="fc">&nbsp;            if (keyClass != null &amp;&amp; keyClass.getClassLoader() == classLoader) {</b>
+<b class="nc">&nbsp;                it.remove();</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        int tclHash = System.identityHashCode(classLoader);</b>
+<b class="fc">&nbsp;        tclHashCaches.remove(tclHash);</b>
+&nbsp;
+<b class="fc">&nbsp;        BeanUtils.cleanupCache(classLoader);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReaderCreator getCreator() {
+<b class="fc">&nbsp;        ObjectReaderCreator contextCreator = JSONFactory.getContextReaderCreator();</b>
+<b class="fc">&nbsp;        if (contextCreator != null) {</b>
+<b class="fc">&nbsp;            return contextCreator;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return this.creator;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public ObjectReaderProvider() {</b>
+<b class="fc">&nbsp;        ObjectReaderCreator creator = null;</b>
+<b class="fc">&nbsp;        switch (JSONFactory.CREATOR) {</b>
+&nbsp;            case &quot;reflect&quot;:
+<b class="nc">&nbsp;                creator = ObjectReaderCreator.INSTANCE;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;lambda&quot;:
+<b class="nc">&nbsp;                creator = ObjectReaderCreatorLambda.INSTANCE;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;asm&quot;:
+&nbsp;            default:
+&nbsp;                try {
+<b class="fc">&nbsp;                    creator = ObjectReaderCreatorASM.INSTANCE;</b>
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;                if (creator == null) {</b>
+<b class="nc">&nbsp;                    creator = ObjectReaderCreatorLambda.INSTANCE;</b>
+&nbsp;                }
+&nbsp;                break;
+&nbsp;        }
+<b class="fc">&nbsp;        this.creator = creator;</b>
+&nbsp;
+<b class="fc">&nbsp;        modules.add(new ObjectReaderBaseModule(this));</b>
+<b class="fc">&nbsp;        init();</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public ObjectReaderProvider(ObjectReaderCreator creator) {</b>
+<b class="fc">&nbsp;        this.creator = creator;</b>
+<b class="fc">&nbsp;        modules.add(new ObjectReaderBaseModule(this));</b>
+<b class="fc">&nbsp;        init();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    void init() {
+<b class="fc">&nbsp;        for (ObjectReaderModule module : modules) {</b>
+<b class="fc">&nbsp;            module.init(this);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Function getTypeConvert(Type from, Type to) {
+<b class="fc">&nbsp;        Map&lt;Type, Function&gt; map = typeConverts.get(from);</b>
+<b class="fc">&nbsp;        if (map == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return map.get(to);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Function registerTypeConvert(Type from, Type to, Function typeConvert) {
+<b class="fc">&nbsp;        Map&lt;Type, Function&gt; map = typeConverts.get(from);</b>
+<b class="fc">&nbsp;        if (map == null) {</b>
+<b class="fc">&nbsp;            typeConverts.putIfAbsent(from, new ConcurrentHashMap&lt;&gt;());</b>
+<b class="fc">&nbsp;            map = typeConverts.get(from);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return map.putIfAbsent(to, typeConvert);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReader getObjectReader(long hashCode) {
+&nbsp;        final Long hashCodeObj;
+<b class="fc">&nbsp;        if (hashCodeCache == null) {</b>
+<b class="fc">&nbsp;            hashCodeObj = hashCodeCache = new Long(hashCode);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            if (hashCode == hashCodeCache.longValue()) {</b>
+<b class="nc">&nbsp;                hashCodeObj = hashCodeCache;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                hashCodeObj = new Long(hashCode);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        ObjectReader objectReader = null;</b>
+<b class="fc">&nbsp;        ClassLoader tcl = Thread.currentThread().getContextClassLoader();</b>
+<b class="fc">&nbsp;        if (tcl != null &amp;&amp; tcl != JSON.class.getClassLoader()) {</b>
+<b class="fc">&nbsp;            int tclHash = System.identityHashCode(tcl);</b>
+<b class="fc">&nbsp;            ConcurrentHashMap&lt;Long, ObjectReader&gt; tclHashCache = tclHashCaches.get(tclHash);</b>
+<b class="fc">&nbsp;            if (tclHashCache != null) {</b>
+<b class="fc">&nbsp;                objectReader = tclHashCache.get(hashCodeObj);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (objectReader == null) {</b>
+<b class="fc">&nbsp;            objectReader = hashCache.get(hashCodeObj);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return objectReader;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReader getObjectReader(String typeName, Class&lt;?&gt; expectClass, long features) {
+<b class="fc">&nbsp;        Class&lt;?&gt; autoTypeClass = checkAutoType(typeName, expectClass, features);</b>
+<b class="fc">&nbsp;        if (autoTypeClass == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        boolean fieldBased = (features &amp; JSONReader.Feature.FieldBased.mask) != 0;</b>
+<b class="fc">&nbsp;        ObjectReader objectReader = getObjectReader(autoTypeClass, fieldBased);</b>
+&nbsp;
+<b class="fc">&nbsp;        registerIfAbsent(Fnv.hashCode64(typeName), objectReader);</b>
+<b class="fc">&nbsp;        return objectReader;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    final void afterAutoType(String typeName, Class type) {
+<b class="fc">&nbsp;        if (autoTypeHandler != null) {</b>
+<b class="fc">&nbsp;            autoTypeHandler.accept(type);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        synchronized (autoTypeList) {</b>
+<b class="fc">&nbsp;            autoTypeList.putIfAbsent(typeName, new Date());</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Class&lt;?&gt; checkAutoType(String typeName, Class&lt;?&gt; expectClass, long features) {
+<b class="fc">&nbsp;        if (typeName == null || typeName.isEmpty()) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (autoTypeBeforeHandler != null) {</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; resolvedClass = autoTypeBeforeHandler.apply(typeName, expectClass, features);</b>
+<b class="fc">&nbsp;            if (resolvedClass != null) {</b>
+<b class="fc">&nbsp;                afterAutoType(typeName, resolvedClass);</b>
+<b class="fc">&nbsp;                return resolvedClass;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (SAFE_MODE) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int typeNameLength = typeName.length();</b>
+<b class="fc">&nbsp;        if (typeNameLength &gt;= 192) {</b>
+<b class="fc">&nbsp;            throw new JSONException(&quot;autoType is not support. &quot; + typeName);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (typeName.charAt(0) == &#39;[&#39;) {</b>
+<b class="fc">&nbsp;            String componentTypeName = typeName.substring(1);</b>
+<b class="fc">&nbsp;            checkAutoType(componentTypeName, null, features); // blacklist check for componentType</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (expectClass != null &amp;&amp; expectClass.getName().equals(typeName)) {</b>
+<b class="fc">&nbsp;            afterAutoType(typeName, expectClass);</b>
+<b class="fc">&nbsp;            return expectClass;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        boolean autoTypeSupport = (features &amp; JSONReader.Feature.SupportAutoType.mask) != 0;</b>
+&nbsp;        Class&lt;?&gt; clazz;
+&nbsp;
+<b class="fc">&nbsp;        if (autoTypeSupport) {</b>
+<b class="fc">&nbsp;            long hash = MAGIC_HASH_CODE;</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; typeNameLength; ++i) {</b>
+<b class="fc">&nbsp;                char ch = typeName.charAt(i);</b>
+<b class="fc">&nbsp;                if (ch == &#39;$&#39;) {</b>
+<b class="fc">&nbsp;                    ch = &#39;.&#39;;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                hash ^= ch;</b>
+<b class="fc">&nbsp;                hash *= MAGIC_PRIME;</b>
+<b class="fc">&nbsp;                if (Arrays.binarySearch(acceptHashCodes, hash) &gt;= 0) {</b>
+<b class="fc">&nbsp;                    clazz = loadClass(typeName);</b>
+<b class="fc">&nbsp;                    if (clazz != null) {</b>
+<b class="fc">&nbsp;                        if (expectClass != null &amp;&amp; !expectClass.isAssignableFrom(clazz)) {</b>
+<b class="fc">&nbsp;                            throw new JSONException(&quot;type not match. &quot; + typeName + &quot; -&gt; &quot; + expectClass.getName());</b>
+&nbsp;                        }
+&nbsp;
+<b class="fc">&nbsp;                        afterAutoType(typeName, clazz);</b>
+<b class="fc">&nbsp;                        return clazz;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                if (Arrays.binarySearch(denyHashCodes, hash) &gt;= 0 &amp;&amp; TypeUtils.getMapping(typeName) == null) {</b>
+<b class="fc">&nbsp;                    throw new JSONException(&quot;autoType is not support. &quot; + typeName);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (!autoTypeSupport) {</b>
+<b class="fc">&nbsp;            long hash = MAGIC_HASH_CODE;</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; typeNameLength; ++i) {</b>
+<b class="fc">&nbsp;                char ch = typeName.charAt(i);</b>
+<b class="fc">&nbsp;                if (ch == &#39;$&#39;) {</b>
+<b class="fc">&nbsp;                    ch = &#39;.&#39;;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                hash ^= ch;</b>
+<b class="fc">&nbsp;                hash *= MAGIC_PRIME;</b>
+&nbsp;
+<b class="fc">&nbsp;                if (Arrays.binarySearch(denyHashCodes, hash) &gt;= 0) {</b>
+<b class="fc">&nbsp;                    throw new JSONException(&quot;autoType is not support. &quot; + typeName);</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // white list
+<b class="fc">&nbsp;                if (Arrays.binarySearch(acceptHashCodes, hash) &gt;= 0) {</b>
+<b class="fc">&nbsp;                    clazz = loadClass(typeName);</b>
+&nbsp;
+<b class="fc">&nbsp;                    if (clazz != null &amp;&amp; expectClass != null &amp;&amp; !expectClass.isAssignableFrom(clazz)) {</b>
+<b class="fc">&nbsp;                        throw new JSONException(&quot;type not match. &quot; + typeName + &quot; -&gt; &quot; + expectClass.getName());</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    afterAutoType(typeName, clazz);</b>
+<b class="fc">&nbsp;                    return clazz;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (!autoTypeSupport) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        clazz = TypeUtils.getMapping(typeName);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (clazz != null) {</b>
+<b class="fc">&nbsp;            if (expectClass != null</b>
+&nbsp;                    &amp;&amp; expectClass != Object.class
+&nbsp;                    &amp;&amp; clazz != java.util.HashMap.class
+<b class="fc">&nbsp;                    &amp;&amp; !expectClass.isAssignableFrom(clazz)</b>
+&nbsp;            ) {
+<b class="fc">&nbsp;                throw new JSONException(&quot;type not match. &quot; + typeName + &quot; -&gt; &quot; + expectClass.getName());</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            afterAutoType(typeName, clazz);</b>
+<b class="fc">&nbsp;            return clazz;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        clazz = loadClass(typeName);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (clazz != null) {</b>
+<b class="fc">&nbsp;            if (ClassLoader.class.isAssignableFrom(clazz) || JDKUtils.isSQLDataSourceOrRowSet(clazz)) {</b>
+<b class="fc">&nbsp;                throw new JSONException(&quot;autoType is not support. &quot; + typeName);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (expectClass != null) {</b>
+<b class="fc">&nbsp;                if (expectClass.isAssignableFrom(clazz)) {</b>
+<b class="fc">&nbsp;                    afterAutoType(typeName, clazz);</b>
+<b class="fc">&nbsp;                    return clazz;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    throw new JSONException(&quot;type not match. &quot; + typeName + &quot; -&gt; &quot; + expectClass.getName());</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        afterAutoType(typeName, clazz);</b>
+<b class="fc">&nbsp;        return clazz;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;ObjectReaderModule&gt; getModules() {
+<b class="nc">&nbsp;        return modules;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void getFieldInfo(FieldInfo fieldInfo, Class objectClass, Field field) {
+<b class="fc">&nbsp;        for (ObjectReaderModule module : modules) {</b>
+<b class="fc">&nbsp;            ObjectReaderAnnotationProcessor annotationProcessor = module.getAnnotationProcessor();</b>
+<b class="fc">&nbsp;            if (annotationProcessor != null) {</b>
+<b class="fc">&nbsp;                annotationProcessor.getFieldInfo(fieldInfo, objectClass, field);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void getFieldInfo(FieldInfo fieldInfo, Class objectClass, Constructor constructor, int paramIndex, Parameter parameter) {
+<b class="fc">&nbsp;        for (ObjectReaderModule module : modules) {</b>
+<b class="fc">&nbsp;            ObjectReaderAnnotationProcessor annotationProcessor = module.getAnnotationProcessor();</b>
+<b class="fc">&nbsp;            if (annotationProcessor != null) {</b>
+<b class="fc">&nbsp;                annotationProcessor.getFieldInfo(fieldInfo, objectClass, constructor, paramIndex, parameter);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void getFieldInfo(FieldInfo fieldInfo, Class objectClass, Method method, int paramIndex, Parameter parameter) {
+<b class="fc">&nbsp;        for (ObjectReaderModule module : modules) {</b>
+<b class="fc">&nbsp;            ObjectReaderAnnotationProcessor annotationProcessor = module.getAnnotationProcessor();</b>
+<b class="fc">&nbsp;            if (annotationProcessor != null) {</b>
+<b class="fc">&nbsp;                annotationProcessor.getFieldInfo(fieldInfo, objectClass, method, paramIndex, parameter);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReader getObjectReader(Type objectType) {
+<b class="fc">&nbsp;        return getObjectReader(objectType, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReader getObjectReader(Type objectType, boolean fieldBased) {
+<b class="fc">&nbsp;        if (objectType == null) {</b>
+<b class="fc">&nbsp;            objectType = Object.class;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        ObjectReader objectReader = fieldBased</b>
+<b class="fc">&nbsp;                ? cacheFieldBased.get(objectType)</b>
+<b class="fc">&nbsp;                : cache.get(objectType);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (objectReader != null) {</b>
+<b class="fc">&nbsp;            return objectReader;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (ObjectReaderModule module : modules) {</b>
+<b class="fc">&nbsp;            objectReader = module.getObjectReader(this, objectType);</b>
+<b class="fc">&nbsp;            if (objectReader != null) {</b>
+<b class="fc">&nbsp;                ObjectReader previous = fieldBased</b>
+<b class="fc">&nbsp;                        ? cacheFieldBased.putIfAbsent(objectType, objectReader)</b>
+<b class="fc">&nbsp;                        : cache.putIfAbsent(objectType, objectReader);</b>
+&nbsp;
+<b class="fc">&nbsp;                if (previous != null) {</b>
+<b class="nc">&nbsp;                    objectReader = previous;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                return objectReader;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        if (objectType instanceof TypeVariable) {</b>
+<b class="fc">&nbsp;            Type[] bounds = ((TypeVariable&lt;?&gt;) objectType).getBounds();</b>
+<b class="fc">&nbsp;            if (bounds.length &gt; 0) {</b>
+<b class="fc">&nbsp;                Type bound = bounds[0];</b>
+<b class="fc">&nbsp;                if (bound instanceof Class) {</b>
+<b class="fc">&nbsp;                    ObjectReader boundObjectReader = getObjectReader(bound, fieldBased);</b>
+<b class="fc">&nbsp;                    if (boundObjectReader != null) {</b>
+<b class="fc">&nbsp;                        ObjectReader previous = getPreviousObjectReader(fieldBased, objectType, boundObjectReader);</b>
+<b class="fc">&nbsp;                        if (previous != null) {</b>
+<b class="nc">&nbsp;                            boundObjectReader = previous;</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                        return boundObjectReader;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (objectType instanceof ParameterizedType) {</b>
+<b class="fc">&nbsp;            ParameterizedType parameterizedType = (ParameterizedType) objectType;</b>
+<b class="fc">&nbsp;            Type rawType = parameterizedType.getRawType();</b>
+<b class="fc">&nbsp;            Type[] typeArguments = parameterizedType.getActualTypeArguments();</b>
+<b class="fc">&nbsp;            if (rawType instanceof Class) {</b>
+<b class="fc">&nbsp;                Class rawClass = (Class) rawType;</b>
+&nbsp;
+<b class="fc">&nbsp;                boolean generic = false;</b>
+<b class="fc">&nbsp;                for (Class clazz = rawClass; clazz != Object.class; clazz = clazz.getSuperclass()) {</b>
+<b class="fc">&nbsp;                    if (clazz.getTypeParameters().length &gt; 0) {</b>
+<b class="fc">&nbsp;                        generic = true;</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                if (typeArguments.length == 0 || !generic) {</b>
+<b class="fc">&nbsp;                    ObjectReader rawClassReader = getObjectReader(rawClass, fieldBased);</b>
+<b class="fc">&nbsp;                    if (rawClassReader != null) {</b>
+<b class="fc">&nbsp;                        ObjectReader previous = getPreviousObjectReader(fieldBased, objectType, rawClassReader);</b>
+<b class="fc">&nbsp;                        if (previous != null) {</b>
+<b class="nc">&nbsp;                            rawClassReader = previous;</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                        return rawClassReader;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Class&lt;?&gt; objectClass = TypeUtils.getMapping(objectType);</b>
+&nbsp;
+<b class="fc">&nbsp;        String className = objectClass.getName();</b>
+<b class="fc">&nbsp;        if (objectReader == null &amp;&amp; !fieldBased) {</b>
+<b class="fc">&nbsp;            switch (className) {</b>
+&nbsp;                case &quot;com.google.common.collect.ArrayListMultimap&quot;:
+<b class="fc">&nbsp;                    objectReader = ObjectReaderImplMap.of(null, objectClass, 0);</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (objectReader == null) {</b>
+<b class="fc">&nbsp;            ObjectReaderCreator creator = getCreator();</b>
+<b class="fc">&nbsp;            objectReader = creator.createObjectReader(objectClass, objectType, fieldBased, this);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        ObjectReader previous = getPreviousObjectReader(fieldBased, objectType, objectReader);</b>
+<b class="fc">&nbsp;        if (previous != null) {</b>
+<b class="nc">&nbsp;            objectReader = previous;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return objectReader;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private ObjectReader getPreviousObjectReader(boolean fieldBased, Type objectType, ObjectReader boundObjectReader) {
+<b class="fc">&nbsp;        return fieldBased</b>
+<b class="fc">&nbsp;                ? cacheFieldBased.putIfAbsent(objectType, boundObjectReader)</b>
+<b class="fc">&nbsp;                : cache.putIfAbsent(objectType, boundObjectReader);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AutoTypeBeforeHandler getAutoTypeBeforeHandler() {
+<b class="fc">&nbsp;        return autoTypeBeforeHandler;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;String, Date&gt; getAutoTypeList() {
+<b class="fc">&nbsp;        return autoTypeList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAutoTypeBeforeHandler(AutoTypeBeforeHandler autoTypeBeforeHandler) {
+<b class="fc">&nbsp;        this.autoTypeBeforeHandler = autoTypeBeforeHandler;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static class LRUAutoTypeCache
+&nbsp;            extends LinkedHashMap&lt;String, Date&gt; {
+&nbsp;        private final int maxSize;
+&nbsp;
+&nbsp;        public LRUAutoTypeCache(int maxSize) {
+<b class="fc">&nbsp;            super(16, 0.75f, false);</b>
+<b class="fc">&nbsp;            this.maxSize = maxSize;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        protected boolean removeEldestEntry(Map.Entry&lt;String, Date&gt; eldest) {
+<b class="fc">&nbsp;            return this.size() &gt; this.maxSize;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:02</div>
+</div>
+</body>
+</html>

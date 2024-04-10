@@ -1,0 +1,518 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CSVWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.support.csv</a>
+</div>
+
+<h1>Coverage Summary for Class: CSVWriter (com.alibaba.fastjson2.support.csv)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CSVWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/158)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CSVWriter$Feature</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/162)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.support.csv;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONFactory;
+&nbsp;import com.alibaba.fastjson2.codec.FieldInfo;
+&nbsp;import com.alibaba.fastjson2.util.*;
+&nbsp;import com.alibaba.fastjson2.writer.FieldWriter;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriter;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriterAdapter;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriterProvider;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.time.*;
+&nbsp;import java.time.format.DateTimeFormatter;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;import java.util.function.IntFunction;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.util.DateUtils.DEFAULT_ZONE_ID;
+&nbsp;
+&nbsp;public abstract class CSVWriter
+&nbsp;        implements Closeable, Flushable {
+&nbsp;    private long features;
+&nbsp;
+&nbsp;    final ZoneId zoneId;
+&nbsp;
+&nbsp;    int off;
+&nbsp;
+<b class="nc">&nbsp;    CSVWriter(ZoneId zoneId, Feature... features) {</b>
+<b class="nc">&nbsp;        for (Feature feature : features) {</b>
+<b class="nc">&nbsp;            this.features |= feature.mask;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.zoneId = zoneId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVWriter of() {
+<b class="nc">&nbsp;        return of(new ByteArrayOutputStream());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVWriter of(File file) throws FileNotFoundException {
+<b class="nc">&nbsp;        return of(new FileOutputStream(file), StandardCharsets.UTF_8);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVWriter of(File file, Charset charset) throws FileNotFoundException {
+<b class="nc">&nbsp;        return of(new FileOutputStream(file), charset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void writeLineObject(Object object) {
+<b class="nc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            this.writeLine();</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        ObjectWriterProvider provider = JSONFactory.getDefaultObjectWriterProvider();</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; objectClass = object.getClass();</b>
+<b class="nc">&nbsp;        ObjectWriter objectWriter = provider.getObjectWriter(objectClass);</b>
+<b class="nc">&nbsp;        if (objectWriter instanceof ObjectWriterAdapter) {</b>
+<b class="nc">&nbsp;            ObjectWriterAdapter adapter = (ObjectWriterAdapter) objectWriter;</b>
+<b class="nc">&nbsp;            List&lt;FieldWriter&gt; fieldWriters = adapter.getFieldWriters();</b>
+<b class="nc">&nbsp;            if (fieldWriters.size() == 1 &amp;&amp; (fieldWriters.get(0).features &amp; FieldInfo.VALUE_MASK) != 0) {</b>
+<b class="nc">&nbsp;                Object fieldValue = fieldWriters.get(0).getFieldValue(object);</b>
+<b class="nc">&nbsp;                writeLineObject(fieldValue);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Object[] values = new Object[fieldWriters.size()];</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; fieldWriters.size(); i++) {</b>
+<b class="nc">&nbsp;                values[i] = fieldWriters.get(i).getFieldValue(object);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            writeLine(values);</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            writeLine(object);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void writeDate(Date date) {
+<b class="nc">&nbsp;        if (date == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        long millis = date.getTime();</b>
+<b class="nc">&nbsp;        writeDate(millis);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void writeInstant(Instant instant) {
+<b class="nc">&nbsp;        if (instant == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int nano = instant.getNano();</b>
+<b class="nc">&nbsp;        if (nano % 1000000 == 0) {</b>
+<b class="nc">&nbsp;            long millis = instant.toEpochMilli();</b>
+<b class="nc">&nbsp;            writeDate(millis);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if ((features &amp; Feature.AlwaysQuoteStrings.mask) != 0) {</b>
+<b class="nc">&nbsp;            writeQuote();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        LocalDateTime ldt = instant.atZone(zoneId).toLocalDateTime();</b>
+<b class="nc">&nbsp;        writeLocalDateTime(ldt);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeLocalDate(LocalDate date) {
+<b class="nc">&nbsp;        if (date == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        String str = DateTimeFormatter.ISO_LOCAL_DATE.format(date);</b>
+<b class="nc">&nbsp;        writeRaw(str);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract void writeLocalDateTime(LocalDateTime instant);
+&nbsp;
+&nbsp;//    protected abstract void writeDirect(byte[] bytes, int off, int len);
+&nbsp;
+&nbsp;    public final void writeLine(int columnCount, IntFunction function) {
+<b class="nc">&nbsp;        for (int i = 0; i &lt; columnCount; i++) {</b>
+<b class="nc">&nbsp;            Object value = function.apply(i);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (i != 0) {</b>
+<b class="nc">&nbsp;                writeComma();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            writeValue(value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        writeLine();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void writeLine(List values) {
+<b class="nc">&nbsp;        for (int i = 0; i &lt; values.size(); i++) {</b>
+<b class="nc">&nbsp;            if (i != 0) {</b>
+<b class="nc">&nbsp;                writeComma();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            writeValue(values.get(i));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        writeLine();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void writeLine(Object... values) {
+<b class="nc">&nbsp;        for (int i = 0; i &lt; values.length; i++) {</b>
+<b class="nc">&nbsp;            if (i != 0) {</b>
+<b class="nc">&nbsp;                writeComma();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            writeValue(values[i]);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        writeLine();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract void writeComma();
+&nbsp;
+&nbsp;    protected abstract void writeQuote();
+&nbsp;
+&nbsp;    public abstract void writeLine();
+&nbsp;
+&nbsp;    public void writeValue(Object value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Optional) {</b>
+<b class="nc">&nbsp;            Optional optional = (Optional) value;</b>
+<b class="nc">&nbsp;            if (!optional.isPresent()) {</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;            value = optional.get();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Integer) {</b>
+<b class="nc">&nbsp;            this.writeInt32(((Integer) value).intValue());</b>
+<b class="nc">&nbsp;        } else if (value instanceof Long) {</b>
+<b class="nc">&nbsp;            this.writeInt64(((Long) value).longValue());</b>
+<b class="nc">&nbsp;        } else if (value instanceof String) {</b>
+<b class="nc">&nbsp;            writeString((String) value);</b>
+<b class="nc">&nbsp;        } else if (value instanceof Boolean) {</b>
+<b class="nc">&nbsp;            boolean booleanValue = ((Boolean) value).booleanValue();</b>
+<b class="nc">&nbsp;            writeBoolean(booleanValue);</b>
+<b class="nc">&nbsp;        } else if (value instanceof Float) {</b>
+<b class="nc">&nbsp;            float floatValue = ((Float) value).floatValue();</b>
+<b class="nc">&nbsp;            writeFloat(floatValue);</b>
+<b class="nc">&nbsp;        } else if (value instanceof Double) {</b>
+<b class="nc">&nbsp;            writeDouble((Double) value);</b>
+<b class="nc">&nbsp;        } else if (value instanceof Short) {</b>
+<b class="nc">&nbsp;            this.writeInt32(((Short) value).intValue());</b>
+<b class="nc">&nbsp;        } else if (value instanceof Byte) {</b>
+<b class="nc">&nbsp;            this.writeInt32(((Byte) value).intValue());</b>
+<b class="nc">&nbsp;        } else if (value instanceof BigDecimal) {</b>
+<b class="nc">&nbsp;            writeDecimal((BigDecimal) value);</b>
+<b class="nc">&nbsp;        } else if (value instanceof BigInteger) {</b>
+<b class="nc">&nbsp;            writeBigInteger((BigInteger) value);</b>
+<b class="nc">&nbsp;        } else if (value instanceof Date) {</b>
+<b class="nc">&nbsp;            writeDate((Date) value);</b>
+<b class="nc">&nbsp;        } else if (value instanceof Instant) {</b>
+<b class="nc">&nbsp;            writeInstant((Instant) value);</b>
+<b class="nc">&nbsp;        } else if (value instanceof LocalDate) {</b>
+<b class="nc">&nbsp;            writeLocalDate((LocalDate) value);</b>
+<b class="nc">&nbsp;        } else if (value instanceof LocalDateTime) {</b>
+<b class="nc">&nbsp;            writeLocalDateTime((LocalDateTime) value);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String str = value.toString();</b>
+<b class="nc">&nbsp;            writeString(str);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeBigInteger(BigInteger value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String str = value.toString();</b>
+<b class="nc">&nbsp;        writeRaw(str);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract void writeBoolean(boolean booleanValue);
+&nbsp;
+&nbsp;    public abstract void writeInt64(long longValue);
+&nbsp;
+&nbsp;    public final void writeDate(long millis) {
+<b class="nc">&nbsp;        ZoneId zoneId = this.zoneId;</b>
+&nbsp;
+<b class="nc">&nbsp;        final int SECONDS_PER_DAY = 60 * 60 * 24;</b>
+<b class="nc">&nbsp;        long epochSecond = Math.floorDiv(millis, 1000L);</b>
+&nbsp;        int offsetTotalSeconds;
+<b class="nc">&nbsp;        if (zoneId == DateUtils.SHANGHAI_ZONE_ID || zoneId.getRules() == DateUtils.SHANGHAI_ZONE_RULES) {</b>
+<b class="nc">&nbsp;            offsetTotalSeconds = DateUtils.getShanghaiZoneOffsetTotalSeconds(epochSecond);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            Instant instant = Instant.ofEpochMilli(millis);</b>
+<b class="nc">&nbsp;            offsetTotalSeconds = zoneId.getRules().getOffset(instant).getTotalSeconds();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long localSecond = epochSecond + offsetTotalSeconds;</b>
+<b class="nc">&nbsp;        long localEpochDay = Math.floorDiv(localSecond, (long) SECONDS_PER_DAY);</b>
+<b class="nc">&nbsp;        int secsOfDay = (int) Math.floorMod(localSecond, (long) SECONDS_PER_DAY);</b>
+&nbsp;        int year, month, dayOfMonth;
+&nbsp;        {
+<b class="nc">&nbsp;            final int DAYS_PER_CYCLE = 146097;</b>
+<b class="nc">&nbsp;            final long DAYS_0000_TO_1970 = (DAYS_PER_CYCLE * 5L) - (30L * 365L + 7L);</b>
+&nbsp;
+<b class="nc">&nbsp;            long zeroDay = localEpochDay + DAYS_0000_TO_1970;</b>
+&nbsp;            // find the march-based year
+<b class="nc">&nbsp;            zeroDay -= 60;  // adjust to 0000-03-01 so leap day is at end of four year cycle</b>
+<b class="nc">&nbsp;            long adjust = 0;</b>
+<b class="nc">&nbsp;            if (zeroDay &lt; 0) {</b>
+&nbsp;                // adjust negative years to positive for calculation
+<b class="nc">&nbsp;                long adjustCycles = (zeroDay + 1) / DAYS_PER_CYCLE - 1;</b>
+<b class="nc">&nbsp;                adjust = adjustCycles * 400;</b>
+<b class="nc">&nbsp;                zeroDay += -adjustCycles * DAYS_PER_CYCLE;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            long yearEst = (400 * zeroDay + 591) / DAYS_PER_CYCLE;</b>
+<b class="nc">&nbsp;            long doyEst = zeroDay - (365 * yearEst + yearEst / 4 - yearEst / 100 + yearEst / 400);</b>
+<b class="nc">&nbsp;            if (doyEst &lt; 0) {</b>
+&nbsp;                // fix estimate
+<b class="nc">&nbsp;                yearEst--;</b>
+<b class="nc">&nbsp;                doyEst = zeroDay - (365 * yearEst + yearEst / 4 - yearEst / 100 + yearEst / 400);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            yearEst += adjust;  // reset any negative year</b>
+<b class="nc">&nbsp;            int marchDoy0 = (int) doyEst;</b>
+&nbsp;
+&nbsp;            // convert march-based values back to january-based
+<b class="nc">&nbsp;            int marchMonth0 = (marchDoy0 * 5 + 2) / 153;</b>
+<b class="nc">&nbsp;            month = (marchMonth0 + 2) % 12 + 1;</b>
+<b class="nc">&nbsp;            dayOfMonth = marchDoy0 - (marchMonth0 * 306 + 5) / 10 + 1;</b>
+<b class="nc">&nbsp;            yearEst += marchMonth0 / 10;</b>
+&nbsp;
+&nbsp;            // check year now we are certain it is correct
+<b class="nc">&nbsp;            if (yearEst &lt; Year.MIN_VALUE || yearEst &gt; Year.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                throw new DateTimeException(&quot;Invalid year &quot; + yearEst);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            year = (int) yearEst;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int hour, minute, second;
+&nbsp;        {
+<b class="nc">&nbsp;            final int MINUTES_PER_HOUR = 60;</b>
+<b class="nc">&nbsp;            final int SECONDS_PER_MINUTE = 60;</b>
+<b class="nc">&nbsp;            final int SECONDS_PER_HOUR = SECONDS_PER_MINUTE * MINUTES_PER_HOUR;</b>
+&nbsp;
+<b class="nc">&nbsp;            long secondOfDay = secsOfDay;</b>
+<b class="nc">&nbsp;            if (secondOfDay &lt; 0 || secondOfDay &gt; 86399) {</b>
+<b class="nc">&nbsp;                throw new DateTimeException(&quot;Invalid secondOfDay &quot; + secondOfDay);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            int hours = (int) (secondOfDay / SECONDS_PER_HOUR);</b>
+<b class="nc">&nbsp;            secondOfDay -= hours * SECONDS_PER_HOUR;</b>
+<b class="nc">&nbsp;            int minutes = (int) (secondOfDay / SECONDS_PER_MINUTE);</b>
+<b class="nc">&nbsp;            secondOfDay -= minutes * SECONDS_PER_MINUTE;</b>
+&nbsp;
+<b class="nc">&nbsp;            hour = hours;</b>
+<b class="nc">&nbsp;            minute = minutes;</b>
+<b class="nc">&nbsp;            second = (int) secondOfDay;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (year &gt;= 0 &amp;&amp; year &lt;= 9999) {</b>
+<b class="nc">&nbsp;            int mos = (int) Math.floorMod(millis, 1000L);</b>
+<b class="nc">&nbsp;            if (mos == 0) {</b>
+<b class="nc">&nbsp;                if (hour == 0 &amp;&amp; minute == 0 &amp;&amp; second == 0) {</b>
+<b class="nc">&nbsp;                    writeDateYYYMMDD10(year, month, dayOfMonth);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    writeDateTime19(year, month, dayOfMonth, hour, minute, second);</b>
+&nbsp;                }
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String str = DateUtils.toString(millis, false, zoneId);</b>
+<b class="nc">&nbsp;        writeRaw(str);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract void writeDateYYYMMDD10(int year, int month, int dayOfMonth);
+&nbsp;
+&nbsp;    public abstract void writeDateTime19(
+&nbsp;            int year,
+&nbsp;            int month,
+&nbsp;            int dayOfMonth,
+&nbsp;            int hour,
+&nbsp;            int minute,
+&nbsp;            int second);
+&nbsp;
+&nbsp;    public abstract void writeString(String value);
+&nbsp;
+&nbsp;    public abstract void writeInt32(int intValue);
+&nbsp;
+&nbsp;    public abstract void writeDouble(double value);
+&nbsp;
+&nbsp;    public abstract void writeFloat(float value);
+&nbsp;
+&nbsp;    public abstract void flush();
+&nbsp;
+&nbsp;    public abstract void writeString(byte[] utf8);
+&nbsp;
+&nbsp;    public abstract void writeDecimal(BigDecimal value);
+&nbsp;
+&nbsp;    public abstract void writeDecimal(long unscaledVal, int scale);
+&nbsp;
+&nbsp;    protected abstract void writeRaw(String str);
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract void close() throws IOException;
+&nbsp;
+&nbsp;    public static CSVWriter of(OutputStream out, Feature... features) {
+<b class="nc">&nbsp;        return new CSVWriterUTF8(out, StandardCharsets.UTF_8, DEFAULT_ZONE_ID, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVWriter of(OutputStream out, Charset charset) {
+<b class="nc">&nbsp;        return of(out, charset, DEFAULT_ZONE_ID);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVWriter of(OutputStream out, Charset charset, ZoneId zoneId) {
+<b class="nc">&nbsp;        if (charset == StandardCharsets.UTF_16</b>
+&nbsp;                || charset == StandardCharsets.UTF_16LE
+&nbsp;                || charset == StandardCharsets.UTF_16BE
+&nbsp;        ) {
+<b class="nc">&nbsp;            return of(new OutputStreamWriter(out, charset), zoneId);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (charset == null) {</b>
+<b class="nc">&nbsp;            charset = StandardCharsets.UTF_8;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new CSVWriterUTF8(out, charset, zoneId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVWriter of(Writer out) {
+<b class="nc">&nbsp;        return new CSVWriterUTF16(out, DEFAULT_ZONE_ID);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVWriter of(Writer out, ZoneId zoneId) {
+<b class="nc">&nbsp;        return new CSVWriterUTF16(out, zoneId);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public enum Feature {</b>
+<b class="nc">&nbsp;        AlwaysQuoteStrings(1);</b>
+&nbsp;
+&nbsp;        public final long mask;
+&nbsp;
+<b class="nc">&nbsp;        Feature(long mask) {</b>
+<b class="nc">&nbsp;            this.mask = mask;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:22</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,476 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectWriterProvider</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectWriterProvider (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectWriterProvider</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.7%
+  </span>
+  <span class="absValue">
+    (22/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.1%
+  </span>
+  <span class="absValue">
+    (136/158)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONFactory;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectCodecProvider;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectWriterModule;
+&nbsp;import com.alibaba.fastjson2.util.BeanUtils;
+&nbsp;import com.alibaba.fastjson2.util.GuavaSupport;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;import java.util.concurrent.ConcurrentMap;
+&nbsp;
+&nbsp;public class ObjectWriterProvider
+&nbsp;        implements ObjectCodecProvider {
+&nbsp;    static final int TYPE_INT32_MASK = 1 &lt;&lt; 1;
+&nbsp;    static final int TYPE_INT64_MASK = 1 &lt;&lt; 2;
+&nbsp;    static final int TYPE_DECIMAL_MASK = 1 &lt;&lt; 3;
+&nbsp;    static final int TYPE_DATE_MASK = 1 &lt;&lt; 4;
+&nbsp;    static final int TYPE_ENUM_MASK = 1 &lt;&lt; 5;
+&nbsp;
+<b class="fc">&nbsp;    final ConcurrentMap&lt;Type, ObjectWriter&gt; cache = new ConcurrentHashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;    final ConcurrentMap&lt;Type, ObjectWriter&gt; cacheFieldBased = new ConcurrentHashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;    final ConcurrentMap&lt;Class, Class&gt; mixInCache = new ConcurrentHashMap&lt;&gt;();</b>
+&nbsp;    final ObjectWriterCreator creator;
+<b class="fc">&nbsp;    final List&lt;ObjectWriterModule&gt; modules = new ArrayList&lt;&gt;();</b>
+&nbsp;
+&nbsp;    volatile long userDefineMask;
+&nbsp;
+<b class="fc">&nbsp;    public ObjectWriterProvider() {</b>
+<b class="fc">&nbsp;        init();</b>
+&nbsp;
+<b class="fc">&nbsp;        ObjectWriterCreator creator = null;</b>
+<b class="fc">&nbsp;        switch (JSONFactory.CREATOR) {</b>
+&nbsp;            case &quot;reflect&quot;:
+<b class="nc">&nbsp;                creator = ObjectWriterCreator.INSTANCE;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;lambda&quot;:
+<b class="nc">&nbsp;                creator = ObjectWriterCreatorLambda.INSTANCE;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;asm&quot;:
+&nbsp;            default:
+&nbsp;                try {
+<b class="fc">&nbsp;                    creator = ObjectWriterCreatorASM.INSTANCE;</b>
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;                if (creator == null) {</b>
+<b class="nc">&nbsp;                    creator = ObjectWriterCreatorLambda.INSTANCE;</b>
+&nbsp;                }
+&nbsp;                break;
+&nbsp;        }
+<b class="fc">&nbsp;        this.creator = creator;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public ObjectWriterProvider(ObjectWriterCreator creator) {</b>
+<b class="fc">&nbsp;        init();</b>
+<b class="fc">&nbsp;        this.creator = creator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void mixIn(Class target, Class mixinSource) {
+<b class="fc">&nbsp;        if (mixinSource == null) {</b>
+<b class="fc">&nbsp;            mixInCache.remove(target);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            mixInCache.put(target, mixinSource);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        cache.remove(target);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void cleanupMixIn() {
+<b class="nc">&nbsp;        mixInCache.clear();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectWriterCreator getCreator() {
+<b class="fc">&nbsp;        ObjectWriterCreator contextCreator = JSONFactory.getContextWriterCreator();</b>
+<b class="fc">&nbsp;        if (contextCreator != null) {</b>
+<b class="fc">&nbsp;            return contextCreator;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return creator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectWriter register(Type type, ObjectWriter objectWriter) {
+<b class="fc">&nbsp;        return register(type, objectWriter, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectWriter register(Type type, ObjectWriter objectWriter, boolean fieldBased) {
+<b class="fc">&nbsp;        if (type == Integer.class) {</b>
+<b class="nc">&nbsp;            if (objectWriter == null || objectWriter == ObjectWriterImplInt32.INSTANCE) {</b>
+<b class="nc">&nbsp;                userDefineMask &amp;= ~TYPE_INT32_MASK;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                userDefineMask |= TYPE_INT32_MASK;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else if (type == Long.class || type == long.class) {</b>
+<b class="fc">&nbsp;            if (objectWriter == null || objectWriter == ObjectWriterImplInt64.INSTANCE) {</b>
+<b class="fc">&nbsp;                userDefineMask &amp;= ~TYPE_INT64_MASK;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                userDefineMask |= TYPE_INT64_MASK;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else if (type == BigDecimal.class) {</b>
+<b class="fc">&nbsp;            if (objectWriter == null || objectWriter == ObjectWriterImplBigDecimal.INSTANCE) {</b>
+<b class="fc">&nbsp;                userDefineMask &amp;= ~TYPE_DECIMAL_MASK;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                userDefineMask |= TYPE_DECIMAL_MASK;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else if (type == Date.class) {</b>
+<b class="fc">&nbsp;            if (objectWriter == null || objectWriter == ObjectWriterImplDate.INSTANCE) {</b>
+<b class="fc">&nbsp;                userDefineMask &amp;= ~TYPE_DATE_MASK;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                userDefineMask |= TYPE_DATE_MASK;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else if (type == Enum.class) {</b>
+<b class="nc">&nbsp;            if (objectWriter == null) {</b>
+<b class="nc">&nbsp;                userDefineMask &amp;= ~TYPE_ENUM_MASK;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                userDefineMask |= TYPE_ENUM_MASK;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (objectWriter == null) {</b>
+<b class="fc">&nbsp;            if (fieldBased) {</b>
+<b class="nc">&nbsp;                return cacheFieldBased.remove(type);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                return cache.remove(type);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (fieldBased) {</b>
+<b class="nc">&nbsp;            return cacheFieldBased.put(type, objectWriter);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return cache.put(type, objectWriter);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectWriter registerIfAbsent(Type type, ObjectWriter objectWriter) {
+<b class="fc">&nbsp;        return cache.putIfAbsent(type, objectWriter);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectWriter unregister(Type type) {
+<b class="fc">&nbsp;        return cache.remove(type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean unregister(Type type, ObjectWriter objectWriter) {
+<b class="fc">&nbsp;        return cache.remove(type, objectWriter);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean register(ObjectWriterModule module) {
+<b class="fc">&nbsp;        for (int i = modules.size() - 1; i &gt;= 0; i--) {</b>
+<b class="fc">&nbsp;            if (modules.get(i) == module) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        module.init(this);</b>
+&nbsp;
+<b class="fc">&nbsp;        modules.add(0, module);</b>
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean unregister(ObjectWriterModule module) {
+<b class="fc">&nbsp;        return modules.remove(module);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Class getMixIn(Class target) {
+<b class="fc">&nbsp;        return mixInCache.get(target);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void init() {
+<b class="fc">&nbsp;        modules.add(new ObjectWriterBaseModule(this));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;ObjectWriterModule&gt; getModules() {
+<b class="nc">&nbsp;        return modules;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectWriter getObjectWriter(Class objectClass) {
+<b class="fc">&nbsp;        return getObjectWriter(objectClass, objectClass, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectWriter getObjectWriter(Type objectType, Class objectClass) {
+<b class="fc">&nbsp;        return getObjectWriter(objectType, objectClass, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectWriter getObjectWriterFromCache(Type objectType, Class objectClass, boolean fieldBased) {
+<b class="fc">&nbsp;        return fieldBased</b>
+<b class="fc">&nbsp;                ? cacheFieldBased.get(objectType)</b>
+<b class="fc">&nbsp;                : cache.get(objectType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectWriter getObjectWriter(Type objectType, Class objectClass, boolean fieldBased) {
+<b class="fc">&nbsp;        ObjectWriter objectWriter = fieldBased</b>
+<b class="fc">&nbsp;                ? cacheFieldBased.get(objectType)</b>
+<b class="fc">&nbsp;                : cache.get(objectType);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (objectWriter != null) {</b>
+<b class="fc">&nbsp;            return objectWriter;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        boolean useModules = true;</b>
+<b class="fc">&nbsp;        if (fieldBased &amp;&amp; objectClass != null) {</b>
+<b class="fc">&nbsp;            if (Iterable.class.isAssignableFrom(objectClass)</b>
+<b class="fc">&nbsp;                    &amp;&amp; !Collection.class.isAssignableFrom(objectClass)) {</b>
+<b class="fc">&nbsp;                useModules = false;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (useModules) {</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; modules.size(); i++) {</b>
+<b class="fc">&nbsp;                ObjectWriterModule module = modules.get(i);</b>
+<b class="fc">&nbsp;                objectWriter = module.getObjectWriter(objectType, objectClass);</b>
+<b class="fc">&nbsp;                if (objectWriter != null) {</b>
+<b class="fc">&nbsp;                    ObjectWriter previous = fieldBased</b>
+<b class="fc">&nbsp;                            ? cacheFieldBased.putIfAbsent(objectType, objectWriter)</b>
+<b class="fc">&nbsp;                            : cache.putIfAbsent(objectType, objectWriter);</b>
+&nbsp;
+<b class="fc">&nbsp;                    if (previous != null) {</b>
+<b class="nc">&nbsp;                        objectWriter = previous;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    return objectWriter;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (objectWriter == null &amp;&amp; objectClass != null &amp;&amp; !fieldBased) {</b>
+<b class="fc">&nbsp;            String className = objectClass.getName();</b>
+<b class="fc">&nbsp;            switch (className) {</b>
+&nbsp;                case &quot;com.google.common.collect.HashMultimap&quot;:
+&nbsp;                case &quot;com.google.common.collect.LinkedListMultimap&quot;:
+&nbsp;                case &quot;com.google.common.collect.LinkedHashMultimap&quot;:
+&nbsp;                case &quot;com.google.common.collect.ArrayListMultimap&quot;:
+&nbsp;                case &quot;com.google.common.collect.TreeMultimap&quot;:
+<b class="fc">&nbsp;                    objectWriter = GuavaSupport.createAsMapWriter(objectClass);</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &quot;com.alibaba.fastjson.JSONObject&quot;:
+<b class="nc">&nbsp;                    objectWriter = ObjectWriterImplMap.of(objectClass);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (objectWriter == null) {</b>
+<b class="fc">&nbsp;            ObjectWriterCreator creator = getCreator();</b>
+<b class="fc">&nbsp;            if (objectClass == null) {</b>
+<b class="fc">&nbsp;                objectClass = TypeUtils.getMapping(objectType);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            objectWriter = creator.createObjectWriter(</b>
+&nbsp;                    objectClass,
+&nbsp;                    fieldBased ? JSONWriter.Feature.FieldBased.mask : 0,
+&nbsp;                    this
+&nbsp;            );
+<b class="fc">&nbsp;            ObjectWriter previous = fieldBased</b>
+<b class="fc">&nbsp;                    ? cacheFieldBased.putIfAbsent(objectType, objectWriter)</b>
+<b class="fc">&nbsp;                    : cache.putIfAbsent(objectType, objectWriter);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (previous != null) {</b>
+<b class="nc">&nbsp;                objectWriter = previous;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return objectWriter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static final int ENUM = 0x00004000;
+&nbsp;    static final int[] PRIMITIVE_HASH_CODES;
+&nbsp;    static final int[] NOT_REFERENCES_TYPE_HASH_CODES;
+&nbsp;
+&nbsp;    static {
+<b class="fc">&nbsp;        Class&lt;?&gt;[] classes = new Class[]{</b>
+&nbsp;                boolean.class,
+&nbsp;                Boolean.class,
+&nbsp;                Character.class,
+&nbsp;                char.class,
+&nbsp;                Byte.class,
+&nbsp;                byte.class,
+&nbsp;                Short.class,
+&nbsp;                short.class,
+&nbsp;                Integer.class,
+&nbsp;                int.class,
+&nbsp;                Long.class,
+&nbsp;                long.class,
+&nbsp;                Float.class,
+&nbsp;                float.class,
+&nbsp;                Double.class,
+&nbsp;                double.class,
+&nbsp;                BigInteger.class,
+&nbsp;                BigDecimal.class,
+&nbsp;                String.class,
+&nbsp;                java.util.Currency.class,
+&nbsp;                java.util.Date.class,
+&nbsp;                java.util.UUID.class,
+&nbsp;                java.util.Locale.class,
+&nbsp;                java.time.LocalTime.class,
+&nbsp;                java.time.LocalDate.class,
+&nbsp;                java.time.LocalDateTime.class,
+&nbsp;                java.time.Instant.class,
+&nbsp;                java.time.ZoneId.class,
+&nbsp;                java.time.ZonedDateTime.class,
+&nbsp;                java.time.OffsetDateTime.class,
+&nbsp;                java.time.OffsetTime.class,
+&nbsp;                String.class,
+&nbsp;                StackTraceElement.class,
+<b class="fc">&nbsp;                Collections.emptyList().getClass(),</b>
+<b class="fc">&nbsp;                Collections.emptyMap().getClass(),</b>
+<b class="fc">&nbsp;                Collections.emptySet().getClass()</b>
+&nbsp;        };
+&nbsp;
+<b class="fc">&nbsp;        int[] codes = new int[classes.length];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; classes.length; i++) {</b>
+<b class="fc">&nbsp;            codes[i] = System.identityHashCode(classes[i]);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Arrays.sort(codes);</b>
+<b class="fc">&nbsp;        PRIMITIVE_HASH_CODES = codes;</b>
+&nbsp;
+<b class="fc">&nbsp;        int[] codes2 = Arrays.copyOf(codes, codes.length + 3);</b>
+<b class="fc">&nbsp;        codes2[codes2.length - 1] = System.identityHashCode(Class.class);</b>
+<b class="fc">&nbsp;        codes2[codes2.length - 2] = System.identityHashCode(int[].class);</b>
+<b class="fc">&nbsp;        codes2[codes2.length - 3] = System.identityHashCode(long[].class);</b>
+<b class="fc">&nbsp;        Arrays.sort(codes2);</b>
+<b class="fc">&nbsp;        NOT_REFERENCES_TYPE_HASH_CODES = codes2;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isPrimitiveOrEnum(final Class&lt;?&gt; clazz) {
+<b class="fc">&nbsp;        return Arrays.binarySearch(PRIMITIVE_HASH_CODES, System.identityHashCode(clazz)) &gt;= 0</b>
+<b class="fc">&nbsp;                || ((clazz.getModifiers() &amp; ENUM) != 0 &amp;&amp; clazz.getSuperclass() == Enum.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isNotReferenceDetect(final Class&lt;?&gt; clazz) {
+<b class="fc">&nbsp;        return Arrays.binarySearch(NOT_REFERENCES_TYPE_HASH_CODES, System.identityHashCode(clazz)) &gt;= 0</b>
+<b class="fc">&nbsp;                || ((clazz.getModifiers() &amp; ENUM) != 0 &amp;&amp; clazz.getSuperclass() == Enum.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void cleanup(Class objectClass) {
+<b class="fc">&nbsp;        mixInCache.remove(objectClass);</b>
+<b class="fc">&nbsp;        cache.remove(objectClass);</b>
+<b class="fc">&nbsp;        cacheFieldBased.remove(objectClass);</b>
+&nbsp;
+<b class="fc">&nbsp;        BeanUtils.cleanupCache(objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void cleanup(ClassLoader classLoader) {
+<b class="fc">&nbsp;        for (Iterator&lt;Map.Entry&lt;Class, Class&gt;&gt; it = mixInCache.entrySet().iterator(); it.hasNext();) {</b>
+<b class="fc">&nbsp;            Map.Entry&lt;Class, Class&gt; entry = it.next();</b>
+<b class="fc">&nbsp;            if (entry.getKey().getClassLoader() == classLoader) {</b>
+<b class="nc">&nbsp;                it.remove();</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        for (Iterator&lt;Map.Entry&lt;Type, ObjectWriter&gt;&gt; it = cache.entrySet().iterator(); it.hasNext();) {</b>
+<b class="fc">&nbsp;            Map.Entry&lt;Type, ObjectWriter&gt; entry = it.next();</b>
+<b class="fc">&nbsp;            Type keyType = entry.getKey();</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; keyClass = TypeUtils.getClass(keyType);</b>
+<b class="fc">&nbsp;            if (keyClass != null &amp;&amp; keyClass.getClassLoader() == classLoader) {</b>
+<b class="fc">&nbsp;                it.remove();</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        for (Iterator&lt;Map.Entry&lt;Type, ObjectWriter&gt;&gt; it = cacheFieldBased.entrySet().iterator(); it.hasNext();) {</b>
+<b class="fc">&nbsp;            Map.Entry&lt;Type, ObjectWriter&gt; entry = it.next();</b>
+<b class="fc">&nbsp;            Type keyType = entry.getKey();</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; keyClass = TypeUtils.getClass(keyType);</b>
+<b class="fc">&nbsp;            if (keyClass != null &amp;&amp; keyClass.getClassLoader() == classLoader) {</b>
+<b class="nc">&nbsp;                it.remove();</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        BeanUtils.cleanupCache(classLoader);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:18</div>
+</div>
+</body>
+</html>

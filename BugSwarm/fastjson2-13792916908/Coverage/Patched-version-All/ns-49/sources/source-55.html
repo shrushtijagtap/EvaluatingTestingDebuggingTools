@@ -1,0 +1,736 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectWriterAdapter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectWriterAdapter (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectWriterAdapter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (14/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.4%
+  </span>
+  <span class="absValue">
+    (226/296)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.codec.FieldInfo;
+&nbsp;import com.alibaba.fastjson2.filter.*;
+&nbsp;import com.alibaba.fastjson2.util.BeanUtils;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONB.Constants.BC_TYPED_ANY;
+&nbsp;import static com.alibaba.fastjson2.JSONWriter.Feature.*;
+&nbsp;
+&nbsp;public class ObjectWriterAdapter&lt;T&gt;
+&nbsp;        implements ObjectWriter&lt;T&gt; {
+&nbsp;    boolean hasFilter;
+&nbsp;    PropertyPreFilter propertyPreFilter;
+&nbsp;    PropertyFilter propertyFilter;
+&nbsp;    NameFilter nameFilter;
+&nbsp;    ValueFilter valueFilter;
+&nbsp;
+&nbsp;    static final String TYPE = &quot;@type&quot;;
+&nbsp;
+&nbsp;    final Class objectClass;
+&nbsp;    final List&lt;FieldWriter&gt; fieldWriters;
+&nbsp;    protected final FieldWriter[] fieldWriterArray;
+&nbsp;
+&nbsp;    final String typeKey;
+&nbsp;    byte[] typeKeyJSONB;
+&nbsp;    protected final String typeName;
+&nbsp;    protected final long typeNameHash;
+&nbsp;    protected long typeNameSymbolCache;
+&nbsp;    protected final byte[] typeNameJSONB;
+&nbsp;
+&nbsp;    byte[] nameWithColonUTF8;
+&nbsp;    char[] nameWithColonUTF16;
+&nbsp;
+&nbsp;    final long features;
+&nbsp;
+&nbsp;    final long[] hashCodes;
+&nbsp;    final short[] mapping;
+&nbsp;
+&nbsp;    final boolean hasValueField;
+&nbsp;    final boolean serializable;
+&nbsp;    final boolean containsNoneFieldGetter;
+&nbsp;    final boolean googleCollection;
+&nbsp;
+&nbsp;    public ObjectWriterAdapter(Class&lt;T&gt; objectClass, List&lt;FieldWriter&gt; fieldWriters) {
+<b class="nc">&nbsp;        this(objectClass, null, null, 0, fieldWriters);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectWriterAdapter(
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            String typeKey,
+&nbsp;            String typeName,
+&nbsp;            long features,
+&nbsp;            List&lt;FieldWriter&gt; fieldWriters
+<b class="fc">&nbsp;    ) {</b>
+<b class="fc">&nbsp;        if (typeName == null &amp;&amp; objectClass != null) {</b>
+<b class="fc">&nbsp;            if (Enum.class.isAssignableFrom(objectClass) &amp;&amp; !objectClass.isEnum()) {</b>
+<b class="nc">&nbsp;                typeName = objectClass.getSuperclass().getName();</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                typeName = TypeUtils.getTypeName(objectClass);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        this.objectClass = objectClass;</b>
+<b class="fc">&nbsp;        this.typeKey = typeKey == null || typeKey.isEmpty() ? TYPE : typeKey;</b>
+<b class="fc">&nbsp;        this.typeName = typeName;</b>
+<b class="fc">&nbsp;        this.typeNameHash = typeName != null ? Fnv.hashCode64(typeName) : 0;</b>
+<b class="fc">&nbsp;        this.typeNameJSONB = JSONB.toBytes(typeName);</b>
+<b class="fc">&nbsp;        this.features = features;</b>
+<b class="fc">&nbsp;        this.fieldWriters = fieldWriters;</b>
+<b class="fc">&nbsp;        this.serializable = objectClass == null || java.io.Serializable.class.isAssignableFrom(objectClass);</b>
+<b class="fc">&nbsp;        this.googleCollection =</b>
+<b class="fc">&nbsp;                &quot;com.google.common.collect.AbstractMapBasedMultimap$RandomAccessWrappedList&quot;.equals(typeName)</b>
+<b class="fc">&nbsp;                || &quot;com.google.common.collect.AbstractMapBasedMultimap$WrappedSet&quot;.equals(typeName);</b>
+&nbsp;
+<b class="fc">&nbsp;        this.fieldWriterArray = new FieldWriter[fieldWriters.size()];</b>
+<b class="fc">&nbsp;        fieldWriters.toArray(fieldWriterArray);</b>
+&nbsp;
+<b class="fc">&nbsp;        this.hasValueField = fieldWriterArray.length == 1 &amp;&amp; (fieldWriterArray[0].features &amp; FieldInfo.VALUE_MASK) != 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        boolean containsNoneFieldGetter = false;</b>
+<b class="fc">&nbsp;        long[] hashCodes = new long[fieldWriterArray.length];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; fieldWriterArray.length; i++) {</b>
+<b class="fc">&nbsp;            FieldWriter fieldWriter = fieldWriterArray[i];</b>
+<b class="fc">&nbsp;            long hashCode = Fnv.hashCode64(fieldWriter.fieldName);</b>
+<b class="fc">&nbsp;            hashCodes[i] = hashCode;</b>
+&nbsp;
+<b class="fc">&nbsp;            if (fieldWriter.method != null &amp;&amp; (fieldWriter.features &amp; FieldInfo.FIELD_MASK) == 0) {</b>
+<b class="fc">&nbsp;                containsNoneFieldGetter = true;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        this.containsNoneFieldGetter = containsNoneFieldGetter;</b>
+&nbsp;
+<b class="fc">&nbsp;        this.hashCodes = Arrays.copyOf(hashCodes, hashCodes.length);</b>
+<b class="fc">&nbsp;        Arrays.sort(this.hashCodes);</b>
+&nbsp;
+<b class="fc">&nbsp;        mapping = new short[this.hashCodes.length];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; hashCodes.length; i++) {</b>
+<b class="fc">&nbsp;            long hashCode = hashCodes[i];</b>
+<b class="fc">&nbsp;            int index = Arrays.binarySearch(this.hashCodes, hashCode);</b>
+<b class="fc">&nbsp;            mapping[index] = (short) i;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public long getFeatures() {
+<b class="nc">&nbsp;        return features;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public FieldWriter getFieldWriter(long hashCode) {
+<b class="fc">&nbsp;        int m = Arrays.binarySearch(hashCodes, hashCode);</b>
+<b class="fc">&nbsp;        if (m &lt; 0) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int index = this.mapping[m];</b>
+<b class="fc">&nbsp;        return fieldWriterArray[index];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final boolean hasFilter(JSONWriter jsonWriter) {
+<b class="fc">&nbsp;        return hasFilter</b>
+<b class="fc">&nbsp;                || (containsNoneFieldGetter ? jsonWriter.hasFilter(IgnoreNonFieldGetter.mask) : jsonWriter.hasFilter());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPropertyFilter(PropertyFilter propertyFilter) {
+<b class="nc">&nbsp;        this.propertyFilter = propertyFilter;</b>
+<b class="nc">&nbsp;        if (propertyFilter != null) {</b>
+<b class="nc">&nbsp;            hasFilter = true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setValueFilter(ValueFilter valueFilter) {
+<b class="nc">&nbsp;        this.valueFilter = valueFilter;</b>
+<b class="nc">&nbsp;        if (valueFilter != null) {</b>
+<b class="nc">&nbsp;            hasFilter = true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setNameFilter(NameFilter nameFilter) {
+<b class="nc">&nbsp;        this.nameFilter = nameFilter;</b>
+<b class="nc">&nbsp;        if (nameFilter != null) {</b>
+<b class="nc">&nbsp;            hasFilter = true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPropertyPreFilter(PropertyPreFilter propertyPreFilter) {
+<b class="nc">&nbsp;        this.propertyPreFilter = propertyPreFilter;</b>
+<b class="nc">&nbsp;        if (propertyPreFilter != null) {</b>
+<b class="nc">&nbsp;            hasFilter = true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeArrayMappingJSONB(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="fc">&nbsp;        if (jsonWriter.isWriteTypeInfo(object, fieldType, features)) {</b>
+<b class="nc">&nbsp;            writeClassInfo(jsonWriter);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int size = fieldWriters.size();</b>
+<b class="fc">&nbsp;        jsonWriter.startArray(size);</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; size; ++i) {</b>
+<b class="fc">&nbsp;            FieldWriter fieldWriter = fieldWriters.get(i);</b>
+<b class="fc">&nbsp;            fieldWriter.writeValue(jsonWriter, object);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeJSONB(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="fc">&nbsp;        long featuresAll = features | this.features | jsonWriter.getFeatures();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (!serializable) {</b>
+<b class="fc">&nbsp;            if ((featuresAll &amp; JSONWriter.Feature.ErrorOnNoneSerializable.mask) != 0) {</b>
+<b class="nc">&nbsp;                errorOnNoneSerializable();</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if ((featuresAll &amp; JSONWriter.Feature.IgnoreNoneSerializable.mask) != 0) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeNull();</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((featuresAll &amp; JSONWriter.Feature.IgnoreNoneSerializable.mask) != 0) {</b>
+<b class="nc">&nbsp;            writeWithFilter(jsonWriter, object, fieldName, fieldType, features);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int size = fieldWriterArray.length;</b>
+<b class="fc">&nbsp;        if (jsonWriter.isWriteTypeInfo(object, fieldType, features)) {</b>
+<b class="fc">&nbsp;            writeClassInfo(jsonWriter);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        jsonWriter.startObject();</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; size; ++i) {</b>
+<b class="fc">&nbsp;            FieldWriter fieldWriter = fieldWriters.get(i);</b>
+<b class="fc">&nbsp;            fieldWriter.write(jsonWriter, object);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        jsonWriter.endObject();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final void writeClassInfo(JSONWriter jsonWriter) {
+<b class="fc">&nbsp;        SymbolTable symbolTable = jsonWriter.symbolTable;</b>
+<b class="fc">&nbsp;        if (symbolTable != null) {</b>
+<b class="fc">&nbsp;            if (writeClassInfoSymbol(jsonWriter, symbolTable)) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        jsonWriter.writeTypeName(typeNameJSONB, typeNameHash);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean writeClassInfoSymbol(JSONWriter jsonWriter, SymbolTable symbolTable) {
+<b class="fc">&nbsp;        int symbolTableIdentity = System.identityHashCode(symbolTable);</b>
+&nbsp;
+&nbsp;        int symbol;
+<b class="fc">&nbsp;        if (typeNameSymbolCache == 0) {</b>
+<b class="fc">&nbsp;            symbol = symbolTable.getOrdinalByHashCode(typeNameHash);</b>
+<b class="fc">&nbsp;            if (symbol != -1) {</b>
+<b class="nc">&nbsp;                typeNameSymbolCache = ((long) symbol &lt;&lt; 32) | symbolTableIdentity;</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            int identity = (int) typeNameSymbolCache;</b>
+<b class="nc">&nbsp;            if (identity == symbolTableIdentity) {</b>
+<b class="nc">&nbsp;                symbol = (int) (typeNameSymbolCache &gt;&gt; 32);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                symbol = symbolTable.getOrdinalByHashCode(typeNameHash);</b>
+<b class="nc">&nbsp;                if (symbol != -1) {</b>
+<b class="nc">&nbsp;                    typeNameSymbolCache = ((long) symbol &lt;&lt; 32) | symbolTableIdentity;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (symbol != -1) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeRaw(BC_TYPED_ANY);</b>
+<b class="nc">&nbsp;            jsonWriter.writeInt32(-symbol);</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="fc">&nbsp;        if (hasValueField) {</b>
+<b class="fc">&nbsp;            FieldWriter fieldWriter = fieldWriterArray[0];</b>
+<b class="fc">&nbsp;            fieldWriter.writeValue(jsonWriter, object);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        long featuresAll = features | this.features | jsonWriter.getFeatures();</b>
+<b class="fc">&nbsp;        boolean beanToArray = (featuresAll &amp; BeanToArray.mask) != 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (jsonWriter.jsonb) {</b>
+<b class="nc">&nbsp;            if (beanToArray) {</b>
+<b class="nc">&nbsp;                writeArrayMappingJSONB(jsonWriter, object, fieldName, fieldType, features);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            writeJSONB(jsonWriter, object, fieldName, fieldType, features);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (googleCollection) {</b>
+<b class="nc">&nbsp;            Collection collection = (Collection) object;</b>
+<b class="nc">&nbsp;            ObjectWriterImplCollection.INSTANCE.write(jsonWriter, collection, fieldName, fieldType, features);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (beanToArray) {</b>
+<b class="fc">&nbsp;            writeArrayMapping(jsonWriter, object, fieldName, fieldType, features);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (!serializable) {</b>
+<b class="fc">&nbsp;            if ((featuresAll &amp; JSONWriter.Feature.ErrorOnNoneSerializable.mask) != 0) {</b>
+<b class="nc">&nbsp;                errorOnNoneSerializable();</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if ((featuresAll &amp; JSONWriter.Feature.IgnoreNoneSerializable.mask) != 0) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeNull();</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (hasFilter(jsonWriter)) {</b>
+<b class="nc">&nbsp;            writeWithFilter(jsonWriter, object, fieldName, fieldType, features);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        jsonWriter.startObject();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (((features | this.features) &amp; WriteClassName.mask) != 0 || jsonWriter.isWriteTypeInfo(object, features)) {</b>
+<b class="fc">&nbsp;            writeTypeInfo(jsonWriter);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0, size = fieldWriters.size(); i &lt; size; ++i) {</b>
+<b class="fc">&nbsp;            FieldWriter fieldWriter = fieldWriters.get(i);</b>
+<b class="fc">&nbsp;            fieldWriter.write(jsonWriter, object);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        jsonWriter.endObject();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;String, Object&gt; toMap(Object object) {
+<b class="fc">&nbsp;        JSONObject map = new JSONObject(fieldWriters.size());</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; fieldWriters.size(); i++) {</b>
+<b class="fc">&nbsp;            FieldWriter fieldWriter = fieldWriters.get(i);</b>
+<b class="fc">&nbsp;            map.put(</b>
+&nbsp;                    fieldWriter.fieldName,
+<b class="fc">&nbsp;                    fieldWriter.getFieldValue(object)</b>
+&nbsp;            );
+&nbsp;        }
+<b class="fc">&nbsp;        return map;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;FieldWriter&gt; getFieldWriters() {
+<b class="fc">&nbsp;        return fieldWriters;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    byte[] jsonbClassInfo;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean writeTypeInfo(JSONWriter jsonWriter) {
+<b class="fc">&nbsp;        if (jsonWriter.utf8) {</b>
+<b class="fc">&nbsp;            if (nameWithColonUTF8 == null) {</b>
+<b class="fc">&nbsp;                byte[] chars = new byte[typeKey.length() + typeName.length() + 5];</b>
+<b class="fc">&nbsp;                chars[0] = &#39;&quot;&#39;;</b>
+<b class="fc">&nbsp;                typeKey.getBytes(0, typeKey.length(), chars, 1);</b>
+<b class="fc">&nbsp;                chars[typeKey.length() + 1] = &#39;&quot;&#39;;</b>
+<b class="fc">&nbsp;                chars[typeKey.length() + 2] = &#39;:&#39;;</b>
+<b class="fc">&nbsp;                chars[typeKey.length() + 3] = &#39;&quot;&#39;;</b>
+<b class="fc">&nbsp;                typeName.getBytes(0, typeName.length(), chars, typeKey.length() + 4);</b>
+<b class="fc">&nbsp;                chars[typeKey.length() + typeName.length() + 4] = &#39;&quot;&#39;;</b>
+&nbsp;
+<b class="fc">&nbsp;                nameWithColonUTF8 = chars;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            jsonWriter.writeNameRaw(nameWithColonUTF8);</b>
+<b class="fc">&nbsp;            return true;</b>
+<b class="fc">&nbsp;        } else if (jsonWriter.utf16) {</b>
+<b class="fc">&nbsp;            if (nameWithColonUTF16 == null) {</b>
+<b class="fc">&nbsp;                char[] chars = new char[typeKey.length() + typeName.length() + 5];</b>
+<b class="fc">&nbsp;                chars[0] = &#39;&quot;&#39;;</b>
+<b class="fc">&nbsp;                typeKey.getChars(0, typeKey.length(), chars, 1);</b>
+<b class="fc">&nbsp;                chars[typeKey.length() + 1] = &#39;&quot;&#39;;</b>
+<b class="fc">&nbsp;                chars[typeKey.length() + 2] = &#39;:&#39;;</b>
+<b class="fc">&nbsp;                chars[typeKey.length() + 3] = &#39;&quot;&#39;;</b>
+<b class="fc">&nbsp;                typeName.getChars(0, typeName.length(), chars, typeKey.length() + 4);</b>
+<b class="fc">&nbsp;                chars[typeKey.length() + typeName.length() + 4] = &#39;&quot;&#39;;</b>
+&nbsp;
+<b class="fc">&nbsp;                nameWithColonUTF16 = chars;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            jsonWriter.writeNameRaw(nameWithColonUTF16);</b>
+<b class="fc">&nbsp;            return true;</b>
+<b class="nc">&nbsp;        } else if (jsonWriter.jsonb) {</b>
+<b class="nc">&nbsp;            if (typeKeyJSONB == null) {</b>
+<b class="nc">&nbsp;                typeKeyJSONB = JSONB.toBytes(typeKey);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            jsonWriter.writeRaw(typeKeyJSONB);</b>
+<b class="nc">&nbsp;            jsonWriter.writeRaw(typeNameJSONB);</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        jsonWriter.writeString(typeKey);</b>
+<b class="nc">&nbsp;        jsonWriter.writeColon();</b>
+<b class="nc">&nbsp;        jsonWriter.writeString(typeName);</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeWithFilter(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="fc">&nbsp;        if (object == null) {</b>
+<b class="fc">&nbsp;            jsonWriter.writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (jsonWriter.isWriteTypeInfo(object, fieldType, features)) {</b>
+<b class="nc">&nbsp;            if (jsonWriter.jsonb) {</b>
+<b class="nc">&nbsp;                writeClassInfo(jsonWriter);</b>
+<b class="nc">&nbsp;                jsonWriter.startObject();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                jsonWriter.startObject();</b>
+<b class="nc">&nbsp;                writeTypeInfo(jsonWriter);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="fc">&nbsp;            jsonWriter.startObject();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        JSONWriter.Context context = jsonWriter.context;</b>
+<b class="fc">&nbsp;        boolean ignoreNonFieldGetter = ((context.getFeatures() | features) &amp; IgnoreNonFieldGetter.mask) != 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        BeforeFilter beforeFilter = context.getBeforeFilter();</b>
+<b class="fc">&nbsp;        if (beforeFilter != null) {</b>
+<b class="fc">&nbsp;            beforeFilter.writeBefore(jsonWriter, object);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        PropertyPreFilter propertyPreFilter = context.getPropertyPreFilter();</b>
+<b class="fc">&nbsp;        if (propertyPreFilter == null) {</b>
+<b class="fc">&nbsp;            propertyPreFilter = this.propertyPreFilter;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        NameFilter nameFilter = context.getNameFilter();</b>
+<b class="fc">&nbsp;        if (nameFilter == null) {</b>
+<b class="fc">&nbsp;            nameFilter = this.nameFilter;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            if (this.nameFilter != null) {</b>
+<b class="nc">&nbsp;                nameFilter = NameFilter.compose(this.nameFilter, nameFilter);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        ContextNameFilter contextNameFilter = context.getContextNameFilter();</b>
+&nbsp;
+<b class="fc">&nbsp;        ValueFilter valueFilter = context.getValueFilter();</b>
+<b class="fc">&nbsp;        if (valueFilter == null) {</b>
+<b class="fc">&nbsp;            valueFilter = this.valueFilter;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            if (this.valueFilter != null) {</b>
+<b class="nc">&nbsp;                valueFilter = ValueFilter.compose(this.valueFilter, valueFilter);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        ContextValueFilter contextValueFilter = context.getContextValueFilter();</b>
+&nbsp;
+<b class="fc">&nbsp;        PropertyFilter propertyFilter = context.getPropertyFilter();</b>
+<b class="fc">&nbsp;        if (propertyFilter == null) {</b>
+<b class="fc">&nbsp;            propertyFilter = this.propertyFilter;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        LabelFilter labelFilter = context.getLabelFilter();</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0, size = fieldWriters.size(); i &lt; size; ++i) {</b>
+<b class="fc">&nbsp;            FieldWriter fieldWriter = fieldWriters.get(i);</b>
+&nbsp;
+<b class="fc">&nbsp;            Field field = fieldWriter.field;</b>
+&nbsp;
+<b class="fc">&nbsp;            if (ignoreNonFieldGetter</b>
+&nbsp;                    &amp;&amp; fieldWriter.method != null
+&nbsp;                    &amp;&amp; (fieldWriter.features &amp; FieldInfo.FIELD_MASK) == 0) {
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // pre property filter
+<b class="fc">&nbsp;            final String fieldWriterFieldName = fieldWriter.fieldName;</b>
+<b class="fc">&nbsp;            if (propertyPreFilter != null</b>
+<b class="nc">&nbsp;                    &amp;&amp; !propertyPreFilter.process(jsonWriter, object, fieldWriterFieldName)) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (labelFilter != null) {</b>
+<b class="fc">&nbsp;                String label = fieldWriter.label;</b>
+<b class="fc">&nbsp;                if (label != null &amp;&amp; !label.isEmpty()) {</b>
+<b class="fc">&nbsp;                    if (!labelFilter.apply(label)) {</b>
+<b class="fc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            // fast return
+<b class="fc">&nbsp;            if (nameFilter == null</b>
+&nbsp;                    &amp;&amp; propertyFilter == null
+&nbsp;                    &amp;&amp; valueFilter == null
+&nbsp;                    &amp;&amp; contextValueFilter == null
+&nbsp;                    &amp;&amp; contextNameFilter == null
+&nbsp;                    &amp;&amp; valueFilter == null
+&nbsp;            ) {
+<b class="fc">&nbsp;                fieldWriter.write(jsonWriter, object);</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            Object fieldValue;
+&nbsp;            try {
+<b class="fc">&nbsp;                fieldValue = fieldWriter.getFieldValue(object);</b>
+<b class="fc">&nbsp;            } catch (Throwable e) {</b>
+<b class="fc">&nbsp;                if ((context.getFeatures() &amp; JSONWriter.Feature.IgnoreErrorGetter.mask) != 0) {</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                throw e;</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+<b class="fc">&nbsp;            if (fieldValue == null &amp;&amp; !jsonWriter.isWriteNulls()) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            BeanContext beanContext = null;</b>
+&nbsp;
+&nbsp;            // name filter
+<b class="fc">&nbsp;            String filteredName = fieldWriterFieldName;</b>
+<b class="fc">&nbsp;            if (nameFilter != null) {</b>
+<b class="fc">&nbsp;                filteredName = nameFilter.process(object, filteredName, fieldValue);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (contextNameFilter != null) {</b>
+<b class="nc">&nbsp;                beanContext = new BeanContext(</b>
+&nbsp;                        objectClass,
+&nbsp;                        fieldWriter.method,
+&nbsp;                        field,
+&nbsp;                        fieldWriter.fieldName,
+&nbsp;                        fieldWriter.label,
+&nbsp;                        fieldWriter.fieldClass,
+&nbsp;                        fieldWriter.fieldType,
+&nbsp;                        fieldWriter.features,
+&nbsp;                        fieldWriter.format
+&nbsp;                );
+<b class="nc">&nbsp;                filteredName = contextNameFilter.process(beanContext, object, filteredName, fieldValue);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // property filter
+<b class="fc">&nbsp;            if (propertyFilter != null</b>
+<b class="nc">&nbsp;                    &amp;&amp; !propertyFilter.apply(object, fieldWriterFieldName, fieldValue)) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            boolean nameChanged = filteredName != null &amp;&amp; filteredName != fieldWriterFieldName;</b>
+&nbsp;
+<b class="fc">&nbsp;            Object filteredValue = fieldValue;</b>
+<b class="fc">&nbsp;            if (valueFilter != null) {</b>
+<b class="fc">&nbsp;                filteredValue = valueFilter.apply(object, fieldWriterFieldName, fieldValue);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (contextValueFilter != null) {</b>
+<b class="fc">&nbsp;                if (beanContext == null) {</b>
+<b class="fc">&nbsp;                    if (field == null &amp;&amp; fieldWriter.method != null) {</b>
+<b class="fc">&nbsp;                        field = BeanUtils.getDeclaredField(objectClass, fieldWriter.fieldName);</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    beanContext = new BeanContext(</b>
+&nbsp;                            objectClass,
+&nbsp;                            fieldWriter.method,
+&nbsp;                            field,
+&nbsp;                            fieldWriter.fieldName,
+&nbsp;                            fieldWriter.label,
+&nbsp;                            fieldWriter.fieldClass,
+&nbsp;                            fieldWriter.fieldType,
+&nbsp;                            fieldWriter.features,
+&nbsp;                            fieldWriter.format
+&nbsp;                    );
+&nbsp;                }
+<b class="fc">&nbsp;                filteredValue = contextValueFilter.process(beanContext, object, filteredName, filteredValue);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (filteredValue != fieldValue) {</b>
+<b class="fc">&nbsp;                if (nameChanged) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeName(filteredName);</b>
+<b class="nc">&nbsp;                    jsonWriter.writeColon();</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    fieldWriter.writeFieldName(jsonWriter);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (filteredValue == null) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeNull();</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    ObjectWriter fieldValueWriter = fieldWriter.getObjectWriter(jsonWriter, filteredValue.getClass());</b>
+<b class="fc">&nbsp;                    fieldValueWriter.write(jsonWriter, filteredValue, fieldName, fieldType, features);</b>
+<b class="fc">&nbsp;                }</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                if (!nameChanged) {</b>
+<b class="fc">&nbsp;                    fieldWriter.write(jsonWriter, object);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    if (nameChanged) {</b>
+<b class="fc">&nbsp;                        jsonWriter.writeName(filteredName);</b>
+<b class="fc">&nbsp;                        jsonWriter.writeColon();</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        fieldWriter.writeFieldName(jsonWriter);</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    if (fieldValue == null) {</b>
+<b class="nc">&nbsp;                        ObjectWriter fieldValueWriter = fieldWriter.getObjectWriter(jsonWriter, fieldWriter.fieldClass);</b>
+<b class="nc">&nbsp;                        fieldValueWriter.write(jsonWriter, null, fieldName, fieldType, features);</b>
+<b class="nc">&nbsp;                    } else {</b>
+<b class="fc">&nbsp;                        ObjectWriter fieldValueWriter = fieldWriter.getObjectWriter(jsonWriter, fieldValue.getClass());</b>
+<b class="fc">&nbsp;                        fieldValueWriter.write(jsonWriter, fieldValue, fieldName, fieldType, features);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        AfterFilter afterFilter = context.getAfterFilter();</b>
+<b class="fc">&nbsp;        if (afterFilter != null) {</b>
+<b class="fc">&nbsp;            afterFilter.writeAfter(jsonWriter, object);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        jsonWriter.endObject();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONObject toJSONObject(T object) {
+<b class="fc">&nbsp;        JSONObject jsonObject = new JSONObject();</b>
+&nbsp;
+<b class="fc">&nbsp;        for (FieldWriter fieldWriter : fieldWriters) {</b>
+<b class="fc">&nbsp;            Object fieldValue = fieldWriter.getFieldValue(object);</b>
+&nbsp;
+<b class="fc">&nbsp;            long fieldFeatures = fieldWriter.features;</b>
+<b class="fc">&nbsp;            if ((fieldFeatures &amp; FieldInfo.UNWRAPPED_MASK) != 0) {</b>
+<b class="fc">&nbsp;                if (fieldValue instanceof Map) {</b>
+<b class="fc">&nbsp;                    jsonObject.putAll((Map) fieldValue);</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                ObjectWriter fieldObjectWriter = fieldWriter.getInitWriter();</b>
+<b class="fc">&nbsp;                if (fieldObjectWriter == null) {</b>
+<b class="fc">&nbsp;                    fieldObjectWriter = JSONFactory.getDefaultObjectWriterProvider().getObjectWriter(fieldWriter.fieldClass);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                List&lt;FieldWriter&gt; unwrappedFieldWriters = fieldObjectWriter.getFieldWriters();</b>
+<b class="fc">&nbsp;                for (FieldWriter unwrappedFieldWriter : unwrappedFieldWriters) {</b>
+<b class="fc">&nbsp;                    Object unwrappedFieldValue = unwrappedFieldWriter.getFieldValue(fieldValue);</b>
+<b class="fc">&nbsp;                    jsonObject.put(unwrappedFieldWriter.fieldName, unwrappedFieldValue);</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            jsonObject.put(fieldWriter.fieldName, fieldValue);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return jsonObject;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return objectClass.getName();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void errorOnNoneSerializable() {
+<b class="fc">&nbsp;        throw new JSONException(&quot;not support none serializable class &quot; + objectClass.getName());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:29</div>
+</div>
+</body>
+</html>

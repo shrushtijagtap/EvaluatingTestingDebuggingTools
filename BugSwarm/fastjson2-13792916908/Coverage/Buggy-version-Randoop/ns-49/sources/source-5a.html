@@ -1,0 +1,1438 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectWriterCreator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectWriterCreator (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectWriterCreator</td>
+<td class="coverageStat">
+  <span class="percent">
+    5.3%
+  </span>
+  <span class="absValue">
+    (2/38)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2%
+  </span>
+  <span class="absValue">
+    (12/613)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ObjectWriterCreator$LambdaInfo</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    7.7%
+  </span>
+  <span class="absValue">
+    (3/39)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    3.1%
+  </span>
+  <span class="absValue">
+    (19/620)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONFactory;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.codec.BeanInfo;
+&nbsp;import com.alibaba.fastjson2.codec.FieldInfo;
+&nbsp;import com.alibaba.fastjson2.filter.*;
+&nbsp;import com.alibaba.fastjson2.function.ToByteFunction;
+&nbsp;import com.alibaba.fastjson2.function.ToCharFunction;
+&nbsp;import com.alibaba.fastjson2.function.ToFloatFunction;
+&nbsp;import com.alibaba.fastjson2.function.ToShortFunction;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectWriterModule;
+&nbsp;import com.alibaba.fastjson2.util.BeanUtils;
+&nbsp;import com.alibaba.fastjson2.util.JDKUtils;
+&nbsp;
+&nbsp;import java.lang.invoke.*;
+&nbsp;import java.lang.reflect.*;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.time.format.DateTimeParseException;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.atomic.AtomicInteger;
+&nbsp;import java.util.function.*;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONWriter.Feature.WriteClassName;
+&nbsp;import static com.alibaba.fastjson2.codec.FieldInfo.JSON_AUTO_WIRED_ANNOTATED;
+&nbsp;import static com.alibaba.fastjson2.util.BeanUtils.SUPER;
+&nbsp;import static com.alibaba.fastjson2.util.TypeUtils.METHOD_TYPE_FUNCTION;
+&nbsp;import static com.alibaba.fastjson2.util.TypeUtils.METHOD_TYPE_OBJECT_OBJECT;
+&nbsp;
+&nbsp;public class ObjectWriterCreator {
+<b class="fc">&nbsp;    public static final ObjectWriterCreator INSTANCE = new ObjectWriterCreator();</b>
+&nbsp;
+<b class="fc">&nbsp;    static Map&lt;Class, LambdaInfo&gt; lambdaMapping = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    static {
+<b class="fc">&nbsp;        lambdaMapping.put(boolean.class, new LambdaInfo(boolean.class, Predicate.class, &quot;test&quot;));</b>
+<b class="fc">&nbsp;        lambdaMapping.put(char.class, new LambdaInfo(char.class, ToCharFunction.class, &quot;applyAsChar&quot;));</b>
+<b class="fc">&nbsp;        lambdaMapping.put(byte.class, new LambdaInfo(byte.class, ToByteFunction.class, &quot;applyAsByte&quot;));</b>
+<b class="fc">&nbsp;        lambdaMapping.put(short.class, new LambdaInfo(short.class, ToShortFunction.class, &quot;applyAsShort&quot;));</b>
+<b class="fc">&nbsp;        lambdaMapping.put(int.class, new LambdaInfo(int.class, ToIntFunction.class, &quot;applyAsInt&quot;));</b>
+<b class="fc">&nbsp;        lambdaMapping.put(long.class, new LambdaInfo(long.class, ToLongFunction.class, &quot;applyAsLong&quot;));</b>
+<b class="fc">&nbsp;        lambdaMapping.put(float.class, new LambdaInfo(float.class, ToFloatFunction.class, &quot;applyAsFloat&quot;));</b>
+<b class="fc">&nbsp;        lambdaMapping.put(double.class, new LambdaInfo(double.class, ToDoubleFunction.class, &quot;applyAsDouble&quot;));</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    protected AtomicInteger jitErrorCount = new AtomicInteger();</b>
+&nbsp;    protected volatile Throwable jitErrorLast;
+&nbsp;
+<b class="fc">&nbsp;    public ObjectWriterCreator() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectWriter createObjectWriter(List&lt;FieldWriter&gt; fieldWriters) {
+<b class="nc">&nbsp;        return new ObjectWriterAdapter(null, null, null, 0, fieldWriters);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectWriter createObjectWriter(FieldWriter... fieldWriters) {
+<b class="nc">&nbsp;        return new ObjectWriterAdapter(null, null, null, 0, Arrays.asList(fieldWriters));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectWriter createObjectWriter(Class objectType) {
+<b class="nc">&nbsp;        return createObjectWriter(</b>
+&nbsp;                objectType,
+&nbsp;                0,
+<b class="nc">&nbsp;                JSONFactory.getDefaultObjectWriterProvider()</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectWriter createObjectWriter(Class objectType,
+&nbsp;                                           FieldWriter... fieldWriters) {
+<b class="nc">&nbsp;        return createObjectWriter(objectType, 0, fieldWriters);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectWriter createObjectWriter(
+&nbsp;            Class objectClass,
+&nbsp;            long features,
+&nbsp;            FieldWriter... fieldWriters
+&nbsp;    ) {
+<b class="nc">&nbsp;        if (fieldWriters.length == 0) {</b>
+<b class="nc">&nbsp;            return createObjectWriter(objectClass, features, JSONFactory.getDefaultObjectWriterProvider());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean googleCollection = false;</b>
+<b class="nc">&nbsp;        if (objectClass != null) {</b>
+<b class="nc">&nbsp;            String typeName = objectClass.getName();</b>
+<b class="nc">&nbsp;            googleCollection =</b>
+<b class="nc">&nbsp;                    &quot;com.google.common.collect.AbstractMapBasedMultimap$RandomAccessWrappedList&quot;.equals(typeName)</b>
+<b class="nc">&nbsp;                            || &quot;com.google.common.collect.AbstractMapBasedMultimap$WrappedSet&quot;.equals(typeName);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!googleCollection) {</b>
+<b class="nc">&nbsp;            switch (fieldWriters.length) {</b>
+&nbsp;                case 1:
+<b class="nc">&nbsp;                    if ((fieldWriters[0].features &amp; FieldInfo.VALUE_MASK) == 0) {</b>
+<b class="nc">&nbsp;                        return new ObjectWriter1(objectClass, null, null, features, Arrays.asList(fieldWriters));</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    return new ObjectWriterAdapter(objectClass, null, null, features, Arrays.asList(fieldWriters));</b>
+&nbsp;                case 2:
+<b class="nc">&nbsp;                    return new ObjectWriter2(objectClass, null, null, features, Arrays.asList(fieldWriters));</b>
+&nbsp;                case 3:
+<b class="nc">&nbsp;                    return new ObjectWriter3(objectClass, null, null, features, Arrays.asList(fieldWriters));</b>
+&nbsp;                case 4:
+<b class="nc">&nbsp;                    return new ObjectWriter4(objectClass, null, null, features, Arrays.asList(fieldWriters));</b>
+&nbsp;                case 5:
+<b class="nc">&nbsp;                    return new ObjectWriter5(objectClass, null, null, features, Arrays.asList(fieldWriters));</b>
+&nbsp;                case 6:
+<b class="nc">&nbsp;                    return new ObjectWriter6(objectClass, null, null, features, Arrays.asList(fieldWriters));</b>
+&nbsp;                case 7:
+<b class="nc">&nbsp;                    return new ObjectWriter7(objectClass, null, null, features, Arrays.asList(fieldWriters));</b>
+&nbsp;                case 8:
+<b class="nc">&nbsp;                    return new ObjectWriter8(objectClass, null, null, features, Arrays.asList(fieldWriters));</b>
+&nbsp;                case 9:
+<b class="nc">&nbsp;                    return new ObjectWriter9(objectClass, null, null, features, Arrays.asList(fieldWriters));</b>
+&nbsp;                case 10:
+<b class="nc">&nbsp;                    return new ObjectWriter10(objectClass, null, null, features, Arrays.asList(fieldWriters));</b>
+&nbsp;                case 11:
+<b class="nc">&nbsp;                    return new ObjectWriter11(objectClass, null, null, features, Arrays.asList(fieldWriters));</b>
+&nbsp;                case 12:
+<b class="nc">&nbsp;                    return new ObjectWriter12(objectClass, null, null, features, Arrays.asList(fieldWriters));</b>
+&nbsp;                default:
+<b class="nc">&nbsp;                    return new ObjectWriterAdapter(objectClass, null, null, features, Arrays.asList(fieldWriters));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new ObjectWriterAdapter(objectClass, null, null, features, Arrays.asList(fieldWriters));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected FieldWriter creteFieldWriter(
+&nbsp;            Class objectClass,
+&nbsp;            long writerFeatures,
+&nbsp;            ObjectWriterProvider provider,
+&nbsp;            BeanInfo beanInfo,
+&nbsp;            FieldInfo fieldInfo,
+&nbsp;            Field field
+&nbsp;    ) {
+<b class="nc">&nbsp;        fieldInfo.features = writerFeatures;</b>
+<b class="nc">&nbsp;        provider.getFieldInfo(beanInfo, fieldInfo, objectClass, field);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (fieldInfo.ignore) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        String fieldName;
+<b class="nc">&nbsp;        if (fieldInfo.fieldName == null || fieldInfo.fieldName.isEmpty()) {</b>
+<b class="nc">&nbsp;            fieldName = field.getName();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (beanInfo.namingStrategy != null) {</b>
+<b class="nc">&nbsp;                fieldName = BeanUtils.fieldName(fieldName, beanInfo.namingStrategy);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            fieldName = fieldInfo.fieldName;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (beanInfo.orders != null) {</b>
+<b class="nc">&nbsp;            boolean match = false;</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; beanInfo.orders.length; i++) {</b>
+<b class="nc">&nbsp;                if (fieldName.equals(beanInfo.orders[i])) {</b>
+<b class="nc">&nbsp;                    fieldInfo.ordinal = i;</b>
+<b class="nc">&nbsp;                    match = true;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            if (!match) {</b>
+<b class="nc">&nbsp;                if (fieldInfo.ordinal == 0) {</b>
+<b class="nc">&nbsp;                    fieldInfo.ordinal = beanInfo.orders.length;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (beanInfo.includes != null &amp;&amp; beanInfo.includes.length &gt; 0) {</b>
+<b class="nc">&nbsp;            boolean match = false;</b>
+<b class="nc">&nbsp;            for (String include : beanInfo.includes) {</b>
+<b class="nc">&nbsp;                if (include.equals(fieldName)) {</b>
+<b class="nc">&nbsp;                    match = true;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            if (!match) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectWriter writeUsingWriter = null;</b>
+<b class="nc">&nbsp;        if (fieldInfo.writeUsing != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                Constructor&lt;?&gt; constructor = fieldInfo.writeUsing.getDeclaredConstructor();</b>
+<b class="nc">&nbsp;                constructor.setAccessible(true);</b>
+<b class="nc">&nbsp;                writeUsingWriter = (ObjectWriter) constructor.newInstance();</b>
+<b class="nc">&nbsp;            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |</b>
+&nbsp;                     NoSuchMethodException e) {
+<b class="nc">&nbsp;                throw new JSONException(&quot;create writeUsing Writer error&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            field.setAccessible(true);</b>
+<b class="nc">&nbsp;        } catch (Throwable ignored) {</b>
+&nbsp;            // ignored
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (writeUsingWriter == null &amp;&amp; fieldInfo.fieldClassMixIn) {</b>
+<b class="nc">&nbsp;            writeUsingWriter = ObjectWriterBaseModule.VoidObjectWriter.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (writeUsingWriter == null) {</b>
+<b class="nc">&nbsp;            Class&lt;?&gt; fieldClass = field.getType();</b>
+<b class="nc">&nbsp;            if (fieldClass == Date.class &amp;&amp; provider != null) {</b>
+<b class="nc">&nbsp;                ObjectWriter objectWriter = provider.cache.get(fieldClass);</b>
+<b class="nc">&nbsp;                if (objectWriter != ObjectWriterImplDate.INSTANCE) {</b>
+<b class="nc">&nbsp;                    writeUsingWriter = objectWriter;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (Map.class.isAssignableFrom(fieldClass)</b>
+&nbsp;                    &amp;&amp; (fieldInfo.keyUsing != null || fieldInfo.valueUsing != null)) {
+<b class="nc">&nbsp;                ObjectWriter keyWriter = null;</b>
+<b class="nc">&nbsp;                ObjectWriter valueWriter = null;</b>
+<b class="nc">&nbsp;                if (fieldInfo.keyUsing != null) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        Constructor&lt;?&gt; constructor = fieldInfo.keyUsing.getDeclaredConstructor();</b>
+<b class="nc">&nbsp;                        constructor.setAccessible(true);</b>
+<b class="nc">&nbsp;                        keyWriter = (ObjectWriter) constructor.newInstance();</b>
+<b class="nc">&nbsp;                    } catch (Exception ignored) {</b>
+&nbsp;                        // ignored
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (fieldInfo.valueUsing != null) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        Constructor&lt;?&gt; constructor = fieldInfo.valueUsing.getDeclaredConstructor();</b>
+<b class="nc">&nbsp;                        constructor.setAccessible(true);</b>
+<b class="nc">&nbsp;                        valueWriter = (ObjectWriter) constructor.newInstance();</b>
+<b class="nc">&nbsp;                    } catch (Exception ignored) {</b>
+&nbsp;                        // ignored
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (keyWriter != null || valueWriter != null) {</b>
+<b class="nc">&nbsp;                    ObjectWriterImplMap mapWriter = ObjectWriterImplMap.of(field.getType(), fieldClass);</b>
+<b class="nc">&nbsp;                    mapWriter.keyWriter = keyWriter;</b>
+<b class="nc">&nbsp;                    mapWriter.valueWriter = valueWriter;</b>
+<b class="nc">&nbsp;                    writeUsingWriter = mapWriter;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String format = fieldInfo.format;</b>
+<b class="nc">&nbsp;        if (format == null &amp;&amp; beanInfo.format != null) {</b>
+<b class="nc">&nbsp;            format = beanInfo.format;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return createFieldWriter(provider, fieldName, fieldInfo.ordinal, fieldInfo.features, format, fieldInfo.label, field, writeUsingWriter);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected ObjectWriter getAnnotatedObjectWriter(ObjectWriterProvider provider,
+&nbsp;                                                    Class objectClass,
+&nbsp;                                                    BeanInfo beanInfo) {
+<b class="nc">&nbsp;        if ((beanInfo.writerFeatures &amp; JSON_AUTO_WIRED_ANNOTATED) == 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String fieldName = beanInfo.objectWriterFieldName;</b>
+<b class="nc">&nbsp;        if (fieldName == null) {</b>
+<b class="nc">&nbsp;            fieldName = &quot;objectWriter&quot;;</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="nc">&nbsp;            Field field = null;</b>
+<b class="nc">&nbsp;            if (beanInfo.mixIn) {</b>
+<b class="nc">&nbsp;                Class mixinClass = provider.mixInCache.get(objectClass);</b>
+<b class="nc">&nbsp;                if (mixinClass != null) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        field = mixinClass.getDeclaredField(fieldName);</b>
+<b class="nc">&nbsp;                    } catch (NoSuchFieldException | SecurityException igored) {</b>
+&nbsp;                        // ignored
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (field == null) {</b>
+<b class="nc">&nbsp;                field = objectClass.getDeclaredField(fieldName);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (field != null</b>
+<b class="nc">&nbsp;                    &amp;&amp; ObjectWriter.class.isAssignableFrom(field.getType())</b>
+<b class="nc">&nbsp;                    &amp;&amp; Modifier.isStatic(field.getModifiers())) {</b>
+<b class="nc">&nbsp;                field.setAccessible(true);</b>
+<b class="nc">&nbsp;                return (ObjectWriter) field.get(null);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Throwable ignored) {</b>
+&nbsp;            // ignored
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectWriter createObjectWriter(
+&nbsp;            Class objectClass,
+&nbsp;            long features,
+&nbsp;            final List&lt;ObjectWriterModule&gt; modules
+&nbsp;    ) {
+<b class="nc">&nbsp;        ObjectWriterProvider provider = null;</b>
+<b class="nc">&nbsp;        for (ObjectWriterModule module : modules) {</b>
+<b class="nc">&nbsp;            if (provider == null) {</b>
+<b class="nc">&nbsp;                provider = module.getProvider();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return createObjectWriter(objectClass, features, provider);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectWriter createObjectWriter(
+&nbsp;            final Class objectClass,
+&nbsp;            final long features,
+&nbsp;            final ObjectWriterProvider provider
+&nbsp;    ) {
+<b class="nc">&nbsp;        BeanInfo beanInfo = new BeanInfo();</b>
+<b class="nc">&nbsp;        beanInfo.readerFeatures |= FieldInfo.JIT;</b>
+&nbsp;
+<b class="nc">&nbsp;        provider.getBeanInfo(beanInfo, objectClass);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (beanInfo.serializer != null &amp;&amp; ObjectWriter.class.isAssignableFrom(beanInfo.serializer)) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                return (ObjectWriter) beanInfo.serializer.newInstance();</b>
+<b class="nc">&nbsp;            } catch (InstantiationException | IllegalAccessException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;create serializer error&quot;, e);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectWriter annotatedObjectWriter = getAnnotatedObjectWriter(provider, objectClass, beanInfo);</b>
+<b class="nc">&nbsp;        if (annotatedObjectWriter != null) {</b>
+<b class="nc">&nbsp;            return annotatedObjectWriter;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean record = BeanUtils.isRecord(objectClass);</b>
+&nbsp;
+<b class="nc">&nbsp;        long beanFeatures = beanInfo.writerFeatures;</b>
+<b class="nc">&nbsp;        if (beanInfo.seeAlso != null) {</b>
+<b class="nc">&nbsp;            beanFeatures &amp;= ~JSONWriter.Feature.WriteClassName.mask;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long writerFieldFeatures = features | beanFeatures;</b>
+<b class="nc">&nbsp;        boolean fieldBased = (writerFieldFeatures &amp; JSONWriter.Feature.FieldBased.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (fieldBased &amp;&amp; (record || objectClass.isInterface() || objectClass.isInterface())) {</b>
+<b class="nc">&nbsp;            fieldBased = false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        List&lt;FieldWriter&gt; fieldWriters;
+<b class="nc">&nbsp;        final FieldInfo fieldInfo = new FieldInfo();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (fieldBased) {</b>
+<b class="nc">&nbsp;            Map&lt;String, FieldWriter&gt; fieldWriterMap = new TreeMap&lt;&gt;();</b>
+<b class="nc">&nbsp;            BeanUtils.declaredFields(objectClass, field -&gt; {</b>
+<b class="nc">&nbsp;                fieldInfo.init();</b>
+<b class="nc">&nbsp;                FieldWriter fieldWriter = creteFieldWriter(objectClass, writerFieldFeatures, provider, beanInfo, fieldInfo, field);</b>
+<b class="nc">&nbsp;                if (fieldWriter != null) {</b>
+<b class="nc">&nbsp;                    fieldWriterMap.put(fieldWriter.fieldName, fieldWriter);</b>
+&nbsp;                }
+&nbsp;            });
+<b class="nc">&nbsp;            fieldWriters = new ArrayList&lt;&gt;(fieldWriterMap.values());</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            boolean fieldWritersCreated = false;</b>
+<b class="nc">&nbsp;            fieldWriters = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;            for (ObjectWriterModule module : provider.modules) {</b>
+<b class="nc">&nbsp;                if (module.createFieldWriters(this, objectClass, fieldWriters)) {</b>
+<b class="nc">&nbsp;                    fieldWritersCreated = true;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            if (!fieldWritersCreated) {</b>
+<b class="nc">&nbsp;                Map&lt;String, FieldWriter&gt; fieldWriterMap = new TreeMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (!record) {</b>
+<b class="nc">&nbsp;                    BeanUtils.declaredFields(objectClass, field -&gt; {</b>
+<b class="nc">&nbsp;                        fieldInfo.init();</b>
+<b class="nc">&nbsp;                        fieldInfo.ignore = (field.getModifiers() &amp; Modifier.PUBLIC) == 0;</b>
+<b class="nc">&nbsp;                        FieldWriter fieldWriter = creteFieldWriter(objectClass, writerFieldFeatures, provider, beanInfo, fieldInfo, field);</b>
+<b class="nc">&nbsp;                        if (fieldWriter != null) {</b>
+<b class="nc">&nbsp;                            FieldWriter origin = fieldWriterMap.putIfAbsent(fieldWriter.fieldName, fieldWriter);</b>
+&nbsp;
+<b class="nc">&nbsp;                            if (origin != null &amp;&amp; origin.compareTo(fieldWriter) &gt; 0) {</b>
+<b class="nc">&nbsp;                                fieldWriterMap.put(fieldWriter.fieldName, fieldWriter);</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    });
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Class mixIn = provider.getMixIn(objectClass);</b>
+&nbsp;
+<b class="nc">&nbsp;                BeanUtils.getters(objectClass, mixIn, method -&gt; {</b>
+<b class="nc">&nbsp;                    fieldInfo.init();</b>
+<b class="nc">&nbsp;                    fieldInfo.features = writerFieldFeatures;</b>
+<b class="nc">&nbsp;                    fieldInfo.format = beanInfo.format;</b>
+<b class="nc">&nbsp;                    provider.getFieldInfo(beanInfo, fieldInfo, objectClass, method);</b>
+<b class="nc">&nbsp;                    if (fieldInfo.ignore) {</b>
+&nbsp;                        return;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    String fieldName;
+<b class="nc">&nbsp;                    if (fieldInfo.fieldName == null || fieldInfo.fieldName.isEmpty()) {</b>
+<b class="nc">&nbsp;                        fieldName = BeanUtils.getterName(method, beanInfo.namingStrategy);</b>
+&nbsp;
+<b class="nc">&nbsp;                        char c0 = &#39;\0&#39;, c1;</b>
+<b class="nc">&nbsp;                        int len = fieldName.length();</b>
+<b class="nc">&nbsp;                        if (len &gt; 0) {</b>
+<b class="nc">&nbsp;                            c0 = fieldName.charAt(0);</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        if ((len == 1 &amp;&amp; c0 &gt;= &#39;a&#39; &amp;&amp; c0 &lt;= &#39;z&#39;)</b>
+<b class="nc">&nbsp;                                || (len &gt; 2 &amp;&amp; c0 &gt;= &#39;A&#39; &amp;&amp; c0 &lt;= &#39;Z&#39; &amp;&amp; (c1 = fieldName.charAt(1)) &gt;= &#39;A&#39; &amp;&amp; c1 &lt;= &#39;Z&#39;)</b>
+&nbsp;                        ) {
+<b class="nc">&nbsp;                            char[] chars = fieldName.toCharArray();</b>
+<b class="nc">&nbsp;                            if (c0 &gt;= &#39;a&#39; &amp;&amp; c0 &lt;= &#39;z&#39;) {</b>
+<b class="nc">&nbsp;                                chars[0] = (char) (chars[0] - 32);</b>
+&nbsp;                            } else {
+<b class="nc">&nbsp;                                chars[0] = (char) (chars[0] + 32);</b>
+&nbsp;                            }
+<b class="nc">&nbsp;                            String fieldName1 = new String(chars);</b>
+<b class="nc">&nbsp;                            Field field = BeanUtils.getDeclaredField(objectClass, fieldName1);</b>
+&nbsp;
+<b class="nc">&nbsp;                            if (field != null &amp;&amp; (len == 1 || Modifier.isPublic(field.getModifiers()))) {</b>
+<b class="nc">&nbsp;                                fieldName = field.getName();</b>
+&nbsp;                            }
+&nbsp;                        }
+<b class="nc">&nbsp;                    } else {</b>
+<b class="nc">&nbsp;                        fieldName = fieldInfo.fieldName;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (beanInfo.includes != null &amp;&amp; beanInfo.includes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                        boolean match = false;</b>
+<b class="nc">&nbsp;                        for (String include : beanInfo.includes) {</b>
+<b class="nc">&nbsp;                            if (include.equals(fieldName)) {</b>
+<b class="nc">&nbsp;                                match = true;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            }
+&nbsp;                        }
+<b class="nc">&nbsp;                        if (!match) {</b>
+&nbsp;                            return;
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    // skip typeKey field
+<b class="nc">&nbsp;                    if ((beanInfo.writerFeatures &amp; WriteClassName.mask) != 0</b>
+<b class="nc">&nbsp;                            &amp;&amp; fieldName.equals(beanInfo.typeKey)) {</b>
+&nbsp;                        return;
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (beanInfo.orders != null) {</b>
+<b class="nc">&nbsp;                        boolean match = false;</b>
+<b class="nc">&nbsp;                        for (int i = 0; i &lt; beanInfo.orders.length; i++) {</b>
+<b class="nc">&nbsp;                            if (fieldName.equals(beanInfo.orders[i])) {</b>
+<b class="nc">&nbsp;                                fieldInfo.ordinal = i;</b>
+<b class="nc">&nbsp;                                match = true;</b>
+&nbsp;                            }
+&nbsp;                        }
+<b class="nc">&nbsp;                        if (!match) {</b>
+<b class="nc">&nbsp;                            if (fieldInfo.ordinal == 0) {</b>
+<b class="nc">&nbsp;                                fieldInfo.ordinal = beanInfo.orders.length;</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    ObjectWriter writeUsingWriter = null;</b>
+<b class="nc">&nbsp;                    if (fieldInfo.writeUsing != null) {</b>
+&nbsp;                        try {
+<b class="nc">&nbsp;                            Constructor&lt;?&gt; constructor = fieldInfo.writeUsing.getDeclaredConstructor();</b>
+<b class="nc">&nbsp;                            constructor.setAccessible(true);</b>
+<b class="nc">&nbsp;                            writeUsingWriter = (ObjectWriter) constructor.newInstance();</b>
+<b class="nc">&nbsp;                        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |</b>
+&nbsp;                                 NoSuchMethodException e) {
+<b class="nc">&nbsp;                            throw new JSONException(&quot;create writeUsing Writer error&quot;, e);</b>
+<b class="nc">&nbsp;                        }</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (writeUsingWriter == null &amp;&amp; fieldInfo.fieldClassMixIn) {</b>
+<b class="nc">&nbsp;                        writeUsingWriter = ObjectWriterBaseModule.VoidObjectWriter.INSTANCE;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    FieldWriter fieldWriter = null;</b>
+<b class="nc">&nbsp;                    if ((beanInfo.readerFeatures &amp; FieldInfo.JIT) != 0) {</b>
+&nbsp;                        try {
+<b class="nc">&nbsp;                            fieldWriter = createFieldWriterLambda(</b>
+&nbsp;                                    provider,
+&nbsp;                                    objectClass,
+&nbsp;                                    fieldName,
+&nbsp;                                    fieldInfo.ordinal,
+&nbsp;                                    fieldInfo.features,
+&nbsp;                                    fieldInfo.format,
+&nbsp;                                    fieldInfo.label,
+&nbsp;                                    method,
+&nbsp;                                    writeUsingWriter
+&nbsp;                            );
+<b class="nc">&nbsp;                        } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;                            jitErrorCount.incrementAndGet();</b>
+<b class="nc">&nbsp;                            jitErrorLast = ignored;</b>
+<b class="nc">&nbsp;                        }</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (fieldWriter == null) {</b>
+<b class="nc">&nbsp;                        fieldWriter = createFieldWriter(</b>
+&nbsp;                                provider,
+&nbsp;                                objectClass,
+&nbsp;                                fieldName,
+&nbsp;                                fieldInfo.ordinal,
+&nbsp;                                fieldInfo.features,
+&nbsp;                                fieldInfo.format,
+&nbsp;                                fieldInfo.label,
+&nbsp;                                method,
+&nbsp;                                writeUsingWriter
+&nbsp;                        );
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    FieldWriter origin = fieldWriterMap.putIfAbsent(fieldWriter.fieldName, fieldWriter);</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (origin != null &amp;&amp; origin.compareTo(fieldWriter) &gt; 0) {</b>
+<b class="nc">&nbsp;                        fieldWriterMap.put(fieldName, fieldWriter);</b>
+&nbsp;                    }
+&nbsp;                });
+&nbsp;
+<b class="nc">&nbsp;                fieldWriters = new ArrayList&lt;&gt;(fieldWriterMap.values());</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long writerFeatures = features | beanInfo.writerFeatures;</b>
+<b class="nc">&nbsp;        if ((!fieldBased) &amp;&amp; Throwable.class.isAssignableFrom(objectClass)) {</b>
+<b class="nc">&nbsp;            return new ObjectWriterException(objectClass, writerFeatures, fieldWriters);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        handleIgnores(beanInfo, fieldWriters);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (beanInfo.alphabetic) {</b>
+<b class="nc">&nbsp;            Collections.sort(fieldWriters);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (BeanUtils.isExtendedMap(objectClass)) {</b>
+<b class="nc">&nbsp;            Type superType = objectClass.getGenericSuperclass();</b>
+<b class="nc">&nbsp;            FieldWriter superWriter = ObjectWriters.fieldWriter(</b>
+&nbsp;                    SUPER,
+&nbsp;                    superType,
+<b class="nc">&nbsp;                    objectClass.getSuperclass(),</b>
+<b class="nc">&nbsp;                    o -&gt; o</b>
+&nbsp;            );
+<b class="nc">&nbsp;            fieldWriters.add(superWriter);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectWriterAdapter writerAdapter = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean googleCollection = false;</b>
+<b class="nc">&nbsp;        if (objectClass != null) {</b>
+<b class="nc">&nbsp;            String typeName = objectClass.getName();</b>
+<b class="nc">&nbsp;            googleCollection =</b>
+<b class="nc">&nbsp;                    &quot;com.google.common.collect.AbstractMapBasedMultimap$RandomAccessWrappedList&quot;.equals(typeName)</b>
+<b class="nc">&nbsp;                            || &quot;com.google.common.collect.AbstractMapBasedMultimap$WrappedSet&quot;.equals(typeName);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!googleCollection) {</b>
+<b class="nc">&nbsp;            switch (fieldWriters.size()) {</b>
+&nbsp;                case 1:
+<b class="nc">&nbsp;                    if ((fieldWriters.get(0).features &amp; FieldInfo.VALUE_MASK) == 0) {</b>
+<b class="nc">&nbsp;                        writerAdapter = new ObjectWriter1(objectClass, beanInfo.typeKey, beanInfo.typeName, writerFeatures, fieldWriters);</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                case 2:
+<b class="nc">&nbsp;                    writerAdapter = new ObjectWriter2(objectClass, beanInfo.typeKey, beanInfo.typeName, writerFeatures, fieldWriters);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 3:
+<b class="nc">&nbsp;                    writerAdapter = new ObjectWriter3(objectClass, beanInfo.typeKey, beanInfo.typeName, writerFeatures, fieldWriters);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 4:
+<b class="nc">&nbsp;                    writerAdapter = new ObjectWriter4(objectClass, beanInfo.typeKey, beanInfo.typeName, writerFeatures, fieldWriters);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 5:
+<b class="nc">&nbsp;                    writerAdapter = new ObjectWriter5(objectClass, beanInfo.typeKey, beanInfo.typeName, writerFeatures, fieldWriters);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 6:
+<b class="nc">&nbsp;                    writerAdapter = new ObjectWriter6(objectClass, beanInfo.typeKey, beanInfo.typeName, writerFeatures, fieldWriters);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 7:
+<b class="nc">&nbsp;                    writerAdapter = new ObjectWriter7(objectClass, beanInfo.typeKey, beanInfo.typeName, writerFeatures, fieldWriters);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 8:
+<b class="nc">&nbsp;                    writerAdapter = new ObjectWriter8(objectClass, beanInfo.typeKey, beanInfo.typeName, writerFeatures, fieldWriters);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 9:
+<b class="nc">&nbsp;                    writerAdapter = new ObjectWriter9(objectClass, beanInfo.typeKey, beanInfo.typeName, writerFeatures, fieldWriters);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 10:
+<b class="nc">&nbsp;                    writerAdapter = new ObjectWriter10(objectClass, beanInfo.typeKey, beanInfo.typeName, writerFeatures, fieldWriters);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 11:
+<b class="nc">&nbsp;                    writerAdapter = new ObjectWriter11(objectClass, beanInfo.typeKey, beanInfo.typeName, writerFeatures, fieldWriters);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 12:
+<b class="nc">&nbsp;                    writerAdapter = new ObjectWriter12(objectClass, beanInfo.typeKey, beanInfo.typeName, writerFeatures, fieldWriters);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (writerAdapter == null) {</b>
+<b class="nc">&nbsp;            writerAdapter = new ObjectWriterAdapter(objectClass, beanInfo.typeKey, beanInfo.typeName, writerFeatures, fieldWriters);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (beanInfo.serializeFilters != null) {</b>
+<b class="nc">&nbsp;            configSerializeFilters(beanInfo, writerAdapter);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return writerAdapter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static void configSerializeFilters(BeanInfo beanInfo, ObjectWriterAdapter writerAdapter) {
+<b class="nc">&nbsp;        for (Class&lt;? extends Filter&gt; filterClass : beanInfo.serializeFilters) {</b>
+<b class="nc">&nbsp;            if (!Filter.class.isAssignableFrom(filterClass)) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            try {
+<b class="nc">&nbsp;                Filter filter = filterClass.newInstance();</b>
+<b class="nc">&nbsp;                writerAdapter.setFilter(filter);</b>
+<b class="nc">&nbsp;            } catch (InstantiationException | IllegalAccessException ignored) {</b>
+&nbsp;                //ignored
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void handleIgnores(BeanInfo beanInfo, List&lt;FieldWriter&gt; fieldWriters) {
+<b class="nc">&nbsp;        if (beanInfo.ignores == null || beanInfo.ignores.length == 0) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = fieldWriters.size() - 1; i &gt;= 0; i--) {</b>
+<b class="nc">&nbsp;            FieldWriter fieldWriter = fieldWriters.get(i);</b>
+<b class="nc">&nbsp;            for (String ignore : beanInfo.ignores) {</b>
+<b class="nc">&nbsp;                if (ignore.equals(fieldWriter.fieldName)) {</b>
+<b class="nc">&nbsp;                    fieldWriters.remove(i);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldWriter&lt;T&gt; createFieldWriter(String fieldName, String format, Field field) {
+<b class="nc">&nbsp;        return createFieldWriter(JSONFactory.getDefaultObjectWriterProvider(), fieldName, 0, 0L, format, null, field, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldWriter&lt;T&gt; createFieldWriter(
+&nbsp;            String fieldName,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            Field field
+&nbsp;    ) {
+<b class="nc">&nbsp;        return createFieldWriter(JSONFactory.getDefaultObjectWriterProvider(), fieldName, ordinal, features, format, null, field, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldWriter&lt;T&gt; createFieldWriter(
+&nbsp;            String fieldName,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            String label,
+&nbsp;            Field field,
+&nbsp;            ObjectWriter initObjectWriter
+&nbsp;    ) {
+<b class="nc">&nbsp;        return createFieldWriter(JSONFactory.getDefaultObjectWriterProvider(), fieldName, ordinal, features, format, label, field, initObjectWriter);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldWriter&lt;T&gt; createFieldWriter(
+&nbsp;            ObjectWriterProvider provider,
+&nbsp;            String fieldName,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            String label,
+&nbsp;            Field field,
+&nbsp;            ObjectWriter initObjectWriter
+&nbsp;    ) {
+<b class="nc">&nbsp;        Class&lt;?&gt; declaringClass = field.getDeclaringClass();</b>
+<b class="nc">&nbsp;        Method method = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        final boolean unsafeFieldWriter = JDKUtils.UNSAFE_SUPPORT;</b>
+<b class="nc">&nbsp;        if (declaringClass == Throwable.class) {</b>
+<b class="nc">&nbsp;            switch (field.getName()) {</b>
+&nbsp;                case &quot;detailMessage&quot;:
+<b class="nc">&nbsp;                    if (!unsafeFieldWriter) {</b>
+<b class="nc">&nbsp;                        method = BeanUtils.getMethod(Throwable.class, &quot;getMessage&quot;);</b>
+<b class="nc">&nbsp;                        fieldName = &quot;message&quot;;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                case &quot;cause&quot;:
+<b class="nc">&nbsp;                    if (!unsafeFieldWriter) {</b>
+<b class="nc">&nbsp;                        method = BeanUtils.getMethod(Throwable.class, &quot;getCause&quot;);</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                case &quot;suppressedExceptions&quot;: {
+<b class="nc">&nbsp;                    if (!unsafeFieldWriter) {</b>
+<b class="nc">&nbsp;                        fieldName = &quot;suppressed&quot;;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case &quot;stackTrace&quot;: {
+<b class="nc">&nbsp;                    method = BeanUtils.getMethod(Throwable.class, &quot;getStackTrace&quot;);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;                default:
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (declaringClass == DateTimeParseException.class &amp;&amp; !unsafeFieldWriter) {</b>
+<b class="nc">&nbsp;            switch (field.getName()) {</b>
+&nbsp;                case &quot;errorIndex&quot;:
+<b class="nc">&nbsp;                    method = BeanUtils.getMethod(DateTimeParseException.class, &quot;getErrorIndex&quot;);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;parsedString&quot;:
+<b class="nc">&nbsp;                    method = BeanUtils.getMethod(DateTimeParseException.class, &quot;getParsedString&quot;);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (method != null) {</b>
+<b class="nc">&nbsp;            return createFieldWriter(provider, (Class&lt;T&gt;) Throwable.class, fieldName, ordinal, features, format, label, method, initObjectWriter);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!unsafeFieldWriter) {</b>
+<b class="nc">&nbsp;            field.setAccessible(true);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = field.getType();</b>
+<b class="nc">&nbsp;        Type fieldType = field.getGenericType();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (initObjectWriter != null) {</b>
+<b class="nc">&nbsp;            if (fieldClass == byte.class) {</b>
+<b class="nc">&nbsp;                fieldType = fieldClass = Byte.class;</b>
+<b class="nc">&nbsp;            } else if (fieldClass == short.class) {</b>
+<b class="nc">&nbsp;                fieldType = fieldClass = Short.class;</b>
+<b class="nc">&nbsp;            } else if (fieldClass == int.class) {</b>
+<b class="nc">&nbsp;                fieldType = fieldClass = Integer.class;</b>
+<b class="nc">&nbsp;            } else if (fieldClass == long.class) {</b>
+<b class="nc">&nbsp;                fieldType = fieldClass = Long.class;</b>
+<b class="nc">&nbsp;            } else if (fieldClass == float.class) {</b>
+<b class="nc">&nbsp;                fieldType = fieldClass = Float.class;</b>
+<b class="nc">&nbsp;            } else if (fieldClass == double.class) {</b>
+<b class="nc">&nbsp;                fieldType = fieldClass = Double.class;</b>
+<b class="nc">&nbsp;            } else if (fieldClass == boolean.class) {</b>
+<b class="nc">&nbsp;                fieldType = fieldClass = Boolean.class;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            FieldWriterObject objImp = new FieldWriterObject(fieldName, ordinal, features, format, label, fieldType, fieldClass, field, null);</b>
+<b class="nc">&nbsp;            objImp.initValueClass = fieldClass;</b>
+<b class="nc">&nbsp;            if (initObjectWriter != ObjectWriterBaseModule.VoidObjectWriter.INSTANCE) {</b>
+<b class="nc">&nbsp;                objImp.initObjectWriter = initObjectWriter;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return objImp;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == boolean.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterBoolValField(fieldName, ordinal, features, format, label, field, fieldClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == byte.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterInt8ValField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == short.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterInt16ValField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == int.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterInt32Val(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == long.class) {</b>
+<b class="nc">&nbsp;            if (format == null || format.isEmpty()) {</b>
+<b class="nc">&nbsp;                return new FieldWriterInt64ValField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return new FieldWriterMillisField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == float.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterFloatValField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Float.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterFloatField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == double.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterDoubleValField(fieldName, ordinal, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Double.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterDoubleField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == char.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterCharValField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == BigInteger.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterBigIntField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == BigDecimal.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterBigDecimalField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == java.util.Date.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterDateField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == String.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterStringField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass.isEnum()) {</b>
+<b class="nc">&nbsp;            BeanInfo beanInfo = new BeanInfo();</b>
+<b class="nc">&nbsp;            provider.getBeanInfo(beanInfo, fieldClass);</b>
+&nbsp;
+<b class="nc">&nbsp;            boolean writeEnumAsJavaBean = beanInfo.writeEnumAsJavaBean;</b>
+<b class="nc">&nbsp;            if (!writeEnumAsJavaBean) {</b>
+<b class="nc">&nbsp;                ObjectWriter objectWriter = provider.cache.get(fieldClass);</b>
+<b class="nc">&nbsp;                if (objectWriter != null &amp;&amp; !(objectWriter instanceof ObjectWriterImplEnum)) {</b>
+<b class="nc">&nbsp;                    writeEnumAsJavaBean = true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Member enumValueField = BeanUtils.getEnumValueField(fieldClass, provider);</b>
+<b class="nc">&nbsp;            if (enumValueField == null &amp;&amp; !writeEnumAsJavaBean) {</b>
+<b class="nc">&nbsp;                String[] enumAnnotationNames = BeanUtils.getEnumAnnotationNames(fieldClass);</b>
+<b class="nc">&nbsp;                if (enumAnnotationNames == null) {</b>
+<b class="nc">&nbsp;                    return new FieldWriterEnum(fieldName, ordinal, features, format, label, fieldType, (Class&lt;? extends Enum&gt;) fieldClass, field, null);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == List.class || fieldClass == ArrayList.class) {</b>
+<b class="nc">&nbsp;            Type itemType = null;</b>
+<b class="nc">&nbsp;            if (fieldType instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;                itemType = ((ParameterizedType) fieldType).getActualTypeArguments()[0];</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return new FieldWriterListField(fieldName, itemType, ordinal, features, format, label, fieldType, fieldClass, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass.isArray() &amp;&amp; !fieldClass.getComponentType().isPrimitive()) {</b>
+<b class="nc">&nbsp;            Class&lt;?&gt; itemClass = fieldClass.getComponentType();</b>
+<b class="nc">&nbsp;            return new FieldWriterObjectArrayField(fieldName, itemClass, ordinal, features, format, label, itemClass, fieldClass, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new FieldWriterObject(fieldName, ordinal, features, format, label, field.getGenericType(), fieldClass, field, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldWriter&lt;T&gt; createFieldWriter(Class&lt;T&gt; objectType,
+&nbsp;                                                String fieldName,
+&nbsp;                                                String dateFormat,
+&nbsp;                                                Method method) {
+<b class="nc">&nbsp;        return createFieldWriter(objectType, fieldName, 0, 0, dateFormat, method);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldWriter&lt;T&gt; createFieldWriter(
+&nbsp;            Class&lt;T&gt; objectType,
+&nbsp;            String fieldName,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            Method method) {
+<b class="nc">&nbsp;        return createFieldWriter(null, objectType, fieldName, ordinal, features, format, null, method, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldWriter&lt;T&gt; createFieldWriter(
+&nbsp;            ObjectWriterProvider provider,
+&nbsp;            Class&lt;T&gt; objectType,
+&nbsp;            String fieldName,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            String label,
+&nbsp;            Method method,
+&nbsp;            ObjectWriter initObjectWriter
+&nbsp;    ) {
+<b class="nc">&nbsp;        method.setAccessible(true);</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = method.getReturnType();</b>
+<b class="nc">&nbsp;        Type fieldType = method.getGenericReturnType();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (initObjectWriter == null &amp;&amp; provider != null) {</b>
+<b class="nc">&nbsp;            initObjectWriter = getInitWriter(provider, fieldClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (initObjectWriter != null) {</b>
+<b class="nc">&nbsp;            FieldWriterObjectMethod objMethod = new FieldWriterObjectMethod(fieldName, ordinal, features, format, label, fieldType, fieldClass, method);</b>
+<b class="nc">&nbsp;            objMethod.initValueClass = fieldClass;</b>
+<b class="nc">&nbsp;            if (initObjectWriter != ObjectWriterBaseModule.VoidObjectWriter.INSTANCE) {</b>
+<b class="nc">&nbsp;                objMethod.initObjectWriter = initObjectWriter;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return objMethod;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldName == null) {</b>
+<b class="nc">&nbsp;            fieldName = BeanUtils.getterName(method, null);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == boolean.class || fieldClass == Boolean.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterBoolMethod(fieldName, ordinal, features, format, label, method, fieldClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == int.class || fieldClass == Integer.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterInt32Method(fieldName, ordinal, features, format, label, method, fieldClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == float.class || fieldClass == Float.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterFloatMethod&lt;&gt;(fieldName, ordinal, features, format, label, fieldClass, fieldClass, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == double.class || fieldClass == Double.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterDoubleMethod&lt;&gt;(fieldName, ordinal, features, format, label, fieldClass, fieldClass, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == long.class || fieldClass == Long.class) {</b>
+<b class="nc">&nbsp;            if (format == null || format.isEmpty() || &quot;string&quot;.equals(format)) {</b>
+<b class="nc">&nbsp;                return new FieldWriterInt64Method(fieldName, ordinal, features, format, label, method, fieldClass);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return new FieldWriterMillisMethod(fieldName, ordinal, features, format, label, fieldClass, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == short.class || fieldClass == Short.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterInt16Method(fieldName, ordinal, features, format, label, method, fieldClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == byte.class || fieldClass == Byte.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterInt8Method(fieldName, ordinal, features, format, label, method, fieldClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == char.class || fieldClass == Character.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterCharMethod(fieldName, ordinal, features, format, label, method, fieldClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == BigDecimal.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterBigDecimalMethod&lt;&gt;(fieldName, ordinal, features, format, label, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass.isEnum()</b>
+<b class="nc">&nbsp;                &amp;&amp; (BeanUtils.getEnumValueField(fieldClass, provider) == null &amp;&amp; initObjectWriter == null)</b>
+<b class="nc">&nbsp;                &amp;&amp; !BeanUtils.isWriteEnumAsJavaBean(fieldClass)</b>
+&nbsp;        ) {
+<b class="nc">&nbsp;            String[] enumAnnotationNames = BeanUtils.getEnumAnnotationNames(fieldClass);</b>
+<b class="nc">&nbsp;            if (enumAnnotationNames == null) {</b>
+<b class="nc">&nbsp;                return new FieldWriterEnumMethod(fieldName, ordinal, features, format, label, fieldClass, method);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Date.class) {</b>
+<b class="nc">&nbsp;            if (format != null) {</b>
+<b class="nc">&nbsp;                format = format.trim();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (format.isEmpty()) {</b>
+<b class="nc">&nbsp;                    format = null;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return new FieldWriterDateMethod(fieldName, ordinal, features, format, label, fieldClass, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == String.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterStringMethod(fieldName, ordinal, format, label, features, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == List.class) {</b>
+<b class="nc">&nbsp;            Type itemType = null;</b>
+<b class="nc">&nbsp;            if (fieldType instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;                itemType = ((ParameterizedType) fieldType).getActualTypeArguments()[0];</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                itemType = Object.class;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return new FieldWriterListMethod(fieldName, itemType, ordinal, features, format, label, method, fieldType, fieldClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Float[].class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterObjectArrayMethod(fieldName, Float.class, ordinal, features, format, label, fieldType, fieldClass, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Double[].class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterObjectArrayMethod(fieldName, Double.class, ordinal, features, format, label, fieldType, fieldClass, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == BigDecimal[].class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterObjectArrayMethod(fieldName, BigDecimal.class, ordinal, features, format, label, fieldType, fieldClass, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new FieldWriterObjectMethod(fieldName, ordinal, features, format, label, fieldType, fieldClass, method);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldWriter createFieldWriter(String fieldName, ToLongFunction&lt;T&gt; function) {
+<b class="nc">&nbsp;        return new FieldWriterInt64ValFunc(fieldName, 0, 0, null, null, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldWriter createFieldWriter(String fieldName, ToIntFunction&lt;T&gt; function) {
+<b class="nc">&nbsp;        return new FieldWriterInt32ValFunc(fieldName, 0, 0, null, null, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldWriter createFieldWriter(String fieldName, ToShortFunction&lt;T&gt; function) {
+<b class="nc">&nbsp;        return new FieldWriterInt16ValFunc(fieldName, 0, 0, null, null, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldWriter createFieldWriter(String fieldName, ToByteFunction&lt;T&gt; function) {
+<b class="nc">&nbsp;        return new FieldWriterInt8ValFunc(fieldName, 0, 0, null, null, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldWriter createFieldWriter(String fieldName, ToFloatFunction&lt;T&gt; function) {
+<b class="nc">&nbsp;        return new FieldWriterFloatValueFunc(fieldName, 0, 0L, null, null, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldWriter createFieldWriter(String fieldName, ToDoubleFunction&lt;T&gt; function) {
+<b class="nc">&nbsp;        return new FieldWriterDoubleValueFunc(fieldName, 0, 0, null, null, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldWriter createFieldWriter(String fieldName, Predicate&lt;T&gt; function) {
+<b class="nc">&nbsp;        return new FieldWriterBoolValFunc(fieldName, 0, 0, null, null, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T, V&gt; FieldWriter createFieldWriter(
+&nbsp;            String fieldName,
+&nbsp;            Class fieldClass,
+&nbsp;            Function&lt;T, V&gt; function
+&nbsp;    ) {
+<b class="nc">&nbsp;        return createFieldWriter(null, null, fieldName, 0, 0, null, null, fieldClass, fieldClass, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T, V&gt; FieldWriter createFieldWriter(
+&nbsp;            String fieldName,
+&nbsp;            Type fieldType,
+&nbsp;            Class fieldClass,
+&nbsp;            Function&lt;T, V&gt; function
+&nbsp;    ) {
+<b class="nc">&nbsp;        return createFieldWriter(null, null, fieldName, 0, 0, null, null, fieldType, fieldClass, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T, V&gt; FieldWriter createFieldWriter(
+&nbsp;            String fieldName,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            Class fieldClass,
+&nbsp;            Function&lt;T, V&gt; function
+&nbsp;    ) {
+<b class="nc">&nbsp;        return createFieldWriter(null, null, fieldName, 0, features, format, null, fieldClass, fieldClass, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T, V&gt; FieldWriter&lt;T&gt; createFieldWriter(
+&nbsp;            ObjectWriterProvider provider,
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            String fieldName,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            String label,
+&nbsp;            Type fieldType,
+&nbsp;            Class&lt;V&gt; fieldClass,
+&nbsp;            Method method,
+&nbsp;            Function&lt;T, V&gt; function
+&nbsp;    ) {
+<b class="nc">&nbsp;        if (fieldClass == Byte.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterInt8Func(fieldName, ordinal, features, format, label, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Short.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterInt16Func(fieldName, ordinal, features, format, label, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Integer.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterInt32Func(fieldName, ordinal, features, format, label, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Long.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterInt64Func(fieldName, ordinal, features, format, label, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == BigInteger.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterBigIntFunc(fieldName, ordinal, features, format, label, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == BigDecimal.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterBigDecimalFunc(fieldName, ordinal, features, format, label, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == String.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterStringFunc(fieldName, ordinal, features, format, label, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Date.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterDateFunc(fieldName, ordinal, features, format, label, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Calendar.class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;            return new FieldWriterCalendarFunc(fieldName, ordinal, features, format, label, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass.isEnum()) {</b>
+<b class="nc">&nbsp;            BeanInfo beanInfo = new BeanInfo();</b>
+<b class="nc">&nbsp;            if (provider == null) {</b>
+<b class="nc">&nbsp;                provider = JSONFactory.getDefaultObjectWriterProvider();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            provider.getBeanInfo(beanInfo, fieldClass);</b>
+&nbsp;
+<b class="nc">&nbsp;            boolean writeEnumAsJavaBean = beanInfo.writeEnumAsJavaBean;</b>
+<b class="nc">&nbsp;            if (!writeEnumAsJavaBean) {</b>
+<b class="nc">&nbsp;                ObjectWriter objectWriter = provider.cache.get(fieldClass);</b>
+<b class="nc">&nbsp;                if (objectWriter != null &amp;&amp; !(objectWriter instanceof ObjectWriterImplEnum)) {</b>
+<b class="nc">&nbsp;                    writeEnumAsJavaBean = true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (!writeEnumAsJavaBean &amp;&amp; BeanUtils.getEnumValueField(fieldClass, provider) == null) {</b>
+<b class="nc">&nbsp;                String[] enumAnnotationNames = BeanUtils.getEnumAnnotationNames(fieldClass);</b>
+<b class="nc">&nbsp;                if (enumAnnotationNames == null) {</b>
+<b class="nc">&nbsp;                    return new FieldWriterEnumFunc(fieldName, ordinal, features, format, label, fieldType, fieldClass, method, function);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;            ParameterizedType parameterizedType = (ParameterizedType) fieldType;</b>
+<b class="nc">&nbsp;            Type rawType = parameterizedType.getRawType();</b>
+<b class="nc">&nbsp;            Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (rawType == List.class || rawType == ArrayList.class) {</b>
+<b class="nc">&nbsp;                if (actualTypeArguments.length == 1) {</b>
+<b class="nc">&nbsp;                    Type itemType = actualTypeArguments[0];</b>
+<b class="nc">&nbsp;                    if (itemType == String.class) {</b>
+<b class="nc">&nbsp;                        return new FieldWriterListStrFunc(fieldName, ordinal, features, format, label, method, function, fieldType, fieldClass);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    return new FieldWriterListFunc(fieldName, ordinal, features, format, label, itemType, method, function, fieldType, fieldClass);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Modifier.isFinal(fieldClass.getModifiers())) {</b>
+<b class="nc">&nbsp;            return new FieldWriterObjectFuncFinal(fieldName, ordinal, features, format, label, fieldType, fieldClass, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new FieldWriterObjectFunc(fieldName, ordinal, features, format, label, fieldType, fieldClass, method, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static class LambdaInfo {
+&nbsp;        final Class fieldClass;
+&nbsp;        final Class supplierClass;
+&nbsp;        final String methodName;
+&nbsp;        final MethodType methodType;
+&nbsp;        final MethodType invokedType;
+&nbsp;        final MethodType samMethodType;
+&nbsp;
+<b class="fc">&nbsp;        LambdaInfo(Class fieldClass, Class supplierClass, String methodName) {</b>
+<b class="fc">&nbsp;            this.fieldClass = fieldClass;</b>
+<b class="fc">&nbsp;            this.supplierClass = supplierClass;</b>
+<b class="fc">&nbsp;            this.methodName = methodName;</b>
+<b class="fc">&nbsp;            this.methodType = MethodType.methodType(fieldClass);</b>
+<b class="fc">&nbsp;            this.invokedType = MethodType.methodType(supplierClass);</b>
+<b class="fc">&nbsp;            this.samMethodType = MethodType.methodType(fieldClass, Object.class);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    Object lambdaGetter(Class objectClass, Class fieldClass, Method method) {
+<b class="nc">&nbsp;        MethodHandles.Lookup lookup = JDKUtils.trustedLookup(objectClass);</b>
+&nbsp;
+<b class="nc">&nbsp;        LambdaInfo buildInfo = lambdaMapping.get(fieldClass);</b>
+&nbsp;
+&nbsp;        MethodType methodType;
+&nbsp;        MethodType invokedType;
+&nbsp;        String methodName;
+&nbsp;        MethodType samMethodType;
+<b class="nc">&nbsp;        if (buildInfo != null) {</b>
+<b class="nc">&nbsp;            methodType = buildInfo.methodType;</b>
+<b class="nc">&nbsp;            invokedType = buildInfo.invokedType;</b>
+<b class="nc">&nbsp;            methodName = buildInfo.methodName;</b>
+<b class="nc">&nbsp;            samMethodType = buildInfo.samMethodType;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            methodType = MethodType.methodType(fieldClass);</b>
+<b class="nc">&nbsp;            invokedType = METHOD_TYPE_FUNCTION;</b>
+<b class="nc">&nbsp;            methodName = &quot;apply&quot;;</b>
+<b class="nc">&nbsp;            samMethodType = METHOD_TYPE_OBJECT_OBJECT;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            MethodHandle target = lookup.findVirtual(objectClass, method.getName(), methodType);</b>
+<b class="nc">&nbsp;            MethodType instantiatedMethodType = target.type();</b>
+&nbsp;
+<b class="nc">&nbsp;            CallSite callSite = LambdaMetafactory.metafactory(</b>
+&nbsp;                    lookup,
+&nbsp;                    methodName,
+&nbsp;                    invokedType,
+&nbsp;                    samMethodType,
+&nbsp;                    target,
+&nbsp;                    instantiatedMethodType
+&nbsp;            );
+&nbsp;
+<b class="nc">&nbsp;            return callSite</b>
+<b class="nc">&nbsp;                    .getTarget()</b>
+<b class="nc">&nbsp;                    .invoke();</b>
+<b class="nc">&nbsp;        } catch (Throwable e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;create fieldLambdaGetter error, method : &quot; + method, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected ObjectWriter getInitWriter(ObjectWriterProvider provider, Class fieldClass) {
+<b class="nc">&nbsp;        if (fieldClass == Date.class) {</b>
+<b class="nc">&nbsp;            if ((provider.userDefineMask &amp; ObjectWriterProvider.TYPE_DATE_MASK) != 0) {</b>
+<b class="nc">&nbsp;                ObjectWriter objectWriter = provider.cache.get(fieldClass);</b>
+<b class="nc">&nbsp;                if (objectWriter != ObjectWriterImplDate.INSTANCE) {</b>
+<b class="nc">&nbsp;                    return objectWriter;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } else if (fieldClass == long.class || fieldClass == Long.class) {</b>
+<b class="nc">&nbsp;            if ((provider.userDefineMask &amp; ObjectWriterProvider.TYPE_INT64_MASK) != 0) {</b>
+<b class="nc">&nbsp;                ObjectWriter objectWriter = provider.cache.get(Long.class);</b>
+<b class="nc">&nbsp;                if (objectWriter != ObjectWriterImplInt64.INSTANCE) {</b>
+<b class="nc">&nbsp;                    return objectWriter;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } else if (fieldClass == BigDecimal.class) {</b>
+<b class="nc">&nbsp;            if ((provider.userDefineMask &amp; ObjectWriterProvider.TYPE_DECIMAL_MASK) != 0) {</b>
+<b class="nc">&nbsp;                ObjectWriter objectWriter = provider.cache.get(fieldClass);</b>
+<b class="nc">&nbsp;                if (objectWriter != ObjectWriterImplBigDecimal.INSTANCE) {</b>
+<b class="nc">&nbsp;                    return objectWriter;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } else if (Enum.class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;            ObjectWriter objectWriter = provider.cache.get(fieldClass);</b>
+<b class="nc">&nbsp;            if (!(objectWriter instanceof ObjectWriterImplEnum)) {</b>
+<b class="nc">&nbsp;                return objectWriter;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    &lt;T&gt; FieldWriter&lt;T&gt; createFieldWriterLambda(
+&nbsp;            ObjectWriterProvider provider,
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            String fieldName,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            String label,
+&nbsp;            Method method,
+&nbsp;            ObjectWriter initObjectWriter
+&nbsp;    ) {
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = method.getReturnType();</b>
+<b class="nc">&nbsp;        Type fieldType = method.getGenericReturnType();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (initObjectWriter == null &amp;&amp; provider != null) {</b>
+<b class="nc">&nbsp;            initObjectWriter = getInitWriter(provider, fieldClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (initObjectWriter != null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String objectClassName = objectClass.getName();</b>
+<b class="nc">&nbsp;        if (objectClassName.indexOf(&#39;$&#39;) != -1 &amp;&amp; objectClassName.contains(&quot;$$&quot;)) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Object lambda = lambdaGetter(objectClass, fieldClass, method);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == int.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterInt32ValFunc(fieldName, ordinal, features, format, label, method, (ToIntFunction&lt;T&gt;) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == long.class) {</b>
+<b class="nc">&nbsp;            if (format == null || format.isEmpty() || &quot;string&quot;.equals(format)) {</b>
+<b class="nc">&nbsp;                return new FieldWriterInt64ValFunc(fieldName, ordinal, features, format, label, method, (ToLongFunction) lambda);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return new FieldWriterMillisFunc(fieldName, ordinal, features, format, label, method, (ToLongFunction) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == boolean.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterBoolValFunc(fieldName, ordinal, features, format, label, method, (Predicate&lt;T&gt;) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Boolean.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterBooleanFunc(fieldName, ordinal, features, format, label, method, (Function) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == short.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterInt16ValFunc(fieldName, ordinal, features, format, label, method, (ToShortFunction) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == byte.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterInt8ValFunc(fieldName, ordinal, features, format, label, method, (ToByteFunction) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == float.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterFloatValueFunc(fieldName, ordinal, features, format, label, method, (ToFloatFunction) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Float.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterFloatFunc(fieldName, ordinal, features, format, label, method, (Function) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == double.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterDoubleValueFunc(fieldName, ordinal, features, format, label, method, (ToDoubleFunction) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Double.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterDoubleFunc(fieldName, ordinal, features, format, label, method, (Function) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == char.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterCharValFunc(fieldName, ordinal, features, format, label, method, (ToCharFunction) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Function function = (Function) lambda;</b>
+<b class="nc">&nbsp;        return createFieldWriter(provider, objectClass, fieldName, ordinal, features, format, label, fieldType, fieldClass, method, function);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:21</div>
+</div>
+</body>
+</html>

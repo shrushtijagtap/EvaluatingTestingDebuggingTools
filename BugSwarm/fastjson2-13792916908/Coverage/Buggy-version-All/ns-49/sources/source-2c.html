@@ -1,0 +1,186 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FieldWriterInt64</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldWriterInt64 (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FieldWriterInt64</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.1%
+  </span>
+  <span class="absValue">
+    (18/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONWriter.Feature.WriteLongAsString;
+&nbsp;import static com.alibaba.fastjson2.JSONWriter.Feature.WriteNonStringValueAsString;
+&nbsp;
+&nbsp;abstract class FieldWriterInt64&lt;T&gt;
+&nbsp;        extends FieldWriter&lt;T&gt; {
+&nbsp;    final boolean browserCompatible;
+&nbsp;
+&nbsp;    FieldWriterInt64(
+&nbsp;            String name,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            String label,
+&nbsp;            Class fieldClass,
+&nbsp;            Field field,
+&nbsp;            Method method
+&nbsp;    ) {
+<b class="fc">&nbsp;        super(name, ordinal, features, format, label, fieldClass, fieldClass, field, method);</b>
+<b class="fc">&nbsp;        browserCompatible = (features &amp; JSONWriter.Feature.BrowserCompatible.mask) != 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void writeInt64(JSONWriter jsonWriter, long value) {
+<b class="fc">&nbsp;        long features = jsonWriter.getFeatures() | this.features;</b>
+<b class="fc">&nbsp;        boolean writeAsString = (features &amp; (WriteNonStringValueAsString.mask | WriteLongAsString.mask)) != 0;</b>
+<b class="fc">&nbsp;        writeFieldName(jsonWriter);</b>
+<b class="fc">&nbsp;        if (!writeAsString) {</b>
+<b class="fc">&nbsp;            writeAsString = browserCompatible</b>
+&nbsp;                    &amp;&amp; !jsonWriter.jsonb
+&nbsp;                    &amp;&amp; (value &gt; 9007199254740991L || value &lt; -9007199254740991L);
+&nbsp;        }
+<b class="fc">&nbsp;        if (writeAsString) {</b>
+<b class="fc">&nbsp;            jsonWriter.writeString(Long.toString(value));</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            jsonWriter.writeInt64(value);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean write(JSONWriter jsonWriter, T object) {
+&nbsp;        Long value;
+&nbsp;        try {
+<b class="fc">&nbsp;            value = (Long) getFieldValue(object);</b>
+<b class="nc">&nbsp;        } catch (RuntimeException error) {</b>
+<b class="nc">&nbsp;            if (jsonWriter.isIgnoreErrorGetter()) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            throw error;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            long features = this.features | jsonWriter.getFeatures();</b>
+<b class="fc">&nbsp;            if ((features &amp; (JSONWriter.Feature.WriteNulls.mask | JSONWriter.Feature.NullAsDefaultValue.mask | JSONWriter.Feature.WriteNullNumberAsZero.mask)) == 0) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            writeFieldName(jsonWriter);</b>
+<b class="nc">&nbsp;            jsonWriter.writeNumberNull();</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        writeInt64(jsonWriter, value);</b>
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeValue(JSONWriter jsonWriter, T object) {
+<b class="nc">&nbsp;        Long value = (Long) getFieldValue(object);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        jsonWriter.writeInt64(value);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:22</div>
+</div>
+</body>
+</html>

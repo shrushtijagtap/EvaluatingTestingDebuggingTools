@@ -1,0 +1,183 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONLexer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.parser</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONLexer (com.alibaba.fastjson.parser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">JSONLexer</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;  // IntelliJ API Decompiler stub source generated from a class file
+&nbsp;  // Implementation of methods is not available
+&nbsp;
+&nbsp;package com.alibaba.fastjson.parser;
+&nbsp;
+&nbsp;public interface JSONLexer {
+&nbsp;    char EOI = &#39;\u001A&#39;;
+&nbsp;    int NOT_MATCH = -1;
+&nbsp;    int NOT_MATCH_NAME = -2;
+&nbsp;    int UNKNOWN = 0;
+&nbsp;    int OBJECT = 1;
+&nbsp;    int ARRAY = 2;
+&nbsp;    int VALUE = 3;
+&nbsp;    int END = 4;
+&nbsp;    int VALUE_NULL = 5;
+&nbsp;
+&nbsp;    int token();
+&nbsp;
+&nbsp;    java.lang.String tokenName();
+&nbsp;
+&nbsp;    void skipWhitespace();
+&nbsp;
+&nbsp;    void nextToken();
+&nbsp;
+&nbsp;    void nextToken(int i);
+&nbsp;
+&nbsp;    char getCurrent();
+&nbsp;
+&nbsp;    char next();
+&nbsp;
+&nbsp;    java.lang.String scanSymbol(com.alibaba.fastjson.parser.SymbolTable symbolTable);
+&nbsp;
+&nbsp;    java.lang.String scanSymbol(com.alibaba.fastjson.parser.SymbolTable symbolTable, char c);
+&nbsp;
+&nbsp;    void resetStringPosition();
+&nbsp;
+&nbsp;    void scanNumber();
+&nbsp;
+&nbsp;    int pos();
+&nbsp;
+&nbsp;    java.lang.Number integerValue();
+&nbsp;
+&nbsp;    java.math.BigDecimal decimalValue();
+&nbsp;
+&nbsp;    java.lang.Number decimalValue(boolean b);
+&nbsp;
+&nbsp;    java.lang.String scanSymbolUnQuoted(com.alibaba.fastjson.parser.SymbolTable symbolTable);
+&nbsp;
+&nbsp;    java.lang.String stringVal();
+&nbsp;
+&nbsp;    boolean isEnabled(int i);
+&nbsp;
+&nbsp;    boolean isEnabled(com.alibaba.fastjson.parser.Feature feature);
+&nbsp;
+&nbsp;    void config(com.alibaba.fastjson.parser.Feature feature, boolean b);
+&nbsp;
+&nbsp;    void scanString();
+&nbsp;
+&nbsp;    int intValue();
+&nbsp;
+&nbsp;    void nextTokenWithColon();
+&nbsp;
+&nbsp;    void nextTokenWithColon(int i);
+&nbsp;
+&nbsp;    boolean isBlankInput();
+&nbsp;
+&nbsp;    void close();
+&nbsp;
+&nbsp;    long longValue();
+&nbsp;
+&nbsp;    boolean isRef();
+&nbsp;
+&nbsp;    java.lang.String scanTypeName(com.alibaba.fastjson.parser.SymbolTable symbolTable);
+&nbsp;
+&nbsp;    java.lang.String numberString();
+&nbsp;
+&nbsp;    byte[] bytesValue();
+&nbsp;
+&nbsp;    float floatValue();
+&nbsp;
+&nbsp;    int scanInt(char c);
+&nbsp;
+&nbsp;    long scanLong(char c);
+&nbsp;
+&nbsp;    float scanFloat(char c);
+&nbsp;
+&nbsp;    double scanDouble(char c);
+&nbsp;
+&nbsp;    boolean scanBoolean(char c);
+&nbsp;
+&nbsp;    java.math.BigDecimal scanDecimal(char c);
+&nbsp;
+&nbsp;    java.lang.String scanString(char c);
+&nbsp;
+&nbsp;    java.lang.Enum&lt;?&gt; scanEnum(java.lang.Class&lt;?&gt; aClass, com.alibaba.fastjson.parser.SymbolTable symbolTable, char c);
+&nbsp;
+&nbsp;    java.lang.String scanSymbolWithSeperator(com.alibaba.fastjson.parser.SymbolTable symbolTable, char c);
+&nbsp;
+&nbsp;    void scanStringArray(java.util.Collection&lt;java.lang.String&gt; collection, char c);
+&nbsp;
+&nbsp;    java.util.TimeZone getTimeZone();
+&nbsp;
+&nbsp;    void setTimeZone(java.util.TimeZone timeZone);
+&nbsp;
+&nbsp;    java.util.Locale getLocale();
+&nbsp;
+&nbsp;    void setLocale(java.util.Locale locale);
+&nbsp;
+&nbsp;    java.lang.String info();
+&nbsp;
+&nbsp;    int getFeatures();
+&nbsp;
+&nbsp;    void setFeatures(int i);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:28</div>
+</div>
+</body>
+</html>

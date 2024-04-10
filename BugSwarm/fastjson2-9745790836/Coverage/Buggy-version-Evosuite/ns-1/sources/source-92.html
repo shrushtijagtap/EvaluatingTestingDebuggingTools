@@ -1,0 +1,240 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderImplGenericArray</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderImplGenericArray (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderImplGenericArray</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/58)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONB;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Array;
+&nbsp;import java.lang.reflect.GenericArrayType;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;class ObjectReaderImplGenericArray
+&nbsp;        implements ObjectReader {
+&nbsp;    final Type arrayType;
+&nbsp;    final Class arrayClass;
+&nbsp;    final Type itemType;
+&nbsp;    final Class&lt;?&gt; componentClass;
+&nbsp;    ObjectReader itemObjectReader;
+&nbsp;    final String arrayClassName;
+&nbsp;    final long arrayClassNameHash;
+&nbsp;
+<b class="nc">&nbsp;    public ObjectReaderImplGenericArray(GenericArrayType genericType) {</b>
+<b class="nc">&nbsp;        this.arrayType = genericType;</b>
+<b class="nc">&nbsp;        this.arrayClass = TypeUtils.getClass(arrayType);</b>
+<b class="nc">&nbsp;        this.itemType = genericType.getGenericComponentType();</b>
+<b class="nc">&nbsp;        this.componentClass = TypeUtils.getMapping(itemType);</b>
+<b class="nc">&nbsp;        this.arrayClassName = &quot;[&quot; + TypeUtils.getTypeName(this.componentClass);</b>
+<b class="nc">&nbsp;        this.arrayClassNameHash = Fnv.hashCode64(arrayClassName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createInstance(long features) {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public FieldReader getFieldReader(long hashCode) {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        if (jsonReader.nextIfMatch(JSONB.Constants.BC_TYPED_ANY)) {</b>
+<b class="nc">&nbsp;            long typeHash = jsonReader.readTypeHashCode();</b>
+<b class="nc">&nbsp;            if (typeHash != arrayClassNameHash) {</b>
+<b class="nc">&nbsp;                String typeName = jsonReader.getString();</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;not support input typeName &quot; + typeName);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int entryCnt = jsonReader.startArray();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (entryCnt &gt; 0 &amp;&amp; itemObjectReader == null) {</b>
+<b class="nc">&nbsp;            itemObjectReader = jsonReader</b>
+<b class="nc">&nbsp;                    .getContext()</b>
+<b class="nc">&nbsp;                    .getObjectReader(itemType);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Object array = Array.newInstance(componentClass, entryCnt);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; entryCnt; ++i) {</b>
+<b class="nc">&nbsp;            Object item = itemObjectReader.readJSONBObject(jsonReader, itemType, null, 0);</b>
+<b class="nc">&nbsp;            Array.set(array, i, item);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return array;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        if (itemObjectReader == null) {</b>
+<b class="nc">&nbsp;            itemObjectReader = jsonReader</b>
+<b class="nc">&nbsp;                    .getContext()</b>
+<b class="nc">&nbsp;                    .getObjectReader(itemType);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.isJSONB()) {</b>
+<b class="nc">&nbsp;            return readJSONBObject(jsonReader, fieldType, fieldName, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.readIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char ch = jsonReader.current();</b>
+<b class="nc">&nbsp;        if (ch == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;            String str = jsonReader.readString();</b>
+<b class="nc">&nbsp;            if (str.isEmpty()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Object&gt; list = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        if (ch != &#39;[&#39;) {</b>
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        jsonReader.next();</b>
+&nbsp;
+&nbsp;        for (; ; ) {
+<b class="nc">&nbsp;            if (jsonReader.nextIfMatch(&#39;]&#39;)) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            Object item;
+<b class="nc">&nbsp;            if (itemObjectReader != null) {</b>
+<b class="nc">&nbsp;                item = itemObjectReader.readObject(jsonReader, itemType, null, 0);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (itemType == String.class) {</b>
+<b class="nc">&nbsp;                    item = jsonReader.readString();</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info(&quot;TODO : &quot; + itemType));</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            list.add(item);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (jsonReader.nextIfMatch(&#39;,&#39;)) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        jsonReader.nextIfMatch(&#39;,&#39;);</b>
+&nbsp;
+<b class="nc">&nbsp;        Object array = Array.newInstance(componentClass, list.size());</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; list.size(); ++i) {</b>
+<b class="nc">&nbsp;            Array.set(array, i, list.get(i));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return array;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:16</div>
+</div>
+</body>
+</html>

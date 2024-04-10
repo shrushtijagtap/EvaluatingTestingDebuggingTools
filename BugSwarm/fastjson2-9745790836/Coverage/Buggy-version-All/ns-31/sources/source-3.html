@@ -1,0 +1,228 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > WebSocket</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.example.springtest.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: WebSocket (com.alibaba.fastjson2.example.springtest.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WebSocket</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.example.springtest.controller;
+&nbsp;
+&nbsp;import lombok.extern.slf4j.Slf4j;
+&nbsp;import org.springframework.stereotype.Component;
+&nbsp;
+&nbsp;import javax.websocket.*;
+&nbsp;import javax.websocket.server.PathParam;
+&nbsp;import javax.websocket.server.ServerEndpoint;
+&nbsp;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;
+<b class="nc">&nbsp;@Slf4j</b>
+&nbsp;@Component
+&nbsp;@ServerEndpoint(&quot;/websocket/{name}&quot;)
+<b class="nc">&nbsp;public class WebSocket {</b>
+&nbsp;    /**
+&nbsp;     * 与某个客户端的连接对话，需要通过它来给客户端发送消息
+&nbsp;     */
+&nbsp;    private Session session;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 标识当前连接客户端的用户名
+&nbsp;     */
+&nbsp;    private String name;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 用于存所有的连接服务的客户端，这个对象存储是安全的
+&nbsp;     * 注意这里的kv,设计的很巧妙，v刚好是本类 WebSocket (用来存放每个客户端对应的MyWebSocket对象)
+&nbsp;     */
+<b class="nc">&nbsp;    private static ConcurrentHashMap&lt;String, WebSocket&gt; webSocketSet = new ConcurrentHashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 连接建立成功调用的方法
+&nbsp;     * session为与某个客户端的连接会话，需要通过它来给客户端发送数据
+&nbsp;     */
+&nbsp;    @OnOpen
+&nbsp;    public void OnOpen(Session session, @PathParam(value = &quot;name&quot;) String name) {
+<b class="nc">&nbsp;        log.info(&quot;----------------------------------&quot;);</b>
+<b class="nc">&nbsp;        this.session = session;</b>
+<b class="nc">&nbsp;        this.name = name;</b>
+&nbsp;        // name是用来表示唯一客户端，如果需要指定发送，需要指定发送通过name来区分
+<b class="nc">&nbsp;        webSocketSet.put(name, this);</b>
+<b class="nc">&nbsp;        log.info(&quot;[WebSocket] 连接成功，当前连接人数为：={}&quot;, webSocketSet.size());</b>
+<b class="nc">&nbsp;        log.info(&quot;----------------------------------&quot;);</b>
+<b class="nc">&nbsp;        log.info(&quot;&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        GroupSending(name + &quot; 来了&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 连接关闭调用的方法
+&nbsp;     */
+&nbsp;    @OnClose
+&nbsp;    public void OnClose() {
+<b class="nc">&nbsp;        webSocketSet.remove(this.name);</b>
+<b class="nc">&nbsp;        log.info(&quot;[WebSocket] 退出成功，当前连接人数为：={}&quot;, webSocketSet.size());</b>
+&nbsp;
+<b class="nc">&nbsp;        GroupSending(name + &quot; 走了&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 收到客户端消息后调用的方法
+&nbsp;     */
+&nbsp;    @OnMessage
+&nbsp;    public void OnMessage(String messageStr) {
+<b class="nc">&nbsp;        log.info(&quot;[WebSocket] 收到消息：{}&quot;, messageStr);</b>
+&nbsp;        //判断是否需要指定发送，具体规则自定义
+&nbsp;        //message_str的格式 TOUSER:user2;message:aaaaaaaaaaaaaaaaaa;
+<b class="nc">&nbsp;        if (messageStr.indexOf(&quot;TOUSER&quot;) == 0) {</b>
+&nbsp;            //取出 name和message的值
+<b class="nc">&nbsp;            String[] split = messageStr.split(&quot;;&quot;);</b>
+<b class="nc">&nbsp;            String[] split1 = split[0].split(&quot;:&quot;);</b>
+<b class="nc">&nbsp;            String[] split2 = split[1].split(&quot;:&quot;);</b>
+<b class="nc">&nbsp;            String name = split1[1];</b>
+<b class="nc">&nbsp;            String message = split2[1];</b>
+&nbsp;            //指定发送
+<b class="nc">&nbsp;            AppointSending(name, message);</b>
+<b class="nc">&nbsp;        } else {</b>
+&nbsp;            //群发
+<b class="nc">&nbsp;            GroupSending(messageStr);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 发生错误时调用
+&nbsp;     *
+&nbsp;     * @param session
+&nbsp;     * @param error
+&nbsp;     */
+&nbsp;    @OnError
+&nbsp;    public void onError(Session session, Throwable error) {
+<b class="nc">&nbsp;        log.info(&quot;发生错误&quot;);</b>
+<b class="nc">&nbsp;        error.printStackTrace();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 群发
+&nbsp;     *
+&nbsp;     * @param message
+&nbsp;     */
+&nbsp;    public void GroupSending(String message) {
+<b class="nc">&nbsp;        for (String name : webSocketSet.keySet()) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                webSocketSet.get(name).session.getBasicRemote().sendText(message);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                e.printStackTrace();</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 指定发送
+&nbsp;     *
+&nbsp;     * @param name
+&nbsp;     * @param message
+&nbsp;     */
+&nbsp;    public void AppointSending(String name, String message) {
+&nbsp;        try {
+<b class="nc">&nbsp;            webSocketSet.get(name).session.getBasicRemote().sendText(message);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:18</div>
+</div>
+</body>
+</html>

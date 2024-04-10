@@ -1,0 +1,293 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderImplDate</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderImplDate (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderImplDate</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/94)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.codec.DateTimeCodec;
+&nbsp;import com.alibaba.fastjson2.util.DateUtils;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.text.ParseException;
+&nbsp;import java.text.SimpleDateFormat;
+&nbsp;import java.time.*;
+&nbsp;import java.time.format.DateTimeFormatter;
+&nbsp;import java.time.temporal.ChronoField;
+&nbsp;import java.time.temporal.TemporalAccessor;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.Locale;
+&nbsp;
+&nbsp;public class ObjectReaderImplDate
+&nbsp;        extends DateTimeCodec
+&nbsp;        implements ObjectReader {
+<b class="nc">&nbsp;    public static final ObjectReaderImplDate INSTANCE = new ObjectReaderImplDate(null, null);</b>
+&nbsp;
+&nbsp;    public static ObjectReaderImplDate of(String format, Locale locale) {
+<b class="nc">&nbsp;        if (format == null) {</b>
+<b class="nc">&nbsp;            return INSTANCE;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new ObjectReaderImplDate(format, locale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReaderImplDate(String format, Locale locale) {
+<b class="nc">&nbsp;        super(format, locale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class getObjectClass() {
+<b class="nc">&nbsp;        return Date.class;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        if (jsonReader.isInt()) {</b>
+<b class="nc">&nbsp;            long millis = jsonReader.readInt64Value();</b>
+<b class="nc">&nbsp;            if (formatUnixTime) {</b>
+<b class="nc">&nbsp;                millis *= 1000;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return new Date(millis);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.readIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return readDate(jsonReader);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        if (jsonReader.isInt()) {</b>
+<b class="nc">&nbsp;            long millis = jsonReader.readInt64Value();</b>
+<b class="nc">&nbsp;            if (formatUnixTime) {</b>
+<b class="nc">&nbsp;                millis *= 1000;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return new Date(millis);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.readIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return readDate(jsonReader);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Object readDate(JSONReader jsonReader) {
+&nbsp;        long millis;
+<b class="nc">&nbsp;        if (useSimpleFormatter) {</b>
+<b class="nc">&nbsp;            String str = jsonReader.readString();</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                return new SimpleDateFormat(format).parse(str);</b>
+<b class="nc">&nbsp;            } catch (ParseException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;parse error : &quot; + str), e);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.nextIfNullOrEmptyString()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if ((formatUnixTime || formatUnixTime) &amp;&amp; jsonReader.isString()) {</b>
+<b class="nc">&nbsp;            millis = jsonReader.readInt64Value();</b>
+<b class="nc">&nbsp;            if (formatUnixTime) {</b>
+<b class="nc">&nbsp;                millis *= 1000L;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (format != null) {</b>
+&nbsp;            ZonedDateTime zdt;
+<b class="nc">&nbsp;            if (yyyyMMddhhmmss19) {</b>
+<b class="nc">&nbsp;                if (jsonReader.isSupportSmartMatch()) {</b>
+<b class="nc">&nbsp;                    millis = jsonReader.readMillisFromString();</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    millis = jsonReader.readMillis19();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (millis != 0 || !jsonReader.wasNull()) {</b>
+<b class="nc">&nbsp;                    return new Date(millis);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                zdt = jsonReader.readZonedDateTime();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                DateTimeFormatter formatter = getDateFormatter(jsonReader.getLocale());</b>
+&nbsp;
+<b class="nc">&nbsp;                if (formatter != null) {</b>
+<b class="nc">&nbsp;                    String str = jsonReader.readString();</b>
+<b class="nc">&nbsp;                    if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;                        return null;</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    LocalDateTime ldt;
+<b class="nc">&nbsp;                    if (!formatHasHour) {</b>
+<b class="nc">&nbsp;                        if (!formatHasDay) {</b>
+<b class="nc">&nbsp;                            TemporalAccessor parsed = formatter.parse(str);</b>
+<b class="nc">&nbsp;                            int year = parsed.get(ChronoField.YEAR);</b>
+<b class="nc">&nbsp;                            int month = parsed.get(ChronoField.MONTH_OF_YEAR);</b>
+<b class="nc">&nbsp;                            int dayOfYear = 1;</b>
+<b class="nc">&nbsp;                            ldt = LocalDateTime.of(</b>
+<b class="nc">&nbsp;                                    LocalDate.of(year, month, dayOfYear),</b>
+&nbsp;                                    LocalTime.MIN
+&nbsp;                            );
+<b class="nc">&nbsp;                        } else {</b>
+&nbsp;                            LocalDate localDate;
+<b class="nc">&nbsp;                            if (str.length() == 19 &amp;&amp; jsonReader.isEnabled(JSONReader.Feature.SupportSmartMatch)) {</b>
+<b class="nc">&nbsp;                                ldt = DateUtils.parseLocalDateTime(str, 0, str.length());</b>
+&nbsp;                            } else {
+<b class="nc">&nbsp;                                if (format.indexOf(&#39;-&#39;) != -1 &amp;&amp; str.indexOf(&#39;-&#39;) == -1 &amp;&amp; TypeUtils.isInteger(str)) {</b>
+<b class="nc">&nbsp;                                    millis = Long.parseLong(str);</b>
+<b class="nc">&nbsp;                                    return new Date(millis);</b>
+&nbsp;                                }
+&nbsp;
+<b class="nc">&nbsp;                                localDate = LocalDate.parse(str, formatter);</b>
+<b class="nc">&nbsp;                                ldt = LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;                            }
+<b class="nc">&nbsp;                        }</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        if (str.length() == 19 &amp;&amp; (yyyyMMddhhmm16 || jsonReader.isEnabled(JSONReader.Feature.SupportSmartMatch))) {</b>
+<b class="nc">&nbsp;                            int length = yyyyMMddhhmm16 ? 16 : 19;</b>
+<b class="nc">&nbsp;                            ldt = DateUtils.parseLocalDateTime(str, 0, length);</b>
+<b class="nc">&nbsp;                        } else {</b>
+<b class="nc">&nbsp;                            ldt = LocalDateTime.parse(str, formatter);</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                    zdt = ldt.atZone(jsonReader.getContext().getZoneId());</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    zdt = jsonReader.readZonedDateTime();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (zdt == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            long seconds = zdt.toEpochSecond();</b>
+<b class="nc">&nbsp;            int nanos = zdt.toLocalTime().getNano();</b>
+<b class="nc">&nbsp;            if (seconds &lt; 0 &amp;&amp; nanos &gt; 0) {</b>
+<b class="nc">&nbsp;                millis = (seconds + 1) * 1000;</b>
+<b class="nc">&nbsp;                long adjustment = nanos / 1000_000 - 1000;</b>
+<b class="nc">&nbsp;                millis += adjustment;</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                millis = seconds * 1000L;</b>
+<b class="nc">&nbsp;                millis += nanos / 1000_000;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            if (jsonReader.isTypeRedirect() &amp;&amp; jsonReader.nextIfMatchIdent(&#39;&quot;&#39;, &#39;v&#39;, &#39;a&#39;, &#39;l&#39;, &#39;&quot;&#39;)) {</b>
+<b class="nc">&nbsp;                jsonReader.nextIfMatch(&#39;:&#39;);</b>
+<b class="nc">&nbsp;                millis = jsonReader.readInt64Value();</b>
+<b class="nc">&nbsp;                jsonReader.nextIfMatch(&#39;}&#39;);</b>
+<b class="nc">&nbsp;                jsonReader.setTypeRedirect(false);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                millis = jsonReader.readMillisFromString();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (millis == 0 &amp;&amp; jsonReader.wasNull()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (formatUnixTime) {</b>
+<b class="nc">&nbsp;                millis *= 1000;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new Date(millis);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:38</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,206 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SerializeConfig</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.serializer</a>
+</div>
+
+<h1>Coverage Summary for Class: SerializeConfig (com.alibaba.fastjson.serializer)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SerializeConfig</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/37)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SerializeConfig$ObjectSerializerAdapter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/44)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;  // IntelliJ API Decompiler stub source generated from a class file
+&nbsp;  // Implementation of methods is not available
+&nbsp;
+&nbsp;package com.alibaba.fastjson.serializer;
+&nbsp;
+&nbsp;public class SerializeConfig {
+&nbsp;    public static final com.alibaba.fastjson.serializer.SerializeConfig globalInstance;
+&nbsp;    private static boolean awtError;
+&nbsp;    private static boolean jdk8Error;
+&nbsp;    private static boolean oracleJdbcError;
+&nbsp;    private static boolean springfoxError;
+&nbsp;    private static boolean guavaError;
+<b class="nc">&nbsp;    private static boolean jodaError;</b>
+<b class="nc">&nbsp;    private boolean asm;</b>
+<b class="nc">&nbsp;    private com.alibaba.fastjson.serializer.ASMSerializerFactory asmFactory;</b>
+&nbsp;    protected java.lang.String typeKey;
+&nbsp;    public com.alibaba.fastjson.PropertyNamingStrategy propertyNamingStrategy;
+&nbsp;    private final com.alibaba.fastjson.util.IdentityHashMap&lt;java.lang.reflect.Type,com.alibaba.fastjson.serializer.ObjectSerializer&gt; serializers;
+&nbsp;    private final com.alibaba.fastjson.util.IdentityHashMap&lt;java.lang.reflect.Type,com.alibaba.fastjson.util.IdentityHashMap&lt;java.lang.reflect.Type,com.alibaba.fastjson.serializer.ObjectSerializer&gt;&gt; mixInSerializers;
+&nbsp;    private final boolean fieldBased;
+&nbsp;    private long[] denyClasses;
+&nbsp;    private java.util.List&lt;com.alibaba.fastjson.spi.Module&gt; modules;
+&nbsp;
+&nbsp;    public java.lang.String getTypeKey() { /* compiled code */ }
+&nbsp;
+&nbsp;    public void setTypeKey(java.lang.String typeKey) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    private final com.alibaba.fastjson.serializer.JavaBeanSerializer createASMSerializer(com.alibaba.fastjson.serializer.SerializeBeanInfo beanInfo) throws java.lang.Exception { /* compiled code */ }
+&nbsp;
+&nbsp;    public final com.alibaba.fastjson.serializer.ObjectSerializer createJavaBeanSerializer(java.lang.Class&lt;?&gt; clazz) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    public com.alibaba.fastjson.serializer.ObjectSerializer createJavaBeanSerializer(com.alibaba.fastjson.serializer.SerializeBeanInfo beanInfo) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public boolean isAsmEnable() { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public void setAsmEnable(boolean asmEnable) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public static com.alibaba.fastjson.serializer.SerializeConfig getGlobalInstance() { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public SerializeConfig() { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public SerializeConfig(boolean fieldBase) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public SerializeConfig(int tableSize) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public SerializeConfig(int tableSize, boolean fieldBase) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    private void initSerializers() { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public void addFilter(java.lang.Class&lt;?&gt; clazz, com.alibaba.fastjson.serializer.SerializeFilter filter) { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public void config(java.lang.Class&lt;?&gt; clazz, com.alibaba.fastjson.serializer.SerializerFeature feature, boolean value) { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public com.alibaba.fastjson.serializer.ObjectSerializer getObjectWriter(java.lang.Class&lt;?&gt; clazz) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public com.alibaba.fastjson.serializer.ObjectSerializer getObjectWriter(java.lang.Class&lt;?&gt; clazz, boolean create) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    private static java.lang.reflect.Member getEnumValueField(java.lang.Class clazz) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    protected com.alibaba.fastjson.serializer.ObjectSerializer getEnumSerializer() { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public final com.alibaba.fastjson.serializer.ObjectSerializer get(java.lang.reflect.Type type) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public boolean put(java.lang.Object type, java.lang.Object value) { /* compiled code */ }
+&nbsp;
+&nbsp;    public boolean put(java.lang.reflect.Type type, com.alibaba.fastjson.serializer.ObjectSerializer value) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    public void configEnumAsJavaBean(java.lang.Class&lt;? extends java.lang.Enum&gt;... enumClasses) { /* compiled code */ }
+&nbsp;
+&nbsp;    public void setPropertyNamingStrategy(com.alibaba.fastjson.PropertyNamingStrategy propertyNamingStrategy) { /* compiled code */ }
+&nbsp;
+&nbsp;    public void clearSerializers() { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public void register(com.alibaba.fastjson.spi.Module module) { /* compiled code */ }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:28</div>
+</div>
+</body>
+</html>

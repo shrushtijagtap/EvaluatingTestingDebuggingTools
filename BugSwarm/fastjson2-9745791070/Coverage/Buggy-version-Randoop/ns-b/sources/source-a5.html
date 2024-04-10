@@ -1,0 +1,569 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderImplMap</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderImplMap (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderImplMap</td>
+<td class="coverageStat">
+  <span class="percent">
+    21.4%
+  </span>
+  <span class="absValue">
+    (3/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    12.8%
+  </span>
+  <span class="absValue">
+    (28/219)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ObjectReaderImplMap$ObjectCreatorUF</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    18.8%
+  </span>
+  <span class="absValue">
+    (3/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    12%
+  </span>
+  <span class="absValue">
+    (28/234)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.util.*;
+&nbsp;
+&nbsp;import java.lang.reflect.*;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;import java.util.concurrent.ConcurrentMap;
+&nbsp;import java.util.concurrent.ConcurrentNavigableMap;
+&nbsp;import java.util.concurrent.ConcurrentSkipListMap;
+&nbsp;import java.util.function.Function;
+&nbsp;import java.util.function.Supplier;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONB.Constants.*;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.UNSAFE_SUPPORT;
+&nbsp;
+&nbsp;public final class ObjectReaderImplMap
+&nbsp;        implements ObjectReader {
+&nbsp;    static Function UNSAFE_OBJECT_CREATOR;
+<b class="fc">&nbsp;    static final Class CLASS_SINGLETON_MAP = Collections.singletonMap(1, 1).getClass();</b>
+<b class="fc">&nbsp;    static final Class CLASS_EMPTY_MAP = Collections.EMPTY_MAP.getClass();</b>
+<b class="fc">&nbsp;    static final Class CLASS_EMPTY_SORTED_MAP = Collections.emptySortedMap().getClass();</b>
+<b class="fc">&nbsp;    static final Class CLASS_EMPTY_NAVIGABLE_MAP = Collections.emptyNavigableMap().getClass();</b>
+<b class="fc">&nbsp;    static final Class CLASS_UNMODIFIABLE_MAP = Collections.unmodifiableMap(Collections.emptyMap()).getClass();</b>
+<b class="fc">&nbsp;    static final Class CLASS_UNMODIFIABLE_SORTED_MAP = Collections.unmodifiableSortedMap(Collections.emptySortedMap()).getClass();</b>
+<b class="fc">&nbsp;    static final Class CLASS_UNMODIFIABLE_NAVIGABLE_MAP = Collections.unmodifiableNavigableMap(Collections.emptyNavigableMap()).getClass();</b>
+&nbsp;
+<b class="fc">&nbsp;    public static ObjectReaderImplMap INSTANCE = new ObjectReaderImplMap(null, HashMap.class, HashMap.class, 0, null);</b>
+<b class="fc">&nbsp;    public static ObjectReaderImplMap INSTANCE_OBJECT = new ObjectReaderImplMap(null, JSONObject.class, JSONObject.class, 0, null);</b>
+&nbsp;
+&nbsp;    final Type fieldType;
+&nbsp;    final Class mapType;
+&nbsp;    final Class instanceType;
+&nbsp;    final long features;
+&nbsp;    final Function builder;
+&nbsp;    volatile boolean instanceError;
+&nbsp;
+&nbsp;    public static ObjectReader of(Type fieldType, Class mapType, long features) {
+<b class="fc">&nbsp;        Function builder = null;</b>
+<b class="fc">&nbsp;        Class instanceType = mapType;</b>
+<b class="fc">&nbsp;        if (mapType == Map.class</b>
+&nbsp;                || mapType == AbstractMap.class
+&nbsp;                || mapType == CLASS_SINGLETON_MAP
+&nbsp;        ) {
+<b class="nc">&nbsp;            instanceType = HashMap.class;</b>
+<b class="fc">&nbsp;        } else if (mapType == CLASS_UNMODIFIABLE_MAP) {</b>
+<b class="nc">&nbsp;            instanceType = LinkedHashMap.class;</b>
+<b class="fc">&nbsp;        } else if (mapType == SortedMap.class</b>
+&nbsp;                || mapType == CLASS_UNMODIFIABLE_SORTED_MAP
+&nbsp;                || mapType == CLASS_UNMODIFIABLE_NAVIGABLE_MAP
+&nbsp;        ) {
+<b class="nc">&nbsp;            instanceType = TreeMap.class;</b>
+<b class="fc">&nbsp;        } else if (mapType == ConcurrentMap.class) {</b>
+<b class="nc">&nbsp;            instanceType = ConcurrentHashMap.class;</b>
+<b class="fc">&nbsp;        } else if (mapType == ConcurrentNavigableMap.class) {</b>
+<b class="nc">&nbsp;            instanceType = ConcurrentSkipListMap.class;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            switch (mapType.getTypeName()) {</b>
+&nbsp;                case &quot;com.google.common.collect.ImmutableMap&quot;:
+&nbsp;                case &quot;com.google.common.collect.RegularImmutableMap&quot;:
+<b class="nc">&nbsp;                    instanceType = HashMap.class;</b>
+<b class="nc">&nbsp;                    builder = GuavaSupport.immutableMapConverter();</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;com.google.common.collect.SingletonImmutableBiMap&quot;:
+<b class="nc">&nbsp;                    instanceType = HashMap.class;</b>
+<b class="nc">&nbsp;                    builder = GuavaSupport.singletonBiMapConverter();</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (fieldType instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;            ParameterizedType parameterizedType = (ParameterizedType) fieldType;</b>
+&nbsp;
+<b class="nc">&nbsp;            Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();</b>
+<b class="nc">&nbsp;            if (actualTypeArguments.length == 2 &amp;&amp; !&quot;org.springframework.util.LinkedMultiValueMap&quot;.equals(instanceType.getName())) {</b>
+<b class="nc">&nbsp;                Type keyType = actualTypeArguments[0];</b>
+<b class="nc">&nbsp;                Type valueType = actualTypeArguments[1];</b>
+&nbsp;
+<b class="nc">&nbsp;                if (keyType == String.class &amp;&amp; valueType == String.class &amp;&amp; builder == null) {</b>
+<b class="nc">&nbsp;                    return new ObjectReaderImplMapString(mapType, instanceType, features);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return new ObjectReaderImplMapTyped(mapType, instanceType, keyType, valueType, 0, builder);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (fieldType == null &amp;&amp; features == 0) {</b>
+<b class="fc">&nbsp;            if (mapType == HashMap.class &amp;&amp; instanceType == HashMap.class) {</b>
+<b class="nc">&nbsp;                return INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (mapType == JSONObject.class &amp;&amp; instanceType == JSONObject.class) {</b>
+<b class="fc">&nbsp;                return INSTANCE_OBJECT;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String instanceTypeName = instanceType.getName();</b>
+<b class="nc">&nbsp;        switch (instanceTypeName) {</b>
+&nbsp;            case &quot;com.alibaba.fastjson.JSONObject&quot;:
+<b class="nc">&nbsp;                builder = createObjectSupplier(instanceType);</b>
+<b class="nc">&nbsp;                instanceType = HashMap.class;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;com.google.common.collect.RegularImmutableMap&quot;:
+<b class="nc">&nbsp;                builder = GuavaSupport.immutableMapConverter();</b>
+<b class="nc">&nbsp;                instanceType = HashMap.class;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;com.google.common.collect.SingletonImmutableBiMap&quot;:
+<b class="nc">&nbsp;                builder = GuavaSupport.singletonBiMapConverter();</b>
+<b class="nc">&nbsp;                instanceType = HashMap.class;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;com.google.common.collect.ArrayListMultimap&quot;:
+<b class="nc">&nbsp;                builder = GuavaSupport.createConvertFunction(instanceType);</b>
+<b class="nc">&nbsp;                instanceType = HashMap.class;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                if (instanceType == JSONObject1O.class) {</b>
+<b class="nc">&nbsp;                    Class objectClass = TypeUtils.loadClass(&quot;com.alibaba.fastjson.JSONObject&quot;);</b>
+<b class="nc">&nbsp;                    builder = createObjectSupplier(objectClass);</b>
+<b class="nc">&nbsp;                    instanceType = LinkedHashMap.class;</b>
+<b class="nc">&nbsp;                } else if (mapType == CLASS_UNMODIFIABLE_MAP) {</b>
+<b class="nc">&nbsp;                    builder = (Function&lt;Map, Map&gt;) Collections::unmodifiableMap;</b>
+<b class="nc">&nbsp;                } else if (mapType == CLASS_UNMODIFIABLE_SORTED_MAP) {</b>
+<b class="nc">&nbsp;                    builder = (Function&lt;SortedMap, SortedMap&gt;) Collections::unmodifiableSortedMap;</b>
+<b class="nc">&nbsp;                } else if (mapType == CLASS_UNMODIFIABLE_NAVIGABLE_MAP) {</b>
+<b class="nc">&nbsp;                    builder = (Function&lt;NavigableMap, NavigableMap&gt;) Collections::unmodifiableNavigableMap;</b>
+<b class="nc">&nbsp;                } else if (mapType == CLASS_SINGLETON_MAP) {</b>
+<b class="nc">&nbsp;                    builder = (Function&lt;Map, Map&gt;) (Map map) -&gt; {</b>
+<b class="nc">&nbsp;                        Map.Entry entry = (Map.Entry) map.entrySet().iterator().next();</b>
+<b class="nc">&nbsp;                        return Collections.singletonMap(entry.getKey(), entry.getValue());</b>
+&nbsp;                    };
+&nbsp;                }
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new ObjectReaderImplMap(fieldType, mapType, instanceType, features, builder);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    ObjectReaderImplMap(Type fieldType, Class mapType, Class instanceType, long features, Function builder) {</b>
+<b class="fc">&nbsp;        this.fieldType = fieldType;</b>
+<b class="fc">&nbsp;        this.mapType = mapType;</b>
+<b class="fc">&nbsp;        this.instanceType = instanceType;</b>
+<b class="fc">&nbsp;        this.features = features;</b>
+<b class="fc">&nbsp;        this.builder = builder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class getObjectClass() {
+<b class="nc">&nbsp;        return mapType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Function getBuildFunction() {
+<b class="nc">&nbsp;        return builder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createInstance(long features) {
+<b class="nc">&nbsp;        if (instanceType == HashMap.class) {</b>
+<b class="nc">&nbsp;            return new HashMap&lt;&gt;();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (instanceType == LinkedHashMap.class) {</b>
+<b class="nc">&nbsp;            return new LinkedHashMap&lt;&gt;();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (instanceType == JSONObject.class) {</b>
+<b class="nc">&nbsp;            return new JSONObject();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (instanceType == CLASS_EMPTY_MAP) {</b>
+<b class="nc">&nbsp;            return Collections.emptyMap();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (instanceType == CLASS_EMPTY_SORTED_MAP) {</b>
+<b class="nc">&nbsp;            return Collections.emptySortedMap();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (instanceType == CLASS_EMPTY_NAVIGABLE_MAP) {</b>
+<b class="nc">&nbsp;            return Collections.emptyNavigableMap();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (UNSAFE_SUPPORT) {</b>
+<b class="nc">&nbsp;            String instanceTypeName = instanceType.getName();</b>
+<b class="nc">&nbsp;            switch (instanceTypeName) {</b>
+&nbsp;                case &quot;com.ali.com.google.common.collect.EmptyImmutableBiMap&quot;:
+<b class="nc">&nbsp;                    return ((Supplier) () -&gt; {</b>
+&nbsp;                        try {
+<b class="nc">&nbsp;                            return UnsafeUtils.UNSAFE.allocateInstance(instanceType);</b>
+<b class="nc">&nbsp;                        } catch (InstantiationException e) {</b>
+<b class="nc">&nbsp;                            throw new JSONException(&quot;create map error : &quot; + instanceType);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    }).get();</b>
+&nbsp;                case &quot;java.util.ImmutableCollections$Map1&quot;:
+<b class="nc">&nbsp;                    return new HashMap&lt;&gt;();</b>
+&nbsp;                case &quot;java.util.ImmutableCollections$MapN&quot;:
+<b class="nc">&nbsp;                    return new LinkedHashMap&lt;&gt;();</b>
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            return instanceType.newInstance();</b>
+<b class="nc">&nbsp;        } catch (InstantiationException | IllegalAccessException e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;create map error : &quot; + instanceType);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createInstance(Map map, long features) {
+<b class="nc">&nbsp;        if (mapType.isInstance(map)) {</b>
+<b class="nc">&nbsp;            return map;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (mapType == JSONObject.class) {</b>
+<b class="nc">&nbsp;            return new JSONObject(map);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Map instance = (Map) this.createInstance(features);</b>
+<b class="nc">&nbsp;        instance.putAll(map);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (builder != null) {</b>
+<b class="nc">&nbsp;            return builder.apply(instance);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return instance;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public FieldReader getFieldReader(long hashCode) {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName1, long features) {
+<b class="nc">&nbsp;        ObjectReader objectReader = jsonReader.checkAutoType(mapType, 0, this.features | features);</b>
+<b class="nc">&nbsp;        if (objectReader != null &amp;&amp; objectReader != this) {</b>
+<b class="nc">&nbsp;            return objectReader.readJSONBObject(jsonReader, fieldType, fieldName1, features);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean emptyObject = false;</b>
+<b class="nc">&nbsp;        jsonReader.nextIfMatch(BC_OBJECT);</b>
+&nbsp;
+<b class="nc">&nbsp;        Supplier&lt;Map&gt; objectSupplier = jsonReader.getContext().getObjectSupplier();</b>
+<b class="nc">&nbsp;        Map map = null;</b>
+<b class="nc">&nbsp;        if (mapType == null &amp;&amp; objectSupplier != null) {</b>
+<b class="nc">&nbsp;            map = objectSupplier.get();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (instanceType == HashMap.class) {</b>
+<b class="nc">&nbsp;                map = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;            } else if (instanceType == LinkedHashMap.class) {</b>
+<b class="nc">&nbsp;                map = new LinkedHashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;            } else if (instanceType == JSONObject.class) {</b>
+<b class="nc">&nbsp;                map = new JSONObject();</b>
+<b class="nc">&nbsp;            } else if (instanceType == CLASS_EMPTY_MAP) {</b>
+<b class="nc">&nbsp;                map = Collections.EMPTY_MAP;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                JSONException error = null;</b>
+&nbsp;
+<b class="nc">&nbsp;                if (!instanceError) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        map = (Map) instanceType.newInstance();</b>
+<b class="nc">&nbsp;                    } catch (InstantiationException | IllegalAccessException e) {</b>
+<b class="nc">&nbsp;                        instanceError = true;</b>
+<b class="nc">&nbsp;                        error = new JSONException(jsonReader.info(&quot;create map error &quot; + instanceType));</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (instanceError &amp;&amp; Map.class.isAssignableFrom(instanceType.getSuperclass())) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        map = (Map) instanceType.getSuperclass().newInstance();</b>
+<b class="nc">&nbsp;                        error = null;</b>
+<b class="nc">&nbsp;                    } catch (InstantiationException | IllegalAccessException e) {</b>
+<b class="nc">&nbsp;                        if (error == null) {</b>
+<b class="nc">&nbsp;                            error = new JSONException(jsonReader.info(&quot;create map error &quot; + instanceType));</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (error != null) {</b>
+<b class="nc">&nbsp;                    throw error;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!emptyObject) {</b>
+<b class="nc">&nbsp;            for (int i = 0; ; ++i) {</b>
+<b class="nc">&nbsp;                byte type = jsonReader.getType();</b>
+<b class="nc">&nbsp;                if (type == BC_OBJECT_END) {</b>
+<b class="nc">&nbsp;                    jsonReader.next();</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                Object fieldName;
+<b class="nc">&nbsp;                if (type &gt;= BC_STR_ASCII_FIX_MIN &amp;&amp; type &lt;= BC_SYMBOL) {</b>
+<b class="nc">&nbsp;                    fieldName = jsonReader.readFieldName();</b>
+<b class="nc">&nbsp;                } else if (jsonReader.nextIfMatch(BC_REFERENCE)) {</b>
+<b class="nc">&nbsp;                    String reference = jsonReader.readString();</b>
+<b class="nc">&nbsp;                    fieldName = new ReferenceKey(i);</b>
+<b class="nc">&nbsp;                    jsonReader.addResolveTask(map, fieldName, JSONPath.of(reference));</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    fieldName = jsonReader.readAny();</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (jsonReader.isReference()) {</b>
+<b class="nc">&nbsp;                    String reference = jsonReader.readReference();</b>
+<b class="nc">&nbsp;                    if (&quot;..&quot;.equals(reference)) {</b>
+<b class="nc">&nbsp;                        map.put(fieldName, map);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        jsonReader.addResolveTask((Map) map, fieldName, JSONPath.of(reference));</b>
+<b class="nc">&nbsp;                        map.put(fieldName, null);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                Object value;
+<b class="nc">&nbsp;                type = jsonReader.getType();</b>
+<b class="nc">&nbsp;                if (type &gt;= BC_STR_ASCII_FIX_MIN &amp;&amp; type &lt;= BC_STR_UTF16BE) {</b>
+<b class="nc">&nbsp;                    value = jsonReader.readString();</b>
+<b class="nc">&nbsp;                } else if (type == BC_TYPED_ANY) {</b>
+<b class="nc">&nbsp;                    ObjectReader autoTypeObjectReader = jsonReader.checkAutoType(Object.class, 0, this.features | features);</b>
+<b class="nc">&nbsp;                    value = autoTypeObjectReader.readJSONBObject(jsonReader, null, fieldName, features);</b>
+<b class="nc">&nbsp;                } else if (type == BC_TRUE) {</b>
+<b class="nc">&nbsp;                    value = Boolean.TRUE;</b>
+<b class="nc">&nbsp;                    jsonReader.next();</b>
+<b class="nc">&nbsp;                } else if (type == BC_FALSE) {</b>
+<b class="nc">&nbsp;                    value = Boolean.FALSE;</b>
+<b class="nc">&nbsp;                    jsonReader.next();</b>
+<b class="nc">&nbsp;                } else if (type == BC_REFERENCE) {</b>
+<b class="nc">&nbsp;                    String reference = jsonReader.readReference();</b>
+<b class="nc">&nbsp;                    if (&quot;..&quot;.equals(reference)) {</b>
+<b class="nc">&nbsp;                        value = map;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        value = null;</b>
+<b class="nc">&nbsp;                        jsonReader.addResolveTask(map, fieldName, JSONPath.of(reference));</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } else if (type == BC_OBJECT) {</b>
+<b class="nc">&nbsp;                    value = jsonReader.readObject();</b>
+<b class="nc">&nbsp;                } else if (type &gt;= BC_ARRAY_FIX_MIN &amp;&amp; type &lt;= BC_ARRAY) {</b>
+<b class="nc">&nbsp;                    value = jsonReader.readArray();</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    value = jsonReader.readAny();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                map.put(fieldName, value);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (builder != null) {</b>
+<b class="nc">&nbsp;            return builder.apply(map);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return map;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        if (jsonReader.isJSONB()) {</b>
+<b class="nc">&nbsp;            return readJSONBObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONReader.Context context = jsonReader.getContext();</b>
+<b class="nc">&nbsp;        Supplier&lt;Map&gt; objectSupplier = jsonReader.getContext().getObjectSupplier();</b>
+&nbsp;        Map object;
+<b class="nc">&nbsp;        if (objectSupplier != null &amp;&amp; (mapType == null || mapType == JSONObject.class || &quot;com.alibaba.fastjson.JSONObject&quot;.equals(mapType.getName()))) {</b>
+<b class="nc">&nbsp;            object = objectSupplier.get();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            object = (Map) createInstance(context.getFeatures() | features);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        jsonReader.read(object, features);</b>
+&nbsp;
+<b class="nc">&nbsp;        jsonReader.nextIfMatch(&#39;,&#39;);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (builder != null) {</b>
+<b class="nc">&nbsp;            return builder.apply(object);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return object;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static Function createObjectSupplier(Class objectClass) {
+<b class="nc">&nbsp;        if (UNSAFE_SUPPORT) {</b>
+<b class="nc">&nbsp;            if (UNSAFE_OBJECT_CREATOR != null) {</b>
+<b class="nc">&nbsp;                return UNSAFE_OBJECT_CREATOR;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return UNSAFE_OBJECT_CREATOR = new ObjectCreatorUF(objectClass);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        Constructor constructor;
+&nbsp;        try {
+<b class="nc">&nbsp;            constructor = objectClass.getConstructor(Map.class);</b>
+<b class="nc">&nbsp;        } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;create JSONObject1 error&quot;);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return (Object arg) -&gt; {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                return constructor.newInstance(arg);</b>
+<b class="nc">&nbsp;            } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;create JSONObject1 error&quot;);</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    static class ObjectCreatorUF
+&nbsp;            implements Function {
+&nbsp;        final Class objectClass;
+&nbsp;        final Field map;
+&nbsp;        final long mapOffset;
+&nbsp;
+<b class="nc">&nbsp;        ObjectCreatorUF(Class objectClass) {</b>
+<b class="nc">&nbsp;            this.objectClass = objectClass;</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                map = objectClass.getDeclaredField(&quot;map&quot;);</b>
+<b class="nc">&nbsp;            } catch (NoSuchFieldException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;field map not found&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            mapOffset = UnsafeUtils.UNSAFE.objectFieldOffset(map);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object apply(Object map) {
+<b class="nc">&nbsp;            if (map == null) {</b>
+<b class="nc">&nbsp;                map = new HashMap&lt;&gt;();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            Object object;
+&nbsp;            try {
+<b class="nc">&nbsp;                object = UnsafeUtils.UNSAFE.allocateInstance(objectClass);</b>
+<b class="nc">&nbsp;                UnsafeUtils.UNSAFE.putObject(object, mapOffset, (Map) map);</b>
+<b class="nc">&nbsp;            } catch (InstantiationException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;create &quot; + objectClass.getName() + &quot; error&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            return object;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:47</div>
+</div>
+</body>
+</html>

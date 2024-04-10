@@ -33,8 +33,8 @@ import org.evosuite.runtime.EvoRunner;
 import org.evosuite.runtime.EvoRunnerParameters;
 import org.junit.runner.RunWith;
 
-@RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true, useJEE = true) 
-public class EvosuiteObjectReaderBean_ESTest extends ObjectReaderBean_ESTest_scaffolding {
+@RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true, useJEE = true)
+public class EvosuiteObjectReaderBean_ESTest extends EvosuiteObjectReaderBean_ESTest_scaffolding {
 
   @Test(timeout = 4000)
   public void test00()  throws Throwable  {
@@ -75,10 +75,10 @@ public class EvosuiteObjectReaderBean_ESTest extends ObjectReaderBean_ESTest_sca
       ObjectReader4<Object> objectReader4_0 = new ObjectReader4<Object>(class0, 64L, objectSchema0, (Supplier<Object>) null, function0, fieldReaderAnySetter0, fieldReaderAnySetter0, fieldReaderAnySetter0, fieldReaderAnySetter0);
       FormatStyle formatStyle0 = FormatStyle.SHORT;
       // Undeclared exception!
-      try { 
+      try {
         objectReader4_0.readObject(jSONReader0, fieldReaderAnySetter0.fieldType, (Object) formatStyle0, 1L);
         fail("Expecting exception: RuntimeException");
-      
+
       } catch(RuntimeException e) {
          //
          // expect object, but INT32 0, offset 0
@@ -93,10 +93,10 @@ public class EvosuiteObjectReaderBean_ESTest extends ObjectReaderBean_ESTest_sca
       ObjectReaderException<FormatStyle> objectReaderException0 = new ObjectReaderException<FormatStyle>(class0);
       JSONReader jSONReader0 = JSONReader.of("com.alibaba.fastjson2.reader.ObjectReaderBean", 3233, (-1670));
       // Undeclared exception!
-      try { 
+      try {
         objectReaderException0.readObject(jSONReader0, (Type) class0, (Object) jSONReader0, (long) (-1670));
         fail("Expecting exception: ArrayIndexOutOfBoundsException");
-      
+
       } catch(ArrayIndexOutOfBoundsException e) {
          //
          // 45
@@ -110,10 +110,10 @@ public class EvosuiteObjectReaderBean_ESTest extends ObjectReaderBean_ESTest_sca
       Class<Long> class0 = Long.class;
       ObjectReaderException<Long> objectReaderException0 = new ObjectReaderException<Long>(class0);
       // Undeclared exception!
-      try { 
+      try {
         objectReaderException0.processObjectInputSingleItemArray((JSONReader) null, class0, class0, 1276L);
         fail("Expecting exception: NullPointerException");
-      
+
       } catch(NullPointerException e) {
          //
          // no message in exception (getMessage() returned null)
@@ -128,10 +128,10 @@ public class EvosuiteObjectReaderBean_ESTest extends ObjectReaderBean_ESTest_sca
       ObjectReaderException<Long> objectReaderException0 = new ObjectReaderException<Long>(class0);
       JSONReader jSONReader0 = JSONReader.of("AW;%>f.i");
       // Undeclared exception!
-      try { 
+      try {
         objectReaderException0.processExtra(jSONReader0, "AW;%>f.i");
         fail("Expecting exception: RuntimeException");
-      
+
       } catch(RuntimeException e) {
          //
          // error, offset 1, char A
@@ -145,10 +145,10 @@ public class EvosuiteObjectReaderBean_ESTest extends ObjectReaderBean_ESTest_sca
       Class<Long> class0 = Long.class;
       ObjectReaderException<Long> objectReaderException0 = new ObjectReaderException<Long>(class0);
       // Undeclared exception!
-      try { 
+      try {
         objectReaderException0.processExtra((JSONReader) null, "AW;%>f.i");
         fail("Expecting exception: NullPointerException");
-      
+
       } catch(NullPointerException e) {
          //
          // no message in exception (getMessage() returned null)
@@ -162,10 +162,10 @@ public class EvosuiteObjectReaderBean_ESTest extends ObjectReaderBean_ESTest_sca
       Class<Long> class0 = Long.class;
       ObjectReaderException<Long> objectReaderException0 = new ObjectReaderException<Long>(class0);
       // Undeclared exception!
-      try { 
+      try {
         objectReaderException0.checkAutoType((JSONReader) null, class0, (-916L));
         fail("Expecting exception: NullPointerException");
-      
+
       } catch(NullPointerException e) {
          //
          // no message in exception (getMessage() returned null)
@@ -187,10 +187,10 @@ public class EvosuiteObjectReaderBean_ESTest extends ObjectReaderBean_ESTest_sca
       jSONReader_FeatureArray0[5] = jSONReader_Feature0;
       jSONReader_FeatureArray0[6] = jSONReader_FeatureArray0[2];
       // Undeclared exception!
-      try { 
+      try {
         JSONObject.parseObject("8[Y", class0, jSONReader_FeatureArray0);
         fail("Expecting exception: RuntimeException");
-      
+
       } catch(RuntimeException e) {
          //
          // offset 1, character 8, line 1, column 2, fastjson-version 2.0.21 8[Y
@@ -223,10 +223,10 @@ public class EvosuiteObjectReaderBean_ESTest extends ObjectReaderBean_ESTest_sca
       JSONReader.Context jSONReader_Context0 = new JSONReader.Context(objectReaderProvider0);
       JSONReader jSONReader0 = JSONReader.ofJSONB(byteArray0, jSONReader_Context0);
       // Undeclared exception!
-      try { 
+      try {
         objectReaderException0.processObjectInputSingleItemArray(jSONReader0, class0, beanInfo0, (-1875L));
         fail("Expecting exception: RuntimeException");
-      
+
       } catch(RuntimeException e) {
          //
          // expect {, but [, class java.lang.Long, parent fieldName com.alibaba.fastjson2.codec.BeanInfo@1, offset 0
@@ -247,10 +247,10 @@ public class EvosuiteObjectReaderBean_ESTest extends ObjectReaderBean_ESTest_sca
       JSONReader.Context jSONReader_Context0 = new JSONReader.Context(objectReaderProvider0);
       JSONReader jSONReader0 = JSONReader.ofJSONB(byteArray0, jSONReader_Context0);
       // Undeclared exception!
-      try { 
+      try {
         objectReaderException0.processObjectInputSingleItemArray(jSONReader0, class0, beanInfo0, 1006L);
         fail("Expecting exception: RuntimeException");
-      
+
       } catch(RuntimeException e) {
          //
          // array not support input INT32 0, offset 1/3
@@ -265,10 +265,10 @@ public class EvosuiteObjectReaderBean_ESTest extends ObjectReaderBean_ESTest_sca
       ObjectReaderException<Long> objectReaderException0 = new ObjectReaderException<Long>(class0);
       JSONReader jSONReader0 = JSONReader.of("+_zs8U$0ac/Y{E|@n");
       // Undeclared exception!
-      try { 
+      try {
         objectReaderException0.processExtra(jSONReader0, "+_zs8U$0ac/Y{E|@n");
         fail("Expecting exception: RuntimeException");
-      
+
       } catch(RuntimeException e) {
          //
          // offset 13
@@ -287,7 +287,7 @@ public class EvosuiteObjectReaderBean_ESTest extends ObjectReaderBean_ESTest_sca
       try {
         objectReader1_0 = new ObjectReader1<Long>((Class) null, 941L, jSONSchema0, (Supplier<Long>) null, (Function) null, (FieldReader) null);
         fail("Expecting exception: NullPointerException");
-      
+
       } catch(NullPointerException e) {
          //
          // no message in exception (getMessage() returned null)

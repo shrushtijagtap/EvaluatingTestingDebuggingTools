@@ -1,0 +1,326 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectWriterImplInstant</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectWriterImplInstant (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectWriterImplInstant</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/100)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.codec.DateTimeCodec;
+&nbsp;import com.alibaba.fastjson2.util.DateUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.time.*;
+&nbsp;import java.time.format.DateTimeFormatter;
+&nbsp;import java.util.Locale;
+&nbsp;
+&nbsp;final class ObjectWriterImplInstant
+&nbsp;        extends DateTimeCodec
+&nbsp;        implements ObjectWriter {
+<b class="nc">&nbsp;    static final ObjectWriterImplInstant INSTANCE = new ObjectWriterImplInstant(null, null);</b>
+&nbsp;    public ObjectWriterImplInstant(String format, Locale locale) {
+<b class="nc">&nbsp;        super(format, locale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeJSONB(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;        jsonWriter.writeInstant((Instant) object);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONWriter.Context context = jsonWriter.context;</b>
+&nbsp;
+<b class="nc">&nbsp;        String dateFormat = this.format != null</b>
+&nbsp;                ? this.format
+<b class="nc">&nbsp;                : context.getDateFormat();</b>
+&nbsp;
+<b class="nc">&nbsp;        Instant instant = (Instant) object;</b>
+<b class="nc">&nbsp;        if (dateFormat == null) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeInstant(instant);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean yyyyMMddhhmmss19 = this.yyyyMMddhhmmss19 || (context.isFormatyyyyMMddhhmmss19() &amp;&amp; this.format == null);</b>
+<b class="nc">&nbsp;        if (yyyyMMddhhmmss14 || yyyyMMddhhmmss19 || yyyyMMdd8 || yyyyMMdd10) {</b>
+<b class="nc">&nbsp;            final int SECONDS_PER_DAY = 60 * 60 * 24;</b>
+<b class="nc">&nbsp;            ZoneId zoneId = context.getZoneId();</b>
+<b class="nc">&nbsp;            long epochSecond = instant.getEpochSecond();</b>
+&nbsp;            int offsetTotalSeconds;
+<b class="nc">&nbsp;            if (zoneId == DateUtils.SHANGHAI_ZONE_ID || zoneId.getRules() == DateUtils.SHANGHAI_ZONE_RULES) {</b>
+<b class="nc">&nbsp;                offsetTotalSeconds = DateUtils.getShanghaiZoneOffsetTotalSeconds(epochSecond);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                offsetTotalSeconds = zoneId.getRules().getOffset(instant).getTotalSeconds();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            long localSecond = epochSecond + offsetTotalSeconds;</b>
+<b class="nc">&nbsp;            long localEpochDay = Math.floorDiv(localSecond, (long) SECONDS_PER_DAY);</b>
+<b class="nc">&nbsp;            int secsOfDay = (int) Math.floorMod(localSecond, (long) SECONDS_PER_DAY);</b>
+&nbsp;            int year, month, dayOfMonth;
+&nbsp;            {
+<b class="nc">&nbsp;                final int DAYS_PER_CYCLE = 146097;</b>
+<b class="nc">&nbsp;                final long DAYS_0000_TO_1970 = (DAYS_PER_CYCLE * 5L) - (30L * 365L + 7L);</b>
+&nbsp;
+<b class="nc">&nbsp;                long zeroDay = localEpochDay + DAYS_0000_TO_1970;</b>
+&nbsp;                // find the march-based year
+<b class="nc">&nbsp;                zeroDay -= 60;  // adjust to 0000-03-01 so leap day is at end of four year cycle</b>
+<b class="nc">&nbsp;                long adjust = 0;</b>
+<b class="nc">&nbsp;                if (zeroDay &lt; 0) {</b>
+&nbsp;                    // adjust negative years to positive for calculation
+<b class="nc">&nbsp;                    long adjustCycles = (zeroDay + 1) / DAYS_PER_CYCLE - 1;</b>
+<b class="nc">&nbsp;                    adjust = adjustCycles * 400;</b>
+<b class="nc">&nbsp;                    zeroDay += -adjustCycles * DAYS_PER_CYCLE;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                long yearEst = (400 * zeroDay + 591) / DAYS_PER_CYCLE;</b>
+<b class="nc">&nbsp;                long doyEst = zeroDay - (365 * yearEst + yearEst / 4 - yearEst / 100 + yearEst / 400);</b>
+<b class="nc">&nbsp;                if (doyEst &lt; 0) {</b>
+&nbsp;                    // fix estimate
+<b class="nc">&nbsp;                    yearEst--;</b>
+<b class="nc">&nbsp;                    doyEst = zeroDay - (365 * yearEst + yearEst / 4 - yearEst / 100 + yearEst / 400);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                yearEst += adjust;  // reset any negative year</b>
+<b class="nc">&nbsp;                int marchDoy0 = (int) doyEst;</b>
+&nbsp;
+&nbsp;                // convert march-based values back to january-based
+<b class="nc">&nbsp;                int marchMonth0 = (marchDoy0 * 5 + 2) / 153;</b>
+<b class="nc">&nbsp;                month = (marchMonth0 + 2) % 12 + 1;</b>
+<b class="nc">&nbsp;                dayOfMonth = marchDoy0 - (marchMonth0 * 306 + 5) / 10 + 1;</b>
+<b class="nc">&nbsp;                yearEst += marchMonth0 / 10;</b>
+&nbsp;
+&nbsp;                // check year now we are certain it is correct
+<b class="nc">&nbsp;                if (yearEst &lt; Year.MIN_VALUE || yearEst &gt; Year.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                    throw new DateTimeException(&quot;Invalid year &quot; + yearEst);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                year = (int) yearEst;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            int hour, minute, second;
+&nbsp;            {
+<b class="nc">&nbsp;                final int MINUTES_PER_HOUR = 60;</b>
+<b class="nc">&nbsp;                final int SECONDS_PER_MINUTE = 60;</b>
+<b class="nc">&nbsp;                final int SECONDS_PER_HOUR = SECONDS_PER_MINUTE * MINUTES_PER_HOUR;</b>
+&nbsp;
+<b class="nc">&nbsp;                long secondOfDay = secsOfDay;</b>
+<b class="nc">&nbsp;                if (secondOfDay &lt; 0 || secondOfDay &gt; 86399) {</b>
+<b class="nc">&nbsp;                    throw new DateTimeException(&quot;Invalid secondOfDay &quot; + secondOfDay);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                int hours = (int) (secondOfDay / SECONDS_PER_HOUR);</b>
+<b class="nc">&nbsp;                secondOfDay -= hours * SECONDS_PER_HOUR;</b>
+<b class="nc">&nbsp;                int minutes = (int) (secondOfDay / SECONDS_PER_MINUTE);</b>
+<b class="nc">&nbsp;                secondOfDay -= minutes * SECONDS_PER_MINUTE;</b>
+&nbsp;
+<b class="nc">&nbsp;                hour = hours;</b>
+<b class="nc">&nbsp;                minute = minutes;</b>
+<b class="nc">&nbsp;                second = (int) secondOfDay;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (yyyyMMddhhmmss19) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeDateTime19(</b>
+&nbsp;                        year,
+&nbsp;                        month,
+&nbsp;                        dayOfMonth,
+&nbsp;                        hour,
+&nbsp;                        minute,
+&nbsp;                        second
+&nbsp;                );
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (yyyyMMddhhmmss14) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeDateTime14(</b>
+&nbsp;                        year,
+&nbsp;                        month,
+&nbsp;                        dayOfMonth,
+&nbsp;                        hour,
+&nbsp;                        minute,
+&nbsp;                        second
+&nbsp;                );
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (yyyyMMdd10) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeDateYYYMMDD10(</b>
+&nbsp;                        year,
+&nbsp;                        month,
+&nbsp;                        dayOfMonth
+&nbsp;                );
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (yyyyMMdd8) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeDateYYYMMDD8(</b>
+&nbsp;                        year,
+&nbsp;                        month,
+&nbsp;                        dayOfMonth
+&nbsp;                );
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, context.getZoneId());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (formatUnixTime || (format == null &amp;&amp; context.isDateFormatUnixTime())) {</b>
+<b class="nc">&nbsp;            long millis = zdt.toInstant().toEpochMilli();</b>
+<b class="nc">&nbsp;            jsonWriter.writeInt64(millis / 1000);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (formatMillis || (format == null &amp;&amp; context.isDateFormatMillis())) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeInt64(zdt</b>
+<b class="nc">&nbsp;                    .toInstant()</b>
+<b class="nc">&nbsp;                    .toEpochMilli());</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int year = zdt.getYear();</b>
+<b class="nc">&nbsp;        if (year &gt;= 0 &amp;&amp; year &lt;= 9999) {</b>
+<b class="nc">&nbsp;            if (formatISO8601 || (format == null &amp;&amp; context.isDateFormatISO8601())) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeDateTimeISO8601(</b>
+&nbsp;                        year,
+<b class="nc">&nbsp;                        zdt.getMonthValue(),</b>
+<b class="nc">&nbsp;                        zdt.getDayOfMonth(),</b>
+<b class="nc">&nbsp;                        zdt.getHour(),</b>
+<b class="nc">&nbsp;                        zdt.getMinute(),</b>
+<b class="nc">&nbsp;                        zdt.getSecond(),</b>
+<b class="nc">&nbsp;                        zdt.getNano() / 1000_000,</b>
+<b class="nc">&nbsp;                        zdt.getOffset().getTotalSeconds(),</b>
+&nbsp;                        true
+&nbsp;                );
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (yyyyMMdd8) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeDateYYYMMDD8(</b>
+&nbsp;                        year,
+<b class="nc">&nbsp;                        zdt.getMonthValue(),</b>
+<b class="nc">&nbsp;                        zdt.getDayOfMonth());</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (yyyyMMdd10) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeDateYYYMMDD10(</b>
+&nbsp;                        year,
+<b class="nc">&nbsp;                        zdt.getMonthValue(),</b>
+<b class="nc">&nbsp;                        zdt.getDayOfMonth());</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        DateTimeFormatter formatter = this.getDateFormatter();</b>
+<b class="nc">&nbsp;        if (formatter == null) {</b>
+<b class="nc">&nbsp;            formatter = context.getDateFormatter();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (formatter == null) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeZonedDateTime(zdt);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String str = formatter.format(zdt);</b>
+<b class="nc">&nbsp;            jsonWriter.writeString(str);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:21</div>
+</div>
+</body>
+</html>

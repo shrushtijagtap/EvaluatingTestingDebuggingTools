@@ -1,0 +1,851 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CSVReader</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.support.csv</a>
+</div>
+
+<h1>Coverage Summary for Class: CSVReader (com.alibaba.fastjson2.support.csv)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CSVReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/57)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/341)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.support.csv;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONFactory;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.reader.*;
+&nbsp;import com.alibaba.fastjson2.stream.StreamReader;
+&nbsp;import com.alibaba.fastjson2.util.IOUtils;
+&nbsp;import com.alibaba.fastjson2.util.JDKUtils;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.Consumer;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.*;
+&nbsp;
+&nbsp;public abstract class CSVReader&lt;T&gt;
+&nbsp;        extends StreamReader
+&nbsp;        implements Closeable {
+&nbsp;    boolean quote;
+&nbsp;    protected Class&lt;T&gt; objectClass;
+&nbsp;
+<b class="nc">&nbsp;    CSVReader() {</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    CSVReader(Class&lt;T&gt; objectClass) {</b>
+<b class="nc">&nbsp;        this.objectClass = objectClass;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public CSVReader(Type[] types) {
+<b class="nc">&nbsp;        super(types);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void config(Feature... features) {
+<b class="nc">&nbsp;        for (Feature feature : features) {</b>
+<b class="nc">&nbsp;            this.features |= feature.mask;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void config(Feature feature, boolean state) {
+<b class="nc">&nbsp;        if (state) {</b>
+<b class="nc">&nbsp;            this.features |= feature.mask;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            this.features &amp;= ~feature.mask;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; CSVReader&lt;T&gt; of(Reader reader, Class&lt;T&gt; objectClass) {
+<b class="nc">&nbsp;        return new CSVReaderUTF16(reader, objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; CSVReader of(String str, Class&lt;T&gt; objectClass) {
+<b class="nc">&nbsp;        if (JVM_VERSION &gt; 8 &amp;&amp; STRING_VALUE != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                int coder = STRING_CODER.applyAsInt(str);</b>
+<b class="nc">&nbsp;                if (coder == 0) {</b>
+<b class="nc">&nbsp;                    byte[] bytes = STRING_VALUE.apply(str);</b>
+<b class="nc">&nbsp;                    return new CSVReaderUTF8(bytes, 0, bytes.length, StandardCharsets.ISO_8859_1, objectClass);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;unsafe get String.coder error&quot;);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char[] chars = JDKUtils.getCharArray(str);</b>
+<b class="nc">&nbsp;        return new CSVReaderUTF16(chars, 0, chars.length, objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; CSVReader&lt;T&gt; of(char[] chars, Class&lt;T&gt; objectClass) {
+<b class="nc">&nbsp;        return new CSVReaderUTF16(chars, 0, chars.length, objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; CSVReader&lt;T&gt; of(byte[] utf8Bytes, Class&lt;T&gt; objectClass) {
+<b class="nc">&nbsp;        return of(utf8Bytes, 0, utf8Bytes.length, StandardCharsets.UTF_8, objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVReader of(File file, Type... types) throws IOException {
+<b class="nc">&nbsp;        return new CSVReaderUTF8(new FileInputStream(file), StandardCharsets.UTF_8, types);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVReader of(File file, ByteArrayValueConsumer consumer) throws IOException {
+<b class="nc">&nbsp;        return of(file, StandardCharsets.UTF_8, consumer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVReader of(File file, Charset charset, ByteArrayValueConsumer consumer) throws IOException {
+<b class="nc">&nbsp;        if (charset == StandardCharsets.UTF_16</b>
+&nbsp;                || charset == StandardCharsets.UTF_16LE
+&nbsp;                || charset == StandardCharsets.UTF_16BE
+&nbsp;        ) {
+<b class="nc">&nbsp;            throw new JSONException(&quot;not support charset : &quot; + charset);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new CSVReaderUTF8(new FileInputStream(file), charset, consumer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVReader of(File file, CharArrayValueConsumer consumer) throws IOException {
+<b class="nc">&nbsp;        return of(file, StandardCharsets.UTF_8, consumer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVReader of(File file, Charset charset, CharArrayValueConsumer consumer) throws IOException {
+<b class="nc">&nbsp;        return new CSVReaderUTF16(new InputStreamReader(new FileInputStream(file), charset), consumer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVReader of(File file, Charset charset, Type... types) throws IOException {
+<b class="nc">&nbsp;        if (JDKUtils.JVM_VERSION == 8</b>
+&nbsp;                || charset == StandardCharsets.UTF_16
+&nbsp;                || charset == StandardCharsets.UTF_16LE
+&nbsp;                || charset == StandardCharsets.UTF_16BE
+&nbsp;        ) {
+<b class="nc">&nbsp;            return new CSVReaderUTF16(</b>
+&nbsp;                    new InputStreamReader(new FileInputStream(file), charset), types
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new CSVReaderUTF8(new FileInputStream(file), charset, types);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; CSVReader&lt;T&gt; of(File file, Class&lt;T&gt; objectClass) throws IOException {
+<b class="nc">&nbsp;        return of(file, StandardCharsets.UTF_8, objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; CSVReader&lt;T&gt; of(File file, Charset charset, Class&lt;T&gt; objectClass) throws IOException {
+<b class="nc">&nbsp;        if (JDKUtils.JVM_VERSION == 8</b>
+&nbsp;                || charset == StandardCharsets.UTF_16
+&nbsp;                || charset == StandardCharsets.UTF_16LE
+&nbsp;                || charset == StandardCharsets.UTF_16BE) {
+<b class="nc">&nbsp;            return new CSVReaderUTF16(</b>
+&nbsp;                    new InputStreamReader(
+&nbsp;                            new FileInputStream(file),
+&nbsp;                            charset
+&nbsp;                    ),
+&nbsp;                    objectClass
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new CSVReaderUTF8(new FileInputStream(file), charset, objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVReader of(InputStream in, Type... types) throws IOException {
+<b class="nc">&nbsp;        return of(in, StandardCharsets.UTF_8, types);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; CSVReader&lt;T&gt; of(InputStream in, Class&lt;T&gt; objectClass) {
+<b class="nc">&nbsp;        return of(in, StandardCharsets.UTF_8, objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; CSVReader&lt;T&gt; of(InputStream in, Charset charset, Class&lt;T&gt; objectClass) {
+<b class="nc">&nbsp;        if (JDKUtils.JVM_VERSION == 8</b>
+&nbsp;                || charset == StandardCharsets.UTF_16
+&nbsp;                || charset == StandardCharsets.UTF_16LE
+&nbsp;                || charset == StandardCharsets.UTF_16BE
+&nbsp;        ) {
+<b class="nc">&nbsp;            return new CSVReaderUTF16(</b>
+&nbsp;                    new InputStreamReader(in, charset),
+&nbsp;                    objectClass
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new CSVReaderUTF8(in, charset, objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVReader of(InputStream in, Charset charset, Type... types) throws IOException {
+<b class="nc">&nbsp;        if (JDKUtils.JVM_VERSION == 8</b>
+&nbsp;                || charset == StandardCharsets.UTF_16
+&nbsp;                || charset == StandardCharsets.UTF_16LE
+&nbsp;                || charset == StandardCharsets.UTF_16BE) {
+<b class="nc">&nbsp;            return new CSVReaderUTF16(</b>
+&nbsp;                    new InputStreamReader(in, charset), types
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new CSVReaderUTF8(in, charset, types);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVReader of(Reader in, Type... types) throws IOException {
+<b class="nc">&nbsp;        return new CSVReaderUTF16(in, types);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVReader of(String str, Type... types) {
+<b class="nc">&nbsp;        if (JVM_VERSION &gt; 8 &amp;&amp; STRING_VALUE != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                int coder = STRING_CODER.applyAsInt(str);</b>
+<b class="nc">&nbsp;                if (coder == 0) {</b>
+<b class="nc">&nbsp;                    byte[] bytes = STRING_VALUE.apply(str);</b>
+<b class="nc">&nbsp;                    return new CSVReaderUTF8(bytes, 0, bytes.length, types);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;unsafe get String.coder error&quot;);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char[] chars = JDKUtils.getCharArray(str);</b>
+<b class="nc">&nbsp;        return new CSVReaderUTF16(chars, 0, chars.length, types);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVReader of(char[] chars, Type... types) {
+<b class="nc">&nbsp;        return new CSVReaderUTF16(chars, 0, chars.length, types);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; CSVReader&lt;T&gt; of(
+&nbsp;            char[] chars,
+&nbsp;            int off,
+&nbsp;            int len,
+&nbsp;            CharArrayValueConsumer consumer
+&nbsp;    ) {
+<b class="nc">&nbsp;        return new CSVReaderUTF16(chars, off, len, consumer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVReader of(byte[] utf8Bytes, Type... types) {
+<b class="nc">&nbsp;        return new CSVReaderUTF8(utf8Bytes, 0, utf8Bytes.length, types);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CSVReader of(byte[] utf8Bytes, ByteArrayValueConsumer consumer) {
+<b class="nc">&nbsp;        return of(utf8Bytes, 0, utf8Bytes.length, StandardCharsets.UTF_8, consumer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; CSVReader&lt;T&gt; of(
+&nbsp;            byte[] utf8Bytes,
+&nbsp;            int off,
+&nbsp;            int len,
+&nbsp;            Charset charset, ByteArrayValueConsumer consumer
+&nbsp;    ) {
+<b class="nc">&nbsp;        return new CSVReaderUTF8(utf8Bytes, off, len, charset, consumer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; CSVReader&lt;T&gt; of(byte[] utf8Bytes, Charset charset, Class&lt;T&gt; objectClass) {
+<b class="nc">&nbsp;        return of(utf8Bytes, 0, utf8Bytes.length, charset, objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; CSVReader&lt;T&gt; of(byte[] utf8Bytes, int off, int len, Class&lt;T&gt; objectClass) {
+<b class="nc">&nbsp;        return new CSVReaderUTF8(utf8Bytes, off, len, StandardCharsets.UTF_8, objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; CSVReader&lt;T&gt; of(byte[] utf8Bytes, int off, int len, Charset charset, Class&lt;T&gt; objectClass) {
+<b class="nc">&nbsp;        if (charset == StandardCharsets.UTF_16</b>
+&nbsp;                || charset == StandardCharsets.UTF_16LE
+&nbsp;                || charset == StandardCharsets.UTF_16BE
+&nbsp;        ) {
+<b class="nc">&nbsp;            char[] chars = new char[len];</b>
+<b class="nc">&nbsp;            int size = IOUtils.decodeUTF8(utf8Bytes, off, len, chars);</b>
+<b class="nc">&nbsp;            return new CSVReaderUTF16(chars, 0, size, objectClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new CSVReaderUTF8(utf8Bytes, off, len, charset, objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; CSVReader&lt;T&gt; of(char[] utf8Bytes, int off, int len, Class&lt;T&gt; objectClass) {
+<b class="nc">&nbsp;        return new CSVReaderUTF16(utf8Bytes, off, len, objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void skipLines(int lines) throws IOException {
+<b class="nc">&nbsp;        if (lines &lt; 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        for (int i = 0; i &lt; lines; i++) {</b>
+<b class="nc">&nbsp;            seekLine();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;String&gt; readHeader() {
+<b class="nc">&nbsp;        String[] columns = (String[]) readLineValues(true);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (objectClass != null) {</b>
+<b class="nc">&nbsp;            ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+<b class="nc">&nbsp;            boolean fieldBased = (features &amp; JSONReader.Feature.FieldBased.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;            Type[] types = new Type[columns.length];</b>
+<b class="nc">&nbsp;            ObjectReader[] typeReaders = new ObjectReader[columns.length];</b>
+<b class="nc">&nbsp;            FieldReader[] fieldReaders = new FieldReader[columns.length];</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; columns.length; i++) {</b>
+<b class="nc">&nbsp;                String column = columns[i].trim();</b>
+<b class="nc">&nbsp;                FieldReader fieldReader = provider.createFieldReader(objectClass, column, features);</b>
+<b class="nc">&nbsp;                if (fieldReader != null) {</b>
+<b class="nc">&nbsp;                    fieldReaders[i] = fieldReader;</b>
+<b class="nc">&nbsp;                    Type fieldType = fieldReader.fieldType;</b>
+<b class="nc">&nbsp;                    if (fieldType instanceof Class) {</b>
+<b class="nc">&nbsp;                        Class fieldClass = (Class) fieldType;</b>
+<b class="nc">&nbsp;                        if (fieldClass.isPrimitive()) {</b>
+<b class="nc">&nbsp;                            fieldType = TypeUtils.nonePrimitive((Class) fieldType);</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                    types[i] = fieldType;</b>
+<b class="nc">&nbsp;                    typeReaders[i] = provider.getObjectReader(fieldType, fieldBased);</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    types[i] = String.class;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            this.types = types;</b>
+<b class="nc">&nbsp;            this.typeReaders = typeReaders;</b>
+<b class="nc">&nbsp;            this.fieldReaders = fieldReaders;</b>
+<b class="nc">&nbsp;            this.objectCreator = provider.createObjectCreator(objectClass, features);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.columns = Arrays.asList(columns);</b>
+<b class="nc">&nbsp;        this.columnStats = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; columns.length; i++) {</b>
+<b class="nc">&nbsp;            this.columnStats.add(new ColumnStat(columns[i]));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (rowCount == 1) {</b>
+<b class="nc">&nbsp;            rowCount = lineTerminated ? 0 : -1;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return this.columns;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;String&gt; getColumns() {
+<b class="nc">&nbsp;        return columns;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getColumn(int columnIndex) {
+<b class="nc">&nbsp;        if (columns != null &amp;&amp; columnIndex &lt; columns.size()) {</b>
+<b class="nc">&nbsp;            return columns.get(columnIndex);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Type getColumnType(int columnIndex) {
+<b class="nc">&nbsp;        if (types != null &amp;&amp; columnIndex &lt; types.length) {</b>
+<b class="nc">&nbsp;            return types[columnIndex];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;ColumnStat&gt; getColumnStats() {
+<b class="nc">&nbsp;        return columnStats;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void readLineObjectAll(Consumer&lt;T&gt; consumer) {
+<b class="nc">&nbsp;        readLineObjectAll(true, consumer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract void readLineObjectAll(boolean readHeader, Consumer&lt;T&gt; consumer);
+&nbsp;
+&nbsp;    public T readLineObject() {
+<b class="nc">&nbsp;        if (inputEnd) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldReaders == null) {</b>
+<b class="nc">&nbsp;            ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+<b class="nc">&nbsp;            if (objectClass != null) {</b>
+<b class="nc">&nbsp;                boolean fieldBased = (features &amp; JSONReader.Feature.FieldBased.mask) != 0;</b>
+<b class="nc">&nbsp;                ObjectReader objectReader = provider.getObjectReader(objectClass, fieldBased);</b>
+<b class="nc">&nbsp;                if (objectReader instanceof ObjectReaderAdapter) {</b>
+<b class="nc">&nbsp;                    this.fieldReaders = ((ObjectReaderAdapter) objectReader).getFieldReaders();</b>
+<b class="nc">&nbsp;                    this.types = new Type[fieldReaders.length];</b>
+<b class="nc">&nbsp;                    for (int i = 0; i &lt; this.types.length; i++) {</b>
+<b class="nc">&nbsp;                        types[i] = fieldReaders[i].fieldType;</b>
+&nbsp;                    }
+&nbsp;                } else {
+<b class="nc">&nbsp;                    throw new JSONException(&quot;not support operation : &quot; + objectClass);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;not support operation, objectClass is null&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            objectCreator = provider.createObjectCreator(objectClass, features);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectCreator == null) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;not support operation, objectClass is null&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Object[] values = readLineValues(false);</b>
+<b class="nc">&nbsp;        if (values == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldReaders != null) {</b>
+<b class="nc">&nbsp;            Object object = objectCreator.get();</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; this.fieldReaders.length; i++) {</b>
+<b class="nc">&nbsp;                FieldReader fieldReader = fieldReaders[i];</b>
+<b class="nc">&nbsp;                if (fieldReader != null) {</b>
+<b class="nc">&nbsp;                    fieldReader.accept(object, values[i]);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return (T) object;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;not support operation, objectClass is null&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract boolean isEnd();
+&nbsp;
+&nbsp;    public final Object[] readLineValues() {
+<b class="nc">&nbsp;        return readLineValues(false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected abstract Object[] readLineValues(boolean strings);
+&nbsp;
+&nbsp;    public final String[] readLine() {
+<b class="nc">&nbsp;        return (String[]) readLineValues(true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int rowCount(String str, Feature... features) {
+<b class="nc">&nbsp;        CSVReader state = new CSVReaderUTF8(features);</b>
+<b class="nc">&nbsp;        state.rowCount(str, str.length());</b>
+<b class="nc">&nbsp;        return state.rowCount();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int rowCount(byte[] bytes, Feature... features) {
+<b class="nc">&nbsp;        CSVReaderUTF8 state = new CSVReaderUTF8(features);</b>
+<b class="nc">&nbsp;        state.rowCount(bytes, bytes.length);</b>
+<b class="nc">&nbsp;        return state.rowCount();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int rowCount(char[] chars, Feature... features) {
+<b class="nc">&nbsp;        CSVReaderUTF16 state = new CSVReaderUTF16(features);</b>
+<b class="nc">&nbsp;        state.rowCount(chars, chars.length);</b>
+<b class="nc">&nbsp;        return state.rowCount();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int rowCount(File file) throws IOException {
+<b class="nc">&nbsp;        if (!file.exists()) {</b>
+<b class="nc">&nbsp;            return -1;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        try (FileInputStream in = new FileInputStream(file)) {</b>
+<b class="nc">&nbsp;            return rowCount(in);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int rowCount(InputStream in) throws IOException {
+<b class="nc">&nbsp;        byte[] bytes = new byte[SIZE_512K];</b>
+&nbsp;
+<b class="nc">&nbsp;        CSVReaderUTF8 state = new CSVReaderUTF8();</b>
+&nbsp;        while (true) {
+<b class="nc">&nbsp;            int cnt = in.read(bytes);</b>
+<b class="nc">&nbsp;            if (cnt == -1) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            state.rowCount(bytes, cnt);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return state.rowCount();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int errorCount() {
+<b class="nc">&nbsp;        return errorCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int rowCount() {
+<b class="nc">&nbsp;        return lineTerminated ? rowCount : rowCount + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    void rowCount(String bytes, int length) {
+<b class="nc">&nbsp;        lineTerminated = false;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; length; i++) {</b>
+<b class="nc">&nbsp;            char ch = bytes.charAt(i);</b>
+<b class="nc">&nbsp;            if (ch == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                lineSize++;</b>
+<b class="nc">&nbsp;                if (!quote) {</b>
+<b class="nc">&nbsp;                    quote = true;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    int n = i + 1;</b>
+<b class="nc">&nbsp;                    if (n &gt;= length) {</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    char next = bytes.charAt(n);</b>
+<b class="nc">&nbsp;                    if (next == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                        i++;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        quote = false;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (quote) {</b>
+<b class="nc">&nbsp;                lineSize++;</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (ch == &#39;\n&#39;) {</b>
+<b class="nc">&nbsp;                if (lineSize &gt; 0 || (features &amp; Feature.IgnoreEmptyLine.mask) == 0) {</b>
+<b class="nc">&nbsp;                    rowCount++;</b>
+<b class="nc">&nbsp;                    lineSize = 0;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                lineTerminated = i + 1 == length;</b>
+<b class="nc">&nbsp;            } else if (ch == &#39;\r&#39;) {</b>
+<b class="nc">&nbsp;                lineTerminated = true;</b>
+<b class="nc">&nbsp;                if (lineSize &gt; 0 || (features &amp; Feature.IgnoreEmptyLine.mask) == 0) {</b>
+<b class="nc">&nbsp;                    rowCount++;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                lineSize = 0;</b>
+<b class="nc">&nbsp;                int n = i + 1;</b>
+<b class="nc">&nbsp;                if (n &gt;= length) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                char next = bytes.charAt(n);</b>
+<b class="nc">&nbsp;                if (next == &#39;\n&#39;) {</b>
+<b class="nc">&nbsp;                    i++;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                lineTerminated = i + 1 == length;</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                lineSize++;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    void rowCount(byte[] bytes, int length) {
+<b class="nc">&nbsp;        lineTerminated = false;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; length; i++) {</b>
+<b class="nc">&nbsp;            if (i + 4 &lt; length) {</b>
+<b class="nc">&nbsp;                byte b0 = bytes[i];</b>
+<b class="nc">&nbsp;                byte b1 = bytes[i + 1];</b>
+<b class="nc">&nbsp;                byte b2 = bytes[i + 2];</b>
+<b class="nc">&nbsp;                byte b3 = bytes[i + 3];</b>
+<b class="nc">&nbsp;                if (b0 &gt; &#39;&quot;&#39;</b>
+&nbsp;                        &amp;&amp; b1 &gt; &#39;&quot;&#39;
+&nbsp;                        &amp;&amp; b2 &gt; &#39;&quot;&#39;
+&nbsp;                        &amp;&amp; b3 &gt; &#39;&quot;&#39;
+&nbsp;                ) {
+<b class="nc">&nbsp;                    lineSize += 4;</b>
+<b class="nc">&nbsp;                    i += 3;</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            byte ch = bytes[i];</b>
+<b class="nc">&nbsp;            if (ch == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                lineSize++;</b>
+<b class="nc">&nbsp;                if (!quote) {</b>
+<b class="nc">&nbsp;                    quote = true;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    int n = i + 1;</b>
+<b class="nc">&nbsp;                    if (n &gt;= length) {</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    byte next = bytes[n];</b>
+<b class="nc">&nbsp;                    if (next == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                        i++;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        quote = false;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (quote) {</b>
+<b class="nc">&nbsp;                lineSize++;</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (ch == &#39;\n&#39;) {</b>
+<b class="nc">&nbsp;                if (lineSize &gt; 0 || (features &amp; Feature.IgnoreEmptyLine.mask) == 0) {</b>
+<b class="nc">&nbsp;                    rowCount++;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                lineSize = 0;</b>
+<b class="nc">&nbsp;                lineTerminated = i + 1 == length;</b>
+<b class="nc">&nbsp;            } else if (ch == &#39;\r&#39;) {</b>
+<b class="nc">&nbsp;                if (lineSize &gt; 0 || (features &amp; Feature.IgnoreEmptyLine.mask) == 0) {</b>
+<b class="nc">&nbsp;                    rowCount++;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                lineTerminated = true;</b>
+<b class="nc">&nbsp;                lineSize = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;                int n = i + 1;</b>
+<b class="nc">&nbsp;                if (n &gt;= length) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                byte next = bytes[n];</b>
+<b class="nc">&nbsp;                if (next == &#39;\n&#39;) {</b>
+<b class="nc">&nbsp;                    i++;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                lineTerminated = i + 1 == length;</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                lineSize++;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    void rowCount(char[] bytes, int length) {
+<b class="nc">&nbsp;        lineTerminated = false;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; length; i++) {</b>
+<b class="nc">&nbsp;            if (i + 4 &lt; length) {</b>
+<b class="nc">&nbsp;                char b0 = bytes[i];</b>
+<b class="nc">&nbsp;                char b1 = bytes[i + 1];</b>
+<b class="nc">&nbsp;                char b2 = bytes[i + 2];</b>
+<b class="nc">&nbsp;                char b3 = bytes[i + 3];</b>
+<b class="nc">&nbsp;                if (b0 &gt; &#39;&quot;&#39;</b>
+&nbsp;                        &amp;&amp; b1 &gt; &#39;&quot;&#39;
+&nbsp;                        &amp;&amp; b2 &gt; &#39;&quot;&#39;
+&nbsp;                        &amp;&amp; b3 &gt; &#39;&quot;&#39;
+&nbsp;                ) {
+<b class="nc">&nbsp;                    i += 3;</b>
+<b class="nc">&nbsp;                    lineSize += 4;</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            char ch = bytes[i];</b>
+<b class="nc">&nbsp;            if (ch == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                lineSize++;</b>
+<b class="nc">&nbsp;                if (!quote) {</b>
+<b class="nc">&nbsp;                    quote = true;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    int n = i + 1;</b>
+<b class="nc">&nbsp;                    if (n &gt;= length) {</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    char next = bytes[n];</b>
+<b class="nc">&nbsp;                    if (next == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                        i++;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        quote = false;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (quote) {</b>
+<b class="nc">&nbsp;                lineSize++;</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (ch == &#39;\n&#39;) {</b>
+<b class="nc">&nbsp;                if (lineSize &gt; 0 || (features &amp; Feature.IgnoreEmptyLine.mask) == 0) {</b>
+<b class="nc">&nbsp;                    rowCount++;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                lineSize = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;                lineTerminated = i + 1 == length;</b>
+<b class="nc">&nbsp;            } else if (ch == &#39;\r&#39; || (features &amp; Feature.IgnoreEmptyLine.mask) == 0) {</b>
+<b class="nc">&nbsp;                if (lineSize &gt; 0) {</b>
+<b class="nc">&nbsp;                    rowCount++;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                lineTerminated = true;</b>
+<b class="nc">&nbsp;                lineSize = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;                int n = i + 1;</b>
+<b class="nc">&nbsp;                if (n &gt;= length) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                char next = bytes[n];</b>
+<b class="nc">&nbsp;                if (next == &#39;\n&#39;) {</b>
+<b class="nc">&nbsp;                    i++;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                lineTerminated = i + 1 == length;</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                lineSize++;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Object error(int columnIndex, Exception e) {
+<b class="nc">&nbsp;        errorCount++;</b>
+<b class="nc">&nbsp;        getColumnStat(columnIndex).errors++;</b>
+&nbsp;
+<b class="nc">&nbsp;        if ((features &amp; Feature.ErrorAsNull.mask) != 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String message = &quot;read csv error, line &quot; + rowCount + &quot;, column &quot;;</b>
+<b class="nc">&nbsp;        String column = null;</b>
+<b class="nc">&nbsp;        if (columns != null &amp;&amp; columnIndex &lt; columns.size()) {</b>
+<b class="nc">&nbsp;            column = columns.get(columnIndex);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (column != null &amp;&amp; !column.isEmpty()) {</b>
+<b class="nc">&nbsp;            message += column;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            message += columnIndex;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new JSONException(message, e);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ColumnStat getColumnStat(String name) {
+<b class="nc">&nbsp;        if (columnStats != null) {</b>
+<b class="nc">&nbsp;            for (ColumnStat stat : columnStats) {</b>
+<b class="nc">&nbsp;                if (name.equals(stat.name)) {</b>
+<b class="nc">&nbsp;                    return stat;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ColumnStat getColumnStat(int i) {
+<b class="nc">&nbsp;        if (columnStats == null) {</b>
+<b class="nc">&nbsp;            columnStats = new ArrayList&lt;&gt;();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        StreamReader.ColumnStat stat = null;</b>
+<b class="nc">&nbsp;        if (i &gt;= columnStats.size()) {</b>
+<b class="nc">&nbsp;            for (int j = columnStats.size(); j &lt;= i; j++) {</b>
+<b class="nc">&nbsp;                String column = null;</b>
+<b class="nc">&nbsp;                if (columns != null &amp;&amp; i &lt; columns.size()) {</b>
+<b class="nc">&nbsp;                    column = columns.get(i);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                stat = new ColumnStat(column);</b>
+<b class="nc">&nbsp;                columnStats.add(stat);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            stat = columnStats.get(i);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return stat;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0.30
+&nbsp;     */
+&nbsp;    public List&lt;String[]&gt; readLineAll() {
+<b class="nc">&nbsp;        List&lt;String[]&gt; lines = new ArrayList();</b>
+&nbsp;        while (true) {
+<b class="nc">&nbsp;            String[] line = readLine();</b>
+<b class="nc">&nbsp;            if (line == null) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            lines.add(line);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return lines;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0.30
+&nbsp;     */
+&nbsp;    public List&lt;T&gt; readLineObjectAll() {
+<b class="nc">&nbsp;        List&lt;T&gt; objects = new ArrayList();</b>
+&nbsp;        while (true) {
+<b class="nc">&nbsp;            T object = readLineObject();</b>
+<b class="nc">&nbsp;            if (object == null) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            objects.add(object);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return objects;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract void statAll();
+&nbsp;
+&nbsp;    public abstract void statAll(int maxRows);
+&nbsp;
+&nbsp;    public abstract void readAll();
+&nbsp;
+&nbsp;    public abstract void readAll(int maxRows);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:28</div>
+</div>
+</body>
+</html>

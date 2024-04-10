@@ -1,0 +1,162 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderImplCurrency</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderImplCurrency (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderImplCurrency</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONB;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONObject;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Currency;
+&nbsp;
+&nbsp;final class ObjectReaderImplCurrency
+&nbsp;        extends ObjectReaderPrimitive {
+<b class="nc">&nbsp;    static final ObjectReaderImplCurrency INSTANCE = new ObjectReaderImplCurrency();</b>
+&nbsp;
+<b class="nc">&nbsp;    static final long TYPE_HASH = Fnv.hashCode64(&quot;Currency&quot;);</b>
+&nbsp;
+&nbsp;    ObjectReaderImplCurrency() {
+<b class="nc">&nbsp;        super(Currency.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        if (jsonReader.getType() == JSONB.Constants.BC_TYPED_ANY) {</b>
+<b class="nc">&nbsp;            jsonReader.next();</b>
+<b class="nc">&nbsp;            long typeHash = jsonReader.readTypeHashCode();</b>
+<b class="nc">&nbsp;            final long TYPE_HASH_FULL = -7860540621745740270L; // Fnv.hashCode64(&quot;java.util.Currency&quot;);</b>
+<b class="nc">&nbsp;            if (typeHash != TYPE_HASH &amp;&amp; typeHash != TYPE_HASH_FULL) {</b>
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;currency not support input autoTypeClass &quot; + jsonReader.getString()));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String strVal = jsonReader.readString();</b>
+<b class="nc">&nbsp;        if (strVal == null || strVal.isEmpty()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Currency.getInstance(strVal);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+&nbsp;        String strVal;
+<b class="nc">&nbsp;        if (jsonReader.isObject()) {</b>
+<b class="nc">&nbsp;            JSONObject jsonObject = new JSONObject();</b>
+<b class="nc">&nbsp;            jsonReader.readObject(jsonObject);</b>
+<b class="nc">&nbsp;            strVal = jsonObject.getString(&quot;currency&quot;);</b>
+<b class="nc">&nbsp;            if (strVal == null) {</b>
+<b class="nc">&nbsp;                strVal = jsonObject.getString(&quot;currencyCode&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            strVal = jsonReader.readString();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (strVal == null || strVal.isEmpty()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Currency.getInstance(strVal);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:05</div>
+</div>
+</body>
+</html>

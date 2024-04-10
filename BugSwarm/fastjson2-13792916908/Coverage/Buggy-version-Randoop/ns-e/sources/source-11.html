@@ -1,0 +1,837 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONPathFunction</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONPathFunction (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONPathFunction</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/210)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JSONPathFunction$BiFunctionAdapter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONPathFunction$Index</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONPathFunction$IndexDecimal</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONPathFunction$IndexInt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONPathFunction$IndexString</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONPathFunction$SizeFunction</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONPathFunction$TypeFunction</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/288)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.function.impl.ToDouble;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Array;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.math.RoundingMode;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.BiFunction;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;final class JSONPathFunction
+&nbsp;        extends JSONPathSegment
+&nbsp;        implements JSONPathSegment.EvalSegment {
+<b class="nc">&nbsp;    static JSONPathFunction FUNC_TYPE = new JSONPathFunction(JSONPathFunction::type);</b>
+<b class="nc">&nbsp;    static JSONPathFunction FUNC_DOUBLE = new JSONPathFunction(new ToDouble(null));</b>
+<b class="nc">&nbsp;    static JSONPathFunction FUNC_FLOOR = new JSONPathFunction(JSONPathFunction::floor);</b>
+<b class="nc">&nbsp;    static JSONPathFunction FUNC_CEIL = new JSONPathFunction(JSONPathFunction::ceil);</b>
+<b class="nc">&nbsp;    static JSONPathFunction FUNC_ABS = new JSONPathFunction(JSONPathFunction::abs);</b>
+<b class="nc">&nbsp;    static JSONPathFunction FUNC_NEGATIVE = new JSONPathFunction(JSONPathFunction::negative);</b>
+<b class="nc">&nbsp;    static JSONPathFunction FUNC_EXISTS = new JSONPathFunction(JSONPathFunction::exists);</b>
+<b class="nc">&nbsp;    static JSONPathFunction FUNC_LOWER = new JSONPathFunction(JSONPathFunction::lower);</b>
+<b class="nc">&nbsp;    static JSONPathFunction FUNC_UPPER = new JSONPathFunction(JSONPathFunction::upper);</b>
+<b class="nc">&nbsp;    static JSONPathFunction FUNC_TRIM = new JSONPathFunction(JSONPathFunction::trim);</b>
+<b class="nc">&nbsp;    static JSONPathFunction FUNC_FIRST = new JSONPathFunction(JSONPathFunction::first);</b>
+<b class="nc">&nbsp;    static JSONPathFunction FUNC_LAST = new JSONPathFunction(JSONPathFunction::last);</b>
+&nbsp;
+&nbsp;    final Function function;
+&nbsp;
+<b class="nc">&nbsp;    public JSONPathFunction(Function function) {</b>
+<b class="nc">&nbsp;        this.function = function;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static Object floor(Object value) {
+<b class="nc">&nbsp;        if (value instanceof Double) {</b>
+<b class="nc">&nbsp;            return Math.floor((Double) value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Float) {</b>
+<b class="nc">&nbsp;            return Math.floor((Float) value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof BigDecimal) {</b>
+<b class="nc">&nbsp;            return ((BigDecimal) value).setScale(0, RoundingMode.FLOOR);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof List) {</b>
+<b class="nc">&nbsp;            List list = (List) value;</b>
+<b class="nc">&nbsp;            for (int i = 0, l = list.size(); i &lt; l; i++) {</b>
+<b class="nc">&nbsp;                Object item = list.get(i);</b>
+<b class="nc">&nbsp;                if (item instanceof Double) {</b>
+<b class="nc">&nbsp;                    list.set(i, Math.floor((Double) item));</b>
+<b class="nc">&nbsp;                } else if (item instanceof Float) {</b>
+<b class="nc">&nbsp;                    list.set(i, Math.floor((Float) item));</b>
+<b class="nc">&nbsp;                } else if (item instanceof BigDecimal) {</b>
+<b class="nc">&nbsp;                    list.set(i, ((BigDecimal) item).setScale(0, RoundingMode.FLOOR));</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static Object ceil(Object value) {
+<b class="nc">&nbsp;        if (value instanceof Double) {</b>
+<b class="nc">&nbsp;            return Math.ceil((Double) value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Float) {</b>
+<b class="nc">&nbsp;            return Math.ceil((Float) value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof BigDecimal) {</b>
+<b class="nc">&nbsp;            return ((BigDecimal) value).setScale(0, RoundingMode.CEILING);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof List) {</b>
+<b class="nc">&nbsp;            List list = (List) value;</b>
+<b class="nc">&nbsp;            for (int i = 0, l = list.size(); i &lt; l; i++) {</b>
+<b class="nc">&nbsp;                Object item = list.get(i);</b>
+<b class="nc">&nbsp;                if (item instanceof Double) {</b>
+<b class="nc">&nbsp;                    list.set(i, Math.ceil((Double) item));</b>
+<b class="nc">&nbsp;                } else if (item instanceof Float) {</b>
+<b class="nc">&nbsp;                    list.set(i, Math.ceil((Float) item));</b>
+<b class="nc">&nbsp;                } else if (item instanceof BigDecimal) {</b>
+<b class="nc">&nbsp;                    list.set(i, ((BigDecimal) item).setScale(0, RoundingMode.CEILING));</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static Object exists(Object value) {
+<b class="nc">&nbsp;        return value != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static Object negative(Object value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Integer) {</b>
+<b class="nc">&nbsp;            int intValue = ((Integer) value).intValue();</b>
+<b class="nc">&nbsp;            if (intValue == Integer.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                return -(long) intValue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return -intValue;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Long) {</b>
+<b class="nc">&nbsp;            long longValue = ((Long) value).longValue();</b>
+<b class="nc">&nbsp;            if (longValue == Long.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                return BigInteger.valueOf(longValue).negate();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return -longValue;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Byte) {</b>
+<b class="nc">&nbsp;            byte byteValue = ((Byte) value).byteValue();</b>
+<b class="nc">&nbsp;            if (byteValue == Byte.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                return -(short) byteValue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return (byte) -byteValue;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Short) {</b>
+<b class="nc">&nbsp;            short shortValue = ((Short) value).shortValue();</b>
+<b class="nc">&nbsp;            if (shortValue == Short.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                return -(int) shortValue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return (short) -shortValue;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Double) {</b>
+<b class="nc">&nbsp;            return -((Double) value).doubleValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Float) {</b>
+<b class="nc">&nbsp;            return -((Float) value).floatValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof BigDecimal) {</b>
+<b class="nc">&nbsp;            return ((BigDecimal) value).negate();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof BigInteger) {</b>
+<b class="nc">&nbsp;            return ((BigInteger) value).negate();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof List) {</b>
+<b class="nc">&nbsp;            List list = (List) value;</b>
+<b class="nc">&nbsp;            JSONArray values = new JSONArray(list.size());</b>
+<b class="nc">&nbsp;            for (int i = 0, l = list.size(); i &lt; l; i++) {</b>
+<b class="nc">&nbsp;                Object item = list.get(i);</b>
+<b class="nc">&nbsp;                Object negativeItem = negative(item);</b>
+<b class="nc">&nbsp;                values.add(negativeItem);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return values;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static Object first(Object value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof JSONPath.Sequence) {</b>
+<b class="nc">&nbsp;            value = ((JSONPath.Sequence) value).values;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof List) {</b>
+<b class="nc">&nbsp;            if (((List&lt;?&gt;) value).isEmpty()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return ((List&lt;?&gt;) value).get(0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Collection) {</b>
+<b class="nc">&nbsp;            Collection&lt;?&gt; collection = (Collection&lt;?&gt;) value;</b>
+<b class="nc">&nbsp;            if (collection.isEmpty()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return collection.iterator().next();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value.getClass().isArray()) {</b>
+<b class="nc">&nbsp;            int len = Array.getLength(value);</b>
+<b class="nc">&nbsp;            if (len == 0) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return Array.get(value, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static Object last(Object value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof JSONPath.Sequence) {</b>
+<b class="nc">&nbsp;            value = ((JSONPath.Sequence) value).values;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof List) {</b>
+<b class="nc">&nbsp;            List list = (List) value;</b>
+<b class="nc">&nbsp;            int size = list.size();</b>
+<b class="nc">&nbsp;            if (size == 0) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return list.get(size - 1);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Collection) {</b>
+<b class="nc">&nbsp;            Collection&lt;?&gt; collection = (Collection&lt;?&gt;) value;</b>
+<b class="nc">&nbsp;            if (collection.isEmpty()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Object last = null;</b>
+<b class="nc">&nbsp;            for (Iterator&lt;?&gt; it = collection.iterator(); it.hasNext(); ) {</b>
+<b class="nc">&nbsp;                last = it.next();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return last;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value.getClass().isArray()) {</b>
+<b class="nc">&nbsp;            int len = Array.getLength(value);</b>
+<b class="nc">&nbsp;            if (len == 0) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return Array.get(value, len - 1);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static Object abs(Object value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Integer) {</b>
+<b class="nc">&nbsp;            int intValue = ((Integer) value).intValue();</b>
+<b class="nc">&nbsp;            if (intValue &lt; 0) {</b>
+<b class="nc">&nbsp;                return -intValue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Long) {</b>
+<b class="nc">&nbsp;            long longValue = ((Long) value).longValue();</b>
+<b class="nc">&nbsp;            if (longValue &lt; 0) {</b>
+<b class="nc">&nbsp;                return -longValue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Byte) {</b>
+<b class="nc">&nbsp;            byte byteValue = ((Byte) value).byteValue();</b>
+<b class="nc">&nbsp;            if (byteValue &lt; 0) {</b>
+<b class="nc">&nbsp;                return (byte) -byteValue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Short) {</b>
+<b class="nc">&nbsp;            short shortValue = ((Short) value).shortValue();</b>
+<b class="nc">&nbsp;            if (shortValue &lt; 0) {</b>
+<b class="nc">&nbsp;                return (short) -shortValue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Double) {</b>
+<b class="nc">&nbsp;            double doubleValue = ((Double) value).doubleValue();</b>
+<b class="nc">&nbsp;            if (doubleValue &lt; 0) {</b>
+<b class="nc">&nbsp;                return -doubleValue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Float) {</b>
+<b class="nc">&nbsp;            float floatValue = ((Float) value).floatValue();</b>
+<b class="nc">&nbsp;            if (floatValue &lt; 0) {</b>
+<b class="nc">&nbsp;                return -floatValue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof BigDecimal) {</b>
+<b class="nc">&nbsp;            return ((BigDecimal) value).abs();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof BigInteger) {</b>
+<b class="nc">&nbsp;            return ((BigInteger) value).abs();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof List) {</b>
+<b class="nc">&nbsp;            List list = (List) value;</b>
+<b class="nc">&nbsp;            JSONArray values = new JSONArray(list.size());</b>
+<b class="nc">&nbsp;            for (int i = 0, l = list.size(); i &lt; l; i++) {</b>
+<b class="nc">&nbsp;                Object item = list.get(i);</b>
+<b class="nc">&nbsp;                values.add(abs(item));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return values;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;abs not support &quot; + value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static String type(Object value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return &quot;null&quot;;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Collection) {</b>
+<b class="nc">&nbsp;            return &quot;array&quot;;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return &quot;number&quot;;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Boolean) {</b>
+<b class="nc">&nbsp;            return &quot;boolean&quot;;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String</b>
+&nbsp;                || value instanceof UUID
+&nbsp;                || value instanceof Enum) {
+<b class="nc">&nbsp;            return &quot;string&quot;;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return &quot;object&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static Object lower(Object value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        String str;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            str = (String) value;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            str = value.toString();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return str.toLowerCase();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static Object upper(Object value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        String str;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            str = (String) value;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            str = value.toString();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return str.toUpperCase();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static Object trim(Object value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        String str;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            str = (String) value;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            str = value.toString();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return str.trim();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(JSONReader jsonReader, JSONPath.Context context) {
+<b class="nc">&nbsp;        if (context.parent == null) {</b>
+<b class="nc">&nbsp;            context.root = jsonReader.readAny();</b>
+<b class="nc">&nbsp;            context.eval = true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        eval(context);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void eval(JSONPath.Context context) {
+<b class="nc">&nbsp;        Object value = context.parent == null</b>
+&nbsp;                ? context.root
+&nbsp;                : context.parent.value;
+&nbsp;
+<b class="nc">&nbsp;        context.value = function.apply(value);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    static final class TypeFunction</b>
+&nbsp;            implements Function {
+<b class="nc">&nbsp;        static final TypeFunction INSTANCE = new TypeFunction();</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object apply(Object object) {
+<b class="nc">&nbsp;            return type(object);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    static final class SizeFunction</b>
+&nbsp;            implements Function {
+<b class="nc">&nbsp;        static final SizeFunction INSTANCE = new SizeFunction();</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object apply(Object value) {
+<b class="nc">&nbsp;            if (value == null) {</b>
+<b class="nc">&nbsp;                return -1;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (value instanceof Collection) {</b>
+<b class="nc">&nbsp;                return ((Collection&lt;?&gt;) value).size();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (value.getClass().isArray()) {</b>
+<b class="nc">&nbsp;                return Array.getLength(value);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (value instanceof Map) {</b>
+<b class="nc">&nbsp;                return ((Map) value).size();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (value instanceof JSONPath.Sequence) {</b>
+<b class="nc">&nbsp;                return ((JSONPath.Sequence) value).values.size();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return 1;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class BiFunctionAdapter
+&nbsp;            implements BiFunction {
+&nbsp;        private final Function function;
+&nbsp;
+<b class="nc">&nbsp;        BiFunctionAdapter(Function function) {</b>
+<b class="nc">&nbsp;            this.function = function;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object apply(Object o1, Object o2) {
+<b class="nc">&nbsp;            return function.apply(o2);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    abstract static class Index</b>
+&nbsp;            implements Function {
+&nbsp;        protected abstract boolean eq(Object item);
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public final Object apply(Object o) {
+<b class="nc">&nbsp;            if (o == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (o instanceof List) {</b>
+<b class="nc">&nbsp;                List list = (List) o;</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; list.size(); i++) {</b>
+<b class="nc">&nbsp;                    if (eq(list.get(i))) {</b>
+<b class="nc">&nbsp;                        return i;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                return -1;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (o.getClass().isArray()) {</b>
+<b class="nc">&nbsp;                int len = Array.getLength(o);</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; len; i++) {</b>
+<b class="nc">&nbsp;                    Object item = Array.get(o, i);</b>
+<b class="nc">&nbsp;                    if (eq(item)) {</b>
+<b class="nc">&nbsp;                        return i;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                return -1;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (eq(o)) {</b>
+<b class="nc">&nbsp;                return 0;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class IndexInt
+&nbsp;            extends Index {
+&nbsp;        final long value;
+&nbsp;        transient BigDecimal decimalValue;
+&nbsp;
+<b class="nc">&nbsp;        public IndexInt(long value) {</b>
+<b class="nc">&nbsp;            this.value = value;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        protected boolean eq(Object item) {
+<b class="nc">&nbsp;            if (item instanceof Integer</b>
+&nbsp;                    || item instanceof Long
+&nbsp;                    || item instanceof Byte
+&nbsp;                    || item instanceof Short
+&nbsp;            ) {
+<b class="nc">&nbsp;                if (((Number) item).longValue() == value) {</b>
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (item instanceof Float || item instanceof Double) {</b>
+<b class="nc">&nbsp;                double doubleValue = ((Number) item).doubleValue();</b>
+<b class="nc">&nbsp;                if (doubleValue == value) {</b>
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (item instanceof BigDecimal) {</b>
+<b class="nc">&nbsp;                BigDecimal decimal = (BigDecimal) item;</b>
+<b class="nc">&nbsp;                decimal = decimal.stripTrailingZeros();</b>
+<b class="nc">&nbsp;                if (decimalValue == null) {</b>
+<b class="nc">&nbsp;                    decimalValue = BigDecimal.valueOf(value);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (decimalValue.equals(decimal)) {</b>
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class IndexDecimal
+&nbsp;            extends Index {
+&nbsp;        final BigDecimal value;
+&nbsp;
+<b class="nc">&nbsp;        public IndexDecimal(BigDecimal value) {</b>
+<b class="nc">&nbsp;            this.value = value;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        protected boolean eq(Object item) {
+<b class="nc">&nbsp;            if (item == null) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (item instanceof BigDecimal) {</b>
+<b class="nc">&nbsp;                BigDecimal decimal = (BigDecimal) item;</b>
+<b class="nc">&nbsp;                decimal = decimal.stripTrailingZeros();</b>
+<b class="nc">&nbsp;                return value.equals(decimal);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (item instanceof Float || item instanceof Double) {</b>
+<b class="nc">&nbsp;                double doubleValue = ((Number) item).doubleValue();</b>
+<b class="nc">&nbsp;                BigDecimal decimal = new BigDecimal(doubleValue).stripTrailingZeros();</b>
+<b class="nc">&nbsp;                return value.equals(decimal);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (item instanceof String) {</b>
+<b class="nc">&nbsp;                String str = (String) item;</b>
+<b class="nc">&nbsp;                if (TypeUtils.isNumber(str)) {</b>
+<b class="nc">&nbsp;                    BigDecimal decimal = new BigDecimal(str).stripTrailingZeros();</b>
+<b class="nc">&nbsp;                    return value.equals(decimal);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class IndexString
+&nbsp;            extends Index {
+&nbsp;        final String value;
+&nbsp;
+<b class="nc">&nbsp;        public IndexString(String value) {</b>
+<b class="nc">&nbsp;            this.value = value;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        protected boolean eq(Object item) {
+<b class="nc">&nbsp;            if (item == null) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return value.equals(item.toString());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:21</div>
+</div>
+</body>
+</html>

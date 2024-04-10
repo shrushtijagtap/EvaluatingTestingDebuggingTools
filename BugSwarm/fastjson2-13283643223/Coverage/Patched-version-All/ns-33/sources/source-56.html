@@ -1,0 +1,401 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FieldReaderObjectField</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldReaderObjectField (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FieldReaderObjectField</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/127)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONFactory;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.schema.JSONSchema;
+&nbsp;import com.alibaba.fastjson2.util.DateUtils;
+&nbsp;import com.alibaba.fastjson2.util.UnsafeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.time.format.DateTimeFormatter;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.util.DateUtils.DEFAULT_ZONE_ID;
+&nbsp;
+&nbsp;class FieldReaderObjectField&lt;T&gt;
+&nbsp;        extends FieldReaderObject&lt;T&gt; {
+&nbsp;    FieldReaderObjectField(
+&nbsp;            String fieldName,
+&nbsp;            Type fieldType,
+&nbsp;            Class fieldClass,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            Object defaultValue,
+&nbsp;            JSONSchema schema,
+&nbsp;            Field field
+&nbsp;    ) {
+<b class="nc">&nbsp;        super(</b>
+<b class="nc">&nbsp;                fieldName, fieldType == null ? field.getType() : fieldType,</b>
+&nbsp;                fieldClass,
+&nbsp;                ordinal,
+&nbsp;                features,
+&nbsp;                format,
+&nbsp;                null,
+&nbsp;                defaultValue,
+&nbsp;                schema,
+&nbsp;                null,
+&nbsp;                field,
+&nbsp;                null
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, boolean value) {
+<b class="nc">&nbsp;        if (schema != null) {</b>
+<b class="nc">&nbsp;            schema.assertValidate(value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldOffset != -1 &amp;&amp; fieldClass == boolean.class) {</b>
+<b class="nc">&nbsp;            UnsafeUtils.putBoolean(object, fieldOffset, value);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            field.setBoolean(object, value);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;set &quot; + fieldName + &quot; error&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, byte value) {
+<b class="nc">&nbsp;        if (schema != null) {</b>
+<b class="nc">&nbsp;            schema.assertValidate(value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldOffset != -1 &amp;&amp; fieldClass == byte.class) {</b>
+<b class="nc">&nbsp;            UnsafeUtils.putByte(object, fieldOffset, value);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            field.setByte(object, value);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;set &quot; + fieldName + &quot; error&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, short value) {
+<b class="nc">&nbsp;        if (schema != null) {</b>
+<b class="nc">&nbsp;            schema.assertValidate(value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldOffset != -1 &amp;&amp; fieldClass == short.class) {</b>
+<b class="nc">&nbsp;            UnsafeUtils.putShort(object, fieldOffset, value);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            field.setShort(object, value);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;set &quot; + fieldName + &quot; error&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, int value) {
+<b class="nc">&nbsp;        if (schema != null) {</b>
+<b class="nc">&nbsp;            schema.assertValidate(value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldOffset != -1 &amp;&amp; fieldClass == int.class) {</b>
+<b class="nc">&nbsp;            UnsafeUtils.putInt(object, fieldOffset, value);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            field.setInt(object, value);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;set &quot; + fieldName + &quot; error&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, long value) {
+<b class="nc">&nbsp;        if (schema != null) {</b>
+<b class="nc">&nbsp;            schema.assertValidate(value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldOffset != -1 &amp;&amp; fieldClass == long.class) {</b>
+<b class="nc">&nbsp;            UnsafeUtils.putLong(object, fieldOffset, value);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            field.setLong(object, value);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;set &quot; + fieldName + &quot; error&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, float value) {
+<b class="nc">&nbsp;        if (schema != null) {</b>
+<b class="nc">&nbsp;            schema.assertValidate(value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldOffset != -1 &amp;&amp; fieldClass == float.class) {</b>
+<b class="nc">&nbsp;            UnsafeUtils.putFloat(object, fieldOffset, value);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            field.setFloat(object, value);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;set &quot; + fieldName + &quot; error&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, double value) {
+<b class="nc">&nbsp;        if (schema != null) {</b>
+<b class="nc">&nbsp;            schema.assertValidate(value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldOffset != -1 &amp;&amp; fieldClass == double.class) {</b>
+<b class="nc">&nbsp;            UnsafeUtils.putDouble(object, fieldOffset, value);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            field.setDouble(object, value);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;set &quot; + fieldName + &quot; error&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, char value) {
+<b class="nc">&nbsp;        if (schema != null) {</b>
+<b class="nc">&nbsp;            schema.assertValidate(value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldOffset != -1 &amp;&amp; fieldClass == char.class) {</b>
+<b class="nc">&nbsp;            UnsafeUtils.putChar(object, fieldOffset, value);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            field.setChar(object, value);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;set &quot; + fieldName + &quot; error&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, Object value) {
+<b class="nc">&nbsp;        if (schema != null) {</b>
+<b class="nc">&nbsp;            schema.assertValidate(value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            if ((features &amp; JSONReader.Feature.IgnoreSetNullValue.mask) != 0) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (fieldClass.isPrimitive()) {</b>
+<b class="nc">&nbsp;                acceptPrimitive(object, value);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (fieldType != fieldClass &amp;&amp; Map.class.isAssignableFrom(fieldClass) &amp;&amp; value instanceof Map) {</b>
+<b class="nc">&nbsp;                ObjectReader objectReader = getObjectReader(JSONFactory.createReadContext());</b>
+<b class="nc">&nbsp;                value = objectReader.createInstance((Map) value);</b>
+<b class="nc">&nbsp;            } else if (!fieldClass.isInstance(value)) {</b>
+<b class="nc">&nbsp;                if (value instanceof String) {</b>
+<b class="nc">&nbsp;                    String str = (String) value;</b>
+<b class="nc">&nbsp;                    if (fieldClass == LocalDate.class) {</b>
+<b class="nc">&nbsp;                        if (format != null) {</b>
+<b class="nc">&nbsp;                            value = LocalDate.parse(str, DateTimeFormatter.ofPattern(format));</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            value = DateUtils.parseLocalDate(str);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    } else if (fieldClass == java.util.Date.class) {</b>
+<b class="nc">&nbsp;                        if (format != null) {</b>
+<b class="nc">&nbsp;                            value = DateUtils.parseDate(str, format, DEFAULT_ZONE_ID);</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            value = DateUtils.parseDate(str);</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (!fieldClass.isInstance(value)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;set &quot; + fieldName + &quot; error, not support type &quot; + value.getClass());</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldOffset != -1) {</b>
+<b class="nc">&nbsp;            UnsafeUtils.putObject(object, fieldOffset, value);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            field.set(object, value);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;set &quot; + fieldName + &quot; error&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    final void acceptPrimitive(T object, Object value) {
+<b class="nc">&nbsp;        if (fieldClass == int.class) {</b>
+<b class="nc">&nbsp;            if (value instanceof Number) {</b>
+<b class="nc">&nbsp;                int intValue = ((Number) value).intValue();</b>
+<b class="nc">&nbsp;                accept(object, intValue);</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (fieldClass == long.class) {</b>
+<b class="nc">&nbsp;            if (value instanceof Number) {</b>
+<b class="nc">&nbsp;                long longValue = ((Number) value).longValue();</b>
+<b class="nc">&nbsp;                accept(object, longValue);</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (fieldClass == float.class) {</b>
+<b class="nc">&nbsp;            if (value instanceof Number) {</b>
+<b class="nc">&nbsp;                float floatValue = ((Number) value).floatValue();</b>
+<b class="nc">&nbsp;                accept(object, floatValue);</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (fieldClass == double.class) {</b>
+<b class="nc">&nbsp;            if (value instanceof Number) {</b>
+<b class="nc">&nbsp;                double doubleValue = ((Number) value).doubleValue();</b>
+<b class="nc">&nbsp;                accept(object, doubleValue);</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (fieldClass == short.class) {</b>
+<b class="nc">&nbsp;            if (value instanceof Number) {</b>
+<b class="nc">&nbsp;                short shortValue = ((Number) value).shortValue();</b>
+<b class="nc">&nbsp;                accept(object, shortValue);</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (fieldClass == byte.class) {</b>
+<b class="nc">&nbsp;            if (value instanceof Number) {</b>
+<b class="nc">&nbsp;                byte byteValue = ((Number) value).byteValue();</b>
+<b class="nc">&nbsp;                accept(object, byteValue);</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (fieldClass == char.class) {</b>
+<b class="nc">&nbsp;            if (value instanceof Character) {</b>
+<b class="nc">&nbsp;                char charValue = ((Character) value).charValue();</b>
+<b class="nc">&nbsp;                accept(object, charValue);</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (fieldClass == boolean.class) {</b>
+<b class="nc">&nbsp;            if (value instanceof Boolean) {</b>
+<b class="nc">&nbsp;                boolean booleanValue = ((Boolean) value).booleanValue();</b>
+<b class="nc">&nbsp;                accept(object, booleanValue);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        throw new JSONException(&quot;set &quot; + fieldName + &quot; error, type not support &quot; + value.getClass());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:41</div>
+</div>
+</body>
+</html>

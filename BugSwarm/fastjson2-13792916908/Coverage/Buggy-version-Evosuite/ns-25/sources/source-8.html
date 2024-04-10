@@ -1,0 +1,393 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Label</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.internal.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: Label (com.alibaba.fastjson2.internal.asm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Label</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (2/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    6.1%
+  </span>
+  <span class="absValue">
+    (3/49)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;// ASM: a very small and fast Java bytecode manipulation framework
+&nbsp;// Copyright (c) 2000-2011 INRIA, France Telecom
+&nbsp;// All rights reserved.
+&nbsp;//
+&nbsp;// Redistribution and use in source and binary forms, with or without
+&nbsp;// modification, are permitted provided that the following conditions
+&nbsp;// are met:
+&nbsp;// 1. Redistributions of source code must retain the above copyright
+&nbsp;//    notice, this list of conditions and the following disclaimer.
+&nbsp;// 2. Redistributions in binary form must reproduce the above copyright
+&nbsp;//    notice, this list of conditions and the following disclaimer in the
+&nbsp;//    documentation and/or other materials provided with the distribution.
+&nbsp;// 3. Neither the name of the copyright holders nor the names of its
+&nbsp;//    contributors may be used to endorse or promote products derived from
+&nbsp;//    this software without specific prior written permission.
+&nbsp;//
+&nbsp;// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+&nbsp;// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+&nbsp;// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+&nbsp;// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+&nbsp;// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+&nbsp;// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+&nbsp;// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+&nbsp;// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+&nbsp;// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+&nbsp;// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+&nbsp;// THE POSSIBILITY OF SUCH DAMAGE.
+&nbsp;package com.alibaba.fastjson2.internal.asm;
+&nbsp;
+&nbsp;/**
+&nbsp; * A position in the bytecode of a method. Labels are used for jump, goto, and switch instructions,
+&nbsp; * and for try catch blocks. A label designates the &lt;i&gt;instruction&lt;/i&gt; that is just after. Note
+&nbsp; * however that there can be other elements between a label and the instruction it designates (such
+&nbsp; * as other labels, stack map frames, line numbers, etc.).
+&nbsp; *
+&nbsp; * @author Eric Bruneton
+&nbsp; */
+&nbsp;public class Label {
+&nbsp;    /**
+&nbsp;     * A flag indicating that a label is only used for debug attributes. Such a label is not the start
+&nbsp;     * of a basic block, the target of a jump instruction, or an exception handler. It can be safely
+&nbsp;     * ignored in control flow graph analysis algorithms (for optimization purposes).
+&nbsp;     */
+&nbsp;    static final int FLAG_DEBUG_ONLY = 1;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A flag indicating that a label is the target of a jump instruction, or the start of an
+&nbsp;     * exception handler.
+&nbsp;     */
+&nbsp;    static final int FLAG_JUMP_TARGET = 2;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A flag indicating that the bytecode offset of a label is known.
+&nbsp;     */
+&nbsp;    static final int FLAG_RESOLVED = 4;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A flag indicating that a label corresponds to a reachable basic block.
+&nbsp;     */
+&nbsp;    static final int FLAG_REACHABLE = 8;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The number of elements to add to the {@link #forwardReferences} array when it needs to be
+&nbsp;     * resized to store a new forward reference.
+&nbsp;     */
+&nbsp;    static final int FORWARD_REFERENCES_CAPACITY_INCREMENT = 6;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The bit mask to extract the type of a forward reference to this label. The extracted type is
+&nbsp;     * either {@link #FORWARD_REFERENCE_TYPE_SHORT} or {@link #FORWARD_REFERENCE_TYPE_WIDE}.
+&nbsp;     *
+&nbsp;     * @see #forwardReferences
+&nbsp;     */
+&nbsp;    static final int FORWARD_REFERENCE_TYPE_MASK = 0xF0000000;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The type of forward references stored with two bytes in the bytecode. This is the case, for
+&nbsp;     * instance, of a forward reference from an ifnull instruction.
+&nbsp;     */
+&nbsp;    static final int FORWARD_REFERENCE_TYPE_SHORT = 0x10000000;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The type of forward references stored in four bytes in the bytecode. This is the case, for
+&nbsp;     * instance, of a forward reference from a lookupswitch instruction.
+&nbsp;     */
+&nbsp;    static final int FORWARD_REFERENCE_TYPE_WIDE = 0x20000000;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The bit mask to extract the &#39;handle&#39; of a forward reference to this label. The extracted handle
+&nbsp;     * is the bytecode offset where the forward reference value is stored (using either 2 or 4 bytes,
+&nbsp;     * as indicated by the {@link #FORWARD_REFERENCE_TYPE_MASK}).
+&nbsp;     *
+&nbsp;     * @see #forwardReferences
+&nbsp;     */
+&nbsp;    static final int FORWARD_REFERENCE_HANDLE_MASK = 0x0FFFFFFF;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A sentinel element used to indicate the end of a list of labels.
+&nbsp;     *
+&nbsp;     * @see #nextListElement
+&nbsp;     */
+<b class="fc">&nbsp;    static final Label EMPTY_LIST = new Label();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A user managed state associated with this label. Warning: this field is used by the ASM tree
+&nbsp;     * package. In order to use it with the ASM tree package you must override the getLabelNode method
+&nbsp;     * in MethodNode.
+&nbsp;     */
+&nbsp;    public Object info;
+&nbsp;
+&nbsp;    short flags;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The offset of this label in the bytecode of its method, in bytes. This value is set if and only
+&nbsp;     * if the {@link #FLAG_RESOLVED} flag is set.
+&nbsp;     */
+&nbsp;    int bytecodeOffset;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The forward references to this label. The first element is the number of forward references,
+&nbsp;     * times 2 (this corresponds to the index of the last element actually used in this array). Then,
+&nbsp;     * each forward reference is described with two consecutive integers noted
+&nbsp;     * &#39;sourceInsnBytecodeOffset&#39; and &#39;reference&#39;:
+&nbsp;     *
+&nbsp;     * &lt;ul&gt;
+&nbsp;     *   &lt;li&gt;&#39;sourceInsnBytecodeOffset&#39; is the bytecode offset of the instruction that contains the
+&nbsp;     *       forward reference,
+&nbsp;     *   &lt;li&gt;&#39;reference&#39; contains the type and the offset in the bytecode where the forward reference
+&nbsp;     *       value must be stored, which can be extracted with {@link #FORWARD_REFERENCE_TYPE_MASK}
+&nbsp;     *       and {@link #FORWARD_REFERENCE_HANDLE_MASK}.
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * &lt;p&gt;For instance, for an ifnull instruction at bytecode offset x, &#39;sourceInsnBytecodeOffset&#39; is
+&nbsp;     * equal to x, and &#39;reference&#39; is of type {@link #FORWARD_REFERENCE_TYPE_SHORT} with value x + 1
+&nbsp;     * (because the ifnull instruction uses a 2 bytes bytecode offset operand stored one byte after
+&nbsp;     * the start of the instruction itself). For the default case of a lookupswitch instruction at
+&nbsp;     * bytecode offset x, &#39;sourceInsnBytecodeOffset&#39; is equal to x, and &#39;reference&#39; is of type {@link
+&nbsp;     * #FORWARD_REFERENCE_TYPE_WIDE} with value between x + 1 and x + 4 (because the lookupswitch
+&nbsp;     * instruction uses a 4 bytes bytecode offset operand stored one to four bytes after the start of
+&nbsp;     * the instruction itself).
+&nbsp;     */
+&nbsp;    private int[] forwardReferences;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The maximum height reached by the output stack, relatively to the top of the input stack, in
+&nbsp;     * the basic block corresponding to this label. This maximum is always positive or {@literal
+&nbsp;     * null}.
+&nbsp;     */
+&nbsp;    short outputStackMax;
+&nbsp;
+&nbsp;    Frame frame;
+&nbsp;
+&nbsp;    Label nextBasicBlock;
+&nbsp;
+&nbsp;    Edge outgoingEdges;
+&nbsp;
+&nbsp;    Label nextListElement;
+&nbsp;
+&nbsp;    // -----------------------------------------------------------------------------------------------
+&nbsp;    // Constructor and accessors
+&nbsp;    // -----------------------------------------------------------------------------------------------
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new label.
+&nbsp;     */
+<b class="fc">&nbsp;    public Label() {</b>
+&nbsp;        // Nothing to do.
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    final Label getCanonicalInstance() {
+<b class="nc">&nbsp;        return frame == null ? this : frame.owner;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -----------------------------------------------------------------------------------------------
+&nbsp;    // Methods to compute offsets and to manage forward references
+&nbsp;    // -----------------------------------------------------------------------------------------------
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Puts a reference to this label in the bytecode of a method. If the bytecode offset of the label
+&nbsp;     * is known, the relative bytecode offset between the label and the instruction referencing it is
+&nbsp;     * computed and written directly. Otherwise, a null relative offset is written and a new forward
+&nbsp;     * reference is declared for this label.
+&nbsp;     *
+&nbsp;     * @param code                     the bytecode of the method. This is where the reference is appended.
+&nbsp;     * @param sourceInsnBytecodeOffset the bytecode offset of the instruction that contains the
+&nbsp;     *                                 reference to be appended.
+&nbsp;     * @param wideReference            whether the reference must be stored in 4 bytes (instead of 2 bytes).
+&nbsp;     */
+&nbsp;    final void put(
+&nbsp;            final ByteVector code, final int sourceInsnBytecodeOffset, final boolean wideReference) {
+<b class="nc">&nbsp;        if ((flags &amp; FLAG_RESOLVED) == 0) {</b>
+<b class="nc">&nbsp;            if (wideReference) {</b>
+<b class="nc">&nbsp;                addForwardReference(sourceInsnBytecodeOffset, FORWARD_REFERENCE_TYPE_WIDE, code.length);</b>
+<b class="nc">&nbsp;                code.putInt(-1);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                addForwardReference(sourceInsnBytecodeOffset, FORWARD_REFERENCE_TYPE_SHORT, code.length);</b>
+<b class="nc">&nbsp;                code.putShort(-1);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (wideReference) {</b>
+<b class="nc">&nbsp;                code.putInt(bytecodeOffset - sourceInsnBytecodeOffset);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                code.putShort(bytecodeOffset - sourceInsnBytecodeOffset);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a forward reference to this label. This method must be called only for a true forward
+&nbsp;     * reference, i.e. only if this label is not resolved yet. For backward references, the relative
+&nbsp;     * bytecode offset of the reference can be, and must be, computed and stored directly.
+&nbsp;     *
+&nbsp;     * @param sourceInsnBytecodeOffset the bytecode offset of the instruction that contains the
+&nbsp;     *                                 reference stored at referenceHandle.
+&nbsp;     * @param referenceType            either {@link #FORWARD_REFERENCE_TYPE_SHORT} or {@link
+&nbsp;     *                                 #FORWARD_REFERENCE_TYPE_WIDE}.
+&nbsp;     * @param referenceHandle          the offset in the bytecode where the forward reference value must be
+&nbsp;     *                                 stored.
+&nbsp;     */
+&nbsp;    private void addForwardReference(
+&nbsp;            final int sourceInsnBytecodeOffset, final int referenceType, final int referenceHandle) {
+<b class="nc">&nbsp;        if (forwardReferences == null) {</b>
+<b class="nc">&nbsp;            forwardReferences = new int[FORWARD_REFERENCES_CAPACITY_INCREMENT];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int lastElementIndex = forwardReferences[0];</b>
+<b class="nc">&nbsp;        if (lastElementIndex + 2 &gt;= forwardReferences.length) {</b>
+<b class="nc">&nbsp;            int[] newValues = new int[forwardReferences.length + FORWARD_REFERENCES_CAPACITY_INCREMENT];</b>
+<b class="nc">&nbsp;            System.arraycopy(forwardReferences, 0, newValues, 0, forwardReferences.length);</b>
+<b class="nc">&nbsp;            forwardReferences = newValues;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        forwardReferences[++lastElementIndex] = sourceInsnBytecodeOffset;</b>
+<b class="nc">&nbsp;        forwardReferences[++lastElementIndex] = referenceType | referenceHandle;</b>
+<b class="nc">&nbsp;        forwardReferences[0] = lastElementIndex;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the bytecode offset of this label to the given value and resolves the forward references
+&nbsp;     * to this label, if any. This method must be called when this label is added to the bytecode of
+&nbsp;     * the method, i.e. when its bytecode offset becomes known. This method fills in the blanks that
+&nbsp;     * where left in the bytecode by each forward reference previously added to this label.
+&nbsp;     *
+&nbsp;     * @param code           the bytecode of the method.
+&nbsp;     * @param bytecodeOffset the bytecode offset of this label.
+&nbsp;     * @return {@literal true} if a blank that was left for this label was too small to store the
+&nbsp;     * offset. In such a case the corresponding jump instruction is replaced with an equivalent
+&nbsp;     * ASM specific instruction using an unsigned two bytes offset. These ASM specific
+&nbsp;     * instructions are later replaced with standard bytecode instructions with wider offsets (4
+&nbsp;     * bytes instead of 2), in ClassReader.
+&nbsp;     */
+&nbsp;    final boolean resolve(final byte[] code, final int bytecodeOffset) {
+<b class="nc">&nbsp;        this.flags |= FLAG_RESOLVED;</b>
+<b class="nc">&nbsp;        this.bytecodeOffset = bytecodeOffset;</b>
+<b class="nc">&nbsp;        if (forwardReferences == null) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        boolean hasAsmInstructions = false;</b>
+<b class="nc">&nbsp;        for (int i = forwardReferences[0]; i &gt; 0; i -= 2) {</b>
+<b class="nc">&nbsp;            final int sourceInsnBytecodeOffset = forwardReferences[i - 1];</b>
+<b class="nc">&nbsp;            final int reference = forwardReferences[i];</b>
+<b class="nc">&nbsp;            final int relativeOffset = bytecodeOffset - sourceInsnBytecodeOffset;</b>
+<b class="nc">&nbsp;            int handle = reference &amp; FORWARD_REFERENCE_HANDLE_MASK;</b>
+<b class="nc">&nbsp;            if ((reference &amp; FORWARD_REFERENCE_TYPE_MASK) == FORWARD_REFERENCE_TYPE_SHORT) {</b>
+<b class="nc">&nbsp;                if (relativeOffset &lt; Short.MIN_VALUE || relativeOffset &gt; Short.MAX_VALUE) {</b>
+&nbsp;                    // Change the opcode of the jump instruction, in order to be able to find it later in
+&nbsp;                    // ClassReader. These ASM specific opcodes are similar to jump instruction opcodes, except
+&nbsp;                    // that the 2 bytes offset is unsigned (and can therefore represent values from 0 to
+&nbsp;                    // 65535, which is sufficient since the size of a method is limited to 65535 bytes).
+<b class="nc">&nbsp;                    int opcode = code[sourceInsnBytecodeOffset] &amp; 0xFF;</b>
+<b class="nc">&nbsp;                    if (opcode &lt; Opcodes.IFNULL) {</b>
+&nbsp;                        // Change IFEQ ... JSR to ASM_IFEQ ... ASM_JSR.
+<b class="nc">&nbsp;                        code[sourceInsnBytecodeOffset] = (byte) (opcode + Constants.ASM_OPCODE_DELTA);</b>
+&nbsp;                    } else {
+&nbsp;                        // Change IFNULL and IFNONNULL to ASM_IFNULL and ASM_IFNONNULL.
+<b class="nc">&nbsp;                        code[sourceInsnBytecodeOffset] = (byte) (opcode + Constants.ASM_IFNULL_OPCODE_DELTA);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    hasAsmInstructions = true;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                code[handle++] = (byte) (relativeOffset &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;                code[handle] = (byte) relativeOffset;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                code[handle++] = (byte) (relativeOffset &gt;&gt;&gt; 24);</b>
+<b class="nc">&nbsp;                code[handle++] = (byte) (relativeOffset &gt;&gt;&gt; 16);</b>
+<b class="nc">&nbsp;                code[handle++] = (byte) (relativeOffset &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;                code[handle] = (byte) relativeOffset;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return hasAsmInstructions;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:20</div>
+</div>
+</body>
+</html>

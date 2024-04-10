@@ -1,0 +1,142 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SimpleSerializers</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.adapter.jackson.databind.module</a>
+</div>
+
+<h1>Coverage Summary for Class: SimpleSerializers (com.alibaba.fastjson2.adapter.jackson.databind.module)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SimpleSerializers</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.adapter.jackson.databind.module;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.adapter.jackson.databind.JsonSerializer;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectWriterModule;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriter;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.HashMap;
+&nbsp;
+<b class="nc">&nbsp;public class SimpleSerializers</b>
+&nbsp;        implements ObjectWriterModule {
+&nbsp;    protected HashMap&lt;Type, JsonSerializer&lt;?&gt;&gt; classMappings;
+&nbsp;    protected HashMap&lt;Type, JsonSerializer&lt;?&gt;&gt; interfaceMappings;
+&nbsp;
+&nbsp;    protected boolean hasEnumSerializer;
+&nbsp;
+&nbsp;    public void addSerializer(Class&lt;?&gt; cls, JsonSerializer&lt;?&gt; ser) {
+&nbsp;        // Interface or class type?
+<b class="nc">&nbsp;        if (cls.isInterface()) {</b>
+<b class="nc">&nbsp;            if (interfaceMappings == null) {</b>
+<b class="nc">&nbsp;                interfaceMappings = new HashMap&lt;&gt;();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            interfaceMappings.put(cls, ser);</b>
+&nbsp;        } else { // nope, class:
+<b class="nc">&nbsp;            if (classMappings == null) {</b>
+<b class="nc">&nbsp;                classMappings = new HashMap&lt;&gt;();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            classMappings.put(cls, ser);</b>
+<b class="nc">&nbsp;            if (cls == Enum.class) {</b>
+<b class="nc">&nbsp;                hasEnumSerializer = true;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectWriter getObjectWriter(Type objectType, Class objectClass) {
+<b class="nc">&nbsp;        return classMappings.get(objectType);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:14</div>
+</div>
+</body>
+</html>

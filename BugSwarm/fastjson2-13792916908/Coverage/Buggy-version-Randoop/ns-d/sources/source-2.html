@@ -1,0 +1,174 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FieldInfo</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.util</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldInfo (com.alibaba.fastjson.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FieldInfo</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/252)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;  // IntelliJ API Decompiler stub source generated from a class file
+&nbsp;  // Implementation of methods is not available
+&nbsp;
+&nbsp;package com.alibaba.fastjson.util;
+&nbsp;
+&nbsp;public class FieldInfo implements java.lang.Comparable&lt;com.alibaba.fastjson.util.FieldInfo&gt; {
+&nbsp;    public final java.lang.String name;
+&nbsp;    public final java.lang.reflect.Method method;
+&nbsp;    public final java.lang.reflect.Field field;
+&nbsp;    private int ordinal;
+&nbsp;    public final java.lang.Class&lt;?&gt; fieldClass;
+&nbsp;    public final java.lang.reflect.Type fieldType;
+&nbsp;    public final java.lang.Class&lt;?&gt; declaringClass;
+&nbsp;    public final boolean getOnly;
+&nbsp;    public final int serialzeFeatures;
+&nbsp;    public final int parserFeatures;
+&nbsp;    public final java.lang.String label;
+&nbsp;    private final com.alibaba.fastjson.annotation.JSONField fieldAnnotation;
+&nbsp;    private final com.alibaba.fastjson.annotation.JSONField methodAnnotation;
+&nbsp;    public final boolean fieldAccess;
+&nbsp;    public final boolean fieldTransient;
+&nbsp;    public final char[] name_chars;
+&nbsp;    public final boolean isEnum;
+&nbsp;    public final boolean jsonDirect;
+&nbsp;    public final boolean unwrapped;
+&nbsp;    public final java.lang.String format;
+&nbsp;    public final java.lang.String[] alternateNames;
+&nbsp;    public final long nameHashCode;
+&nbsp;
+&nbsp;    public FieldInfo(java.lang.String name, java.lang.Class&lt;?&gt; declaringClass, java.lang.Class&lt;?&gt; fieldClass, java.lang.reflect.Type fieldType, java.lang.reflect.Field field, int ordinal, int serialzeFeatures, int parserFeatures) { /* compiled code */ }
+&nbsp;
+&nbsp;    public FieldInfo(java.lang.String name, java.lang.reflect.Method method, java.lang.reflect.Field field, java.lang.Class&lt;?&gt; clazz, java.lang.reflect.Type type, int ordinal, int serialzeFeatures, int parserFeatures, com.alibaba.fastjson.annotation.JSONField fieldAnnotation, com.alibaba.fastjson.annotation.JSONField methodAnnotation, java.lang.String label) { /* compiled code */ }
+&nbsp;
+&nbsp;    public FieldInfo(java.lang.String name, java.lang.reflect.Method method, java.lang.reflect.Field field, java.lang.Class&lt;?&gt; clazz, java.lang.reflect.Type type, int ordinal, int serialzeFeatures, int parserFeatures, com.alibaba.fastjson.annotation.JSONField fieldAnnotation, com.alibaba.fastjson.annotation.JSONField methodAnnotation, java.lang.String label, java.util.Map&lt;java.lang.reflect.TypeVariable,java.lang.reflect.Type&gt; genericInfo) { /* compiled code */ }
+&nbsp;
+&nbsp;    private long nameHashCode64(java.lang.String name, com.alibaba.fastjson.annotation.JSONField annotation) { /* compiled code */ }
+&nbsp;
+&nbsp;    protected char[] genFieldNameChars() { /* compiled code */ }
+&nbsp;
+&nbsp;    public &lt;T extends java.lang.annotation.Annotation&gt; T getAnnation(java.lang.Class&lt;T&gt; annotationClass) { /* compiled code */ }
+&nbsp;
+&nbsp;    public static java.lang.reflect.Type getFieldType(java.lang.Class&lt;?&gt; clazz, java.lang.reflect.Type type, java.lang.reflect.Type fieldType) { /* compiled code */ }
+&nbsp;
+&nbsp;    public static java.lang.reflect.Type getFieldType(java.lang.Class&lt;?&gt; clazz, java.lang.reflect.Type type, java.lang.reflect.Type fieldType, java.util.Map&lt;java.lang.reflect.TypeVariable,java.lang.reflect.Type&gt; genericInfo) { /* compiled code */ }
+&nbsp;
+&nbsp;    private static boolean getArgument(java.lang.reflect.Type[] typeArgs, java.util.Map&lt;java.lang.reflect.TypeVariable,java.lang.reflect.Type&gt; genericInfo) { /* compiled code */ }
+&nbsp;
+&nbsp;    private static boolean getArgument(java.lang.reflect.Type[] typeArgs, java.lang.reflect.TypeVariable[] typeVariables, java.lang.reflect.Type[] arguments) { /* compiled code */ }
+&nbsp;
+&nbsp;    private static java.lang.reflect.Type getInheritGenericType(java.lang.Class&lt;?&gt; clazz, java.lang.reflect.Type type, java.lang.reflect.TypeVariable&lt;?&gt; tv) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.String toString() { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public java.lang.reflect.Member getMember() { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    protected java.lang.Class&lt;?&gt; getDeclaredClass() { /* compiled code */ }
+&nbsp;
+&nbsp;    public int compareTo(com.alibaba.fastjson.util.FieldInfo o) { /* compiled code */ }
+&nbsp;
+&nbsp;    public com.alibaba.fastjson.annotation.JSONField getAnnotation() { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.String getFormat() { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.Object get(java.lang.Object javaObject) throws java.lang.IllegalAccessException, java.lang.reflect.InvocationTargetException { /* compiled code */ }
+&nbsp;
+&nbsp;    public void set(java.lang.Object javaObject, java.lang.Object value) throws java.lang.IllegalAccessException, java.lang.reflect.InvocationTargetException { /* compiled code */ }
+&nbsp;
+&nbsp;    public void setAccessible() throws java.lang.SecurityException { /* compiled code */ }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:21</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,237 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.serializer</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONSerializer (com.alibaba.fastjson.serializer)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/65)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JSONSerializer$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/66)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;  // IntelliJ API Decompiler stub source generated from a class file
+&nbsp;  // Implementation of methods is not available
+&nbsp;
+&nbsp;package com.alibaba.fastjson.serializer;
+&nbsp;
+&nbsp;public class JSONSerializer extends com.alibaba.fastjson.serializer.SerializeFilterable {
+&nbsp;    protected final com.alibaba.fastjson.serializer.SerializeConfig config;
+&nbsp;    public final com.alibaba.fastjson.serializer.SerializeWriter out;
+&nbsp;    private int indentCount;
+&nbsp;    private java.lang.String indent;
+&nbsp;    private java.lang.String dateFormatPattern;
+&nbsp;    private java.text.DateFormat dateFormat;
+&nbsp;    private java.lang.String fastJsonConfigDateFormatPattern;
+&nbsp;    protected java.util.IdentityHashMap&lt;java.lang.Object,com.alibaba.fastjson.serializer.SerialContext&gt; references;
+<b class="nc">&nbsp;    protected com.alibaba.fastjson.serializer.SerialContext context;</b>
+&nbsp;    protected java.util.TimeZone timeZone;
+&nbsp;    protected java.util.Locale locale;
+&nbsp;
+<b class="nc">&nbsp;    public JSONSerializer() { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public JSONSerializer(com.alibaba.fastjson.serializer.SerializeWriter out) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public JSONSerializer(com.alibaba.fastjson.serializer.SerializeConfig config) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public JSONSerializer(com.alibaba.fastjson.serializer.SerializeWriter out, com.alibaba.fastjson.serializer.SerializeConfig config) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public java.lang.String getDateFormatPattern() { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public java.text.DateFormat getDateFormat() { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    private java.text.DateFormat generateDateFormat(java.lang.String dateFormatPattern) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public void setDateFormat(java.text.DateFormat dateFormat) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public void setDateFormat(java.lang.String dateFormat) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public void setFastJsonConfigDateFormatPattern(java.lang.String dateFormatPattern) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public java.lang.String getFastJsonConfigDateFormatPattern() { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public com.alibaba.fastjson.serializer.SerialContext getContext() { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public void setContext(com.alibaba.fastjson.serializer.SerialContext context) { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public void setContext(com.alibaba.fastjson.serializer.SerialContext parent, java.lang.Object object, java.lang.Object fieldName, int features) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public void setContext(com.alibaba.fastjson.serializer.SerialContext parent, java.lang.Object object, java.lang.Object fieldName, int features, int fieldFeatures) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public void setContext(java.lang.Object object, java.lang.Object fieldName) { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public void popContext() { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public final boolean isWriteClassName(java.lang.reflect.Type fieldType, java.lang.Object obj) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public boolean containsReference(java.lang.Object value) { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public void writeReference(java.lang.Object object) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public boolean checkValue(com.alibaba.fastjson.serializer.SerializeFilterable filterable) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public boolean hasNameFilters(com.alibaba.fastjson.serializer.SerializeFilterable filterable) { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public boolean hasPropertyFilters(com.alibaba.fastjson.serializer.SerializeFilterable filterable) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public int getIndentCount() { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public void incrementIndent() { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public void decrementIdent() { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public void println() { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public com.alibaba.fastjson.serializer.SerializeWriter getWriter() { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public java.lang.String toString() { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public void config(com.alibaba.fastjson.serializer.SerializerFeature feature, boolean state) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public boolean isEnabled(com.alibaba.fastjson.serializer.SerializerFeature feature) { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public void writeNull() { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public com.alibaba.fastjson.serializer.SerializeConfig getMapping() { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public static void write(java.io.Writer out, java.lang.Object object) { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public static void write(com.alibaba.fastjson.serializer.SerializeWriter out, java.lang.Object object) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public final void write(java.lang.Object object) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public final void writeAs(java.lang.Object object, java.lang.Class type) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public final void writeWithFieldName(java.lang.Object object, java.lang.Object fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    protected final void writeKeyValue(char seperator, java.lang.String key, java.lang.Object value) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void writeWithFieldName(java.lang.Object object, java.lang.Object fieldName, java.lang.reflect.Type fieldType, int fieldFeatures) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    public final void writeWithFormat(java.lang.Object object, java.lang.String format) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void write(java.lang.String text) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    public com.alibaba.fastjson.serializer.ObjectSerializer getObjectWriter(java.lang.Class&lt;?&gt; clazz) { /* compiled code */ }
+&nbsp;
+&nbsp;    public void close() { /* compiled code */ }
+<b class="nc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:33</div>
+</div>
+</body>
+</html>

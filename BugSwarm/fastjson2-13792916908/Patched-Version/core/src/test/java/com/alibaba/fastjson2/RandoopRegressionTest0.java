@@ -3,14 +3,14 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class RegressionTest0 {
+public class RandoopRegressionTest0 {
 
     public static boolean debug = false;
 
     @Test
     public void test01() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test01");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test01");
         // The following exception was thrown during execution in test generation
         try {
             com.alibaba.fastjson2.JSONObject jSONObject1 = com.alibaba.fastjson2.JSONObject.parseObject("hi!");
@@ -23,7 +23,7 @@ public class RegressionTest0 {
     @Test
     public void test02() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test02");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test02");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         java.time.Instant instant5 = jSONObject3.getInstant("");
         org.junit.Assert.assertNull(instant5);
@@ -32,7 +32,7 @@ public class RegressionTest0 {
     @Test
     public void test03() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test03");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test03");
         com.alibaba.fastjson2.JSONObject jSONObject2 = com.alibaba.fastjson2.JSONObject.of("", (java.lang.Object) 'a');
         org.junit.Assert.assertNotNull(jSONObject2);
     }
@@ -40,7 +40,7 @@ public class RegressionTest0 {
     @Test
     public void test04() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test04");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test04");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray2 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         java.lang.String str3 = com.alibaba.fastjson2.JSONObject.toJSONString((java.lang.Object) 10.0f, featureArray2);
         // The following exception was thrown during execution in test generation
@@ -57,7 +57,7 @@ public class RegressionTest0 {
     @Test
     public void test05() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test05");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test05");
         com.alibaba.fastjson2.JSONObject jSONObject8 = com.alibaba.fastjson2.JSONObject.of("hi!", (java.lang.Object) (byte) 1, "", (java.lang.Object) (byte) -1, "hi!", (java.lang.Object) true, "", (java.lang.Object) 0L);
         boolean boolean11 = jSONObject8.getBooleanValue("", true);
         java.util.Date date13 = jSONObject8.getDate("10.0");
@@ -69,7 +69,7 @@ public class RegressionTest0 {
     @Test
     public void test06() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test06");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test06");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         java.lang.Object obj6 = jSONObject3.putIfAbsent("hi!", (java.lang.Object) "{}");
         org.junit.Assert.assertNull(obj6);
@@ -78,7 +78,7 @@ public class RegressionTest0 {
     @Test
     public void test07() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test07");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test07");
         com.alibaba.fastjson2.JSONObject jSONObject4 = com.alibaba.fastjson2.JSONObject.of("{}", (java.lang.Object) true, "10.0", (java.lang.Object) 0.0f);
         // The following exception was thrown during execution in test generation
         try {
@@ -93,7 +93,7 @@ public class RegressionTest0 {
     @Test
     public void test08() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test08");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test08");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject((int) 'a', (float) 1L, false);
         com.alibaba.fastjson2.JSONObject jSONObject12 = com.alibaba.fastjson2.JSONObject.of("hi!", (java.lang.Object) (byte) 1, "", (java.lang.Object) (byte) -1, "hi!", (java.lang.Object) true, "", (java.lang.Object) 0L);
         boolean boolean15 = jSONObject12.getBooleanValue("", true);
@@ -129,7 +129,7 @@ public class RegressionTest0 {
     @Test
     public void test09() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test09");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test09");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject((int) 'a', (float) 1L, false);
         java.lang.Object obj6 = jSONObject3.getOrDefault("hi!", (java.lang.Object) 0);
         jSONObject3.clear();
@@ -141,7 +141,7 @@ public class RegressionTest0 {
     @Test
     public void test10() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test10");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test10");
         com.alibaba.fastjson2.JSONObject jSONObject6 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         java.lang.Object obj9 = jSONObject6.put("10.0", (java.lang.Object) "");
         java.lang.Short short11 = jSONObject6.getShort("");
@@ -156,7 +156,7 @@ public class RegressionTest0 {
     @Test
     public void test11() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test11");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test11");
         com.alibaba.fastjson2.JSONObject jSONObject4 = com.alibaba.fastjson2.JSONObject.of("10.0", (java.lang.Object) 100L, "10.0", (java.lang.Object) '4');
         com.alibaba.fastjson2.JSONObject jSONObject8 = new com.alibaba.fastjson2.JSONObject((int) 'a', (float) 1L, false);
         com.alibaba.fastjson2.JSONObject jSONObject17 = com.alibaba.fastjson2.JSONObject.of("hi!", (java.lang.Object) (byte) 1, "", (java.lang.Object) (byte) -1, "hi!", (java.lang.Object) true, "", (java.lang.Object) 0L);
@@ -176,14 +176,14 @@ public class RegressionTest0 {
     @Test
     public void test12() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test12");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test12");
         com.alibaba.fastjson2.JSONObject jSONObject1 = new com.alibaba.fastjson2.JSONObject(1);
     }
 
     @Test
     public void test13() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test13");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test13");
         com.alibaba.fastjson2.JSONObject jSONObject0 = new com.alibaba.fastjson2.JSONObject();
         java.lang.Object obj2 = jSONObject0.get((java.lang.Object) (-1L));
         org.junit.Assert.assertNull(obj2);
@@ -192,7 +192,7 @@ public class RegressionTest0 {
     @Test
     public void test14() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test14");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test14");
         com.alibaba.fastjson2.JSONObject jSONObject6 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         java.lang.Object obj8 = jSONObject6.get("");
         com.alibaba.fastjson2.JSONObject jSONObject10 = new com.alibaba.fastjson2.JSONObject();
@@ -220,7 +220,7 @@ public class RegressionTest0 {
     @Test
     public void test15() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test15");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test15");
         com.alibaba.fastjson2.JSONObject jSONObject8 = com.alibaba.fastjson2.JSONObject.of("hi!", (java.lang.Object) (byte) 1, "", (java.lang.Object) (byte) -1, "hi!", (java.lang.Object) true, "", (java.lang.Object) 0L);
         byte byte10 = jSONObject8.getByteValue("{}");
         org.junit.Assert.assertNotNull(jSONObject8);
@@ -230,7 +230,7 @@ public class RegressionTest0 {
     @Test
     public void test16() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test16");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test16");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         java.lang.Object obj5 = jSONObject3.get("");
         com.alibaba.fastjson2.JSONObject jSONObject10 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
@@ -249,7 +249,7 @@ public class RegressionTest0 {
     @Test
     public void test17() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test17");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test17");
         com.alibaba.fastjson2.JSONObject jSONObject6 = com.alibaba.fastjson2.JSONObject.of("", (java.lang.Object) "hi!", "{}", (java.lang.Object) 1L, "10.0", (java.lang.Object) (-1L));
         org.junit.Assert.assertNotNull(jSONObject6);
     }
@@ -257,7 +257,7 @@ public class RegressionTest0 {
     @Test
     public void test18() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test18");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test18");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         java.lang.Object obj5 = jSONObject3.get("");
         java.lang.Boolean boolean7 = jSONObject3.getBoolean("");
@@ -270,7 +270,7 @@ public class RegressionTest0 {
     @Test
     public void test19() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test19");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test19");
         com.alibaba.fastjson2.JSONObject jSONObject11 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         com.alibaba.fastjson2.JSONObject jSONObject17 = com.alibaba.fastjson2.JSONObject.of("{}", (java.lang.Object) true, "10.0", (java.lang.Object) 0.0f);
         com.alibaba.fastjson2.JSONObject jSONObject18 = com.alibaba.fastjson2.JSONObject.of("", (java.lang.Object) 10.0d, "", (java.lang.Object) 'a', "{}", (java.lang.Object) 0.0f);
@@ -283,7 +283,7 @@ public class RegressionTest0 {
     @Test
     public void test20() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test20");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test20");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         java.lang.Object obj5 = jSONObject3.get("");
         java.lang.Boolean boolean7 = jSONObject3.getBoolean("");
@@ -300,7 +300,7 @@ public class RegressionTest0 {
     @Test
     public void test21() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test21");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test21");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject((int) 'a', (float) 1L, false);
         com.alibaba.fastjson2.JSONObject jSONObject4 = new com.alibaba.fastjson2.JSONObject((java.util.Map) jSONObject3);
         long long7 = jSONObject3.getLongValue("hi!", (long) (byte) 10);
@@ -310,7 +310,7 @@ public class RegressionTest0 {
     @Test
     public void test22() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test22");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test22");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         int int4 = jSONObject3.size();
         org.junit.Assert.assertTrue("'" + int4 + "' != '" + 0 + "'", int4 == 0);
@@ -319,7 +319,7 @@ public class RegressionTest0 {
     @Test
     public void test23() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test23");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test23");
         com.alibaba.fastjson2.JSONObject jSONObject0 = new com.alibaba.fastjson2.JSONObject();
         java.time.Instant instant2 = jSONObject0.getInstant("");
         int int3 = jSONObject0.size();
@@ -330,7 +330,7 @@ public class RegressionTest0 {
     @Test
     public void test24() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test24");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test24");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         java.lang.Object obj5 = jSONObject3.get("");
         java.lang.Integer int7 = jSONObject3.getInteger("hi!");
@@ -343,7 +343,7 @@ public class RegressionTest0 {
     @Test
     public void test25() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test25");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test25");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject((int) 'a', (float) 1L, false);
         com.alibaba.fastjson2.JSONObject jSONObject4 = new com.alibaba.fastjson2.JSONObject((java.util.Map) jSONObject3);
         com.alibaba.fastjson2.JSONArray jSONArray6 = jSONObject4.getJSONArray("10.0");
@@ -366,7 +366,7 @@ public class RegressionTest0 {
     @Test
     public void test26() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test26");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test26");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject((int) 'a', (float) 1L, false);
         java.lang.String str4 = jSONObject3.toString();
         java.lang.Integer int6 = jSONObject3.getInteger("hi!");
@@ -377,7 +377,7 @@ public class RegressionTest0 {
     @Test
     public void test27() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test27");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test27");
         com.alibaba.fastjson2.JSONObject jSONObject0 = new com.alibaba.fastjson2.JSONObject();
         com.alibaba.fastjson2.JSONArray jSONArray2 = jSONObject0.getJSONArray("10.0");
         com.alibaba.fastjson2.JSONObject jSONObject11 = com.alibaba.fastjson2.JSONObject.of("hi!", (java.lang.Object) (byte) 1, "", (java.lang.Object) (byte) -1, "hi!", (java.lang.Object) true, "", (java.lang.Object) 0L);
@@ -395,7 +395,7 @@ public class RegressionTest0 {
     @Test
     public void test28() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test28");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test28");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject((int) 'a', (float) 1L, false);
         com.alibaba.fastjson2.JSONObject jSONObject12 = com.alibaba.fastjson2.JSONObject.of("hi!", (java.lang.Object) (byte) 1, "", (java.lang.Object) (byte) -1, "hi!", (java.lang.Object) true, "", (java.lang.Object) 0L);
         boolean boolean15 = jSONObject12.getBooleanValue("", true);
@@ -431,7 +431,7 @@ public class RegressionTest0 {
     @Test
     public void test29() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test29");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test29");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         java.lang.Object obj5 = jSONObject3.get("");
         com.alibaba.fastjson2.JSONObject jSONObject10 = new com.alibaba.fastjson2.JSONObject((int) 'a', (float) 1L, false);
@@ -455,7 +455,7 @@ public class RegressionTest0 {
     @Test
     public void test30() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test30");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test30");
         com.alibaba.fastjson2.JSONObject jSONObject6 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         java.lang.Object obj8 = jSONObject6.get("");
         com.alibaba.fastjson2.JSONObject jSONObject10 = new com.alibaba.fastjson2.JSONObject();
@@ -488,7 +488,7 @@ public class RegressionTest0 {
     @Test
     public void test31() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test31");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test31");
         com.alibaba.fastjson2.JSONObject jSONObject8 = com.alibaba.fastjson2.JSONObject.of("hi!", (java.lang.Object) (byte) 1, "", (java.lang.Object) (byte) -1, "hi!", (java.lang.Object) true, "", (java.lang.Object) 0L);
         // The following exception was thrown during execution in test generation
         try {
@@ -503,7 +503,7 @@ public class RegressionTest0 {
     @Test
     public void test32() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test32");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test32");
         com.alibaba.fastjson2.JSONObject jSONObject1 = new com.alibaba.fastjson2.JSONObject();
         com.alibaba.fastjson2.JSONObject jSONObject2 = com.alibaba.fastjson2.JSONObject.of("", (java.lang.Object) jSONObject1);
         org.junit.Assert.assertNotNull(jSONObject2);
@@ -512,7 +512,7 @@ public class RegressionTest0 {
     @Test
     public void test33() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test33");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test33");
         // The following exception was thrown during execution in test generation
         try {
             com.alibaba.fastjson2.JSONObject jSONObject2 = new com.alibaba.fastjson2.JSONObject((int) (byte) 0, (float) (byte) 0);
@@ -525,7 +525,7 @@ public class RegressionTest0 {
     @Test
     public void test34() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test34");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test34");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         java.lang.Object obj5 = jSONObject3.get("");
         com.alibaba.fastjson2.JSONObject jSONObject10 = new com.alibaba.fastjson2.JSONObject((int) 'a', (float) 1L, false);
@@ -542,7 +542,7 @@ public class RegressionTest0 {
     @Test
     public void test35() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test35");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test35");
         com.alibaba.fastjson2.JSONObject jSONObject6 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         java.lang.Object obj9 = jSONObject6.put("10.0", (java.lang.Object) "");
         java.lang.Short short11 = jSONObject6.getShort("");
@@ -562,7 +562,7 @@ public class RegressionTest0 {
     @Test
     public void test36() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test36");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test36");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         java.lang.Object obj5 = jSONObject3.get("");
         java.lang.Boolean boolean7 = jSONObject3.getBoolean("");
@@ -579,7 +579,7 @@ public class RegressionTest0 {
     @Test
     public void test37() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test37");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test37");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject((int) 'a', (float) 1L, false);
         com.alibaba.fastjson2.JSONObject jSONObject4 = new com.alibaba.fastjson2.JSONObject((java.util.Map) jSONObject3);
         com.alibaba.fastjson2.JSONArray jSONArray6 = jSONObject4.getJSONArray("10.0");
@@ -593,7 +593,7 @@ public class RegressionTest0 {
     @Test
     public void test38() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test38");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test38");
         // The following exception was thrown during execution in test generation
         try {
             com.alibaba.fastjson2.JSONObject jSONObject1 = com.alibaba.fastjson2.JSONObject.from((java.lang.Object) (short) 1);
@@ -606,7 +606,7 @@ public class RegressionTest0 {
     @Test
     public void test39() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test39");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test39");
         com.alibaba.fastjson2.JSONObject jSONObject8 = com.alibaba.fastjson2.JSONObject.of("hi!", (java.lang.Object) (byte) 1, "", (java.lang.Object) (byte) -1, "hi!", (java.lang.Object) true, "", (java.lang.Object) 0L);
         boolean boolean11 = jSONObject8.getBooleanValue("", true);
         com.alibaba.fastjson2.JSONObject jSONObject18 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
@@ -627,7 +627,7 @@ public class RegressionTest0 {
     @Test
     public void test40() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test40");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test40");
         // The following exception was thrown during execution in test generation
         try {
             com.alibaba.fastjson2.JSONObject jSONObject2 = new com.alibaba.fastjson2.JSONObject((int) ' ', (float) (short) 0);
@@ -640,7 +640,7 @@ public class RegressionTest0 {
     @Test
     public void test41() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test41");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test41");
         // The following exception was thrown during execution in test generation
         try {
             com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject((int) (byte) 0, (float) (-1), true);
@@ -653,7 +653,7 @@ public class RegressionTest0 {
     @Test
     public void test42() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test42");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test42");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         java.lang.Object obj5 = jSONObject3.get("");
         com.alibaba.fastjson2.JSONObject jSONObject10 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
@@ -680,7 +680,7 @@ public class RegressionTest0 {
     @Test
     public void test43() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test43");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test43");
         com.alibaba.fastjson2.JSONObject jSONObject6 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         java.lang.Object obj9 = jSONObject6.put("10.0", (java.lang.Object) "");
         java.lang.Short short11 = jSONObject6.getShort("");
@@ -695,7 +695,7 @@ public class RegressionTest0 {
     @Test
     public void test44() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test44");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test44");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         com.alibaba.fastjson2.JSONArray jSONArray5 = jSONObject3.getJSONArray("10.0");
         int int6 = jSONObject3.size();
@@ -710,7 +710,7 @@ public class RegressionTest0 {
     @Test
     public void test45() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test45");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test45");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         java.lang.Object obj5 = jSONObject3.get("");
         com.alibaba.fastjson2.JSONObject jSONObject10 = new com.alibaba.fastjson2.JSONObject((int) 'a', (float) 1L, false);
@@ -727,7 +727,7 @@ public class RegressionTest0 {
     @Test
     public void test46() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test46");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test46");
         com.alibaba.fastjson2.JSONObject jSONObject6 = com.alibaba.fastjson2.JSONObject.of("hi!", (java.lang.Object) 100, "10.0", (java.lang.Object) "10.0", "hi!", (java.lang.Object) (-1.0d));
         com.alibaba.fastjson2.filter.ValueFilter valueFilter7 = null;
         // The following exception was thrown during execution in test generation
@@ -743,14 +743,14 @@ public class RegressionTest0 {
     @Test
     public void test47() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test47");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test47");
         com.alibaba.fastjson2.JSONObject jSONObject2 = new com.alibaba.fastjson2.JSONObject(1, (float) 10);
     }
 
     @Test
     public void test48() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test48");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test48");
         com.alibaba.fastjson2.JSONObject jSONObject1 = new com.alibaba.fastjson2.JSONObject();
         java.time.Instant instant3 = jSONObject1.getInstant("");
         com.alibaba.fastjson2.JSONObject jSONObject7 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
@@ -808,7 +808,7 @@ public class RegressionTest0 {
     @Test
     public void test49() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test49");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test49");
         com.alibaba.fastjson2.JSONObject jSONObject3 = new com.alibaba.fastjson2.JSONObject((int) 'a', (float) 1L, false);
         java.lang.Object obj6 = jSONObject3.getOrDefault("hi!", (java.lang.Object) 0);
         com.alibaba.fastjson2.JSONObject jSONObject10 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
@@ -829,7 +829,7 @@ public class RegressionTest0 {
     @Test
     public void test50() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test50");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test50");
         com.alibaba.fastjson2.JSONObject jSONObject4 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);
         java.lang.Object obj6 = jSONObject4.get("");
         java.lang.Boolean boolean8 = jSONObject4.getBoolean("");

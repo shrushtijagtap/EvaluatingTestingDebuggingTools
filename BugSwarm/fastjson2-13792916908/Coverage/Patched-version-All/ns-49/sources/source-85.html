@@ -1,0 +1,178 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectWriterImplListStr</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectWriterImplListStr (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectWriterImplListStr</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    3%
+  </span>
+  <span class="absValue">
+    (1/33)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.ParameterizedType;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.writer.ObjectWriterImplList.CLASS_SUBLIST;
+&nbsp;
+<b class="fc">&nbsp;final class ObjectWriterImplListStr</b>
+&nbsp;        extends ObjectWriterPrimitiveImpl {
+<b class="nc">&nbsp;    static final ObjectWriterImplListStr INSTANCE = new ObjectWriterImplListStr();</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        List list = (List) object;</b>
+&nbsp;
+<b class="nc">&nbsp;        jsonWriter.startArray();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; list.size(); i++) {</b>
+<b class="nc">&nbsp;            if (i != 0) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeComma();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String item = (String) list.get(i);</b>
+<b class="nc">&nbsp;            if (item == null) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeNull();</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            jsonWriter.writeString(item);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        jsonWriter.endArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeJSONB(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeArrayNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Class fieldClass = null;</b>
+<b class="nc">&nbsp;        if (fieldType == TypeUtils.PARAM_TYPE_LIST_STR) {</b>
+<b class="nc">&nbsp;            fieldClass = List.class;</b>
+<b class="nc">&nbsp;        } else if (fieldType instanceof Class) {</b>
+<b class="nc">&nbsp;            fieldClass = (Class) fieldType;</b>
+<b class="nc">&nbsp;        } else if (fieldType instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;            ParameterizedType parameterizedType = (ParameterizedType) fieldType;</b>
+<b class="nc">&nbsp;            Type rawType = parameterizedType.getRawType();</b>
+<b class="nc">&nbsp;            if (rawType instanceof Class) {</b>
+<b class="nc">&nbsp;                fieldClass = (Class) rawType;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Class&lt;?&gt; objectClass = object.getClass();</b>
+<b class="nc">&nbsp;        if (objectClass != ArrayList.class &amp;&amp; jsonWriter.isWriteTypeInfo(object, fieldClass, features)) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeTypeName(</b>
+<b class="nc">&nbsp;                    TypeUtils.getTypeName(</b>
+&nbsp;                            objectClass == CLASS_SUBLIST ? ArrayList.class : objectClass
+&nbsp;                    )
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        List&lt;String&gt; list = (List) object;</b>
+<b class="nc">&nbsp;        jsonWriter.writeString(list);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:29</div>
+</div>
+</body>
+</html>

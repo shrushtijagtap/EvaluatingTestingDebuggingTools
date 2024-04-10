@@ -1,0 +1,779 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONPathSingleName</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONPathSingleName (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONPathSingleName</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    56.2%
+  </span>
+  <span class="absValue">
+    (9/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    24.6%
+  </span>
+  <span class="absValue">
+    (74/301)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.reader.*;
+&nbsp;import com.alibaba.fastjson2.util.IOUtils;
+&nbsp;import com.alibaba.fastjson2.writer.FieldWriter;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriter;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriterProvider;
+&nbsp;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.function.BiFunction;
+&nbsp;
+&nbsp;final class JSONPathSingleName
+&nbsp;        extends JSONPathSingle {
+&nbsp;    final long nameHashCode;
+&nbsp;    final String name;
+&nbsp;
+&nbsp;    public JSONPathSingleName(String path, JSONPathSegmentName segment, Feature... features) {
+<b class="fc">&nbsp;        super(segment, path, features);</b>
+<b class="fc">&nbsp;        this.name = segment.name;</b>
+<b class="fc">&nbsp;        this.nameHashCode = segment.nameHashCode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object eval(Object root) {
+&nbsp;        Object value;
+<b class="fc">&nbsp;        if (root instanceof Map) {</b>
+<b class="fc">&nbsp;            Map map = (Map) root;</b>
+<b class="fc">&nbsp;            value = map.get(name);</b>
+<b class="fc">&nbsp;            if (value == null) {</b>
+<b class="fc">&nbsp;                boolean isNum = IOUtils.isNumber(this.name);</b>
+<b class="fc">&nbsp;                Long longValue = null;</b>
+&nbsp;
+<b class="fc">&nbsp;                for (Object o : map.entrySet()) {</b>
+<b class="nc">&nbsp;                    Map.Entry entry = (Map.Entry) o;</b>
+<b class="nc">&nbsp;                    Object entryKey = entry.getKey();</b>
+<b class="nc">&nbsp;                    if (entryKey instanceof Enum &amp;&amp; ((Enum&lt;?&gt;) entryKey).name().equals(this.name)) {</b>
+<b class="nc">&nbsp;                        value = entry.getValue();</b>
+<b class="nc">&nbsp;                        break;</b>
+<b class="nc">&nbsp;                    } else if (entryKey instanceof Long) {</b>
+<b class="nc">&nbsp;                        if (longValue == null &amp;&amp; isNum) {</b>
+<b class="nc">&nbsp;                            longValue = Long.parseLong(this.name);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        if (entryKey.equals(longValue)) {</b>
+<b class="nc">&nbsp;                            value = entry.getValue();</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else {</b>
+<b class="fc">&nbsp;            JSONWriter.Context writerContext = getWriterContext();</b>
+<b class="fc">&nbsp;            ObjectWriter objectWriter = writerContext.getObjectWriter(root.getClass());</b>
+<b class="fc">&nbsp;            if (objectWriter == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            FieldWriter fieldWriter = objectWriter.getFieldWriter(nameHashCode);</b>
+<b class="fc">&nbsp;            if (fieldWriter == null) {</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            value = fieldWriter.getFieldValue(root);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if ((features &amp; Feature.AlwaysReturnList.mask) != 0) {</b>
+<b class="nc">&nbsp;            if (value == null) {</b>
+<b class="nc">&nbsp;                value = new JSONArray();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                value = JSONArray.of(value);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean remove(Object root) {
+<b class="fc">&nbsp;        if (root == null) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (root instanceof Map) {</b>
+<b class="fc">&nbsp;            return ((Map&lt;?, ?&gt;) root).remove(name) != null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        ObjectReaderProvider provider = getReaderContext().getProvider();</b>
+&nbsp;
+<b class="fc">&nbsp;        ObjectReader objectReader = provider.getObjectReader(root.getClass());</b>
+<b class="fc">&nbsp;        if (objectReader == null) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        FieldReader fieldReader = objectReader.getFieldReader(nameHashCode);</b>
+<b class="fc">&nbsp;        if (fieldReader == null) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="fc">&nbsp;            fieldReader.accept(root, null);</b>
+<b class="nc">&nbsp;        } catch (Exception ignored) {</b>
+<b class="nc">&nbsp;            return false;</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isRef() {
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean contains(Object root) {
+<b class="fc">&nbsp;        if (root instanceof Map) {</b>
+<b class="fc">&nbsp;            return ((Map) root).containsKey(name);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectWriterProvider provider = getWriterContext().provider;</b>
+&nbsp;
+<b class="nc">&nbsp;        ObjectWriter objectWriter = provider.getObjectWriter(root.getClass());</b>
+<b class="nc">&nbsp;        if (objectWriter == null) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        FieldWriter fieldWriter = objectWriter.getFieldWriter(nameHashCode);</b>
+<b class="nc">&nbsp;        if (fieldWriter == null) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return fieldWriter.getFieldValue(root) != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void set(Object rootObject, Object value) {
+<b class="fc">&nbsp;        if (rootObject instanceof Map) {</b>
+<b class="fc">&nbsp;            Map map = (Map) rootObject;</b>
+<b class="fc">&nbsp;            map.put(name, value);</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="fc">&nbsp;        ObjectReaderProvider provider = getReaderContext().getProvider();</b>
+<b class="fc">&nbsp;        ObjectReader objectReader = provider.getObjectReader(rootObject.getClass());</b>
+<b class="fc">&nbsp;        FieldReader fieldReader = objectReader.getFieldReader(nameHashCode);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (fieldReader != null) {</b>
+<b class="fc">&nbsp;            if (value != null) {</b>
+<b class="fc">&nbsp;                Class&lt;?&gt; valueClass = value.getClass();</b>
+<b class="fc">&nbsp;                Class fieldClass = fieldReader.fieldClass;</b>
+<b class="fc">&nbsp;                if (!fieldReader.supportAcceptType(valueClass)) {</b>
+<b class="fc">&nbsp;                    java.util.function.Function typeConvert = provider.getTypeConvert(valueClass, fieldClass);</b>
+<b class="fc">&nbsp;                    if (typeConvert != null) {</b>
+<b class="fc">&nbsp;                        value = typeConvert.apply(value);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            fieldReader.accept(rootObject, value);</b>
+<b class="nc">&nbsp;        } else if (objectReader instanceof ObjectReaderBean) {</b>
+<b class="nc">&nbsp;            ((ObjectReaderBean) objectReader).acceptExtra(rootObject, name, value);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void set(Object rootObject, Object value, JSONReader.Feature... readerFeatures) {
+<b class="nc">&nbsp;        if (rootObject instanceof Map) {</b>
+<b class="nc">&nbsp;            Map map = (Map) rootObject;</b>
+<b class="nc">&nbsp;            Object origin = map.put(name, value);</b>
+<b class="nc">&nbsp;            if (origin != null) {</b>
+<b class="nc">&nbsp;                boolean duplicateKeyValueAsArray = false;</b>
+<b class="nc">&nbsp;                for (JSONReader.Feature feature : readerFeatures) {</b>
+<b class="nc">&nbsp;                    if (feature == JSONReader.Feature.DuplicateKeyValueAsArray) {</b>
+<b class="nc">&nbsp;                        duplicateKeyValueAsArray = true;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (duplicateKeyValueAsArray) {</b>
+<b class="nc">&nbsp;                    if (origin instanceof Collection) {</b>
+<b class="nc">&nbsp;                        ((Collection) origin).add(value);</b>
+<b class="nc">&nbsp;                        map.put(name, value);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        JSONArray array = JSONArray.of(origin, value);</b>
+<b class="nc">&nbsp;                        map.put(name, array);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        ObjectReaderProvider provider = getReaderContext().getProvider();</b>
+<b class="nc">&nbsp;        ObjectReader objectReader = provider.getObjectReader(rootObject.getClass());</b>
+<b class="nc">&nbsp;        FieldReader fieldReader = objectReader.getFieldReader(nameHashCode);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value != null) {</b>
+<b class="nc">&nbsp;            Class&lt;?&gt; valueClass = value.getClass();</b>
+<b class="nc">&nbsp;            Class fieldClass = fieldReader.fieldClass;</b>
+<b class="nc">&nbsp;            if (valueClass != fieldClass) {</b>
+<b class="nc">&nbsp;                java.util.function.Function typeConvert = provider.getTypeConvert(valueClass, fieldClass);</b>
+<b class="nc">&nbsp;                if (typeConvert != null) {</b>
+<b class="nc">&nbsp;                    value = typeConvert.apply(value);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        fieldReader.accept(rootObject, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setCallback(Object object, BiFunction callback) {
+<b class="nc">&nbsp;        if (object instanceof Map) {</b>
+<b class="nc">&nbsp;            Map map = (Map) object;</b>
+<b class="nc">&nbsp;            Object originValue = map.get(name);</b>
+<b class="nc">&nbsp;            if (originValue != null || map.containsKey(name)) {</b>
+<b class="nc">&nbsp;                map.put(name, callback.apply(map, originValue));</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Class&lt;?&gt; objectClass = object.getClass();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (readerContext == null) {</b>
+<b class="nc">&nbsp;            readerContext = JSONFactory.createReadContext();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        FieldReader fieldReader = readerContext.provider</b>
+<b class="nc">&nbsp;                .getObjectReader(objectClass)</b>
+<b class="nc">&nbsp;                .getFieldReader(nameHashCode);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (writerContext == null) {</b>
+<b class="nc">&nbsp;            writerContext = JSONFactory.createWriteContext();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        FieldWriter fieldWriter = writerContext.provider</b>
+<b class="nc">&nbsp;                .getObjectWriter(objectClass)</b>
+<b class="nc">&nbsp;                .getFieldWriter(nameHashCode);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (fieldReader != null &amp;&amp; fieldWriter != null) {</b>
+<b class="nc">&nbsp;            Object fieldValue = fieldWriter.getFieldValue(object);</b>
+<b class="nc">&nbsp;            Object value = callback.apply(object, fieldValue);</b>
+<b class="nc">&nbsp;            fieldReader.accept(object, value);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setInt(Object obejct, int value) {
+<b class="fc">&nbsp;        if (obejct instanceof Map) {</b>
+<b class="nc">&nbsp;            ((Map) obejct).put(name, value);</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="fc">&nbsp;        ObjectReaderProvider provider = getReaderContext().getProvider();</b>
+<b class="fc">&nbsp;        ObjectReader objectReader = provider.getObjectReader(obejct.getClass());</b>
+<b class="fc">&nbsp;        objectReader.setFieldValue(obejct, name, nameHashCode, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setLong(Object object, long value) {
+<b class="fc">&nbsp;        if (object instanceof Map) {</b>
+<b class="nc">&nbsp;            ((Map) object).put(name, value);</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="fc">&nbsp;        ObjectReaderProvider provider = getReaderContext().getProvider();</b>
+<b class="fc">&nbsp;        ObjectReader objectReader = provider.getObjectReader(object.getClass());</b>
+<b class="fc">&nbsp;        objectReader.setFieldValue(object, name, nameHashCode, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object extract(JSONReader jsonReader) {
+<b class="fc">&nbsp;        if (jsonReader.isJSONB()) {</b>
+<b class="nc">&nbsp;            if (jsonReader.nextIfObjectStart()) {</b>
+<b class="nc">&nbsp;                while (!jsonReader.nextIfObjectEnd()) {</b>
+<b class="nc">&nbsp;                    long nameHashCode = jsonReader.readFieldNameHashCode();</b>
+<b class="nc">&nbsp;                    if (nameHashCode == 0) {</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    boolean match = nameHashCode == this.nameHashCode;</b>
+<b class="nc">&nbsp;                    if (!match &amp;&amp; (!jsonReader.isObject()) &amp;&amp; !jsonReader.isArray()) {</b>
+<b class="nc">&nbsp;                        jsonReader.skipValue();</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (jsonReader.isNumber()) {</b>
+<b class="nc">&nbsp;                        return jsonReader.readNumber();</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    throw new JSONException(&quot;TODO&quot;);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if ((features &amp; Feature.AlwaysReturnList.mask) != 0) {</b>
+<b class="nc">&nbsp;                return new JSONArray();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (jsonReader.nextIfObjectStart()) {</b>
+<b class="fc">&nbsp;            while (!jsonReader.nextIfObjectEnd()) {</b>
+<b class="fc">&nbsp;                long nameHashCode = jsonReader.readFieldNameHashCode();</b>
+<b class="fc">&nbsp;                boolean match = nameHashCode == this.nameHashCode;</b>
+&nbsp;
+<b class="fc">&nbsp;                if (!match) {</b>
+<b class="fc">&nbsp;                    jsonReader.skipValue();</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                Object val;
+<b class="fc">&nbsp;                switch (jsonReader.ch) {</b>
+&nbsp;                    case &#39;-&#39;:
+&nbsp;                    case &#39;+&#39;:
+&nbsp;                    case &#39;0&#39;:
+&nbsp;                    case &#39;1&#39;:
+&nbsp;                    case &#39;2&#39;:
+&nbsp;                    case &#39;3&#39;:
+&nbsp;                    case &#39;4&#39;:
+&nbsp;                    case &#39;5&#39;:
+&nbsp;                    case &#39;6&#39;:
+&nbsp;                    case &#39;7&#39;:
+&nbsp;                    case &#39;8&#39;:
+&nbsp;                    case &#39;9&#39;:
+<b class="nc">&nbsp;                        val = jsonReader.readNumber();</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;[&#39;:
+<b class="fc">&nbsp;                        val = jsonReader.readArray();</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;{&#39;:
+<b class="nc">&nbsp;                        val = jsonReader.readObject();</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;&quot;&#39;:
+&nbsp;                    case &#39;\&#39;&#39;:
+<b class="fc">&nbsp;                        val = jsonReader.readString(); //</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;t&#39;:
+&nbsp;                    case &#39;f&#39;:
+<b class="nc">&nbsp;                        val = jsonReader.readBoolValue();</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;n&#39;:
+<b class="nc">&nbsp;                        jsonReader.readNull();</b>
+<b class="nc">&nbsp;                        val = null;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    default:
+<b class="nc">&nbsp;                        throw new JSONException(&quot;TODO : &quot; + jsonReader.ch);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if ((features &amp; Feature.AlwaysReturnList.mask) != 0) {</b>
+<b class="nc">&nbsp;                    if (val == null) {</b>
+<b class="nc">&nbsp;                        val = new JSONArray();</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        val = JSONArray.of(val);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                return val;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if ((features &amp; Feature.AlwaysReturnList.mask) != 0) {</b>
+<b class="nc">&nbsp;            return new JSONArray();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String extractScalar(JSONReader jsonReader) {
+<b class="nc">&nbsp;        if (jsonReader.nextIfObjectStart()) {</b>
+&nbsp;            for (; ; ) {
+<b class="nc">&nbsp;                if (jsonReader.ch == &#39;}&#39;) {</b>
+<b class="nc">&nbsp;                    jsonReader.next();</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                long nameHashCode = jsonReader.readFieldNameHashCode();</b>
+&nbsp;
+<b class="nc">&nbsp;                boolean match = nameHashCode == this.nameHashCode;</b>
+<b class="nc">&nbsp;                char ch = jsonReader.ch;</b>
+<b class="nc">&nbsp;                if (!match &amp;&amp; ch != &#39;{&#39; &amp;&amp; ch != &#39;[&#39;) {</b>
+<b class="nc">&nbsp;                    jsonReader.skipValue();</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                Object val;
+<b class="nc">&nbsp;                switch (jsonReader.ch) {</b>
+&nbsp;                    case &#39;-&#39;:
+&nbsp;                    case &#39;+&#39;:
+&nbsp;                    case &#39;0&#39;:
+&nbsp;                    case &#39;1&#39;:
+&nbsp;                    case &#39;2&#39;:
+&nbsp;                    case &#39;3&#39;:
+&nbsp;                    case &#39;4&#39;:
+&nbsp;                    case &#39;5&#39;:
+&nbsp;                    case &#39;6&#39;:
+&nbsp;                    case &#39;7&#39;:
+&nbsp;                    case &#39;8&#39;:
+&nbsp;                    case &#39;9&#39;:
+<b class="nc">&nbsp;                        val = jsonReader.readNumber();</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;[&#39;:
+<b class="nc">&nbsp;                        val = jsonReader.readArray();</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;{&#39;:
+<b class="nc">&nbsp;                        val = jsonReader.readObject();</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;&quot;&#39;:
+&nbsp;                    case &#39;\&#39;&#39;:
+<b class="nc">&nbsp;                        val = jsonReader.readString(); //</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;t&#39;:
+&nbsp;                    case &#39;f&#39;:
+<b class="nc">&nbsp;                        val = jsonReader.readBoolValue();</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;n&#39;:
+<b class="nc">&nbsp;                        jsonReader.readNull();</b>
+<b class="nc">&nbsp;                        val = null;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    default:
+<b class="nc">&nbsp;                        throw new JSONException(&quot;TODO : &quot; + jsonReader.ch);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return JSON.toJSONString(val);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public long extractInt64Value(JSONReader jsonReader) {
+<b class="nc">&nbsp;        if (jsonReader.nextIfObjectStart()) {</b>
+&nbsp;            _for:
+&nbsp;            for (; ; ) {
+<b class="nc">&nbsp;                if (jsonReader.ch == &#39;}&#39;) {</b>
+<b class="nc">&nbsp;                    jsonReader.wasNull = true;</b>
+<b class="nc">&nbsp;                    return 0;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                long nameHashCode = jsonReader.readFieldNameHashCode();</b>
+&nbsp;
+<b class="nc">&nbsp;                boolean match = nameHashCode == this.nameHashCode;</b>
+<b class="nc">&nbsp;                if (!match) {</b>
+<b class="nc">&nbsp;                    jsonReader.skipValue();</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                switch (jsonReader.ch) {</b>
+&nbsp;                    case &#39;-&#39;:
+&nbsp;                    case &#39;+&#39;:
+&nbsp;                    case &#39;0&#39;:
+&nbsp;                    case &#39;1&#39;:
+&nbsp;                    case &#39;2&#39;:
+&nbsp;                    case &#39;3&#39;:
+&nbsp;                    case &#39;4&#39;:
+&nbsp;                    case &#39;5&#39;:
+&nbsp;                    case &#39;6&#39;:
+&nbsp;                    case &#39;7&#39;:
+&nbsp;                    case &#39;8&#39;:
+&nbsp;                    case &#39;9&#39;:
+<b class="nc">&nbsp;                        return jsonReader.readInt64Value();</b>
+&nbsp;                    case &#39;[&#39;:
+&nbsp;                    case &#39;{&#39;:
+<b class="nc">&nbsp;                        Map object = jsonReader.readObject();</b>
+<b class="nc">&nbsp;                        return jsonReader.toLong(object);</b>
+&nbsp;                    case &#39;&quot;&#39;:
+&nbsp;                    case &#39;\&#39;&#39;:
+<b class="nc">&nbsp;                        String str = jsonReader.readString();</b>
+<b class="nc">&nbsp;                        return Long.parseLong(str);</b>
+&nbsp;                    case &#39;t&#39;:
+&nbsp;                    case &#39;f&#39;:
+<b class="nc">&nbsp;                        boolean booleanValue = jsonReader.readBoolValue();</b>
+<b class="nc">&nbsp;                        return booleanValue ? 1L : 0L;</b>
+&nbsp;                    case &#39;n&#39;:
+<b class="nc">&nbsp;                        jsonReader.readNull();</b>
+<b class="nc">&nbsp;                        jsonReader.wasNull = true;</b>
+<b class="nc">&nbsp;                        return 0;</b>
+&nbsp;                    case &#39;]&#39;:
+<b class="nc">&nbsp;                        jsonReader.next();</b>
+<b class="nc">&nbsp;                        break _for;</b>
+&nbsp;                    default:
+<b class="nc">&nbsp;                        throw new JSONException(&quot;TODO : &quot; + jsonReader.ch);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        jsonReader.wasNull = true;</b>
+<b class="nc">&nbsp;        return 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int extractInt32Value(JSONReader jsonReader) {
+<b class="nc">&nbsp;        if (jsonReader.nextIfObjectStart()) {</b>
+&nbsp;            _for:
+&nbsp;            for (; ; ) {
+<b class="nc">&nbsp;                if (jsonReader.ch == &#39;}&#39;) {</b>
+<b class="nc">&nbsp;                    jsonReader.wasNull = true;</b>
+<b class="nc">&nbsp;                    return 0;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                long nameHashCode = jsonReader.readFieldNameHashCode();</b>
+&nbsp;
+<b class="nc">&nbsp;                boolean match = nameHashCode == this.nameHashCode;</b>
+<b class="nc">&nbsp;                if (!match) {</b>
+<b class="nc">&nbsp;                    jsonReader.skipValue();</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                switch (jsonReader.ch) {</b>
+&nbsp;                    case &#39;-&#39;:
+&nbsp;                    case &#39;+&#39;:
+&nbsp;                    case &#39;0&#39;:
+&nbsp;                    case &#39;1&#39;:
+&nbsp;                    case &#39;2&#39;:
+&nbsp;                    case &#39;3&#39;:
+&nbsp;                    case &#39;4&#39;:
+&nbsp;                    case &#39;5&#39;:
+&nbsp;                    case &#39;6&#39;:
+&nbsp;                    case &#39;7&#39;:
+&nbsp;                    case &#39;8&#39;:
+&nbsp;                    case &#39;9&#39;:
+<b class="nc">&nbsp;                        return jsonReader.readInt32Value();</b>
+&nbsp;                    case &#39;&quot;&#39;:
+&nbsp;                    case &#39;\&#39;&#39;:
+<b class="nc">&nbsp;                        String str = jsonReader.readString(); //</b>
+<b class="nc">&nbsp;                        return Integer.parseInt(str);</b>
+&nbsp;                    case &#39;t&#39;:
+&nbsp;                    case &#39;f&#39;:
+<b class="nc">&nbsp;                        boolean booleanValue = jsonReader.readBoolValue();</b>
+<b class="nc">&nbsp;                        return booleanValue ? 1 : 0;</b>
+&nbsp;                    case &#39;n&#39;:
+<b class="nc">&nbsp;                        jsonReader.readNull();</b>
+<b class="nc">&nbsp;                        jsonReader.wasNull = true;</b>
+<b class="nc">&nbsp;                        return 0;</b>
+&nbsp;                    case &#39;]&#39;:
+<b class="nc">&nbsp;                        jsonReader.next();</b>
+<b class="nc">&nbsp;                        break _for;</b>
+&nbsp;                    default:
+<b class="nc">&nbsp;                        throw new JSONException(&quot;TODO : &quot; + jsonReader.ch);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        jsonReader.wasNull = true;</b>
+<b class="nc">&nbsp;        return 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void extractScalar(JSONReader jsonReader, ValueConsumer consumer) {
+<b class="nc">&nbsp;        if (jsonReader.nextIfObjectStart()) {</b>
+&nbsp;            _for:
+&nbsp;            for (; ; ) {
+<b class="nc">&nbsp;                if (jsonReader.ch == &#39;}&#39;) {</b>
+<b class="nc">&nbsp;                    consumer.acceptNull();</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                long nameHashCode = jsonReader.readFieldNameHashCode();</b>
+&nbsp;
+<b class="nc">&nbsp;                boolean match = nameHashCode == this.nameHashCode;</b>
+<b class="nc">&nbsp;                if (!match) {</b>
+<b class="nc">&nbsp;                    jsonReader.skipValue();</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                switch (jsonReader.ch) {</b>
+&nbsp;                    case &#39;-&#39;:
+&nbsp;                    case &#39;+&#39;:
+&nbsp;                    case &#39;0&#39;:
+&nbsp;                    case &#39;1&#39;:
+&nbsp;                    case &#39;2&#39;:
+&nbsp;                    case &#39;3&#39;:
+&nbsp;                    case &#39;4&#39;:
+&nbsp;                    case &#39;5&#39;:
+&nbsp;                    case &#39;6&#39;:
+&nbsp;                    case &#39;7&#39;:
+&nbsp;                    case &#39;8&#39;:
+&nbsp;                    case &#39;9&#39;: {
+<b class="nc">&nbsp;                        jsonReader.readNumber(consumer, false);</b>
+&nbsp;                        return;
+&nbsp;                    }
+&nbsp;                    case &#39;[&#39;: {
+<b class="nc">&nbsp;                        List array = jsonReader.readArray();</b>
+<b class="nc">&nbsp;                        consumer.accept(array);</b>
+&nbsp;                        return;
+&nbsp;                    }
+&nbsp;                    case &#39;{&#39;: {
+<b class="nc">&nbsp;                        Map object = jsonReader.readObject();</b>
+<b class="nc">&nbsp;                        consumer.accept(object);</b>
+&nbsp;                        return;
+&nbsp;                    }
+&nbsp;                    case &#39;&quot;&#39;:
+&nbsp;                    case &#39;\&#39;&#39;: {
+<b class="nc">&nbsp;                        jsonReader.readString(consumer, false);</b>
+&nbsp;                        return;
+&nbsp;                    }
+&nbsp;                    case &#39;t&#39;:
+&nbsp;                    case &#39;f&#39;: {
+<b class="nc">&nbsp;                        consumer.accept(</b>
+<b class="nc">&nbsp;                                jsonReader.readBoolValue()</b>
+&nbsp;                        );
+&nbsp;                        return;
+&nbsp;                    }
+&nbsp;                    case &#39;n&#39;:
+<b class="nc">&nbsp;                        jsonReader.readNull();</b>
+<b class="nc">&nbsp;                        consumer.acceptNull();</b>
+&nbsp;                        return;
+&nbsp;                    case &#39;]&#39;:
+<b class="nc">&nbsp;                        jsonReader.next();</b>
+<b class="nc">&nbsp;                        break _for;</b>
+&nbsp;                    default:
+<b class="nc">&nbsp;                        throw new JSONException(&quot;TODO : &quot; + jsonReader.ch);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        consumer.acceptNull();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void extract(JSONReader jsonReader, ValueConsumer consumer) {
+<b class="nc">&nbsp;        if (jsonReader.nextIfObjectStart()) {</b>
+&nbsp;            for (; ; ) {
+<b class="nc">&nbsp;                if (jsonReader.ch == &#39;}&#39;) {</b>
+<b class="nc">&nbsp;                    consumer.acceptNull();</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                long nameHashCode = jsonReader.readFieldNameHashCode();</b>
+&nbsp;
+<b class="nc">&nbsp;                boolean match = nameHashCode == this.nameHashCode;</b>
+<b class="nc">&nbsp;                if (!match) {</b>
+<b class="nc">&nbsp;                    jsonReader.skipValue();</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                switch (jsonReader.ch) {</b>
+&nbsp;                    case &#39;-&#39;:
+&nbsp;                    case &#39;+&#39;:
+&nbsp;                    case &#39;0&#39;:
+&nbsp;                    case &#39;1&#39;:
+&nbsp;                    case &#39;2&#39;:
+&nbsp;                    case &#39;3&#39;:
+&nbsp;                    case &#39;4&#39;:
+&nbsp;                    case &#39;5&#39;:
+&nbsp;                    case &#39;6&#39;:
+&nbsp;                    case &#39;7&#39;:
+&nbsp;                    case &#39;8&#39;:
+&nbsp;                    case &#39;9&#39;: {
+<b class="nc">&nbsp;                        jsonReader.readNumber(consumer, true);</b>
+&nbsp;                        return;
+&nbsp;                    }
+&nbsp;                    case &#39;[&#39;: {
+<b class="nc">&nbsp;                        List array = jsonReader.readArray();</b>
+<b class="nc">&nbsp;                        consumer.accept(array);</b>
+&nbsp;                        return;
+&nbsp;                    }
+&nbsp;                    case &#39;{&#39;: {
+<b class="nc">&nbsp;                        Map object = jsonReader.readObject();</b>
+<b class="nc">&nbsp;                        consumer.accept(object);</b>
+&nbsp;                        return;
+&nbsp;                    }
+&nbsp;                    case &#39;&quot;&#39;:
+&nbsp;                    case &#39;\&#39;&#39;: {
+<b class="nc">&nbsp;                        jsonReader.readString(consumer, true);</b>
+&nbsp;                        return;
+&nbsp;                    }
+&nbsp;                    case &#39;t&#39;:
+&nbsp;                    case &#39;f&#39;: {
+<b class="nc">&nbsp;                        consumer.accept(</b>
+<b class="nc">&nbsp;                                jsonReader.readBoolValue()</b>
+&nbsp;                        );
+&nbsp;                        return;
+&nbsp;                    }
+&nbsp;                    case &#39;n&#39;:
+<b class="nc">&nbsp;                        jsonReader.readNull();</b>
+<b class="nc">&nbsp;                        consumer.acceptNull();</b>
+&nbsp;                        return;
+&nbsp;                    default:
+<b class="nc">&nbsp;                        throw new JSONException(&quot;TODO : &quot; + jsonReader.ch);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        consumer.acceptNull();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:29</div>
+</div>
+</body>
+</html>

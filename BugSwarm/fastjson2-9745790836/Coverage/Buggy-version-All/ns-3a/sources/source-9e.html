@@ -1,0 +1,612 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderImplList</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderImplList (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderImplList</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.5%
+  </span>
+  <span class="absValue">
+    (248/297)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.GuavaSupport;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.ParameterizedType;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.JVM_VERSION;
+&nbsp;
+&nbsp;public final class ObjectReaderImplList
+&nbsp;        implements ObjectReader {
+<b class="fc">&nbsp;    static final Class CLASS_EMPTY_SET = Collections.emptySet().getClass();</b>
+<b class="fc">&nbsp;    static final Class CLASS_EMPTY_LIST = Collections.emptyList().getClass();</b>
+<b class="fc">&nbsp;    static final Class CLASS_SINGLETON = Collections.singleton(0).getClass();</b>
+<b class="fc">&nbsp;    static final Class CLASS_SINGLETON_LIST = Collections.singletonList(0).getClass();</b>
+<b class="fc">&nbsp;    static final Class CLASS_ARRAYS_LIST = Arrays.asList(0).getClass();</b>
+&nbsp;
+<b class="fc">&nbsp;    static final Class CLASS_UNMODIFIABLE_COLLECTION = Collections.unmodifiableCollection(Collections.emptyList()).getClass();</b>
+<b class="fc">&nbsp;    static final Class CLASS_UNMODIFIABLE_LIST = Collections.unmodifiableList(Collections.emptyList()).getClass();</b>
+<b class="fc">&nbsp;    static final Class CLASS_UNMODIFIABLE_SET = Collections.unmodifiableSet(Collections.emptySet()).getClass();</b>
+<b class="fc">&nbsp;    static final Class CLASS_UNMODIFIABLE_SORTED_SET = Collections.unmodifiableSortedSet(Collections.emptySortedSet()).getClass();</b>
+<b class="fc">&nbsp;    static final Class CLASS_UNMODIFIABLE_NAVIGABLE_SET = Collections.unmodifiableNavigableSet(Collections.emptyNavigableSet()).getClass();</b>
+&nbsp;
+<b class="fc">&nbsp;    public static ObjectReaderImplList INSTANCE = new ObjectReaderImplList(ArrayList.class, ArrayList.class, ArrayList.class, Object.class, null);</b>
+&nbsp;
+&nbsp;    final Type listType;
+&nbsp;    final Class listClass;
+&nbsp;    final Class instanceType;
+&nbsp;    final long instanceTypeHash;
+&nbsp;    final Type itemType;
+&nbsp;    final Class itemClass;
+&nbsp;    final String itemClassName;
+&nbsp;    final long itemClassNameHash;
+&nbsp;    final Function builder;
+&nbsp;    ObjectReader itemObjectReader;
+&nbsp;    volatile boolean instanceError;
+&nbsp;
+&nbsp;    public static ObjectReader of(Type type, Class listClass, long features) {
+<b class="fc">&nbsp;        Type itemType = Object.class;</b>
+&nbsp;        Type rawType;
+<b class="fc">&nbsp;        if (type instanceof ParameterizedType) {</b>
+<b class="fc">&nbsp;            ParameterizedType parameterizedType = (ParameterizedType) type;</b>
+<b class="fc">&nbsp;            rawType = parameterizedType.getRawType();</b>
+<b class="fc">&nbsp;            Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();</b>
+<b class="fc">&nbsp;            if (actualTypeArguments.length == 1) {</b>
+<b class="fc">&nbsp;                itemType = actualTypeArguments[0];</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else {</b>
+<b class="fc">&nbsp;            rawType = type;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (listClass == null) {</b>
+<b class="fc">&nbsp;            listClass = TypeUtils.getClass(rawType);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function builder = null;</b>
+&nbsp;        Class instanceClass;
+&nbsp;
+<b class="fc">&nbsp;        if (listClass == Iterable.class</b>
+&nbsp;                || listClass == Collection.class
+&nbsp;                || listClass == List.class
+&nbsp;                || listClass == AbstractCollection.class
+&nbsp;                || listClass == AbstractList.class
+&nbsp;        ) {
+<b class="fc">&nbsp;            instanceClass = ArrayList.class;</b>
+<b class="fc">&nbsp;        } else if (listClass == Queue.class</b>
+&nbsp;                || listClass == Deque.class
+&nbsp;                || listClass == AbstractSequentialList.class) {
+<b class="fc">&nbsp;            instanceClass = LinkedList.class;</b>
+<b class="fc">&nbsp;        } else if (listClass == Set.class || listClass == AbstractSet.class) {</b>
+<b class="fc">&nbsp;            instanceClass = HashSet.class;</b>
+<b class="fc">&nbsp;        } else if (listClass == EnumSet.class) {</b>
+<b class="fc">&nbsp;            instanceClass = HashSet.class;</b>
+<b class="fc">&nbsp;            builder = (o) -&gt; EnumSet.copyOf((Collection) o);</b>
+<b class="fc">&nbsp;        } else if (listClass == NavigableSet.class || listClass == SortedSet.class) {</b>
+<b class="fc">&nbsp;            instanceClass = TreeSet.class;</b>
+<b class="fc">&nbsp;        } else if (listClass == CLASS_SINGLETON) {</b>
+<b class="fc">&nbsp;            instanceClass = ArrayList.class;</b>
+<b class="fc">&nbsp;            builder = (Object obj) -&gt; Collections.singleton(((List) obj).get(0));</b>
+<b class="fc">&nbsp;        } else if (listClass == CLASS_SINGLETON_LIST) {</b>
+<b class="fc">&nbsp;            instanceClass = ArrayList.class;</b>
+<b class="fc">&nbsp;            builder = (Object obj) -&gt; Collections.singletonList(((List) obj).get(0));</b>
+<b class="fc">&nbsp;        } else if (listClass == CLASS_ARRAYS_LIST) {</b>
+<b class="fc">&nbsp;            instanceClass = ArrayList.class;</b>
+<b class="fc">&nbsp;            builder = (Object obj) -&gt; Arrays.asList(((List) obj).toArray());</b>
+<b class="fc">&nbsp;        } else if (listClass == CLASS_UNMODIFIABLE_COLLECTION) {</b>
+<b class="fc">&nbsp;            instanceClass = ArrayList.class;</b>
+<b class="fc">&nbsp;            builder = (Object obj) -&gt; Collections.unmodifiableCollection((Collection) obj);</b>
+<b class="fc">&nbsp;        } else if (listClass == CLASS_UNMODIFIABLE_LIST) {</b>
+<b class="nc">&nbsp;            instanceClass = ArrayList.class;</b>
+<b class="nc">&nbsp;            builder = (Object obj) -&gt; Collections.unmodifiableList((List) obj);</b>
+<b class="fc">&nbsp;        } else if (listClass == CLASS_UNMODIFIABLE_SET) {</b>
+<b class="fc">&nbsp;            instanceClass = LinkedHashSet.class;</b>
+<b class="fc">&nbsp;            builder = (Object obj) -&gt; Collections.unmodifiableSet((Set) obj);</b>
+<b class="fc">&nbsp;        } else if (listClass == CLASS_UNMODIFIABLE_SORTED_SET) {</b>
+<b class="fc">&nbsp;            instanceClass = TreeSet.class;</b>
+<b class="fc">&nbsp;            builder = (Object obj) -&gt; Collections.unmodifiableSortedSet((SortedSet) obj);</b>
+<b class="fc">&nbsp;        } else if (listClass == CLASS_UNMODIFIABLE_NAVIGABLE_SET) {</b>
+<b class="fc">&nbsp;            instanceClass = TreeSet.class;</b>
+<b class="fc">&nbsp;            builder = (Object obj) -&gt; Collections.unmodifiableNavigableSet((NavigableSet) obj);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            String typeName = listClass.getTypeName();</b>
+<b class="fc">&nbsp;            switch (typeName) {</b>
+&nbsp;                case &quot;com.google.common.collect.ImmutableList&quot;:
+<b class="fc">&nbsp;                    instanceClass = ArrayList.class;</b>
+<b class="fc">&nbsp;                    builder = GuavaSupport.immutableListConverter();</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &quot;com.google.common.collect.ImmutableSet&quot;:
+<b class="fc">&nbsp;                    instanceClass = ArrayList.class;</b>
+<b class="fc">&nbsp;                    builder = GuavaSupport.immutableSetConverter();</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &quot;com.google.common.collect.Lists$TransformingRandomAccessList&quot;:
+<b class="fc">&nbsp;                    instanceClass = ArrayList.class;</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &quot;com.google.common.collect.Lists.TransformingSequentialList&quot;:
+<b class="nc">&nbsp;                    instanceClass = LinkedList.class;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+<b class="fc">&nbsp;                    instanceClass = listClass;</b>
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == ObjectReaderImplList.CLASS_EMPTY_SET</b>
+&nbsp;                || type == ObjectReaderImplList.CLASS_EMPTY_LIST
+&nbsp;                || type == ObjectReaderImplList.CLASS_EMPTY_LIST
+&nbsp;        ) {
+<b class="fc">&nbsp;            return new ObjectReaderImplList(type, (Class) type, (Class) type, Object.class, null);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (itemType == String.class &amp;&amp; builder == null) {</b>
+<b class="fc">&nbsp;            return new ObjectReaderImplListStr(listClass, instanceClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (itemType == Long.class &amp;&amp; builder == null) {</b>
+<b class="fc">&nbsp;            return new ObjectReaderImplListInt64(listClass, instanceClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return new ObjectReaderImplList(type, listClass, instanceClass, itemType, builder);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public ObjectReaderImplList(Type listType, Class listClass, Class instanceType, Type itemType, Function builder) {</b>
+<b class="fc">&nbsp;        this.listType = listType;</b>
+<b class="fc">&nbsp;        this.listClass = listClass;</b>
+<b class="fc">&nbsp;        this.instanceType = instanceType;</b>
+<b class="fc">&nbsp;        this.instanceTypeHash = Fnv.hashCode64(TypeUtils.getTypeName(instanceType));</b>
+<b class="fc">&nbsp;        this.itemType = itemType;</b>
+<b class="fc">&nbsp;        this.itemClass = TypeUtils.getClass(itemType);</b>
+<b class="fc">&nbsp;        this.builder = builder;</b>
+<b class="fc">&nbsp;        this.itemClassName = itemClass != null ? TypeUtils.getTypeName(itemClass) : null;</b>
+<b class="fc">&nbsp;        this.itemClassNameHash = itemClassName != null ? Fnv.hashCode64(itemClassName) : 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class getObjectClass() {
+<b class="fc">&nbsp;        return listClass;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Function getBuildFunction() {
+<b class="fc">&nbsp;        return builder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createInstance(Collection collection) {
+<b class="fc">&nbsp;        int size = collection.size();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (size == 0) {</b>
+<b class="fc">&nbsp;            Collection list = Collections.emptyList();</b>
+<b class="fc">&nbsp;            if (builder != null) {</b>
+<b class="nc">&nbsp;                return builder.apply(list);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return list;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+&nbsp;
+<b class="fc">&nbsp;        Collection list = (Collection) createInstance(0L);</b>
+<b class="fc">&nbsp;        for (Object item : collection) {</b>
+<b class="fc">&nbsp;            Object value = item;</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; valueClass = value.getClass();</b>
+<b class="fc">&nbsp;            if (valueClass != itemType) {</b>
+<b class="fc">&nbsp;                Function typeConvert = provider.getTypeConvert(valueClass, itemType);</b>
+<b class="fc">&nbsp;                if (typeConvert != null) {</b>
+<b class="fc">&nbsp;                    value = typeConvert.apply(value);</b>
+<b class="fc">&nbsp;                } else if (item instanceof Map) {</b>
+<b class="fc">&nbsp;                    Map map = (Map) item;</b>
+<b class="fc">&nbsp;                    if (itemObjectReader == null) {</b>
+<b class="fc">&nbsp;                        itemObjectReader = provider.getObjectReader(itemType);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    value = itemObjectReader.createInstance(map, 0L);</b>
+<b class="fc">&nbsp;                } else if (value instanceof Collection) {</b>
+<b class="nc">&nbsp;                    if (itemObjectReader == null) {</b>
+<b class="nc">&nbsp;                        itemObjectReader = provider.getObjectReader(itemType);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    value = itemObjectReader.createInstance((Collection) value);</b>
+<b class="fc">&nbsp;                } else if (itemClass.isInstance(value)) {</b>
+&nbsp;                    // skip
+&nbsp;                } else {
+<b class="nc">&nbsp;                    throw new JSONException(&quot;can not convert from &quot; + valueClass + &quot; to &quot; + itemType);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            list.add(value);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        if (builder != null) {</b>
+<b class="nc">&nbsp;            return builder.apply(list);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createInstance(long features) {
+<b class="fc">&nbsp;        if (instanceType == ArrayList.class) {</b>
+<b class="fc">&nbsp;            return JVM_VERSION == 8 ? new ArrayList(10) : new ArrayList();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (instanceType == LinkedList.class) {</b>
+<b class="fc">&nbsp;            return new LinkedList();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (instanceType == HashSet.class) {</b>
+<b class="fc">&nbsp;            return new HashSet();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (instanceType == LinkedHashSet.class) {</b>
+<b class="fc">&nbsp;            return new LinkedHashSet();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (instanceType == TreeSet.class) {</b>
+<b class="fc">&nbsp;            return new TreeSet();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (instanceType == CLASS_EMPTY_LIST) {</b>
+<b class="fc">&nbsp;            return Collections.emptyList();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (instanceType == CLASS_EMPTY_SET) {</b>
+<b class="fc">&nbsp;            return Collections.emptySet();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (instanceType != null) {</b>
+<b class="fc">&nbsp;            JSONException error = null;</b>
+<b class="fc">&nbsp;            if (!instanceError) {</b>
+&nbsp;                try {
+<b class="fc">&nbsp;                    return instanceType.newInstance();</b>
+<b class="fc">&nbsp;                } catch (InstantiationException | IllegalAccessException e) {</b>
+<b class="fc">&nbsp;                    instanceError = true;</b>
+<b class="fc">&nbsp;                    error = new JSONException(&quot;create list error, type &quot; + instanceType);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (instanceError &amp;&amp; List.class.isAssignableFrom(instanceType.getSuperclass())) {</b>
+&nbsp;                try {
+<b class="fc">&nbsp;                    return instanceType.getSuperclass().newInstance();</b>
+<b class="nc">&nbsp;                } catch (InstantiationException | IllegalAccessException e) {</b>
+<b class="nc">&nbsp;                    instanceError = true;</b>
+<b class="nc">&nbsp;                    error = new JSONException(&quot;create list error, type &quot; + instanceType);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (error != null) {</b>
+<b class="nc">&nbsp;                throw error;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new ArrayList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public FieldReader getFieldReader(long hashCode) {
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="fc">&nbsp;        ObjectReader objectReader = jsonReader.checkAutoType(this.listClass, 0, features);</b>
+&nbsp;
+<b class="fc">&nbsp;        Function builder = this.builder;</b>
+<b class="fc">&nbsp;        Class listType = this.instanceType;</b>
+<b class="fc">&nbsp;        if (objectReader != null) {</b>
+<b class="fc">&nbsp;            listType = objectReader.getObjectClass();</b>
+&nbsp;
+<b class="fc">&nbsp;            if (listType == CLASS_UNMODIFIABLE_COLLECTION) {</b>
+<b class="fc">&nbsp;                listType = ArrayList.class;</b>
+<b class="fc">&nbsp;                builder = (Function&lt;Collection, Collection&gt;) Collections::unmodifiableCollection;</b>
+<b class="fc">&nbsp;            } else if (listType == CLASS_UNMODIFIABLE_LIST) {</b>
+<b class="nc">&nbsp;                listType = ArrayList.class;</b>
+<b class="nc">&nbsp;                builder = (Function&lt;List, List&gt;) Collections::unmodifiableList;</b>
+<b class="fc">&nbsp;            } else if (listType == CLASS_UNMODIFIABLE_SET) {</b>
+<b class="fc">&nbsp;                listType = LinkedHashSet.class;</b>
+<b class="fc">&nbsp;                builder = (Function&lt;Set, Set&gt;) Collections::unmodifiableSet;</b>
+<b class="fc">&nbsp;            } else if (listType == CLASS_UNMODIFIABLE_SORTED_SET) {</b>
+<b class="fc">&nbsp;                listType = TreeSet.class;</b>
+<b class="fc">&nbsp;                builder = (Function&lt;SortedSet, SortedSet&gt;) Collections::unmodifiableSortedSet;</b>
+<b class="fc">&nbsp;            } else if (listType == CLASS_UNMODIFIABLE_NAVIGABLE_SET) {</b>
+<b class="fc">&nbsp;                listType = TreeSet.class;</b>
+<b class="fc">&nbsp;                builder = (Function&lt;NavigableSet, NavigableSet&gt;) Collections::unmodifiableNavigableSet;</b>
+<b class="fc">&nbsp;            } else if (listType == CLASS_SINGLETON) {</b>
+<b class="fc">&nbsp;                listType = ArrayList.class;</b>
+<b class="fc">&nbsp;                builder = (Function&lt;Collection, Collection&gt;) ((Collection list) -&gt; Collections.singleton(list.iterator().next()));</b>
+<b class="fc">&nbsp;            } else if (listType == CLASS_SINGLETON_LIST) {</b>
+<b class="fc">&nbsp;                listType = ArrayList.class;</b>
+<b class="fc">&nbsp;                builder = (Function&lt;List, List&gt;) ((List list) -&gt; Collections.singletonList(list.get(0)));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int entryCnt = jsonReader.startArray();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (entryCnt &gt; 0 &amp;&amp; itemObjectReader == null) {</b>
+<b class="fc">&nbsp;            itemObjectReader = jsonReader</b>
+<b class="fc">&nbsp;                    .getContext()</b>
+<b class="fc">&nbsp;                    .getObjectReader(itemType);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (listType == CLASS_ARRAYS_LIST) {</b>
+<b class="fc">&nbsp;            Object[] array = new Object[entryCnt];</b>
+<b class="fc">&nbsp;            List list = Arrays.asList(array);</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; entryCnt; ++i) {</b>
+&nbsp;                Object item;
+&nbsp;
+<b class="fc">&nbsp;                if (jsonReader.isReference()) {</b>
+<b class="nc">&nbsp;                    String reference = jsonReader.readReference();</b>
+<b class="nc">&nbsp;                    if (&quot;..&quot;.equals(reference)) {</b>
+<b class="nc">&nbsp;                        item = list;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        item = null;</b>
+<b class="nc">&nbsp;                        jsonReader.addResolveTask((List) list, i, JSONPath.of(reference));</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } else {</b>
+<b class="fc">&nbsp;                    item = itemObjectReader.readJSONBObject(jsonReader, itemType, i, features);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                array[i] = item;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return list;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        Collection list;
+<b class="fc">&nbsp;        if (listType == ArrayList.class) {</b>
+<b class="fc">&nbsp;            list = entryCnt &gt; 0 ? new ArrayList(entryCnt) : new ArrayList();</b>
+<b class="fc">&nbsp;        } else if (listType == JSONArray.class) {</b>
+<b class="fc">&nbsp;            list = entryCnt &gt; 0 ? new JSONArray(entryCnt) : new JSONArray();</b>
+<b class="fc">&nbsp;        } else if (listType == HashSet.class) {</b>
+<b class="fc">&nbsp;            list = new HashSet();</b>
+<b class="fc">&nbsp;        } else if (listType == LinkedHashSet.class) {</b>
+<b class="fc">&nbsp;            list = new LinkedHashSet();</b>
+<b class="fc">&nbsp;        } else if (listType == TreeSet.class) {</b>
+<b class="fc">&nbsp;            list = new TreeSet();</b>
+<b class="fc">&nbsp;        } else if (listType == CLASS_EMPTY_SET) {</b>
+<b class="fc">&nbsp;            list = Collections.emptySet();</b>
+<b class="fc">&nbsp;        } else if (listType == CLASS_EMPTY_LIST) {</b>
+<b class="fc">&nbsp;            list = Collections.emptyList();</b>
+<b class="fc">&nbsp;        } else if (listType == CLASS_SINGLETON_LIST) {</b>
+<b class="nc">&nbsp;            list = new ArrayList();</b>
+<b class="nc">&nbsp;            builder = (Function&lt;Collection, Collection&gt;) ((Collection items) -&gt; Collections.singletonList(items.iterator().next()));</b>
+<b class="fc">&nbsp;        } else if (listType == CLASS_UNMODIFIABLE_LIST) {</b>
+<b class="nc">&nbsp;            list = new ArrayList();</b>
+<b class="nc">&nbsp;            builder = (Function&lt;List, List&gt;) ((List items) -&gt; Collections.unmodifiableList(items));</b>
+<b class="fc">&nbsp;        } else if (listType != null &amp;&amp; listType != this.listType) {</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                list = (Collection) listType.newInstance();</b>
+<b class="nc">&nbsp;            } catch (InstantiationException | IllegalAccessException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;create instance error &quot; + listType), e);</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            list = (Collection) createInstance(jsonReader.getContext().getFeatures() | features);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; entryCnt; ++i) {</b>
+&nbsp;            Object item;
+&nbsp;
+<b class="fc">&nbsp;            if (jsonReader.isReference()) {</b>
+<b class="fc">&nbsp;                String reference = jsonReader.readReference();</b>
+<b class="fc">&nbsp;                if (&quot;..&quot;.equals(reference)) {</b>
+<b class="nc">&nbsp;                    item = list;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    jsonReader.addResolveTask(list, i, JSONPath.of(reference));</b>
+<b class="fc">&nbsp;                    if (list instanceof List) {</b>
+<b class="fc">&nbsp;                        item = null;</b>
+&nbsp;                    } else {
+&nbsp;                        continue;
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;            } else {</b>
+<b class="fc">&nbsp;                ObjectReader autoTypeReader = jsonReader.checkAutoType(itemClass, itemClassNameHash, features);</b>
+<b class="fc">&nbsp;                if (autoTypeReader != null) {</b>
+<b class="fc">&nbsp;                    item = autoTypeReader.readJSONBObject(jsonReader, itemType, i, features);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    item = itemObjectReader.readJSONBObject(jsonReader, itemType, i, features);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            list.add(item);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (builder != null) {</b>
+<b class="fc">&nbsp;            return builder.apply(list);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="fc">&nbsp;        JSONReader.Context context = jsonReader.getContext();</b>
+<b class="fc">&nbsp;        if (itemObjectReader == null) {</b>
+<b class="fc">&nbsp;            itemObjectReader = context</b>
+<b class="fc">&nbsp;                    .getObjectReader(itemType);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (jsonReader.isJSONB()) {</b>
+<b class="nc">&nbsp;            return readJSONBObject(jsonReader, fieldType, fieldName, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (jsonReader.readIfNull()) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        Collection list;
+<b class="fc">&nbsp;        if (jsonReader.nextIfSet()) {</b>
+<b class="fc">&nbsp;            list = new HashSet();</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            list = (Collection) createInstance(context.getFeatures() | features);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        char ch = jsonReader.current();</b>
+<b class="fc">&nbsp;        if (ch == &#39;&quot;&#39;) {</b>
+<b class="fc">&nbsp;            String str = jsonReader.readString();</b>
+<b class="fc">&nbsp;            if (itemClass == String.class) {</b>
+<b class="nc">&nbsp;                jsonReader.nextIfMatch(&#39;,&#39;);</b>
+<b class="nc">&nbsp;                list.add(str);</b>
+<b class="nc">&nbsp;                return list;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (str.isEmpty()) {</b>
+<b class="nc">&nbsp;                jsonReader.nextIfMatch(&#39;,&#39;);</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Function typeConvert = context.getProvider().getTypeConvert(String.class, itemType);</b>
+<b class="fc">&nbsp;            if (typeConvert != null) {</b>
+<b class="fc">&nbsp;                Object converted = typeConvert.apply(str);</b>
+<b class="fc">&nbsp;                jsonReader.nextIfMatch(&#39;,&#39;);</b>
+<b class="fc">&nbsp;                list.add(converted);</b>
+<b class="fc">&nbsp;                return list;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (!jsonReader.nextIfMatch(&#39;[&#39;)) {</b>
+<b class="fc">&nbsp;            if (itemClass != Object.class &amp;&amp; itemObjectReader != null) {</b>
+<b class="fc">&nbsp;                Object item = itemObjectReader.readObject(jsonReader, itemType, 0, 0);</b>
+<b class="fc">&nbsp;                list.add(item);</b>
+<b class="fc">&nbsp;                if (builder != null) {</b>
+<b class="nc">&nbsp;                    list = (Collection) builder.apply(list);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                return list;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; ; ++i) {</b>
+<b class="fc">&nbsp;            if (jsonReader.nextIfMatch(&#39;]&#39;)) {</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            Object item;
+<b class="fc">&nbsp;            if (itemType == String.class) {</b>
+<b class="nc">&nbsp;                item = jsonReader.readString();</b>
+<b class="fc">&nbsp;            } else if (itemObjectReader != null) {</b>
+<b class="fc">&nbsp;                if (jsonReader.isReference()) {</b>
+<b class="nc">&nbsp;                    String reference = jsonReader.readReference();</b>
+<b class="nc">&nbsp;                    if (&quot;..&quot;.equals(reference)) {</b>
+<b class="nc">&nbsp;                        item = this;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        jsonReader.addResolveTask(list, i, JSONPath.of(reference));</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } else {</b>
+<b class="fc">&nbsp;                    item = itemObjectReader.readObject(jsonReader, itemType, i, 0);</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;TODO : &quot; + itemType));</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            list.add(item);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (jsonReader.nextIfMatch(&#39;,&#39;)) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        jsonReader.nextIfMatch(&#39;,&#39;);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (builder != null) {</b>
+<b class="fc">&nbsp;            return builder.apply(list);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:18</div>
+</div>
+</body>
+</html>

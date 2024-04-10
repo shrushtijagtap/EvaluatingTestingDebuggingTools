@@ -1,0 +1,288 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectArrayTypedReader</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectArrayTypedReader (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectArrayTypedReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/98)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Array;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;final class ObjectArrayTypedReader
+&nbsp;        extends ObjectReaderPrimitive {
+&nbsp;    final Class componentType;
+&nbsp;    final Class componentClass;
+&nbsp;    final long componentClassHash;
+&nbsp;    final String typeName;
+&nbsp;    final long typeNameHashCode;
+&nbsp;
+&nbsp;    ObjectArrayTypedReader(Class objectClass) {
+<b class="nc">&nbsp;        super(objectClass);</b>
+<b class="nc">&nbsp;        this.componentType = objectClass.getComponentType();</b>
+<b class="nc">&nbsp;        String componentTypeName = TypeUtils.getTypeName(componentType);</b>
+<b class="nc">&nbsp;        this.componentClassHash = Fnv.hashCode64(componentTypeName);</b>
+<b class="nc">&nbsp;        this.typeName = &#39;[&#39; + componentTypeName;</b>
+<b class="nc">&nbsp;        typeNameHashCode = Fnv.hashCode64(this.typeName);</b>
+&nbsp;
+<b class="nc">&nbsp;        this.componentClass = TypeUtils.getClass(componentType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        if (jsonReader.isJSONB()) {</b>
+<b class="nc">&nbsp;            return readJSONBObject(jsonReader, fieldType, fieldName, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.readIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.nextIfMatch(&#39;[&#39;)) {</b>
+<b class="nc">&nbsp;            Object[] values = (Object[]) Array.newInstance(componentType, 16);</b>
+<b class="nc">&nbsp;            int size = 0;</b>
+&nbsp;            for (; ; ) {
+<b class="nc">&nbsp;                if (jsonReader.nextIfMatch(&#39;]&#39;)) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                int minCapacity = size + 1;</b>
+<b class="nc">&nbsp;                if (minCapacity - values.length &gt; 0) {</b>
+<b class="nc">&nbsp;                    int oldCapacity = values.length;</b>
+<b class="nc">&nbsp;                    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                    if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                        newCapacity = minCapacity;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    values = Arrays.copyOf(values, newCapacity);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Object value = jsonReader.read(componentType);</b>
+<b class="nc">&nbsp;                values[size++] = value;</b>
+&nbsp;
+<b class="nc">&nbsp;                jsonReader.nextIfMatch(&#39;,&#39;);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            jsonReader.nextIfMatch(&#39;,&#39;);</b>
+&nbsp;
+<b class="nc">&nbsp;            return Arrays.copyOf(values, size);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.current() == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;            String str = jsonReader.readString();</b>
+<b class="nc">&nbsp;            if (str.isEmpty()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(jsonReader.info(&quot;TODO&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        if (jsonReader.getType() == JSONB.Constants.BC_TYPED_ANY) {</b>
+<b class="nc">&nbsp;            jsonReader.next();</b>
+<b class="nc">&nbsp;            long typeHash = jsonReader.readTypeHashCode();</b>
+<b class="nc">&nbsp;            if (typeHash == ObjectArrayReader.TYPE_HASH_CODE || typeHash == typeNameHashCode) {</b>
+&nbsp;                // skip
+&nbsp;            } else {
+<b class="nc">&nbsp;                JSONReader.Context context = jsonReader.getContext();</b>
+<b class="nc">&nbsp;                if (jsonReader.isSupportAutoType(features)) {</b>
+<b class="nc">&nbsp;                    ObjectReader autoTypeObjectReader = context.getObjectReaderAutoType(typeHash);</b>
+<b class="nc">&nbsp;                    if (autoTypeObjectReader == null) {</b>
+<b class="nc">&nbsp;                        String typeName = jsonReader.getString();</b>
+<b class="nc">&nbsp;                        autoTypeObjectReader = context.getObjectReaderAutoType(typeName, objectClass, features);</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (autoTypeObjectReader == null) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(jsonReader.info(&quot;auotype not support : &quot; + jsonReader.getString()));</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    return autoTypeObjectReader.readObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;not support autotype : &quot; + jsonReader.getString()));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int entryCnt = jsonReader.startArray();</b>
+<b class="nc">&nbsp;        if (entryCnt == -1) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Object[] values = (Object[]) Array.newInstance(componentClass, entryCnt);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; entryCnt; ++i) {</b>
+&nbsp;            Object value;
+&nbsp;
+<b class="nc">&nbsp;            if (jsonReader.isReference()) {</b>
+<b class="nc">&nbsp;                String reference = jsonReader.readReference();</b>
+<b class="nc">&nbsp;                if (&quot;..&quot;.equals(reference)) {</b>
+<b class="nc">&nbsp;                    value = values;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    value = null;</b>
+<b class="nc">&nbsp;                    jsonReader.addResolveTask(values, i, JSONPath.of(reference));</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                ObjectReader autoTypeReader = jsonReader.checkAutoType(componentClass, componentClassHash, features);</b>
+<b class="nc">&nbsp;                if (autoTypeReader != null) {</b>
+<b class="nc">&nbsp;                    value = autoTypeReader.readJSONBObject(jsonReader, null, null, features);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    value = jsonReader.read(componentType);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            values[i] = value;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return values;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createInstance(Collection collection) {
+<b class="nc">&nbsp;        Object[] values = (Object[]) Array.newInstance(componentClass, collection.size());</b>
+<b class="nc">&nbsp;        int index = 0;</b>
+<b class="nc">&nbsp;        for (Object item : collection) {</b>
+<b class="nc">&nbsp;            if (item != null) {</b>
+<b class="nc">&nbsp;                Class&lt;?&gt; valueClass = item.getClass();</b>
+<b class="nc">&nbsp;                if (valueClass != componentType) {</b>
+<b class="nc">&nbsp;                    ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+<b class="nc">&nbsp;                    Function typeConvert = provider.getTypeConvert(valueClass, componentType);</b>
+<b class="nc">&nbsp;                    if (typeConvert != null) {</b>
+<b class="nc">&nbsp;                        item = typeConvert.apply(item);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (componentType.isInstance(item)) {</b>
+<b class="nc">&nbsp;                values[index++] = item;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                ObjectReader objectReader = JSONFactory.getDefaultObjectReaderProvider().getObjectReader(componentType);</b>
+<b class="nc">&nbsp;                if (item instanceof Map) {</b>
+<b class="nc">&nbsp;                    item = objectReader.createInstance((Map) item);</b>
+<b class="nc">&nbsp;                } else if (item instanceof Collection) {</b>
+<b class="nc">&nbsp;                    item = objectReader.createInstance((Collection) item);</b>
+<b class="nc">&nbsp;                } else if (item instanceof Object[]) {</b>
+<b class="nc">&nbsp;                    item = objectReader.createInstance(JSONArray.of((Object[]) item));</b>
+<b class="nc">&nbsp;                } else if (item != null) {</b>
+<b class="nc">&nbsp;                    Class&lt;?&gt; itemClass = item.getClass();</b>
+<b class="nc">&nbsp;                    if (itemClass.isArray()) {</b>
+<b class="nc">&nbsp;                        int length = Array.getLength(item);</b>
+<b class="nc">&nbsp;                        JSONArray array = new JSONArray(length);</b>
+<b class="nc">&nbsp;                        for (int i = 0; i &lt; length; i++) {</b>
+<b class="nc">&nbsp;                            array.add(Array.get(item, i));</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        item = objectReader.createInstance(array);</b>
+<b class="nc">&nbsp;                    } else {</b>
+<b class="nc">&nbsp;                        throw new JSONException(&quot;component type not match, expect &quot; + componentType.getName() + &quot;, but &quot; + itemClass);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                values[index++] = item;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return values;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:58</div>
+</div>
+</body>
+</html>

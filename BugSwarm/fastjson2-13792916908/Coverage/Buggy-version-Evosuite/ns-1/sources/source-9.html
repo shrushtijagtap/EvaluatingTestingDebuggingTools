@@ -1,0 +1,840 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONKt</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONKt (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/41)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/84)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JSONKt$into$$inlined$reference$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONKt$into$$inlined$reference$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONKt$into$$inlined$reference$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONKt$into$$inlined$reference$4</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONKt$sam$i$java_util_function_Consumer$0</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/45)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/88)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;@file:Suppress(
+&nbsp;    &quot;HasPlatformType&quot;, &quot;NOTHING_TO_INLINE&quot;
+&nbsp;)
+&nbsp;
+&nbsp;package com.alibaba.fastjson2
+&nbsp;
+&nbsp;import java.io.InputStream
+&nbsp;import java.io.Reader
+&nbsp;import java.net.URL
+&nbsp;import java.nio.charset.Charset
+<b class="nc">&nbsp;</b>
+&nbsp;import com.alibaba.fastjson2.filter.Filter
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json string as [T]
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val json = ...
+&nbsp; *   val data = json.to&lt;User&gt;()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun &lt;reified T&gt; String?.to() =
+<b class="nc">&nbsp;    JSON.parseObject(</b>
+<b class="nc">&nbsp;        this, T::class.java</b>
+&nbsp;    )
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json string as [T]
+&nbsp; * Implemented using [TypeReference]
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val json = ...
+&nbsp; *   val data = json.into&lt;Map&lt;String, User&gt;&gt;()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun &lt;reified T : Any&gt; String?.into() =
+<b class="nc">&nbsp;    JSON.parseObject&lt;T&gt;(</b>
+<b class="nc">&nbsp;        this, reference&lt;T&gt;().getType()</b>
+&nbsp;    )
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json byte array as [T]
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val json = ...
+&nbsp; *   val data = json.to&lt;User&gt;()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun &lt;reified T&gt; ByteArray?.to() =
+<b class="nc">&nbsp;    JSON.parseObject(</b>
+<b class="nc">&nbsp;        this, T::class.java</b>
+&nbsp;    )
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json byte array as [T]
+&nbsp; * Implemented using [TypeReference]
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val json = ...
+&nbsp; *   val data = json.into&lt;Map&lt;String, User&gt;&gt;()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun &lt;reified T : Any&gt; ByteArray.into() =
+<b class="nc">&nbsp;    JSON.parseObject&lt;T&gt;(</b>
+<b class="nc">&nbsp;        this, reference&lt;T&gt;().getType()</b>
+&nbsp;    )
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json stream as [T] with the specified features
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val url = ...
+&nbsp; *   val data = url.to&lt;User&gt;()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @param features the specified features is applied to parsing
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.30
+&nbsp; * @throws JSONException If an I/O error occurs or other
+&nbsp; */
+&nbsp;inline fun &lt;reified T&gt; URL?.to(
+&nbsp;    vararg features: JSONReader.Feature
+<b class="nc">&nbsp;) = JSON.parseObject(</b>
+<b class="nc">&nbsp;    this, T::class.java, *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json stream as [T] with the specified features
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val url = ...
+&nbsp; *   val data = url.into&lt;Map&lt;String, User&gt;&gt;()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @param features the specified features is applied to parsing
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.4
+&nbsp; * @throws JSONException If an I/O error occurs or other
+&nbsp; */
+&nbsp;inline fun &lt;reified T : Any&gt; URL?.into(
+&nbsp;    vararg features: JSONReader.Feature
+<b class="nc">&nbsp;) = JSON.parseObject&lt;T&gt;(</b>
+<b class="nc">&nbsp;    this, reference&lt;T&gt;().getType(), *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json stream as [T] with the specified features
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val in = ...
+&nbsp; *   val data = in.to&lt;User&gt;()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @param features the specified features is applied to parsing
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.4
+&nbsp; */
+&nbsp;inline fun &lt;reified T&gt; InputStream?.to(
+&nbsp;    vararg features: JSONReader.Feature
+<b class="nc">&nbsp;) = JSON.parseObject&lt;T&gt;(</b>
+<b class="nc">&nbsp;    this, T::class.java, *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json stream as [T] with the specified features
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val in = ...
+&nbsp; *   val data = in.into&lt;Map&lt;String, User&gt;&gt;()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @param features the specified features is applied to parsing
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.4
+&nbsp; */
+&nbsp;inline fun &lt;reified T : Any&gt; InputStream?.into(
+&nbsp;    vararg features: JSONReader.Feature
+<b class="nc">&nbsp;) = JSON.parseObject&lt;T&gt;(</b>
+<b class="nc">&nbsp;    this, reference&lt;T&gt;().getType(), *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Verify that the json string is a JsonObject
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val json = ...
+&nbsp; *   val bool = json.isJSONObject()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @receiver [Boolean]
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun String?.isJSONObject() =
+<b class="nc">&nbsp;    JSON.isValidObject(this)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Verify that the json byte array is a JsonObject
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val json = ...
+&nbsp; *   val bool = json.isJSONObject()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @receiver [Boolean]
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun ByteArray?.isJSONObject() =
+<b class="nc">&nbsp;    JSON.isValidObject(this)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Verify that the json string is a JsonArray
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val json = ...
+&nbsp; *   val bool = json.isJSONArray()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @receiver [Boolean]
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun String?.isJSONArray() =
+<b class="nc">&nbsp;    JSON.isValidArray(this)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Verify that the json byte array is a JsonArray
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val json = ...
+&nbsp; *   val bool = json.isJSONArray()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @receiver Any?
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun ByteArray?.isJSONArray() =
+<b class="nc">&nbsp;    JSON.isValidArray(this)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json string as [JSONObject]
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val json = ...
+&nbsp; *   val data = json.parseObject()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @return [JSONObject]?
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun String?.parseObject() =
+<b class="nc">&nbsp;    JSON.parseObject(this)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json byte array as [JSONObject]
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val json = ...
+&nbsp; *   val data = json.parseObject()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @return [JSONObject]?
+&nbsp; * @since 2.0.4
+&nbsp; */
+&nbsp;inline fun ByteArray?.parseObject() =
+<b class="nc">&nbsp;    JSON.parseObject(this)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json string as [JSONObject] with the specified features
+&nbsp; *
+&nbsp; * @param features the specified features is applied to parsing
+&nbsp; * @return [JSONObject]?
+&nbsp; * @since 2.0.4
+&nbsp; */
+&nbsp;inline fun String?.parseObject(
+&nbsp;    vararg features: JSONReader.Feature
+<b class="nc">&nbsp;) = JSON.parseObject(</b>
+<b class="nc">&nbsp;    this, *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json byte array as [JSONObject] with the specified features
+&nbsp; *
+&nbsp; * @param features the specified features is applied to parsing
+&nbsp; * @return [JSONObject]?
+&nbsp; * @since 2.0.4
+&nbsp; */
+&nbsp;inline fun ByteArray?.parseObject(
+&nbsp;    vararg features: JSONReader.Feature
+<b class="nc">&nbsp;) = JSON.parseObject(</b>
+<b class="nc">&nbsp;    this, *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json reader as [JSONObject] with the specified features
+&nbsp; *
+&nbsp; * @param features the specified features is applied to parsing
+&nbsp; * @return [JSONObject]?
+&nbsp; * @since 2.0.30
+&nbsp; */
+&nbsp;inline fun Reader?.parseObject(
+&nbsp;    vararg features: JSONReader.Feature
+<b class="nc">&nbsp;) = JSON.parseObject(</b>
+<b class="nc">&nbsp;    this, *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json stream as [JSONObject] with the specified features
+&nbsp; *
+&nbsp; * @param features the specified features is applied to parsing
+&nbsp; * @return [JSONObject]?
+&nbsp; * @since 2.0.4
+&nbsp; */
+&nbsp;inline fun InputStream?.parseObject(
+&nbsp;    vararg features: JSONReader.Feature
+<b class="nc">&nbsp;) = JSON.parseObject(</b>
+<b class="nc">&nbsp;    this, *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json string as [T]
+&nbsp; *
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun &lt;reified T&gt; String?.parseObject() =
+<b class="nc">&nbsp;    JSON.parseObject(</b>
+<b class="nc">&nbsp;        this, T::class.java</b>
+&nbsp;    )
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json string as [T] with the specified features
+&nbsp; *
+&nbsp; * @param features the specified features is applied to parsing
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun &lt;reified T&gt; String?.parseObject(
+&nbsp;    vararg features: JSONReader.Feature
+<b class="nc">&nbsp;) = JSON.parseObject(</b>
+<b class="nc">&nbsp;    this, T::class.java, *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json string as [T] with the specified filter and features
+&nbsp; *
+&nbsp; * @param filter the specified filter is applied to parsing
+&nbsp; * @param features the specified features is applied to parsing
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun &lt;reified T&gt; String?.parseObject(
+&nbsp;    filter: Filter,
+&nbsp;    vararg features: JSONReader.Feature
+<b class="nc">&nbsp;) = JSON.parseObject(</b>
+<b class="nc">&nbsp;    this, T::class.java, filter, *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json byte array as [T]
+&nbsp; *
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun &lt;reified T&gt; ByteArray?.parseObject() =
+<b class="nc">&nbsp;    JSON.parseObject(</b>
+<b class="nc">&nbsp;        this, T::class.java</b>
+&nbsp;    )
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json byte array as [T] with the specified features
+&nbsp; *
+&nbsp; * @param features the specified features is applied to parsing
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.30
+&nbsp; */
+&nbsp;inline fun &lt;reified T&gt; ByteArray?.parseObject(
+&nbsp;    vararg features: JSONReader.Feature
+<b class="nc">&nbsp;) = JSON.parseObject(</b>
+<b class="nc">&nbsp;    this, T::class.java, *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json byte array as [T] with the specified filter and features
+&nbsp; *
+&nbsp; * @param filter the specified filter is applied to parsing
+&nbsp; * @param features the specified features is applied to parsing
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.30
+&nbsp; */
+&nbsp;inline fun &lt;reified T&gt; ByteArray?.parseObject(
+&nbsp;    filter: Filter,
+&nbsp;    vararg features: JSONReader.Feature
+<b class="nc">&nbsp;) = JSON.parseObject(</b>
+<b class="nc">&nbsp;    this, T::class.java, filter, *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json byte array as [T] with the specified offset, length and charset
+&nbsp; *
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.3
+&nbsp; */
+<b class="nc">&nbsp;inline fun &lt;reified T&gt; ByteArray.parseObject(</b>
+&nbsp;    offset: Int,
+<b class="nc">&nbsp;    length: Int = size,</b>
+<b class="nc">&nbsp;    charset: Charset = Charsets.UTF_8</b>
+<b class="nc">&nbsp;) = JSON.parseObject(</b>
+<b class="nc">&nbsp;    this, offset, length, charset, T::class.java</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json reader as [T] with the specified delimiter and consumer
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val reader = ...
+&nbsp; *   reader.parseObject&lt;User&gt;() {
+&nbsp; *       val id = it.id
+&nbsp; *   }
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @param delimiter the specified delimiter is used to distinguish
+&nbsp; * @since 2.0.3
+&nbsp; */
+<b class="nc">&nbsp;inline fun &lt;reified T&gt; Reader.parseObject(</b>
+<b class="nc">&nbsp;    delimiter: Char = &#39;\n&#39;,</b>
+&nbsp;    noinline consumer: (T) -&gt; Unit
+<b class="nc">&nbsp;) = JSON.parseObject(</b>
+<b class="nc">&nbsp;    this, delimiter, T::class.java, consumer</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json stream as [T] with the specified features and consumer
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val input = ...
+&nbsp; *   input.parseObject&lt;User&gt; {
+&nbsp; *       val id = it.id
+&nbsp; *   }
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @param features the specified features is applied to parsing
+&nbsp; * @param consumer the specified consumer is applied to parsing
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun &lt;reified T&gt; InputStream.parseObject(
+&nbsp;    vararg features: JSONReader.Feature,
+&nbsp;    noinline consumer: (T) -&gt; Unit
+<b class="nc">&nbsp;) = JSON.parseObject(</b>
+<b class="nc">&nbsp;    this, T::class.java, consumer, *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json stream as [T] with the specified charset and features and so on
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val input = ...
+&nbsp; *   input.parseObject&lt;User&gt;(Charsets.UTF_8) {
+&nbsp; *       val id = it.id
+&nbsp; *   }
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @param charset the specified charset of the stream
+&nbsp; * @param features the specified features is applied to parsing
+&nbsp; * @param consumer the specified consumer is applied to parsing
+&nbsp; * @param delimiter the specified delimiter is used to distinguish
+&nbsp; * @since 2.0.3
+&nbsp; */
+<b class="nc">&nbsp;inline fun &lt;reified T&gt; InputStream.parseObject(</b>
+&nbsp;    charset: Charset,
+<b class="nc">&nbsp;    delimiter: Char = &#39;\n&#39;,</b>
+&nbsp;    vararg features: JSONReader.Feature,
+&nbsp;    noinline consumer: (T) -&gt; Unit
+<b class="nc">&nbsp;) = JSON.parseObject(</b>
+<b class="nc">&nbsp;    this, charset, delimiter, T::class.java, consumer, *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json string as [JSONArray]
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val json = ...
+&nbsp; *   val data = json.parseArray()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @return [JSONArray]?
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun String?.parseArray() =
+<b class="nc">&nbsp;    JSON.parseArray(this)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json string as a list of [T]
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val json = ...
+&nbsp; *   val list = json.parseArray&lt;User&gt;()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @return [List]?
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun &lt;reified T&gt; String?.parseArray() =
+<b class="nc">&nbsp;    JSON.parseArray(</b>
+<b class="nc">&nbsp;        this, T::class.java</b>
+&nbsp;    )
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json string as a list of [T] with the specified features
+&nbsp; *
+&nbsp; * @param features the specified features is applied to parsing
+&nbsp; * @return [List]?
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun &lt;reified T&gt; String?.parseArray(
+&nbsp;    vararg features: JSONReader.Feature
+<b class="nc">&nbsp;) = JSON.parseArray(</b>
+<b class="nc">&nbsp;    this, T::class.java, *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses the json byte array as a list of [T] with the specified features
+&nbsp; *
+&nbsp; * @param features the specified features is applied to parsing
+&nbsp; * @return [List]?
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun &lt;reified T&gt; ByteArray?.parseArray(
+&nbsp;    vararg features: JSONReader.Feature
+<b class="nc">&nbsp;) = JSON.parseArray(</b>
+<b class="nc">&nbsp;    this, T::class.java, *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Serializes this object to the json string
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val obj = ...
+&nbsp; *   val text = obj.toJSONString()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @receiver [Any]?
+&nbsp; * @return [String]
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun Any?.toJSONString() =
+<b class="nc">&nbsp;    JSON.toJSONString(this)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Serializes this object to the json string with the specified filters
+&nbsp; *
+&nbsp; * @param filters the specified filters is applied to serialization
+&nbsp; * @return [String]
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun Any?.toJSONString(
+&nbsp;    filters: Array&lt;out Filter&gt;
+<b class="nc">&nbsp;) = JSON.toJSONString(</b>
+<b class="nc">&nbsp;    this, filters</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Serializes this object to the json string with the specified features
+&nbsp; *
+&nbsp; * @param features the specified features is applied to serialization
+&nbsp; * @return [String]
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun Any?.toJSONString(
+&nbsp;    vararg features: JSONWriter.Feature
+<b class="nc">&nbsp;) = JSON.toJSONString(</b>
+<b class="nc">&nbsp;    this, *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Serializes this object to the json string with the specified filter and features
+&nbsp; *
+&nbsp; * @param filter the specified filter is applied to serialization
+&nbsp; * @param features the specified features is applied to serialization
+&nbsp; * @return [String]
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun Any?.toJSONString(
+&nbsp;    filter: Filter,
+&nbsp;    vararg features: JSONWriter.Feature
+<b class="nc">&nbsp;) = JSON.toJSONString(</b>
+<b class="nc">&nbsp;    this, filter, *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Serializes this object to the json string with the specified filters and features
+&nbsp; *
+&nbsp; * @param filters the specified filters is applied to serialization
+&nbsp; * @param features the specified features is applied to serialization
+&nbsp; * @return [String]
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun Any?.toJSONString(
+&nbsp;    filters: Array&lt;out Filter&gt;,
+&nbsp;    vararg features: JSONWriter.Feature
+<b class="nc">&nbsp;) = JSON.toJSONString(</b>
+<b class="nc">&nbsp;    this, filters, *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Serializes this object to the json byte array
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val obj = ...
+&nbsp; *   val text = obj.toJSONByteArray()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @receiver [Any]?
+&nbsp; * @return [ByteArray]
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun Any?.toJSONByteArray() =
+<b class="nc">&nbsp;    JSON.toJSONBytes(this)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Serializes this object to the json byte array with the specified filters
+&nbsp; *
+&nbsp; * @param filters the specified filters is applied to serialization
+&nbsp; * @return [ByteArray]
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun Any?.toJSONByteArray(
+&nbsp;    filters: Array&lt;out Filter&gt;
+<b class="nc">&nbsp;) = JSON.toJSONBytes(</b>
+<b class="nc">&nbsp;    this, filters</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Serializes this object to the json byte array with the specified features
+&nbsp; *
+&nbsp; * @param features the specified features is applied to serialization
+&nbsp; * @return [ByteArray]
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun Any?.toJSONByteArray(
+&nbsp;    vararg features: JSONWriter.Feature
+<b class="nc">&nbsp;) = JSON.toJSONBytes(</b>
+<b class="nc">&nbsp;    this, *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Serializes this object to the json byte array with the specified filters and features
+&nbsp; *
+&nbsp; * @param filters the specified filters is applied to serialization
+&nbsp; * @param features the specified features is applied to serialization
+&nbsp; * @return [ByteArray]
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun Any?.toJSONByteArray(
+&nbsp;    filters: Array&lt;out Filter&gt;,
+&nbsp;    vararg features: JSONWriter.Feature
+<b class="nc">&nbsp;) = JSON.toJSONBytes(</b>
+<b class="nc">&nbsp;    this, filters, *features</b>
+&nbsp;)
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:20</div>
+</div>
+</body>
+</html>

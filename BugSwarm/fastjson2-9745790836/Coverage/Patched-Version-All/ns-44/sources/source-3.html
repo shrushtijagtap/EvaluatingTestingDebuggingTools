@@ -1,0 +1,231 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GeoJsonReaderModule</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.support.spring.data.mongodb</a>
+</div>
+
+<h1>Coverage Summary for Class: GeoJsonReaderModule (com.alibaba.fastjson2.support.spring.data.mongodb)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GeoJsonReaderModule</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GeoJsonReaderModule$GeoJsonLineStringMixin</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GeoJsonReaderModule$GeoJsonMultiPointMixin</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GeoJsonReaderModule$PointMixin</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.support.spring.data.mongodb;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.annotation.JSONCreator;
+&nbsp;import com.alibaba.fastjson2.annotation.JSONField;
+&nbsp;import com.alibaba.fastjson2.annotation.JSONType;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectReaderModule;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReaderProvider;
+&nbsp;import org.springframework.data.geo.Point;
+&nbsp;import org.springframework.data.mongodb.core.geo.GeoJsonLineString;
+&nbsp;import org.springframework.data.mongodb.core.geo.GeoJsonMultiPoint;
+&nbsp;import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
+&nbsp;import org.springframework.data.mongodb.core.geo.GeoJsonPolygon;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+<b class="nc">&nbsp;public class GeoJsonReaderModule</b>
+&nbsp;        implements ObjectReaderModule {
+<b class="nc">&nbsp;    public static final GeoJsonReaderModule INSTANCE = new GeoJsonReaderModule();</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void init(ObjectReaderProvider provider) {
+<b class="nc">&nbsp;        provider.mixIn(Point.class, PointMixin.class);</b>
+<b class="nc">&nbsp;        provider.mixIn(GeoJsonLineString.class, GeoJsonLineStringMixin.class);</b>
+<b class="nc">&nbsp;        provider.mixIn(GeoJsonMultiPoint.class, GeoJsonMultiPointMixin.class);</b>
+<b class="nc">&nbsp;        provider.register(GeoJsonPoint.class, GeoJsonPointReader.INSTANCE);</b>
+<b class="nc">&nbsp;        provider.register(GeoJsonPolygon.class, GeoJsonPolygonReader.INSTANCE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JSONType(deserializeFeatures = JSONReader.Feature.SupportArrayToBean)
+&nbsp;    static class PointMixin {
+&nbsp;        @JSONCreator(parameterNames = {&quot;x&quot;, &quot;y&quot;})
+<b class="nc">&nbsp;        public PointMixin(double x, double y) {</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @JSONType(
+&nbsp;            typeKey = &quot;type&quot;,
+&nbsp;            typeName = &quot;MultiPoint&quot;,
+&nbsp;            deserializeFeatures = JSONReader.Feature.SupportArrayToBean)
+&nbsp;    abstract static class GeoJsonMultiPointMixin {
+&nbsp;        @JSONCreator(parameterNames = &quot;coordinates&quot;)
+<b class="nc">&nbsp;        public GeoJsonMultiPointMixin(List&lt;Point&gt; points) {</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @JSONField(deserialize = false)
+&nbsp;        public abstract List&lt;Point&gt; getCoordinates();
+&nbsp;    }
+&nbsp;
+&nbsp;    @JSONType(
+&nbsp;            typeKey = &quot;type&quot;,
+&nbsp;            typeName = &quot;LineString&quot;,
+&nbsp;            deserializeFeatures = JSONReader.Feature.SupportArrayToBean
+&nbsp;    )
+&nbsp;    abstract static class GeoJsonLineStringMixin {
+&nbsp;        @JSONCreator(parameterNames = &quot;coordinates&quot;)
+<b class="nc">&nbsp;        public GeoJsonLineStringMixin(List&lt;Point&gt; points) {</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @JSONField(deserialize = false)
+&nbsp;        public abstract List&lt;Point&gt; getCoordinates();
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:32</div>
+</div>
+</body>
+</html>

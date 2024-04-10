@@ -1,0 +1,1052 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONPathParser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONPathParser (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONPathParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/519)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JSONPathParser$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/520)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.List;
+&nbsp;import java.util.function.Function;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONReader.EOI;
+&nbsp;
+&nbsp;class JSONPathParser {
+&nbsp;    final String path;
+&nbsp;    final JSONReader jsonReader;
+&nbsp;
+&nbsp;    boolean dollar;
+&nbsp;    boolean lax;
+&nbsp;    boolean strict;
+&nbsp;
+&nbsp;    int segmentIndex;
+&nbsp;    JSONPathSegment first;
+&nbsp;    JSONPathSegment second;
+&nbsp;
+&nbsp;    List&lt;JSONPathSegment&gt; segments;
+&nbsp;
+&nbsp;    boolean negative;
+&nbsp;
+<b class="nc">&nbsp;    public JSONPathParser(String str) {</b>
+<b class="nc">&nbsp;        this.jsonReader = JSONReader.of(this.path = str, JSONPath.PARSE_CONTEXT);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.ch == &#39;l&#39; &amp;&amp; jsonReader.nextIfMatchIdent(&#39;l&#39;, &#39;a&#39;, &#39;x&#39;)) {</b>
+<b class="nc">&nbsp;            lax = true;</b>
+<b class="nc">&nbsp;        } else if (jsonReader.ch == &#39;s&#39; &amp;&amp; jsonReader.nextIfMatchIdent(&#39;s&#39;, &#39;t&#39;, &#39;r&#39;, &#39;i&#39;, &#39;c&#39;, &#39;t&#39;)) {</b>
+<b class="nc">&nbsp;            strict = true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.ch == &#39;-&#39;) {</b>
+<b class="nc">&nbsp;            jsonReader.next();</b>
+<b class="nc">&nbsp;            negative = true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.ch == &#39;$&#39;) {</b>
+<b class="nc">&nbsp;            jsonReader.next();</b>
+<b class="nc">&nbsp;            dollar = true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    JSONPath parse(JSONPath.Feature... features) {
+<b class="nc">&nbsp;        if (dollar &amp;&amp; jsonReader.ch == EOI) {</b>
+<b class="nc">&nbsp;            if (negative) {</b>
+<b class="nc">&nbsp;                return new JSONPathSingle(JSONPathFunction.FUNC_NEGATIVE, path);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return JSONPath.RootPath.INSTANCE;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.ch == &#39;e&#39; &amp;&amp; jsonReader.nextIfMatchIdent(&#39;e&#39;, &#39;x&#39;, &#39;i&#39;, &#39;s&#39;, &#39;t&#39;, &#39;s&#39;)) {</b>
+<b class="nc">&nbsp;            if (!jsonReader.nextIfMatch(&#39;(&#39;)) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;syntax error &quot; + path);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (jsonReader.ch == &#39;@&#39;) {</b>
+<b class="nc">&nbsp;                jsonReader.next();</b>
+<b class="nc">&nbsp;                if (!jsonReader.nextIfMatch(&#39;.&#39;)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;syntax error &quot; + path);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            char ch = jsonReader.ch;</b>
+&nbsp;            JSONPathSegment segment;
+<b class="nc">&nbsp;            if ((ch &gt;= &#39;a&#39; &amp;&amp; ch &lt;= &#39;z&#39;) || (ch &gt;= &#39;A&#39; &amp;&amp; ch &lt;= &#39;Z&#39;) || ch == &#39;_&#39; || ch == &#39;@&#39;) {</b>
+<b class="nc">&nbsp;                segment = parseProperty();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new JSONException(&quot;syntax error &quot; + path);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (!jsonReader.nextIfMatch(&#39;)&#39;)) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;syntax error &quot; + path);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return new JSONPathTwoSegment(path, segment, JSONPathFunction.FUNC_EXISTS);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        while (jsonReader.ch != EOI) {</b>
+&nbsp;            final JSONPathSegment segment;
+&nbsp;
+<b class="nc">&nbsp;            char ch = jsonReader.ch;</b>
+<b class="nc">&nbsp;            if (ch == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;                jsonReader.next();</b>
+<b class="nc">&nbsp;                segment = parseProperty();</b>
+<b class="nc">&nbsp;            } else if (jsonReader.ch == &#39;[&#39;) {</b>
+<b class="nc">&nbsp;                segment = parseArrayAccess();</b>
+<b class="nc">&nbsp;            } else if ((ch &gt;= &#39;a&#39; &amp;&amp; ch &lt;= &#39;z&#39;) || (ch &gt;= &#39;A&#39; &amp;&amp; ch &lt;= &#39;Z&#39;) || ch == &#39;_&#39;) {</b>
+<b class="nc">&nbsp;                segment = parseProperty();</b>
+<b class="nc">&nbsp;            } else if (ch == &#39;?&#39;) {</b>
+<b class="nc">&nbsp;                if (dollar &amp;&amp; segmentIndex == 0) {</b>
+<b class="nc">&nbsp;                    first = JSONPathSegment.RootSegment.INSTANCE;</b>
+<b class="nc">&nbsp;                    segmentIndex++;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                jsonReader.next();</b>
+<b class="nc">&nbsp;                segment = parseFilter();</b>
+<b class="nc">&nbsp;            } else if (ch == &#39;@&#39;) {</b>
+<b class="nc">&nbsp;                jsonReader.next();</b>
+<b class="nc">&nbsp;                segment = JSONPathSegment.SelfSegment.INSTANCE;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new JSONException(&quot;not support &quot; + ch);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (segmentIndex == 0) {</b>
+<b class="nc">&nbsp;                first = segment;</b>
+<b class="nc">&nbsp;            } else if (segmentIndex == 1) {</b>
+<b class="nc">&nbsp;                second = segment;</b>
+<b class="nc">&nbsp;            } else if (segmentIndex == 2) {</b>
+<b class="nc">&nbsp;                segments = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                segments.add(first);</b>
+<b class="nc">&nbsp;                segments.add(second);</b>
+<b class="nc">&nbsp;                segments.add(segment);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                segments.add(segment);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            segmentIndex++;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (negative) {</b>
+<b class="nc">&nbsp;            if (segmentIndex == 1) {</b>
+<b class="nc">&nbsp;                second = JSONPathFunction.FUNC_NEGATIVE;</b>
+<b class="nc">&nbsp;            } else if (segmentIndex == 2) {</b>
+<b class="nc">&nbsp;                segments = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                segments.add(first);</b>
+<b class="nc">&nbsp;                segments.add(second);</b>
+<b class="nc">&nbsp;                segments.add(JSONPathFunction.FUNC_NEGATIVE);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                segments.add(JSONPathFunction.FUNC_NEGATIVE);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            segmentIndex++;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (segmentIndex == 1) {</b>
+<b class="nc">&nbsp;            if (first instanceof JSONPathSegmentName) {</b>
+<b class="nc">&nbsp;                return new JSONPathSingleName(path, (JSONPathSegmentName) first, features);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (first instanceof JSONPathSegmentIndex) {</b>
+<b class="nc">&nbsp;                JSONPathSegmentIndex firstIndex = (JSONPathSegmentIndex) first;</b>
+<b class="nc">&nbsp;                if (firstIndex.index &gt;= 0) {</b>
+<b class="nc">&nbsp;                    return new JSONPathSingleIndex(path, firstIndex, features);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return new JSONPathSingle(first, path, features);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (segmentIndex == 2) {</b>
+<b class="nc">&nbsp;            return new JSONPathTwoSegment(path, first, second, features);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new JSONPathMulti(path, segments, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private JSONPathSegment parseArrayAccess() {
+<b class="nc">&nbsp;        jsonReader.next();</b>
+&nbsp;
+&nbsp;        JSONPathSegment segment;
+<b class="nc">&nbsp;        switch (jsonReader.ch) {</b>
+&nbsp;            case &#39;-&#39;:
+&nbsp;            case &#39;0&#39;:
+&nbsp;            case &#39;1&#39;:
+&nbsp;            case &#39;2&#39;:
+&nbsp;            case &#39;3&#39;:
+&nbsp;            case &#39;4&#39;:
+&nbsp;            case &#39;5&#39;:
+&nbsp;            case &#39;6&#39;:
+&nbsp;            case &#39;7&#39;:
+&nbsp;            case &#39;8&#39;:
+&nbsp;            case &#39;9&#39;: {
+<b class="nc">&nbsp;                int index = jsonReader.readInt32Value();</b>
+<b class="nc">&nbsp;                boolean last = false;</b>
+<b class="nc">&nbsp;                if (jsonReader.ch == &#39;:&#39;) {</b>
+<b class="nc">&nbsp;                    jsonReader.next();</b>
+<b class="nc">&nbsp;                    if (jsonReader.ch == &#39;]&#39;) {</b>
+<b class="nc">&nbsp;                        segment = new JSONPathSegment.RangeIndexSegment(index, index &gt;= 0 ? Integer.MAX_VALUE : 0);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        int end = jsonReader.readInt32Value();</b>
+<b class="nc">&nbsp;                        segment = new JSONPathSegment.RangeIndexSegment(index, end);</b>
+<b class="nc">&nbsp;                    }</b>
+<b class="nc">&nbsp;                } else if (jsonReader.isNumber() || (last = jsonReader.nextIfMatchIdent(&#39;l&#39;, &#39;a&#39;, &#39;s&#39;, &#39;t&#39;))) {</b>
+<b class="nc">&nbsp;                    List&lt;Integer&gt; list = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                    list.add(index);</b>
+<b class="nc">&nbsp;                    if (last) {</b>
+<b class="nc">&nbsp;                        list.add(-1);</b>
+<b class="nc">&nbsp;                        jsonReader.nextIfMatch(&#39;,&#39;);</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    while (true) {
+<b class="nc">&nbsp;                        if (jsonReader.isNumber()) {</b>
+<b class="nc">&nbsp;                            index = jsonReader.readInt32Value();</b>
+<b class="nc">&nbsp;                            list.add(index);</b>
+<b class="nc">&nbsp;                        } else if (jsonReader.nextIfMatchIdent(&#39;l&#39;, &#39;a&#39;, &#39;s&#39;, &#39;t&#39;)) {</b>
+<b class="nc">&nbsp;                            list.add(-1);</b>
+<b class="nc">&nbsp;                            jsonReader.nextIfMatch(&#39;,&#39;);</b>
+&nbsp;                        } else {
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    int[] indics = new int[list.size()];</b>
+<b class="nc">&nbsp;                    for (int i = 0; i &lt; list.size(); i++) {</b>
+<b class="nc">&nbsp;                        indics[i] = list.get(i);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    segment = new JSONPathSegment.MultiIndexSegment(indics);</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    segment = JSONPathSegmentIndex.of(index);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;            case &#39;*&#39;:
+<b class="nc">&nbsp;                jsonReader.next();</b>
+<b class="nc">&nbsp;                segment = JSONPathSegment.AllSegment.INSTANCE_ARRAY;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;:&#39;: {
+<b class="nc">&nbsp;                jsonReader.next();</b>
+<b class="nc">&nbsp;                int end = jsonReader.ch == &#39;]&#39; ? 0 : jsonReader.readInt32Value();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (end &gt; 0) {</b>
+<b class="nc">&nbsp;                    segment = new JSONPathSegment.RangeIndexSegment(0, end);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    segment = new JSONPathSegment.RangeIndexSegment(Integer.MIN_VALUE, end);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;            case &#39;&quot;&#39;:
+&nbsp;            case &#39;\&#39;&#39;:
+<b class="nc">&nbsp;                String name = jsonReader.readString();</b>
+<b class="nc">&nbsp;                if (jsonReader.current() == &#39;]&#39;) {</b>
+<b class="nc">&nbsp;                    segment = new JSONPathSegmentName(name, Fnv.hashCode64(name));</b>
+<b class="nc">&nbsp;                } else if (jsonReader.isString()) {</b>
+<b class="nc">&nbsp;                    List&lt;String&gt; names = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                    names.add(name);</b>
+&nbsp;                    do {
+<b class="nc">&nbsp;                        names.add(jsonReader.readString());</b>
+<b class="nc">&nbsp;                    } while (jsonReader.isString());</b>
+<b class="nc">&nbsp;                    String[] nameArray = new String[names.size()];</b>
+<b class="nc">&nbsp;                    names.toArray(nameArray);</b>
+<b class="nc">&nbsp;                    segment = new JSONPathSegment.MultiNameSegment(nameArray);</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;TODO : &quot; + jsonReader.current());</b>
+&nbsp;                }
+&nbsp;                break;
+&nbsp;            case &#39;?&#39;:
+<b class="nc">&nbsp;                jsonReader.next();</b>
+<b class="nc">&nbsp;                segment = parseFilter();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;r&#39;: {
+<b class="nc">&nbsp;                String fieldName = jsonReader.readFieldNameUnquote();</b>
+<b class="nc">&nbsp;                if (&quot;randomIndex&quot;.equals(fieldName)) {</b>
+<b class="nc">&nbsp;                    if (jsonReader.nextIfMatch(&#39;(&#39;)</b>
+<b class="nc">&nbsp;                            &amp;&amp; jsonReader.nextIfMatch(&#39;)&#39;)</b>
+&nbsp;                            &amp;&amp; jsonReader.ch == (&#39;]&#39;)) {
+<b class="nc">&nbsp;                        segment = JSONPathSegment.RandomIndexSegment.INSTANCE;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                throw new JSONException(&quot;not support : &quot; + fieldName);</b>
+&nbsp;            }
+&nbsp;            case &#39;l&#39;: {
+<b class="nc">&nbsp;                String fieldName = jsonReader.readFieldNameUnquote();</b>
+<b class="nc">&nbsp;                if (&quot;last&quot;.equals(fieldName)) {</b>
+<b class="nc">&nbsp;                    segment = JSONPathSegmentIndex.of(-1);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    throw new JSONException(&quot;not support : &quot; + fieldName);</b>
+&nbsp;                }
+&nbsp;                break;
+&nbsp;            }
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new JSONException(&quot;TODO : &quot; + jsonReader.current());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!jsonReader.nextIfMatch(&#39;]&#39;)) {</b>
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return segment;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private JSONPathSegment parseProperty() {
+&nbsp;        final JSONPathSegment segment;
+<b class="nc">&nbsp;        if (jsonReader.ch == &#39;*&#39;) {</b>
+<b class="nc">&nbsp;            jsonReader.next();</b>
+<b class="nc">&nbsp;            segment = JSONPathSegment.AllSegment.INSTANCE;</b>
+<b class="nc">&nbsp;        } else if (jsonReader.ch == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;            jsonReader.next();</b>
+<b class="nc">&nbsp;            if (jsonReader.ch == &#39;*&#39;) {</b>
+<b class="nc">&nbsp;                jsonReader.next();</b>
+<b class="nc">&nbsp;                segment = new JSONPathSegment.CycleNameSegment(&quot;*&quot;, Fnv.hashCode64(&quot;*&quot;));</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                long hashCode = jsonReader.readFieldNameHashCodeUnquote();</b>
+<b class="nc">&nbsp;                String name = jsonReader.getFieldName();</b>
+<b class="nc">&nbsp;                segment = new JSONPathSegment.CycleNameSegment(name, hashCode);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            boolean isNum = jsonReader.isNumber();</b>
+<b class="nc">&nbsp;            long hashCode = jsonReader.readFieldNameHashCodeUnquote();</b>
+<b class="nc">&nbsp;            String name = jsonReader.getFieldName();</b>
+<b class="nc">&nbsp;            if (isNum) {</b>
+<b class="nc">&nbsp;                if (name.length() &gt; 9) {</b>
+<b class="nc">&nbsp;                    isNum = false;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    for (int i = 0; i &lt; name.length(); ++i) {</b>
+<b class="nc">&nbsp;                        char ch = name.charAt(i);</b>
+<b class="nc">&nbsp;                        if (ch &lt; &#39;0&#39; || ch &gt; &#39;9&#39;) {</b>
+<b class="nc">&nbsp;                            isNum = false;</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (jsonReader.ch == &#39;(&#39;) {</b>
+<b class="nc">&nbsp;                jsonReader.next();</b>
+<b class="nc">&nbsp;                switch (name) {</b>
+&nbsp;                    case &quot;length&quot;:
+&nbsp;                    case &quot;size&quot;:
+<b class="nc">&nbsp;                        segment = JSONPathSegment.LengthSegment.INSTANCE;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;keys&quot;:
+<b class="nc">&nbsp;                        segment = JSONPathSegment.KeysSegment.INSTANCE;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;values&quot;:
+<b class="nc">&nbsp;                        segment = JSONPathSegment.ValuesSegment.INSTANCE;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;entrySet&quot;:
+<b class="nc">&nbsp;                        segment = JSONPathSegment.EntrySetSegment.INSTANCE;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;min&quot;:
+<b class="nc">&nbsp;                        segment = JSONPathSegment.MinSegment.INSTANCE;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;max&quot;:
+<b class="nc">&nbsp;                        segment = JSONPathSegment.MaxSegment.INSTANCE;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;sum&quot;:
+<b class="nc">&nbsp;                        segment = JSONPathSegment.SumSegment.INSTANCE;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;type&quot;:
+<b class="nc">&nbsp;                        segment = JSONPathFunction.FUNC_TYPE;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;floor&quot;:
+<b class="nc">&nbsp;                        segment = JSONPathFunction.FUNC_FLOOR;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;ceil&quot;:
+&nbsp;                    case &quot;ceiling&quot;:
+<b class="nc">&nbsp;                        segment = JSONPathFunction.FUNC_CEIL;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;double&quot;:
+<b class="nc">&nbsp;                        segment = JSONPathFunction.FUNC_DOUBLE;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;abs&quot;:
+<b class="nc">&nbsp;                        segment = JSONPathFunction.FUNC_ABS;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;lower&quot;:
+<b class="nc">&nbsp;                        segment = JSONPathFunction.FUNC_LOWER;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;upper&quot;:
+<b class="nc">&nbsp;                        segment = JSONPathFunction.FUNC_UPPER;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;trim&quot;:
+<b class="nc">&nbsp;                        segment = JSONPathFunction.FUNC_TRIM;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;negative&quot;:
+<b class="nc">&nbsp;                        segment = JSONPathFunction.FUNC_NEGATIVE;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;first&quot;:
+<b class="nc">&nbsp;                        segment = JSONPathFunction.FUNC_FIRST;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;last&quot;:
+<b class="nc">&nbsp;                        segment = JSONPathFunction.FUNC_LAST;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;index&quot;:
+<b class="nc">&nbsp;                        if (jsonReader.isNumber()) {</b>
+<b class="nc">&nbsp;                            Number number = jsonReader.readNumber();</b>
+<b class="nc">&nbsp;                            if (number instanceof BigDecimal) {</b>
+<b class="nc">&nbsp;                                BigDecimal decimal = (BigDecimal) number;</b>
+<b class="nc">&nbsp;                                decimal = decimal.stripTrailingZeros();</b>
+<b class="nc">&nbsp;                                if (decimal.scale() != 0) {</b>
+<b class="nc">&nbsp;                                    segment = new JSONPathFunction(new JSONPathFunction.IndexDecimal(decimal));</b>
+<b class="nc">&nbsp;                                    break;</b>
+&nbsp;                                }
+<b class="nc">&nbsp;                                BigInteger unscaledValue = decimal.unscaledValue();</b>
+<b class="nc">&nbsp;                                if (unscaledValue.compareTo(TypeUtils.BIGINT_INT64_MIN) &gt;= 0</b>
+<b class="nc">&nbsp;                                        &amp;&amp; unscaledValue.compareTo(TypeUtils.BIGINT_INT64_MAX) &lt;= 0) {</b>
+<b class="nc">&nbsp;                                    number = unscaledValue.longValue();</b>
+&nbsp;                                } else {
+<b class="nc">&nbsp;                                    number = unscaledValue;</b>
+&nbsp;                                }
+&nbsp;                            }
+&nbsp;
+<b class="nc">&nbsp;                            if (number instanceof Integer</b>
+&nbsp;                                    || number instanceof Long
+&nbsp;                            ) {
+<b class="nc">&nbsp;                                long longValue = number.longValue();</b>
+<b class="nc">&nbsp;                                segment = new JSONPathFunction(new JSONPathFunction.IndexInt(longValue));</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            }
+<b class="nc">&nbsp;                        } else if (jsonReader.isString()) {</b>
+<b class="nc">&nbsp;                            String indexValue = jsonReader.readString();</b>
+<b class="nc">&nbsp;                            segment = new JSONPathFunction(new JSONPathFunction.IndexString(indexValue));</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        throw new JSONException(&quot;not support syntax, path : &quot; + path);</b>
+&nbsp;                    default:
+<b class="nc">&nbsp;                        throw new JSONException(&quot;not support syntax, path : &quot; + path);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (!jsonReader.nextIfMatch(&#39;)&#39;)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;not support syntax, path : &quot; + path);</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                segment = new JSONPathSegmentName(name, hashCode);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return segment;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    JSONPathSegment parseFilterRest(JSONPathSegment segment) {
+&nbsp;        boolean and;
+<b class="nc">&nbsp;        switch (jsonReader.ch) {</b>
+&nbsp;            case &#39;&amp;&#39;:
+<b class="nc">&nbsp;                jsonReader.next();</b>
+<b class="nc">&nbsp;                if (!jsonReader.nextIfMatch(&#39;&amp;&#39;)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;                }
+<b class="nc">&nbsp;                and = true;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;|&#39;:
+<b class="nc">&nbsp;                jsonReader.next();</b>
+<b class="nc">&nbsp;                if (!jsonReader.nextIfMatch(&#39;|&#39;)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;                }
+<b class="nc">&nbsp;                and = false;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;a&#39;:
+&nbsp;            case &#39;A&#39;: {
+<b class="nc">&nbsp;                String fieldName = jsonReader.readFieldNameUnquote();</b>
+<b class="nc">&nbsp;                if (!&quot;and&quot;.equalsIgnoreCase(fieldName)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;syntax error : &quot; + fieldName);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                and = true;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;            case &#39;o&#39;:
+&nbsp;            case &#39;O&#39;: {
+<b class="nc">&nbsp;                String fieldName = jsonReader.readFieldNameUnquote();</b>
+<b class="nc">&nbsp;                if (!&quot;or&quot;.equalsIgnoreCase(fieldName)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;syntax error : &quot; + fieldName);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                and = false;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new JSONException(&quot;TODO : &quot; + jsonReader.ch);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONPathSegment right = parseFilter();</b>
+<b class="nc">&nbsp;        if (segment instanceof JSONPathFilter.GroupFilter) {</b>
+<b class="nc">&nbsp;            JSONPathFilter.GroupFilter group = (JSONPathFilter.GroupFilter) segment;</b>
+<b class="nc">&nbsp;            if (group.and == and) {</b>
+<b class="nc">&nbsp;                group.filters.add((JSONPathFilter) right);</b>
+<b class="nc">&nbsp;                return group;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        List&lt;JSONPathFilter&gt; filters = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        filters.add((JSONPathFilter) segment);</b>
+<b class="nc">&nbsp;        filters.add((JSONPathFilter) right);</b>
+<b class="nc">&nbsp;        return new JSONPathFilter.GroupFilter(filters, and);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    JSONPathSegment parseFilter() {
+<b class="nc">&nbsp;        boolean parentheses = jsonReader.nextIfMatch(&#39;(&#39;);</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean at = jsonReader.ch == &#39;@&#39;;</b>
+<b class="nc">&nbsp;        if (at) {</b>
+<b class="nc">&nbsp;            jsonReader.next();</b>
+<b class="nc">&nbsp;        } else if (jsonReader.nextIfMatchIdent(&#39;e&#39;, &#39;x&#39;, &#39;i&#39;, &#39;s&#39;, &#39;t&#39;, &#39;s&#39;)) {</b>
+<b class="nc">&nbsp;            if (!jsonReader.nextIfMatch(&#39;(&#39;)) {</b>
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;exists&quot;));</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (jsonReader.nextIfMatch(&#39;@&#39;)) {</b>
+<b class="nc">&nbsp;                if (jsonReader.nextIfMatch(&#39;.&#39;)) {</b>
+<b class="nc">&nbsp;                    long hashCode = jsonReader.readFieldNameHashCodeUnquote();</b>
+<b class="nc">&nbsp;                    String fieldName = jsonReader.getFieldName();</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (jsonReader.nextIfMatch(&#39;)&#39;)) {</b>
+<b class="nc">&nbsp;                        if (parentheses) {</b>
+<b class="nc">&nbsp;                            if (!jsonReader.nextIfMatch(&#39;)&#39;)) {</b>
+<b class="nc">&nbsp;                                throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;                            }
+&nbsp;                        }
+<b class="nc">&nbsp;                        return new JSONPathFilter.NameExistsFilter(fieldName, hashCode);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean starts = jsonReader.nextIfMatchIdent(&#39;s&#39;, &#39;t&#39;, &#39;a&#39;, &#39;r&#39;, &#39;t&#39;, &#39;s&#39;);</b>
+<b class="nc">&nbsp;        boolean ends = (!starts) &amp;&amp; jsonReader.nextIfMatchIdent(&#39;e&#39;, &#39;n&#39;, &#39;d&#39;, &#39;s&#39;);</b>
+<b class="nc">&nbsp;        if ((at &amp;&amp; (starts || ends)) || (jsonReader.ch != &#39;.&#39; &amp;&amp; !JSONReader.isFirstIdentifier(jsonReader.ch))) {</b>
+<b class="nc">&nbsp;            if (!at) {</b>
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            JSONPathFilter.Operator operator;
+<b class="nc">&nbsp;            if (starts || ends) {</b>
+<b class="nc">&nbsp;                jsonReader.readFieldNameHashCodeUnquote();</b>
+<b class="nc">&nbsp;                String fieldName = jsonReader.getFieldName();</b>
+<b class="nc">&nbsp;                if (!&quot;with&quot;.equalsIgnoreCase(fieldName)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;not support operator : &quot; + fieldName);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                operator = starts ? JSONPathFilter.Operator.STARTS_WITH : JSONPathFilter.Operator.ENDS_WITH;</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                operator = JSONPath.parseOperator(jsonReader);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            JSONPathSegment segment = null;</b>
+<b class="nc">&nbsp;            if (jsonReader.isNumber()) {</b>
+<b class="nc">&nbsp;                Number number = jsonReader.readNumber();</b>
+<b class="nc">&nbsp;                if (number instanceof Integer || number instanceof Long) {</b>
+<b class="nc">&nbsp;                    segment = new JSONPathFilter.NameIntOpSegment(null, 0, null, null, null, operator, number.longValue());</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (jsonReader.isString()) {</b>
+<b class="nc">&nbsp;                String string = jsonReader.readString();</b>
+&nbsp;
+<b class="nc">&nbsp;                switch (operator) {</b>
+&nbsp;                    case STARTS_WITH:
+<b class="nc">&nbsp;                        segment = new JSONPathFilter.StartsWithSegment(null, 0, string);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case ENDS_WITH:
+<b class="nc">&nbsp;                        segment = new JSONPathFilter.EndsWithSegment(null, 0, string);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    default:
+<b class="nc">&nbsp;                        throw new JSONException(&quot;syntax error, &quot; + string);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            while (jsonReader.ch == &#39;&amp;&#39; || jsonReader.ch == &#39;|&#39;) {</b>
+<b class="nc">&nbsp;                segment = parseFilterRest(segment);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (segment != null) {</b>
+<b class="nc">&nbsp;                if (parentheses) {</b>
+<b class="nc">&nbsp;                    if (!jsonReader.nextIfMatch(&#39;)&#39;)) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                return segment;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (at) {</b>
+<b class="nc">&nbsp;            jsonReader.next();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long hashCode = jsonReader.readFieldNameHashCodeUnquote();</b>
+<b class="nc">&nbsp;        String fieldName = jsonReader.getFieldName();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (parentheses) {</b>
+<b class="nc">&nbsp;            if (jsonReader.nextIfMatch(&#39;)&#39;)) {</b>
+<b class="nc">&nbsp;                return new JSONPathFilter.NameExistsFilter(fieldName, hashCode);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String functionName = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        long[] hashCode2 = null;</b>
+<b class="nc">&nbsp;        String[] fieldName2 = null;</b>
+<b class="nc">&nbsp;        while (jsonReader.ch == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;            jsonReader.next();</b>
+<b class="nc">&nbsp;            long hash = jsonReader.readFieldNameHashCodeUnquote();</b>
+<b class="nc">&nbsp;            String str = jsonReader.getFieldName();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (jsonReader.ch == &#39;(&#39;) {</b>
+<b class="nc">&nbsp;                functionName = str;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (hashCode2 == null) {</b>
+<b class="nc">&nbsp;                hashCode2 = new long[]{hash};</b>
+<b class="nc">&nbsp;                fieldName2 = new String[]{str};</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                hashCode2 = Arrays.copyOf(hashCode2, hashCode2.length + 1);</b>
+<b class="nc">&nbsp;                hashCode2[hashCode2.length - 1] = hash;</b>
+<b class="nc">&nbsp;                fieldName2 = Arrays.copyOf(fieldName2, fieldName2.length + 1);</b>
+<b class="nc">&nbsp;                fieldName2[fieldName2.length - 1] = str;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        JSONPathFilter.Operator operator = null;</b>
+<b class="nc">&nbsp;        Function function = null;</b>
+<b class="nc">&nbsp;        if (jsonReader.ch == &#39;(&#39;) {</b>
+<b class="nc">&nbsp;            if (functionName == null) {</b>
+<b class="nc">&nbsp;                functionName = fieldName;</b>
+<b class="nc">&nbsp;                fieldName = null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            switch (functionName) {</b>
+&nbsp;                case &quot;type&quot;:
+<b class="nc">&nbsp;                    hashCode = 0;</b>
+<b class="nc">&nbsp;                    function = JSONPathFunction.TypeFunction.INSTANCE;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;size&quot;:
+<b class="nc">&nbsp;                    hashCode = 0;</b>
+<b class="nc">&nbsp;                    function = JSONPathFunction.SizeFunction.INSTANCE;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;contains&quot;:
+<b class="nc">&nbsp;                    hashCode = 0;</b>
+<b class="nc">&nbsp;                    operator = JSONPathFilter.Operator.CONTAINS;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+<b class="nc">&nbsp;                    throw new JSONException(&quot;syntax error, function not support &quot; + fieldName);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (function != null) {</b>
+<b class="nc">&nbsp;                jsonReader.next();</b>
+<b class="nc">&nbsp;                if (!jsonReader.nextIfMatch(&#39;)&#39;)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;syntax error, function &quot; + functionName);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (operator == null) {</b>
+<b class="nc">&nbsp;            operator = JSONPath.parseOperator(jsonReader);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        switch (operator) {</b>
+&nbsp;            case REG_MATCH:
+&nbsp;            case RLIKE:
+&nbsp;            case NOT_RLIKE: {
+&nbsp;                String regex;
+&nbsp;                boolean ignoreCase;
+<b class="nc">&nbsp;                if (jsonReader.isString()) {</b>
+<b class="nc">&nbsp;                    regex = jsonReader.readString();</b>
+<b class="nc">&nbsp;                    ignoreCase = false;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    regex = jsonReader.readPattern();</b>
+<b class="nc">&nbsp;                    ignoreCase = jsonReader.nextIfMatch(&#39;i&#39;);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Pattern pattern = ignoreCase</b>
+<b class="nc">&nbsp;                        ? Pattern.compile(regex, Pattern.CASE_INSENSITIVE)</b>
+<b class="nc">&nbsp;                        : Pattern.compile(regex);</b>
+&nbsp;
+<b class="nc">&nbsp;                JSONPathSegment segment = new JSONPathFilter.NameRLikeSegment(fieldName, hashCode, pattern, operator == JSONPathFilter.Operator.NOT_RLIKE);</b>
+<b class="nc">&nbsp;                if (!jsonReader.nextIfMatch(&#39;)&#39;)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return segment;</b>
+&nbsp;            }
+&nbsp;            case IN:
+&nbsp;            case NOT_IN: {
+<b class="nc">&nbsp;                if (jsonReader.ch != &#39;(&#39;) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;                }
+<b class="nc">&nbsp;                jsonReader.next();</b>
+&nbsp;
+&nbsp;                JSONPathSegment segment;
+<b class="nc">&nbsp;                if (jsonReader.isString()) {</b>
+<b class="nc">&nbsp;                    List&lt;String&gt; list = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                    while (jsonReader.isString()) {</b>
+<b class="nc">&nbsp;                        list.add(jsonReader.readString());</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    String[] strArray = new String[list.size()];</b>
+<b class="nc">&nbsp;                    list.toArray(strArray);</b>
+<b class="nc">&nbsp;                    segment = new JSONPathFilter.NameStringInSegment(</b>
+&nbsp;                            fieldName,
+&nbsp;                            hashCode,
+&nbsp;                            strArray,
+&nbsp;                            operator == JSONPathFilter.Operator.NOT_IN
+&nbsp;                    );
+<b class="nc">&nbsp;                } else if (jsonReader.isNumber()) {</b>
+<b class="nc">&nbsp;                    List&lt;Number&gt; list = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                    while (jsonReader.isNumber()) {</b>
+<b class="nc">&nbsp;                        list.add(jsonReader.readNumber());</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    long[] values = new long[list.size()];</b>
+<b class="nc">&nbsp;                    for (int i = 0; i &lt; list.size(); i++) {</b>
+<b class="nc">&nbsp;                        values[i] = list.get(i).longValue();</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    segment = new JSONPathFilter.NameIntInSegment(fieldName, hashCode, fieldName2, hashCode2, function, values, operator == JSONPathFilter.Operator.NOT_IN);</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (!jsonReader.nextIfMatch(&#39;)&#39;)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (!jsonReader.nextIfMatch(&#39;)&#39;)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return segment;</b>
+&nbsp;            }
+&nbsp;            case CONTAINS: {
+<b class="nc">&nbsp;                if (jsonReader.ch != &#39;(&#39;) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;                }
+<b class="nc">&nbsp;                jsonReader.next();</b>
+&nbsp;
+&nbsp;                JSONPathSegment segment;
+<b class="nc">&nbsp;                if (jsonReader.isString()) {</b>
+<b class="nc">&nbsp;                    List&lt;String&gt; list = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                    while (jsonReader.isString()) {</b>
+<b class="nc">&nbsp;                        list.add(jsonReader.readString());</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    String[] strArray = new String[list.size()];</b>
+<b class="nc">&nbsp;                    list.toArray(strArray);</b>
+<b class="nc">&nbsp;                    segment = new JSONPathFilter.NameStringContainsSegment(</b>
+&nbsp;                            fieldName,
+&nbsp;                            hashCode,
+&nbsp;                            fieldName2,
+&nbsp;                            hashCode2,
+&nbsp;                            strArray,
+&nbsp;                            false
+&nbsp;                    );
+<b class="nc">&nbsp;                } else if (jsonReader.isNumber()) {</b>
+<b class="nc">&nbsp;                    List&lt;Number&gt; list = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                    while (jsonReader.isNumber()) {</b>
+<b class="nc">&nbsp;                        list.add(jsonReader.readNumber());</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    long[] values = new long[list.size()];</b>
+<b class="nc">&nbsp;                    for (int i = 0; i &lt; list.size(); i++) {</b>
+<b class="nc">&nbsp;                        values[i] = list.get(i).longValue();</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    segment = new JSONPathFilter.NameLongContainsSegment(</b>
+&nbsp;                            fieldName,
+&nbsp;                            hashCode,
+&nbsp;                            fieldName2,
+&nbsp;                            hashCode2,
+&nbsp;                            values,
+&nbsp;                            false
+&nbsp;                    );
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (!jsonReader.nextIfMatch(&#39;)&#39;)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (!jsonReader.nextIfMatch(&#39;)&#39;)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return segment;</b>
+&nbsp;            }
+&nbsp;            case BETWEEN:
+&nbsp;            case NOT_BETWEEN: {
+&nbsp;                JSONPathSegment segment;
+<b class="nc">&nbsp;                if (jsonReader.isNumber()) {</b>
+<b class="nc">&nbsp;                    Number begin = jsonReader.readNumber();</b>
+<b class="nc">&nbsp;                    String and = jsonReader.readFieldNameUnquote();</b>
+<b class="nc">&nbsp;                    if (!&quot;and&quot;.equalsIgnoreCase(and)) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(&quot;syntax error, &quot; + and);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    Number end = jsonReader.readNumber();</b>
+<b class="nc">&nbsp;                    segment = new JSONPathFilter.NameIntBetweenSegment(fieldName, hashCode, begin.longValue(), end.longValue(), operator == JSONPathFilter.Operator.NOT_BETWEEN);</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (parentheses) {</b>
+<b class="nc">&nbsp;                    if (!jsonReader.nextIfMatch(&#39;)&#39;)) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return segment;</b>
+&nbsp;            }
+&nbsp;            default:
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONPathSegment segment = null;</b>
+<b class="nc">&nbsp;        switch (jsonReader.ch) {</b>
+&nbsp;            case &#39;-&#39;:
+&nbsp;            case &#39;+&#39;:
+&nbsp;            case &#39;0&#39;:
+&nbsp;            case &#39;1&#39;:
+&nbsp;            case &#39;2&#39;:
+&nbsp;            case &#39;3&#39;:
+&nbsp;            case &#39;4&#39;:
+&nbsp;            case &#39;5&#39;:
+&nbsp;            case &#39;6&#39;:
+&nbsp;            case &#39;7&#39;:
+&nbsp;            case &#39;8&#39;:
+&nbsp;            case &#39;9&#39;: {
+<b class="nc">&nbsp;                Number number = jsonReader.readNumber();</b>
+<b class="nc">&nbsp;                if (number instanceof Integer || number instanceof Long) {</b>
+<b class="nc">&nbsp;                    segment = new JSONPathFilter.NameIntOpSegment(fieldName, hashCode, fieldName2, hashCode2, function, operator, number.longValue());</b>
+<b class="nc">&nbsp;                } else if (number instanceof BigDecimal) {</b>
+<b class="nc">&nbsp;                    segment = new JSONPathFilter.NameDecimalOpSegment(fieldName, hashCode, operator, (BigDecimal) number);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;                }
+&nbsp;                break;
+&nbsp;            }
+&nbsp;            case &#39;&quot;&#39;:
+&nbsp;            case &#39;\&#39;&#39;: {
+<b class="nc">&nbsp;                String strVal = jsonReader.readString();</b>
+<b class="nc">&nbsp;                int p0 = strVal.indexOf(&#39;%&#39;);</b>
+<b class="nc">&nbsp;                if (p0 == -1) {</b>
+<b class="nc">&nbsp;                    if (operator == JSONPathFilter.Operator.LIKE) {</b>
+<b class="nc">&nbsp;                        operator = JSONPathFilter.Operator.EQ;</b>
+<b class="nc">&nbsp;                    } else if (operator == JSONPathFilter.Operator.NOT_LIKE) {</b>
+<b class="nc">&nbsp;                        operator = JSONPathFilter.Operator.NE;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (operator == JSONPathFilter.Operator.LIKE || operator == JSONPathFilter.Operator.NOT_LIKE) {</b>
+<b class="nc">&nbsp;                    String[] items = strVal.split(&quot;%&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                    String startsWithValue = null;</b>
+<b class="nc">&nbsp;                    String endsWithValue = null;</b>
+<b class="nc">&nbsp;                    String[] containsValues = null;</b>
+<b class="nc">&nbsp;                    if (p0 == 0) {</b>
+<b class="nc">&nbsp;                        if (strVal.charAt(strVal.length() - 1) == &#39;%&#39;) {</b>
+<b class="nc">&nbsp;                            containsValues = new String[items.length - 1];</b>
+<b class="nc">&nbsp;                            System.arraycopy(items, 1, containsValues, 0, containsValues.length);</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            endsWithValue = items[items.length - 1];</b>
+<b class="nc">&nbsp;                            if (items.length &gt; 2) {</b>
+<b class="nc">&nbsp;                                containsValues = new String[items.length - 2];</b>
+<b class="nc">&nbsp;                                System.arraycopy(items, 1, containsValues, 0, containsValues.length);</b>
+&nbsp;                            }
+&nbsp;                        }
+<b class="nc">&nbsp;                    } else if (strVal.charAt(strVal.length() - 1) == &#39;%&#39;) {</b>
+<b class="nc">&nbsp;                        if (items.length == 1) {</b>
+<b class="nc">&nbsp;                            startsWithValue = items[0];</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            containsValues = items;</b>
+&nbsp;                        }
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        if (items.length == 1) {</b>
+<b class="nc">&nbsp;                            startsWithValue = items[0];</b>
+<b class="nc">&nbsp;                        } else if (items.length == 2) {</b>
+<b class="nc">&nbsp;                            startsWithValue = items[0];</b>
+<b class="nc">&nbsp;                            endsWithValue = items[1];</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            startsWithValue = items[0];</b>
+<b class="nc">&nbsp;                            endsWithValue = items[items.length - 1];</b>
+<b class="nc">&nbsp;                            containsValues = new String[items.length - 2];</b>
+<b class="nc">&nbsp;                            System.arraycopy(items, 1, containsValues, 0, containsValues.length);</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                    segment = new JSONPathFilter.NameMatchFilter(</b>
+&nbsp;                            fieldName,
+&nbsp;                            hashCode,
+&nbsp;                            startsWithValue,
+&nbsp;                            endsWithValue,
+&nbsp;                            containsValues,
+&nbsp;                            operator == JSONPathFilter.Operator.NOT_LIKE
+&nbsp;                    );
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    segment = new JSONPathFilter.NameStringOpSegment(fieldName, hashCode, fieldName2, hashCode2, function, operator, strVal);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;            case &#39;t&#39;: {
+<b class="nc">&nbsp;                String ident = jsonReader.readFieldNameUnquote();</b>
+<b class="nc">&nbsp;                if (&quot;true&quot;.equalsIgnoreCase(ident)) {</b>
+<b class="nc">&nbsp;                    segment = new JSONPathFilter.NameIntOpSegment(fieldName, hashCode, fieldName2, hashCode2, function, operator, 1);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;                break;
+&nbsp;            }
+&nbsp;            case &#39;f&#39;: {
+<b class="nc">&nbsp;                String ident = jsonReader.readFieldNameUnquote();</b>
+<b class="nc">&nbsp;                if (&quot;false&quot;.equalsIgnoreCase(ident)) {</b>
+<b class="nc">&nbsp;                    segment = new JSONPathFilter.NameIntOpSegment(fieldName, hashCode, fieldName2, hashCode2, function, operator, 0);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;                break;
+&nbsp;            }
+&nbsp;            case &#39;[&#39;: {
+<b class="nc">&nbsp;                JSONArray array = jsonReader.read(JSONArray.class);</b>
+<b class="nc">&nbsp;                segment = new JSONPathFilter.NameArrayOpSegment(fieldName, hashCode, fieldName2, hashCode2, function, operator, array);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;            case &#39;{&#39;: {
+<b class="nc">&nbsp;                JSONObject object = jsonReader.read(JSONObject.class);</b>
+<b class="nc">&nbsp;                segment = new JSONPathFilter.NameObjectOpSegment(fieldName, hashCode, fieldName2, hashCode2, function, operator, object);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;            case &#39;n&#39;:
+<b class="nc">&nbsp;                boolean nextNull = jsonReader.nextIfNull();</b>
+<b class="nc">&nbsp;                if (nextNull) {</b>
+<b class="nc">&nbsp;                    segment = new JSONPathFilter.NameIsNull(fieldName, hashCode, fieldName2, hashCode2, function);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.ch == &#39;&amp;&#39; || jsonReader.ch == &#39;|&#39; || jsonReader.ch == &#39;a&#39; || jsonReader.ch == &#39;o&#39;) {</b>
+<b class="nc">&nbsp;            segment = parseFilterRest(segment);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (parentheses) {</b>
+<b class="nc">&nbsp;            if (!jsonReader.nextIfMatch(&#39;)&#39;)) {</b>
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;jsonpath syntax error&quot;));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return segment;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:33</div>
+</div>
+</body>
+</html>

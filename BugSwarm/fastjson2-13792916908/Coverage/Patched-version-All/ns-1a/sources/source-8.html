@@ -1,0 +1,255 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > _Clients_DslJsonConverter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.jjb</a>
+</div>
+
+<h1>Coverage Summary for Class: _Clients_DslJsonConverter (com.alibaba.fastjson2.benchmark.jjb)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">_Clients_DslJsonConverter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">_Clients_DslJsonConverter$ObjectFormatConverter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/67)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/73)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.jjb;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;@javax.annotation.Generated(&quot;dsl_json&quot;)
+<b class="nc">&nbsp;public class _Clients_DslJsonConverter implements com.dslplatform.json.Configuration {</b>
+<b class="nc">&nbsp;	private static final java.nio.charset.Charset utf8 = java.nio.charset.Charset.forName(&quot;UTF-8&quot;);</b>
+&nbsp;	@Override
+&nbsp;	public void configure(com.dslplatform.json.DslJson __dsljson) {
+<b class="nc">&nbsp;		ObjectFormatConverter objectConverter = new ObjectFormatConverter(__dsljson);</b>
+<b class="nc">&nbsp;		__dsljson.registerBinder(com.alibaba.fastjson2.benchmark.jjb.Clients.class, objectConverter);</b>
+<b class="nc">&nbsp;		__dsljson.registerReader(com.alibaba.fastjson2.benchmark.jjb.Clients.class, objectConverter);</b>
+<b class="nc">&nbsp;		__dsljson.registerWriter(com.alibaba.fastjson2.benchmark.jjb.Clients.class, objectConverter);</b>
+&nbsp;	}
+&nbsp;	public final static class ObjectFormatConverter implements com.dslplatform.json.runtime.FormatConverter&lt;com.alibaba.fastjson2.benchmark.jjb.Clients&gt;, com.dslplatform.json.JsonReader.BindObject&lt;com.alibaba.fastjson2.benchmark.jjb.Clients&gt; {
+&nbsp;		private final boolean alwaysSerialize;
+&nbsp;		private final com.dslplatform.json.DslJson __dsljson;
+&nbsp;		private com.dslplatform.json.JsonReader.ReadObject&lt;java.util.List&lt;com.alibaba.fastjson2.benchmark.jjb.Clients.Client&gt;&gt; reader_clients;
+&nbsp;		private com.dslplatform.json.JsonReader.ReadObject&lt;java.util.List&lt;com.alibaba.fastjson2.benchmark.jjb.Clients.Client&gt;&gt; reader_clients() {
+<b class="nc">&nbsp;			if (reader_clients == null) {</b>
+<b class="nc">&nbsp;				java.lang.reflect.Type manifest = com.dslplatform.json.runtime.Generics.makeParameterizedType(java.util.List.class, com.alibaba.fastjson2.benchmark.jjb.Clients.Client.class);</b>
+<b class="nc">&nbsp;				reader_clients = __dsljson.tryFindReader(manifest);</b>
+<b class="nc">&nbsp;				if (reader_clients == null) {</b>
+<b class="nc">&nbsp;					throw new com.dslplatform.json.ConfigurationException(&quot;Unable to find reader for &quot; + manifest + &quot;. Enable runtime conversion by initializing DslJson with new DslJson&lt;&gt;(Settings.basicSetup())&quot;);</b>
+&nbsp;				}
+&nbsp;			}
+<b class="nc">&nbsp;			return reader_clients;</b>
+&nbsp;		}
+&nbsp;		private com.dslplatform.json.JsonWriter.WriteObject&lt;java.util.List&lt;com.alibaba.fastjson2.benchmark.jjb.Clients.Client&gt;&gt; writer_clients;
+&nbsp;		private com.dslplatform.json.JsonWriter.WriteObject&lt;java.util.List&lt;com.alibaba.fastjson2.benchmark.jjb.Clients.Client&gt;&gt; writer_clients() {
+<b class="nc">&nbsp;			if (writer_clients == null) {</b>
+<b class="nc">&nbsp;				java.lang.reflect.Type manifest = com.dslplatform.json.runtime.Generics.makeParameterizedType(java.util.List.class, com.alibaba.fastjson2.benchmark.jjb.Clients.Client.class);</b>
+<b class="nc">&nbsp;				writer_clients = __dsljson.tryFindWriter(manifest);</b>
+<b class="nc">&nbsp;				if (writer_clients == null) {</b>
+<b class="nc">&nbsp;					throw new com.dslplatform.json.ConfigurationException(&quot;Unable to find writer for &quot; + manifest + &quot;. Enable runtime conversion by initializing DslJson with new DslJson&lt;&gt;(Settings.basicSetup())&quot;);</b>
+&nbsp;				}
+&nbsp;			}
+<b class="nc">&nbsp;			return writer_clients;</b>
+&nbsp;		}
+<b class="nc">&nbsp;		public ObjectFormatConverter(com.dslplatform.json.DslJson __dsljson) {</b>
+<b class="nc">&nbsp;			this.alwaysSerialize = !__dsljson.omitDefaults;</b>
+<b class="nc">&nbsp;			this.__dsljson = __dsljson;</b>
+&nbsp;		}
+&nbsp;		public com.alibaba.fastjson2.benchmark.jjb.Clients read(final com.dslplatform.json.JsonReader reader) throws java.io.IOException {
+<b class="nc">&nbsp;			if (reader.wasNull()) return null;</b>
+<b class="nc">&nbsp;			return bind(reader, new com.alibaba.fastjson2.benchmark.jjb.Clients());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		private static final byte[] quoted_clients = &quot;\&quot;clients\&quot;:&quot;.getBytes(utf8);</b>
+<b class="nc">&nbsp;		private static final byte[] name_clients = &quot;clients&quot;.getBytes(utf8);</b>
+&nbsp;		public final void write(final com.dslplatform.json.JsonWriter writer, final com.alibaba.fastjson2.benchmark.jjb.Clients instance) {
+<b class="nc">&nbsp;			if (instance == null) writer.writeNull();</b>
+&nbsp;			else {
+<b class="nc">&nbsp;				writer.writeByte((byte)&#39;{&#39;);</b>
+<b class="nc">&nbsp;				if (alwaysSerialize) { writeContentFull(writer, instance); writer.writeByte((byte)&#39;}&#39;); }</b>
+<b class="nc">&nbsp;				else if (writeContentMinimal(writer, instance)) writer.getByteBuffer()[writer.size() - 1] = &#39;}&#39;;</b>
+<b class="nc">&nbsp;				else writer.writeByte((byte)&#39;}&#39;);</b>
+&nbsp;			}
+&nbsp;		}
+&nbsp;		public void writeContentFull(final com.dslplatform.json.JsonWriter writer, final com.alibaba.fastjson2.benchmark.jjb.Clients instance) {
+<b class="nc">&nbsp;			writer.writeAscii(quoted_clients);</b>
+<b class="nc">&nbsp;			if (instance.getClients() == null) writer.writeNull();</b>
+<b class="nc">&nbsp;			else writer_clients().write(writer, instance.getClients());</b>
+&nbsp;		}
+&nbsp;		public boolean writeContentMinimal(final com.dslplatform.json.JsonWriter writer, final com.alibaba.fastjson2.benchmark.jjb.Clients instance) {
+<b class="nc">&nbsp;			boolean hasWritten = false;</b>
+<b class="nc">&nbsp;			if (instance.getClients() != null) {</b>
+<b class="nc">&nbsp;				writer.writeByte((byte)&#39;&quot;&#39;); writer.writeAscii(name_clients); writer.writeByte((byte)&#39;&quot;&#39;); writer.writeByte((byte)&#39;:&#39;);</b>
+<b class="nc">&nbsp;				writer_clients().write(writer, instance.getClients());</b>
+<b class="nc">&nbsp;				writer.writeByte((byte)&#39;,&#39;); hasWritten = true;</b>
+&nbsp;			}
+<b class="nc">&nbsp;			return hasWritten;</b>
+&nbsp;		}
+&nbsp;		public com.alibaba.fastjson2.benchmark.jjb.Clients bind(final com.dslplatform.json.JsonReader reader, final com.alibaba.fastjson2.benchmark.jjb.Clients instance) throws java.io.IOException {
+<b class="nc">&nbsp;			if (reader.last() != &#39;{&#39;) throw reader.newParseError(&quot;Expecting &#39;{&#39; for object start&quot;);</b>
+<b class="nc">&nbsp;			reader.getNextToken();</b>
+<b class="nc">&nbsp;			bindContent(reader, instance);</b>
+<b class="nc">&nbsp;			return instance;</b>
+&nbsp;		}
+&nbsp;		public com.alibaba.fastjson2.benchmark.jjb.Clients readContent(final com.dslplatform.json.JsonReader reader) throws java.io.IOException {
+<b class="nc">&nbsp;			com.alibaba.fastjson2.benchmark.jjb.Clients instance = new com.alibaba.fastjson2.benchmark.jjb.Clients();</b>
+<b class="nc">&nbsp; 			bindContent(reader, instance);</b>
+<b class="nc">&nbsp;			return instance;</b>
+&nbsp;		}
+&nbsp;		public void bindContent(final com.dslplatform.json.JsonReader reader, final com.alibaba.fastjson2.benchmark.jjb.Clients instance) throws java.io.IOException {
+<b class="nc">&nbsp;			if (reader.last() == &#39;}&#39;) return;</b>
+<b class="nc">&nbsp;			if (reader.fillNameWeakHash() != 754 || !reader.wasLastName(name_clients)) { bindSlow(reader, instance, 0); return; }</b>
+<b class="nc">&nbsp;			reader.getNextToken();</b>
+<b class="nc">&nbsp;			instance.setClients(reader_clients().read(reader));</b>
+<b class="nc">&nbsp;			if (reader.getNextToken() != &#39;}&#39;) {</b>
+<b class="nc">&nbsp;				if (reader.last() == &#39;,&#39;) {</b>
+<b class="nc">&nbsp;					reader.getNextToken();</b>
+<b class="nc">&nbsp;					reader.fillNameWeakHash();</b>
+<b class="nc">&nbsp;					bindSlow(reader, instance, 1);</b>
+&nbsp;				}
+<b class="nc">&nbsp;				if (reader.last() != &#39;}&#39;) throw reader.newParseError(&quot;Expecting &#39;}&#39; for object end&quot;);</b>
+&nbsp;			}
+&nbsp;		}
+&nbsp;		private void bindSlow(final com.dslplatform.json.JsonReader reader, final com.alibaba.fastjson2.benchmark.jjb.Clients instance, int index) throws java.io.IOException {
+<b class="nc">&nbsp;			switch(reader.getLastHash()) {</b>
+&nbsp;				case 1892433815:
+<b class="nc">&nbsp;					reader.getNextToken();</b>
+<b class="nc">&nbsp;					instance.setClients(reader_clients().read(reader));</b>
+<b class="nc">&nbsp;					reader.getNextToken();</b>
+<b class="nc">&nbsp;					break;</b>
+&nbsp;				default:
+<b class="nc">&nbsp;					reader.getNextToken();</b>
+<b class="nc">&nbsp;					reader.skip();</b>
+&nbsp;			}
+<b class="nc">&nbsp;			while (reader.last() == &#39;,&#39;){</b>
+<b class="nc">&nbsp;				reader.getNextToken();</b>
+<b class="nc">&nbsp;				switch(reader.fillName()) {</b>
+&nbsp;					case 1892433815:
+<b class="nc">&nbsp;						reader.getNextToken();</b>
+<b class="nc">&nbsp;						instance.setClients(reader_clients().read(reader));</b>
+<b class="nc">&nbsp;						reader.getNextToken();</b>
+<b class="nc">&nbsp;						break;</b>
+&nbsp;					default:
+<b class="nc">&nbsp;						reader.getNextToken();</b>
+<b class="nc">&nbsp;						reader.skip();</b>
+&nbsp;				}
+&nbsp;			}
+<b class="nc">&nbsp;			if (reader.last() != &#39;}&#39;) throw reader.newParseError(&quot;Expecting &#39;}&#39; for object end&quot;);</b>
+&nbsp;		}
+&nbsp;	}
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:29</div>
+</div>
+</body>
+</html>

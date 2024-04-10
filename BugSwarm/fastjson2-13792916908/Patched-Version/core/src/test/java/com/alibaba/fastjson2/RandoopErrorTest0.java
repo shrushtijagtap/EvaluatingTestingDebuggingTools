@@ -3,14 +3,14 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ErrorTest0 {
+public class RandoopErrorTest0 {
 
     public static boolean debug = false;
 
     @Test
     public void test1() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "ErrorTest0.test1");
+            System.out.format("%n%s%n", "RandoopErrorTest0.test1");
         com.alibaba.fastjson2.JSONObject jSONObject0 = new com.alibaba.fastjson2.JSONObject();
         java.time.Instant instant2 = jSONObject0.getInstant("");
         com.alibaba.fastjson2.JSONObject jSONObject6 = new com.alibaba.fastjson2.JSONObject(10, (float) 'a', true);

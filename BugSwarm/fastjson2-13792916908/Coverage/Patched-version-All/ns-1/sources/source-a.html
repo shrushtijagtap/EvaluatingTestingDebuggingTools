@@ -1,0 +1,229 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONValidator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONValidator (com.alibaba.fastjson)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONValidator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JSONValidator$Type</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;  // IntelliJ API Decompiler stub source generated from a class file
+&nbsp;  // Implementation of methods is not available
+&nbsp;
+&nbsp;package com.alibaba.fastjson;
+&nbsp;
+<b class="nc">&nbsp;public abstract class JSONValidator implements java.lang.Cloneable, java.io.Closeable {</b>
+<b class="nc">&nbsp;    protected boolean eof;</b>
+&nbsp;    protected int pos;
+&nbsp;    protected char ch;
+&nbsp;    protected com.alibaba.fastjson.JSONValidator.Type type;
+&nbsp;    private java.lang.Boolean validateResult;
+&nbsp;    protected int count;
+&nbsp;    protected boolean supportMultiValue;
+&nbsp;
+<b class="nc">&nbsp;    public JSONValidator() { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public static com.alibaba.fastjson.JSONValidator fromUtf8(byte[] jsonBytes) { /* compiled code */ }
+&nbsp;
+&nbsp;    public static com.alibaba.fastjson.JSONValidator fromUtf8(java.io.InputStream is) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    public static com.alibaba.fastjson.JSONValidator from(java.lang.String jsonStr) { /* compiled code */ }
+&nbsp;
+&nbsp;    public static com.alibaba.fastjson.JSONValidator from(java.io.Reader r) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    public boolean isSupportMultiValue() { /* compiled code */ }
+&nbsp;
+&nbsp;    public com.alibaba.fastjson.JSONValidator setSupportMultiValue(boolean supportMultiValue) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public com.alibaba.fastjson.JSONValidator.Type getType() { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    abstract void next();
+&nbsp;
+<b class="nc">&nbsp;    public boolean validate() { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public void close() throws java.io.IOException { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    private boolean any() { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    protected void fieldName() { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    protected boolean string() { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    void skipWhiteSpace() { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    static final boolean isWhiteSpace(char ch) { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    static class ReaderValidator extends com.alibaba.fastjson.JSONValidator {</b>
+&nbsp;        private static final java.lang.ThreadLocal&lt;char[]&gt; bufLocal;
+&nbsp;        final java.io.Reader r;
+<b class="nc">&nbsp;        private char[] buf;</b>
+&nbsp;        private int end;
+&nbsp;        private int readCount;
+&nbsp;
+<b class="nc">&nbsp;        ReaderValidator(java.io.Reader r) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        void next() { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;        public void close() throws java.io.IOException { /* compiled code */ }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static class UTF16Validator extends com.alibaba.fastjson.JSONValidator {
+&nbsp;        private final java.lang.String str;
+&nbsp;
+&nbsp;        public UTF16Validator(java.lang.String str) { /* compiled code */ }
+&nbsp;
+&nbsp;        void next() { /* compiled code */ }
+&nbsp;
+&nbsp;        protected final void fieldName() { /* compiled code */ }
+&nbsp;    }
+&nbsp;
+&nbsp;    static class UTF8InputStreamValidator extends com.alibaba.fastjson.JSONValidator {
+&nbsp;        private static final java.lang.ThreadLocal&lt;byte[]&gt; bufLocal;
+&nbsp;        private final java.io.InputStream is;
+&nbsp;        private byte[] buf;
+&nbsp;        private int end;
+&nbsp;        private int readCount;
+&nbsp;
+&nbsp;        public UTF8InputStreamValidator(java.io.InputStream is) { /* compiled code */ }
+&nbsp;
+&nbsp;        void next() { /* compiled code */ }
+&nbsp;
+&nbsp;        public void close() throws java.io.IOException { /* compiled code */ }
+&nbsp;    }
+&nbsp;
+&nbsp;    static class UTF8Validator extends com.alibaba.fastjson.JSONValidator {
+&nbsp;        private final byte[] bytes;
+&nbsp;
+&nbsp;        public UTF8Validator(byte[] bytes) { /* compiled code */ }
+&nbsp;
+&nbsp;        void next() { /* compiled code */ }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum Type {
+&nbsp;        Object, Array, Value;
+&nbsp;
+&nbsp;        private Type() { /* compiled code */ }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:29</div>
+</div>
+</body>
+</html>

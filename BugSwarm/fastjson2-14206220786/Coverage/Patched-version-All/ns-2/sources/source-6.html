@@ -1,0 +1,305 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ParserConfig</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.parser</a>
+</div>
+
+<h1>Coverage Summary for Class: ParserConfig (com.alibaba.fastjson.parser)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ParserConfig</td>
+<td class="coverageStat">
+  <span class="percent">
+    36%
+  </span>
+  <span class="absValue">
+    (18/50)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (230/691)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ParserConfig$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParserConfig$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParserConfig$AutoTypeCheckHandler</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    40.7%
+  </span>
+  <span class="absValue">
+    (22/54)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    34%
+  </span>
+  <span class="absValue">
+    (238/699)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;  // IntelliJ API Decompiler stub source generated from a class file
+&nbsp;  // Implementation of methods is not available
+&nbsp;
+&nbsp;package com.alibaba.fastjson.parser;
+&nbsp;
+&nbsp;public class ParserConfig {
+&nbsp;    public static final java.lang.String DENY_PROPERTY_INTERNAL = &quot;fastjson.parser.deny.internal&quot;;
+&nbsp;    public static final java.lang.String DENY_PROPERTY = &quot;fastjson.parser.deny&quot;;
+&nbsp;    public static final java.lang.String AUTOTYPE_ACCEPT = &quot;fastjson.parser.autoTypeAccept&quot;;
+&nbsp;    public static final java.lang.String AUTOTYPE_SUPPORT_PROPERTY = &quot;fastjson.parser.autoTypeSupport&quot;;
+&nbsp;    public static final java.lang.String SAFE_MODE_PROPERTY = &quot;fastjson.parser.safeMode&quot;;
+&nbsp;    public static final java.lang.String[] DENYS_INTERNAL;
+&nbsp;    public static final java.lang.String[] DENYS;
+&nbsp;    private static final java.lang.String[] AUTO_TYPE_ACCEPT_LIST;
+&nbsp;    public static final boolean AUTO_SUPPORT;
+&nbsp;    public static final boolean SAFE_MODE;
+&nbsp;    private static final long[] INTERNAL_WHITELIST_HASHCODES;
+&nbsp;    public static com.alibaba.fastjson.parser.ParserConfig global;
+&nbsp;    private final com.alibaba.fastjson.util.IdentityHashMap&lt;java.lang.reflect.Type,com.alibaba.fastjson.parser.deserializer.ObjectDeserializer&gt; deserializers;
+&nbsp;    private final com.alibaba.fastjson.util.IdentityHashMap&lt;java.lang.reflect.Type,com.alibaba.fastjson.util.IdentityHashMap&lt;java.lang.reflect.Type,com.alibaba.fastjson.parser.deserializer.ObjectDeserializer&gt;&gt; mixInDeserializers;
+&nbsp;    private final java.util.concurrent.ConcurrentMap&lt;java.lang.String,java.lang.Class&lt;?&gt;&gt; typeMapping;
+&nbsp;    private boolean asmEnable;
+&nbsp;    public final com.alibaba.fastjson.parser.SymbolTable symbolTable;
+&nbsp;    public com.alibaba.fastjson.PropertyNamingStrategy propertyNamingStrategy;
+&nbsp;    protected java.lang.ClassLoader defaultClassLoader;
+&nbsp;    protected com.alibaba.fastjson.parser.deserializer.ASMDeserializerFactory asmFactory;
+&nbsp;    private static boolean awtError;
+&nbsp;    private static boolean jdk8Error;
+&nbsp;    private static boolean jodaError;
+&nbsp;    private static boolean guavaError;
+&nbsp;    private boolean autoTypeSupport;
+&nbsp;    private long[] internalDenyHashCodes;
+&nbsp;    private long[] denyHashCodes;
+&nbsp;    private long[] acceptHashCodes;
+&nbsp;    public final boolean fieldBased;
+&nbsp;    private boolean jacksonCompatible;
+&nbsp;    public boolean compatibleWithJavaBean;
+&nbsp;    private java.util.List&lt;com.alibaba.fastjson.spi.Module&gt; modules;
+&nbsp;    private volatile java.util.List&lt;com.alibaba.fastjson.parser.ParserConfig.AutoTypeCheckHandler&gt; autoTypeCheckHandlers;
+&nbsp;    private boolean safeMode;
+&nbsp;    private final java.util.concurrent.Callable&lt;java.lang.Void&gt; initDeserializersWithJavaSql;
+&nbsp;    private static com.alibaba.fastjson.util.Function&lt;java.lang.Class&lt;?&gt;,java.lang.Boolean&gt; isPrimitiveFuncation;
+&nbsp;
+&nbsp;    public static com.alibaba.fastjson.parser.ParserConfig getGlobalInstance() { /* compiled code */ }
+&nbsp;
+&nbsp;    public ParserConfig() { /* compiled code */ }
+&nbsp;
+&nbsp;    public ParserConfig(boolean fieldBase) { /* compiled code */ }
+&nbsp;
+&nbsp;    public ParserConfig(java.lang.ClassLoader parentClassLoader) { /* compiled code */ }
+&nbsp;
+&nbsp;    public ParserConfig(com.alibaba.fastjson.parser.deserializer.ASMDeserializerFactory asmFactory) { /* compiled code */ }
+&nbsp;
+&nbsp;    private ParserConfig(com.alibaba.fastjson.parser.deserializer.ASMDeserializerFactory asmFactory, java.lang.ClassLoader parentClassLoader, boolean fieldBased) { /* compiled code */ }
+&nbsp;
+&nbsp;    private void initDeserializers() { /* compiled code */ }
+&nbsp;
+&nbsp;    private static java.lang.String[] splitItemsFormProperty(java.lang.String property) { /* compiled code */ }
+&nbsp;
+&nbsp;    public void configFromPropety(java.util.Properties properties) { /* compiled code */ }
+&nbsp;
+&nbsp;    private void addItemsToDeny0(java.lang.String[] items) { /* compiled code */ }
+&nbsp;
+&nbsp;    private void addItemsToDeny(java.lang.String[] items) { /* compiled code */ }
+&nbsp;
+&nbsp;    private void addItemsToAccept(java.lang.String[] items) { /* compiled code */ }
+<b class="fc">&nbsp;</b>
+&nbsp;    public boolean isSafeMode() { /* compiled code */ }
+&nbsp;
+&nbsp;    public void setSafeMode(boolean safeMode) { /* compiled code */ }
+&nbsp;
+&nbsp;    public boolean isAutoTypeSupport() { /* compiled code */ }
+&nbsp;
+&nbsp;    public void setAutoTypeSupport(boolean autoTypeSupport) { /* compiled code */ }
+&nbsp;
+&nbsp;    public boolean isAsmEnable() { /* compiled code */ }
+&nbsp;
+&nbsp;    public void setAsmEnable(boolean asmEnable) { /* compiled code */ }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated
+&nbsp;     */
+&nbsp;    public com.alibaba.fastjson.util.IdentityHashMap&lt;java.lang.reflect.Type,com.alibaba.fastjson.parser.deserializer.ObjectDeserializer&gt; getDerializers() { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public com.alibaba.fastjson.util.IdentityHashMap&lt;java.lang.reflect.Type,com.alibaba.fastjson.parser.deserializer.ObjectDeserializer&gt; getDeserializers() { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public com.alibaba.fastjson.parser.deserializer.ObjectDeserializer getDeserializer(java.lang.reflect.Type type) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public com.alibaba.fastjson.parser.deserializer.ObjectDeserializer getDeserializer(java.lang.Class&lt;?&gt; clazz, java.lang.reflect.Type type) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    private static java.lang.reflect.Method getEnumCreator(java.lang.Class clazz, java.lang.Class enumClass) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    protected com.alibaba.fastjson.parser.deserializer.ObjectDeserializer getEnumDeserializer(java.lang.Class&lt;?&gt; clazz) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public void initJavaBeanDeserializers(java.lang.Class&lt;?&gt;... classes) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public com.alibaba.fastjson.parser.deserializer.ObjectDeserializer createJavaBeanDeserializer(java.lang.Class&lt;?&gt; clazz, java.lang.reflect.Type type) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public com.alibaba.fastjson.parser.deserializer.FieldDeserializer createFieldDeserializer(com.alibaba.fastjson.parser.ParserConfig mapping, com.alibaba.fastjson.util.JavaBeanInfo beanInfo, com.alibaba.fastjson.util.FieldInfo fieldInfo) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public void putDeserializer(java.lang.reflect.Type type, com.alibaba.fastjson.parser.deserializer.ObjectDeserializer deserializer) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public com.alibaba.fastjson.parser.deserializer.ObjectDeserializer get(java.lang.reflect.Type type) { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public com.alibaba.fastjson.parser.deserializer.ObjectDeserializer getDeserializer(com.alibaba.fastjson.util.FieldInfo fieldInfo) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    /**
+<b class="nc">&nbsp;     * @deprecated</b>
+&nbsp;     */
+&nbsp;    public boolean isPrimitive(java.lang.Class&lt;?&gt; clazz) { /* compiled code */ }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated
+&nbsp;     */
+&nbsp;    public static boolean isPrimitive2(java.lang.Class&lt;?&gt; clazz) { /* compiled code */ }
+&nbsp;
+<b class="fc">&nbsp;    public static void parserAllFieldToCache(java.lang.Class&lt;?&gt; clazz, java.util.Map&lt;java.lang.String,java.lang.reflect.Field&gt; fieldCacheMap) { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public static java.lang.reflect.Field getFieldFromCache(java.lang.String fieldName, java.util.Map&lt;java.lang.String,java.lang.reflect.Field&gt; fieldCacheMap) { /* compiled code */ }</b>
+&nbsp;
+<b class="fc">&nbsp;    public java.lang.ClassLoader getDefaultClassLoader() { /* compiled code */ }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public void setDefaultClassLoader(java.lang.ClassLoader defaultClassLoader) { /* compiled code */ }</b>
+&nbsp;
+<b class="fc">&nbsp;    public void addDenyInternal(java.lang.String name) { /* compiled code */ }</b>
+&nbsp;
+<b class="fc">&nbsp;    public void addDeny(java.lang.String name) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public void addAccept(java.lang.String name) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.Class&lt;?&gt; checkAutoType(java.lang.Class type) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.Class&lt;?&gt; checkAutoType(java.lang.String typeName, java.lang.Class&lt;?&gt; expectClass) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public java.lang.Class&lt;?&gt; checkAutoType(java.lang.String typeName, java.lang.Class&lt;?&gt; expectClass, int features) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public void clearDeserializers() { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public boolean isJacksonCompatible() { /* compiled code */ }
+<b class="fc">&nbsp;</b>
+&nbsp;    public void setJacksonCompatible(boolean jacksonCompatible) { /* compiled code */ }
+&nbsp;
+&nbsp;    public void register(java.lang.String typeName, java.lang.Class type) { /* compiled code */ }
+&nbsp;
+&nbsp;    public void register(com.alibaba.fastjson.spi.Module module) { /* compiled code */ }
+&nbsp;
+<b class="fc">&nbsp;    public void addAutoTypeCheckHandler(com.alibaba.fastjson.parser.ParserConfig.AutoTypeCheckHandler h) { /* compiled code */ }</b>
+&nbsp;
+<b class="fc">&nbsp;    public static interface AutoTypeCheckHandler {</b>
+<b class="fc">&nbsp;        java.lang.Class&lt;?&gt; handler(java.lang.String s, java.lang.Class&lt;?&gt; aClass, int i);</b>
+&nbsp;    }
+<b class="fc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:16</div>
+</div>
+</body>
+</html>

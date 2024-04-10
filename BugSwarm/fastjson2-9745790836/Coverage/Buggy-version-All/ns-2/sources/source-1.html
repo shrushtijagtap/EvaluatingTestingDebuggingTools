@@ -1,0 +1,302 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DefaultJSONParser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.parser</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultJSONParser (com.alibaba.fastjson.parser)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultJSONParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    37.9%
+  </span>
+  <span class="absValue">
+    (25/66)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    28.5%
+  </span>
+  <span class="absValue">
+    (272/954)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DefaultJSONParser$ResolveTask</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    38.8%
+  </span>
+  <span class="absValue">
+    (26/67)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    28.7%
+  </span>
+  <span class="absValue">
+    (275/957)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;  // IntelliJ API Decompiler stub source generated from a class file
+&nbsp;  // Implementation of methods is not available
+&nbsp;
+&nbsp;package com.alibaba.fastjson.parser;
+&nbsp;
+&nbsp;public class DefaultJSONParser implements java.io.Closeable {
+&nbsp;    public final java.lang.Object input;
+&nbsp;    public final com.alibaba.fastjson.parser.SymbolTable symbolTable;
+&nbsp;    protected com.alibaba.fastjson.parser.ParserConfig config;
+&nbsp;    private static final java.util.Set&lt;java.lang.Class&lt;?&gt;&gt; primitiveClasses;
+&nbsp;    private java.lang.String dateFormatPattern;
+&nbsp;    private java.text.DateFormat dateFormat;
+&nbsp;    public final com.alibaba.fastjson.parser.JSONLexer lexer;
+&nbsp;    protected com.alibaba.fastjson.parser.ParseContext context;
+&nbsp;    private com.alibaba.fastjson.parser.ParseContext[] contextArray;
+&nbsp;    private int contextArrayIndex;
+&nbsp;    private java.util.List&lt;com.alibaba.fastjson.parser.DefaultJSONParser.ResolveTask&gt; resolveTaskList;
+&nbsp;    public static final int NONE = 0;
+&nbsp;    public static final int NeedToResolve = 1;
+&nbsp;    public static final int TypeNameRedirect = 2;
+&nbsp;    public int resolveStatus;
+&nbsp;    private java.util.List&lt;com.alibaba.fastjson.parser.deserializer.ExtraTypeProvider&gt; extraTypeProviders;
+&nbsp;    private java.util.List&lt;com.alibaba.fastjson.parser.deserializer.ExtraProcessor&gt; extraProcessors;
+&nbsp;    protected com.alibaba.fastjson.parser.deserializer.FieldTypeResolver fieldTypeResolver;
+&nbsp;    private int objectKeyLevel;
+&nbsp;    private boolean autoTypeEnable;
+&nbsp;    private java.lang.String[] autoTypeAccept;
+&nbsp;    protected transient com.alibaba.fastjson.serializer.BeanContext lastBeanContext;
+&nbsp;
+&nbsp;    public java.lang.String getDateFomartPattern() { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.text.DateFormat getDateFormat() { /* compiled code */ }
+&nbsp;
+&nbsp;    public void setDateFormat(java.lang.String dateFormat) { /* compiled code */ }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated
+&nbsp;     */
+&nbsp;    public void setDateFomrat(java.text.DateFormat dateFormat) { /* compiled code */ }
+&nbsp;
+&nbsp;    public void setDateFormat(java.text.DateFormat dateFormat) { /* compiled code */ }
+&nbsp;
+&nbsp;    public DefaultJSONParser(java.lang.String input) { /* compiled code */ }
+&nbsp;
+<b class="fc">&nbsp;    public DefaultJSONParser(java.lang.String input, com.alibaba.fastjson.parser.ParserConfig config) { /* compiled code */ }</b>
+&nbsp;
+<b class="fc">&nbsp;    public DefaultJSONParser(java.lang.String input, com.alibaba.fastjson.parser.ParserConfig config, int features) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public DefaultJSONParser(char[] input, int length, com.alibaba.fastjson.parser.ParserConfig config, int features) { /* compiled code */ }
+&nbsp;
+&nbsp;    public DefaultJSONParser(com.alibaba.fastjson.parser.JSONLexer lexer) { /* compiled code */ }
+&nbsp;
+&nbsp;    public DefaultJSONParser(com.alibaba.fastjson.parser.JSONLexer lexer, com.alibaba.fastjson.parser.ParserConfig config) { /* compiled code */ }
+&nbsp;
+<b class="fc">&nbsp;    public DefaultJSONParser(java.lang.Object input, com.alibaba.fastjson.parser.JSONLexer lexer, com.alibaba.fastjson.parser.ParserConfig config) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public com.alibaba.fastjson.parser.SymbolTable getSymbolTable() { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.String getInput() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final java.lang.Object parseObject(java.util.Map object, java.lang.Object fieldName) { /* compiled code */ }
+&nbsp;
+<b class="fc">&nbsp;    public com.alibaba.fastjson.parser.ParserConfig getConfig() { /* compiled code */ }</b>
+&nbsp;
+<b class="fc">&nbsp;    public void setConfig(com.alibaba.fastjson.parser.ParserConfig config) { /* compiled code */ }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public &lt;T&gt; T parseObject(java.lang.Class&lt;T&gt; clazz) { /* compiled code */ }</b>
+&nbsp;
+<b class="fc">&nbsp;    public &lt;T&gt; T parseObject(java.lang.reflect.Type type) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public &lt;T&gt; T parseObject(java.lang.reflect.Type type, java.lang.Object fieldName) { /* compiled code */ }
+<b class="fc">&nbsp;</b>
+&nbsp;    public &lt;T&gt; java.util.List&lt;T&gt; parseArray(java.lang.Class&lt;T&gt; clazz) { /* compiled code */ }
+&nbsp;
+&nbsp;    public void parseArray(java.lang.Class&lt;?&gt; clazz, java.util.Collection array) { /* compiled code */ }
+&nbsp;
+<b class="fc">&nbsp;    public void parseArray(java.lang.reflect.Type type, java.util.Collection array) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public void parseArray(java.lang.reflect.Type type, java.util.Collection array, java.lang.Object fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.Object[] parseArray(java.lang.reflect.Type[] types) { /* compiled code */ }
+&nbsp;
+&nbsp;    public void parseObject(java.lang.Object object) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.Object parseArrayWithType(java.lang.reflect.Type collectionType) { /* compiled code */ }
+&nbsp;
+&nbsp;    public void acceptType(java.lang.String typeName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public int getResolveStatus() { /* compiled code */ }
+&nbsp;
+&nbsp;    public void setResolveStatus(int resolveStatus) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.Object getObject(java.lang.String path) { /* compiled code */ }
+&nbsp;
+&nbsp;    public void checkListResolve(java.util.Collection array) { /* compiled code */ }
+&nbsp;
+&nbsp;    public void checkMapResolve(java.util.Map object, java.lang.Object fieldName) { /* compiled code */ }
+&nbsp;
+<b class="fc">&nbsp;    public java.lang.Object parseObject(java.util.Map object) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public com.alibaba.fastjson.JSONObject parseObject() { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public final void parseArray(java.util.Collection array) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public final void parseArray(java.util.Collection array, java.lang.Object fieldName) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public com.alibaba.fastjson.parser.ParseContext getContext() { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public com.alibaba.fastjson.parser.ParseContext getOwnerContext() { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    public java.util.List&lt;com.alibaba.fastjson.parser.DefaultJSONParser.ResolveTask&gt; getResolveTaskList() { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public void addResolveTask(com.alibaba.fastjson.parser.DefaultJSONParser.ResolveTask task) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public com.alibaba.fastjson.parser.DefaultJSONParser.ResolveTask getLastResolveTask() { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public java.util.List&lt;com.alibaba.fastjson.parser.deserializer.ExtraProcessor&gt; getExtraProcessors() { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.util.List&lt;com.alibaba.fastjson.parser.deserializer.ExtraTypeProvider&gt; getExtraTypeProviders() { /* compiled code */ }
+&nbsp;
+&nbsp;    public com.alibaba.fastjson.parser.deserializer.FieldTypeResolver getFieldTypeResolver() { /* compiled code */ }
+&nbsp;
+&nbsp;    public void setFieldTypeResolver(com.alibaba.fastjson.parser.deserializer.FieldTypeResolver fieldTypeResolver) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    public void setContext(com.alibaba.fastjson.parser.ParseContext context) { /* compiled code */ }
+&nbsp;
+&nbsp;    public void popContext() { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    public com.alibaba.fastjson.parser.ParseContext setContext(java.lang.Object object, java.lang.Object fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public com.alibaba.fastjson.parser.ParseContext setContext(com.alibaba.fastjson.parser.ParseContext parent, java.lang.Object object, java.lang.Object fieldName) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    private void addContext(com.alibaba.fastjson.parser.ParseContext context) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.Object parse() { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    public java.lang.Object parseKey() { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.Object parse(java.lang.Object fieldName) { /* compiled code */ }
+<b class="fc">&nbsp;</b>
+&nbsp;    public void config(com.alibaba.fastjson.parser.Feature feature, boolean state) { /* compiled code */ }
+&nbsp;
+&nbsp;    public boolean isEnabled(com.alibaba.fastjson.parser.Feature feature) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    public com.alibaba.fastjson.parser.JSONLexer getLexer() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void accept(int token) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    public final void accept(int token, int nextExpectToken) { /* compiled code */ }
+&nbsp;
+&nbsp;    public void throwException(int token) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    public void close() { /* compiled code */ }
+&nbsp;
+<b class="fc">&nbsp;    public java.lang.Object resolveReference(java.lang.String ref) { /* compiled code */ }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public void handleResovleTask(java.lang.Object value) { /* compiled code */ }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public void parseExtra(java.lang.Object object, java.lang.String key) { /* compiled code */ }</b>
+&nbsp;
+<b class="fc">&nbsp;    public java.lang.Object parse(com.alibaba.fastjson.parser.deserializer.PropertyProcessable object, java.lang.Object fieldName) { /* compiled code */ }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public static class ResolveTask {</b>
+<b class="fc">&nbsp;        public final com.alibaba.fastjson.parser.ParseContext context;</b>
+<b class="fc">&nbsp;        public final java.lang.String referenceValue;</b>
+<b class="fc">&nbsp;        public com.alibaba.fastjson.parser.deserializer.FieldDeserializer fieldDeserializer;</b>
+<b class="fc">&nbsp;        public com.alibaba.fastjson.parser.ParseContext ownerContext;</b>
+&nbsp;
+<b class="nc">&nbsp;        public ResolveTask(com.alibaba.fastjson.parser.ParseContext context, java.lang.String referenceValue) { /* compiled code */ }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:18</div>
+</div>
+</body>
+</html>

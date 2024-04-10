@@ -1,0 +1,293 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONStreamReader</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.stream</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONStreamReader (com.alibaba.fastjson2.stream)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONStreamReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/84)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.stream;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReaderAdapter;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;public abstract class JSONStreamReader
+&nbsp;        extends StreamReader {
+&nbsp;    protected ObjectReaderAdapter objectReader;
+&nbsp;
+&nbsp;    public JSONStreamReader(Type[] types) {
+<b class="nc">&nbsp;        super(types);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public JSONStreamReader(ObjectReaderAdapter objectReader) {</b>
+<b class="nc">&nbsp;        this.objectReader = objectReader;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONStreamReader of(File file) throws IOException {
+<b class="nc">&nbsp;        return of(new FileInputStream(file), StandardCharsets.UTF_8);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONStreamReader of(InputStream in) throws IOException {
+<b class="nc">&nbsp;        return of(in, StandardCharsets.UTF_8);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONStreamReader of(InputStream in, Type... types) throws IOException {
+<b class="nc">&nbsp;        return of(in, StandardCharsets.UTF_8, types);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONStreamReader of(InputStream in, Charset charset, Type... types) throws IOException {
+<b class="nc">&nbsp;        if (charset == StandardCharsets.UTF_16 || charset == StandardCharsets.UTF_16LE || charset == StandardCharsets.UTF_16BE) {</b>
+<b class="nc">&nbsp;            return new JSONStreamReaderUTF16(new InputStreamReader(in, charset), types);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new JSONStreamReaderUTF8(in, charset, types);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONStreamReader of(InputStream in, Class objectClass) {
+<b class="nc">&nbsp;        return of(in, StandardCharsets.UTF_8, objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONStreamReader of(InputStream in, Charset charset, Class objectClass) {
+<b class="nc">&nbsp;        JSONReader.Context context = JSONFactory.createReadContext();</b>
+<b class="nc">&nbsp;        ObjectReaderAdapter objectReader = (ObjectReaderAdapter) context.getObjectReader(objectClass);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (charset == StandardCharsets.UTF_16 || charset == StandardCharsets.UTF_16LE || charset == StandardCharsets.UTF_16BE) {</b>
+<b class="nc">&nbsp;            return new JSONStreamReaderUTF16(new InputStreamReader(in, charset), objectReader);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new JSONStreamReaderUTF8(in, charset, objectReader);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ColumnStat getColumnStat(String name) {
+<b class="nc">&nbsp;        if (this.columnStatsMap == null) {</b>
+<b class="nc">&nbsp;            this.columnStatsMap = new LinkedHashMap&lt;&gt;();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (this.columns == null) {</b>
+<b class="nc">&nbsp;            this.columns = new ArrayList&lt;&gt;();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (columnStats == null) {</b>
+<b class="nc">&nbsp;            columnStats = new ArrayList&lt;&gt;();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ColumnStat stat = columnStatsMap.get(name);</b>
+<b class="nc">&nbsp;        if (stat == null &amp;&amp; columnStatsMap.size() &lt;= 100) {</b>
+<b class="nc">&nbsp;            stat = new ColumnStat(name);</b>
+<b class="nc">&nbsp;            columnStatsMap.put(name, stat);</b>
+<b class="nc">&nbsp;            columns.add(name);</b>
+<b class="nc">&nbsp;            columnStats.add(stat);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return stat;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static void stat(ColumnStat stat, Object value) {
+<b class="nc">&nbsp;        if (stat == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            stat.nulls++;</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        stat.values++;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            stat.numbers++;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (value instanceof Byte || value instanceof Short || value instanceof Integer || value instanceof Long) {</b>
+<b class="nc">&nbsp;                stat.integers++;</b>
+<b class="nc">&nbsp;            } else if (value instanceof Float || value instanceof Double) {</b>
+<b class="nc">&nbsp;                stat.doubles++;</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            stat.stat((String) value);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Boolean) {</b>
+<b class="nc">&nbsp;            stat.booleans++;</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Map) {</b>
+<b class="nc">&nbsp;            stat.maps++;</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Collection) {</b>
+<b class="nc">&nbsp;            stat.arrays++;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void statAll() {
+<b class="nc">&nbsp;        this.columnStatsMap = new LinkedHashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        this.columns = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        this.columnStats = new ArrayList&lt;&gt;();</b>
+&nbsp;
+&nbsp;        while (true) {
+<b class="nc">&nbsp;            Object object = readLineObject();</b>
+<b class="nc">&nbsp;            if (object == null) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            statLine(object);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void statLine(Object object) {
+<b class="nc">&nbsp;        if (object instanceof Map) {</b>
+<b class="nc">&nbsp;            statMap(null, (Map) object, 0);</b>
+<b class="nc">&nbsp;        } else if (object instanceof List) {</b>
+<b class="nc">&nbsp;            statArray(null, (List) object, 0);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        rowCount++;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void statArray(String parentKey, List list, int level) {
+<b class="nc">&nbsp;        if (level &gt; 10) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (list.size() &gt; 10) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; list.size(); i++) {</b>
+<b class="nc">&nbsp;            Object item = list.get(i);</b>
+<b class="nc">&nbsp;            String strKey = parentKey == null ? &quot;[&quot; + i + &quot;]&quot; : parentKey + &quot;[&quot; + i + &quot;]&quot;;</b>
+<b class="nc">&nbsp;            ColumnStat stat = getColumnStat(parentKey);</b>
+<b class="nc">&nbsp;            stat(stat, item);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (item instanceof Map) {</b>
+<b class="nc">&nbsp;                statMap(strKey, (Map) item, level + 1);</b>
+<b class="nc">&nbsp;            } else if (item instanceof List) {</b>
+<b class="nc">&nbsp;                statArray(strKey, (List) item, level + 1);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void statMap(String parentKey, Map map, int level) {
+<b class="nc">&nbsp;        if (level &gt; 10) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (Iterator it = map.entrySet().iterator(); it.hasNext(); ) {</b>
+<b class="nc">&nbsp;            Map.Entry entry = (Map.Entry) it.next();</b>
+<b class="nc">&nbsp;            Object key = entry.getKey();</b>
+<b class="nc">&nbsp;            if (key instanceof String) {</b>
+<b class="nc">&nbsp;                String strKey = parentKey == null ? (String) key : parentKey + &quot;.&quot; + key;</b>
+<b class="nc">&nbsp;                ColumnStat stat = getColumnStat(strKey);</b>
+<b class="nc">&nbsp;                Object entryValue = entry.getValue();</b>
+<b class="nc">&nbsp;                stat(stat, entryValue);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (entryValue instanceof Map) {</b>
+<b class="nc">&nbsp;                    statMap(strKey, (Map) entryValue, level + 1);</b>
+<b class="nc">&nbsp;                } else if (entryValue instanceof List) {</b>
+<b class="nc">&nbsp;                    statArray(strKey, (List) entryValue, level + 1);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:21</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,245 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Invoke</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.fastcode</a>
+</div>
+
+<h1>Coverage Summary for Class: Invoke (com.alibaba.fastjson2.benchmark.fastcode)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Invoke</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/42)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Invoke$Bean</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/47)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.fastcode;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.util.JDKUtils;
+&nbsp;import org.openjdk.jmh.annotations.Benchmark;
+&nbsp;import org.openjdk.jmh.annotations.Mode;
+&nbsp;import org.openjdk.jmh.infra.Blackhole;
+&nbsp;import org.openjdk.jmh.runner.Runner;
+&nbsp;import org.openjdk.jmh.runner.RunnerException;
+&nbsp;import org.openjdk.jmh.runner.options.Options;
+&nbsp;import org.openjdk.jmh.runner.options.OptionsBuilder;
+&nbsp;
+&nbsp;import java.lang.invoke.*;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.util.concurrent.TimeUnit;
+&nbsp;import java.util.function.ObjIntConsumer;
+&nbsp;
+<b class="nc">&nbsp;public class Invoke {</b>
+&nbsp;    static final Method METHOD_SET_ID;
+&nbsp;    static final ObjIntConsumer FUNC_SET_ID;
+&nbsp;
+&nbsp;    static final Object OBJECT;
+<b class="nc">&nbsp;    static int value = 12345;</b>
+&nbsp;
+&nbsp;    static {
+<b class="nc">&nbsp;        Method method = null;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            method = Bean.class.getMethod(&quot;setId&quot;, int.class);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        METHOD_SET_ID = method;</b>
+&nbsp;
+<b class="nc">&nbsp;        ObjIntConsumer function = null;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            MethodHandles.Lookup lookup = JDKUtils.trustedLookup(Bean.class);</b>
+<b class="nc">&nbsp;            MethodType invokedType = MethodType.methodType(ObjIntConsumer.class);</b>
+<b class="nc">&nbsp;            MethodHandle target = lookup.findVirtual(Bean.class, &quot;setId&quot;, MethodType.methodType(void.class, int.class));</b>
+<b class="nc">&nbsp;            MethodType instantiatedMethodType = MethodType.methodType(void.class, Bean.class, int.class);</b>
+<b class="nc">&nbsp;            MethodType samMethodType = MethodType.methodType(void.class, Object.class, int.class);</b>
+&nbsp;
+<b class="nc">&nbsp;            CallSite callSite = LambdaMetafactory.metafactory(</b>
+&nbsp;                    lookup,
+&nbsp;                    &quot;accept&quot;,
+&nbsp;                    invokedType,
+&nbsp;                    samMethodType,
+&nbsp;                    target,
+&nbsp;                    instantiatedMethodType
+&nbsp;            );
+<b class="nc">&nbsp;            function = (ObjIntConsumer) callSite.getTarget().invoke();</b>
+<b class="nc">&nbsp;        } catch (Throwable e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        FUNC_SET_ID = function;</b>
+&nbsp;
+<b class="nc">&nbsp;        Bean bean = new Bean();</b>
+<b class="nc">&nbsp;        bean.id = 1234;</b>
+<b class="nc">&nbsp;        bean.name = &quot;DataWorks&quot;;</b>
+&nbsp;
+<b class="nc">&nbsp;        OBJECT = bean;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void reflect(Blackhole bh) throws Exception {
+<b class="nc">&nbsp;        Object obj = OBJECT;</b>
+<b class="nc">&nbsp;        METHOD_SET_ID.invoke(obj, value);</b>
+<b class="nc">&nbsp;        bh.consume(obj);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void direct(Blackhole bh) throws Exception {
+<b class="nc">&nbsp;        Bean obj = (Bean) OBJECT;</b>
+<b class="nc">&nbsp;        obj.setId(value);</b>
+<b class="nc">&nbsp;        bh.consume(obj);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void lambda(Blackhole bh) throws Exception {
+<b class="nc">&nbsp;        Object obj = OBJECT;</b>
+<b class="nc">&nbsp;        FUNC_SET_ID.accept(obj, value);</b>
+<b class="nc">&nbsp;        bh.consume(obj);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public static class Bean {</b>
+&nbsp;        private int id;
+&nbsp;        private String name;
+&nbsp;
+&nbsp;        public int getId() {
+<b class="nc">&nbsp;            return id;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setId(int id) {
+<b class="nc">&nbsp;            this.id = id;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getName() {
+<b class="nc">&nbsp;            return name;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setName(String name) {
+<b class="nc">&nbsp;            this.name = name;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void main(String[] args) throws RunnerException {
+<b class="nc">&nbsp;        Options options = new OptionsBuilder()</b>
+<b class="nc">&nbsp;                .include(Invoke.class.getName())</b>
+<b class="nc">&nbsp;                .include(InvokeFirst.class.getName())</b>
+<b class="nc">&nbsp;                .mode(Mode.Throughput)</b>
+<b class="nc">&nbsp;                .timeUnit(TimeUnit.MILLISECONDS)</b>
+<b class="nc">&nbsp;                .warmupIterations(1)</b>
+<b class="nc">&nbsp;                .forks(1)</b>
+<b class="nc">&nbsp;                .build();</b>
+<b class="nc">&nbsp;        new Runner(options).run();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:22</div>
+</div>
+</body>
+</html>

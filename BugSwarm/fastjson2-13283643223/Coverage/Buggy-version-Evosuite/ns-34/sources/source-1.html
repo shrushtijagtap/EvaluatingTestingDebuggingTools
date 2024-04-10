@@ -1,0 +1,361 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FastJsonHttpMessageConverter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.support.spring.http.converter</a>
+</div>
+
+<h1>Coverage Summary for Class: FastJsonHttpMessageConverter (com.alibaba.fastjson2.support.spring.http.converter)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FastJsonHttpMessageConverter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/50)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">FastJsonHttpMessageConverter$Spring4TypeResolvableHelper</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/41)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/91)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.support.spring.http.converter;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSON;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.support.config.FastJsonConfig;
+&nbsp;import org.springframework.core.ResolvableType;
+&nbsp;import org.springframework.http.HttpHeaders;
+&nbsp;import org.springframework.http.HttpInputMessage;
+&nbsp;import org.springframework.http.HttpOutputMessage;
+&nbsp;import org.springframework.http.MediaType;
+&nbsp;import org.springframework.http.converter.AbstractHttpMessageConverter;
+&nbsp;import org.springframework.http.converter.GenericHttpMessageConverter;
+&nbsp;import org.springframework.http.converter.HttpMessageNotReadableException;
+&nbsp;import org.springframework.http.converter.HttpMessageNotWritableException;
+&nbsp;
+&nbsp;import java.io.ByteArrayOutputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.lang.reflect.ParameterizedType;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.lang.reflect.TypeVariable;
+&nbsp;
+&nbsp;/**
+&nbsp; * Fastjson for Spring MVC Converter.
+&nbsp; *
+&nbsp; * @author Victor.Zxy
+&nbsp; * @see AbstractHttpMessageConverter
+&nbsp; * @see GenericHttpMessageConverter
+&nbsp; * @since 2.0.2
+&nbsp; */
+&nbsp;public class FastJsonHttpMessageConverter
+&nbsp;        extends AbstractHttpMessageConverter&lt;Object&gt;
+&nbsp;        implements GenericHttpMessageConverter&lt;Object&gt; {
+&nbsp;    /**
+&nbsp;     * with fastJson config
+&nbsp;     */
+<b class="nc">&nbsp;    private FastJsonConfig config = new FastJsonConfig();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Can serialize/deserialize all types.
+&nbsp;     */
+&nbsp;    public FastJsonHttpMessageConverter() {
+<b class="nc">&nbsp;        super(MediaType.ALL);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return the fastJsonConfig.
+&nbsp;     */
+&nbsp;    public FastJsonConfig getFastJsonConfig() {
+<b class="nc">&nbsp;        return config;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param fastJsonConfig the fastJsonConfig to set.
+&nbsp;     */
+&nbsp;    public void setFastJsonConfig(FastJsonConfig fastJsonConfig) {
+<b class="nc">&nbsp;        this.config = fastJsonConfig;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected boolean supports(Class&lt;?&gt; clazz) {
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean canRead(Type type, Class&lt;?&gt; contextClass, MediaType mediaType) {
+<b class="nc">&nbsp;        return super.canRead(contextClass, mediaType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean canWrite(Type type, Class&lt;?&gt; clazz, MediaType mediaType) {
+<b class="nc">&nbsp;        return super.canWrite(clazz, mediaType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object read(Type type, Class&lt;?&gt; contextClass, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
+<b class="nc">&nbsp;        return readType(getType(type, contextClass), inputMessage);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(Object o, Type type, MediaType contentType, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
+&nbsp;        // support StreamingHttpOutputMessage in spring4.0+
+<b class="nc">&nbsp;        super.write(o, contentType, outputMessage);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object readInternal(Class&lt;?&gt; clazz, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
+<b class="nc">&nbsp;        return readType(getType(clazz, null), inputMessage);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Object readType(Type type, HttpInputMessage inputMessage) {
+<b class="nc">&nbsp;        try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {</b>
+<b class="nc">&nbsp;            InputStream in = inputMessage.getBody();</b>
+&nbsp;
+<b class="nc">&nbsp;            byte[] buf = new byte[1024 * 64];</b>
+&nbsp;            for (; ; ) {
+<b class="nc">&nbsp;                int len = in.read(buf);</b>
+<b class="nc">&nbsp;                if (len == -1) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (len &gt; 0) {</b>
+<b class="nc">&nbsp;                    baos.write(buf, 0, len);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            byte[] bytes = baos.toByteArray();</b>
+&nbsp;
+<b class="nc">&nbsp;            return JSON.parseObject(bytes, type, config.getDateFormat(), config.getReaderFilters(), config.getReaderFeatures());</b>
+<b class="nc">&nbsp;        } catch (JSONException ex) {</b>
+<b class="nc">&nbsp;            throw new HttpMessageNotReadableException(&quot;JSON parse error: &quot; + ex.getMessage(), ex, inputMessage);</b>
+<b class="nc">&nbsp;        } catch (IOException ex) {</b>
+<b class="nc">&nbsp;            throw new HttpMessageNotReadableException(&quot;I/O error while reading input message&quot;, ex, inputMessage);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void writeInternal(Object object, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
+<b class="nc">&nbsp;        HttpHeaders headers = outputMessage.getHeaders();</b>
+&nbsp;
+&nbsp;        try {
+&nbsp;            int contentLength;
+<b class="nc">&nbsp;            if (object instanceof String &amp;&amp; JSON.isValidObject((String) object)) {</b>
+<b class="nc">&nbsp;                byte[] strBytes = ((String) object).getBytes(config.getCharset());</b>
+<b class="nc">&nbsp;                contentLength = strBytes.length;</b>
+<b class="nc">&nbsp;                outputMessage.getBody().write(strBytes, 0, strBytes.length);</b>
+<b class="nc">&nbsp;            } else if (object instanceof byte[] &amp;&amp; JSON.isValid((byte[]) object)) {</b>
+<b class="nc">&nbsp;                byte[] strBytes = (byte[]) object;</b>
+<b class="nc">&nbsp;                contentLength = strBytes.length;</b>
+<b class="nc">&nbsp;                outputMessage.getBody().write(strBytes, 0, strBytes.length);</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                contentLength = JSON.writeTo(</b>
+<b class="nc">&nbsp;                        outputMessage.getBody(),</b>
+<b class="nc">&nbsp;                        object, config.getDateFormat(),</b>
+<b class="nc">&nbsp;                        config.getWriterFilters(),</b>
+<b class="nc">&nbsp;                        config.getWriterFeatures()</b>
+&nbsp;                );
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (headers.getContentLength() &lt; 0 &amp;&amp; config.isWriteContentLength()) {</b>
+<b class="nc">&nbsp;                headers.setContentLength(contentLength);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (JSONException ex) {</b>
+<b class="nc">&nbsp;            throw new HttpMessageNotWritableException(&quot;Could not write JSON: &quot; + ex.getMessage(), ex);</b>
+<b class="nc">&nbsp;        } catch (IOException ex) {</b>
+<b class="nc">&nbsp;            throw new HttpMessageNotWritableException(&quot;I/O error while writing output message&quot;, ex);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Type getType(Type type, Class&lt;?&gt; contextClass) {
+<b class="nc">&nbsp;        if (Spring4TypeResolvableHelper.isSupport()) {</b>
+<b class="nc">&nbsp;            return Spring4TypeResolvableHelper.getType(type, contextClass);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static class Spring4TypeResolvableHelper {
+&nbsp;        private static boolean hasClazzResolvableType;
+&nbsp;
+&nbsp;        static {
+&nbsp;            try {
+<b class="nc">&nbsp;                Class.forName(&quot;org.springframework.core.ResolvableType&quot;);</b>
+<b class="nc">&nbsp;                hasClazzResolvableType = true;</b>
+<b class="nc">&nbsp;            } catch (ClassNotFoundException e) {</b>
+<b class="nc">&nbsp;                hasClazzResolvableType = false;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static boolean isSupport() {
+<b class="nc">&nbsp;            return hasClazzResolvableType;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static Type getType(Type type, Class&lt;?&gt; contextClass) {
+<b class="nc">&nbsp;            if (contextClass != null) {</b>
+<b class="nc">&nbsp;                ResolvableType resolvedType = ResolvableType.forType(type);</b>
+<b class="nc">&nbsp;                if (type instanceof TypeVariable) {</b>
+<b class="nc">&nbsp;                    ResolvableType resolvedTypeVariable = resolveVariable((TypeVariable) type, ResolvableType.forClass(contextClass));</b>
+<b class="nc">&nbsp;                    if (resolvedTypeVariable != ResolvableType.NONE) {</b>
+<b class="nc">&nbsp;                        return resolvedTypeVariable.resolve();</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } else if (type instanceof ParameterizedType &amp;&amp; resolvedType.hasUnresolvableGenerics()) {</b>
+<b class="nc">&nbsp;                    ParameterizedType parameterizedType = (ParameterizedType) type;</b>
+<b class="nc">&nbsp;                    Class&lt;?&gt;[] generics = new Class[parameterizedType.getActualTypeArguments().length];</b>
+<b class="nc">&nbsp;                    Type[] typeArguments = parameterizedType.getActualTypeArguments();</b>
+&nbsp;
+<b class="nc">&nbsp;                    for (int i = 0; i &lt; typeArguments.length; ++i) {</b>
+<b class="nc">&nbsp;                        Type typeArgument = typeArguments[i];</b>
+<b class="nc">&nbsp;                        if (typeArgument instanceof TypeVariable) {</b>
+<b class="nc">&nbsp;                            ResolvableType resolvedTypeArgument = resolveVariable((TypeVariable) typeArgument, ResolvableType.forClass(contextClass));</b>
+<b class="nc">&nbsp;                            if (resolvedTypeArgument != ResolvableType.NONE) {</b>
+<b class="nc">&nbsp;                                generics[i] = resolvedTypeArgument.resolve();</b>
+&nbsp;                            } else {
+<b class="nc">&nbsp;                                generics[i] = ResolvableType.forType(typeArgument).resolve();</b>
+&nbsp;                            }
+<b class="nc">&nbsp;                        } else {</b>
+<b class="nc">&nbsp;                            generics[i] = ResolvableType.forType(typeArgument).resolve();</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    return ResolvableType.forClassWithGenerics(resolvedType.getRawClass(), generics).getType();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return type;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static ResolvableType resolveVariable(TypeVariable&lt;?&gt; typeVariable, ResolvableType contextType) {
+&nbsp;            ResolvableType resolvedType;
+<b class="nc">&nbsp;            if (contextType.hasGenerics()) {</b>
+<b class="nc">&nbsp;                resolvedType = ResolvableType.forType(typeVariable, contextType);</b>
+<b class="nc">&nbsp;                if (resolvedType.resolve() != null) {</b>
+<b class="nc">&nbsp;                    return resolvedType;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            ResolvableType superType = contextType.getSuperType();</b>
+<b class="nc">&nbsp;            if (superType != ResolvableType.NONE) {</b>
+<b class="nc">&nbsp;                resolvedType = resolveVariable(typeVariable, superType);</b>
+<b class="nc">&nbsp;                if (resolvedType.resolve() != null) {</b>
+<b class="nc">&nbsp;                    return resolvedType;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            for (ResolvableType ifc : contextType.getInterfaces()) {</b>
+<b class="nc">&nbsp;                resolvedType = resolveVariable(typeVariable, ifc);</b>
+<b class="nc">&nbsp;                if (resolvedType.resolve() != null) {</b>
+<b class="nc">&nbsp;                    return resolvedType;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return ResolvableType.NONE;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:20</div>
+</div>
+</body>
+</html>

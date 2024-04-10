@@ -1,0 +1,204 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UnsafeUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.util</a>
+</div>
+
+<h1>Coverage Summary for Class: UnsafeUtils (com.alibaba.fastjson2.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UnsafeUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/28)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.util;
+&nbsp;
+&nbsp;import sun.misc.Unsafe;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;
+<b class="nc">&nbsp;public class UnsafeUtils {</b>
+&nbsp;    public static final Unsafe UNSAFE;
+&nbsp;    static {
+<b class="nc">&nbsp;        Unsafe unsafe = null;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            Field theUnsafeField = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);</b>
+<b class="nc">&nbsp;            theUnsafeField.setAccessible(true);</b>
+<b class="nc">&nbsp;            unsafe = (Unsafe) theUnsafeField.get(null);</b>
+<b class="nc">&nbsp;        } catch (Throwable ignored) {</b>
+&nbsp;            // ignored
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        UNSAFE = unsafe;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Object getObject(Object o, long offset) {
+<b class="nc">&nbsp;        return UNSAFE.getObject(o, offset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static long getLong(Object o, long offset) {
+<b class="nc">&nbsp;        return UNSAFE.getLong(o, offset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int getInt(Object o, long offset) {
+<b class="nc">&nbsp;        return UNSAFE.getInt(o, offset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static short getShort(Object o, long offset) {
+<b class="nc">&nbsp;        return UNSAFE.getShort(o, offset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static byte getByte(Object o, long offset) {
+<b class="nc">&nbsp;        return UNSAFE.getByte(o, offset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static float getFloat(Object o, long offset) {
+<b class="nc">&nbsp;        return UNSAFE.getFloat(o, offset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static double getDouble(Object o, long offset) {
+<b class="nc">&nbsp;        return UNSAFE.getDouble(o, offset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean getBoolean(Object o, long offset) {
+<b class="nc">&nbsp;        return UNSAFE.getBoolean(o, offset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static char getChar(Object o, long offset) {
+<b class="nc">&nbsp;        return UNSAFE.getChar(o, offset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void putObject(Object o, long offset, Object x) {
+<b class="nc">&nbsp;        UNSAFE.putObject(o, offset, x);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void putInt(Object o, long offset, int x) {
+<b class="nc">&nbsp;        UNSAFE.putInt(o, offset, x);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void putLong(Object o, long offset, long x) {
+<b class="nc">&nbsp;        UNSAFE.putLong(o, offset, x);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void putFloat(Object o, long offset, float x) {
+<b class="nc">&nbsp;        UNSAFE.putFloat(o, offset, x);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void putDouble(Object o, long offset, double x) {
+<b class="nc">&nbsp;        UNSAFE.putDouble(o, offset, x);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void putShort(Object o, long offset, short x) {
+<b class="nc">&nbsp;        UNSAFE.putShort(o, offset, x);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void putByte(Object o, long offset, byte x) {
+<b class="nc">&nbsp;        UNSAFE.putByte(o, offset, x);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void putChar(Object o, long offset, char x) {
+<b class="nc">&nbsp;        UNSAFE.putChar(o, offset, x);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void putBoolean(Object o, long offset, boolean x) {
+<b class="nc">&nbsp;        UNSAFE.putBoolean(o, offset, x);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Object allocateInstance(Class&lt;?&gt; cls) throws InstantiationException {
+<b class="nc">&nbsp;        return UNSAFE.allocateInstance(cls);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static long objectFieldOffset(Field field) {
+<b class="nc">&nbsp;        return UNSAFE.objectFieldOffset(field);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:05</div>
+</div>
+</body>
+</html>

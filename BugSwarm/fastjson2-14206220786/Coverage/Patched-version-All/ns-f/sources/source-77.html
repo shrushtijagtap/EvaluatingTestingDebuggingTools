@@ -1,0 +1,520 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderException</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderException (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderException</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84.6%
+  </span>
+  <span class="absValue">
+    (193/228)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.codec.FieldInfo;
+&nbsp;import com.alibaba.fastjson2.internal.asm.ASMUtils;
+&nbsp;import com.alibaba.fastjson2.util.BeanUtils;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.Parameter;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.time.format.DateTimeParseException;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;final class ObjectReaderException&lt;T&gt;
+&nbsp;        extends ObjectReaderAdapter&lt;T&gt; {
+<b class="fc">&nbsp;    static final long HASH_TYPE = Fnv.hashCode64(&quot;@type&quot;);</b>
+<b class="fc">&nbsp;    static final long HASH_MESSAGE = Fnv.hashCode64(&quot;message&quot;);</b>
+<b class="fc">&nbsp;    static final long HASH_DETAIL_MESSAGE = Fnv.hashCode64(&quot;detailMessage&quot;);</b>
+<b class="fc">&nbsp;    static final long HASH_LOCALIZED_MESSAGE = Fnv.hashCode64(&quot;localizedMessage&quot;);</b>
+<b class="fc">&nbsp;    static final long HASH_CAUSE = Fnv.hashCode64(&quot;cause&quot;);</b>
+<b class="fc">&nbsp;    static final long HASH_STACKTRACE = Fnv.hashCode64(&quot;stackTrace&quot;);</b>
+<b class="fc">&nbsp;    static final long HASH_SUPPRESSED_EXCEPTIONS = Fnv.hashCode64(&quot;suppressedExceptions&quot;);</b>
+&nbsp;
+&nbsp;    private final FieldReader fieldReaderStackTrace;
+&nbsp;    final List&lt;Constructor&gt; constructors;
+&nbsp;
+&nbsp;    final Constructor constructorDefault;
+&nbsp;    final Constructor constructorMessage;
+&nbsp;    final Constructor constructorMessageCause;
+&nbsp;    final Constructor constructorCause;
+&nbsp;
+&nbsp;    final List&lt;String[]&gt; constructorParameters;
+&nbsp;
+&nbsp;    ObjectReaderException(Class&lt;T&gt; objectClass) {
+<b class="nc">&nbsp;        this(</b>
+&nbsp;                objectClass,
+<b class="nc">&nbsp;                Arrays.asList(BeanUtils.getConstructor(objectClass)),</b>
+<b class="nc">&nbsp;                ObjectReaders.fieldReader(&quot;stackTrace&quot;, StackTraceElement[].class, Throwable::setStackTrace)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    ObjectReaderException(
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            List&lt;Constructor&gt; constructors,
+&nbsp;            FieldReader... fieldReaders
+&nbsp;    ) {
+<b class="fc">&nbsp;        super(objectClass, null, objectClass.getName(), 0, null, null, null, fieldReaders);</b>
+<b class="fc">&nbsp;        this.constructors = constructors;</b>
+&nbsp;
+<b class="fc">&nbsp;        Constructor constructorDefault = null;</b>
+<b class="fc">&nbsp;        Constructor constructorMessage = null;</b>
+<b class="fc">&nbsp;        Constructor constructorMessageCause = null;</b>
+<b class="fc">&nbsp;        Constructor constructorCause = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (Constructor constructor : constructors) {</b>
+<b class="fc">&nbsp;            if (constructor != null &amp;&amp; constructorMessageCause == null) {</b>
+<b class="fc">&nbsp;                int paramCount = constructor.getParameterCount();</b>
+&nbsp;
+<b class="fc">&nbsp;                if (paramCount == 0) {</b>
+<b class="fc">&nbsp;                    constructorDefault = constructor;</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                Class[] paramTypes = constructor.getParameterTypes();</b>
+<b class="fc">&nbsp;                Class paramType0 = paramTypes[0];</b>
+<b class="fc">&nbsp;                if (paramCount == 1) {</b>
+<b class="fc">&nbsp;                    if (paramType0 == String.class) {</b>
+<b class="fc">&nbsp;                        constructorMessage = constructor;</b>
+<b class="fc">&nbsp;                    } else if (Throwable.class.isAssignableFrom(paramType0)) {</b>
+<b class="fc">&nbsp;                        constructorCause = constructor;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (paramCount == 2</b>
+&nbsp;                        &amp;&amp; paramType0 == String.class
+<b class="fc">&nbsp;                        &amp;&amp; Throwable.class.isAssignableFrom(paramTypes[1])</b>
+&nbsp;                ) {
+<b class="fc">&nbsp;                    constructorMessageCause = constructor;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        this.constructorDefault = constructorDefault;</b>
+<b class="fc">&nbsp;        this.constructorMessage = constructorMessage;</b>
+<b class="fc">&nbsp;        this.constructorMessageCause = constructorMessageCause;</b>
+<b class="fc">&nbsp;        this.constructorCause = constructorCause;</b>
+&nbsp;
+<b class="fc">&nbsp;        constructors.sort((Constructor left, Constructor right) -&gt; {</b>
+<b class="fc">&nbsp;            int x = left.getParameterCount();</b>
+<b class="fc">&nbsp;            int y = right.getParameterCount();</b>
+<b class="fc">&nbsp;            return Integer.compare(y, x);</b>
+&nbsp;        });
+&nbsp;
+<b class="fc">&nbsp;        constructorParameters = new ArrayList&lt;&gt;(constructors.size());</b>
+<b class="fc">&nbsp;        for (Constructor constructor : constructors) {</b>
+<b class="fc">&nbsp;            int paramCount = constructor.getParameterCount();</b>
+<b class="fc">&nbsp;            String[] parameterNames = null;</b>
+<b class="fc">&nbsp;            if (paramCount &gt; 0) {</b>
+<b class="fc">&nbsp;                parameterNames = ASMUtils.lookupParameterNames(constructor);</b>
+&nbsp;
+<b class="fc">&nbsp;                Parameter[] parameters = constructor.getParameters();</b>
+<b class="fc">&nbsp;                FieldInfo fieldInfo = new FieldInfo();</b>
+<b class="fc">&nbsp;                for (int i = 0; i &lt; parameters.length &amp;&amp; i &lt; parameterNames.length; i++) {</b>
+<b class="fc">&nbsp;                    fieldInfo.init();</b>
+&nbsp;
+<b class="fc">&nbsp;                    Parameter parameter = parameters[i];</b>
+&nbsp;
+<b class="fc">&nbsp;                    ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+<b class="fc">&nbsp;                    provider.getFieldInfo(fieldInfo, objectClass, constructor, i, parameter);</b>
+<b class="fc">&nbsp;                    if (fieldInfo.fieldName != null) {</b>
+<b class="nc">&nbsp;                        parameterNames[i] = fieldInfo.fieldName;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            constructorParameters.add(parameterNames);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        FieldReader fieldReaderStackTrace = null;</b>
+<b class="fc">&nbsp;        for (FieldReader fieldReader : fieldReaders) {</b>
+<b class="fc">&nbsp;            if (&quot;stackTrace&quot;.equals(fieldReader.fieldName) &amp;&amp; fieldReader.fieldClass == StackTraceElement[].class) {</b>
+<b class="fc">&nbsp;                fieldReaderStackTrace = fieldReader;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        this.fieldReaderStackTrace = fieldReaderStackTrace;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public T readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="fc">&nbsp;        boolean objectStart = jsonReader.nextIfObjectStart();</b>
+<b class="fc">&nbsp;        if (!objectStart) {</b>
+<b class="fc">&nbsp;            if (jsonReader.nextIfNullOrEmptyString()) {</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        String message = null, localizedMessage = null;</b>
+<b class="fc">&nbsp;        Throwable cause = null;</b>
+<b class="fc">&nbsp;        StackTraceElement[] stackTrace = null;</b>
+<b class="fc">&nbsp;        List&lt;Throwable&gt; suppressedExceptions = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        String stackTraceReference = null;</b>
+<b class="fc">&nbsp;        String suppressedExceptionsReference = null;</b>
+<b class="fc">&nbsp;        String causeReference = null;</b>
+<b class="fc">&nbsp;        Map&lt;String, Object&gt; fieldValues = null;</b>
+<b class="fc">&nbsp;        Map&lt;String, String&gt; references = null;</b>
+<b class="fc">&nbsp;        for (int i = 0; ; ++i) {</b>
+<b class="fc">&nbsp;            if (jsonReader.nextIfObjectEnd()) {</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            long hash = jsonReader.readFieldNameHashCode();</b>
+&nbsp;
+<b class="fc">&nbsp;            if (i == 0 &amp;&amp; hash == HASH_TYPE &amp;&amp; jsonReader.isSupportAutoType(features)) {</b>
+<b class="fc">&nbsp;                long typeHash = jsonReader.readTypeHashCode();</b>
+<b class="fc">&nbsp;                JSONReader.Context context = jsonReader.getContext();</b>
+<b class="fc">&nbsp;                ObjectReader reader = autoType(context, typeHash);</b>
+<b class="fc">&nbsp;                String typeName = null;</b>
+<b class="fc">&nbsp;                if (reader == null) {</b>
+<b class="fc">&nbsp;                    typeName = jsonReader.getString();</b>
+<b class="fc">&nbsp;                    reader = context.getObjectReaderAutoType(typeName, objectClass, features);</b>
+&nbsp;
+<b class="fc">&nbsp;                    if (reader == null) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(jsonReader.info(&quot;No suitable ObjectReader found for&quot; + typeName));</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (reader == this) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                return (T) reader.readObject(jsonReader);</b>
+<b class="fc">&nbsp;            } else if (hash == HASH_MESSAGE || hash == HASH_DETAIL_MESSAGE) {</b>
+<b class="fc">&nbsp;                message = jsonReader.readString();</b>
+<b class="fc">&nbsp;            } else if (hash == HASH_LOCALIZED_MESSAGE) {</b>
+<b class="nc">&nbsp;                localizedMessage = jsonReader.readString();</b>
+<b class="fc">&nbsp;            } else if (hash == HASH_CAUSE) {</b>
+<b class="fc">&nbsp;                if (jsonReader.isReference()) {</b>
+<b class="nc">&nbsp;                    causeReference = jsonReader.readReference();</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    cause = jsonReader.read(Throwable.class);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } else if (hash == HASH_STACKTRACE) {</b>
+<b class="fc">&nbsp;                if (jsonReader.isReference()) {</b>
+<b class="nc">&nbsp;                    stackTraceReference = jsonReader.readReference();</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    stackTrace = jsonReader.read(StackTraceElement[].class);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } else if (hash == HASH_SUPPRESSED_EXCEPTIONS) {</b>
+<b class="fc">&nbsp;                if (jsonReader.isReference()) {</b>
+<b class="fc">&nbsp;                    suppressedExceptionsReference = jsonReader.readReference();</b>
+<b class="fc">&nbsp;                } else if (jsonReader.getType() == JSONB.Constants.BC_TYPED_ANY) {</b>
+<b class="fc">&nbsp;                    suppressedExceptions = (List&lt;Throwable&gt;) jsonReader.readAny();</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    suppressedExceptions = jsonReader.readArray(Throwable.class);</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="fc">&nbsp;                FieldReader fieldReader = getFieldReader(hash);</b>
+<b class="fc">&nbsp;                if (fieldValues == null) {</b>
+<b class="fc">&nbsp;                    fieldValues = new HashMap&lt;&gt;();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                String name;
+<b class="fc">&nbsp;                if (fieldReader != null) {</b>
+<b class="fc">&nbsp;                    name = fieldReader.fieldName;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    name = jsonReader.getFieldName();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                Object fieldValue;
+<b class="fc">&nbsp;                if (jsonReader.isReference()) {</b>
+<b class="nc">&nbsp;                    String reference = jsonReader.readReference();</b>
+<b class="nc">&nbsp;                    if (references == null) {</b>
+<b class="nc">&nbsp;                        references = new HashMap&lt;&gt;();</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    references.put(name, reference);</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (fieldReader != null) {</b>
+<b class="fc">&nbsp;                    fieldValue = fieldReader.readFieldValue(jsonReader);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    fieldValue = jsonReader.readAny();</b>
+&nbsp;                }
+<b class="fc">&nbsp;                fieldValues.put(name, fieldValue);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Throwable object = createObject(message, cause);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (object == null) {</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; constructors.size(); i++) {</b>
+<b class="fc">&nbsp;                String[] paramNames = constructorParameters.get(i);</b>
+<b class="fc">&nbsp;                if (paramNames == null || paramNames.length == 0) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                boolean matchAll = true;</b>
+<b class="fc">&nbsp;                for (String paramName : paramNames) {</b>
+<b class="fc">&nbsp;                    if (paramName == null) {</b>
+<b class="nc">&nbsp;                        matchAll = false;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    switch (paramName) {</b>
+&nbsp;                        case &quot;message&quot;:
+&nbsp;                        case &quot;cause&quot;:
+<b class="fc">&nbsp;                            break;</b>
+&nbsp;                        case &quot;errorIndex&quot;:
+<b class="fc">&nbsp;                            if (objectClass == DateTimeParseException.class) {</b>
+<b class="fc">&nbsp;                                break;</b>
+&nbsp;                            }
+<b class="nc">&nbsp;                            if (!fieldValues.containsKey(paramName)) {</b>
+<b class="nc">&nbsp;                                matchAll = false;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        default:
+<b class="fc">&nbsp;                            if (!fieldValues.containsKey(paramName)) {</b>
+<b class="nc">&nbsp;                                matchAll = false;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (!matchAll) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                Object[] args = new Object[paramNames.length];</b>
+<b class="fc">&nbsp;                for (int j = 0; j &lt; paramNames.length; j++) {</b>
+<b class="fc">&nbsp;                    String paramName = paramNames[j];</b>
+&nbsp;                    Object fieldValue;
+<b class="fc">&nbsp;                    switch (paramName) {</b>
+&nbsp;                        case &quot;message&quot;:
+<b class="fc">&nbsp;                            fieldValue = message;</b>
+<b class="fc">&nbsp;                            break;</b>
+&nbsp;                        case &quot;cause&quot;:
+<b class="fc">&nbsp;                            fieldValue = cause;</b>
+<b class="fc">&nbsp;                            break;</b>
+&nbsp;                        case &quot;errorIndex&quot;:
+<b class="fc">&nbsp;                            fieldValue = fieldValues.get(paramName);</b>
+<b class="fc">&nbsp;                            if (fieldValue == null &amp;&amp; objectClass == DateTimeParseException.class) {</b>
+<b class="fc">&nbsp;                                fieldValue = 0;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        default:
+<b class="fc">&nbsp;                            fieldValue = fieldValues.get(paramName);</b>
+&nbsp;                            break;
+&nbsp;                    }
+<b class="fc">&nbsp;                    args[j] = fieldValue;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                Constructor constructor = constructors.get(i);</b>
+&nbsp;                try {
+<b class="fc">&nbsp;                    object = (Throwable) constructor.newInstance(args);</b>
+<b class="fc">&nbsp;                    break;</b>
+<b class="nc">&nbsp;                } catch (Throwable e) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;create error, objectClass &quot; + constructor + &quot;, &quot; + e.getMessage(), e);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info(jsonReader.info(&quot;not support : &quot; + objectClass.getName())));</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (stackTrace != null) {</b>
+<b class="fc">&nbsp;            int nullCount = 0;</b>
+<b class="fc">&nbsp;            for (StackTraceElement item : stackTrace) {</b>
+<b class="fc">&nbsp;                if (item == null) {</b>
+<b class="fc">&nbsp;                    nullCount++;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            if (stackTrace.length == 0 || nullCount != stackTrace.length) {</b>
+<b class="fc">&nbsp;                object.setStackTrace(stackTrace);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (stackTraceReference != null) {</b>
+<b class="nc">&nbsp;            jsonReader.addResolveTask(fieldReaderStackTrace, object, JSONPath.of(stackTraceReference));</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (fieldValues != null) {</b>
+<b class="fc">&nbsp;            for (Map.Entry&lt;String, Object&gt; entry : fieldValues.entrySet()) {</b>
+<b class="fc">&nbsp;                FieldReader fieldReader = getFieldReader(entry.getKey());</b>
+<b class="fc">&nbsp;                if (fieldReader != null) {</b>
+<b class="fc">&nbsp;                    fieldReader.accept(object, entry.getValue());</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (references != null) {</b>
+<b class="nc">&nbsp;            for (Map.Entry&lt;String, String&gt; entry : references.entrySet()) {</b>
+<b class="nc">&nbsp;                FieldReader fieldReader = getFieldReader(entry.getKey());</b>
+<b class="nc">&nbsp;                if (fieldReader == null) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                fieldReader.addResolveTask(jsonReader, object, entry.getValue());</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return (T) object;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public T readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="fc">&nbsp;        if (jsonReader.getType() == JSONB.Constants.BC_TYPED_ANY) {</b>
+<b class="fc">&nbsp;            JSONReader.Context context = jsonReader.getContext();</b>
+&nbsp;
+<b class="fc">&nbsp;            if (jsonReader.isSupportAutoType(features) || context.getContextAutoTypeBeforeHandler() != null) {</b>
+<b class="fc">&nbsp;                jsonReader.next();</b>
+<b class="fc">&nbsp;                long typeHash = jsonReader.readTypeHashCode();</b>
+&nbsp;
+<b class="fc">&nbsp;                ObjectReader autoTypeObjectReader = context.getObjectReaderAutoType(typeHash);</b>
+<b class="fc">&nbsp;                if (autoTypeObjectReader == null) {</b>
+<b class="fc">&nbsp;                    String typeName = jsonReader.getString();</b>
+<b class="fc">&nbsp;                    autoTypeObjectReader = context.getObjectReaderAutoType(typeName, null);</b>
+&nbsp;
+<b class="fc">&nbsp;                    if (autoTypeObjectReader == null) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(&quot;auoType not support : &quot; + typeName + &quot;, offset &quot; + jsonReader.getOffset());</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                return (T) autoTypeObjectReader.readJSONBObject(jsonReader, fieldType, fieldName, 0);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return readObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Throwable createObject(String message, Throwable cause) {
+&nbsp;        try {
+<b class="fc">&nbsp;            if (constructorMessageCause != null) {</b>
+<b class="fc">&nbsp;                if (cause != null &amp;&amp; message != null) {</b>
+<b class="fc">&nbsp;                    return (Throwable) constructorMessageCause.newInstance(message, cause);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (constructorMessage != null) {</b>
+<b class="fc">&nbsp;                if (message != null) {</b>
+<b class="fc">&nbsp;                    return (Throwable) constructorMessage.newInstance(message);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (constructorCause != null) {</b>
+<b class="fc">&nbsp;                if (cause != null) {</b>
+<b class="fc">&nbsp;                    return (Throwable) constructorCause.newInstance(cause);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (constructorMessageCause != null) {</b>
+<b class="fc">&nbsp;                if (cause != null || message != null) {</b>
+<b class="fc">&nbsp;                    return (Throwable) constructorMessageCause.newInstance(message, cause);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (constructorDefault != null) {</b>
+<b class="fc">&nbsp;                return (Throwable) constructorDefault.newInstance();</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (constructorMessageCause != null) {</b>
+<b class="fc">&nbsp;                return (Throwable) constructorMessageCause.newInstance(message, cause);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (constructorMessage != null) {</b>
+<b class="fc">&nbsp;                return (Throwable) constructorMessage.newInstance(message);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (constructorCause != null) {</b>
+<b class="fc">&nbsp;                return (Throwable) constructorCause.newInstance(cause);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Throwable e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;create Exception error, class &quot; + objectClass.getName() + &quot;, &quot; + e.getMessage(), e);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:16</div>
+</div>
+</body>
+</html>

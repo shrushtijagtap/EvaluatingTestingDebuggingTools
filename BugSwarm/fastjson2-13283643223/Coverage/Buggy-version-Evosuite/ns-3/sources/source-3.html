@@ -1,0 +1,201 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BytesAsciiCheck</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark</a>
+</div>
+
+<h1>Coverage Summary for Class: BytesAsciiCheck (com.alibaba.fastjson2.benchmark)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BytesAsciiCheck</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/43)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.benchmark.eishay.EishayParseBinaryArrayMapping;
+&nbsp;import com.alibaba.fastjson2.util.JDKUtils;
+&nbsp;import org.apache.commons.io.IOUtils;
+&nbsp;import org.openjdk.jmh.annotations.Benchmark;
+&nbsp;import org.openjdk.jmh.annotations.Mode;
+&nbsp;import org.openjdk.jmh.infra.Blackhole;
+&nbsp;import org.openjdk.jmh.runner.Runner;
+&nbsp;import org.openjdk.jmh.runner.options.Options;
+&nbsp;import org.openjdk.jmh.runner.options.OptionsBuilder;
+&nbsp;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.util.concurrent.TimeUnit;
+&nbsp;
+<b class="nc">&nbsp;public class BytesAsciiCheck {</b>
+&nbsp;    static byte[] bytes;
+&nbsp;
+&nbsp;    static {
+&nbsp;        try {
+<b class="nc">&nbsp;            InputStream is = EishayParseBinaryArrayMapping.class.getClassLoader().getResourceAsStream(&quot;data/eishay.json&quot;);</b>
+<b class="nc">&nbsp;            String str = IOUtils.toString(is, &quot;UTF-8&quot;);</b>
+<b class="nc">&nbsp;            bytes = str.getBytes();</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void handler(Blackhole bh) throws Throwable {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                JDKUtils.METHOD_HANDLE_HAS_NEGATIVE.invoke(bytes, 0, bytes.length)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void lambda(Blackhole bh) throws Throwable {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                JDKUtils.PREDICATE_IS_ASCII.test(bytes)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void direct(Blackhole bh) throws Throwable {
+<b class="nc">&nbsp;        bh.consume(hasNegatives(bytes, 0, bytes.length));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void direct8(Blackhole bh) throws Throwable {
+<b class="nc">&nbsp;        bh.consume(hasNegatives_8(bytes, 0, bytes.length));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean hasNegatives(byte[] ba, int off, int len) {
+<b class="nc">&nbsp;        for (int i = off; i &lt; off + len; i++) {</b>
+<b class="nc">&nbsp;            if (ba[i] &lt; 0) {</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean hasNegatives_8(byte[] bytes, int off, int len) {
+<b class="nc">&nbsp;        int i = off;</b>
+<b class="nc">&nbsp;        while (i + 8 &lt;= off + len) {</b>
+<b class="nc">&nbsp;            byte b0 = bytes[0];</b>
+<b class="nc">&nbsp;            byte b1 = bytes[1];</b>
+<b class="nc">&nbsp;            byte b2 = bytes[2];</b>
+<b class="nc">&nbsp;            byte b3 = bytes[3];</b>
+<b class="nc">&nbsp;            byte b4 = bytes[4];</b>
+<b class="nc">&nbsp;            byte b5 = bytes[5];</b>
+<b class="nc">&nbsp;            byte b6 = bytes[6];</b>
+<b class="nc">&nbsp;            byte b7 = bytes[6];</b>
+<b class="nc">&nbsp;            if (b0 &lt; 0 || b1 &lt; 0 || b2 &lt; 0 || b3 &lt; 0 || b4 &lt; 0 || b5 &lt; 0 || b6 &lt; 0 || b7 &lt; 0) {</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            i += 8;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        for (; i &lt; off + len; i++) {</b>
+<b class="nc">&nbsp;            if (bytes[i] &lt; 0) {</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void main(String[] args) throws Exception {
+<b class="nc">&nbsp;        Options options = new OptionsBuilder()</b>
+<b class="nc">&nbsp;                .include(BytesAsciiCheck.class.getName())</b>
+<b class="nc">&nbsp;                .mode(Mode.Throughput)</b>
+<b class="nc">&nbsp;                .timeUnit(TimeUnit.MILLISECONDS)</b>
+<b class="nc">&nbsp;                .warmupIterations(3)</b>
+<b class="nc">&nbsp;                .forks(1)</b>
+<b class="nc">&nbsp;                .build();</b>
+<b class="nc">&nbsp;        new Runner(options).run();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:20</div>
+</div>
+</body>
+</html>

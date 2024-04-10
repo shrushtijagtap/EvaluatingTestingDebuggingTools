@@ -1,0 +1,248 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FastJsonHttpMessageConverter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.support.spring</a>
+</div>
+
+<h1>Coverage Summary for Class: FastJsonHttpMessageConverter (com.alibaba.fastjson.support.spring)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FastJsonHttpMessageConverter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/39)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">FastJsonHttpMessageConverter$Spring4TypeResolvableHelper</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/41)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/80)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;  // IntelliJ API Decompiler stub source generated from a class file
+&nbsp;  // Implementation of methods is not available
+&nbsp;
+&nbsp;package com.alibaba.fastjson.support.spring;
+&nbsp;
+&nbsp;public class FastJsonHttpMessageConverter extends org.springframework.http.converter.AbstractHttpMessageConverter&lt;java.lang.Object&gt; implements org.springframework.http.converter.GenericHttpMessageConverter&lt;java.lang.Object&gt; {
+&nbsp;    public static final org.springframework.http.MediaType APPLICATION_JAVASCRIPT;
+&nbsp;    /**
+&nbsp;     * @deprecated
+&nbsp;     */
+&nbsp;    @java.lang.Deprecated
+&nbsp;    protected com.alibaba.fastjson.serializer.SerializerFeature[] features;
+&nbsp;    /**
+&nbsp;     * @deprecated
+&nbsp;     */
+&nbsp;    @java.lang.Deprecated
+&nbsp;    protected com.alibaba.fastjson.serializer.SerializeFilter[] filters;
+&nbsp;    /**
+&nbsp;     * @deprecated
+&nbsp;     */
+&nbsp;    @java.lang.Deprecated
+&nbsp;    protected java.lang.String dateFormat;
+&nbsp;    private boolean setLengthError;
+&nbsp;    private com.alibaba.fastjson.support.config.FastJsonConfig fastJsonConfig;
+&nbsp;
+&nbsp;    public com.alibaba.fastjson.support.config.FastJsonConfig getFastJsonConfig() { /* compiled code */ }
+&nbsp;
+&nbsp;    public void setFastJsonConfig(com.alibaba.fastjson.support.config.FastJsonConfig fastJsonConfig) { /* compiled code */ }
+&nbsp;
+&nbsp;    public FastJsonHttpMessageConverter() { /* compiled code */ }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated
+&nbsp;     */
+&nbsp;    @java.lang.Deprecated
+&nbsp;    public java.nio.charset.Charset getCharset() { /* compiled code */ }
+&nbsp;
+&nbsp;    /**
+<b class="nc">&nbsp;     * @deprecated</b>
+&nbsp;     */
+&nbsp;    @java.lang.Deprecated
+&nbsp;    public void setCharset(java.nio.charset.Charset charset) { /* compiled code */ }
+&nbsp;
+&nbsp;    /**
+<b class="nc">&nbsp;     * @deprecated</b>
+&nbsp;     */
+&nbsp;    @java.lang.Deprecated
+&nbsp;    public java.lang.String getDateFormat() { /* compiled code */ }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated
+<b class="nc">&nbsp;     */</b>
+&nbsp;    @java.lang.Deprecated
+&nbsp;    public void setDateFormat(java.lang.String dateFormat) { /* compiled code */ }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated
+&nbsp;     */
+<b class="nc">&nbsp;    @java.lang.Deprecated</b>
+&nbsp;    public com.alibaba.fastjson.serializer.SerializerFeature[] getFeatures() { /* compiled code */ }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated
+<b class="nc">&nbsp;     */</b>
+&nbsp;    @java.lang.Deprecated
+&nbsp;    public void setFeatures(com.alibaba.fastjson.serializer.SerializerFeature... features) { /* compiled code */ }
+&nbsp;
+&nbsp;    /**
+<b class="nc">&nbsp;     * @deprecated</b>
+&nbsp;     */
+&nbsp;    @java.lang.Deprecated
+&nbsp;    public com.alibaba.fastjson.serializer.SerializeFilter[] getFilters() { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    /**</b>
+&nbsp;     * @deprecated
+&nbsp;     */
+&nbsp;    @java.lang.Deprecated
+&nbsp;    public void setFilters(com.alibaba.fastjson.serializer.SerializeFilter... filters) { /* compiled code */ }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated
+<b class="nc">&nbsp;     */</b>
+&nbsp;    @java.lang.Deprecated
+&nbsp;    public void addSerializeFilter(com.alibaba.fastjson.serializer.SerializeFilter filter) { /* compiled code */ }
+&nbsp;
+&nbsp;    protected boolean supports(java.lang.Class&lt;?&gt; clazz) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public boolean canRead(java.lang.reflect.Type type, java.lang.Class&lt;?&gt; contextClass, org.springframework.http.MediaType mediaType) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public boolean canWrite(java.lang.reflect.Type type, java.lang.Class&lt;?&gt; clazz, org.springframework.http.MediaType mediaType) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.Object read(java.lang.reflect.Type type, java.lang.Class&lt;?&gt; contextClass, org.springframework.http.HttpInputMessage inputMessage) throws java.io.IOException, org.springframework.http.converter.HttpMessageNotReadableException { /* compiled code */ }
+&nbsp;
+&nbsp;    public void write(java.lang.Object o, java.lang.reflect.Type type, org.springframework.http.MediaType contentType, org.springframework.http.HttpOutputMessage outputMessage) throws java.io.IOException, org.springframework.http.converter.HttpMessageNotWritableException { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+&nbsp;    protected java.lang.Object readInternal(java.lang.Class&lt;?&gt; clazz, org.springframework.http.HttpInputMessage inputMessage) throws java.io.IOException, org.springframework.http.converter.HttpMessageNotReadableException { /* compiled code */ }
+&nbsp;
+&nbsp;    private java.lang.Object readType(java.lang.reflect.Type type, org.springframework.http.HttpInputMessage inputMessage) { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    protected void writeInternal(java.lang.Object object, org.springframework.http.HttpOutputMessage outputMessage) throws java.io.IOException, org.springframework.http.converter.HttpMessageNotWritableException { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    private java.lang.Object strangeCodeForJackson(java.lang.Object obj) { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;    protected java.lang.reflect.Type getType(java.lang.reflect.Type type, java.lang.Class&lt;?&gt; contextClass) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    private static class Spring4TypeResolvableHelper {</b>
+&nbsp;        private static boolean hasClazzResolvableType;
+&nbsp;
+<b class="nc">&nbsp;        private Spring4TypeResolvableHelper() { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        private static boolean isSupport() { /* compiled code */ }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        private static java.lang.reflect.Type getType(java.lang.reflect.Type type, java.lang.Class&lt;?&gt; contextClass) { /* compiled code */ }</b>
+&nbsp;
+<b class="nc">&nbsp;        private static org.springframework.core.ResolvableType resolveVariable(java.lang.reflect.TypeVariable&lt;?&gt; typeVariable, org.springframework.core.ResolvableType contextType) { /* compiled code */ }</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:18</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,359 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FieldWriterList</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldWriterList (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FieldWriterList</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    71.4%
+  </span>
+  <span class="absValue">
+    (5/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91%
+  </span>
+  <span class="absValue">
+    (111/122)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;abstract class FieldWriterList&lt;T&gt;
+&nbsp;        extends FieldWriter&lt;T&gt; {
+&nbsp;    final Type itemType;
+&nbsp;    final Class itemClass;
+&nbsp;    final boolean itemClassNotReferenceDetect;
+&nbsp;    ObjectWriter listWriter;
+&nbsp;    ObjectWriter itemObjectWriter;
+&nbsp;
+&nbsp;    FieldWriterList(
+&nbsp;            String name,
+&nbsp;            Type itemType,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            String label,
+&nbsp;            Type fieldType,
+&nbsp;            Class fieldClass,
+&nbsp;            Field field,
+&nbsp;            Method method
+&nbsp;    ) {
+<b class="fc">&nbsp;        super(name, ordinal, features, format, label, fieldType, fieldClass, field, method);</b>
+&nbsp;
+<b class="fc">&nbsp;        this.itemType = itemType == null ? Object.class : itemType;</b>
+<b class="fc">&nbsp;        if (this.itemType instanceof Class) {</b>
+<b class="fc">&nbsp;            itemClass = (Class) itemType;</b>
+<b class="fc">&nbsp;            if (itemClass != null) {</b>
+<b class="fc">&nbsp;                if (Enum.class.isAssignableFrom(this.itemClass)) {</b>
+<b class="fc">&nbsp;                    listWriter = new ObjectWriterImplListEnum(fieldClass, itemClass, features);</b>
+<b class="fc">&nbsp;                } else if (itemClass == String.class) {</b>
+<b class="fc">&nbsp;                    listWriter = ObjectWriterImplListStr.INSTANCE;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    listWriter = new ObjectWriterImplList(fieldClass, fieldType, itemClass, itemType, features);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            itemClass = TypeUtils.getMapping(itemType);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.itemClassNotReferenceDetect = itemClass == null ? false : ObjectWriterProvider.isNotReferenceDetect(itemClass);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (format != null) {</b>
+<b class="fc">&nbsp;            if (itemClass == Date.class) {</b>
+<b class="fc">&nbsp;                itemObjectWriter = new ObjectWriterImplDate(format, null);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Type getItemType() {
+<b class="nc">&nbsp;        return itemType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class getItemClass() {
+<b class="nc">&nbsp;        return itemClass;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObjectWriter getItemWriter(JSONWriter jsonWriter, Type itemType) {
+<b class="fc">&nbsp;        if (itemType == null || itemType == this.itemType) {</b>
+<b class="fc">&nbsp;            if (itemObjectWriter != null) {</b>
+<b class="fc">&nbsp;                return itemObjectWriter;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return itemObjectWriter = jsonWriter</b>
+<b class="fc">&nbsp;                    .getObjectWriter(this.itemType, itemClass);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return jsonWriter</b>
+<b class="fc">&nbsp;                .getObjectWriter(itemType, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObjectWriter getObjectWriter(JSONWriter jsonWriter, Class valueClass) {
+<b class="fc">&nbsp;        if (listWriter != null &amp;&amp; fieldClass.isAssignableFrom(valueClass)) {</b>
+<b class="fc">&nbsp;            return listWriter;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (listWriter == null &amp;&amp; valueClass == fieldClass) {</b>
+<b class="fc">&nbsp;            return listWriter = jsonWriter.getObjectWriter(valueClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return jsonWriter.getObjectWriter(valueClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeList(JSONWriter jsonWriter, boolean writeFieldName, List list) {
+<b class="fc">&nbsp;        Class previousClass = null;</b>
+<b class="fc">&nbsp;        ObjectWriter previousObjectWriter = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        long features = this.features | jsonWriter.getFeatures();</b>
+<b class="fc">&nbsp;        boolean beanToArray = (features &amp; JSONWriter.Feature.BeanToArray.mask) != 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        if ((features &amp; JSONWriter.Feature.NotWriteEmptyArray.mask) != 0 &amp;&amp; list.isEmpty() &amp;&amp; writeFieldName) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        boolean refDetect = (features &amp; JSONWriter.Feature.ReferenceDetection.mask) != 0;</b>
+<b class="fc">&nbsp;        boolean previousItemRefDetect = refDetect;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (writeFieldName) {</b>
+<b class="fc">&nbsp;            writeFieldName(jsonWriter);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (jsonWriter.isJSONB()) {</b>
+<b class="fc">&nbsp;            int size = list.size();</b>
+&nbsp;
+<b class="fc">&nbsp;            if (jsonWriter.isWriteTypeInfo(list, fieldClass)) {</b>
+<b class="fc">&nbsp;                jsonWriter.writeTypeName(</b>
+<b class="fc">&nbsp;                        TypeUtils.getTypeName(list.getClass()));</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            jsonWriter.startArray(size);</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; size; i++) {</b>
+<b class="fc">&nbsp;                Object item = list.get(i);</b>
+<b class="fc">&nbsp;                if (item == null) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeNull();</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                Class&lt;?&gt; itemClass = item.getClass();</b>
+&nbsp;                ObjectWriter itemObjectWriter;
+<b class="fc">&nbsp;                if (itemClass != previousClass) {</b>
+<b class="fc">&nbsp;                    refDetect = jsonWriter.isRefDetect();</b>
+<b class="fc">&nbsp;                    if (itemClass == this.itemType &amp;&amp; this.itemObjectWriter != null) {</b>
+<b class="fc">&nbsp;                        previousObjectWriter = this.itemObjectWriter;</b>
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        previousObjectWriter = getItemWriter(jsonWriter, itemClass);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    previousClass = itemClass;</b>
+<b class="fc">&nbsp;                    if (refDetect) {</b>
+<b class="fc">&nbsp;                        if (itemClass == this.itemClass) {</b>
+<b class="fc">&nbsp;                            refDetect = !itemClassNotReferenceDetect;</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            refDetect = !ObjectWriterProvider.isNotReferenceDetect(itemClass);</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                itemObjectWriter = previousObjectWriter;</b>
+&nbsp;
+<b class="fc">&nbsp;                if (refDetect) {</b>
+<b class="fc">&nbsp;                    String refPath = jsonWriter.setPath(i, item);</b>
+<b class="fc">&nbsp;                    if (refPath != null) {</b>
+<b class="nc">&nbsp;                        jsonWriter.writeReference(refPath);</b>
+<b class="nc">&nbsp;                        jsonWriter.popPath(item);</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (beanToArray) {</b>
+<b class="fc">&nbsp;                    itemObjectWriter.writeArrayMappingJSONB(jsonWriter, item, i, itemType, features);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    itemObjectWriter.writeJSONB(jsonWriter, item, i, itemType, features);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (refDetect) {</b>
+<b class="fc">&nbsp;                    jsonWriter.popPath(item);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        jsonWriter.startArray();</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; list.size(); i++) {</b>
+<b class="fc">&nbsp;            if (i != 0) {</b>
+<b class="fc">&nbsp;                jsonWriter.writeComma();</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Object item = list.get(i);</b>
+<b class="fc">&nbsp;            if (item == null) {</b>
+<b class="fc">&nbsp;                jsonWriter.writeNull();</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Class&lt;?&gt; itemClass = item.getClass();</b>
+<b class="fc">&nbsp;            if (itemClass == String.class) {</b>
+<b class="fc">&nbsp;                jsonWriter.writeString((String) item);</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            boolean itemRefDetect;
+&nbsp;            ObjectWriter itemObjectWriter;
+<b class="fc">&nbsp;            if (itemClass == previousClass) {</b>
+<b class="fc">&nbsp;                itemObjectWriter = previousObjectWriter;</b>
+<b class="fc">&nbsp;                itemRefDetect = previousItemRefDetect;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                itemRefDetect = jsonWriter.isRefDetect();</b>
+<b class="fc">&nbsp;                itemObjectWriter = getItemWriter(jsonWriter, itemClass);</b>
+<b class="fc">&nbsp;                previousClass = itemClass;</b>
+<b class="fc">&nbsp;                previousObjectWriter = itemObjectWriter;</b>
+<b class="fc">&nbsp;                if (itemRefDetect) {</b>
+<b class="fc">&nbsp;                    itemRefDetect = !ObjectWriterProvider.isNotReferenceDetect(itemClass);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                previousItemRefDetect = itemRefDetect;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (itemRefDetect) {</b>
+<b class="fc">&nbsp;                String refPath = jsonWriter.setPath(i, item);</b>
+<b class="fc">&nbsp;                if (refPath != null) {</b>
+<b class="fc">&nbsp;                    jsonWriter.writeReference(refPath);</b>
+<b class="fc">&nbsp;                    jsonWriter.popPath(item);</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            itemObjectWriter.write(jsonWriter, item, null, itemType, features);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (refDetect) {</b>
+<b class="fc">&nbsp;                jsonWriter.popPath(item);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        jsonWriter.endArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeListStr(JSONWriter jsonWriter, boolean writeFieldName, List&lt;String&gt; list) {
+<b class="fc">&nbsp;        if (writeFieldName) {</b>
+<b class="fc">&nbsp;            writeFieldName(jsonWriter);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (jsonWriter.isJSONB()) {</b>
+<b class="fc">&nbsp;            if (jsonWriter.isWriteTypeInfo(list, fieldClass)) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeTypeName(</b>
+<b class="nc">&nbsp;                        TypeUtils.getTypeName(list.getClass()));</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            final int listSize = list.size();</b>
+<b class="fc">&nbsp;            jsonWriter.startArray(listSize);</b>
+<b class="fc">&nbsp;            for (int i = 0, size = listSize; i &lt; size; i++) {</b>
+<b class="fc">&nbsp;                String str = list.get(i);</b>
+<b class="fc">&nbsp;                jsonWriter.writeString(str);</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        jsonWriter.startArray();</b>
+<b class="fc">&nbsp;        for (int i = 0, size = list.size(); i &lt; size; i++) {</b>
+<b class="fc">&nbsp;            if (i != 0) {</b>
+<b class="fc">&nbsp;                jsonWriter.writeComma();</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            String str = list.get(i);</b>
+<b class="fc">&nbsp;            jsonWriter.writeString(str);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        jsonWriter.endArray();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:49</div>
+</div>
+</body>
+</html>

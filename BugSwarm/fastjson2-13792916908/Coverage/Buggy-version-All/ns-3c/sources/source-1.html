@@ -1,0 +1,310 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ArrowByteArrayConsumer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.support.csv</a>
+</div>
+
+<h1>Coverage Summary for Class: ArrowByteArrayConsumer (com.alibaba.fastjson2.support.csv)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ArrowByteArrayConsumer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/100)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.support.csv;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.reader.ByteArrayValueConsumer;
+&nbsp;import com.alibaba.fastjson2.util.DateUtils;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;import org.apache.arrow.memory.BufferAllocator;
+&nbsp;import org.apache.arrow.memory.RootAllocator;
+&nbsp;import org.apache.arrow.vector.*;
+&nbsp;import org.apache.arrow.vector.types.pojo.Field;
+&nbsp;import org.apache.arrow.vector.types.pojo.Schema;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.util.List;
+&nbsp;import java.util.function.Consumer;
+&nbsp;import java.util.function.ObjIntConsumer;
+&nbsp;
+&nbsp;public class ArrowByteArrayConsumer
+&nbsp;        implements ByteArrayValueConsumer {
+&nbsp;    static final int CHUNK_SIZE = 1_000_000;
+&nbsp;    final Schema schema;
+&nbsp;    final int rowCount;
+<b class="nc">&nbsp;    final int varcharValueSize = 128;</b>
+&nbsp;    final ObjIntConsumer&lt;VectorSchemaRoot&gt; rootConsumer;
+&nbsp;    final Consumer&lt;Long[]&gt; committer;
+&nbsp;    BufferAllocator allocator;
+&nbsp;
+&nbsp;    VectorSchemaRoot root;
+&nbsp;    int blockSize;
+&nbsp;    int blockRowIndex;
+<b class="nc">&nbsp;    int blockIndex = -1;</b>
+&nbsp;    int[] valueCapacities;
+&nbsp;
+&nbsp;    public ArrowByteArrayConsumer(
+&nbsp;            Schema schema,
+&nbsp;            int rowCount,
+&nbsp;            ObjIntConsumer&lt;VectorSchemaRoot&gt; rootConsumer,
+&nbsp;            Consumer&lt;Long[]&gt; committer
+<b class="nc">&nbsp;    ) {</b>
+<b class="nc">&nbsp;        allocator = new RootAllocator();</b>
+<b class="nc">&nbsp;        this.schema = schema;</b>
+<b class="nc">&nbsp;        this.rowCount = rowCount;</b>
+<b class="nc">&nbsp;        this.rootConsumer = rootConsumer;</b>
+<b class="nc">&nbsp;        this.committer = committer;</b>
+<b class="nc">&nbsp;        int blockSize = Math.min(CHUNK_SIZE, rowCount);</b>
+<b class="nc">&nbsp;        allocateNew(blockSize);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void afterRow(int row) {
+<b class="nc">&nbsp;        blockRowIndex++;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (blockRowIndex == blockSize) {</b>
+<b class="nc">&nbsp;            List&lt;Field&gt; fields = root.getSchema().getFields();</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; fields.size(); i++) {</b>
+<b class="nc">&nbsp;                FieldVector vector = root.getVector(i);</b>
+<b class="nc">&nbsp;                vector.setValueCount(blockSize);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            rootConsumer.accept(root, blockIndex);</b>
+<b class="nc">&nbsp;            root.close();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (row + 1 == rowCount) {</b>
+<b class="nc">&nbsp;                if (committer != null) {</b>
+<b class="nc">&nbsp;                    Long[] blocks = new Long[blockIndex + 1];</b>
+<b class="nc">&nbsp;                    for (int i = 0; i &lt;= blockIndex; i++) {</b>
+<b class="nc">&nbsp;                        blocks[i] = Long.valueOf(i);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    committer.accept(blocks);</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            } else if (row &lt; rowCount) {</b>
+<b class="nc">&nbsp;                int rest = rowCount - row - 1;</b>
+<b class="nc">&nbsp;                int blockSize = Math.min(rest, CHUNK_SIZE);</b>
+<b class="nc">&nbsp;                allocateNew(blockSize);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void allocateNew(int blockSize) {
+<b class="nc">&nbsp;        root = VectorSchemaRoot.create(schema, allocator);</b>
+<b class="nc">&nbsp;        this.blockSize = blockSize;</b>
+<b class="nc">&nbsp;        this.blockRowIndex = 0;</b>
+<b class="nc">&nbsp;        root.setRowCount(blockSize);</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Field&gt; fields = root.getSchema().getFields();</b>
+<b class="nc">&nbsp;        final int fieldsSize = fields.size();</b>
+<b class="nc">&nbsp;        valueCapacities = new int[fieldsSize];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; fieldsSize; i++) {</b>
+<b class="nc">&nbsp;            FieldVector vector = root.getVector(i);</b>
+<b class="nc">&nbsp;            if (vector instanceof FixedWidthVector) {</b>
+<b class="nc">&nbsp;                ((FixedWidthVector) vector).allocateNew(blockSize);</b>
+<b class="nc">&nbsp;            } else if (vector instanceof VariableWidthVector) {</b>
+<b class="nc">&nbsp;                VariableWidthVector variableWidthVector = (VariableWidthVector) vector;</b>
+<b class="nc">&nbsp;                variableWidthVector.allocateNew(varcharValueSize * blockSize, blockSize);</b>
+<b class="nc">&nbsp;                valueCapacities[i] = variableWidthVector.getValueCapacity();</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;TODO&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        blockIndex++;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(int row, int column, byte[] bytes, int off, int len, Charset charset) {
+<b class="nc">&nbsp;        if (column &gt;= root.getSchema().getFields().size()) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        FieldVector vector = root.getVector(column);</b>
+<b class="nc">&nbsp;        if (len == 0) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        row = blockRowIndex;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof IntVector) {</b>
+<b class="nc">&nbsp;            int intValue = TypeUtils.parseInt(bytes, off, len);</b>
+<b class="nc">&nbsp;            ((IntVector) vector).set(row, intValue);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof BigIntVector) {</b>
+<b class="nc">&nbsp;            long longValue = TypeUtils.parseLong(bytes, off, len);</b>
+<b class="nc">&nbsp;            ((BigIntVector) vector).set(row, longValue);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof VarCharVector) {</b>
+<b class="nc">&nbsp;            VarCharVector charVector = (VarCharVector) vector;</b>
+<b class="nc">&nbsp;            int valueCapacity = valueCapacities[column];</b>
+<b class="nc">&nbsp;            int startOffset = charVector.getStartOffset(row);</b>
+<b class="nc">&nbsp;            if (startOffset + len &gt;= valueCapacity) {</b>
+<b class="nc">&nbsp;                int newValueCapacity = valueCapacity + Math.max(len, varcharValueSize * rowCount);</b>
+<b class="nc">&nbsp;                charVector.reallocDataBuffer(newValueCapacity);</b>
+<b class="nc">&nbsp;                valueCapacities[column] = newValueCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            charVector.set(row, bytes, off, len);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof DecimalVector) {</b>
+<b class="nc">&nbsp;            DecimalVector decimalVector = (DecimalVector) vector;</b>
+<b class="nc">&nbsp;            ArrowUtils.setDecimal(decimalVector, row, bytes, off, len);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof Decimal256Vector) {</b>
+<b class="nc">&nbsp;            BigDecimal decimal = TypeUtils.parseBigDecimal(bytes, off, len);</b>
+<b class="nc">&nbsp;            Decimal256Vector decimalVector = (Decimal256Vector) vector;</b>
+<b class="nc">&nbsp;            int scale = decimalVector.getScale();</b>
+<b class="nc">&nbsp;            if (decimal.scale() != scale) {</b>
+<b class="nc">&nbsp;                decimal = decimal.setScale(scale);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            decimalVector.set(row, decimal);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof SmallIntVector) {</b>
+<b class="nc">&nbsp;            int intValue = TypeUtils.parseInt(bytes, off, len);</b>
+<b class="nc">&nbsp;            ((SmallIntVector) vector).set(row, intValue);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof TinyIntVector) {</b>
+<b class="nc">&nbsp;            int intValue = TypeUtils.parseInt(bytes, off, len);</b>
+<b class="nc">&nbsp;            ((TinyIntVector) vector).set(row, intValue);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof Float4Vector) {</b>
+<b class="nc">&nbsp;            float floatValue = TypeUtils.parseFloat(bytes, off, len);</b>
+<b class="nc">&nbsp;            ((Float4Vector) vector).set(row, floatValue);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof Float8Vector) {</b>
+<b class="nc">&nbsp;            float floatValue = TypeUtils.parseFloat(bytes, off, len);</b>
+<b class="nc">&nbsp;            ((Float8Vector) vector).set(row, floatValue);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof DateMilliVector) {</b>
+<b class="nc">&nbsp;            long millis = DateUtils.parseMillis(bytes, off, len, charset);</b>
+<b class="nc">&nbsp;            ((DateMilliVector) vector).set(row, millis);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof TimeStampMilliVector) {</b>
+<b class="nc">&nbsp;            long millis = DateUtils.parseMillis(bytes, off, len, charset);</b>
+<b class="nc">&nbsp;            ((TimeStampMilliVector) vector).set(row, millis);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof BitVector) {</b>
+<b class="nc">&nbsp;            Boolean value = TypeUtils.parseBoolean(bytes, off, len);</b>
+<b class="nc">&nbsp;            if (value != null) {</b>
+<b class="nc">&nbsp;                int intValue = value.booleanValue() ? 1 : 0;</b>
+<b class="nc">&nbsp;                ((BitVector) vector).set(row, intValue);</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;TODO : &quot; + vector.getClass().getName());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:22</div>
+</div>
+</body>
+</html>

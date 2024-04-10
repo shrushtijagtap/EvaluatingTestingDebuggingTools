@@ -3,14 +3,14 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class RegressionTest0 {
+public class RandoopRegressionTest0 {
 
     public static boolean debug = false;
 
     @Test
     public void test01() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test01");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test01");
         com.alibaba.fastjson2.writer.ObjectWriterProvider objectWriterProvider0 = null;
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray1 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         // The following exception was thrown during execution in test generation
@@ -26,7 +26,7 @@ public class RegressionTest0 {
     @Test
     public void test02() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test02");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test02");
         com.alibaba.fastjson2.JSONWriter.Feature feature1 = null;
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray2 = new com.alibaba.fastjson2.JSONWriter.Feature[] { feature1 };
         // The following exception was thrown during execution in test generation
@@ -42,7 +42,7 @@ public class RegressionTest0 {
     @Test
     public void test03() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test03");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test03");
         com.alibaba.fastjson2.writer.ObjectWriterProvider objectWriterProvider0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -56,7 +56,7 @@ public class RegressionTest0 {
     @Test
     public void test04() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test04");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test04");
         com.alibaba.fastjson2.JSONWriter.Feature feature0 = com.alibaba.fastjson2.JSONWriter.Feature.WriteClassName;
         org.junit.Assert.assertTrue("'" + feature0 + "' != '" + com.alibaba.fastjson2.JSONWriter.Feature.WriteClassName + "'", feature0.equals(com.alibaba.fastjson2.JSONWriter.Feature.WriteClassName));
     }
@@ -64,7 +64,7 @@ public class RegressionTest0 {
     @Test
     public void test05() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test05");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test05");
         com.alibaba.fastjson2.JSONWriter.Feature feature0 = com.alibaba.fastjson2.JSONWriter.Feature.BrowserCompatible;
         org.junit.Assert.assertTrue("'" + feature0 + "' != '" + com.alibaba.fastjson2.JSONWriter.Feature.BrowserCompatible + "'", feature0.equals(com.alibaba.fastjson2.JSONWriter.Feature.BrowserCompatible));
     }
@@ -72,7 +72,7 @@ public class RegressionTest0 {
     @Test
     public void test06() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test06");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test06");
         com.alibaba.fastjson2.JSONWriter.Context context0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -86,7 +86,7 @@ public class RegressionTest0 {
     @Test
     public void test07() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test07");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test07");
         com.alibaba.fastjson2.JSONWriter.Feature feature0 = com.alibaba.fastjson2.JSONWriter.Feature.WriteNonStringValueAsString;
         org.junit.Assert.assertTrue("'" + feature0 + "' != '" + com.alibaba.fastjson2.JSONWriter.Feature.WriteNonStringValueAsString + "'", feature0.equals(com.alibaba.fastjson2.JSONWriter.Feature.WriteNonStringValueAsString));
     }
@@ -94,7 +94,7 @@ public class RegressionTest0 {
     @Test
     public void test08() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test08");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test08");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         jSONWriter1.close();
@@ -106,7 +106,7 @@ public class RegressionTest0 {
     @Test
     public void test09() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test09");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test09");
         com.alibaba.fastjson2.JSONWriter.Feature feature0 = com.alibaba.fastjson2.JSONWriter.Feature.NotWriteHashMapArrayListClassName;
         org.junit.Assert.assertTrue("'" + feature0 + "' != '" + com.alibaba.fastjson2.JSONWriter.Feature.NotWriteHashMapArrayListClassName + "'", feature0.equals(com.alibaba.fastjson2.JSONWriter.Feature.NotWriteHashMapArrayListClassName));
     }
@@ -114,7 +114,7 @@ public class RegressionTest0 {
     @Test
     public void test10() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test10");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test10");
         com.alibaba.fastjson2.JSONWriter.Feature feature0 = com.alibaba.fastjson2.JSONWriter.Feature.WriteNonStringKeyAsString;
         org.junit.Assert.assertTrue("'" + feature0 + "' != '" + com.alibaba.fastjson2.JSONWriter.Feature.WriteNonStringKeyAsString + "'", feature0.equals(com.alibaba.fastjson2.JSONWriter.Feature.WriteNonStringKeyAsString));
     }
@@ -122,7 +122,7 @@ public class RegressionTest0 {
     @Test
     public void test11() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test11");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test11");
         com.alibaba.fastjson2.SymbolTable symbolTable0 = null;
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(symbolTable0);
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray2 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
@@ -148,7 +148,7 @@ public class RegressionTest0 {
     @Test
     public void test12() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test12");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test12");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         boolean boolean3 = jSONWriter1.isRefDetect((java.lang.Object) 1L);
@@ -164,7 +164,7 @@ public class RegressionTest0 {
     @Test
     public void test13() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test13");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test13");
         com.alibaba.fastjson2.JSONWriter.Feature feature0 = com.alibaba.fastjson2.JSONWriter.Feature.EscapeNoneAscii;
         org.junit.Assert.assertTrue("'" + feature0 + "' != '" + com.alibaba.fastjson2.JSONWriter.Feature.EscapeNoneAscii + "'", feature0.equals(com.alibaba.fastjson2.JSONWriter.Feature.EscapeNoneAscii));
     }
@@ -172,7 +172,7 @@ public class RegressionTest0 {
     @Test
     public void test14() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test14");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test14");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         com.alibaba.fastjson2.JSONWriter jSONWriter2 = com.alibaba.fastjson2.JSONWriter.ofPretty(jSONWriter1);
@@ -193,7 +193,7 @@ public class RegressionTest0 {
     @Test
     public void test15() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test15");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test15");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         boolean boolean3 = jSONWriter1.isRefDetect((java.lang.Object) 1L);
@@ -214,7 +214,7 @@ public class RegressionTest0 {
     @Test
     public void test16() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test16");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test16");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         boolean boolean3 = jSONWriter1.isRefDetect((java.lang.Object) 1L);
@@ -233,7 +233,7 @@ public class RegressionTest0 {
     @Test
     public void test17() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test17");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test17");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         com.alibaba.fastjson2.JSONWriter jSONWriter2 = com.alibaba.fastjson2.JSONWriter.ofPretty(jSONWriter1);
@@ -254,7 +254,7 @@ public class RegressionTest0 {
     @Test
     public void test18() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test18");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test18");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         com.alibaba.fastjson2.JSONWriter.Feature feature2 = com.alibaba.fastjson2.JSONWriter.Feature.WriteThrowableClassName;
@@ -268,7 +268,7 @@ public class RegressionTest0 {
     @Test
     public void test19() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test19");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test19");
         com.alibaba.fastjson2.JSONWriter.Context context0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -282,7 +282,7 @@ public class RegressionTest0 {
     @Test
     public void test20() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test20");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test20");
         com.alibaba.fastjson2.JSONWriter jSONWriter0 = com.alibaba.fastjson2.JSONWriter.ofPretty();
         org.junit.Assert.assertNotNull(jSONWriter0);
     }
@@ -290,7 +290,7 @@ public class RegressionTest0 {
     @Test
     public void test21() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test21");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test21");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         java.time.LocalTime localTime2 = null;
@@ -309,7 +309,7 @@ public class RegressionTest0 {
     @Test
     public void test22() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test22");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test22");
         com.alibaba.fastjson2.SymbolTable symbolTable0 = null;
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(symbolTable0);
         boolean boolean2 = jSONWriter1.isRefDetect();
@@ -322,7 +322,7 @@ public class RegressionTest0 {
     @Test
     public void test23() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test23");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test23");
         com.alibaba.fastjson2.JSONWriter.Feature feature0 = com.alibaba.fastjson2.JSONWriter.Feature.NullAsDefaultValue;
         org.junit.Assert.assertTrue("'" + feature0 + "' != '" + com.alibaba.fastjson2.JSONWriter.Feature.NullAsDefaultValue + "'", feature0.equals(com.alibaba.fastjson2.JSONWriter.Feature.NullAsDefaultValue));
     }
@@ -330,7 +330,7 @@ public class RegressionTest0 {
     @Test
     public void test24() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test24");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test24");
         com.alibaba.fastjson2.JSONWriter.Feature feature0 = com.alibaba.fastjson2.JSONWriter.Feature.WriteNullStringAsEmpty;
         org.junit.Assert.assertTrue("'" + feature0 + "' != '" + com.alibaba.fastjson2.JSONWriter.Feature.WriteNullStringAsEmpty + "'", feature0.equals(com.alibaba.fastjson2.JSONWriter.Feature.WriteNullStringAsEmpty));
     }
@@ -338,7 +338,7 @@ public class RegressionTest0 {
     @Test
     public void test25() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test25");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test25");
         com.alibaba.fastjson2.JSONWriter.Feature feature0 = com.alibaba.fastjson2.JSONWriter.Feature.WriteEnumsUsingName;
         org.junit.Assert.assertTrue("'" + feature0 + "' != '" + com.alibaba.fastjson2.JSONWriter.Feature.WriteEnumsUsingName + "'", feature0.equals(com.alibaba.fastjson2.JSONWriter.Feature.WriteEnumsUsingName));
     }
@@ -346,7 +346,7 @@ public class RegressionTest0 {
     @Test
     public void test26() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test26");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test26");
         com.alibaba.fastjson2.SymbolTable symbolTable0 = null;
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(symbolTable0);
         com.alibaba.fastjson2.SymbolTable symbolTable2 = null;
@@ -363,7 +363,7 @@ public class RegressionTest0 {
     @Test
     public void test27() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test27");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test27");
         com.alibaba.fastjson2.JSONWriter jSONWriter0 = com.alibaba.fastjson2.JSONWriter.of();
         org.junit.Assert.assertNotNull(jSONWriter0);
     }
@@ -371,7 +371,7 @@ public class RegressionTest0 {
     @Test
     public void test28() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test28");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test28");
         com.alibaba.fastjson2.JSONWriter.Feature feature0 = com.alibaba.fastjson2.JSONWriter.Feature.NotWriteEmptyArray;
         org.junit.Assert.assertTrue("'" + feature0 + "' != '" + com.alibaba.fastjson2.JSONWriter.Feature.NotWriteEmptyArray + "'", feature0.equals(com.alibaba.fastjson2.JSONWriter.Feature.NotWriteEmptyArray));
     }
@@ -379,7 +379,7 @@ public class RegressionTest0 {
     @Test
     public void test29() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test29");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test29");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         com.alibaba.fastjson2.JSONWriter jSONWriter2 = com.alibaba.fastjson2.JSONWriter.ofPretty(jSONWriter1);
@@ -398,7 +398,7 @@ public class RegressionTest0 {
     @Test
     public void test30() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test30");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test30");
         com.alibaba.fastjson2.JSONWriter.Path path0 = null;
         com.alibaba.fastjson2.JSONWriter.Path path2 = new com.alibaba.fastjson2.JSONWriter.Path(path0, "");
     }
@@ -406,7 +406,7 @@ public class RegressionTest0 {
     @Test
     public void test31() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test31");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test31");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         boolean boolean3 = jSONWriter1.isRefDetect((java.lang.Object) 1L);
@@ -432,7 +432,7 @@ public class RegressionTest0 {
     @Test
     public void test32() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test32");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test32");
         com.alibaba.fastjson2.JSONWriter jSONWriter0 = com.alibaba.fastjson2.JSONWriter.ofJSONB();
         char[] charArray2 = new char[] { ' ' };
         // The following exception was thrown during execution in test generation
@@ -452,7 +452,7 @@ public class RegressionTest0 {
     @Test
     public void test33() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test33");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test33");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         jSONWriter1.close();
@@ -465,7 +465,7 @@ public class RegressionTest0 {
     @Test
     public void test34() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test34");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test34");
         com.alibaba.fastjson2.SymbolTable symbolTable0 = null;
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(symbolTable0);
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray2 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
@@ -499,7 +499,7 @@ public class RegressionTest0 {
     @Test
     public void test35() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test35");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test35");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray2 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
@@ -525,7 +525,7 @@ public class RegressionTest0 {
     @Test
     public void test36() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test36");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test36");
         com.alibaba.fastjson2.JSONWriter.Feature feature0 = com.alibaba.fastjson2.JSONWriter.Feature.WritePairAsJavaBean;
         org.junit.Assert.assertTrue("'" + feature0 + "' != '" + com.alibaba.fastjson2.JSONWriter.Feature.WritePairAsJavaBean + "'", feature0.equals(com.alibaba.fastjson2.JSONWriter.Feature.WritePairAsJavaBean));
     }
@@ -533,7 +533,7 @@ public class RegressionTest0 {
     @Test
     public void test37() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test37");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test37");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         boolean boolean3 = jSONWriter1.isRefDetect((java.lang.Object) 1L);
@@ -574,7 +574,7 @@ public class RegressionTest0 {
     @Test
     public void test38() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test38");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test38");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         boolean boolean3 = jSONWriter1.isRefDetect((java.lang.Object) 1L);
@@ -592,7 +592,7 @@ public class RegressionTest0 {
     @Test
     public void test39() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test39");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test39");
         com.alibaba.fastjson2.writer.ObjectWriterProvider objectWriterProvider0 = null;
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray1 = null;
         // The following exception was thrown during execution in test generation
@@ -607,7 +607,7 @@ public class RegressionTest0 {
     @Test
     public void test40() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test40");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test40");
         com.alibaba.fastjson2.SymbolTable symbolTable0 = null;
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(symbolTable0);
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray2 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
@@ -632,7 +632,7 @@ public class RegressionTest0 {
     @Test
     public void test41() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test41");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test41");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         boolean boolean3 = jSONWriter1.isRefDetect((java.lang.Object) 1L);
@@ -650,7 +650,7 @@ public class RegressionTest0 {
     @Test
     public void test42() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test42");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test42");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         java.time.LocalTime localTime2 = null;
@@ -680,7 +680,7 @@ public class RegressionTest0 {
     @Test
     public void test43() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test43");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test43");
         com.alibaba.fastjson2.JSONWriter.Feature feature0 = com.alibaba.fastjson2.JSONWriter.Feature.IgnoreNonFieldGetter;
         org.junit.Assert.assertTrue("'" + feature0 + "' != '" + com.alibaba.fastjson2.JSONWriter.Feature.IgnoreNonFieldGetter + "'", feature0.equals(com.alibaba.fastjson2.JSONWriter.Feature.IgnoreNonFieldGetter));
     }
@@ -688,7 +688,7 @@ public class RegressionTest0 {
     @Test
     public void test44() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test44");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test44");
         com.alibaba.fastjson2.JSONWriter.Feature feature0 = com.alibaba.fastjson2.JSONWriter.Feature.OptimizedForAscii;
         org.junit.Assert.assertTrue("'" + feature0 + "' != '" + com.alibaba.fastjson2.JSONWriter.Feature.OptimizedForAscii + "'", feature0.equals(com.alibaba.fastjson2.JSONWriter.Feature.OptimizedForAscii));
     }
@@ -696,7 +696,7 @@ public class RegressionTest0 {
     @Test
     public void test45() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test45");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test45");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         boolean boolean3 = jSONWriter1.isRefDetect((java.lang.Object) 1L);
@@ -713,7 +713,7 @@ public class RegressionTest0 {
     @Test
     public void test46() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test46");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test46");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         com.alibaba.fastjson2.JSONWriter jSONWriter2 = com.alibaba.fastjson2.JSONWriter.ofPretty(jSONWriter1);
@@ -728,7 +728,7 @@ public class RegressionTest0 {
     @Test
     public void test47() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test47");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test47");
         com.alibaba.fastjson2.SymbolTable symbolTable0 = null;
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(symbolTable0);
         boolean boolean2 = jSONWriter1.isRefDetect();
@@ -741,7 +741,7 @@ public class RegressionTest0 {
     @Test
     public void test48() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test48");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test48");
         com.alibaba.fastjson2.SymbolTable symbolTable0 = null;
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(symbolTable0);
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray2 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
@@ -764,7 +764,7 @@ public class RegressionTest0 {
     @Test
     public void test49() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test49");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test49");
         com.alibaba.fastjson2.SymbolTable symbolTable0 = null;
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(symbolTable0);
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray2 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
@@ -790,7 +790,7 @@ public class RegressionTest0 {
     @Test
     public void test50() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test50");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test50");
         com.alibaba.fastjson2.SymbolTable symbolTable0 = null;
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(symbolTable0);
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray2 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
@@ -820,7 +820,7 @@ public class RegressionTest0 {
     @Test
     public void test51() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test51");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test51");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         com.alibaba.fastjson2.JSONWriter jSONWriter2 = com.alibaba.fastjson2.JSONWriter.ofPretty(jSONWriter1);
@@ -836,7 +836,7 @@ public class RegressionTest0 {
     @Test
     public void test52() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test52");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test52");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         java.lang.reflect.Type type3 = null;
@@ -849,7 +849,7 @@ public class RegressionTest0 {
     @Test
     public void test53() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test53");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test53");
         com.alibaba.fastjson2.SymbolTable symbolTable0 = null;
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(symbolTable0);
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray2 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
@@ -892,7 +892,7 @@ public class RegressionTest0 {
     @Test
     public void test54() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test54");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test54");
         com.alibaba.fastjson2.SymbolTable symbolTable0 = null;
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(symbolTable0);
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray2 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
@@ -924,7 +924,7 @@ public class RegressionTest0 {
     @Test
     public void test55() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test55");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test55");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         boolean boolean3 = jSONWriter1.isRefDetect((java.lang.Object) 1L);
@@ -937,7 +937,7 @@ public class RegressionTest0 {
     @Test
     public void test56() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test56");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test56");
         com.alibaba.fastjson2.JSONWriter.Feature feature0 = com.alibaba.fastjson2.JSONWriter.Feature.WriteNullListAsEmpty;
         org.junit.Assert.assertTrue("'" + feature0 + "' != '" + com.alibaba.fastjson2.JSONWriter.Feature.WriteNullListAsEmpty + "'", feature0.equals(com.alibaba.fastjson2.JSONWriter.Feature.WriteNullListAsEmpty));
     }
@@ -945,7 +945,7 @@ public class RegressionTest0 {
     @Test
     public void test57() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test57");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test57");
         com.alibaba.fastjson2.JSONWriter.Feature feature0 = com.alibaba.fastjson2.JSONWriter.Feature.IgnoreErrorGetter;
         org.junit.Assert.assertTrue("'" + feature0 + "' != '" + com.alibaba.fastjson2.JSONWriter.Feature.IgnoreErrorGetter + "'", feature0.equals(com.alibaba.fastjson2.JSONWriter.Feature.IgnoreErrorGetter));
     }
@@ -953,7 +953,7 @@ public class RegressionTest0 {
     @Test
     public void test58() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test58");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test58");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         com.alibaba.fastjson2.JSONWriter jSONWriter2 = com.alibaba.fastjson2.JSONWriter.ofPretty(jSONWriter1);
@@ -983,7 +983,7 @@ public class RegressionTest0 {
     @Test
     public void test59() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test59");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test59");
         com.alibaba.fastjson2.JSONWriter jSONWriter0 = com.alibaba.fastjson2.JSONWriter.ofJSONB();
         double[] doubleArray1 = null;
         jSONWriter0.writeDouble(doubleArray1);
@@ -995,7 +995,7 @@ public class RegressionTest0 {
     @Test
     public void test60() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test60");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test60");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         boolean boolean3 = jSONWriter1.isRefDetect((java.lang.Object) 1L);
@@ -1013,7 +1013,7 @@ public class RegressionTest0 {
     @Test
     public void test61() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test61");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test61");
         com.alibaba.fastjson2.JSONWriter jSONWriter0 = com.alibaba.fastjson2.JSONWriter.ofJSONB();
         double[] doubleArray1 = null;
         jSONWriter0.writeDouble(doubleArray1);
@@ -1028,7 +1028,7 @@ public class RegressionTest0 {
     @Test
     public void test62() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test62");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test62");
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray0 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(featureArray0);
         jSONWriter1.close();
@@ -1053,7 +1053,7 @@ public class RegressionTest0 {
     @Test
     public void test63() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test63");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test63");
         com.alibaba.fastjson2.SymbolTable symbolTable0 = null;
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(symbolTable0);
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray2 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
@@ -1085,7 +1085,7 @@ public class RegressionTest0 {
     @Test
     public void test64() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test64");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test64");
         com.alibaba.fastjson2.SymbolTable symbolTable0 = null;
         com.alibaba.fastjson2.JSONWriter jSONWriter1 = com.alibaba.fastjson2.JSONWriter.ofJSONB(symbolTable0);
         com.alibaba.fastjson2.JSONWriter.Feature[] featureArray2 = new com.alibaba.fastjson2.JSONWriter.Feature[] {};
@@ -1116,7 +1116,7 @@ public class RegressionTest0 {
     @Test
     public void test65() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test65");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test65");
         com.alibaba.fastjson2.JSONWriter.Feature feature0 = com.alibaba.fastjson2.JSONWriter.Feature.WriteBigDecimalAsPlain;
         org.junit.Assert.assertTrue("'" + feature0 + "' != '" + com.alibaba.fastjson2.JSONWriter.Feature.WriteBigDecimalAsPlain + "'", feature0.equals(com.alibaba.fastjson2.JSONWriter.Feature.WriteBigDecimalAsPlain));
     }

@@ -1,0 +1,265 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaders</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaders (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaders</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.function.*;
+&nbsp;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.function.*;
+&nbsp;
+<b class="nc">&nbsp;public class ObjectReaders {</b>
+&nbsp;    public static &lt;T&gt; ObjectReader&lt;T&gt; of(
+&nbsp;            Supplier&lt;T&gt; defaultCreator,
+&nbsp;            FieldReader... fieldReaders
+&nbsp;    ) {
+<b class="nc">&nbsp;        return ObjectReaderCreator.INSTANCE.createObjectReader(null, defaultCreator, fieldReaders);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; ObjectReader&lt;T&gt; of(
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            Supplier&lt;T&gt; defaultCreator,
+&nbsp;            FieldReader... fieldReaders
+&nbsp;    ) {
+<b class="nc">&nbsp;        return ObjectReaderCreator.INSTANCE.createObjectReader(objectClass, defaultCreator, fieldReaders);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; ObjectReader&lt;T&gt; ofString(Function&lt;String, T&gt; function) {
+<b class="nc">&nbsp;        return new ObjectReaderImplFromString&lt;&gt;(null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; ObjectReader&lt;T&gt; ofInt(IntFunction&lt;T&gt; function) {
+<b class="nc">&nbsp;        return new ObjectReaderImplFromInt&lt;&gt;(null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; ObjectReader&lt;T&gt; ofLong(LongFunction&lt;T&gt; function) {
+<b class="nc">&nbsp;        return new ObjectReaderImplFromLong&lt;&gt;(null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; ObjectReader&lt;T&gt; objectReader(
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            Supplier&lt;T&gt; defaultCreator,
+&nbsp;            FieldReader... fieldReaders
+&nbsp;    ) {
+<b class="nc">&nbsp;        return ObjectReaderCreator.INSTANCE.createObjectReader(objectClass, defaultCreator, fieldReaders);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; ObjectReader&lt;T&gt; ofReflect(Class&lt;T&gt; objectType) {
+<b class="nc">&nbsp;        return ObjectReaderCreator.INSTANCE.createObjectReader(objectType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; ObjectReader&lt;T&gt; of(Class&lt;T&gt; objectType) {
+<b class="nc">&nbsp;        return ObjectReaderCreatorLambda.INSTANCE.createObjectReader(objectType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; ObjectReader&lt;T&gt; objectReader(
+&nbsp;            Function&lt;Map&lt;Long, Object&gt;, T&gt; creator,
+&nbsp;            FieldReader... fieldReaders) {
+<b class="nc">&nbsp;        return ObjectReaderCreator.INSTANCE.createObjectReaderNoneDefaultConstructor(null, creator, fieldReaders);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static FieldReader fieldReader(String fieldName, Class fieldClass) {
+<b class="nc">&nbsp;        return ObjectReaderCreator.INSTANCE.createFieldReader(null, fieldName, fieldClass, fieldClass, (Method) null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static FieldReader fieldReader(String fieldName, Type fieldType, Class fieldClass) {
+<b class="nc">&nbsp;        return ObjectReaderCreator.INSTANCE.createFieldReader(null, fieldName, fieldType, fieldClass, (Method) null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; FieldReader fieldReaderBool(String fieldName, ObjBoolConsumer&lt;T&gt; function) {
+<b class="nc">&nbsp;        return new FieldReaderBoolValFunc&lt;&gt;(fieldName, 0, null, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; FieldReader fieldReaderByte(String fieldName, ObjByteConsumer&lt;T&gt; function) {
+<b class="nc">&nbsp;        return new FieldReaderInt8ValueFunc&lt;&gt;(fieldName, 0, null, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; FieldReader fieldReaderShort(String fieldName, ObjShortConsumer&lt;T&gt; function) {
+<b class="nc">&nbsp;        return new FieldReaderInt16ValueFunc&lt;&gt;(fieldName, 0, 0L, null, null, null, null, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; FieldReader fieldReaderInt(String fieldName, ObjIntConsumer&lt;T&gt; function) {
+<b class="nc">&nbsp;        return new FieldReaderInt32ValueFunc&lt;&gt;(fieldName, 0, null, null, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; FieldReader fieldReaderLong(String fieldName, ObjLongConsumer&lt;T&gt; function) {
+<b class="nc">&nbsp;        return new FieldReaderInt64ValueFunc&lt;&gt;(fieldName, 0, null, null, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; FieldReader fieldReaderChar(String fieldName, ObjCharConsumer&lt;T&gt; function) {
+<b class="nc">&nbsp;        return new FieldReaderCharValueFunc&lt;&gt;(fieldName, 0, null, null, null, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; FieldReader fieldReaderFloat(String fieldName, ObjFloatConsumer&lt;T&gt; function) {
+<b class="nc">&nbsp;        return new FieldReaderFloatValueFunc&lt;&gt;(fieldName, 0, null, null, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; FieldReader fieldReaderDouble(String fieldName, ObjDoubleConsumer&lt;T&gt; function) {
+<b class="nc">&nbsp;        return new FieldReaderDoubleValueFunc&lt;&gt;(fieldName, 0, null, null, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; FieldReader fieldReaderString(
+&nbsp;            String fieldName,
+&nbsp;            BiConsumer&lt;T, String&gt; function
+&nbsp;    ) {
+<b class="nc">&nbsp;        return ObjectReaderCreator.INSTANCE.createFieldReader(fieldName, String.class, String.class, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T, V&gt; FieldReader fieldReader(
+&nbsp;            String fieldName,
+&nbsp;            Class&lt;V&gt; fieldClass,
+&nbsp;            BiConsumer&lt;T, V&gt; function
+&nbsp;    ) {
+<b class="nc">&nbsp;        return ObjectReaderCreator.INSTANCE.createFieldReader(fieldName, fieldClass, fieldClass, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T, V&gt; FieldReader fieldReader(
+&nbsp;            String fieldName,
+&nbsp;            Type fieldType,
+&nbsp;            Class&lt;V&gt; fieldClass,
+&nbsp;            BiConsumer&lt;T, V&gt; function
+&nbsp;    ) {
+<b class="nc">&nbsp;        return ObjectReaderCreator.INSTANCE.createFieldReader(fieldName, fieldType, fieldClass, null, function);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T, U&gt; FieldReader fieldReader(
+&nbsp;            String fieldName,
+&nbsp;            Type fieldType,
+&nbsp;            BiConsumer&lt;T, U&gt; consumer,
+&nbsp;            ObjectReader&lt;U&gt; fieldObjectReader
+&nbsp;    ) {
+<b class="nc">&nbsp;        return new FieldReaderObjectFunc2&lt;&gt;(fieldObjectReader, consumer, fieldType, fieldName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T, V&gt; FieldReader fieldReaderList(
+&nbsp;            String fieldName,
+&nbsp;            Type itemType,
+&nbsp;            Supplier&lt;List&lt;V&gt;&gt; listCreator,
+&nbsp;            BiConsumer&lt;T, List&lt;V&gt;&gt; function,
+&nbsp;            ObjectReader&lt;V&gt; itemObjectReader
+&nbsp;    ) {
+<b class="nc">&nbsp;        return new FieldReaderListFuncImpl&lt;&gt;(listCreator, itemObjectReader, function, itemType, fieldName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T, V&gt; FieldReader fieldReaderList(
+&nbsp;            String fieldName,
+&nbsp;            Type itemType,
+&nbsp;            Supplier&lt;List&lt;V&gt;&gt; listCreator,
+&nbsp;            BiConsumer&lt;T, List&lt;V&gt;&gt; function
+&nbsp;    ) {
+<b class="nc">&nbsp;        return new FieldReaderListFuncImpl&lt;&gt;(listCreator, null, function, itemType, fieldName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T, V&gt; FieldReader fieldReaderList(
+&nbsp;            String fieldName,
+&nbsp;            Type itemType,
+&nbsp;            BiConsumer&lt;T, List&lt;V&gt;&gt; function
+&nbsp;    ) {
+<b class="nc">&nbsp;        return fieldReaderList(fieldName, itemType, ArrayList::new, function);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:47</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,326 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DateParse</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark</a>
+</div>
+
+<h1>Coverage Summary for Class: DateParse (com.alibaba.fastjson2.benchmark)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DateParse</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/109)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.util.DateUtils;
+&nbsp;import org.openjdk.jmh.annotations.Benchmark;
+&nbsp;import org.openjdk.jmh.annotations.Mode;
+&nbsp;import org.openjdk.jmh.infra.Blackhole;
+&nbsp;import org.openjdk.jmh.runner.Runner;
+&nbsp;import org.openjdk.jmh.runner.options.Options;
+&nbsp;import org.openjdk.jmh.runner.options.OptionsBuilder;
+&nbsp;
+&nbsp;import java.text.SimpleDateFormat;
+&nbsp;import java.time.*;
+&nbsp;import java.time.format.DateTimeFormatter;
+&nbsp;import java.time.format.DateTimeParseException;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.concurrent.TimeUnit;
+&nbsp;
+<b class="nc">&nbsp;public class DateParse {</b>
+<b class="nc">&nbsp;    static final String[] dates = {</b>
+&nbsp;            &quot;2001-07-01 01:02:03&quot;, &quot;2011-06-02 09:02:03&quot;,
+&nbsp;            &quot;2021-11-03 02:02:03&quot;, &quot;2001-11-14 07:02:03&quot;,
+&nbsp;            &quot;2002-10-07 16:02:03&quot;, &quot;2003-09-12 15:02:03&quot;,
+&nbsp;            &quot;2006-08-16 02:02:03&quot;, &quot;2002-01-30 22:02:03&quot;,
+&nbsp;            &quot;2009-02-27 01:02:03&quot;, &quot;2011-04-26 11:02:03&quot;,
+&nbsp;            &quot;2012-06-23 01:02:03&quot;, &quot;2022-02-18 09:02:03&quot;
+&nbsp;    };
+&nbsp;
+<b class="nc">&nbsp;    static ThreadLocal&lt;SimpleDateFormat&gt; formatThreadLocal = ThreadLocal.withInitial(</b>
+<b class="nc">&nbsp;            () -&gt; new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;)</b>
+&nbsp;    );
+<b class="nc">&nbsp;    static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;    static final ZoneId DEFAULT_ZONE_ID = ZoneId.systemDefault();</b>
+<b class="nc">&nbsp;    static final ZoneId SHANGHAI_ZONE_ID = &quot;Asia/Shanghai&quot;.equals(DEFAULT_ZONE_ID.getId()) ? DEFAULT_ZONE_ID : ZoneId.of(&quot;Asia/Shanghai&quot;);</b>
+<b class="nc">&nbsp;    static final ZoneOffset SHANGHAI_ZONE_OFFSET = SHANGHAI_ZONE_ID</b>
+<b class="nc">&nbsp;            .getRules()</b>
+<b class="nc">&nbsp;            .getOffset(</b>
+<b class="nc">&nbsp;                    LocalDateTime.of(</b>
+<b class="nc">&nbsp;                            LocalDate.of(1992, 1, 1), LocalTime.MIN</b>
+&nbsp;                    )
+&nbsp;            );
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void simpleDateFormat(Blackhole bh) throws Exception {
+<b class="nc">&nbsp;        for (int i = 0; i &lt; dates.length; i++) {</b>
+<b class="nc">&nbsp;            String str = dates[i];</b>
+<b class="nc">&nbsp;            SimpleDateFormat format = formatThreadLocal.get();</b>
+<b class="nc">&nbsp;            bh.consume(</b>
+<b class="nc">&nbsp;                    format.parse(str)</b>
+&nbsp;            );
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void dateTimeFormatter(Blackhole bh) throws Exception {
+<b class="nc">&nbsp;        for (int i = 0; i &lt; dates.length; i++) {</b>
+<b class="nc">&nbsp;            String str = dates[i];</b>
+<b class="nc">&nbsp;            LocalDateTime ldt = LocalDateTime.parse(str, formatter);</b>
+<b class="nc">&nbsp;            ZoneOffset offset = DEFAULT_ZONE_ID.getRules().getOffset(ldt);</b>
+<b class="nc">&nbsp;            long millis = ldt.toInstant(offset).toEpochMilli();</b>
+<b class="nc">&nbsp;            bh.consume(new Date(millis));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void localDateTimeParse(Blackhole bh) throws Exception {
+<b class="nc">&nbsp;        for (int i = 0; i &lt; dates.length; i++) {</b>
+<b class="nc">&nbsp;            String str = dates[i];</b>
+<b class="nc">&nbsp;            LocalDateTime ldt = LocalDateTime.parse(str, formatter);</b>
+&nbsp;            ZoneOffset offset;
+<b class="nc">&nbsp;            if (DEFAULT_ZONE_ID == SHANGHAI_ZONE_ID &amp;&amp; ldt.getYear() &gt;= 1992) {</b>
+<b class="nc">&nbsp;                offset = SHANGHAI_ZONE_OFFSET;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                offset = DEFAULT_ZONE_ID.getRules().getOffset(ldt);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            long millis = ldt.toInstant(offset).toEpochMilli();</b>
+<b class="nc">&nbsp;            bh.consume(new Date(millis));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void parseYYYYMMDDHHMMSS19(Blackhole bh) throws Exception {
+<b class="nc">&nbsp;        for (int i = 0; i &lt; dates.length; i++) {</b>
+<b class="nc">&nbsp;            String str = dates[i];</b>
+<b class="nc">&nbsp;            bh.consume(parseYYYYMMDDHHMMSS19(str));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Date parseYYYYMMDDHHMMSS19(String str) {
+<b class="nc">&nbsp;        if (str == null || str.length() != 19) {</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;not support input &quot;, str, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char c0 = str.charAt(0);</b>
+<b class="nc">&nbsp;        char c1 = str.charAt(1);</b>
+<b class="nc">&nbsp;        char c2 = str.charAt(2);</b>
+<b class="nc">&nbsp;        char c3 = str.charAt(3);</b>
+<b class="nc">&nbsp;        char c4 = str.charAt(4);</b>
+<b class="nc">&nbsp;        char c5 = str.charAt(5);</b>
+<b class="nc">&nbsp;        char c6 = str.charAt(6);</b>
+<b class="nc">&nbsp;        char c7 = str.charAt(7);</b>
+<b class="nc">&nbsp;        char c8 = str.charAt(8);</b>
+<b class="nc">&nbsp;        char c9 = str.charAt(9);</b>
+<b class="nc">&nbsp;        char c10 = str.charAt(10);</b>
+<b class="nc">&nbsp;        char c11 = str.charAt(11);</b>
+<b class="nc">&nbsp;        char c12 = str.charAt(12);</b>
+<b class="nc">&nbsp;        char c13 = str.charAt(13);</b>
+<b class="nc">&nbsp;        char c14 = str.charAt(14);</b>
+<b class="nc">&nbsp;        char c15 = str.charAt(15);</b>
+<b class="nc">&nbsp;        char c16 = str.charAt(16);</b>
+<b class="nc">&nbsp;        char c17 = str.charAt(17);</b>
+<b class="nc">&nbsp;        char c18 = str.charAt(18);</b>
+&nbsp;
+&nbsp;        char y0, y1, y2, y3, m0, m1, d0, d1, h0, h1, i0, i1, s0, s1;
+<b class="nc">&nbsp;        if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; c10 == &#39; &#39; &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;:&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c17;</b>
+<b class="nc">&nbsp;            s1 = c18;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;not support input &quot;, str, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int year;
+<b class="nc">&nbsp;        if (y0 &gt;= &#39;0&#39; &amp;&amp; y0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; y1 &gt;= &#39;0&#39; &amp;&amp; y1 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y2 &gt;= &#39;0&#39; &amp;&amp; y2 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y3 &gt;= &#39;0&#39; &amp;&amp; y3 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            year = (y0 - &#39;0&#39;) * 1000 + (y1 - &#39;0&#39;) * 100 + (y2 - &#39;0&#39;) * 10 + (y3 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;not support input &quot;, str, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int month;
+<b class="nc">&nbsp;        if (m0 &gt;= &#39;0&#39; &amp;&amp; m0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; m1 &gt;= &#39;0&#39; &amp;&amp; m1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            month = (m0 - &#39;0&#39;) * 10 + (m1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;not support input &quot;, str, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int dom;
+<b class="nc">&nbsp;        if (d0 &gt;= &#39;0&#39; &amp;&amp; d0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; d1 &gt;= &#39;0&#39; &amp;&amp; d1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            dom = (d0 - &#39;0&#39;) * 10 + (d1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;not support input &quot;, str, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int hour;
+<b class="nc">&nbsp;        if (h0 &gt;= &#39;0&#39; &amp;&amp; h0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; h1 &gt;= &#39;0&#39; &amp;&amp; h1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            hour = (h0 - &#39;0&#39;) * 10 + (h1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;not support input &quot;, str, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int minute;
+<b class="nc">&nbsp;        if (i0 &gt;= &#39;0&#39; &amp;&amp; i0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; i1 &gt;= &#39;0&#39; &amp;&amp; i1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            minute = (i0 - &#39;0&#39;) * 10 + (i1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;not support input &quot;, str, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int second;
+<b class="nc">&nbsp;        if (s0 &gt;= &#39;0&#39; &amp;&amp; s0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; s1 &gt;= &#39;0&#39; &amp;&amp; s1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            second = (s0 - &#39;0&#39;) * 10 + (s1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;not support input &quot;, str, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        long millis;
+<b class="nc">&nbsp;        if (DEFAULT_ZONE_ID == SHANGHAI_ZONE_ID || DEFAULT_ZONE_ID.getRules() == DateUtils.SHANGHAI_ZONE_RULES) {</b>
+<b class="nc">&nbsp;            long seconds = DateUtils.utcSeconds(year, month, dom, hour, minute, second);</b>
+<b class="nc">&nbsp;            int zoneOffsetTotalSeconds = DateUtils.getShanghaiZoneOffsetTotalSeconds(seconds);</b>
+<b class="nc">&nbsp;            seconds -= zoneOffsetTotalSeconds;</b>
+<b class="nc">&nbsp;            millis = seconds * 1000L;</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            LocalDate localDate = LocalDate.of(year, month, dom);</b>
+<b class="nc">&nbsp;            LocalTime localTime = LocalTime.of(hour, minute, second, 0);</b>
+<b class="nc">&nbsp;            LocalDateTime ldt = LocalDateTime.of(localDate, localTime);</b>
+<b class="nc">&nbsp;            ZoneOffset offset = DEFAULT_ZONE_ID.getRules().getOffset(ldt);</b>
+<b class="nc">&nbsp;            millis = ldt.toEpochSecond(offset) * 1000;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new Date(millis);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void main(String[] args) throws Exception {
+<b class="nc">&nbsp;        Options options = new OptionsBuilder()</b>
+<b class="nc">&nbsp;                .include(DateParse.class.getName())</b>
+<b class="nc">&nbsp;                .mode(Mode.Throughput)</b>
+<b class="nc">&nbsp;                .timeUnit(TimeUnit.MILLISECONDS)</b>
+<b class="nc">&nbsp;                .warmupIterations(3)</b>
+<b class="nc">&nbsp;                .forks(1)</b>
+<b class="nc">&nbsp;                .build();</b>
+<b class="nc">&nbsp;        new Runner(options).run();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:22</div>
+</div>
+</body>
+</html>

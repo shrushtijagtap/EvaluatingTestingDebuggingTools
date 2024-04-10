@@ -1,0 +1,154 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectWriterException</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectWriterException (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectWriterException</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class ObjectWriterException
+&nbsp;        extends ObjectWriterAdapter&lt;Exception&gt; {
+&nbsp;    public ObjectWriterException(Class objectType, long features, List&lt;FieldWriter&gt; fieldWriters) {
+<b class="nc">&nbsp;        super(objectType, null, null, features, fieldWriters);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeJSONB(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;        writeClassInfo(jsonWriter);</b>
+&nbsp;
+<b class="nc">&nbsp;        int size = fieldWriters.size();</b>
+<b class="nc">&nbsp;        jsonWriter.startObject();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; size; ++i) {</b>
+<b class="nc">&nbsp;            FieldWriter fw = fieldWriters.get(i);</b>
+<b class="nc">&nbsp;            fw.write(jsonWriter, object);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        jsonWriter.endObject();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;        if (jsonWriter.isJSONB()) {</b>
+<b class="nc">&nbsp;            writeJSONB(jsonWriter, object, fieldName, fieldType, features);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (hasFilter(jsonWriter)) {</b>
+<b class="nc">&nbsp;            writeWithFilter(jsonWriter, object);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        jsonWriter.startObject();</b>
+&nbsp;
+<b class="nc">&nbsp;        writeTypeInfo(jsonWriter);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0, size = fieldWriters.size(); i &lt; size; ++i) {</b>
+<b class="nc">&nbsp;            FieldWriter fieldWriter = fieldWriters.get(i);</b>
+<b class="nc">&nbsp;            fieldWriter.write(jsonWriter, object);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        jsonWriter.endObject();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:00</div>
+</div>
+</body>
+</html>

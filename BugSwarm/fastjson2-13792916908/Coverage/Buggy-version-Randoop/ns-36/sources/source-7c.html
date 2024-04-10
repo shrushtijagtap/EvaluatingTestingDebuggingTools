@@ -1,0 +1,212 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderImplCharValueArray</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderImplCharValueArray (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderImplCharValueArray</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/54)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONB;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;final class ObjectReaderImplCharValueArray
+&nbsp;        extends ObjectReaderPrimitive {
+<b class="nc">&nbsp;    static final ObjectReaderImplCharValueArray INSTANCE = new ObjectReaderImplCharValueArray(null);</b>
+<b class="nc">&nbsp;    static final long TYPE_HASH = Fnv.hashCode64(&quot;[C&quot;);</b>
+&nbsp;
+&nbsp;    final Function&lt;char[], Object&gt; builder;
+&nbsp;
+&nbsp;    public ObjectReaderImplCharValueArray(Function&lt;char[], Object&gt; builder) {
+<b class="nc">&nbsp;        super(char[].class);</b>
+<b class="nc">&nbsp;        this.builder = builder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        if (jsonReader.readIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.current() == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;            String str = jsonReader.readString();</b>
+<b class="nc">&nbsp;            char[] chars = str.toCharArray();</b>
+<b class="nc">&nbsp;            if (builder != null) {</b>
+<b class="nc">&nbsp;                return builder.apply(chars);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return chars;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.nextIfMatch(&#39;[&#39;)) {</b>
+<b class="nc">&nbsp;            char[] values = new char[16];</b>
+<b class="nc">&nbsp;            int size = 0;</b>
+&nbsp;            for (; ; ) {
+<b class="nc">&nbsp;                if (jsonReader.nextIfMatch(&#39;]&#39;)) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                int minCapacity = size + 1;</b>
+<b class="nc">&nbsp;                if (minCapacity - values.length &gt; 0) {</b>
+<b class="nc">&nbsp;                    int oldCapacity = values.length;</b>
+<b class="nc">&nbsp;                    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                    if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                        newCapacity = minCapacity;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    values = Arrays.copyOf(values, newCapacity);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (jsonReader.isInt()) {</b>
+<b class="nc">&nbsp;                    values[size++] = (char) jsonReader.readInt32Value();</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                String str = jsonReader.readString();</b>
+<b class="nc">&nbsp;                values[size++] = (str == null) ? &#39;\0&#39; : str.charAt(0);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            jsonReader.nextIfMatch(&#39;,&#39;);</b>
+&nbsp;
+<b class="nc">&nbsp;            char[] chars = Arrays.copyOf(values, size);</b>
+<b class="nc">&nbsp;            if (builder != null) {</b>
+<b class="nc">&nbsp;                return builder.apply(chars);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return chars;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(jsonReader.info(&quot;TODO&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        if (jsonReader.nextIfMatch(JSONB.Constants.BC_TYPED_ANY)) {</b>
+<b class="nc">&nbsp;            long typeHashCode = jsonReader.readTypeHashCode();</b>
+<b class="nc">&nbsp;            if (typeHashCode != TYPE_HASH) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;not support autoType : &quot; + jsonReader.getString());</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.isString()) {</b>
+<b class="nc">&nbsp;            String str = jsonReader.readString();</b>
+<b class="nc">&nbsp;            return str.toCharArray();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int entryCnt = jsonReader.startArray();</b>
+<b class="nc">&nbsp;        if (entryCnt == -1) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        char[] chars = new char[entryCnt];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; entryCnt; i++) {</b>
+<b class="nc">&nbsp;            if (jsonReader.isInt()) {</b>
+<b class="nc">&nbsp;                chars[i] = (char) jsonReader.readInt32Value();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                chars[i] = jsonReader.readString().charAt(0);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (builder != null) {</b>
+<b class="nc">&nbsp;            return builder.apply(chars);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return chars;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:21</div>
+</div>
+</body>
+</html>

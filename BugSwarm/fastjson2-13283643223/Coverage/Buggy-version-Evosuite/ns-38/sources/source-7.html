@@ -1,0 +1,573 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GuavaSupport</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.util</a>
+</div>
+
+<h1>Coverage Summary for Class: GuavaSupport (com.alibaba.fastjson2.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GuavaSupport</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GuavaSupport$ArrayListMultimapConvertFunction</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GuavaSupport$AsMapWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GuavaSupport$ImmutableListConvertFunction</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GuavaSupport$ImmutableSetConvertFunction</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GuavaSupport$ImmutableSingletonMapConvertFunction</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GuavaSupport$SingletonImmutableBiMapConvertFunction</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/158)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.util;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONB;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.support.LambdaMiscCodec;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriter;
+&nbsp;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.BiFunction;
+&nbsp;import java.util.function.Function;
+&nbsp;import java.util.function.Supplier;
+&nbsp;
+<b class="nc">&nbsp;public class GuavaSupport {</b>
+&nbsp;    static Class CLASS_IMMUTABLE_MAP;
+&nbsp;    static Class CLASS_IMMUTABLE_LIST;
+&nbsp;    static Class CLASS_IMMUTABLE_SET;
+&nbsp;    static Class CLASS_ARRAYLIST_MULTI_MAP;
+&nbsp;
+&nbsp;    static Supplier FUNC_IMMUTABLE_MAP_OF_0;
+&nbsp;    static BiFunction FUNC_IMMUTABLE_MAP_OF_1;
+&nbsp;    static Function FUNC_IMMUTABLE_MAP_COPY_OF;
+&nbsp;
+&nbsp;    static Supplier FUNC_IMMUTABLE_LIST_OF_0;
+&nbsp;    static Function FUNC_IMMUTABLE_LIST_OF_1;
+&nbsp;    static Function FUNC_IMMUTABLE_LIST_COPY_OF;
+&nbsp;
+&nbsp;    static Supplier FUNC_IMMUTABLE_SET_OF_0;
+&nbsp;    static Function FUNC_IMMUTABLE_SET_OF_1;
+&nbsp;    static Function FUNC_IMMUTABLE_SET_COPY_OF;
+&nbsp;
+&nbsp;    static Supplier FUNC_ARRAYLIST_MULTI_MAP_CREATE;
+&nbsp;    static Method METHOD_ARRAYLIST_MULTI_MAP_PUT_ALL;
+&nbsp;    static volatile boolean METHOD_ARRAYLIST_MULTI_MAP_ERROR;
+&nbsp;
+&nbsp;    static BiFunction FUNC_SINGLETON_IMMUTABLE_BIMAP;
+&nbsp;
+&nbsp;    public static Function immutableListConverter() {
+<b class="nc">&nbsp;        return new ImmutableListConvertFunction();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Function immutableSetConverter() {
+<b class="nc">&nbsp;        return new ImmutableSetConvertFunction();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Function immutableMapConverter() {
+<b class="nc">&nbsp;        return new ImmutableSingletonMapConvertFunction();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Function singletonBiMapConverter() {
+<b class="nc">&nbsp;        return new SingletonImmutableBiMapConvertFunction();</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    static class ImmutableSetConvertFunction</b>
+&nbsp;            implements Function {
+&nbsp;        @Override
+&nbsp;        public Object apply(Object object) {
+<b class="nc">&nbsp;            if (CLASS_IMMUTABLE_SET == null) {</b>
+<b class="nc">&nbsp;                CLASS_IMMUTABLE_SET = TypeUtils.loadClass(&quot;com.google.common.collect.ImmutableSet&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (CLASS_IMMUTABLE_SET == null) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;class not found : com.google.common.collect.ImmutableSet&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            List list = (List) object;</b>
+<b class="nc">&nbsp;            if (list.isEmpty()) {</b>
+<b class="nc">&nbsp;                if (FUNC_IMMUTABLE_SET_OF_0 == null) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        Method method = CLASS_IMMUTABLE_SET.getMethod(&quot;of&quot;);</b>
+<b class="nc">&nbsp;                        FUNC_IMMUTABLE_SET_OF_0 = LambdaMiscCodec.createSupplier(method);</b>
+<b class="nc">&nbsp;                    } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(&quot;method not found : com.google.common.collect.ImmutableSet.of&quot;, e);</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return FUNC_IMMUTABLE_SET_OF_0.get();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (list.size() == 1) {</b>
+<b class="nc">&nbsp;                if (FUNC_IMMUTABLE_SET_OF_1 == null) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        Method method = CLASS_IMMUTABLE_SET.getMethod(&quot;of&quot;, Object.class);</b>
+<b class="nc">&nbsp;                        FUNC_IMMUTABLE_SET_OF_1 = LambdaMiscCodec.createFunction(method);</b>
+<b class="nc">&nbsp;                    } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(&quot;method not found : com.google.common.collect.ImmutableSet.of&quot;, e);</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Object first = list.get(0);</b>
+<b class="nc">&nbsp;                return FUNC_IMMUTABLE_SET_OF_1.apply(first);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (FUNC_IMMUTABLE_SET_COPY_OF == null) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    Method method = CLASS_IMMUTABLE_SET.getMethod(&quot;copyOf&quot;, Collection.class);</b>
+<b class="nc">&nbsp;                    FUNC_IMMUTABLE_SET_COPY_OF = LambdaMiscCodec.createFunction(method);</b>
+<b class="nc">&nbsp;                } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;method not found : com.google.common.collect.ImmutableSet.copyOf&quot;, e);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return FUNC_IMMUTABLE_SET_COPY_OF.apply(list);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    static class ImmutableListConvertFunction</b>
+&nbsp;            implements Function {
+&nbsp;        @Override
+&nbsp;        public Object apply(Object object) {
+<b class="nc">&nbsp;            if (CLASS_IMMUTABLE_LIST == null) {</b>
+<b class="nc">&nbsp;                CLASS_IMMUTABLE_LIST = TypeUtils.loadClass(&quot;com.google.common.collect.ImmutableList&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (CLASS_IMMUTABLE_LIST == null) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;class not found : com.google.common.collect.ImmutableList&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            List list = (List) object;</b>
+<b class="nc">&nbsp;            if (list.isEmpty()) {</b>
+<b class="nc">&nbsp;                if (FUNC_IMMUTABLE_LIST_OF_0 == null) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        Method method = CLASS_IMMUTABLE_LIST.getMethod(&quot;of&quot;);</b>
+<b class="nc">&nbsp;                        FUNC_IMMUTABLE_LIST_OF_0 = LambdaMiscCodec.createSupplier(method);</b>
+<b class="nc">&nbsp;                    } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(&quot;method not found : com.google.common.collect.ImmutableList.of&quot;, e);</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return FUNC_IMMUTABLE_LIST_OF_0.get();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (list.size() == 1) {</b>
+<b class="nc">&nbsp;                if (FUNC_IMMUTABLE_LIST_OF_1 == null) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        Method method = CLASS_IMMUTABLE_LIST.getMethod(&quot;of&quot;, Object.class);</b>
+<b class="nc">&nbsp;                        FUNC_IMMUTABLE_LIST_OF_1 = LambdaMiscCodec.createFunction(method);</b>
+<b class="nc">&nbsp;                    } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(&quot;method not found : com.google.common.collect.ImmutableList.of&quot;, e);</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Object first = list.get(0);</b>
+<b class="nc">&nbsp;                return FUNC_IMMUTABLE_LIST_OF_1.apply(first);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (FUNC_IMMUTABLE_LIST_COPY_OF == null) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    Method method = CLASS_IMMUTABLE_LIST.getMethod(&quot;copyOf&quot;, Collection.class);</b>
+<b class="nc">&nbsp;                    FUNC_IMMUTABLE_LIST_COPY_OF = LambdaMiscCodec.createFunction(method);</b>
+<b class="nc">&nbsp;                } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;method not found : com.google.common.collect.ImmutableList.copyOf&quot;, e);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return FUNC_IMMUTABLE_LIST_COPY_OF.apply(list);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ObjectWriter createAsMapWriter(Class objectClass) {
+<b class="nc">&nbsp;        return new AsMapWriter(objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static class AsMapWriter
+&nbsp;            implements ObjectWriter {
+&nbsp;        final Class objectClass;
+&nbsp;        final String typeName;
+&nbsp;        final long typeNameHash;
+&nbsp;        final Function asMap;
+&nbsp;
+&nbsp;        protected byte[] typeNameJSONB;
+&nbsp;
+<b class="nc">&nbsp;        public AsMapWriter(Class objectClass) {</b>
+<b class="nc">&nbsp;            this.objectClass = objectClass;</b>
+<b class="nc">&nbsp;            this.typeName = TypeUtils.getTypeName(objectClass);</b>
+<b class="nc">&nbsp;            this.typeNameHash = Fnv.hashCode64(typeName);</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                Method method = objectClass.getMethod(&quot;asMap&quot;);</b>
+<b class="nc">&nbsp;                asMap = LambdaMiscCodec.createFunction(method);</b>
+<b class="nc">&nbsp;            } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;create Guava AsMapWriter error&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;            Map map = (Map) asMap.apply(object);</b>
+<b class="nc">&nbsp;            jsonWriter.write(map);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void writeJSONB(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;            if (jsonWriter.isWriteTypeInfo(object, fieldType, features)) {</b>
+<b class="nc">&nbsp;                if (typeNameJSONB == null) {</b>
+<b class="nc">&nbsp;                    typeNameJSONB = JSONB.toBytes(typeName);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                jsonWriter.writeTypeName(typeNameJSONB, typeNameHash);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Map map = (Map) asMap.apply(object);</b>
+<b class="nc">&nbsp;            jsonWriter.write(map);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Function createConvertFunction(Class objectClass) {
+<b class="nc">&nbsp;        String instanceTypeName = objectClass.getName();</b>
+<b class="nc">&nbsp;        switch (instanceTypeName) {</b>
+&nbsp;            case &quot;com.google.common.collect.ArrayListMultimap&quot;:
+<b class="nc">&nbsp;                if (CLASS_ARRAYLIST_MULTI_MAP == null) {</b>
+<b class="nc">&nbsp;                    CLASS_ARRAYLIST_MULTI_MAP = objectClass;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (!METHOD_ARRAYLIST_MULTI_MAP_ERROR &amp;&amp; FUNC_ARRAYLIST_MULTI_MAP_CREATE == null) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        Method method = CLASS_ARRAYLIST_MULTI_MAP.getMethod(&quot;create&quot;);</b>
+<b class="nc">&nbsp;                        FUNC_ARRAYLIST_MULTI_MAP_CREATE = LambdaMiscCodec.createSupplier(method);</b>
+<b class="nc">&nbsp;                    } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;                        METHOD_ARRAYLIST_MULTI_MAP_ERROR = true;</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (!METHOD_ARRAYLIST_MULTI_MAP_ERROR &amp;&amp; METHOD_ARRAYLIST_MULTI_MAP_PUT_ALL == null) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        METHOD_ARRAYLIST_MULTI_MAP_PUT_ALL = CLASS_ARRAYLIST_MULTI_MAP.getMethod(&quot;putAll&quot;, Object.class, Iterable.class);</b>
+<b class="nc">&nbsp;                    } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;                        METHOD_ARRAYLIST_MULTI_MAP_ERROR = true;</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (FUNC_ARRAYLIST_MULTI_MAP_CREATE != null &amp;&amp; METHOD_ARRAYLIST_MULTI_MAP_PUT_ALL != null) {</b>
+<b class="nc">&nbsp;                    return new ArrayListMultimapConvertFunction(FUNC_ARRAYLIST_MULTI_MAP_CREATE, METHOD_ARRAYLIST_MULTI_MAP_PUT_ALL);</b>
+&nbsp;                }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;create map error : &quot; + objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static class ArrayListMultimapConvertFunction
+&nbsp;            implements Function {
+&nbsp;        final Supplier method;
+&nbsp;        final Method putAllMethod;
+&nbsp;
+<b class="nc">&nbsp;        public ArrayListMultimapConvertFunction(Supplier method, Method putAllMethod) {</b>
+<b class="nc">&nbsp;            this.method = method;</b>
+<b class="nc">&nbsp;            this.putAllMethod = putAllMethod;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object apply(Object o) {
+<b class="nc">&nbsp;            Map map = (Map) o;</b>
+&nbsp;
+<b class="nc">&nbsp;            Object multiMap = method.get();</b>
+&nbsp;
+<b class="nc">&nbsp;            for (Iterator&lt;Map.Entry&gt; it = map.entrySet().iterator(); it.hasNext();) {</b>
+<b class="nc">&nbsp;                Map.Entry entry = it.next();</b>
+<b class="nc">&nbsp;                Object key = entry.getKey();</b>
+<b class="nc">&nbsp;                Iterable item = (Iterable) entry.getValue();</b>
+&nbsp;
+&nbsp;                try {
+<b class="nc">&nbsp;                    putAllMethod.invoke(multiMap, key, item);</b>
+<b class="nc">&nbsp;                } catch (Throwable e) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;putAll ArrayListMultimap error&quot;, e);</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            return multiMap;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    static class SingletonImmutableBiMapConvertFunction</b>
+&nbsp;            implements Function {
+&nbsp;        @Override
+&nbsp;        public Object apply(Object object) {
+<b class="nc">&nbsp;            if (FUNC_SINGLETON_IMMUTABLE_BIMAP == null) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    Constructor constructor = TypeUtils.loadClass(&quot;com.google.common.collect.SingletonImmutableBiMap&quot;)</b>
+<b class="nc">&nbsp;                            .getDeclaredConstructor(Object.class, Object.class);</b>
+<b class="nc">&nbsp;                    FUNC_SINGLETON_IMMUTABLE_BIMAP = LambdaMiscCodec.createBiFunction(constructor);</b>
+<b class="nc">&nbsp;                } catch (NoSuchMethodException | SecurityException e) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;method not found : com.google.common.collect.SingletonImmutableBiMap(Object, Object)&quot;, e);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Map map = (Map) object;</b>
+<b class="nc">&nbsp;            Map.Entry entry = (Map.Entry) map.entrySet().iterator().next();</b>
+&nbsp;
+<b class="nc">&nbsp;            return FUNC_SINGLETON_IMMUTABLE_BIMAP.apply(entry.getKey(), entry.getValue());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    static class ImmutableSingletonMapConvertFunction</b>
+&nbsp;            implements Function {
+&nbsp;        @Override
+&nbsp;        public Object apply(Object object) {
+<b class="nc">&nbsp;            if (CLASS_IMMUTABLE_MAP == null) {</b>
+<b class="nc">&nbsp;                CLASS_IMMUTABLE_MAP = TypeUtils.loadClass(&quot;com.google.common.collect.ImmutableMap&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (CLASS_IMMUTABLE_MAP == null) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;class not found : com.google.common.collect.ImmutableMap&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Map map = (Map) object;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (map.size() == 0) {</b>
+<b class="nc">&nbsp;                if (FUNC_IMMUTABLE_MAP_OF_0 == null) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        Method method = CLASS_IMMUTABLE_MAP.getMethod(&quot;of&quot;);</b>
+<b class="nc">&nbsp;                        FUNC_IMMUTABLE_MAP_OF_0 = LambdaMiscCodec.createSupplier(method);</b>
+<b class="nc">&nbsp;                    } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(&quot;method not found : com.google.common.collect.ImmutableMap.of&quot;, e);</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return FUNC_IMMUTABLE_MAP_OF_0.get();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (map.size() == 1) {</b>
+<b class="nc">&nbsp;                if (FUNC_IMMUTABLE_MAP_OF_1 == null) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        Method method = CLASS_IMMUTABLE_MAP.getMethod(&quot;of&quot;, Object.class, Object.class);</b>
+<b class="nc">&nbsp;                        method.setAccessible(true);</b>
+<b class="nc">&nbsp;                        FUNC_IMMUTABLE_MAP_OF_1 = LambdaMiscCodec.createBiFunction(method);</b>
+<b class="nc">&nbsp;                    } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(&quot;method not found : com.google.common.collect.ImmutableBiMap.of&quot;, e);</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Map.Entry entry = (Map.Entry) map.entrySet().iterator().next();</b>
+<b class="nc">&nbsp;                return FUNC_IMMUTABLE_MAP_OF_1.apply(entry.getKey(), entry.getValue());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (FUNC_IMMUTABLE_MAP_COPY_OF == null) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    Method method = CLASS_IMMUTABLE_MAP.getMethod(&quot;copyOf&quot;, Map.class);</b>
+<b class="nc">&nbsp;                    FUNC_IMMUTABLE_MAP_COPY_OF = LambdaMiscCodec.createFunction(method);</b>
+<b class="nc">&nbsp;                } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;method not found : com.google.common.collect.ImmutableBiMap.copyOf&quot;, e);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return FUNC_IMMUTABLE_MAP_COPY_OF.apply(map);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:20</div>
+</div>
+</body>
+</html>

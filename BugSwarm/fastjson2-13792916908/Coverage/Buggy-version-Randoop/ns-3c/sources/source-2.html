@@ -1,0 +1,535 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ArrowUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.support.csv</a>
+</div>
+
+<h1>Coverage Summary for Class: ArrowUtils (com.alibaba.fastjson2.support.csv)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ArrowUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/246)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.support.csv;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.util.DateUtils;
+&nbsp;import com.alibaba.fastjson2.util.JDKUtils;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;import com.alibaba.fastjson2.util.UnsafeUtils;
+&nbsp;import org.apache.arrow.memory.ArrowBuf;
+&nbsp;import org.apache.arrow.vector.*;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.nio.ByteOrder;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.*;
+&nbsp;
+<b class="nc">&nbsp;public class ArrowUtils {</b>
+<b class="nc">&nbsp;    static final boolean LITTLE_ENDIAN = ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN;</b>
+&nbsp;    static final byte DECIMAL_TYPE_WIDTH = 16;
+&nbsp;
+&nbsp;    public static void write(CSVWriter writer, VectorSchemaRoot root) throws IOException {
+<b class="nc">&nbsp;        List&lt;FieldVector&gt; fieldVectors = root.getFieldVectors();</b>
+&nbsp;
+<b class="nc">&nbsp;        int rowCount = root.getRowCount();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; rowCount; i++) {</b>
+<b class="nc">&nbsp;            for (int j = 0; j &lt; fieldVectors.size(); j++) {</b>
+<b class="nc">&nbsp;                if (j != 0) {</b>
+<b class="nc">&nbsp;                    writer.writeComma();</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                FieldVector fieldVector = fieldVectors.get(j);</b>
+<b class="nc">&nbsp;                if (fieldVector.isNull(i)) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (fieldVector instanceof IntVector) {</b>
+<b class="nc">&nbsp;                    int value = ((IntVector) fieldVector).get(i);</b>
+<b class="nc">&nbsp;                    writer.writeInt32(value);</b>
+<b class="nc">&nbsp;                } else if (fieldVector instanceof BigIntVector) {</b>
+<b class="nc">&nbsp;                    long value = ((BigIntVector) fieldVector).get(i);</b>
+<b class="nc">&nbsp;                    writer.writeInt64(value);</b>
+<b class="nc">&nbsp;                } else if (fieldVector instanceof VarCharVector) {</b>
+<b class="nc">&nbsp;                    byte[] value = ((VarCharVector) fieldVector).get(i);</b>
+<b class="nc">&nbsp;                    writer.writeString(value);</b>
+<b class="nc">&nbsp;                } else if (fieldVector instanceof DecimalVector) {</b>
+<b class="nc">&nbsp;                    DecimalVector decimalVector = (DecimalVector) fieldVector;</b>
+<b class="nc">&nbsp;                    writeDecimal(writer, i, decimalVector);</b>
+<b class="nc">&nbsp;                } else if (fieldVector instanceof DateMilliVector) {</b>
+<b class="nc">&nbsp;                    long millis = ((DateMilliVector) fieldVector).get(i);</b>
+<b class="nc">&nbsp;                    writer.writeDate(millis);</b>
+<b class="nc">&nbsp;                } else if (fieldVector instanceof Float8Vector) {</b>
+<b class="nc">&nbsp;                    double value = ((Float8Vector) fieldVector).get(i);</b>
+<b class="nc">&nbsp;                    writer.writeDouble(value);</b>
+<b class="nc">&nbsp;                } else if (fieldVector instanceof Float4Vector) {</b>
+<b class="nc">&nbsp;                    float value = ((Float4Vector) fieldVector).get(i);</b>
+<b class="nc">&nbsp;                    writer.writeFloat(value);</b>
+<b class="nc">&nbsp;                } else if (fieldVector instanceof SmallIntVector) {</b>
+<b class="nc">&nbsp;                    short value = ((SmallIntVector) fieldVector).get(i);</b>
+<b class="nc">&nbsp;                    writer.writeInt32(value);</b>
+<b class="nc">&nbsp;                } else if (fieldVector instanceof TinyIntVector) {</b>
+<b class="nc">&nbsp;                    short value = ((TinyIntVector) fieldVector).get(i);</b>
+<b class="nc">&nbsp;                    writer.writeInt32(value);</b>
+<b class="nc">&nbsp;                } else if (fieldVector instanceof BitVector) {</b>
+<b class="nc">&nbsp;                    int value = ((BitVector) fieldVector).get(i);</b>
+<b class="nc">&nbsp;                    writer.writeInt32(value);</b>
+<b class="nc">&nbsp;                } else if (fieldVector instanceof Decimal256Vector) {</b>
+<b class="nc">&nbsp;                    Object object = fieldVector.getObject(i);</b>
+<b class="nc">&nbsp;                    writer.writeString(object.toString());</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;TODO : &quot; + fieldVector.getClass().getName());</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            writer.writeLine();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void writeDecimal(
+&nbsp;            CSVWriter writer,
+&nbsp;            int row,
+&nbsp;            DecimalVector decimalVector
+&nbsp;    ) {
+<b class="nc">&nbsp;        int precision = decimalVector.getPrecision();</b>
+&nbsp;
+<b class="nc">&nbsp;        decimalVector.getObject(row);</b>
+<b class="nc">&nbsp;        if (precision &lt; 20) {</b>
+<b class="nc">&nbsp;            final long startIndex = (long) row * DecimalVector.TYPE_WIDTH;</b>
+<b class="nc">&nbsp;            int scale = decimalVector.getScale();</b>
+&nbsp;            long unscaleValue;
+<b class="nc">&nbsp;            ArrowBuf dataBuffer = decimalVector.getDataBuffer();</b>
+<b class="nc">&nbsp;            if (LITTLE_ENDIAN) {</b>
+<b class="nc">&nbsp;                unscaleValue = dataBuffer.getLong(startIndex);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                long littleEndianValue = dataBuffer.getLong(startIndex + 8);</b>
+<b class="nc">&nbsp;                unscaleValue = Long.reverseBytes(littleEndianValue);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            writer.writeDecimal(unscaleValue, scale);</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            BigDecimal decimal = decimalVector.getObject(row);</b>
+<b class="nc">&nbsp;            writer.writeDecimal(decimal);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setValue(FieldVector vector, int row, String value) {
+<b class="nc">&nbsp;        if (value == null || value.isEmpty()) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof IntVector) {</b>
+<b class="nc">&nbsp;            ((IntVector) vector).set(row, Integer.parseInt(value));</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof BigIntVector) {</b>
+<b class="nc">&nbsp;            ((BigIntVector) vector).set(row, Long.parseLong(value));</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof DecimalVector) {</b>
+<b class="nc">&nbsp;            DecimalVector decimalVector = (DecimalVector) vector;</b>
+<b class="nc">&nbsp;            ArrowUtils.setDecimal(decimalVector, row, value);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof DateMilliVector) {</b>
+<b class="nc">&nbsp;            long millis = DateUtils.parseMillis(value);</b>
+<b class="nc">&nbsp;            ((DateMilliVector) vector).set(row, millis);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof VarCharVector) {</b>
+<b class="nc">&nbsp;            VarCharVector varCharVector = (VarCharVector) vector;</b>
+<b class="nc">&nbsp;            ArrowUtils.setString(varCharVector, row, value);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof Float8Vector) {</b>
+<b class="nc">&nbsp;            double doubleValue = Double.parseDouble(value);</b>
+<b class="nc">&nbsp;            ((Float8Vector) vector).set(row, doubleValue);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof Float4Vector) {</b>
+<b class="nc">&nbsp;            float floatValue = Float.parseFloat(value);</b>
+<b class="nc">&nbsp;            ((Float4Vector) vector).set(row, floatValue);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof TinyIntVector) {</b>
+<b class="nc">&nbsp;            int intValue = Integer.parseInt(value);</b>
+<b class="nc">&nbsp;            ((TinyIntVector) vector).set(row, (byte) intValue);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof SmallIntVector) {</b>
+<b class="nc">&nbsp;            int intValue = Integer.parseInt(value);</b>
+<b class="nc">&nbsp;            ((SmallIntVector) vector).set(row, (short) intValue);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof TimeStampMilliVector) {</b>
+<b class="nc">&nbsp;            long millis = DateUtils.parseMillis(value);</b>
+<b class="nc">&nbsp;            ((TimeStampMilliVector) vector).set(row, millis);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof BitVector) {</b>
+<b class="nc">&nbsp;            Boolean booleanValue = Boolean.parseBoolean(value);</b>
+<b class="nc">&nbsp;            if (value != null) {</b>
+<b class="nc">&nbsp;                int intValue = booleanValue.booleanValue() ? 1 : 0;</b>
+<b class="nc">&nbsp;                ((BitVector) vector).set(row, intValue);</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (vector instanceof Decimal256Vector) {</b>
+<b class="nc">&nbsp;            BigDecimal decimal = TypeUtils.toBigDecimal(value);</b>
+<b class="nc">&nbsp;            Decimal256Vector decimalVector = (Decimal256Vector) vector;</b>
+<b class="nc">&nbsp;            int scale = decimalVector.getScale();</b>
+<b class="nc">&nbsp;            if (decimal.scale() != scale) {</b>
+<b class="nc">&nbsp;                decimal = decimal.setScale(scale);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            decimalVector.set(row, decimal);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;TODO &quot; + vector.getClass());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setDecimal(DecimalVector vector, int row, String str) {
+<b class="nc">&nbsp;        if (str == null || str.length() == 0) {</b>
+<b class="nc">&nbsp;            vector.setNull(row);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (STRING_CODER != null &amp;&amp; STRING_VALUE != null &amp;&amp; STRING_CODER.applyAsInt(str) == 0) {</b>
+<b class="nc">&nbsp;            byte[] bytes = JDKUtils.STRING_VALUE.apply(str);</b>
+<b class="nc">&nbsp;            setDecimal(vector, row, bytes, 0, bytes.length);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char[] chars = JDKUtils.getCharArray(str);</b>
+<b class="nc">&nbsp;        setDecimal(vector, row, chars, 0, chars.length);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setString(VarCharVector vector, int row, String str) {
+<b class="nc">&nbsp;        if (str == null || str.length() == 0) {</b>
+<b class="nc">&nbsp;            vector.setNull(row);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        byte[] bytes;
+<b class="nc">&nbsp;        if (STRING_CODER != null &amp;&amp; STRING_VALUE != null &amp;&amp; STRING_CODER.applyAsInt(str) == 0) {</b>
+<b class="nc">&nbsp;            bytes = JDKUtils.STRING_VALUE.apply(str);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            bytes = str.getBytes(StandardCharsets.UTF_8);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        vector.set(row, bytes);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setDecimal(DecimalVector vector, int row, char[] bytes, int off, int len) {
+<b class="nc">&nbsp;        boolean negative = false;</b>
+<b class="nc">&nbsp;        int j = off;</b>
+<b class="nc">&nbsp;        if (bytes[off] == &#39;-&#39;) {</b>
+<b class="nc">&nbsp;            negative = true;</b>
+<b class="nc">&nbsp;            j++;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (len &lt;= 20 || (negative &amp;&amp; len == 21)) {</b>
+<b class="nc">&nbsp;            int end = off + len;</b>
+<b class="nc">&nbsp;            int dot = 0;</b>
+<b class="nc">&nbsp;            int dotIndex = -1;</b>
+<b class="nc">&nbsp;            long unscaleValue = 0;</b>
+<b class="nc">&nbsp;            for (; j &lt; end; j++) {</b>
+<b class="nc">&nbsp;                char b = bytes[j];</b>
+<b class="nc">&nbsp;                if (b == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;                    dot++;</b>
+<b class="nc">&nbsp;                    if (dot &gt; 1) {</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    dotIndex = j;</b>
+<b class="nc">&nbsp;                } else if (b &gt;= &#39;0&#39; &amp;&amp; b &lt;= &#39;9&#39;) {</b>
+<b class="nc">&nbsp;                    unscaleValue = unscaleValue * 10 + (b - &#39;0&#39;);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    unscaleValue = -1;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            int scale = 0;</b>
+<b class="nc">&nbsp;            if (unscaleValue &gt;= 0 &amp;&amp; dot &lt;= 1) {</b>
+<b class="nc">&nbsp;                if (dotIndex != -1) {</b>
+<b class="nc">&nbsp;                    scale = len - (dotIndex - off) - 1;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                boolean overflow = false;</b>
+<b class="nc">&nbsp;                long unscaleValueV = unscaleValue;</b>
+<b class="nc">&nbsp;                int scaleV = vector.getScale();</b>
+<b class="nc">&nbsp;                if (scaleV &gt; scale) {</b>
+<b class="nc">&nbsp;                    for (int i = scale; i &lt; scaleV; i++) {</b>
+<b class="nc">&nbsp;                        unscaleValueV *= 10;</b>
+<b class="nc">&nbsp;                        if (unscaleValueV &lt; 0) {</b>
+<b class="nc">&nbsp;                            overflow = true;</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                } else if (scaleV &lt; scale) {</b>
+<b class="nc">&nbsp;                    overflow = true;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (!overflow) {</b>
+<b class="nc">&nbsp;                    if (negative) {</b>
+<b class="nc">&nbsp;                        unscaleValueV = -unscaleValueV;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    BitVectorHelper.setBit(vector.getValidityBuffer(), row);</b>
+&nbsp;
+<b class="nc">&nbsp;                    ArrowBuf dataBuffer = vector.getDataBuffer();</b>
+<b class="nc">&nbsp;                    final long startIndex = (long) row * DECIMAL_TYPE_WIDTH;</b>
+<b class="nc">&nbsp;                    if (LITTLE_ENDIAN) {</b>
+&nbsp;                        // Decimal stored as native-endian, need to swap data bytes before writing to ArrowBuf if LE
+&nbsp;                        // Write LE data
+<b class="nc">&nbsp;                        dataBuffer.setLong(startIndex, unscaleValueV);</b>
+&nbsp;                    } else {
+&nbsp;                        // Write BE data
+<b class="nc">&nbsp;                        dataBuffer.setLong(startIndex, 0);</b>
+<b class="nc">&nbsp;                        long littleEndianValue = Long.reverseBytes(unscaleValueV);</b>
+<b class="nc">&nbsp;                        dataBuffer.setLong(startIndex + 8, littleEndianValue);</b>
+&nbsp;                    }
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (negative) {</b>
+<b class="nc">&nbsp;                    unscaleValue = -unscaleValue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                BigDecimal decimal = BigDecimal.valueOf(unscaleValue, scale);</b>
+<b class="nc">&nbsp;                if (vector.getScale() != decimal.scale()) {</b>
+<b class="nc">&nbsp;                    decimal = decimal.setScale(vector.getScale(), BigDecimal.ROUND_CEILING);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                vector.set(row, decimal);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        BigDecimal decimal = TypeUtils.parseBigDecimal(bytes, off, len);</b>
+<b class="nc">&nbsp;        if (vector.getScale() != decimal.scale()) {</b>
+<b class="nc">&nbsp;            decimal = decimal.setScale(vector.getScale(), BigDecimal.ROUND_CEILING);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        vector.set(row, decimal);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setDecimal(DecimalVector vector, int row, byte[] bytes, int off, int len) {
+<b class="nc">&nbsp;        boolean negative = false;</b>
+<b class="nc">&nbsp;        int j = off;</b>
+<b class="nc">&nbsp;        if (bytes[off] == &#39;-&#39;) {</b>
+<b class="nc">&nbsp;            negative = true;</b>
+<b class="nc">&nbsp;            j++;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (len &lt;= 20 || (negative &amp;&amp; len == 21)) {</b>
+<b class="nc">&nbsp;            int end = off + len;</b>
+<b class="nc">&nbsp;            int dot = 0;</b>
+<b class="nc">&nbsp;            int dotIndex = -1;</b>
+<b class="nc">&nbsp;            long unscaleValue = 0;</b>
+<b class="nc">&nbsp;            for (; j &lt; end; j++) {</b>
+<b class="nc">&nbsp;                byte b = bytes[j];</b>
+<b class="nc">&nbsp;                if (b == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;                    dot++;</b>
+<b class="nc">&nbsp;                    if (dot &gt; 1) {</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    dotIndex = j;</b>
+<b class="nc">&nbsp;                } else if (b &gt;= &#39;0&#39; &amp;&amp; b &lt;= &#39;9&#39;) {</b>
+<b class="nc">&nbsp;                    unscaleValue = unscaleValue * 10 + (b - &#39;0&#39;);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    unscaleValue = -1;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            int scale = 0;</b>
+<b class="nc">&nbsp;            if (unscaleValue &gt;= 0 &amp;&amp; dot &lt;= 1) {</b>
+<b class="nc">&nbsp;                if (dotIndex != -1) {</b>
+<b class="nc">&nbsp;                    scale = len - (dotIndex - off) - 1;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                boolean overflow = false;</b>
+<b class="nc">&nbsp;                long unscaleValueV = unscaleValue;</b>
+<b class="nc">&nbsp;                int scaleV = vector.getScale();</b>
+<b class="nc">&nbsp;                if (scaleV &gt; scale) {</b>
+<b class="nc">&nbsp;                    for (int i = scale; i &lt; scaleV; i++) {</b>
+<b class="nc">&nbsp;                        unscaleValueV *= 10;</b>
+<b class="nc">&nbsp;                        if (unscaleValueV &lt; 0) {</b>
+<b class="nc">&nbsp;                            overflow = true;</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                } else if (scaleV &lt; scale) {</b>
+<b class="nc">&nbsp;                    overflow = true;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (!overflow) {</b>
+<b class="nc">&nbsp;                    if (negative) {</b>
+<b class="nc">&nbsp;                        unscaleValueV = -unscaleValueV;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    BitVectorHelper.setBit(vector.getValidityBuffer(), row);</b>
+&nbsp;
+<b class="nc">&nbsp;                    ArrowBuf dataBuffer = vector.getDataBuffer();</b>
+<b class="nc">&nbsp;                    final long startIndex = (long) row * DECIMAL_TYPE_WIDTH;</b>
+<b class="nc">&nbsp;                    if (LITTLE_ENDIAN) {</b>
+&nbsp;                        // Decimal stored as native-endian, need to swap data bytes before writing to ArrowBuf if LE
+&nbsp;                        // Write LE data
+<b class="nc">&nbsp;                        dataBuffer.setLong(startIndex, unscaleValueV);</b>
+&nbsp;                    } else {
+&nbsp;                        // Write BE data
+<b class="nc">&nbsp;                        dataBuffer.setLong(startIndex, 0);</b>
+<b class="nc">&nbsp;                        long littleEndianValue = Long.reverseBytes(unscaleValueV);</b>
+<b class="nc">&nbsp;                        dataBuffer.setLong(startIndex + 8, littleEndianValue);</b>
+&nbsp;                    }
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (negative) {</b>
+<b class="nc">&nbsp;                    unscaleValue = -unscaleValue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                BigDecimal decimal = BigDecimal.valueOf(unscaleValue, scale);</b>
+<b class="nc">&nbsp;                if (vector.getScale() != decimal.scale()) {</b>
+<b class="nc">&nbsp;                    decimal = decimal.setScale(vector.getScale(), BigDecimal.ROUND_CEILING);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                vector.set(row, decimal);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        BigDecimal decimal = TypeUtils.parseBigDecimal(bytes, off, len);</b>
+<b class="nc">&nbsp;        if (vector.getScale() != decimal.scale()) {</b>
+<b class="nc">&nbsp;            decimal = decimal.setScale(vector.getScale(), BigDecimal.ROUND_CEILING);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        vector.set(row, decimal);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setDecimal(DecimalVector vector, int row, BigDecimal decimal) {
+<b class="nc">&nbsp;        int scale = vector.getScale();</b>
+<b class="nc">&nbsp;        if (decimal.scale() != scale) {</b>
+<b class="nc">&nbsp;            decimal = decimal.setScale(scale, BigDecimal.ROUND_CEILING);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int precision = decimal.precision();</b>
+<b class="nc">&nbsp;        if (precision &lt; 19 &amp;&amp; FIELD_DECIMAL_INT_COMPACT_OFFSET != -1) {</b>
+<b class="nc">&nbsp;            long unscaleValue = UnsafeUtils.getLong(decimal, FIELD_DECIMAL_INT_COMPACT_OFFSET);</b>
+<b class="nc">&nbsp;            if (unscaleValue != Long.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                BitVectorHelper.setBit(vector.getValidityBuffer(), row);</b>
+<b class="nc">&nbsp;                ArrowBuf dataBuffer = vector.getDataBuffer();</b>
+<b class="nc">&nbsp;                final long startIndex = (long) row * DECIMAL_TYPE_WIDTH;</b>
+<b class="nc">&nbsp;                if (LITTLE_ENDIAN) {</b>
+&nbsp;                    // Decimal stored as native-endian, need to swap data bytes before writing to ArrowBuf if LE
+&nbsp;                    // Write LE data
+<b class="nc">&nbsp;                    dataBuffer.setLong(startIndex, unscaleValue);</b>
+&nbsp;                } else {
+&nbsp;                    // Write BE data
+<b class="nc">&nbsp;                    dataBuffer.setLong(startIndex, 0);</b>
+<b class="nc">&nbsp;                    long littleEndianValue = Long.reverseBytes(unscaleValue);</b>
+<b class="nc">&nbsp;                    dataBuffer.setLong(startIndex + 8, littleEndianValue);</b>
+&nbsp;                }
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        vector.set(row, decimal);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:21</div>
+</div>
+</body>
+</html>

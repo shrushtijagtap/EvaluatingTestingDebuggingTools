@@ -1,0 +1,288 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Media</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.eishay.vo</a>
+</div>
+
+<h1>Coverage Summary for Class: Media (com.alibaba.fastjson2.benchmark.eishay.vo)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Media</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/42)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Media$Player</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/44)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.eishay.vo;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;@SuppressWarnings(&quot;serial&quot;)
+&nbsp;public class Media
+&nbsp;        implements java.io.Serializable {
+<b class="nc">&nbsp;    public enum Player {</b>
+<b class="nc">&nbsp;        JAVA, FLASH</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private int bitrate;
+&nbsp;    private long duration;
+&nbsp;    private String format;
+&nbsp;    private int height;
+&nbsp;    private List&lt;String&gt; persons;
+&nbsp;    private Player player;
+&nbsp;    private long size;
+&nbsp;    private String title;
+&nbsp;    private String uri;
+&nbsp;    private int width;
+&nbsp;    private String copyright;
+&nbsp;
+<b class="nc">&nbsp;    public Media() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Media(
+&nbsp;            String uri,
+&nbsp;            String title,
+&nbsp;            int width,
+&nbsp;            int height,
+&nbsp;            String format,
+&nbsp;            long duration,
+&nbsp;            long size,
+&nbsp;            int bitrate,
+&nbsp;            List&lt;String&gt; persons,
+&nbsp;            Player player,
+&nbsp;            String copyright
+<b class="nc">&nbsp;    ) {</b>
+<b class="nc">&nbsp;        this.uri = uri;</b>
+<b class="nc">&nbsp;        this.title = title;</b>
+<b class="nc">&nbsp;        this.width = width;</b>
+<b class="nc">&nbsp;        this.height = height;</b>
+<b class="nc">&nbsp;        this.format = format;</b>
+<b class="nc">&nbsp;        this.duration = duration;</b>
+<b class="nc">&nbsp;        this.size = size;</b>
+<b class="nc">&nbsp;        this.bitrate = bitrate;</b>
+<b class="nc">&nbsp;        this.persons = persons;</b>
+<b class="nc">&nbsp;        this.player = player;</b>
+<b class="nc">&nbsp;        this.copyright = copyright;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getUri() {
+<b class="nc">&nbsp;        return uri;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setUri(String uri) {
+<b class="nc">&nbsp;        this.uri = uri;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getTitle() {
+<b class="nc">&nbsp;        return title;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setTitle(String title) {
+<b class="nc">&nbsp;        this.title = title;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getWidth() {
+<b class="nc">&nbsp;        return width;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setWidth(int width) {
+<b class="nc">&nbsp;        this.width = width;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getHeight() {
+<b class="nc">&nbsp;        return height;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setHeight(int height) {
+<b class="nc">&nbsp;        this.height = height;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getFormat() {
+<b class="nc">&nbsp;        return format;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFormat(String format) {
+<b class="nc">&nbsp;        this.format = format;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getDuration() {
+<b class="nc">&nbsp;        return duration;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDuration(long duration) {
+<b class="nc">&nbsp;        this.duration = duration;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getSize() {
+<b class="nc">&nbsp;        return size;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setSize(long size) {
+<b class="nc">&nbsp;        this.size = size;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getBitrate() {
+<b class="nc">&nbsp;        return bitrate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setBitrate(int bitrate) {
+<b class="nc">&nbsp;        this.bitrate = bitrate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;String&gt; getPersons() {
+<b class="nc">&nbsp;        return persons;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPersons(List&lt;String&gt; persons) {
+<b class="nc">&nbsp;        this.persons = persons;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Player getPlayer() {
+<b class="nc">&nbsp;        return player;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPlayer(Player player) {
+<b class="nc">&nbsp;        this.player = player;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getCopyright() {
+<b class="nc">&nbsp;        return copyright;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCopyright(String copyright) {
+<b class="nc">&nbsp;        this.copyright = copyright;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="nc">&nbsp;        if (this == o) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (o == null || getClass() != o.getClass()) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Media media = (Media) o;</b>
+<b class="nc">&nbsp;        return bitrate == media.bitrate &amp;&amp; duration == media.duration &amp;&amp; height == media.height &amp;&amp; size == media.size &amp;&amp; width == media.width &amp;&amp; Objects.equals(format, media.format) &amp;&amp; Objects.equals(persons, media.persons) &amp;&amp; player == media.player &amp;&amp; Objects.equals(title, media.title) &amp;&amp; Objects.equals(uri, media.uri) &amp;&amp; Objects.equals(copyright, media.copyright);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        return Objects.hash(bitrate, duration, format, height, persons, player, size, title, uri, width, copyright);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:20</div>
+</div>
+</body>
+</html>

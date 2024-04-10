@@ -1,0 +1,431 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FieldWriterEnum</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldWriterEnum (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FieldWriterEnum</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    36.4%
+  </span>
+  <span class="absValue">
+    (4/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    30.6%
+  </span>
+  <span class="absValue">
+    (48/157)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONB;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.SymbolTable;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.IOUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;class FieldWriterEnum
+&nbsp;        extends FieldWriter {
+&nbsp;    final byte[][] valueNameCacheUTF8;
+&nbsp;    final char[][] valueNameCacheUTF16;
+&nbsp;
+&nbsp;    final byte[][] utf8ValueCache;
+&nbsp;    final char[][] utf16ValueCache;
+&nbsp;
+&nbsp;    final Class enumType;
+&nbsp;    final Enum[] enumConstants;
+&nbsp;    final long[] hashCodes;
+&nbsp;    final long[] hashCodesSymbolCache;
+&nbsp;
+&nbsp;    protected FieldWriterEnum(
+&nbsp;            String name,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            String label,
+&nbsp;            Type fieldType,
+&nbsp;            Class&lt;? extends Enum&gt; enumClass,
+&nbsp;            Field field,
+&nbsp;            Method method
+&nbsp;    ) {
+<b class="fc">&nbsp;        super(name, ordinal, features, format, label, fieldType, enumClass, field, method);</b>
+&nbsp;
+<b class="fc">&nbsp;        this.enumType = enumClass;</b>
+<b class="fc">&nbsp;        this.enumConstants = enumClass.getEnumConstants();</b>
+<b class="fc">&nbsp;        this.hashCodes = new long[enumConstants.length];</b>
+<b class="fc">&nbsp;        this.hashCodesSymbolCache = new long[enumConstants.length];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; enumConstants.length; i++) {</b>
+<b class="fc">&nbsp;            hashCodes[i] = Fnv.hashCode64(enumConstants[i].name());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        valueNameCacheUTF8 = new byte[enumConstants.length][];</b>
+<b class="fc">&nbsp;        valueNameCacheUTF16 = new char[enumConstants.length][];</b>
+&nbsp;
+<b class="fc">&nbsp;        utf8ValueCache = new byte[enumConstants.length][];</b>
+<b class="fc">&nbsp;        utf16ValueCache = new char[enumConstants.length][];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeEnumJSONB(JSONWriter jsonWriter, Enum e) {
+<b class="fc">&nbsp;        if (e == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        long features = jsonWriter.getFeatures(this.features);</b>
+<b class="fc">&nbsp;        boolean usingOrdinal = (features &amp; (JSONWriter.Feature.WriteEnumUsingToString.mask | JSONWriter.Feature.WriteEnumsUsingName.mask)) == 0;</b>
+<b class="fc">&nbsp;        boolean usingToString = (features &amp; JSONWriter.Feature.WriteEnumUsingToString.mask) != 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        int ordinal = e.ordinal();</b>
+<b class="fc">&nbsp;        SymbolTable symbolTable = jsonWriter.symbolTable;</b>
+<b class="fc">&nbsp;        if (symbolTable != null &amp;&amp; usingOrdinal &amp;&amp; !usingToString) {</b>
+<b class="nc">&nbsp;            if (writeSymbolNameOrdinal(jsonWriter, ordinal, symbolTable)) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (usingToString) {</b>
+<b class="nc">&nbsp;            writeJSONBToString(jsonWriter, e, symbolTable);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (usingOrdinal) {</b>
+&nbsp;            int symbol;
+<b class="fc">&nbsp;            if (symbolTable != null) {</b>
+<b class="nc">&nbsp;                int symbolTableIdentity = System.identityHashCode(symbolTable);</b>
+<b class="nc">&nbsp;                if (nameSymbolCache == 0) {</b>
+<b class="nc">&nbsp;                    symbol = symbolTable.getOrdinalByHashCode(hashCode);</b>
+<b class="nc">&nbsp;                    nameSymbolCache = ((long) symbol &lt;&lt; 32) | symbolTableIdentity;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    int identity = (int) nameSymbolCache;</b>
+<b class="nc">&nbsp;                    if (identity == symbolTableIdentity) {</b>
+<b class="nc">&nbsp;                        symbol = (int) (nameSymbolCache &gt;&gt; 32);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        symbol = symbolTable.getOrdinalByHashCode(hashCode);</b>
+<b class="nc">&nbsp;                        nameSymbolCache = ((long) symbol &lt;&lt; 32) | symbolTableIdentity;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            } else {</b>
+<b class="fc">&nbsp;                symbol = -1;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (symbol != -1) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeSymbol(-symbol);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                jsonWriter.writeNameRaw(nameJSONB, hashCode);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            jsonWriter.writeInt32(ordinal);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        writeFieldName(jsonWriter);</b>
+<b class="fc">&nbsp;        jsonWriter.writeString(e.name());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean writeSymbolNameOrdinal(JSONWriter jsonWriter, int ordinal, SymbolTable symbolTable) {
+<b class="nc">&nbsp;        int symbolTableIdentity = System.identityHashCode(symbolTable);</b>
+<b class="nc">&nbsp;        long enumNameCache = hashCodesSymbolCache[ordinal];</b>
+&nbsp;        int enumSymbol;
+<b class="nc">&nbsp;        if (enumNameCache == 0) {</b>
+<b class="nc">&nbsp;            enumSymbol = symbolTable.getOrdinalByHashCode(hashCodes[ordinal]);</b>
+<b class="nc">&nbsp;            hashCodesSymbolCache[ordinal] = ((long) enumSymbol &lt;&lt; 32) | symbolTableIdentity;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            int identity = (int) enumNameCache;</b>
+<b class="nc">&nbsp;            if (identity == symbolTableIdentity) {</b>
+<b class="nc">&nbsp;                enumSymbol = (int) (enumNameCache &gt;&gt; 32);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                enumSymbol = symbolTable.getOrdinalByHashCode(hashCodes[ordinal]);</b>
+<b class="nc">&nbsp;                hashCodesSymbolCache[ordinal] = ((long) enumSymbol &lt;&lt; 32) | symbolTableIdentity;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int namingOrdinal = enumSymbol;</b>
+<b class="nc">&nbsp;        if (namingOrdinal &gt;= 0) {</b>
+&nbsp;            int symbol;
+<b class="nc">&nbsp;            if (nameSymbolCache == 0) {</b>
+<b class="nc">&nbsp;                symbol = symbolTable.getOrdinalByHashCode(hashCode);</b>
+<b class="nc">&nbsp;                if (symbol != -1) {</b>
+<b class="nc">&nbsp;                    nameSymbolCache = ((long) symbol &lt;&lt; 32) | symbolTableIdentity;</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                int identity = (int) nameSymbolCache;</b>
+<b class="nc">&nbsp;                if (identity == symbolTableIdentity) {</b>
+<b class="nc">&nbsp;                    symbol = (int) (nameSymbolCache &gt;&gt; 32);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    symbol = symbolTable.getOrdinalByHashCode(hashCode);</b>
+<b class="nc">&nbsp;                    nameSymbolCache = ((long) symbol &lt;&lt; 32) | symbolTableIdentity;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (symbol != -1) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeSymbol(-symbol);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                jsonWriter.writeNameRaw(nameJSONB, hashCode);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            jsonWriter.writeRaw(JSONB.Constants.BC_STR_ASCII);</b>
+<b class="nc">&nbsp;            jsonWriter.writeInt32(-namingOrdinal);</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void writeJSONBToString(JSONWriter jsonWriter, Enum e, SymbolTable symbolTable) {
+&nbsp;        int symbol;
+<b class="nc">&nbsp;        if (symbolTable != null) {</b>
+<b class="nc">&nbsp;            int symbolTableIdentity = System.identityHashCode(symbolTable);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (nameSymbolCache == 0) {</b>
+<b class="nc">&nbsp;                symbol = symbolTable.getOrdinalByHashCode(hashCode);</b>
+<b class="nc">&nbsp;                nameSymbolCache = ((long) symbol &lt;&lt; 32) | symbolTableIdentity;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                int identity = (int) nameSymbolCache;</b>
+<b class="nc">&nbsp;                if (identity == symbolTableIdentity) {</b>
+<b class="nc">&nbsp;                    symbol = (int) (nameSymbolCache &gt;&gt; 32);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    symbol = symbolTable.getOrdinalByHashCode(hashCode);</b>
+<b class="nc">&nbsp;                    nameSymbolCache = ((long) symbol &lt;&lt; 32) | symbolTableIdentity;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            symbol = -1;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (symbol != -1) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeSymbol(-symbol);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            jsonWriter.writeNameRaw(nameJSONB, hashCode);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        jsonWriter.writeString(e.toString());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeEnum(JSONWriter jsonWriter, Enum e) {
+<b class="fc">&nbsp;        long features = jsonWriter.getFeatures(this.features);</b>
+&nbsp;
+<b class="fc">&nbsp;        if ((features &amp; JSONWriter.Feature.WriteEnumUsingToString.mask) == 0) {</b>
+<b class="fc">&nbsp;            if (jsonWriter.jsonb) {</b>
+<b class="nc">&nbsp;                writeEnumJSONB(jsonWriter, e);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            boolean unquoteName = (features &amp; JSONWriter.Feature.UnquoteFieldName.mask) != 0;</b>
+<b class="fc">&nbsp;            final boolean utf8 = jsonWriter.utf8;</b>
+<b class="fc">&nbsp;            final boolean utf16 = !jsonWriter.utf8 &amp;&amp; jsonWriter.utf16;</b>
+<b class="fc">&nbsp;            final int ordinal = e.ordinal();</b>
+&nbsp;
+<b class="fc">&nbsp;            if ((features &amp; JSONWriter.Feature.WriteEnumUsingOrdinal.mask) != 0) {</b>
+<b class="nc">&nbsp;                if (!unquoteName) {</b>
+<b class="nc">&nbsp;                    if (utf8) {</b>
+<b class="nc">&nbsp;                        byte[] bytes = utf8ValueCache[ordinal];</b>
+<b class="nc">&nbsp;                        if (bytes == null) {</b>
+<b class="nc">&nbsp;                            utf8ValueCache[ordinal] = bytes = getBytes(ordinal);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        jsonWriter.writeNameRaw(bytes);</b>
+&nbsp;                        return;
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (utf16) {</b>
+<b class="nc">&nbsp;                        char[] chars = utf16ValueCache[ordinal];</b>
+<b class="nc">&nbsp;                        if (chars == null) {</b>
+<b class="nc">&nbsp;                            utf16ValueCache[ordinal] = chars = getChars(ordinal);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        jsonWriter.writeNameRaw(chars);</b>
+&nbsp;                        return;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                writeFieldName(jsonWriter);</b>
+<b class="nc">&nbsp;                jsonWriter.writeInt32(ordinal);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (!unquoteName) {</b>
+<b class="fc">&nbsp;                if (utf8) {</b>
+<b class="nc">&nbsp;                    byte[] bytes = valueNameCacheUTF8[ordinal];</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (bytes == null) {</b>
+<b class="nc">&nbsp;                        valueNameCacheUTF8[ordinal] = bytes = getNameBytes(ordinal);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    jsonWriter.writeNameRaw(bytes);</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (utf16) {</b>
+<b class="fc">&nbsp;                    char[] chars = valueNameCacheUTF16[ordinal];</b>
+<b class="fc">&nbsp;                    if (chars == null) {</b>
+<b class="fc">&nbsp;                        valueNameCacheUTF16[ordinal] = chars = getNameChars(ordinal);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    jsonWriter.writeNameRaw(chars);</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        writeFieldName(jsonWriter);</b>
+<b class="nc">&nbsp;        jsonWriter.writeString(e.toString());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private char[] getNameChars(int ordinal) {
+&nbsp;        char[] chars;
+<b class="fc">&nbsp;        String name = enumConstants[ordinal].name();</b>
+<b class="fc">&nbsp;        chars = Arrays.copyOf(nameWithColonUTF16, nameWithColonUTF16.length + name.length() + 2);</b>
+<b class="fc">&nbsp;        chars[nameWithColonUTF16.length] = &#39;&quot;&#39;;</b>
+<b class="fc">&nbsp;        name.getChars(0, name.length(), chars, nameWithColonUTF16.length + 1);</b>
+<b class="fc">&nbsp;        chars[chars.length - 1] = &#39;&quot;&#39;;</b>
+<b class="fc">&nbsp;        return chars;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private byte[] getNameBytes(int ordinal) {
+&nbsp;        byte[] bytes;
+<b class="nc">&nbsp;        byte[] nameUft8Bytes = enumConstants[ordinal].name().getBytes(StandardCharsets.UTF_8);</b>
+<b class="nc">&nbsp;        bytes = Arrays.copyOf(nameWithColonUTF8, nameWithColonUTF8.length + nameUft8Bytes.length + 2);</b>
+<b class="nc">&nbsp;        bytes[nameWithColonUTF8.length] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;        int index = nameWithColonUTF8.length + 1;</b>
+<b class="nc">&nbsp;        for (byte b : nameUft8Bytes) {</b>
+<b class="nc">&nbsp;            bytes[index++] = b;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        bytes[bytes.length - 1] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;        return bytes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private char[] getChars(int ordinal) {
+&nbsp;        char[] chars;
+<b class="nc">&nbsp;        int size = IOUtils.stringSize(ordinal);</b>
+<b class="nc">&nbsp;        char[] original = Arrays.copyOf(nameWithColonUTF16, nameWithColonUTF16.length + size);</b>
+<b class="nc">&nbsp;        chars = Arrays.copyOf(original, original.length);</b>
+<b class="nc">&nbsp;        IOUtils.getChars(ordinal, chars.length, chars);</b>
+<b class="nc">&nbsp;        return chars;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private byte[] getBytes(int ordinal) {
+&nbsp;        byte[] bytes;
+<b class="nc">&nbsp;        int size = IOUtils.stringSize(ordinal);</b>
+<b class="nc">&nbsp;        byte[] original = Arrays.copyOf(nameWithColonUTF8, nameWithColonUTF8.length + size);</b>
+<b class="nc">&nbsp;        bytes = Arrays.copyOf(original, original.length);</b>
+<b class="nc">&nbsp;        IOUtils.getChars(ordinal, bytes.length, bytes);</b>
+<b class="nc">&nbsp;        return bytes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void writeValue(JSONWriter jsonWriter, Object object) {
+<b class="nc">&nbsp;        Enum value = (Enum) getFieldValue(object);</b>
+<b class="nc">&nbsp;        jsonWriter.writeEnum(value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean write(JSONWriter jsonWriter, Object object) {
+<b class="nc">&nbsp;        Enum value = (Enum) getFieldValue(object);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            long features = this.features | jsonWriter.getFeatures();</b>
+<b class="nc">&nbsp;            if ((features &amp; JSONWriter.Feature.WriteNulls.mask) != 0) {</b>
+<b class="nc">&nbsp;                writeFieldName(jsonWriter);</b>
+<b class="nc">&nbsp;                jsonWriter.writeNull();</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonWriter.jsonb) {</b>
+<b class="nc">&nbsp;            writeEnumJSONB(jsonWriter, value);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            writeEnum(jsonWriter, value);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:16</div>
+</div>
+</body>
+</html>

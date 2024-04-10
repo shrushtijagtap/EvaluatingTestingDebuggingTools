@@ -1,0 +1,426 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Clients</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.jjb</a>
+</div>
+
+<h1>Coverage Summary for Class: Clients (com.alibaba.fastjson2.benchmark.jjb)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Clients</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Clients$Client</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/41)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/41)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Clients$EyeColor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Clients$Partner</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/53)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/60)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.jjb;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.annotation.JSONField;
+&nbsp;import com.dslplatform.json.CompiledJson;
+&nbsp;import com.dslplatform.json.JsonAttribute;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.time.OffsetDateTime;
+&nbsp;import java.util.List;
+&nbsp;import java.util.UUID;
+&nbsp;
+&nbsp;@CompiledJson
+<b class="nc">&nbsp;public class Clients {</b>
+&nbsp;    private List&lt;Client&gt; clients;
+&nbsp;
+&nbsp;    public List&lt;Client&gt; getClients() {
+<b class="nc">&nbsp;        return clients;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setClients(List&lt;Client&gt; clients) {
+<b class="nc">&nbsp;        this.clients = clients;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @CompiledJson
+<b class="nc">&nbsp;    public static final class Client {</b>
+&nbsp;        private long id;
+&nbsp;        private int index;
+&nbsp;        private UUID guid;
+&nbsp;        @JSONField(name = &quot;isActive&quot;)
+&nbsp;        private boolean isActive;
+&nbsp;        private BigDecimal balance;
+&nbsp;        private String picture;
+&nbsp;        private int age;
+&nbsp;        private EyeColor eyeColor;
+&nbsp;        private String name;
+&nbsp;        private String gender;
+&nbsp;        private String company;
+&nbsp;        private String[] emails;
+&nbsp;        private long[] phones;
+&nbsp;        private String address;
+&nbsp;        private String about;
+&nbsp;        private LocalDate registered;
+&nbsp;        private double latitude;
+&nbsp;        private double longitude;
+&nbsp;        @JsonAttribute(nullable = false)
+&nbsp;        private List&lt;String&gt; tags;
+&nbsp;        @JsonAttribute(nullable = false)
+&nbsp;        private List&lt;Partner&gt; partners;
+&nbsp;
+&nbsp;        public long getId() {
+<b class="nc">&nbsp;            return id;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setId(long id) {
+<b class="nc">&nbsp;            this.id = id;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getIndex() {
+<b class="nc">&nbsp;            return index;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setIndex(int index) {
+<b class="nc">&nbsp;            this.index = index;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public UUID getGuid() {
+<b class="nc">&nbsp;            return guid;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setGuid(UUID guid) {
+<b class="nc">&nbsp;            this.guid = guid;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean getIsActive() {
+<b class="nc">&nbsp;            return isActive;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setIsActive(boolean active) {
+<b class="nc">&nbsp;            isActive = active;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public BigDecimal getBalance() {
+<b class="nc">&nbsp;            return balance;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setBalance(BigDecimal balance) {
+<b class="nc">&nbsp;            this.balance = balance;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getPicture() {
+<b class="nc">&nbsp;            return picture;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setPicture(String picture) {
+<b class="nc">&nbsp;            this.picture = picture;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getAge() {
+<b class="nc">&nbsp;            return age;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setAge(int age) {
+<b class="nc">&nbsp;            this.age = age;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public EyeColor getEyeColor() {
+<b class="nc">&nbsp;            return eyeColor;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setEyeColor(EyeColor eyeColor) {
+<b class="nc">&nbsp;            this.eyeColor = eyeColor;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getName() {
+<b class="nc">&nbsp;            return name;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setName(String name) {
+<b class="nc">&nbsp;            this.name = name;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getGender() {
+<b class="nc">&nbsp;            return gender;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setGender(String gender) {
+<b class="nc">&nbsp;            this.gender = gender;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getCompany() {
+<b class="nc">&nbsp;            return company;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setCompany(String company) {
+<b class="nc">&nbsp;            this.company = company;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String[] getEmails() {
+<b class="nc">&nbsp;            return emails;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setEmails(String[] emails) {
+<b class="nc">&nbsp;            this.emails = emails;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public long[] getPhones() {
+<b class="nc">&nbsp;            return phones;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setPhones(long[] phones) {
+<b class="nc">&nbsp;            this.phones = phones;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getAddress() {
+<b class="nc">&nbsp;            return address;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setAddress(String address) {
+<b class="nc">&nbsp;            this.address = address;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getAbout() {
+<b class="nc">&nbsp;            return about;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setAbout(String about) {
+<b class="nc">&nbsp;            this.about = about;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public LocalDate getRegistered() {
+<b class="nc">&nbsp;            return registered;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setRegistered(LocalDate registered) {
+<b class="nc">&nbsp;            this.registered = registered;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public double getLatitude() {
+<b class="nc">&nbsp;            return latitude;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setLatitude(double latitude) {
+<b class="nc">&nbsp;            this.latitude = latitude;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public double getLongitude() {
+<b class="nc">&nbsp;            return longitude;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setLongitude(double longitude) {
+<b class="nc">&nbsp;            this.longitude = longitude;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public List&lt;String&gt; getTags() {
+<b class="nc">&nbsp;            return tags;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setTags(List&lt;String&gt; tags) {
+<b class="nc">&nbsp;            this.tags = tags;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public List&lt;Partner&gt; getPartners() {
+<b class="nc">&nbsp;            return partners;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setPartners(List&lt;Partner&gt; partners) {
+<b class="nc">&nbsp;            this.partners = partners;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public enum EyeColor {</b>
+<b class="nc">&nbsp;        BROWN,</b>
+<b class="nc">&nbsp;        BLUE,</b>
+<b class="nc">&nbsp;        GREEN;</b>
+&nbsp;
+&nbsp;        public static EyeColor fromNumber(int i) {
+<b class="nc">&nbsp;            if (i == 0) {</b>
+<b class="nc">&nbsp;                return BROWN;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (i == 1) {</b>
+<b class="nc">&nbsp;                return BLUE;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return GREEN;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @CompiledJson
+<b class="nc">&nbsp;    public static final class Partner {</b>
+&nbsp;        private long id;
+&nbsp;        private String name;
+&nbsp;        private OffsetDateTime since;
+&nbsp;
+&nbsp;        public long getId() {
+<b class="nc">&nbsp;            return id;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setId(long id) {
+<b class="nc">&nbsp;            this.id = id;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getName() {
+<b class="nc">&nbsp;            return name;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setName(String name) {
+<b class="nc">&nbsp;            this.name = name;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public OffsetDateTime getSince() {
+<b class="nc">&nbsp;            return since;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setSince(OffsetDateTime since) {
+<b class="nc">&nbsp;            this.since = since;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:21</div>
+</div>
+</body>
+</html>

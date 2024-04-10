@@ -1,0 +1,242 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONScanner</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.parser</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONScanner (com.alibaba.fastjson.parser)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONScanner</td>
+<td class="coverageStat">
+  <span class="percent">
+    25.5%
+  </span>
+  <span class="absValue">
+    (13/51)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    3.4%
+  </span>
+  <span class="absValue">
+    (63/1876)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JSONScanner$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (13/52)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    3.4%
+  </span>
+  <span class="absValue">
+    (63/1877)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;  // IntelliJ API Decompiler stub source generated from a class file
+&nbsp;  // Implementation of methods is not available
+&nbsp;
+&nbsp;package com.alibaba.fastjson.parser;
+&nbsp;
+&nbsp;public final class JSONScanner extends com.alibaba.fastjson.parser.JSONLexerBase {
+&nbsp;    private final java.lang.String text;
+&nbsp;    private final int len;
+&nbsp;
+&nbsp;    public JSONScanner(java.lang.String input) { /* compiled code */ }
+&nbsp;
+&nbsp;    public JSONScanner(java.lang.String input, int features) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final char charAt(int index) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final char next() { /* compiled code */ }
+&nbsp;
+&nbsp;    public JSONScanner(char[] input, int inputLength) { /* compiled code */ }
+&nbsp;
+&nbsp;    public JSONScanner(char[] input, int inputLength, int features) { /* compiled code */ }
+&nbsp;
+&nbsp;    protected final void copyTo(int offset, int count, char[] dest) { /* compiled code */ }
+&nbsp;
+&nbsp;    static boolean charArrayCompare(java.lang.String src, int offset, char[] dest) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final boolean charArrayCompare(char[] chars) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final int indexOf(char ch, int startIndex) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final java.lang.String addSymbol(int offset, int len, int hash, com.alibaba.fastjson.parser.SymbolTable symbolTable) { /* compiled code */ }
+&nbsp;
+&nbsp;    public byte[] bytesValue() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final java.lang.String stringVal() { /* compiled code */ }
+&nbsp;
+&nbsp;    public final java.lang.String subString(int offset, int count) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final char[] sub_chars(int offset, int count) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public final java.lang.String numberString() { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public final java.math.BigDecimal decimalValue() { /* compiled code */ }
+&nbsp;
+<b class="fc">&nbsp;    public boolean scanISO8601DateIfMatch() { /* compiled code */ }</b>
+&nbsp;
+<b class="fc">&nbsp;    public boolean scanISO8601DateIfMatch(boolean strict) { /* compiled code */ }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    private boolean scanISO8601DateIfMatch(boolean strict, int rest) { /* compiled code */ }</b>
+&nbsp;
+<b class="fc">&nbsp;    protected void setTime(char h0, char h1, char m0, char m1, char s0, char s1) { /* compiled code */ }</b>
+<b class="fc">&nbsp;</b>
+<b class="nc">&nbsp;    protected void setTimeZone(char timeZoneFlag, char t0, char t1) { /* compiled code */ }</b>
+&nbsp;
+<b class="fc">&nbsp;    protected void setTimeZone(char timeZoneFlag, char t0, char t1, char t3, char t4) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    private boolean checkTime(char h0, char h1, char m0, char m1, char s0, char s1) { /* compiled code */ }
+<b class="fc">&nbsp;</b>
+<b class="nc">&nbsp;    private void setCalendar(char y0, char y1, char y2, char y3, char M0, char M1, char d0, char d1) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    static boolean checkDate(char y0, char y1, char y2, char y3, char M0, char M1, int d0, int d1) { /* compiled code */ }
+<b class="fc">&nbsp;</b>
+&nbsp;    public boolean isEOF() { /* compiled code */ }
+&nbsp;
+&nbsp;    public int scanFieldInt(char[] fieldName) { /* compiled code */ }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public java.lang.String scanFieldString(char[] fieldName) { /* compiled code */ }</b>
+&nbsp;
+<b class="fc">&nbsp;    public java.util.Date scanFieldDate(char[] fieldName) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public long scanFieldSymbol(char[] fieldName) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public java.util.Collection&lt;java.lang.String&gt; scanFieldStringArray(char[] fieldName, java.lang.Class&lt;?&gt; type) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public long scanFieldLong(char[] fieldName) { /* compiled code */ }
+&nbsp;
+<b class="nc">&nbsp;    public boolean scanFieldBoolean(char[] fieldName) { /* compiled code */ }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public final int scanInt(char expectNext) { /* compiled code */ }
+&nbsp;
+<b class="fc">&nbsp;    public double scanDouble(char seperator) { /* compiled code */ }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public long scanLong(char seperator) { /* compiled code */ }
+&nbsp;
+<b class="fc">&nbsp;    public java.util.Date scanDate(char seperator) { /* compiled code */ }</b>
+<b class="pc">&nbsp;</b>
+<b class="nc">&nbsp;    protected final void arrayCopy(int srcPos, char[] dest, int destPos, int length) { /* compiled code */ }</b>
+&nbsp;
+&nbsp;    public java.lang.String info() { /* compiled code */ }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public java.lang.String[] scanFieldStringArray(char[] fieldName, int argTypesCount, com.alibaba.fastjson.parser.SymbolTable typeSymbolTable) { /* compiled code */ }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public boolean matchField2(char[] fieldName) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void skipObject() { /* compiled code */ }
+<b class="fc">&nbsp;</b>
+&nbsp;    public final void skipObject(boolean valid) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void skipArray() { /* compiled code */ }
+<b class="fc">&nbsp;</b>
+&nbsp;    public final void skipArray(boolean valid) { /* compiled code */ }
+&nbsp;
+&nbsp;    public final void skipString() { /* compiled code */ }
+<b class="fc">&nbsp;</b>
+&nbsp;    public boolean seekArrayToItem(int index) { /* compiled code */ }
+&nbsp;
+&nbsp;    public int seekObjectToField(long fieldNameHash, boolean deepScan) { /* compiled code */ }
+<b class="fc">&nbsp;</b>
+&nbsp;    public int seekObjectToField(long[] fieldNameHash) { /* compiled code */ }
+&nbsp;
+&nbsp;    public java.lang.String scanTypeName(com.alibaba.fastjson.parser.SymbolTable symbolTable) { /* compiled code */ }
+<b class="nc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:29</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,238 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FieldWriterBoolean</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldWriterBoolean (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FieldWriterBoolean</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/65)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;abstract class FieldWriterBoolean
+&nbsp;        extends FieldWriter {
+&nbsp;    volatile byte[] utf8ValueTrue;
+&nbsp;    volatile byte[] utf8ValueFalse;
+&nbsp;    volatile char[] utf16ValueTrue;
+&nbsp;    volatile char[] utf16ValueFalse;
+&nbsp;
+&nbsp;    FieldWriterBoolean(
+&nbsp;            String name,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            String label,
+&nbsp;            Type fieldType,
+&nbsp;            Class fieldClass,
+&nbsp;            Field field,
+&nbsp;            Method method
+&nbsp;    ) {
+<b class="nc">&nbsp;        super(name, ordinal, features, format, label, fieldType, fieldClass, field, method);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeValue(JSONWriter jsonWriter, Object object) {
+<b class="nc">&nbsp;        Boolean value = (Boolean) getFieldValue(object);</b>
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        jsonWriter.writeBool(value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeBool(JSONWriter jsonWriter, boolean value) {
+<b class="nc">&nbsp;        boolean writeNonStringValueAsString = (jsonWriter.getFeatures() &amp; JSONWriter.Feature.WriteNonStringValueAsString.mask) != 0;</b>
+<b class="nc">&nbsp;        if (writeNonStringValueAsString) {</b>
+<b class="nc">&nbsp;            writeFieldName(jsonWriter);</b>
+<b class="nc">&nbsp;            jsonWriter.writeString(value ? &quot;true&quot; : &quot;false&quot;);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonWriter.isUTF8()) {</b>
+<b class="nc">&nbsp;            if (value) {</b>
+<b class="nc">&nbsp;                if (utf8ValueTrue == null) {</b>
+<b class="nc">&nbsp;                    byte[] bytes = Arrays.copyOf(nameWithColonUTF8, nameWithColonUTF8.length + 4);</b>
+<b class="nc">&nbsp;                    bytes[nameWithColonUTF8.length] = &#39;t&#39;;</b>
+<b class="nc">&nbsp;                    bytes[nameWithColonUTF8.length + 1] = &#39;r&#39;;</b>
+<b class="nc">&nbsp;                    bytes[nameWithColonUTF8.length + 2] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    bytes[nameWithColonUTF8.length + 3] = &#39;e&#39;;</b>
+<b class="nc">&nbsp;                    utf8ValueTrue = bytes;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                jsonWriter.writeNameRaw(utf8ValueTrue);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (utf8ValueFalse == null) {</b>
+<b class="nc">&nbsp;                    byte[] bytes = Arrays.copyOf(nameWithColonUTF8, nameWithColonUTF8.length + 5);</b>
+<b class="nc">&nbsp;                    bytes[nameWithColonUTF8.length] = &#39;f&#39;;</b>
+<b class="nc">&nbsp;                    bytes[nameWithColonUTF8.length + 1] = &#39;a&#39;;</b>
+<b class="nc">&nbsp;                    bytes[nameWithColonUTF8.length + 2] = &#39;l&#39;;</b>
+<b class="nc">&nbsp;                    bytes[nameWithColonUTF8.length + 3] = &#39;s&#39;;</b>
+<b class="nc">&nbsp;                    bytes[nameWithColonUTF8.length + 4] = &#39;e&#39;;</b>
+<b class="nc">&nbsp;                    utf8ValueFalse = bytes;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                jsonWriter.writeNameRaw(utf8ValueFalse);</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        if (jsonWriter.isUTF16()) {</b>
+<b class="nc">&nbsp;            if (value) {</b>
+<b class="nc">&nbsp;                if (utf16ValueTrue == null) {</b>
+<b class="nc">&nbsp;                    char[] chars = Arrays.copyOf(nameWithColonUTF16, nameWithColonUTF16.length + 4);</b>
+<b class="nc">&nbsp;                    chars[nameWithColonUTF16.length] = &#39;t&#39;;</b>
+<b class="nc">&nbsp;                    chars[nameWithColonUTF16.length + 1] = &#39;r&#39;;</b>
+<b class="nc">&nbsp;                    chars[nameWithColonUTF16.length + 2] = &#39;u&#39;;</b>
+<b class="nc">&nbsp;                    chars[nameWithColonUTF16.length + 3] = &#39;e&#39;;</b>
+<b class="nc">&nbsp;                    utf16ValueTrue = chars;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                jsonWriter.writeNameRaw(utf16ValueTrue);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (utf16ValueFalse == null) {</b>
+<b class="nc">&nbsp;                    char[] chars = Arrays.copyOf(nameWithColonUTF16, nameWithColonUTF16.length + 5);</b>
+<b class="nc">&nbsp;                    chars[nameWithColonUTF16.length] = &#39;f&#39;;</b>
+<b class="nc">&nbsp;                    chars[nameWithColonUTF16.length + 1] = &#39;a&#39;;</b>
+<b class="nc">&nbsp;                    chars[nameWithColonUTF16.length + 2] = &#39;l&#39;;</b>
+<b class="nc">&nbsp;                    chars[nameWithColonUTF16.length + 3] = &#39;s&#39;;</b>
+<b class="nc">&nbsp;                    chars[nameWithColonUTF16.length + 4] = &#39;e&#39;;</b>
+<b class="nc">&nbsp;                    utf16ValueFalse = chars;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                jsonWriter.writeNameRaw(utf16ValueFalse);</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        writeFieldName(jsonWriter);</b>
+<b class="nc">&nbsp;        jsonWriter.writeBool(value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean write(JSONWriter jsonWriter, Object object) {
+&nbsp;        Boolean value;
+&nbsp;        try {
+<b class="nc">&nbsp;            value = (Boolean) getFieldValue(object);</b>
+<b class="nc">&nbsp;        } catch (RuntimeException error) {</b>
+<b class="nc">&nbsp;            if (jsonWriter.isIgnoreErrorGetter()) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            throw error;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            long features = this.features | jsonWriter.getFeatures();</b>
+<b class="nc">&nbsp;            if ((features &amp; (JSONWriter.Feature.WriteNulls.mask | JSONWriter.Feature.NullAsDefaultValue.mask | JSONWriter.Feature.WriteNullBooleanAsFalse.mask)) == 0) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            writeFieldName(jsonWriter);</b>
+<b class="nc">&nbsp;            jsonWriter.writeBooleanNull();</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        writeBool(jsonWriter, value);</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObjectWriter getObjectWriter(JSONWriter jsonWriter, Class valueClass) {
+<b class="nc">&nbsp;        return ObjectWriterImplBoolean.INSTANCE;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:00</div>
+</div>
+</body>
+</html>

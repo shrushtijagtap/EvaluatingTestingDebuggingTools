@@ -1,0 +1,437 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MoneySupport</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.support.money</a>
+</div>
+
+<h1>Coverage Summary for Class: MoneySupport (com.alibaba.fastjson2.support.money)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MoneySupport</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/132)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.support.money;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.reader.*;
+&nbsp;import com.alibaba.fastjson2.support.LambdaMiscCodec;
+&nbsp;import com.alibaba.fastjson2.util.JDKUtils;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;import com.alibaba.fastjson2.writer.*;
+&nbsp;
+&nbsp;import java.lang.invoke.*;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.function.BiFunction;
+&nbsp;import java.util.function.Function;
+&nbsp;import java.util.function.Supplier;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.util.TypeUtils.*;
+&nbsp;
+<b class="nc">&nbsp;public class MoneySupport {</b>
+&nbsp;    static Class CLASS_MONETARY;
+&nbsp;    static Class CLASS_MONETARY_AMOUNT;
+&nbsp;    static Class CLASS_MONETARY_AMOUNT_FACTORY;
+&nbsp;    static Class CLASS_DEFAULT_NUMBER_VALUE;
+&nbsp;    static Class CLASS_NUMBER_VALUE;
+&nbsp;    static Class CLASS_CURRENCY_UNIT;
+&nbsp;
+&nbsp;    static Function&lt;Object, Object&gt; FUNC_CREATE;
+&nbsp;    static Supplier&lt;Object&gt; FUNC_GET_DEFAULT_AMOUNT_FACTORY;
+&nbsp;    static BiFunction&lt;Object, Object, Object&gt; FUNC_SET_CURRENCY;
+&nbsp;    static BiFunction&lt;Object, Object, Number&gt; FUNC_SET_NUMBER;
+&nbsp;    static Function&lt;String, Object&gt; FUNC_GET_CURRENCY;
+&nbsp;    static Function&lt;Object, BigDecimal&gt; FUNC_NUMBER_VALUE;
+&nbsp;
+&nbsp;    public static ObjectReader createCurrencyUnitReader() {
+<b class="nc">&nbsp;        if (CLASS_MONETARY == null) {</b>
+<b class="nc">&nbsp;            CLASS_MONETARY = TypeUtils.loadClass(&quot;javax.money.Monetary&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (CLASS_CURRENCY_UNIT == null) {</b>
+<b class="nc">&nbsp;            CLASS_CURRENCY_UNIT = TypeUtils.loadClass(&quot;javax.money.CurrencyUnit&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (FUNC_GET_CURRENCY == null) {</b>
+<b class="nc">&nbsp;            MethodHandles.Lookup lookup = JDKUtils.trustedLookup(CLASS_MONETARY);</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                MethodHandle methodHandle = lookup.findStatic(</b>
+&nbsp;                        CLASS_MONETARY,
+&nbsp;                        &quot;getCurrency&quot;,
+<b class="nc">&nbsp;                        MethodType.methodType(CLASS_CURRENCY_UNIT, String.class, String[].class)</b>
+&nbsp;                );
+&nbsp;
+<b class="nc">&nbsp;                CallSite callSite = LambdaMetafactory.metafactory(</b>
+&nbsp;                        lookup,
+&nbsp;                        &quot;apply&quot;,
+&nbsp;                        METHOD_TYPE_BI_FUNCTION,
+&nbsp;                        METHOD_TYPE_OBJECT_OBJECT_OBJECT,
+&nbsp;                        methodHandle,
+<b class="nc">&nbsp;                        MethodType.methodType(CLASS_CURRENCY_UNIT, String.class, String[].class)</b>
+&nbsp;                );
+<b class="nc">&nbsp;                MethodHandle target = callSite.getTarget();</b>
+<b class="nc">&nbsp;                BiFunction&lt;String, String[], Object&gt; biFunctionGetCurrency = (BiFunction&lt;String, String[], Object&gt;) target.invokeExact();</b>
+<b class="nc">&nbsp;                FUNC_GET_CURRENCY = s -&gt; biFunctionGetCurrency.apply(s, new String[0]);</b>
+<b class="nc">&nbsp;            } catch (Throwable e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;method not found : javax.money.Monetary.getCurrency&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return ObjectReaderImplValue.of(CLASS_CURRENCY_UNIT, String.class, FUNC_GET_CURRENCY);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ObjectReader createMonetaryAmountReader() {
+<b class="nc">&nbsp;        if (CLASS_NUMBER_VALUE == null) {</b>
+<b class="nc">&nbsp;            CLASS_NUMBER_VALUE = TypeUtils.loadClass(&quot;javax.money.NumberValue&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (CLASS_CURRENCY_UNIT == null) {</b>
+<b class="nc">&nbsp;            CLASS_CURRENCY_UNIT = TypeUtils.loadClass(&quot;javax.money.CurrencyUnit&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            Method factoryMethod = MoneySupport.class.getMethod(&quot;createMonetaryAmount&quot;, Object.class, Object.class);</b>
+<b class="nc">&nbsp;            String[] paramNames = {&quot;currency&quot;, &quot;number&quot;};</b>
+<b class="nc">&nbsp;            Function&lt;Map&lt;Long, Object&gt;, Object&gt; factoryFunction = ObjectReaderCreator.INSTANCE.createFactoryFunction(factoryMethod, paramNames);</b>
+&nbsp;
+<b class="nc">&nbsp;            FieldReader fieldReader0 = ObjectReaderCreator.INSTANCE.createFieldReaderParam(</b>
+&nbsp;                    MoneySupport.class, MoneySupport.class, &quot;currency&quot;, 0, 0, null, CLASS_CURRENCY_UNIT, CLASS_CURRENCY_UNIT, &quot;currency&quot;, null, null, null
+&nbsp;            );
+<b class="nc">&nbsp;            FieldReader fieldReader1 = ObjectReaderCreator.INSTANCE.createFieldReaderParam(</b>
+&nbsp;                    MoneySupport.class, MoneySupport.class, &quot;number&quot;, 0, 0, null, CLASS_DEFAULT_NUMBER_VALUE, CLASS_DEFAULT_NUMBER_VALUE, &quot;number&quot;, null, null, null
+&nbsp;            );
+&nbsp;
+<b class="nc">&nbsp;            FieldReader[] fieldReaders = {fieldReader0, fieldReader1};</b>
+<b class="nc">&nbsp;            return new ObjectReaderNoneDefaultConstructor(</b>
+&nbsp;                    null,
+&nbsp;                    null,
+&nbsp;                    null,
+&nbsp;                    0,
+&nbsp;                    factoryFunction,
+&nbsp;                    null,
+&nbsp;                    paramNames,
+&nbsp;                    fieldReaders,
+&nbsp;                    null,
+&nbsp;                    null,
+&nbsp;                    null
+&nbsp;            );
+<b class="nc">&nbsp;        } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;createMonetaryAmountReader error&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static Method METHOD_NUMBER_VALUE_OF;
+&nbsp;
+&nbsp;    public static ObjectReader createNumberValueReader() {
+<b class="nc">&nbsp;        if (CLASS_DEFAULT_NUMBER_VALUE == null) {</b>
+<b class="nc">&nbsp;            CLASS_DEFAULT_NUMBER_VALUE = TypeUtils.loadClass(&quot;org.javamoney.moneta.spi.DefaultNumberValue&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (METHOD_NUMBER_VALUE_OF == null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                METHOD_NUMBER_VALUE_OF = CLASS_DEFAULT_NUMBER_VALUE.getMethod(&quot;of&quot;, Number.class);</b>
+<b class="nc">&nbsp;            } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;method not found : org.javamoney.moneta.spi.DefaultNumberValue.of&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (CLASS_NUMBER_VALUE == null) {</b>
+<b class="nc">&nbsp;            CLASS_NUMBER_VALUE = TypeUtils.loadClass(&quot;javax.money.NumberValue&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return ObjectReaderImplValue.of(CLASS_NUMBER_VALUE, BigDecimal.class, METHOD_NUMBER_VALUE_OF);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ObjectWriter createMonetaryAmountWriter() {
+<b class="nc">&nbsp;        if (CLASS_MONETARY == null) {</b>
+<b class="nc">&nbsp;            CLASS_MONETARY = TypeUtils.loadClass(&quot;javax.money.Monetary&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (CLASS_MONETARY_AMOUNT == null) {</b>
+<b class="nc">&nbsp;            CLASS_MONETARY_AMOUNT = TypeUtils.loadClass(&quot;javax.money.MonetaryAmount&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (CLASS_NUMBER_VALUE == null) {</b>
+<b class="nc">&nbsp;            CLASS_NUMBER_VALUE = TypeUtils.loadClass(&quot;javax.money.NumberValue&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (CLASS_CURRENCY_UNIT == null) {</b>
+<b class="nc">&nbsp;            CLASS_CURRENCY_UNIT = TypeUtils.loadClass(&quot;javax.money.CurrencyUnit&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        Function&lt;Object, Object&gt; FUNC_GET_CURRENCY;
+&nbsp;        try {
+<b class="nc">&nbsp;            FUNC_GET_CURRENCY = LambdaMiscCodec.createFunction(</b>
+<b class="nc">&nbsp;                    CLASS_MONETARY_AMOUNT.getMethod(&quot;getCurrency&quot;)</b>
+&nbsp;            );
+<b class="nc">&nbsp;        } catch (Throwable e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;method not found : javax.money.Monetary.getCurrency&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        Function&lt;Object, Object&gt; FUNC_GET_NUMBER;
+&nbsp;        try {
+<b class="nc">&nbsp;            FUNC_GET_NUMBER = LambdaMiscCodec.createFunction(</b>
+<b class="nc">&nbsp;                    CLASS_MONETARY_AMOUNT.getMethod(&quot;getNumber&quot;)</b>
+&nbsp;            );
+<b class="nc">&nbsp;        } catch (Throwable e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;method not found : javax.money.Monetary.getNumber&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        FieldWriter fieldWriter0 = ObjectWriterCreator.INSTANCE.createFieldWriter(</b>
+&nbsp;                &quot;currency&quot;,
+&nbsp;                CLASS_CURRENCY_UNIT,
+&nbsp;                CLASS_CURRENCY_UNIT,
+&nbsp;                FUNC_GET_CURRENCY
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        FieldWriter fieldWriter1 = ObjectWriterCreator.INSTANCE.createFieldWriter(</b>
+&nbsp;                &quot;number&quot;,
+&nbsp;                CLASS_NUMBER_VALUE,
+&nbsp;                CLASS_NUMBER_VALUE,
+&nbsp;                FUNC_GET_NUMBER);
+&nbsp;
+<b class="nc">&nbsp;        return new ObjectWriterAdapter(CLASS_MONETARY_AMOUNT, null, null, 0, Arrays.asList(fieldWriter0, fieldWriter1));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ObjectWriter createNumberValueWriter() {
+<b class="nc">&nbsp;        if (CLASS_NUMBER_VALUE == null) {</b>
+<b class="nc">&nbsp;            CLASS_NUMBER_VALUE = TypeUtils.loadClass(&quot;javax.money.NumberValue&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (FUNC_NUMBER_VALUE == null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                BiFunction&lt;Object, Class, Number&gt; biFunctionNumberValue = LambdaMiscCodec.createBiFunction(</b>
+<b class="nc">&nbsp;                        CLASS_NUMBER_VALUE.getMethod(&quot;numberValue&quot;, Class.class)</b>
+&nbsp;                );
+<b class="nc">&nbsp;                FUNC_NUMBER_VALUE = o -&gt; (BigDecimal) biFunctionNumberValue.apply(o, BigDecimal.class);</b>
+<b class="nc">&nbsp;            } catch (Throwable e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;method not found : javax.money.NumberValue.numberValue&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return ObjectWriters.ofToBigDecimal(FUNC_NUMBER_VALUE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Object createMonetaryAmount(Object currency, Object number) {
+<b class="nc">&nbsp;        if (CLASS_NUMBER_VALUE == null) {</b>
+<b class="nc">&nbsp;            CLASS_NUMBER_VALUE = TypeUtils.loadClass(&quot;javax.money.NumberValue&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (CLASS_CURRENCY_UNIT == null) {</b>
+<b class="nc">&nbsp;            CLASS_CURRENCY_UNIT = TypeUtils.loadClass(&quot;javax.money.CurrencyUnit&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (CLASS_MONETARY == null) {</b>
+<b class="nc">&nbsp;            CLASS_MONETARY = TypeUtils.loadClass(&quot;javax.money.Monetary&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (CLASS_MONETARY_AMOUNT == null) {</b>
+<b class="nc">&nbsp;            CLASS_MONETARY_AMOUNT = TypeUtils.loadClass(&quot;javax.money.MonetaryAmount&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (CLASS_MONETARY_AMOUNT_FACTORY == null) {</b>
+<b class="nc">&nbsp;            CLASS_MONETARY_AMOUNT_FACTORY = TypeUtils.loadClass(&quot;javax.money.MonetaryAmountFactory&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (FUNC_GET_DEFAULT_AMOUNT_FACTORY == null) {</b>
+<b class="nc">&nbsp;            MethodHandles.Lookup lookup = JDKUtils.trustedLookup(CLASS_MONETARY);</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                MethodHandle methodHandle = lookup.findStatic(</b>
+&nbsp;                        CLASS_MONETARY,
+&nbsp;                        &quot;getDefaultAmountFactory&quot;,
+<b class="nc">&nbsp;                        MethodType.methodType(CLASS_MONETARY_AMOUNT_FACTORY)</b>
+&nbsp;                );
+&nbsp;
+<b class="nc">&nbsp;                CallSite callSite = LambdaMetafactory.metafactory(</b>
+&nbsp;                        lookup,
+&nbsp;                        &quot;get&quot;,
+&nbsp;                        METHOD_TYPE_SUPPLIER,
+&nbsp;                        METHOD_TYPE_OBJECT,
+&nbsp;                        methodHandle,
+<b class="nc">&nbsp;                        MethodType.methodType(CLASS_MONETARY_AMOUNT_FACTORY)</b>
+&nbsp;                );
+<b class="nc">&nbsp;                MethodHandle target = callSite.getTarget();</b>
+<b class="nc">&nbsp;                FUNC_GET_DEFAULT_AMOUNT_FACTORY = (Supplier&lt;Object&gt;) target.invokeExact();</b>
+<b class="nc">&nbsp;            } catch (Throwable e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;method not found : javax.money.Monetary.getDefaultAmountFactory&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (FUNC_SET_CURRENCY == null) {</b>
+<b class="nc">&nbsp;            MethodHandles.Lookup lookup = JDKUtils.trustedLookup(CLASS_MONETARY_AMOUNT_FACTORY);</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                MethodHandle methodHandle = lookup.findVirtual(</b>
+&nbsp;                        CLASS_MONETARY_AMOUNT_FACTORY,
+&nbsp;                        &quot;setCurrency&quot;,
+<b class="nc">&nbsp;                        MethodType.methodType(CLASS_MONETARY_AMOUNT_FACTORY, CLASS_CURRENCY_UNIT)</b>
+&nbsp;                );
+&nbsp;
+<b class="nc">&nbsp;                CallSite callSite = LambdaMetafactory.metafactory(</b>
+&nbsp;                        lookup,
+&nbsp;                        &quot;apply&quot;,
+&nbsp;                        METHOD_TYPE_BI_FUNCTION,
+&nbsp;                        METHOD_TYPE_OBJECT_OBJECT_OBJECT,
+&nbsp;                        methodHandle,
+<b class="nc">&nbsp;                        MethodType.methodType(CLASS_MONETARY_AMOUNT_FACTORY, CLASS_MONETARY_AMOUNT_FACTORY, CLASS_CURRENCY_UNIT)</b>
+&nbsp;                );
+<b class="nc">&nbsp;                MethodHandle target = callSite.getTarget();</b>
+<b class="nc">&nbsp;                FUNC_SET_CURRENCY = (BiFunction&lt;Object, Object, Object&gt;) target.invokeExact();</b>
+<b class="nc">&nbsp;            } catch (Throwable e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;method not found : javax.money.NumberValue.numberValue&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (FUNC_SET_NUMBER == null) {</b>
+<b class="nc">&nbsp;            MethodHandles.Lookup lookup = JDKUtils.trustedLookup(CLASS_MONETARY_AMOUNT_FACTORY);</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                MethodHandle methodHandle = lookup.findVirtual(</b>
+&nbsp;                        CLASS_MONETARY_AMOUNT_FACTORY,
+&nbsp;                        &quot;setNumber&quot;,
+<b class="nc">&nbsp;                        MethodType.methodType(CLASS_MONETARY_AMOUNT_FACTORY, Number.class)</b>
+&nbsp;                );
+&nbsp;
+<b class="nc">&nbsp;                CallSite callSite = LambdaMetafactory.metafactory(</b>
+&nbsp;                        lookup,
+&nbsp;                        &quot;apply&quot;,
+&nbsp;                        METHOD_TYPE_BI_FUNCTION,
+&nbsp;                        METHOD_TYPE_OBJECT_OBJECT_OBJECT,
+&nbsp;                        methodHandle,
+<b class="nc">&nbsp;                        MethodType.methodType(CLASS_MONETARY_AMOUNT_FACTORY, CLASS_MONETARY_AMOUNT_FACTORY, Number.class)</b>
+&nbsp;                );
+<b class="nc">&nbsp;                MethodHandle target = callSite.getTarget();</b>
+<b class="nc">&nbsp;                FUNC_SET_NUMBER = (BiFunction&lt;Object, Object, Number&gt;) target.invokeExact();</b>
+<b class="nc">&nbsp;            } catch (Throwable e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;method not found : javax.money.NumberValue.numberValue&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (FUNC_CREATE == null) {</b>
+<b class="nc">&nbsp;            MethodHandles.Lookup lookup = JDKUtils.trustedLookup(CLASS_MONETARY_AMOUNT_FACTORY);</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                MethodHandle methodHandle = lookup.findVirtual(</b>
+&nbsp;                        CLASS_MONETARY_AMOUNT_FACTORY,
+&nbsp;                        &quot;create&quot;,
+<b class="nc">&nbsp;                        MethodType.methodType(CLASS_MONETARY_AMOUNT)</b>
+&nbsp;                );
+&nbsp;
+<b class="nc">&nbsp;                CallSite callSite = LambdaMetafactory.metafactory(</b>
+&nbsp;                        lookup,
+&nbsp;                        &quot;apply&quot;,
+&nbsp;                        METHOD_TYPE_FUNCTION,
+&nbsp;                        METHOD_TYPE_OBJECT_OBJECT,
+&nbsp;                        methodHandle,
+<b class="nc">&nbsp;                        MethodType.methodType(CLASS_MONETARY_AMOUNT, CLASS_MONETARY_AMOUNT_FACTORY)</b>
+&nbsp;                );
+<b class="nc">&nbsp;                MethodHandle target = callSite.getTarget();</b>
+<b class="nc">&nbsp;                FUNC_CREATE = (Function&lt;Object, Object&gt;) target.invokeExact();</b>
+<b class="nc">&nbsp;            } catch (Throwable e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;method not found : javax.money.NumberValue.numberValue&quot;, e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Object factoryObject = FUNC_GET_DEFAULT_AMOUNT_FACTORY.get();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (currency != null) {</b>
+<b class="nc">&nbsp;            FUNC_SET_CURRENCY.apply(factoryObject, currency);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (number != null) {</b>
+<b class="nc">&nbsp;            FUNC_SET_NUMBER.apply(factoryObject, number);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return FUNC_CREATE.apply(factoryObject);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:27</div>
+</div>
+</body>
+</html>

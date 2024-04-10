@@ -1,0 +1,1028 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MethodWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.internal.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: MethodWriter (com.alibaba.fastjson2.internal.asm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MethodWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/387)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;// ASM: a very small and fast Java bytecode manipulation framework
+&nbsp;// Copyright (c) 2000-2011 INRIA, France Telecom
+&nbsp;// All rights reserved.
+&nbsp;//
+&nbsp;// Redistribution and use in source and binary forms, with or without
+&nbsp;// modification, are permitted provided that the following conditions
+&nbsp;// are met:
+&nbsp;// 1. Redistributions of source code must retain the above copyright
+&nbsp;//    notice, this list of conditions and the following disclaimer.
+&nbsp;// 2. Redistributions in binary form must reproduce the above copyright
+&nbsp;//    notice, this list of conditions and the following disclaimer in the
+&nbsp;//    documentation and/or other materials provided with the distribution.
+&nbsp;// 3. Neither the name of the copyright holders nor the names of its
+&nbsp;//    contributors may be used to endorse or promote products derived from
+&nbsp;//    this software without specific prior written permission.
+&nbsp;//
+&nbsp;// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+&nbsp;// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+&nbsp;// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+&nbsp;// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+&nbsp;// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+&nbsp;// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+&nbsp;// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+&nbsp;// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+&nbsp;// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+&nbsp;// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+&nbsp;// THE POSSIBILITY OF SUCH DAMAGE.
+&nbsp;package com.alibaba.fastjson2.internal.asm;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author Eric Bruneton
+&nbsp; * @author Eugene Kuleshov
+&nbsp; */
+&nbsp;public final class MethodWriter {
+&nbsp;    protected MethodWriter mv;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Where the constants used in this MethodWriter must be stored.
+&nbsp;     */
+&nbsp;    private final SymbolTable symbolTable;
+&nbsp;
+&nbsp;    private final int accessFlags;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The name_index field of the method_info JVMS structure.
+&nbsp;     */
+&nbsp;    private final int nameIndex;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The name of this method.
+&nbsp;     */
+&nbsp;    private final String name;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The descriptor_index field of the method_info JVMS structure.
+&nbsp;     */
+&nbsp;    private final int descriptorIndex;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The descriptor of this method.
+&nbsp;     */
+&nbsp;    private final String descriptor;
+&nbsp;
+&nbsp;    // Code attribute fields and sub attributes:
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The max_stack field of the Code attribute.
+&nbsp;     */
+&nbsp;    private int maxStack;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The max_locals field of the Code attribute.
+&nbsp;     */
+&nbsp;    private int maxLocals;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The &#39;code&#39; field of the Code attribute.
+&nbsp;     */
+&nbsp;    private final ByteVector code;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The number_of_entries field of the StackMapTable code attribute.
+&nbsp;     */
+&nbsp;    int stackMapTableNumberOfEntries;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The &#39;entries&#39; array of the StackMapTable code attribute.
+&nbsp;     */
+&nbsp;    private ByteVector stackMapTableEntries;
+&nbsp;    /**
+&nbsp;     * The first basic block of the method. The next ones (in bytecode offset order) can be accessed
+&nbsp;     * with the {@link Label#nextBasicBlock} field.
+&nbsp;     */
+&nbsp;    private Label firstBasicBlock;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The last basic block of the method (in bytecode offset order). This field is updated each time
+&nbsp;     * a basic block is encountered, and is used to append it at the end of the basic block list.
+&nbsp;     */
+&nbsp;    private Label lastBasicBlock;
+&nbsp;
+&nbsp;    private Label currentBasicBlock;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The last frame that was written in {@link #stackMapTableEntries}. This field has the same
+&nbsp;     * format as {@link #currentFrame}.
+&nbsp;     */
+&nbsp;    private int[] previousFrame;
+&nbsp;    private int[] currentFrame;
+&nbsp;
+&nbsp;    boolean hasAsmInstructions;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The start offset of the last visited instruction. Used to set the offset field of type
+&nbsp;     * annotations of type &#39;offset_target&#39; (see &lt;a
+&nbsp;     * href=&quot;https://docs.oracle.com/javase/specs/jvms/se9/html/jvms-4.html#jvms-4.7.20.1&quot;&gt;JVMS
+&nbsp;     * 4.7.20.1&lt;/a&gt;).
+&nbsp;     */
+&nbsp;    private int lastBytecodeOffset;
+&nbsp;
+&nbsp;    // -----------------------------------------------------------------------------------------------
+&nbsp;    // Constructor and accessors
+&nbsp;    // -----------------------------------------------------------------------------------------------
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new {@link MethodWriter}.
+&nbsp;     *
+&nbsp;     * @param symbolTable where the constants used in this AnnotationWriter must be stored.
+&nbsp;     * @param access      the method&#39;s access flags (see {@link Opcodes}).
+&nbsp;     * @param name        the method&#39;s name.
+&nbsp;     * @param descriptor  the method&#39;s descriptor (see {@link Type}).
+&nbsp;     */
+&nbsp;    MethodWriter(
+&nbsp;            SymbolTable symbolTable,
+&nbsp;            int access,
+&nbsp;            String name,
+&nbsp;            String descriptor,
+&nbsp;            int codeInitCapacity
+<b class="nc">&nbsp;    ) {</b>
+<b class="nc">&nbsp;        this.symbolTable = symbolTable;</b>
+<b class="nc">&nbsp;        this.accessFlags = &quot;&lt;init&gt;&quot;.equals(name) ? access | Constants.ACC_CONSTRUCTOR : access;</b>
+<b class="nc">&nbsp;        this.nameIndex = symbolTable.addConstantUtf8(name);</b>
+<b class="nc">&nbsp;        this.name = name;</b>
+<b class="nc">&nbsp;        this.descriptorIndex = symbolTable.addConstantUtf8(descriptor);</b>
+<b class="nc">&nbsp;        this.descriptor = descriptor;</b>
+<b class="nc">&nbsp;        this.code = new ByteVector(codeInitCapacity);</b>
+&nbsp;
+&nbsp;        // Update maxLocals and currentLocals.
+<b class="nc">&nbsp;        int argumentsSize = Type.getArgumentsAndReturnSizes(descriptor) &gt;&gt; 2;</b>
+<b class="nc">&nbsp;        if ((access &amp; Opcodes.ACC_STATIC) != 0) {</b>
+<b class="nc">&nbsp;            --argumentsSize;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        maxLocals = argumentsSize;</b>
+&nbsp;        // Create and visit the label for the first basic block.
+<b class="nc">&nbsp;        firstBasicBlock = new Label();</b>
+<b class="nc">&nbsp;        visitLabel(firstBasicBlock);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    // -----------------------------------------------------------------------------------------------
+&nbsp;    // Implementation of the MethodVisitor abstract class
+&nbsp;    // -----------------------------------------------------------------------------------------------
+&nbsp;
+&nbsp;    public void visitInsn(final int opcode) {
+<b class="nc">&nbsp;        lastBytecodeOffset = code.length;</b>
+&nbsp;        // Add the instruction to the bytecode of the method.
+<b class="nc">&nbsp;        code.putByte(opcode);</b>
+&nbsp;        // If needed, update the maximum stack size and number of locals, and stack map frames.
+<b class="nc">&nbsp;        if (currentBasicBlock != null) {</b>
+<b class="nc">&nbsp;            currentBasicBlock.frame.execute(opcode, 0, null, null);</b>
+<b class="nc">&nbsp;            if ((opcode &gt;= Opcodes.IRETURN &amp;&amp; opcode &lt;= Opcodes.RETURN) || opcode == Opcodes.ATHROW) {</b>
+<b class="nc">&nbsp;                endCurrentBasicBlockWithNoSuccessor();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void visitIntInsn(final int opcode, final int operand) {
+<b class="nc">&nbsp;        lastBytecodeOffset = code.length;</b>
+&nbsp;        // Add the instruction to the bytecode of the method.
+<b class="nc">&nbsp;        if (opcode == Opcodes.SIPUSH) {</b>
+<b class="nc">&nbsp;            code.put12(opcode, operand);</b>
+&nbsp;        } else { // BIPUSH or NEWARRAY
+<b class="nc">&nbsp;            code.put11(opcode, operand);</b>
+&nbsp;        }
+&nbsp;        // If needed, update the maximum stack size and number of locals, and stack map frames.
+<b class="nc">&nbsp;        if (currentBasicBlock != null) {</b>
+<b class="nc">&nbsp;            currentBasicBlock.frame.execute(opcode, operand, null, null);</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void visitVarInsn(final int opcode, final int var) {
+<b class="nc">&nbsp;        lastBytecodeOffset = code.length;</b>
+&nbsp;        // Add the instruction to the bytecode of the method.
+<b class="nc">&nbsp;        if (var &lt; 4 &amp;&amp; opcode != Opcodes.RET) {</b>
+&nbsp;            int optimizedOpcode;
+<b class="nc">&nbsp;            if (opcode &lt; Opcodes.ISTORE) {</b>
+<b class="nc">&nbsp;                optimizedOpcode = Constants.ILOAD_0 + ((opcode - Opcodes.ILOAD) &lt;&lt; 2) + var;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                optimizedOpcode = Constants.ISTORE_0 + ((opcode - Opcodes.ISTORE) &lt;&lt; 2) + var;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            code.putByte(optimizedOpcode);</b>
+<b class="nc">&nbsp;        } else if (var &gt;= 256) {</b>
+<b class="nc">&nbsp;            code.putByte(Constants.WIDE).put12(opcode, var);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            code.put11(opcode, var);</b>
+&nbsp;        }
+&nbsp;        // If needed, update the maximum stack size and number of locals, and stack map frames.
+<b class="nc">&nbsp;        if (currentBasicBlock != null) {</b>
+<b class="nc">&nbsp;            currentBasicBlock.frame.execute(opcode, var, null, null);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int currentMaxLocals;
+<b class="nc">&nbsp;        if (opcode == Opcodes.LLOAD</b>
+&nbsp;                || opcode == Opcodes.DLOAD
+&nbsp;                || opcode == Opcodes.LSTORE
+&nbsp;                || opcode == Opcodes.DSTORE) {
+<b class="nc">&nbsp;            currentMaxLocals = var + 2;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            currentMaxLocals = var + 1;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (currentMaxLocals &gt; maxLocals) {</b>
+<b class="nc">&nbsp;            maxLocals = currentMaxLocals;</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void visitTypeInsn(final int opcode, final String type) {
+<b class="nc">&nbsp;        lastBytecodeOffset = code.length;</b>
+&nbsp;        // Add the instruction to the bytecode of the method.
+<b class="nc">&nbsp;        Symbol typeSymbol = symbolTable.addConstantUtf8Reference(/*CONSTANT_CLASS_TAG*/ 7, type);</b>
+<b class="nc">&nbsp;        code.put12(opcode, typeSymbol.index);</b>
+&nbsp;        // If needed, update the maximum stack size and number of locals, and stack map frames.
+<b class="nc">&nbsp;        if (currentBasicBlock != null) {</b>
+<b class="nc">&nbsp;            currentBasicBlock.frame.execute(opcode, lastBytecodeOffset, typeSymbol, symbolTable);</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void visitFieldInsn(
+&nbsp;            final int opcode, final String owner, final String name, final String descriptor) {
+<b class="nc">&nbsp;        lastBytecodeOffset = code.length;</b>
+&nbsp;        // Add the instruction to the bytecode of the method.
+<b class="nc">&nbsp;        Symbol fieldrefSymbol = symbolTable.addConstantMemberReference(/*CONSTANT_FIELDREF_TAG*/ 9, owner, name, descriptor);</b>
+<b class="nc">&nbsp;        code.put12(opcode, fieldrefSymbol.index);</b>
+&nbsp;        // If needed, update the maximum stack size and number of locals, and stack map frames.
+<b class="nc">&nbsp;        if (currentBasicBlock != null) {</b>
+<b class="nc">&nbsp;            currentBasicBlock.frame.execute(opcode, 0, fieldrefSymbol, symbolTable);</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void visitMethodInsn(
+&nbsp;            final int opcode,
+&nbsp;            final String owner,
+&nbsp;            final String name,
+&nbsp;            final String descriptor,
+&nbsp;            final boolean isInterface) {
+<b class="nc">&nbsp;        lastBytecodeOffset = code.length;</b>
+&nbsp;        // Add the instruction to the bytecode of the method.
+<b class="nc">&nbsp;        Symbol methodrefSymbol = symbolTable.addConstantMemberReference(</b>
+&nbsp;                isInterface ? /*CONSTANT_INTERFACE_METHODREF_TAG*/ 11 : /*CONSTANT_METHODREF_TAG*/ 10,
+&nbsp;                owner,
+&nbsp;                name,
+&nbsp;                descriptor
+&nbsp;        );
+<b class="nc">&nbsp;        if (opcode == Opcodes.INVOKEINTERFACE) {</b>
+<b class="nc">&nbsp;            code.put12(Opcodes.INVOKEINTERFACE, methodrefSymbol.index)</b>
+<b class="nc">&nbsp;                    .put11(methodrefSymbol.getArgumentsAndReturnSizes() &gt;&gt; 2, 0);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            code.put12(opcode, methodrefSymbol.index);</b>
+&nbsp;        }
+&nbsp;        // If needed, update the maximum stack size and number of locals, and stack map frames.
+<b class="nc">&nbsp;        if (currentBasicBlock != null) {</b>
+<b class="nc">&nbsp;            currentBasicBlock.frame.execute(opcode, 0, methodrefSymbol, symbolTable);</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void visitJumpInsn(final int opcode, final Label label) {
+<b class="nc">&nbsp;        lastBytecodeOffset = code.length;</b>
+&nbsp;        // Add the instruction to the bytecode of the method.
+&nbsp;        // Compute the &#39;base&#39; opcode, i.e. GOTO or JSR if opcode is GOTO_W or JSR_W, otherwise opcode.
+<b class="nc">&nbsp;        int baseOpcode =</b>
+&nbsp;                opcode &gt;= Constants.GOTO_W ? opcode - Constants.WIDE_JUMP_OPCODE_DELTA : opcode;
+<b class="nc">&nbsp;        boolean nextInsnIsJumpTarget = false;</b>
+<b class="nc">&nbsp;        if ((label.flags &amp; Label.FLAG_RESOLVED) != 0</b>
+&nbsp;                &amp;&amp; label.bytecodeOffset - code.length &lt; Short.MIN_VALUE) {
+<b class="nc">&nbsp;            throw new JSONException(&quot;not supported&quot;);</b>
+<b class="nc">&nbsp;        } else if (baseOpcode != opcode) {</b>
+&nbsp;            // Case of a GOTO_W or JSR_W specified by the user (normally ClassReader when used to remove
+&nbsp;            // ASM specific instructions). In this case we keep the original instruction.
+<b class="nc">&nbsp;            code.putByte(opcode);</b>
+<b class="nc">&nbsp;            label.put(code, code.length - 1, true);</b>
+&nbsp;        } else {
+&nbsp;            // Case of a jump with an offset &gt;= -32768, or of a jump with an unknown offset. In these
+&nbsp;            // cases we store the offset in 2 bytes (which will be increased via a ClassReader -&gt;
+&nbsp;            // ClassWriter round trip if it turns out that 2 bytes are not sufficient).
+<b class="nc">&nbsp;            code.putByte(baseOpcode);</b>
+<b class="nc">&nbsp;            label.put(code, code.length - 1, false);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // If needed, update the maximum stack size and number of locals, and stack map frames.
+<b class="nc">&nbsp;        if (currentBasicBlock != null) {</b>
+<b class="nc">&nbsp;            Label nextBasicBlock = null;</b>
+<b class="nc">&nbsp;            currentBasicBlock.frame.execute(baseOpcode, 0, null, null);</b>
+&nbsp;            // Record the fact that &#39;label&#39; is the target of a jump instruction.
+<b class="nc">&nbsp;            label.getCanonicalInstance().flags |= Label.FLAG_JUMP_TARGET;</b>
+&nbsp;            // Add &#39;label&#39; as a successor of the current basic block.
+<b class="nc">&nbsp;            addSuccessorToCurrentBasicBlock(label);</b>
+<b class="nc">&nbsp;            if (baseOpcode != Opcodes.GOTO) {</b>
+&nbsp;                // The next instruction starts a new basic block (except for GOTO: by default the code
+&nbsp;                // following a goto is unreachable - unless there is an explicit label for it - and we
+&nbsp;                // should not compute stack frame types for its instructions).
+<b class="nc">&nbsp;                nextBasicBlock = new Label();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // If the next instruction starts a new basic block, call visitLabel to add the label of this
+&nbsp;            // instruction as a successor of the current block, and to start a new basic block.
+<b class="nc">&nbsp;            if (nextBasicBlock != null) {</b>
+<b class="nc">&nbsp;                if (nextInsnIsJumpTarget) {</b>
+<b class="nc">&nbsp;                    nextBasicBlock.flags |= Label.FLAG_JUMP_TARGET;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                visitLabel(nextBasicBlock);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (baseOpcode == Opcodes.GOTO) {</b>
+<b class="nc">&nbsp;                endCurrentBasicBlockWithNoSuccessor();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void visitLabel(final Label label) {
+&nbsp;        // Resolve the forward references to this label, if any.
+<b class="nc">&nbsp;        hasAsmInstructions |= label.resolve(code.data, code.length);</b>
+&nbsp;        // visitLabel starts a new basic block (except for debug only labels), so we need to update the
+&nbsp;        // previous and current block references and list of successors.
+<b class="nc">&nbsp;        if ((label.flags &amp; Label.FLAG_DEBUG_ONLY) != 0) {</b>
+<b class="nc">&nbsp;            return;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (currentBasicBlock != null) {</b>
+<b class="nc">&nbsp;            if (label.bytecodeOffset == currentBasicBlock.bytecodeOffset) {</b>
+&nbsp;                // We use {@link Label#getCanonicalInstance} to store the state of a basic block in only
+&nbsp;                // one place, but this does not work for labels which have not been visited yet.
+&nbsp;                // Therefore, when we detect here two labels having the same bytecode offset, we need to
+&nbsp;                // - consolidate the state scattered in these two instances into the canonical instance:
+<b class="nc">&nbsp;                currentBasicBlock.flags |= (label.flags &amp; Label.FLAG_JUMP_TARGET);</b>
+&nbsp;                // - make sure the two instances share the same Frame instance (the implementation of
+&nbsp;                // {@link Label#getCanonicalInstance} relies on this property; here label.frame should be
+&nbsp;                // null):
+<b class="nc">&nbsp;                label.frame = currentBasicBlock.frame;</b>
+&nbsp;                // - and make sure to NOT assign &#39;label&#39; into &#39;currentBasicBlock&#39; or &#39;lastBasicBlock&#39;, so
+&nbsp;                // that they still refer to the canonical instance for this bytecode offset.
+<b class="nc">&nbsp;                return;</b>
+&nbsp;            }
+&nbsp;            // End the current basic block (with one new successor).
+<b class="nc">&nbsp;            addSuccessorToCurrentBasicBlock(label);</b>
+&nbsp;        }
+&nbsp;        // Append &#39;label&#39; at the end of the basic block list.
+<b class="nc">&nbsp;        if (lastBasicBlock != null) {</b>
+<b class="nc">&nbsp;            if (label.bytecodeOffset == lastBasicBlock.bytecodeOffset) {</b>
+&nbsp;                // Same comment as above.
+<b class="nc">&nbsp;                lastBasicBlock.flags |= (label.flags &amp; Label.FLAG_JUMP_TARGET);</b>
+&nbsp;                // Here label.frame should be null.
+<b class="nc">&nbsp;                label.frame = lastBasicBlock.frame;</b>
+<b class="nc">&nbsp;                currentBasicBlock = lastBasicBlock;</b>
+<b class="nc">&nbsp;                return;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            lastBasicBlock.nextBasicBlock = label;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        lastBasicBlock = label;</b>
+&nbsp;        // Make it the new current basic block.
+<b class="nc">&nbsp;        currentBasicBlock = label;</b>
+&nbsp;        // Here label.frame should be null.
+<b class="nc">&nbsp;        label.frame = new Frame(label);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;//
+&nbsp;//  public void visitLdcInsn(final Object value) {
+&nbsp;//    lastBytecodeOffset = code.length;
+&nbsp;//    // Add the instruction to the bytecode of the method.
+&nbsp;//    Symbol constantSymbol = symbolTable.addConstant(value);
+&nbsp;//    int constantIndex = constantSymbol.index;
+&nbsp;//    char firstDescriptorChar;
+&nbsp;//    boolean isLongOrDouble =
+&nbsp;//            constantSymbol.tag == Symbol.CONSTANT_LONG_TAG
+&nbsp;//                    || constantSymbol.tag == Symbol.CONSTANT_DOUBLE_TAG
+&nbsp;//                    || (constantSymbol.tag == Symbol.CONSTANT_DYNAMIC_TAG
+&nbsp;//                    &amp;&amp; ((firstDescriptorChar = constantSymbol.value.charAt(0)) == &#39;J&#39;
+&nbsp;//                    || firstDescriptorChar == &#39;D&#39;));
+&nbsp;//    if (isLongOrDouble) {
+&nbsp;//      code.put12(Constants.LDC2_W, constantIndex);
+&nbsp;//    } else if (constantIndex &gt;= 256) {
+&nbsp;//      code.put12(Constants.LDC_W, constantIndex);
+&nbsp;//    } else {
+&nbsp;//      code.put11(Opcodes.LDC, constantIndex);
+&nbsp;//    }
+&nbsp;//    // If needed, update the maximum stack size and number of locals, and stack map frames.
+&nbsp;//    if (currentBasicBlock != null) {
+&nbsp;//      currentBasicBlock.frame.execute(Opcodes.LDC, 0, constantSymbol, symbolTable);
+&nbsp;//    }
+&nbsp;//  }
+&nbsp;
+&nbsp;    public void visitLdcInsn(final String value) {
+<b class="nc">&nbsp;        final int CONSTANT_STRING_TAG = 8;</b>
+&nbsp;
+<b class="nc">&nbsp;        lastBytecodeOffset = code.length;</b>
+&nbsp;        // Add the instruction to the bytecode of the method.
+<b class="nc">&nbsp;        Symbol constantSymbol = symbolTable.addConstantUtf8Reference(CONSTANT_STRING_TAG, value);</b>
+<b class="nc">&nbsp;        int constantIndex = constantSymbol.index;</b>
+<b class="nc">&nbsp;        if (constantIndex &gt;= 256) {</b>
+<b class="nc">&nbsp;            code.put12(Constants.LDC_W, constantIndex);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            code.put11(Opcodes.LDC, constantIndex);</b>
+&nbsp;        }
+&nbsp;        // If needed, update the maximum stack size and number of locals, and stack map frames.
+<b class="nc">&nbsp;        if (currentBasicBlock != null) {</b>
+<b class="nc">&nbsp;            currentBasicBlock.frame.execute(Opcodes.LDC, 0, constantSymbol, symbolTable);</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void visitLdcInsn(Class value) {
+&nbsp;        // getTypeInternal(typeDescriptor, 0, typeDescriptor.length())
+<b class="nc">&nbsp;        String desc = ASMUtils.desc(value);</b>
+<b class="nc">&nbsp;        Type type = Type.getTypeInternal(desc, 0, desc.length());</b>
+<b class="nc">&nbsp;        lastBytecodeOffset = code.length;</b>
+&nbsp;        // Add the instruction to the bytecode of the method.
+&nbsp;        Symbol constantSymbol;
+&nbsp;//        int typeSort = type.getSort();
+<b class="nc">&nbsp;        int typeSort = type.sort == Type.INTERNAL ? Type.OBJECT : type.sort;</b>
+<b class="nc">&nbsp;        if (typeSort == Type.OBJECT) {</b>
+&nbsp;            // type.valueBuffer.substring(type.valueBegin, type.valueEnd)
+<b class="nc">&nbsp;            constantSymbol = symbolTable.addConstantUtf8Reference(/*CONSTANT_CLASS_TAG*/ 7, type.valueBuffer.substring(type.valueBegin, type.valueEnd));</b>
+&nbsp;        } else { // type is a primitive or array type.
+<b class="nc">&nbsp;            constantSymbol = symbolTable.addConstantUtf8Reference(/*CONSTANT_CLASS_TAG*/ 7, type.getDescriptor());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int constantIndex = constantSymbol.index;</b>
+<b class="nc">&nbsp;        if (constantIndex &gt;= 256) {</b>
+<b class="nc">&nbsp;            code.put12(Constants.LDC_W, constantIndex);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            code.put11(Opcodes.LDC, constantIndex);</b>
+&nbsp;        }
+&nbsp;        // If needed, update the maximum stack size and number of locals, and stack map frames.
+<b class="nc">&nbsp;        if (currentBasicBlock != null) {</b>
+<b class="nc">&nbsp;            currentBasicBlock.frame.execute(Opcodes.LDC, 0, constantSymbol, symbolTable);</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void visitLdcInsn(final int value) {
+<b class="nc">&nbsp;        final int CONSTANT_INTEGER_TAG = 3;</b>
+&nbsp;
+<b class="nc">&nbsp;        lastBytecodeOffset = code.length;</b>
+&nbsp;        // Add the instruction to the bytecode of the method.
+<b class="nc">&nbsp;        Symbol constantSymbol = symbolTable.addConstantIntegerOrFloat(CONSTANT_INTEGER_TAG, value);</b>
+<b class="nc">&nbsp;        int constantIndex = constantSymbol.index;</b>
+<b class="nc">&nbsp;        if (constantIndex &gt;= 256) {</b>
+<b class="nc">&nbsp;            code.put12(Constants.LDC_W, constantIndex);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            code.put11(Opcodes.LDC, constantIndex);</b>
+&nbsp;        }
+&nbsp;        // If needed, update the maximum stack size and number of locals, and stack map frames.
+<b class="nc">&nbsp;        if (currentBasicBlock != null) {</b>
+<b class="nc">&nbsp;            currentBasicBlock.frame.execute(Opcodes.LDC, 0, constantSymbol, symbolTable);</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void visitLdcInsn(final long value) {
+<b class="nc">&nbsp;        final int CONSTANT_LONG_TAG = 5;</b>
+<b class="nc">&nbsp;        lastBytecodeOffset = code.length;</b>
+&nbsp;        // Add the instruction to the bytecode of the method.
+<b class="nc">&nbsp;        Symbol constantSymbol = symbolTable.addConstantLongOrDouble(CONSTANT_LONG_TAG, value);</b>
+<b class="nc">&nbsp;        int constantIndex = constantSymbol.index;</b>
+<b class="nc">&nbsp;        code.put12(Constants.LDC2_W, constantIndex);</b>
+&nbsp;        // If needed, update the maximum stack size and number of locals, and stack map frames.
+<b class="nc">&nbsp;        if (currentBasicBlock != null) {</b>
+<b class="nc">&nbsp;            currentBasicBlock.frame.execute(Opcodes.LDC, 0, constantSymbol, symbolTable);</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void visitIincInsn(final int var, final int increment) {
+<b class="nc">&nbsp;        lastBytecodeOffset = code.length;</b>
+&nbsp;        // Add the instruction to the bytecode of the method.
+<b class="nc">&nbsp;        if ((var &gt; 255) || (increment &gt; 127) || (increment &lt; -128)) {</b>
+<b class="nc">&nbsp;            code.putByte(Constants.WIDE).put12(Opcodes.IINC, var).putShort(increment);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            code.putByte(Opcodes.IINC).put11(var, increment);</b>
+&nbsp;        }
+&nbsp;        // If needed, update the maximum stack size and number of locals, and stack map frames.
+<b class="nc">&nbsp;        if (currentBasicBlock != null) {</b>
+<b class="nc">&nbsp;            currentBasicBlock.frame.execute(Opcodes.IINC, var, null, null);</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void visitLookupSwitchInsn(final Label dflt, final int[] keys, final Label[] labels) {
+<b class="nc">&nbsp;        lastBytecodeOffset = code.length;</b>
+&nbsp;        // Add the instruction to the bytecode of the method.
+<b class="nc">&nbsp;        code.putByte(Opcodes.LOOKUPSWITCH).putByteArray(null, 0, (4 - code.length % 4) % 4);</b>
+<b class="nc">&nbsp;        dflt.put(code, lastBytecodeOffset, true);</b>
+<b class="nc">&nbsp;        code.putInt(labels.length);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; labels.length; ++i) {</b>
+<b class="nc">&nbsp;            code.putInt(keys[i]);</b>
+<b class="nc">&nbsp;            labels[i].put(code, lastBytecodeOffset, true);</b>
+&nbsp;        }
+&nbsp;        // If needed, update the maximum stack size and number of locals, and stack map frames.
+<b class="nc">&nbsp;        visitSwitchInsn(dflt, labels);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private void visitSwitchInsn(final Label dflt, final Label[] labels) {
+<b class="nc">&nbsp;        if (currentBasicBlock != null) {</b>
+<b class="nc">&nbsp;            currentBasicBlock.frame.execute(Opcodes.LOOKUPSWITCH, 0, null, null);</b>
+&nbsp;            // Add all the labels as successors of the current basic block.
+<b class="nc">&nbsp;            addSuccessorToCurrentBasicBlock(dflt);</b>
+<b class="nc">&nbsp;            dflt.getCanonicalInstance().flags |= Label.FLAG_JUMP_TARGET;</b>
+<b class="nc">&nbsp;            for (Label label : labels) {</b>
+<b class="nc">&nbsp;                addSuccessorToCurrentBasicBlock(label);</b>
+<b class="nc">&nbsp;                label.getCanonicalInstance().flags |= Label.FLAG_JUMP_TARGET;</b>
+&nbsp;            }
+&nbsp;            // End the current basic block.
+<b class="nc">&nbsp;            endCurrentBasicBlockWithNoSuccessor();</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void visitMaxs(final int maxStack, final int maxLocals) {
+&nbsp;        /**
+&nbsp;         * Computes all the stack map frames of the method, from scratch.
+&nbsp;         */
+&nbsp;        // computeAllFrames();
+&nbsp;        // Create and visit the first (implicit) frame.
+<b class="nc">&nbsp;        Frame firstFrame = firstBasicBlock.frame;</b>
+<b class="nc">&nbsp;        firstFrame.setInputFrameFromDescriptor(symbolTable, accessFlags, descriptor, this.maxLocals);</b>
+<b class="nc">&nbsp;        firstFrame.accept(this);</b>
+&nbsp;
+&nbsp;        // Fix point algorithm: add the first basic block to a list of blocks to process (i.e. blocks
+&nbsp;        // whose stack map frame has changed) and, while there are blocks to process, remove one from
+&nbsp;        // the list and update the stack map frames of its successor blocks in the control flow graph
+&nbsp;        // (which might change them, in which case these blocks must be processed too, and are thus
+&nbsp;        // added to the list of blocks to process). Also compute the maximum stack size of the method,
+&nbsp;        // as a by-product.
+<b class="nc">&nbsp;        Label listOfBlocksToProcess = firstBasicBlock;</b>
+<b class="nc">&nbsp;        listOfBlocksToProcess.nextListElement = Label.EMPTY_LIST;</b>
+<b class="nc">&nbsp;        int maxStackSize = 0;</b>
+<b class="nc">&nbsp;        while (listOfBlocksToProcess != Label.EMPTY_LIST) {</b>
+&nbsp;            // Remove a basic block from the list of blocks to process.
+<b class="nc">&nbsp;            Label basicBlock = listOfBlocksToProcess;</b>
+<b class="nc">&nbsp;            listOfBlocksToProcess = listOfBlocksToProcess.nextListElement;</b>
+<b class="nc">&nbsp;            basicBlock.nextListElement = null;</b>
+&nbsp;            // By definition, basicBlock is reachable.
+<b class="nc">&nbsp;            basicBlock.flags |= Label.FLAG_REACHABLE;</b>
+&nbsp;            // Update the (absolute) maximum stack size.
+<b class="nc">&nbsp;            int maxBlockStackSize = basicBlock.frame.inputStack.length + basicBlock.outputStackMax;</b>
+<b class="nc">&nbsp;            if (maxBlockStackSize &gt; maxStackSize) {</b>
+<b class="nc">&nbsp;                maxStackSize = maxBlockStackSize;</b>
+&nbsp;            }
+&nbsp;            // Update the successor blocks of basicBlock in the control flow graph.
+<b class="nc">&nbsp;            Edge outgoingEdge = basicBlock.outgoingEdges;</b>
+<b class="nc">&nbsp;            while (outgoingEdge != null) {</b>
+<b class="nc">&nbsp;                Label successorBlock = outgoingEdge.successor.getCanonicalInstance();</b>
+<b class="nc">&nbsp;                boolean successorBlockChanged =</b>
+<b class="nc">&nbsp;                        basicBlock.frame.merge(symbolTable, successorBlock.frame);</b>
+<b class="nc">&nbsp;                if (successorBlockChanged &amp;&amp; successorBlock.nextListElement == null) {</b>
+&nbsp;                    // If successorBlock has changed it must be processed. Thus, if it is not already in the
+&nbsp;                    // list of blocks to process, add it to this list.
+<b class="nc">&nbsp;                    successorBlock.nextListElement = listOfBlocksToProcess;</b>
+<b class="nc">&nbsp;                    listOfBlocksToProcess = successorBlock;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                outgoingEdge = outgoingEdge.nextEdge;</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // Loop over all the basic blocks and visit the stack map frames that must be stored in the
+&nbsp;        // StackMapTable attribute. Also replace unreachable code with NOP* ATHROW, and remove it from
+&nbsp;        // exception handler ranges.
+<b class="nc">&nbsp;        Label basicBlock = firstBasicBlock;</b>
+<b class="nc">&nbsp;        while (basicBlock != null) {</b>
+<b class="nc">&nbsp;            if ((basicBlock.flags &amp; (Label.FLAG_JUMP_TARGET | Label.FLAG_REACHABLE))</b>
+&nbsp;                    == (Label.FLAG_JUMP_TARGET | Label.FLAG_REACHABLE)) {
+<b class="nc">&nbsp;                basicBlock.frame.accept(this);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if ((basicBlock.flags &amp; Label.FLAG_REACHABLE) == 0) {</b>
+&nbsp;                // Find the start and end bytecode offsets of this unreachable block.
+<b class="nc">&nbsp;                Label nextBasicBlock = basicBlock.nextBasicBlock;</b>
+<b class="nc">&nbsp;                int startOffset = basicBlock.bytecodeOffset;</b>
+<b class="nc">&nbsp;                int endOffset = (nextBasicBlock == null ? code.length : nextBasicBlock.bytecodeOffset) - 1;</b>
+<b class="nc">&nbsp;                if (endOffset &gt;= startOffset) {</b>
+&nbsp;                    // Replace its instructions with NOP ... NOP ATHROW.
+<b class="nc">&nbsp;                    for (int i = startOffset; i &lt; endOffset; ++i) {</b>
+<b class="nc">&nbsp;                        code.data[i] = Opcodes.NOP;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    code.data[endOffset] = (byte) Opcodes.ATHROW;</b>
+&nbsp;                    // Emit a frame for this unreachable block, with no local and a Throwable on the stack
+&nbsp;                    // (so that the ATHROW could consume this Throwable if it were reachable).
+<b class="nc">&nbsp;                    int frameIndex = visitFrameStart(startOffset, /* numLocal = */ 0, /* numStack = */ 1);</b>
+<b class="nc">&nbsp;                    currentFrame[frameIndex] = Frame.REFERENCE_KIND | symbolTable.addType(&quot;java/lang/Throwable&quot;);</b>
+<b class="nc">&nbsp;                    visitFrameEnd();</b>
+&nbsp;                    // The maximum stack size is now at least one, because of the Throwable declared above.
+<b class="nc">&nbsp;                    maxStackSize = Math.max(maxStackSize, 1);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            basicBlock = basicBlock.nextBasicBlock;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.maxStack = maxStackSize;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    // -----------------------------------------------------------------------------------------------
+&nbsp;    // Utility methods: control flow analysis algorithm
+&nbsp;    // -----------------------------------------------------------------------------------------------
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a successor to {@link #currentBasicBlock} in the control flow graph.
+&nbsp;     *
+&nbsp;     * @param successor the successor block to be added to the current basic block.
+&nbsp;     */
+&nbsp;    private void addSuccessorToCurrentBasicBlock(final Label successor) {
+<b class="nc">&nbsp;        currentBasicBlock.outgoingEdges = new Edge(successor, currentBasicBlock.outgoingEdges);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ends the current basic block. This method must be used in the case where the current basic
+&nbsp;     * block does not have any successor.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;WARNING: this method must be called after the currently visited instruction has been put in
+&nbsp;     * {@link #code} (if frames are computed, this method inserts a new Label to start a new basic
+&nbsp;     * block after the current instruction).
+&nbsp;     */
+&nbsp;    private void endCurrentBasicBlockWithNoSuccessor() {
+<b class="nc">&nbsp;        Label nextBasicBlock = new Label();</b>
+<b class="nc">&nbsp;        nextBasicBlock.frame = new Frame(nextBasicBlock);</b>
+<b class="nc">&nbsp;        nextBasicBlock.resolve(code.data, code.length);</b>
+<b class="nc">&nbsp;        lastBasicBlock.nextBasicBlock = nextBasicBlock;</b>
+<b class="nc">&nbsp;        lastBasicBlock = nextBasicBlock;</b>
+<b class="nc">&nbsp;        currentBasicBlock = null;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    // -----------------------------------------------------------------------------------------------
+&nbsp;    // Utility methods: stack map frames
+&nbsp;    // -----------------------------------------------------------------------------------------------
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Starts the visit of a new stack map frame, stored in {@link #currentFrame}.
+&nbsp;     *
+&nbsp;     * @param offset   the bytecode offset of the instruction to which the frame corresponds.
+&nbsp;     * @param numLocal the number of local variables in the frame.
+&nbsp;     * @param numStack the number of stack elements in the frame.
+&nbsp;     * @return the index of the next element to be written in this frame.
+&nbsp;     */
+&nbsp;    int visitFrameStart(final int offset, final int numLocal, final int numStack) {
+<b class="nc">&nbsp;        int frameLength = 3 + numLocal + numStack;</b>
+<b class="nc">&nbsp;        if (currentFrame == null || currentFrame.length &lt; frameLength) {</b>
+<b class="nc">&nbsp;            currentFrame = new int[frameLength];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        currentFrame[0] = offset;</b>
+<b class="nc">&nbsp;        currentFrame[1] = numLocal;</b>
+<b class="nc">&nbsp;        currentFrame[2] = numStack;</b>
+<b class="nc">&nbsp;        return 3;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets an abstract type in {@link #currentFrame}.
+&nbsp;     *
+&nbsp;     * @param frameIndex   the index of the element to be set in {@link #currentFrame}.
+&nbsp;     * @param abstractType an abstract type.
+&nbsp;     */
+&nbsp;    void visitAbstractType(final int frameIndex, final int abstractType) {
+<b class="nc">&nbsp;        currentFrame[frameIndex] = abstractType;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ends the visit of {@link #currentFrame} by writing it in the StackMapTable entries and by
+&nbsp;     * updating the StackMapTable number_of_entries (except if the current frame is the first one,
+&nbsp;     * which is implicit in StackMapTable). Then resets {@link #currentFrame} to {@literal null}.
+&nbsp;     */
+&nbsp;    void visitFrameEnd() {
+<b class="nc">&nbsp;        if (previousFrame != null) {</b>
+<b class="nc">&nbsp;            if (stackMapTableEntries == null) {</b>
+<b class="nc">&nbsp;                stackMapTableEntries = new ByteVector(2048);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            putFrame();</b>
+<b class="nc">&nbsp;            ++stackMapTableNumberOfEntries;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        previousFrame = currentFrame;</b>
+<b class="nc">&nbsp;        currentFrame = null;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compresses and writes {@link #currentFrame} in a new StackMapTable entry.
+&nbsp;     */
+&nbsp;    private void putFrame() {
+<b class="nc">&nbsp;        final int numLocal = currentFrame[1];</b>
+<b class="nc">&nbsp;        final int numStack = currentFrame[2];</b>
+<b class="nc">&nbsp;        final int offsetDelta =</b>
+&nbsp;                stackMapTableNumberOfEntries == 0
+&nbsp;                        ? currentFrame[0]
+&nbsp;                        : currentFrame[0] - previousFrame[0] - 1;
+<b class="nc">&nbsp;        final int previousNumlocal = previousFrame[1];</b>
+<b class="nc">&nbsp;        final int numLocalDelta = numLocal - previousNumlocal;</b>
+<b class="nc">&nbsp;        int type = Frame.FULL_FRAME;</b>
+<b class="nc">&nbsp;        if (numStack == 0) {</b>
+<b class="nc">&nbsp;            switch (numLocalDelta) {</b>
+&nbsp;                case -3:
+&nbsp;                case -2:
+&nbsp;                case -1:
+<b class="nc">&nbsp;                    type = Frame.CHOP_FRAME;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 0:
+<b class="nc">&nbsp;                    type = offsetDelta &lt; 64 ? Frame.SAME_FRAME : Frame.SAME_FRAME_EXTENDED;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 1:
+&nbsp;                case 2:
+&nbsp;                case 3:
+<b class="nc">&nbsp;                    type = Frame.APPEND_FRAME;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+&nbsp;                    // Keep the FULL_FRAME type.
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (numLocalDelta == 0 &amp;&amp; numStack == 1) {</b>
+<b class="nc">&nbsp;            type =</b>
+&nbsp;                    offsetDelta &lt; 63
+&nbsp;                            ? Frame.SAME_LOCALS_1_STACK_ITEM_FRAME
+&nbsp;                            : Frame.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED;
+&nbsp;        }
+<b class="nc">&nbsp;        if (type != Frame.FULL_FRAME) {</b>
+&nbsp;            // Verify if locals are the same as in the previous frame.
+<b class="nc">&nbsp;            int frameIndex = 3;</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; previousNumlocal &amp;&amp; i &lt; numLocal; i++) {</b>
+<b class="nc">&nbsp;                if (currentFrame[frameIndex] != previousFrame[frameIndex]) {</b>
+<b class="nc">&nbsp;                    type = Frame.FULL_FRAME;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                frameIndex++;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        switch (type) {</b>
+&nbsp;            case Frame.SAME_FRAME:
+<b class="nc">&nbsp;                stackMapTableEntries.putByte(offsetDelta);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case Frame.SAME_LOCALS_1_STACK_ITEM_FRAME:
+<b class="nc">&nbsp;                stackMapTableEntries.putByte(Frame.SAME_LOCALS_1_STACK_ITEM_FRAME + offsetDelta);</b>
+<b class="nc">&nbsp;                putAbstractTypes(3 + numLocal, 4 + numLocal);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case Frame.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED:
+<b class="nc">&nbsp;                stackMapTableEntries</b>
+<b class="nc">&nbsp;                        .putByte(Frame.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED)</b>
+<b class="nc">&nbsp;                        .putShort(offsetDelta);</b>
+<b class="nc">&nbsp;                putAbstractTypes(3 + numLocal, 4 + numLocal);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case Frame.SAME_FRAME_EXTENDED:
+<b class="nc">&nbsp;                stackMapTableEntries.putByte(Frame.SAME_FRAME_EXTENDED).putShort(offsetDelta);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case Frame.CHOP_FRAME:
+<b class="nc">&nbsp;                stackMapTableEntries</b>
+<b class="nc">&nbsp;                        .putByte(Frame.SAME_FRAME_EXTENDED + numLocalDelta)</b>
+<b class="nc">&nbsp;                        .putShort(offsetDelta);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case Frame.APPEND_FRAME:
+<b class="nc">&nbsp;                stackMapTableEntries</b>
+<b class="nc">&nbsp;                        .putByte(Frame.SAME_FRAME_EXTENDED + numLocalDelta)</b>
+<b class="nc">&nbsp;                        .putShort(offsetDelta);</b>
+<b class="nc">&nbsp;                putAbstractTypes(3 + previousNumlocal, 3 + numLocal);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case Frame.FULL_FRAME:
+&nbsp;            default:
+<b class="nc">&nbsp;                stackMapTableEntries.putByte(Frame.FULL_FRAME).putShort(offsetDelta).putShort(numLocal);</b>
+<b class="nc">&nbsp;                putAbstractTypes(3, 3 + numLocal);</b>
+<b class="nc">&nbsp;                stackMapTableEntries.putShort(numStack);</b>
+<b class="nc">&nbsp;                putAbstractTypes(3 + numLocal, 3 + numLocal + numStack);</b>
+&nbsp;                break;
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Puts some abstract types of {@link #currentFrame} in {@link #stackMapTableEntries} , using the
+&nbsp;     * JVMS verification_type_info format used in StackMapTable attributes.
+&nbsp;     *
+&nbsp;     * @param start index of the first type in {@link #currentFrame} to write.
+&nbsp;     * @param end   index of last type in {@link #currentFrame} to write (exclusive).
+&nbsp;     */
+&nbsp;    private void putAbstractTypes(final int start, final int end) {
+<b class="nc">&nbsp;        for (int i = start; i &lt; end; ++i) {</b>
+<b class="nc">&nbsp;            final int abstractType = currentFrame[i];</b>
+<b class="nc">&nbsp;            final ByteVector output = stackMapTableEntries;</b>
+&nbsp;
+<b class="nc">&nbsp;            int arrayDimensions = (abstractType &amp; Frame.DIM_MASK) &gt;&gt; Frame.DIM_SHIFT;</b>
+<b class="nc">&nbsp;            if (arrayDimensions == 0) {</b>
+<b class="nc">&nbsp;                int typeValue = abstractType &amp; Frame.VALUE_MASK;</b>
+<b class="nc">&nbsp;                switch (abstractType &amp; Frame.KIND_MASK) {</b>
+&nbsp;                    case Frame.CONSTANT_KIND:
+<b class="nc">&nbsp;                        output.putByte(typeValue);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case Frame.REFERENCE_KIND:
+<b class="nc">&nbsp;                        output</b>
+<b class="nc">&nbsp;                                .putByte(Frame.ITEM_OBJECT)</b>
+<b class="nc">&nbsp;                                .putShort(symbolTable.addConstantUtf8Reference(/*CONSTANT_CLASS_TAG*/ 7, symbolTable.typeTable[typeValue].value).index);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case Frame.UNINITIALIZED_KIND:
+<b class="nc">&nbsp;                        output.putByte(Frame.ITEM_UNINITIALIZED).putShort((int) symbolTable.typeTable[typeValue].data);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    default:
+<b class="nc">&nbsp;                        throw new AssertionError();</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else {</b>
+&nbsp;                // Case of an array type, we need to build its descriptor first.
+<b class="nc">&nbsp;                StringBuilder typeDescriptor = new StringBuilder();</b>
+<b class="nc">&nbsp;                while (arrayDimensions-- &gt; 0) {</b>
+<b class="nc">&nbsp;                    typeDescriptor.append(&#39;[&#39;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if ((abstractType &amp; Frame.KIND_MASK) == Frame.REFERENCE_KIND) {</b>
+<b class="nc">&nbsp;                    typeDescriptor</b>
+<b class="nc">&nbsp;                            .append(&#39;L&#39;)</b>
+<b class="nc">&nbsp;                            .append(symbolTable.typeTable[abstractType &amp; Frame.VALUE_MASK].value)</b>
+<b class="nc">&nbsp;                            .append(&#39;;&#39;);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    switch (abstractType &amp; Frame.VALUE_MASK) {</b>
+&nbsp;                        case Frame.ITEM_ASM_BOOLEAN:
+<b class="nc">&nbsp;                            typeDescriptor.append(&#39;Z&#39;);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        case Frame.ITEM_ASM_BYTE:
+<b class="nc">&nbsp;                            typeDescriptor.append(&#39;B&#39;);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        case Frame.ITEM_ASM_CHAR:
+<b class="nc">&nbsp;                            typeDescriptor.append(&#39;C&#39;);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        case Frame.ITEM_ASM_SHORT:
+<b class="nc">&nbsp;                            typeDescriptor.append(&#39;S&#39;);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        case Frame.ITEM_INTEGER:
+<b class="nc">&nbsp;                            typeDescriptor.append(&#39;I&#39;);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        case Frame.ITEM_FLOAT:
+<b class="nc">&nbsp;                            typeDescriptor.append(&#39;F&#39;);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        case Frame.ITEM_LONG:
+<b class="nc">&nbsp;                            typeDescriptor.append(&#39;J&#39;);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        case Frame.ITEM_DOUBLE:
+<b class="nc">&nbsp;                            typeDescriptor.append(&#39;D&#39;);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        default:
+<b class="nc">&nbsp;                            throw new AssertionError();</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                output</b>
+<b class="nc">&nbsp;                        .putByte(Frame.ITEM_OBJECT)</b>
+<b class="nc">&nbsp;                        .putShort(symbolTable.addConstantUtf8Reference(/*CONSTANT_CLASS_TAG*/ 7, typeDescriptor.toString()).index);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    // -----------------------------------------------------------------------------------------------
+&nbsp;    // Utility methods
+&nbsp;    // -----------------------------------------------------------------------------------------------
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the size of the method_info JVMS structure generated by this MethodWriter. Also add the
+&nbsp;     * names of the attributes of this method in the constant pool.
+&nbsp;     *
+&nbsp;     * @return the size in bytes of the method_info JVMS structure.
+&nbsp;     */
+&nbsp;    int computeMethodInfoSize() {
+&nbsp;        // 2 bytes each for access_flags, name_index, descriptor_index and attributes_count.
+<b class="nc">&nbsp;        int size = 8;</b>
+&nbsp;        // For ease of reference, we use here the same attribute order as in Section 4.7 of the JVMS.
+<b class="nc">&nbsp;        if (code.length &gt; 0) {</b>
+<b class="nc">&nbsp;            if (code.length &gt; 65535) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;Method too large: &quot; + symbolTable.className + &quot;.&quot; + name + &quot; &quot; + descriptor + &quot;, length &quot; + code.length);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            symbolTable.addConstantUtf8(Constants.CODE);</b>
+&nbsp;            // The Code attribute has 6 header bytes, plus 2, 2, 4 and 2 bytes respectively for max_stack,
+&nbsp;            // max_locals, code_length and attributes_count, plus the bytecode and the exception table.
+<b class="nc">&nbsp;            size += 16 + code.length + 2;</b>
+<b class="nc">&nbsp;            if (stackMapTableEntries != null) {</b>
+<b class="nc">&nbsp;                boolean useStackMapTable = true;</b>
+<b class="nc">&nbsp;                symbolTable.addConstantUtf8(useStackMapTable ? Constants.STACK_MAP_TABLE : &quot;StackMap&quot;);</b>
+&nbsp;                // 6 header bytes and 2 bytes for number_of_entries.
+<b class="nc">&nbsp;                size += 8 + stackMapTableEntries.length;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return size;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Puts the content of the method_info JVMS structure generated by this MethodWriter into the
+&nbsp;     * given ByteVector.
+&nbsp;     *
+&nbsp;     * @param output where the method_info structure must be put.
+&nbsp;     */
+&nbsp;    void putMethodInfo(final ByteVector output) {
+<b class="nc">&nbsp;        int mask = 0;</b>
+<b class="nc">&nbsp;        output.putShort(accessFlags &amp; ~mask).putShort(nameIndex).putShort(descriptorIndex);</b>
+&nbsp;        // For ease of reference, we use here the same attribute order as in Section 4.7 of the JVMS.
+<b class="nc">&nbsp;        int attributeCount = 0;</b>
+<b class="nc">&nbsp;        if (code.length &gt; 0) {</b>
+<b class="nc">&nbsp;            ++attributeCount;</b>
+&nbsp;        }
+&nbsp;        // For ease of reference, we use here the same attribute order as in Section 4.7 of the JVMS.
+<b class="nc">&nbsp;        output.putShort(attributeCount);</b>
+<b class="nc">&nbsp;        if (code.length &gt; 0) {</b>
+&nbsp;            // 2, 2, 4 and 2 bytes respectively for max_stack, max_locals, code_length and
+&nbsp;            // attributes_count, plus the bytecode and the exception table.
+<b class="nc">&nbsp;            int size = 10 + code.length + 2;</b>
+<b class="nc">&nbsp;            int codeAttributeCount = 0;</b>
+<b class="nc">&nbsp;            if (stackMapTableEntries != null) {</b>
+&nbsp;                // 6 header bytes and 2 bytes for number_of_entries.
+<b class="nc">&nbsp;                size += 8 + stackMapTableEntries.length;</b>
+<b class="nc">&nbsp;                ++codeAttributeCount;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            output</b>
+<b class="nc">&nbsp;                    .putShort(symbolTable.addConstantUtf8(Constants.CODE))</b>
+<b class="nc">&nbsp;                    .putInt(size)</b>
+<b class="nc">&nbsp;                    .putShort(maxStack)</b>
+<b class="nc">&nbsp;                    .putShort(maxLocals)</b>
+<b class="nc">&nbsp;                    .putInt(code.length)</b>
+<b class="nc">&nbsp;                    .putByteArray(code.data, 0, code.length);</b>
+<b class="nc">&nbsp;            output.putShort(0); // putExceptionTable</b>
+<b class="nc">&nbsp;            output.putShort(codeAttributeCount);</b>
+<b class="nc">&nbsp;            if (stackMapTableEntries != null) {</b>
+<b class="nc">&nbsp;                boolean useStackMapTable = true;</b>
+<b class="nc">&nbsp;                output</b>
+<b class="nc">&nbsp;                        .putShort(</b>
+<b class="nc">&nbsp;                                symbolTable.addConstantUtf8(</b>
+&nbsp;                                        useStackMapTable ? Constants.STACK_MAP_TABLE : &quot;StackMap&quot;))
+<b class="nc">&nbsp;                        .putInt(2 + stackMapTableEntries.length)</b>
+<b class="nc">&nbsp;                        .putShort(stackMapTableNumberOfEntries)</b>
+<b class="nc">&nbsp;                        .putByteArray(stackMapTableEntries.data, 0, stackMapTableEntries.length);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:20</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,149 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FieldWriterMillisField</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldWriterMillisField (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FieldWriterMillisField</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;
+&nbsp;final class FieldWriterMillisField&lt;T&gt;
+&nbsp;        extends FieldWriterDate&lt;T&gt; {
+&nbsp;    FieldWriterMillisField(String fieldName,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String dateTimeFormat,
+&nbsp;            String label,
+&nbsp;            Field field
+&nbsp;    ) {
+<b class="nc">&nbsp;        super(fieldName, ordinal, features, dateTimeFormat, label, long.class, long.class, field, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object getFieldValue(T object) {
+<b class="nc">&nbsp;        return getFieldLong(object);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getFieldLong(T object) {
+&nbsp;        try {
+<b class="nc">&nbsp;            return field.getLong(object);</b>
+<b class="nc">&nbsp;        } catch (IllegalArgumentException | IllegalAccessException e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;field.get error, &quot; + fieldName, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean write(JSONWriter jsonWriter, T object) {
+<b class="nc">&nbsp;        long millis = getFieldLong(object);</b>
+<b class="nc">&nbsp;        writeDate(jsonWriter, millis);</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeValue(JSONWriter jsonWriter, T object) {
+<b class="nc">&nbsp;        long millis = getFieldLong(object);</b>
+<b class="nc">&nbsp;        writeDate(jsonWriter, false, millis);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:14</div>
+</div>
+</body>
+</html>

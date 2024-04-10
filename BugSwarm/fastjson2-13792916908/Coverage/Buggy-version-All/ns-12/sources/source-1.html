@@ -1,0 +1,448 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EishayClassGen</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.eishay.gen</a>
+</div>
+
+<h1>Coverage Summary for Class: EishayClassGen (com.alibaba.fastjson2.benchmark.eishay.gen)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EishayClassGen</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/134)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">EishayClassGen$FieldInfo</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/143)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.eishay.gen;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.TypeReference;
+&nbsp;import com.alibaba.fastjson2.benchmark.eishay.EishayFuryWriteNoneCache;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReaderProvider;
+&nbsp;import com.alibaba.fastjson2.util.DynamicClassLoader;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriterProvider;
+&nbsp;import org.apache.commons.io.IOUtils;
+&nbsp;import org.objectweb.asm.*;
+&nbsp;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.lang.reflect.ParameterizedType;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import static org.objectweb.asm.Opcodes.*;
+&nbsp;
+<b class="nc">&nbsp;public class EishayClassGen {</b>
+&nbsp;    public Class genMedia(DynamicClassLoader classLoader, String packageName) throws Exception {
+<b class="nc">&nbsp;        classLoader.definePackage(packageName.replace(&#39;/&#39;, &#39;.&#39;));</b>
+&nbsp;
+<b class="nc">&nbsp;        LinkedHashMap&lt;String, byte[]&gt; codes = new LinkedHashMap();</b>
+<b class="nc">&nbsp;        LinkedHashMap&lt;String, Class&gt; classes = new LinkedHashMap();</b>
+&nbsp;
+<b class="nc">&nbsp;        genCode(packageName, codes);</b>
+<b class="nc">&nbsp;        codes.forEach((name, code) -&gt; {</b>
+<b class="nc">&nbsp;            Class&lt;?&gt; clazz = classLoader.loadClass(name, code, 0, code.length);</b>
+<b class="nc">&nbsp;            classes.put(name, clazz);</b>
+&nbsp;        });
+&nbsp;
+<b class="nc">&nbsp;        String mediaContentClassName = packageName.replace(&#39;/&#39;, &#39;.&#39;) + &quot;.MediaContent&quot;;</b>
+<b class="nc">&nbsp;        return classes.get(mediaContentClassName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void genCode(String packageName, Map&lt;String, byte[]&gt; classBytes) {
+<b class="nc">&nbsp;        String playerType = packageName + &quot;/Media$Player&quot;;</b>
+<b class="nc">&nbsp;        String playerClassName = playerType.replace(&#39;/&#39;, &#39;.&#39;);</b>
+<b class="nc">&nbsp;        byte[] playerCode = genEnum(playerType, &quot;JAVA&quot;, &quot;FLASH&quot;);</b>
+<b class="nc">&nbsp;        classBytes.put(playerClassName, playerCode);</b>
+&nbsp;
+<b class="nc">&nbsp;        String mediaType = packageName + &quot;/Media&quot;;</b>
+<b class="nc">&nbsp;        String mediaClassName = mediaType.replace(&#39;/&#39;, &#39;.&#39;);</b>
+<b class="nc">&nbsp;        byte[] mediaCode = genClass(mediaType,</b>
+&nbsp;                new FieldInfo[]{
+&nbsp;                        new FieldInfo(&quot;bitrate&quot;, long.class),
+&nbsp;                        new FieldInfo(&quot;duration&quot;, long.class),
+&nbsp;                        new FieldInfo(&quot;format&quot;, String.class),
+&nbsp;                        new FieldInfo(&quot;height&quot;, int.class),
+<b class="nc">&nbsp;                        new FieldInfo(&quot;persons&quot;, TypeReference.collectionType(List.class, String.class)),</b>
+&nbsp;                        new FieldInfo(&quot;player&quot;, &quot;L&quot; + playerType + &quot;;&quot;, null),
+&nbsp;                        new FieldInfo(&quot;size&quot;, long.class),
+&nbsp;                        new FieldInfo(&quot;title&quot;, String.class),
+&nbsp;                        new FieldInfo(&quot;uri&quot;, String.class),
+&nbsp;                        new FieldInfo(&quot;width&quot;, int.class),
+&nbsp;                        new FieldInfo(&quot;copyright&quot;, String.class)
+&nbsp;                });
+<b class="nc">&nbsp;        classBytes.put(mediaClassName, mediaCode);</b>
+&nbsp;
+<b class="nc">&nbsp;        String sizeType = packageName + &quot;/Image$Size&quot;;</b>
+<b class="nc">&nbsp;        String sizeClassName = sizeType.replace(&#39;/&#39;, &#39;.&#39;);</b>
+<b class="nc">&nbsp;        byte[] sizeCode = genEnum(sizeType, &quot;SMALL&quot;, &quot;LARGE&quot;);</b>
+<b class="nc">&nbsp;        classBytes.put(sizeClassName, sizeCode);</b>
+&nbsp;
+<b class="nc">&nbsp;        String imageType = packageName + &quot;/Image&quot;;</b>
+<b class="nc">&nbsp;        String imageClassName = imageType.replace(&#39;/&#39;, &#39;.&#39;);</b>
+<b class="nc">&nbsp;        byte[] imageCode = genClass(imageType,</b>
+&nbsp;                new FieldInfo[]{
+&nbsp;                        new FieldInfo(&quot;height&quot;, int.class),
+&nbsp;                        new FieldInfo(&quot;size&quot;, &quot;L&quot; + sizeType + &quot;;&quot;, null),
+&nbsp;                        new FieldInfo(&quot;title&quot;, String.class),
+&nbsp;                        new FieldInfo(&quot;uri&quot;, String.class),
+&nbsp;                        new FieldInfo(&quot;width&quot;, int.class)
+&nbsp;                }
+&nbsp;        );
+<b class="nc">&nbsp;        classBytes.put(imageClassName, imageCode);</b>
+&nbsp;
+<b class="nc">&nbsp;        String mediaContentType = packageName + &quot;/MediaContent&quot;;</b>
+<b class="nc">&nbsp;        String mediaContentClassName = mediaContentType.replace(&#39;/&#39;, &#39;.&#39;);</b>
+<b class="nc">&nbsp;        byte[] mediaContentCode = genClass(mediaContentType,</b>
+&nbsp;                new FieldInfo(&quot;media&quot;, &quot;L&quot; + mediaType + &quot;;&quot;, null),
+&nbsp;                new FieldInfo(&quot;images&quot;, &quot;Ljava/util/List;&quot;, &quot;Ljava/util/List&lt;L&quot; + imageType + &quot;;&gt;;&quot;)
+&nbsp;        );
+<b class="nc">&nbsp;        classBytes.put(mediaContentClassName, mediaContentCode);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static class FieldInfo {
+&nbsp;        final String name;
+&nbsp;        final String desc;
+&nbsp;        final String signature;
+&nbsp;
+<b class="nc">&nbsp;        FieldInfo(String name, java.lang.reflect.Type type) {</b>
+<b class="nc">&nbsp;            this.name = name;</b>
+<b class="nc">&nbsp;            Class fieldClass = TypeUtils.getClass(type);</b>
+<b class="nc">&nbsp;            this.desc = Type.getDescriptor(fieldClass);</b>
+<b class="nc">&nbsp;            this.signature = getSignature(type);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        FieldInfo(String name, String desc, String signature) {</b>
+<b class="nc">&nbsp;            this.name = name;</b>
+<b class="nc">&nbsp;            this.desc = desc;</b>
+<b class="nc">&nbsp;            this.signature = signature;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static String getSignature(java.lang.reflect.Type type) {
+<b class="nc">&nbsp;        if (type instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;            ParameterizedType paramType = (ParameterizedType) type;</b>
+<b class="nc">&nbsp;            java.lang.reflect.Type rawType = paramType.getRawType();</b>
+<b class="nc">&nbsp;            java.lang.reflect.Type[] arguments = paramType.getActualTypeArguments();</b>
+<b class="nc">&nbsp;            if (rawType == List.class) {</b>
+&nbsp;                // &quot;Ljava/util/List&lt;L&quot; + type + &quot;;&gt;;&quot;,
+<b class="nc">&nbsp;                Class itemType = (Class) arguments[0];</b>
+<b class="nc">&nbsp;                String signature = &quot;Ljava/util/List&lt;&quot; + Type.getType(itemType) + &quot;&gt;;&quot;;</b>
+<b class="nc">&nbsp;                return signature;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public byte[] genClass(String type, FieldInfo... fields) {
+<b class="nc">&nbsp;        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);</b>
+<b class="nc">&nbsp;        cw.visit(</b>
+&nbsp;                Opcodes.V1_8,
+&nbsp;                ACC_PUBLIC + ACC_SUPER,
+&nbsp;                type,
+&nbsp;                null,
+&nbsp;                &quot;java/lang/Object&quot;,
+&nbsp;                new String[] {
+&nbsp;                        &quot;java/io/Serializable&quot;
+&nbsp;                }
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        for (FieldInfo field : fields) {</b>
+<b class="nc">&nbsp;            FieldVisitor fv = cw.visitField(ACC_PUBLIC, field.name, field.desc, field.signature, null);</b>
+<b class="nc">&nbsp;            fv.visitEnd();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            MethodVisitor mv = cw.visitMethod(ACC_PUBLIC, &quot;&lt;init&gt;&quot;, &quot;()V&quot;,</b>
+&nbsp;                    &quot;()V&quot;, null);
+<b class="nc">&nbsp;            mv.visitCode();</b>
+<b class="nc">&nbsp;            mv.visitVarInsn(ALOAD, 0);</b>
+<b class="nc">&nbsp;            mv.visitMethodInsn(INVOKESPECIAL, &quot;java/lang/Object&quot;, &quot;&lt;init&gt;&quot;, &quot;()V&quot;);</b>
+<b class="nc">&nbsp;            mv.visitInsn(RETURN);</b>
+<b class="nc">&nbsp;            mv.visitMaxs(0, 0);</b>
+<b class="nc">&nbsp;            mv.visitEnd();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        cw.visitEnd();</b>
+&nbsp;
+<b class="nc">&nbsp;        return cw.toByteArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public byte[] genEnum(String type, String... values) {
+<b class="nc">&nbsp;        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);</b>
+<b class="nc">&nbsp;        String desc = &quot;L&quot; + type + &quot;;&quot;;</b>
+<b class="nc">&nbsp;        cw.visit(</b>
+&nbsp;                Opcodes.V1_8,
+&nbsp;                ACC_PUBLIC + ACC_FINAL + ACC_SUPER + ACC_ENUM,
+&nbsp;                type,
+&nbsp;                &quot;Ljava/lang/Enum&lt;L&quot; + type + &quot;;&gt;;&quot;,
+&nbsp;                &quot;java/lang/Enum&quot;,
+&nbsp;                null
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        for (String value : values) {</b>
+<b class="nc">&nbsp;            FieldVisitor fv = cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC + ACC_ENUM, value, desc, null, null);</b>
+<b class="nc">&nbsp;            fv.visitEnd();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            FieldVisitor fv = cw.visitField(</b>
+&nbsp;                    ACC_PRIVATE + ACC_FINAL + ACC_STATIC + ACC_SYNTHETIC,
+&nbsp;                    &quot;$VALUES&quot;, &quot;[&quot; + desc, null, null);
+<b class="nc">&nbsp;            fv.visitEnd();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            MethodVisitor mv = cw.visitMethod(ACC_PRIVATE, &quot;&lt;init&gt;&quot;, &quot;(Ljava/lang/String;I)V&quot;,</b>
+&nbsp;                    &quot;()V&quot;, null);
+<b class="nc">&nbsp;            mv.visitCode();</b>
+<b class="nc">&nbsp;            mv.visitVarInsn(ALOAD, 0);</b>
+<b class="nc">&nbsp;            mv.visitVarInsn(ALOAD, 1);</b>
+<b class="nc">&nbsp;            mv.visitVarInsn(ILOAD, 2);</b>
+<b class="nc">&nbsp;            mv.visitMethodInsn(INVOKESPECIAL, &quot;java/lang/Enum&quot;, &quot;&lt;init&gt;&quot;,</b>
+&nbsp;                    &quot;(Ljava/lang/String;I)V&quot;);
+<b class="nc">&nbsp;            mv.visitInsn(RETURN);</b>
+<b class="nc">&nbsp;            mv.visitMaxs(0, 0);</b>
+<b class="nc">&nbsp;            mv.visitEnd();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            MethodVisitor mv = cw.visitMethod(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, &quot;values&quot;,</b>
+&nbsp;                    &quot;()[&quot; + desc, null, null);
+<b class="nc">&nbsp;            mv.visitCode();</b>
+<b class="nc">&nbsp;            mv.visitFieldInsn(GETSTATIC, type, &quot;$VALUES&quot;, &quot;[&quot; + desc);</b>
+<b class="nc">&nbsp;            mv.visitMethodInsn(INVOKEVIRTUAL, &quot;[&quot; + desc, &quot;clone&quot;,</b>
+&nbsp;                    &quot;()Ljava/lang/Object;&quot;);
+<b class="nc">&nbsp;            mv.visitTypeInsn(CHECKCAST, &quot;[&quot; + desc);</b>
+<b class="nc">&nbsp;            mv.visitInsn(ARETURN);</b>
+<b class="nc">&nbsp;            mv.visitMaxs(0, 0);</b>
+<b class="nc">&nbsp;            mv.visitEnd();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            MethodVisitor mv = cw.visitMethod(ACC_PUBLIC + ACC_STATIC, &quot;valueOf&quot;,</b>
+&nbsp;                    &quot;(Ljava/lang/String;)&quot; + desc, null, null);
+<b class="nc">&nbsp;            mv.visitCode();</b>
+<b class="nc">&nbsp;            mv.visitLdcInsn(Type.getType(desc));</b>
+<b class="nc">&nbsp;            mv.visitVarInsn(ALOAD, 0);</b>
+<b class="nc">&nbsp;            mv.visitMethodInsn(INVOKESTATIC, &quot;java/lang/Enum&quot;, &quot;valueOf&quot;,</b>
+&nbsp;                    &quot;(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;&quot;);
+<b class="nc">&nbsp;            mv.visitTypeInsn(CHECKCAST, type);</b>
+<b class="nc">&nbsp;            mv.visitInsn(ARETURN);</b>
+<b class="nc">&nbsp;            mv.visitMaxs(0, 0);</b>
+<b class="nc">&nbsp;            mv.visitEnd();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            MethodVisitor mv = cw.visitMethod(ACC_STATIC, &quot;&lt;clinit&gt;&quot;, &quot;()V&quot;, null, null);</b>
+<b class="nc">&nbsp;            mv.visitCode();</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; values.length; i++) {</b>
+<b class="nc">&nbsp;                String value = values[i];</b>
+<b class="nc">&nbsp;                mv.visitTypeInsn(NEW, type);</b>
+<b class="nc">&nbsp;                mv.visitInsn(DUP);</b>
+<b class="nc">&nbsp;                mv.visitLdcInsn(value);</b>
+<b class="nc">&nbsp;                mv.visitLdcInsn(i);</b>
+<b class="nc">&nbsp;                mv.visitMethodInsn(INVOKESPECIAL, type, &quot;&lt;init&gt;&quot;, &quot;(Ljava/lang/String;I)V&quot;);</b>
+<b class="nc">&nbsp;                mv.visitFieldInsn(PUTSTATIC, type, value, desc);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mv.visitLdcInsn(values.length);</b>
+<b class="nc">&nbsp;            mv.visitTypeInsn(ANEWARRAY, type);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; values.length; i++) {</b>
+<b class="nc">&nbsp;                String value = values[i];</b>
+&nbsp;
+<b class="nc">&nbsp;                mv.visitInsn(DUP);</b>
+<b class="nc">&nbsp;                mv.visitLdcInsn(i);</b>
+<b class="nc">&nbsp;                mv.visitFieldInsn(GETSTATIC, type, value, desc);</b>
+<b class="nc">&nbsp;                mv.visitInsn(AASTORE);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mv.visitFieldInsn(PUTSTATIC, type, &quot;$VALUES&quot;, &quot;[&quot; + desc);</b>
+<b class="nc">&nbsp;            mv.visitInsn(RETURN);</b>
+<b class="nc">&nbsp;            mv.visitMaxs(0, 0);</b>
+<b class="nc">&nbsp;            mv.visitEnd();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        cw.visitEnd();</b>
+&nbsp;
+<b class="nc">&nbsp;        return cw.toByteArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public byte[][] genFastjsonJSONBBytes(int count, JSONWriter.Feature[] writerFeatures) throws Exception {
+<b class="nc">&nbsp;        try (InputStream is = EishayFuryWriteNoneCache.class.getClassLoader()</b>
+<b class="nc">&nbsp;                .getResourceAsStream(&quot;data/eishay.json&quot;)</b>
+&nbsp;        ) {
+<b class="nc">&nbsp;            String str = IOUtils.toString(is, &quot;UTF-8&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            DynamicClassLoader classLoader = new DynamicClassLoader();</b>
+<b class="nc">&nbsp;            byte[][] bytes = new byte[count][];</b>
+<b class="nc">&nbsp;            EishayClassGen gen = new EishayClassGen();</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; count; i++) {</b>
+<b class="nc">&nbsp;                String packageName = &quot;com/alibaba/fastjson2/benchmark/eishay&quot; + i;</b>
+<b class="nc">&nbsp;                Class objectClass = gen.genMedia(classLoader, packageName);</b>
+<b class="nc">&nbsp;                ObjectReaderProvider provider = new ObjectReaderProvider();</b>
+<b class="nc">&nbsp;                Object object = JSONReader.of(str, JSONFactory.createReadContext(provider)).read(objectClass);</b>
+&nbsp;
+<b class="nc">&nbsp;                ObjectWriterProvider writerProvider = new ObjectWriterProvider();</b>
+<b class="nc">&nbsp;                bytes[i] = JSONB.toBytes(object, JSONFactory.createWriteContext(writerProvider, writerFeatures));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return bytes;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public LinkedHashMap&lt;String, byte[]&gt; genCodes(int count) throws Exception {
+<b class="nc">&nbsp;        LinkedHashMap&lt;String, byte[]&gt; codeMap = new LinkedHashMap();</b>
+<b class="nc">&nbsp;        EishayClassGen gen = new EishayClassGen();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; count; i++) {</b>
+<b class="nc">&nbsp;            String packageName = &quot;com/alibaba/fastjson2/benchmark/eishay&quot; + i;</b>
+<b class="nc">&nbsp;            gen.genCode(packageName, codeMap);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return codeMap;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public byte[][] genFuryBytes(int count) throws Exception {
+&nbsp;//        io.fury.ThreadSafeFury fury = io.fury.Fury.builder()
+&nbsp;//                .withLanguage(io.fury.Language.JAVA)
+&nbsp;//                .withReferenceTracking(true)
+&nbsp;//                .disableSecureMode()
+&nbsp;//                .buildThreadSafeFury();
+&nbsp;//
+&nbsp;//        try (InputStream is = EishayFuryWriteNoneCache.class.getClassLoader()
+&nbsp;//                .getResourceAsStream(&quot;data/eishay.json&quot;)
+&nbsp;//        ) {
+&nbsp;//            String str = IOUtils.toString(is, &quot;UTF-8&quot;);
+&nbsp;//
+&nbsp;//            DynamicClassLoader classLoader = new DynamicClassLoader();
+&nbsp;//            byte[][] bytes = new byte[count][];
+&nbsp;//            EishayClassGen gen = new EishayClassGen();
+&nbsp;//            for (int i = 0; i &lt; count; i++) {
+&nbsp;//                String packageName = &quot;com/alibaba/fastjson2/benchmark/eishay&quot; + i;
+&nbsp;//                Class objectClass = gen.genMedia(classLoader, packageName);
+&nbsp;//                ObjectReaderProvider provider = new ObjectReaderProvider();
+&nbsp;//                Object object = JSONReader.of(str, JSONFactory.createReadContext(provider)).read(objectClass);
+&nbsp;//                bytes[i] = fury.serialize(object);
+&nbsp;//                System.out.println(java.time.LocalDateTime.now() + &quot; write &quot; + i + &quot; done&quot;);
+&nbsp;//            }
+&nbsp;//            return bytes;
+&nbsp;//        }
+<b class="nc">&nbsp;        throw new JSONException(&quot;TODO&quot;);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:22</div>
+</div>
+</body>
+</html>

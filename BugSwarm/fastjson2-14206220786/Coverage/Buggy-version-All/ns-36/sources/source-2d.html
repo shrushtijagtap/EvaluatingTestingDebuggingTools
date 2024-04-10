@@ -1,0 +1,158 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FieldReaderFloatValueFunc</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldReaderFloatValueFunc (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FieldReaderFloatValueFunc</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.function.ObjFloatConsumer;
+&nbsp;import com.alibaba.fastjson2.schema.JSONSchema;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;
+&nbsp;final class FieldReaderFloatValueFunc&lt;T&gt;
+&nbsp;        extends FieldReader&lt;T&gt; {
+&nbsp;    final ObjFloatConsumer&lt;T&gt; function;
+&nbsp;
+&nbsp;    public FieldReaderFloatValueFunc(String fieldName, int ordinal, Float defaultValue, JSONSchema schema, Method method, ObjFloatConsumer&lt;T&gt; function) {
+<b class="nc">&nbsp;        super(fieldName, float.class, float.class, ordinal, 0, null, null, defaultValue, schema, method, null);</b>
+<b class="nc">&nbsp;        this.function = function;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, float value) {
+<b class="nc">&nbsp;        if (schema != null) {</b>
+<b class="nc">&nbsp;            schema.assertValidate(value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        function.accept(object, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void accept(T object, Object value) {
+<b class="nc">&nbsp;        float floatValue = TypeUtils.toFloatValue(value);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (schema != null) {</b>
+<b class="nc">&nbsp;            schema.assertValidate(floatValue);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        function.accept(object, floatValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void readFieldValue(JSONReader jsonReader, T object) {
+<b class="nc">&nbsp;        float fieldValue = jsonReader.readFloatValue();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (schema != null) {</b>
+<b class="nc">&nbsp;            schema.assertValidate(fieldValue);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        function.accept(object, fieldValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readFieldValue(JSONReader jsonReader) {
+<b class="nc">&nbsp;        return jsonReader.readFloatValue();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:05</div>
+</div>
+</body>
+</html>
