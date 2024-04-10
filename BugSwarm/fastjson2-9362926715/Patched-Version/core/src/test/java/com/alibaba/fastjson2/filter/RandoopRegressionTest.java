@@ -1,4 +1,4 @@
-package com.alibaba.fastjson2.reader;
+package com.alibaba.fastjson2.filter;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
