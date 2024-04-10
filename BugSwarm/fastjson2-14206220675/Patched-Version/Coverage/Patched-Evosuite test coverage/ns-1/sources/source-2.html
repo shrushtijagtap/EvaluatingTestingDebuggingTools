@@ -1,0 +1,1032 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONArray</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONArray (com.alibaba.fastjson)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONArray</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/69)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/50)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/168)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.parser.ParserConfig;
+&nbsp;import com.alibaba.fastjson2.JSONFactory;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReader;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReaderProvider;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriter;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriterAdapter;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.sql.Timestamp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.util.TypeUtils.toBigDecimal;
+&nbsp;
+&nbsp;public class JSONArray
+&nbsp;        extends JSON
+&nbsp;        implements List&lt;Object&gt;, Serializable, Cloneable {
+&nbsp;    static ObjectReader&lt;JSONArray&gt; arrayReader;
+&nbsp;    static ObjectReader&lt;JSONObject&gt; objectReader;
+&nbsp;
+&nbsp;    private List list = new com.alibaba.fastjson2.JSONArray();
+&nbsp;
+&nbsp;    protected transient Object relatedArray;
+&nbsp;    protected transient Type componentType;
+&nbsp;
+&nbsp;    public JSONArray() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONArray(List list) {
+&nbsp;        this.list = list;
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONArray(int initialCapacity) {
+&nbsp;        this.list = new ArrayList&lt;&gt;(initialCapacity);
+&nbsp;    }
+&nbsp;
+&nbsp;    public Byte getByte(int index) {
+&nbsp;        Object value = get(index);
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof Number) {
+&nbsp;            return ((Number) value).byteValue();
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value instanceof String) {
+&nbsp;            String str = (String) value;
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;</b>
+&nbsp;            return Byte.parseByte(str);
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Byte&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Short getShort(int index) {
+&nbsp;        Object value = get(index);
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            return null;
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        if (value instanceof Short) {
+&nbsp;            return (Short) value;
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        if (value instanceof Number) {
+&nbsp;            return ((Number) value).shortValue();
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        if (value instanceof String) {
+&nbsp;            String str = (String) value;
+<b class="nc">&nbsp;</b>
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+&nbsp;                return null;
+&nbsp;            }
+<b class="nc">&nbsp;</b>
+&nbsp;            return Short.parseShort(str);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Short&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Float getFloat(int index) {
+<b class="nc">&nbsp;        Object value = get(index);</b>
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            return null;
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        if (value instanceof Float) {
+&nbsp;            return (Float) value;
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        if (value instanceof Number) {
+&nbsp;            return ((Number) value).floatValue();
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        if (value instanceof String) {
+&nbsp;            String str = (String) value;
+<b class="nc">&nbsp;</b>
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+&nbsp;                return null;
+&nbsp;            }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;            return Float.parseFloat(str);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Float&quot;);
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Double getDouble(int index) {
+&nbsp;        Object value = get(index);
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (value == null) {</b>
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Double) {</b>
+&nbsp;            return (Double) value;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+&nbsp;            return ((Number) value).doubleValue();
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+&nbsp;                return null;
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            return Double.parseDouble(str);
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Double&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getIntValue(int index) {
+<b class="nc">&nbsp;        Object value = get(index);</b>
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            return 0;
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value instanceof Number) {
+&nbsp;            return ((Number) value).intValue();
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value instanceof String) {
+&nbsp;            String str = (String) value;
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return 0;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            return Integer.parseInt(str);
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to int value&quot;);
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public BigDecimal getBigDecimal(int index) {</b>
+&nbsp;        Object value = get(index);
+&nbsp;
+&nbsp;        if (value == null) {
+<b class="nc">&nbsp;            return null;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value instanceof Number) {
+&nbsp;            if (value instanceof BigDecimal) {
+<b class="nc">&nbsp;                return (BigDecimal) value;</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;            if (value instanceof BigInteger) {
+<b class="nc">&nbsp;                return new BigDecimal((BigInteger) value);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            if (value instanceof Float) {
+<b class="nc">&nbsp;                float floatValue = ((Float) value).floatValue();</b>
+&nbsp;                return toBigDecimal(floatValue);
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (value instanceof Double) {</b>
+<b class="nc">&nbsp;                double doubleValue = ((Double) value).doubleValue();</b>
+&nbsp;                return toBigDecimal(doubleValue);
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            long longValue = ((Number) value).longValue();</b>
+&nbsp;            return BigDecimal.valueOf(longValue);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;            return toBigDecimal(str);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to BigDecimal&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getLongValue(int index) {
+<b class="nc">&nbsp;        Object value = get(index);</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value == null) {
+&nbsp;            return 0;
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value instanceof Number) {
+&nbsp;            return ((Number) value).longValue();
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value instanceof String) {
+&nbsp;            String str = (String) value;
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+&nbsp;                return 0;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return Long.parseLong(str);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to long value&quot;);
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Integer getInteger(int index) {
+&nbsp;        Object value = get(index);
+<b class="nc">&nbsp;        if (value == null) {</b>
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Integer) {</b>
+&nbsp;            return ((Integer) value);
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value instanceof Number) {
+&nbsp;            return ((Number) value).intValue();
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value instanceof String) {
+&nbsp;            String str = (String) value;
+<b class="nc">&nbsp;</b>
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+&nbsp;                return null;
+&nbsp;            }
+<b class="nc">&nbsp;</b>
+&nbsp;            return Integer.parseInt(str);
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Integer&quot;);
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public Long getLong(int index) {</b>
+&nbsp;        Object value = list.get(index);
+&nbsp;        if (value == null) {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof Long) {
+<b class="nc">&nbsp;            return ((Long) value);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        if (value instanceof Number) {
+&nbsp;            return ((Number) value).longValue();
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+&nbsp;            String str = (String) value;
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+&nbsp;                return null;
+&nbsp;            }
+&nbsp;
+&nbsp;            return Long.parseLong(str);
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Long&quot;);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public boolean getBooleanValue(int index) {
+<b class="nc">&nbsp;        Object value = get(index);</b>
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            return false;
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Boolean) {</b>
+<b class="nc">&nbsp;            return (Boolean) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+&nbsp;            return ((Number) value).intValue() == 1;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+&nbsp;            String str = (String) value;
+<b class="nc">&nbsp;            return &quot;true&quot;.equalsIgnoreCase(str) || &quot;1&quot;.equals(str);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to boolean value&quot;);
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+<b class="nc">&nbsp;    public Boolean getBoolean(int index) {</b>
+<b class="nc">&nbsp;        Object value = get(index);</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value == null) {
+&nbsp;            return null;
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        if (value instanceof Boolean) {
+&nbsp;            return (Boolean) value;
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+&nbsp;            return ((Number) value).intValue() == 1;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+&nbsp;            String str = (String) value;
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return &quot;true&quot;.equalsIgnoreCase(str) || &quot;1&quot;.equals(str);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Boolean&quot;);
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+<b class="nc">&nbsp;    public JSONObject getJSONObject(int index) {</b>
+&nbsp;        Object value = get(index);
+&nbsp;
+&nbsp;        if (value instanceof JSONObject) {
+<b class="nc">&nbsp;            return (JSONObject) value;</b>
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            JSONReader reader = JSONReader.of(str);
+<b class="nc">&nbsp;            if (objectReader == null) {</b>
+&nbsp;                objectReader = reader.getObjectReader(JSONObject.class);
+<b class="nc">&nbsp;            }</b>
+&nbsp;            return objectReader.readObject(reader, null, null, 0);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Map) {</b>
+&nbsp;            return new JSONObject((Map) value);
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (value == null) {</b>
+&nbsp;            return null;
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+&nbsp;        Class valueClass = value.getClass();
+&nbsp;        ObjectWriter objectWriter = JSONFactory.getDefaultObjectWriterProvider().getObjectWriter(valueClass);
+&nbsp;        if (objectWriter instanceof ObjectWriterAdapter) {
+<b class="nc">&nbsp;            ObjectWriterAdapter writerAdapter = (ObjectWriterAdapter) objectWriter;</b>
+&nbsp;            return new JSONObject(
+<b class="nc">&nbsp;                    writerAdapter.toJSONObject(value)</b>
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    @Override</b>
+<b class="nc">&nbsp;    public int size() {</b>
+&nbsp;        return list.size();
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+&nbsp;    @Override
+&nbsp;    public boolean isEmpty() {
+&nbsp;        return list.isEmpty();
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+<b class="nc">&nbsp;    @Override</b>
+&nbsp;    public boolean contains(Object o) {
+&nbsp;        return list.contains(o);
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+&nbsp;    @Override
+<b class="nc">&nbsp;    public Iterator iterator() {</b>
+<b class="nc">&nbsp;        return list.iterator();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public Object[] toArray() {</b>
+&nbsp;        return list.toArray();
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    @Override</b>
+&nbsp;    public Object[] toArray(Object[] a) {
+<b class="nc">&nbsp;        return list.toArray(a);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public boolean add(Object item) {</b>
+&nbsp;        return list.add(item);
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean remove(Object o) {
+<b class="nc">&nbsp;        return list.remove(o);</b>
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+&nbsp;    @Override
+&nbsp;    public boolean addAll(Collection c) {
+&nbsp;        return list.addAll(c);
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+<b class="nc">&nbsp;    @Override</b>
+&nbsp;    public boolean addAll(int index, Collection c) {
+&nbsp;        return list.addAll(index, c);
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+&nbsp;    @Override
+<b class="nc">&nbsp;    public void clear() {</b>
+&nbsp;        list.clear();
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public JSONArray fluentClear() {</b>
+&nbsp;        list.clear();
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONArray fluentRemove(int index) {
+&nbsp;        list.remove(index);
+&nbsp;        return this;
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+&nbsp;    public JSONArray fluentRemove(Object o) {
+<b class="nc">&nbsp;        list.remove(o);</b>
+&nbsp;        return this;
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public JSONArray fluentSet(int index, Object element) {</b>
+&nbsp;        set(index, element);
+&nbsp;        return this;
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public JSONArray fluentRemoveAll(Collection&lt;?&gt; c) {
+&nbsp;        list.removeAll(c);
+&nbsp;        return this;
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public JSONArray fluentAddAll(Collection&lt;?&gt; c) {
+&nbsp;        list.addAll(c);
+<b class="nc">&nbsp;        return this;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+<b class="nc">&nbsp;     * Returns a short value at the specified location in this {@link com.alibaba.fastjson.JSONArray}.</b>
+<b class="nc">&nbsp;     *</b>
+&nbsp;     * @param index index of the element to return
+&nbsp;     * @return short
+<b class="nc">&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it contains no parsable short</b>
+&nbsp;     * @throws JSONException Unsupported type conversion to short value
+&nbsp;     * @throws IndexOutOfBoundsException if the index is out of range {@code (index &lt; 0 || index &gt;= size())}
+&nbsp;     */
+<b class="nc">&nbsp;    public short getShortValue(int index) {</b>
+&nbsp;        Object value = list.get(index);
+&nbsp;
+&nbsp;        if (value == null) {
+<b class="nc">&nbsp;            return 0;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value instanceof Number) {
+<b class="nc">&nbsp;            return ((Number) value).shortValue();</b>
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value instanceof String) {
+&nbsp;            String str = (String) value;
+&nbsp;
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+<b class="nc">&nbsp;                return 0;</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;            return Short.parseShort(str);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to short value&quot;);</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    /**
+&nbsp;     * Returns a float value at the specified location in this {@link com.alibaba.fastjson.JSONArray}.
+&nbsp;     *
+&nbsp;     * @param index index of the element to return
+&nbsp;     * @return float
+&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it contains no parsable float
+&nbsp;     * @throws JSONException Unsupported type conversion to float value
+&nbsp;     * @throws IndexOutOfBoundsException if the index is out of range {@code (index &lt; 0 || index &gt;= size())}
+&nbsp;     */
+&nbsp;    public float getFloatValue(int index) {
+&nbsp;        Object value = list.get(index);
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            return 0F;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof Number) {
+&nbsp;            return ((Number) value).floatValue();
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof String) {
+&nbsp;            String str = (String) value;
+&nbsp;
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+&nbsp;                return 0F;
+&nbsp;            }
+&nbsp;
+&nbsp;            return Float.parseFloat(str);
+&nbsp;        }
+&nbsp;
+&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to float value&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a double value at the specified location in this {@link com.alibaba.fastjson.JSONArray}.
+&nbsp;     *
+&nbsp;     * @param index index of the element to return
+&nbsp;     * @return double
+&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it contains no parsable double
+&nbsp;     * @throws JSONException Unsupported type conversion to double value
+&nbsp;     * @throws IndexOutOfBoundsException if the index is out of range {@code (index &lt; 0 || index &gt;= size())}
+&nbsp;     */
+&nbsp;    public double getDoubleValue(int index) {
+&nbsp;        Object value = list.get(index);
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            return 0D;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof Number) {
+&nbsp;            return ((Number) value).doubleValue();
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof String) {
+&nbsp;            String str = (String) value;
+&nbsp;
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+&nbsp;                return 0D;
+&nbsp;            }
+&nbsp;
+&nbsp;            return Double.parseDouble(str);
+&nbsp;        }
+&nbsp;
+&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to double value&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean retainAll(Collection c) {
+&nbsp;        return list.retainAll(c);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean removeAll(Collection c) {
+&nbsp;        return list.removeAll(c);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean containsAll(Collection c) {
+&nbsp;        return list.containsAll(c);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object get(int index) {
+&nbsp;        return list.get(index);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a byte value at the specified location in this {@link com.alibaba.fastjson2.JSONArray}.
+&nbsp;     *
+&nbsp;     * @param index index of the element to return
+&nbsp;     * @return byte
+&nbsp;     * @throws NumberFormatException If the value of get is {@link String} and it contains no parsable byte
+&nbsp;     * @throws JSONException Unsupported type conversion to byte value
+&nbsp;     * @throws IndexOutOfBoundsException if the index is out of range {@code (index &lt; 0 || index &gt;= size())}
+&nbsp;     */
+&nbsp;    public byte getByteValue(int index) {
+&nbsp;        Object value = list.get(index);
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            return 0;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof Number) {
+&nbsp;            return ((Number) value).byteValue();
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof String) {
+&nbsp;            String str = (String) value;
+&nbsp;
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+&nbsp;                return 0;
+&nbsp;            }
+&nbsp;
+&nbsp;            return Byte.parseByte(str);
+&nbsp;        }
+&nbsp;
+&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to byte value&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    public BigInteger getBigInteger(int index) {
+&nbsp;        Object value = list.get(index);
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof Number) {
+&nbsp;            if (value instanceof BigInteger) {
+&nbsp;                return (BigInteger) value;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (value instanceof BigDecimal) {
+&nbsp;                return ((BigDecimal) value).toBigInteger();
+&nbsp;            }
+&nbsp;
+&nbsp;            long longValue = ((Number) value).longValue();
+&nbsp;            return BigInteger.valueOf(longValue);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof String) {
+&nbsp;            String str = (String) value;
+&nbsp;
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+&nbsp;                return null;
+&nbsp;            }
+&nbsp;
+&nbsp;            return new BigInteger(str);
+&nbsp;        }
+&nbsp;
+&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to BigInteger&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    public java.sql.Date getSqlDate(int index) {
+&nbsp;        Object object = get(index);
+&nbsp;        return TypeUtils.cast(object, java.sql.Date.class);
+&nbsp;    }
+&nbsp;
+&nbsp;    public Timestamp getTimestamp(int index) {
+&nbsp;        Object object = get(index);
+&nbsp;        return TypeUtils.cast(object, java.sql.Timestamp.class);
+&nbsp;    }
+&nbsp;
+&nbsp;    public Date getDate(int index) {
+&nbsp;        Object value = get(index);
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof Date) {
+&nbsp;            return (Date) value;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof Number) {
+&nbsp;            long millis = ((Number) value).longValue();
+&nbsp;            if (millis == 0) {
+&nbsp;                return null;
+&nbsp;            }
+&nbsp;            return new Date(millis);
+&nbsp;        }
+&nbsp;
+&nbsp;        return TypeUtils.toDate(value);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object set(int index, Object element) {
+&nbsp;        if (index == -1) {
+&nbsp;            list.add(element);
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (list.size() &lt;= index) {
+&nbsp;            for (int i = list.size(); i &lt; index; ++i) {
+&nbsp;                list.add(null);
+&nbsp;            }
+&nbsp;            list.add(element);
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;
+&nbsp;        return list.set(index, element);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void add(int index, Object element) {
+&nbsp;        list.add(index, element);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object remove(int index) {
+&nbsp;        return list.remove(index);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int indexOf(Object o) {
+&nbsp;        return list.indexOf(o);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int lastIndexOf(Object o) {
+&nbsp;        return list.lastIndexOf(o);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ListIterator listIterator() {
+&nbsp;        return list.listIterator();
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ListIterator listIterator(int index) {
+&nbsp;        return list.listIterator(index);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List subList(int fromIndex, int toIndex) {
+&nbsp;        return list.subList(fromIndex, toIndex);
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getString(int index) {
+&nbsp;        Object value = list.get(index);
+&nbsp;        if (value == null) {
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof String) {
+&nbsp;            return (String) value;
+&nbsp;        }
+&nbsp;
+&nbsp;        return com.alibaba.fastjson2.JSON.toJSONString(value);
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONArray getJSONArray(int index) {
+&nbsp;        Object value = get(index);
+&nbsp;
+&nbsp;        if (value instanceof JSONArray) {
+&nbsp;            return (JSONArray) value;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof String) {
+&nbsp;            String str = (String) value;
+&nbsp;
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+&nbsp;                return null;
+&nbsp;            }
+&nbsp;
+&nbsp;            JSONReader reader = JSONReader.of(str);
+&nbsp;            if (arrayReader == null) {
+&nbsp;                arrayReader = reader.getObjectReader(JSONArray.class);
+&nbsp;            }
+&nbsp;            return arrayReader.readObject(reader, null, null, 0);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof List) {
+&nbsp;            return new JSONArray((List&lt;?&gt;) value);
+&nbsp;        }
+&nbsp;
+&nbsp;        return null;
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T getObject(int index, Type type) {
+&nbsp;        Object obj = list.get(index);
+&nbsp;        if (type instanceof Class) {
+&nbsp;            return (T) TypeUtils.cast(obj, (Class) type);
+&nbsp;        } else {
+&nbsp;            String json = JSON.toJSONString(obj);
+&nbsp;            return (T) JSON.parseObject(json, type);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T getObject(int index, Class&lt;T&gt; clazz) {
+&nbsp;        Object obj = list.get(index);
+&nbsp;        if (obj == null) {
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (clazz.isInstance(obj)) {
+&nbsp;            return (T) obj;
+&nbsp;        }
+&nbsp;
+&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();
+&nbsp;        Function typeConvert = provider.getTypeConvert(obj.getClass(), clazz);
+&nbsp;        if (typeConvert != null) {
+&nbsp;            return (T) typeConvert.apply(obj);
+&nbsp;        }
+&nbsp;
+&nbsp;        String json = JSON.toJSONString(obj);
+&nbsp;        ObjectReader objectReader = provider.getObjectReader(clazz);
+&nbsp;        JSONReader jsonReader = JSONReader.of(json);
+&nbsp;
+&nbsp;        String defaultDateFormat = JSON.DEFFAULT_DATE_FORMAT;
+&nbsp;        if (!&quot;yyyy-MM-dd HH:mm:ss&quot;.equals(defaultDateFormat)) {
+&nbsp;            jsonReader
+&nbsp;                    .getContext()
+&nbsp;                    .setDateFormat(defaultDateFormat);
+&nbsp;        }
+&nbsp;
+&nbsp;        return (T) objectReader.readObject(jsonReader, null, null, 0);
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; List&lt;T&gt; toJavaList(Class&lt;T&gt; clazz) {
+&nbsp;        List&lt;T&gt; list = new ArrayList&lt;T&gt;(this.size());
+&nbsp;
+&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();
+&nbsp;        ObjectReader objectReader = provider.getObjectReader(clazz);
+&nbsp;
+&nbsp;        for (Object item : this) {
+&nbsp;            T classItem;
+&nbsp;            if (item instanceof Map) {
+&nbsp;                classItem = (T) objectReader.createInstance((Map) item, 0L);
+&nbsp;            } else {
+&nbsp;                if (item == null || item.getClass() == clazz) {
+&nbsp;                    list.add((T) item);
+&nbsp;                    continue;
+&nbsp;                }
+&nbsp;
+&nbsp;                Function typeConvert = provider.getTypeConvert(item.getClass(), clazz);
+&nbsp;                if (typeConvert != null) {
+&nbsp;                    Object converted = typeConvert.apply(item);
+&nbsp;                    list.add((T) converted);
+&nbsp;                    continue;
+&nbsp;                }
+&nbsp;
+&nbsp;                throw new com.alibaba.fastjson2.JSONException(
+&nbsp;                        (item == null ? &quot;null&quot; : item.getClass()) + &quot; cannot be converted to &quot; + clazz
+&nbsp;                );
+&nbsp;            }
+&nbsp;            list.add(classItem);
+&nbsp;        }
+&nbsp;
+&nbsp;        return list;
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONArray fluentAdd(Object e) {
+&nbsp;        list.add(e);
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T toJavaObject(Class&lt;T&gt; clazz) {
+&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();
+&nbsp;        ObjectReader&lt;T&gt; objectReader = provider.getObjectReader(clazz);
+&nbsp;        return objectReader.createInstance(this);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+&nbsp;        return toJSONString(this);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JSONArray clone() {
+&nbsp;        return new JSONArray(new ArrayList&lt;Object&gt;(list));
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+&nbsp;        return this.list.hashCode();
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object obj) {
+&nbsp;        if (this == obj) {
+&nbsp;            return true;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (obj instanceof JSONArray) {
+&nbsp;            return this.list.equals(((JSONArray) obj).list);
+&nbsp;        }
+&nbsp;
+&nbsp;        return this.list.equals(obj);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;T&gt; T toJavaObject(Type type) {
+&nbsp;        return com.alibaba.fastjson.util.TypeUtils.cast(this, type, ParserConfig.getGlobalInstance());
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    public Type getComponentType() {
+&nbsp;        return componentType;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    public void setComponentType(Type componentType) {
+&nbsp;        this.componentType = componentType;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    public Object getRelatedArray() {
+&nbsp;        return relatedArray;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    public void setRelatedArray(Object relatedArray) {
+&nbsp;        this.relatedArray = relatedArray;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:17</div>
+</div>
+</body>
+</html>

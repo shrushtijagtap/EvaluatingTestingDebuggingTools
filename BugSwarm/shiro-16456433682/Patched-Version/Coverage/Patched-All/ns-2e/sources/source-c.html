@@ -1,0 +1,446 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ShiroHttpServletResponse</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.web.servlet</a>
+</div>
+
+<h1>Coverage Summary for Class: ShiroHttpServletResponse (org.apache.shiro.web.servlet)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ShiroHttpServletResponse</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/80)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/117)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.web.servlet;
+&nbsp;
+&nbsp;import javax.servlet.ServletContext;
+&nbsp;import javax.servlet.http.HttpServletRequest;
+&nbsp;import javax.servlet.http.HttpServletResponse;
+&nbsp;import javax.servlet.http.HttpServletResponseWrapper;
+&nbsp;import javax.servlet.http.HttpSession;
+&nbsp;import java.io.IOException;
+&nbsp;import java.net.MalformedURLException;
+&nbsp;import java.net.URL;
+&nbsp;import java.net.URLEncoder;
+&nbsp;
+&nbsp;/**
+&nbsp; * HttpServletResponse implementation to support URL Encoding of Shiro Session IDs.
+&nbsp; * &lt;p/&gt;
+&nbsp; * It is only used when using Shiro&#39;s native Session Management configuration (and not when using the Servlet
+&nbsp; * Container session configuration, which is Shiro&#39;s default in a web environment).  Because the servlet container
+&nbsp; * already performs url encoding of its own session ids, instances of this class are only needed when using Shiro
+&nbsp; * native sessions.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Note that this implementation relies in part on source code from the Tomcat 6.x distribution for
+&nbsp; * encoding URLs for session ID URL Rewriting (we didn&#39;t want to re-invent the wheel).  Since Shiro is also
+&nbsp; * Apache 2.0 license, all regular licenses and conditions have remained in tact.
+&nbsp; *
+&nbsp; * @since 0.2
+&nbsp; */
+&nbsp;public class ShiroHttpServletResponse extends HttpServletResponseWrapper {
+&nbsp;
+&nbsp;    //TODO - complete JavaDoc
+&nbsp;
+&nbsp;    private static final String DEFAULT_SESSION_ID_PARAMETER_NAME = ShiroHttpSession.DEFAULT_SESSION_ID_NAME;
+&nbsp;
+<b class="nc">&nbsp;    private ServletContext context = null;</b>
+&nbsp;    //the associated request
+<b class="nc">&nbsp;    private ShiroHttpServletRequest request = null;</b>
+&nbsp;
+&nbsp;    public ShiroHttpServletResponse(HttpServletResponse wrapped, ServletContext context, ShiroHttpServletRequest request) {
+<b class="nc">&nbsp;        super(wrapped);</b>
+<b class="nc">&nbsp;        this.context = context;</b>
+<b class="nc">&nbsp;        this.request = request;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    public ServletContext getContext() {
+<b class="nc">&nbsp;        return context;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    public void setContext(ServletContext context) {
+<b class="nc">&nbsp;        this.context = context;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ShiroHttpServletRequest getRequest() {
+<b class="nc">&nbsp;        return request;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    public void setRequest(ShiroHttpServletRequest request) {
+<b class="nc">&nbsp;        this.request = request;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Encode the session identifier associated with this response
+&nbsp;     * into the specified redirect URL, if necessary.
+&nbsp;     *
+&nbsp;     * @param url URL to be encoded
+&nbsp;     */
+&nbsp;    public String encodeRedirectURL(String url) {
+<b class="nc">&nbsp;        if (isEncodeable(toAbsolute(url))) {</b>
+<b class="nc">&nbsp;            return toEncoded(url, request.getSession().getId());</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return url;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public String encodeRedirectUrl(String s) {
+<b class="nc">&nbsp;        return encodeRedirectURL(s);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Encode the session identifier associated with this response
+&nbsp;     * into the specified URL, if necessary.
+&nbsp;     *
+&nbsp;     * @param url URL to be encoded
+&nbsp;     */
+&nbsp;    public String encodeURL(String url) {
+<b class="nc">&nbsp;        String absolute = toAbsolute(url);</b>
+<b class="nc">&nbsp;        if (isEncodeable(absolute)) {</b>
+&nbsp;            // W3c spec clearly said
+<b class="nc">&nbsp;            if (url.equalsIgnoreCase(&quot;&quot;)) {</b>
+<b class="nc">&nbsp;                url = absolute;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return toEncoded(url, request.getSession().getId());</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return url;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public String encodeUrl(String s) {
+<b class="nc">&nbsp;        return encodeURL(s);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return &lt;code&gt;true&lt;/code&gt; if the specified URL should be encoded with
+&nbsp;     * a session identifier.  This will be true if all of the following
+&nbsp;     * conditions are met:
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;The request we are responding to asked for a valid session
+&nbsp;     * &lt;li&gt;The requested session ID was not received via a cookie
+&nbsp;     * &lt;li&gt;The specified URL points back to somewhere within the web
+&nbsp;     * application that is responding to this request
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @param location Absolute URL to be validated
+&nbsp;     * @return {@code true} if the specified URL should be encoded with a session identifier, {@code false} otherwise.
+&nbsp;     */
+&nbsp;    protected boolean isEncodeable(final String location) {
+&nbsp;
+&nbsp;        // First check if URL rewriting is disabled globally
+<b class="nc">&nbsp;        if (Boolean.FALSE.equals(request.getAttribute(ShiroHttpServletRequest.SESSION_ID_URL_REWRITING_ENABLED)))</b>
+<b class="nc">&nbsp;            return (false);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (location == null)</b>
+<b class="nc">&nbsp;            return (false);</b>
+&nbsp;
+&nbsp;        // Is this an intra-document reference?
+<b class="nc">&nbsp;        if (location.startsWith(&quot;#&quot;))</b>
+<b class="nc">&nbsp;            return (false);</b>
+&nbsp;
+&nbsp;        // Are we in a valid session that is not using cookies?
+<b class="nc">&nbsp;        final HttpServletRequest hreq = request;</b>
+<b class="nc">&nbsp;        final HttpSession session = hreq.getSession(false);</b>
+<b class="nc">&nbsp;        if (session == null)</b>
+<b class="nc">&nbsp;            return (false);</b>
+<b class="nc">&nbsp;        if (hreq.isRequestedSessionIdFromCookie())</b>
+<b class="nc">&nbsp;            return (false);</b>
+&nbsp;
+<b class="nc">&nbsp;        return doIsEncodeable(hreq, session, location);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean doIsEncodeable(HttpServletRequest hreq, HttpSession session, String location) {
+&nbsp;        // Is this a valid absolute URL?
+&nbsp;        URL url;
+&nbsp;        try {
+<b class="nc">&nbsp;            url = new URL(location);</b>
+<b class="nc">&nbsp;        } catch (MalformedURLException e) {</b>
+<b class="nc">&nbsp;            return (false);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Does this URL match down to (and including) the context path?
+<b class="nc">&nbsp;        if (!hreq.getScheme().equalsIgnoreCase(url.getProtocol()))</b>
+<b class="nc">&nbsp;            return (false);</b>
+<b class="nc">&nbsp;        if (!hreq.getServerName().equalsIgnoreCase(url.getHost()))</b>
+<b class="nc">&nbsp;            return (false);</b>
+<b class="nc">&nbsp;        int serverPort = hreq.getServerPort();</b>
+<b class="nc">&nbsp;        if (serverPort == -1) {</b>
+<b class="nc">&nbsp;            if (&quot;https&quot;.equals(hreq.getScheme()))</b>
+<b class="nc">&nbsp;                serverPort = 443;</b>
+&nbsp;            else
+<b class="nc">&nbsp;                serverPort = 80;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int urlPort = url.getPort();</b>
+<b class="nc">&nbsp;        if (urlPort == -1) {</b>
+<b class="nc">&nbsp;            if (&quot;https&quot;.equals(url.getProtocol()))</b>
+<b class="nc">&nbsp;                urlPort = 443;</b>
+&nbsp;            else
+<b class="nc">&nbsp;                urlPort = 80;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (serverPort != urlPort)</b>
+<b class="nc">&nbsp;            return (false);</b>
+&nbsp;
+<b class="nc">&nbsp;        String contextPath = getRequest().getContextPath();</b>
+<b class="nc">&nbsp;        if (contextPath != null) {</b>
+<b class="nc">&nbsp;            String file = url.getFile();</b>
+<b class="nc">&nbsp;            if ((file == null) || !file.startsWith(contextPath))</b>
+<b class="nc">&nbsp;                return (false);</b>
+<b class="nc">&nbsp;            String tok = &quot;;&quot; + DEFAULT_SESSION_ID_PARAMETER_NAME + &quot;=&quot; + session.getId();</b>
+<b class="nc">&nbsp;            if (file.indexOf(tok, contextPath.length()) &gt;= 0)</b>
+<b class="nc">&nbsp;                return (false);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // This URL belongs to our web application, so it is encodeable
+<b class="nc">&nbsp;        return (true);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convert (if necessary) and return the absolute URL that represents the
+&nbsp;     * resource referenced by this possibly relative URL.  If this URL is
+&nbsp;     * already absolute, return it unchanged.
+&nbsp;     *
+&nbsp;     * @param location URL to be (possibly) converted and then returned
+&nbsp;     * @return resource location as an absolute url
+&nbsp;     * @throws IllegalArgumentException if a MalformedURLException is
+&nbsp;     *                                  thrown when converting the relative URL to an absolute one
+&nbsp;     */
+&nbsp;    private String toAbsolute(String location) {
+&nbsp;
+<b class="nc">&nbsp;        if (location == null)</b>
+<b class="nc">&nbsp;            return (location);</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean leadingSlash = location.startsWith(&quot;/&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (leadingSlash || !hasScheme(location)) {</b>
+&nbsp;
+<b class="nc">&nbsp;            StringBuilder buf = new StringBuilder();</b>
+&nbsp;
+<b class="nc">&nbsp;            String scheme = request.getScheme();</b>
+<b class="nc">&nbsp;            String name = request.getServerName();</b>
+<b class="nc">&nbsp;            int port = request.getServerPort();</b>
+&nbsp;
+&nbsp;            try {
+<b class="nc">&nbsp;                buf.append(scheme).append(&quot;://&quot;).append(name);</b>
+<b class="nc">&nbsp;                if ((scheme.equals(&quot;http&quot;) &amp;&amp; port != 80)</b>
+<b class="nc">&nbsp;                        || (scheme.equals(&quot;https&quot;) &amp;&amp; port != 443)) {</b>
+<b class="nc">&nbsp;                    buf.append(&#39;:&#39;).append(port);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (!leadingSlash) {</b>
+<b class="nc">&nbsp;                    String relativePath = request.getRequestURI();</b>
+<b class="nc">&nbsp;                    int pos = relativePath.lastIndexOf(&#39;/&#39;);</b>
+<b class="nc">&nbsp;                    relativePath = relativePath.substring(0, pos);</b>
+&nbsp;
+<b class="nc">&nbsp;                    String encodedURI = URLEncoder.encode(relativePath, getCharacterEncoding());</b>
+<b class="nc">&nbsp;                    buf.append(encodedURI).append(&#39;/&#39;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                buf.append(location);</b>
+<b class="nc">&nbsp;            } catch (IOException e) {</b>
+<b class="nc">&nbsp;                IllegalArgumentException iae = new IllegalArgumentException(location);</b>
+<b class="nc">&nbsp;                iae.initCause(e);</b>
+<b class="nc">&nbsp;                throw iae;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return buf.toString();</b>
+&nbsp;
+&nbsp;        } else {
+<b class="nc">&nbsp;            return location;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Determine if the character is allowed in the scheme of a URI.
+&nbsp;     * See RFC 2396, Section 3.1
+&nbsp;     *
+&nbsp;     * @param c the character to check
+&nbsp;     * @return {@code true} if the character is allowed in a URI scheme, {@code false} otherwise.
+&nbsp;     */
+&nbsp;    public static boolean isSchemeChar(char c) {
+<b class="nc">&nbsp;        return Character.isLetterOrDigit(c) ||</b>
+&nbsp;                c == &#39;+&#39; || c == &#39;-&#39; || c == &#39;.&#39;;
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if the URI string has a {@code scheme} component, {@code false} otherwise.
+&nbsp;     *
+&nbsp;     * @param uri the URI string to check for a scheme component
+&nbsp;     * @return {@code true} if the URI string has a {@code scheme} component, {@code false} otherwise.
+&nbsp;     */
+&nbsp;    private boolean hasScheme(String uri) {
+<b class="nc">&nbsp;        int len = uri.length();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; len; i++) {</b>
+<b class="nc">&nbsp;            char c = uri.charAt(i);</b>
+<b class="nc">&nbsp;            if (c == &#39;:&#39;) {</b>
+<b class="nc">&nbsp;                return i &gt; 0;</b>
+<b class="nc">&nbsp;            } else if (!isSchemeChar(c)) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the specified URL with the specified session identifier suitably encoded.
+&nbsp;     *
+&nbsp;     * @param url       URL to be encoded with the session id
+&nbsp;     * @param sessionId Session id to be included in the encoded URL
+&nbsp;     * @return the url with the session identifer properly encoded.
+&nbsp;     */
+&nbsp;    protected String toEncoded(String url, String sessionId) {
+&nbsp;
+<b class="nc">&nbsp;        if ((url == null) || (sessionId == null))</b>
+<b class="nc">&nbsp;            return (url);</b>
+&nbsp;
+<b class="nc">&nbsp;        String path = url;</b>
+<b class="nc">&nbsp;        String query = &quot;&quot;;</b>
+<b class="nc">&nbsp;        String anchor = &quot;&quot;;</b>
+<b class="nc">&nbsp;        int question = url.indexOf(&#39;?&#39;);</b>
+<b class="nc">&nbsp;        if (question &gt;= 0) {</b>
+<b class="nc">&nbsp;            path = url.substring(0, question);</b>
+<b class="nc">&nbsp;            query = url.substring(question);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int pound = path.indexOf(&#39;#&#39;);</b>
+<b class="nc">&nbsp;        if (pound &gt;= 0) {</b>
+<b class="nc">&nbsp;            anchor = path.substring(pound);</b>
+<b class="nc">&nbsp;            path = path.substring(0, pound);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder(path);</b>
+<b class="nc">&nbsp;        if (sb.length() &gt; 0) { // session id param can&#39;t be first.</b>
+<b class="nc">&nbsp;            sb.append(&quot;;&quot;);</b>
+<b class="nc">&nbsp;            sb.append(DEFAULT_SESSION_ID_PARAMETER_NAME);</b>
+<b class="nc">&nbsp;            sb.append(&quot;=&quot;);</b>
+<b class="nc">&nbsp;            sb.append(sessionId);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        sb.append(anchor);</b>
+<b class="nc">&nbsp;        sb.append(query);</b>
+<b class="nc">&nbsp;        return (sb.toString());</b>
+&nbsp;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

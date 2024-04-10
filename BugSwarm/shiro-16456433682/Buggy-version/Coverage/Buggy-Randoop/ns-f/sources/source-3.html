@@ -1,0 +1,429 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CasRealm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.cas</a>
+</div>
+
+<h1>Coverage Summary for Class: CasRealm (org.apache.shiro.cas)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CasRealm</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/80)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.cas;
+&nbsp;
+&nbsp;import org.apache.shiro.authc.AuthenticationException;
+&nbsp;import org.apache.shiro.authc.AuthenticationInfo;
+&nbsp;import org.apache.shiro.authc.AuthenticationToken;
+&nbsp;import org.apache.shiro.authc.SimpleAuthenticationInfo;
+&nbsp;import org.apache.shiro.authz.AuthorizationInfo;
+&nbsp;import org.apache.shiro.authz.SimpleAuthorizationInfo;
+&nbsp;import org.apache.shiro.realm.AuthorizingRealm;
+&nbsp;import org.apache.shiro.subject.PrincipalCollection;
+&nbsp;import org.apache.shiro.subject.SimplePrincipalCollection;
+&nbsp;import org.apache.shiro.util.CollectionUtils;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;import org.jasig.cas.client.authentication.AttributePrincipal;
+&nbsp;import org.jasig.cas.client.validation.*;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * This realm implementation acts as a CAS client to a CAS server for authentication and basic authorization.
+&nbsp; * &lt;p/&gt;
+&nbsp; * This realm functions by inspecting a submitted {@link org.apache.shiro.cas.CasToken CasToken} (which essentially 
+&nbsp; * wraps a CAS service ticket) and validates it against the CAS server using a configured CAS
+&nbsp; * {@link org.jasig.cas.client.validation.TicketValidator TicketValidator}.
+&nbsp; * &lt;p/&gt;
+&nbsp; * The {@link #getValidationProtocol() validationProtocol} is {@code CAS} by default, which indicates that a
+&nbsp; * a {@link org.jasig.cas.client.validation.Cas20ServiceTicketValidator Cas20ServiceTicketValidator}
+&nbsp; * will be used for ticket validation.  You can alternatively set
+&nbsp; * or {@link org.jasig.cas.client.validation.Saml11TicketValidator Saml11TicketValidator} of CAS client. It is based on
+&nbsp; * {@link AuthorizingRealm AuthorizingRealm} for both authentication and authorization. User id and attributes are retrieved from the CAS
+&nbsp; * service ticket validation response during authentication phase. Roles and permissions are computed during authorization phase (according
+&nbsp; * to the attributes previously retrieved).
+&nbsp; *
+&nbsp; * @since 1.2
+&nbsp; * @see &lt;a href=&quot;https://github.com/bujiio/buji-pac4j&quot;&gt;buji-pac4j&lt;/a&gt;
+&nbsp; * @deprecated replaced with Shiro integration in &lt;a href=&quot;https://github.com/bujiio/buji-pac4j&quot;&gt;buji-pac4j&lt;/a&gt;.
+&nbsp; */
+&nbsp;@Deprecated
+&nbsp;public class CasRealm extends AuthorizingRealm {
+&nbsp;
+&nbsp;    // default name of the CAS attribute for remember me authentication (CAS 3.4.10+)
+&nbsp;    public static final String DEFAULT_REMEMBER_ME_ATTRIBUTE_NAME = &quot;longTermAuthenticationRequestTokenUsed&quot;;
+&nbsp;    public static final String DEFAULT_VALIDATION_PROTOCOL = &quot;CAS&quot;;
+&nbsp;    
+<b class="nc">&nbsp;    private static Logger log = LoggerFactory.getLogger(CasRealm.class);</b>
+&nbsp;    
+&nbsp;    // this is the url of the CAS server (example : http://host:port/cas)
+&nbsp;    private String casServerUrlPrefix;
+&nbsp;    
+&nbsp;    // this is the CAS service url of the application (example : http://host:port/mycontextpath/shiro-cas)
+&nbsp;    private String casService;
+&nbsp;    
+&nbsp;    /* CAS protocol to use for ticket validation : CAS (default) or SAML :
+&nbsp;       - CAS protocol can be used with CAS server version &lt; 3.1 : in this case, no user attributes can be retrieved from the CAS ticket validation response (except if there are some customizations on CAS server side)
+&nbsp;       - SAML protocol can be used with CAS server version &gt;= 3.1 : in this case, user attributes can be extracted from the CAS ticket validation response
+&nbsp;    */
+<b class="nc">&nbsp;    private String validationProtocol = DEFAULT_VALIDATION_PROTOCOL;</b>
+&nbsp;    
+&nbsp;    // default name of the CAS attribute for remember me authentication (CAS 3.4.10+)
+<b class="nc">&nbsp;    private String rememberMeAttributeName = DEFAULT_REMEMBER_ME_ATTRIBUTE_NAME;</b>
+&nbsp;    
+&nbsp;    // this class from the CAS client is used to validate a service ticket on CAS server
+&nbsp;    private TicketValidator ticketValidator;
+&nbsp;    
+&nbsp;    // default roles to applied to authenticated user
+&nbsp;    private String defaultRoles;
+&nbsp;    
+&nbsp;    // default permissions to applied to authenticated user
+&nbsp;    private String defaultPermissions;
+&nbsp;    
+&nbsp;    // names of attributes containing roles
+&nbsp;    private String roleAttributeNames;
+&nbsp;    
+&nbsp;    // names of attributes containing permissions
+&nbsp;    private String permissionAttributeNames;
+&nbsp;    
+<b class="nc">&nbsp;    public CasRealm() {</b>
+<b class="nc">&nbsp;        setAuthenticationTokenClass(CasToken.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void onInit() {
+<b class="nc">&nbsp;        super.onInit();</b>
+<b class="nc">&nbsp;        ensureTicketValidator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected TicketValidator ensureTicketValidator() {
+<b class="nc">&nbsp;        if (this.ticketValidator == null) {</b>
+<b class="nc">&nbsp;            this.ticketValidator = createTicketValidator();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return this.ticketValidator;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    protected TicketValidator createTicketValidator() {
+<b class="nc">&nbsp;        String urlPrefix = getCasServerUrlPrefix();</b>
+<b class="nc">&nbsp;        if (&quot;saml&quot;.equalsIgnoreCase(getValidationProtocol())) {</b>
+<b class="nc">&nbsp;            return new Saml11TicketValidator(urlPrefix);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new Cas20ServiceTicketValidator(urlPrefix);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Authenticates a user and retrieves its information.
+&nbsp;     * 
+&nbsp;     * @param token the authentication token
+&nbsp;     * @throws AuthenticationException if there is an error during authentication.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+<b class="nc">&nbsp;        CasToken casToken = (CasToken) token;</b>
+<b class="nc">&nbsp;        if (token == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        String ticket = (String)casToken.getCredentials();</b>
+<b class="nc">&nbsp;        if (!StringUtils.hasText(ticket)) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        TicketValidator ticketValidator = ensureTicketValidator();</b>
+&nbsp;
+&nbsp;        try {
+&nbsp;            // contact CAS server to validate service ticket
+<b class="nc">&nbsp;            Assertion casAssertion = ticketValidator.validate(ticket, getCasService());</b>
+&nbsp;            // get principal, user id and attributes
+<b class="nc">&nbsp;            AttributePrincipal casPrincipal = casAssertion.getPrincipal();</b>
+<b class="nc">&nbsp;            String userId = casPrincipal.getName();</b>
+<b class="nc">&nbsp;            log.debug(&quot;Validate ticket : {} in CAS server : {} to retrieve user : {}&quot;, new Object[]{</b>
+<b class="nc">&nbsp;                    ticket, getCasServerUrlPrefix(), userId</b>
+&nbsp;            });
+&nbsp;
+<b class="nc">&nbsp;            Map&lt;String, Object&gt; attributes = casPrincipal.getAttributes();</b>
+&nbsp;            // refresh authentication token (user id + remember me)
+<b class="nc">&nbsp;            casToken.setUserId(userId);</b>
+<b class="nc">&nbsp;            String rememberMeAttributeName = getRememberMeAttributeName();</b>
+<b class="nc">&nbsp;            String rememberMeStringValue = (String)attributes.get(rememberMeAttributeName);</b>
+<b class="nc">&nbsp;            boolean isRemembered = rememberMeStringValue != null &amp;&amp; Boolean.parseBoolean(rememberMeStringValue);</b>
+<b class="nc">&nbsp;            if (isRemembered) {</b>
+<b class="nc">&nbsp;                casToken.setRememberMe(true);</b>
+&nbsp;            }
+&nbsp;            // create simple authentication info
+<b class="nc">&nbsp;            List&lt;Object&gt; principals = CollectionUtils.asList(userId, attributes);</b>
+<b class="nc">&nbsp;            PrincipalCollection principalCollection = new SimplePrincipalCollection(principals, getName());</b>
+<b class="nc">&nbsp;            return new SimpleAuthenticationInfo(principalCollection, ticket);</b>
+<b class="nc">&nbsp;        } catch (TicketValidationException e) { </b>
+<b class="nc">&nbsp;            throw new CasAuthenticationException(&quot;Unable to validate ticket [&quot; + ticket + &quot;]&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Retrieves the AuthorizationInfo for the given principals (the CAS previously authenticated user : id + attributes).
+&nbsp;     * 
+&nbsp;     * @param principals the primary identifying principals of the AuthorizationInfo that should be retrieved.
+&nbsp;     * @return the AuthorizationInfo associated with this principals.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+&nbsp;        // retrieve user information
+<b class="nc">&nbsp;        SimplePrincipalCollection principalCollection = (SimplePrincipalCollection) principals;</b>
+<b class="nc">&nbsp;        List&lt;Object&gt; listPrincipals = principalCollection.asList();</b>
+<b class="nc">&nbsp;        Map&lt;String, String&gt; attributes = (Map&lt;String, String&gt;) listPrincipals.get(1);</b>
+&nbsp;        // create simple authorization info
+<b class="nc">&nbsp;        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();</b>
+&nbsp;        // add default roles
+<b class="nc">&nbsp;        addRoles(simpleAuthorizationInfo, split(defaultRoles));</b>
+&nbsp;        // add default permissions
+<b class="nc">&nbsp;        addPermissions(simpleAuthorizationInfo, split(defaultPermissions));</b>
+&nbsp;        // get roles from attributes
+<b class="nc">&nbsp;        List&lt;String&gt; attributeNames = split(roleAttributeNames);</b>
+<b class="nc">&nbsp;        for (String attributeName : attributeNames) {</b>
+<b class="nc">&nbsp;            String value = attributes.get(attributeName);</b>
+<b class="nc">&nbsp;            addRoles(simpleAuthorizationInfo, split(value));</b>
+&nbsp;        }
+&nbsp;        // get permissions from attributes
+<b class="nc">&nbsp;        attributeNames = split(permissionAttributeNames);</b>
+<b class="nc">&nbsp;        for (String attributeName : attributeNames) {</b>
+<b class="nc">&nbsp;            String value = attributes.get(attributeName);</b>
+<b class="nc">&nbsp;            addPermissions(simpleAuthorizationInfo, split(value));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return simpleAuthorizationInfo;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Split a string into a list of not empty and trimmed strings, delimiter is a comma.
+&nbsp;     * 
+&nbsp;     * @param s the input string
+&nbsp;     * @return the list of not empty and trimmed strings
+&nbsp;     */
+&nbsp;    private List&lt;String&gt; split(String s) {
+<b class="nc">&nbsp;        List&lt;String&gt; list = new ArrayList&lt;String&gt;();</b>
+<b class="nc">&nbsp;        String[] elements = StringUtils.split(s, &#39;,&#39;);</b>
+<b class="nc">&nbsp;        if (elements != null &amp;&amp; elements.length &gt; 0) {</b>
+<b class="nc">&nbsp;            for (String element : elements) {</b>
+<b class="nc">&nbsp;                if (StringUtils.hasText(element)) {</b>
+<b class="nc">&nbsp;                    list.add(element.trim());</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Add roles to the simple authorization info.
+&nbsp;     * 
+&nbsp;     * @param simpleAuthorizationInfo
+&nbsp;     * @param roles the list of roles to add
+&nbsp;     */
+&nbsp;    private void addRoles(SimpleAuthorizationInfo simpleAuthorizationInfo, List&lt;String&gt; roles) {
+<b class="nc">&nbsp;        for (String role : roles) {</b>
+<b class="nc">&nbsp;            simpleAuthorizationInfo.addRole(role);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Add permissions to the simple authorization info.
+&nbsp;     * 
+&nbsp;     * @param simpleAuthorizationInfo
+&nbsp;     * @param permissions the list of permissions to add
+&nbsp;     */
+&nbsp;    private void addPermissions(SimpleAuthorizationInfo simpleAuthorizationInfo, List&lt;String&gt; permissions) {
+<b class="nc">&nbsp;        for (String permission : permissions) {</b>
+<b class="nc">&nbsp;            simpleAuthorizationInfo.addStringPermission(permission);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getCasServerUrlPrefix() {
+<b class="nc">&nbsp;        return casServerUrlPrefix;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCasServerUrlPrefix(String casServerUrlPrefix) {
+<b class="nc">&nbsp;        this.casServerUrlPrefix = casServerUrlPrefix;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getCasService() {
+<b class="nc">&nbsp;        return casService;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCasService(String casService) {
+<b class="nc">&nbsp;        this.casService = casService;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getValidationProtocol() {
+<b class="nc">&nbsp;        return validationProtocol;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setValidationProtocol(String validationProtocol) {
+<b class="nc">&nbsp;        this.validationProtocol = validationProtocol;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getRememberMeAttributeName() {
+<b class="nc">&nbsp;        return rememberMeAttributeName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setRememberMeAttributeName(String rememberMeAttributeName) {
+<b class="nc">&nbsp;        this.rememberMeAttributeName = rememberMeAttributeName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getDefaultRoles() {
+<b class="nc">&nbsp;        return defaultRoles;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDefaultRoles(String defaultRoles) {
+<b class="nc">&nbsp;        this.defaultRoles = defaultRoles;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getDefaultPermissions() {
+<b class="nc">&nbsp;        return defaultPermissions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDefaultPermissions(String defaultPermissions) {
+<b class="nc">&nbsp;        this.defaultPermissions = defaultPermissions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getRoleAttributeNames() {
+<b class="nc">&nbsp;        return roleAttributeNames;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setRoleAttributeNames(String roleAttributeNames) {
+<b class="nc">&nbsp;        this.roleAttributeNames = roleAttributeNames;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getPermissionAttributeNames() {
+<b class="nc">&nbsp;        return permissionAttributeNames;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPermissionAttributeNames(String permissionAttributeNames) {
+<b class="nc">&nbsp;        this.permissionAttributeNames = permissionAttributeNames;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

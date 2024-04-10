@@ -1,0 +1,243 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CipherService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.crypto</a>
+</div>
+
+<h1>Coverage Summary for Class: CipherService (org.apache.shiro.crypto)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">CipherService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.crypto;
+&nbsp;
+&nbsp;import org.apache.shiro.util.ByteSource;
+&nbsp;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.io.OutputStream;
+&nbsp;
+&nbsp;/**
+&nbsp; * A {@code CipherService} uses a cryptographic algorithm called a
+&nbsp; * &lt;a href=&quot;http://en.wikipedia.org/wiki/Cipher&quot;&gt;Cipher&lt;/a&gt; to convert an original input source using a {@code key} to
+&nbsp; * an uninterpretable format.  The resulting encrypted output is only able to be converted back to original form with
+&nbsp; * a {@code key} as well.  {@code CipherService}s can perform both encryption and decryption.
+&nbsp; * &lt;h2&gt;Cipher Basics&lt;/h2&gt;
+&nbsp; * For what is known as &lt;em&gt;Symmetric&lt;/em&gt; {@code Cipher}s, the {@code Key} used to encrypt the source is the same
+&nbsp; * as (or trivially similar to) the {@code Key} used to decrypt it.
+&nbsp; * &lt;p/&gt;
+&nbsp; * For &lt;em&gt;Asymmetric&lt;/em&gt; {@code Cipher}s, the encryption {@code Key} is not the same as the decryption {@code Key}.
+&nbsp; * The most common type of Asymmetric Ciphers are based on what is called public/private key pairs:
+&nbsp; * &lt;p/&gt;
+&nbsp; * A &lt;em&gt;private&lt;/em&gt; key is known only to a single party, and as its name implies, is supposed be kept very private
+&nbsp; * and secure.  A &lt;em&gt;public&lt;/em&gt; key that is associated with the private key can be disseminated freely to anyone.
+&nbsp; * Then data encrypted by the public key can only be decrypted by the private key and vice versa, but neither party
+&nbsp; * need share their private key with anyone else.  By not sharing a private key, you can guarantee no 3rd party can
+&nbsp; * intercept the key and therefore use it to decrypt a message.
+&nbsp; * &lt;p/&gt;
+&nbsp; * This asymmetric key technology was created as a
+&nbsp; * more secure alternative to symmetric ciphers that sometimes suffer from man-in-the-middle attacks since, for
+&nbsp; * data shared between two parties, the same Key must also be shared and may be compromised.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Note that a symmetric cipher is perfectly fine to use if you just want to encode data in a format no one else
+&nbsp; * can understand and you never give away the key.  Shiro uses a symmetric cipher when creating certain
+&nbsp; * HTTP Cookies for example - because it is often undesirable to have user&#39;s identity stored in a plain-text cookie,
+&nbsp; * that identity can be converted via a symmetric cipher.  Since the the same exact Shiro application will receive
+&nbsp; * the cookie, it can decrypt it via the same {@code Key} and there is no potential for discovery since that Key
+&nbsp; * is never shared with anyone.
+&nbsp; * &lt;h2&gt;{@code CipherService}s vs JDK {@link javax.crypto.Cipher Cipher}s&lt;/h2&gt;
+&nbsp; * Shiro {@code CipherService}s essentially do the same things as JDK {@link javax.crypto.Cipher Cipher}s, but in
+&nbsp; * simpler and easier-to-use ways for most application developers.  When thinking about encrypting and decrypting data
+&nbsp; * in an application, most app developers want what a {@code CipherService} provides, rather than having to manage the
+&nbsp; * lower-level intricacies of the JDK&#39;s {@code Cipher} API.  Here are a few reasons why most people prefer
+&nbsp; * {@code CipherService}s:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;&lt;b&gt;Stateless Methods&lt;/b&gt; - {@code CipherService} method calls do not retain state between method invocations.
+&nbsp; * JDK {@code Cipher} instances do retain state across invocations, requiring its end-users to manage the instance
+&nbsp; * and its state themselves.&lt;/li&gt;
+&nbsp; * &lt;li&gt;&lt;b&gt;Thread Safety&lt;/b&gt; - {@code CipherService} instances are thread-safe inherently because no state is
+&nbsp; * retained across method invocations.  JDK {@code Cipher} instances retain state and cannot be used by multiple
+&nbsp; * threads concurrently.&lt;/li&gt;
+&nbsp; * &lt;li&gt;&lt;b&gt;Single Operation&lt;/b&gt; - {@code CipherService} method calls are single operation methods: encryption or
+&nbsp; * decryption in their entirety are done as a single method call.  This is ideal for the large majority of developer
+&nbsp; * needs where you have something unencrypted and just want it decrypted (or vice versa) in a single method call.  In
+&nbsp; * contrast, JDK {@code Cipher} instances can support encrypting/decrypting data in chunks over time (because it
+&nbsp; * retains state), but this often introduces API clutter and confusion for most application developers.&lt;/li&gt;
+&nbsp; * &lt;li&gt;&lt;b&gt;Type Safe&lt;/b&gt; - There are {@code CipherService} implementations for different Cipher algorithms
+&nbsp; * ({@code AesCipherService}, {@code BlowfishCipherService}, etc).  There is only one JDK {@code Cipher} class to
+&nbsp; * represent all cipher algorithms/instances.
+&nbsp; * &lt;li&gt;&lt;b&gt;Simple Construction&lt;/b&gt; - Because {@code CipherService} instances are type-safe, instantiating and using
+&nbsp; * one is often as simple as calling the default constructor, for example, &lt;code&gt;new AesCipherService();&lt;/code&gt;.  The
+&nbsp; * JDK {@code Cipher} class however requires using a procedural factory method with String arguments to indicate how
+&nbsp; * the instance should be created.  The String arguments themselves are somewhat cryptic and hard to
+&nbsp; * understand unless you&#39;re a security expert.  Shiro hides these details from you, but allows you to configure them
+&nbsp; * if you want.&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; *
+&nbsp; * @see BlowfishCipherService
+&nbsp; * @see AesCipherService
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public interface CipherService {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Decrypts encrypted data via the specified cipher key and returns the original (pre-encrypted) data.
+&nbsp;     * Note that the key must be in a format understood by the CipherService implementation.
+&nbsp;     *
+&nbsp;     * @param encrypted     the previously encrypted data to decrypt
+&nbsp;     * @param decryptionKey the cipher key used during decryption.
+&nbsp;     * @return a byte source representing the original form of the specified encrypted data.
+&nbsp;     * @throws CryptoException if there is an error during decryption
+&nbsp;     */
+&nbsp;    ByteSource decrypt(byte[] encrypted, byte[] decryptionKey) throws CryptoException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Receives encrypted data from the given {@code InputStream}, decrypts it, and sends the resulting decrypted data
+&nbsp;     * to the given {@code OutputStream}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;NOTE:&lt;/b&gt; This method &lt;em&gt;does NOT&lt;/em&gt; flush or close either stream prior to returning - the caller must
+&nbsp;     * do so when they are finished with the streams.  For example:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * try {
+&nbsp;     *     InputStream in = ...
+&nbsp;     *     OutputStream out = ...
+&nbsp;     *     cipherService.decrypt(in, out, decryptionKey);
+&nbsp;     * } finally {
+&nbsp;     *     if (in != null) {
+&nbsp;     *         try {
+&nbsp;     *             in.close();
+&nbsp;     *         } catch (IOException ioe1) { ... log, trigger event, etc }
+&nbsp;     *     }
+&nbsp;     *     if (out != null) {
+&nbsp;     *         try {
+&nbsp;     *             out.close();
+&nbsp;     *         } catch (IOException ioe2) { ... log, trigger event, etc }
+&nbsp;     *     }
+&nbsp;     * }
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param in            the stream supplying the data to decrypt
+&nbsp;     * @param out           the stream to send the decrypted data
+&nbsp;     * @param decryptionKey the cipher key to use for decryption
+&nbsp;     * @throws CryptoException if there is any problem during decryption.
+&nbsp;     */
+&nbsp;    void decrypt(InputStream in, OutputStream out, byte[] decryptionKey) throws CryptoException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Encrypts data via the specified cipher key.  Note that the key must be in a format understood by
+&nbsp;     * the {@code CipherService} implementation.
+&nbsp;     *
+&nbsp;     * @param raw           the data to encrypt
+&nbsp;     * @param encryptionKey the cipher key used during encryption.
+&nbsp;     * @return a byte source with the encrypted representation of the specified raw data.
+&nbsp;     * @throws CryptoException if there is an error during encryption
+&nbsp;     */
+&nbsp;    ByteSource encrypt(byte[] raw, byte[] encryptionKey) throws CryptoException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Receives the data from the given {@code InputStream}, encrypts it, and sends the resulting encrypted data to the
+&nbsp;     * given {@code OutputStream}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;NOTE:&lt;/b&gt; This method &lt;em&gt;does NOT&lt;/em&gt; flush or close either stream prior to returning - the caller must
+&nbsp;     * do so when they are finished with the streams.  For example:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * try {
+&nbsp;     *     InputStream in = ...
+&nbsp;     *     OutputStream out = ...
+&nbsp;     *     cipherService.encrypt(in, out, encryptionKey);
+&nbsp;     * } finally {
+&nbsp;     *     if (in != null) {
+&nbsp;     *         try {
+&nbsp;     *             in.close();
+&nbsp;     *         } catch (IOException ioe1) { ... log, trigger event, etc }
+&nbsp;     *     }
+&nbsp;     *     if (out != null) {
+&nbsp;     *         try {
+&nbsp;     *             out.close();
+&nbsp;     *         } catch (IOException ioe2) { ... log, trigger event, etc }
+&nbsp;     *     }
+&nbsp;     * }
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param in            the stream supplying the data to encrypt
+&nbsp;     * @param out           the stream to send the encrypted data
+&nbsp;     * @param encryptionKey the cipher key to use for encryption
+&nbsp;     * @throws CryptoException if there is any problem during encryption.
+&nbsp;     */
+&nbsp;    void encrypt(InputStream in, OutputStream out, byte[] encryptionKey) throws CryptoException;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

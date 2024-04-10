@@ -1,0 +1,470 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DefaultHashFormatFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.crypto.hash.format</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultHashFormatFactory (org.apache.shiro.crypto.hash.format)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultHashFormatFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/56)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/78)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.crypto.hash.format;
+&nbsp;
+&nbsp;import org.apache.shiro.util.ClassUtils;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;import org.apache.shiro.util.UnknownClassException;
+&nbsp;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;/**
+&nbsp; * This default {@code HashFormatFactory} implementation heuristically determines a {@code HashFormat} class to
+&nbsp; * instantiate based on the input argument and returns a new instance of the discovered class.  The heuristics are
+&nbsp; * detailed in the {@link #getInstance(String) getInstance} method documentation.
+&nbsp; *
+&nbsp; * @since 1.2
+&nbsp; */
+&nbsp;public class DefaultHashFormatFactory implements HashFormatFactory {
+&nbsp;
+&nbsp;    private Map&lt;String, String&gt; formatClassNames; //id - to - fully qualified class name
+&nbsp;
+&nbsp;    private Set&lt;String&gt; searchPackages; //packages to search for HashFormat implementations
+&nbsp;
+<b class="nc">&nbsp;    public DefaultHashFormatFactory() {</b>
+<b class="nc">&nbsp;        this.searchPackages = new HashSet&lt;String&gt;();</b>
+<b class="nc">&nbsp;        this.formatClassNames = new HashMap&lt;String, String&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a {@code hashFormatAlias}-to-&lt;code&gt;fullyQualifiedHashFormatClassNameImplementation&lt;/code&gt; map.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This map will be used by the {@link #getInstance(String) getInstance} implementation:  that method&#39;s argument
+&nbsp;     * will be used as a lookup key to this map.  If the map returns a value, that value will be used to instantiate
+&nbsp;     * and return a new {@code HashFormat} instance.
+&nbsp;     * &lt;h3&gt;Defaults&lt;/h3&gt;
+&nbsp;     * Shiro&#39;s default HashFormat implementations (as listed by the {@link ProvidedHashFormat} enum) will
+&nbsp;     * be searched automatically independently of this map.  You only need to populate this map with custom
+&nbsp;     * {@code HashFormat} implementations that are &lt;em&gt;not&lt;/em&gt; already represented by a {@code ProvidedHashFormat}.
+&nbsp;     * &lt;h3&gt;Efficiency&lt;/h3&gt;
+&nbsp;     * Populating this map will be more efficient than configuring {@link #getSearchPackages() searchPackages},
+&nbsp;     * but search packages may be more convenient depending on the number of {@code HashFormat} implementations that
+&nbsp;     * need to be supported by this factory.
+&nbsp;     *
+&nbsp;     * @return a {@code hashFormatAlias}-to-&lt;code&gt;fullyQualifiedHashFormatClassNameImplementation&lt;/code&gt; map.
+&nbsp;     */
+&nbsp;    public Map&lt;String, String&gt; getFormatClassNames() {
+<b class="nc">&nbsp;        return formatClassNames;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the {@code hash-format-alias}-to-{@code fullyQualifiedHashFormatClassNameImplementation} map to be used in
+&nbsp;     * the {@link #getInstance(String)} implementation.  See the {@link #getFormatClassNames()} JavaDoc for more
+&nbsp;     * information.
+&nbsp;     * &lt;h3&gt;Efficiency&lt;/h3&gt;
+&nbsp;     * Populating this map will be more efficient than configuring {@link #getSearchPackages() searchPackages},
+&nbsp;     * but search packages may be more convenient depending on the number of {@code HashFormat} implementations that
+&nbsp;     * need to be supported by this factory.
+&nbsp;     *
+&nbsp;     * @param formatClassNames the {@code hash-format-alias}-to-{@code fullyQualifiedHashFormatClassNameImplementation}
+&nbsp;     *                         map to be used in the {@link #getInstance(String)} implementation.
+&nbsp;     */
+&nbsp;    public void setFormatClassNames(Map&lt;String, String&gt; formatClassNames) {
+<b class="nc">&nbsp;        this.formatClassNames = formatClassNames;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a set of package names that can be searched for {@link HashFormat} implementations according to
+&nbsp;     * heuristics defined in the {@link #getHashFormatClass(String, String) getHashFormat(packageName, token)} JavaDoc.
+&nbsp;     * &lt;h3&gt;Efficiency&lt;/h3&gt;
+&nbsp;     * Configuring this property is not as efficient as configuring a {@link #getFormatClassNames() formatClassNames}
+&nbsp;     * map, but it may be more convenient depending on the number of {@code HashFormat} implementations that
+&nbsp;     * need to be supported by this factory.
+&nbsp;     *
+&nbsp;     * @return a set of package names that can be searched for {@link HashFormat} implementations
+&nbsp;     * @see #getHashFormatClass(String, String)
+&nbsp;     */
+&nbsp;    public Set&lt;String&gt; getSearchPackages() {
+<b class="nc">&nbsp;        return searchPackages;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets a set of package names that can be searched for {@link HashFormat} implementations according to
+&nbsp;     * heuristics defined in the {@link #getHashFormatClass(String, String) getHashFormat(packageName, token)} JavaDoc.
+&nbsp;     * &lt;h3&gt;Efficiency&lt;/h3&gt;
+&nbsp;     * Configuring this property is not as efficient as configuring a {@link #getFormatClassNames() formatClassNames}
+&nbsp;     * map, but it may be more convenient depending on the number of {@code HashFormat} implementations that
+&nbsp;     * need to be supported by this factory.
+&nbsp;     *
+&nbsp;     * @param searchPackages a set of package names that can be searched for {@link HashFormat} implementations
+&nbsp;     */
+&nbsp;    public void setSearchPackages(Set&lt;String&gt; searchPackages) {
+<b class="nc">&nbsp;        this.searchPackages = searchPackages;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public HashFormat getInstance(String in) {
+<b class="nc">&nbsp;        if (in == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        HashFormat hashFormat = null;</b>
+<b class="nc">&nbsp;        Class clazz = null;</b>
+&nbsp;
+&nbsp;        //NOTE: this code block occurs BEFORE calling getHashFormatClass(in) on purpose as a performance
+&nbsp;        //optimization.  If the input arg is an MCF-formatted string, there will be many unnecessary ClassLoader
+&nbsp;        //misses which can be slow.  By checking the MCF-formatted option, we can significantly improve performance
+<b class="nc">&nbsp;        if (in.startsWith(ModularCryptFormat.TOKEN_DELIMITER)) {</b>
+&nbsp;            //odds are high that the input argument is not a fully qualified class name or a format key (e.g. &#39;hex&#39;,
+&nbsp;            //base64&#39; or &#39;shiro1&#39;).  Try to find the key and lookup via that:
+<b class="nc">&nbsp;            String test = in.substring(ModularCryptFormat.TOKEN_DELIMITER.length());</b>
+<b class="nc">&nbsp;            String[] tokens = test.split(&quot;\\&quot; + ModularCryptFormat.TOKEN_DELIMITER);</b>
+&nbsp;            //the MCF ID is always the first token in the delimited string:
+<b class="nc">&nbsp;            String possibleMcfId = (tokens != null &amp;&amp; tokens.length &gt; 0) ? tokens[0] : null;</b>
+<b class="nc">&nbsp;            if (possibleMcfId != null) {</b>
+&nbsp;                //found a possible MCF ID - test it using our heuristics to see if we can find a corresponding class:
+<b class="nc">&nbsp;                clazz = getHashFormatClass(possibleMcfId);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (clazz == null) {</b>
+&nbsp;            //not an MCF-formatted string - use the unaltered input arg and go through our heuristics:
+<b class="nc">&nbsp;            clazz = getHashFormatClass(in);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (clazz != null) {</b>
+&nbsp;            //we found a HashFormat class - instantiate it:
+<b class="nc">&nbsp;            hashFormat = newHashFormatInstance(clazz);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return hashFormat;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Heuristically determine the fully qualified HashFormat implementation class name based on the specified
+&nbsp;     * token.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation functions as follows (in order):
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;See if the argument can be used as a lookup key in the {@link #getFormatClassNames() formatClassNames}
+&nbsp;     * map.  If a value (a fully qualified class name {@link HashFormat HashFormat} implementation) is found,
+&nbsp;     * {@link ClassUtils#forName(String) lookup} the class and return it.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;
+&nbsp;     * Check to see if the token argument is a
+&nbsp;     * {@link ProvidedHashFormat} enum value.  If so, acquire the corresponding {@code HashFormat} class and
+&nbsp;     * return it.
+&nbsp;     * &lt;/li&gt;
+&nbsp;     * &lt;li&gt;
+&nbsp;     * Check to see if the token argument is itself a fully qualified class name.  If so, try to load the class
+&nbsp;     * and return it.
+&nbsp;     * &lt;/li&gt;
+&nbsp;     * &lt;li&gt;If the above options do not result in a discovered class, search all all configured
+&nbsp;     * {@link #getSearchPackages() searchPackages} using heuristics defined in the
+&nbsp;     * {@link #getHashFormatClass(String, String) getHashFormatClass(packageName, token)} method documentation
+&nbsp;     * (relaying the {@code token} argument to that method for each configured package).
+&nbsp;     * &lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If a class is not discovered via any of the above means, {@code null} is returned to indicate the class
+&nbsp;     * could not be found.
+&nbsp;     *
+&nbsp;     * @param token the string token from which a class name will be heuristically determined.
+&nbsp;     * @return the discovered HashFormat class implementation or {@code null} if no class could be heuristically determined.
+&nbsp;     */
+&nbsp;    protected Class getHashFormatClass(String token) {
+&nbsp;
+<b class="nc">&nbsp;        Class clazz = null;</b>
+&nbsp;
+&nbsp;        //check to see if the token is a configured FQCN alias.  This is faster than searching packages,
+&nbsp;        //so we try this first:
+<b class="nc">&nbsp;        if (this.formatClassNames != null) {</b>
+<b class="nc">&nbsp;            String value = this.formatClassNames.get(token);</b>
+<b class="nc">&nbsp;            if (value != null) {</b>
+&nbsp;                //found an alias - see if the value is a class:
+<b class="nc">&nbsp;                clazz = lookupHashFormatClass(value);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        //check to see if the token is one of Shiro&#39;s provided FQCN aliases (again, faster than searching):
+<b class="nc">&nbsp;        if (clazz == null) {</b>
+<b class="nc">&nbsp;            ProvidedHashFormat provided = ProvidedHashFormat.byId(token);</b>
+<b class="nc">&nbsp;            if (provided != null) {</b>
+<b class="nc">&nbsp;                clazz = provided.getHashFormatClass();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (clazz == null) {</b>
+&nbsp;            //check to see if &#39;token&#39; was a FQCN itself:
+<b class="nc">&nbsp;            clazz = lookupHashFormatClass(token);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (clazz == null) {</b>
+&nbsp;            //token wasn&#39;t a FQCN or a FQCN alias - try searching in configured packages:
+<b class="nc">&nbsp;            if (this.searchPackages != null) {</b>
+<b class="nc">&nbsp;                for (String packageName : this.searchPackages) {</b>
+<b class="nc">&nbsp;                    clazz = getHashFormatClass(packageName, token);</b>
+<b class="nc">&nbsp;                    if (clazz != null) {</b>
+&nbsp;                        //found it:
+&nbsp;                        break;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (clazz != null) {</b>
+<b class="nc">&nbsp;            assertHashFormatImpl(clazz);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return clazz;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Heuristically determine the fully qualified {@code HashFormat} implementation class name in the specified
+&nbsp;     * package based on the provided token.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The token is expected to be a relevant fragment of an unqualified class name in the specified package.
+&nbsp;     * A &#39;relevant fragment&#39; can be one of the following:
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;The {@code HashFormat} implementation unqualified class name&lt;/li&gt;
+&nbsp;     * &lt;li&gt;The prefix of an unqualified class name ending with the text {@code Format}.  The first character of
+&nbsp;     * this prefix can be upper or lower case and both options will be tried.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;The prefix of an unqualified class name ending with the text {@code HashFormat}.  The first character of
+&nbsp;     * this prefix can be upper or lower case and both options will be tried.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;The prefix of an unqualified class name ending with the text {@code CryptoFormat}.  The first character
+&nbsp;     * of this prefix can be upper or lower case and both options will be tried.&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Some examples:
+&nbsp;     * &lt;table&gt;
+&nbsp;     * &lt;tr&gt;
+&nbsp;     * &lt;th&gt;Package Name&lt;/th&gt;
+&nbsp;     * &lt;th&gt;Token&lt;/th&gt;
+&nbsp;     * &lt;th&gt;Expected Output Class&lt;/th&gt;
+&nbsp;     * &lt;th&gt;Notes&lt;/th&gt;
+&nbsp;     * &lt;/tr&gt;
+&nbsp;     * &lt;tr&gt;
+&nbsp;     * &lt;td&gt;{@code com.foo.whatever}&lt;/td&gt;
+&nbsp;     * &lt;td&gt;{@code MyBarFormat}&lt;/td&gt;
+&nbsp;     * &lt;td&gt;{@code com.foo.whatever.MyBarFormat}&lt;/td&gt;
+&nbsp;     * &lt;td&gt;Token is a complete unqualified class name&lt;/td&gt;
+&nbsp;     * &lt;/tr&gt;
+&nbsp;     * &lt;tr&gt;
+&nbsp;     * &lt;td&gt;{@code com.foo.whatever}&lt;/td&gt;
+&nbsp;     * &lt;td&gt;{@code Bar}&lt;/td&gt;
+&nbsp;     * &lt;td&gt;{@code com.foo.whatever.BarFormat} &lt;em&gt;or&lt;/em&gt; {@code com.foo.whatever.BarHashFormat} &lt;em&gt;or&lt;/em&gt;
+&nbsp;     * {@code com.foo.whatever.BarCryptFormat}&lt;/td&gt;
+&nbsp;     * &lt;td&gt;The token is only part of the unqualified class name - i.e. all characters in front of the {@code *Format}
+&nbsp;     * {@code *HashFormat} or {@code *CryptFormat} suffix.  Note that the {@code *Format} variant will be tried before
+&nbsp;     * {@code *HashFormat} and then finally {@code *CryptFormat}&lt;/td&gt;
+&nbsp;     * &lt;/tr&gt;
+&nbsp;     * &lt;tr&gt;
+&nbsp;     * &lt;td&gt;{@code com.foo.whatever}&lt;/td&gt;
+&nbsp;     * &lt;td&gt;{@code bar}&lt;/td&gt;
+&nbsp;     * &lt;td&gt;{@code com.foo.whatever.BarFormat} &lt;em&gt;or&lt;/em&gt; {@code com.foo.whatever.BarHashFormat} &lt;em&gt;or&lt;/em&gt;
+&nbsp;     * {@code com.foo.whatever.BarCryptFormat}&lt;/td&gt;
+&nbsp;     * &lt;td&gt;Exact same output as the above {@code Bar} input example. (The token differs only by the first character)&lt;/td&gt;
+&nbsp;     * &lt;/tr&gt;
+&nbsp;     * &lt;/table&gt;
+&nbsp;     *
+&nbsp;     * @param packageName the package to search for matching {@code HashFormat} implementations.
+&nbsp;     * @param token       the string token from which a class name will be heuristically determined.
+&nbsp;     * @return the discovered HashFormat class implementation or {@code null} if no class could be heuristically determined.
+&nbsp;     */
+&nbsp;    protected Class getHashFormatClass(String packageName, String token) {
+<b class="nc">&nbsp;        String test = token;</b>
+<b class="nc">&nbsp;        Class clazz = null;</b>
+<b class="nc">&nbsp;        String pkg = packageName == null ? &quot;&quot; : packageName;</b>
+&nbsp;
+&nbsp;        //1. Assume the arg is a fully qualified class name in the classpath:
+<b class="nc">&nbsp;        clazz = lookupHashFormatClass(test);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (clazz == null) {</b>
+<b class="nc">&nbsp;            test = pkg + &quot;.&quot; + token;</b>
+<b class="nc">&nbsp;            clazz = lookupHashFormatClass(test);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (clazz == null) {</b>
+<b class="nc">&nbsp;            test = pkg + &quot;.&quot; + StringUtils.uppercaseFirstChar(token) + &quot;Format&quot;;</b>
+<b class="nc">&nbsp;            clazz = lookupHashFormatClass(test);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (clazz == null) {</b>
+<b class="nc">&nbsp;            test = pkg + &quot;.&quot; + token + &quot;Format&quot;;</b>
+<b class="nc">&nbsp;            clazz = lookupHashFormatClass(test);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (clazz == null) {</b>
+<b class="nc">&nbsp;            test = pkg + &quot;.&quot; + StringUtils.uppercaseFirstChar(token) + &quot;HashFormat&quot;;</b>
+<b class="nc">&nbsp;            clazz = lookupHashFormatClass(test);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (clazz == null) {</b>
+<b class="nc">&nbsp;            test = pkg + &quot;.&quot; + token + &quot;HashFormat&quot;;</b>
+<b class="nc">&nbsp;            clazz = lookupHashFormatClass(test);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (clazz == null) {</b>
+<b class="nc">&nbsp;            test = pkg + &quot;.&quot; + StringUtils.uppercaseFirstChar(token) + &quot;CryptFormat&quot;;</b>
+<b class="nc">&nbsp;            clazz = lookupHashFormatClass(test);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (clazz == null) {</b>
+<b class="nc">&nbsp;            test = pkg + &quot;.&quot; + token + &quot;CryptFormat&quot;;</b>
+<b class="nc">&nbsp;            clazz = lookupHashFormatClass(test);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (clazz == null) {</b>
+<b class="nc">&nbsp;            return null; //ran out of options</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        assertHashFormatImpl(clazz);</b>
+&nbsp;
+<b class="nc">&nbsp;        return clazz;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Class lookupHashFormatClass(String name) {
+&nbsp;        try {
+<b class="nc">&nbsp;            return ClassUtils.forName(name);</b>
+<b class="nc">&nbsp;        } catch (UnknownClassException ignored) {</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final void assertHashFormatImpl(Class clazz) {
+<b class="nc">&nbsp;        if (!HashFormat.class.isAssignableFrom(clazz) || clazz.isInterface()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Discovered class [&quot; + clazz.getName() + &quot;] is not a &quot; +</b>
+<b class="nc">&nbsp;                    HashFormat.class.getName() + &quot; implementation.&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final HashFormat newHashFormatInstance(Class clazz) {
+<b class="nc">&nbsp;        assertHashFormatImpl(clazz);</b>
+<b class="nc">&nbsp;        return (HashFormat) ClassUtils.newInstance(clazz);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

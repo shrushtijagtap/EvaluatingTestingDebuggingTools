@@ -1,0 +1,1994 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONPathSegment</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONPathSegment (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONPathSegment</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.reader.FieldReader;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReader;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReaderBean;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;import com.alibaba.fastjson2.writer.FieldWriter;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriter;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriterAdapter;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriterProvider;
+&nbsp;
+&nbsp;import java.lang.reflect.Array;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.BiConsumer;
+&nbsp;import java.util.function.BiFunction;
+&nbsp;import java.util.function.Consumer;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONB.Constants.BC_OBJECT;
+&nbsp;import static com.alibaba.fastjson2.JSONB.Constants.BC_OBJECT_END;
+&nbsp;import static com.alibaba.fastjson2.JSONReader.EOI;
+&nbsp;
+<b class="nc">&nbsp;abstract class JSONPathSegment {</b>
+&nbsp;    public abstract void accept(JSONReader jsonReader, JSONPath.Context context);
+&nbsp;
+&nbsp;    public abstract void eval(JSONPath.Context context);
+&nbsp;
+&nbsp;    public boolean contains(JSONPath.Context context) {
+<b class="nc">&nbsp;        eval(context);</b>
+<b class="nc">&nbsp;        return context.value != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean remove(JSONPath.Context context) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;UnsupportedOperation &quot; + getClass());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void set(JSONPath.Context context, Object value) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;UnsupportedOperation &quot; + getClass());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCallback(JSONPath.Context context, BiFunction callback) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;UnsupportedOperation &quot; + getClass());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setInt(JSONPath.Context context, int value) {
+<b class="nc">&nbsp;        set(context, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setLong(JSONPath.Context context, long value) {
+<b class="nc">&nbsp;        set(context, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    interface EvalSegment {
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class RandomIndexSegment
+&nbsp;            extends JSONPathSegment {
+&nbsp;        public static final RandomIndexSegment INSTANCE = new RandomIndexSegment();
+&nbsp;
+&nbsp;        Random random;
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(JSONReader jsonReader, JSONPath.Context context) {
+&nbsp;            if (context.parent != null
+&nbsp;                    &amp;&amp; (context.parent.eval
+&nbsp;                    || (context.parent.current instanceof CycleNameSegment &amp;&amp; context.next == null))) {
+&nbsp;                eval(context);
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (jsonReader.isJSONB()) {
+&nbsp;                JSONArray array = new JSONArray();
+&nbsp;
+&nbsp;                {
+&nbsp;                    int itemCnt = jsonReader.startArray();
+&nbsp;                    for (int i = 0; i &lt; itemCnt; i++) {
+&nbsp;                        array.add(jsonReader.readAny());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                // lazy init for graalvm
+&nbsp;                if (random == null) {
+&nbsp;                    random = new Random();
+&nbsp;                }
+&nbsp;
+&nbsp;                int index = Math.abs(random.nextInt()) % array.size();
+&nbsp;                context.value = array.get(index);
+&nbsp;                context.eval = true;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            JSONArray array = new JSONArray();
+&nbsp;            jsonReader.next();
+&nbsp;            for (int i = 0; jsonReader.ch != EOI; ++i) {
+&nbsp;                if (jsonReader.ch == &#39;]&#39;) {
+&nbsp;                    jsonReader.next();
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;
+&nbsp;                Object val;
+&nbsp;                switch (jsonReader.ch) {
+&nbsp;                    case &#39;-&#39;:
+&nbsp;                    case &#39;+&#39;:
+&nbsp;                    case &#39;0&#39;:
+&nbsp;                    case &#39;1&#39;:
+&nbsp;                    case &#39;2&#39;:
+&nbsp;                    case &#39;3&#39;:
+&nbsp;                    case &#39;4&#39;:
+&nbsp;                    case &#39;5&#39;:
+&nbsp;                    case &#39;6&#39;:
+&nbsp;                    case &#39;7&#39;:
+&nbsp;                    case &#39;8&#39;:
+&nbsp;                    case &#39;9&#39;:
+&nbsp;                    case &#39;.&#39;:
+&nbsp;                        jsonReader.readNumber0();
+&nbsp;                        val = jsonReader.getNumber();
+&nbsp;                        break;
+&nbsp;                    case &#39;[&#39;:
+&nbsp;                        val = jsonReader.readArray();
+&nbsp;                        break;
+&nbsp;                    case &#39;{&#39;:
+&nbsp;                        val = jsonReader.readObject();
+&nbsp;                        break;
+&nbsp;                    case &#39;&quot;&#39;:
+&nbsp;                    case &#39;\&#39;&#39;:
+&nbsp;                        val = jsonReader.readString();
+&nbsp;                        break;
+&nbsp;                    case &#39;t&#39;:
+&nbsp;                    case &#39;f&#39;:
+&nbsp;                        val = jsonReader.readBoolValue();
+&nbsp;                        break;
+&nbsp;                    case &#39;n&#39;:
+&nbsp;                        jsonReader.readNull();
+&nbsp;                        val = null;
+&nbsp;                        break;
+&nbsp;                    default:
+&nbsp;                        throw new JSONException(&quot;TODO : &quot; + jsonReader.ch);
+&nbsp;                }
+&nbsp;
+&nbsp;                array.add(val);
+&nbsp;            }
+&nbsp;
+&nbsp;            // lazy init for graalvm
+&nbsp;            if (random == null) {
+&nbsp;                random = new Random();
+&nbsp;            }
+&nbsp;
+&nbsp;            int index = Math.abs(random.nextInt()) % array.size();
+&nbsp;            context.value = array.get(index);
+&nbsp;            context.eval = true;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void eval(JSONPath.Context context) {
+&nbsp;            Object object = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;
+&nbsp;            if (object instanceof List) {
+&nbsp;                List list = (List) object;
+&nbsp;                if (list.isEmpty()) {
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+&nbsp;                // lazy init for graalvm
+&nbsp;                if (random == null) {
+&nbsp;                    random = new Random();
+&nbsp;                }
+&nbsp;
+&nbsp;                int randomIndex = Math.abs(random.nextInt()) % list.size();
+&nbsp;                context.value = list.get(randomIndex);
+&nbsp;                context.eval = true;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (object instanceof Object[]) {
+&nbsp;                Object[] array = (Object[]) object;
+&nbsp;                if (array.length == 0) {
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+&nbsp;                // lazy init for graalvm
+&nbsp;                if (random == null) {
+&nbsp;                    random = new Random();
+&nbsp;                }
+&nbsp;
+&nbsp;                int randomIndex = random.nextInt() % array.length;
+&nbsp;                context.value = array[randomIndex];
+&nbsp;                context.eval = true;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            throw new JSONException(&quot;TODO&quot;);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class RangeIndexSegment
+&nbsp;            extends JSONPathSegment {
+&nbsp;        final int begin;
+&nbsp;        final int end;
+&nbsp;
+&nbsp;        public RangeIndexSegment(int begin, int end) {
+&nbsp;            this.begin = begin;
+&nbsp;            this.end = end;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void eval(JSONPath.Context context) {
+&nbsp;            Object object = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;
+&nbsp;            List result = new JSONArray();
+&nbsp;
+&nbsp;            if (object instanceof List) {
+&nbsp;                List list = (List) object;
+&nbsp;                for (int i = 0, size = list.size(); i &lt; size; i++) {
+&nbsp;                    boolean match;
+&nbsp;                    if (begin &gt;= 0) {
+&nbsp;                        match = i &gt;= begin &amp;&amp; i &lt; end;
+&nbsp;                    } else {
+&nbsp;                        int ni = i - size;
+&nbsp;                        match = ni &gt;= begin &amp;&amp; ni &lt; end;
+&nbsp;                    }
+&nbsp;                    if (match) {
+&nbsp;                        result.add(list.get(i));
+&nbsp;                    }
+&nbsp;                }
+&nbsp;                context.value = result;
+&nbsp;                context.eval = true;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (object instanceof Object[]) {
+&nbsp;                Object[] array = (Object[]) object;
+&nbsp;                for (int i = 0; i &lt; array.length; i++) {
+&nbsp;                    boolean match = i &gt;= begin &amp;&amp; i &lt;= end
+&nbsp;                            || i - array.length &gt; begin &amp;&amp; i - array.length &lt;= end;
+&nbsp;                    if (match) {
+&nbsp;                        result.add(array[i]);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;                context.value = result;
+&nbsp;                context.eval = true;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            throw new JSONException(&quot;TODO&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(JSONReader jsonReader, JSONPath.Context context) {
+&nbsp;            if (context.parent != null
+&nbsp;                    &amp;&amp; (context.parent.eval
+&nbsp;                    || (context.parent.current instanceof CycleNameSegment &amp;&amp; context.next == null))
+&nbsp;            ) {
+&nbsp;                eval(context);
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (jsonReader.isJSONB()) {
+&nbsp;                JSONArray array = new JSONArray();
+&nbsp;
+&nbsp;                {
+&nbsp;                    int itemCnt = jsonReader.startArray();
+&nbsp;                    for (int i = 0; i &lt; itemCnt; i++) {
+&nbsp;                        boolean match = begin &lt; 0 || i &gt;= begin &amp;&amp; i &lt; end;
+&nbsp;
+&nbsp;                        if (!match) {
+&nbsp;                            jsonReader.skipValue();
+&nbsp;                            continue;
+&nbsp;                        }
+&nbsp;
+&nbsp;                        array.add(
+&nbsp;                                jsonReader.readAny());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                if (begin &lt; 0) {
+&nbsp;                    for (int size = array.size(), i = size - 1; i &gt;= 0; i--) {
+&nbsp;                        int ni = i - size;
+&nbsp;                        if (ni &lt; begin || ni &gt;= end) {
+&nbsp;                            array.remove(i);
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                context.value = array;
+&nbsp;                context.eval = true;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            JSONArray array = new JSONArray();
+&nbsp;            jsonReader.next();
+&nbsp;            for (int i = 0; jsonReader.ch != EOI; ++i) {
+&nbsp;                if (jsonReader.ch == &#39;]&#39;) {
+&nbsp;                    jsonReader.next();
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;
+&nbsp;                boolean match = begin &lt; 0 || i &gt;= begin &amp;&amp; i &lt; end;
+&nbsp;
+&nbsp;                if (!match) {
+&nbsp;                    jsonReader.skipValue();
+&nbsp;                    if (jsonReader.ch == &#39;,&#39;) {
+&nbsp;                        jsonReader.next();
+&nbsp;                    }
+&nbsp;                    continue;
+&nbsp;                }
+&nbsp;
+&nbsp;                Object val;
+&nbsp;                switch (jsonReader.ch) {
+&nbsp;                    case &#39;-&#39;:
+&nbsp;                    case &#39;+&#39;:
+&nbsp;                    case &#39;0&#39;:
+&nbsp;                    case &#39;1&#39;:
+&nbsp;                    case &#39;2&#39;:
+&nbsp;                    case &#39;3&#39;:
+&nbsp;                    case &#39;4&#39;:
+&nbsp;                    case &#39;5&#39;:
+&nbsp;                    case &#39;6&#39;:
+&nbsp;                    case &#39;7&#39;:
+&nbsp;                    case &#39;8&#39;:
+&nbsp;                    case &#39;9&#39;:
+&nbsp;                    case &#39;.&#39;:
+&nbsp;                        jsonReader.readNumber0();
+&nbsp;                        val = jsonReader.getNumber();
+&nbsp;                        break;
+&nbsp;                    case &#39;[&#39;:
+&nbsp;                        val = jsonReader.readArray();
+&nbsp;                        break;
+&nbsp;                    case &#39;{&#39;:
+&nbsp;                        val = jsonReader.readObject();
+&nbsp;                        break;
+&nbsp;                    case &#39;&quot;&#39;:
+&nbsp;                    case &#39;\&#39;&#39;:
+&nbsp;                        val = jsonReader.readString();
+&nbsp;                        break;
+&nbsp;                    case &#39;t&#39;:
+&nbsp;                    case &#39;f&#39;:
+&nbsp;                        val = jsonReader.readBoolValue();
+&nbsp;                        break;
+&nbsp;                    case &#39;n&#39;:
+&nbsp;                        jsonReader.readNull();
+&nbsp;                        val = null;
+&nbsp;                        break;
+&nbsp;                    default:
+&nbsp;                        throw new JSONException(&quot;TODO : &quot; + jsonReader.ch);
+&nbsp;                }
+&nbsp;
+&nbsp;                array.add(val);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (begin &lt; 0) {
+&nbsp;                for (int size = array.size(), i = size - 1; i &gt;= 0; i--) {
+&nbsp;                    int ni = i - size;
+&nbsp;                    if (ni &lt; begin || ni &gt;= end) {
+&nbsp;                        array.remove(i);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;            context.value = array;
+&nbsp;            context.eval = true;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void set(JSONPath.Context context, Object value) {
+&nbsp;            Object object = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;
+&nbsp;            if (object instanceof List) {
+&nbsp;                List list = (List) object;
+&nbsp;                for (int i = 0, size = list.size(); i &lt; size; i++) {
+&nbsp;                    boolean match;
+&nbsp;                    if (begin &gt;= 0) {
+&nbsp;                        match = i &gt;= begin &amp;&amp; i &lt; end;
+&nbsp;                    } else {
+&nbsp;                        int ni = i - size;
+&nbsp;                        match = ni &gt;= begin &amp;&amp; ni &lt; end;
+&nbsp;                    }
+&nbsp;                    if (match) {
+&nbsp;                        list.set(i, value);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            throw new JSONException(&quot;UnsupportedOperation &quot; + getClass());
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean remove(JSONPath.Context context) {
+&nbsp;            Object object = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;
+&nbsp;            if (object instanceof List) {
+&nbsp;                List list = (List) object;
+&nbsp;                int removeCount = 0;
+&nbsp;                for (int size = list.size(), i = size - 1; i &gt;= 0; i--) {
+&nbsp;                    boolean match;
+&nbsp;                    if (begin &gt;= 0) {
+&nbsp;                        match = i &gt;= begin &amp;&amp; i &lt; end;
+&nbsp;                    } else {
+&nbsp;                        int ni = i - size;
+&nbsp;                        match = ni &gt;= begin &amp;&amp; ni &lt; end;
+&nbsp;                    }
+&nbsp;                    if (match) {
+&nbsp;                        list.remove(i);
+&nbsp;                        removeCount++;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;                return removeCount &gt; 0;
+&nbsp;            }
+&nbsp;
+&nbsp;            throw new JSONException(&quot;UnsupportedOperation &quot; + getClass());
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class MultiIndexSegment
+&nbsp;            extends JSONPathSegment {
+&nbsp;        final int[] indexes;
+&nbsp;
+&nbsp;        public MultiIndexSegment(int[] indexes) {
+&nbsp;//            Arrays.sort(indexes);
+&nbsp;            this.indexes = indexes;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void eval(JSONPath.Context context) {
+&nbsp;            Object object = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;
+&nbsp;            List&lt;Object&gt; result = new JSONArray();
+&nbsp;
+&nbsp;            if (object instanceof JSONPath.Sequence) {
+&nbsp;                List list = ((JSONPath.Sequence) object).values;
+&nbsp;
+&nbsp;                for (Object item : list) {
+&nbsp;                    context.value = item;
+&nbsp;                    JSONPath.Context itemContext = new JSONPath.Context(context.path, context, context.current, context.next, context.readerFeatures);
+&nbsp;                    eval(itemContext);
+&nbsp;                    Object value = itemContext.value;
+&nbsp;
+&nbsp;                    if (value instanceof Collection) {
+&nbsp;                        result.addAll((Collection&lt;Object&gt;) value);
+&nbsp;                    } else {
+&nbsp;                        result.add(value);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;                context.value = result;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            for (int index : indexes) {
+&nbsp;                Object value;
+&nbsp;
+&nbsp;                if (object instanceof List) {
+&nbsp;                    List list = (List) object;
+&nbsp;
+&nbsp;                    if (index &gt;= 0) {
+&nbsp;                        if (index &lt; list.size()) {
+&nbsp;                            value = list.get(index);
+&nbsp;                        } else {
+&nbsp;                            continue;
+&nbsp;                        }
+&nbsp;                    } else {
+&nbsp;                        int itemIndex = list.size() + index;
+&nbsp;                        if (itemIndex &gt;= 0) {
+&nbsp;                            value = list.get(itemIndex);
+&nbsp;                        } else {
+&nbsp;                            continue;
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                } else if (object instanceof Object[]) {
+&nbsp;                    Object[] array = (Object[]) object;
+&nbsp;                    if (index &gt;= 0) {
+&nbsp;                        if (index &lt; array.length) {
+&nbsp;                            value = array[index];
+&nbsp;                        } else {
+&nbsp;                            continue;
+&nbsp;                        }
+&nbsp;                    } else {
+&nbsp;                        int itemIndex = array.length + index;
+&nbsp;                        if (itemIndex &gt;= 0) {
+&nbsp;                            value = array[itemIndex];
+&nbsp;                        } else {
+&nbsp;                            continue;
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                } else {
+&nbsp;                    continue;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (value instanceof Collection) {
+&nbsp;                    result.addAll((Collection&lt;Object&gt;) value);
+&nbsp;                } else {
+&nbsp;                    result.add(value);
+&nbsp;                }
+&nbsp;            }
+&nbsp;            context.value = result;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(JSONReader jsonReader, JSONPath.Context context) {
+&nbsp;            if (context.parent != null
+&nbsp;                    &amp;&amp; context.parent.current instanceof CycleNameSegment
+&nbsp;                    &amp;&amp; context.next == null) {
+&nbsp;                eval(context);
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (jsonReader.isJSONB()) {
+&nbsp;                JSONArray array = new JSONArray();
+&nbsp;                int itemCnt = jsonReader.startArray();
+&nbsp;                for (int i = 0; i &lt; itemCnt; i++) {
+&nbsp;                    boolean match = Arrays.binarySearch(indexes, i) &gt;= 0;
+&nbsp;                    if (!match) {
+&nbsp;                        jsonReader.skipValue();
+&nbsp;                        continue;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    array.add(jsonReader.readAny());
+&nbsp;                }
+&nbsp;                context.value = array;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            JSONArray array = new JSONArray();
+&nbsp;
+&nbsp;            jsonReader.next();
+&nbsp;            for (int i = 0; jsonReader.ch != EOI; ++i) {
+&nbsp;                if (jsonReader.ch == &#39;]&#39;) {
+&nbsp;                    jsonReader.next();
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;
+&nbsp;                boolean match = Arrays.binarySearch(indexes, i) &gt;= 0;
+&nbsp;
+&nbsp;                if (!match) {
+&nbsp;                    jsonReader.skipValue();
+&nbsp;                    if (jsonReader.ch == &#39;,&#39;) {
+&nbsp;                        jsonReader.next();
+&nbsp;                    }
+&nbsp;                    continue;
+&nbsp;                }
+&nbsp;
+&nbsp;                Object val;
+&nbsp;                switch (jsonReader.ch) {
+&nbsp;                    case &#39;-&#39;:
+&nbsp;                    case &#39;+&#39;:
+&nbsp;                    case &#39;0&#39;:
+&nbsp;                    case &#39;1&#39;:
+&nbsp;                    case &#39;2&#39;:
+&nbsp;                    case &#39;3&#39;:
+&nbsp;                    case &#39;4&#39;:
+&nbsp;                    case &#39;5&#39;:
+&nbsp;                    case &#39;6&#39;:
+&nbsp;                    case &#39;7&#39;:
+&nbsp;                    case &#39;8&#39;:
+&nbsp;                    case &#39;9&#39;:
+&nbsp;                    case &#39;.&#39;:
+&nbsp;                        jsonReader.readNumber0();
+&nbsp;                        val = jsonReader.getNumber();
+&nbsp;                        break;
+&nbsp;                    case &#39;[&#39;:
+&nbsp;                        val = jsonReader.readArray();
+&nbsp;                        break;
+&nbsp;                    case &#39;{&#39;:
+&nbsp;                        val = jsonReader.readObject();
+&nbsp;                        break;
+&nbsp;                    case &#39;&quot;&#39;:
+&nbsp;                    case &#39;\&#39;&#39;:
+&nbsp;                        val = jsonReader.readString();
+&nbsp;                        break;
+&nbsp;                    case &#39;t&#39;:
+&nbsp;                    case &#39;f&#39;:
+&nbsp;                        val = jsonReader.readBoolValue();
+&nbsp;                        break;
+&nbsp;                    case &#39;n&#39;:
+&nbsp;                        jsonReader.readNull();
+&nbsp;                        val = null;
+&nbsp;                        break;
+&nbsp;                    default:
+&nbsp;                        throw new JSONException(&quot;TODO : &quot; + jsonReader.ch);
+&nbsp;                }
+&nbsp;
+&nbsp;                array.add(val);
+&nbsp;            }
+&nbsp;            context.value = array;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class MultiNameSegment
+&nbsp;            extends JSONPathSegment {
+&nbsp;        final String[] names;
+&nbsp;        final long[] nameHashCodes;
+&nbsp;        final Set&lt;String&gt; nameSet;
+&nbsp;
+&nbsp;        public MultiNameSegment(String[] names) {
+&nbsp;            this.names = names;
+&nbsp;            this.nameHashCodes = new long[names.length];
+&nbsp;            this.nameSet = new HashSet&lt;&gt;();
+&nbsp;            for (int i = 0; i &lt; names.length; i++) {
+&nbsp;                nameHashCodes[i] = Fnv.hashCode64(names[i]);
+&nbsp;                nameSet.add(names[i]);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void eval(JSONPath.Context context) {
+&nbsp;            Object object = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;
+&nbsp;            if (object instanceof Map) {
+&nbsp;                Map map = (Map) object;
+&nbsp;                JSONArray array = new JSONArray(names.length);
+&nbsp;                for (String name : names) {
+&nbsp;                    Object value = map.get(name);
+&nbsp;                    array.add(value);
+&nbsp;                }
+&nbsp;                context.value = array;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (object instanceof Collection) {
+&nbsp;                // skip
+&nbsp;                context.value = object;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            ObjectWriterProvider provider = context.path.getWriterContext().provider;
+&nbsp;            ObjectWriter objectWriter = provider.getObjectWriter(object.getClass());
+&nbsp;
+&nbsp;            JSONArray array = new JSONArray(names.length);
+&nbsp;            for (int i = 0; i &lt; names.length; i++) {
+&nbsp;                FieldWriter fieldWriter = objectWriter.getFieldWriter(nameHashCodes[i]);
+&nbsp;                Object fieldValue = null;
+&nbsp;                if (fieldWriter != null) {
+&nbsp;                    fieldValue = fieldWriter.getFieldValue(object);
+&nbsp;                }
+&nbsp;                array.add(fieldValue);
+&nbsp;            }
+&nbsp;            context.value = array;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(JSONReader jsonReader, JSONPath.Context context) {
+&nbsp;            if (context.parent != null
+&nbsp;                    &amp;&amp; (context.parent.eval
+&nbsp;                    || context.parent.current instanceof JSONPathFilter
+&nbsp;                    || context.parent.current instanceof MultiIndexSegment)
+&nbsp;            ) {
+&nbsp;                eval(context);
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            Object object = jsonReader.readAny();
+&nbsp;            if (object instanceof Map) {
+&nbsp;                Map map = (Map) object;
+&nbsp;                JSONArray array = new JSONArray(names.length);
+&nbsp;                for (String name : names) {
+&nbsp;                    Object value = map.get(name);
+&nbsp;                    array.add(value);
+&nbsp;                }
+&nbsp;                context.value = array;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (object instanceof Collection) {
+&nbsp;                if (context.next == null) {
+&nbsp;                    Collection collection = (Collection) object;
+&nbsp;                    JSONArray collectionArray = new JSONArray(collection.size());
+&nbsp;                    for (Object item : collection) {
+&nbsp;                        if (item instanceof Map) {
+&nbsp;                            Map map = (Map) item;
+&nbsp;                            JSONArray array = new JSONArray(names.length);
+&nbsp;                            for (String name : names) {
+&nbsp;                                Object value = map.get(name);
+&nbsp;                                array.add(value);
+&nbsp;                            }
+&nbsp;                            collectionArray.add(array);
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                    context.value = collectionArray;
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;                // skip
+&nbsp;                context.value = object;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            ObjectWriterProvider provider = context.path.getWriterContext().provider;
+&nbsp;            ObjectWriter objectWriter = provider.getObjectWriter(object.getClass());
+&nbsp;
+&nbsp;            JSONArray array = new JSONArray(names.length);
+&nbsp;            for (int i = 0; i &lt; names.length; i++) {
+&nbsp;                FieldWriter fieldWriter = objectWriter.getFieldWriter(nameHashCodes[i]);
+&nbsp;                Object fieldValue = null;
+&nbsp;                if (fieldWriter != null) {
+&nbsp;                    fieldValue = fieldWriter.getFieldValue(object);
+&nbsp;                }
+&nbsp;                array.add(fieldValue);
+&nbsp;            }
+&nbsp;            context.value = array;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class AllSegment
+&nbsp;            extends JSONPathSegment {
+&nbsp;        static final AllSegment INSTANCE = new AllSegment(false);
+&nbsp;        static final AllSegment INSTANCE_ARRAY = new AllSegment(true);
+&nbsp;
+&nbsp;        final boolean array;
+&nbsp;
+&nbsp;        AllSegment(boolean array) {
+&nbsp;            this.array = array;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void eval(JSONPath.Context context) {
+&nbsp;            Object object = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;
+&nbsp;            if (object == null) {
+&nbsp;                context.value = null;
+&nbsp;                context.eval = true;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (object instanceof Map) {
+&nbsp;                Map map = (Map) object;
+&nbsp;                JSONArray array = new JSONArray(map.size());
+&nbsp;                for (Object value : map.values()) {
+&nbsp;                    if (this.array &amp;&amp; value instanceof Collection) {
+&nbsp;                        array.addAll((Collection) value);
+&nbsp;                    } else {
+&nbsp;                        array.add(value);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;                if (context.next != null) {
+&nbsp;                    context.value = new JSONPath.Sequence(array);
+&nbsp;                } else {
+&nbsp;                    context.value = array;
+&nbsp;                }
+&nbsp;                context.eval = true;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (object instanceof List) {
+&nbsp;                List list = (List) object;
+&nbsp;                JSONArray values = new JSONArray(list.size());
+&nbsp;                if (context.next == null &amp;&amp; !array) {
+&nbsp;                    for (Object item : list) {
+&nbsp;                        if (item instanceof Map) {
+&nbsp;                            values.addAll(((Map&lt;?, ?&gt;) item).values());
+&nbsp;                        } else {
+&nbsp;                            values.add(item);
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                    context.value = values;
+&nbsp;                    context.eval = true;
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (context.next != null) {
+&nbsp;                    context.value = new JSONPath.Sequence(list);
+&nbsp;                } else {
+&nbsp;                    context.value = object;
+&nbsp;                }
+&nbsp;                context.eval = true;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (object instanceof Collection) {
+&nbsp;                // skip
+&nbsp;                context.value = object;
+&nbsp;                context.eval = true;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (object instanceof JSONPath.Sequence) {
+&nbsp;                List list = ((JSONPath.Sequence) object).values;
+&nbsp;                JSONArray values = new JSONArray(list.size());
+&nbsp;                if (context.next == null) {
+&nbsp;                    for (Object item : list) {
+&nbsp;                        if (item instanceof Map &amp;&amp; !array) {
+&nbsp;                            values.addAll(((Map&lt;?, ?&gt;) item).values());
+&nbsp;                        } else if (item instanceof Collection) {
+&nbsp;                            Collection collection = (Collection) item;
+&nbsp;                            values.addAll(collection);
+&nbsp;                        } else {
+&nbsp;                            values.add(item);
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                    context.value = values;
+&nbsp;                    context.eval = true;
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+&nbsp;                context.value = new JSONPath.Sequence(list);
+&nbsp;                context.eval = true;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            ObjectWriterProvider provider = context.path.getWriterContext().provider;
+&nbsp;            ObjectWriter objectWriter = provider.getObjectWriter(object.getClass());
+&nbsp;            List&lt;FieldWriter&gt; fieldWriters = objectWriter.getFieldWriters();
+&nbsp;            int size = fieldWriters.size();
+&nbsp;            JSONArray array = new JSONArray(size);
+&nbsp;            for (int i = 0; i &lt; size; i++) {
+&nbsp;                Object fieldValue = fieldWriters.get(i).getFieldValue(object);
+&nbsp;                array.add(fieldValue);
+&nbsp;            }
+&nbsp;            context.value = array;
+&nbsp;            context.eval = true;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean remove(JSONPath.Context context) {
+&nbsp;            Object object = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;
+&nbsp;            if (object instanceof Map) {
+&nbsp;                ((Map&lt;?, ?&gt;) object).clear();
+&nbsp;                return true;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (object instanceof Collection) {
+&nbsp;                ((Collection&lt;?&gt;) object).clear();
+&nbsp;                return true;
+&nbsp;            }
+&nbsp;
+&nbsp;            throw new JSONException(&quot;UnsupportedOperation &quot; + getClass());
+&nbsp;        }
+&nbsp;
+&nbsp;        public void set(JSONPath.Context context, Object value) {
+&nbsp;            Object object = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;
+&nbsp;            if (object instanceof Map) {
+&nbsp;                Map map = (Map) object;
+&nbsp;                for (Object o : map.entrySet()) {
+&nbsp;                    Map.Entry entry = (Map.Entry) o;
+&nbsp;                    entry.setValue(value);
+&nbsp;                }
+&nbsp;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (object instanceof List) {
+&nbsp;                Collections.fill((List) object, value);
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (object != null &amp;&amp; object.getClass().isArray()) {
+&nbsp;                int len = Array.getLength(object);
+&nbsp;                for (int i = 0; i &lt; len; i++) {
+&nbsp;                    Array.set(object, i, value);
+&nbsp;                }
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            throw new JSONException(&quot;UnsupportedOperation &quot; + getClass());
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setCallback(JSONPath.Context context, BiFunction callback) {
+&nbsp;            Object object = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;
+&nbsp;            if (object instanceof Map) {
+&nbsp;                Map map = (Map) object;
+&nbsp;                for (Object o : map.entrySet()) {
+&nbsp;                    Map.Entry entry = (Map.Entry) o;
+&nbsp;                    Object value = entry.getValue();
+&nbsp;                    Object apply = callback.apply(object, value);
+&nbsp;                    if (apply != value) {
+&nbsp;                        entry.setValue(apply);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (object instanceof List) {
+&nbsp;                List list = (List) object;
+&nbsp;                for (int i = 0; i &lt; list.size(); i++) {
+&nbsp;                    Object value = list.get(i);
+&nbsp;                    Object apply = callback.apply(object, value);
+&nbsp;                    if (apply != value) {
+&nbsp;                        list.set(i, apply);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (object != null &amp;&amp; object.getClass().isArray()) {
+&nbsp;                int len = Array.getLength(object);
+&nbsp;                for (int i = 0; i &lt; len; i++) {
+&nbsp;                    Object value = Array.get(object, i);
+&nbsp;                    Object apply = callback.apply(object, value);
+&nbsp;                    if (apply != value) {
+&nbsp;                        Array.set(object, i, apply);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            throw new JSONException(&quot;UnsupportedOperation &quot; + getClass());
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(JSONReader jsonReader, JSONPath.Context context) {
+&nbsp;            if (context.parent != null &amp;&amp; context.parent.eval) {
+&nbsp;                eval(context);
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (jsonReader.isEnd()) {
+&nbsp;                context.eval = true;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (jsonReader.isJSONB()) {
+&nbsp;                List&lt;Object&gt; values = new JSONArray();
+&nbsp;                if (jsonReader.nextIfMatch(BC_OBJECT)) {
+&nbsp;                    while (!jsonReader.nextIfMatch(BC_OBJECT_END)) {
+&nbsp;                        if (jsonReader.skipName()) {
+&nbsp;                            Object val = jsonReader.readAny();
+&nbsp;
+&nbsp;                            if (array &amp;&amp; val instanceof Collection) {
+&nbsp;                                values.addAll((Collection) val);
+&nbsp;                            } else {
+&nbsp;                                values.add(val);
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    context.value = values;
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (jsonReader.isArray() &amp;&amp; context.next != null) {
+&nbsp;                    // skip
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+&nbsp;                throw new JSONException(&quot;TODO&quot;);
+&nbsp;            }
+&nbsp;
+&nbsp;            boolean alwaysReturnList = context.next == null &amp;&amp; (context.path.features &amp; JSONPath.Feature.AlwaysReturnList.mask) != 0;
+&nbsp;            List&lt;Object&gt; values = new JSONArray();
+&nbsp;
+&nbsp;            if (jsonReader.nextIfMatch(&#39;{&#39;)) {
+&nbsp;                _for:
+&nbsp;                for (; ; ) {
+&nbsp;                    if (jsonReader.ch == &#39;}&#39;) {
+&nbsp;                        jsonReader.next();
+&nbsp;                        break;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    jsonReader.skipName();
+&nbsp;                    Object val;
+&nbsp;                    switch (jsonReader.ch) {
+&nbsp;                        case &#39;-&#39;:
+&nbsp;                        case &#39;+&#39;:
+&nbsp;                        case &#39;0&#39;:
+&nbsp;                        case &#39;1&#39;:
+&nbsp;                        case &#39;2&#39;:
+&nbsp;                        case &#39;3&#39;:
+&nbsp;                        case &#39;4&#39;:
+&nbsp;                        case &#39;5&#39;:
+&nbsp;                        case &#39;6&#39;:
+&nbsp;                        case &#39;7&#39;:
+&nbsp;                        case &#39;8&#39;:
+&nbsp;                        case &#39;9&#39;:
+&nbsp;                            jsonReader.readNumber0();
+&nbsp;                            val = jsonReader.getNumber();
+&nbsp;                            break;
+&nbsp;                        case &#39;[&#39;:
+&nbsp;                            val = jsonReader.readArray();
+&nbsp;                            break;
+&nbsp;                        case &#39;{&#39;:
+&nbsp;                            val = jsonReader.readObject();
+&nbsp;                            break;
+&nbsp;                        case &#39;&quot;&#39;:
+&nbsp;                        case &#39;\&#39;&#39;:
+&nbsp;                            val = jsonReader.readString();
+&nbsp;                            break;
+&nbsp;                        case &#39;t&#39;:
+&nbsp;                        case &#39;f&#39;:
+&nbsp;                            val = jsonReader.readBoolValue();
+&nbsp;                            break;
+&nbsp;                        case &#39;n&#39;:
+&nbsp;                            jsonReader.readNull();
+&nbsp;                            val = null;
+&nbsp;                            break;
+&nbsp;                        case &#39;]&#39;:
+&nbsp;                            jsonReader.next();
+&nbsp;                            break _for;
+&nbsp;                        default:
+&nbsp;                            throw new JSONException(&quot;TODO : &quot; + jsonReader.ch);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (val instanceof Collection) {
+&nbsp;                        if (alwaysReturnList) {
+&nbsp;                            values.add(val);
+&nbsp;                        } else {
+&nbsp;                            values.addAll((Collection) val);
+&nbsp;                        }
+&nbsp;                    } else {
+&nbsp;                        values.add(val);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (jsonReader.ch == &#39;,&#39;) {
+&nbsp;                        jsonReader.next();
+&nbsp;                    }
+&nbsp;                }
+&nbsp;                context.value = values;
+&nbsp;                context.eval = true;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (jsonReader.ch == &#39;[&#39;) {
+&nbsp;                jsonReader.next();
+&nbsp;                for (; ; ) {
+&nbsp;                    if (jsonReader.ch == &#39;]&#39;) {
+&nbsp;                        jsonReader.next();
+&nbsp;                        break;
+&nbsp;                    }
+&nbsp;                    Object value = jsonReader.readAny();
+&nbsp;                    values.add(value);
+&nbsp;                    if (jsonReader.ch == &#39;,&#39;) {
+&nbsp;                        jsonReader.next();
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                if (context.next != null) {
+&nbsp;                    context.value = new JSONPath.Sequence(values);
+&nbsp;                } else {
+&nbsp;                    context.value = values;
+&nbsp;                }
+&nbsp;                context.eval = true;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            throw new JSONException(&quot;TODO&quot;);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class SelfSegment
+&nbsp;            extends JSONPathSegment {
+&nbsp;        static final SelfSegment INSTANCE = new SelfSegment();
+&nbsp;
+&nbsp;        private SelfSegment() {
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(JSONReader jsonReader, JSONPath.Context context) {
+&nbsp;            context.value = jsonReader.readAny();
+&nbsp;            context.eval = true;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void eval(JSONPath.Context context) {
+&nbsp;            context.value = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class RootSegment
+&nbsp;            extends JSONPathSegment {
+&nbsp;        static final RootSegment INSTANCE = new RootSegment();
+&nbsp;
+&nbsp;        private RootSegment() {
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(JSONReader jsonReader, JSONPath.Context context) {
+&nbsp;            if (context.parent != null) {
+&nbsp;                throw new JSONException(&quot;not support operation&quot;);
+&nbsp;            }
+&nbsp;            context.value = jsonReader.readAny();
+&nbsp;            context.eval = true;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void eval(JSONPath.Context context) {
+&nbsp;            context.value = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.root;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class CycleNameSegment
+&nbsp;            extends JSONPathSegment {
+&nbsp;        static final long HASH_STAR = Fnv.hashCode64(&quot;*&quot;);
+&nbsp;        final String name;
+&nbsp;        final long nameHashCode;
+&nbsp;
+&nbsp;        public CycleNameSegment(String name, long nameHashCode) {
+&nbsp;            this.name = name;
+&nbsp;            this.nameHashCode = nameHashCode;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString() {
+&nbsp;            return &quot;..&quot; + name;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean remove(JSONPath.Context context) {
+&nbsp;            set(context, null);
+&nbsp;            return context.eval = true;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void eval(JSONPath.Context context) {
+&nbsp;            Object object = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;
+&nbsp;            List values = new JSONArray();
+&nbsp;
+&nbsp;            Consumer action;
+&nbsp;            if (nameHashCode == HASH_STAR &amp;&amp; &quot;*&quot;.equals(name)) {
+&nbsp;                action = new MapRecursive(context, values, 0);
+&nbsp;            } else {
+&nbsp;                action = new MapLoop(context, values);
+&nbsp;            }
+&nbsp;            action.accept(object);
+&nbsp;
+&nbsp;            if (values.size() == 1 &amp;&amp; values.get(0) instanceof Collection) {
+&nbsp;                context.value = values.get(0);
+&nbsp;            } else {
+&nbsp;                context.value = values;
+&nbsp;            }
+&nbsp;            if (context.value instanceof List &amp;&amp; context.next instanceof JSONPathFilter) {
+&nbsp;                context.value = new JSONPath.Sequence((List) context.value);
+&nbsp;            }
+&nbsp;
+&nbsp;            context.eval = true;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void set(JSONPath.Context context, Object value) {
+&nbsp;            Object object = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;
+&nbsp;            LoopSet action = new LoopSet(context, value);
+&nbsp;            action.accept(object);
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void setCallback(JSONPath.Context context, BiFunction callback) {
+&nbsp;            Object object = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;
+&nbsp;            LoopCallback action = new LoopCallback(context, callback);
+&nbsp;            action.accept(object);
+&nbsp;        }
+&nbsp;
+&nbsp;        class MapLoop
+&nbsp;                implements BiConsumer, Consumer {
+&nbsp;            final JSONPath.Context context;
+&nbsp;            final List values;
+&nbsp;
+&nbsp;            public MapLoop(JSONPath.Context context, List values) {
+&nbsp;                this.context = context;
+&nbsp;                this.values = values;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public void accept(Object key, Object value) {
+&nbsp;                if (name.equals(key)) {
+&nbsp;                    values.add(value);
+&nbsp;                }
+&nbsp;
+&nbsp;                if (value instanceof Map) {
+&nbsp;                    ((Map&lt;?, ?&gt;) value).forEach(this);
+&nbsp;                } else if (value instanceof List) {
+&nbsp;                    ((List&lt;?&gt;) value).forEach(this);
+&nbsp;                } else if (nameHashCode == HASH_STAR) {
+&nbsp;                    values.add(value);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public void accept(Object value) {
+&nbsp;                if (value == null) {
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (value instanceof Map) {
+&nbsp;                    ((Map&lt;?, ?&gt;) value).forEach(this);
+&nbsp;                } else if (value instanceof List) {
+&nbsp;                    ((List&lt;?&gt;) value).forEach(this);
+&nbsp;                } else {
+&nbsp;                    ObjectWriter&lt;?&gt; objectWriter = context.path
+&nbsp;                            .getWriterContext()
+&nbsp;                            .getObjectWriter(value.getClass());
+&nbsp;                    if (objectWriter instanceof ObjectWriterAdapter) {
+&nbsp;                        FieldWriter fieldWriter = objectWriter.getFieldWriter(nameHashCode);
+&nbsp;                        if (fieldWriter != null) {
+&nbsp;                            Object fieldValue = fieldWriter.getFieldValue(value);
+&nbsp;                            if (fieldValue != null) {
+&nbsp;                                values.add(fieldValue);
+&nbsp;                            }
+&nbsp;                            return;
+&nbsp;                        }
+&nbsp;
+&nbsp;                        for (int i = 0; i &lt; objectWriter.getFieldWriters().size(); i++) {
+&nbsp;                            fieldWriter = objectWriter.getFieldWriters().get(i);
+&nbsp;                            Object fieldValue = fieldWriter.getFieldValue(value);
+&nbsp;                            accept(fieldValue);
+&nbsp;                        }
+&nbsp;                    } else if (nameHashCode == HASH_STAR) {
+&nbsp;                        values.add(value);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        static final class MapRecursive
+&nbsp;                implements Consumer {
+&nbsp;            static final int maxLevel = 2048;
+&nbsp;            final JSONPath.Context context;
+&nbsp;            final List values;
+&nbsp;            final int level;
+&nbsp;
+&nbsp;            public MapRecursive(JSONPath.Context context, List values, int level) {
+&nbsp;                this.context = context;
+&nbsp;                this.values = values;
+&nbsp;                this.level = level;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public void accept(Object value) {
+&nbsp;                if (level &gt; maxLevel) {
+&nbsp;                    throw new JSONException(&quot;level too large&quot;);
+&nbsp;                } else {
+&nbsp;                    if (value instanceof Map) {
+&nbsp;                        Collection collection = ((Map) value).values();
+&nbsp;                        values.addAll(collection);
+&nbsp;                        collection.forEach(this);
+&nbsp;                    } else if (value instanceof Collection) {
+&nbsp;                        Collection collection = (Collection) value;
+&nbsp;                        values.addAll(collection);
+&nbsp;                        collection.forEach(this);
+&nbsp;                    } else if (value != null) {
+&nbsp;                        ObjectWriter&lt;?&gt; objectWriter = context.path
+&nbsp;                                .getWriterContext()
+&nbsp;                                .getObjectWriter(value.getClass());
+&nbsp;                        if (objectWriter instanceof ObjectWriterAdapter) {
+&nbsp;                            ObjectWriterAdapter writerAdapter = (ObjectWriterAdapter) objectWriter;
+&nbsp;                            Object temp = Optional.ofNullable(writerAdapter.getFieldWriters()).orElseGet(() -&gt; new ArrayList())
+&nbsp;                                    .stream()
+&nbsp;                                    .filter(Objects::nonNull).map(v -&gt; ((FieldWriter) v).getFieldValue(value))
+&nbsp;                                    .collect(Collectors.toList());
+&nbsp;                            accept(temp);
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        class LoopSet {
+&nbsp;            final JSONPath.Context context;
+&nbsp;            final Object value;
+&nbsp;
+&nbsp;            public LoopSet(JSONPath.Context context, Object value) {
+&nbsp;                this.context = context;
+&nbsp;                this.value = value;
+&nbsp;            }
+&nbsp;
+&nbsp;            public void accept(Object object) {
+&nbsp;                if (object instanceof Map) {
+&nbsp;                    for (Map.Entry entry : (Iterable&lt;Map.Entry&gt;) ((Map) object).entrySet()) {
+&nbsp;                        if (name.equals(entry.getKey())) {
+&nbsp;                            entry.setValue(value);
+&nbsp;                            context.eval = true;
+&nbsp;                        } else {
+&nbsp;                            Object entryValue = entry.getValue();
+&nbsp;                            if (entryValue != null) {
+&nbsp;                                accept(entryValue);
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                } else if (object instanceof Collection) {
+&nbsp;                    for (Object item : ((List&lt;?&gt;) object)) {
+&nbsp;                        accept(item);
+&nbsp;                    }
+&nbsp;                } else {
+&nbsp;                    Class&lt;?&gt; entryValueClass = object.getClass();
+&nbsp;                    ObjectReader objectReader = JSONFactory.getDefaultObjectReaderProvider().getObjectReader(entryValueClass);
+&nbsp;                    if (objectReader instanceof ObjectReaderBean) {
+&nbsp;                        FieldReader fieldReader = objectReader.getFieldReader(nameHashCode);
+&nbsp;                        if (fieldReader != null) {
+&nbsp;                            fieldReader.accept(object, value);
+&nbsp;                            context.eval = true;
+&nbsp;                            return;
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    ObjectWriter objectWriter = JSONFactory.getDefaultObjectWriterProvider().getObjectWriter(entryValueClass);
+&nbsp;                    List&lt;FieldWriter&gt; fieldWriters = objectWriter.getFieldWriters();
+&nbsp;                    for (FieldWriter fieldWriter : fieldWriters) {
+&nbsp;                        Object fieldValue = fieldWriter.getFieldValue(object);
+&nbsp;                        accept(fieldValue);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        class LoopCallback {
+&nbsp;            final JSONPath.Context context;
+&nbsp;            final BiFunction callback;
+&nbsp;
+&nbsp;            public LoopCallback(JSONPath.Context context, BiFunction callback) {
+&nbsp;                this.context = context;
+&nbsp;                this.callback = callback;
+&nbsp;            }
+&nbsp;
+&nbsp;            public void accept(Object object) {
+&nbsp;                if (object instanceof Map) {
+&nbsp;                    for (Map.Entry entry : (Iterable&lt;Map.Entry&gt;) ((Map) object).entrySet()) {
+&nbsp;                        Object entryValue = entry.getValue();
+&nbsp;                        if (name.equals(entry.getKey())) {
+&nbsp;                            Object applyValue = callback.apply(object, entryValue);
+&nbsp;                            entry.setValue(applyValue);
+&nbsp;                            context.eval = true;
+&nbsp;                        } else {
+&nbsp;                            if (entryValue != null) {
+&nbsp;                                accept(entryValue);
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                } else if (object instanceof Collection) {
+&nbsp;                    for (Object item : ((List&lt;?&gt;) object)) {
+&nbsp;                        accept(item);
+&nbsp;                    }
+&nbsp;                } else {
+&nbsp;                    Class&lt;?&gt; entryValueClass = object.getClass();
+&nbsp;                    ObjectReader objectReader = JSONFactory.getDefaultObjectReaderProvider().getObjectReader(entryValueClass);
+&nbsp;                    ObjectWriter objectWriter = JSONFactory.getDefaultObjectWriterProvider().getObjectWriter(entryValueClass);
+&nbsp;                    if (objectReader instanceof ObjectReaderBean) {
+&nbsp;                        FieldReader fieldReader = objectReader.getFieldReader(nameHashCode);
+&nbsp;                        FieldWriter fieldWriter = objectWriter.getFieldWriter(nameHashCode);
+&nbsp;                        if (fieldWriter != null &amp;&amp; fieldReader != null) {
+&nbsp;                            Object fieldValue = fieldWriter.getFieldValue(object);
+&nbsp;                            fieldValue = callback.apply(object, fieldValue);
+&nbsp;                            fieldReader.accept(object, fieldValue);
+&nbsp;                            context.eval = true;
+&nbsp;                            return;
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    List&lt;FieldWriter&gt; fieldWriters = objectWriter.getFieldWriters();
+&nbsp;                    for (FieldWriter fieldWriter : fieldWriters) {
+&nbsp;                        Object fieldValue = fieldWriter.getFieldValue(object);
+&nbsp;                        accept(fieldValue);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(JSONReader jsonReader, JSONPath.Context context) {
+&nbsp;            List values = new JSONArray();
+&nbsp;            accept(jsonReader, context, values);
+&nbsp;            context.value = values;
+&nbsp;            context.eval = true;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void accept(JSONReader jsonReader, JSONPath.Context context, List&lt;Object&gt; values) {
+&nbsp;            if (jsonReader.isJSONB()) {
+&nbsp;                if (jsonReader.nextIfMatch(BC_OBJECT)) {
+&nbsp;                    while (!jsonReader.nextIfMatch(BC_OBJECT_END)) {
+&nbsp;                        long nameHashCode = jsonReader.readFieldNameHashCode();
+&nbsp;                        if (nameHashCode == 0) {
+&nbsp;                            continue;
+&nbsp;                        }
+&nbsp;
+&nbsp;                        boolean match = nameHashCode == this.nameHashCode;
+&nbsp;                        if (match) {
+&nbsp;                            if (jsonReader.isArray()) {
+&nbsp;                                values.addAll(jsonReader.readArray());
+&nbsp;                            } else {
+&nbsp;                                values.add(jsonReader.readAny());
+&nbsp;                            }
+&nbsp;                        } else if (jsonReader.isObject() || jsonReader.isArray()) {
+&nbsp;                            accept(jsonReader, context, values);
+&nbsp;                        } else {
+&nbsp;                            jsonReader.skipValue();
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (jsonReader.isArray()) {
+&nbsp;                    int itemCnt = jsonReader.startArray();
+&nbsp;                    for (int i = 0; i &lt; itemCnt; i++) {
+&nbsp;                        if (jsonReader.isObject() || jsonReader.isArray()) {
+&nbsp;                            accept(jsonReader, context, values);
+&nbsp;                            continue;
+&nbsp;                        }
+&nbsp;
+&nbsp;                        jsonReader.skipValue();
+&nbsp;                    }
+&nbsp;                } else {
+&nbsp;                    jsonReader.skipValue();
+&nbsp;                }
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (jsonReader.ch == &#39;{&#39;) {
+&nbsp;                jsonReader.next();
+&nbsp;                for (; ; ) {
+&nbsp;                    if (jsonReader.ch == &#39;}&#39;) {
+&nbsp;                        jsonReader.next();
+&nbsp;                        break;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    long nameHashCode = jsonReader.readFieldNameHashCode();
+&nbsp;
+&nbsp;                    boolean match = nameHashCode == this.nameHashCode;
+&nbsp;                    char ch = jsonReader.ch;
+&nbsp;                    if (!match &amp;&amp; ch != &#39;{&#39; &amp;&amp; ch != &#39;[&#39;) {
+&nbsp;                        jsonReader.skipValue();
+&nbsp;                        continue;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    Object val;
+&nbsp;                    switch (jsonReader.ch) {
+&nbsp;                        case &#39;-&#39;:
+&nbsp;                        case &#39;+&#39;:
+&nbsp;                        case &#39;0&#39;:
+&nbsp;                        case &#39;1&#39;:
+&nbsp;                        case &#39;2&#39;:
+&nbsp;                        case &#39;3&#39;:
+&nbsp;                        case &#39;4&#39;:
+&nbsp;                        case &#39;5&#39;:
+&nbsp;                        case &#39;6&#39;:
+&nbsp;                        case &#39;7&#39;:
+&nbsp;                        case &#39;8&#39;:
+&nbsp;                        case &#39;9&#39;:
+&nbsp;                            jsonReader.readNumber0();
+&nbsp;                            val = jsonReader.getNumber();
+&nbsp;                            break;
+&nbsp;                        case &#39;[&#39;:
+&nbsp;                        case &#39;{&#39;:
+&nbsp;                            if (match) {
+&nbsp;                                val = ch == &#39;[&#39; ? jsonReader.readArray() : jsonReader.readObject();
+&nbsp;                                break;
+&nbsp;                            }
+&nbsp;                            accept(jsonReader, context, values);
+&nbsp;                            continue;
+&nbsp;                        case &#39;&quot;&#39;:
+&nbsp;                        case &#39;\&#39;&#39;:
+&nbsp;                            val = jsonReader.readString();
+&nbsp;                            break;
+&nbsp;                        case &#39;t&#39;:
+&nbsp;                        case &#39;f&#39;:
+&nbsp;                            val = jsonReader.readBoolValue();
+&nbsp;                            break;
+&nbsp;                        case &#39;n&#39;:
+&nbsp;                            jsonReader.readNull();
+&nbsp;                            val = null;
+&nbsp;                            break;
+&nbsp;                        default:
+&nbsp;                            throw new JSONException(&quot;TODO : &quot; + jsonReader.ch);
+&nbsp;                    }
+&nbsp;                    if (val instanceof Collection) {
+&nbsp;                        values.addAll((Collection) val);
+&nbsp;                    } else {
+&nbsp;                        values.add(val);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (jsonReader.ch == &#39;,&#39;) {
+&nbsp;                        jsonReader.next();
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                if (jsonReader.ch == &#39;,&#39;) {
+&nbsp;                    jsonReader.next();
+&nbsp;                }
+&nbsp;            } else if (jsonReader.ch == &#39;[&#39;) {
+&nbsp;                jsonReader.next();
+&nbsp;
+&nbsp;                for (; ; ) {
+&nbsp;                    if (jsonReader.ch == &#39;]&#39;) {
+&nbsp;                        jsonReader.next();
+&nbsp;                        break;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (jsonReader.ch == &#39;{&#39; || jsonReader.ch == &#39;[&#39;) {
+&nbsp;                        accept(jsonReader, context, values);
+&nbsp;                    } else {
+&nbsp;                        jsonReader.skipValue();
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (jsonReader.ch == &#39;,&#39;) {
+&nbsp;                        jsonReader.next();
+&nbsp;                        break;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                if (jsonReader.ch == &#39;,&#39;) {
+&nbsp;                    jsonReader.next();
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                jsonReader.skipValue();
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class MinSegment
+&nbsp;            extends JSONPathSegment
+&nbsp;            implements EvalSegment {
+&nbsp;        static final MinSegment INSTANCE = new MinSegment();
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(JSONReader jsonReader, JSONPath.Context context) {
+&nbsp;            eval(context);
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void eval(JSONPath.Context context) {
+&nbsp;            Object value = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;
+&nbsp;            if (value == null) {
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            Object min = null;
+&nbsp;            if (value instanceof Collection) {
+&nbsp;                for (Object item : (Collection) value) {
+&nbsp;                    if (item == null) {
+&nbsp;                        continue;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (min == null) {
+&nbsp;                        min = item;
+&nbsp;                    } else if (TypeUtils.compare(min, item) &gt; 0) {
+&nbsp;                        min = item;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            } else if (value instanceof Object[]) {
+&nbsp;                Object[] array = (Object[]) value;
+&nbsp;                for (Object item : array) {
+&nbsp;                    if (item == null) {
+&nbsp;                        continue;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (min == null) {
+&nbsp;                        min = item;
+&nbsp;                    } else if (TypeUtils.compare(min, item) &gt; 0) {
+&nbsp;                        min = item;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            } else if (value instanceof JSONPath.Sequence) {
+&nbsp;                for (Object item : ((JSONPath.Sequence) value).values) {
+&nbsp;                    if (item == null) {
+&nbsp;                        continue;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (min == null) {
+&nbsp;                        min = item;
+&nbsp;                    } else if (TypeUtils.compare(min, item) &gt; 0) {
+&nbsp;                        min = item;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                throw new UnsupportedOperationException();
+&nbsp;            }
+&nbsp;
+&nbsp;            context.value = min;
+&nbsp;            context.eval = true;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class MaxSegment
+&nbsp;            extends JSONPathSegment
+&nbsp;            implements EvalSegment {
+&nbsp;        static final MaxSegment INSTANCE = new MaxSegment();
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(JSONReader jsonReader, JSONPath.Context context) {
+&nbsp;            eval(context);
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void eval(JSONPath.Context context) {
+&nbsp;            Object value = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;
+&nbsp;            if (value == null) {
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            Object max = null;
+&nbsp;            if (value instanceof Collection) {
+&nbsp;                for (Object item : (Collection) value) {
+&nbsp;                    if (item == null) {
+&nbsp;                        continue;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (max == null) {
+&nbsp;                        max = item;
+&nbsp;                    } else if (TypeUtils.compare(max, item) &lt; 0) {
+&nbsp;                        max = item;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            } else if (value instanceof Object[]) {
+&nbsp;                Object[] array = (Object[]) value;
+&nbsp;                for (Object item : array) {
+&nbsp;                    if (item == null) {
+&nbsp;                        continue;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (max == null) {
+&nbsp;                        max = item;
+&nbsp;                    } else if (TypeUtils.compare(max, item) &lt; 0) {
+&nbsp;                        max = item;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            } else if (value instanceof JSONPath.Sequence) {
+&nbsp;                for (Object item : ((JSONPath.Sequence) value).values) {
+&nbsp;                    if (item == null) {
+&nbsp;                        continue;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (max == null) {
+&nbsp;                        max = item;
+&nbsp;                    } else if (TypeUtils.compare(max, item) &lt; 0) {
+&nbsp;                        max = item;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                throw new UnsupportedOperationException();
+&nbsp;            }
+&nbsp;
+&nbsp;            context.value = max;
+&nbsp;            context.eval = true;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class SumSegment
+&nbsp;            extends JSONPathSegment
+&nbsp;            implements EvalSegment {
+&nbsp;        static final SumSegment INSTANCE = new SumSegment();
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(JSONReader jsonReader, JSONPath.Context context) {
+&nbsp;            eval(context);
+&nbsp;        }
+&nbsp;
+&nbsp;        static Number add(Number a, Number b) {
+&nbsp;            boolean aIsInt = a instanceof Byte || a instanceof Short || a instanceof Integer || a instanceof Long;
+&nbsp;            boolean bIsInt = b instanceof Byte || b instanceof Short || b instanceof Integer || b instanceof Long;
+&nbsp;            if (aIsInt &amp;&amp; bIsInt) {
+&nbsp;                return a.longValue() + b.longValue();
+&nbsp;            }
+&nbsp;            throw new JSONException(&quot;not support operation&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void eval(JSONPath.Context context) {
+&nbsp;            Object value = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;
+&nbsp;            if (value == null) {
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            Number sum = 0;
+&nbsp;            if (value instanceof Collection) {
+&nbsp;                for (Object item : (Collection) value) {
+&nbsp;                    if (item == null) {
+&nbsp;                        continue;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    sum = add(sum, (Number) item);
+&nbsp;                }
+&nbsp;            } else if (value instanceof Object[]) {
+&nbsp;                Object[] array = (Object[]) value;
+&nbsp;                for (Object item : array) {
+&nbsp;                    if (item == null) {
+&nbsp;                        continue;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    sum = add(sum, (Number) item);
+&nbsp;                }
+&nbsp;            } else if (value instanceof JSONPath.Sequence) {
+&nbsp;                for (Object item : ((JSONPath.Sequence) value).values) {
+&nbsp;                    if (item == null) {
+&nbsp;                        continue;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    sum = add(sum, (Number) item);
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                throw new UnsupportedOperationException();
+&nbsp;            }
+&nbsp;
+&nbsp;            context.value = sum;
+&nbsp;            context.eval = true;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class LengthSegment
+&nbsp;            extends JSONPathSegment
+&nbsp;            implements EvalSegment {
+&nbsp;        static final LengthSegment INSTANCE = new LengthSegment();
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(JSONReader jsonReader, JSONPath.Context context) {
+&nbsp;            if (context.parent == null) {
+&nbsp;                context.root = jsonReader.readAny();
+&nbsp;                context.eval = true;
+&nbsp;            }
+&nbsp;            eval(context);
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void eval(JSONPath.Context context) {
+&nbsp;            Object value = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;
+&nbsp;            if (value == null) {
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            int length = 1;
+&nbsp;            if (value instanceof Collection) {
+&nbsp;                length = ((Collection&lt;?&gt;) value).size();
+&nbsp;            } else if (value.getClass().isArray()) {
+&nbsp;                length = Array.getLength(value);
+&nbsp;            } else if (value instanceof Map) {
+&nbsp;                length = ((Map&lt;?, ?&gt;) value).size();
+&nbsp;            } else if (value instanceof String) {
+&nbsp;                length = ((String) value).length();
+&nbsp;            } else if (value instanceof JSONPath.Sequence) {
+&nbsp;                length = ((JSONPath.Sequence) value).values.size();
+&nbsp;            }
+&nbsp;            context.value = length;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class ValuesSegment
+&nbsp;            extends JSONPathSegment
+&nbsp;            implements EvalSegment {
+&nbsp;        static final ValuesSegment INSTANCE = new ValuesSegment();
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(JSONReader jsonReader, JSONPath.Context context) {
+&nbsp;            eval(context);
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void eval(JSONPath.Context context) {
+&nbsp;            Object object = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;
+&nbsp;            if (object == null) {
+&nbsp;                context.value = null;
+&nbsp;                context.eval = true;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (object instanceof Map) {
+&nbsp;                context.value = new JSONArray(((Map&lt;?, ?&gt;) object).values());
+&nbsp;                context.eval = true;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            throw new JSONException(&quot;TODO&quot;);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class KeysSegment
+&nbsp;            extends JSONPathSegment
+&nbsp;            implements EvalSegment {
+&nbsp;        static final KeysSegment INSTANCE = new KeysSegment();
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(JSONReader jsonReader, JSONPath.Context context) {
+&nbsp;            if (jsonReader.isObject()) {
+&nbsp;                jsonReader.next();
+&nbsp;                JSONArray array = new JSONArray();
+&nbsp;                while (!jsonReader.nextIfObjectEnd()) {
+&nbsp;                    String fieldName = jsonReader.readFieldName();
+&nbsp;                    array.add(fieldName);
+&nbsp;                    jsonReader.skipValue();
+&nbsp;                }
+&nbsp;                context.value = array;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;            throw new JSONException(&quot;TODO&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void eval(JSONPath.Context context) {
+&nbsp;            Object object = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;            if (object instanceof Map) {
+&nbsp;                context.value = new JSONArray(((Map&lt;?, ?&gt;) object).keySet());
+&nbsp;                context.eval = true;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            throw new JSONException(&quot;TODO&quot;);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class EntrySetSegment
+&nbsp;            extends JSONPathSegment
+&nbsp;            implements EvalSegment {
+&nbsp;        static final EntrySetSegment INSTANCE = new EntrySetSegment();
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(JSONReader jsonReader, JSONPath.Context context) {
+&nbsp;            if (jsonReader.isObject()) {
+&nbsp;                jsonReader.next();
+&nbsp;                JSONArray array = new JSONArray();
+&nbsp;                while (!jsonReader.nextIfObjectEnd()) {
+&nbsp;                    String fieldName = jsonReader.readFieldName();
+&nbsp;                    Object value = jsonReader.readAny();
+&nbsp;                    array.add(
+&nbsp;                            JSONObject.of(&quot;key&quot;, fieldName, &quot;value&quot;, value)
+&nbsp;                    );
+&nbsp;                }
+&nbsp;                context.value = array;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;            throw new JSONException(&quot;TODO&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void eval(JSONPath.Context context) {
+&nbsp;            Object object = context.parent == null
+&nbsp;                    ? context.root
+&nbsp;                    : context.parent.value;
+&nbsp;            if (object instanceof Map) {
+&nbsp;                Map map = (Map) object;
+&nbsp;                JSONArray array = new JSONArray(map.size());
+&nbsp;                for (Map.Entry entry : (Iterable&lt;Map.Entry&gt;) ((Map) object).entrySet()) {
+&nbsp;                    array.add(
+&nbsp;                            JSONObject.of(&quot;key&quot;, entry.getKey(), &quot;value&quot;, entry.getValue())
+&nbsp;                    );
+&nbsp;                }
+&nbsp;                context.value = array;
+&nbsp;                context.eval = true;
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            throw new JSONException(&quot;TODO&quot;);
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:40</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,377 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DefaultEventBus</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.event.support</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultEventBus (org.apache.shiro.event.support)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultEventBus</td>
+<td class="coverageStat">
+  <span class="percent">
+    37.5%
+  </span>
+  <span class="absValue">
+    (3/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    16.7%
+  </span>
+  <span class="absValue">
+    (2/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    38.2%
+  </span>
+  <span class="absValue">
+    (13/34)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DefaultEventBus$Subscription</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    30%
+  </span>
+  <span class="absValue">
+    (3/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    10%
+  </span>
+  <span class="absValue">
+    (2/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    26.5%
+  </span>
+  <span class="absValue">
+    (13/49)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.event.support;
+&nbsp;
+&nbsp;import org.apache.shiro.event.EventBus;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.concurrent.locks.Lock;
+&nbsp;import java.util.concurrent.locks.ReentrantReadWriteLock;
+&nbsp;
+&nbsp;/**
+&nbsp; * A default event bus implementation that synchronously publishes events to registered listeners.  Listeners can be
+&nbsp; * registered or unregistered for events as necessary.
+&nbsp; * &lt;p/&gt;
+&nbsp; * An event bus enables a publish/subscribe paradigm within Shiro - components can publish or consume events they
+&nbsp; * find relevant without needing to be tightly coupled to other components.  This affords great
+&nbsp; * flexibility within Shiro by promoting loose coupling and high cohesion between components and a much safer
+&nbsp; * pluggable architecture that is more resilient to change over time.
+&nbsp; * &lt;h2&gt;Sending Events&lt;/h2&gt;
+&nbsp; * If a component wishes to publish events to other components:
+&nbsp; * &lt;pre&gt;
+&nbsp; *     MyEvent myEvent = createMyEvent();
+&nbsp; *     eventBus.publish(myEvent);
+&nbsp; * &lt;/pre&gt;
+&nbsp; * The event bus will determine the type of event and then dispatch the event to components that wish to receive
+&nbsp; * events of that type.
+&nbsp; * &lt;h2&gt;Receiving Events&lt;/h2&gt;
+&nbsp; * A component can receive events of interest by doing the following.
+&nbsp; * &lt;ol&gt;
+&nbsp; * &lt;li&gt;For each type of event you wish to consume, create a public method that accepts a single event argument.
+&nbsp; * The method argument type indicates the type of event to receive.&lt;/li&gt;
+&nbsp; * &lt;li&gt;Annotate each of these public methods with the {@link org.apache.shiro.event.Subscribe Subscribe} annotation.&lt;/li&gt;
+&nbsp; * &lt;li&gt;Register the component with the event bus:
+&nbsp; * &lt;pre&gt;
+&nbsp; *         eventBus.register(myComponent);
+&nbsp; *     &lt;/pre&gt;
+&nbsp; * &lt;/li&gt;
+&nbsp; * &lt;/ol&gt;
+&nbsp; * After registering the component, when when an event of a respective type is published, the component&#39;s
+&nbsp; * {@code Subscribe}-annotated method(s) will be invoked as expected.
+&nbsp; *
+&nbsp; * This design (and its constituent helper components) was largely influenced by
+&nbsp; * Guava&#39;s &lt;a href=&quot;http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/eventbus/EventBus.html&quot;&gt;EventBus&lt;/a&gt;
+&nbsp; * concept, although no code was shared/imported (even though Guava is Apache 2.0 licensed and could have
+&nbsp; * been used).
+&nbsp; *
+&nbsp; * This implementation is thread-safe and may be used concurrently.
+&nbsp; *
+&nbsp; * @since 1.3
+&nbsp; */
+<b class="nc">&nbsp;public class DefaultEventBus implements EventBus {</b>
+&nbsp;
+<b class="fc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(DefaultEventBus.class);</b>
+&nbsp;
+&nbsp;    private static final String EVENT_LISTENER_ERROR_MSG = &quot;Event listener processing failed.  Listeners should &quot; +
+&nbsp;            &quot;generally handle exceptions directly and not propagate to the event bus.&quot;;
+&nbsp;
+&nbsp;    //this is stateless, we can retain a static final reference:
+<b class="fc">&nbsp;    private static final EventListenerComparator EVENT_LISTENER_COMPARATOR = new EventListenerComparator();</b>
+&nbsp;
+&nbsp;    private EventListenerResolver eventListenerResolver;
+&nbsp;
+&nbsp;    //We want to preserve registration order to deliver events to objects in the order that they are registered
+&nbsp;    //with the event bus.  This has the nice effect that any Shiro system-level components that are registered first
+&nbsp;    //(likely to happen upon startup) have precedence over those registered by end-user components later.
+&nbsp;    //
+&nbsp;    //One might think that this could have been done by just using a ConcurrentSkipListMap (which is available only on
+&nbsp;    //JDK 6 or later).  However, this approach requires the implementation of a Comparator to sort elements, and this
+&nbsp;    //surfaces a problem: for any given random event listener, there isn&#39;t any guaranteed property to exist that can be
+&nbsp;    //inspected to determine order of registration, since registration order is an artifact of this EventBus
+&nbsp;    //implementation, not the listeners themselves.
+&nbsp;    //
+&nbsp;    //Therefore, we use a simple concurrent lock to wrap a LinkedHashMap - the LinkedHashMap retains insertion order
+&nbsp;    //and the lock provides thread-safety in probably a much simpler mechanism than attempting to write a
+&nbsp;    //EventBus-specific Comparator.  This technique is also likely to be faster than a ConcurrentSkipListMap, which
+&nbsp;    //is about 3-5 times slower than a standard ConcurrentMap.
+&nbsp;    private final Map&lt;Object, Subscription&gt; registry;
+&nbsp;    private final Lock registryReadLock;
+&nbsp;    private final Lock registryWriteLock;
+&nbsp;
+<b class="fc">&nbsp;    public DefaultEventBus() {</b>
+<b class="fc">&nbsp;        this.registry = new LinkedHashMap&lt;Object, Subscription&gt;(); //not thread safe, so we need locks:</b>
+<b class="fc">&nbsp;        ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();</b>
+<b class="fc">&nbsp;        this.registryReadLock = rwl.readLock();</b>
+<b class="fc">&nbsp;        this.registryWriteLock = rwl.writeLock();</b>
+<b class="fc">&nbsp;        this.eventListenerResolver = new AnnotationEventListenerResolver();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public EventListenerResolver getEventListenerResolver() {
+<b class="nc">&nbsp;        return eventListenerResolver;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEventListenerResolver(EventListenerResolver eventListenerResolver) {
+<b class="nc">&nbsp;        this.eventListenerResolver = eventListenerResolver;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void publish(Object event) {
+<b class="pc">&nbsp;        if (event == null) {</b>
+<b class="nc">&nbsp;            log.info(&quot;Received null event for publishing.  Ignoring and returning.&quot;);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        registryReadLock.lock();</b>
+&nbsp;        try {
+&nbsp;            //performing the entire iteration within the lock will be a slow operation if the registry has a lot of
+&nbsp;            //contention.  However, it is expected that the very large majority of cases the registry will be
+&nbsp;            //read-mostly with very little writes (registrations or removals) occurring during a typical application
+&nbsp;            //lifetime.
+&nbsp;            //
+&nbsp;            //The alternative would be to copy the registry.values() collection to a new LinkedHashSet within the lock
+&nbsp;            //only and the iteration on this new collection could be outside the lock.  This has the performance penalty
+&nbsp;            //however of always creating a new collection every time an event is published,  which could be more
+&nbsp;            //costly for the majority of applications, especially if the number of listeners is large.
+&nbsp;            //
+&nbsp;            //Finally, the read lock is re-entrant, so multiple publish calls will be
+&nbsp;            //concurrent without penalty since publishing is a read-only operation on the registry.
+&nbsp;
+<b class="pc">&nbsp;            for (Subscription subscription : this.registry.values()) {</b>
+<b class="nc">&nbsp;                subscription.onEvent(event);</b>
+&nbsp;            }
+&nbsp;        } finally {
+<b class="fc">&nbsp;            registryReadLock.unlock();</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void register(Object instance) {
+<b class="nc">&nbsp;        if (instance == null) {</b>
+<b class="nc">&nbsp;            log.info(&quot;Received null instance for event listener registration.  Ignoring registration request.&quot;);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        unregister(instance);</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;EventListener&gt; listeners = getEventListenerResolver().getEventListeners(instance);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (listeners == null || listeners.isEmpty()) {</b>
+<b class="nc">&nbsp;            log.warn(&quot;Unable to resolve event listeners for subscriber instance [{}]. Ignoring registration request.&quot;,</b>
+&nbsp;                    instance);
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Subscription subscription = new Subscription(listeners);</b>
+&nbsp;
+<b class="nc">&nbsp;        this.registryWriteLock.lock();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            this.registry.put(instance, subscription);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            this.registryWriteLock.unlock();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void unregister(Object instance) {
+<b class="nc">&nbsp;        if (instance == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        this.registryWriteLock.lock();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            this.registry.remove(instance);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            this.registryWriteLock.unlock();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private class Subscription {
+&nbsp;
+&nbsp;        private final List&lt;EventListener&gt; listeners;
+&nbsp;
+<b class="nc">&nbsp;        public Subscription(List&lt;EventListener&gt; listeners) {</b>
+<b class="nc">&nbsp;            List&lt;EventListener&gt; toSort = new ArrayList&lt;EventListener&gt;(listeners);</b>
+<b class="nc">&nbsp;            Collections.sort(toSort, EVENT_LISTENER_COMPARATOR);</b>
+<b class="nc">&nbsp;            this.listeners = toSort;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void onEvent(Object event) {
+&nbsp;
+<b class="nc">&nbsp;            Set&lt;Object&gt; delivered = new HashSet&lt;Object&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;            for (EventListener listener : this.listeners) {</b>
+<b class="nc">&nbsp;                Object target = listener;</b>
+<b class="nc">&nbsp;                if (listener instanceof SingleArgumentMethodEventListener) {</b>
+<b class="nc">&nbsp;                    SingleArgumentMethodEventListener singleArgListener = (SingleArgumentMethodEventListener) listener;</b>
+<b class="nc">&nbsp;                    target = singleArgListener.getTarget();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (listener.accepts(event) &amp;&amp; !delivered.contains(target)) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        listener.onEvent(event);</b>
+<b class="nc">&nbsp;                    } catch (Throwable t) {</b>
+<b class="nc">&nbsp;                        log.warn(EVENT_LISTENER_ERROR_MSG, t);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    delivered.add(target);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

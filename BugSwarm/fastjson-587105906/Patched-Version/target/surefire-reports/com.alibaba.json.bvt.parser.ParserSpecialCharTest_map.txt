@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.parser.ParserSpecialCharTest_map
 -------------------------------------------------------------------------------
-Tests run: 18, Failures: 0, Errors: 18, Skipped: 0, Time elapsed: 0.001 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.ParserSpecialCharTest_map
-com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_10 -- Time elapsed: 0 s <<< ERROR!
+Tests run: 18, Failures: 0, Errors: 18, Skipped: 0, Time elapsed: 0.013 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.ParserSpecialCharTest_map
+com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_10 -- Time elapsed: 0.001 s <<< ERROR!
 com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:246)
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1391)
@@ -11,7 +11,8 @@ com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.JSON.parse(JSON.java:180)
 	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:241)
-	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_10(ParserSpecialCharTest_map.java:52)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.__CLR4_5_2c3oj7x1idv(ParserSpecialCharTest_map.java:52)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_10(ParserSpecialCharTest_map.java:51)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -43,7 +44,8 @@ com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.JSON.parse(JSON.java:180)
 	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:241)
-	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_11(ParserSpecialCharTest_map.java:56)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.__CLR4_5_28uokfg1idx(ParserSpecialCharTest_map.java:56)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_11(ParserSpecialCharTest_map.java:55)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -66,7 +68,7 @@ com.alibaba.fastjson.JSONException: syntax error
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_12 -- Time elapsed: 0 s <<< ERROR!
+com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_12 -- Time elapsed: 0.001 s <<< ERROR!
 com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:246)
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1391)
@@ -75,7 +77,8 @@ com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.JSON.parse(JSON.java:180)
 	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:241)
-	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_12(ParserSpecialCharTest_map.java:60)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.__CLR4_5_25lolmz1idz(ParserSpecialCharTest_map.java:60)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_12(ParserSpecialCharTest_map.java:59)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -107,7 +110,8 @@ com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.JSON.parse(JSON.java:180)
 	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:241)
-	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_13(ParserSpecialCharTest_map.java:64)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.__CLR4_5_22comui1ie1(ParserSpecialCharTest_map.java:64)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_13(ParserSpecialCharTest_map.java:63)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -130,7 +134,7 @@ com.alibaba.fastjson.JSONException: syntax error
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_34 -- Time elapsed: 0 s <<< ERROR!
+com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_34 -- Time elapsed: 0.001 s <<< ERROR!
 com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:246)
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1391)
@@ -139,7 +143,8 @@ com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.JSON.parse(JSON.java:180)
 	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:241)
-	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_34(ParserSpecialCharTest_map.java:68)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.__CLR4_5_2ap2wy31ie3(ParserSpecialCharTest_map.java:68)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_34(ParserSpecialCharTest_map.java:67)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -171,7 +176,8 @@ com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.JSON.parse(JSON.java:180)
 	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:241)
-	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_39(ParserSpecialCharTest_map.java:72)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.__CLR4_5_25jwx0a1ie5(ParserSpecialCharTest_map.java:72)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_39(ParserSpecialCharTest_map.java:71)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -194,7 +200,7 @@ com.alibaba.fastjson.JSONException: syntax error
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_47 -- Time elapsed: 0 s <<< ERROR!
+com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_47 -- Time elapsed: 0.001 s <<< ERROR!
 com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:246)
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1391)
@@ -203,7 +209,8 @@ com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.JSON.parse(JSON.java:180)
 	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:241)
-	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_47(ParserSpecialCharTest_map.java:76)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.__CLR4_5_2srrvyv1ie7(ParserSpecialCharTest_map.java:76)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_47(ParserSpecialCharTest_map.java:75)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -226,7 +233,7 @@ com.alibaba.fastjson.JSONException: syntax error
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_92 -- Time elapsed: 0 s <<< ERROR!
+com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_92 -- Time elapsed: 0.001 s <<< ERROR!
 com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:246)
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1391)
@@ -235,7 +242,8 @@ com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.JSON.parse(JSON.java:180)
 	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:241)
-	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_92(ParserSpecialCharTest_map.java:80)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.__CLR4_5_2j1ugrx1ie9(ParserSpecialCharTest_map.java:80)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_92(ParserSpecialCharTest_map.java:79)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -267,7 +275,8 @@ com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.JSON.parse(JSON.java:180)
 	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:241)
-	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_0(ParserSpecialCharTest_map.java:12)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.__CLR4_5_2n53hp21idb(ParserSpecialCharTest_map.java:12)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_0(ParserSpecialCharTest_map.java:11)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -290,7 +299,7 @@ com.alibaba.fastjson.JSONException: syntax error
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_1 -- Time elapsed: 0 s <<< ERROR!
+com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_1 -- Time elapsed: 0.001 s <<< ERROR!
 com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:246)
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1391)
@@ -299,7 +308,8 @@ com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.JSON.parse(JSON.java:180)
 	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:241)
-	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_1(ParserSpecialCharTest_map.java:16)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.__CLR4_5_2jw3iwl1idd(ParserSpecialCharTest_map.java:16)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_1(ParserSpecialCharTest_map.java:15)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -322,7 +332,7 @@ com.alibaba.fastjson.JSONException: syntax error
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_2 -- Time elapsed: 0 s <<< ERROR!
+com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_2 -- Time elapsed: 0.001 s <<< ERROR!
 com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:246)
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1391)
@@ -331,7 +341,8 @@ com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.JSON.parse(JSON.java:180)
 	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:241)
-	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_2(ParserSpecialCharTest_map.java:20)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.__CLR4_5_2gn3k441idf(ParserSpecialCharTest_map.java:20)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_2(ParserSpecialCharTest_map.java:19)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -363,7 +374,8 @@ com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.JSON.parse(JSON.java:180)
 	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:241)
-	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_3(ParserSpecialCharTest_map.java:24)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.__CLR4_5_2de3lbn1idh(ParserSpecialCharTest_map.java:24)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_3(ParserSpecialCharTest_map.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -395,7 +407,8 @@ com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.JSON.parse(JSON.java:180)
 	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:241)
-	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_4(ParserSpecialCharTest_map.java:28)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.__CLR4_5_2a53mj61idj(ParserSpecialCharTest_map.java:28)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_4(ParserSpecialCharTest_map.java:27)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -418,7 +431,7 @@ com.alibaba.fastjson.JSONException: syntax error
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_5 -- Time elapsed: 0 s <<< ERROR!
+com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_5 -- Time elapsed: 0.001 s <<< ERROR!
 com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:246)
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1391)
@@ -427,7 +440,8 @@ com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.JSON.parse(JSON.java:180)
 	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:241)
-	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_5(ParserSpecialCharTest_map.java:32)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.__CLR4_5_26w3nqp1idl(ParserSpecialCharTest_map.java:32)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_5(ParserSpecialCharTest_map.java:31)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -450,7 +464,7 @@ com.alibaba.fastjson.JSONException: syntax error
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_6 -- Time elapsed: 0 s <<< ERROR!
+com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_6 -- Time elapsed: 0.001 s <<< ERROR!
 com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:246)
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1391)
@@ -459,7 +473,8 @@ com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.JSON.parse(JSON.java:180)
 	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:241)
-	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_6(ParserSpecialCharTest_map.java:36)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.__CLR4_5_23n3oy81idn(ParserSpecialCharTest_map.java:36)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_6(ParserSpecialCharTest_map.java:35)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -482,7 +497,7 @@ com.alibaba.fastjson.JSONException: syntax error
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_7 -- Time elapsed: 0.001 s <<< ERROR!
+com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_7 -- Time elapsed: 0 s <<< ERROR!
 com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:246)
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1391)
@@ -491,7 +506,8 @@ com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.JSON.parse(JSON.java:180)
 	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:241)
-	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_7(ParserSpecialCharTest_map.java:40)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.__CLR4_5_2e3q5r1idp(ParserSpecialCharTest_map.java:40)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_7(ParserSpecialCharTest_map.java:39)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -514,7 +530,7 @@ com.alibaba.fastjson.JSONException: syntax error
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_8 -- Time elapsed: 0 s <<< ERROR!
+com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_8 -- Time elapsed: 0.001 s <<< ERROR!
 com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:246)
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1391)
@@ -523,7 +539,8 @@ com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.JSON.parse(JSON.java:180)
 	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:241)
-	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_8(ParserSpecialCharTest_map.java:44)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.__CLR4_5_22uw8mq1idr(ParserSpecialCharTest_map.java:44)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_8(ParserSpecialCharTest_map.java:43)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -546,7 +563,7 @@ com.alibaba.fastjson.JSONException: syntax error
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_9 -- Time elapsed: 0 s <<< ERROR!
+com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_9 -- Time elapsed: 0.002 s <<< ERROR!
 com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:246)
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1391)
@@ -555,7 +572,8 @@ com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.JSON.parse(JSON.java:180)
 	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:241)
-	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_9(ParserSpecialCharTest_map.java:48)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.__CLR4_5_263w7f71idt(ParserSpecialCharTest_map.java:48)
+	at com.alibaba.json.bvt.parser.ParserSpecialCharTest_map.test_9(ParserSpecialCharTest_map.java:47)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

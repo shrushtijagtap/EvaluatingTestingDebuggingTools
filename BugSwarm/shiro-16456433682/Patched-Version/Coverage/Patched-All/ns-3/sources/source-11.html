@@ -1,0 +1,162 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AuthenticationToken</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.authc</a>
+</div>
+
+<h1>Coverage Summary for Class: AuthenticationToken (org.apache.shiro.authc)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">AuthenticationToken</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.authc;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;
+&nbsp;/**
+&nbsp; * &lt;p&gt;An &lt;tt&gt;AuthenticationToken&lt;/tt&gt; is a consolidation of an account&#39;s principals and supporting
+&nbsp; * credentials submitted by a user during an authentication attempt.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;p&gt;The token is submitted to an {@link Authenticator Authenticator} via the
+&nbsp; * {@link Authenticator#authenticate(AuthenticationToken) authenticate(token)} method.  The
+&nbsp; * Authenticator then executes the authentication/log-in process.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;p&gt;Common implementations of an &lt;tt&gt;AuthenticationToken&lt;/tt&gt; would have username/password
+&nbsp; * pairs, X.509 Certificate, PGP key, or anything else you can think of.  The token can be
+&nbsp; * anything needed by an {@link Authenticator} to authenticate properly.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;p&gt;Because applications represent user data and credentials in different ways, implementations
+&nbsp; * of this interface are application-specific.  You are free to acquire a user&#39;s principals and
+&nbsp; * credentials however you wish (e.g. web form, Swing form, fingerprint identification, etc) and
+&nbsp; * then submit them to the Shiro framework in the form of an implementation of this
+&nbsp; * interface.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;p&gt;If your application&#39;s authentication process is  username/password based
+&nbsp; * (like most), instead of implementing this interface yourself, take a look at the
+&nbsp; * {@link UsernamePasswordToken UsernamePasswordToken} class, as it is probably sufficient for your needs.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;p&gt;RememberMe services are enabled for a token if they implement a sub-interface of this one, called
+&nbsp; * {@link RememberMeAuthenticationToken RememberMeAuthenticationToken}.  Implement that interface if you need
+&nbsp; * RememberMe services (the &lt;tt&gt;UsernamePasswordToken&lt;/tt&gt; already implements this interface).
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;p&gt;If you are familiar with JAAS, an &lt;tt&gt;AuthenticationToken&lt;/tt&gt; replaces the concept of a
+&nbsp; * {@link javax.security.auth.callback.Callback}, and  defines meaningful behavior
+&nbsp; * (&lt;tt&gt;Callback&lt;/tt&gt; is just a marker interface, and of little use).  We
+&nbsp; * also think the name &lt;em&gt;AuthenticationToken&lt;/em&gt; more accurately reflects its true purpose
+&nbsp; * in a login framework, whereas &lt;em&gt;Callback&lt;/em&gt; is less obvious.
+&nbsp; *
+&nbsp; * @see RememberMeAuthenticationToken
+&nbsp; * @see HostAuthenticationToken
+&nbsp; * @see UsernamePasswordToken
+&nbsp; * @since 0.1
+&nbsp; */
+&nbsp;public interface AuthenticationToken extends Serializable {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the account identity submitted during the authentication process.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;p&gt;Most application authentications are username/password based and have this
+&nbsp;     * object represent a username.  If this is the case for your application,
+&nbsp;     * take a look at the {@link UsernamePasswordToken UsernamePasswordToken}, as it is probably
+&nbsp;     * sufficient for your use.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;p&gt;Ultimately, the object returned is application specific and can represent
+&nbsp;     * any account identity (user id, X.509 certificate, etc).
+&nbsp;     *
+&nbsp;     * @return the account identity submitted during the authentication process.
+&nbsp;     * @see UsernamePasswordToken
+&nbsp;     */
+&nbsp;    Object getPrincipal();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the credentials submitted by the user during the authentication process that verifies
+&nbsp;     * the submitted {@link #getPrincipal() account identity}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;p&gt;Most application authentications are username/password based and have this object
+&nbsp;     * represent a submitted password.  If this is the case for your application,
+&nbsp;     * take a look at the {@link UsernamePasswordToken UsernamePasswordToken}, as it is probably
+&nbsp;     * sufficient for your use.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;p&gt;Ultimately, the credentials Object returned is application specific and can represent
+&nbsp;     * any credential mechanism.
+&nbsp;     *
+&nbsp;     * @return the credential submitted by the user during the authentication process.
+&nbsp;     */
+&nbsp;    Object getCredentials();
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

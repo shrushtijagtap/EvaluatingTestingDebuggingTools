@@ -1,0 +1,575 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > HashedCredentialsMatcher</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.authc.credential</a>
+</div>
+
+<h1>Coverage Summary for Class: HashedCredentialsMatcher (org.apache.shiro.authc.credential)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HashedCredentialsMatcher</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/47)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.authc.credential;
+&nbsp;
+&nbsp;import org.apache.shiro.authc.AuthenticationInfo;
+&nbsp;import org.apache.shiro.authc.AuthenticationToken;
+&nbsp;import org.apache.shiro.authc.SaltedAuthenticationInfo;
+&nbsp;import org.apache.shiro.codec.Base64;
+&nbsp;import org.apache.shiro.codec.Hex;
+&nbsp;import org.apache.shiro.crypto.hash.AbstractHash;
+&nbsp;import org.apache.shiro.crypto.hash.Hash;
+&nbsp;import org.apache.shiro.crypto.hash.SimpleHash;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;
+&nbsp;/**
+&nbsp; * A {@code HashedCredentialMatcher} provides support for hashing of supplied {@code AuthenticationToken} credentials
+&nbsp; * before being compared to those in the {@code AuthenticationInfo} from the data store.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Credential hashing is one of the most common security techniques when safeguarding a user&#39;s private credentials
+&nbsp; * (passwords, keys, etc).  Most developers never want to store their users&#39; credentials in plain form, viewable by
+&nbsp; * anyone, so they often hash the users&#39; credentials before they are saved in the data store.
+&nbsp; * &lt;p/&gt;
+&nbsp; * This class (and its subclasses) function as follows:
+&nbsp; * &lt;ol&gt;
+&nbsp; * &lt;li&gt;Hash the {@code AuthenticationToken} credentials supplied by the user during their login.&lt;/li&gt;
+&nbsp; * &lt;li&gt;Compare this hashed value directly with the {@code AuthenticationInfo} credentials stored in the system
+&nbsp; * (the stored account credentials are expected to already be in hashed form).&lt;/li&gt;
+&nbsp; * &lt;li&gt;If these two values are {@link #equals(Object, Object) equal}, the submitted credentials match, otherwise
+&nbsp; * they do not.&lt;/li&gt;
+&nbsp; * &lt;/ol&gt;
+&nbsp; * &lt;h2&gt;Salting and Multiple Hash Iterations&lt;/h2&gt;
+&nbsp; * Because simple hashing is usually not good enough for secure applications, this class also supports &#39;salting&#39;
+&nbsp; * and multiple hash iterations.  Please read this excellent
+&nbsp; * &lt;a href=&quot;http://www.owasp.org/index.php/Hashing_Java&quot; _target=&quot;blank&quot;&gt;Hashing Java article&lt;/a&gt; to learn about
+&nbsp; * salting and multiple iterations and why you might want to use them. (Note of sections 5
+&nbsp; * &amp;quot;Why add salt?&amp;quot; and 6 &quot;Hardening against the attacker&#39;s attack&quot;).   We should also note here that all of
+&nbsp; * Shiro&#39;s Hash implementations (for example, {@link org.apache.shiro.crypto.hash.Md5Hash Md5Hash},
+&nbsp; * {@link org.apache.shiro.crypto.hash.Sha1Hash Sha1Hash}, etc) support salting and multiple hash iterations via
+&nbsp; * overloaded constructors.
+&nbsp; * &lt;h4&gt;Real World Case Study&lt;/h4&gt;
+&nbsp; * In April 2010, some public Atlassian Jira and Confluence
+&nbsp; * installations (Apache Software Foundation, Codehaus, etc) were the target of account attacks and user accounts
+&nbsp; * were compromised.  The reason?  Jira and Confluence at the time did not salt user passwords and attackers were
+&nbsp; * able to use dictionary attacks to compromise user accounts (Atlassian has since
+&nbsp; * &lt;a href=&quot;http://blogs.atlassian.com/news/2010/04/oh_man_what_a_day_an_update_on_our_security_breach.html&quot;&gt;
+&nbsp; * fixed the problem&lt;/a&gt; of course).
+&nbsp; * &lt;p/&gt;
+&nbsp; * The lesson?
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;b&gt;ALWAYS, ALWAYS, ALWAYS SALT USER PASSWORDS!&lt;/b&gt;
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;h3&gt;Salting&lt;/h3&gt;
+&nbsp; * Prior to Shiro 1.1, salts could be obtained based on the end-user submitted
+&nbsp; * {@link AuthenticationToken AuthenticationToken} via the now-deprecated
+&nbsp; * {@link #getSalt(org.apache.shiro.authc.AuthenticationToken) getSalt(AuthenticationToken)} method.  This however
+&nbsp; * could constitute a security hole since ideally salts should never be obtained based on what a user can submit.
+&nbsp; * User-submitted salt mechanisms are &lt;em&gt;much&lt;/em&gt; more susceptible to dictionary attacks and &lt;b&gt;SHOULD NOT&lt;/b&gt; be
+&nbsp; * used in secure systems.  Instead salts should ideally be a secure randomly-generated number that is generated when
+&nbsp; * the user account is created.  The secure number should never be disseminated to the user and always kept private
+&nbsp; * by the application.
+&nbsp; * &lt;h4&gt;Shiro 1.1&lt;/h4&gt;
+&nbsp; * As of Shiro 1.1, it is expected that any salt used to hash the submitted credentials will be obtained from the
+&nbsp; * stored account information (represented as an {@link AuthenticationInfo AuthenticationInfo} instance).  This is much
+&nbsp; * more secure because the salt value remains private to the application (Shiro will never store this value).
+&nbsp; * &lt;p/&gt;
+&nbsp; * To enable this, {@code Realm}s should return {@link SaltedAuthenticationInfo SaltedAuthenticationInfo} instances
+&nbsp; * during authentication.  {@code HashedCredentialsMatcher} implementations will then use the provided
+&nbsp; * {@link org.apache.shiro.authc.SaltedAuthenticationInfo#getCredentialsSalt credentialsSalt} for hashing.  To avoid
+&nbsp; * security risks,
+&nbsp; * &lt;b&gt;it is highly recommended that any existing {@code Realm} implementations that support hashed credentials are
+&nbsp; * updated to return {@link SaltedAuthenticationInfo SaltedAuthenticationInfo} instances as soon as possible&lt;/b&gt;.
+&nbsp; * &lt;h4&gt;Shiro 1.0 Backwards Compatibility&lt;/h4&gt;
+&nbsp; * Because of the identified security risk, {@code Realm} implementations that support credentials hashing should
+&nbsp; * be updated to return {@link SaltedAuthenticationInfo SaltedAuthenticationInfo} instances as
+&nbsp; * soon as possible.
+&nbsp; * &lt;p/&gt;
+&nbsp; * If this is not possible for some reason, this class will retain 1.0 backwards-compatible behavior of obtaining
+&nbsp; * the salt via the now-deprecated {@link #getSalt(AuthenticationToken) getSalt(AuthenticationToken)} method.  This
+&nbsp; * method will only be invoked if a {@code Realm} &lt;em&gt;does not&lt;/em&gt; return
+&nbsp; * {@link SaltedAuthenticationInfo SaltedAutenticationInfo} instances and {@link #isHashSalted() hashSalted} is
+&nbsp; * {@code true}.
+&nbsp; * But please note that the {@link #isHashSalted() hashSalted} property and the
+&nbsp; * {@link #getSalt(AuthenticationToken) getSalt(AuthenticationToken)} methods will be removed before the Shiro 2.0
+&nbsp; * release.
+&nbsp; * &lt;h3&gt;Multiple Hash Iterations&lt;/h3&gt;
+&nbsp; * If you hash your users&#39; credentials multiple times before persisting to the data store, you will also need to
+&nbsp; * set this class&#39;s {@link #setHashIterations(int) hashIterations} property.  See the
+&nbsp; * &lt;a href=&quot;http://www.owasp.org/index.php/Hashing_Java&quot; _target=&quot;blank&quot;&gt;Hashing Java article&lt;/a&gt;&#39;s
+&nbsp; * &lt;a href=&quot;http://www.owasp.org/index.php/Hashing_Java#Hardening_against_the_attacker.27s_attack&quot;&gt;
+&nbsp; * &amp;quot;Hardening against the attacker&#39;s attack&amp;quot;&lt;/a&gt; section to learn more about why you might want to use
+&nbsp; * multiple hash iterations.
+&nbsp; * &lt;h2&gt;MD5 &amp;amp; SHA-1 Notice&lt;/h2&gt;
+&nbsp; * &lt;a href=&quot;http://en.wikipedia.org/wiki/MD5&quot;&gt;MD5&lt;/a&gt; and
+&nbsp; * &lt;a href=&quot;http://en.wikipedia.org/wiki/SHA_hash_functions&quot;&gt;SHA-1&lt;/a&gt; algorithms are now known to be vulnerable to
+&nbsp; * compromise and/or collisions (read the linked pages for more).  While most applications are ok with either of these
+&nbsp; * two, if your application mandates high security, use the SHA-256 (or higher) hashing algorithms and their
+&nbsp; * supporting {@code CredentialsMatcher} implementations.
+&nbsp; *
+&nbsp; * @see org.apache.shiro.crypto.hash.Md5Hash
+&nbsp; * @see org.apache.shiro.crypto.hash.Sha1Hash
+&nbsp; * @see org.apache.shiro.crypto.hash.Sha256Hash
+&nbsp; * @since 0.9
+&nbsp; */
+&nbsp;public class HashedCredentialsMatcher extends SimpleCredentialsMatcher {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    private String hashAlgorithm;
+&nbsp;    private int hashIterations;
+&nbsp;    private boolean hashSalted;
+&nbsp;    private boolean storedCredentialsHexEncoded;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * JavaBeans-compatible no-arg constructor intended for use in IoC/Dependency Injection environments.  If you
+&nbsp;     * use this constructor, you &lt;em&gt;MUST&lt;/em&gt; also additionally set the
+&nbsp;     * {@link #setHashAlgorithmName(String) hashAlgorithmName} property.
+&nbsp;     */
+<b class="nc">&nbsp;    public HashedCredentialsMatcher() {</b>
+<b class="nc">&nbsp;        this.hashAlgorithm = null;</b>
+<b class="nc">&nbsp;        this.hashSalted = false;</b>
+<b class="nc">&nbsp;        this.hashIterations = 1;</b>
+<b class="nc">&nbsp;        this.storedCredentialsHexEncoded = true; //false means Base64-encoded</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates an instance using the specified {@link #getHashAlgorithmName() hashAlgorithmName} to hash submitted
+&nbsp;     * credentials.
+&nbsp;     * @param hashAlgorithmName the {@code Hash} {@link org.apache.shiro.crypto.hash.Hash#getAlgorithmName() algorithmName}
+&nbsp;     *                          to use when performing hashes for credentials matching.
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    public HashedCredentialsMatcher(String hashAlgorithmName) {
+<b class="nc">&nbsp;        this();</b>
+<b class="nc">&nbsp;        if (!StringUtils.hasText(hashAlgorithmName) ) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;hashAlgorithmName cannot be null or empty.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.hashAlgorithm = hashAlgorithmName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@code Hash} {@link org.apache.shiro.crypto.hash.Hash#getAlgorithmName() algorithmName} to use
+&nbsp;     * when performing hashes for credentials matching.
+&nbsp;     *
+&nbsp;     * @return the {@code Hash} {@link org.apache.shiro.crypto.hash.Hash#getAlgorithmName() algorithmName} to use
+&nbsp;     *         when performing hashes for credentials matching.
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    public String getHashAlgorithmName() {
+<b class="nc">&nbsp;        return hashAlgorithm;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the {@code Hash} {@link org.apache.shiro.crypto.hash.Hash#getAlgorithmName() algorithmName} to use
+&nbsp;     * when performing hashes for credentials matching.
+&nbsp;     *
+&nbsp;     * @param hashAlgorithmName the {@code Hash} {@link org.apache.shiro.crypto.hash.Hash#getAlgorithmName() algorithmName}
+&nbsp;     *                          to use when performing hashes for credentials matching.
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    public void setHashAlgorithmName(String hashAlgorithmName) {
+<b class="nc">&nbsp;        this.hashAlgorithm = hashAlgorithmName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if the system&#39;s stored credential hash is Hex encoded, {@code false} if it
+&nbsp;     * is Base64 encoded.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Default value is {@code true} for convenience - all of Shiro&#39;s {@link Hash Hash#toString()}
+&nbsp;     * implementations return Hex encoded values by default, making this class&#39;s use with those implementations
+&nbsp;     * easier.
+&nbsp;     *
+&nbsp;     * @return {@code true} if the system&#39;s stored credential hash is Hex encoded, {@code false} if it
+&nbsp;     *         is Base64 encoded.  Default is {@code true}
+&nbsp;     */
+&nbsp;    public boolean isStoredCredentialsHexEncoded() {
+<b class="nc">&nbsp;        return storedCredentialsHexEncoded;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the indicator if this system&#39;s stored credential hash is Hex encoded or not.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * A value of {@code true} will cause this class to decode the system credential from Hex, a
+&nbsp;     * value of {@code false} will cause this class to decode the system credential from Base64.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Unless overridden via this method, the default value is {@code true} for convenience - all of Shiro&#39;s
+&nbsp;     * {@link Hash Hash#toString()} implementations return Hex encoded values by default, making this class&#39;s use with
+&nbsp;     * those implementations easier.
+&nbsp;     *
+&nbsp;     * @param storedCredentialsHexEncoded the indicator if this system&#39;s stored credential hash is Hex
+&nbsp;     *                                    encoded or not (&#39;not&#39; automatically implying it is Base64 encoded).
+&nbsp;     */
+&nbsp;    public void setStoredCredentialsHexEncoded(boolean storedCredentialsHexEncoded) {
+<b class="nc">&nbsp;        this.storedCredentialsHexEncoded = storedCredentialsHexEncoded;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if a submitted {@code AuthenticationToken}&#39;s credentials should be salted when hashing,
+&nbsp;     * {@code false} if it should not be salted.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If enabled, the salt used will be obtained via the {@link #getSalt(AuthenticationToken) getSalt} method.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The default value is {@code false}.
+&nbsp;     *
+&nbsp;     * @return {@code true} if a submitted {@code AuthenticationToken}&#39;s credentials should be salted when hashing,
+&nbsp;     *         {@code false} if it should not be salted.
+&nbsp;     * @deprecated since Shiro 1.1.  Hash salting is now expected to be based on if the {@link AuthenticationInfo}
+&nbsp;     *             returned from the {@code Realm} is a {@link SaltedAuthenticationInfo} instance and its
+&nbsp;     *             {@link org.apache.shiro.authc.SaltedAuthenticationInfo#getCredentialsSalt() getCredentialsSalt()} method returns a non-null value.
+&nbsp;     *             This method and the 1.0 behavior still exists for backwards compatibility if the {@code Realm} does not return
+&nbsp;     *             {@code SaltedAuthenticationInfo} instances, but &lt;b&gt;it is highly recommended that {@code Realm} implementations
+&nbsp;     *             that support hashed credentials start returning {@link SaltedAuthenticationInfo SaltedAuthenticationInfo}
+&nbsp;     *             instances as soon as possible&lt;/b&gt;.
+&nbsp;     *             &lt;p/&gt;
+&nbsp;     *             This is because salts should always be obtained from the stored account information and
+&nbsp;     *             never be interpreted based on user/Subject-entered data.  User-entered data is easier to compromise for
+&nbsp;     *             attackers, whereas account-unique (and secure randomly-generated) salts never disseminated to the end-user
+&nbsp;     *             are almost impossible to break.  This method will be removed in Shiro 2.0.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public boolean isHashSalted() {
+<b class="nc">&nbsp;        return hashSalted;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets whether or not to salt a submitted {@code AuthenticationToken}&#39;s credentials when hashing.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If enabled, the salt used will be obtained via the {@link #getSalt(org.apache.shiro.authc.AuthenticationToken) getCredentialsSalt} method.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     * The default value is {@code false}.
+&nbsp;     *
+&nbsp;     * @param hashSalted whether or not to salt a submitted {@code AuthenticationToken}&#39;s credentials when hashing.
+&nbsp;     * @deprecated since Shiro 1.1.  Hash salting is now expected to be based on if the {@link AuthenticationInfo}
+&nbsp;     *             returned from the {@code Realm} is a {@link SaltedAuthenticationInfo} instance and its
+&nbsp;     *             {@link org.apache.shiro.authc.SaltedAuthenticationInfo#getCredentialsSalt() getCredentialsSalt()} method returns a non-null value.
+&nbsp;     *             This method and the 1.0 behavior still exists for backwards compatibility if the {@code Realm} does not return
+&nbsp;     *             {@code SaltedAuthenticationInfo} instances, but &lt;b&gt;it is highly recommended that {@code Realm} implementations
+&nbsp;     *             that support hashed credentials start returning {@link SaltedAuthenticationInfo SaltedAuthenticationInfo}
+&nbsp;     *             instances as soon as possible&lt;/b&gt;.
+&nbsp;     *             &lt;p/&gt;
+&nbsp;     *             This is because salts should always be obtained from the stored account information and
+&nbsp;     *             never be interpreted based on user/Subject-entered data.  User-entered data is easier to compromise for
+&nbsp;     *             attackers, whereas account-unique (and secure randomly-generated) salts never disseminated to the end-user
+&nbsp;     *             are almost impossible to break.  This method will be removed in Shiro 2.0.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public void setHashSalted(boolean hashSalted) {
+<b class="nc">&nbsp;        this.hashSalted = hashSalted;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the number of times a submitted {@code AuthenticationToken}&#39;s credentials will be hashed before
+&nbsp;     * comparing to the credentials stored in the system.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Unless overridden, the default value is {@code 1}, meaning a normal hash execution will occur.
+&nbsp;     *
+&nbsp;     * @return the number of times a submitted {@code AuthenticationToken}&#39;s credentials will be hashed before
+&nbsp;     *         comparing to the credentials stored in the system.
+&nbsp;     */
+&nbsp;    public int getHashIterations() {
+<b class="nc">&nbsp;        return hashIterations;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the number of times a submitted {@code AuthenticationToken}&#39;s credentials will be hashed before comparing
+&nbsp;     * to the credentials stored in the system.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Unless overridden, the default value is {@code 1}, meaning a normal single hash execution will occur.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If this argument is less than 1 (i.e. 0 or negative), the default value of 1 is applied.  There must always be
+&nbsp;     * at least 1 hash iteration (otherwise there would be no hash).
+&nbsp;     *
+&nbsp;     * @param hashIterations the number of times to hash a submitted {@code AuthenticationToken}&#39;s credentials.
+&nbsp;     */
+&nbsp;    public void setHashIterations(int hashIterations) {
+<b class="nc">&nbsp;        if (hashIterations &lt; 1) {</b>
+<b class="nc">&nbsp;            this.hashIterations = 1;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            this.hashIterations = hashIterations;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a salt value used to hash the token&#39;s credentials.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This default implementation merely returns {@code token.getPrincipal()}, effectively using the user&#39;s
+&nbsp;     * identity (username, user id, etc) as the salt, a most common technique.  If you wish to provide the
+&nbsp;     * authentication token&#39;s salt another way, you may override this method.
+&nbsp;     *
+&nbsp;     * @param token the AuthenticationToken submitted during the authentication attempt.
+&nbsp;     * @return a salt value to use to hash the authentication token&#39;s credentials.
+&nbsp;     * @deprecated since Shiro 1.1.  Hash salting is now expected to be based on if the {@link AuthenticationInfo}
+&nbsp;     *             returned from the {@code Realm} is a {@link SaltedAuthenticationInfo} instance and its
+&nbsp;     *             {@link org.apache.shiro.authc.SaltedAuthenticationInfo#getCredentialsSalt() getCredentialsSalt()} method returns a non-null value.
+&nbsp;     *             This method and the 1.0 behavior still exists for backwards compatibility if the {@code Realm} does not return
+&nbsp;     *             {@code SaltedAuthenticationInfo} instances, but &lt;b&gt;it is highly recommended that {@code Realm} implementations
+&nbsp;     *             that support hashed credentials start returning {@link SaltedAuthenticationInfo SaltedAuthenticationInfo}
+&nbsp;     *             instances as soon as possible&lt;/b&gt;.&lt;p/&gt;
+&nbsp;     *             This is because salts should always be obtained from the stored account information and
+&nbsp;     *             never be interpreted based on user/Subject-entered data.  User-entered data is easier to compromise for
+&nbsp;     *             attackers, whereas account-unique (and secure randomly-generated) salts never disseminated to the end-user
+&nbsp;     *             are almost impossible to break.  This method will be removed in Shiro 2.0.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    protected Object getSalt(AuthenticationToken token) {
+<b class="nc">&nbsp;        return token.getPrincipal();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a {@link Hash Hash} instance representing the already-hashed AuthenticationInfo credentials stored in the system.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This method reconstructs a {@link Hash Hash} instance based on a {@code info.getCredentials} call,
+&nbsp;     * but it does &lt;em&gt;not&lt;/em&gt; hash that value - it is expected that method call will return an already-hashed value.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation&#39;s reconstruction effort functions as follows:
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;Convert {@code account.getCredentials()} to a byte array via the {@link #toBytes toBytes} method.
+&nbsp;     * &lt;li&gt;If {@code account.getCredentials()} was originally a String or char[] before {@code toBytes} was
+&nbsp;     * called, check for encoding:
+&nbsp;     * &lt;li&gt;If {@link #storedCredentialsHexEncoded storedCredentialsHexEncoded}, Hex decode that byte array, otherwise
+&nbsp;     * Base64 decode the byte array&lt;/li&gt;
+&nbsp;     * &lt;li&gt;Set the byte[] array directly on the {@code Hash} implementation and return it.&lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     *
+&nbsp;     * @param info the AuthenticationInfo from which to retrieve the credentials which assumed to be in already-hashed form.
+&nbsp;     * @return a {@link Hash Hash} instance representing the given AuthenticationInfo&#39;s stored credentials.
+&nbsp;     */
+&nbsp;    protected Object getCredentials(AuthenticationInfo info) {
+<b class="nc">&nbsp;        Object credentials = info.getCredentials();</b>
+&nbsp;
+<b class="nc">&nbsp;        byte[] storedBytes = toBytes(credentials);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (credentials instanceof String || credentials instanceof char[]) {</b>
+&nbsp;            //account.credentials were a char[] or String, so
+&nbsp;            //we need to do text decoding first:
+<b class="nc">&nbsp;            if (isStoredCredentialsHexEncoded()) {</b>
+<b class="nc">&nbsp;                storedBytes = Hex.decode(storedBytes);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                storedBytes = Base64.decode(storedBytes);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        AbstractHash hash = newHashInstance();</b>
+<b class="nc">&nbsp;        hash.setBytes(storedBytes);</b>
+<b class="nc">&nbsp;        return hash;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This implementation first hashes the {@code token}&#39;s credentials, potentially using a
+&nbsp;     * {@code salt} if the {@code info} argument is a
+&nbsp;     * {@link org.apache.shiro.authc.SaltedAuthenticationInfo SaltedAuthenticationInfo}.  It then compares the hash
+&nbsp;     * against the {@code AuthenticationInfo}&#39;s
+&nbsp;     * {@link #getCredentials(org.apache.shiro.authc.AuthenticationInfo) already-hashed credentials}.  This method
+&nbsp;     * returns {@code true} if those two values are {@link #equals(Object, Object) equal}, {@code false} otherwise.
+&nbsp;     *
+&nbsp;     * @param token the {@code AuthenticationToken} submitted during the authentication attempt.
+&nbsp;     * @param info  the {@code AuthenticationInfo} stored in the system matching the token principal
+&nbsp;     * @return {@code true} if the provided token credentials hash match to the stored account credentials hash,
+&nbsp;     *         {@code false} otherwise
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
+<b class="nc">&nbsp;        Object tokenHashedCredentials = hashProvidedCredentials(token, info);</b>
+<b class="nc">&nbsp;        Object accountCredentials = getCredentials(info);</b>
+<b class="nc">&nbsp;        return equals(tokenHashedCredentials, accountCredentials);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Hash the provided {@code token}&#39;s credentials using the salt stored with the account if the
+&nbsp;     * {@code info} instance is an {@code instanceof} {@link SaltedAuthenticationInfo SaltedAuthenticationInfo} (see
+&nbsp;     * the class-level JavaDoc for why this is the preferred approach).
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If the {@code info} instance is &lt;em&gt;not&lt;/em&gt;
+&nbsp;     * an {@code instanceof} {@code SaltedAuthenticationInfo}, the logic will fall back to Shiro 1.0
+&nbsp;     * backwards-compatible logic:  it will first check to see {@link #isHashSalted() isHashSalted} and if so, will try
+&nbsp;     * to acquire the salt from {@link #getSalt(AuthenticationToken) getSalt(AuthenticationToken)}.  See the class-level
+&nbsp;     * JavaDoc for why this is not recommended.  This &#39;fallback&#39; logic exists only for backwards-compatibility.
+&nbsp;     * {@code Realm}s should be updated as soon as possible to return {@code SaltedAuthenticationInfo} instances
+&nbsp;     * if account credentials salting is enabled (highly recommended for password-based systems).
+&nbsp;     *
+&nbsp;     * @param token the submitted authentication token from which its credentials will be hashed
+&nbsp;     * @param info  the stored account data, potentially used to acquire a salt
+&nbsp;     * @return the token credentials hash
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    protected Object hashProvidedCredentials(AuthenticationToken token, AuthenticationInfo info) {
+<b class="nc">&nbsp;        Object salt = null;</b>
+<b class="nc">&nbsp;        if (info instanceof SaltedAuthenticationInfo) {</b>
+<b class="nc">&nbsp;            salt = ((SaltedAuthenticationInfo) info).getCredentialsSalt();</b>
+&nbsp;        } else {
+&nbsp;            //retain 1.0 backwards compatibility:
+<b class="nc">&nbsp;            if (isHashSalted()) {</b>
+<b class="nc">&nbsp;                salt = getSalt(token);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return hashProvidedCredentials(token.getCredentials(), salt, getHashIterations());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@link #getHashAlgorithmName() hashAlgorithmName} property, but will throw an
+&nbsp;     * {@link IllegalStateException} if it has not been set.
+&nbsp;     *
+&nbsp;     * @return the required {@link #getHashAlgorithmName() hashAlgorithmName} property
+&nbsp;     * @throws IllegalStateException if the property has not been set prior to calling this method.
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    private String assertHashAlgorithmName() throws IllegalStateException {
+<b class="nc">&nbsp;        String hashAlgorithmName = getHashAlgorithmName();</b>
+<b class="nc">&nbsp;        if (hashAlgorithmName == null) {</b>
+<b class="nc">&nbsp;            String msg = &quot;Required &#39;hashAlgorithmName&#39; property has not been set.  This is required to execute &quot; +</b>
+&nbsp;                    &quot;the hashing algorithm.&quot;;
+<b class="nc">&nbsp;            throw new IllegalStateException(msg);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return hashAlgorithmName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Hashes the provided credentials a total of {@code hashIterations} times, using the given salt.  The hash
+&nbsp;     * implementation/algorithm used is based on the {@link #getHashAlgorithmName() hashAlgorithmName} property.
+&nbsp;     *
+&nbsp;     * @param credentials    the submitted authentication token&#39;s credentials to hash
+&nbsp;     * @param salt           the value to salt the hash, or {@code null} if a salt will not be used.
+&nbsp;     * @param hashIterations the number of times to hash the credentials.  At least one hash will always occur though,
+&nbsp;     *                       even if this argument is 0 or negative.
+&nbsp;     * @return the hashed value of the provided credentials, according to the specified salt and hash iterations.
+&nbsp;     */
+&nbsp;    protected Hash hashProvidedCredentials(Object credentials, Object salt, int hashIterations) {
+<b class="nc">&nbsp;        String hashAlgorithmName = assertHashAlgorithmName();</b>
+<b class="nc">&nbsp;        return new SimpleHash(hashAlgorithmName, credentials, salt, hashIterations);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a new, &lt;em&gt;uninitialized&lt;/em&gt; instance, without its byte array set.  Used as a utility method in the
+&nbsp;     * {@link SimpleCredentialsMatcher#getCredentials(org.apache.shiro.authc.AuthenticationInfo) getCredentials(AuthenticationInfo)} implementation.
+&nbsp;     *
+&nbsp;     * @return a new, &lt;em&gt;uninitialized&lt;/em&gt; instance, without its byte array set.
+&nbsp;     */
+&nbsp;    protected AbstractHash newHashInstance() {
+<b class="nc">&nbsp;        String hashAlgorithmName = assertHashAlgorithmName();</b>
+<b class="nc">&nbsp;        return new SimpleHash(hashAlgorithmName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

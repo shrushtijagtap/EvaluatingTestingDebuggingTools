@@ -1,0 +1,429 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractValidatingSessionManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.session.mgt</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractValidatingSessionManager (org.apache.shiro.session.mgt)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractValidatingSessionManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/44)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/101)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.session.mgt;
+&nbsp;
+&nbsp;import org.apache.shiro.authz.AuthorizationException;
+&nbsp;import org.apache.shiro.session.ExpiredSessionException;
+&nbsp;import org.apache.shiro.session.InvalidSessionException;
+&nbsp;import org.apache.shiro.session.Session;
+&nbsp;import org.apache.shiro.session.UnknownSessionException;
+&nbsp;import org.apache.shiro.util.Destroyable;
+&nbsp;import org.apache.shiro.util.LifecycleUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import java.util.Collection;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Default business-tier implementation of the {@link ValidatingSessionManager} interface.
+&nbsp; *
+&nbsp; * @since 0.1
+&nbsp; */
+&nbsp;public abstract class AbstractValidatingSessionManager extends AbstractNativeSessionManager
+&nbsp;        implements ValidatingSessionManager, Destroyable {
+&nbsp;
+&nbsp;    //TODO - complete JavaDoc
+&nbsp;
+<b class="nc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(AbstractValidatingSessionManager.class);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The default interval at which sessions will be validated (1 hour);
+&nbsp;     * This can be overridden by calling {@link #setSessionValidationInterval(long)}
+&nbsp;     */
+&nbsp;    public static final long DEFAULT_SESSION_VALIDATION_INTERVAL = MILLIS_PER_HOUR;
+&nbsp;
+&nbsp;    protected boolean sessionValidationSchedulerEnabled;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Scheduler used to validate sessions on a regular basis.
+&nbsp;     */
+&nbsp;    protected SessionValidationScheduler sessionValidationScheduler;
+&nbsp;
+&nbsp;    protected long sessionValidationInterval;
+&nbsp;
+<b class="nc">&nbsp;    public AbstractValidatingSessionManager() {</b>
+<b class="nc">&nbsp;        this.sessionValidationSchedulerEnabled = true;</b>
+<b class="nc">&nbsp;        this.sessionValidationInterval = DEFAULT_SESSION_VALIDATION_INTERVAL;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isSessionValidationSchedulerEnabled() {
+<b class="nc">&nbsp;        return sessionValidationSchedulerEnabled;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    public void setSessionValidationSchedulerEnabled(boolean sessionValidationSchedulerEnabled) {
+<b class="nc">&nbsp;        this.sessionValidationSchedulerEnabled = sessionValidationSchedulerEnabled;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setSessionValidationScheduler(SessionValidationScheduler sessionValidationScheduler) {
+<b class="nc">&nbsp;        this.sessionValidationScheduler = sessionValidationScheduler;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SessionValidationScheduler getSessionValidationScheduler() {
+<b class="nc">&nbsp;        return sessionValidationScheduler;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void enableSessionValidationIfNecessary() {
+<b class="nc">&nbsp;        SessionValidationScheduler scheduler = getSessionValidationScheduler();</b>
+<b class="nc">&nbsp;        if (isSessionValidationSchedulerEnabled() &amp;&amp; (scheduler == null || !scheduler.isEnabled())) {</b>
+<b class="nc">&nbsp;            enableSessionValidation();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If using the underlying default &lt;tt&gt;SessionValidationScheduler&lt;/tt&gt; (that is, the
+&nbsp;     * {@link #setSessionValidationScheduler(SessionValidationScheduler) setSessionValidationScheduler} method is
+&nbsp;     * never called) , this method allows one to specify how
+&nbsp;     * frequently session should be validated (to check for orphans).  The default value is
+&nbsp;     * {@link #DEFAULT_SESSION_VALIDATION_INTERVAL}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If you override the default scheduler, it is assumed that overriding instance &#39;knows&#39; how often to
+&nbsp;     * validate sessions, and this attribute will be ignored.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Unless this method is called, the default value is {@link #DEFAULT_SESSION_VALIDATION_INTERVAL}.
+&nbsp;     *
+&nbsp;     * @param sessionValidationInterval the time in milliseconds between checking for valid sessions to reap orphans.
+&nbsp;     */
+&nbsp;    public void setSessionValidationInterval(long sessionValidationInterval) {
+<b class="nc">&nbsp;        this.sessionValidationInterval = sessionValidationInterval;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getSessionValidationInterval() {
+<b class="nc">&nbsp;        return sessionValidationInterval;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected final Session doGetSession(final SessionKey key) throws InvalidSessionException {
+<b class="nc">&nbsp;        enableSessionValidationIfNecessary();</b>
+&nbsp;
+<b class="nc">&nbsp;        log.trace(&quot;Attempting to retrieve session with key {}&quot;, key);</b>
+&nbsp;
+<b class="nc">&nbsp;        Session s = retrieveSession(key);</b>
+<b class="nc">&nbsp;        if (s != null) {</b>
+<b class="nc">&nbsp;            validate(s, key);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return s;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Looks up a session from the underlying data store based on the specified session key.
+&nbsp;     *
+&nbsp;     * @param key the session key to use to look up the target session.
+&nbsp;     * @return the session identified by {@code sessionId}.
+&nbsp;     * @throws UnknownSessionException if there is no session identified by {@code sessionId}.
+&nbsp;     */
+&nbsp;    protected abstract Session retrieveSession(SessionKey key) throws UnknownSessionException;
+&nbsp;
+&nbsp;    protected Session createSession(SessionContext context) throws AuthorizationException {
+<b class="nc">&nbsp;        enableSessionValidationIfNecessary();</b>
+<b class="nc">&nbsp;        return doCreateSession(context);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected abstract Session doCreateSession(SessionContext initData) throws AuthorizationException;
+&nbsp;
+&nbsp;    protected void validate(Session session, SessionKey key) throws InvalidSessionException {
+&nbsp;        try {
+<b class="nc">&nbsp;            doValidate(session);</b>
+<b class="nc">&nbsp;        } catch (ExpiredSessionException ese) {</b>
+<b class="nc">&nbsp;            onExpiration(session, ese, key);</b>
+<b class="nc">&nbsp;            throw ese;</b>
+<b class="nc">&nbsp;        } catch (InvalidSessionException ise) {</b>
+<b class="nc">&nbsp;            onInvalidation(session, ise, key);</b>
+<b class="nc">&nbsp;            throw ise;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void onExpiration(Session s, ExpiredSessionException ese, SessionKey key) {
+<b class="nc">&nbsp;        log.trace(&quot;Session with id [{}] has expired.&quot;, s.getId());</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            onExpiration(s);</b>
+<b class="nc">&nbsp;            notifyExpiration(s);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            afterExpired(s);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void onExpiration(Session session) {
+<b class="nc">&nbsp;        onChange(session);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void afterExpired(Session session) {
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    protected void onInvalidation(Session s, InvalidSessionException ise, SessionKey key) {
+<b class="nc">&nbsp;        if (ise instanceof ExpiredSessionException) {</b>
+<b class="nc">&nbsp;            onExpiration(s, (ExpiredSessionException) ise, key);</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        log.trace(&quot;Session with id [{}] is invalid.&quot;, s.getId());</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            onStop(s);</b>
+<b class="nc">&nbsp;            notifyStop(s);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            afterStopped(s);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void doValidate(Session session) throws InvalidSessionException {
+<b class="nc">&nbsp;        if (session instanceof ValidatingSession) {</b>
+<b class="nc">&nbsp;            ((ValidatingSession) session).validate();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String msg = &quot;The &quot; + getClass().getName() + &quot; implementation only supports validating &quot; +</b>
+<b class="nc">&nbsp;                    &quot;Session implementations of the &quot; + ValidatingSession.class.getName() + &quot; interface.  &quot; +</b>
+&nbsp;                    &quot;Please either implement this interface in your session implementation or override the &quot; +
+<b class="nc">&nbsp;                    AbstractValidatingSessionManager.class.getName() + &quot;.doValidate(Session) method to perform validation.&quot;;</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(msg);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Subclass template hook in case per-session timeout is not based on
+&nbsp;     * {@link org.apache.shiro.session.Session#getTimeout()}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;p&gt;This implementation merely returns {@link org.apache.shiro.session.Session#getTimeout()}&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param session the session for which to determine session timeout.
+&nbsp;     * @return the time in milliseconds the specified session may remain idle before expiring.
+&nbsp;     */
+&nbsp;    protected long getTimeout(Session session) {
+<b class="nc">&nbsp;        return session.getTimeout();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected SessionValidationScheduler createSessionValidationScheduler() {
+&nbsp;        ExecutorServiceSessionValidationScheduler scheduler;
+&nbsp;
+<b class="nc">&nbsp;        if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;            log.debug(&quot;No sessionValidationScheduler set.  Attempting to create default instance.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        scheduler = new ExecutorServiceSessionValidationScheduler(this);</b>
+<b class="nc">&nbsp;        scheduler.setInterval(getSessionValidationInterval());</b>
+<b class="nc">&nbsp;        if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;            log.trace(&quot;Created default SessionValidationScheduler instance of type [&quot; + scheduler.getClass().getName() + &quot;].&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return scheduler;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected synchronized void enableSessionValidation() {
+<b class="nc">&nbsp;        SessionValidationScheduler scheduler = getSessionValidationScheduler();</b>
+<b class="nc">&nbsp;        if (scheduler == null) {</b>
+<b class="nc">&nbsp;            scheduler = createSessionValidationScheduler();</b>
+<b class="nc">&nbsp;            setSessionValidationScheduler(scheduler);</b>
+&nbsp;        }
+&nbsp;        // it is possible that that a scheduler was already created and set via &#39;setSessionValidationScheduler()&#39;
+&nbsp;        // but would not have been enabled/started yet
+<b class="nc">&nbsp;        if (!scheduler.isEnabled()) {</b>
+<b class="nc">&nbsp;            if (log.isInfoEnabled()) {</b>
+<b class="nc">&nbsp;                log.info(&quot;Enabling session validation scheduler...&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            scheduler.enableSessionValidation();</b>
+<b class="nc">&nbsp;            afterSessionValidationEnabled();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void afterSessionValidationEnabled() {
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    protected synchronized void disableSessionValidation() {
+<b class="nc">&nbsp;        beforeSessionValidationDisabled();</b>
+<b class="nc">&nbsp;        SessionValidationScheduler scheduler = getSessionValidationScheduler();</b>
+<b class="nc">&nbsp;        if (scheduler != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                scheduler.disableSessionValidation();</b>
+<b class="nc">&nbsp;                if (log.isInfoEnabled()) {</b>
+<b class="nc">&nbsp;                    log.info(&quot;Disabled session validation scheduler.&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;                    String msg = &quot;Unable to disable SessionValidationScheduler.  Ignoring (shutting down)...&quot;;</b>
+<b class="nc">&nbsp;                    log.debug(msg, e);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            LifecycleUtils.destroy(scheduler);</b>
+<b class="nc">&nbsp;            setSessionValidationScheduler(null);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void beforeSessionValidationDisabled() {
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void destroy() {
+<b class="nc">&nbsp;        disableSessionValidation();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see ValidatingSessionManager#validateSessions()
+&nbsp;     */
+&nbsp;    public void validateSessions() {
+<b class="nc">&nbsp;        if (log.isInfoEnabled()) {</b>
+<b class="nc">&nbsp;            log.info(&quot;Validating all active sessions...&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int invalidCount = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        Collection&lt;Session&gt; activeSessions = getActiveSessions();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (activeSessions != null &amp;&amp; !activeSessions.isEmpty()) {</b>
+<b class="nc">&nbsp;            for (Session s : activeSessions) {</b>
+&nbsp;                try {
+&nbsp;                    //simulate a lookup key to satisfy the method signature.
+&nbsp;                    //this could probably stand to be cleaned up in future versions:
+<b class="nc">&nbsp;                    SessionKey key = new DefaultSessionKey(s.getId());</b>
+<b class="nc">&nbsp;                    validate(s, key);</b>
+<b class="nc">&nbsp;                } catch (InvalidSessionException e) {</b>
+<b class="nc">&nbsp;                    if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;                        boolean expired = (e instanceof ExpiredSessionException);</b>
+<b class="nc">&nbsp;                        String msg = &quot;Invalidated session with id [&quot; + s.getId() + &quot;]&quot; +</b>
+<b class="nc">&nbsp;                                (expired ? &quot; (expired)&quot; : &quot; (stopped)&quot;);</b>
+<b class="nc">&nbsp;                        log.debug(msg);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    invalidCount++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (log.isInfoEnabled()) {</b>
+<b class="nc">&nbsp;            String msg = &quot;Finished session validation.&quot;;</b>
+<b class="nc">&nbsp;            if (invalidCount &gt; 0) {</b>
+<b class="nc">&nbsp;                msg += &quot;  [&quot; + invalidCount + &quot;] sessions were stopped.&quot;;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                msg += &quot;  No sessions were stopped.&quot;;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            log.info(msg);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected abstract Collection&lt;Session&gt; getActiveSessions();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

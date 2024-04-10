@@ -1,0 +1,247 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractFilter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.web.servlet</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractFilter (org.apache.shiro.web.servlet)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractFilter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (5/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    36.8%
+  </span>
+  <span class="absValue">
+    (7/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.web.servlet;
+&nbsp;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import javax.servlet.Filter;
+&nbsp;import javax.servlet.FilterConfig;
+&nbsp;import javax.servlet.ServletException;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base abstract Filter simplifying Filter initialization and {@link #getInitParam(String) access} to init parameters.
+&nbsp; * Subclass initialization logic should be performed by overriding the {@link #onFilterConfigSet()} template method.
+&nbsp; * FilterChain execution logic (the
+&nbsp; * {@link #doFilter(javax.servlet.ServletRequest, javax.servlet.ServletResponse, javax.servlet.FilterChain)} method
+&nbsp; * is left to subclasses.
+&nbsp; *
+&nbsp; * @since 1.0
+&nbsp; */
+<b class="fc">&nbsp;public abstract class AbstractFilter extends ServletContextSupport implements Filter {</b>
+&nbsp;
+<b class="fc">&nbsp;    private static transient final Logger log = LoggerFactory.getLogger(AbstractFilter.class);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * FilterConfig provided by the Servlet container at start-up.
+&nbsp;     */
+&nbsp;    protected FilterConfig filterConfig;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the servlet container specified {@code FilterConfig} instance provided at
+&nbsp;     * {@link #init(javax.servlet.FilterConfig) startup}.
+&nbsp;     *
+&nbsp;     * @return the servlet container specified {@code FilterConfig} instance provided at start-up.
+&nbsp;     */
+&nbsp;    public FilterConfig getFilterConfig() {
+<b class="nc">&nbsp;        return filterConfig;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the FilterConfig &lt;em&gt;and&lt;/em&gt; the {@code ServletContext} as attributes of this class for use by
+&nbsp;     * subclasses.  That is:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * this.filterConfig = filterConfig;
+&nbsp;     * setServletContext(filterConfig.getServletContext());&lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param filterConfig the FilterConfig instance provided by the Servlet container at start-up.
+&nbsp;     */
+&nbsp;    public void setFilterConfig(FilterConfig filterConfig) {
+<b class="fc">&nbsp;        this.filterConfig = filterConfig;</b>
+<b class="fc">&nbsp;        setServletContext(filterConfig.getServletContext());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the value for the named {@code init-param}, or {@code null} if there was no {@code init-param}
+&nbsp;     * specified by that name.
+&nbsp;     *
+&nbsp;     * @param paramName the name of the {@code init-param}
+&nbsp;     * @return the value for the named {@code init-param}, or {@code null} if there was no {@code init-param}
+&nbsp;     *         specified by that name.
+&nbsp;     */
+&nbsp;    protected String getInitParam(String paramName) {
+<b class="nc">&nbsp;        FilterConfig config = getFilterConfig();</b>
+<b class="nc">&nbsp;        if (config != null) {</b>
+<b class="nc">&nbsp;            return StringUtils.clean(config.getInitParameter(paramName));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the filter&#39;s {@link #setFilterConfig filterConfig} and then immediately calls
+&nbsp;     * {@link #onFilterConfigSet() onFilterConfigSet()} to trigger any processing a subclass might wish to perform.
+&nbsp;     *
+&nbsp;     * @param filterConfig the servlet container supplied FilterConfig instance.
+&nbsp;     * @throws javax.servlet.ServletException if {@link #onFilterConfigSet() onFilterConfigSet()} throws an Exception.
+&nbsp;     */
+&nbsp;    public final void init(FilterConfig filterConfig) throws ServletException {
+<b class="fc">&nbsp;        setFilterConfig(filterConfig);</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            onFilterConfigSet();</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            if (e instanceof ServletException) {</b>
+<b class="nc">&nbsp;                throw (ServletException) e;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (log.isErrorEnabled()) {</b>
+<b class="nc">&nbsp;                    log.error(&quot;Unable to start Filter: [&quot; + e.getMessage() + &quot;].&quot;, e);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                throw new ServletException(e);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Template method to be overridden by subclasses to perform initialization logic at start-up.  The
+&nbsp;     * {@code ServletContext} and {@code FilterConfig} will be accessible
+&nbsp;     * (and non-{@code null}) at the time this method is invoked via the
+&nbsp;     * {@link #getServletContext() getServletContext()} and {@link #getFilterConfig() getFilterConfig()}
+&nbsp;     * methods respectively.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * {@code init-param} values may be conveniently obtained via the {@link #getInitParam(String)} method.
+&nbsp;     *
+&nbsp;     * @throws Exception if the subclass has an error upon initialization.
+&nbsp;     */
+&nbsp;    protected void onFilterConfigSet() throws Exception {
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default no-op implementation that can be overridden by subclasses for custom cleanup behavior.
+&nbsp;     */
+&nbsp;    public void destroy() {
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

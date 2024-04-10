@@ -1,0 +1,249 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NativeSessionManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.session.mgt</a>
+</div>
+
+<h1>Coverage Summary for Class: NativeSessionManager (org.apache.shiro.session.mgt)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">NativeSessionManager</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2008 Les Hazlewood
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.session.mgt;
+&nbsp;
+&nbsp;import org.apache.shiro.session.InvalidSessionException;
+&nbsp;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;/**
+&nbsp; * A {@code Native} session manager is one that manages sessions natively - that is, it is directly responsible
+&nbsp; * for the creation, persistence and removal of {@link org.apache.shiro.session.Session Session} instances and their
+&nbsp; * lifecycles.
+&nbsp; *
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public interface NativeSessionManager extends SessionManager {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the time the associated {@code Session} started (was created).
+&nbsp;     *
+&nbsp;     * @param key the session key to use to look up the target session.
+&nbsp;     * @return the time the specified {@code Session} started (was created).
+&nbsp;     * @see org.apache.shiro.session.Session#getStartTimestamp()
+&nbsp;     */
+&nbsp;    Date getStartTimestamp(SessionKey key);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the time the associated {@code Session} last interacted with the system.
+&nbsp;     *
+&nbsp;     * @param key the session key to use to look up the target session.
+&nbsp;     * @return time the session last accessed the system
+&nbsp;     * @see org.apache.shiro.session.Session#getLastAccessTime()
+&nbsp;     * @see org.apache.shiro.session.Session#touch()
+&nbsp;     */
+&nbsp;    Date getLastAccessTime(SessionKey key);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if the associated session is valid (it exists and is not stopped nor expired),
+&nbsp;     * {@code false} otherwise.
+&nbsp;     *
+&nbsp;     * @param key the session key to use to look up the target session.
+&nbsp;     * @return {@code true} if the session is valid (exists and is not stopped or expired), {@code false} otherwise.
+&nbsp;     */
+&nbsp;    boolean isValid(SessionKey key);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns quietly if the associated session is valid (it exists and is not stopped or expired) or throws
+&nbsp;     * an {@link org.apache.shiro.session.InvalidSessionException} indicating that the session id is invalid.  This
+&nbsp;     * might be preferred to be used instead of {@link #isValid} since any exception thrown will definitively explain
+&nbsp;     * the reason for invalidation.
+&nbsp;     *
+&nbsp;     * @param key the session key to use to look up the target session.
+&nbsp;     * @throws org.apache.shiro.session.InvalidSessionException
+&nbsp;     *          if the session id is invalid (it does not exist or it is stopped or expired).
+&nbsp;     */
+&nbsp;    void checkValid(SessionKey key) throws InvalidSessionException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the time in milliseconds that the associated session may remain idle before expiring.
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;A negative return value means the session will never expire.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;A non-negative return value (0 or greater) means the session expiration will occur if idle for that
+&nbsp;     * length of time.&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @param key the session key to use to look up the target session.
+&nbsp;     * @return the time in milliseconds that the associated session may remain idle before expiring.
+&nbsp;     * @throws org.apache.shiro.session.InvalidSessionException
+&nbsp;     *          if the session has been stopped or expired prior to calling this method.
+&nbsp;     */
+&nbsp;    long getTimeout(SessionKey key) throws InvalidSessionException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the time in milliseconds that the associated session may remain idle before expiring.
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;A negative return value means the session will never expire.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;A non-negative return value (0 or greater) means the session expiration will occur if idle for that
+&nbsp;     * length of time.&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @param key                 the session key to use to look up the target session.
+&nbsp;     * @param maxIdleTimeInMillis the time in milliseconds that the associated session may remain idle before expiring.
+&nbsp;     * @throws org.apache.shiro.session.InvalidSessionException
+&nbsp;     *          if the session has been stopped or expired prior to calling this method.
+&nbsp;     */
+&nbsp;    void setTimeout(SessionKey key, long maxIdleTimeInMillis) throws InvalidSessionException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Updates the last accessed time of the session identified by &lt;code&gt;sessionId&lt;/code&gt;.  This
+&nbsp;     * can be used to explicitly ensure that a session does not time out.
+&nbsp;     *
+&nbsp;     * @param key the session key to use to look up the target session.
+&nbsp;     * @throws org.apache.shiro.session.InvalidSessionException
+&nbsp;     *          if the session has been stopped or expired prior to calling this method.
+&nbsp;     * @see org.apache.shiro.session.Session#touch
+&nbsp;     */
+&nbsp;    void touch(SessionKey key) throws InvalidSessionException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the host name or IP string of the host where the session was started, if known.  If
+&nbsp;     * no host name or IP was specified when starting the session, this method returns {@code null}
+&nbsp;     *
+&nbsp;     * @param key the session key to use to look up the target session.
+&nbsp;     * @return the host name or ip address of the host where the session originated, if known.  If unknown,
+&nbsp;     *         this method returns {@code null}.
+&nbsp;     */
+&nbsp;    String getHost(SessionKey key);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Explicitly stops the associated session, thereby releasing all of its resources.
+&nbsp;     *
+&nbsp;     * @param key the session key to use to look up the target session.
+&nbsp;     * @throws InvalidSessionException if the session has stopped or expired prior to calling this method.
+&nbsp;     * @see org.apache.shiro.session.Session#stop
+&nbsp;     */
+&nbsp;    void stop(SessionKey key) throws InvalidSessionException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns all attribute keys maintained by the target session or an empty collection if there are no attributes.
+&nbsp;     *
+&nbsp;     * @param sessionKey the session key to use to look up the target session.
+&nbsp;     * @return all attribute keys maintained by the target session or an empty collection if there are no attributes.
+&nbsp;     * @throws InvalidSessionException if the associated session has stopped or expired prior to calling this method.
+&nbsp;     * @see org.apache.shiro.session.Session#getAttributeKeys()
+&nbsp;     */
+&nbsp;    Collection&lt;Object&gt; getAttributeKeys(SessionKey sessionKey);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the object bound to the associated session identified by the specified attribute key.  If there
+&nbsp;     * is no object bound under the attribute key for the given session, {@code null} is returned.
+&nbsp;     *
+&nbsp;     * @param sessionKey   session key to use to look up the target session.
+&nbsp;     * @param attributeKey the unique name of the object bound to the associated session
+&nbsp;     * @return the object bound under the {@code attributeKey} or {@code null} if there is no object bound.
+&nbsp;     * @throws InvalidSessionException if the specified session has stopped or expired prior to calling this method.
+&nbsp;     * @see org.apache.shiro.session.Session#getAttribute(Object key)
+&nbsp;     */
+&nbsp;    Object getAttribute(SessionKey sessionKey, Object attributeKey) throws InvalidSessionException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Binds the specified {@code value} to the associated session uniquely identified by the {@code attributeKey}.
+&nbsp;     * If there is already a session attribute bound under the {@code attributeKey}, that existing object will be
+&nbsp;     * replaced by the new {@code value}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If the {@code value} parameter is null, it has the same effect as if the
+&nbsp;     * {@link #removeAttribute(SessionKey sessionKey, Object attributeKey)} method was called.
+&nbsp;     *
+&nbsp;     * @param sessionKey   the session key to use to look up the target session.
+&nbsp;     * @param attributeKey the key under which the {@code value} object will be bound in this session
+&nbsp;     * @param value        the object to bind in this session.
+&nbsp;     * @throws InvalidSessionException if the specified session has stopped or expired prior to calling this method.
+&nbsp;     * @see org.apache.shiro.session.Session#setAttribute(Object key, Object value)
+&nbsp;     */
+&nbsp;    void setAttribute(SessionKey sessionKey, Object attributeKey, Object value) throws InvalidSessionException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes (unbinds) the object bound to associated {@code Session} under the given {@code attributeKey}.
+&nbsp;     *
+&nbsp;     * @param sessionKey   session key to use to look up the target session.
+&nbsp;     * @param attributeKey the key uniquely identifying the object to remove
+&nbsp;     * @return the object removed or {@code null} if there was no object bound under the specified {@code attributeKey}.
+&nbsp;     * @throws InvalidSessionException if the specified session has stopped or expired prior to calling this method.
+&nbsp;     * @see org.apache.shiro.session.Session#removeAttribute(Object key)
+&nbsp;     */
+&nbsp;    Object removeAttribute(SessionKey sessionKey, Object attributeKey) throws InvalidSessionException;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

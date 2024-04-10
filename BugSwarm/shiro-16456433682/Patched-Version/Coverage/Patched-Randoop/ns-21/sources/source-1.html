@@ -1,0 +1,428 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractNativeSessionManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.session.mgt</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractNativeSessionManager (org.apache.shiro.session.mgt)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractNativeSessionManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/80)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.session.mgt;
+&nbsp;
+&nbsp;import org.apache.shiro.authz.AuthorizationException;
+&nbsp;import org.apache.shiro.event.EventBus;
+&nbsp;import org.apache.shiro.event.EventBusAware;
+&nbsp;import org.apache.shiro.session.InvalidSessionException;
+&nbsp;import org.apache.shiro.session.Session;
+&nbsp;import org.apache.shiro.session.SessionException;
+&nbsp;import org.apache.shiro.session.SessionListener;
+&nbsp;import org.apache.shiro.session.UnknownSessionException;
+&nbsp;import org.apache.shiro.util.CollectionUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;/**
+&nbsp; * Abstract implementation supporting the {@link NativeSessionManager NativeSessionManager} interface, supporting
+&nbsp; * {@link SessionListener SessionListener}s and application of the
+&nbsp; * {@link #getGlobalSessionTimeout() globalSessionTimeout}.
+&nbsp; *
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public abstract class AbstractNativeSessionManager extends AbstractSessionManager implements NativeSessionManager, EventBusAware {
+&nbsp;
+<b class="nc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(AbstractSessionManager.class);</b>
+&nbsp;
+&nbsp;    private EventBus eventBus;
+&nbsp;
+&nbsp;    private Collection&lt;SessionListener&gt; listeners;
+&nbsp;
+<b class="nc">&nbsp;    public AbstractNativeSessionManager() {</b>
+<b class="nc">&nbsp;        this.listeners = new ArrayList&lt;SessionListener&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setSessionListeners(Collection&lt;SessionListener&gt; listeners) {
+<b class="nc">&nbsp;        this.listeners = listeners != null ? listeners : new ArrayList&lt;SessionListener&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    public Collection&lt;SessionListener&gt; getSessionListeners() {
+<b class="nc">&nbsp;        return this.listeners;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the EventBus used to publish SessionEvents.
+&nbsp;     *
+&nbsp;     * @return the EventBus used to publish SessionEvents.
+&nbsp;     * @since 1.3
+&nbsp;     */
+&nbsp;    protected EventBus getEventBus() {
+<b class="nc">&nbsp;        return eventBus;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the EventBus to use to publish SessionEvents.
+&nbsp;     *
+&nbsp;     * @param eventBus the EventBus to use to publish SessionEvents.
+&nbsp;     * @since 1.3
+&nbsp;     */
+&nbsp;    public void setEventBus(EventBus eventBus) {
+<b class="nc">&nbsp;        this.eventBus = eventBus;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Publishes events on the event bus if the event bus is non-null, otherwise does nothing.
+&nbsp;     *
+&nbsp;     * @param event the event to publish on the event bus if the event bus exists.
+&nbsp;     * @since 1.3
+&nbsp;     */
+&nbsp;    protected void publishEvent(Object event) {
+<b class="nc">&nbsp;        if (this.eventBus != null) {</b>
+<b class="nc">&nbsp;            this.eventBus.publish(event);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Session start(SessionContext context) {
+<b class="nc">&nbsp;        Session session = createSession(context);</b>
+<b class="nc">&nbsp;        applyGlobalSessionTimeout(session);</b>
+<b class="nc">&nbsp;        onStart(session, context);</b>
+<b class="nc">&nbsp;        notifyStart(session);</b>
+&nbsp;        //Don&#39;t expose the EIS-tier Session object to the client-tier:
+<b class="nc">&nbsp;        return createExposedSession(session, context);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new {@code Session Session} instance based on the specified (possibly {@code null})
+&nbsp;     * initialization data.  Implementing classes must manage the persistent state of the returned session such that it
+&nbsp;     * could later be acquired via the {@link #getSession(SessionKey)} method.
+&nbsp;     *
+&nbsp;     * @param context the initialization data that can be used by the implementation or underlying
+&nbsp;     *                {@link SessionFactory} when instantiating the internal {@code Session} instance.
+&nbsp;     * @return the new {@code Session} instance.
+&nbsp;     * @throws org.apache.shiro.authz.HostUnauthorizedException
+&nbsp;     *                                if the system access control policy restricts access based
+&nbsp;     *                                on client location/IP and the specified hostAddress hasn&#39;t been enabled.
+&nbsp;     * @throws AuthorizationException if the system access control policy does not allow the currently executing
+&nbsp;     *                                caller to start sessions.
+&nbsp;     */
+&nbsp;    protected abstract Session createSession(SessionContext context) throws AuthorizationException;
+&nbsp;
+&nbsp;    protected void applyGlobalSessionTimeout(Session session) {
+<b class="nc">&nbsp;        session.setTimeout(getGlobalSessionTimeout());</b>
+<b class="nc">&nbsp;        onChange(session);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Template method that allows subclasses to react to a new session being created.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This method is invoked &lt;em&gt;before&lt;/em&gt; any session listeners are notified.
+&nbsp;     *
+&nbsp;     * @param session the session that was just {@link #createSession created}.
+&nbsp;     * @param context the {@link SessionContext SessionContext} that was used to start the session.
+&nbsp;     */
+&nbsp;    protected void onStart(Session session, SessionContext context) {
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Session getSession(SessionKey key) throws SessionException {
+<b class="nc">&nbsp;        Session session = lookupSession(key);</b>
+<b class="nc">&nbsp;        return session != null ? createExposedSession(session, key) : null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Session lookupSession(SessionKey key) throws SessionException {
+<b class="nc">&nbsp;        if (key == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(&quot;SessionKey argument cannot be null.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return doGetSession(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Session lookupRequiredSession(SessionKey key) throws SessionException {
+<b class="nc">&nbsp;        Session session = lookupSession(key);</b>
+<b class="nc">&nbsp;        if (session == null) {</b>
+<b class="nc">&nbsp;            String msg = &quot;Unable to locate required Session instance based on SessionKey [&quot; + key + &quot;].&quot;;</b>
+<b class="nc">&nbsp;            throw new UnknownSessionException(msg);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return session;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected abstract Session doGetSession(SessionKey key) throws InvalidSessionException;
+&nbsp;
+&nbsp;    protected Session createExposedSession(Session session, SessionContext context) {
+<b class="nc">&nbsp;        return new DelegatingSession(this, new DefaultSessionKey(session.getId()));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Session createExposedSession(Session session, SessionKey key) {
+<b class="nc">&nbsp;        return new DelegatingSession(this, new DefaultSessionKey(session.getId()));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the session instance to use to pass to registered {@code SessionListener}s for notification
+&nbsp;     * that the session has been invalidated (stopped or expired).
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The default implementation returns an {@link ImmutableProxiedSession ImmutableProxiedSession} instance to ensure
+&nbsp;     * that the specified {@code session} argument is not modified by any listeners.
+&nbsp;     *
+&nbsp;     * @param session the {@code Session} object being invalidated.
+&nbsp;     * @return the {@code Session} instance to use to pass to registered {@code SessionListener}s for notification.
+&nbsp;     */
+&nbsp;    protected Session beforeInvalidNotification(Session session) {
+<b class="nc">&nbsp;        return new ImmutableProxiedSession(session);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Notifies any interested {@link SessionListener}s that a Session has started.  This method is invoked
+&nbsp;     * &lt;em&gt;after&lt;/em&gt; the {@link #onStart onStart} method is called.
+&nbsp;     *
+&nbsp;     * @param session the session that has just started that will be delivered to any
+&nbsp;     *                {@link #setSessionListeners(java.util.Collection) registered} session listeners.
+&nbsp;     * @see SessionListener#onStart(org.apache.shiro.session.Session)
+&nbsp;     */
+&nbsp;    protected void notifyStart(Session session) {
+<b class="nc">&nbsp;        for (SessionListener listener : this.listeners) {</b>
+<b class="nc">&nbsp;            listener.onStart(session);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void notifyStop(Session session) {
+<b class="nc">&nbsp;        Session forNotification = beforeInvalidNotification(session);</b>
+<b class="nc">&nbsp;        for (SessionListener listener : this.listeners) {</b>
+<b class="nc">&nbsp;            listener.onStop(forNotification);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void notifyExpiration(Session session) {
+<b class="nc">&nbsp;        Session forNotification = beforeInvalidNotification(session);</b>
+<b class="nc">&nbsp;        for (SessionListener listener : this.listeners) {</b>
+<b class="nc">&nbsp;            listener.onExpiration(forNotification);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Date getStartTimestamp(SessionKey key) {
+<b class="nc">&nbsp;        return lookupRequiredSession(key).getStartTimestamp();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Date getLastAccessTime(SessionKey key) {
+<b class="nc">&nbsp;        return lookupRequiredSession(key).getLastAccessTime();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getTimeout(SessionKey key) throws InvalidSessionException {
+<b class="nc">&nbsp;        return lookupRequiredSession(key).getTimeout();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setTimeout(SessionKey key, long maxIdleTimeInMillis) throws InvalidSessionException {
+<b class="nc">&nbsp;        Session s = lookupRequiredSession(key);</b>
+<b class="nc">&nbsp;        s.setTimeout(maxIdleTimeInMillis);</b>
+<b class="nc">&nbsp;        onChange(s);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void touch(SessionKey key) throws InvalidSessionException {
+<b class="nc">&nbsp;        Session s = lookupRequiredSession(key);</b>
+<b class="nc">&nbsp;        s.touch();</b>
+<b class="nc">&nbsp;        onChange(s);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getHost(SessionKey key) {
+<b class="nc">&nbsp;        return lookupRequiredSession(key).getHost();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Object&gt; getAttributeKeys(SessionKey key) {
+<b class="nc">&nbsp;        Collection&lt;Object&gt; c = lookupRequiredSession(key).getAttributeKeys();</b>
+<b class="nc">&nbsp;        if (!CollectionUtils.isEmpty(c)) {</b>
+<b class="nc">&nbsp;            return Collections.unmodifiableCollection(c);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Collections.emptySet();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object getAttribute(SessionKey sessionKey, Object attributeKey) throws InvalidSessionException {
+<b class="nc">&nbsp;        return lookupRequiredSession(sessionKey).getAttribute(attributeKey);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAttribute(SessionKey sessionKey, Object attributeKey, Object value) throws InvalidSessionException {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            removeAttribute(sessionKey, attributeKey);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            Session s = lookupRequiredSession(sessionKey);</b>
+<b class="nc">&nbsp;            s.setAttribute(attributeKey, value);</b>
+<b class="nc">&nbsp;            onChange(s);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object removeAttribute(SessionKey sessionKey, Object attributeKey) throws InvalidSessionException {
+<b class="nc">&nbsp;        Session s = lookupRequiredSession(sessionKey);</b>
+<b class="nc">&nbsp;        Object removed = s.removeAttribute(attributeKey);</b>
+<b class="nc">&nbsp;        if (removed != null) {</b>
+<b class="nc">&nbsp;            onChange(s);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return removed;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isValid(SessionKey key) {
+&nbsp;        try {
+<b class="nc">&nbsp;            checkValid(key);</b>
+<b class="nc">&nbsp;            return true;</b>
+<b class="nc">&nbsp;        } catch (InvalidSessionException e) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void stop(SessionKey key) throws InvalidSessionException {
+<b class="nc">&nbsp;        Session session = lookupRequiredSession(key);</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;                log.debug(&quot;Stopping session with id [&quot; + session.getId() + &quot;]&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            session.stop();</b>
+<b class="nc">&nbsp;            onStop(session, key);</b>
+<b class="nc">&nbsp;            notifyStop(session);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            afterStopped(session);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void onStop(Session session, SessionKey key) {
+<b class="nc">&nbsp;        onStop(session);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void onStop(Session session) {
+<b class="nc">&nbsp;        onChange(session);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void afterStopped(Session session) {
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void checkValid(SessionKey key) throws InvalidSessionException {
+&nbsp;        //just try to acquire it.  If there is a problem, an exception will be thrown:
+<b class="nc">&nbsp;        lookupRequiredSession(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void onChange(Session s) {
+<b class="nc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

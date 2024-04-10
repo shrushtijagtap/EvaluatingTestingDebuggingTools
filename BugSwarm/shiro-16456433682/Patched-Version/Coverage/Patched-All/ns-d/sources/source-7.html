@@ -1,0 +1,1302 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReflectionBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.config</a>
+</div>
+
+<h1>Coverage Summary for Class: ReflectionBuilder (org.apache.shiro.config)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReflectionBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    67.4%
+  </span>
+  <span class="absValue">
+    (31/46)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    28%
+  </span>
+  <span class="absValue">
+    (52/186)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    38.3%
+  </span>
+  <span class="absValue">
+    (118/308)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ReflectionBuilder$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ReflectionBuilder$AssignmentStatement</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ReflectionBuilder$BeanConfiguration</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (4/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72.7%
+  </span>
+  <span class="absValue">
+    (16/22)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ReflectionBuilder$BeanConfigurationProcessor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (9/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    73.5%
+  </span>
+  <span class="absValue">
+    (25/34)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ReflectionBuilder$InstantiationStatement</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ReflectionBuilder$Statement</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.8%
+  </span>
+  <span class="absValue">
+    (7/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (3/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    89.5%
+  </span>
+  <span class="absValue">
+    (17/19)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    73.7%
+  </span>
+  <span class="absValue">
+    (56/76)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    31.4%
+  </span>
+  <span class="absValue">
+    (69/220)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    46.3%
+  </span>
+  <span class="absValue">
+    (189/408)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.config;
+&nbsp;
+&nbsp;import java.beans.PropertyDescriptor;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.LinkedHashSet;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;import org.apache.commons.beanutils.BeanUtilsBean;
+&nbsp;import org.apache.commons.beanutils.ConvertUtilsBean;
+&nbsp;import org.apache.commons.beanutils.FluentPropertyBeanIntrospector;
+&nbsp;import org.apache.commons.beanutils.SuppressPropertiesBeanIntrospector;
+&nbsp;import org.apache.shiro.codec.Base64;
+&nbsp;import org.apache.shiro.codec.Hex;
+&nbsp;import org.apache.shiro.config.event.BeanEvent;
+&nbsp;import org.apache.shiro.config.event.ConfiguredBeanEvent;
+&nbsp;import org.apache.shiro.config.event.DestroyedBeanEvent;
+&nbsp;import org.apache.shiro.config.event.InitializedBeanEvent;
+&nbsp;import org.apache.shiro.config.event.InstantiatedBeanEvent;
+&nbsp;import org.apache.shiro.event.EventBus;
+&nbsp;import org.apache.shiro.event.EventBusAware;
+&nbsp;import org.apache.shiro.event.Subscribe;
+&nbsp;import org.apache.shiro.event.support.DefaultEventBus;
+&nbsp;import org.apache.shiro.util.Assert;
+&nbsp;import org.apache.shiro.util.ByteSource;
+&nbsp;import org.apache.shiro.util.ClassUtils;
+&nbsp;import org.apache.shiro.util.Factory;
+&nbsp;import org.apache.shiro.util.LifecycleUtils;
+&nbsp;import org.apache.shiro.util.Nameable;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Object builder that uses reflection and Apache Commons BeanUtils to build objects given a
+&nbsp; * map of &quot;property values&quot;.  Typically these come from the Shiro INI configuration and are used
+&nbsp; * to construct or modify the SecurityManager, its dependencies, and web-based security filters.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Recognizes {@link Factory} implementations and will call
+&nbsp; * {@link org.apache.shiro.util.Factory#getInstance() getInstance} to satisfy any reference to this bean.
+&nbsp; *
+&nbsp; * @since 0.9
+&nbsp; */
+<b class="fc">&nbsp;public class ReflectionBuilder {</b>
+&nbsp;
+&nbsp;    //TODO - complete JavaDoc
+&nbsp;
+<b class="fc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(ReflectionBuilder.class);</b>
+&nbsp;
+&nbsp;    private static final String OBJECT_REFERENCE_BEGIN_TOKEN = &quot;$&quot;;
+&nbsp;    private static final String ESCAPED_OBJECT_REFERENCE_BEGIN_TOKEN = &quot;\\$&quot;;
+&nbsp;    private static final String GLOBAL_PROPERTY_PREFIX = &quot;shiro&quot;;
+&nbsp;    private static final char MAP_KEY_VALUE_DELIMITER = &#39;:&#39;;
+&nbsp;    private static final String HEX_BEGIN_TOKEN = &quot;0x&quot;;
+&nbsp;    private static final String NULL_VALUE_TOKEN = &quot;null&quot;;
+&nbsp;    private static final String EMPTY_STRING_VALUE_TOKEN = &quot;\&quot;\&quot;&quot;;
+&nbsp;    private static final char STRING_VALUE_DELIMETER = &#39;&quot;&#39;;
+&nbsp;    private static final char MAP_PROPERTY_BEGIN_TOKEN = &#39;[&#39;;
+&nbsp;    private static final char MAP_PROPERTY_END_TOKEN = &#39;]&#39;;
+&nbsp;
+&nbsp;    private static final String EVENT_BUS_NAME = &quot;eventBus&quot;;
+&nbsp;
+&nbsp;    private final Map&lt;String, Object&gt; objects;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Interpolation allows for ${key} substitution of values.
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    private Interpolator interpolator;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.3
+&nbsp;     */
+&nbsp;    private EventBus eventBus;
+&nbsp;    /**
+&nbsp;     * Keeps track of event subscribers that were automatically registered by this ReflectionBuilder during
+&nbsp;     * object construction.  This is used in case a new EventBus is discovered during object graph
+&nbsp;     * construction:  upon discovery of the new EventBus, the existing subscribers will be unregistered from the
+&nbsp;     * old EventBus and then re-registered with the new EventBus.
+&nbsp;     *
+&nbsp;     * @since 1.3
+&nbsp;     */
+&nbsp;    private final Map&lt;String,Object&gt; registeredEventSubscribers;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    private final BeanUtilsBean beanUtilsBean;
+&nbsp;
+&nbsp;    //@since 1.3
+&nbsp;    private Map&lt;String,Object&gt; createDefaultObjectMap() {
+<b class="fc">&nbsp;        Map&lt;String,Object&gt; map = new LinkedHashMap&lt;String, Object&gt;();</b>
+<b class="fc">&nbsp;        map.put(EVENT_BUS_NAME, new DefaultEventBus());</b>
+<b class="fc">&nbsp;        return map;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ReflectionBuilder() {
+<b class="fc">&nbsp;        this(null);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public ReflectionBuilder(Map&lt;String, ?&gt; defaults) {</b>
+&nbsp;
+&nbsp;        // SHIRO-619
+&nbsp;        // SHIRO-739
+<b class="fc">&nbsp;        beanUtilsBean = new BeanUtilsBean(new ConvertUtilsBean() {</b>
+&nbsp;            @Override
+&nbsp;            public Object convert(String value, Class clazz) {
+<b class="pc">&nbsp;                if (clazz.isEnum()){</b>
+<b class="nc">&nbsp;                    return Enum.valueOf(clazz, value);</b>
+&nbsp;                }else{
+<b class="fc">&nbsp;                    return super.convert(value, clazz);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        });
+<b class="fc">&nbsp;        beanUtilsBean.getPropertyUtils().addBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);</b>
+<b class="fc">&nbsp;        beanUtilsBean.getPropertyUtils().addBeanIntrospector(new FluentPropertyBeanIntrospector());</b>
+&nbsp;
+<b class="fc">&nbsp;        this.interpolator = createInterpolator();</b>
+&nbsp;
+<b class="fc">&nbsp;        this.objects = createDefaultObjectMap();</b>
+<b class="fc">&nbsp;        this.registeredEventSubscribers = new LinkedHashMap&lt;String,Object&gt;();</b>
+<b class="fc">&nbsp;        apply(defaults);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void apply(Map&lt;String, ?&gt; objects) {
+<b class="fc">&nbsp;        if(!isEmpty(objects)) {</b>
+<b class="fc">&nbsp;            this.objects.putAll(objects);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        EventBus found = findEventBus(this.objects);</b>
+<b class="fc">&nbsp;        Assert.notNull(found, &quot;An &quot; + EventBus.class.getName() + &quot; instance must be present in the object defaults&quot;);</b>
+<b class="fc">&nbsp;        enableEvents(found);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;String, ?&gt; getObjects() {
+<b class="fc">&nbsp;        return objects;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param objects
+&nbsp;     */
+&nbsp;    public void setObjects(Map&lt;String, ?&gt; objects) {
+<b class="fc">&nbsp;        this.objects.clear();</b>
+<b class="fc">&nbsp;        this.objects.putAll(createDefaultObjectMap());</b>
+<b class="fc">&nbsp;        apply(objects);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //@since 1.3
+&nbsp;    private void enableEvents(EventBus eventBus) {
+<b class="fc">&nbsp;        Assert.notNull(eventBus, &quot;EventBus argument cannot be null.&quot;);</b>
+&nbsp;        //clean up old auto-registered subscribers:
+<b class="pc">&nbsp;        for (Object subscriber : this.registeredEventSubscribers.values()) {</b>
+<b class="nc">&nbsp;            this.eventBus.unregister(subscriber);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.registeredEventSubscribers.clear();</b>
+&nbsp;
+<b class="fc">&nbsp;        this.eventBus = eventBus;</b>
+&nbsp;
+<b class="fc">&nbsp;        for(Map.Entry&lt;String,Object&gt; entry : this.objects.entrySet()) {</b>
+<b class="fc">&nbsp;            enableEventsIfNecessary(entry.getValue(), entry.getKey());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //@since 1.3
+&nbsp;    private void enableEventsIfNecessary(Object bean, String name) {
+<b class="fc">&nbsp;        boolean applied = applyEventBusIfNecessary(bean);</b>
+<b class="fc">&nbsp;        if (!applied) {</b>
+&nbsp;            //if the event bus is applied, and the bean wishes to be a subscriber as well (not just a publisher),
+&nbsp;            // we assume that the implementation registers itself with the event bus, i.e. eventBus.register(this);
+&nbsp;
+&nbsp;            //if the event bus isn&#39;t applied, only then do we need to check to see if the bean is an event subscriber,
+&nbsp;            // and if so, register it on the event bus automatically since it has no ability to do so itself:
+<b class="pc">&nbsp;            if (isEventSubscriber(bean, name)) {</b>
+&nbsp;                //found an event subscriber, so register them with the EventBus:
+<b class="nc">&nbsp;                this.eventBus.register(bean);</b>
+<b class="nc">&nbsp;                this.registeredEventSubscribers.put(name, bean);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //@since 1.3
+&nbsp;    private boolean isEventSubscriber(Object bean, String name) {
+<b class="fc">&nbsp;        List annotatedMethods = ClassUtils.getAnnotatedMethods(bean.getClass(), Subscribe.class);</b>
+<b class="fc">&nbsp;        return !isEmpty(annotatedMethods);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //@since 1.3
+&nbsp;    protected EventBus findEventBus(Map&lt;String,?&gt; objects) {
+&nbsp;
+<b class="pc">&nbsp;        if (isEmpty(objects)) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //prefer a named object first:
+<b class="fc">&nbsp;        Object value = objects.get(EVENT_BUS_NAME);</b>
+<b class="pc">&nbsp;        if (value != null &amp;&amp; value instanceof EventBus) {</b>
+<b class="fc">&nbsp;            return (EventBus)value;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //couldn&#39;t find a named &#39;eventBus&#39; EventBus object.  Try to find the first typed value we can:
+<b class="nc">&nbsp;        for( Object v : objects.values()) {</b>
+<b class="nc">&nbsp;            if (v instanceof EventBus) {</b>
+<b class="nc">&nbsp;                return (EventBus)v;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean applyEventBusIfNecessary(Object value) {
+<b class="fc">&nbsp;        if (value instanceof EventBusAware) {</b>
+<b class="fc">&nbsp;            ((EventBusAware)value).setEventBus(this.eventBus);</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object getBean(String id) {
+<b class="fc">&nbsp;        return objects.get(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings({&quot;unchecked&quot;})
+&nbsp;    public &lt;T&gt; T getBean(String id, Class&lt;T&gt; requiredType) {
+<b class="pc">&nbsp;        if (requiredType == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(&quot;requiredType argument cannot be null.&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Object bean = getBean(id);</b>
+<b class="pc">&nbsp;        if (bean == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Assert.state(requiredType.isAssignableFrom(bean.getClass()),</b>
+<b class="fc">&nbsp;                &quot;Bean with id [&quot; + id + &quot;] is not of the required type [&quot; + requiredType.getName() + &quot;].&quot;);</b>
+<b class="fc">&nbsp;        return (T) bean;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String parseBeanId(String lhs) {
+<b class="fc">&nbsp;        Assert.notNull(lhs);</b>
+<b class="pc">&nbsp;        if (lhs.indexOf(&#39;.&#39;) &lt; 0) {</b>
+<b class="nc">&nbsp;            return lhs;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        String classSuffix = &quot;.class&quot;;</b>
+<b class="fc">&nbsp;        int index = lhs.indexOf(classSuffix);</b>
+<b class="pc">&nbsp;        if (index &gt;= 0) {</b>
+<b class="nc">&nbsp;            return lhs.substring(0, index);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings({&quot;unchecked&quot;})
+&nbsp;    public Map&lt;String, ?&gt; buildObjects(Map&lt;String, String&gt; kvPairs) {
+&nbsp;
+<b class="pc">&nbsp;        if (kvPairs != null &amp;&amp; !kvPairs.isEmpty()) {</b>
+&nbsp;
+<b class="fc">&nbsp;            BeanConfigurationProcessor processor = new BeanConfigurationProcessor();</b>
+&nbsp;
+<b class="fc">&nbsp;            for (Map.Entry&lt;String, String&gt; entry : kvPairs.entrySet()) {</b>
+<b class="fc">&nbsp;                String lhs = entry.getKey();</b>
+<b class="fc">&nbsp;                String rhs = interpolator.interpolate(entry.getValue());</b>
+&nbsp;
+<b class="fc">&nbsp;                String beanId = parseBeanId(lhs);</b>
+<b class="pc">&nbsp;                if (beanId != null) { //a beanId could be parsed, so the line is a bean instance definition</b>
+<b class="nc">&nbsp;                    processor.add(new InstantiationStatement(beanId, rhs));</b>
+&nbsp;                } else { //the line must be a property configuration
+<b class="fc">&nbsp;                    processor.add(new AssignmentStatement(lhs, rhs));</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            processor.execute();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //SHIRO-413: init method must be called for constructed objects that are Initializable
+<b class="fc">&nbsp;        LifecycleUtils.init(objects.values());</b>
+&nbsp;
+<b class="fc">&nbsp;        return objects;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void destroy() {
+<b class="nc">&nbsp;        final Map&lt;String, Object&gt; immutableObjects = Collections.unmodifiableMap(objects);</b>
+&nbsp;
+&nbsp;        //destroy objects in the opposite order they were initialized:
+<b class="nc">&nbsp;        List&lt;Map.Entry&lt;String,?&gt;&gt; entries = new ArrayList&lt;Map.Entry&lt;String,?&gt;&gt;(objects.entrySet());</b>
+<b class="nc">&nbsp;        Collections.reverse(entries);</b>
+&nbsp;
+<b class="nc">&nbsp;        for(Map.Entry&lt;String, ?&gt; entry: entries) {</b>
+<b class="nc">&nbsp;            String id = entry.getKey();</b>
+<b class="nc">&nbsp;            Object bean = entry.getValue();</b>
+&nbsp;
+&nbsp;            //don&#39;t destroy the eventbus until the end - we need it to still be &#39;alive&#39; while publishing destroy events:
+<b class="nc">&nbsp;            if (bean != this.eventBus) { //memory equality check (not .equals) on purpose</b>
+<b class="nc">&nbsp;                LifecycleUtils.destroy(bean);</b>
+<b class="nc">&nbsp;                BeanEvent event = new DestroyedBeanEvent(id, bean, immutableObjects);</b>
+<b class="nc">&nbsp;                eventBus.publish(event);</b>
+<b class="nc">&nbsp;                this.eventBus.unregister(bean); //bean is now destroyed - it should not receive any other events</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        //only now destroy the event bus:
+<b class="nc">&nbsp;        LifecycleUtils.destroy(this.eventBus);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void createNewInstance(Map&lt;String, Object&gt; objects, String name, String value) {
+&nbsp;
+<b class="nc">&nbsp;        Object currentInstance = objects.get(name);</b>
+<b class="nc">&nbsp;        if (currentInstance != null) {</b>
+<b class="nc">&nbsp;            log.info(&quot;An instance with name &#39;{}&#39; already exists.  &quot; +</b>
+&nbsp;                    &quot;Redefining this object as a new instance of type {}&quot;, name, value);
+&nbsp;        }
+&nbsp;
+&nbsp;        Object instance;//name with no property, assume right hand side of equals sign is the class name:
+&nbsp;        try {
+<b class="nc">&nbsp;            instance = ClassUtils.newInstance(value);</b>
+<b class="nc">&nbsp;            if (instance instanceof Nameable) {</b>
+<b class="nc">&nbsp;                ((Nameable) instance).setName(name);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            String msg = &quot;Unable to instantiate class [&quot; + value + &quot;] for object named &#39;&quot; + name + &quot;&#39;.  &quot; +</b>
+&nbsp;                    &quot;Please ensure you&#39;ve specified the fully qualified class name correctly.&quot;;
+<b class="nc">&nbsp;            throw new ConfigurationException(msg, e);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        objects.put(name, instance);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void applyProperty(String key, String value, Map objects) {
+&nbsp;
+<b class="fc">&nbsp;        int index = key.indexOf(&#39;.&#39;);</b>
+&nbsp;
+<b class="pc">&nbsp;        if (index &gt;= 0) {</b>
+<b class="fc">&nbsp;            String name = key.substring(0, index);</b>
+<b class="fc">&nbsp;            String property = key.substring(index + 1, key.length());</b>
+&nbsp;
+<b class="pc">&nbsp;            if (GLOBAL_PROPERTY_PREFIX.equalsIgnoreCase(name)) {</b>
+<b class="nc">&nbsp;                applyGlobalProperty(objects, property, value);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                applySingleProperty(objects, name, property, value);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;All property keys must contain a &#39;.&#39; character. &quot; +</b>
+&nbsp;                    &quot;(e.g. myBean.property = value)  These should already be separated out by buildObjects().&quot;);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void applyGlobalProperty(Map objects, String property, String value) {
+<b class="nc">&nbsp;        for (Object instance : objects.values()) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                PropertyDescriptor pd = beanUtilsBean.getPropertyUtils().getPropertyDescriptor(instance, property);</b>
+<b class="nc">&nbsp;                if (pd != null) {</b>
+<b class="nc">&nbsp;                    applyProperty(instance, property, value);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                String msg = &quot;Error retrieving property descriptor for instance &quot; +</b>
+<b class="nc">&nbsp;                        &quot;of type [&quot; + instance.getClass().getName() + &quot;] &quot; +</b>
+&nbsp;                        &quot;while setting property [&quot; + property + &quot;]&quot;;
+<b class="nc">&nbsp;                throw new ConfigurationException(msg, e);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void applySingleProperty(Map objects, String name, String property, String value) {
+<b class="fc">&nbsp;        Object instance = objects.get(name);</b>
+<b class="pc">&nbsp;        if (property.equals(&quot;class&quot;)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Property keys should not contain &#39;class&#39; properties since these &quot; +</b>
+&nbsp;                    &quot;should already be separated out by buildObjects().&quot;);
+&nbsp;
+<b class="pc">&nbsp;        } else if (instance == null) {</b>
+<b class="nc">&nbsp;            String msg = &quot;Configuration error.  Specified object [&quot; + name + &quot;] with property [&quot; +</b>
+&nbsp;                    property + &quot;] without first defining that object&#39;s class.  Please first &quot; +
+&nbsp;                    &quot;specify the class property first, e.g. myObject = fully_qualified_class_name &quot; +
+&nbsp;                    &quot;and then define additional properties.&quot;;
+<b class="nc">&nbsp;            throw new IllegalArgumentException(msg);</b>
+&nbsp;
+&nbsp;        } else {
+<b class="fc">&nbsp;            applyProperty(instance, property, value);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean isReference(String value) {
+<b class="pc">&nbsp;        return value != null &amp;&amp; value.startsWith(OBJECT_REFERENCE_BEGIN_TOKEN);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected String getId(String referenceToken) {
+<b class="nc">&nbsp;        return referenceToken.substring(OBJECT_REFERENCE_BEGIN_TOKEN.length());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Object getReferencedObject(String id) {
+<b class="nc">&nbsp;        Object o = objects != null &amp;&amp; !objects.isEmpty() ? objects.get(id) : null;</b>
+<b class="nc">&nbsp;        if (o == null) {</b>
+<b class="nc">&nbsp;            String msg = &quot;The object with id [&quot; + id + &quot;] has not yet been defined and therefore cannot be &quot; +</b>
+&nbsp;                    &quot;referenced.  Please ensure objects are defined in the order in which they should be &quot; +
+&nbsp;                    &quot;created and made available for future reference.&quot;;
+<b class="nc">&nbsp;            throw new UnresolveableReferenceException(msg);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return o;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected String unescapeIfNecessary(String value) {
+<b class="pc">&nbsp;        if (value != null &amp;&amp; value.startsWith(ESCAPED_OBJECT_REFERENCE_BEGIN_TOKEN)) {</b>
+<b class="nc">&nbsp;            return value.substring(ESCAPED_OBJECT_REFERENCE_BEGIN_TOKEN.length() - 1);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Object resolveReference(String reference) {
+<b class="nc">&nbsp;        String id = getId(reference);</b>
+<b class="nc">&nbsp;        log.debug(&quot;Encountered object reference &#39;{}&#39;.  Looking up object with id &#39;{}&#39;&quot;, reference, id);</b>
+<b class="nc">&nbsp;        final Object referencedObject = getReferencedObject(id);</b>
+<b class="nc">&nbsp;        if (referencedObject instanceof Factory) {</b>
+<b class="nc">&nbsp;            return ((Factory) referencedObject).getInstance();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return referencedObject;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean isTypedProperty(Object object, String propertyName, Class clazz) {
+<b class="pc">&nbsp;        if (clazz == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(&quot;type (class) argument cannot be null.&quot;);</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="fc">&nbsp;            PropertyDescriptor descriptor = beanUtilsBean.getPropertyUtils().getPropertyDescriptor(object, propertyName);</b>
+<b class="pc">&nbsp;            if (descriptor == null) {</b>
+<b class="nc">&nbsp;                String msg = &quot;Property &#39;&quot; + propertyName + &quot;&#39; does not exist for object of &quot; +</b>
+<b class="nc">&nbsp;                        &quot;type &quot; + object.getClass().getName() + &quot;.&quot;;</b>
+<b class="nc">&nbsp;                throw new ConfigurationException(msg);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            Class propertyClazz = descriptor.getPropertyType();</b>
+<b class="fc">&nbsp;            return clazz.isAssignableFrom(propertyClazz);</b>
+<b class="nc">&nbsp;        } catch (ConfigurationException ce) {</b>
+&nbsp;            //let it propagate:
+<b class="nc">&nbsp;            throw ce;</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            String msg = &quot;Unable to determine if property [&quot; + propertyName + &quot;] represents a &quot; + clazz.getName();</b>
+<b class="nc">&nbsp;            throw new ConfigurationException(msg, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Set&lt;?&gt; toSet(String sValue) {
+<b class="nc">&nbsp;        String[] tokens = StringUtils.split(sValue);</b>
+<b class="nc">&nbsp;        if (tokens == null || tokens.length &lt;= 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //SHIRO-423: check to see if the value is a referenced Set already, and if so, return it immediately:
+<b class="nc">&nbsp;        if (tokens.length == 1 &amp;&amp; isReference(tokens[0])) {</b>
+<b class="nc">&nbsp;            Object reference = resolveReference(tokens[0]);</b>
+<b class="nc">&nbsp;            if (reference instanceof Set) {</b>
+<b class="nc">&nbsp;                return (Set)reference;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Set&lt;String&gt; setTokens = new LinkedHashSet&lt;String&gt;(Arrays.asList(tokens));</b>
+&nbsp;
+&nbsp;        //now convert into correct values and/or references:
+<b class="nc">&nbsp;        Set&lt;Object&gt; values = new LinkedHashSet&lt;Object&gt;(setTokens.size());</b>
+<b class="nc">&nbsp;        for (String token : setTokens) {</b>
+<b class="nc">&nbsp;            Object value = resolveValue(token);</b>
+<b class="nc">&nbsp;            values.add(value);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return values;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Map&lt;?, ?&gt; toMap(String sValue) {
+<b class="nc">&nbsp;        String[] tokens = StringUtils.split(sValue, StringUtils.DEFAULT_DELIMITER_CHAR,</b>
+&nbsp;                StringUtils.DEFAULT_QUOTE_CHAR, StringUtils.DEFAULT_QUOTE_CHAR, true, true);
+<b class="nc">&nbsp;        if (tokens == null || tokens.length &lt;= 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //SHIRO-423: check to see if the value is a referenced Map already, and if so, return it immediately:
+<b class="nc">&nbsp;        if (tokens.length == 1 &amp;&amp; isReference(tokens[0])) {</b>
+<b class="nc">&nbsp;            Object reference = resolveReference(tokens[0]);</b>
+<b class="nc">&nbsp;            if (reference instanceof Map) {</b>
+<b class="nc">&nbsp;                return (Map)reference;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Map&lt;String, String&gt; mapTokens = new LinkedHashMap&lt;String, String&gt;(tokens.length);</b>
+<b class="nc">&nbsp;        for (String token : tokens) {</b>
+<b class="nc">&nbsp;            String[] kvPair = StringUtils.split(token, MAP_KEY_VALUE_DELIMITER);</b>
+<b class="nc">&nbsp;            if (kvPair == null || kvPair.length != 2) {</b>
+<b class="nc">&nbsp;                String msg = &quot;Map property value [&quot; + sValue + &quot;] contained key-value pair token [&quot; +</b>
+&nbsp;                        token + &quot;] that does not properly split to a single key and pair.  This must be the &quot; +
+&nbsp;                        &quot;case for all map entries.&quot;;
+<b class="nc">&nbsp;                throw new ConfigurationException(msg);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            mapTokens.put(kvPair[0], kvPair[1]);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //now convert into correct values and/or references:
+<b class="nc">&nbsp;        Map&lt;Object, Object&gt; map = new LinkedHashMap&lt;Object, Object&gt;(mapTokens.size());</b>
+<b class="nc">&nbsp;        for (Map.Entry&lt;String, String&gt; entry : mapTokens.entrySet()) {</b>
+<b class="nc">&nbsp;            Object key = resolveValue(entry.getKey());</b>
+<b class="nc">&nbsp;            Object value = resolveValue(entry.getValue());</b>
+<b class="nc">&nbsp;            map.put(key, value);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return map;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // @since 1.2.2
+&nbsp;    protected Collection&lt;?&gt; toCollection(String sValue) {
+&nbsp;
+<b class="nc">&nbsp;        String[] tokens = StringUtils.split(sValue);</b>
+<b class="nc">&nbsp;        if (tokens == null || tokens.length &lt;= 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //SHIRO-423: check to see if the value is a referenced Collection already, and if so, return it immediately:
+<b class="nc">&nbsp;        if (tokens.length == 1 &amp;&amp; isReference(tokens[0])) {</b>
+<b class="nc">&nbsp;            Object reference = resolveReference(tokens[0]);</b>
+<b class="nc">&nbsp;            if (reference instanceof Collection) {</b>
+<b class="nc">&nbsp;                return (Collection)reference;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        //now convert into correct values and/or references:
+<b class="nc">&nbsp;        List&lt;Object&gt; values = new ArrayList&lt;Object&gt;(tokens.length);</b>
+<b class="nc">&nbsp;        for (String token : tokens) {</b>
+<b class="nc">&nbsp;            Object value = resolveValue(token);</b>
+<b class="nc">&nbsp;            values.add(value);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return values;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected List&lt;?&gt; toList(String sValue) {
+<b class="nc">&nbsp;        String[] tokens = StringUtils.split(sValue);</b>
+<b class="nc">&nbsp;        if (tokens == null || tokens.length &lt;= 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //SHIRO-423: check to see if the value is a referenced List already, and if so, return it immediately:
+<b class="nc">&nbsp;        if (tokens.length == 1 &amp;&amp; isReference(tokens[0])) {</b>
+<b class="nc">&nbsp;            Object reference = resolveReference(tokens[0]);</b>
+<b class="nc">&nbsp;            if (reference instanceof List) {</b>
+<b class="nc">&nbsp;                return (List)reference;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        //now convert into correct values and/or references:
+<b class="nc">&nbsp;        List&lt;Object&gt; values = new ArrayList&lt;Object&gt;(tokens.length);</b>
+<b class="nc">&nbsp;        for (String token : tokens) {</b>
+<b class="nc">&nbsp;            Object value = resolveValue(token);</b>
+<b class="nc">&nbsp;            values.add(value);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return values;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected byte[] toBytes(String sValue) {
+<b class="nc">&nbsp;        if (sValue == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        byte[] bytes;
+<b class="nc">&nbsp;        if (sValue.startsWith(HEX_BEGIN_TOKEN)) {</b>
+<b class="nc">&nbsp;            String hex = sValue.substring(HEX_BEGIN_TOKEN.length());</b>
+<b class="nc">&nbsp;            bytes = Hex.decode(hex);</b>
+&nbsp;        } else {
+&nbsp;            //assume base64 encoded:
+<b class="nc">&nbsp;            bytes = Base64.decode(sValue);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return bytes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Object resolveValue(String stringValue) {
+&nbsp;        Object value;
+<b class="pc">&nbsp;        if (isReference(stringValue)) {</b>
+<b class="nc">&nbsp;            value = resolveReference(stringValue);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            value = unescapeIfNecessary(stringValue);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected String checkForNullOrEmptyLiteral(String stringValue) {
+<b class="pc">&nbsp;        if (stringValue == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        //check if the value is the actual literal string &#39;null&#39; (expected to be wrapped in quotes):
+<b class="pc">&nbsp;        if (stringValue.equals(&quot;\&quot;null\&quot;&quot;)) {</b>
+<b class="nc">&nbsp;            return NULL_VALUE_TOKEN;</b>
+&nbsp;        }
+&nbsp;        //or the actual literal string of two quotes &#39;&quot;&quot;&#39; (expected to be wrapped in quotes):
+<b class="pc">&nbsp;        else if (stringValue.equals(&quot;\&quot;\&quot;\&quot;\&quot;&quot;)) {</b>
+<b class="nc">&nbsp;            return EMPTY_STRING_VALUE_TOKEN;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return stringValue;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    protected void applyProperty(Object object, String propertyPath, Object value) {
+&nbsp;
+<b class="fc">&nbsp;        int mapBegin = propertyPath.indexOf(MAP_PROPERTY_BEGIN_TOKEN);</b>
+<b class="fc">&nbsp;        int mapEnd = -1;</b>
+<b class="fc">&nbsp;        String mapPropertyPath = null;</b>
+<b class="fc">&nbsp;        String keyString = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        String remaining = null;</b>
+&nbsp;        
+<b class="pc">&nbsp;        if (mapBegin &gt;= 0) {</b>
+&nbsp;            //a map is being referenced in the overall property path.  Find just the map&#39;s path:
+<b class="nc">&nbsp;            mapPropertyPath = propertyPath.substring(0, mapBegin);</b>
+&nbsp;            //find the end of the map reference:
+<b class="nc">&nbsp;            mapEnd = propertyPath.indexOf(MAP_PROPERTY_END_TOKEN, mapBegin);</b>
+&nbsp;            //find the token in between the [ and the ] (the map/array key or index):
+<b class="nc">&nbsp;            keyString = propertyPath.substring(mapBegin+1, mapEnd);</b>
+&nbsp;
+&nbsp;            //find out if there is more path reference to follow.  If not, we&#39;re at a terminal of the OGNL expression
+<b class="nc">&nbsp;            if (propertyPath.length() &gt; (mapEnd+1)) {</b>
+<b class="nc">&nbsp;                remaining = propertyPath.substring(mapEnd+1);</b>
+<b class="nc">&nbsp;                if (remaining.startsWith(&quot;.&quot;)) {</b>
+<b class="nc">&nbsp;                    remaining = StringUtils.clean(remaining.substring(1));</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;        
+<b class="pc">&nbsp;        if (remaining == null) {</b>
+&nbsp;            //we&#39;ve terminated the OGNL expression.  Check to see if we&#39;re assigning a property or a map entry:
+<b class="pc">&nbsp;            if (keyString == null) {</b>
+&nbsp;                //not a map or array value assignment - assign the property directly:
+<b class="fc">&nbsp;                setProperty(object, propertyPath, value);</b>
+&nbsp;            } else {
+&nbsp;                //we&#39;re assigning a map or array entry.  Check to see which we should call:
+<b class="nc">&nbsp;                if (isTypedProperty(object, mapPropertyPath, Map.class)) {</b>
+<b class="nc">&nbsp;                    Map map = (Map)getProperty(object, mapPropertyPath);</b>
+<b class="nc">&nbsp;                    Object mapKey = resolveValue(keyString);</b>
+&nbsp;                    //noinspection unchecked
+<b class="nc">&nbsp;                    map.put(mapKey, value);</b>
+&nbsp;                } else {
+&nbsp;                    //must be an array property.  Convert the key string to an index:
+<b class="nc">&nbsp;                    int index = Integer.valueOf(keyString);</b>
+<b class="nc">&nbsp;                    setIndexedProperty(object, mapPropertyPath, index, value);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        } else {
+&nbsp;            //property is being referenced as part of a nested path.  Find the referenced map/array entry and
+&nbsp;            //recursively call this method with the remaining property path
+<b class="nc">&nbsp;            Object referencedValue = null;</b>
+<b class="nc">&nbsp;            if (isTypedProperty(object, mapPropertyPath, Map.class)) {</b>
+<b class="nc">&nbsp;                Map map = (Map)getProperty(object, mapPropertyPath);</b>
+<b class="nc">&nbsp;                Object mapKey = resolveValue(keyString);</b>
+<b class="nc">&nbsp;                referencedValue = map.get(mapKey);</b>
+&nbsp;            } else {
+&nbsp;                //must be an array property:
+<b class="nc">&nbsp;                int index = Integer.valueOf(keyString);</b>
+<b class="nc">&nbsp;                referencedValue = getIndexedProperty(object, mapPropertyPath, index);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (referencedValue == null) {</b>
+<b class="nc">&nbsp;                throw new ConfigurationException(&quot;Referenced map/array value &#39;&quot; + mapPropertyPath + &quot;[&quot; +</b>
+&nbsp;                keyString + &quot;]&#39; does not exist.&quot;);
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            applyProperty(referencedValue, remaining, value);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    private void setProperty(Object object, String propertyPath, Object value) {
+&nbsp;        try {
+<b class="pc">&nbsp;            if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;                log.trace(&quot;Applying property [{}] value [{}] on object of type [{}]&quot;,</b>
+<b class="nc">&nbsp;                        new Object[]{propertyPath, value, object.getClass().getName()});</b>
+&nbsp;            }
+<b class="fc">&nbsp;            beanUtilsBean.setProperty(object, propertyPath, value);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            String msg = &quot;Unable to set property &#39;&quot; + propertyPath + &quot;&#39; with value [&quot; + value + &quot;] on object &quot; +</b>
+<b class="nc">&nbsp;                    &quot;of type &quot; + (object != null ? object.getClass().getName() : null) + &quot;.  If &quot; +</b>
+&nbsp;                    &quot;&#39;&quot; + value + &quot;&#39; is a reference to another (previously defined) object, prefix it with &quot; +
+&nbsp;                    &quot;&#39;&quot; + OBJECT_REFERENCE_BEGIN_TOKEN + &quot;&#39; to indicate that the referenced &quot; +
+&nbsp;                    &quot;object should be used as the actual value.  &quot; +
+&nbsp;                    &quot;For example, &quot; + OBJECT_REFERENCE_BEGIN_TOKEN + value;
+<b class="nc">&nbsp;            throw new ConfigurationException(msg, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    private Object getProperty(Object object, String propertyPath) {
+&nbsp;        try {
+<b class="nc">&nbsp;            return beanUtilsBean.getPropertyUtils().getProperty(object, propertyPath);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new ConfigurationException(&quot;Unable to access property &#39;&quot; + propertyPath + &quot;&#39;&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    private void setIndexedProperty(Object object, String propertyPath, int index, Object value) {
+&nbsp;        try {
+<b class="nc">&nbsp;            beanUtilsBean.getPropertyUtils().setIndexedProperty(object, propertyPath, index, value);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new ConfigurationException(&quot;Unable to set array property &#39;&quot; + propertyPath + &quot;&#39;&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    private Object getIndexedProperty(Object object, String propertyPath, int index) {
+&nbsp;        try {
+<b class="nc">&nbsp;            return beanUtilsBean.getPropertyUtils().getIndexedProperty(object, propertyPath, index);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new ConfigurationException(&quot;Unable to acquire array property &#39;&quot; + propertyPath + &quot;&#39;&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    protected boolean isIndexedPropertyAssignment(String propertyPath) {
+<b class="fc">&nbsp;        return propertyPath.endsWith(&quot;&quot; + MAP_PROPERTY_END_TOKEN);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void applyProperty(Object object, String propertyName, String stringValue) {
+&nbsp;
+&nbsp;        Object value;
+&nbsp;
+<b class="pc">&nbsp;        if (NULL_VALUE_TOKEN.equals(stringValue)) {</b>
+<b class="nc">&nbsp;            value = null;</b>
+<b class="pc">&nbsp;        } else if (EMPTY_STRING_VALUE_TOKEN.equals(stringValue)) {</b>
+<b class="nc">&nbsp;            value = StringUtils.EMPTY_STRING;</b>
+<b class="pc">&nbsp;        } else if (isIndexedPropertyAssignment(propertyName)) {</b>
+<b class="nc">&nbsp;            String checked = checkForNullOrEmptyLiteral(stringValue);</b>
+<b class="nc">&nbsp;            value = resolveValue(checked);</b>
+<b class="nc">&nbsp;        } else if (isTypedProperty(object, propertyName, Set.class)) {</b>
+<b class="nc">&nbsp;            value = toSet(stringValue);</b>
+<b class="pc">&nbsp;        } else if (isTypedProperty(object, propertyName, Map.class)) {</b>
+<b class="nc">&nbsp;            value = toMap(stringValue);</b>
+<b class="pc">&nbsp;        } else if (isTypedProperty(object, propertyName, List.class)) {</b>
+<b class="nc">&nbsp;            value = toList(stringValue);</b>
+<b class="pc">&nbsp;        } else if (isTypedProperty(object, propertyName, Collection.class)) {</b>
+<b class="nc">&nbsp;            value = toCollection(stringValue);</b>
+<b class="pc">&nbsp;        } else if (isTypedProperty(object, propertyName, byte[].class)) {</b>
+<b class="nc">&nbsp;            value = toBytes(stringValue);</b>
+<b class="pc">&nbsp;        } else if (isTypedProperty(object, propertyName, ByteSource.class)) {</b>
+<b class="nc">&nbsp;            byte[] bytes = toBytes(stringValue);</b>
+<b class="nc">&nbsp;            value = ByteSource.Util.bytes(bytes);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            String checked = checkForNullOrEmptyLiteral(stringValue);</b>
+<b class="fc">&nbsp;            value = resolveValue(checked);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        applyProperty(object, propertyName, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Interpolator createInterpolator() {
+&nbsp;
+<b class="pc">&nbsp;        if (ClassUtils.isAvailable(&quot;org.apache.commons.configuration2.interpol.ConfigurationInterpolator&quot;)) {</b>
+<b class="nc">&nbsp;            return new CommonsInterpolator();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return new DefaultInterpolator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the {@link Interpolator} used when evaluating the right side of the expressions.
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    public void setInterpolator(Interpolator interpolator) {
+<b class="nc">&nbsp;        this.interpolator = interpolator;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private class BeanConfigurationProcessor {</b>
+&nbsp;
+<b class="fc">&nbsp;        private final List&lt;Statement&gt; statements = new ArrayList&lt;Statement&gt;();</b>
+<b class="fc">&nbsp;        private final List&lt;BeanConfiguration&gt; beanConfigurations = new ArrayList&lt;BeanConfiguration&gt;();</b>
+&nbsp;
+&nbsp;        public void add(Statement statement) {
+&nbsp;
+<b class="fc">&nbsp;            statements.add(statement); //we execute bean configuration statements in the order they are declared.</b>
+&nbsp;
+<b class="pc">&nbsp;            if (statement instanceof InstantiationStatement) {</b>
+<b class="nc">&nbsp;                InstantiationStatement is = (InstantiationStatement)statement;</b>
+<b class="nc">&nbsp;                beanConfigurations.add(new BeanConfiguration(is));</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                AssignmentStatement as = (AssignmentStatement)statement;</b>
+&nbsp;                //statements always apply to the most recently defined bean configuration with the same name, so we
+&nbsp;                //have to traverse the configuration list starting at the end (most recent elements are appended):
+<b class="fc">&nbsp;                boolean addedToConfig = false;</b>
+<b class="fc">&nbsp;                String beanName = as.getRootBeanName();</b>
+<b class="pc">&nbsp;                for( int i = beanConfigurations.size()-1; i &gt;= 0; i--) {</b>
+<b class="nc">&nbsp;                    BeanConfiguration mostRecent = beanConfigurations.get(i);</b>
+<b class="nc">&nbsp;                    String mostRecentBeanName = mostRecent.getBeanName();</b>
+<b class="nc">&nbsp;                    if (beanName.equals(mostRecentBeanName)) {</b>
+<b class="nc">&nbsp;                        mostRecent.add(as);</b>
+<b class="nc">&nbsp;                        addedToConfig = true;</b>
+&nbsp;                        break;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="pc">&nbsp;                if (!addedToConfig) {</b>
+&nbsp;                    // the AssignmentStatement must be for an existing bean that does not yet have a corresponding
+&nbsp;                    // configuration object (this would happen if the bean is in the default objects map). Because
+&nbsp;                    // BeanConfiguration instances don&#39;t exist for default (already instantiated) beans,
+&nbsp;                    // we simulate a creation of one to satisfy this processors implementation:
+<b class="fc">&nbsp;                    beanConfigurations.add(new BeanConfiguration(as));</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public void execute() {
+&nbsp;
+<b class="fc">&nbsp;            for( Statement statement : statements) {</b>
+&nbsp;
+<b class="fc">&nbsp;                statement.execute();</b>
+&nbsp;
+<b class="fc">&nbsp;                BeanConfiguration bd = statement.getBeanConfiguration();</b>
+&nbsp;
+<b class="pc">&nbsp;                if (bd.isExecuted()) { //bean is fully configured, no more statements to execute for it:</b>
+&nbsp;
+&nbsp;                    //bean configured overrides the &#39;eventBus&#39; bean - replace the existing eventBus with the one configured:
+<b class="pc">&nbsp;                    if (bd.getBeanName().equals(EVENT_BUS_NAME)) {</b>
+<b class="nc">&nbsp;                        EventBus eventBus = (EventBus)bd.getBean();</b>
+<b class="nc">&nbsp;                        enableEvents(eventBus);</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    //ignore global &#39;shiro.&#39; shortcut mechanism:
+<b class="pc">&nbsp;                    if (!bd.isGlobalConfig()) {</b>
+<b class="fc">&nbsp;                        BeanEvent event = new ConfiguredBeanEvent(bd.getBeanName(), bd.getBean(),</b>
+<b class="fc">&nbsp;                                Collections.unmodifiableMap(objects));</b>
+<b class="fc">&nbsp;                        eventBus.publish(event);</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    //initialize the bean if necessary:
+<b class="fc">&nbsp;                    LifecycleUtils.init(bd.getBean());</b>
+&nbsp;
+&nbsp;                    //ignore global &#39;shiro.&#39; shortcut mechanism:
+<b class="pc">&nbsp;                    if (!bd.isGlobalConfig()) {</b>
+<b class="fc">&nbsp;                        BeanEvent event = new InitializedBeanEvent(bd.getBeanName(), bd.getBean(),</b>
+<b class="fc">&nbsp;                                Collections.unmodifiableMap(objects));</b>
+<b class="fc">&nbsp;                        eventBus.publish(event);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private class BeanConfiguration {</b>
+&nbsp;
+&nbsp;        private final InstantiationStatement instantiationStatement;
+<b class="fc">&nbsp;        private final List&lt;AssignmentStatement&gt; assignments = new ArrayList&lt;AssignmentStatement&gt;();</b>
+&nbsp;        private final String beanName;
+&nbsp;        private Object bean;
+&nbsp;
+<b class="nc">&nbsp;        private BeanConfiguration(InstantiationStatement statement) {</b>
+<b class="nc">&nbsp;            statement.setBeanConfiguration(this);</b>
+<b class="nc">&nbsp;            this.instantiationStatement = statement;</b>
+<b class="nc">&nbsp;            this.beanName = statement.lhs;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        private BeanConfiguration(AssignmentStatement as) {</b>
+<b class="fc">&nbsp;            this.instantiationStatement = null;</b>
+<b class="fc">&nbsp;            this.beanName = as.getRootBeanName();</b>
+<b class="fc">&nbsp;            add(as);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getBeanName() {
+<b class="fc">&nbsp;            return this.beanName;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isGlobalConfig() { //BeanConfiguration instance representing the global &#39;shiro.&#39; properties
+&nbsp;            // (we should remove this concept).
+<b class="fc">&nbsp;            return GLOBAL_PROPERTY_PREFIX.equals(getBeanName());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void add(AssignmentStatement as) {
+<b class="fc">&nbsp;            as.setBeanConfiguration(this);</b>
+<b class="fc">&nbsp;            assignments.add(as);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * When this configuration is parsed sufficiently to create (or find) an actual bean instance, that instance
+&nbsp;         * will be associated with its configuration by setting it via this method.
+&nbsp;         *
+&nbsp;         * @param bean the bean instantiated (or found) that corresponds to this BeanConfiguration instance.
+&nbsp;         */
+&nbsp;        public void setBean(Object bean) {
+<b class="fc">&nbsp;            this.bean = bean;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Object getBean() {
+<b class="fc">&nbsp;            return this.bean;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns true if all configuration statements have been executed.
+&nbsp;         * @return true if all configuration statements have been executed.
+&nbsp;         */
+&nbsp;        public boolean isExecuted() {
+<b class="pc">&nbsp;            if (instantiationStatement != null &amp;&amp; !instantiationStatement.isExecuted()) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            for (AssignmentStatement as : assignments) {</b>
+<b class="pc">&nbsp;                if (!as.isExecuted()) {</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private abstract class Statement {</b>
+&nbsp;
+&nbsp;        protected final String lhs;
+&nbsp;        protected final String rhs;
+&nbsp;        protected Object bean;
+&nbsp;        private Object result;
+&nbsp;        private boolean executed;
+&nbsp;        private BeanConfiguration beanConfiguration;
+&nbsp;
+<b class="fc">&nbsp;        private Statement(String lhs, String rhs) {</b>
+<b class="fc">&nbsp;            this.lhs = lhs;</b>
+<b class="fc">&nbsp;            this.rhs = rhs;</b>
+<b class="fc">&nbsp;            this.executed = false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setBeanConfiguration(BeanConfiguration bd) {
+<b class="fc">&nbsp;            this.beanConfiguration = bd;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public BeanConfiguration getBeanConfiguration() {
+<b class="fc">&nbsp;            return this.beanConfiguration;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Object execute() {
+<b class="pc">&nbsp;            if (!isExecuted()) {</b>
+<b class="fc">&nbsp;                this.result = doExecute();</b>
+<b class="fc">&nbsp;                this.executed = true;</b>
+&nbsp;            }
+<b class="pc">&nbsp;            if (!getBeanConfiguration().isGlobalConfig()) {</b>
+<b class="fc">&nbsp;                Assert.notNull(this.bean, &quot;Implementation must set the root bean for which it executed.&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return this.result;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Object getBean() {
+<b class="nc">&nbsp;            return this.bean;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        protected void setBean(Object bean) {
+<b class="fc">&nbsp;            this.bean = bean;</b>
+<b class="pc">&nbsp;            if (this.beanConfiguration.getBean() == null) {</b>
+<b class="fc">&nbsp;                this.beanConfiguration.setBean(bean);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public Object getResult() {
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        protected abstract Object doExecute();
+&nbsp;
+&nbsp;        public boolean isExecuted() {
+<b class="fc">&nbsp;            return executed;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private class InstantiationStatement extends Statement {</b>
+&nbsp;
+<b class="nc">&nbsp;        private InstantiationStatement(String lhs, String rhs) {</b>
+<b class="nc">&nbsp;            super(lhs, rhs);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        protected Object doExecute() {
+<b class="nc">&nbsp;            String beanName = this.lhs;</b>
+<b class="nc">&nbsp;            createNewInstance(objects, beanName, this.rhs);</b>
+<b class="nc">&nbsp;            Object instantiated = objects.get(beanName);</b>
+<b class="nc">&nbsp;            setBean(instantiated);</b>
+&nbsp;
+&nbsp;            //also ensure the instantiated bean has access to the event bus or is subscribed to events if necessary:
+&nbsp;            //Note: because events are being enabled on this bean here (before the instantiated event below is
+&nbsp;            //triggered), beans can react to their own instantiation events.
+<b class="nc">&nbsp;            enableEventsIfNecessary(instantiated, beanName);</b>
+&nbsp;
+<b class="nc">&nbsp;            BeanEvent event = new InstantiatedBeanEvent(beanName, instantiated, Collections.unmodifiableMap(objects));</b>
+<b class="nc">&nbsp;            eventBus.publish(event);</b>
+&nbsp;
+<b class="nc">&nbsp;            return instantiated;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private class AssignmentStatement extends Statement {</b>
+&nbsp;
+&nbsp;        private final String rootBeanName;
+&nbsp;
+<b class="fc">&nbsp;        private AssignmentStatement(String lhs, String rhs) {</b>
+<b class="fc">&nbsp;            super(lhs, rhs);</b>
+<b class="fc">&nbsp;            int index = lhs.indexOf(&#39;.&#39;);</b>
+<b class="fc">&nbsp;            this.rootBeanName = lhs.substring(0, index);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        protected Object doExecute() {
+<b class="fc">&nbsp;            applyProperty(lhs, rhs, objects);</b>
+<b class="fc">&nbsp;            Object bean = objects.get(this.rootBeanName);</b>
+<b class="fc">&nbsp;            setBean(bean);</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getRootBeanName() {
+<b class="fc">&nbsp;            return this.rootBeanName;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //////////////////////////
+&nbsp;    // From CollectionUtils //
+&nbsp;    //////////////////////////
+&nbsp;    // CollectionUtils cannot be removed from shiro-core until 2.0 as it has a dependency on PrincipalCollection
+&nbsp;
+&nbsp;    private static boolean isEmpty(Map m) {
+<b class="fc">&nbsp;        return m == null || m.isEmpty();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean isEmpty(Collection c) {
+<b class="pc">&nbsp;        return c == null || c.isEmpty();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

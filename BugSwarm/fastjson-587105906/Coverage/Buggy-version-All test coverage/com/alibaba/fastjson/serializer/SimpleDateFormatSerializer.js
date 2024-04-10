@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":29,"id":31543,"methods":[{"el":14,"sc":5,"sl":12},{"el":28,"sc":5,"sl":16}],"name":"SimpleDateFormatSerializer","sl":8}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_1097":{"methods":[{"sl":12},{"sl":16}],"name":"test_codec_null_no_asm","pass":true,"statements":[{"sl":13},{"sl":17},{"sl":18},{"sl":19}]},"test_1528":{"methods":[{"sl":12},{"sl":16}],"name":"test_codec_no_asm","pass":true,"statements":[{"sl":13},{"sl":17},{"sl":22},{"sl":23},{"sl":24},{"sl":26},{"sl":27}]},"test_1722":{"methods":[{"sl":12}],"name":"test_codec_null_asm","pass":true,"statements":[{"sl":13}]},"test_2002":{"methods":[{"sl":12},{"sl":16}],"name":"test_0","pass":true,"statements":[{"sl":13},{"sl":17},{"sl":22},{"sl":23},{"sl":24},{"sl":26},{"sl":27}]},"test_2572":{"methods":[{"sl":12},{"sl":16}],"name":"test_codec_asm","pass":true,"statements":[{"sl":13},{"sl":17},{"sl":22},{"sl":23},{"sl":24},{"sl":26},{"sl":27}]},"test_323":{"methods":[{"sl":16}],"name":"test_0","pass":true,"statements":[{"sl":17},{"sl":22},{"sl":23},{"sl":24},{"sl":26},{"sl":27}]},"test_3367":{"methods":[{"sl":12},{"sl":16}],"name":"test_0","pass":true,"statements":[{"sl":13},{"sl":17},{"sl":22},{"sl":23},{"sl":24},{"sl":26},{"sl":27}]},"test_4403":{"methods":[{"sl":12},{"sl":16}],"name":"test_codec","pass":true,"statements":[{"sl":13},{"sl":17},{"sl":22},{"sl":23},{"sl":24},{"sl":26},{"sl":27}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [1722, 2572, 1528, 3367, 1097, 4403, 2002], [1722, 2572, 1528, 3367, 1097, 4403, 2002], [], [], [2572, 323, 1528, 3367, 1097, 4403, 2002], [2572, 323, 1528, 3367, 1097, 4403, 2002], [1097], [1097], [], [], [2572, 323, 1528, 3367, 4403, 2002], [2572, 323, 1528, 3367, 4403, 2002], [2572, 323, 1528, 3367, 4403, 2002], [], [2572, 323, 1528, 3367, 4403, 2002], [2572, 323, 1528, 3367, 4403, 2002], [], []]

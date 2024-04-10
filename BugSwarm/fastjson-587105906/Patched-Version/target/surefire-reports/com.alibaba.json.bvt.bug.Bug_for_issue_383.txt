@@ -1,14 +1,15 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.bug.Bug_for_issue_383
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.001 s <<< FAILURE! -- in com.alibaba.json.bvt.bug.Bug_for_issue_383
-com.alibaba.json.bvt.bug.Bug_for_issue_383.test_for_issue -- Time elapsed: 0.001 s <<< FAILURE!
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.030 s <<< FAILURE! -- in com.alibaba.json.bvt.bug.Bug_for_issue_383
+com.alibaba.json.bvt.bug.Bug_for_issue_383.test_for_issue -- Time elapsed: 0.028 s <<< FAILURE!
 java.lang.AssertionError: expected:<class java.util.HashSet> but was:<class java.util.ArrayList>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:834)
 	at org.junit.Assert.assertEquals(Assert.java:118)
 	at org.junit.Assert.assertEquals(Assert.java:144)
-	at com.alibaba.json.bvt.bug.Bug_for_issue_383.test_for_issue(Bug_for_issue_383.java:26)
+	at com.alibaba.json.bvt.bug.Bug_for_issue_383.__CLR4_5_2e86tqb14d1(Bug_for_issue_383.java:26)
+	at com.alibaba.json.bvt.bug.Bug_for_issue_383.test_for_issue(Bug_for_issue_383.java:15)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

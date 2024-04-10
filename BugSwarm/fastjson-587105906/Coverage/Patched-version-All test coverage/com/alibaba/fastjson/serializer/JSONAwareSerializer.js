@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":41,"id":26006,"methods":[{"el":40,"sc":5,"sl":30}],"name":"JSONAwareSerializer","sl":26}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_1852":{"methods":[{"sl":30}],"name":"test_3_s","pass":true,"statements":[{"sl":31},{"sl":33},{"sl":38},{"sl":39}]},"test_2352":{"methods":[{"sl":30}],"name":"test_toJSONString","pass":true,"statements":[{"sl":31},{"sl":33},{"sl":38},{"sl":39}]},"test_2387":{"methods":[{"sl":30}],"name":"test_for_issue","pass":true,"statements":[{"sl":31},{"sl":33},{"sl":38},{"sl":39}]},"test_403":{"methods":[{"sl":30}],"name":"test_3","pass":true,"statements":[{"sl":31},{"sl":33},{"sl":38},{"sl":39}]},"test_521":{"methods":[{"sl":30}],"name":"test_for_issue","pass":true,"statements":[{"sl":31},{"sl":33},{"sl":38},{"sl":39}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [521, 403, 2352, 1852, 2387], [521, 403, 2352, 1852, 2387], [], [521, 403, 2352, 1852, 2387], [], [], [], [], [521, 403, 2352, 1852, 2387], [521, 403, 2352, 1852, 2387], [], []]

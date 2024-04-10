@@ -1,0 +1,346 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Authorizer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.authz</a>
+</div>
+
+<h1>Coverage Summary for Class: Authorizer (org.apache.shiro.authz)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Authorizer</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.authz;
+&nbsp;
+&nbsp;import org.apache.shiro.subject.PrincipalCollection;
+&nbsp;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * An &lt;tt&gt;Authorizer&lt;/tt&gt; performs authorization (access control) operations for any given Subject
+&nbsp; * (aka &#39;application user&#39;).
+&nbsp; *
+&nbsp; * &lt;p&gt;Each method requires a subject principal to perform the action for the corresponding Subject/user.
+&nbsp; *
+&nbsp; * &lt;p&gt;This principal argument is usually an object representing a user database primary key or a String username or
+&nbsp; * something similar that uniquely identifies an application user.  The runtime value of the this principal
+&nbsp; * is application-specific and provided by the application&#39;s configured Realms.
+&nbsp; *
+&nbsp; * &lt;p&gt;Note that there are many *Permission methods in this interface overloaded to accept String arguments instead of
+&nbsp; * {@link Permission Permission} instances. They are a convenience allowing the caller to use a String representation of
+&nbsp; * a {@link Permission Permission} if desired.  Most implementations of this interface will simply convert these
+&nbsp; * String values to {@link Permission Permission} instances and then just call the corresponding type-safe method.
+&nbsp; * (Shiro&#39;s default implementations do String-to-Permission conversion for these methods using
+&nbsp; * {@link org.apache.shiro.authz.permission.PermissionResolver PermissionResolver}s.)
+&nbsp; *
+&nbsp; * &lt;p&gt;These overloaded *Permission methods &lt;em&gt;do&lt;/em&gt; forego type-safety for the benefit of convenience and simplicity,
+&nbsp; * so you should choose which ones to use based on your preferences and needs.
+&nbsp; *
+&nbsp; * @since 0.1
+&nbsp; */
+&nbsp;public interface Authorizer {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns &lt;tt&gt;true&lt;/tt&gt; if the corresponding subject/user is permitted to perform an action or access a resource
+&nbsp;     * summarized by the specified permission string.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This is an overloaded method for the corresponding type-safe {@link Permission Permission} variant.
+&nbsp;     * Please see the class-level JavaDoc for more information on these String-based permission methods.
+&nbsp;     *
+&nbsp;     * @param principals the application-specific subject/user identifier.
+&nbsp;     * @param permission the String representation of a Permission that is being checked.
+&nbsp;     * @return true if the corresponding Subject/user is permitted, false otherwise.
+&nbsp;     * @see #isPermitted(PrincipalCollection principals,Permission permission)
+&nbsp;     * @since 0.9
+&nbsp;     */
+&nbsp;    boolean isPermitted(PrincipalCollection principals, String permission);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns &lt;tt&gt;true&lt;/tt&gt; if the corresponding subject/user is permitted to perform an action or access a resource
+&nbsp;     * summarized by the specified permission.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;More specifically, this method determines if any &lt;tt&gt;Permission&lt;/tt&gt;s associated
+&nbsp;     * with the subject {@link Permission#implies(Permission) imply} the specified permission.
+&nbsp;     *
+&nbsp;     * @param subjectPrincipal the application-specific subject/user identifier.
+&nbsp;     * @param permission       the permission that is being checked.
+&nbsp;     * @return true if the corresponding Subject/user is permitted, false otherwise.
+&nbsp;     */
+&nbsp;    boolean isPermitted(PrincipalCollection subjectPrincipal, Permission permission);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if the corresponding Subject implies the given permission strings and returns a boolean array
+&nbsp;     * indicating which permissions are implied.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This is an overloaded method for the corresponding type-safe {@link Permission Permission} variant.
+&nbsp;     * Please see the class-level JavaDoc for more information on these String-based permission methods.
+&nbsp;     *
+&nbsp;     * @param subjectPrincipal the application-specific subject/user identifier.
+&nbsp;     * @param permissions      the String representations of the Permissions that are being checked.
+&nbsp;     * @return an array of booleans whose indices correspond to the index of the
+&nbsp;     *         permissions in the given list.  A true value at an index indicates the user is permitted for
+&nbsp;     *         for the associated &lt;tt&gt;Permission&lt;/tt&gt; string in the list.  A false value at an index
+&nbsp;     *         indicates otherwise.
+&nbsp;     * @since 0.9
+&nbsp;     */
+&nbsp;    boolean[] isPermitted(PrincipalCollection subjectPrincipal, String... permissions);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if the corresponding Subject/user implies the given Permissions and returns a boolean array indicating
+&nbsp;     * which permissions are implied.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;More specifically, this method should determine if each &lt;tt&gt;Permission&lt;/tt&gt; in
+&nbsp;     * the array is {@link Permission#implies(Permission) implied} by permissions
+&nbsp;     * already associated with the subject.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This is primarily a performance-enhancing method to help reduce the number of
+&nbsp;     * {@link #isPermitted} invocations over the wire in client/server systems.
+&nbsp;     *
+&nbsp;     * @param subjectPrincipal the application-specific subject/user identifier.
+&nbsp;     * @param permissions      the permissions that are being checked.
+&nbsp;     * @return an array of booleans whose indices correspond to the index of the
+&nbsp;     *         permissions in the given list.  A true value at an index indicates the user is permitted for
+&nbsp;     *         for the associated &lt;tt&gt;Permission&lt;/tt&gt; object in the list.  A false value at an index
+&nbsp;     *         indicates otherwise.
+&nbsp;     */
+&nbsp;    boolean[] isPermitted(PrincipalCollection subjectPrincipal, List&lt;Permission&gt; permissions);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns &lt;tt&gt;true&lt;/tt&gt; if the corresponding Subject/user implies all of the specified permission strings,
+&nbsp;     * &lt;tt&gt;false&lt;/tt&gt; otherwise.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This is an overloaded method for the corresponding type-safe {@link Permission Permission} variant.
+&nbsp;     * Please see the class-level JavaDoc for more information on these String-based permission methods.
+&nbsp;     *
+&nbsp;     * @param subjectPrincipal the application-specific subject/user identifier.
+&nbsp;     * @param permissions      the String representations of the Permissions that are being checked.
+&nbsp;     * @return true if the user has all of the specified permissions, false otherwise.
+&nbsp;     * @see #isPermittedAll(PrincipalCollection,Collection)
+&nbsp;     * @since 0.9
+&nbsp;     */
+&nbsp;    boolean isPermittedAll(PrincipalCollection subjectPrincipal, String... permissions);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns &lt;tt&gt;true&lt;/tt&gt; if the corresponding Subject/user implies all of the specified permissions, &lt;tt&gt;false&lt;/tt&gt;
+&nbsp;     * otherwise.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;More specifically, this method determines if all of the given &lt;tt&gt;Permission&lt;/tt&gt;s are
+&nbsp;     * {@link Permission#implies(Permission) implied by} permissions already associated with the subject.
+&nbsp;     *
+&nbsp;     * @param subjectPrincipal the application-specific subject/user identifier.
+&nbsp;     * @param permissions      the permissions to check.
+&nbsp;     * @return true if the user has all of the specified permissions, false otherwise.
+&nbsp;     */
+&nbsp;    boolean isPermittedAll(PrincipalCollection subjectPrincipal, Collection&lt;Permission&gt; permissions);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ensures the corresponding Subject/user implies the specified permission String.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;If the subject&#39;s existing associated permissions do not {@link Permission#implies(Permission)} imply}
+&nbsp;     * the given permission, an {@link AuthorizationException} will be thrown.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This is an overloaded method for the corresponding type-safe {@link Permission Permission} variant.
+&nbsp;     * Please see the class-level JavaDoc for more information on these String-based permission methods.
+&nbsp;     *
+&nbsp;     * @param subjectPrincipal the application-specific subject/user identifier.
+&nbsp;     * @param permission       the String representation of the Permission to check.
+&nbsp;     * @throws AuthorizationException
+&nbsp;     *          if the user does not have the permission.
+&nbsp;     * @since 0.9
+&nbsp;     */
+&nbsp;    void checkPermission(PrincipalCollection subjectPrincipal, String permission) throws AuthorizationException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ensures a subject/user {@link Permission#implies(Permission)} implies} the specified &lt;tt&gt;Permission&lt;/tt&gt;.
+&nbsp;     * If the subject&#39;s existing associated permissions do not {@link Permission#implies(Permission)} imply}
+&nbsp;     * the given permission, an {@link AuthorizationException} will be thrown.
+&nbsp;     *
+&nbsp;     * @param subjectPrincipal the application-specific subject/user identifier.
+&nbsp;     * @param permission       the Permission to check.
+&nbsp;     * @throws AuthorizationException
+&nbsp;     *          if the user does not have the permission.
+&nbsp;     */
+&nbsp;    void checkPermission(PrincipalCollection subjectPrincipal, Permission permission) throws AuthorizationException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ensures the corresponding Subject/user
+&nbsp;     * {@link Permission#implies(Permission) implies} all of the
+&nbsp;     * specified permission strings.
+&nbsp;     *
+&nbsp;     * If the subject&#39;s existing associated permissions do not
+&nbsp;     * {@link Permission#implies(Permission) imply} all of the given permissions,
+&nbsp;     * an {@link AuthorizationException} will be thrown.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This is an overloaded method for the corresponding type-safe {@link Permission Permission} variant.
+&nbsp;     * Please see the class-level JavaDoc for more information on these String-based permission methods.
+&nbsp;     *
+&nbsp;     * @param subjectPrincipal the application-specific subject/user identifier.
+&nbsp;     * @param permissions      the string representations of Permissions to check.
+&nbsp;     * @throws AuthorizationException if the user does not have all of the given permissions.
+&nbsp;     * @since 0.9
+&nbsp;     */
+&nbsp;    void checkPermissions(PrincipalCollection subjectPrincipal, String... permissions) throws AuthorizationException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ensures the corresponding Subject/user
+&nbsp;     * {@link Permission#implies(Permission) implies} all of the
+&nbsp;     * specified permission strings.
+&nbsp;     *
+&nbsp;     * If the subject&#39;s existing associated permissions do not
+&nbsp;     * {@link Permission#implies(Permission) imply} all of the given permissions,
+&nbsp;     * an {@link AuthorizationException} will be thrown.
+&nbsp;     *
+&nbsp;     * @param subjectPrincipal the application-specific subject/user identifier.
+&nbsp;     * @param permissions      the Permissions to check.
+&nbsp;     * @throws AuthorizationException if the user does not have all of the given permissions.
+&nbsp;     */
+&nbsp;    void checkPermissions(PrincipalCollection subjectPrincipal, Collection&lt;Permission&gt; permissions) throws AuthorizationException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns &lt;tt&gt;true&lt;/tt&gt; if the corresponding Subject/user has the specified role, &lt;tt&gt;false&lt;/tt&gt; otherwise.
+&nbsp;     *
+&nbsp;     * @param subjectPrincipal the application-specific subject/user identifier.
+&nbsp;     * @param roleIdentifier   the application-specific role identifier (usually a role id or role name).
+&nbsp;     * @return &lt;tt&gt;true&lt;/tt&gt; if the corresponding subject has the specified role, &lt;tt&gt;false&lt;/tt&gt; otherwise.
+&nbsp;     */
+&nbsp;    boolean hasRole(PrincipalCollection subjectPrincipal, String roleIdentifier);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if the corresponding Subject/user has the specified roles, returning a boolean array indicating
+&nbsp;     * which roles are associated with the given subject.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This is primarily a performance-enhancing method to help reduce the number of
+&nbsp;     * {@link #hasRole} invocations over the wire in client/server systems.
+&nbsp;     *
+&nbsp;     * @param subjectPrincipal the application-specific subject/user identifier.
+&nbsp;     * @param roleIdentifiers  the application-specific role identifiers to check (usually role ids or role names).
+&nbsp;     * @return an array of booleans whose indices correspond to the index of the
+&nbsp;     *         roles in the given identifiers.  A true value indicates the user has the
+&nbsp;     *         role at that index.  False indicates the user does not have the role at that index.
+&nbsp;     */
+&nbsp;    boolean[] hasRoles(PrincipalCollection subjectPrincipal, List&lt;String&gt; roleIdentifiers);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns &lt;tt&gt;true&lt;/tt&gt; if the corresponding Subject/user has all of the specified roles, &lt;tt&gt;false&lt;/tt&gt; otherwise.
+&nbsp;     *
+&nbsp;     * @param subjectPrincipal the application-specific subject/user identifier.
+&nbsp;     * @param roleIdentifiers  the application-specific role identifiers to check (usually role ids or role names).
+&nbsp;     * @return true if the user has all the roles, false otherwise.
+&nbsp;     */
+&nbsp;    boolean hasAllRoles(PrincipalCollection subjectPrincipal, Collection&lt;String&gt; roleIdentifiers);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Asserts the corresponding Subject/user has the specified role by returning quietly if they do or throwing an
+&nbsp;     * {@link AuthorizationException} if they do not.
+&nbsp;     *
+&nbsp;     * @param subjectPrincipal the application-specific subject/user identifier.
+&nbsp;     * @param roleIdentifier   the application-specific role identifier (usually a role id or role name ).
+&nbsp;     * @throws AuthorizationException
+&nbsp;     *          if the user does not have the role.
+&nbsp;     */
+&nbsp;    void checkRole(PrincipalCollection subjectPrincipal, String roleIdentifier) throws AuthorizationException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Asserts the corresponding Subject/user has all of the specified roles by returning quietly if they do or
+&nbsp;     * throwing an {@link AuthorizationException} if they do not.
+&nbsp;     *
+&nbsp;     * @param subjectPrincipal the application-specific subject/user identifier.
+&nbsp;     * @param roleIdentifiers  the application-specific role identifiers to check (usually role ids or role names).
+&nbsp;     * @throws AuthorizationException
+&nbsp;     *          if the user does not have all of the specified roles.
+&nbsp;     */
+&nbsp;    void checkRoles(PrincipalCollection subjectPrincipal, Collection&lt;String&gt; roleIdentifiers) throws AuthorizationException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Same as {@link #checkRoles(org.apache.shiro.subject.PrincipalCollection, java.util.Collection)
+&nbsp;     * checkRoles(PrincipalCollection subjectPrincipal, Collection&amp;lt;String&amp;gt; roleIdentifiers)} but doesn&#39;t require a collection
+&nbsp;     * as an argument.
+&nbsp;     * Asserts the corresponding Subject/user has all of the specified roles by returning quietly if they do or
+&nbsp;     * throwing an {@link AuthorizationException} if they do not.
+&nbsp;     *
+&nbsp;     * @param subjectPrincipal the application-specific subject/user identifier.
+&nbsp;     * @param roleIdentifiers  the application-specific role identifiers to check (usually role ids or role names).
+&nbsp;     * @throws AuthorizationException
+&nbsp;     *          if the user does not have all of the specified roles.
+&nbsp;     *          
+&nbsp;     *  @since 1.1.0
+&nbsp;     */
+&nbsp;    void checkRoles(PrincipalCollection subjectPrincipal, String... roleIdentifiers) throws AuthorizationException;
+&nbsp;    
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

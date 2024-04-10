@@ -1,0 +1,32 @@
+/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ */package com.alibaba.json.bvt;
+
+import java.nio.charset.Charset;
+
+import org.junit.Assert;
+
+import com.alibaba.fastjson.JSON;
+
+import junit.framework.TestCase;
+
+public class JSONBytesTest3 extends TestCase {static class __CLR4_5_2xngxnglusyjpvt{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings("unchecked") public static <I, T extends I> I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException("Clover failed to invoke instrumented lambda",e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l("[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.");com_atlassian_clover.Clover.l("[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime="+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+"#"+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder("\u002f\u0055\u0073\u0065\u0072\u0073\u002f\u0073\u0068\u0072\u0065\u0079\u0061\u0063\u0068\u0061\u0075\u0064\u0068\u0061\u0072\u0079\u002f\u0044\u0065\u0073\u006b\u0074\u006f\u0070\u002f\u0063\u0073\u0035\u0032\u0037\u002f\u0043\u0053\u0035\u0032\u0037\u002d\u0050\u0072\u006f\u006a\u0065\u0063\u0074\u002f\u0042\u0075\u0067\u0053\u0077\u0061\u0072\u006d\u002f\u0066\u0061\u0073\u0074\u006a\u0073\u006f\u006e\u002d\u0035\u0038\u0037\u0031\u0030\u0035\u0039\u0030\u0036\u002f\u0050\u0061\u0074\u0063\u0068\u0065\u0064\u002d\u0056\u0065\u0072\u0073\u0069\u006f\u006e\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062",1712701995271L,8589935092L,43624,profiles,new java.lang.String[]{"clover.distributed.coverage",null});}catch(java.lang.SecurityException e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.Throwable t){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. ("+t.getClass()+":"+t.getMessage()+")");}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;
+
+    public void test_codec() throws Exception {__CLR4_5_2xngxnglusyjpvt.R.globalSliceStart(getClass().getName(),43612);int $CLV_p$=0;java.lang.Throwable $CLV_t$=null;try{__CLR4_5_2nht31sxng();$CLV_p$=1;}catch(java.lang.Throwable $CLV_t2$){if($CLV_p$==0&&$CLV_t$==null){$CLV_t$=$CLV_t2$;}__CLR4_5_2xngxnglusyjpvt.R.rethrow($CLV_t2$);}finally{__CLR4_5_2xngxnglusyjpvt.R.globalSliceEnd(getClass().getName(),"com.alibaba.json.bvt.JSONBytesTest3.test_codec",__CLR4_5_2_TEST_NAME_SNIFFER.getTestName(),43612,$CLV_p$,$CLV_t$);}}private void  __CLR4_5_2nht31sxng() throws Exception{try{__CLR4_5_2xngxnglusyjpvt.R.inc(43612);
+        __CLR4_5_2xngxnglusyjpvt.R.inc(43613);Model model = new Model();
+        __CLR4_5_2xngxnglusyjpvt.R.inc(43614);model.value = "\ud841\udf0e\ud841\udf31\ud841\udf79\ud843\udc53\ud843\udc78\ud843\udc96\ud843\udccf\ud843\udcd5\ud843\udd15\ud843\udd7c\ud843\udd7f\ud843\ude0e\ud843\ude0f\ud843\ude77\ud843\ude9d\ud843\udea2\ud843\uded7\ud843\udef9\ud843\udefa\ud843\udf2d\ud843\udf2e\ud843\udf4c\ud843\udfb4\ud843\udfbc\ud843\udfea\ud844\udc5c\ud844\udc6f\ud844\udc75\ud844\udc76\ud844\udc7b\ud844\udcc1\ud844\udcc9\ud844\uddd9\ud848\udcc7\ud849\udfb5\ud84a\uded5\ud84a\udf43\ud84a\udfca\ud84b\udc51\ud84b\udc55\ud84b\udcc2\ud84b\udd08\ud84b\udd4c\ud84b\udd67\ud84b\udeb3\ud84f\udcb7\ud851\udcd3\ud853\uddb8\ud853\uddea\ud854\udd2b\ud858\ude58\ud859\udfcc\ud85a\uddf2\ud85a\uddfa\ud85e\ude3e\ud860\udd5d\ud860\ude07\ud860\udee2\ud863\udcca\ud863\udccd\ud863\udcd2\ud867\udd98";
+
+        __CLR4_5_2xngxnglusyjpvt.R.inc(43615);byte[] bytes = JSON.toJSONBytes(model);
+        __CLR4_5_2xngxnglusyjpvt.R.inc(43616);Model model2 = JSON.parseObject(bytes, 0, bytes.length, Charset.forName("UTF8").newDecoder(), Model.class);
+
+        __CLR4_5_2xngxnglusyjpvt.R.inc(43617);Assert.assertEquals(model.value.length(), model2.value.length());
+        __CLR4_5_2xngxnglusyjpvt.R.inc(43618);for (int i = 0; (((i < model.value.length())&&(__CLR4_5_2xngxnglusyjpvt.R.iget(43619)!=0|true))||(__CLR4_5_2xngxnglusyjpvt.R.iget(43620)==0&false)); ++i) {{
+            __CLR4_5_2xngxnglusyjpvt.R.inc(43621);char c1 = model.value.charAt(i);
+            __CLR4_5_2xngxnglusyjpvt.R.inc(43622);char c2 = model2.value.charAt(i);
+
+            __CLR4_5_2xngxnglusyjpvt.R.inc(43623);Assert.assertEquals(c1, c2);
+        }
+    }}finally{__CLR4_5_2xngxnglusyjpvt.R.flushNeeded();}}
+
+    public static class Model {
+        public String value;
+    }
+}

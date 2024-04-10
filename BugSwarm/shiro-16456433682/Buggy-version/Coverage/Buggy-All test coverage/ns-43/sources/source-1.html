@@ -1,0 +1,750 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ShiroFilterFactoryBean</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.spring.web</a>
+</div>
+
+<h1>Coverage Summary for Class: ShiroFilterFactoryBean (org.apache.shiro.spring.web)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ShiroFilterFactoryBean</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/42)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/98)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ShiroFilterFactoryBean$SpringShiroFilter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/46)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/105)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.spring.web;
+&nbsp;
+&nbsp;import org.apache.shiro.config.Ini;
+&nbsp;import org.apache.shiro.mgt.SecurityManager;
+&nbsp;import org.apache.shiro.util.CollectionUtils;
+&nbsp;import org.apache.shiro.util.Nameable;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;import org.apache.shiro.web.config.IniFilterChainResolverFactory;
+&nbsp;import org.apache.shiro.web.config.ShiroFilterConfiguration;
+&nbsp;import org.apache.shiro.web.filter.AccessControlFilter;
+&nbsp;import org.apache.shiro.web.filter.InvalidRequestFilter;
+&nbsp;import org.apache.shiro.web.filter.authc.AuthenticationFilter;
+&nbsp;import org.apache.shiro.web.filter.authz.AuthorizationFilter;
+&nbsp;import org.apache.shiro.web.filter.mgt.DefaultFilter;
+&nbsp;import org.apache.shiro.web.filter.mgt.DefaultFilterChainManager;
+&nbsp;import org.apache.shiro.web.filter.mgt.FilterChainManager;
+&nbsp;import org.apache.shiro.web.filter.mgt.FilterChainResolver;
+&nbsp;import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
+&nbsp;import org.apache.shiro.web.mgt.WebSecurityManager;
+&nbsp;import org.apache.shiro.web.servlet.AbstractShiroFilter;
+&nbsp;import org.apache.shiro.web.servlet.OncePerRequestFilter;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import org.springframework.beans.BeansException;
+&nbsp;import org.springframework.beans.factory.BeanInitializationException;
+&nbsp;import org.springframework.beans.factory.FactoryBean;
+&nbsp;import org.springframework.beans.factory.config.BeanPostProcessor;
+&nbsp;
+&nbsp;import javax.servlet.Filter;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * {@link org.springframework.beans.factory.FactoryBean FactoryBean} to be used in Spring-based web applications for
+&nbsp; * defining the master Shiro Filter.
+&nbsp; * &lt;h4&gt;Usage&lt;/h4&gt;
+&nbsp; * Declare a DelegatingFilterProxy in {@code web.xml}, matching the filter name to the bean id:
+&nbsp; * &lt;pre&gt;
+&nbsp; * &amp;lt;filter&amp;gt;
+&nbsp; *   &amp;lt;filter-name&amp;gt;&lt;b&gt;shiroFilter&lt;/b&gt;&amp;lt;/filter-name&amp;gt;
+&nbsp; *   &amp;lt;filter-class&amp;gt;org.springframework.web.filter.DelegatingFilterProxy&amp;lt;filter-class&amp;gt;
+&nbsp; *   &amp;lt;init-param&amp;gt;
+&nbsp; *    &amp;lt;param-name&amp;gt;targetFilterLifecycle&amp;lt;/param-name&amp;gt;
+&nbsp; *     &amp;lt;param-value&amp;gt;true&amp;lt;/param-value&amp;gt;
+&nbsp; *   &amp;lt;/init-param&amp;gt;
+&nbsp; * &amp;lt;/filter&amp;gt;
+&nbsp; * &lt;/pre&gt;
+&nbsp; * Then, in your spring XML file that defines your web ApplicationContext:
+&nbsp; * &lt;pre&gt;
+&nbsp; * &amp;lt;bean id=&quot;&lt;b&gt;shiroFilter&lt;/b&gt;&quot; class=&quot;org.apache.shiro.spring.web.ShiroFilterFactoryBean&quot;&amp;gt;
+&nbsp; *    &amp;lt;property name=&quot;securityManager&quot; ref=&quot;securityManager&quot;/&amp;gt;
+&nbsp; *    &amp;lt;!-- other properties as necessary ... --&amp;gt;
+&nbsp; * &amp;lt;/bean&amp;gt;
+&nbsp; * &lt;/pre&gt;
+&nbsp; * &lt;h4&gt;Filter Auto-Discovery&lt;/h4&gt;
+&nbsp; * While there is a {@link #setFilters(java.util.Map) filters} property that allows you to assign a filter beans
+&nbsp; * to the &#39;pool&#39; of filters available when defining {@link #setFilterChainDefinitions(String) filter chains}, it is
+&nbsp; * optional.
+&nbsp; * &lt;p/&gt;
+&nbsp; * This implementation is also a {@link BeanPostProcessor} and will acquire
+&nbsp; * any {@link javax.servlet.Filter Filter} beans defined independently in your Spring application context.  Upon
+&nbsp; * discovery, they will be automatically added to the {@link #setFilters(java.util.Map) map} keyed by the bean ID.
+&nbsp; * That ID can then be used in the filter chain definitions, for example:
+&nbsp; *
+&nbsp; * &lt;pre&gt;
+&nbsp; * &amp;lt;bean id=&quot;&lt;b&gt;myCustomFilter&lt;/b&gt;&quot; class=&quot;com.class.that.implements.javax.servlet.Filter&quot;/&amp;gt;
+&nbsp; * ...
+&nbsp; * &amp;lt;bean id=&quot;shiroFilter&quot; class=&quot;org.apache.shiro.spring.web.ShiroFilterFactoryBean&quot;&amp;gt;
+&nbsp; *    ...
+&nbsp; *    &amp;lt;property name=&quot;filterChainDefinitions&quot;&amp;gt;
+&nbsp; *        &amp;lt;value&amp;gt;
+&nbsp; *            /some/path/** = authc, &lt;b&gt;myCustomFilter&lt;/b&gt;
+&nbsp; *        &amp;lt;/value&amp;gt;
+&nbsp; *    &amp;lt;/property&amp;gt;
+&nbsp; * &amp;lt;/bean&amp;gt;
+&nbsp; * &lt;/pre&gt;
+&nbsp; * &lt;h4&gt;Global Property Values&lt;/h4&gt;
+&nbsp; * Most Shiro servlet Filter implementations exist for defining custom Filter
+&nbsp; * {@link #setFilterChainDefinitions(String) chain definitions}.  Most implementations subclass one of the
+&nbsp; * {@link AccessControlFilter}, {@link AuthenticationFilter}, {@link AuthorizationFilter} classes to simplify things,
+&nbsp; * and each of these 3 classes has configurable properties that are application-specific.
+&nbsp; * &lt;p/&gt;
+&nbsp; * A dilemma arises where, if you want to for example set the application&#39;s &#39;loginUrl&#39; for any Filter, you don&#39;t want
+&nbsp; * to have to manually specify that value for &lt;em&gt;each&lt;/em&gt; filter instance definied.
+&nbsp; * &lt;p/&gt;
+&nbsp; * To prevent configuration duplication, this implementation provides the following properties to allow you
+&nbsp; * to set relevant values in only one place:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;{@link #setLoginUrl(String)}&lt;/li&gt;
+&nbsp; * &lt;li&gt;{@link #setSuccessUrl(String)}&lt;/li&gt;
+&nbsp; * &lt;li&gt;{@link #setUnauthorizedUrl(String)}&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; *
+&nbsp; * Then at startup, any values specified via these 3 properties will be applied to all configured
+&nbsp; * Filter instances so you don&#39;t have to specify them individually on each filter instance.  To ensure your own custom
+&nbsp; * filters benefit from this convenience, your filter implementation should subclass one of the 3 mentioned
+&nbsp; * earlier.
+&nbsp; *
+&nbsp; * @see org.springframework.web.filter.DelegatingFilterProxy DelegatingFilterProxy
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public class ShiroFilterFactoryBean implements FactoryBean&lt;AbstractShiroFilter&gt;, BeanPostProcessor {
+&nbsp;
+<b class="nc">&nbsp;    private static transient final Logger log = LoggerFactory.getLogger(ShiroFilterFactoryBean.class);</b>
+&nbsp;
+&nbsp;    private SecurityManager securityManager;
+&nbsp;
+&nbsp;    private Map&lt;String, Filter&gt; filters;
+&nbsp;
+&nbsp;    private List&lt;String&gt; globalFilters;
+&nbsp;
+&nbsp;    private Map&lt;String, String&gt; filterChainDefinitionMap; //urlPathExpression_to_comma-delimited-filter-chain-definition
+&nbsp;
+&nbsp;    private String loginUrl;
+&nbsp;    private String successUrl;
+&nbsp;    private String unauthorizedUrl;
+&nbsp;
+&nbsp;    private AbstractShiroFilter instance;
+&nbsp;
+&nbsp;    private ShiroFilterConfiguration filterConfiguration;
+&nbsp;
+<b class="nc">&nbsp;    public ShiroFilterFactoryBean() {</b>
+<b class="nc">&nbsp;        this.filters = new LinkedHashMap&lt;String, Filter&gt;();</b>
+<b class="nc">&nbsp;        this.globalFilters = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        this.globalFilters.add(DefaultFilter.invalidRequest.name());</b>
+<b class="nc">&nbsp;        this.filterChainDefinitionMap = new LinkedHashMap&lt;String, String&gt;(); //order matters!</b>
+<b class="nc">&nbsp;        this.filterConfiguration = new ShiroFilterConfiguration();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the application {@code SecurityManager} instance to be used by the constructed Shiro Filter.  This is a
+&nbsp;     * required property - failure to set it will throw an initialization exception.
+&nbsp;     *
+&nbsp;     * @return the application {@code SecurityManager} instance to be used by the constructed Shiro Filter.
+&nbsp;     */
+&nbsp;    public SecurityManager getSecurityManager() {
+<b class="nc">&nbsp;        return securityManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the application {@code SecurityManager} instance to be used by the constructed Shiro Filter.  This is a
+&nbsp;     * required property - failure to set it will throw an initialization exception.
+&nbsp;     *
+&nbsp;     * @param securityManager the application {@code SecurityManager} instance to be used by the constructed Shiro Filter.
+&nbsp;     */
+&nbsp;    public void setSecurityManager(SecurityManager securityManager) {
+<b class="nc">&nbsp;        this.securityManager = securityManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the application {@code ShiroFilterConfiguration} instance to be used by the constructed Shiro Filter.
+&nbsp;     *
+&nbsp;     * @return the application {@code ShiroFilterConfiguration} instance to be used by the constructed Shiro Filter.
+&nbsp;     */
+&nbsp;    public ShiroFilterConfiguration getShiroFilterConfiguration() {
+<b class="nc">&nbsp;        return filterConfiguration;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the application {@code ShiroFilterConfiguration} instance to be used by the constructed Shiro Filter.
+&nbsp;     *
+&nbsp;     * @param filterConfiguration the application {@code SecurityManager} instance to be used by the constructed Shiro Filter.
+&nbsp;     */
+&nbsp;    public void setShiroFilterConfiguration(ShiroFilterConfiguration filterConfiguration) {
+<b class="nc">&nbsp;        this.filterConfiguration = filterConfiguration;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the application&#39;s login URL to be assigned to all acquired Filters that subclass
+&nbsp;     * {@link AccessControlFilter} or {@code null} if no value should be assigned globally. The default value
+&nbsp;     * is {@code null}.
+&nbsp;     *
+&nbsp;     * @return the application&#39;s login URL to be assigned to all acquired Filters that subclass
+&nbsp;     *         {@link AccessControlFilter} or {@code null} if no value should be assigned globally.
+&nbsp;     * @see #setLoginUrl
+&nbsp;     */
+&nbsp;    public String getLoginUrl() {
+<b class="nc">&nbsp;        return loginUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the application&#39;s login URL to be assigned to all acquired Filters that subclass
+&nbsp;     * {@link AccessControlFilter}.  This is a convenience mechanism: for all configured {@link #setFilters filters},
+&nbsp;     * as well for any default ones ({@code authc}, {@code user}, etc), this value will be passed on to each Filter
+&nbsp;     * via the {@link AccessControlFilter#setLoginUrl(String)} method&lt;b&gt;*&lt;/b&gt;.  This eliminates the need to
+&nbsp;     * configure the &#39;loginUrl&#39; property manually on each filter instance, and instead that can be configured once
+&nbsp;     * via this attribute.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;*&lt;/b&gt;If a filter already has already been explicitly configured with a value, it will
+&nbsp;     * &lt;em&gt;not&lt;/em&gt; receive this value. Individual filter configuration overrides this global convenience property.
+&nbsp;     *
+&nbsp;     * @param loginUrl the application&#39;s login URL to apply to as a convenience to all discovered
+&nbsp;     *                 {@link AccessControlFilter} instances.
+&nbsp;     * @see AccessControlFilter#setLoginUrl(String)
+&nbsp;     */
+&nbsp;    public void setLoginUrl(String loginUrl) {
+<b class="nc">&nbsp;        this.loginUrl = loginUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the application&#39;s after-login success URL to be assigned to all acquired Filters that subclass
+&nbsp;     * {@link AuthenticationFilter} or {@code null} if no value should be assigned globally. The default value
+&nbsp;     * is {@code null}.
+&nbsp;     *
+&nbsp;     * @return the application&#39;s after-login success URL to be assigned to all acquired Filters that subclass
+&nbsp;     *         {@link AuthenticationFilter} or {@code null} if no value should be assigned globally.
+&nbsp;     * @see #setSuccessUrl
+&nbsp;     */
+&nbsp;    public String getSuccessUrl() {
+<b class="nc">&nbsp;        return successUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the application&#39;s after-login success URL to be assigned to all acquired Filters that subclass
+&nbsp;     * {@link AuthenticationFilter}.  This is a convenience mechanism: for all configured {@link #setFilters filters},
+&nbsp;     * as well for any default ones ({@code authc}, {@code user}, etc), this value will be passed on to each Filter
+&nbsp;     * via the {@link AuthenticationFilter#setSuccessUrl(String)} method&lt;b&gt;*&lt;/b&gt;.  This eliminates the need to
+&nbsp;     * configure the &#39;successUrl&#39; property manually on each filter instance, and instead that can be configured once
+&nbsp;     * via this attribute.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;*&lt;/b&gt;If a filter already has already been explicitly configured with a value, it will
+&nbsp;     * &lt;em&gt;not&lt;/em&gt; receive this value. Individual filter configuration overrides this global convenience property.
+&nbsp;     *
+&nbsp;     * @param successUrl the application&#39;s after-login success URL to apply to as a convenience to all discovered
+&nbsp;     *                   {@link AccessControlFilter} instances.
+&nbsp;     * @see AuthenticationFilter#setSuccessUrl(String)
+&nbsp;     */
+&nbsp;    public void setSuccessUrl(String successUrl) {
+<b class="nc">&nbsp;        this.successUrl = successUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the application&#39;s after-login success URL to be assigned to all acquired Filters that subclass
+&nbsp;     * {@link AuthenticationFilter} or {@code null} if no value should be assigned globally. The default value
+&nbsp;     * is {@code null}.
+&nbsp;     *
+&nbsp;     * @return the application&#39;s after-login success URL to be assigned to all acquired Filters that subclass
+&nbsp;     *         {@link AuthenticationFilter} or {@code null} if no value should be assigned globally.
+&nbsp;     * @see #setSuccessUrl
+&nbsp;     */
+&nbsp;    public String getUnauthorizedUrl() {
+<b class="nc">&nbsp;        return unauthorizedUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the application&#39;s &#39;unauthorized&#39; URL to be assigned to all acquired Filters that subclass
+&nbsp;     * {@link AuthorizationFilter}.  This is a convenience mechanism: for all configured {@link #setFilters filters},
+&nbsp;     * as well for any default ones ({@code roles}, {@code perms}, etc), this value will be passed on to each Filter
+&nbsp;     * via the {@link AuthorizationFilter#setUnauthorizedUrl(String)} method&lt;b&gt;*&lt;/b&gt;.  This eliminates the need to
+&nbsp;     * configure the &#39;unauthorizedUrl&#39; property manually on each filter instance, and instead that can be configured once
+&nbsp;     * via this attribute.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;*&lt;/b&gt;If a filter already has already been explicitly configured with a value, it will
+&nbsp;     * &lt;em&gt;not&lt;/em&gt; receive this value. Individual filter configuration overrides this global convenience property.
+&nbsp;     *
+&nbsp;     * @param unauthorizedUrl the application&#39;s &#39;unauthorized&#39; URL to apply to as a convenience to all discovered
+&nbsp;     *                        {@link AuthorizationFilter} instances.
+&nbsp;     * @see AuthorizationFilter#setUnauthorizedUrl(String)
+&nbsp;     */
+&nbsp;    public void setUnauthorizedUrl(String unauthorizedUrl) {
+<b class="nc">&nbsp;        this.unauthorizedUrl = unauthorizedUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the filterName-to-Filter map of filters available for reference when defining filter chain definitions.
+&nbsp;     * All filter chain definitions will reference filters by the names in this map (i.e. the keys).
+&nbsp;     *
+&nbsp;     * @return the filterName-to-Filter map of filters available for reference when defining filter chain definitions.
+&nbsp;     */
+&nbsp;    public Map&lt;String, Filter&gt; getFilters() {
+<b class="nc">&nbsp;        return filters;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the filterName-to-Filter map of filters available for reference when creating
+&nbsp;     * {@link #setFilterChainDefinitionMap(java.util.Map) filter chain definitions}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;Note:&lt;/b&gt; This property is optional:  this {@code FactoryBean} implementation will discover all beans in the
+&nbsp;     * web application context that implement the {@link Filter} interface and automatically add them to this filter
+&nbsp;     * map under their bean name.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * For example, just defining this bean in a web Spring XML application context:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * &amp;lt;bean id=&amp;quot;myFilter&amp;quot; class=&amp;quot;com.class.that.implements.javax.servlet.Filter&amp;quot;&amp;gt;
+&nbsp;     * ...
+&nbsp;     * &amp;lt;/bean&amp;gt;&lt;/pre&gt;
+&nbsp;     * Will automatically place that bean into this Filters map under the key &#39;&lt;b&gt;myFilter&lt;/b&gt;&#39;.
+&nbsp;     *
+&nbsp;     * @param filters the optional filterName-to-Filter map of filters available for reference when creating
+&nbsp;     *                {@link #setFilterChainDefinitionMap (java.util.Map) filter chain definitions}.
+&nbsp;     */
+&nbsp;    public void setFilters(Map&lt;String, Filter&gt; filters) {
+<b class="nc">&nbsp;        this.filters = filters;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the chainName-to-chainDefinition map of chain definitions to use for creating filter chains intercepted
+&nbsp;     * by the Shiro Filter.  Each map entry should conform to the format defined by the
+&nbsp;     * {@link FilterChainManager#createChain(String, String)} JavaDoc, where the map key is the chain name (e.g. URL
+&nbsp;     * path expression) and the map value is the comma-delimited string chain definition.
+&nbsp;     *
+&nbsp;     * @return he chainName-to-chainDefinition map of chain definitions to use for creating filter chains intercepted
+&nbsp;     *         by the Shiro Filter.
+&nbsp;     */
+&nbsp;    public Map&lt;String, String&gt; getFilterChainDefinitionMap() {
+<b class="nc">&nbsp;        return filterChainDefinitionMap;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the chainName-to-chainDefinition map of chain definitions to use for creating filter chains intercepted
+&nbsp;     * by the Shiro Filter.  Each map entry should conform to the format defined by the
+&nbsp;     * {@link FilterChainManager#createChain(String, String)} JavaDoc, where the map key is the chain name (e.g. URL
+&nbsp;     * path expression) and the map value is the comma-delimited string chain definition.
+&nbsp;     *
+&nbsp;     * @param filterChainDefinitionMap the chainName-to-chainDefinition map of chain definitions to use for creating
+&nbsp;     *                                 filter chains intercepted by the Shiro Filter.
+&nbsp;     */
+&nbsp;    public void setFilterChainDefinitionMap(Map&lt;String, String&gt; filterChainDefinitionMap) {
+<b class="nc">&nbsp;        this.filterChainDefinitionMap = filterChainDefinitionMap;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A convenience method that sets the {@link #setFilterChainDefinitionMap(java.util.Map) filterChainDefinitionMap}
+&nbsp;     * property by accepting a {@link java.util.Properties Properties}-compatible string (multi-line key/value pairs).
+&nbsp;     * Each key/value pair must conform to the format defined by the
+&nbsp;     * {@link FilterChainManager#createChain(String,String)} JavaDoc - each property key is an ant URL
+&nbsp;     * path expression and the value is the comma-delimited chain definition.
+&nbsp;     *
+&nbsp;     * @param definitions a {@link java.util.Properties Properties}-compatible string (multi-line key/value pairs)
+&nbsp;     *                    where each key/value pair represents a single urlPathExpression-commaDelimitedChainDefinition.
+&nbsp;     */
+&nbsp;    public void setFilterChainDefinitions(String definitions) {
+<b class="nc">&nbsp;        Ini ini = new Ini();</b>
+<b class="nc">&nbsp;        ini.load(definitions);</b>
+&nbsp;        //did they explicitly state a &#39;urls&#39; section?  Not necessary, but just in case:
+<b class="nc">&nbsp;        Ini.Section section = ini.getSection(IniFilterChainResolverFactory.URLS);</b>
+<b class="nc">&nbsp;        if (CollectionUtils.isEmpty(section)) {</b>
+&nbsp;            //no urls section.  Since this _is_ a urls chain definition property, just assume the
+&nbsp;            //default section contains only the definitions:
+<b class="nc">&nbsp;            section = ini.getSection(Ini.DEFAULT_SECTION_NAME);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        setFilterChainDefinitionMap(section);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the list of filters that will be executed against every request.  Defaults to the {@link InvalidRequestFilter} which will block known invalid request attacks.
+&nbsp;     * @param globalFilters the list of filters to execute before specific path filters.
+&nbsp;     */
+&nbsp;    public void setGlobalFilters(List&lt;String&gt; globalFilters) {
+<b class="nc">&nbsp;        this.globalFilters = globalFilters;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Lazily creates and returns a {@link AbstractShiroFilter} concrete instance via the
+&nbsp;     * {@link #createInstance} method.
+&nbsp;     *
+&nbsp;     * @return the application&#39;s Shiro Filter instance used to filter incoming web requests.
+&nbsp;     * @throws Exception if there is a problem creating the {@code Filter} instance.
+&nbsp;     */
+&nbsp;    public AbstractShiroFilter getObject() throws Exception {
+<b class="nc">&nbsp;        if (instance == null) {</b>
+<b class="nc">&nbsp;            instance = createInstance();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return instance;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns &lt;code&gt;{@link org.apache.shiro.web.servlet.AbstractShiroFilter}.class&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @return &lt;code&gt;{@link org.apache.shiro.web.servlet.AbstractShiroFilter}.class&lt;/code&gt;
+&nbsp;     */
+&nbsp;    public Class&lt;?&gt; getObjectType() {
+<b class="nc">&nbsp;        return AbstractShiroFilter.class;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} always.  There is almost always only ever 1 Shiro {@code Filter} per web application.
+&nbsp;     *
+&nbsp;     * @return {@code true} always.  There is almost always only ever 1 Shiro {@code Filter} per web application.
+&nbsp;     */
+&nbsp;    public boolean isSingleton() {
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected FilterChainManager createFilterChainManager() {
+&nbsp;
+<b class="nc">&nbsp;        DefaultFilterChainManager manager = new DefaultFilterChainManager();</b>
+<b class="nc">&nbsp;        Map&lt;String, Filter&gt; defaultFilters = manager.getFilters();</b>
+&nbsp;        //apply global settings if necessary:
+<b class="nc">&nbsp;        for (Filter filter : defaultFilters.values()) {</b>
+<b class="nc">&nbsp;            applyGlobalPropertiesIfNecessary(filter);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //Apply the acquired and/or configured filters:
+<b class="nc">&nbsp;        Map&lt;String, Filter&gt; filters = getFilters();</b>
+<b class="nc">&nbsp;        if (!CollectionUtils.isEmpty(filters)) {</b>
+<b class="nc">&nbsp;            for (Map.Entry&lt;String, Filter&gt; entry : filters.entrySet()) {</b>
+<b class="nc">&nbsp;                String name = entry.getKey();</b>
+<b class="nc">&nbsp;                Filter filter = entry.getValue();</b>
+<b class="nc">&nbsp;                applyGlobalPropertiesIfNecessary(filter);</b>
+<b class="nc">&nbsp;                if (filter instanceof Nameable) {</b>
+<b class="nc">&nbsp;                    ((Nameable) filter).setName(name);</b>
+&nbsp;                }
+&nbsp;                //&#39;init&#39; argument is false, since Spring-configured filters should be initialized
+&nbsp;                //in Spring (i.e. &#39;init-method=blah&#39;) or implement InitializingBean:
+<b class="nc">&nbsp;                manager.addFilter(name, filter, false);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // set the global filters
+<b class="nc">&nbsp;        manager.setGlobalFilters(this.globalFilters);</b>
+&nbsp;
+&nbsp;        //build up the chains:
+<b class="nc">&nbsp;        Map&lt;String, String&gt; chains = getFilterChainDefinitionMap();</b>
+<b class="nc">&nbsp;        if (!CollectionUtils.isEmpty(chains)) {</b>
+<b class="nc">&nbsp;            for (Map.Entry&lt;String, String&gt; entry : chains.entrySet()) {</b>
+<b class="nc">&nbsp;                String url = entry.getKey();</b>
+<b class="nc">&nbsp;                String chainDefinition = entry.getValue();</b>
+<b class="nc">&nbsp;                manager.createChain(url, chainDefinition);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // create the default chain, to match anything the path matching would have missed
+<b class="nc">&nbsp;        manager.createDefaultChain(&quot;/**&quot;); // TODO this assumes ANT path matching, which might be OK here</b>
+&nbsp;
+<b class="nc">&nbsp;        return manager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This implementation:
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;Ensures the required {@link #setSecurityManager(org.apache.shiro.mgt.SecurityManager) securityManager}
+&nbsp;     * property has been set&lt;/li&gt;
+&nbsp;     * &lt;li&gt;{@link #createFilterChainManager() Creates} a {@link FilterChainManager} instance that reflects the
+&nbsp;     * configured {@link #setFilters(java.util.Map) filters} and
+&nbsp;     * {@link #setFilterChainDefinitionMap(java.util.Map) filter chain definitions}&lt;/li&gt;
+&nbsp;     * &lt;li&gt;Wraps the FilterChainManager with a suitable
+&nbsp;     * {@link org.apache.shiro.web.filter.mgt.FilterChainResolver FilterChainResolver} since the Shiro Filter
+&nbsp;     * implementations do not know of {@code FilterChainManager}s&lt;/li&gt;
+&nbsp;     * &lt;li&gt;Sets both the {@code SecurityManager} and {@code FilterChainResolver} instances on a new Shiro Filter
+&nbsp;     * instance and returns that filter instance.&lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     *
+&nbsp;     * @return a new Shiro Filter reflecting any configured filters and filter chain definitions.
+&nbsp;     * @throws Exception if there is a problem creating the AbstractShiroFilter instance.
+&nbsp;     */
+&nbsp;    protected AbstractShiroFilter createInstance() throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        log.debug(&quot;Creating Shiro Filter instance.&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        SecurityManager securityManager = getSecurityManager();</b>
+<b class="nc">&nbsp;        if (securityManager == null) {</b>
+<b class="nc">&nbsp;            String msg = &quot;SecurityManager property must be set.&quot;;</b>
+<b class="nc">&nbsp;            throw new BeanInitializationException(msg);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!(securityManager instanceof WebSecurityManager)) {</b>
+<b class="nc">&nbsp;            String msg = &quot;The security manager does not implement the WebSecurityManager interface.&quot;;</b>
+<b class="nc">&nbsp;            throw new BeanInitializationException(msg);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        FilterChainManager manager = createFilterChainManager();</b>
+&nbsp;
+&nbsp;        //Expose the constructed FilterChainManager by first wrapping it in a
+&nbsp;        // FilterChainResolver implementation. The AbstractShiroFilter implementations
+&nbsp;        // do not know about FilterChainManagers - only resolvers:
+<b class="nc">&nbsp;        PathMatchingFilterChainResolver chainResolver = new PathMatchingFilterChainResolver();</b>
+<b class="nc">&nbsp;        chainResolver.setFilterChainManager(manager);</b>
+&nbsp;
+&nbsp;        //Now create a concrete ShiroFilter instance and apply the acquired SecurityManager and built
+&nbsp;        //FilterChainResolver.  It doesn&#39;t matter that the instance is an anonymous inner class
+&nbsp;        //here - we&#39;re just using it because it is a concrete AbstractShiroFilter instance that accepts
+&nbsp;        //injection of the SecurityManager and FilterChainResolver:
+<b class="nc">&nbsp;        return new SpringShiroFilter((WebSecurityManager) securityManager, chainResolver, getShiroFilterConfiguration());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void applyLoginUrlIfNecessary(Filter filter) {
+<b class="nc">&nbsp;        String loginUrl = getLoginUrl();</b>
+<b class="nc">&nbsp;        if (StringUtils.hasText(loginUrl) &amp;&amp; (filter instanceof AccessControlFilter)) {</b>
+<b class="nc">&nbsp;            AccessControlFilter acFilter = (AccessControlFilter) filter;</b>
+&nbsp;            //only apply the login url if they haven&#39;t explicitly configured one already:
+<b class="nc">&nbsp;            String existingLoginUrl = acFilter.getLoginUrl();</b>
+<b class="nc">&nbsp;            if (AccessControlFilter.DEFAULT_LOGIN_URL.equals(existingLoginUrl)) {</b>
+<b class="nc">&nbsp;                acFilter.setLoginUrl(loginUrl);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void applySuccessUrlIfNecessary(Filter filter) {
+<b class="nc">&nbsp;        String successUrl = getSuccessUrl();</b>
+<b class="nc">&nbsp;        if (StringUtils.hasText(successUrl) &amp;&amp; (filter instanceof AuthenticationFilter)) {</b>
+<b class="nc">&nbsp;            AuthenticationFilter authcFilter = (AuthenticationFilter) filter;</b>
+&nbsp;            //only apply the successUrl if they haven&#39;t explicitly configured one already:
+<b class="nc">&nbsp;            String existingSuccessUrl = authcFilter.getSuccessUrl();</b>
+<b class="nc">&nbsp;            if (AuthenticationFilter.DEFAULT_SUCCESS_URL.equals(existingSuccessUrl)) {</b>
+<b class="nc">&nbsp;                authcFilter.setSuccessUrl(successUrl);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void applyUnauthorizedUrlIfNecessary(Filter filter) {
+<b class="nc">&nbsp;        String unauthorizedUrl = getUnauthorizedUrl();</b>
+<b class="nc">&nbsp;        if (StringUtils.hasText(unauthorizedUrl) &amp;&amp; (filter instanceof AuthorizationFilter)) {</b>
+<b class="nc">&nbsp;            AuthorizationFilter authzFilter = (AuthorizationFilter) filter;</b>
+&nbsp;            //only apply the unauthorizedUrl if they haven&#39;t explicitly configured one already:
+<b class="nc">&nbsp;            String existingUnauthorizedUrl = authzFilter.getUnauthorizedUrl();</b>
+<b class="nc">&nbsp;            if (existingUnauthorizedUrl == null) {</b>
+<b class="nc">&nbsp;                authzFilter.setUnauthorizedUrl(unauthorizedUrl);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void applyGlobalPropertiesIfNecessary(Filter filter) {
+<b class="nc">&nbsp;        applyLoginUrlIfNecessary(filter);</b>
+<b class="nc">&nbsp;        applySuccessUrlIfNecessary(filter);</b>
+<b class="nc">&nbsp;        applyUnauthorizedUrlIfNecessary(filter);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (filter instanceof OncePerRequestFilter) {</b>
+<b class="nc">&nbsp;            ((OncePerRequestFilter) filter).setFilterOncePerRequest(filterConfiguration.isFilterOncePerRequest());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Inspects a bean, and if it implements the {@link Filter} interface, automatically adds that filter
+&nbsp;     * instance to the internal {@link #setFilters(java.util.Map) filters map} that will be referenced
+&nbsp;     * later during filter chain construction.
+&nbsp;     */
+&nbsp;    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+<b class="nc">&nbsp;        if (bean instanceof Filter) {</b>
+<b class="nc">&nbsp;            log.debug(&quot;Found filter chain candidate filter &#39;{}&#39;&quot;, beanName);</b>
+<b class="nc">&nbsp;            Filter filter = (Filter) bean;</b>
+<b class="nc">&nbsp;            applyGlobalPropertiesIfNecessary(filter);</b>
+<b class="nc">&nbsp;            getFilters().put(beanName, filter);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            log.trace(&quot;Ignoring non-Filter bean &#39;{}&#39;&quot;, beanName);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return bean;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Does nothing - only exists to satisfy the BeanPostProcessor interface and immediately returns the
+&nbsp;     * {@code bean} argument.
+&nbsp;     */
+&nbsp;    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+<b class="nc">&nbsp;        return bean;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ordinarily the {@code AbstractShiroFilter} must be subclassed to additionally perform configuration
+&nbsp;     * and initialization behavior.  Because this {@code FactoryBean} implementation manually builds the
+&nbsp;     * {@link AbstractShiroFilter}&#39;s
+&nbsp;     * {@link AbstractShiroFilter#setSecurityManager(org.apache.shiro.web.mgt.WebSecurityManager) securityManager} and
+&nbsp;     * {@link AbstractShiroFilter#setFilterChainResolver(org.apache.shiro.web.filter.mgt.FilterChainResolver) filterChainResolver}
+&nbsp;     * properties, the only thing left to do is set those properties explicitly.  We do that in a simple
+&nbsp;     * concrete subclass in the constructor.
+&nbsp;     */
+&nbsp;    private static final class SpringShiroFilter extends AbstractShiroFilter {
+&nbsp;
+&nbsp;        protected SpringShiroFilter(WebSecurityManager webSecurityManager, FilterChainResolver resolver, ShiroFilterConfiguration filterConfiguration) {
+<b class="nc">&nbsp;            super();</b>
+<b class="nc">&nbsp;            if (webSecurityManager == null) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;WebSecurityManager property cannot be null.&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            setSecurityManager(webSecurityManager);</b>
+<b class="nc">&nbsp;            setShiroFilterConfiguration(filterConfiguration);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (resolver != null) {</b>
+<b class="nc">&nbsp;                setFilterChainResolver(resolver);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

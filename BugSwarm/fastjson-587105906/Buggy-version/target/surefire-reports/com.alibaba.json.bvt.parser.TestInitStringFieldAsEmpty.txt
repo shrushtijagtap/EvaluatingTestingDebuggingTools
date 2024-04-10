@@ -1,14 +1,15 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.parser.TestInitStringFieldAsEmpty
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.TestInitStringFieldAsEmpty
-com.alibaba.json.bvt.parser.TestInitStringFieldAsEmpty.test_public -- Time elapsed: 0 s <<< FAILURE!
+Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.010 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.TestInitStringFieldAsEmpty
+com.alibaba.json.bvt.parser.TestInitStringFieldAsEmpty.test_public -- Time elapsed: 0.007 s <<< FAILURE!
 java.lang.AssertionError: expected:<> but was:<null>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:834)
 	at org.junit.Assert.assertEquals(Assert.java:118)
 	at org.junit.Assert.assertEquals(Assert.java:144)
-	at com.alibaba.json.bvt.parser.TestInitStringFieldAsEmpty.test_public(TestInitStringFieldAsEmpty.java:18)
+	at com.alibaba.json.bvt.parser.TestInitStringFieldAsEmpty.__CLR4_1_107b2uv71jhp(TestInitStringFieldAsEmpty.java:18)
+	at com.alibaba.json.bvt.parser.TestInitStringFieldAsEmpty.test_public(TestInitStringFieldAsEmpty.java:16)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

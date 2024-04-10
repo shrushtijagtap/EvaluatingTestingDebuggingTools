@@ -1,0 +1,343 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FormAuthenticationFilter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.web.filter.authc</a>
+</div>
+
+<h1>Coverage Summary for Class: FormAuthenticationFilter (org.apache.shiro.web.filter.authc)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FormAuthenticationFilter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    15%
+  </span>
+  <span class="absValue">
+    (3/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    11.1%
+  </span>
+  <span class="absValue">
+    (2/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    26%
+  </span>
+  <span class="absValue">
+    (13/50)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.web.filter.authc;
+&nbsp;
+&nbsp;import org.apache.shiro.authc.AuthenticationException;
+&nbsp;import org.apache.shiro.authc.AuthenticationToken;
+&nbsp;import org.apache.shiro.authc.UsernamePasswordToken;
+&nbsp;import org.apache.shiro.subject.Subject;
+&nbsp;import org.apache.shiro.web.util.WebUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import javax.servlet.ServletRequest;
+&nbsp;import javax.servlet.ServletResponse;
+&nbsp;import javax.servlet.http.HttpServletRequest;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Requires the requesting user to be authenticated for the request to continue, and if they are not, forces the user
+&nbsp; * to login via by redirecting them to the {@link #setLoginUrl(String) loginUrl} you configure.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;p&gt;This filter constructs a {@link UsernamePasswordToken UsernamePasswordToken} with the values found in
+&nbsp; * {@link #setUsernameParam(String) username}, {@link #setPasswordParam(String) password},
+&nbsp; * and {@link #setRememberMeParam(String) rememberMe} request parameters.  It then calls
+&nbsp; * {@link org.apache.shiro.subject.Subject#login(org.apache.shiro.authc.AuthenticationToken) Subject.login(usernamePasswordToken)},
+&nbsp; * effectively automatically performing a login attempt.  Note that the login attempt will only occur when the
+&nbsp; * {@link #isLoginSubmission(javax.servlet.ServletRequest, javax.servlet.ServletResponse) isLoginSubmission(request,response)}
+&nbsp; * is &lt;code&gt;true&lt;/code&gt;, which by default occurs when the request is for the {@link #setLoginUrl(String) loginUrl} and
+&nbsp; * is a POST request.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;p&gt;If the login attempt fails, the resulting &lt;code&gt;AuthenticationException&lt;/code&gt; fully qualified class name will
+&nbsp; * be set as a request attribute under the {@link #setFailureKeyAttribute(String) failureKeyAttribute} key.  This
+&nbsp; * FQCN can be used as an i18n key or lookup mechanism to explain to the user why their login attempt failed
+&nbsp; * (e.g. no account, incorrect password, etc).
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;p&gt;If you would prefer to handle the authentication validation and login in your own code, consider using the
+&nbsp; * {@link PassThruAuthenticationFilter} instead, which allows requests to the
+&nbsp; * {@link #loginUrl} to pass through to your application&#39;s code directly.
+&nbsp; *
+&nbsp; * @see PassThruAuthenticationFilter
+&nbsp; * @since 0.9
+&nbsp; */
+&nbsp;public class FormAuthenticationFilter extends AuthenticatingFilter {
+&nbsp;
+&nbsp;    //TODO - complete JavaDoc
+&nbsp;
+&nbsp;    public static final String DEFAULT_ERROR_KEY_ATTRIBUTE_NAME = &quot;shiroLoginFailure&quot;;
+&nbsp;
+&nbsp;    public static final String DEFAULT_USERNAME_PARAM = &quot;username&quot;;
+&nbsp;    public static final String DEFAULT_PASSWORD_PARAM = &quot;password&quot;;
+&nbsp;    public static final String DEFAULT_REMEMBER_ME_PARAM = &quot;rememberMe&quot;;
+&nbsp;
+<b class="fc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(FormAuthenticationFilter.class);</b>
+&nbsp;
+<b class="fc">&nbsp;    private String usernameParam = DEFAULT_USERNAME_PARAM;</b>
+<b class="fc">&nbsp;    private String passwordParam = DEFAULT_PASSWORD_PARAM;</b>
+<b class="fc">&nbsp;    private String rememberMeParam = DEFAULT_REMEMBER_ME_PARAM;</b>
+&nbsp;
+<b class="fc">&nbsp;    private String failureKeyAttribute = DEFAULT_ERROR_KEY_ATTRIBUTE_NAME;</b>
+&nbsp;
+<b class="fc">&nbsp;    public FormAuthenticationFilter() {</b>
+<b class="fc">&nbsp;        setLoginUrl(DEFAULT_LOGIN_URL);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setLoginUrl(String loginUrl) {
+<b class="fc">&nbsp;        String previous = getLoginUrl();</b>
+<b class="pc">&nbsp;        if (previous != null) {</b>
+<b class="fc">&nbsp;            this.appliedPaths.remove(previous);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        super.setLoginUrl(loginUrl);</b>
+<b class="pc">&nbsp;        if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;            log.trace(&quot;Adding login url to applied paths.&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.appliedPaths.put(getLoginUrl(), null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getUsernameParam() {
+<b class="nc">&nbsp;        return usernameParam;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the request parameter name to look for when acquiring the username.  Unless overridden by calling this
+&nbsp;     * method, the default is &lt;code&gt;username&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @param usernameParam the name of the request param to check for acquiring the username.
+&nbsp;     */
+&nbsp;    public void setUsernameParam(String usernameParam) {
+<b class="nc">&nbsp;        this.usernameParam = usernameParam;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getPasswordParam() {
+<b class="nc">&nbsp;        return passwordParam;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the request parameter name to look for when acquiring the password.  Unless overridden by calling this
+&nbsp;     * method, the default is &lt;code&gt;password&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @param passwordParam the name of the request param to check for acquiring the password.
+&nbsp;     */
+&nbsp;    public void setPasswordParam(String passwordParam) {
+<b class="nc">&nbsp;        this.passwordParam = passwordParam;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getRememberMeParam() {
+<b class="nc">&nbsp;        return rememberMeParam;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the request parameter name to look for when acquiring the rememberMe boolean value.  Unless overridden
+&nbsp;     * by calling this method, the default is &lt;code&gt;rememberMe&lt;/code&gt;.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * RememberMe will be &lt;code&gt;true&lt;/code&gt; if the parameter value equals any of those supported by
+&nbsp;     * {@link org.apache.shiro.web.util.WebUtils#isTrue(javax.servlet.ServletRequest, String) WebUtils.isTrue(request,value)}, &lt;code&gt;false&lt;/code&gt;
+&nbsp;     * otherwise.
+&nbsp;     *
+&nbsp;     * @param rememberMeParam the name of the request param to check for acquiring the rememberMe boolean value.
+&nbsp;     */
+&nbsp;    public void setRememberMeParam(String rememberMeParam) {
+<b class="nc">&nbsp;        this.rememberMeParam = rememberMeParam;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getFailureKeyAttribute() {
+<b class="nc">&nbsp;        return failureKeyAttribute;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFailureKeyAttribute(String failureKeyAttribute) {
+<b class="nc">&nbsp;        this.failureKeyAttribute = failureKeyAttribute;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
+<b class="nc">&nbsp;        if (isLoginRequest(request, response)) {</b>
+<b class="nc">&nbsp;            if (isLoginSubmission(request, response)) {</b>
+<b class="nc">&nbsp;                if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;                    log.trace(&quot;Login submission detected.  Attempting to execute login.&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return executeLogin(request, response);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;                    log.trace(&quot;Login page view.&quot;);</b>
+&nbsp;                }
+&nbsp;                //allow them to see the login page ;)
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;                log.trace(&quot;Attempting to access a path which requires authentication.  Forwarding to the &quot; +</b>
+<b class="nc">&nbsp;                        &quot;Authentication url [&quot; + getLoginUrl() + &quot;]&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            saveRequestAndRedirectToLogin(request, response);</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This default implementation merely returns &lt;code&gt;true&lt;/code&gt; if the request is an HTTP &lt;code&gt;POST&lt;/code&gt;,
+&nbsp;     * &lt;code&gt;false&lt;/code&gt; otherwise. Can be overridden by subclasses for custom login submission detection behavior.
+&nbsp;     *
+&nbsp;     * @param request  the incoming ServletRequest
+&nbsp;     * @param response the outgoing ServletResponse.
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt; if the request is an HTTP &lt;code&gt;POST&lt;/code&gt;, &lt;code&gt;false&lt;/code&gt; otherwise.
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    protected boolean isLoginSubmission(ServletRequest request, ServletResponse response) {
+<b class="nc">&nbsp;        return (request instanceof HttpServletRequest) &amp;&amp; WebUtils.toHttp(request).getMethod().equalsIgnoreCase(POST_METHOD);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
+<b class="nc">&nbsp;        String username = getUsername(request);</b>
+<b class="nc">&nbsp;        String password = getPassword(request);</b>
+<b class="nc">&nbsp;        return createToken(username, password, request, response);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean isRememberMe(ServletRequest request) {
+<b class="nc">&nbsp;        return WebUtils.isTrue(request, getRememberMeParam());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean onLoginSuccess(AuthenticationToken token, Subject subject,
+&nbsp;                                     ServletRequest request, ServletResponse response) throws Exception {
+<b class="nc">&nbsp;        issueSuccessRedirect(request, response);</b>
+&nbsp;        //we handled the success redirect directly, prevent the chain from continuing:
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e,
+&nbsp;                                     ServletRequest request, ServletResponse response) {
+<b class="nc">&nbsp;        if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;            log.debug( &quot;Authentication exception&quot;, e );</b>
+&nbsp;        }
+<b class="nc">&nbsp;        setFailureAttribute(request, e);</b>
+&nbsp;        //login failed, let request continue back to the login page:
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void setFailureAttribute(ServletRequest request, AuthenticationException ae) {
+<b class="nc">&nbsp;        String className = ae.getClass().getName();</b>
+<b class="nc">&nbsp;        request.setAttribute(getFailureKeyAttribute(), className);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected String getUsername(ServletRequest request) {
+<b class="nc">&nbsp;        return WebUtils.getCleanParam(request, getUsernameParam());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected String getPassword(ServletRequest request) {
+<b class="nc">&nbsp;        return WebUtils.getCleanParam(request, getPasswordParam(), false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

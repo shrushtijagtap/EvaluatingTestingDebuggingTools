@@ -1,14 +1,15 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.writeAsArray.WriteAsArray_float2_public
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0 s <<< FAILURE! -- in com.alibaba.json.bvt.writeAsArray.WriteAsArray_float2_public
-com.alibaba.json.bvt.writeAsArray.WriteAsArray_float2_public.test_error1 -- Time elapsed: 0 s <<< FAILURE!
+Tests run: 4, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.001 s <<< FAILURE! -- in com.alibaba.json.bvt.writeAsArray.WriteAsArray_float2_public
+com.alibaba.json.bvt.writeAsArray.WriteAsArray_float2_public.test_error1 -- Time elapsed: 0.001 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_float2_public.test_error1(WriteAsArray_float2_public.java:43)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_float2_public.__CLR4_5_284g0lf1yci(WriteAsArray_float2_public.java:43)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_float2_public.test_error1(WriteAsArray_float2_public.java:36)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -37,7 +38,8 @@ java.lang.AssertionError
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_float2_public.test_error2(WriteAsArray_float2_public.java:53)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_float2_public.__CLR4_5_24vg1sy1yco(WriteAsArray_float2_public.java:53)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_float2_public.test_error2(WriteAsArray_float2_public.java:46)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -66,7 +68,8 @@ java.lang.AssertionError
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_float2_public.test_error(WriteAsArray_float2_public.java:33)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_float2_public.__CLR4_5_2vbot1a1ycc(WriteAsArray_float2_public.java:33)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_float2_public.test_error(WriteAsArray_float2_public.java:26)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

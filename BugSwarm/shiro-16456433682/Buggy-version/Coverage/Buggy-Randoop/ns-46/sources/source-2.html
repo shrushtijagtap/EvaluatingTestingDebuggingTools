@@ -1,0 +1,680 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DelegatingSubject</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.subject.support</a>
+</div>
+
+<h1>Coverage Summary for Class: DelegatingSubject (org.apache.shiro.subject.support)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DelegatingSubject</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/52)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/92)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/170)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DelegatingSubject$1</td>
+  </tr>
+  <tr>
+    <td class="name">DelegatingSubject$StoppingAwareProxiedSession</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/55)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/92)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/176)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.subject.support;
+&nbsp;
+&nbsp;import org.apache.shiro.authc.AuthenticationException;
+&nbsp;import org.apache.shiro.authc.AuthenticationToken;
+&nbsp;import org.apache.shiro.authc.HostAuthenticationToken;
+&nbsp;import org.apache.shiro.authz.AuthorizationException;
+&nbsp;import org.apache.shiro.authz.Permission;
+&nbsp;import org.apache.shiro.authz.UnauthenticatedException;
+&nbsp;import org.apache.shiro.mgt.SecurityManager;
+&nbsp;import org.apache.shiro.session.InvalidSessionException;
+&nbsp;import org.apache.shiro.session.ProxiedSession;
+&nbsp;import org.apache.shiro.session.Session;
+&nbsp;import org.apache.shiro.session.SessionException;
+&nbsp;import org.apache.shiro.session.mgt.DefaultSessionContext;
+&nbsp;import org.apache.shiro.session.mgt.SessionContext;
+&nbsp;import org.apache.shiro.subject.ExecutionException;
+&nbsp;import org.apache.shiro.subject.PrincipalCollection;
+&nbsp;import org.apache.shiro.subject.Subject;
+&nbsp;import org.apache.shiro.util.CollectionUtils;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.List;
+&nbsp;import java.util.concurrent.Callable;
+&nbsp;import java.util.concurrent.CopyOnWriteArrayList;
+&nbsp;
+&nbsp;/**
+&nbsp; * Implementation of the {@code Subject} interface that delegates
+&nbsp; * method calls to an underlying {@link org.apache.shiro.mgt.SecurityManager SecurityManager} instance for security checks.
+&nbsp; * It is essentially a {@code SecurityManager} proxy.
+&nbsp; * &lt;p/&gt;
+&nbsp; * This implementation does not maintain state such as roles and permissions (only {@code Subject}
+&nbsp; * {@link #getPrincipals() principals}, such as usernames or user primary keys) for better performance in a stateless
+&nbsp; * architecture.  It instead asks the underlying {@code SecurityManager} every time to perform
+&nbsp; * the authorization check.
+&nbsp; * &lt;p/&gt;
+&nbsp; * A common misconception in using this implementation is that an EIS resource (RDBMS, etc) would
+&nbsp; * be &amp;quot;hit&amp;quot; every time a method is called.  This is not necessarily the case and is
+&nbsp; * up to the implementation of the underlying {@code SecurityManager} instance.  If caching of authorization
+&nbsp; * data is desired (to eliminate EIS round trips and therefore improve database performance), it is considered
+&nbsp; * much more elegant to let the underlying {@code SecurityManager} implementation or its delegate components
+&nbsp; * manage caching, not this class.  A {@code SecurityManager} is considered a business-tier component,
+&nbsp; * where caching strategies are better managed.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Applications from large and clustered to simple and JVM-local all benefit from
+&nbsp; * stateless architectures.  This implementation plays a part in the stateless programming
+&nbsp; * paradigm and should be used whenever possible.
+&nbsp; *
+&nbsp; * @since 0.1
+&nbsp; */
+<b class="nc">&nbsp;public class DelegatingSubject implements Subject {</b>
+&nbsp;
+<b class="nc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(DelegatingSubject.class);</b>
+&nbsp;
+<b class="nc">&nbsp;    private static final String RUN_AS_PRINCIPALS_SESSION_KEY =</b>
+<b class="nc">&nbsp;            DelegatingSubject.class.getName() + &quot;.RUN_AS_PRINCIPALS_SESSION_KEY&quot;;</b>
+&nbsp;
+&nbsp;    protected PrincipalCollection principals;
+&nbsp;    protected boolean authenticated;
+&nbsp;    protected String host;
+&nbsp;    protected Session session;
+&nbsp;    /**
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    protected boolean sessionCreationEnabled;
+&nbsp;
+&nbsp;    protected transient SecurityManager securityManager;
+&nbsp;
+&nbsp;    public DelegatingSubject(SecurityManager securityManager) {
+<b class="nc">&nbsp;        this(null, false, null, null, securityManager);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DelegatingSubject(PrincipalCollection principals, boolean authenticated, String host,
+&nbsp;                             Session session, SecurityManager securityManager) {
+<b class="nc">&nbsp;        this(principals, authenticated, host, session, true, securityManager);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //since 1.2
+&nbsp;    public DelegatingSubject(PrincipalCollection principals, boolean authenticated, String host,
+<b class="nc">&nbsp;                             Session session, boolean sessionCreationEnabled, SecurityManager securityManager) {</b>
+<b class="nc">&nbsp;        if (securityManager == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;SecurityManager argument cannot be null.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.securityManager = securityManager;</b>
+<b class="nc">&nbsp;        this.principals = principals;</b>
+<b class="nc">&nbsp;        this.authenticated = authenticated;</b>
+<b class="nc">&nbsp;        this.host = host;</b>
+<b class="nc">&nbsp;        if (session != null) {</b>
+<b class="nc">&nbsp;            this.session = decorate(session);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.sessionCreationEnabled = sessionCreationEnabled;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Session decorate(Session session) {
+<b class="nc">&nbsp;        if (session == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;session cannot be null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new StoppingAwareProxiedSession(session, this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SecurityManager getSecurityManager() {
+<b class="nc">&nbsp;        return securityManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean isEmpty(PrincipalCollection pc) {
+<b class="nc">&nbsp;        return pc == null || pc.isEmpty();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean hasPrincipals() {
+<b class="nc">&nbsp;        return !isEmpty(getPrincipals());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the host name or IP associated with the client who created/is interacting with this Subject.
+&nbsp;     *
+&nbsp;     * @return the host name or IP associated with the client who created/is interacting with this Subject.
+&nbsp;     */
+&nbsp;    public String getHost() {
+<b class="nc">&nbsp;        return this.host;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Object getPrimaryPrincipal(PrincipalCollection principals) {
+<b class="nc">&nbsp;        if (!isEmpty(principals)) {</b>
+<b class="nc">&nbsp;            return principals.getPrimaryPrincipal();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @see Subject#getPrincipal()
+&nbsp;     */
+&nbsp;    public Object getPrincipal() {
+<b class="nc">&nbsp;        return getPrimaryPrincipal(getPrincipals());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public PrincipalCollection getPrincipals() {
+<b class="nc">&nbsp;        List&lt;PrincipalCollection&gt; runAsPrincipals = getRunAsPrincipalsStack();</b>
+<b class="nc">&nbsp;        return CollectionUtils.isEmpty(runAsPrincipals) ? this.principals : runAsPrincipals.get(0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isPermitted(String permission) {
+<b class="nc">&nbsp;        return hasPrincipals() &amp;&amp; securityManager.isPermitted(getPrincipals(), permission);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isPermitted(Permission permission) {
+<b class="nc">&nbsp;        return hasPrincipals() &amp;&amp; securityManager.isPermitted(getPrincipals(), permission);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean[] isPermitted(String... permissions) {
+<b class="nc">&nbsp;        if (hasPrincipals()) {</b>
+<b class="nc">&nbsp;            return securityManager.isPermitted(getPrincipals(), permissions);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return new boolean[permissions.length];</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean[] isPermitted(List&lt;Permission&gt; permissions) {
+<b class="nc">&nbsp;        if (hasPrincipals()) {</b>
+<b class="nc">&nbsp;            return securityManager.isPermitted(getPrincipals(), permissions);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return new boolean[permissions.size()];</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isPermittedAll(String... permissions) {
+<b class="nc">&nbsp;        return hasPrincipals() &amp;&amp; securityManager.isPermittedAll(getPrincipals(), permissions);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isPermittedAll(Collection&lt;Permission&gt; permissions) {
+<b class="nc">&nbsp;        return hasPrincipals() &amp;&amp; securityManager.isPermittedAll(getPrincipals(), permissions);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void assertAuthzCheckPossible() throws AuthorizationException {
+<b class="nc">&nbsp;        if (!hasPrincipals()) {</b>
+<b class="nc">&nbsp;            String msg = &quot;This subject is anonymous - it does not have any identifying principals and &quot; +</b>
+&nbsp;                    &quot;authorization operations require an identity to check against.  A Subject instance will &quot; +
+&nbsp;                    &quot;acquire these identifying principals automatically after a successful login is performed &quot; +
+<b class="nc">&nbsp;                    &quot;be executing &quot; + Subject.class.getName() + &quot;.login(AuthenticationToken) or when &#39;Remember Me&#39; &quot; +</b>
+&nbsp;                    &quot;functionality is enabled by the SecurityManager.  This exception can also occur when a &quot; +
+&nbsp;                    &quot;previously logged-in Subject has logged out which &quot; +
+&nbsp;                    &quot;makes it anonymous again.  Because an identity is currently not known due to any of these &quot; +
+&nbsp;                    &quot;conditions, authorization is denied.&quot;;
+<b class="nc">&nbsp;            throw new UnauthenticatedException(msg);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkPermission(String permission) throws AuthorizationException {
+<b class="nc">&nbsp;        assertAuthzCheckPossible();</b>
+<b class="nc">&nbsp;        securityManager.checkPermission(getPrincipals(), permission);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkPermission(Permission permission) throws AuthorizationException {
+<b class="nc">&nbsp;        assertAuthzCheckPossible();</b>
+<b class="nc">&nbsp;        securityManager.checkPermission(getPrincipals(), permission);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkPermissions(String... permissions) throws AuthorizationException {
+<b class="nc">&nbsp;        assertAuthzCheckPossible();</b>
+<b class="nc">&nbsp;        securityManager.checkPermissions(getPrincipals(), permissions);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkPermissions(Collection&lt;Permission&gt; permissions) throws AuthorizationException {
+<b class="nc">&nbsp;        assertAuthzCheckPossible();</b>
+<b class="nc">&nbsp;        securityManager.checkPermissions(getPrincipals(), permissions);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasRole(String roleIdentifier) {
+<b class="nc">&nbsp;        return hasPrincipals() &amp;&amp; securityManager.hasRole(getPrincipals(), roleIdentifier);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean[] hasRoles(List&lt;String&gt; roleIdentifiers) {
+<b class="nc">&nbsp;        if (hasPrincipals()) {</b>
+<b class="nc">&nbsp;            return securityManager.hasRoles(getPrincipals(), roleIdentifiers);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return new boolean[roleIdentifiers.size()];</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasAllRoles(Collection&lt;String&gt; roleIdentifiers) {
+<b class="nc">&nbsp;        return hasPrincipals() &amp;&amp; securityManager.hasAllRoles(getPrincipals(), roleIdentifiers);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkRole(String role) throws AuthorizationException {
+<b class="nc">&nbsp;        assertAuthzCheckPossible();</b>
+<b class="nc">&nbsp;        securityManager.checkRole(getPrincipals(), role);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkRoles(String... roleIdentifiers) throws AuthorizationException {
+<b class="nc">&nbsp;        assertAuthzCheckPossible();</b>
+<b class="nc">&nbsp;        securityManager.checkRoles(getPrincipals(), roleIdentifiers);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkRoles(Collection&lt;String&gt; roles) throws AuthorizationException {
+<b class="nc">&nbsp;        assertAuthzCheckPossible();</b>
+<b class="nc">&nbsp;        securityManager.checkRoles(getPrincipals(), roles);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void login(AuthenticationToken token) throws AuthenticationException {
+<b class="nc">&nbsp;        clearRunAsIdentitiesInternal();</b>
+<b class="nc">&nbsp;        Subject subject = securityManager.login(this, token);</b>
+&nbsp;
+&nbsp;        PrincipalCollection principals;
+&nbsp;
+<b class="nc">&nbsp;        String host = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (subject instanceof DelegatingSubject) {</b>
+<b class="nc">&nbsp;            DelegatingSubject delegating = (DelegatingSubject) subject;</b>
+&nbsp;            //we have to do this in case there are assumed identities - we don&#39;t want to lose the &#39;real&#39; principals:
+<b class="nc">&nbsp;            principals = delegating.principals;</b>
+<b class="nc">&nbsp;            host = delegating.host;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            principals = subject.getPrincipals();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (principals == null || principals.isEmpty()) {</b>
+<b class="nc">&nbsp;            String msg = &quot;Principals returned from securityManager.login( token ) returned a null or &quot; +</b>
+&nbsp;                    &quot;empty value.  This value must be non null and populated with one or more elements.&quot;;
+<b class="nc">&nbsp;            throw new IllegalStateException(msg);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.principals = principals;</b>
+<b class="nc">&nbsp;        this.authenticated = true;</b>
+<b class="nc">&nbsp;        if (token instanceof HostAuthenticationToken) {</b>
+<b class="nc">&nbsp;            host = ((HostAuthenticationToken) token).getHost();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (host != null) {</b>
+<b class="nc">&nbsp;            this.host = host;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Session session = subject.getSession(false);</b>
+<b class="nc">&nbsp;        if (session != null) {</b>
+<b class="nc">&nbsp;            this.session = decorate(session);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            this.session = null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isAuthenticated() {
+<b class="nc">&nbsp;        return authenticated &amp;&amp; hasPrincipals();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isRemembered() {
+<b class="nc">&nbsp;        PrincipalCollection principals = getPrincipals();</b>
+<b class="nc">&nbsp;        return principals != null &amp;&amp; !principals.isEmpty() &amp;&amp; !isAuthenticated();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if this Subject is allowed to create sessions, {@code false} otherwise.
+&nbsp;     *
+&nbsp;     * @return {@code true} if this Subject is allowed to create sessions, {@code false} otherwise.
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    protected boolean isSessionCreationEnabled() {
+<b class="nc">&nbsp;        return this.sessionCreationEnabled;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Session getSession() {
+<b class="nc">&nbsp;        return getSession(true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Session getSession(boolean create) {
+<b class="nc">&nbsp;        if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;            log.trace(&quot;attempting to get session; create = &quot; + create +</b>
+&nbsp;                    &quot;; session is null = &quot; + (this.session == null) +
+<b class="nc">&nbsp;                    &quot;; session has id = &quot; + (this.session != null &amp;&amp; session.getId() != null));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (this.session == null &amp;&amp; create) {</b>
+&nbsp;
+&nbsp;            //added in 1.2:
+<b class="nc">&nbsp;            if (!isSessionCreationEnabled()) {</b>
+<b class="nc">&nbsp;                String msg = &quot;Session creation has been disabled for the current subject.  This exception indicates &quot; +</b>
+&nbsp;                        &quot;that there is either a programming error (using a session when it should never be &quot; +
+&nbsp;                        &quot;used) or that Shiro&#39;s configuration needs to be adjusted to allow Sessions to be created &quot; +
+<b class="nc">&nbsp;                        &quot;for the current Subject.  See the &quot; + DisabledSessionException.class.getName() + &quot; JavaDoc &quot; +</b>
+&nbsp;                        &quot;for more.&quot;;
+<b class="nc">&nbsp;                throw new DisabledSessionException(msg);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            log.trace(&quot;Starting session for host {}&quot;, getHost());</b>
+<b class="nc">&nbsp;            SessionContext sessionContext = createSessionContext();</b>
+<b class="nc">&nbsp;            Session session = this.securityManager.start(sessionContext);</b>
+<b class="nc">&nbsp;            this.session = decorate(session);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return this.session;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected SessionContext createSessionContext() {
+<b class="nc">&nbsp;        SessionContext sessionContext = new DefaultSessionContext();</b>
+<b class="nc">&nbsp;        if (StringUtils.hasText(host)) {</b>
+<b class="nc">&nbsp;            sessionContext.setHost(host);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return sessionContext;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void clearRunAsIdentitiesInternal() {
+&nbsp;        //try/catch added for SHIRO-298
+&nbsp;        try {
+<b class="nc">&nbsp;            clearRunAsIdentities();</b>
+<b class="nc">&nbsp;        } catch (SessionException se) {</b>
+<b class="nc">&nbsp;            log.debug(&quot;Encountered session exception trying to clear &#39;runAs&#39; identities during logout.  This &quot; +</b>
+&nbsp;                    &quot;can generally safely be ignored.&quot;, se);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void logout() {
+&nbsp;        try {
+<b class="nc">&nbsp;            clearRunAsIdentitiesInternal();</b>
+<b class="nc">&nbsp;            this.securityManager.logout(this);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            this.session = null;</b>
+<b class="nc">&nbsp;            this.principals = null;</b>
+<b class="nc">&nbsp;            this.authenticated = false;</b>
+&nbsp;            //Don&#39;t set securityManager to null here - the Subject can still be
+&nbsp;            //used, it is just considered anonymous at this point.  The SecurityManager instance is
+&nbsp;            //necessary if the subject would log in again or acquire a new session.  This is in response to
+&nbsp;            //https://issues.apache.org/jira/browse/JSEC-22
+&nbsp;            //this.securityManager = null;
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void sessionStopped() {
+<b class="nc">&nbsp;        this.session = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;V&gt; V execute(Callable&lt;V&gt; callable) throws ExecutionException {
+<b class="nc">&nbsp;        Callable&lt;V&gt; associated = associateWith(callable);</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            return associated.call();</b>
+<b class="nc">&nbsp;        } catch (Throwable t) {</b>
+<b class="nc">&nbsp;            throw new ExecutionException(t);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void execute(Runnable runnable) {
+<b class="nc">&nbsp;        Runnable associated = associateWith(runnable);</b>
+<b class="nc">&nbsp;        associated.run();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;V&gt; Callable&lt;V&gt; associateWith(Callable&lt;V&gt; callable) {
+<b class="nc">&nbsp;        return new SubjectCallable&lt;V&gt;(this, callable);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Runnable associateWith(Runnable runnable) {
+<b class="nc">&nbsp;        if (runnable instanceof Thread) {</b>
+<b class="nc">&nbsp;            String msg = &quot;This implementation does not support Thread arguments because of JDK ThreadLocal &quot; +</b>
+&nbsp;                    &quot;inheritance mechanisms required by Shiro.  Instead, the method argument should be a non-Thread &quot; +
+&nbsp;                    &quot;Runnable and the return value from this method can then be given to an ExecutorService or &quot; +
+&nbsp;                    &quot;another Thread.&quot;;
+<b class="nc">&nbsp;            throw new UnsupportedOperationException(msg);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new SubjectRunnable(this, runnable);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private class StoppingAwareProxiedSession extends ProxiedSession {</b>
+&nbsp;
+&nbsp;        private final DelegatingSubject owner;
+&nbsp;
+<b class="nc">&nbsp;        private StoppingAwareProxiedSession(Session target, DelegatingSubject owningSubject) {</b>
+<b class="nc">&nbsp;            super(target);</b>
+<b class="nc">&nbsp;            owner = owningSubject;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void stop() throws InvalidSessionException {
+<b class="nc">&nbsp;            super.stop();</b>
+<b class="nc">&nbsp;            owner.sessionStopped();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    // ======================================
+&nbsp;    // &#39;Run As&#39; support implementations
+&nbsp;    // ======================================
+&nbsp;
+&nbsp;    public void runAs(PrincipalCollection principals) {
+<b class="nc">&nbsp;        if (!hasPrincipals()) {</b>
+<b class="nc">&nbsp;            String msg = &quot;This subject does not yet have an identity.  Assuming the identity of another &quot; +</b>
+&nbsp;                    &quot;Subject is only allowed for Subjects with an existing identity.  Try logging this subject in &quot; +
+<b class="nc">&nbsp;                    &quot;first, or using the &quot; + Subject.Builder.class.getName() + &quot; to build ad hoc Subject instances &quot; +</b>
+&nbsp;                    &quot;with identities as necessary.&quot;;
+<b class="nc">&nbsp;            throw new IllegalStateException(msg);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        pushIdentity(principals);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isRunAs() {
+<b class="nc">&nbsp;        List&lt;PrincipalCollection&gt; stack = getRunAsPrincipalsStack();</b>
+<b class="nc">&nbsp;        return !CollectionUtils.isEmpty(stack);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public PrincipalCollection getPreviousPrincipals() {
+<b class="nc">&nbsp;        PrincipalCollection previousPrincipals = null;</b>
+<b class="nc">&nbsp;        List&lt;PrincipalCollection&gt; stack = getRunAsPrincipalsStack();</b>
+<b class="nc">&nbsp;        int stackSize = stack != null ? stack.size() : 0;</b>
+<b class="nc">&nbsp;        if (stackSize &gt; 0) {</b>
+<b class="nc">&nbsp;            if (stackSize == 1) {</b>
+<b class="nc">&nbsp;                previousPrincipals = this.principals;</b>
+&nbsp;            } else {
+&nbsp;                //always get the one behind the current:
+<b class="nc">&nbsp;                assert stack != null;</b>
+<b class="nc">&nbsp;                previousPrincipals = stack.get(1);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return previousPrincipals;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public PrincipalCollection releaseRunAs() {
+<b class="nc">&nbsp;        return popIdentity();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    private List&lt;PrincipalCollection&gt; getRunAsPrincipalsStack() {
+<b class="nc">&nbsp;        Session session = getSession(false);</b>
+<b class="nc">&nbsp;        if (session != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                return (List&lt;PrincipalCollection&gt;) session.getAttribute(RUN_AS_PRINCIPALS_SESSION_KEY);</b>
+<b class="nc">&nbsp;            } catch (SessionException se) {</b>
+&nbsp;                // There could be a rare race condition when a session is invalidated in another thread,
+&nbsp;                // this thread could throw this exception, so we catch it
+&nbsp;                // similar issue as in clearRunAsIdentitiesInternal()
+&nbsp;                // See https://issues.apache.org/jira/browse/SHIRO-512
+<b class="nc">&nbsp;                log.debug(&quot;Encountered session exception trying to get &#39;runAs&#39; principal stack.  This &quot;</b>
+&nbsp;                        + &quot;can generally safely be ignored.&quot;, se);
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void clearRunAsIdentities() {
+<b class="nc">&nbsp;        Session session = getSession(false);</b>
+<b class="nc">&nbsp;        if (session != null) {</b>
+<b class="nc">&nbsp;            session.removeAttribute(RUN_AS_PRINCIPALS_SESSION_KEY);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void pushIdentity(PrincipalCollection principals) throws NullPointerException {
+<b class="nc">&nbsp;        if (isEmpty(principals)) {</b>
+<b class="nc">&nbsp;            String msg = &quot;Specified Subject principals cannot be null or empty for &#39;run as&#39; functionality.&quot;;</b>
+<b class="nc">&nbsp;            throw new NullPointerException(msg);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        List&lt;PrincipalCollection&gt; stack = getRunAsPrincipalsStack();</b>
+<b class="nc">&nbsp;        if (stack == null) {</b>
+<b class="nc">&nbsp;            stack = new CopyOnWriteArrayList&lt;PrincipalCollection&gt;();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        stack.add(0, principals);</b>
+<b class="nc">&nbsp;        Session session = getSession();</b>
+<b class="nc">&nbsp;        session.setAttribute(RUN_AS_PRINCIPALS_SESSION_KEY, stack);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private PrincipalCollection popIdentity() {
+<b class="nc">&nbsp;        PrincipalCollection popped = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;PrincipalCollection&gt; stack = getRunAsPrincipalsStack();</b>
+<b class="nc">&nbsp;        if (!CollectionUtils.isEmpty(stack)) {</b>
+<b class="nc">&nbsp;            popped = stack.remove(0);</b>
+&nbsp;            Session session;
+<b class="nc">&nbsp;            if (!CollectionUtils.isEmpty(stack)) {</b>
+&nbsp;                //persist the changed stack to the session
+<b class="nc">&nbsp;                session = getSession();</b>
+<b class="nc">&nbsp;                session.setAttribute(RUN_AS_PRINCIPALS_SESSION_KEY, stack);</b>
+&nbsp;            } else {
+&nbsp;                //stack is empty, remove it from the session:
+<b class="nc">&nbsp;                clearRunAsIdentities();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return popped;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

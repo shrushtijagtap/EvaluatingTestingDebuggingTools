@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.parser.bug.Bug2
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.bug.Bug2
-com.alibaba.json.bvt.parser.bug.Bug2.test_1 -- Time elapsed: 0 s <<< ERROR!
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.006 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.bug.Bug2
+com.alibaba.json.bvt.parser.bug.Bug2.test_1 -- Time elapsed: 0.004 s <<< ERROR!
 com.alibaba.fastjson.JSONException: Feature.AllowSingleQuotes is false
 	at com.alibaba.fastjson.parser.JSONLexerBase.nextToken(JSONLexerBase.java:131)
 	at com.alibaba.fastjson.parser.JSONLexerBase.nextToken(JSONLexerBase.java:359)
@@ -15,7 +15,8 @@ com.alibaba.fastjson.JSONException: Feature.AllowSingleQuotes is false
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:383)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:287)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:560)
-	at com.alibaba.json.bvt.parser.bug.Bug2.test_1(Bug2.java:23)
+	at com.alibaba.json.bvt.parser.bug.Bug2.__CLR4_5_2jw3iwl1jhp(Bug2.java:23)
+	at com.alibaba.json.bvt.parser.bug.Bug2.test_1(Bug2.java:21)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

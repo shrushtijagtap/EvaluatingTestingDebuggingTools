@@ -1,0 +1,620 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JdbcRealm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.realm.jdbc</a>
+</div>
+
+<h1>Coverage Summary for Class: JdbcRealm (org.apache.shiro.realm.jdbc)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JdbcRealm</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/46)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/123)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JdbcRealm$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JdbcRealm$SaltStyle</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/46)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/125)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.realm.jdbc;
+&nbsp;
+&nbsp;import org.apache.shiro.authc.AccountException;
+&nbsp;import org.apache.shiro.authc.AuthenticationException;
+&nbsp;import org.apache.shiro.authc.AuthenticationInfo;
+&nbsp;import org.apache.shiro.authc.AuthenticationToken;
+&nbsp;import org.apache.shiro.authc.SimpleAuthenticationInfo;
+&nbsp;import org.apache.shiro.authc.UnknownAccountException;
+&nbsp;import org.apache.shiro.authc.UsernamePasswordToken;
+&nbsp;import org.apache.shiro.authz.AuthorizationException;
+&nbsp;import org.apache.shiro.authz.AuthorizationInfo;
+&nbsp;import org.apache.shiro.authz.SimpleAuthorizationInfo;
+&nbsp;import org.apache.shiro.codec.Base64;
+&nbsp;import org.apache.shiro.config.ConfigurationException;
+&nbsp;import org.apache.shiro.realm.AuthorizingRealm;
+&nbsp;import org.apache.shiro.subject.PrincipalCollection;
+&nbsp;import org.apache.shiro.util.ByteSource;
+&nbsp;import org.apache.shiro.util.JdbcUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import javax.sql.DataSource;
+&nbsp;import java.sql.Connection;
+&nbsp;import java.sql.PreparedStatement;
+&nbsp;import java.sql.ResultSet;
+&nbsp;import java.sql.SQLException;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.LinkedHashSet;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Realm that allows authentication and authorization via JDBC calls.  The default queries suggest a potential schema
+&nbsp; * for retrieving the user&#39;s password for authentication, and querying for a user&#39;s roles and permissions.  The
+&nbsp; * default queries can be overridden by setting the query properties of the realm.
+&nbsp; * &lt;p/&gt;
+&nbsp; * If the default implementation
+&nbsp; * of authentication and authorization cannot handle your schema, this class can be subclassed and the
+&nbsp; * appropriate methods overridden. (usually {@link #doGetAuthenticationInfo(org.apache.shiro.authc.AuthenticationToken)},
+&nbsp; * {@link #getRoleNamesForUser(java.sql.Connection,String)}, and/or {@link #getPermissions(java.sql.Connection,String,java.util.Collection)}
+&nbsp; * &lt;p/&gt;
+&nbsp; * This realm supports caching by extending from {@link org.apache.shiro.realm.AuthorizingRealm}.
+&nbsp; *
+&nbsp; * @since 0.2
+&nbsp; */
+<b class="nc">&nbsp;public class JdbcRealm extends AuthorizingRealm {</b>
+&nbsp;
+&nbsp;    //TODO - complete JavaDoc
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |             C O N S T A N T S             |
+&nbsp;    ============================================*/
+&nbsp;    /**
+&nbsp;     * The default query used to retrieve account data for the user.
+&nbsp;     */
+&nbsp;    protected static final String DEFAULT_AUTHENTICATION_QUERY = &quot;select password from users where username = ?&quot;;
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * The default query used to retrieve account data for the user when {@link #saltStyle} is COLUMN.
+&nbsp;     */
+&nbsp;    protected static final String DEFAULT_SALTED_AUTHENTICATION_QUERY = &quot;select password, password_salt from users where username = ?&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The default query used to retrieve the roles that apply to a user.
+&nbsp;     */
+&nbsp;    protected static final String DEFAULT_USER_ROLES_QUERY = &quot;select role_name from user_roles where username = ?&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The default query used to retrieve permissions that apply to a particular role.
+&nbsp;     */
+&nbsp;    protected static final String DEFAULT_PERMISSIONS_QUERY = &quot;select permission from roles_permissions where role_name = ?&quot;;
+&nbsp;
+<b class="nc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(JdbcRealm.class);</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Password hash salt configuration. &lt;ul&gt;
+&nbsp;     *   &lt;li&gt;NO_SALT - password hashes are not salted.&lt;/li&gt;
+&nbsp;     *   &lt;li&gt;CRYPT - password hashes are stored in unix crypt format.&lt;/li&gt;
+&nbsp;     *   &lt;li&gt;COLUMN - salt is in a separate column in the database.&lt;/li&gt; 
+&nbsp;     *   &lt;li&gt;EXTERNAL - salt is not stored in the database. {@link #getSaltForUser(String)} will be called
+&nbsp;     *       to get the salt&lt;/li&gt;&lt;/ul&gt;
+&nbsp;     */
+<b class="nc">&nbsp;    public enum SaltStyle {NO_SALT, CRYPT, COLUMN, EXTERNAL};</b>
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |    I N S T A N C E   V A R I A B L E S    |
+&nbsp;    ============================================*/
+&nbsp;    protected DataSource dataSource;
+&nbsp;
+<b class="nc">&nbsp;    protected String authenticationQuery = DEFAULT_AUTHENTICATION_QUERY;</b>
+&nbsp;
+<b class="nc">&nbsp;    protected String userRolesQuery = DEFAULT_USER_ROLES_QUERY;</b>
+&nbsp;
+<b class="nc">&nbsp;    protected String permissionsQuery = DEFAULT_PERMISSIONS_QUERY;</b>
+&nbsp;
+<b class="nc">&nbsp;    protected boolean permissionsLookupEnabled = false;</b>
+&nbsp;    
+<b class="nc">&nbsp;    protected SaltStyle saltStyle = SaltStyle.NO_SALT;</b>
+&nbsp;
+<b class="nc">&nbsp;    protected boolean saltIsBase64Encoded = true;</b>
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |         C O N S T R U C T O R S           |
+&nbsp;    ============================================*/
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |  A C C E S S O R S / M O D I F I E R S    |
+&nbsp;    ============================================*/
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Sets the datasource that should be used to retrieve connections used by this realm.
+&nbsp;     *
+&nbsp;     * @param dataSource the SQL data source.
+&nbsp;     */
+&nbsp;    public void setDataSource(DataSource dataSource) {
+<b class="nc">&nbsp;        this.dataSource = dataSource;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Overrides the default query used to retrieve a user&#39;s password during authentication.  When using the default
+&nbsp;     * implementation, this query must take the user&#39;s username as a single parameter and return a single result
+&nbsp;     * with the user&#39;s password as the first column.  If you require a solution that does not match this query
+&nbsp;     * structure, you can override {@link #doGetAuthenticationInfo(org.apache.shiro.authc.AuthenticationToken)} or
+&nbsp;     * just {@link #getPasswordForUser(java.sql.Connection,String)}
+&nbsp;     *
+&nbsp;     * @param authenticationQuery the query to use for authentication.
+&nbsp;     * @see #DEFAULT_AUTHENTICATION_QUERY
+&nbsp;     */
+&nbsp;    public void setAuthenticationQuery(String authenticationQuery) {
+<b class="nc">&nbsp;        this.authenticationQuery = authenticationQuery;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Overrides the default query used to retrieve a user&#39;s roles during authorization.  When using the default
+&nbsp;     * implementation, this query must take the user&#39;s username as a single parameter and return a row
+&nbsp;     * per role with a single column containing the role name.  If you require a solution that does not match this query
+&nbsp;     * structure, you can override {@link #doGetAuthorizationInfo(PrincipalCollection)} or just
+&nbsp;     * {@link #getRoleNamesForUser(java.sql.Connection,String)}
+&nbsp;     *
+&nbsp;     * @param userRolesQuery the query to use for retrieving a user&#39;s roles.
+&nbsp;     * @see #DEFAULT_USER_ROLES_QUERY
+&nbsp;     */
+&nbsp;    public void setUserRolesQuery(String userRolesQuery) {
+<b class="nc">&nbsp;        this.userRolesQuery = userRolesQuery;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Overrides the default query used to retrieve a user&#39;s permissions during authorization.  When using the default
+&nbsp;     * implementation, this query must take a role name as the single parameter and return a row
+&nbsp;     * per permission with a single column, containing the permission.
+&nbsp;     * If you require a solution that does not match this query
+&nbsp;     * structure, you can override {@link #doGetAuthorizationInfo(org.apache.shiro.subject.PrincipalCollection)} or just
+&nbsp;     * {@link #getPermissions(java.sql.Connection,String,java.util.Collection)}&lt;/p&gt;
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;Permissions are only retrieved if you set {@link #permissionsLookupEnabled} to true.  Otherwise,
+&nbsp;     * this query is ignored.&lt;/b&gt;
+&nbsp;     *
+&nbsp;     * @param permissionsQuery the query to use for retrieving permissions for a role.
+&nbsp;     * @see #DEFAULT_PERMISSIONS_QUERY
+&nbsp;     * @see #setPermissionsLookupEnabled(boolean)
+&nbsp;     */
+&nbsp;    public void setPermissionsQuery(String permissionsQuery) {
+<b class="nc">&nbsp;        this.permissionsQuery = permissionsQuery;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Enables lookup of permissions during authorization.  The default is &quot;false&quot; - meaning that only roles
+&nbsp;     * are associated with a user.  Set this to true in order to lookup roles &lt;b&gt;and&lt;/b&gt; permissions.
+&nbsp;     *
+&nbsp;     * @param permissionsLookupEnabled true if permissions should be looked up during authorization, or false if only
+&nbsp;     *                                 roles should be looked up.
+&nbsp;     */
+&nbsp;    public void setPermissionsLookupEnabled(boolean permissionsLookupEnabled) {
+<b class="nc">&nbsp;        this.permissionsLookupEnabled = permissionsLookupEnabled;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Sets the salt style.  See {@link #saltStyle}.
+&nbsp;     * 
+&nbsp;     * @param saltStyle new SaltStyle to set.
+&nbsp;     */
+&nbsp;    public void setSaltStyle(SaltStyle saltStyle) {
+<b class="nc">&nbsp;        this.saltStyle = saltStyle;</b>
+<b class="nc">&nbsp;        if (saltStyle == SaltStyle.COLUMN &amp;&amp; authenticationQuery.equals(DEFAULT_AUTHENTICATION_QUERY)) {</b>
+<b class="nc">&nbsp;            authenticationQuery = DEFAULT_SALTED_AUTHENTICATION_QUERY;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Makes it possible to switch off base64 encoding of password salt.
+&nbsp;     * The default value is true, ie. expect the salt from a string
+&nbsp;     * value in a database to be base64 encoded.
+&nbsp;     *
+&nbsp;     * @param saltIsBase64Encoded the saltIsBase64Encoded to set
+&nbsp;     */
+&nbsp;    public void setSaltIsBase64Encoded(boolean saltIsBase64Encoded) {
+<b class="nc">&nbsp;        this.saltIsBase64Encoded = saltIsBase64Encoded;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |               M E T H O D S               |
+&nbsp;    ============================================*/
+&nbsp;
+&nbsp;    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+&nbsp;
+<b class="nc">&nbsp;        UsernamePasswordToken upToken = (UsernamePasswordToken) token;</b>
+<b class="nc">&nbsp;        String username = upToken.getUsername();</b>
+&nbsp;
+&nbsp;        // Null username is invalid
+<b class="nc">&nbsp;        if (username == null) {</b>
+<b class="nc">&nbsp;            throw new AccountException(&quot;Null usernames are not allowed by this realm.&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Connection conn = null;</b>
+<b class="nc">&nbsp;        SimpleAuthenticationInfo info = null;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            conn = dataSource.getConnection();</b>
+&nbsp;
+<b class="nc">&nbsp;            String password = null;</b>
+<b class="nc">&nbsp;            String salt = null;</b>
+<b class="nc">&nbsp;            switch (saltStyle) {</b>
+&nbsp;            case NO_SALT:
+<b class="nc">&nbsp;                password = getPasswordForUser(conn, username)[0];</b>
+&nbsp;                break;
+&nbsp;            case CRYPT:
+&nbsp;                // TODO: separate password and hash from getPasswordForUser[0]
+<b class="nc">&nbsp;                throw new ConfigurationException(&quot;Not implemented yet&quot;);</b>
+&nbsp;                //break;
+&nbsp;            case COLUMN:
+<b class="nc">&nbsp;                String[] queryResults = getPasswordForUser(conn, username);</b>
+<b class="nc">&nbsp;                password = queryResults[0];</b>
+<b class="nc">&nbsp;                salt = queryResults[1];</b>
+&nbsp;                break;
+&nbsp;            case EXTERNAL:
+<b class="nc">&nbsp;                password = getPasswordForUser(conn, username)[0];</b>
+<b class="nc">&nbsp;                salt = getSaltForUser(username);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (password == null) {</b>
+<b class="nc">&nbsp;                throw new UnknownAccountException(&quot;No account found for user [&quot; + username + &quot;]&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            info = new SimpleAuthenticationInfo(username, password.toCharArray(), getName());</b>
+&nbsp;            
+<b class="nc">&nbsp;            if (salt != null) {</b>
+<b class="nc">&nbsp;            	if (saltStyle == SaltStyle.COLUMN &amp;&amp; saltIsBase64Encoded) {</b>
+<b class="nc">&nbsp;                    info.setCredentialsSalt(ByteSource.Util.bytes(Base64.decode(salt)));</b>
+&nbsp;            	} else {
+<b class="nc">&nbsp;                    info.setCredentialsSalt(ByteSource.Util.bytes(salt));</b>
+&nbsp;            	}
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;        } catch (SQLException e) {</b>
+<b class="nc">&nbsp;            final String message = &quot;There was a SQL error while authenticating user [&quot; + username + &quot;]&quot;;</b>
+<b class="nc">&nbsp;            if (log.isErrorEnabled()) {</b>
+<b class="nc">&nbsp;                log.error(message, e);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // Rethrow any SQL errors as an authentication exception
+<b class="nc">&nbsp;            throw new AuthenticationException(message, e);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            JdbcUtils.closeConnection(conn);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return info;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String[] getPasswordForUser(Connection conn, String username) throws SQLException {
+&nbsp;
+&nbsp;        String[] result;
+<b class="nc">&nbsp;        boolean returningSeparatedSalt = false;</b>
+<b class="nc">&nbsp;        switch (saltStyle) {</b>
+&nbsp;        case NO_SALT:
+&nbsp;        case CRYPT:
+&nbsp;        case EXTERNAL:
+<b class="nc">&nbsp;            result = new String[1];</b>
+&nbsp;            break;
+&nbsp;        default:
+<b class="nc">&nbsp;            result = new String[2];</b>
+<b class="nc">&nbsp;            returningSeparatedSalt = true;</b>
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        PreparedStatement ps = null;</b>
+<b class="nc">&nbsp;        ResultSet rs = null;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            ps = conn.prepareStatement(authenticationQuery);</b>
+<b class="nc">&nbsp;            ps.setString(1, username);</b>
+&nbsp;
+&nbsp;            // Execute query
+<b class="nc">&nbsp;            rs = ps.executeQuery();</b>
+&nbsp;
+&nbsp;            // Loop over results - although we are only expecting one result, since usernames should be unique
+<b class="nc">&nbsp;            boolean foundResult = false;</b>
+<b class="nc">&nbsp;            while (rs.next()) {</b>
+&nbsp;
+&nbsp;                // Check to ensure only one row is processed
+<b class="nc">&nbsp;                if (foundResult) {</b>
+<b class="nc">&nbsp;                    throw new AuthenticationException(&quot;More than one user row found for user [&quot; + username + &quot;]. Usernames must be unique.&quot;);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                result[0] = rs.getString(1);</b>
+<b class="nc">&nbsp;                if (returningSeparatedSalt) {</b>
+<b class="nc">&nbsp;                    result[1] = rs.getString(2);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                foundResult = true;</b>
+&nbsp;            }
+&nbsp;        } finally {
+<b class="nc">&nbsp;            JdbcUtils.closeResultSet(rs);</b>
+<b class="nc">&nbsp;            JdbcUtils.closeStatement(ps);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This implementation of the interface expects the principals collection to return a String username keyed off of
+&nbsp;     * this realm&#39;s {@link #getName() name}
+&nbsp;     *
+&nbsp;     * @see #getAuthorizationInfo(org.apache.shiro.subject.PrincipalCollection)
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+&nbsp;
+&nbsp;        //null usernames are invalid
+<b class="nc">&nbsp;        if (principals == null) {</b>
+<b class="nc">&nbsp;            throw new AuthorizationException(&quot;PrincipalCollection method argument cannot be null.&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String username = (String) getAvailablePrincipal(principals);</b>
+&nbsp;
+<b class="nc">&nbsp;        Connection conn = null;</b>
+<b class="nc">&nbsp;        Set&lt;String&gt; roleNames = null;</b>
+<b class="nc">&nbsp;        Set&lt;String&gt; permissions = null;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            conn = dataSource.getConnection();</b>
+&nbsp;
+&nbsp;            // Retrieve roles and permissions from database
+<b class="nc">&nbsp;            roleNames = getRoleNamesForUser(conn, username);</b>
+<b class="nc">&nbsp;            if (permissionsLookupEnabled) {</b>
+<b class="nc">&nbsp;                permissions = getPermissions(conn, username, roleNames);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;        } catch (SQLException e) {</b>
+<b class="nc">&nbsp;            final String message = &quot;There was a SQL error while authorizing user [&quot; + username + &quot;]&quot;;</b>
+<b class="nc">&nbsp;            if (log.isErrorEnabled()) {</b>
+<b class="nc">&nbsp;                log.error(message, e);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // Rethrow any SQL errors as an authorization exception
+<b class="nc">&nbsp;            throw new AuthorizationException(message, e);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            JdbcUtils.closeConnection(conn);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roleNames);</b>
+<b class="nc">&nbsp;        info.setStringPermissions(permissions);</b>
+<b class="nc">&nbsp;        return info;</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Set&lt;String&gt; getRoleNamesForUser(Connection conn, String username) throws SQLException {
+<b class="nc">&nbsp;        PreparedStatement ps = null;</b>
+<b class="nc">&nbsp;        ResultSet rs = null;</b>
+<b class="nc">&nbsp;        Set&lt;String&gt; roleNames = new LinkedHashSet&lt;String&gt;();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            ps = conn.prepareStatement(userRolesQuery);</b>
+<b class="nc">&nbsp;            ps.setString(1, username);</b>
+&nbsp;
+&nbsp;            // Execute query
+<b class="nc">&nbsp;            rs = ps.executeQuery();</b>
+&nbsp;
+&nbsp;            // Loop over results and add each returned role to a set
+<b class="nc">&nbsp;            while (rs.next()) {</b>
+&nbsp;
+<b class="nc">&nbsp;                String roleName = rs.getString(1);</b>
+&nbsp;
+&nbsp;                // Add the role to the list of names if it isn&#39;t null
+<b class="nc">&nbsp;                if (roleName != null) {</b>
+<b class="nc">&nbsp;                    roleNames.add(roleName);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    if (log.isWarnEnabled()) {</b>
+<b class="nc">&nbsp;                        log.warn(&quot;Null role name found while retrieving role names for user [&quot; + username + &quot;]&quot;);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        } finally {
+<b class="nc">&nbsp;            JdbcUtils.closeResultSet(rs);</b>
+<b class="nc">&nbsp;            JdbcUtils.closeStatement(ps);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return roleNames;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Set&lt;String&gt; getPermissions(Connection conn, String username, Collection&lt;String&gt; roleNames) throws SQLException {
+<b class="nc">&nbsp;        PreparedStatement ps = null;</b>
+<b class="nc">&nbsp;        Set&lt;String&gt; permissions = new LinkedHashSet&lt;String&gt;();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            ps = conn.prepareStatement(permissionsQuery);</b>
+<b class="nc">&nbsp;            for (String roleName : roleNames) {</b>
+&nbsp;
+<b class="nc">&nbsp;                ps.setString(1, roleName);</b>
+&nbsp;
+<b class="nc">&nbsp;                ResultSet rs = null;</b>
+&nbsp;
+&nbsp;                try {
+&nbsp;                    // Execute query
+<b class="nc">&nbsp;                    rs = ps.executeQuery();</b>
+&nbsp;
+&nbsp;                    // Loop over results and add each returned role to a set
+<b class="nc">&nbsp;                    while (rs.next()) {</b>
+&nbsp;
+<b class="nc">&nbsp;                        String permissionString = rs.getString(1);</b>
+&nbsp;
+&nbsp;                        // Add the permission to the set of permissions
+<b class="nc">&nbsp;                        permissions.add(permissionString);</b>
+&nbsp;                    }
+&nbsp;                } finally {
+<b class="nc">&nbsp;                    JdbcUtils.closeResultSet(rs);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+&nbsp;            }
+&nbsp;        } finally {
+<b class="nc">&nbsp;            JdbcUtils.closeStatement(ps);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return permissions;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    protected String getSaltForUser(String username) {
+<b class="nc">&nbsp;        return username;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

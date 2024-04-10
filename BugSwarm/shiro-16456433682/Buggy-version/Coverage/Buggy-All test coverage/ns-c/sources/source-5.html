@@ -1,0 +1,160 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Cache</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.cache</a>
+</div>
+
+<h1>Coverage Summary for Class: Cache (org.apache.shiro.cache)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Cache</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.cache;
+&nbsp;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;/**
+&nbsp; * A Cache efficiently stores temporary objects primarily to improve an application&#39;s performance.
+&nbsp; *
+&nbsp; * &lt;p&gt;Shiro doesn&#39;t implement a full Cache mechanism itself, since that is outside the core competency of a
+&nbsp; * Security framework.  Instead, this interface provides an abstraction (wrapper) API on top of an underlying
+&nbsp; * cache framework&#39;s cache instance (e.g. JCache, Ehcache, JCS, OSCache, JBossCache, TerraCotta, Coherence,
+&nbsp; * GigaSpaces, etc, etc), allowing a Shiro user to configure any cache mechanism they choose.
+&nbsp; *
+&nbsp; * @since 0.2
+&nbsp; */
+&nbsp;public interface Cache&lt;K, V&gt; {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the Cached value stored under the specified {@code key} or
+&nbsp;     * {@code null} if there is no Cache entry for that {@code key}.
+&nbsp;     *
+&nbsp;     * @param key the key that the value was previous added with
+&nbsp;     * @return the cached object or {@code null} if there is no entry for the specified {@code key}
+&nbsp;     * @throws CacheException if there is a problem accessing the underlying cache system
+&nbsp;     */
+&nbsp;    public V get(K key) throws CacheException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a Cache entry.
+&nbsp;     *
+&nbsp;     * @param key   the key used to identify the object being stored.
+&nbsp;     * @param value the value to be stored in the cache.
+&nbsp;     * @return the previous value associated with the given {@code key} or {@code null} if there was previous value
+&nbsp;     * @throws CacheException if there is a problem accessing the underlying cache system
+&nbsp;     */
+&nbsp;    public V put(K key, V value) throws CacheException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Remove the cache entry corresponding to the specified key.
+&nbsp;     *
+&nbsp;     * @param key the key of the entry to be removed.
+&nbsp;     * @return the previous value associated with the given {@code key} or {@code null} if there was previous value
+&nbsp;     * @throws CacheException if there is a problem accessing the underlying cache system
+&nbsp;     */
+&nbsp;    public V remove(K key) throws CacheException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Clear all entries from the cache.
+&nbsp;     *
+&nbsp;     * @throws CacheException if there is a problem accessing the underlying cache system
+&nbsp;     */
+&nbsp;    public void clear() throws CacheException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the number of entries in the cache.
+&nbsp;     *
+&nbsp;     * @return the number of entries in the cache.
+&nbsp;     */
+&nbsp;    public int size();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a view of all the keys for entries contained in this cache.
+&nbsp;     *
+&nbsp;     * @return a view of all the keys for entries contained in this cache.
+&nbsp;     */
+&nbsp;    public Set&lt;K&gt; keys();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a view of all of the values contained in this cache.
+&nbsp;     *
+&nbsp;     * @return a view of all of the values contained in this cache.
+&nbsp;     */
+&nbsp;    public Collection&lt;V&gt; values();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

@@ -1,14 +1,15 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.parser.JSONScannerTest_scanFieldString_error
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.JSONScannerTest_scanFieldString_error
-com.alibaba.json.bvt.parser.JSONScannerTest_scanFieldString_error.test_error_2 -- Time elapsed: 0 s <<< FAILURE!
+Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.006 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.JSONScannerTest_scanFieldString_error
+com.alibaba.json.bvt.parser.JSONScannerTest_scanFieldString_error.test_error_2 -- Time elapsed: 0.001 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.parser.JSONScannerTest_scanFieldString_error.test_error_2(JSONScannerTest_scanFieldString_error.java:40)
+	at com.alibaba.json.bvt.parser.JSONScannerTest_scanFieldString_error.__CLR4_1_10licfit1j0b(JSONScannerTest_scanFieldString_error.java:40)
+	at com.alibaba.json.bvt.parser.JSONScannerTest_scanFieldString_error.test_error_2(JSONScannerTest_scanFieldString_error.java:32)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

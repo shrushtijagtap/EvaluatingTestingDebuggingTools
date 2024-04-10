@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.RandoopRegressionTest0
 -------------------------------------------------------------------------------
-Tests run: 80, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.048 s <<< FAILURE! -- in com.alibaba.json.bvt.RandoopRegressionTest0
-com.alibaba.json.bvt.RandoopRegressionTest0.test31 -- Time elapsed: 0.020 s <<< FAILURE!
+Tests run: 80, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.070 s <<< FAILURE! -- in com.alibaba.json.bvt.RandoopRegressionTest0
+com.alibaba.json.bvt.RandoopRegressionTest0.test31 -- Time elapsed: 0.032 s <<< FAILURE!
 org.junit.ComparisonFailure: expected:<C[hina] Standard Time> but was:<C[entral] Standard Time>
 	at org.junit.Assert.assertEquals(Assert.java:115)
 	at org.junit.Assert.assertEquals(Assert.java:144)

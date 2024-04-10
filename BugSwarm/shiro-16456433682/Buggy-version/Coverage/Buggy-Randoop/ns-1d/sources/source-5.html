@@ -1,0 +1,666 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ShiroWebModule</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.guice.web</a>
+</div>
+
+<h1>Coverage Summary for Class: ShiroWebModule (org.apache.shiro.guice.web)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ShiroWebModule</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/94)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ShiroWebModule$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ShiroWebModule$FilterConfig</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ShiroWebModule$FilterConfigKey</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/39)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/108)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.guice.web;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import javax.servlet.Filter;
+&nbsp;import javax.servlet.ServletContext;
+&nbsp;
+&nbsp;import org.apache.shiro.config.ConfigurationException;
+&nbsp;import org.apache.shiro.env.Environment;
+&nbsp;import org.apache.shiro.guice.ShiroModule;
+&nbsp;import org.apache.shiro.mgt.SecurityManager;
+&nbsp;import org.apache.shiro.session.mgt.SessionManager;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;import org.apache.shiro.web.config.ShiroFilterConfiguration;
+&nbsp;import org.apache.shiro.web.env.WebEnvironment;
+&nbsp;import org.apache.shiro.web.filter.InvalidRequestFilter;
+&nbsp;import org.apache.shiro.web.filter.PathMatchingFilter;
+&nbsp;import org.apache.shiro.web.filter.authc.AnonymousFilter;
+&nbsp;import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
+&nbsp;import org.apache.shiro.web.filter.authc.BearerHttpAuthenticationFilter;
+&nbsp;import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
+&nbsp;import org.apache.shiro.web.filter.authc.LogoutFilter;
+&nbsp;import org.apache.shiro.web.filter.authc.UserFilter;
+&nbsp;import org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter;
+&nbsp;import org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter;
+&nbsp;import org.apache.shiro.web.filter.authz.PortFilter;
+&nbsp;import org.apache.shiro.web.filter.authz.RolesAuthorizationFilter;
+&nbsp;import org.apache.shiro.web.filter.authz.SslFilter;
+&nbsp;import org.apache.shiro.web.filter.mgt.FilterChainResolver;
+&nbsp;import org.apache.shiro.web.filter.session.NoSessionCreationFilter;
+&nbsp;import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+&nbsp;import org.apache.shiro.web.mgt.WebSecurityManager;
+&nbsp;import org.apache.shiro.web.session.mgt.ServletContainerSessionManager;
+&nbsp;
+&nbsp;import com.google.inject.Binder;
+&nbsp;import com.google.inject.Key;
+&nbsp;import com.google.inject.TypeLiteral;
+&nbsp;import com.google.inject.binder.AnnotatedBindingBuilder;
+&nbsp;import com.google.inject.name.Names;
+&nbsp;import com.google.inject.servlet.ServletModule;
+&nbsp;
+&nbsp;/**
+&nbsp; * Sets up Shiro lifecycles within Guice, enables the injecting of Shiro objects, and binds a default
+&nbsp; * {@link org.apache.shiro.web.mgt.WebSecurityManager}, {@link org.apache.shiro.mgt.SecurityManager} and {@link org.apache.shiro.session.mgt.SessionManager}.  At least one realm must be added by
+&nbsp; * using {@link #bindRealm() bindRealm}.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Also provides for the configuring of filter chains and binds a {@link org.apache.shiro.web.filter.mgt.FilterChainResolver} with that information.
+&nbsp; */
+&nbsp;public abstract class ShiroWebModule extends ShiroModule {
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+<b class="nc">&nbsp;    public static final Key&lt;AnonymousFilter&gt; ANON = Key.get(AnonymousFilter.class);</b>
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+<b class="nc">&nbsp;    public static final Key&lt;FormAuthenticationFilter&gt; AUTHC = Key.get(FormAuthenticationFilter.class);</b>
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+<b class="nc">&nbsp;    public static final Key&lt;BasicHttpAuthenticationFilter&gt; AUTHC_BASIC = Key.get(BasicHttpAuthenticationFilter.class);</b>
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+<b class="nc">&nbsp;    public static final Key&lt;BearerHttpAuthenticationFilter&gt; AUTHC_BEARER = Key.get(BearerHttpAuthenticationFilter.class);</b>
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+<b class="nc">&nbsp;    public static final Key&lt;NoSessionCreationFilter&gt; NO_SESSION_CREATION = Key.get(NoSessionCreationFilter.class);</b>
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+<b class="nc">&nbsp;    public static final Key&lt;LogoutFilter&gt; LOGOUT = Key.get(LogoutFilter.class);</b>
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+<b class="nc">&nbsp;    public static final Key&lt;PermissionsAuthorizationFilter&gt; PERMS = Key.get(PermissionsAuthorizationFilter.class);</b>
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+<b class="nc">&nbsp;    public static final Key&lt;PortFilter&gt; PORT = Key.get(PortFilter.class);</b>
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+<b class="nc">&nbsp;    public static final Key&lt;HttpMethodPermissionFilter&gt; REST = Key.get(HttpMethodPermissionFilter.class);</b>
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+<b class="nc">&nbsp;    public static final Key&lt;RolesAuthorizationFilter&gt; ROLES = Key.get(RolesAuthorizationFilter.class);</b>
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+<b class="nc">&nbsp;    public static final Key&lt;SslFilter&gt; SSL = Key.get(SslFilter.class);</b>
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+<b class="nc">&nbsp;    public static final Key&lt;UserFilter&gt; USER = Key.get(UserFilter.class);</b>
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+<b class="nc">&nbsp;    public static final Key&lt;InvalidRequestFilter&gt; INVALID_REQUEST = Key.get(InvalidRequestFilter.class);</b>
+&nbsp;
+&nbsp;    static final String NAME = &quot;SHIRO&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * We use a LinkedHashMap here to ensure that iterator order is the same as add order.  This is important, as the
+&nbsp;     * FilterChainResolver uses iterator order when searching for a matching chain.
+&nbsp;     */
+<b class="nc">&nbsp;    private final Map&lt;String, FilterConfig&lt;? extends Filter&gt;[]&gt; filterChains = new LinkedHashMap&lt;String, FilterConfig&lt;? extends Filter&gt;[]&gt;();</b>
+&nbsp;    private final ServletContext servletContext;
+&nbsp;
+<b class="nc">&nbsp;    public ShiroWebModule(ServletContext servletContext) {</b>
+<b class="nc">&nbsp;        this.servletContext = servletContext;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void bindGuiceFilter(Binder binder) {
+<b class="nc">&nbsp;        binder.install(guiceFilterModule());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    public static void bindGuiceFilter(final String pattern, Binder binder) {
+<b class="nc">&nbsp;        binder.install(guiceFilterModule(pattern));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ServletModule guiceFilterModule() {
+<b class="nc">&nbsp;        return guiceFilterModule(&quot;/*&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ServletModule guiceFilterModule(final String pattern) {
+<b class="nc">&nbsp;        return new ServletModule() {</b>
+&nbsp;            @Override
+&nbsp;            protected void configureServlets() {
+<b class="nc">&nbsp;                filter(pattern).through(GuiceShiroFilter.class);</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;FilterConfig&lt;? extends Filter&gt;&gt; globalFilters() {
+<b class="nc">&nbsp;        return Collections.singletonList(filterConfig(INVALID_REQUEST));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected final void configureShiro() {
+<b class="nc">&nbsp;        bindBeanType(TypeLiteral.get(ServletContext.class), Key.get(ServletContext.class, Names.named(NAME)));</b>
+<b class="nc">&nbsp;        bind(Key.get(ServletContext.class, Names.named(NAME))).toInstance(this.servletContext);</b>
+<b class="nc">&nbsp;        bindWebSecurityManager(bind(WebSecurityManager.class));</b>
+<b class="nc">&nbsp;        bindShiroFilterConfiguration(bind(ShiroFilterConfiguration.class));</b>
+<b class="nc">&nbsp;        bindWebEnvironment(bind(WebEnvironment.class));</b>
+<b class="nc">&nbsp;        bind(GuiceShiroFilter.class).asEagerSingleton();</b>
+<b class="nc">&nbsp;        expose(GuiceShiroFilter.class);</b>
+&nbsp;
+<b class="nc">&nbsp;        this.configureShiroWeb();</b>
+&nbsp;
+&nbsp;        // add default matching route if not already set
+<b class="nc">&nbsp;        if (!filterChains.containsKey(&quot;/**&quot;)) {</b>
+&nbsp;            // no config, this will add only the global filters
+<b class="nc">&nbsp;            this.addFilterChain(&quot;/**&quot;, new FilterConfig[0]);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        bind(FilterChainResolver.class).toProvider(new FilterChainResolverProvider(setupFilterChainConfigs()));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Map&lt;String, Key&lt;? extends Filter&gt;[]&gt; setupFilterChainConfigs() {
+&nbsp;
+&nbsp;        // loop through and build a map of Filter Key -&gt; Map&lt;Path, Config&gt;
+<b class="nc">&nbsp;        Map&lt;Key&lt;? extends Filter&gt;, Map&lt;String, String&gt;&gt; filterToPathToConfig = new HashMap&lt;Key&lt;? extends Filter&gt;, Map&lt;String, String&gt;&gt;();</b>
+&nbsp;
+&nbsp;        // At the same time build a map to return with Path -&gt; Key[]
+<b class="nc">&nbsp;        Map&lt;String, Key&lt;? extends Filter&gt;[]&gt; resultConfigMap = new LinkedHashMap&lt;String, Key&lt;? extends Filter&gt;[]&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (Map.Entry&lt;String, FilterConfig&lt;? extends Filter&gt;[]&gt; filterChain : filterChains.entrySet()) {</b>
+&nbsp;
+<b class="nc">&nbsp;            String path = filterChain.getKey();</b>
+&nbsp;
+&nbsp;            // collect the keys used for this path
+<b class="nc">&nbsp;            List&lt;Key&lt;? extends Filter&gt;&gt; keysForPath = new ArrayList&lt;Key&lt;? extends Filter&gt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;            List&lt;FilterConfig&lt;? extends Filter&gt;&gt; globalFilters = this.globalFilters();</b>
+<b class="nc">&nbsp;            FilterConfig&lt;? extends Filter&gt;[] pathFilters = filterChain.getValue();</b>
+&nbsp;
+&nbsp;            // merge the global filters and the path specific filters
+<b class="nc">&nbsp;            List&lt;FilterConfig&lt;? extends Filter&gt;&gt; filterConfigs = new ArrayList&lt;&gt;(globalFilters.size() + pathFilters.length);</b>
+<b class="nc">&nbsp;            filterConfigs.addAll(globalFilters);</b>
+<b class="nc">&nbsp;            filterConfigs.addAll(Arrays.asList(pathFilters));</b>
+&nbsp;
+<b class="nc">&nbsp;            for (FilterConfig&lt;? extends Filter&gt; filterConfig : filterConfigs) {</b>
+&nbsp;
+<b class="nc">&nbsp;                Key&lt;? extends Filter&gt; key = filterConfig.getKey();</b>
+<b class="nc">&nbsp;                String config = filterConfig.getConfigValue();</b>
+&nbsp;
+&nbsp;                // initialize key in filterToPathToConfig, if it doesn&#39;t exist
+<b class="nc">&nbsp;                if (filterToPathToConfig.get(key) == null) {</b>
+&nbsp;                	// Fix for SHIRO-621: REST filter bypassing matched path
+<b class="nc">&nbsp;                    filterToPathToConfig.put((key), new LinkedHashMap&lt;String, String&gt;());</b>
+&nbsp;                }
+&nbsp;                // now set the value
+<b class="nc">&nbsp;                filterToPathToConfig.get(key).put(path, config);</b>
+&nbsp;
+&nbsp;                // Config error if someone configured a non PathMatchingFilter with a config value
+<b class="nc">&nbsp;                if (StringUtils.hasText(config) &amp;&amp; !PathMatchingFilter.class.isAssignableFrom(key.getTypeLiteral().getRawType())) {</b>
+<b class="nc">&nbsp;                    throw new ConfigurationException(&quot;Config information requires a PathMatchingFilter - can&#39;t apply to &quot; + key.getTypeLiteral().getRawType());</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // store the key in keysForPath
+<b class="nc">&nbsp;                keysForPath.add(key);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // map the current path to all of its Keys
+<b class="nc">&nbsp;            resultConfigMap.put(path, keysForPath.toArray(new Key[keysForPath.size()]));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // now we find only the PathMatchingFilter and configure bindings
+&nbsp;        // non PathMatchingFilter, can be loaded with the default provider via the class name
+<b class="nc">&nbsp;        for (Key&lt;? extends Filter&gt; key : filterToPathToConfig.keySet()) {</b>
+<b class="nc">&nbsp;            if (PathMatchingFilter.class.isAssignableFrom(key.getTypeLiteral().getRawType())) {</b>
+<b class="nc">&nbsp;                bindPathMatchingFilter(castToPathMatching(key), filterToPathToConfig.get(key));</b>
+&nbsp;            }
+&nbsp;            else {
+<b class="nc">&nbsp;                bind(key);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return resultConfigMap;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    private &lt;T extends PathMatchingFilter&gt; void bindPathMatchingFilter(Key&lt;T&gt; filterKey, Map&lt;String, String&gt; configs) {
+<b class="nc">&nbsp;        bind(filterKey).toProvider(new PathMatchingFilterProvider&lt;T&gt;(filterKey, configs)).asEagerSingleton();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings({&quot;unchecked&quot;})
+&nbsp;    private Key&lt;? extends PathMatchingFilter&gt; castToPathMatching(Key&lt;? extends Filter&gt; key) {
+<b class="nc">&nbsp;        return (Key&lt;? extends PathMatchingFilter&gt;) key;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected abstract void configureShiroWeb();
+&nbsp;
+&nbsp;    @SuppressWarnings({&quot;unchecked&quot;})
+&nbsp;    @Override
+&nbsp;    protected final void bindSecurityManager(AnnotatedBindingBuilder&lt;? super SecurityManager&gt; bind) {
+<b class="nc">&nbsp;        bind.to(WebSecurityManager.class); // SHIRO-435</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Binds the security manager.  Override this method in order to provide your own security manager binding.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * By default, a {@link org.apache.shiro.web.mgt.DefaultWebSecurityManager} is bound as an eager singleton.
+&nbsp;     *
+&nbsp;     * @param bind
+&nbsp;     */
+&nbsp;    protected void bindWebSecurityManager(AnnotatedBindingBuilder&lt;? super WebSecurityManager&gt; bind) {
+&nbsp;        try {
+<b class="nc">&nbsp;            bind.toConstructor(DefaultWebSecurityManager.class.getConstructor(Collection.class)).asEagerSingleton();</b>
+<b class="nc">&nbsp;        } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;            throw new ConfigurationException(&quot;This really shouldn&#39;t happen.  Either something has changed in Shiro, or there&#39;s a bug in ShiroModule.&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Binds the Shiro Filter Configuration.  Override this method in order to provide your own Shiro Filter Configuration binding.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * By default, a {@link ShiroFilterConfiguration} is bound as an eager singleton.
+&nbsp;     *
+&nbsp;     * @param bind
+&nbsp;     */
+&nbsp;    protected void bindShiroFilterConfiguration(AnnotatedBindingBuilder&lt;? super ShiroFilterConfiguration&gt; bind) {
+<b class="nc">&nbsp;        bind.asEagerSingleton();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Binds the session manager.  Override this method in order to provide your own session manager binding.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * By default, a {@link org.apache.shiro.web.session.mgt.DefaultWebSessionManager} is bound as an eager singleton.
+&nbsp;     *
+&nbsp;     * @param bind
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    protected void bindSessionManager(AnnotatedBindingBuilder&lt;SessionManager&gt; bind) {
+<b class="nc">&nbsp;        bind.to(ServletContainerSessionManager.class).asEagerSingleton();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected final void bindEnvironment(AnnotatedBindingBuilder&lt;Environment&gt; bind) {
+<b class="nc">&nbsp;        bind.to(WebEnvironment.class); // SHIRO-435</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void bindWebEnvironment(AnnotatedBindingBuilder&lt;? super WebEnvironment&gt; bind) {
+<b class="nc">&nbsp;        bind.to(WebGuiceEnvironment.class).asEagerSingleton();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final void addFilterChain(String pattern, Key&lt;? extends Filter&gt; key) {
+&nbsp;        // check for legacy API
+<b class="nc">&nbsp;        if (key instanceof FilterConfigKey) {</b>
+<b class="nc">&nbsp;            addLegacyFilterChain(pattern, (FilterConfigKey) key);</b>
+&nbsp;        }
+&nbsp;        else {
+<b class="nc">&nbsp;            addFilterChain(pattern, new FilterConfig&lt;Filter&gt;((Key&lt;Filter&gt;) key, &quot;&quot;));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Maps &#39;n&#39; number of &lt;code&gt;filterConfig&lt;/code&gt;s to a specific path pattern.&lt;BR/&gt;
+&nbsp;     * For example, a path of &#39;/my_private_resource/**&#39; to &#39;filterConfig(AUTHC)&#39; would require
+&nbsp;     * any resource under the path &#39;/my_private_resource&#39; would be processed through the {@link FormAuthenticationFilter}.
+&nbsp;     *
+&nbsp;     * @param pattern URL patter to be mapped to a FilterConfig, e.g. &#39;/my_private-path/**&#39;
+&nbsp;     * @param filterConfigs FilterConfiguration representing the Filter and config to be used when processing resources on &lt;code&gt;pattern&lt;/code&gt;.
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    protected final void addFilterChain(String pattern, FilterConfig&lt;? extends Filter&gt;... filterConfigs) {
+<b class="nc">&nbsp;        filterChains.put(pattern, filterConfigs);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Builds a FilterConfig from a Filer and configuration String
+&nbsp;     * @param baseKey The Key of the Filter class to be used.
+&nbsp;     * @param &lt;T&gt; A Servlet Filter class.
+&nbsp;     * @return A FilterConfig used to map a String path to this configuration.
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    protected static &lt;T extends Filter&gt; FilterConfig&lt;T&gt; filterConfig(Key&lt;T&gt; baseKey, String configValue) {
+<b class="nc">&nbsp;        return new FilterConfig&lt;T&gt;(baseKey, configValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Builds a FilterConfig from a Filer and configuration String
+&nbsp;     * @param baseKey The Key of the Filter class to be used.
+&nbsp;     * @param &lt;T&gt; A Servlet Filter class.
+&nbsp;     * @return A FilterConfig used to map a String path to this configuration.
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    protected static &lt;T extends Filter&gt; FilterConfig&lt;T&gt; filterConfig(Key&lt;T&gt; baseKey) {
+<b class="nc">&nbsp;        return filterConfig(baseKey, &quot;&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Builds a FilterConfig from a Filer and configuration String
+&nbsp;     * @param typeLiteral The TyleLiteral of the filter key to be used.
+&nbsp;     * @param configValue the configuration used.
+&nbsp;     * @param &lt;T&gt; A Servlet Filter class.
+&nbsp;     * @return A FilterConfig used to map a String path to this configuration.
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    protected static &lt;T extends Filter&gt; FilterConfig&lt;T&gt; filterConfig(TypeLiteral&lt;T&gt; typeLiteral, String configValue) {
+<b class="nc">&nbsp;        return filterConfig(Key.get(typeLiteral), configValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Builds a FilterConfig from a Filer and configuration String
+&nbsp;     * @param type The filter to be used.
+&nbsp;     * @param configValue the configuration used.
+&nbsp;     * @param &lt;T&gt; A Servlet Filter class.
+&nbsp;     * @return A FilterConfig used to map a String path to this configuration.
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    protected static &lt;T extends Filter&gt; FilterConfig&lt;T&gt; filterConfig(Class&lt;T&gt; type, String configValue) {
+<b class="nc">&nbsp;        return filterConfig(Key.get(type), configValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Filter configuration which pairs a Filter class with its configuration used on a path.
+&nbsp;     * @param &lt;T&gt; The Servlet Filter class.
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    public static class FilterConfig&lt;T extends Filter&gt; {
+&nbsp;        private Key&lt;T&gt; key;
+&nbsp;        private String configValue;
+&nbsp;
+<b class="nc">&nbsp;        private FilterConfig(Key&lt;T&gt; key, String configValue) {</b>
+<b class="nc">&nbsp;            super();</b>
+<b class="nc">&nbsp;            this.key = key;</b>
+<b class="nc">&nbsp;            this.configValue = configValue;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Key&lt;T&gt; getKey() {
+<b class="nc">&nbsp;            return key;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getConfigValue() {
+<b class="nc">&nbsp;            return configValue;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    // legacy methods
+&nbsp;
+&nbsp;
+&nbsp;    static boolean isGuiceVersion3() {
+&nbsp;        try {
+<b class="nc">&nbsp;            Class.forName(&quot;com.google.inject.multibindings.MapKey&quot;);</b>
+<b class="nc">&nbsp;            return false;</b>
+<b class="nc">&nbsp;        } catch (ClassNotFoundException e) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addLegacyFilterChain(String pattern, FilterConfigKey filterConfigKey) {
+&nbsp;
+<b class="nc">&nbsp;        FilterConfig&lt;Filter&gt; filterConfig = new FilterConfig&lt;Filter&gt;(filterConfigKey.getKey(), filterConfigKey.getConfigValue());</b>
+<b class="nc">&nbsp;        addFilterChain(pattern, filterConfig);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a filter chain to the shiro configuration.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * NOTE: If the provided key is for a subclass of {@link org.apache.shiro.web.filter.PathMatchingFilter}, it will be registered with a proper
+&nbsp;     * provider.
+&nbsp;     *
+&nbsp;     * @param pattern
+&nbsp;     * @param keys
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    @Deprecated
+&nbsp;    protected final void addFilterChain(String pattern, Key&lt;? extends Filter&gt;... keys) {
+&nbsp;
+&nbsp;        // We need to extract the keys and FilterConfigKey and convert to the new format.
+&nbsp;
+<b class="nc">&nbsp;        FilterConfig[] filterConfigs = new FilterConfig[keys.length];</b>
+<b class="nc">&nbsp;        for (int ii = 0; ii &lt; keys.length; ii++) {</b>
+<b class="nc">&nbsp;            Key&lt;? extends Filter&gt; key = keys[ii];</b>
+&nbsp;            // If this is a path matching filter, we need to remember the config
+<b class="nc">&nbsp;            if (key instanceof FilterConfigKey) {</b>
+&nbsp;                // legacy config
+<b class="nc">&nbsp;                FilterConfigKey legacyKey = (FilterConfigKey) key;</b>
+<b class="nc">&nbsp;                filterConfigs[ii] = new FilterConfig(legacyKey.getKey(), legacyKey.getConfigValue());</b>
+&nbsp;            }
+&nbsp;            else {
+&nbsp;                // Some other type of Filter key, no config
+<b class="nc">&nbsp;                filterConfigs[ii] = new FilterConfig(key, &quot;&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        filterChains.put(pattern, filterConfigs);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    protected static &lt;T extends PathMatchingFilter&gt; Key&lt;T&gt; config(Key&lt;T&gt; baseKey, String configValue) {
+&nbsp;
+<b class="nc">&nbsp;        if( !isGuiceVersion3()) {</b>
+<b class="nc">&nbsp;            throw new ConfigurationException(&quot;Method ShiroWebModule.config(Key&lt;? extends PathMatchingFilter&gt;, String configValue), is not supported when using Guice 4+&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new FilterConfigKey&lt;T&gt;(baseKey, configValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    @Deprecated
+&nbsp;    protected static &lt;T extends PathMatchingFilter&gt; Key&lt;T&gt; config(TypeLiteral&lt;T&gt; typeLiteral, String configValue) {
+<b class="nc">&nbsp;        return config(Key.get(typeLiteral), configValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    @Deprecated
+&nbsp;    protected static &lt;T extends PathMatchingFilter&gt; Key&lt;T&gt; config(Class&lt;T&gt; type, String configValue) {
+<b class="nc">&nbsp;        return config(Key.get(type), configValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    private static class FilterConfigKey&lt;T extends PathMatchingFilter&gt; extends Key&lt;T&gt; {
+&nbsp;        private Key&lt;T&gt; key;
+&nbsp;        private String configValue;
+&nbsp;
+<b class="nc">&nbsp;        private FilterConfigKey(Key&lt;T&gt; key, String configValue) {</b>
+<b class="nc">&nbsp;            super();</b>
+<b class="nc">&nbsp;            this.key = key;</b>
+<b class="nc">&nbsp;            this.configValue = configValue;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Key&lt;T&gt; getKey() {
+<b class="nc">&nbsp;            return key;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getConfigValue() {
+<b class="nc">&nbsp;            return configValue;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

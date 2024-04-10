@@ -1,0 +1,121 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RequiresUser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.authz.annotation</a>
+</div>
+
+<h1>Coverage Summary for Class: RequiresUser (org.apache.shiro.authz.annotation)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">RequiresUser</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.authz.annotation;
+&nbsp;
+&nbsp;import java.lang.annotation.Documented;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.lang.annotation.Retention;
+&nbsp;import java.lang.annotation.RetentionPolicy;
+&nbsp;import java.lang.annotation.Target;
+&nbsp;
+&nbsp;/**
+&nbsp; * Requires the current Subject to be an application &lt;em&gt;user&lt;/em&gt; for the annotated class/instance/method to be
+&nbsp; * accessed or invoked.  This is &lt;em&gt;less&lt;/em&gt; restrictive than the {@link RequiresAuthentication RequiresAuthentication}
+&nbsp; * annotation.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Shiro defines a &amp;quot;user&amp;quot; as a Subject that is either
+&nbsp; * &amp;quot;remembered&amp;quot; &lt;b&gt;&lt;em&gt;or&lt;/em&gt;&lt;/b&gt; authenticated:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;An &lt;b&gt;authenticated&lt;/b&gt; user is a Subject that has successfully logged in (proven their identity)
+&nbsp; * &lt;em&gt;during their current session&lt;/em&gt;.&lt;/li&gt;
+&nbsp; * &lt;li&gt;A &lt;b&gt;remembered&lt;/b&gt; user is any Subject that has proven their identity at least once, although not necessarily
+&nbsp; * during their current session, and asked the system to remember them.&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * &lt;p/&gt;
+&nbsp; * See the {@link org.apache.shiro.authc.RememberMeAuthenticationToken RememberMeAuthenticationToken} JavaDoc for an
+&nbsp; * explanation of why these two states are considered different.
+&nbsp; *
+&nbsp; * @see RequiresAuthentication
+&nbsp; * @see RequiresGuest
+&nbsp; *
+&nbsp; * @since 0.9.0
+&nbsp; */
+&nbsp;@Target({ElementType.TYPE, ElementType.METHOD})
+&nbsp;@Retention(RetentionPolicy.RUNTIME)
+&nbsp;@Documented
+&nbsp;public @interface RequiresUser {
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

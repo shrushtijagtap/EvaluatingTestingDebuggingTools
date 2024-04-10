@@ -1,0 +1,541 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AntPathMatcher</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.util</a>
+</div>
+
+<h1>Coverage Summary for Class: AntPathMatcher (org.apache.shiro.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AntPathMatcher</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    55.6%
+  </span>
+  <span class="absValue">
+    (5/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    29%
+  </span>
+  <span class="absValue">
+    (47/162)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    38.2%
+  </span>
+  <span class="absValue">
+    (60/157)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.util;
+&nbsp;
+&nbsp;/**
+&nbsp; * &lt;p&gt;PathMatcher implementation for Ant-style path patterns.
+&nbsp; * Examples are provided below.&lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;Part of this mapping code has been kindly borrowed from
+&nbsp; * &lt;a href=&quot;http://ant.apache.org&quot;&gt;Apache Ant&lt;/a&gt;.
+&nbsp; *
+&nbsp; * &lt;p&gt;The mapping matches URLs using the following rules:&lt;br&gt;
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;? matches one character&lt;/li&gt;
+&nbsp; * &lt;li&gt;* matches zero or more characters&lt;/li&gt;
+&nbsp; * &lt;li&gt;** matches zero or more &#39;directories&#39; in a path&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;Some examples:&lt;br&gt;
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;&lt;code&gt;com/t?st.jsp&lt;/code&gt; - matches &lt;code&gt;com/test.jsp&lt;/code&gt; but also
+&nbsp; * &lt;code&gt;com/tast.jsp&lt;/code&gt; or &lt;code&gt;com/txst.jsp&lt;/code&gt;&lt;/li&gt;
+&nbsp; * &lt;li&gt;&lt;code&gt;com/*.jsp&lt;/code&gt; - matches all &lt;code&gt;.jsp&lt;/code&gt; files in the
+&nbsp; * &lt;code&gt;com&lt;/code&gt; directory&lt;/li&gt;
+&nbsp; * &lt;li&gt;&lt;code&gt;com/&amp;#42;&amp;#42;/test.jsp&lt;/code&gt; - matches all &lt;code&gt;test.jsp&lt;/code&gt;
+&nbsp; * files underneath the &lt;code&gt;com&lt;/code&gt; path&lt;/li&gt;
+&nbsp; * &lt;li&gt;&lt;code&gt;org/apache/shiro/&amp;#42;&amp;#42;/*.jsp&lt;/code&gt; - matches all &lt;code&gt;.jsp&lt;/code&gt;
+&nbsp; * files underneath the &lt;code&gt;org/apache/shiro&lt;/code&gt; path&lt;/li&gt;
+&nbsp; * &lt;li&gt;&lt;code&gt;org/&amp;#42;&amp;#42;/servlet/bla.jsp&lt;/code&gt; - matches
+&nbsp; * &lt;code&gt;org/apache/shiro/servlet/bla.jsp&lt;/code&gt; but also
+&nbsp; * &lt;code&gt;org/apache/shiro/testing/servlet/bla.jsp&lt;/code&gt; and
+&nbsp; * &lt;code&gt;org/servlet/bla.jsp&lt;/code&gt;&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;&lt;b&gt;N.B.&lt;/b&gt;: This class was borrowed (with much appreciation) from the
+&nbsp; * &lt;a href=&quot;http://www.springframework.org&quot;&gt;Spring Framework&lt;/a&gt; with modifications.  We didn&#39;t want to reinvent the
+&nbsp; * wheel of great work they&#39;ve done, but also didn&#39;t want to force every Shiro user to depend on Spring&lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;As per the Apache 2.0 license, the original copyright notice and all author and copyright information have
+&nbsp; * remained in tact.&lt;/p&gt;
+&nbsp; *
+&nbsp; * @since 16.07.2003
+&nbsp; */
+<b class="fc">&nbsp;public class AntPathMatcher implements PatternMatcher {</b>
+&nbsp;
+&nbsp;    //TODO - complete JavaDoc
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default path separator: &quot;/&quot;
+&nbsp;     */
+&nbsp;    public static final String DEFAULT_PATH_SEPARATOR = &quot;/&quot;;
+&nbsp;
+<b class="fc">&nbsp;    private String pathSeparator = DEFAULT_PATH_SEPARATOR;</b>
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the path separator to use for pattern parsing.
+&nbsp;     * Default is &quot;/&quot;, as in Ant.
+&nbsp;     */
+&nbsp;    public void setPathSeparator(String pathSeparator) {
+<b class="nc">&nbsp;        this.pathSeparator = (pathSeparator != null ? pathSeparator : DEFAULT_PATH_SEPARATOR);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if {@code path} is a pattern (i.e. contains a &#39;*&#39;, or &#39;?&#39;). For example the {@code /foo/**} would return {@code true}, while {@code /bar/} would return {@code false}.
+&nbsp;     * @param path the string to check
+&nbsp;     * @return this method returns {@code true} if {@code path} contains a &#39;*&#39; or &#39;?&#39;, otherwise, {@code false}
+&nbsp;     */
+&nbsp;    public boolean isPattern(String path) {
+<b class="nc">&nbsp;        if (path == null) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return (path.indexOf(&#39;*&#39;) != -1 || path.indexOf(&#39;?&#39;) != -1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean matches(String pattern, String source) {
+<b class="fc">&nbsp;        return match(pattern, source);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean match(String pattern, String path) {
+<b class="fc">&nbsp;        return doMatch(pattern, path, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean matchStart(String pattern, String path) {
+<b class="nc">&nbsp;        return doMatch(pattern, path, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Actually match the given &lt;code&gt;path&lt;/code&gt; against the given &lt;code&gt;pattern&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @param pattern   the pattern to match against
+&nbsp;     * @param path      the path String to test
+&nbsp;     * @param fullMatch whether a full pattern match is required
+&nbsp;     *                  (else a pattern match as far as the given base path goes is sufficient)
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt; if the supplied &lt;code&gt;path&lt;/code&gt; matched,
+&nbsp;     *         &lt;code&gt;false&lt;/code&gt; if it didn&#39;t
+&nbsp;     */
+&nbsp;    protected boolean doMatch(String pattern, String path, boolean fullMatch) {
+<b class="pc">&nbsp;        if (path == null || path.startsWith(this.pathSeparator) != pattern.startsWith(this.pathSeparator)) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        String[] pattDirs = StringUtils.tokenizeToStringArray(pattern, this.pathSeparator, false, true);</b>
+<b class="fc">&nbsp;        String[] pathDirs = StringUtils.tokenizeToStringArray(path, this.pathSeparator, false, true);</b>
+&nbsp;
+<b class="fc">&nbsp;        int pattIdxStart = 0;</b>
+<b class="fc">&nbsp;        int pattIdxEnd = pattDirs.length - 1;</b>
+<b class="fc">&nbsp;        int pathIdxStart = 0;</b>
+<b class="fc">&nbsp;        int pathIdxEnd = pathDirs.length - 1;</b>
+&nbsp;
+&nbsp;        // Match all elements up to the first **
+<b class="fc">&nbsp;        while (pattIdxStart &lt;= pattIdxEnd &amp;&amp; pathIdxStart &lt;= pathIdxEnd) {</b>
+<b class="fc">&nbsp;            String patDir = pattDirs[pattIdxStart];</b>
+<b class="pc">&nbsp;            if (&quot;**&quot;.equals(patDir)) {</b>
+&nbsp;                break;
+&nbsp;            }
+<b class="fc">&nbsp;            if (!matchStrings(patDir, pathDirs[pathIdxStart])) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            pattIdxStart++;</b>
+<b class="fc">&nbsp;            pathIdxStart++;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (pathIdxStart &gt; pathIdxEnd) {</b>
+&nbsp;            // Path is exhausted, only match if rest of pattern is * or **&#39;s
+<b class="fc">&nbsp;            if (pattIdxStart &gt; pattIdxEnd) {</b>
+<b class="fc">&nbsp;                return (pattern.endsWith(this.pathSeparator) ?</b>
+<b class="fc">&nbsp;                        path.endsWith(this.pathSeparator) : !path.endsWith(this.pathSeparator));</b>
+&nbsp;            }
+<b class="pc">&nbsp;            if (!fullMatch) {</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="pc">&nbsp;            if (pattIdxStart == pattIdxEnd &amp;&amp; pattDirs[pattIdxStart].equals(&quot;*&quot;) &amp;&amp;</b>
+<b class="fc">&nbsp;                    path.endsWith(this.pathSeparator)) {</b>
+<b class="fc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="pc">&nbsp;            for (int i = pattIdxStart; i &lt;= pattIdxEnd; i++) {</b>
+<b class="pc">&nbsp;                if (!pattDirs[i].equals(&quot;**&quot;)) {</b>
+<b class="fc">&nbsp;                    return false;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return true;</b>
+<b class="pc">&nbsp;        } else if (pattIdxStart &gt; pattIdxEnd) {</b>
+&nbsp;            // String not exhausted, but pattern is. Failure.
+<b class="fc">&nbsp;            return false;</b>
+<b class="nc">&nbsp;        } else if (!fullMatch &amp;&amp; &quot;**&quot;.equals(pattDirs[pattIdxStart])) {</b>
+&nbsp;            // Path start definitely matches due to &quot;**&quot; part in pattern.
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // up to last &#39;**&#39;
+<b class="nc">&nbsp;        while (pattIdxStart &lt;= pattIdxEnd &amp;&amp; pathIdxStart &lt;= pathIdxEnd) {</b>
+<b class="nc">&nbsp;            String patDir = pattDirs[pattIdxEnd];</b>
+<b class="nc">&nbsp;            if (patDir.equals(&quot;**&quot;)) {</b>
+&nbsp;                break;
+&nbsp;            }
+<b class="nc">&nbsp;            if (!matchStrings(patDir, pathDirs[pathIdxEnd])) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            pattIdxEnd--;</b>
+<b class="nc">&nbsp;            pathIdxEnd--;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (pathIdxStart &gt; pathIdxEnd) {</b>
+&nbsp;            // String is exhausted
+<b class="nc">&nbsp;            for (int i = pattIdxStart; i &lt;= pattIdxEnd; i++) {</b>
+<b class="nc">&nbsp;                if (!pattDirs[i].equals(&quot;**&quot;)) {</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        while (pattIdxStart != pattIdxEnd &amp;&amp; pathIdxStart &lt;= pathIdxEnd) {</b>
+<b class="nc">&nbsp;            int patIdxTmp = -1;</b>
+<b class="nc">&nbsp;            for (int i = pattIdxStart + 1; i &lt;= pattIdxEnd; i++) {</b>
+<b class="nc">&nbsp;                if (pattDirs[i].equals(&quot;**&quot;)) {</b>
+<b class="nc">&nbsp;                    patIdxTmp = i;</b>
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            if (patIdxTmp == pattIdxStart + 1) {</b>
+&nbsp;                // &#39;**/**&#39; situation, so skip one
+<b class="nc">&nbsp;                pattIdxStart++;</b>
+&nbsp;                continue;
+&nbsp;            }
+&nbsp;            // Find the pattern between padIdxStart &amp; padIdxTmp in str between
+&nbsp;            // strIdxStart &amp; strIdxEnd
+<b class="nc">&nbsp;            int patLength = (patIdxTmp - pattIdxStart - 1);</b>
+<b class="nc">&nbsp;            int strLength = (pathIdxEnd - pathIdxStart + 1);</b>
+<b class="nc">&nbsp;            int foundIdx = -1;</b>
+&nbsp;
+&nbsp;            strLoop:
+<b class="nc">&nbsp;            for (int i = 0; i &lt;= strLength - patLength; i++) {</b>
+<b class="nc">&nbsp;                for (int j = 0; j &lt; patLength; j++) {</b>
+<b class="nc">&nbsp;                    String subPat = (String) pattDirs[pattIdxStart + j + 1];</b>
+<b class="nc">&nbsp;                    String subStr = (String) pathDirs[pathIdxStart + i + j];</b>
+<b class="nc">&nbsp;                    if (!matchStrings(subPat, subStr)) {</b>
+&nbsp;                        continue strLoop;
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                foundIdx = pathIdxStart + i;</b>
+&nbsp;                break;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (foundIdx == -1) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            pattIdxStart = patIdxTmp;</b>
+<b class="nc">&nbsp;            pathIdxStart = foundIdx + patLength;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = pattIdxStart; i &lt;= pattIdxEnd; i++) {</b>
+<b class="nc">&nbsp;            if (!pattDirs[i].equals(&quot;**&quot;)) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Tests whether or not a string matches against a pattern.
+&nbsp;     * The pattern may contain two special characters:&lt;br&gt;
+&nbsp;     * &#39;*&#39; means zero or more characters&lt;br&gt;
+&nbsp;     * &#39;?&#39; means one and only one character
+&nbsp;     *
+&nbsp;     * @param pattern pattern to match against.
+&nbsp;     *                Must not be &lt;code&gt;null&lt;/code&gt;.
+&nbsp;     * @param str     string which must be matched against the pattern.
+&nbsp;     *                Must not be &lt;code&gt;null&lt;/code&gt;.
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt; if the string matches against the
+&nbsp;     *         pattern, or &lt;code&gt;false&lt;/code&gt; otherwise.
+&nbsp;     */
+&nbsp;    private boolean matchStrings(String pattern, String str) {
+<b class="fc">&nbsp;        char[] patArr = pattern.toCharArray();</b>
+<b class="fc">&nbsp;        char[] strArr = str.toCharArray();</b>
+<b class="fc">&nbsp;        int patIdxStart = 0;</b>
+<b class="fc">&nbsp;        int patIdxEnd = patArr.length - 1;</b>
+<b class="fc">&nbsp;        int strIdxStart = 0;</b>
+<b class="fc">&nbsp;        int strIdxEnd = strArr.length - 1;</b>
+&nbsp;        char ch;
+&nbsp;
+<b class="fc">&nbsp;        boolean containsStar = false;</b>
+<b class="fc">&nbsp;        for (char aPatArr : patArr) {</b>
+<b class="fc">&nbsp;            if (aPatArr == &#39;*&#39;) {</b>
+<b class="fc">&nbsp;                containsStar = true;</b>
+&nbsp;                break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (!containsStar) {</b>
+&nbsp;            // No &#39;*&#39;s, so we make a shortcut
+<b class="fc">&nbsp;            if (patIdxEnd != strIdxEnd) {</b>
+<b class="fc">&nbsp;                return false; // Pattern and string do not have the same size</b>
+&nbsp;            }
+<b class="fc">&nbsp;            for (int i = 0; i &lt;= patIdxEnd; i++) {</b>
+<b class="fc">&nbsp;                ch = patArr[i];</b>
+<b class="pc">&nbsp;                if (ch != &#39;?&#39;) {</b>
+<b class="pc">&nbsp;                    if (ch != strArr[i]) {</b>
+<b class="nc">&nbsp;                        return false;// Character mismatch</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            return true; // String matches against pattern</b>
+&nbsp;        }
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        if (patIdxEnd == 0) {</b>
+<b class="fc">&nbsp;            return true; // Pattern contains only &#39;*&#39;, which matches anything</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Process characters before first star
+<b class="pc">&nbsp;        while ((ch = patArr[patIdxStart]) != &#39;*&#39; &amp;&amp; strIdxStart &lt;= strIdxEnd) {</b>
+<b class="pc">&nbsp;            if (ch != &#39;?&#39;) {</b>
+<b class="pc">&nbsp;                if (ch != strArr[strIdxStart]) {</b>
+<b class="nc">&nbsp;                    return false;// Character mismatch</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            patIdxStart++;</b>
+<b class="fc">&nbsp;            strIdxStart++;</b>
+&nbsp;        }
+<b class="pc">&nbsp;        if (strIdxStart &gt; strIdxEnd) {</b>
+&nbsp;            // All characters in the string are used. Check if only &#39;*&#39;s are
+&nbsp;            // left in the pattern. If so, we succeeded. Otherwise failure.
+<b class="fc">&nbsp;            for (int i = patIdxStart; i &lt;= patIdxEnd; i++) {</b>
+<b class="pc">&nbsp;                if (patArr[i] != &#39;*&#39;) {</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Process characters after last star
+<b class="nc">&nbsp;        while ((ch = patArr[patIdxEnd]) != &#39;*&#39; &amp;&amp; strIdxStart &lt;= strIdxEnd) {</b>
+<b class="nc">&nbsp;            if (ch != &#39;?&#39;) {</b>
+<b class="nc">&nbsp;                if (ch != strArr[strIdxEnd]) {</b>
+<b class="nc">&nbsp;                    return false;// Character mismatch</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            patIdxEnd--;</b>
+<b class="nc">&nbsp;            strIdxEnd--;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (strIdxStart &gt; strIdxEnd) {</b>
+&nbsp;            // All characters in the string are used. Check if only &#39;*&#39;s are
+&nbsp;            // left in the pattern. If so, we succeeded. Otherwise failure.
+<b class="nc">&nbsp;            for (int i = patIdxStart; i &lt;= patIdxEnd; i++) {</b>
+<b class="nc">&nbsp;                if (patArr[i] != &#39;*&#39;) {</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // process pattern between stars. padIdxStart and patIdxEnd point
+&nbsp;        // always to a &#39;*&#39;.
+<b class="nc">&nbsp;        while (patIdxStart != patIdxEnd &amp;&amp; strIdxStart &lt;= strIdxEnd) {</b>
+<b class="nc">&nbsp;            int patIdxTmp = -1;</b>
+<b class="nc">&nbsp;            for (int i = patIdxStart + 1; i &lt;= patIdxEnd; i++) {</b>
+<b class="nc">&nbsp;                if (patArr[i] == &#39;*&#39;) {</b>
+<b class="nc">&nbsp;                    patIdxTmp = i;</b>
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            if (patIdxTmp == patIdxStart + 1) {</b>
+&nbsp;                // Two stars next to each other, skip the first one.
+<b class="nc">&nbsp;                patIdxStart++;</b>
+&nbsp;                continue;
+&nbsp;            }
+&nbsp;            // Find the pattern between padIdxStart &amp; padIdxTmp in str between
+&nbsp;            // strIdxStart &amp; strIdxEnd
+<b class="nc">&nbsp;            int patLength = (patIdxTmp - patIdxStart - 1);</b>
+<b class="nc">&nbsp;            int strLength = (strIdxEnd - strIdxStart + 1);</b>
+<b class="nc">&nbsp;            int foundIdx = -1;</b>
+&nbsp;            strLoop:
+<b class="nc">&nbsp;            for (int i = 0; i &lt;= strLength - patLength; i++) {</b>
+<b class="nc">&nbsp;                for (int j = 0; j &lt; patLength; j++) {</b>
+<b class="nc">&nbsp;                    ch = patArr[patIdxStart + j + 1];</b>
+<b class="nc">&nbsp;                    if (ch != &#39;?&#39;) {</b>
+<b class="nc">&nbsp;                        if (ch != strArr[strIdxStart + i + j]) {</b>
+&nbsp;                            continue strLoop;
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                foundIdx = strIdxStart + i;</b>
+&nbsp;                break;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (foundIdx == -1) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            patIdxStart = patIdxTmp;</b>
+<b class="nc">&nbsp;            strIdxStart = foundIdx + patLength;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // All characters in the string are used. Check if only &#39;*&#39;s are left
+&nbsp;        // in the pattern. If so, we succeeded. Otherwise failure.
+<b class="nc">&nbsp;        for (int i = patIdxStart; i &lt;= patIdxEnd; i++) {</b>
+<b class="nc">&nbsp;            if (patArr[i] != &#39;*&#39;) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Given a pattern and a full path, determine the pattern-mapped part.
+&nbsp;     * &lt;p&gt;For example:
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;&#39;&lt;code&gt;/docs/cvs/commit.html&lt;/code&gt;&#39; and &#39;&lt;code&gt;/docs/cvs/commit.html&lt;/code&gt; -&gt; &#39;&#39;&lt;/li&gt;
+&nbsp;     * &lt;li&gt;&#39;&lt;code&gt;/docs/*&lt;/code&gt;&#39; and &#39;&lt;code&gt;/docs/cvs/commit&lt;/code&gt; -&gt; &#39;&lt;code&gt;cvs/commit&lt;/code&gt;&#39;&lt;/li&gt;
+&nbsp;     * &lt;li&gt;&#39;&lt;code&gt;/docs/cvs/*.html&lt;/code&gt;&#39; and &#39;&lt;code&gt;/docs/cvs/commit.html&lt;/code&gt; -&gt; &#39;&lt;code&gt;commit.html&lt;/code&gt;&#39;&lt;/li&gt;
+&nbsp;     * &lt;li&gt;&#39;&lt;code&gt;/docs/**&lt;/code&gt;&#39; and &#39;&lt;code&gt;/docs/cvs/commit&lt;/code&gt; -&gt; &#39;&lt;code&gt;cvs/commit&lt;/code&gt;&#39;&lt;/li&gt;
+&nbsp;     * &lt;li&gt;&#39;&lt;code&gt;/docs/**\/*.html&lt;/code&gt;&#39; and &#39;&lt;code&gt;/docs/cvs/commit.html&lt;/code&gt; -&gt; &#39;&lt;code&gt;cvs/commit.html&lt;/code&gt;&#39;&lt;/li&gt;
+&nbsp;     * &lt;li&gt;&#39;&lt;code&gt;/*.html&lt;/code&gt;&#39; and &#39;&lt;code&gt;/docs/cvs/commit.html&lt;/code&gt; -&gt; &#39;&lt;code&gt;docs/cvs/commit.html&lt;/code&gt;&#39;&lt;/li&gt;
+&nbsp;     * &lt;li&gt;&#39;&lt;code&gt;*.html&lt;/code&gt;&#39; and &#39;&lt;code&gt;/docs/cvs/commit.html&lt;/code&gt; -&gt; &#39;&lt;code&gt;/docs/cvs/commit.html&lt;/code&gt;&#39;&lt;/li&gt;
+&nbsp;     * &lt;li&gt;&#39;&lt;code&gt;*&lt;/code&gt;&#39; and &#39;&lt;code&gt;/docs/cvs/commit.html&lt;/code&gt; -&gt; &#39;&lt;code&gt;/docs/cvs/commit.html&lt;/code&gt;&#39;&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     * &lt;p&gt;Assumes that {@link #match} returns &lt;code&gt;true&lt;/code&gt; for &#39;&lt;code&gt;pattern&lt;/code&gt;&#39;
+&nbsp;     * and &#39;&lt;code&gt;path&lt;/code&gt;&#39;, but does &lt;strong&gt;not&lt;/strong&gt; enforce this.
+&nbsp;     */
+&nbsp;    public String extractPathWithinPattern(String pattern, String path) {
+<b class="nc">&nbsp;        String[] patternParts = StringUtils.tokenizeToStringArray(pattern, this.pathSeparator, false, true);</b>
+<b class="nc">&nbsp;        String[] pathParts = StringUtils.tokenizeToStringArray(path, this.pathSeparator, false, true);</b>
+<b class="nc">&nbsp;        StringBuilder builder = new StringBuilder();</b>
+<b class="nc">&nbsp;        boolean pathStarted = false;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int segment = 0; segment &lt; patternParts.length; segment++) {</b>
+<b class="nc">&nbsp;            String patternPart = patternParts[segment];</b>
+<b class="nc">&nbsp;            if (patternPart.indexOf(&#39;*&#39;) &gt; -1 || patternPart.indexOf(&#39;?&#39;) &gt; -1) {</b>
+<b class="nc">&nbsp;                for (; segment &lt; pathParts.length; segment++) {</b>
+<b class="nc">&nbsp;                    if (pathStarted || (segment == 0 &amp;&amp; !pattern.startsWith(this.pathSeparator))) {</b>
+<b class="nc">&nbsp;                        builder.append(this.pathSeparator);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    builder.append(pathParts[segment]);</b>
+<b class="nc">&nbsp;                    pathStarted = true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return builder.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

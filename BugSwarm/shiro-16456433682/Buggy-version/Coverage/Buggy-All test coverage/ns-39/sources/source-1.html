@@ -1,0 +1,301 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractSessionDAO</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.session.mgt.eis</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractSessionDAO (org.apache.shiro.session.mgt.eis)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractSessionDAO</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (6/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (3/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    63.2%
+  </span>
+  <span class="absValue">
+    (12/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.session.mgt.eis;
+&nbsp;
+&nbsp;import org.apache.shiro.session.Session;
+&nbsp;import org.apache.shiro.session.UnknownSessionException;
+&nbsp;import org.apache.shiro.session.mgt.SimpleSession;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * An abstract {@code SessionDAO} implementation that performs some sanity checks on session creation and reading and
+&nbsp; * allows for pluggable Session ID generation strategies if desired.  The {@code SessionDAO}
+&nbsp; * {@link SessionDAO#update update} and {@link SessionDAO#delete delete} methods are left to
+&nbsp; * subclasses.
+&nbsp; * &lt;h3&gt;Session ID Generation&lt;/h3&gt;
+&nbsp; * This class also allows for plugging in a {@link SessionIdGenerator} for custom ID generation strategies.  This is
+&nbsp; * optional, as the default generator is probably sufficient for most cases.  Subclass implementations that do use a
+&nbsp; * generator (default or custom) will want to call the
+&nbsp; * {@link #generateSessionId(org.apache.shiro.session.Session)} method from within their {@link #doCreate}
+&nbsp; * implementations.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Subclass implementations that rely on the EIS data store to generate the ID automatically (e.g. when the session
+&nbsp; * ID is also an auto-generated primary key), they can simply ignore the {@code SessionIdGenerator} concept
+&nbsp; * entirely and just return the data store&#39;s ID from the {@link #doCreate} implementation.
+&nbsp; *
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public abstract class AbstractSessionDAO implements SessionDAO {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Optional SessionIdGenerator instance available to subclasses via the
+&nbsp;     * {@link #generateSessionId(org.apache.shiro.session.Session)} method.
+&nbsp;     */
+&nbsp;    private SessionIdGenerator sessionIdGenerator;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default no-arg constructor that defaults the {@link #setSessionIdGenerator sessionIdGenerator} to be a
+&nbsp;     * {@link org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator}.
+&nbsp;     */
+<b class="fc">&nbsp;    public AbstractSessionDAO() {</b>
+<b class="fc">&nbsp;        this.sessionIdGenerator = new JavaUuidSessionIdGenerator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@code SessionIdGenerator} used by the {@link #generateSessionId(org.apache.shiro.session.Session)}
+&nbsp;     * method.  Unless overridden by the {@link #setSessionIdGenerator(SessionIdGenerator)} method, the default instance
+&nbsp;     * is a {@link JavaUuidSessionIdGenerator}.
+&nbsp;     *
+&nbsp;     * @return the {@code SessionIdGenerator} used by the {@link #generateSessionId(org.apache.shiro.session.Session)}
+&nbsp;     *         method.
+&nbsp;     */
+&nbsp;    public SessionIdGenerator getSessionIdGenerator() {
+<b class="nc">&nbsp;        return sessionIdGenerator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the {@code SessionIdGenerator} used by the {@link #generateSessionId(org.apache.shiro.session.Session)}
+&nbsp;     * method.  Unless overridden by this method, the default instance ss a {@link JavaUuidSessionIdGenerator}.
+&nbsp;     *
+&nbsp;     * @param sessionIdGenerator the {@code SessionIdGenerator} to use in the
+&nbsp;     *                           {@link #generateSessionId(org.apache.shiro.session.Session)} method.
+&nbsp;     */
+&nbsp;    public void setSessionIdGenerator(SessionIdGenerator sessionIdGenerator) {
+<b class="nc">&nbsp;        this.sessionIdGenerator = sessionIdGenerator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates a new ID to be applied to the specified {@code session} instance.  This method is usually called
+&nbsp;     * from within a subclass&#39;s {@link #doCreate} implementation where they assign the returned id to the session
+&nbsp;     * instance and then create a record with this ID in the EIS data store.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Subclass implementations backed by EIS data stores that auto-generate IDs during record creation, such as
+&nbsp;     * relational databases, don&#39;t need to use this method or the {@link #getSessionIdGenerator() sessionIdGenerator}
+&nbsp;     * attribute - they can simply return the data store&#39;s generated ID from the {@link #doCreate} implementation
+&nbsp;     * if desired.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation uses the {@link #setSessionIdGenerator configured} {@link SessionIdGenerator} to create
+&nbsp;     * the ID.
+&nbsp;     *
+&nbsp;     * @param session the new session instance for which an ID will be generated and then assigned
+&nbsp;     * @return the generated ID to assign
+&nbsp;     */
+&nbsp;    protected Serializable generateSessionId(Session session) {
+<b class="pc">&nbsp;        if (this.sessionIdGenerator == null) {</b>
+<b class="nc">&nbsp;            String msg = &quot;sessionIdGenerator attribute has not been configured.&quot;;</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(msg);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return this.sessionIdGenerator.generateId(session);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates the session by delegating EIS creation to subclasses via the {@link #doCreate} method, and then
+&nbsp;     * asserting that the returned sessionId is not null.
+&nbsp;     *
+&nbsp;     * @param session Session object to create in the EIS and associate with an ID.
+&nbsp;     */
+&nbsp;    public Serializable create(Session session) {
+<b class="fc">&nbsp;        Serializable sessionId = doCreate(session);</b>
+<b class="fc">&nbsp;        verifySessionId(sessionId);</b>
+<b class="fc">&nbsp;        return sessionId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ensures the sessionId returned from the subclass implementation of {@link #doCreate} is not null and not
+&nbsp;     * already in use.
+&nbsp;     *
+&nbsp;     * @param sessionId session id returned from the subclass implementation of {@link #doCreate}
+&nbsp;     */
+&nbsp;    private void verifySessionId(Serializable sessionId) {
+<b class="pc">&nbsp;        if (sessionId == null) {</b>
+<b class="nc">&nbsp;            String msg = &quot;sessionId returned from doCreate implementation is null.  Please verify the implementation.&quot;;</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(msg);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Utility method available to subclasses that wish to
+&nbsp;     * assign a generated session ID to the session instance directly.  This method is not used by the
+&nbsp;     * {@code AbstractSessionDAO} implementation directly, but it is provided so subclasses don&#39;t
+&nbsp;     * need to know the {@code Session} implementation if they don&#39;t need to.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This default implementation casts the argument to a {@link SimpleSession}, Shiro&#39;s default EIS implementation.
+&nbsp;     *
+&nbsp;     * @param session   the session instance to which the sessionId will be applied
+&nbsp;     * @param sessionId the id to assign to the specified session instance.
+&nbsp;     */
+&nbsp;    protected void assignSessionId(Session session, Serializable sessionId) {
+<b class="fc">&nbsp;        ((SimpleSession) session).setId(sessionId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Subclass hook to actually persist the given &lt;tt&gt;Session&lt;/tt&gt; instance to the underlying EIS.
+&nbsp;     *
+&nbsp;     * @param session the Session instance to persist to the EIS.
+&nbsp;     * @return the id of the session created in the EIS (i.e. this is almost always a primary key and should be the
+&nbsp;     *         value returned from {@link org.apache.shiro.session.Session#getId() Session.getId()}.
+&nbsp;     */
+&nbsp;    protected abstract Serializable doCreate(Session session);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Retrieves the Session object from the underlying EIS identified by &lt;tt&gt;sessionId&lt;/tt&gt; by delegating to
+&nbsp;     * the {@link #doReadSession(java.io.Serializable)} method.  If {@code null} is returned from that method, an
+&nbsp;     * {@link UnknownSessionException} will be thrown.
+&nbsp;     *
+&nbsp;     * @param sessionId the id of the session to retrieve from the EIS.
+&nbsp;     * @return the session identified by &lt;tt&gt;sessionId&lt;/tt&gt; in the EIS.
+&nbsp;     * @throws UnknownSessionException if the id specified does not correspond to any session in the EIS.
+&nbsp;     */
+&nbsp;    public Session readSession(Serializable sessionId) throws UnknownSessionException {
+<b class="fc">&nbsp;        Session s = doReadSession(sessionId);</b>
+<b class="pc">&nbsp;        if (s == null) {</b>
+<b class="nc">&nbsp;            throw new UnknownSessionException(&quot;There is no session with id [&quot; + sessionId + &quot;]&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return s;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Subclass implementation hook that retrieves the Session object from the underlying EIS or {@code null} if a
+&nbsp;     * session with that ID could not be found.
+&nbsp;     *
+&nbsp;     * @param sessionId the id of the &lt;tt&gt;Session&lt;/tt&gt; to retrieve.
+&nbsp;     * @return the Session in the EIS identified by &lt;tt&gt;sessionId&lt;/tt&gt; or {@code null} if a
+&nbsp;     *         session with that ID could not be found.
+&nbsp;     */
+&nbsp;    protected abstract Session doReadSession(Serializable sessionId);
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

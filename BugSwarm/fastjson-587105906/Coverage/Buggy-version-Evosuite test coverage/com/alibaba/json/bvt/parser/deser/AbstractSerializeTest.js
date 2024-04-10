@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":93,"id":74345,"methods":[{"el":17,"sc":5,"sl":12},{"el":21,"sc":5,"sl":19},{"el":28,"sc":5,"sl":23},{"el":36,"sc":5,"sl":30},{"el":45,"sc":5,"sl":38},{"el":52,"sc":5,"sl":47}],"name":"AbstractSerializeTest","sl":11},{"el":66,"id":74370,"methods":[{"el":60,"sc":9,"sl":58},{"el":64,"sc":9,"sl":62}],"name":"AbstractSerializeTest.G","sl":54},{"el":79,"id":74374,"methods":[{"el":74,"sc":9,"sl":72},{"el":78,"sc":9,"sl":76}],"name":"AbstractSerializeTest.A","sl":68},{"el":92,"id":74378,"methods":[{"el":87,"sc":9,"sl":85},{"el":91,"sc":9,"sl":89}],"name":"AbstractSerializeTest.B","sl":81}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_1828":{"methods":[{"sl":30},{"sl":72},{"sl":76}],"name":"test_mapping_1","pass":true,"statements":[{"sl":31},{"sl":33},{"sl":34},{"sl":35},{"sl":73},{"sl":77}]},"test_1896":{"methods":[{"sl":23}],"name":"test_mapping_0","pass":true,"statements":[{"sl":24},{"sl":26},{"sl":27}]},"test_1900":{"methods":[{"sl":38},{"sl":72},{"sl":76},{"sl":85},{"sl":89}],"name":"test_mapping_2","pass":true,"statements":[{"sl":39},{"sl":41},{"sl":42},{"sl":43},{"sl":44},{"sl":73},{"sl":77},{"sl":86},{"sl":90}]},"test_323":{"methods":[{"sl":47},{"sl":58},{"sl":62},{"sl":76},{"sl":89}],"name":"test_mapping_group","pass":true,"statements":[{"sl":48},{"sl":50},{"sl":51},{"sl":59},{"sl":63},{"sl":77},{"sl":90}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [1896], [1896], [], [1896], [1896], [], [], [1828], [1828], [], [1828], [1828], [1828], [], [], [1900], [1900], [], [1900], [1900], [1900], [1900], [], [], [323], [323], [], [323], [323], [], [], [], [], [], [], [323], [323], [], [], [323], [323], [], [], [], [], [], [], [], [], [1828, 1900], [1828, 1900], [], [], [323, 1828, 1900], [323, 1828, 1900], [], [], [], [], [], [], [], [1900], [1900], [], [], [323, 1900], [323, 1900], [], [], []]

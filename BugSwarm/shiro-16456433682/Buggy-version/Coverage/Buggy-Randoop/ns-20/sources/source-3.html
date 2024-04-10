@@ -1,0 +1,439 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JndiTemplate</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.jndi</a>
+</div>
+
+<h1>Coverage Summary for Class: JndiTemplate (org.apache.shiro.jndi)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JndiTemplate</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JndiTemplate$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JndiTemplate$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JndiTemplate$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JndiTemplate$4</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/50)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.jndi;
+&nbsp;
+&nbsp;import java.util.Enumeration;
+&nbsp;import java.util.Hashtable;
+&nbsp;import java.util.Properties;
+&nbsp;import javax.naming.Context;
+&nbsp;import javax.naming.InitialContext;
+&nbsp;import javax.naming.NameNotFoundException;
+&nbsp;import javax.naming.NamingException;
+&nbsp;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper class that simplifies JNDI operations. It provides methods to lookup and
+&nbsp; * bind objects, and allows implementations of the {@link JndiCallback} interface
+&nbsp; * to perform any operation they like with a JNDI naming context provided.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;p&gt;Note that this implementation is an almost exact copy of the Spring Framework&#39;s identically named class from
+&nbsp; * their 2.5.4 distribution - we didn&#39;t want to re-invent the wheel, but not require a full dependency on the
+&nbsp; * Spring framework, nor does Spring make available only its JNDI classes in a small jar, or we would have used that.
+&nbsp; * Since Shiro is also Apache 2.0 licensed, all regular licenses and conditions and authors have remained in tact.
+&nbsp; *
+&nbsp; * @see JndiCallback
+&nbsp; * @see #execute
+&nbsp; */
+&nbsp;public class JndiTemplate {
+&nbsp;
+<b class="nc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(JndiTemplate.class);</b>
+&nbsp;
+&nbsp;    private Properties environment;
+&nbsp;
+&nbsp;    /** Create a new JndiTemplate instance. */
+<b class="nc">&nbsp;    public JndiTemplate() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new JndiTemplate instance, using the given environment.
+&nbsp;     *
+&nbsp;     * @param environment the Properties to initialize with
+&nbsp;     */
+<b class="nc">&nbsp;    public JndiTemplate(Properties environment) {</b>
+<b class="nc">&nbsp;        this.environment = environment;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the environment for the JNDI InitialContext.
+&nbsp;     *
+&nbsp;     * @param environment the Properties to initialize with
+&nbsp;     */
+&nbsp;    public void setEnvironment(Properties environment) {
+<b class="nc">&nbsp;        this.environment = environment;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the environment for the JNDI InitialContext, or &lt;code&gt;null&lt;/code&gt; if none should be used.
+&nbsp;     *
+&nbsp;     * @return the environment for the JNDI InitialContext, or &lt;code&gt;null&lt;/code&gt; if none should be used.
+&nbsp;     */
+&nbsp;    public Properties getEnvironment() {
+<b class="nc">&nbsp;        return this.environment;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Execute the given JNDI context callback implementation.
+&nbsp;     *
+&nbsp;     * @param contextCallback JndiCallback implementation
+&nbsp;     * @return a result object returned by the callback, or &lt;code&gt;null&lt;/code&gt;
+&nbsp;     * @throws NamingException thrown by the callback implementation
+&nbsp;     * @see #createInitialContext
+&nbsp;     */
+&nbsp;    public Object execute(JndiCallback contextCallback) throws NamingException {
+<b class="nc">&nbsp;        Context ctx = createInitialContext();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            return contextCallback.doInContext(ctx);</b>
+&nbsp;        }
+&nbsp;        finally {
+<b class="nc">&nbsp;            try {</b>
+<b class="nc">&nbsp;                ctx.close();</b>
+<b class="nc">&nbsp;            } catch (NamingException ex) {</b>
+<b class="nc">&nbsp;                log.debug(&quot;Could not close JNDI InitialContext&quot;, ex);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new JNDI initial context. Invoked by {@link #execute}.
+&nbsp;     * &lt;p&gt;The default implementation use this template&#39;s environment settings.
+&nbsp;     * Can be subclassed for custom contexts, e.g. for testing.
+&nbsp;     *
+&nbsp;     * @return the initial Context instance
+&nbsp;     * @throws NamingException in case of initialization errors
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;unchecked&quot;})
+&nbsp;    protected Context createInitialContext() throws NamingException {
+<b class="nc">&nbsp;        Properties env = getEnvironment();</b>
+<b class="nc">&nbsp;        Hashtable icEnv = null;</b>
+<b class="nc">&nbsp;        if (env != null) {</b>
+<b class="nc">&nbsp;            icEnv = new Hashtable(env.size());</b>
+<b class="nc">&nbsp;            for (Enumeration en = env.propertyNames(); en.hasMoreElements();) {</b>
+<b class="nc">&nbsp;                String key = (String) en.nextElement();</b>
+<b class="nc">&nbsp;                icEnv.put(key, env.getProperty(key));</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return new InitialContext(icEnv);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Look up the object with the given name in the current JNDI context.
+&nbsp;     *
+&nbsp;     * @param name the JNDI name of the object
+&nbsp;     * @return object found (cannot be &lt;code&gt;null&lt;/code&gt;; if a not so well-behaved
+&nbsp;     *         JNDI implementations returns null, a NamingException gets thrown)
+&nbsp;     * @throws NamingException if there is no object with the given
+&nbsp;     *                         name bound to JNDI
+&nbsp;     */
+&nbsp;    public Object lookup(final String name) throws NamingException {
+<b class="nc">&nbsp;        log.debug(&quot;Looking up JNDI object with name &#39;{}&#39;&quot;, name);</b>
+<b class="nc">&nbsp;        return execute(new JndiCallback() {</b>
+&nbsp;            public Object doInContext(Context ctx) throws NamingException {
+<b class="nc">&nbsp;                Object located = ctx.lookup(name);</b>
+<b class="nc">&nbsp;                if (located == null) {</b>
+<b class="nc">&nbsp;                    throw new NameNotFoundException(</b>
+&nbsp;                            &quot;JNDI object with [&quot; + name + &quot;] not found: JNDI implementation returned null&quot;);
+&nbsp;                }
+<b class="nc">&nbsp;                return located;</b>
+&nbsp;            }
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Look up the object with the given name in the current JNDI context.
+&nbsp;     *
+&nbsp;     * @param name         the JNDI name of the object
+&nbsp;     * @param requiredType type the JNDI object must match. Can be an interface or
+&nbsp;     *                     superclass of the actual class, or &lt;code&gt;null&lt;/code&gt; for any match. For example,
+&nbsp;     *                     if the value is &lt;code&gt;Object.class&lt;/code&gt;, this method will succeed whatever
+&nbsp;     *                     the class of the returned instance.
+&nbsp;     * @return object found (cannot be &lt;code&gt;null&lt;/code&gt;; if a not so well-behaved
+&nbsp;     *         JNDI implementations returns null, a NamingException gets thrown)
+&nbsp;     * @throws NamingException if there is no object with the given
+&nbsp;     *                         name bound to JNDI
+&nbsp;     */
+&nbsp;    public Object lookup(String name, Class requiredType) throws NamingException {
+<b class="nc">&nbsp;        Object jndiObject = lookup(name);</b>
+<b class="nc">&nbsp;        if (requiredType != null &amp;&amp; !requiredType.isInstance(jndiObject)) {</b>
+<b class="nc">&nbsp;            String msg = &quot;Jndi object acquired under name &#39;&quot; + name + &quot;&#39; is of type [&quot; +</b>
+<b class="nc">&nbsp;                    jndiObject.getClass().getName() + &quot;] and not assignable to the required type [&quot; +</b>
+<b class="nc">&nbsp;                    requiredType.getName() + &quot;].&quot;;</b>
+<b class="nc">&nbsp;            throw new NamingException(msg);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return jndiObject;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Bind the given object to the current JNDI context, using the given name.
+&nbsp;     *
+&nbsp;     * @param name   the JNDI name of the object
+&nbsp;     * @param object the object to bind
+&nbsp;     * @throws NamingException thrown by JNDI, mostly name already bound
+&nbsp;     */
+&nbsp;    public void bind(final String name, final Object object) throws NamingException {
+<b class="nc">&nbsp;        log.debug(&quot;Binding JNDI object with name &#39;{}&#39;&quot;, name);</b>
+<b class="nc">&nbsp;        execute(new JndiCallback() {</b>
+&nbsp;            public Object doInContext(Context ctx) throws NamingException {
+<b class="nc">&nbsp;                ctx.bind(name, object);</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Rebind the given object to the current JNDI context, using the given name.
+&nbsp;     * Overwrites any existing binding.
+&nbsp;     *
+&nbsp;     * @param name   the JNDI name of the object
+&nbsp;     * @param object the object to rebind
+&nbsp;     * @throws NamingException thrown by JNDI
+&nbsp;     */
+&nbsp;    public void rebind(final String name, final Object object) throws NamingException {
+<b class="nc">&nbsp;        log.debug(&quot;Rebinding JNDI object with name &#39;{}&#39;&quot;, name);</b>
+<b class="nc">&nbsp;        execute(new JndiCallback() {</b>
+&nbsp;            public Object doInContext(Context ctx) throws NamingException {
+<b class="nc">&nbsp;                ctx.rebind(name, object);</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Remove the binding for the given name from the current JNDI context.
+&nbsp;     *
+&nbsp;     * @param name the JNDI name of the object
+&nbsp;     * @throws NamingException thrown by JNDI, mostly name not found
+&nbsp;     */
+&nbsp;    public void unbind(final String name) throws NamingException {
+<b class="nc">&nbsp;        log.debug(&quot;Unbinding JNDI object with name &#39;{}&#39;&quot;, name);</b>
+<b class="nc">&nbsp;        execute(new JndiCallback() {</b>
+&nbsp;            public Object doInContext(Context ctx) throws NamingException {
+<b class="nc">&nbsp;                ctx.unbind(name);</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

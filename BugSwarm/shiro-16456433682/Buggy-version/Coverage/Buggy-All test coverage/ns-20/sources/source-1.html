@@ -1,0 +1,295 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JndiLocator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.jndi</a>
+</div>
+
+<h1>Coverage Summary for Class: JndiLocator (org.apache.shiro.jndi)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JndiLocator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.jndi;
+&nbsp;
+&nbsp;import java.util.Properties;
+&nbsp;import javax.naming.NamingException;
+&nbsp;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;/**
+&nbsp; * Convenient superclass for JNDI accessors, providing &quot;jndiTemplate&quot;
+&nbsp; * and &quot;jndiEnvironment&quot; bean properties.
+&nbsp; *
+&nbsp; * &lt;p&gt;Note that this implementation is an almost exact combined copy of the Spring Framework&#39;s &#39;JndiAccessor&#39; and
+&nbsp; * &#39;JndiLocatorSupport&#39; classes from their 2.5.4 distribution - we didn&#39;t want to re-invent the wheel, but not require
+&nbsp; * a full dependency on the Spring framework, nor does Spring make available only its JNDI classes in a small jar, or
+&nbsp; * we would have used that. Since Shiro is also Apache 2.0 licensed, all regular licenses and conditions and
+&nbsp; * authors have remained in tact.
+&nbsp; *
+&nbsp; * @see #setJndiTemplate
+&nbsp; * @see #setJndiEnvironment
+&nbsp; * @see #setResourceRef
+&nbsp; * @since 1.1
+&nbsp; */
+<b class="nc">&nbsp;public class JndiLocator {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Private class log.
+&nbsp;     */
+<b class="nc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(JndiLocator.class);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * JNDI prefix used in a J2EE container
+&nbsp;     */
+&nbsp;    public static final String CONTAINER_PREFIX = &quot;java:comp/env/&quot;;
+&nbsp;
+<b class="nc">&nbsp;    private boolean resourceRef = false;</b>
+&nbsp;
+<b class="nc">&nbsp;    private JndiTemplate jndiTemplate = new JndiTemplate();</b>
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the JNDI template to use for JNDI lookups.
+&nbsp;     * &lt;p&gt;You can also specify JNDI environment settings via &quot;jndiEnvironment&quot;.
+&nbsp;     *
+&nbsp;     * @see #setJndiEnvironment
+&nbsp;     */
+&nbsp;    public void setJndiTemplate(JndiTemplate jndiTemplate) {
+<b class="nc">&nbsp;        this.jndiTemplate = (jndiTemplate != null ? jndiTemplate : new JndiTemplate());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the JNDI template to use for JNDI lookups.
+&nbsp;     */
+&nbsp;    public JndiTemplate getJndiTemplate() {
+<b class="nc">&nbsp;        return this.jndiTemplate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the JNDI environment to use for JNDI lookups.
+&nbsp;     * &lt;p&gt;Creates a JndiTemplate with the given environment settings.
+&nbsp;     *
+&nbsp;     * @see #setJndiTemplate
+&nbsp;     */
+&nbsp;    public void setJndiEnvironment(Properties jndiEnvironment) {
+<b class="nc">&nbsp;        this.jndiTemplate = new JndiTemplate(jndiEnvironment);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the JNDI environment to use for JNDI lookups.
+&nbsp;     */
+&nbsp;    public Properties getJndiEnvironment() {
+<b class="nc">&nbsp;        return this.jndiTemplate.getEnvironment();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set whether the lookup occurs in a J2EE container, i.e. if the prefix
+&nbsp;     * &quot;java:comp/env/&quot; needs to be added if the JNDI name doesn&#39;t already
+&nbsp;     * contain it. Default is &quot;false&quot;.
+&nbsp;     * &lt;p&gt;Note: Will only get applied if no other scheme (e.g. &quot;java:&quot;) is given.
+&nbsp;     */
+&nbsp;    public void setResourceRef(boolean resourceRef) {
+<b class="nc">&nbsp;        this.resourceRef = resourceRef;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return whether the lookup occurs in a J2EE container.
+&nbsp;     */
+&nbsp;    public boolean isResourceRef() {
+<b class="nc">&nbsp;        return this.resourceRef;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Perform an actual JNDI lookup for the given name via the JndiTemplate.
+&nbsp;     * &lt;p&gt;If the name doesn&#39;t begin with &quot;java:comp/env/&quot;, this prefix is added
+&nbsp;     * if &quot;resourceRef&quot; is set to &quot;true&quot;.
+&nbsp;     *
+&nbsp;     * @param jndiName the JNDI name to look up
+&nbsp;     * @return the obtained object
+&nbsp;     * @throws javax.naming.NamingException if the JNDI lookup failed
+&nbsp;     * @see #setResourceRef
+&nbsp;     */
+&nbsp;    protected Object lookup(String jndiName) throws NamingException {
+<b class="nc">&nbsp;        return lookup(jndiName, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Perform an actual JNDI lookup for the given name via the JndiTemplate.
+&nbsp;     * &lt;p&gt;If the name doesn&#39;t begin with &quot;java:comp/env/&quot;, this prefix is added
+&nbsp;     * if &quot;resourceRef&quot; is set to &quot;true&quot;.
+&nbsp;     *
+&nbsp;     * @param jndiName     the JNDI name to look up
+&nbsp;     * @param requiredType the required type of the object
+&nbsp;     * @return the obtained object
+&nbsp;     * @throws NamingException if the JNDI lookup failed
+&nbsp;     * @see #setResourceRef
+&nbsp;     */
+&nbsp;    protected Object lookup(String jndiName, Class requiredType) throws NamingException {
+<b class="nc">&nbsp;        if (jndiName == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;jndiName argument must not be null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String convertedName = convertJndiName(jndiName);</b>
+&nbsp;        Object jndiObject;
+&nbsp;        try {
+<b class="nc">&nbsp;            jndiObject = getJndiTemplate().lookup(convertedName, requiredType);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        catch (NamingException ex) {</b>
+<b class="nc">&nbsp;            if (!convertedName.equals(jndiName)) {</b>
+&nbsp;                // Try fallback to originally specified name...
+<b class="nc">&nbsp;                if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;                    log.debug(&quot;Converted JNDI name [&quot; + convertedName +</b>
+&nbsp;                            &quot;] not found - trying original name [&quot; + jndiName + &quot;]. &quot; + ex);
+&nbsp;                }
+<b class="nc">&nbsp;                jndiObject = getJndiTemplate().lookup(jndiName, requiredType);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw ex;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        log.debug(&quot;Located object with JNDI name &#39;{}&#39;&quot;, convertedName);</b>
+<b class="nc">&nbsp;        return jndiObject;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convert the given JNDI name into the actual JNDI name to use.
+&nbsp;     * &lt;p&gt;The default implementation applies the &quot;java:comp/env/&quot; prefix if
+&nbsp;     * &quot;resourceRef&quot; is &quot;true&quot; and no other scheme (e.g. &quot;java:&quot;) is given.
+&nbsp;     *
+&nbsp;     * @param jndiName the original JNDI name
+&nbsp;     * @return the JNDI name to use
+&nbsp;     * @see #CONTAINER_PREFIX
+&nbsp;     * @see #setResourceRef
+&nbsp;     */
+&nbsp;    protected String convertJndiName(String jndiName) {
+&nbsp;        // Prepend container prefix if not already specified and no other scheme given.
+<b class="nc">&nbsp;        if (isResourceRef() &amp;&amp; !jndiName.startsWith(CONTAINER_PREFIX) &amp;&amp; jndiName.indexOf(&#39;:&#39;) == -1) {</b>
+<b class="nc">&nbsp;            jndiName = CONTAINER_PREFIX + jndiName;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return jndiName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

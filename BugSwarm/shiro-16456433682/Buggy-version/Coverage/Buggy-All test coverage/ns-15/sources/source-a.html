@@ -1,0 +1,547 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SimpleHash</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.crypto.hash</a>
+</div>
+
+<h1>Coverage Summary for Class: SimpleHash (org.apache.shiro.crypto.hash)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SimpleHash</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/69)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.crypto.hash;
+&nbsp;
+&nbsp;import org.apache.shiro.codec.Base64;
+&nbsp;import org.apache.shiro.codec.CodecException;
+&nbsp;import org.apache.shiro.codec.Hex;
+&nbsp;import org.apache.shiro.crypto.UnknownAlgorithmException;
+&nbsp;import org.apache.shiro.util.ByteSource;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;
+&nbsp;import java.security.MessageDigest;
+&nbsp;import java.security.NoSuchAlgorithmException;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;/**
+&nbsp; * A {@code Hash} implementation that allows any {@link java.security.MessageDigest MessageDigest} algorithm name to
+&nbsp; * be used.  This class is a less type-safe variant than the other {@code AbstractHash} subclasses
+&nbsp; * (e.g. {@link Sha512Hash}, etc), but it does allow for any algorithm name to be specified in case the other subclass
+&nbsp; * implementations do not represent an algorithm that you may want to use.
+&nbsp; * &lt;p/&gt;
+&nbsp; * As of Shiro 1.1, this class effectively replaces the (now-deprecated) {@link AbstractHash} class.  It subclasses
+&nbsp; * {@code AbstractHash} only to retain backwards-compatibility.
+&nbsp; *
+&nbsp; * @since 1.1
+&nbsp; */
+&nbsp;public class SimpleHash extends AbstractHash {
+&nbsp;
+&nbsp;    private static final int DEFAULT_ITERATIONS = 1;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The {@link java.security.MessageDigest MessageDigest} algorithm name to use when performing the hash.
+&nbsp;     */
+&nbsp;    private final String algorithmName;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The hashed data
+&nbsp;     */
+&nbsp;    private byte[] bytes;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Supplied salt, if any.
+&nbsp;     */
+&nbsp;    private ByteSource salt;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Number of hash iterations to perform.  Defaults to 1 in the constructor.
+&nbsp;     */
+&nbsp;    private int iterations;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Cached value of the {@link #toHex() toHex()} call so multiple calls won&#39;t incur repeated overhead.
+&nbsp;     */
+<b class="nc">&nbsp;    private transient String hexEncoded = null;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Cached value of the {@link #toBase64() toBase64()} call so multiple calls won&#39;t incur repeated overhead.
+&nbsp;     */
+<b class="nc">&nbsp;    private transient String base64Encoded = null;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates an new instance with only its {@code algorithmName} set - no hashing is performed.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Because all other constructors in this class hash the {@code source} constructor argument, this
+&nbsp;     * constructor is useful in scenarios when you have a byte array that you know is already hashed and
+&nbsp;     * just want to set the bytes in their raw form directly on an instance.  After using this constructor,
+&nbsp;     * you can then immediately call {@link #setBytes setBytes} to have a fully-initialized instance.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;N.B.&lt;/b&gt;The algorithm identified by the {@code algorithmName} parameter must be available on the JVM.  If it
+&nbsp;     * is not, a {@link UnknownAlgorithmException} will be thrown when the hash is performed (not at instantiation).
+&nbsp;     *
+&nbsp;     * @param algorithmName the {@link java.security.MessageDigest MessageDigest} algorithm name to use when
+&nbsp;     *                      performing the hash.
+&nbsp;     * @see UnknownAlgorithmException
+&nbsp;     */
+<b class="nc">&nbsp;    public SimpleHash(String algorithmName) {</b>
+<b class="nc">&nbsp;        this.algorithmName = algorithmName;</b>
+<b class="nc">&nbsp;        this.iterations = DEFAULT_ITERATIONS;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates an {@code algorithmName}-specific hash of the specified {@code source} with no {@code salt} using a
+&nbsp;     * single hash iteration.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is a convenience constructor that merely executes &lt;code&gt;this( algorithmName, source, null, 1);&lt;/code&gt;.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Please see the
+&nbsp;     * {@link #SimpleHash(String algorithmName, Object source, Object salt, int numIterations) SimpleHashHash(algorithmName, Object,Object,int)}
+&nbsp;     * constructor for the types of Objects that may be passed into this constructor, as well as how to support further
+&nbsp;     * types.
+&nbsp;     *
+&nbsp;     * @param algorithmName the {@link java.security.MessageDigest MessageDigest} algorithm name to use when
+&nbsp;     *                      performing the hash.
+&nbsp;     * @param source        the object to be hashed.
+&nbsp;     * @throws org.apache.shiro.codec.CodecException
+&nbsp;     *                                   if the specified {@code source} cannot be converted into a byte array (byte[]).
+&nbsp;     * @throws UnknownAlgorithmException if the {@code algorithmName} is not available.
+&nbsp;     */
+&nbsp;    public SimpleHash(String algorithmName, Object source) throws CodecException, UnknownAlgorithmException {
+&nbsp;        //noinspection NullableProblems
+<b class="nc">&nbsp;        this(algorithmName, source, null, DEFAULT_ITERATIONS);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates an {@code algorithmName}-specific hash of the specified {@code source} using the given {@code salt}
+&nbsp;     * using a single hash iteration.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * It is a convenience constructor that merely executes &lt;code&gt;this( algorithmName, source, salt, 1);&lt;/code&gt;.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Please see the
+&nbsp;     * {@link #SimpleHash(String algorithmName, Object source, Object salt, int numIterations) SimpleHashHash(algorithmName, Object,Object,int)}
+&nbsp;     * constructor for the types of Objects that may be passed into this constructor, as well as how to support further
+&nbsp;     * types.
+&nbsp;     *
+&nbsp;     * @param algorithmName the {@link java.security.MessageDigest MessageDigest} algorithm name to use when
+&nbsp;     *                      performing the hash.
+&nbsp;     * @param source        the source object to be hashed.
+&nbsp;     * @param salt          the salt to use for the hash
+&nbsp;     * @throws CodecException            if either constructor argument cannot be converted into a byte array.
+&nbsp;     * @throws UnknownAlgorithmException if the {@code algorithmName} is not available.
+&nbsp;     */
+&nbsp;    public SimpleHash(String algorithmName, Object source, Object salt) throws CodecException, UnknownAlgorithmException {
+<b class="nc">&nbsp;        this(algorithmName, source, salt, DEFAULT_ITERATIONS);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates an {@code algorithmName}-specific hash of the specified {@code source} using the given
+&nbsp;     * {@code salt} a total of {@code hashIterations} times.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * By default, this class only supports Object method arguments of
+&nbsp;     * type {@code byte[]}, {@code char[]}, {@link String}, {@link java.io.File File},
+&nbsp;     * {@link java.io.InputStream InputStream} or {@link org.apache.shiro.util.ByteSource ByteSource}.  If either
+&nbsp;     * argument is anything other than these types a {@link org.apache.shiro.codec.CodecException CodecException}
+&nbsp;     * will be thrown.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If you want to be able to hash other object types, or use other salt types, you need to override the
+&nbsp;     * {@link #toBytes(Object) toBytes(Object)} method to support those specific types.  Your other option is to
+&nbsp;     * convert your arguments to one of the default supported types first before passing them in to this
+&nbsp;     * constructor}.
+&nbsp;     *
+&nbsp;     * @param algorithmName  the {@link java.security.MessageDigest MessageDigest} algorithm name to use when
+&nbsp;     *                       performing the hash.
+&nbsp;     * @param source         the source object to be hashed.
+&nbsp;     * @param salt           the salt to use for the hash
+&nbsp;     * @param hashIterations the number of times the {@code source} argument hashed for attack resiliency.
+&nbsp;     * @throws CodecException            if either Object constructor argument cannot be converted into a byte array.
+&nbsp;     * @throws UnknownAlgorithmException if the {@code algorithmName} is not available.
+&nbsp;     */
+&nbsp;    public SimpleHash(String algorithmName, Object source, Object salt, int hashIterations)
+<b class="nc">&nbsp;            throws CodecException, UnknownAlgorithmException {</b>
+<b class="nc">&nbsp;        if (!StringUtils.hasText(algorithmName)) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(&quot;algorithmName argument cannot be null or empty.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.algorithmName = algorithmName;</b>
+<b class="nc">&nbsp;        this.iterations = Math.max(DEFAULT_ITERATIONS, hashIterations);</b>
+<b class="nc">&nbsp;        ByteSource saltBytes = null;</b>
+<b class="nc">&nbsp;        if (salt != null) {</b>
+<b class="nc">&nbsp;            saltBytes = convertSaltToBytes(salt);</b>
+<b class="nc">&nbsp;            this.salt = saltBytes;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        ByteSource sourceBytes = convertSourceToBytes(source);</b>
+<b class="nc">&nbsp;        hash(sourceBytes, saltBytes, hashIterations);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Acquires the specified {@code source} argument&#39;s bytes and returns them in the form of a {@code ByteSource} instance.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation merely delegates to the convenience {@link #toByteSource(Object)} method for generic
+&nbsp;     * conversion.  Can be overridden by subclasses for source-specific conversion.
+&nbsp;     *
+&nbsp;     * @param source the source object to be hashed.
+&nbsp;     * @return the source&#39;s bytes in the form of a {@code ByteSource} instance.
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    protected ByteSource convertSourceToBytes(Object source) {
+<b class="nc">&nbsp;        return toByteSource(source);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Acquires the specified {@code salt} argument&#39;s bytes and returns them in the form of a {@code ByteSource} instance.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation merely delegates to the convenience {@link #toByteSource(Object)} method for generic
+&nbsp;     * conversion.  Can be overridden by subclasses for salt-specific conversion.
+&nbsp;     *
+&nbsp;     * @param salt the salt to be use for the hash.
+&nbsp;     * @return the salt&#39;s bytes in the form of a {@code ByteSource} instance.
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    protected ByteSource convertSaltToBytes(Object salt) {
+<b class="nc">&nbsp;        return toByteSource(salt);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts a given object into a {@code ByteSource} instance.  Assumes the object can be converted to bytes.
+&nbsp;     *
+&nbsp;     * @param o the Object to convert into a {@code ByteSource} instance.
+&nbsp;     * @return the {@code ByteSource} representation of the specified object&#39;s bytes.
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    protected ByteSource toByteSource(Object o) {
+<b class="nc">&nbsp;        if (o == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (o instanceof ByteSource) {</b>
+<b class="nc">&nbsp;            return (ByteSource) o;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        byte[] bytes = toBytes(o);</b>
+<b class="nc">&nbsp;        return ByteSource.Util.bytes(bytes);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void hash(ByteSource source, ByteSource salt, int hashIterations) throws CodecException, UnknownAlgorithmException {
+<b class="nc">&nbsp;        byte[] saltBytes = salt != null ? salt.getBytes() : null;</b>
+<b class="nc">&nbsp;        byte[] hashedBytes = hash(source.getBytes(), saltBytes, hashIterations);</b>
+<b class="nc">&nbsp;        setBytes(hashedBytes);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@link java.security.MessageDigest MessageDigest} algorithm name to use when performing the hash.
+&nbsp;     *
+&nbsp;     * @return the {@link java.security.MessageDigest MessageDigest} algorithm name to use when performing the hash.
+&nbsp;     */
+&nbsp;    public String getAlgorithmName() {
+<b class="nc">&nbsp;        return this.algorithmName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteSource getSalt() {
+<b class="nc">&nbsp;        return this.salt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getIterations() {
+<b class="nc">&nbsp;        return this.iterations;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public byte[] getBytes() {
+<b class="nc">&nbsp;        return this.bytes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the raw bytes stored by this hash instance.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The bytes are kept in raw form - they will not be hashed/changed.  This is primarily a utility method for
+&nbsp;     * constructing a Hash instance when the hashed value is already known.
+&nbsp;     *
+&nbsp;     * @param alreadyHashedBytes the raw already-hashed bytes to store in this instance.
+&nbsp;     */
+&nbsp;    public void setBytes(byte[] alreadyHashedBytes) {
+<b class="nc">&nbsp;        this.bytes = alreadyHashedBytes;</b>
+<b class="nc">&nbsp;        this.hexEncoded = null;</b>
+<b class="nc">&nbsp;        this.base64Encoded = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the iterations used to previously compute AN ALREADY GENERATED HASH.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is provided &lt;em&gt;ONLY&lt;/em&gt; to reconstitute an already-created Hash instance.  It should ONLY ever be
+&nbsp;     * invoked when re-constructing a hash instance from an already-hashed value.
+&nbsp;     *
+&nbsp;     * @param iterations the number of hash iterations used to previously create the hash/digest.
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    public void setIterations(int iterations) {
+<b class="nc">&nbsp;        this.iterations = Math.max(DEFAULT_ITERATIONS, iterations);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the salt used to previously compute AN ALREADY GENERATED HASH.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is provided &lt;em&gt;ONLY&lt;/em&gt; to reconstitute a Hash instance that has already been computed.  It should ONLY
+&nbsp;     * ever be invoked when re-constructing a hash instance from an already-hashed value.
+&nbsp;     *
+&nbsp;     * @param salt the salt used to previously create the hash/digest.
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    public void setSalt(ByteSource salt) {
+<b class="nc">&nbsp;        this.salt = salt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the JDK MessageDigest instance to use for executing the hash.
+&nbsp;     *
+&nbsp;     * @param algorithmName the algorithm to use for the hash, provided by subclasses.
+&nbsp;     * @return the MessageDigest object for the specified {@code algorithm}.
+&nbsp;     * @throws UnknownAlgorithmException if the specified algorithm name is not available.
+&nbsp;     */
+&nbsp;    protected MessageDigest getDigest(String algorithmName) throws UnknownAlgorithmException {
+&nbsp;        try {
+<b class="nc">&nbsp;            return MessageDigest.getInstance(algorithmName);</b>
+<b class="nc">&nbsp;        } catch (NoSuchAlgorithmException e) {</b>
+<b class="nc">&nbsp;            String msg = &quot;No native &#39;&quot; + algorithmName + &quot;&#39; MessageDigest instance available on the current JVM.&quot;;</b>
+<b class="nc">&nbsp;            throw new UnknownAlgorithmException(msg, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Hashes the specified byte array without a salt for a single iteration.
+&nbsp;     *
+&nbsp;     * @param bytes the bytes to hash.
+&nbsp;     * @return the hashed bytes.
+&nbsp;     * @throws UnknownAlgorithmException if the configured {@link #getAlgorithmName() algorithmName} is not available.
+&nbsp;     */
+&nbsp;    protected byte[] hash(byte[] bytes) throws UnknownAlgorithmException {
+<b class="nc">&nbsp;        return hash(bytes, null, DEFAULT_ITERATIONS);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Hashes the specified byte array using the given {@code salt} for a single iteration.
+&nbsp;     *
+&nbsp;     * @param bytes the bytes to hash
+&nbsp;     * @param salt  the salt to use for the initial hash
+&nbsp;     * @return the hashed bytes
+&nbsp;     * @throws UnknownAlgorithmException if the configured {@link #getAlgorithmName() algorithmName} is not available.
+&nbsp;     */
+&nbsp;    protected byte[] hash(byte[] bytes, byte[] salt) throws UnknownAlgorithmException {
+<b class="nc">&nbsp;        return hash(bytes, salt, DEFAULT_ITERATIONS);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Hashes the specified byte array using the given {@code salt} for the specified number of iterations.
+&nbsp;     *
+&nbsp;     * @param bytes          the bytes to hash
+&nbsp;     * @param salt           the salt to use for the initial hash
+&nbsp;     * @param hashIterations the number of times the the {@code bytes} will be hashed (for attack resiliency).
+&nbsp;     * @return the hashed bytes.
+&nbsp;     * @throws UnknownAlgorithmException if the {@link #getAlgorithmName() algorithmName} is not available.
+&nbsp;     */
+&nbsp;    protected byte[] hash(byte[] bytes, byte[] salt, int hashIterations) throws UnknownAlgorithmException {
+<b class="nc">&nbsp;        MessageDigest digest = getDigest(getAlgorithmName());</b>
+<b class="nc">&nbsp;        if (salt != null) {</b>
+<b class="nc">&nbsp;            digest.reset();</b>
+<b class="nc">&nbsp;            digest.update(salt);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        byte[] hashed = digest.digest(bytes);</b>
+<b class="nc">&nbsp;        int iterations = hashIterations - 1; //already hashed once above</b>
+&nbsp;        //iterate remaining number:
+<b class="nc">&nbsp;        for (int i = 0; i &lt; iterations; i++) {</b>
+<b class="nc">&nbsp;            digest.reset();</b>
+<b class="nc">&nbsp;            hashed = digest.digest(hashed);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return hashed;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isEmpty() {
+<b class="nc">&nbsp;        return this.bytes == null || this.bytes.length == 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a hex-encoded string of the underlying {@link #getBytes byte array}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation caches the resulting hex string so multiple calls to this method remain efficient.
+&nbsp;     * However, calling {@link #setBytes setBytes} will null the cached value, forcing it to be recalculated the
+&nbsp;     * next time this method is called.
+&nbsp;     *
+&nbsp;     * @return a hex-encoded string of the underlying {@link #getBytes byte array}.
+&nbsp;     */
+&nbsp;    public String toHex() {
+<b class="nc">&nbsp;        if (this.hexEncoded == null) {</b>
+<b class="nc">&nbsp;            this.hexEncoded = Hex.encodeToString(getBytes());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return this.hexEncoded;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a Base64-encoded string of the underlying {@link #getBytes byte array}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation caches the resulting Base64 string so multiple calls to this method remain efficient.
+&nbsp;     * However, calling {@link #setBytes setBytes} will null the cached value, forcing it to be recalculated the
+&nbsp;     * next time this method is called.
+&nbsp;     *
+&nbsp;     * @return a Base64-encoded string of the underlying {@link #getBytes byte array}.
+&nbsp;     */
+&nbsp;    public String toBase64() {
+<b class="nc">&nbsp;        if (this.base64Encoded == null) {</b>
+&nbsp;            //cache result in case this method is called multiple times.
+<b class="nc">&nbsp;            this.base64Encoded = Base64.encodeToString(getBytes());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return this.base64Encoded;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Simple implementation that merely returns {@link #toHex() toHex()}.
+&nbsp;     *
+&nbsp;     * @return the {@link #toHex() toHex()} value.
+&nbsp;     */
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return toHex();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if the specified object is a Hash and its {@link #getBytes byte array} is identical to
+&nbsp;     * this Hash&#39;s byte array, {@code false} otherwise.
+&nbsp;     *
+&nbsp;     * @param o the object (Hash) to check for equality.
+&nbsp;     * @return {@code true} if the specified object is a Hash and its {@link #getBytes byte array} is identical to
+&nbsp;     *         this Hash&#39;s byte array, {@code false} otherwise.
+&nbsp;     */
+&nbsp;    public boolean equals(Object o) {
+<b class="nc">&nbsp;        if (o instanceof Hash) {</b>
+<b class="nc">&nbsp;            Hash other = (Hash) o;</b>
+<b class="nc">&nbsp;            return MessageDigest.isEqual(getBytes(), other.getBytes());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Simply returns toHex().hashCode();
+&nbsp;     *
+&nbsp;     * @return toHex().hashCode()
+&nbsp;     */
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        if (this.bytes == null || this.bytes.length == 0) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Arrays.hashCode(this.bytes);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

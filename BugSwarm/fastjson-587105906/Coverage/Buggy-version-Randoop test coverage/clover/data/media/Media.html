@@ -1,0 +1,2475 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="../../img/clover.ico" />
+
+    <link rel="stylesheet" href="../../aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="../../aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="../../aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('../../style.css');
+        @import url('../../tree.css');
+        
+    </style>
+
+    <script src="../../jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../../aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="../../aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="../../aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="../../package-nodes-tree.js" type="text/javascript"></script>
+    <script src="../../clover-tree.js" type="text/javascript"></script>
+    <script src="../../clover.js" type="text/javascript"></script>
+    <script src="../../clover-descriptions.js" type="text/javascript"></script>
+    <script src="../../cloud.js" type="text/javascript"></script>
+
+            <title>fastjson 1.2.60_preview_04</title>
+    </head>
+
+<body  onload="onLoad('fastjson 1.2.60_preview_04: data.media.Media.java')">
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="http://www.atlassian.com/clover" title="Open Atlassian Clover home page"><span class="aui-header-logo-device">Clover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online Clover documentation" target="_blank"
+                           href="https://confluence.atlassian.com/display/CLOVER/Clover+Documentation+Home">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                    <a href="https://github.com/alibaba/fastjson" target="_top">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="../../img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+                    </a>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                            <a href="https://github.com/alibaba/fastjson" target="_top">
+                                        fastjson 1.2.60_preview_04
+                                        </a>
+                    </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="">
+                    <a href="../../dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                <div class="packages-tree-wrapper" data-root-relative="../../" data-package-name="data.media">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="../../dashboard.html">Project Clover database Tue Apr 9 2024 12:11:48 CDT</a></li> 
+        <li><a href="pkg-summary.html">        Package data.media</a></li> 
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            File Media.java
+    </h1>
+
+
+
+
+
+
+
+
+        
+<div class="aui-tabs horizontal-tabs" id="tabs-file">
+            <div class="tabs-pane aui-tabs-pane-100-pcnt active-pane" id="tabs-file-source">
+        <div>&#160;</div>
+
+        
+                <div style="display: table; width: 100%">
+                            <div class="clover-histogram-table-cell">
+                                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Coverage histogram</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div class="aui-item clover-aui-item-histogram">
+                    <img src="../../img/srcFileCovDistChart3.png" alt="../../img/srcFileCovDistChart3.png"
+                         usemap="#srcFileCovDistChart3.png" class="clover-histogram-img"/>
+                    <map id="srcFileCovDistChart3.png" name="srcFileCovDistChart3.png">
+<area shape="rect" coords="100,41,107,66" title="104 files have 91-100% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="91,58,98,66" title="35 files have 81-90% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="82,60,89,66" title="27 files have 71-80% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="73,63,80,65" title="12 files have 61-70% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="64,65,71,66" title="5 files have 51-60% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="56,65,63,66" title="6 files have 41-50% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="47,65,54,66" title="4 files have 31-40% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="38,65,45,66" title="6 files have 21-30% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="29,65,36,66" title="6 files have 11-20% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="20,66,27,67" title="2 files have 1-10% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="11,8,18,65" title="237 files have 0% coverage" alt="" nohref="nohref"/>
+</map><br />
+                    <span class="subtle"><strong>43% </strong>of files have more coverage</span>
+                </div>
+            </div>
+        </div>
+                    </div>
+                        <div style="display: table-cell; width: 67%;">
+                    <div class="dashboard-widget">
+        <header class="dashboard-widget-header">
+            <h3>Code metrics</h3>
+        </header>
+        <div class="dashboard-widget-content">
+                        
+
+<div id="td-header-stats" class="aui-item" style="display: ">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this file">Branches:</label></div>
+        <div class="stats-box-value">52</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this file">Statements:</label></div>
+        <div class="stats-box-value">93</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this file">Methods:</label></div>
+        <div class="stats-box-value">27</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this file">Classes:</label></div>
+        <div class="stats-box-value">2</div>
+    </div>
+            <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this file">LOC:</label></div>
+        <div class="stats-box-value">196</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this file">NCLOC:</label></div>
+        <div class="stats-box-value">157</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this file">Total complexity:</label></div>
+        <div class="stats-box-value">54</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this file">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.58</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">3.44</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">13.5</div>
+    </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this file">Average method complexity:</label></div>
+        <div class="stats-box-value">2</div>
+    </div>
+</div>
+
+</div>
+                        
+
+<div id="td-filtered-header-stats" class="aui-item" style="display: none">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this file">Branches:</label></div>
+        <div class="stats-box-value">52</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this file">Statements:</label></div>
+        <div class="stats-box-value">93</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this file">Methods:</label></div>
+        <div class="stats-box-value">27</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this file">Classes:</label></div>
+        <div class="stats-box-value">2</div>
+    </div>
+            <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this file">LOC:</label></div>
+        <div class="stats-box-value">196</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this file">NCLOC:</label></div>
+        <div class="stats-box-value">157</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this file">Total complexity:</label></div>
+        <div class="stats-box-value">54</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this file">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.58</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">3.44</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">13.5</div>
+    </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this file">Average method complexity:</label></div>
+        <div class="stats-box-value">2</div>
+    </div>
+</div>
+
+</div>        </div>
+    </div>
+            </div>
+        </div>
+
+        
+        
+
+
+    <h2>Classes</h2>
+
+        <table class="aui aui-table-sortable">
+        <thead>
+                        <tr>     <th>Class</th>
+    <th>Line #</th>
+
+            
+        <th class="">
+            <label  title="The total number of statements.">Total Statements</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The percentage of elements that have been filtered from this report.">% Filtered</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label>
+        </th>
+        
+    
+            <th>Actions</th>
+    </tr>         </thead>
+        <tbody>
+                              <tr> <td id="Media">
+        <span><a href="#8" title="Media" onclick="closeDialogAndScrollTo('dialog-Media', '8');">Media</a></span>
+</td>
+<td>8<a name="sl-8"></a></td>
+    <td class="">93</td>
+    <td class="">0%</td>
+    <td class="">54</td>
+    <td class="">127</td>
+    <td class=""><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.2616279</span>26.2%</div><div style="display: table-cell">
+ <div title="26.2% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:26.2%"></div></div></div></div></td>
+    <td><button data-dialog-id="dialog-Media" class="aui-button aui-button-link dialog-show-button">Show methods</button></td>
+</tr>                               <tr> <td id="Media.Player">
+        <span><a href="#10" title="Media.Player" onclick="closeDialogAndScrollTo('dialog-Media_Player', '10');">Media.Player</a></span>
+</td>
+<td>10<a name="sl-10"></a></td>
+    <td class="">0</td>
+    <td class=""> - </td>
+    <td class="">0</td>
+    <td class="">0</td>
+    <td class=""><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">-1.0</span> - </div><div style="display: table-cell">
+<div title="Empty" class="barEmpty" style="min-width:200px;"></div></div></div></td>
+    <td><button data-dialog-id="dialog-Media_Player" class="aui-button aui-button-link dialog-show-button">Show methods</button></td>
+</tr>                      </tbody>
+    </table>
+
+    
+     
+        <section role="dialog" id="dialog-Media" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+            
+            <header class="aui-dialog2-header">
+                <h1 class="aui-dialog2-header-main">Class Media</h1>
+                <div class="aui-dialog2-header-secondary">
+                    <input id="dialog-Media-method-filter" class="test-filter text" type="text" name="method-filter"
+                           placeholder="Type to filter methods..." autocomplete="off"
+                           onkeyup="filterMethods('dialog-Media-methods-body', 'dialog-Media-method-filter');"/>
+                </div>
+            </header>
+
+            
+            <div class="aui-dialog2-content">
+
+                
+
+                <table class="aui aui-table-sortable">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                    <thead>
+                                                 <tr> <th id="Media">
+    Class<br/>    <span><a href="#8" title="Media" onclick="closeDialogAndScrollTo('dialog-Media', '8');">Media</a></span>
+</th>
+<th>Line #<br/>8<a name="sl-8"></a></th>
+    <th class=""><label  title="The total number of statements.">Total Statements</label><br/>93</th>
+    <th class=""><label  title="The percentage of elements that have been filtered from this report.">% Filtered</label><br/>0%</th>
+    <th class=""><label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label><br/>54</th>
+    <th class=""><label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label><br/>127</th>
+    <th class=""><label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label><br/><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.2616279</span>26.2%</div><div style="display: table-cell">
+ <div title="26.2% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:26.2%"></div></div></div></div></th>
+</tr>                     </thead>
+                    <tbody id="dialog-Media-methods-body">
+                                                                                                            <tr id="Media-1">
+<td id="summary-30-5">
+ <span class="sortValue">Media()</span>
+&#160;&#160;<a href="?line=29#30" title="Media()" name="sl-30" onclick="closeDialogAndScrollTo('dialog-Media', '30');">Media()</a>
+</td>
+<td align="right"><span class="sortValue">30</span>30</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span> - </td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">-1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">-1.0</span> - </div><div style="display: table-cell">
+<div title="Empty" class="barEmpty" style="min-width:200px;"></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-2">
+<td id="summary-33-5">
+ <span class="sortValue">Media(String,String,int,int,String,long,long,int,boolean,List&lt;String&gt;,Player,String)</span>
+&#160;&#160;<a href="?line=29#33" title="Media(String,String,int,int,String,long,long,int,boolean,List&lt;String&gt;,Player,String)" name="sl-33" onclick="closeDialogAndScrollTo('dialog-Media', '33');">Media(String,String,int,int,String,long,long,int,boolean,List&lt;String&gt;,Player,String)</a>
+</td>
+<td align="right"><span class="sortValue">33</span>33</td>
+<td class="" align="right"><span class="sortValue">12.0</span>12</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">12.0</span>12</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-3">
+<td id="summary-49-5">
+ <span class="sortValue">equals(Object)&#160;:&#160;boolean</span>
+&#160;&#160;<a href="?line=29#49" title="equals(Object)&#160;:&#160;boolean" name="sl-49" onclick="closeDialogAndScrollTo('dialog-Media', '49');">equals(Object)&#160;:&#160;boolean</a>
+</td>
+<td align="right"><span class="sortValue">49</span>49</td>
+<td class="" align="right"><span class="sortValue">30.0</span>30</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">21.0</span>21</td>
+<td class="" align="right"><span class="sortValue">68.0</span>68</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-4">
+<td id="summary-72-5">
+ <span class="sortValue">hashCode()&#160;:&#160;int</span>
+&#160;&#160;<a href="?line=29#72" title="hashCode()&#160;:&#160;int" name="sl-72" onclick="closeDialogAndScrollTo('dialog-Media', '72');">hashCode()&#160;:&#160;int</a>
+</td>
+<td align="right"><span class="sortValue">72</span>72</td>
+<td class="" align="right"><span class="sortValue">13.0</span>13</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">8.0</span>8</td>
+<td class="" align="right"><span class="sortValue">27.0</span>27</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-5">
+<td id="summary-89-5">
+ <span class="sortValue">toString()&#160;:&#160;String</span>
+&#160;&#160;<a href="?line=29#89" title="toString()&#160;:&#160;String" name="sl-89" onclick="closeDialogAndScrollTo('dialog-Media', '89');">toString()&#160;:&#160;String</a>
+</td>
+<td align="right"><span class="sortValue">89</span>89</td>
+<td class="" align="right"><span class="sortValue">16.0</span>16</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">16.0</span>16</td>
+<td class="" align="right"><span class="sortValue">0.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-6">
+<td id="summary-108-5">
+ <span class="sortValue">getUri()&#160;:&#160;String</span>
+&#160;&#160;<a href="?line=29#108" title="getUri()&#160;:&#160;String" name="sl-108" onclick="closeDialogAndScrollTo('dialog-Media', '108');">getUri()&#160;:&#160;String</a>
+</td>
+<td align="right"><span class="sortValue">108</span>108</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-7">
+<td id="summary-112-5">
+ <span class="sortValue">setUri(String)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#112" title="setUri(String)&#160;:&#160;void" name="sl-112" onclick="closeDialogAndScrollTo('dialog-Media', '112');">setUri(String)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">112</span>112</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-8">
+<td id="summary-116-5">
+ <span class="sortValue">getTitle()&#160;:&#160;String</span>
+&#160;&#160;<a href="?line=29#116" title="getTitle()&#160;:&#160;String" name="sl-116" onclick="closeDialogAndScrollTo('dialog-Media', '116');">getTitle()&#160;:&#160;String</a>
+</td>
+<td align="right"><span class="sortValue">116</span>116</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-9">
+<td id="summary-120-5">
+ <span class="sortValue">setTitle(String)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#120" title="setTitle(String)&#160;:&#160;void" name="sl-120" onclick="closeDialogAndScrollTo('dialog-Media', '120');">setTitle(String)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">120</span>120</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-10">
+<td id="summary-124-5">
+ <span class="sortValue">getWidth()&#160;:&#160;int</span>
+&#160;&#160;<a href="?line=29#124" title="getWidth()&#160;:&#160;int" name="sl-124" onclick="closeDialogAndScrollTo('dialog-Media', '124');">getWidth()&#160;:&#160;int</a>
+</td>
+<td align="right"><span class="sortValue">124</span>124</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-11">
+<td id="summary-128-5">
+ <span class="sortValue">setWidth(int)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#128" title="setWidth(int)&#160;:&#160;void" name="sl-128" onclick="closeDialogAndScrollTo('dialog-Media', '128');">setWidth(int)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">128</span>128</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-12">
+<td id="summary-132-5">
+ <span class="sortValue">getHeight()&#160;:&#160;int</span>
+&#160;&#160;<a href="?line=29#132" title="getHeight()&#160;:&#160;int" name="sl-132" onclick="closeDialogAndScrollTo('dialog-Media', '132');">getHeight()&#160;:&#160;int</a>
+</td>
+<td align="right"><span class="sortValue">132</span>132</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-13">
+<td id="summary-136-5">
+ <span class="sortValue">setHeight(int)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#136" title="setHeight(int)&#160;:&#160;void" name="sl-136" onclick="closeDialogAndScrollTo('dialog-Media', '136');">setHeight(int)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">136</span>136</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-14">
+<td id="summary-140-5">
+ <span class="sortValue">getFormat()&#160;:&#160;String</span>
+&#160;&#160;<a href="?line=29#140" title="getFormat()&#160;:&#160;String" name="sl-140" onclick="closeDialogAndScrollTo('dialog-Media', '140');">getFormat()&#160;:&#160;String</a>
+</td>
+<td align="right"><span class="sortValue">140</span>140</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-15">
+<td id="summary-144-5">
+ <span class="sortValue">setFormat(String)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#144" title="setFormat(String)&#160;:&#160;void" name="sl-144" onclick="closeDialogAndScrollTo('dialog-Media', '144');">setFormat(String)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">144</span>144</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-16">
+<td id="summary-148-5">
+ <span class="sortValue">getDuration()&#160;:&#160;long</span>
+&#160;&#160;<a href="?line=29#148" title="getDuration()&#160;:&#160;long" name="sl-148" onclick="closeDialogAndScrollTo('dialog-Media', '148');">getDuration()&#160;:&#160;long</a>
+</td>
+<td align="right"><span class="sortValue">148</span>148</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-17">
+<td id="summary-152-5">
+ <span class="sortValue">setDuration(long)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#152" title="setDuration(long)&#160;:&#160;void" name="sl-152" onclick="closeDialogAndScrollTo('dialog-Media', '152');">setDuration(long)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">152</span>152</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-18">
+<td id="summary-156-5">
+ <span class="sortValue">getSize()&#160;:&#160;long</span>
+&#160;&#160;<a href="?line=29#156" title="getSize()&#160;:&#160;long" name="sl-156" onclick="closeDialogAndScrollTo('dialog-Media', '156');">getSize()&#160;:&#160;long</a>
+</td>
+<td align="right"><span class="sortValue">156</span>156</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-19">
+<td id="summary-160-5">
+ <span class="sortValue">setSize(long)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#160" title="setSize(long)&#160;:&#160;void" name="sl-160" onclick="closeDialogAndScrollTo('dialog-Media', '160');">setSize(long)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">160</span>160</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-20">
+<td id="summary-164-5">
+ <span class="sortValue">getBitrate()&#160;:&#160;int</span>
+&#160;&#160;<a href="?line=29#164" title="getBitrate()&#160;:&#160;int" name="sl-164" onclick="closeDialogAndScrollTo('dialog-Media', '164');">getBitrate()&#160;:&#160;int</a>
+</td>
+<td align="right"><span class="sortValue">164</span>164</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-21">
+<td id="summary-168-5">
+ <span class="sortValue">setBitrate(int)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#168" title="setBitrate(int)&#160;:&#160;void" name="sl-168" onclick="closeDialogAndScrollTo('dialog-Media', '168');">setBitrate(int)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">168</span>168</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-22">
+<td id="summary-172-5">
+ <span class="sortValue">getPersons()&#160;:&#160;List&lt;String&gt;</span>
+&#160;&#160;<a href="?line=29#172" title="getPersons()&#160;:&#160;List&lt;String&gt;" name="sl-172" onclick="closeDialogAndScrollTo('dialog-Media', '172');">getPersons()&#160;:&#160;List&lt;String&gt;</a>
+</td>
+<td align="right"><span class="sortValue">172</span>172</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-23">
+<td id="summary-176-5">
+ <span class="sortValue">setPersons(List&lt;String&gt;)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#176" title="setPersons(List&lt;String&gt;)&#160;:&#160;void" name="sl-176" onclick="closeDialogAndScrollTo('dialog-Media', '176');">setPersons(List&lt;String&gt;)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">176</span>176</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-24">
+<td id="summary-180-5">
+ <span class="sortValue">getPlayer()&#160;:&#160;Player</span>
+&#160;&#160;<a href="?line=29#180" title="getPlayer()&#160;:&#160;Player" name="sl-180" onclick="closeDialogAndScrollTo('dialog-Media', '180');">getPlayer()&#160;:&#160;Player</a>
+</td>
+<td align="right"><span class="sortValue">180</span>180</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-25">
+<td id="summary-184-5">
+ <span class="sortValue">setPlayer(Player)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#184" title="setPlayer(Player)&#160;:&#160;void" name="sl-184" onclick="closeDialogAndScrollTo('dialog-Media', '184');">setPlayer(Player)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">184</span>184</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-26">
+<td id="summary-188-5">
+ <span class="sortValue">getCopyright()&#160;:&#160;String</span>
+&#160;&#160;<a href="?line=29#188" title="getCopyright()&#160;:&#160;String" name="sl-188" onclick="closeDialogAndScrollTo('dialog-Media', '188');">getCopyright()&#160;:&#160;String</a>
+</td>
+<td align="right"><span class="sortValue">188</span>188</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="Media-27">
+<td id="summary-192-5">
+ <span class="sortValue">setCopyright(String)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#192" title="setCopyright(String)&#160;:&#160;void" name="sl-192" onclick="closeDialogAndScrollTo('dialog-Media', '192');">setCopyright(String)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">192</span>192</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                         </tbody>
+                </table>
+
+                <div>&#160;</div>
+                
+
+            </div>
+
+            
+            <footer class="aui-dialog2-footer">
+                <div class="aui-dialog2-footer-actions">
+                    <button class="aui-button aui-button-primary dialog-close-button"
+                            data-dialog-id="dialog-Media">Close</button>
+                </div>
+                <div class="aui-dialog2-footer-hint">Click on a class or a method name to jump to source.</div>
+            </footer>
+        </section>
+
+     
+        <section role="dialog" id="dialog-Media_Player" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+            
+            <header class="aui-dialog2-header">
+                <h1 class="aui-dialog2-header-main">Class Media.Player</h1>
+                <div class="aui-dialog2-header-secondary">
+                    <input id="dialog-Media.Player-method-filter" class="test-filter text" type="text" name="method-filter"
+                           placeholder="Type to filter methods..." autocomplete="off"
+                           onkeyup="filterMethods('dialog-Media.Player-methods-body', 'dialog-Media.Player-method-filter');"/>
+                </div>
+            </header>
+
+            
+            <div class="aui-dialog2-content">
+
+                
+
+                <table class="aui aui-table-sortable">
+                                        
+                    <thead>
+                                                 <tr> <th id="Media.Player">
+    Class<br/>    <span><a href="#10" title="Media.Player" onclick="closeDialogAndScrollTo('dialog-Media_Player', '10');">Media.Player</a></span>
+</th>
+<th>Line #<br/>10<a name="sl-10"></a></th>
+    <th class=""><label  title="The total number of statements.">Total Statements</label><br/>0</th>
+    <th class=""><label  title="The percentage of elements that have been filtered from this report.">% Filtered</label><br/> - </th>
+    <th class=""><label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label><br/>0</th>
+    <th class=""><label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label><br/>0</th>
+    <th class=""><label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label><br/><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">-1.0</span> - </div><div style="display: table-cell">
+<div title="Empty" class="barEmpty" style="min-width:200px;"></div></div></div></th>
+</tr>                     </thead>
+                    <tbody id="dialog-Media.Player-methods-body">
+                                                                     </tbody>
+                </table>
+
+                <div>&#160;</div>
+                
+
+            </div>
+
+            
+            <footer class="aui-dialog2-footer">
+                <div class="aui-dialog2-footer-actions">
+                    <button class="aui-button aui-button-primary dialog-close-button"
+                            data-dialog-id="dialog-Media_Player">Close</button>
+                </div>
+                <div class="aui-dialog2-footer-hint">Click on a class or a method name to jump to source.</div>
+            </footer>
+        </section>
+
+     
+ 
+        
+        <div>&#160;</div>
+
+<h2>Contributing tests</h2>
+
+    <div>
+                This file is covered by 6 tests.
+        <button data-dialog-id="contr-tests-dialog" class="aui-button aui-button-link dialog-show-button">
+            Select tests to highlight the test coverage
+        </button>.
+    </div>
+
+<section role="dialog" id="contr-tests-dialog" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+    
+    <header class="aui-dialog2-header">
+        <h1 class="aui-dialog2-header-main">Contributing tests</h1>
+        <div class="aui-dialog2-header-secondary">
+            <input id="test-filter" class="test-filter text" type="text" name="test-filter"
+                   placeholder="Type to filter tests..." autocomplete="off"
+                   onkeyup="filterTests('tests-body', 'test-filter', 3);"/>
+        </div>
+    </header>
+
+    
+    <div class="aui-dialog2-content">
+    
+
+        <p class="aui-buttons">
+            <button title="Selects all tests for this file, highlighting their coverage."
+                    class="aui-button" id="selectalltests">Select all</button>
+        </p>
+
+        <table class="aui aui-table-sortable">
+            <thead id="tests-head">
+            <tr id="testHeaderRow">
+                <th class="aui-table-column-unsortable"></th>
+                <th>
+                    <label title="The percentage of coverage contributed by each single test.">Test contribution</label>
+                </th>
+                <th>
+                    <label title="The test (or test iteration) which was executed.">Test</label>
+                </th>
+                <th>
+                    <label>Result</label>
+                </th>
+                <th class="aui-table-column-unsortable">
+                    <label>Actions</label>
+                </th>
+            </tr>
+            </thead>
+            <tbody id="tests-body">
+
+<tr id="test-594">
+<td><a name="testA-594"></a><input type="checkbox" id="cb-594" value="594" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay_test_0_gi.html';">
+<span class="sortValue">0.2616279</span>
+<div>
+<div title="26.2% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:26.2%"></div></div></div></td>
+<td id="tc-594">  <span class="sortValue">com.alibaba.json.bvt.writeAsArray.WriteAsArray_Eishay.test_0</span><a href="../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay_test_0_gi.html" title="View Test Summary Page">com.alibaba.json.bvt.writeAsArray.WriteAsArray_Eishay.test_0</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay_test_0_gi.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1493">
+<td><a name="testA-1493"></a><input type="checkbox" id="cb-1493" value="1493" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay_Media_test_0_15h.html';">
+<span class="sortValue">0.2616279</span>
+<div>
+<div title="26.2% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:26.2%"></div></div></div></td>
+<td id="tc-1493">  <span class="sortValue">com.alibaba.json.bvt.writeAsArray.WriteAsArray_Eishay_Media.test_0</span><a href="../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay_Media_test_0_15h.html" title="View Test Summary Page">com.alibaba.json.bvt.writeAsArray.WriteAsArray_Eishay_Media.test_0</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay_Media.html?line=17#src-17" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay_Media_test_0_15h.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-261">
+<td><a name="testA-261"></a><input type="checkbox" id="cb-261" value="261" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../com/alibaba/json/bvt/parser/deser/asm/TestASMEishay_test_asm_79.html';">
+<span class="sortValue">0.2616279</span>
+<div>
+<div title="26.2% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:26.2%"></div></div></div></td>
+<td id="tc-261">  <span class="sortValue">com.alibaba.json.bvt.parser.deser.asm.TestASMEishay.test_asm</span><a href="../../com/alibaba/json/bvt/parser/deser/asm/TestASMEishay_test_asm_79.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.deser.asm.TestASMEishay.test_asm</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../com/alibaba/json/bvt/parser/deser/asm/TestASMEishay.html?line=12#src-12" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../com/alibaba/json/bvt/parser/deser/asm/TestASMEishay_test_asm_79.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-735">
+<td><a name="testA-735"></a><input type="checkbox" id="cb-735" value="735" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../com/alibaba/json/bvt/asm/Case_Eishay_test_0_kf.html';">
+<span class="sortValue">0.25</span>
+<div>
+<div title="25% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:25%"></div></div></div></td>
+<td id="tc-735">  <span class="sortValue">com.alibaba.json.bvt.asm.Case_Eishay.test_0</span><a href="../../com/alibaba/json/bvt/asm/Case_Eishay_test_0_kf.html" title="View Test Summary Page">com.alibaba.json.bvt.asm.Case_Eishay.test_0</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../com/alibaba/json/bvt/asm/Case_Eishay.html?line=20#src-20" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../com/alibaba/json/bvt/asm/Case_Eishay_test_0_kf.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1925">
+<td><a name="testA-1925"></a><input type="checkbox" id="cb-1925" value="1925" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../com/alibaba/json/bvt/parser/deser/asm/TestASM_test_asm_1hh.html';">
+<span class="sortValue">0.12790698</span>
+<div>
+<div title="12.8% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:12.8%"></div></div></div></td>
+<td id="tc-1925">  <span class="sortValue">com.alibaba.json.bvt.parser.deser.asm.TestASM.test_asm</span><a href="../../com/alibaba/json/bvt/parser/deser/asm/TestASM_test_asm_1hh.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.deser.asm.TestASM.test_asm</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../com/alibaba/json/bvt/parser/deser/asm/TestASM.html?line=15#src-15" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../com/alibaba/json/bvt/parser/deser/asm/TestASM_test_asm_1hh.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2342">
+<td><a name="testA-2342"></a><input type="checkbox" id="cb-2342" value="2342" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../com/alibaba/json/bvt/ListFieldTest3_test_typeRef_1t2.html';">
+<span class="sortValue">0.017441861</span>
+<div>
+<div title="1.7% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:1.7%"></div></div></div></td>
+<td id="tc-2342">  <span class="sortValue">com.alibaba.json.bvt.ListFieldTest3.test_typeRef</span><a href="../../com/alibaba/json/bvt/ListFieldTest3_test_typeRef_1t2.html" title="View Test Summary Page">com.alibaba.json.bvt.ListFieldTest3.test_typeRef</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../com/alibaba/json/bvt/ListFieldTest3.html?line=14#src-14" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../com/alibaba/json/bvt/ListFieldTest3_test_typeRef_1t2.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+
+            </tbody>
+        </table>
+
+        
+        <div>&#160;</div>
+
+    
+    </div>
+
+    
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button data-dialog-id="contr-tests-dialog" class="aui-button aui-button-primary dialog-close-button">Apply</button>
+        </div>
+        <div class="aui-dialog2-footer-hint">Select tests to highlight code covered by them in the source view.</div>
+    </footer>
+</section>
+
+ 
+        
+        
+
+
+
+
+
+<h2>Source view</h2>
+
+
+<div style="display: table; width: 100%;">
+    <div style="display: table-cell">
+        <button class="aui-button aui-button-link"
+                title="Toggles all methods in the source to be either expanded or collapsed."
+                onclick="toggleAllInlineMethods(this); return false;" id="method-expander">
+            Collapse all methods
+        </button>
+    </div>
+    <div style="display: table-cell">
+        <div style="text-align: right; margin-bottom: 10px">
+            <button class="aui-button aui-button-subtle" id="popupHelp">
+    <span class="aui-icon aui-icon-small aui-iconfont-help"></span>&#160;Show legend
+</button>
+<script>
+    AJS.InlineDialog(AJS.$("#popupHelp"), "helpDialog",
+            function(content, trigger, showPopup) {
+                content.css({"padding":"20px"}).html(SRC_FILE_LEGEND_TEXT);
+                showPopup();
+                return false;
+            },
+            {
+                width: 700, hideDelay: 60000
+            }
+    );
+</script>        </div>
+    </div>
+</div>
+
+<table cellspacing="0" cellpadding="0" class="srcView" width="100%">
+
+    
+<tbody> <tr id="l1">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=1#src-1">1</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-1" class="srcLine"><span class="keyword">package</span> <a href="../../data/pkg-summary.html">data</a>.<a href="../media/pkg-summary.html">media</a>;</span></td>
+</tr>
+ <tr id="l2">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=2#src-2">2</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-2" class="srcLine"></span></td>
+</tr>
+ <tr id="l3">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=3#src-3">3</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-3" class="srcLine"><span class="keyword">import</span> <span class="keyword">static</span> data.ReprUtil.repr;</span></td>
+</tr>
+ <tr id="l4">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=4#src-4">4</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-4" class="srcLine"></span></td>
+</tr>
+ <tr id="l5">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=5#src-5">5</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-5" class="srcLine"><span class="keyword">import</span> java.util.List;</span></td>
+</tr>
+ <tr id="l6">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=6#src-6">6</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-6" class="srcLine"></span></td>
+</tr>
+ <tr id="l7">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=7#src-7">7</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-7" class="srcLine">@SuppressWarnings(<span class="string">&quot;serial&quot;</span>)</span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="8" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-8' onclick="toggleInlineStats(this, 'inlinestats-8');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-8" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-8'), 'inlinestats-8');return true;">
+                <td><div>
+<div title="26.2% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:26.2%"></div></div></div></td><td>26.2%</td>
+                <td class="inlineStat">Uncovered Elements: 127 (172)</td>
+                <td class="inlineStat">Complexity: 54</td>
+                <td class="inlineStat">Complexity Density: 0.58</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l8">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=8#src-8">8</a></td>
+<td align="right" class="coverageCount NoHilight "   onclick="return showTestsForLine(this, 8, 'Tests that hit Media');" >&#160;&#160;</td>
+<td class=" srcCell" id="id-8"><span class="spacer"></span><span id="src-8" class="srcLine"><span class="keyword">public</span> <span class="keyword">class</span> <a href="../../data/media/Media.html#Media">Media</a> <span class="keyword">implements</span> java.io.Serializable {</span></td>
+</tr>
+ <tr id="l9">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=9#src-9">9</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-9" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="10" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-10' onclick="toggleInlineStats(this, 'inlinestats-10');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-10" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-10'), 'inlinestats-10');return true;">
+                <td><div>
+<div title="Empty" class="barEmpty" style="min-width:40px;"></div>
+</div></td><td> - </td>
+                <td class="inlineStat">Uncovered Elements: 0 (0)</td>
+                <td class="inlineStat">Complexity: 0</td>
+                <td class="inlineStat">Complexity Density: -</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l10">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=10#src-10">10</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" id="id-10"><span class="spacer"></span><span id="src-10" class="srcLine">    <span class="keyword">public</span> enum Player {</span></td>
+</tr>
+ <tr id="l11">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=11#src-11">11</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-11" class="srcLine">                        JAVA, FLASH</span></td>
+</tr>
+ <tr id="l12">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=12#src-12">12</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-12" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l13">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=13#src-13">13</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-13" class="srcLine"></span></td>
+</tr>
+ <tr id="l14">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=14#src-14">14</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-14" class="srcLine">    <span class="keyword">private</span> <span class="keyword">int</span>          bitrate;   <span class="comment">// Can be unset.</span></span></td>
+</tr>
+ <tr id="l15">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=15#src-15">15</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-15" class="srcLine">    <span class="keyword">private</span> <span class="keyword">boolean</span>      hasBitrate;</span></td>
+</tr>
+ <tr id="l16">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=16#src-16">16</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-16" class="srcLine"></span></td>
+</tr>
+ <tr id="l17">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=17#src-17">17</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-17" class="srcLine">    <span class="keyword">private</span> <span class="keyword">long</span>         duration;</span></td>
+</tr>
+ <tr id="l18">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=18#src-18">18</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-18" class="srcLine">    <span class="keyword">private</span> String       format;</span></td>
+</tr>
+ <tr id="l19">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=19#src-19">19</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-19" class="srcLine">    <span class="keyword">private</span> <span class="keyword">int</span>          height;</span></td>
+</tr>
+ <tr id="l20">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=20#src-20">20</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-20" class="srcLine">    <span class="keyword">private</span> List&lt;String&gt; persons;</span></td>
+</tr>
+ <tr id="l21">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=21#src-21">21</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-21" class="srcLine">    <span class="keyword">private</span> Player       player;</span></td>
+</tr>
+ <tr id="l22">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=22#src-22">22</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-22" class="srcLine">    <span class="keyword">private</span> <span class="keyword">long</span>         size;</span></td>
+</tr>
+ <tr id="l23">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=23#src-23">23</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-23" class="srcLine">    <span class="keyword">private</span> String       title;     <span class="comment">// Can be unset.</span></span></td>
+</tr>
+ <tr id="l24">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=24#src-24">24</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-24" class="srcLine">    <span class="keyword">private</span> String       uri;</span></td>
+</tr>
+ <tr id="l25">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=25#src-25">25</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-25" class="srcLine">    <span class="keyword">private</span> <span class="keyword">int</span>          width;</span></td>
+</tr>
+ <tr id="l26">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=26#src-26">26</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-26" class="srcLine"></span></td>
+</tr>
+ <tr id="l27">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=27#src-27">27</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-27" class="srcLine">    <span class="comment">// msgpack requires this</span></span></td>
+</tr>
+ <tr id="l28">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=28#src-28">28</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-28" class="srcLine">    <span class="keyword">public</span> String        copyright; <span class="comment">// Can be unset.</span></span></td>
+</tr>
+ <tr id="l29">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=29#src-29">29</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-29" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="30" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-30' onclick="toggleInlineStats(this, 'inlinestats-30');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-30" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-30'), 'inlinestats-30');return true;">
+                <td><div>
+<div title="Empty" class="barEmpty" style="min-width:40px;"></div>
+</div></td><td> - </td>
+                <td class="inlineStat">Uncovered Elements: 0 (0)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: -</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l30">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=30#src-30">30</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 30, 'Tests that hit Media()');" ><span title="Line 30, Col 5: method entered 8 times." class="nolink">&#160;8</span></td>
+<td class=" methodStart  srcCell" id="id-30"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 30,31);" id="img-30" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-30" class="srcLine"><span class="nolink" title="Line 30, Col 5: method entered 8 times.">    <span class="keyword">public</span> <a href="../../data/media/Media.html#Media">Media</a>(){</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-30'), 30,31);" id="e30" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l31">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=31#src-31">31</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-31" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l32">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=32#src-32">32</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-32" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="33" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-33' onclick="toggleInlineStats(this, 'inlinestats-33');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-33" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-33'), 'inlinestats-33');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 12 (12)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 0.08</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l33">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=33#src-33">33</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 33, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-33"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 33,47);" id="img-33" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-33" class="srcLineHilight"><span class="nolink" title="Line 33, Col 5: method not entered.">    <span class="keyword">public</span> <a href="../../data/media/Media.html#Media">Media</a>(String uri, String title, <span class="keyword">int</span> width, <span class="keyword">int</span> height, String format, <span class="keyword">long</span> duration, <span class="keyword">long</span> size, <span class="keyword">int</span> bitrate,</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-33'), 33,47);" id="e33" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l34">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=34#src-34">34</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-34" class="srcLine">                 <span class="keyword">boolean</span> hasBitrate, List&lt;String&gt; persons, Player player, String copyright){</span></td>
+</tr>
+ <tr id="l35">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=35#src-35">35</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 35, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-35" class="srcLineHilight"><span class="nolink" title="Line 35, Col 9: statement not executed.">        <span class="keyword">this</span>.uri = uri;</span></span></td>
+</tr>
+ <tr id="l36">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=36#src-36">36</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 36, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-36" class="srcLineHilight"><span class="nolink" title="Line 36, Col 9: statement not executed.">        <span class="keyword">this</span>.title = title;</span></span></td>
+</tr>
+ <tr id="l37">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=37#src-37">37</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 37, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-37" class="srcLineHilight"><span class="nolink" title="Line 37, Col 9: statement not executed.">        <span class="keyword">this</span>.width = width;</span></span></td>
+</tr>
+ <tr id="l38">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=38#src-38">38</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 38, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-38" class="srcLineHilight"><span class="nolink" title="Line 38, Col 9: statement not executed.">        <span class="keyword">this</span>.height = height;</span></span></td>
+</tr>
+ <tr id="l39">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=39#src-39">39</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 39, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-39" class="srcLineHilight"><span class="nolink" title="Line 39, Col 9: statement not executed.">        <span class="keyword">this</span>.format = format;</span></span></td>
+</tr>
+ <tr id="l40">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=40#src-40">40</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 40, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-40" class="srcLineHilight"><span class="nolink" title="Line 40, Col 9: statement not executed.">        <span class="keyword">this</span>.duration = duration;</span></span></td>
+</tr>
+ <tr id="l41">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=41#src-41">41</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 41, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-41" class="srcLineHilight"><span class="nolink" title="Line 41, Col 9: statement not executed.">        <span class="keyword">this</span>.size = size;</span></span></td>
+</tr>
+ <tr id="l42">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=42#src-42">42</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 42, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-42" class="srcLineHilight"><span class="nolink" title="Line 42, Col 9: statement not executed.">        <span class="keyword">this</span>.bitrate = bitrate;</span></span></td>
+</tr>
+ <tr id="l43">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=43#src-43">43</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 43, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-43" class="srcLineHilight"><span class="nolink" title="Line 43, Col 9: statement not executed.">        <span class="keyword">this</span>.hasBitrate = hasBitrate;</span></span></td>
+</tr>
+ <tr id="l44">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=44#src-44">44</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 44, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-44" class="srcLineHilight"><span class="nolink" title="Line 44, Col 9: statement not executed.">        <span class="keyword">this</span>.persons = persons;</span></span></td>
+</tr>
+ <tr id="l45">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=45#src-45">45</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 45, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-45" class="srcLineHilight"><span class="nolink" title="Line 45, Col 9: statement not executed.">        <span class="keyword">this</span>.player = player;</span></span></td>
+</tr>
+ <tr id="l46">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=46#src-46">46</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 46, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-46" class="srcLineHilight"><span class="nolink" title="Line 46, Col 9: statement not executed.">        <span class="keyword">this</span>.copyright = copyright;</span></span></td>
+</tr>
+ <tr id="l47">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=47#src-47">47</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-47" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l48">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=48#src-48">48</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-48" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="49" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-49' onclick="toggleInlineStats(this, 'inlinestats-49');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-49" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-49'), 'inlinestats-49');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 68 (68)</td>
+                <td class="inlineStat">Complexity: 21</td>
+                <td class="inlineStat">Complexity Density: 0.7</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l49">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=49#src-49">49</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 49, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-49"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 49,70);" id="img-49" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-49" class="srcLineHilight"><span class="nolink" title="Line 49, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-49'), 49,70);" id="e49" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l50">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=50#src-50">50</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-50" class="srcLine">    <span class="keyword">public</span> <span class="keyword">boolean</span> equals(Object o) {</span></td>
+</tr>
+ <tr id="l51">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=51#src-51">51</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 51, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-51" class="srcLineHilight"><span class="nolink" title="Line 51, Col 9: statement not executed.">        <span class="keyword">if</span> (<span class="keyword">this</span> == o) <span class="keyword">return</span> <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l52">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=52#src-52">52</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 52, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-52" class="srcLineHilight"><span class="nolink" title="Line 52, Col 9: statement not executed.">        <span class="keyword">if</span> (o == <span class="keyword">null</span> || getClass() != o.getClass()) <span class="keyword">return</span> <span class="keyword">false</span>;</span></span></td>
+</tr>
+ <tr id="l53">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=53#src-53">53</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-53" class="srcLine"></span></td>
+</tr>
+ <tr id="l54">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=54#src-54">54</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 54, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-54" class="srcLineHilight"><span class="nolink" title="Line 54, Col 9: statement not executed.">        <a href="../../data/media/Media.html#Media">Media</a> media = (<a href="../../data/media/Media.html#Media">Media</a>) o;</span></span></td>
+</tr>
+ <tr id="l55">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=55#src-55">55</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-55" class="srcLine"></span></td>
+</tr>
+ <tr id="l56">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=56#src-56">56</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 56, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-56" class="srcLineHilight"><span class="nolink" title="Line 56, Col 9: statement not executed.">        <span class="keyword">if</span> (bitrate != media.bitrate) <span class="keyword">return</span> <span class="keyword">false</span>;</span></span></td>
+</tr>
+ <tr id="l57">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=57#src-57">57</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 57, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-57" class="srcLineHilight"><span class="nolink" title="Line 57, Col 9: statement not executed.">        <span class="keyword">if</span> (duration != media.duration) <span class="keyword">return</span> <span class="keyword">false</span>;</span></span></td>
+</tr>
+ <tr id="l58">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=58#src-58">58</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 58, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-58" class="srcLineHilight"><span class="nolink" title="Line 58, Col 9: statement not executed.">        <span class="keyword">if</span> (hasBitrate != media.hasBitrate) <span class="keyword">return</span> <span class="keyword">false</span>;</span></span></td>
+</tr>
+ <tr id="l59">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=59#src-59">59</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 59, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-59" class="srcLineHilight"><span class="nolink" title="Line 59, Col 9: statement not executed.">        <span class="keyword">if</span> (height != media.height) <span class="keyword">return</span> <span class="keyword">false</span>;</span></span></td>
+</tr>
+ <tr id="l60">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=60#src-60">60</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 60, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-60" class="srcLineHilight"><span class="nolink" title="Line 60, Col 9: statement not executed.">        <span class="keyword">if</span> (size != media.size) <span class="keyword">return</span> <span class="keyword">false</span>;</span></span></td>
+</tr>
+ <tr id="l61">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=61#src-61">61</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 61, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-61" class="srcLineHilight"><span class="nolink" title="Line 61, Col 9: statement not executed.">        <span class="keyword">if</span> (width != media.width) <span class="keyword">return</span> <span class="keyword">false</span>;</span></span></td>
+</tr>
+ <tr id="l62">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=62#src-62">62</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 62, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-62" class="srcLineHilight"><span class="nolink" title="Line 62, Col 9: statement not executed.">        <span class="keyword">if</span> (copyright != <span class="keyword">null</span> ? !copyright.equals(media.copyright) : media.copyright != <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span></span></td>
+</tr>
+ <tr id="l63">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=63#src-63">63</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 63, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-63" class="srcLineHilight"><span class="nolink" title="Line 63, Col 9: statement not executed.">        <span class="keyword">if</span> (format != <span class="keyword">null</span> ? !format.equals(media.format) : media.format != <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span></span></td>
+</tr>
+ <tr id="l64">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=64#src-64">64</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 64, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-64" class="srcLineHilight"><span class="nolink" title="Line 64, Col 9: statement not executed.">        <span class="keyword">if</span> (persons != <span class="keyword">null</span> ? !persons.equals(media.persons) : media.persons != <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span></span></td>
+</tr>
+ <tr id="l65">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=65#src-65">65</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 65, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-65" class="srcLineHilight"><span class="nolink" title="Line 65, Col 9: statement not executed.">        <span class="keyword">if</span> (player != media.player) <span class="keyword">return</span> <span class="keyword">false</span>;</span></span></td>
+</tr>
+ <tr id="l66">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=66#src-66">66</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 66, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-66" class="srcLineHilight"><span class="nolink" title="Line 66, Col 9: statement not executed.">        <span class="keyword">if</span> (title != <span class="keyword">null</span> ? !title.equals(media.title) : media.title != <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span></span></td>
+</tr>
+ <tr id="l67">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=67#src-67">67</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 67, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-67" class="srcLineHilight"><span class="nolink" title="Line 67, Col 9: statement not executed.">        <span class="keyword">if</span> (uri != <span class="keyword">null</span> ? !uri.equals(media.uri) : media.uri != <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span></span></td>
+</tr>
+ <tr id="l68">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=68#src-68">68</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-68" class="srcLine"></span></td>
+</tr>
+ <tr id="l69">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=69#src-69">69</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 69, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-69" class="srcLineHilight"><span class="nolink" title="Line 69, Col 9: statement not executed.">        <span class="keyword">return</span> <span class="keyword">true</span>;</span></span></td>
+</tr>
+ <tr id="l70">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=70#src-70">70</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-70" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l71">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=71#src-71">71</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-71" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="72" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-72' onclick="toggleInlineStats(this, 'inlinestats-72');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-72" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-72'), 'inlinestats-72');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 27 (27)</td>
+                <td class="inlineStat">Complexity: 8</td>
+                <td class="inlineStat">Complexity Density: 0.62</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l72">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=72#src-72">72</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 72, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-72"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 72,87);" id="img-72" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-72" class="srcLineHilight"><span class="nolink" title="Line 72, Col 5: method not entered.">    @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-72'), 72,87);" id="e72" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l73">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=73#src-73">73</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-73" class="srcLine">    <span class="keyword">public</span> <span class="keyword">int</span> hashCode() {</span></td>
+</tr>
+ <tr id="l74">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=74#src-74">74</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 74, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-74" class="srcLineHilight"><span class="nolink" title="Line 74, Col 9: statement not executed.">        <span class="keyword">int</span> result = uri != <span class="keyword">null</span> ? uri.hashCode() : 0;</span></span></td>
+</tr>
+ <tr id="l75">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=75#src-75">75</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 75, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-75" class="srcLineHilight"><span class="nolink" title="Line 75, Col 9: statement not executed.">        result = 31 * result + (title != <span class="keyword">null</span> ? title.hashCode() : 0);</span></span></td>
+</tr>
+ <tr id="l76">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=76#src-76">76</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 76, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-76" class="srcLineHilight"><span class="nolink" title="Line 76, Col 9: statement not executed.">        result = 31 * result + width;</span></span></td>
+</tr>
+ <tr id="l77">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=77#src-77">77</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 77, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-77" class="srcLineHilight"><span class="nolink" title="Line 77, Col 9: statement not executed.">        result = 31 * result + height;</span></span></td>
+</tr>
+ <tr id="l78">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=78#src-78">78</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 78, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-78" class="srcLineHilight"><span class="nolink" title="Line 78, Col 9: statement not executed.">        result = 31 * result + (format != <span class="keyword">null</span> ? format.hashCode() : 0);</span></span></td>
+</tr>
+ <tr id="l79">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=79#src-79">79</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 79, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-79" class="srcLineHilight"><span class="nolink" title="Line 79, Col 9: statement not executed.">        result = 31 * result + (<span class="keyword">int</span>) (duration ^ (duration &gt;&gt;&gt; 32));</span></span></td>
+</tr>
+ <tr id="l80">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=80#src-80">80</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 80, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-80" class="srcLineHilight"><span class="nolink" title="Line 80, Col 9: statement not executed.">        result = 31 * result + (<span class="keyword">int</span>) (size ^ (size &gt;&gt;&gt; 32));</span></span></td>
+</tr>
+ <tr id="l81">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=81#src-81">81</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 81, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-81" class="srcLineHilight"><span class="nolink" title="Line 81, Col 9: statement not executed.">        result = 31 * result + bitrate;</span></span></td>
+</tr>
+ <tr id="l82">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=82#src-82">82</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 82, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-82" class="srcLineHilight"><span class="nolink" title="Line 82, Col 9: statement not executed.">        result = 31 * result + (hasBitrate ? 1 : 0);</span></span></td>
+</tr>
+ <tr id="l83">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=83#src-83">83</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 83, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-83" class="srcLineHilight"><span class="nolink" title="Line 83, Col 9: statement not executed.">        result = 31 * result + (persons != <span class="keyword">null</span> ? persons.hashCode() : 0);</span></span></td>
+</tr>
+ <tr id="l84">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=84#src-84">84</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 84, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-84" class="srcLineHilight"><span class="nolink" title="Line 84, Col 9: statement not executed.">        result = 31 * result + (player != <span class="keyword">null</span> ? player.hashCode() : 0);</span></span></td>
+</tr>
+ <tr id="l85">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=85#src-85">85</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 85, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-85" class="srcLineHilight"><span class="nolink" title="Line 85, Col 9: statement not executed.">        result = 31 * result + (copyright != <span class="keyword">null</span> ? copyright.hashCode() : 0);</span></span></td>
+</tr>
+ <tr id="l86">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=86#src-86">86</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 86, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-86" class="srcLineHilight"><span class="nolink" title="Line 86, Col 9: statement not executed.">        <span class="keyword">return</span> result;</span></span></td>
+</tr>
+ <tr id="l87">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=87#src-87">87</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-87" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l88">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=88#src-88">88</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-88" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="89" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-89' onclick="toggleInlineStats(this, 'inlinestats-89');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-89" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-89'), 'inlinestats-89');return true;">
+                <td><div>
+<div title="0% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:0%"></div></div></div></td><td>0%</td>
+                <td class="inlineStat">Uncovered Elements: 16 (16)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 0.06</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l89">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=89#src-89">89</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 89, Col 5: method not entered." class="nolink">&#160;0</span></td>
+<td class=" methodStart  srcCell" id="id-89"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 89,106);" id="img-89" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-89" class="srcLineHilight"><span class="nolink" title="Line 89, Col 5: method not entered.">    <span class="keyword">public</span> String toString() {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-89'), 89,106);" id="e89" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l90">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=90#src-90">90</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 90, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-90" class="srcLineHilight"><span class="nolink" title="Line 90, Col 9: statement not executed.">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span></span></td>
+</tr>
+ <tr id="l91">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=91#src-91">91</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 91, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-91" class="srcLineHilight"><span class="nolink" title="Line 91, Col 9: statement not executed.">        sb.append(<span class="string">&quot;[Media &quot;</span>);</span></span></td>
+</tr>
+ <tr id="l92">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=92#src-92">92</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 92, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-92" class="srcLineHilight"><span class="nolink" title="Line 92, Col 9: statement not executed.">        sb.append(<span class="string">&quot;uri=&quot;</span>).append(repr(uri));</span></span></td>
+</tr>
+ <tr id="l93">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=93#src-93">93</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 93, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-93" class="srcLineHilight"><span class="nolink" title="Line 93, Col 9: statement not executed.">        sb.append(<span class="string">&quot;, title=&quot;</span>).append(repr(title));</span></span></td>
+</tr>
+ <tr id="l94">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=94#src-94">94</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 94, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-94" class="srcLineHilight"><span class="nolink" title="Line 94, Col 9: statement not executed.">        sb.append(<span class="string">&quot;, width=&quot;</span>).append(width);</span></span></td>
+</tr>
+ <tr id="l95">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=95#src-95">95</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 95, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-95" class="srcLineHilight"><span class="nolink" title="Line 95, Col 9: statement not executed.">        sb.append(<span class="string">&quot;, height=&quot;</span>).append(height);</span></span></td>
+</tr>
+ <tr id="l96">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=96#src-96">96</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 96, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-96" class="srcLineHilight"><span class="nolink" title="Line 96, Col 9: statement not executed.">        sb.append(<span class="string">&quot;, format=&quot;</span>).append(repr(format));</span></span></td>
+</tr>
+ <tr id="l97">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=97#src-97">97</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 97, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-97" class="srcLineHilight"><span class="nolink" title="Line 97, Col 9: statement not executed.">        sb.append(<span class="string">&quot;, duration=&quot;</span>).append(duration);</span></span></td>
+</tr>
+ <tr id="l98">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=98#src-98">98</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 98, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-98" class="srcLineHilight"><span class="nolink" title="Line 98, Col 9: statement not executed.">        sb.append(<span class="string">&quot;, size=&quot;</span>).append(size);</span></span></td>
+</tr>
+ <tr id="l99">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=99#src-99">99</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 99, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-99" class="srcLineHilight"><span class="nolink" title="Line 99, Col 9: statement not executed.">        sb.append(<span class="string">&quot;, hasBitrate=&quot;</span>).append(hasBitrate);</span></span></td>
+</tr>
+ <tr id="l100">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=100#src-100">100</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 100, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-100" class="srcLineHilight"><span class="nolink" title="Line 100, Col 9: statement not executed.">        sb.append(<span class="string">&quot;, bitrate=&quot;</span>).append(String.valueOf(bitrate));</span></span></td>
+</tr>
+ <tr id="l101">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=101#src-101">101</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 101, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-101" class="srcLineHilight"><span class="nolink" title="Line 101, Col 9: statement not executed.">        sb.append(<span class="string">&quot;, persons=&quot;</span>).append(repr(persons));</span></span></td>
+</tr>
+ <tr id="l102">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=102#src-102">102</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 102, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-102" class="srcLineHilight"><span class="nolink" title="Line 102, Col 9: statement not executed.">        sb.append(<span class="string">&quot;, player=&quot;</span>).append(player);</span></span></td>
+</tr>
+ <tr id="l103">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=103#src-103">103</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 103, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-103" class="srcLineHilight"><span class="nolink" title="Line 103, Col 9: statement not executed.">        sb.append(<span class="string">&quot;, copyright=&quot;</span>).append(copyright);</span></span></td>
+</tr>
+ <tr id="l104">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=104#src-104">104</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 104, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-104" class="srcLineHilight"><span class="nolink" title="Line 104, Col 9: statement not executed.">        sb.append(<span class="string">&quot;]&quot;</span>);</span></span></td>
+</tr>
+ <tr id="l105">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=105#src-105">105</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 105, Col 9: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-105" class="srcLineHilight"><span class="nolink" title="Line 105, Col 9: statement not executed.">        <span class="keyword">return</span> sb.toString();</span></span></td>
+</tr>
+ <tr id="l106">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=106#src-106">106</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-106" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l107">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=107#src-107">107</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-107" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="108" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-108' onclick="toggleInlineStats(this, 'inlinestats-108');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-108" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-108'), 'inlinestats-108');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l108">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=108#src-108">108</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 108, 'Tests that hit getUri()&#160;:&#160;String');" ><span title="Line 108, Col 5: method entered 9 times." class="nolink">&#160;9</span></td>
+<td class=" methodStart  srcCell" id="id-108"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 108,110);" id="img-108" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-108" class="srcLine"><span class="nolink" title="Line 108, Col 5: method entered 9 times.">    <span class="keyword">public</span> String getUri() {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-108'), 108,110);" id="e108" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l109">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=109#src-109">109</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 109, 'Tests that hit line # 109');" ><span title="Line 109, Col 9: statement executed 9 times." class="nolink">&#160;9</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-109" class="srcLine"><span class="nolink" title="Line 109, Col 9: statement executed 9 times.">        <span class="keyword">return</span> uri;</span></span></td>
+</tr>
+ <tr id="l110">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=110#src-110">110</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-110" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l111">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=111#src-111">111</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-111" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="112" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-112' onclick="toggleInlineStats(this, 'inlinestats-112');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-112" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-112'), 'inlinestats-112');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l112">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=112#src-112">112</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 112, 'Tests that hit setUri(String)&#160;:&#160;void');" ><span title="Line 112, Col 5: method entered 6 times." class="nolink">&#160;6</span></td>
+<td class=" methodStart  srcCell" id="id-112"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 112,114);" id="img-112" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-112" class="srcLine"><span class="nolink" title="Line 112, Col 5: method entered 6 times.">    <span class="keyword">public</span> <span class="keyword">void</span> setUri(String uri) {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-112'), 112,114);" id="e112" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l113">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=113#src-113">113</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 113, 'Tests that hit line # 113');" ><span title="Line 113, Col 9: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-113" class="srcLine"><span class="nolink" title="Line 113, Col 9: statement executed 6 times.">        <span class="keyword">this</span>.uri = uri;</span></span></td>
+</tr>
+ <tr id="l114">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=114#src-114">114</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-114" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l115">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=115#src-115">115</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-115" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="116" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-116' onclick="toggleInlineStats(this, 'inlinestats-116');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-116" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-116'), 'inlinestats-116');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l116">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=116#src-116">116</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 116, 'Tests that hit getTitle()&#160;:&#160;String');" ><span title="Line 116, Col 5: method entered 9 times." class="nolink">&#160;9</span></td>
+<td class=" methodStart  srcCell" id="id-116"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 116,118);" id="img-116" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-116" class="srcLine"><span class="nolink" title="Line 116, Col 5: method entered 9 times.">    <span class="keyword">public</span> String getTitle() {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-116'), 116,118);" id="e116" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l117">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=117#src-117">117</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 117, 'Tests that hit line # 117');" ><span title="Line 117, Col 9: statement executed 9 times." class="nolink">&#160;9</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-117" class="srcLine"><span class="nolink" title="Line 117, Col 9: statement executed 9 times.">        <span class="keyword">return</span> title;</span></span></td>
+</tr>
+ <tr id="l118">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=118#src-118">118</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-118" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l119">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=119#src-119">119</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-119" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="120" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-120' onclick="toggleInlineStats(this, 'inlinestats-120');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-120" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-120'), 'inlinestats-120');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l120">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=120#src-120">120</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 120, 'Tests that hit setTitle(String)&#160;:&#160;void');" ><span title="Line 120, Col 5: method entered 7 times." class="nolink">&#160;7</span></td>
+<td class=" methodStart  srcCell" id="id-120"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 120,122);" id="img-120" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-120" class="srcLine"><span class="nolink" title="Line 120, Col 5: method entered 7 times.">    <span class="keyword">public</span> <span class="keyword">void</span> setTitle(String title) {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-120'), 120,122);" id="e120" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l121">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=121#src-121">121</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 121, 'Tests that hit line # 121');" ><span title="Line 121, Col 9: statement executed 7 times." class="nolink">&#160;7</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-121" class="srcLine"><span class="nolink" title="Line 121, Col 9: statement executed 7 times.">        <span class="keyword">this</span>.title = title;</span></span></td>
+</tr>
+ <tr id="l122">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=122#src-122">122</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-122" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l123">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=123#src-123">123</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-123" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="124" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-124' onclick="toggleInlineStats(this, 'inlinestats-124');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-124" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-124'), 'inlinestats-124');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l124">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=124#src-124">124</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 124, 'Tests that hit getWidth()&#160;:&#160;int');" ><span title="Line 124, Col 5: method entered 9 times." class="nolink">&#160;9</span></td>
+<td class=" methodStart  srcCell" id="id-124"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 124,126);" id="img-124" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-124" class="srcLine"><span class="nolink" title="Line 124, Col 5: method entered 9 times.">    <span class="keyword">public</span> <span class="keyword">int</span> getWidth() {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-124'), 124,126);" id="e124" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l125">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=125#src-125">125</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 125, 'Tests that hit line # 125');" ><span title="Line 125, Col 9: statement executed 9 times." class="nolink">&#160;9</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-125" class="srcLine"><span class="nolink" title="Line 125, Col 9: statement executed 9 times.">        <span class="keyword">return</span> width;</span></span></td>
+</tr>
+ <tr id="l126">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=126#src-126">126</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-126" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l127">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=127#src-127">127</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-127" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="128" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-128' onclick="toggleInlineStats(this, 'inlinestats-128');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-128" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-128'), 'inlinestats-128');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l128">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=128#src-128">128</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 128, 'Tests that hit setWidth(int)&#160;:&#160;void');" ><span title="Line 128, Col 5: method entered 7 times." class="nolink">&#160;7</span></td>
+<td class=" methodStart  srcCell" id="id-128"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 128,130);" id="img-128" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-128" class="srcLine"><span class="nolink" title="Line 128, Col 5: method entered 7 times.">    <span class="keyword">public</span> <span class="keyword">void</span> setWidth(<span class="keyword">int</span> width) {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-128'), 128,130);" id="e128" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l129">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=129#src-129">129</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 129, 'Tests that hit line # 129');" ><span title="Line 129, Col 9: statement executed 7 times." class="nolink">&#160;7</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-129" class="srcLine"><span class="nolink" title="Line 129, Col 9: statement executed 7 times.">        <span class="keyword">this</span>.width = width;</span></span></td>
+</tr>
+ <tr id="l130">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=130#src-130">130</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-130" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l131">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=131#src-131">131</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-131" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="132" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-132' onclick="toggleInlineStats(this, 'inlinestats-132');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-132" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-132'), 'inlinestats-132');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l132">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=132#src-132">132</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 132, 'Tests that hit getHeight()&#160;:&#160;int');" ><span title="Line 132, Col 5: method entered 9 times." class="nolink">&#160;9</span></td>
+<td class=" methodStart  srcCell" id="id-132"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 132,134);" id="img-132" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-132" class="srcLine"><span class="nolink" title="Line 132, Col 5: method entered 9 times.">    <span class="keyword">public</span> <span class="keyword">int</span> getHeight() {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-132'), 132,134);" id="e132" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l133">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=133#src-133">133</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 133, 'Tests that hit line # 133');" ><span title="Line 133, Col 9: statement executed 9 times." class="nolink">&#160;9</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-133" class="srcLine"><span class="nolink" title="Line 133, Col 9: statement executed 9 times.">        <span class="keyword">return</span> height;</span></span></td>
+</tr>
+ <tr id="l134">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=134#src-134">134</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-134" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l135">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=135#src-135">135</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-135" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="136" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-136' onclick="toggleInlineStats(this, 'inlinestats-136');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-136" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-136'), 'inlinestats-136');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l136">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=136#src-136">136</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 136, 'Tests that hit setHeight(int)&#160;:&#160;void');" ><span title="Line 136, Col 5: method entered 7 times." class="nolink">&#160;7</span></td>
+<td class=" methodStart  srcCell" id="id-136"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 136,138);" id="img-136" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-136" class="srcLine"><span class="nolink" title="Line 136, Col 5: method entered 7 times.">    <span class="keyword">public</span> <span class="keyword">void</span> setHeight(<span class="keyword">int</span> height) {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-136'), 136,138);" id="e136" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l137">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=137#src-137">137</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 137, 'Tests that hit line # 137');" ><span title="Line 137, Col 9: statement executed 7 times." class="nolink">&#160;7</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-137" class="srcLine"><span class="nolink" title="Line 137, Col 9: statement executed 7 times.">        <span class="keyword">this</span>.height = height;</span></span></td>
+</tr>
+ <tr id="l138">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=138#src-138">138</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-138" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l139">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=139#src-139">139</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-139" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="140" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-140' onclick="toggleInlineStats(this, 'inlinestats-140');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-140" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-140'), 'inlinestats-140');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l140">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=140#src-140">140</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 140, 'Tests that hit getFormat()&#160;:&#160;String');" ><span title="Line 140, Col 5: method entered 7 times." class="nolink">&#160;7</span></td>
+<td class=" methodStart  srcCell" id="id-140"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 140,142);" id="img-140" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-140" class="srcLine"><span class="nolink" title="Line 140, Col 5: method entered 7 times.">    <span class="keyword">public</span> String getFormat() {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-140'), 140,142);" id="e140" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l141">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=141#src-141">141</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 141, 'Tests that hit line # 141');" ><span title="Line 141, Col 9: statement executed 7 times." class="nolink">&#160;7</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-141" class="srcLine"><span class="nolink" title="Line 141, Col 9: statement executed 7 times.">        <span class="keyword">return</span> format;</span></span></td>
+</tr>
+ <tr id="l142">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=142#src-142">142</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-142" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l143">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=143#src-143">143</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-143" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="144" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-144' onclick="toggleInlineStats(this, 'inlinestats-144');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-144" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-144'), 'inlinestats-144');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l144">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=144#src-144">144</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 144, 'Tests that hit setFormat(String)&#160;:&#160;void');" ><span title="Line 144, Col 5: method entered 6 times." class="nolink">&#160;6</span></td>
+<td class=" methodStart  srcCell" id="id-144"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 144,146);" id="img-144" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-144" class="srcLine"><span class="nolink" title="Line 144, Col 5: method entered 6 times.">    <span class="keyword">public</span> <span class="keyword">void</span> setFormat(String format) {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-144'), 144,146);" id="e144" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l145">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=145#src-145">145</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 145, 'Tests that hit line # 145');" ><span title="Line 145, Col 9: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-145" class="srcLine"><span class="nolink" title="Line 145, Col 9: statement executed 6 times.">        <span class="keyword">this</span>.format = format;</span></span></td>
+</tr>
+ <tr id="l146">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=146#src-146">146</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-146" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l147">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=147#src-147">147</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-147" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="148" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-148' onclick="toggleInlineStats(this, 'inlinestats-148');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-148" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-148'), 'inlinestats-148');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l148">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=148#src-148">148</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 148, 'Tests that hit getDuration()&#160;:&#160;long');" ><span title="Line 148, Col 5: method entered 7 times." class="nolink">&#160;7</span></td>
+<td class=" methodStart  srcCell" id="id-148"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 148,150);" id="img-148" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-148" class="srcLine"><span class="nolink" title="Line 148, Col 5: method entered 7 times.">    <span class="keyword">public</span> <span class="keyword">long</span> getDuration() {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-148'), 148,150);" id="e148" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l149">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=149#src-149">149</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 149, 'Tests that hit line # 149');" ><span title="Line 149, Col 9: statement executed 7 times." class="nolink">&#160;7</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-149" class="srcLine"><span class="nolink" title="Line 149, Col 9: statement executed 7 times.">        <span class="keyword">return</span> duration;</span></span></td>
+</tr>
+ <tr id="l150">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=150#src-150">150</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-150" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l151">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=151#src-151">151</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-151" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="152" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-152' onclick="toggleInlineStats(this, 'inlinestats-152');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-152" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-152'), 'inlinestats-152');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l152">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=152#src-152">152</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 152, 'Tests that hit setDuration(long)&#160;:&#160;void');" ><span title="Line 152, Col 5: method entered 6 times." class="nolink">&#160;6</span></td>
+<td class=" methodStart  srcCell" id="id-152"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 152,154);" id="img-152" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-152" class="srcLine"><span class="nolink" title="Line 152, Col 5: method entered 6 times.">    <span class="keyword">public</span> <span class="keyword">void</span> setDuration(<span class="keyword">long</span> duration) {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-152'), 152,154);" id="e152" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l153">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=153#src-153">153</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 153, 'Tests that hit line # 153');" ><span title="Line 153, Col 9: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-153" class="srcLine"><span class="nolink" title="Line 153, Col 9: statement executed 6 times.">        <span class="keyword">this</span>.duration = duration;</span></span></td>
+</tr>
+ <tr id="l154">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=154#src-154">154</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-154" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l155">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=155#src-155">155</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-155" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="156" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-156' onclick="toggleInlineStats(this, 'inlinestats-156');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-156" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-156'), 'inlinestats-156');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l156">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=156#src-156">156</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 156, 'Tests that hit getSize()&#160;:&#160;long');" ><span title="Line 156, Col 5: method entered 9 times." class="nolink">&#160;9</span></td>
+<td class=" methodStart  srcCell" id="id-156"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 156,158);" id="img-156" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-156" class="srcLine"><span class="nolink" title="Line 156, Col 5: method entered 9 times.">    <span class="keyword">public</span> <span class="keyword">long</span> getSize() {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-156'), 156,158);" id="e156" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l157">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=157#src-157">157</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 157, 'Tests that hit line # 157');" ><span title="Line 157, Col 9: statement executed 9 times." class="nolink">&#160;9</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-157" class="srcLine"><span class="nolink" title="Line 157, Col 9: statement executed 9 times.">        <span class="keyword">return</span> size;</span></span></td>
+</tr>
+ <tr id="l158">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=158#src-158">158</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-158" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l159">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=159#src-159">159</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-159" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="160" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-160' onclick="toggleInlineStats(this, 'inlinestats-160');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-160" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-160'), 'inlinestats-160');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l160">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=160#src-160">160</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 160, 'Tests that hit setSize(long)&#160;:&#160;void');" ><span title="Line 160, Col 5: method entered 6 times." class="nolink">&#160;6</span></td>
+<td class=" methodStart  srcCell" id="id-160"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 160,162);" id="img-160" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-160" class="srcLine"><span class="nolink" title="Line 160, Col 5: method entered 6 times.">    <span class="keyword">public</span> <span class="keyword">void</span> setSize(<span class="keyword">long</span> size) {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-160'), 160,162);" id="e160" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l161">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=161#src-161">161</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 161, 'Tests that hit line # 161');" ><span title="Line 161, Col 9: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-161" class="srcLine"><span class="nolink" title="Line 161, Col 9: statement executed 6 times.">        <span class="keyword">this</span>.size = size;</span></span></td>
+</tr>
+ <tr id="l162">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=162#src-162">162</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-162" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l163">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=163#src-163">163</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-163" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="164" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-164' onclick="toggleInlineStats(this, 'inlinestats-164');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-164" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-164'), 'inlinestats-164');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l164">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=164#src-164">164</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 164, 'Tests that hit getBitrate()&#160;:&#160;int');" ><span title="Line 164, Col 5: method entered 7 times." class="nolink">&#160;7</span></td>
+<td class=" methodStart  srcCell" id="id-164"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 164,166);" id="img-164" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-164" class="srcLine"><span class="nolink" title="Line 164, Col 5: method entered 7 times.">    <span class="keyword">public</span> <span class="keyword">int</span> getBitrate() {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-164'), 164,166);" id="e164" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l165">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=165#src-165">165</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 165, 'Tests that hit line # 165');" ><span title="Line 165, Col 9: statement executed 7 times." class="nolink">&#160;7</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-165" class="srcLine"><span class="nolink" title="Line 165, Col 9: statement executed 7 times.">        <span class="keyword">return</span> bitrate;</span></span></td>
+</tr>
+ <tr id="l166">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=166#src-166">166</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-166" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l167">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=167#src-167">167</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-167" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="168" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-168' onclick="toggleInlineStats(this, 'inlinestats-168');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-168" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-168'), 'inlinestats-168');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l168">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=168#src-168">168</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 168, 'Tests that hit setBitrate(int)&#160;:&#160;void');" ><span title="Line 168, Col 5: method entered 6 times." class="nolink">&#160;6</span></td>
+<td class=" methodStart  srcCell" id="id-168"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 168,170);" id="img-168" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-168" class="srcLine"><span class="nolink" title="Line 168, Col 5: method entered 6 times.">    <span class="keyword">public</span> <span class="keyword">void</span> setBitrate(<span class="keyword">int</span> bitrate) {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-168'), 168,170);" id="e168" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l169">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=169#src-169">169</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 169, 'Tests that hit line # 169');" ><span title="Line 169, Col 9: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-169" class="srcLine"><span class="nolink" title="Line 169, Col 9: statement executed 6 times.">        <span class="keyword">this</span>.bitrate = bitrate;</span></span></td>
+</tr>
+ <tr id="l170">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=170#src-170">170</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-170" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l171">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=171#src-171">171</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-171" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="172" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-172' onclick="toggleInlineStats(this, 'inlinestats-172');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-172" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-172'), 'inlinestats-172');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l172">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=172#src-172">172</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 172, 'Tests that hit getPersons()&#160;:&#160;List&lt;String&gt;');" ><span title="Line 172, Col 5: method entered 7 times." class="nolink">&#160;7</span></td>
+<td class=" methodStart  srcCell" id="id-172"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 172,174);" id="img-172" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-172" class="srcLine"><span class="nolink" title="Line 172, Col 5: method entered 7 times.">    <span class="keyword">public</span> List&lt;String&gt; getPersons() {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-172'), 172,174);" id="e172" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l173">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=173#src-173">173</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 173, 'Tests that hit line # 173');" ><span title="Line 173, Col 9: statement executed 7 times." class="nolink">&#160;7</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-173" class="srcLine"><span class="nolink" title="Line 173, Col 9: statement executed 7 times.">        <span class="keyword">return</span> persons;</span></span></td>
+</tr>
+ <tr id="l174">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=174#src-174">174</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-174" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l175">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=175#src-175">175</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-175" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="176" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-176' onclick="toggleInlineStats(this, 'inlinestats-176');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-176" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-176'), 'inlinestats-176');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l176">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=176#src-176">176</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 176, 'Tests that hit setPersons(List&lt;String&gt;)&#160;:&#160;void');" ><span title="Line 176, Col 5: method entered 7 times." class="nolink">&#160;7</span></td>
+<td class=" methodStart  srcCell" id="id-176"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 176,178);" id="img-176" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-176" class="srcLine"><span class="nolink" title="Line 176, Col 5: method entered 7 times.">    <span class="keyword">public</span> <span class="keyword">void</span> setPersons(List&lt;String&gt; persons) {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-176'), 176,178);" id="e176" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l177">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=177#src-177">177</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 177, 'Tests that hit line # 177');" ><span title="Line 177, Col 9: statement executed 7 times." class="nolink">&#160;7</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-177" class="srcLine"><span class="nolink" title="Line 177, Col 9: statement executed 7 times.">        <span class="keyword">this</span>.persons = persons;</span></span></td>
+</tr>
+ <tr id="l178">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=178#src-178">178</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-178" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l179">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=179#src-179">179</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-179" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="180" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-180' onclick="toggleInlineStats(this, 'inlinestats-180');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-180" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-180'), 'inlinestats-180');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l180">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=180#src-180">180</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 180, 'Tests that hit getPlayer()&#160;:&#160;Player');" ><span title="Line 180, Col 5: method entered 7 times." class="nolink">&#160;7</span></td>
+<td class=" methodStart  srcCell" id="id-180"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 180,182);" id="img-180" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-180" class="srcLine"><span class="nolink" title="Line 180, Col 5: method entered 7 times.">    <span class="keyword">public</span> Player getPlayer() {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-180'), 180,182);" id="e180" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l181">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=181#src-181">181</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 181, 'Tests that hit line # 181');" ><span title="Line 181, Col 9: statement executed 7 times." class="nolink">&#160;7</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-181" class="srcLine"><span class="nolink" title="Line 181, Col 9: statement executed 7 times.">        <span class="keyword">return</span> player;</span></span></td>
+</tr>
+ <tr id="l182">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=182#src-182">182</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-182" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l183">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=183#src-183">183</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-183" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="184" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-184' onclick="toggleInlineStats(this, 'inlinestats-184');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-184" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-184'), 'inlinestats-184');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l184">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=184#src-184">184</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 184, 'Tests that hit setPlayer(Player)&#160;:&#160;void');" ><span title="Line 184, Col 5: method entered 7 times." class="nolink">&#160;7</span></td>
+<td class=" methodStart  srcCell" id="id-184"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 184,186);" id="img-184" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-184" class="srcLine"><span class="nolink" title="Line 184, Col 5: method entered 7 times.">    <span class="keyword">public</span> <span class="keyword">void</span> setPlayer(Player player) {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-184'), 184,186);" id="e184" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l185">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=185#src-185">185</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 185, 'Tests that hit line # 185');" ><span title="Line 185, Col 9: statement executed 7 times." class="nolink">&#160;7</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-185" class="srcLine"><span class="nolink" title="Line 185, Col 9: statement executed 7 times.">        <span class="keyword">this</span>.player = player;</span></span></td>
+</tr>
+ <tr id="l186">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=186#src-186">186</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-186" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l187">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=187#src-187">187</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-187" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="188" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-188' onclick="toggleInlineStats(this, 'inlinestats-188');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-188" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-188'), 'inlinestats-188');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l188">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=188#src-188">188</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 188, 'Tests that hit getCopyright()&#160;:&#160;String');" ><span title="Line 188, Col 5: method entered 7 times." class="nolink">&#160;7</span></td>
+<td class=" methodStart  srcCell" id="id-188"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 188,190);" id="img-188" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-188" class="srcLine"><span class="nolink" title="Line 188, Col 5: method entered 7 times.">    <span class="keyword">public</span> String getCopyright() {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-188'), 188,190);" id="e188" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l189">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=189#src-189">189</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 189, 'Tests that hit line # 189');" ><span title="Line 189, Col 9: statement executed 7 times." class="nolink">&#160;7</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-189" class="srcLine"><span class="nolink" title="Line 189, Col 9: statement executed 7 times.">        <span class="keyword">return</span> copyright;</span></span></td>
+</tr>
+ <tr id="l190">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=190#src-190">190</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-190" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l191">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=191#src-191">191</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-191" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="192" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-192' onclick="toggleInlineStats(this, 'inlinestats-192');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-192" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-192'), 'inlinestats-192');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l192">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=192#src-192">192</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 192, 'Tests that hit setCopyright(String)&#160;:&#160;void');" ><span title="Line 192, Col 5: method entered 4 times." class="nolink">&#160;4</span></td>
+<td class=" methodStart  srcCell" id="id-192"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 192,194);" id="img-192" src="../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-192" class="srcLine"><span class="nolink" title="Line 192, Col 5: method entered 4 times.">    <span class="keyword">public</span> <span class="keyword">void</span> setCopyright(String copyright) {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-192'), 192,194);" id="e192" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l193">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=193#src-193">193</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 193, 'Tests that hit line # 193');" ><span title="Line 193, Col 9: statement executed 4 times." class="nolink">&#160;4</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-193" class="srcLine"><span class="nolink" title="Line 193, Col 9: statement executed 4 times.">        <span class="keyword">this</span>.copyright = copyright;</span></span></td>
+</tr>
+ <tr id="l194">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=194#src-194">194</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-194" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l195">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=195#src-195">195</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-195" class="srcLine"></span></td>
+</tr>
+ <tr id="l196">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=196#src-196">196</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-196" class="srcLine">}</span></td>
+</tr>
+ 
+    </tbody></table>    </div>
+</div><!-- .aui-tabs -->
+
+<script type="text/javascript"> 
+    var ol_bgclass = "overBG";
+    var ol_fgclass = "overFG";
+    var ol_cgclass = "overCaption";
+    var ol_captionfontclass= "overCaption";
+    var ol_closefontclass = "closeFont";
+    var ol_closeclick = 1;
+    var ol_close = 'X';
+    var ol_wrap = 1;
+    var rootRelPath = '../../';
+    var testsPerFile = -1;
+</script>
+<script src="Media.js" type="text/javascript"></script>
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="https://www.atlassian.com/software/clover">Atlassian Clover</a> v 4.1.10
+                on Tue Apr 9 2024 12:27:38 CDT using coverage data from Tue Apr 9 2024 12:26:56 CDT.
+            </li>
+        </ul>
+        <ul>
+            <li>Clover server edition. </li>
+        </ul>
+        <div id="footer-logo">
+            <a target="_blank" href="http://www.atlassian.com/">
+                Atlassian
+            </a>
+        </div>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>

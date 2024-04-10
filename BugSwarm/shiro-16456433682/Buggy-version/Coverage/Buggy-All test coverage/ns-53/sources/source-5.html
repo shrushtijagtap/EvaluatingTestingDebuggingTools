@@ -1,0 +1,472 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > IniShiroFilter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.web.servlet</a>
+</div>
+
+<h1>Coverage Summary for Class: IniShiroFilter (org.apache.shiro.web.servlet)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">IniShiroFilter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/40)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/74)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.web.servlet;
+&nbsp;
+&nbsp;import org.apache.shiro.config.ConfigurationException;
+&nbsp;import org.apache.shiro.config.Ini;
+&nbsp;import org.apache.shiro.config.IniFactorySupport;
+&nbsp;import org.apache.shiro.io.ResourceUtils;
+&nbsp;import org.apache.shiro.mgt.SecurityManager;
+&nbsp;import org.apache.shiro.util.CollectionUtils;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;import org.apache.shiro.web.config.IniFilterChainResolverFactory;
+&nbsp;import org.apache.shiro.web.config.WebIniSecurityManagerFactory;
+&nbsp;import org.apache.shiro.web.filter.mgt.FilterChainResolver;
+&nbsp;import org.apache.shiro.web.mgt.WebSecurityManager;
+&nbsp;import org.apache.shiro.web.util.WebUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * &lt;h1&gt;Deprecated&lt;/h1&gt;
+&nbsp; * This filter has been deprecated as of Shiro 1.2 in favor of using the {@link ShiroFilter} in {@code web.xml} instead.
+&nbsp; * See the {@link ShiroFilter} JavaDoc for usage.
+&nbsp; * &lt;p/&gt;
+&nbsp; * ======================
+&nbsp; * &lt;p/&gt;
+&nbsp; * Servlet Filter that configures and enables all Shiro functions within a web application by using the
+&nbsp; * &lt;a href=&quot;http://en.wikipedia.org/wiki/INI_file&quot;&gt;INI&lt;/a&gt; configuration format.
+&nbsp; * &lt;p/&gt;
+&nbsp; * The actual INI configuration contents are not covered here, but instead in Shiro&#39;s
+&nbsp; * &lt;a href=&quot;http://shiro.apache.org/configuration.html&quot;&gt;Configuration Documentation&lt;/a&gt; and additional web-specific
+&nbsp; * &lt;a href=&quot;http://shiro.apache.org/web.html&quot;&gt;Web Documentation&lt;/a&gt;.
+&nbsp; * &lt;h2&gt;Usage&lt;/h2&gt;
+&nbsp; * &lt;h3&gt;Default&lt;/h3&gt;
+&nbsp; * By default, the simplest filter declaration expects a {@code shiro.ini} resource to be located at
+&nbsp; * {@code /WEB-INF/shiro.ini}, or, if not there, falls back to checking the root of the classpath
+&nbsp; * (i.e. {@code classpath:shiro.ini}):
+&nbsp; * &lt;pre&gt;
+&nbsp; * &amp;lt;filter&amp;gt;
+&nbsp; *     &amp;lt;filter-name&amp;gt;ShiroFilter&amp;lt;/filter-name&amp;gt;
+&nbsp; *     &amp;lt;filter-class&amp;gt;org.apache.shiro.web.servlet.IniShiroFilter&amp;lt;/filter-class&amp;gt;
+&nbsp; * &amp;lt;/filter&amp;gt;
+&nbsp; * &lt;/pre&gt;
+&nbsp; * &lt;h3&gt;Custom Path&lt;/h3&gt;
+&nbsp; * If you want the INI configuration to be somewhere other than {@code /WEB-INF/shiro.ini} or
+&nbsp; * {@code classpath:shiro.ini}, you may specify an alternate location via the {@code configPath init-param}:
+&nbsp; * &lt;pre&gt;
+&nbsp; * &amp;lt;filter&amp;gt;
+&nbsp; *     &amp;lt;filter-name&amp;gt;ShiroFilter&amp;lt;/filter-name&amp;gt;
+&nbsp; *     &amp;lt;filter-class&amp;gt;org.apache.shiro.web.servlet.IniShiroFilter&amp;lt;/filter-class&amp;gt;
+&nbsp; *     &amp;lt;init-param&amp;gt;
+&nbsp; *         &amp;lt;param-name&amp;gt;configPath&amp;lt;/param-name&amp;gt;
+&nbsp; *         &amp;lt;param-value&amp;gt;/WEB-INF/someFile.ini&amp;lt;/param-value&amp;gt;
+&nbsp; *     &amp;lt;/init-param&amp;gt;
+&nbsp; * &amp;lt;/filter&amp;gt;
+&nbsp; * &lt;/pre&gt;
+&nbsp; * Unqualified (schemeless or &#39;non-prefixed&#39;) paths are assumed to be {@code ServletContext} resource paths, resolvable
+&nbsp; * via {@link javax.servlet.ServletContext#getResourceAsStream(String) ServletContext#getResourceAsStream}.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Non-ServletContext resources may be loaded from qualified locations by specifying prefixes indicating the source,
+&nbsp; * e.g. {@code file:}, {@code url:}, and {@code classpath:}.  See the
+&nbsp; * {@link ResourceUtils#getInputStreamForPath(String)} JavaDoc for more.
+&nbsp; * &lt;h3&gt;Inline&lt;/h3&gt;
+&nbsp; * For relatively simple environments, you can embed the INI config directly inside the filter declaration with
+&nbsp; * the {@code config init-param}:
+&nbsp; * &lt;pre&gt;
+&nbsp; * &amp;lt;filter&amp;gt;
+&nbsp; *     &amp;lt;filter-name&amp;gt;ShiroFilter&amp;lt;/filter-name&amp;gt;
+&nbsp; *     &amp;lt;filter-class&amp;gt;org.apache.shiro.web.servlet.IniShiroFilter&amp;lt;/filter-class&amp;gt;
+&nbsp; *     &amp;lt;init-param&amp;gt;
+&nbsp; *         &amp;lt;param-name&amp;gt;config&amp;lt;/param-name&amp;gt;
+&nbsp; *         &amp;lt;param-value&amp;gt;
+&nbsp; *             #INI config goes here...
+&nbsp; *      &amp;lt;/param-value&amp;gt;
+&nbsp; *     &amp;lt;/init-param&amp;gt;
+&nbsp; * &amp;lt;/filter&amp;gt;
+&nbsp; * &lt;/pre&gt;
+&nbsp; * Although this is typically not recommended because any Shiro configuration changes would contribute to version control
+&nbsp; * &#39;noise&#39; in the web.xml file.
+&nbsp; * &lt;p/&gt;
+&nbsp; * When creating the shiro.ini configuration itself, please see Shiro&#39;s
+&nbsp; * &lt;a href=&quot;http://shiro.apache.org/configuration.html&quot;&gt;Configuration Documentation&lt;/a&gt; and
+&nbsp; * &lt;a href=&quot;http://shiro.apache.org/web.html&quot;&gt;Web Documentation&lt;/a&gt;.
+&nbsp; *
+&nbsp; * @see &lt;a href=&quot;http://shiro.apache.org/configuration.html&quot;&gt;Apache Shiro INI Configuration&lt;/a&gt;
+&nbsp; * @see &lt;a href=&quot;http://shiro.apache.org/web.html&quot;&gt;Apache Shiro Web Documentation&lt;/a&gt;
+&nbsp; * @since 1.0
+&nbsp; * @deprecated in 1.2 in favor of using the {@link ShiroFilter}
+&nbsp; */
+&nbsp;@Deprecated
+&nbsp;public class IniShiroFilter extends AbstractShiroFilter {
+&nbsp;
+&nbsp;    public static final String CONFIG_INIT_PARAM_NAME = &quot;config&quot;;
+&nbsp;    public static final String CONFIG_PATH_INIT_PARAM_NAME = &quot;configPath&quot;;
+&nbsp;
+&nbsp;    public static final String DEFAULT_WEB_INI_RESOURCE_PATH = &quot;/WEB-INF/shiro.ini&quot;;
+&nbsp;
+<b class="nc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(IniShiroFilter.class);</b>
+&nbsp;
+&nbsp;    private String config;
+&nbsp;    private String configPath;
+&nbsp;
+<b class="nc">&nbsp;    public IniShiroFilter() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the actual INI configuration text to use to build the {@link SecurityManager} and
+&nbsp;     * {@link FilterChainResolver} used by the web application or {@code null} if the
+&nbsp;     * {@link #getConfigPath() configPath} should be used to load a fallback INI source.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This value is {@code null} by default, but it will be automatically set to the value of the
+&nbsp;     * &#39;{@code config}&#39; {@code init-param} if it exists in the {@code FilterConfig} provided by the servlet
+&nbsp;     * container at startup.
+&nbsp;     *
+&nbsp;     * @return the actual INI configuration text to use to build the {@link SecurityManager} and
+&nbsp;     *         {@link FilterChainResolver} used by the web application or {@code null} if the
+&nbsp;     *         {@link #getConfigPath() configPath} should be used to load a fallback INI source.
+&nbsp;     */
+&nbsp;    public String getConfig() {
+<b class="nc">&nbsp;        return this.config;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the actual INI configuration text to use to build the {@link SecurityManager} and
+&nbsp;     * {@link FilterChainResolver} used by the web application.  If this value is {@code null}, the
+&nbsp;     * {@link #getConfigPath() configPath} will be checked to see if a .ini file should be loaded instead.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This value is {@code null} by default, but it will be automatically set to the value of the
+&nbsp;     * &#39;{@code config}&#39; {@code init-param} if it exists in the {@code FilterConfig} provided by the servlet
+&nbsp;     * container at startup.
+&nbsp;     *
+&nbsp;     * @param config the actual INI configuration text to use to build the {@link SecurityManager} and
+&nbsp;     *               {@link FilterChainResolver} used by the web application.
+&nbsp;     */
+&nbsp;    public void setConfig(String config) {
+<b class="nc">&nbsp;        this.config = config;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the config path to be used to load a .ini file for configuration if a configuration is
+&nbsp;     * not specified via the {@link #getConfig() config} attribute.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This value is {@code null} by default, but it will be automatically set to the value of the
+&nbsp;     * &#39;{@code configPath}&#39; {@code init-param} if it exists in the {@code FilterConfig} provided by the servlet
+&nbsp;     * container at startup.
+&nbsp;     *
+&nbsp;     * @return the config path to be used to load a .ini file for configuration if a configuration is
+&nbsp;     *         not specified via the {@link #getConfig() config} attribute.
+&nbsp;     */
+&nbsp;    public String getConfigPath() {
+<b class="nc">&nbsp;        return configPath;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the config path to be used to load a .ini file for configuration if a configuration is
+&nbsp;     * not specified via the {@link #getConfig() config} attribute.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This value is {@code null} by default, but it will be automatically set to the value of the
+&nbsp;     * &#39;{@code configPath}&#39; {@code init-param} if it exists in the {@code FilterConfig} provided by the servlet
+&nbsp;     * container at startup.
+&nbsp;     *
+&nbsp;     * @param configPath the config path to be used to load a .ini file for configuration if a configuration is
+&nbsp;     *                   not specified via the {@link #getConfig() config} attribute.
+&nbsp;     */
+&nbsp;    public void setConfigPath(String configPath) {
+<b class="nc">&nbsp;        this.configPath = StringUtils.clean(configPath);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void init() throws Exception {
+<b class="nc">&nbsp;        applyInitParams();</b>
+<b class="nc">&nbsp;        configure();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void applyInitParams() throws Exception {
+<b class="nc">&nbsp;        String config = getInitParam(CONFIG_INIT_PARAM_NAME);</b>
+<b class="nc">&nbsp;        if (config != null) {</b>
+<b class="nc">&nbsp;            setConfig(config);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String configPath = getInitParam(CONFIG_PATH_INIT_PARAM_NAME);</b>
+<b class="nc">&nbsp;        if (configPath != null) {</b>
+<b class="nc">&nbsp;            setConfigPath(configPath);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void configure() throws Exception {
+<b class="nc">&nbsp;        Ini ini = loadIniFromConfig();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (CollectionUtils.isEmpty(ini)) {</b>
+<b class="nc">&nbsp;            log.info(&quot;Null or empty configuration specified via &#39;config&#39; init-param.  &quot; +</b>
+&nbsp;                    &quot;Checking path-based configuration.&quot;);
+<b class="nc">&nbsp;            ini = loadIniFromPath();</b>
+&nbsp;        }
+&nbsp;        //added for SHIRO-178:
+<b class="nc">&nbsp;        if (CollectionUtils.isEmpty(ini)) {</b>
+<b class="nc">&nbsp;            log.info(&quot;Null or empty configuration specified via &#39;&quot; + CONFIG_INIT_PARAM_NAME + &quot;&#39; or &#39;&quot; +</b>
+&nbsp;                    CONFIG_PATH_INIT_PARAM_NAME + &quot;&#39; filter parameters.  Trying the default &quot; +
+&nbsp;                    DEFAULT_WEB_INI_RESOURCE_PATH + &quot; file.&quot;);
+<b class="nc">&nbsp;            ini = getServletContextIniResource(DEFAULT_WEB_INI_RESOURCE_PATH);</b>
+&nbsp;        }
+&nbsp;        //although the preferred default is /WEB-INF/shiro.ini per SHIRO-178, keep this
+&nbsp;        //for backwards compatibility:
+<b class="nc">&nbsp;        if (CollectionUtils.isEmpty(ini)) {</b>
+<b class="nc">&nbsp;            log.info(&quot;Null or empty configuration specified via &#39;&quot; + CONFIG_INIT_PARAM_NAME + &quot;&#39; or &#39;&quot; +</b>
+&nbsp;                    CONFIG_PATH_INIT_PARAM_NAME + &quot;&#39; filter parameters.  Trying the default &quot; +
+&nbsp;                    IniFactorySupport.DEFAULT_INI_RESOURCE_PATH + &quot; file.&quot;);
+<b class="nc">&nbsp;            ini = IniFactorySupport.loadDefaultClassPathIni();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Map&lt;String, ?&gt; objects = applySecurityManager(ini);</b>
+<b class="nc">&nbsp;        applyFilterChainResolver(ini, objects);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Ini loadIniFromConfig() {
+<b class="nc">&nbsp;        Ini ini = null;</b>
+<b class="nc">&nbsp;        String config = getConfig();</b>
+<b class="nc">&nbsp;        if (config != null) {</b>
+<b class="nc">&nbsp;            ini = convertConfigToIni(config);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return ini;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Ini loadIniFromPath() {
+<b class="nc">&nbsp;        Ini ini = null;</b>
+<b class="nc">&nbsp;        String path = getConfigPath();</b>
+<b class="nc">&nbsp;        if (path != null) {</b>
+<b class="nc">&nbsp;            ini = convertPathToIni(path);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return ini;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Map&lt;String, ?&gt; applySecurityManager(Ini ini) {
+&nbsp;        WebIniSecurityManagerFactory factory;
+<b class="nc">&nbsp;        if (CollectionUtils.isEmpty(ini)) {</b>
+<b class="nc">&nbsp;            factory = new WebIniSecurityManagerFactory();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            factory = new WebIniSecurityManagerFactory(ini);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Create the security manager and check that it implements WebSecurityManager.
+&nbsp;        // Otherwise, it can&#39;t be used with the filter.
+<b class="nc">&nbsp;        SecurityManager securityManager = factory.getInstance();</b>
+<b class="nc">&nbsp;        if (!(securityManager instanceof WebSecurityManager)) {</b>
+<b class="nc">&nbsp;            String msg = &quot;The configured security manager is not an instance of WebSecurityManager, so &quot; +</b>
+&nbsp;                    &quot;it can not be used with the Shiro servlet filter.&quot;;
+<b class="nc">&nbsp;            throw new ConfigurationException(msg);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        setSecurityManager((WebSecurityManager) securityManager);</b>
+&nbsp;
+<b class="nc">&nbsp;        return factory.getBeans();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void applyFilterChainResolver(Ini ini, Map&lt;String, ?&gt; defaults) {
+<b class="nc">&nbsp;        if (ini == null || ini.isEmpty()) {</b>
+&nbsp;            //nothing to use to create the resolver, just return
+&nbsp;            //(the AbstractShiroFilter allows a null resolver, in which case the original FilterChain is
+&nbsp;            // always used).
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        //only create a resolver if the &#39;filters&#39; or &#39;urls&#39; sections are defined:
+<b class="nc">&nbsp;        Ini.Section urls = ini.getSection(IniFilterChainResolverFactory.URLS);</b>
+<b class="nc">&nbsp;        Ini.Section filters = ini.getSection(IniFilterChainResolverFactory.FILTERS);</b>
+<b class="nc">&nbsp;        if ((urls != null &amp;&amp; !urls.isEmpty()) || (filters != null &amp;&amp; !filters.isEmpty())) {</b>
+&nbsp;            //either the urls section or the filters section was defined.  Go ahead and create the resolver
+&nbsp;            //and set it:
+<b class="nc">&nbsp;            IniFilterChainResolverFactory filterChainResolverFactory = new IniFilterChainResolverFactory(ini, defaults);</b>
+<b class="nc">&nbsp;            filterChainResolverFactory.setFilterConfig(getFilterConfig());</b>
+<b class="nc">&nbsp;            FilterChainResolver resolver = filterChainResolverFactory.getInstance();</b>
+<b class="nc">&nbsp;            setFilterChainResolver(resolver);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Ini convertConfigToIni(String config) {
+<b class="nc">&nbsp;        Ini ini = new Ini();</b>
+<b class="nc">&nbsp;        ini.load(config);</b>
+<b class="nc">&nbsp;        return ini;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the INI instance reflecting the specified servlet context resource path or {@code null} if no
+&nbsp;     * resource was found.
+&nbsp;     *
+&nbsp;     * @param servletContextPath the servlet context resource path of the INI file to load
+&nbsp;     * @return the INI instance reflecting the specified servlet context resource path or {@code null} if no
+&nbsp;     *         resource was found.
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    protected Ini getServletContextIniResource(String servletContextPath) {
+<b class="nc">&nbsp;        String path = WebUtils.normalize(servletContextPath);</b>
+<b class="nc">&nbsp;        if (getServletContext() != null) {</b>
+<b class="nc">&nbsp;            InputStream is = getServletContext().getResourceAsStream(path);</b>
+<b class="nc">&nbsp;            if (is != null) {</b>
+<b class="nc">&nbsp;                Ini ini = new Ini();</b>
+<b class="nc">&nbsp;                ini.load(is);</b>
+<b class="nc">&nbsp;                if (CollectionUtils.isEmpty(ini)) {</b>
+<b class="nc">&nbsp;                    log.warn(&quot;ServletContext INI resource &#39;&quot; + servletContextPath + &quot;&#39; exists, but it did not contain &quot; +</b>
+&nbsp;                            &quot;any data.&quot;);
+&nbsp;                }
+<b class="nc">&nbsp;                return ini;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts the specified file path to an {@link Ini} instance.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If the path does not have a resource prefix as defined by {@link ResourceUtils#hasResourcePrefix(String)}, the
+&nbsp;     * path is expected to be resolvable by the {@code ServletContext} via
+&nbsp;     * {@link javax.servlet.ServletContext#getResourceAsStream(String)}.
+&nbsp;     *
+&nbsp;     * @param path the path of the INI resource to load into an INI instance.
+&nbsp;     * @return an INI instance populated based on the given INI resource path.
+&nbsp;     */
+&nbsp;    protected Ini convertPathToIni(String path) {
+&nbsp;
+<b class="nc">&nbsp;        Ini ini = new Ini();</b>
+&nbsp;
+&nbsp;        //SHIRO-178: Check for servlet context resource and not
+&nbsp;        //only resource paths:
+<b class="nc">&nbsp;        if (!ResourceUtils.hasResourcePrefix(path)) {</b>
+<b class="nc">&nbsp;            ini = getServletContextIniResource(path);</b>
+<b class="nc">&nbsp;            if (ini == null) {</b>
+<b class="nc">&nbsp;                String msg = &quot;There is no servlet context resource corresponding to configPath &#39;&quot; + path + &quot;&#39;  If &quot; +</b>
+&nbsp;                        &quot;the resource is located elsewhere (not immediately resolveable in the servlet context), &quot; +
+&nbsp;                        &quot;specify an appropriate classpath:, url:, or file: resource prefix accordingly.&quot;;
+<b class="nc">&nbsp;                throw new ConfigurationException(msg);</b>
+&nbsp;            }
+&nbsp;        } else {
+&nbsp;            //normal resource path - load as usual:
+<b class="nc">&nbsp;            ini.loadFromPath(path);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return ini;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

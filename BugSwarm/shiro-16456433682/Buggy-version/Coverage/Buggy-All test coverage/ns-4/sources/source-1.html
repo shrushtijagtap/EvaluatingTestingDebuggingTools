@@ -1,0 +1,179 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AspectjAnnotationsAuthorizingMethodInterceptor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.aspectj</a>
+</div>
+
+<h1>Coverage Summary for Class: AspectjAnnotationsAuthorizingMethodInterceptor (org.apache.shiro.aspectj)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AspectjAnnotationsAuthorizingMethodInterceptor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.aspectj;
+&nbsp;
+&nbsp;import org.apache.shiro.aop.MethodInvocation;
+&nbsp;import org.apache.shiro.authz.aop.AnnotationsAuthorizingMethodInterceptor;
+&nbsp;import org.aspectj.lang.JoinPoint;
+&nbsp;import org.aspectj.lang.reflect.MethodSignature;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;/**
+&nbsp; * Extends the annotations authorizing method interceptor class hierarchie to adapt
+&nbsp; * an aspectj {@link JoinPoint} into a {@link MethodInvocation} amd to perform the
+&nbsp; * authorization of method invocations.
+&nbsp; *
+&nbsp; * @since 1.0
+&nbsp; */
+<b class="nc">&nbsp;public class AspectjAnnotationsAuthorizingMethodInterceptor extends AnnotationsAuthorizingMethodInterceptor {</b>
+&nbsp;    /**
+&nbsp;     * This class&#39;s private log instance.
+&nbsp;     */
+<b class="nc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(AspectjAnnotationsAuthorizingMethodInterceptor.class);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs the method interception of the before advice at the specified joint point.
+&nbsp;     *
+&nbsp;     * @param aJoinPoint The joint point to intercept.
+&nbsp;     * @throws Throwable If an error occurs berforming the method invocation.
+&nbsp;     */
+&nbsp;    protected void performBeforeInterception(JoinPoint aJoinPoint) throws Throwable {
+<b class="nc">&nbsp;        if (log.isTraceEnabled()) log.trace(&quot;#### Invoking a method decorated with a Shiro annotation&quot; +</b>
+<b class="nc">&nbsp;                &quot;\n\tkind       : &quot; + aJoinPoint.getKind() +</b>
+<b class="nc">&nbsp;                &quot;\n\tjoinPoint  : &quot; + aJoinPoint +</b>
+<b class="nc">&nbsp;                &quot;\n\tannotations: &quot; + Arrays.toString(((MethodSignature) aJoinPoint.getSignature()).getMethod().getAnnotations()) +</b>
+<b class="nc">&nbsp;                &quot;\n\ttarget     : &quot; + aJoinPoint.getTarget()</b>
+&nbsp;        );
+&nbsp;
+&nbsp;        // 1. Adapt the join point into a method invocation
+<b class="nc">&nbsp;        BeforeAdviceMethodInvocationAdapter mi = BeforeAdviceMethodInvocationAdapter.createFrom(aJoinPoint);</b>
+&nbsp;
+&nbsp;        // 2. Delegate the authorization of the method call to the super class
+<b class="nc">&nbsp;        super.invoke(mi);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

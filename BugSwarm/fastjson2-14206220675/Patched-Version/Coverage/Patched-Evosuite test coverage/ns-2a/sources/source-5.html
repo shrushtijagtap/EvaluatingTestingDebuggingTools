@@ -1,0 +1,191 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FactoryFunction</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: FactoryFunction (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FactoryFunction</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/34)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.support.LambdaMiscCodec;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;
+&nbsp;import java.lang.reflect.InvocationTargetException;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Parameter;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.function.BiFunction;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;final class FactoryFunction&lt;T&gt;
+&nbsp;        implements Function&lt;Map&lt;Long, Object&gt;, T&gt; {
+&nbsp;    final Method factoryMethod;
+&nbsp;    final Function function;
+&nbsp;    final BiFunction biFunction;
+&nbsp;    final String[] paramNames;
+&nbsp;    final long[] hashCodes;
+&nbsp;
+<b class="nc">&nbsp;    FactoryFunction(Method factoryMethod, String... paramNames) {</b>
+<b class="nc">&nbsp;        this.factoryMethod = factoryMethod;</b>
+<b class="nc">&nbsp;        Parameter[] parameters = factoryMethod.getParameters();</b>
+<b class="nc">&nbsp;        this.paramNames = new String[parameters.length];</b>
+<b class="nc">&nbsp;        this.hashCodes = new long[parameters.length];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; parameters.length; i++) {</b>
+&nbsp;            String name;
+<b class="nc">&nbsp;            if (i &lt; paramNames.length) {</b>
+<b class="nc">&nbsp;                name = paramNames[i];</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                name = parameters[i].getName();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            paramNames[i] = name;</b>
+<b class="nc">&nbsp;            hashCodes[i] = Fnv.hashCode64(name);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Function function = null;</b>
+<b class="nc">&nbsp;        BiFunction biFunction = null;</b>
+<b class="nc">&nbsp;        if (ObjectReaderCreator.JIT) {</b>
+<b class="nc">&nbsp;            int parameterCount = factoryMethod.getParameterCount();</b>
+<b class="nc">&nbsp;            if (parameterCount == 1) {</b>
+<b class="nc">&nbsp;                function = LambdaMiscCodec.createFunction(factoryMethod);</b>
+<b class="nc">&nbsp;            } else if (parameterCount == 2) {</b>
+<b class="nc">&nbsp;                biFunction = LambdaMiscCodec.createBiFunction(factoryMethod);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        this.function = function;</b>
+<b class="nc">&nbsp;        this.biFunction = biFunction;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public T apply(Map&lt;Long, Object&gt; values) {
+<b class="nc">&nbsp;        if (function != null) {</b>
+<b class="nc">&nbsp;            Object arg = values.get(hashCodes[0]);</b>
+<b class="nc">&nbsp;            return (T) function.apply(arg);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (biFunction != null) {</b>
+<b class="nc">&nbsp;            Object arg0 = values.get(hashCodes[0]);</b>
+<b class="nc">&nbsp;            Object arg1 = values.get(hashCodes[1]);</b>
+<b class="nc">&nbsp;            return (T) biFunction.apply(arg0, arg1);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Object[] args = new Object[hashCodes.length];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; args.length; i++) {</b>
+<b class="nc">&nbsp;            args[i] = values.get(hashCodes[i]);</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="nc">&nbsp;            return (T) factoryMethod.invoke(null, args);</b>
+<b class="nc">&nbsp;        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;invoke factoryMethod error&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:17</div>
+</div>
+</body>
+</html>

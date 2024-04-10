@@ -1,0 +1,109 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MethodInterceptor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.aop</a>
+</div>
+
+<h1>Coverage Summary for Class: MethodInterceptor (org.apache.shiro.aop)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">MethodInterceptor</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.aop;
+&nbsp;
+&nbsp;/**
+&nbsp; * A &lt;tt&gt;MethodInterceptor&lt;/tt&gt; intercepts a &lt;tt&gt;MethodInvocation&lt;/tt&gt; to perform before or after logic (aka &#39;advice&#39;).
+&nbsp; *
+&nbsp; * &lt;p&gt;Shiro&#39;s implementations of this interface mostly have to deal with ensuring a current Subject has the
+&nbsp; * ability to execute the method before allowing it to continue.
+&nbsp; *
+&nbsp; * @since 0.2
+&nbsp; */
+&nbsp;public interface MethodInterceptor {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Invokes the specified &lt;code&gt;MethodInvocation&lt;/code&gt;, allowing implementations to perform pre/post/finally
+&nbsp;     * surrounding the actual invocation.
+&nbsp;     *
+&nbsp;     * @param methodInvocation the &lt;code&gt;MethodInvocation&lt;/code&gt; to execute.
+&nbsp;     * @return the result of the invocation
+&nbsp;     * @throws Throwable if the method invocation throws a Throwable or if an error occurs in pre/post/finally advice.
+&nbsp;     */
+&nbsp;    Object invoke(MethodInvocation methodInvocation) throws Throwable;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,831 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AuthenticatingRealm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.realm</a>
+</div>
+
+<h1>Coverage Summary for Class: AuthenticatingRealm (org.apache.shiro.realm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AuthenticatingRealm</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    56.2%
+  </span>
+  <span class="absValue">
+    (18/32)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (18/54)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    51%
+  </span>
+  <span class="absValue">
+    (49/96)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.realm;
+&nbsp;
+&nbsp;import org.apache.shiro.authc.AuthenticationException;
+&nbsp;import org.apache.shiro.authc.AuthenticationInfo;
+&nbsp;import org.apache.shiro.authc.AuthenticationToken;
+&nbsp;import org.apache.shiro.authc.IncorrectCredentialsException;
+&nbsp;import org.apache.shiro.authc.UsernamePasswordToken;
+&nbsp;import org.apache.shiro.authc.credential.AllowAllCredentialsMatcher;
+&nbsp;import org.apache.shiro.authc.credential.CredentialsMatcher;
+&nbsp;import org.apache.shiro.authc.credential.SimpleCredentialsMatcher;
+&nbsp;import org.apache.shiro.cache.Cache;
+&nbsp;import org.apache.shiro.cache.CacheManager;
+&nbsp;import org.apache.shiro.subject.PrincipalCollection;
+&nbsp;import org.apache.shiro.util.Initializable;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import java.util.concurrent.atomic.AtomicInteger;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * A top-level abstract implementation of the &lt;tt&gt;Realm&lt;/tt&gt; interface that only implements authentication support
+&nbsp; * (log-in) operations and leaves authorization (access control) behavior to subclasses.
+&nbsp; * &lt;h2&gt;Authentication Caching&lt;/h2&gt;
+&nbsp; * For applications that perform frequent repeated authentication of the same accounts (e.g. as is often done in
+&nbsp; * REST or Soap applications that authenticate on every request), it might be prudent to enable authentication
+&nbsp; * caching to alleviate constant load on any back-end data sources.
+&nbsp; * &lt;p/&gt;
+&nbsp; * This feature is disabled by default to retain backwards-compatibility with Shiro 1.1 and earlier.  It may be
+&nbsp; * enabled by setting {@link #setAuthenticationCachingEnabled(boolean) authenticationCachingEnabled} = {@code true}
+&nbsp; * (and configuring Shiro with a {@link CacheManager} of course), but &lt;b&gt;NOTE:&lt;/b&gt;
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;b&gt;ONLY enable authentication caching if either of the following is true for your realm implementation:&lt;/b&gt;
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;The {@link #doGetAuthenticationInfo(org.apache.shiro.authc.AuthenticationToken) doGetAuthenticationInfo}
+&nbsp; * implementation returns {@code AuthenticationInfo} instances where the
+&nbsp; * {@link org.apache.shiro.authc.AuthenticationInfo#getCredentials() credentials} are securely obfuscated and NOT
+&nbsp; * plaintext (raw) credentials. For example,
+&nbsp; * if your realm references accounts with passwords, that the {@code AuthenticationInfo}&#39;s
+&nbsp; * {@link org.apache.shiro.authc.AuthenticationInfo#getCredentials() credentials} are safely hashed and salted or otherwise
+&nbsp; * fully encrypted.&lt;br/&gt;&lt;br/&gt;&lt;/li&gt;
+&nbsp; * &lt;li&gt;The {@link #doGetAuthenticationInfo(org.apache.shiro.authc.AuthenticationToken) doGetAuthenticationInfo}
+&nbsp; * implementation returns {@code AuthenticationInfo} instances where the
+&nbsp; * {@link org.apache.shiro.authc.AuthenticationInfo#getCredentials() credentials} are plaintext (raw) &lt;b&gt;AND&lt;/b&gt; the
+&nbsp; * cache region storing the {@code AuthenticationInfo} instances WILL NOT overflow to disk and WILL NOT transmit cache
+&nbsp; * entries over an unprotected (non TLS/SSL) network (as might be the case with a networked/distributed enterprise cache).
+&nbsp; * This should be the case even in private/trusted/corporate networks.&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * &lt;p/&gt;
+&nbsp; * These points are very important because if authentication caching is enabled, this abstract class implementation
+&nbsp; * will place AuthenticationInfo instances returned from the subclass implementations directly into the cache, for
+&nbsp; * example:
+&nbsp; * &lt;pre&gt;
+&nbsp; * cache.put(cacheKey, subclassAuthenticationInfoInstance);
+&nbsp; * &lt;/pre&gt;
+&nbsp; * &lt;p/&gt;
+&nbsp; * Enabling authentication caching is ONLY safe to do if the above two scenarios apply.  It is NOT safe to enable under
+&nbsp; * any other scenario.
+&nbsp; * &lt;p/&gt;
+&nbsp; * When possible, always represent and store credentials in a safe form (hash+salt or encrypted) to eliminate plaintext
+&nbsp; * visibility.
+&nbsp; * &lt;h3&gt;Authentication Cache Invalidation on Logout&lt;/h3&gt;
+&nbsp; * If authentication caching is enabled, this implementation will attempt to evict (remove) cached authentication data
+&nbsp; * for an account during logout.  This can only occur if the
+&nbsp; * {@link #getAuthenticationCacheKey(org.apache.shiro.authc.AuthenticationToken)} and
+&nbsp; * {@link #getAuthenticationCacheKey(org.apache.shiro.subject.PrincipalCollection)} methods return the exact same value.
+&nbsp; * &lt;p/&gt;
+&nbsp; * The default implementations of these methods expect that the
+&nbsp; * {@link org.apache.shiro.authc.AuthenticationToken#getPrincipal()} (what the user submits during login) and
+&nbsp; * {@link #getAvailablePrincipal(org.apache.shiro.subject.PrincipalCollection) getAvailablePrincipal} (what is returned
+&nbsp; * by the realm after account lookup) return
+&nbsp; * the same exact value.  For example, the user submitted username is also the primary account identifier.
+&nbsp; * &lt;p/&gt;
+&nbsp; * However, if your application uses, say, a username for end-user login, but returns a primary key ID as the
+&nbsp; * primary principal after authentication, then you will need to override either
+&nbsp; * {@link #getAuthenticationCacheKey(org.apache.shiro.authc.AuthenticationToken) getAuthenticationCacheKey(token)} or
+&nbsp; * {@link #getAuthenticationCacheKey(org.apache.shiro.subject.PrincipalCollection) getAuthenticationCacheKey(principals)}
+&nbsp; * (or both) to ensure that the same cache key can be used for either object.
+&nbsp; * &lt;p/&gt;
+&nbsp; * This guarantees that the same cache key used to cache the data during authentication (derived from the
+&nbsp; * {@code AuthenticationToken}) will be used to remove the cached data during logout (derived from the
+&nbsp; * {@code PrincipalCollection}).
+&nbsp; * &lt;h4&gt;Unmatching Cache Key Values&lt;/h4&gt;
+&nbsp; * If the return values from {@link #getAuthenticationCacheKey(org.apache.shiro.authc.AuthenticationToken)} and
+&nbsp; * {@link #getAuthenticationCacheKey(org.apache.shiro.subject.PrincipalCollection)} are not identical, cached
+&nbsp; * authentication data removal is at the mercy of your cache provider settings.  For example, often cache
+&nbsp; * implementations will evict cache entries based on a timeToIdle or timeToLive (TTL) value.
+&nbsp; * &lt;p/&gt;
+&nbsp; * If this lazy eviction capability of the cache product is not sufficient and you want discrete behavior
+&nbsp; * (highly recommended for authentication data), ensure that the return values from those two methods are identical in
+&nbsp; * the subclass implementation.
+&nbsp; *
+&nbsp; * @since 0.2
+&nbsp; */
+&nbsp;public abstract class AuthenticatingRealm extends CachingRealm implements Initializable {
+&nbsp;
+&nbsp;    //TODO - complete JavaDoc
+&nbsp;
+<b class="fc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(AuthenticatingRealm.class);</b>
+&nbsp;
+<b class="fc">&nbsp;    private static final AtomicInteger INSTANCE_COUNT = new AtomicInteger();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The default suffix appended to the realm name used for caching authentication data.
+&nbsp;     *
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    private static final String DEFAULT_AUTHENTICATION_CACHE_SUFFIX = &quot;.authenticationCache&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Credentials matcher used to determine if the provided credentials match the credentials stored in the data store.
+&nbsp;     */
+&nbsp;    private CredentialsMatcher credentialsMatcher;
+&nbsp;
+&nbsp;
+&nbsp;    private Cache&lt;Object, AuthenticationInfo&gt; authenticationCache;
+&nbsp;
+&nbsp;    private boolean authenticationCachingEnabled;
+&nbsp;    private String authenticationCacheName;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The class that this realm supports for authentication tokens.  This is used by the
+&nbsp;     * default implementation of the {@link Realm#supports(org.apache.shiro.authc.AuthenticationToken)} method to
+&nbsp;     * determine whether or not the given authentication token is supported by this realm.
+&nbsp;     */
+&nbsp;    private Class&lt;? extends AuthenticationToken&gt; authenticationTokenClass;
+&nbsp;
+&nbsp;    /*-------------------------------------------
+&nbsp;    |         C O N S T R U C T O R S           |
+&nbsp;    ============================================*/
+&nbsp;    public AuthenticatingRealm() {
+<b class="fc">&nbsp;        this(null, new SimpleCredentialsMatcher());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AuthenticatingRealm(CacheManager cacheManager) {
+<b class="nc">&nbsp;        this(cacheManager, new SimpleCredentialsMatcher());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AuthenticatingRealm(CredentialsMatcher matcher) {
+<b class="nc">&nbsp;        this(null, matcher);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public AuthenticatingRealm(CacheManager cacheManager, CredentialsMatcher matcher) {</b>
+<b class="fc">&nbsp;        authenticationTokenClass = UsernamePasswordToken.class;</b>
+&nbsp;
+&nbsp;        //retain backwards compatibility for Shiro 1.1 and earlier.  Setting to true by default will probably cause
+&nbsp;        //unexpected results for existing applications:
+<b class="fc">&nbsp;        this.authenticationCachingEnabled = false;</b>
+&nbsp;
+<b class="fc">&nbsp;        int instanceNumber = INSTANCE_COUNT.getAndIncrement();</b>
+<b class="fc">&nbsp;        this.authenticationCacheName = getClass().getName() + DEFAULT_AUTHENTICATION_CACHE_SUFFIX;</b>
+<b class="fc">&nbsp;        if (instanceNumber &gt; 0) {</b>
+<b class="fc">&nbsp;            this.authenticationCacheName = this.authenticationCacheName + &quot;.&quot; + instanceNumber;</b>
+&nbsp;        }
+&nbsp;
+<b class="pc">&nbsp;        if (cacheManager != null) {</b>
+<b class="nc">&nbsp;            setCacheManager(cacheManager);</b>
+&nbsp;        }
+<b class="pc">&nbsp;        if (matcher != null) {</b>
+<b class="fc">&nbsp;            setCredentialsMatcher(matcher);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |  A C C E S S O R S / M O D I F I E R S    |
+&nbsp;    ============================================*/
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the &lt;code&gt;CredentialsMatcher&lt;/code&gt; used during an authentication attempt to verify submitted
+&nbsp;     * credentials with those stored in the system.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;p&gt;Unless overridden by the {@link #setCredentialsMatcher setCredentialsMatcher} method, the default
+&nbsp;     * value is a {@link org.apache.shiro.authc.credential.SimpleCredentialsMatcher SimpleCredentialsMatcher} instance.
+&nbsp;     *
+&nbsp;     * @return the &lt;code&gt;CredentialsMatcher&lt;/code&gt; used during an authentication attempt to verify submitted
+&nbsp;     *         credentials with those stored in the system.
+&nbsp;     */
+&nbsp;    public CredentialsMatcher getCredentialsMatcher() {
+<b class="fc">&nbsp;        return credentialsMatcher;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the CrendialsMatcher used during an authentication attempt to verify submitted credentials with those
+&nbsp;     * stored in the system.  The implementation of this matcher can be switched via configuration to
+&nbsp;     * support any number of schemes, including plain text comparisons, hashing comparisons, and others.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;p&gt;Unless overridden by this method, the default value is a
+&nbsp;     * {@link org.apache.shiro.authc.credential.SimpleCredentialsMatcher} instance.
+&nbsp;     *
+&nbsp;     * @param credentialsMatcher the matcher to use.
+&nbsp;     */
+&nbsp;    public void setCredentialsMatcher(CredentialsMatcher credentialsMatcher) {
+<b class="fc">&nbsp;        this.credentialsMatcher = credentialsMatcher;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the authenticationToken class supported by this realm.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;p&gt;The default value is &lt;tt&gt;{@link org.apache.shiro.authc.UsernamePasswordToken UsernamePasswordToken.class}&lt;/tt&gt;, since
+&nbsp;     * about 90% of realms use username/password authentication, regardless of their protocol (e.g. over jdbc, ldap,
+&nbsp;     * kerberos, http, etc).
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;p&gt;If subclasses haven&#39;t already overridden the {@link Realm#supports Realm.supports(AuthenticationToken)} method,
+&nbsp;     * they must {@link #setAuthenticationTokenClass(Class) set a new class} if they won&#39;t support
+&nbsp;     * &lt;tt&gt;UsernamePasswordToken&lt;/tt&gt; authentication token submissions.
+&nbsp;     *
+&nbsp;     * @return the authenticationToken class supported by this realm.
+&nbsp;     * @see #setAuthenticationTokenClass
+&nbsp;     */
+&nbsp;    public Class getAuthenticationTokenClass() {
+<b class="fc">&nbsp;        return authenticationTokenClass;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the authenticationToken class supported by this realm.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;p&gt;Unless overridden by this method, the default value is
+&nbsp;     * {@link org.apache.shiro.authc.UsernamePasswordToken UsernamePasswordToken.class} to support the majority of applications.
+&nbsp;     *
+&nbsp;     * @param authenticationTokenClass the class of authentication token instances supported by this realm.
+&nbsp;     * @see #getAuthenticationTokenClass getAuthenticationTokenClass() for more explanation.
+&nbsp;     */
+&nbsp;    public void setAuthenticationTokenClass(Class&lt;? extends AuthenticationToken&gt; authenticationTokenClass) {
+<b class="nc">&nbsp;        this.authenticationTokenClass = authenticationTokenClass;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets an explicit {@link Cache} instance to use for authentication caching.  If not set and authentication
+&nbsp;     * caching is {@link #isAuthenticationCachingEnabled() enabled}, any available
+&nbsp;     * {@link #getCacheManager() cacheManager} will be used to acquire the cache instance if available.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;WARNING:&lt;/b&gt; Only set this property if safe caching conditions apply, as documented at the top
+&nbsp;     * of this page in the class-level JavaDoc.
+&nbsp;     *
+&nbsp;     * @param authenticationCache an explicit {@link Cache} instance to use for authentication caching or
+&nbsp;     *                            {@code null} if the cache should possibly be obtained another way.
+&nbsp;     * @see #isAuthenticationCachingEnabled()
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    public void setAuthenticationCache(Cache&lt;Object, AuthenticationInfo&gt; authenticationCache) {
+<b class="nc">&nbsp;        this.authenticationCache = authenticationCache;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a {@link Cache} instance to use for authentication caching, or {@code null} if no cache has been
+&nbsp;     * set.
+&nbsp;     *
+&nbsp;     * @return a {@link Cache} instance to use for authentication caching, or {@code null} if no cache has been
+&nbsp;     *         set.
+&nbsp;     * @see #setAuthenticationCache(org.apache.shiro.cache.Cache)
+&nbsp;     * @see #isAuthenticationCachingEnabled()
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    public Cache&lt;Object, AuthenticationInfo&gt; getAuthenticationCache() {
+<b class="fc">&nbsp;        return this.authenticationCache;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the name of a {@link Cache} to lookup from any available {@link #getCacheManager() cacheManager} if
+&nbsp;     * a cache is not explicitly configured via {@link #setAuthenticationCache(org.apache.shiro.cache.Cache)}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This name will only be used to look up a cache if authentication caching is
+&nbsp;     * {@link #isAuthenticationCachingEnabled() enabled}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;WARNING:&lt;/b&gt; Only set this property if safe caching conditions apply, as documented at the top
+&nbsp;     * of this page in the class-level JavaDoc.
+&nbsp;     *
+&nbsp;     * @return the name of a {@link Cache} to lookup from any available {@link #getCacheManager() cacheManager} if
+&nbsp;     *         a cache is not explicitly configured via {@link #setAuthenticationCache(org.apache.shiro.cache.Cache)}.
+&nbsp;     * @see #isAuthenticationCachingEnabled()
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    public String getAuthenticationCacheName() {
+<b class="nc">&nbsp;        return this.authenticationCacheName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the name of a {@link Cache} to lookup from any available {@link #getCacheManager() cacheManager} if
+&nbsp;     * a cache is not explicitly configured via {@link #setAuthenticationCache(org.apache.shiro.cache.Cache)}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This name will only be used to look up a cache if authentication caching is
+&nbsp;     * {@link #isAuthenticationCachingEnabled() enabled}.
+&nbsp;     *
+&nbsp;     * @param authenticationCacheName the name of a {@link Cache} to lookup from any available
+&nbsp;     *                                {@link #getCacheManager() cacheManager} if a cache is not explicitly configured
+&nbsp;     *                                via {@link #setAuthenticationCache(org.apache.shiro.cache.Cache)}.
+&nbsp;     * @see #isAuthenticationCachingEnabled()
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    public void setAuthenticationCacheName(String authenticationCacheName) {
+<b class="nc">&nbsp;        this.authenticationCacheName = authenticationCacheName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if authentication caching should be utilized if a {@link CacheManager} has been
+&nbsp;     * {@link #setCacheManager(org.apache.shiro.cache.CacheManager) configured}, {@code false} otherwise.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The default value is {@code true}.
+&nbsp;     *
+&nbsp;     * @return {@code true} if authentication caching should be utilized, {@code false} otherwise.
+&nbsp;     */
+&nbsp;    public boolean isAuthenticationCachingEnabled() {
+<b class="pc">&nbsp;        return this.authenticationCachingEnabled &amp;&amp; isCachingEnabled();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets whether or not authentication caching should be utilized if a {@link CacheManager} has been
+&nbsp;     * {@link #setCacheManager(org.apache.shiro.cache.CacheManager) configured}, {@code false} otherwise.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The default value is {@code false} to retain backwards compatibility with Shiro 1.1 and earlier.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;WARNING:&lt;/b&gt; Only set this property to {@code true} if safe caching conditions apply, as documented at the top
+&nbsp;     * of this page in the class-level JavaDoc.
+&nbsp;     *
+&nbsp;     * @param authenticationCachingEnabled the value to set
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    public void setAuthenticationCachingEnabled(boolean authenticationCachingEnabled) {
+<b class="nc">&nbsp;        this.authenticationCachingEnabled = authenticationCachingEnabled;</b>
+<b class="nc">&nbsp;        if (authenticationCachingEnabled) {</b>
+<b class="nc">&nbsp;            setCachingEnabled(true);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setName(String name) {
+<b class="fc">&nbsp;        super.setName(name);</b>
+<b class="fc">&nbsp;        String authcCacheName = this.authenticationCacheName;</b>
+<b class="pc">&nbsp;        if (authcCacheName != null &amp;&amp; authcCacheName.startsWith(getClass().getName())) {</b>
+&nbsp;            //get rid of the default heuristically-created cache name.  Create a more meaningful one
+&nbsp;            //based on the application-unique Realm name:
+<b class="fc">&nbsp;            this.authenticationCacheName = name + DEFAULT_AUTHENTICATION_CACHE_SUFFIX;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |               M E T H O D S               |
+&nbsp;    ============================================*/
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience implementation that returns
+&nbsp;     * &lt;tt&gt;getAuthenticationTokenClass().isAssignableFrom( token.getClass() );&lt;/tt&gt;.  Can be overridden
+&nbsp;     * by subclasses for more complex token checking.
+&nbsp;     * &lt;p&gt;Most configurations will only need to set a different class via
+&nbsp;     * {@link #setAuthenticationTokenClass}, as opposed to overriding this method.
+&nbsp;     *
+&nbsp;     * @param token the token being submitted for authentication.
+&nbsp;     * @return true if this authentication realm can process the submitted token instance of the class, false otherwise.
+&nbsp;     */
+&nbsp;    public boolean supports(AuthenticationToken token) {
+<b class="pc">&nbsp;        return token != null &amp;&amp; getAuthenticationTokenClass().isAssignableFrom(token.getClass());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Initializes this realm and potentially enables an authentication cache, depending on configuration.  Based on
+&nbsp;     * the availability of an authentication cache, this class functions as follows:
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;If the {@link #setAuthenticationCache cache} property has been set, it will be
+&nbsp;     * used to cache the AuthenticationInfo objects returned from {@link #getAuthenticationInfo}
+&nbsp;     * method invocations.
+&nbsp;     * All future calls to {@link #getAuthenticationInfo} will attempt to use this cache first
+&nbsp;     * to alleviate any potentially unnecessary calls to an underlying data store.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;If the {@link #setAuthenticationCache cache} property has &lt;b&gt;not&lt;/b&gt; been set,
+&nbsp;     * the {@link #setCacheManager cacheManager} property will be checked.
+&nbsp;     * If a {@code cacheManager} has been set, it will be used to eagerly acquire an authentication
+&nbsp;     * {@code cache}, and this cache which will be used as specified in #1.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;If neither the {@link #setAuthenticationCache (org.apache.shiro.cache.Cache) authenticationCache}
+&nbsp;     * or {@link #setCacheManager(org.apache.shiro.cache.CacheManager) cacheManager}
+&nbsp;     * properties are set, caching will not be utilized and authentication look-ups will be delegated to
+&nbsp;     * subclass implementations for each authentication attempt.&lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This method finishes by calling {@link #onInit()} is to allow subclasses to perform any init behavior desired.
+&nbsp;     *
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    public final void init() {
+&nbsp;        //trigger obtaining the authorization cache if possible
+<b class="fc">&nbsp;        getAvailableAuthenticationCache();</b>
+<b class="fc">&nbsp;        onInit();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Template method for subclasses to implement any initialization logic.  Called from
+&nbsp;     * {@link #init()}.
+&nbsp;     *
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    protected void onInit() {
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This implementation attempts to acquire an authentication cache if one is not already configured.
+&nbsp;     *
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    protected void afterCacheManagerSet() {
+&nbsp;        //trigger obtaining the authorization cache if possible
+<b class="nc">&nbsp;        getAvailableAuthenticationCache();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns any available {@link Cache} instance to use for authentication caching.  This functions as follows:
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;If an {@link #setAuthenticationCache(org.apache.shiro.cache.Cache) authenticationCache} has been explicitly
+&nbsp;     * configured (it is not null), it is returned.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;If there is no {@link #getAuthenticationCache() authenticationCache} configured:
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;If authentication caching is {@link #isAuthenticationCachingEnabled() enabled}, any available
+&nbsp;     * {@link #getCacheManager() cacheManager} will be consulted to obtain an available authentication cache.
+&nbsp;     * &lt;/li&gt;
+&nbsp;     * &lt;li&gt;If authentication caching is disabled, this implementation does nothing.&lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     * &lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     *
+&nbsp;     * @return any available {@link Cache} instance to use for authentication caching.
+&nbsp;     */
+&nbsp;    private Cache&lt;Object, AuthenticationInfo&gt; getAvailableAuthenticationCache() {
+<b class="fc">&nbsp;        Cache&lt;Object, AuthenticationInfo&gt; cache = getAuthenticationCache();</b>
+<b class="fc">&nbsp;        boolean authcCachingEnabled = isAuthenticationCachingEnabled();</b>
+<b class="pc">&nbsp;        if (cache == null &amp;&amp; authcCachingEnabled) {</b>
+<b class="nc">&nbsp;            cache = getAuthenticationCacheLazy();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return cache;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks to see if the authenticationCache class attribute is null, and if so, attempts to acquire one from
+&nbsp;     * any configured {@link #getCacheManager() cacheManager}.  If one is acquired, it is set as the class attribute.
+&nbsp;     * The class attribute is then returned.
+&nbsp;     *
+&nbsp;     * @return an available cache instance to be used for authentication caching or {@code null} if one is not available.
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    private Cache&lt;Object, AuthenticationInfo&gt; getAuthenticationCacheLazy() {
+&nbsp;
+<b class="nc">&nbsp;        if (this.authenticationCache == null) {</b>
+&nbsp;
+<b class="nc">&nbsp;            log.trace(&quot;No authenticationCache instance set.  Checking for a cacheManager...&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            CacheManager cacheManager = getCacheManager();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (cacheManager != null) {</b>
+<b class="nc">&nbsp;                String cacheName = getAuthenticationCacheName();</b>
+<b class="nc">&nbsp;                log.debug(&quot;CacheManager [{}] configured.  Building authentication cache &#39;{}&#39;&quot;, cacheManager, cacheName);</b>
+<b class="nc">&nbsp;                this.authenticationCache = cacheManager.getCache(cacheName);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return this.authenticationCache;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns any cached AuthenticationInfo corresponding to the specified token or {@code null} if there currently
+&nbsp;     * isn&#39;t any cached data.
+&nbsp;     *
+&nbsp;     * @param token the token submitted during the authentication attempt.
+&nbsp;     * @return any cached AuthenticationInfo corresponding to the specified token or {@code null} if there currently
+&nbsp;     *         isn&#39;t any cached data.
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    private AuthenticationInfo getCachedAuthenticationInfo(AuthenticationToken token) {
+<b class="fc">&nbsp;        AuthenticationInfo info = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        Cache&lt;Object, AuthenticationInfo&gt; cache = getAvailableAuthenticationCache();</b>
+<b class="pc">&nbsp;        if (cache != null &amp;&amp; token != null) {</b>
+<b class="nc">&nbsp;            log.trace(&quot;Attempting to retrieve the AuthenticationInfo from cache.&quot;);</b>
+<b class="nc">&nbsp;            Object key = getAuthenticationCacheKey(token);</b>
+<b class="nc">&nbsp;            info = cache.get(key);</b>
+<b class="nc">&nbsp;            if (info == null) {</b>
+<b class="nc">&nbsp;                log.trace(&quot;No AuthorizationInfo found in cache for key [{}]&quot;, key);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                log.trace(&quot;Found cached AuthorizationInfo for key [{}]&quot;, key);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return info;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Caches the specified info if authentication caching
+&nbsp;     * {@link #isAuthenticationCachingEnabled(org.apache.shiro.authc.AuthenticationToken, org.apache.shiro.authc.AuthenticationInfo) isEnabled}
+&nbsp;     * for the specific token/info pair and a cache instance is available to be used.
+&nbsp;     *
+&nbsp;     * @param token the authentication token submitted which resulted in a successful authentication attempt.
+&nbsp;     * @param info  the AuthenticationInfo to cache as a result of the successful authentication attempt.
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    private void cacheAuthenticationInfoIfPossible(AuthenticationToken token, AuthenticationInfo info) {
+<b class="pc">&nbsp;        if (!isAuthenticationCachingEnabled(token, info)) {</b>
+<b class="fc">&nbsp;            log.debug(&quot;AuthenticationInfo caching is disabled for info [{}].  Submitted token: [{}].&quot;, info, token);</b>
+&nbsp;            //return quietly, caching is disabled for this token/info pair:
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Cache&lt;Object, AuthenticationInfo&gt; cache = getAvailableAuthenticationCache();</b>
+<b class="nc">&nbsp;        if (cache != null) {</b>
+<b class="nc">&nbsp;            Object key = getAuthenticationCacheKey(token);</b>
+<b class="nc">&nbsp;            cache.put(key, info);</b>
+<b class="nc">&nbsp;            log.trace(&quot;Cached AuthenticationInfo for continued authentication.  key=[{}], value=[{}].&quot;, key, info);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if authentication caching should be utilized based on the specified
+&nbsp;     * {@link AuthenticationToken} and/or {@link AuthenticationInfo}, {@code false} otherwise.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The default implementation simply delegates to {@link #isAuthenticationCachingEnabled()}, the general-case
+&nbsp;     * authentication caching setting.  Subclasses can override this to turn on or off caching at runtime
+&nbsp;     * based on the specific submitted runtime values.
+&nbsp;     *
+&nbsp;     * @param token the submitted authentication token
+&nbsp;     * @param info  the {@code AuthenticationInfo} acquired from data source lookup via
+&nbsp;     *              {@link #doGetAuthenticationInfo(org.apache.shiro.authc.AuthenticationToken)}
+&nbsp;     * @return {@code true} if authentication caching should be utilized based on the specified
+&nbsp;     *         {@link AuthenticationToken} and/or {@link AuthenticationInfo}, {@code false} otherwise.
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    protected boolean isAuthenticationCachingEnabled(AuthenticationToken token, AuthenticationInfo info) {
+<b class="fc">&nbsp;        return isAuthenticationCachingEnabled();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This implementation functions as follows:
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;It attempts to acquire any cached {@link AuthenticationInfo} corresponding to the specified
+&nbsp;     * {@link AuthenticationToken} argument.  If a cached value is found, it will be used for credentials matching,
+&nbsp;     * alleviating the need to perform any lookups with a data source.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;If there is no cached {@link AuthenticationInfo} found, delegate to the
+&nbsp;     * {@link #doGetAuthenticationInfo(org.apache.shiro.authc.AuthenticationToken)} method to perform the actual
+&nbsp;     * lookup.  If authentication caching is enabled and possible, any returned info object will be
+&nbsp;     * {@link #cacheAuthenticationInfoIfPossible(org.apache.shiro.authc.AuthenticationToken, org.apache.shiro.authc.AuthenticationInfo) cached}
+&nbsp;     * to be used in future authentication attempts.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;If an AuthenticationInfo instance is not found in the cache or by lookup, {@code null} is returned to
+&nbsp;     * indicate an account cannot be found.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;If an AuthenticationInfo instance is found (either cached or via lookup), ensure the submitted
+&nbsp;     * AuthenticationToken&#39;s credentials match the expected {@code AuthenticationInfo}&#39;s credentials using the
+&nbsp;     * {@link #getCredentialsMatcher() credentialsMatcher}.  This means that credentials are always verified
+&nbsp;     * for an authentication attempt.&lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     *
+&nbsp;     * @param token the submitted account principal and credentials.
+&nbsp;     * @return the AuthenticationInfo corresponding to the given {@code token}, or {@code null} if no
+&nbsp;     *         AuthenticationInfo could be found.
+&nbsp;     * @throws AuthenticationException if authentication failed.
+&nbsp;     */
+&nbsp;    public final AuthenticationInfo getAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+&nbsp;
+<b class="fc">&nbsp;        AuthenticationInfo info = getCachedAuthenticationInfo(token);</b>
+<b class="pc">&nbsp;        if (info == null) {</b>
+&nbsp;            //otherwise not cached, perform the lookup:
+<b class="fc">&nbsp;            info = doGetAuthenticationInfo(token);</b>
+<b class="fc">&nbsp;            log.debug(&quot;Looked up AuthenticationInfo [{}] from doGetAuthenticationInfo&quot;, info);</b>
+<b class="pc">&nbsp;            if (token != null &amp;&amp; info != null) {</b>
+<b class="fc">&nbsp;                cacheAuthenticationInfoIfPossible(token, info);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            log.debug(&quot;Using cached authentication info [{}] to perform credentials matching.&quot;, info);</b>
+&nbsp;        }
+&nbsp;
+<b class="pc">&nbsp;        if (info != null) {</b>
+<b class="fc">&nbsp;            assertCredentialsMatch(token, info);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            log.debug(&quot;No AuthenticationInfo found for submitted AuthenticationToken [{}].  Returning null.&quot;, token);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return info;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Asserts that the submitted {@code AuthenticationToken}&#39;s credentials match the stored account
+&nbsp;     * {@code AuthenticationInfo}&#39;s credentials, and if not, throws an {@link AuthenticationException}.
+&nbsp;     *
+&nbsp;     * @param token the submitted authentication token
+&nbsp;     * @param info  the AuthenticationInfo corresponding to the given {@code token}
+&nbsp;     * @throws AuthenticationException if the token&#39;s credentials do not match the stored account credentials.
+&nbsp;     */
+&nbsp;    protected void assertCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) throws AuthenticationException {
+<b class="fc">&nbsp;        CredentialsMatcher cm = getCredentialsMatcher();</b>
+<b class="pc">&nbsp;        if (cm != null) {</b>
+<b class="pc">&nbsp;            if (!cm.doCredentialsMatch(token, info)) {</b>
+&nbsp;                //not successful - throw an exception to indicate this:
+<b class="nc">&nbsp;                String msg = &quot;Submitted credentials for token [&quot; + token + &quot;] did not match the expected credentials.&quot;;</b>
+<b class="nc">&nbsp;                throw new IncorrectCredentialsException(msg);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new AuthenticationException(&quot;A CredentialsMatcher must be configured in order to verify &quot; +</b>
+&nbsp;                    &quot;credentials during authentication.  If you do not wish for credentials to be examined, you &quot; +
+<b class="nc">&nbsp;                    &quot;can configure an &quot; + AllowAllCredentialsMatcher.class.getName() + &quot; instance.&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the key under which {@link AuthenticationInfo} instances are cached if authentication caching is enabled.
+&nbsp;     * This implementation defaults to returning the token&#39;s
+&nbsp;     * {@link org.apache.shiro.authc.AuthenticationToken#getPrincipal() principal}, which is usually a username in
+&nbsp;     * most applications.
+&nbsp;     * &lt;h3&gt;Cache Invalidation on Logout&lt;/h3&gt;
+&nbsp;     * &lt;b&gt;NOTE:&lt;/b&gt; If you want to be able to invalidate an account&#39;s cached {@code AuthenticationInfo} on logout, you
+&nbsp;     * must ensure the {@link #getAuthenticationCacheKey(org.apache.shiro.subject.PrincipalCollection)} method returns
+&nbsp;     * the same value as this method.
+&nbsp;     *
+&nbsp;     * @param token the authentication token for which any successful authentication will be cached.
+&nbsp;     * @return the cache key to use to cache the associated {@link AuthenticationInfo} after a successful authentication.
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    protected Object getAuthenticationCacheKey(AuthenticationToken token) {
+<b class="nc">&nbsp;        return token != null ? token.getPrincipal() : null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the key under which {@link AuthenticationInfo} instances are cached if authentication caching is enabled.
+&nbsp;     * This implementation delegates to
+&nbsp;     * {@link #getAvailablePrincipal(org.apache.shiro.subject.PrincipalCollection)}, which returns the primary principal
+&nbsp;     * associated with this particular Realm.
+&nbsp;     * &lt;h3&gt;Cache Invalidation on Logout&lt;/h3&gt;
+&nbsp;     * &lt;b&gt;NOTE:&lt;/b&gt; If you want to be able to invalidate an account&#39;s cached {@code AuthenticationInfo} on logout, you
+&nbsp;     * must ensure that this method returns the same value as the
+&nbsp;     * {@link #getAuthenticationCacheKey(org.apache.shiro.authc.AuthenticationToken)} method!
+&nbsp;     *
+&nbsp;     * @param principals the principals of the account for which to set or remove cached {@code AuthenticationInfo}.
+&nbsp;     * @return the cache key to use when looking up cached {@link AuthenticationInfo} instances.
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    protected Object getAuthenticationCacheKey(PrincipalCollection principals) {
+<b class="nc">&nbsp;        return getAvailablePrincipal(principals);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This implementation clears out any cached authentication data by calling
+&nbsp;     * {@link #clearCachedAuthenticationInfo(org.apache.shiro.subject.PrincipalCollection)}.
+&nbsp;     * If overriding in a subclass, be sure to call {@code super.doClearCache} to ensure this behavior is maintained.
+&nbsp;     *
+&nbsp;     * @param principals principals the principals of the account for which to clear any cached data.
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    protected void doClearCache(PrincipalCollection principals) {
+<b class="nc">&nbsp;        super.doClearCache(principals);</b>
+<b class="nc">&nbsp;        clearCachedAuthenticationInfo(principals);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean isEmpty(PrincipalCollection pc) {
+<b class="nc">&nbsp;        return pc == null || pc.isEmpty();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Clears out the AuthenticationInfo cache entry for the specified account.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This method is provided as a convenience to subclasses so they can invalidate a cache entry when they
+&nbsp;     * change an account&#39;s authentication data (e.g. reset password) during runtime.  Because an account&#39;s
+&nbsp;     * AuthenticationInfo can be cached, there needs to be a way to invalidate the cache for only that account so that
+&nbsp;     * subsequent authentication operations don&#39;t used the (old) cached value if account data changes.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * After this method is called, the next authentication for that same account will result in a call to
+&nbsp;     * {@link #doGetAuthenticationInfo(org.apache.shiro.authc.AuthenticationToken) doGetAuthenticationInfo}, and the
+&nbsp;     * resulting return value will be cached before being returned so it can be reused for later authentications.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If you wish to clear out all associated cached data (and not just authentication data), use the
+&nbsp;     * {@link #clearCache(org.apache.shiro.subject.PrincipalCollection)} method instead (which will in turn call this
+&nbsp;     * method by default).
+&nbsp;     *
+&nbsp;     * @param principals the principals of the account for which to clear the cached AuthorizationInfo.
+&nbsp;     * @see #clearCache(org.apache.shiro.subject.PrincipalCollection)
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    protected void clearCachedAuthenticationInfo(PrincipalCollection principals) {
+<b class="nc">&nbsp;        if (!isEmpty(principals)) {</b>
+<b class="nc">&nbsp;            Cache&lt;Object, AuthenticationInfo&gt; cache = getAvailableAuthenticationCache();</b>
+&nbsp;            //cache instance will be non-null if caching is enabled:
+<b class="nc">&nbsp;            if (cache != null) {</b>
+<b class="nc">&nbsp;                Object key = getAuthenticationCacheKey(principals);</b>
+<b class="nc">&nbsp;                cache.remove(key);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Retrieves authentication data from an implementation-specific datasource (RDBMS, LDAP, etc) for the given
+&nbsp;     * authentication token.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * For most datasources, this means just &#39;pulling&#39; authentication data for an associated subject/user and nothing
+&nbsp;     * more and letting Shiro do the rest.  But in some systems, this method could actually perform EIS specific
+&nbsp;     * log-in logic in addition to just retrieving data - it is up to the Realm implementation.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * A {@code null} return value means that no account could be associated with the specified token.
+&nbsp;     *
+&nbsp;     * @param token the authentication token containing the user&#39;s principal and credentials.
+&nbsp;     * @return an {@link AuthenticationInfo} object containing account data resulting from the
+&nbsp;     *         authentication ONLY if the lookup is successful (i.e. account exists and is valid, etc.)
+&nbsp;     * @throws AuthenticationException if there is an error acquiring data or performing
+&nbsp;     *                                 realm-specific authentication logic for the specified &lt;tt&gt;token&lt;/tt&gt;
+&nbsp;     */
+&nbsp;    protected abstract AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

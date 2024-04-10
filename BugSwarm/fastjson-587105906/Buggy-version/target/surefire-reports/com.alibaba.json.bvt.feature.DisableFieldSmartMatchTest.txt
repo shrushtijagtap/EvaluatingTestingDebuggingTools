@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.feature.DisableFieldSmartMatchTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.001 s <<< FAILURE! -- in com.alibaba.json.bvt.feature.DisableFieldSmartMatchTest
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.007 s <<< FAILURE! -- in com.alibaba.json.bvt.feature.DisableFieldSmartMatchTest
 com.alibaba.json.bvt.feature.DisableFieldSmartMatchTest.test_feature2 -- Time elapsed: 0 s <<< ERROR!
 com.alibaba.fastjson.JSONException: setter not found, class com.alibaba.json.bvt.feature.DisableFieldSmartMatchTest$Model_for_disableFieldSmartMatchMask2, property person_id
 	at com.alibaba.fastjson.parser.deserializer.JavaBeanDeserializer.parseField(JavaBeanDeserializer.java:1132)
@@ -13,7 +13,8 @@ com.alibaba.fastjson.JSONException: setter not found, class com.alibaba.json.bvt
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:383)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:287)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:560)
-	at com.alibaba.json.bvt.feature.DisableFieldSmartMatchTest.test_feature2(DisableFieldSmartMatchTest.java:19)
+	at com.alibaba.json.bvt.feature.DisableFieldSmartMatchTest.__CLR4_1_10odzt1s1a1w(DisableFieldSmartMatchTest.java:19)
+	at com.alibaba.json.bvt.feature.DisableFieldSmartMatchTest.test_feature2(DisableFieldSmartMatchTest.java:18)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -36,7 +37,7 @@ com.alibaba.fastjson.JSONException: setter not found, class com.alibaba.json.bvt
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.feature.DisableFieldSmartMatchTest.test_feature -- Time elapsed: 0 s <<< ERROR!
+com.alibaba.json.bvt.feature.DisableFieldSmartMatchTest.test_feature -- Time elapsed: 0.007 s <<< ERROR!
 com.alibaba.fastjson.JSONException: setter not found, class com.alibaba.json.bvt.feature.DisableFieldSmartMatchTest$Model_for_disableFieldSmartMatchMask, property person_id
 	at com.alibaba.fastjson.parser.deserializer.JavaBeanDeserializer.parseField(JavaBeanDeserializer.java:1132)
 	at com.alibaba.fastjson.parser.deserializer.JavaBeanDeserializer.deserialze(JavaBeanDeserializer.java:850)
@@ -46,7 +47,8 @@ com.alibaba.fastjson.JSONException: setter not found, class com.alibaba.json.bvt
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:682)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:383)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:287)
-	at com.alibaba.json.bvt.feature.DisableFieldSmartMatchTest.test_feature(DisableFieldSmartMatchTest.java:14)
+	at com.alibaba.json.bvt.feature.DisableFieldSmartMatchTest.__CLR4_1_10y8u7ww1a1s(DisableFieldSmartMatchTest.java:14)
+	at com.alibaba.json.bvt.feature.DisableFieldSmartMatchTest.test_feature(DisableFieldSmartMatchTest.java:12)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

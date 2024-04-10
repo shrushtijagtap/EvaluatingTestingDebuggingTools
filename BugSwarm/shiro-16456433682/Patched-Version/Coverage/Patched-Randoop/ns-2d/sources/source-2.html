@@ -1,0 +1,371 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DefaultWebSecurityManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.web.mgt</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultWebSecurityManager (org.apache.shiro.web.mgt)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultWebSecurityManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/40)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/83)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.web.mgt;
+&nbsp;
+&nbsp;import org.apache.shiro.mgt.DefaultSecurityManager;
+&nbsp;import org.apache.shiro.mgt.DefaultSubjectDAO;
+&nbsp;import org.apache.shiro.mgt.SessionStorageEvaluator;
+&nbsp;import org.apache.shiro.mgt.SubjectDAO;
+&nbsp;import org.apache.shiro.realm.Realm;
+&nbsp;import org.apache.shiro.session.mgt.SessionContext;
+&nbsp;import org.apache.shiro.session.mgt.SessionKey;
+&nbsp;import org.apache.shiro.session.mgt.SessionManager;
+&nbsp;import org.apache.shiro.subject.Subject;
+&nbsp;import org.apache.shiro.subject.SubjectContext;
+&nbsp;import org.apache.shiro.util.LifecycleUtils;
+&nbsp;import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
+&nbsp;import org.apache.shiro.web.session.mgt.*;
+&nbsp;import org.apache.shiro.web.subject.WebSubject;
+&nbsp;import org.apache.shiro.web.subject.WebSubjectContext;
+&nbsp;import org.apache.shiro.web.subject.support.DefaultWebSubjectContext;
+&nbsp;import org.apache.shiro.web.util.WebUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import javax.servlet.ServletRequest;
+&nbsp;import javax.servlet.ServletResponse;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.Collection;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Default {@link WebSecurityManager WebSecurityManager} implementation used in web-based applications or any
+&nbsp; * application that requires HTTP connectivity (SOAP, http remoting, etc).
+&nbsp; *
+&nbsp; * @since 0.2
+&nbsp; */
+&nbsp;public class DefaultWebSecurityManager extends DefaultSecurityManager implements WebSecurityManager {
+&nbsp;
+&nbsp;    //TODO - complete JavaDoc
+&nbsp;
+<b class="nc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(DefaultWebSecurityManager.class);</b>
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    public static final String HTTP_SESSION_MODE = &quot;http&quot;;
+&nbsp;    @Deprecated
+&nbsp;    public static final String NATIVE_SESSION_MODE = &quot;native&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated as of 1.2.  This should NOT be used for anything other than determining if the sessionMode has changed.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    private String sessionMode;
+&nbsp;
+&nbsp;    public DefaultWebSecurityManager() {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        DefaultWebSessionStorageEvaluator webEvalutator = new DefaultWebSessionStorageEvaluator();  </b>
+<b class="nc">&nbsp;        ((DefaultSubjectDAO) this.subjectDAO).setSessionStorageEvaluator(webEvalutator);</b>
+<b class="nc">&nbsp;        this.sessionMode = HTTP_SESSION_MODE;</b>
+<b class="nc">&nbsp;        setSubjectFactory(new DefaultWebSubjectFactory());</b>
+<b class="nc">&nbsp;        setRememberMeManager(new CookieRememberMeManager());</b>
+<b class="nc">&nbsp;        setSessionManager(new ServletContainerSessionManager());</b>
+<b class="nc">&nbsp;        webEvalutator.setSessionManager(getSessionManager());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    public DefaultWebSecurityManager(Realm singleRealm) {
+<b class="nc">&nbsp;        this();</b>
+<b class="nc">&nbsp;        setRealm(singleRealm);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    public DefaultWebSecurityManager(Collection&lt;Realm&gt; realms) {
+<b class="nc">&nbsp;        this();</b>
+<b class="nc">&nbsp;        setRealms(realms);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected SubjectContext createSubjectContext() {
+<b class="nc">&nbsp;        return new DefaultWebSubjectContext();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    //since 1.2.1 for fixing SHIRO-350
+&nbsp;    public void setSubjectDAO(SubjectDAO subjectDAO) {
+<b class="nc">&nbsp;        super.setSubjectDAO(subjectDAO);</b>
+<b class="nc">&nbsp;        applySessionManagerToSessionStorageEvaluatorIfPossible();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //since 1.2.1 for fixing SHIRO-350
+&nbsp;    @Override
+&nbsp;    protected void afterSessionManagerSet() {
+<b class="nc">&nbsp;        super.afterSessionManagerSet();</b>
+<b class="nc">&nbsp;        applySessionManagerToSessionStorageEvaluatorIfPossible();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //since 1.2.1 for fixing SHIRO-350:
+&nbsp;    private void applySessionManagerToSessionStorageEvaluatorIfPossible() {
+<b class="nc">&nbsp;        SubjectDAO subjectDAO = getSubjectDAO();</b>
+<b class="nc">&nbsp;        if (subjectDAO instanceof DefaultSubjectDAO) {</b>
+<b class="nc">&nbsp;            SessionStorageEvaluator evaluator = ((DefaultSubjectDAO)subjectDAO).getSessionStorageEvaluator();</b>
+<b class="nc">&nbsp;            if (evaluator instanceof DefaultWebSessionStorageEvaluator) {</b>
+<b class="nc">&nbsp;                ((DefaultWebSessionStorageEvaluator)evaluator).setSessionManager(getSessionManager());</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected SubjectContext copy(SubjectContext subjectContext) {
+<b class="nc">&nbsp;        if (subjectContext instanceof WebSubjectContext) {</b>
+<b class="nc">&nbsp;            return new DefaultWebSubjectContext((WebSubjectContext) subjectContext);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return super.copy(subjectContext);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    @Deprecated
+&nbsp;    public String getSessionMode() {
+<b class="nc">&nbsp;        return sessionMode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param sessionMode
+&nbsp;     * @deprecated since 1.2
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public void setSessionMode(String sessionMode) {
+<b class="nc">&nbsp;        log.warn(&quot;The &#39;sessionMode&#39; property has been deprecated.  Please configure an appropriate WebSessionManager &quot; +</b>
+&nbsp;                &quot;instance instead of using this property.  This property/method will be removed in a later version.&quot;);
+<b class="nc">&nbsp;        String mode = sessionMode;</b>
+<b class="nc">&nbsp;        if (mode == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;sessionMode argument cannot be null.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        mode = sessionMode.toLowerCase();</b>
+<b class="nc">&nbsp;        if (!HTTP_SESSION_MODE.equals(mode) &amp;&amp; !NATIVE_SESSION_MODE.equals(mode)) {</b>
+<b class="nc">&nbsp;            String msg = &quot;Invalid sessionMode [&quot; + sessionMode + &quot;].  Allowed values are &quot; +</b>
+<b class="nc">&nbsp;                    &quot;public static final String constants in the &quot; + getClass().getName() + &quot; class: &#39;&quot;</b>
+&nbsp;                    + HTTP_SESSION_MODE + &quot;&#39; or &#39;&quot; + NATIVE_SESSION_MODE + &quot;&#39;, with &#39;&quot; +
+&nbsp;                    HTTP_SESSION_MODE + &quot;&#39; being the default.&quot;;
+<b class="nc">&nbsp;            throw new IllegalArgumentException(msg);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        boolean recreate = this.sessionMode == null || !this.sessionMode.equals(mode);</b>
+<b class="nc">&nbsp;        this.sessionMode = mode;</b>
+<b class="nc">&nbsp;        if (recreate) {</b>
+<b class="nc">&nbsp;            LifecycleUtils.destroy(getSessionManager());</b>
+<b class="nc">&nbsp;            SessionManager sessionManager = createSessionManager(mode);</b>
+<b class="nc">&nbsp;            this.setInternalSessionManager(sessionManager);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setSessionManager(SessionManager sessionManager) {
+<b class="nc">&nbsp;        this.sessionMode = null;</b>
+<b class="nc">&nbsp;        if (sessionManager != null &amp;&amp; !(sessionManager instanceof WebSessionManager)) {</b>
+<b class="nc">&nbsp;            if (log.isWarnEnabled()) {</b>
+<b class="nc">&nbsp;                String msg = &quot;The &quot; + getClass().getName() + &quot; implementation expects SessionManager instances &quot; +</b>
+<b class="nc">&nbsp;                        &quot;that implement the &quot; + WebSessionManager.class.getName() + &quot; interface.  The &quot; +</b>
+<b class="nc">&nbsp;                        &quot;configured instance is of type [&quot; + sessionManager.getClass().getName() + &quot;] which does not &quot; +</b>
+&nbsp;                        &quot;implement this interface..  This may cause unexpected behavior.&quot;;
+<b class="nc">&nbsp;                log.warn(msg);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        setInternalSessionManager(sessionManager);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param sessionManager
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    private void setInternalSessionManager(SessionManager sessionManager) {
+<b class="nc">&nbsp;        super.setSessionManager(sessionManager);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    public boolean isHttpSessionMode() {
+<b class="nc">&nbsp;        SessionManager sessionManager = getSessionManager();</b>
+<b class="nc">&nbsp;        return sessionManager instanceof WebSessionManager &amp;&amp; ((WebSessionManager)sessionManager).isServletContainerSessions();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected SessionManager createSessionManager(String sessionMode) {
+<b class="nc">&nbsp;        if (sessionMode == null || !sessionMode.equalsIgnoreCase(NATIVE_SESSION_MODE)) {</b>
+<b class="nc">&nbsp;            log.info(&quot;{} mode - enabling ServletContainerSessionManager (HTTP-only Sessions)&quot;, HTTP_SESSION_MODE);</b>
+<b class="nc">&nbsp;            return new ServletContainerSessionManager();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            log.info(&quot;{} mode - enabling DefaultWebSessionManager (non-HTTP and HTTP Sessions)&quot;, NATIVE_SESSION_MODE);</b>
+<b class="nc">&nbsp;            return new DefaultWebSessionManager();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected SessionContext createSessionContext(SubjectContext subjectContext) {
+<b class="nc">&nbsp;        SessionContext sessionContext = super.createSessionContext(subjectContext);</b>
+<b class="nc">&nbsp;        if (subjectContext instanceof WebSubjectContext) {</b>
+<b class="nc">&nbsp;            WebSubjectContext wsc = (WebSubjectContext) subjectContext;</b>
+<b class="nc">&nbsp;            ServletRequest request = wsc.resolveServletRequest();</b>
+<b class="nc">&nbsp;            ServletResponse response = wsc.resolveServletResponse();</b>
+<b class="nc">&nbsp;            DefaultWebSessionContext webSessionContext = new DefaultWebSessionContext(sessionContext);</b>
+<b class="nc">&nbsp;            if (request != null) {</b>
+<b class="nc">&nbsp;                webSessionContext.setServletRequest(request);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (response != null) {</b>
+<b class="nc">&nbsp;                webSessionContext.setServletResponse(response);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            sessionContext = webSessionContext;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return sessionContext;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected SessionKey getSessionKey(SubjectContext context) {
+<b class="nc">&nbsp;        if (WebUtils.isWeb(context)) {</b>
+<b class="nc">&nbsp;            Serializable sessionId = context.getSessionId();</b>
+<b class="nc">&nbsp;            ServletRequest request = WebUtils.getRequest(context);</b>
+<b class="nc">&nbsp;            ServletResponse response = WebUtils.getResponse(context);</b>
+<b class="nc">&nbsp;            return new WebSessionKey(sessionId, request, response);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return super.getSessionKey(context);</b>
+&nbsp;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void beforeLogout(Subject subject) {
+<b class="nc">&nbsp;        super.beforeLogout(subject);</b>
+<b class="nc">&nbsp;        removeRequestIdentity(subject);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void removeRequestIdentity(Subject subject) {
+<b class="nc">&nbsp;        if (subject instanceof WebSubject) {</b>
+<b class="nc">&nbsp;            WebSubject webSubject = (WebSubject) subject;</b>
+<b class="nc">&nbsp;            ServletRequest request = webSubject.getServletRequest();</b>
+<b class="nc">&nbsp;            if (request != null) {</b>
+<b class="nc">&nbsp;                request.setAttribute(ShiroHttpServletRequest.IDENTITY_REMOVED_KEY, Boolean.TRUE);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

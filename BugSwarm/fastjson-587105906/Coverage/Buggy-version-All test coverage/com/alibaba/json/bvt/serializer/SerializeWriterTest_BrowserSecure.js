@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":87,"id":85629,"methods":[{"el":24,"sc":5,"sl":16},{"el":36,"sc":5,"sl":26},{"el":40,"sc":5,"sl":38},{"el":46,"sc":5,"sl":42},{"el":59,"sc":5,"sl":48},{"el":72,"sc":5,"sl":61}],"name":"SerializeWriterTest_BrowserSecure","sl":14},{"el":85,"id":85670,"methods":[{"el":80,"sc":9,"sl":78},{"el":84,"sc":9,"sl":82}],"name":"SerializeWriterTest_BrowserSecure.VO","sl":74}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_1040":{"methods":[{"sl":42}],"name":"test_all","pass":true,"statements":[{"sl":43},{"sl":44},{"sl":45}]},"test_2095":{"methods":[{"sl":61},{"sl":78},{"sl":82}],"name":"test_all_entity","pass":true,"statements":[{"sl":62},{"sl":64},{"sl":65},{"sl":67},{"sl":68},{"sl":69},{"sl":71},{"sl":79},{"sl":83}]},"test_2311":{"methods":[{"sl":26}],"name":"test_1","pass":true,"statements":[{"sl":27},{"sl":28},{"sl":29},{"sl":31},{"sl":32},{"sl":34},{"sl":35}]},"test_3206":{"methods":[{"sl":38}],"name":"test_zh","pass":true,"statements":[{"sl":39}]},"test_4":{"methods":[{"sl":16}],"name":"test_0","pass":true,"statements":[{"sl":17},{"sl":18},{"sl":19},{"sl":21},{"sl":22},{"sl":23}]},"test_4258":{"methods":[{"sl":48}],"name":"test_all_map","pass":true,"statements":[{"sl":49},{"sl":51},{"sl":52},{"sl":54},{"sl":55},{"sl":56},{"sl":58}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [4], [4], [4], [4], [], [4], [4], [4], [], [], [2311], [2311], [2311], [2311], [], [2311], [2311], [], [2311], [2311], [], [], [3206], [3206], [], [], [1040], [1040], [1040], [1040], [], [], [4258], [4258], [], [4258], [4258], [], [4258], [4258], [4258], [], [4258], [], [], [2095], [2095], [], [2095], [2095], [], [2095], [2095], [2095], [], [2095], [], [], [], [], [], [], [2095], [2095], [], [], [2095], [2095], [], [], [], []]

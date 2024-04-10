@@ -1,0 +1,424 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RedirectView</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.web.util</a>
+</div>
+
+<h1>Coverage Summary for Class: RedirectView (org.apache.shiro.web.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RedirectView</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    64.3%
+  </span>
+  <span class="absValue">
+    (9/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    35%
+  </span>
+  <span class="absValue">
+    (7/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    54.2%
+  </span>
+  <span class="absValue">
+    (26/48)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.web.util;
+&nbsp;
+&nbsp;import javax.servlet.http.HttpServletRequest;
+&nbsp;import javax.servlet.http.HttpServletResponse;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.UnsupportedEncodingException;
+&nbsp;import java.net.URLEncoder;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * View that redirects to an absolute, context relative, or current request
+&nbsp; * relative URL, exposing all model attributes as HTTP query parameters.
+&nbsp; * &lt;p/&gt;
+&nbsp; * A URL for this view is supposed to be a HTTP redirect URL, i.e.
+&nbsp; * suitable for HttpServletResponse&#39;s &lt;code&gt;sendRedirect&lt;/code&gt; method, which
+&nbsp; * is what actually does the redirect if the HTTP 1.0 flag is on, or via sending
+&nbsp; * back an HTTP 303 code - if the HTTP 1.0 compatibility flag is off.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Note that while the default value for the &quot;contextRelative&quot; flag is off,
+&nbsp; * you will probably want to almost always set it to true. With the flag off,
+&nbsp; * URLs starting with &quot;/&quot; are considered relative to the web server root, while
+&nbsp; * with the flag on, they are considered relative to the web application root.
+&nbsp; * Since most web apps will never know or care what their context path actually
+&nbsp; * is, they are much better off setting this flag to true, and submitting paths
+&nbsp; * which are to be considered relative to the web application root.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Note that in a Servlet 2.2 environment, i.e. a servlet container which
+&nbsp; * is only compliant to the limits of this spec, this class will probably fail
+&nbsp; * when feeding in URLs which are not fully absolute, or relative to the current
+&nbsp; * request (no leading &quot;/&quot;), as these are the only two types of URL that
+&nbsp; * &lt;code&gt;sendRedirect&lt;/code&gt; supports in a Servlet 2.2 environment.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;em&gt;This class was borrowed from a nearly identical version found in
+&nbsp; * the &lt;a href=&quot;http://www.springframework.org/&quot;&gt;Spring Framework&lt;/a&gt;, with minor modifications to
+&nbsp; * avoid a dependency on Spring itself for a very small amount of code - we couldn&#39;t have done it better, and
+&nbsp; * don&#39;t want to repeat all of their great effort ;).
+&nbsp; * The original author names and copyright (Apache 2.0) has been left in place.  A special
+&nbsp; * thanks to Rod Johnson, Juergen Hoeller, and Colin Sampaleanu for making this available.&lt;/em&gt;
+&nbsp; *
+&nbsp; * @see #setContextRelative
+&nbsp; * @see #setHttp10Compatible
+&nbsp; * @see javax.servlet.http.HttpServletResponse#sendRedirect
+&nbsp; * @since 0.2
+&nbsp; */
+&nbsp;public class RedirectView {
+&nbsp;
+&nbsp;    //TODO - complete JavaDoc
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The default encoding scheme: UTF-8
+&nbsp;     */
+&nbsp;    public static final String DEFAULT_ENCODING_SCHEME = &quot;UTF-8&quot;;
+&nbsp;
+&nbsp;    private String url;
+&nbsp;
+<b class="fc">&nbsp;    private boolean contextRelative = false;</b>
+&nbsp;
+<b class="fc">&nbsp;    private boolean http10Compatible = true;</b>
+&nbsp;
+<b class="fc">&nbsp;    private String encodingScheme = DEFAULT_ENCODING_SCHEME;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor for use as a bean.
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+<b class="nc">&nbsp;    public RedirectView() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new RedirectView with the given URL.
+&nbsp;     * &lt;p&gt;The given URL will be considered as relative to the web server,
+&nbsp;     * not as relative to the current ServletContext.
+&nbsp;     *
+&nbsp;     * @param url the URL to redirect to
+&nbsp;     * @see #RedirectView(String, boolean)
+&nbsp;     */
+<b class="fc">&nbsp;    public RedirectView(String url) {</b>
+<b class="fc">&nbsp;        setUrl(url);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new RedirectView with the given URL.
+&nbsp;     *
+&nbsp;     * @param url             the URL to redirect to
+&nbsp;     * @param contextRelative whether to interpret the given URL as
+&nbsp;     *                        relative to the current ServletContext
+&nbsp;     */
+&nbsp;    public RedirectView(String url, boolean contextRelative) {
+<b class="nc">&nbsp;        this(url);</b>
+<b class="nc">&nbsp;        this.contextRelative = contextRelative;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a new RedirectView with the given URL.
+&nbsp;     *
+&nbsp;     * @param url              the URL to redirect to
+&nbsp;     * @param contextRelative  whether to interpret the given URL as
+&nbsp;     *                         relative to the current ServletContext
+&nbsp;     * @param http10Compatible whether to stay compatible with HTTP 1.0 clients
+&nbsp;     */
+&nbsp;    public RedirectView(String url, boolean contextRelative, boolean http10Compatible) {
+<b class="fc">&nbsp;        this(url);</b>
+<b class="fc">&nbsp;        this.contextRelative = contextRelative;</b>
+<b class="fc">&nbsp;        this.http10Compatible = http10Compatible;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public String getUrl() {
+<b class="fc">&nbsp;        return url;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setUrl(String url) {
+<b class="fc">&nbsp;        this.url = url;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set whether to interpret a given URL that starts with a slash (&quot;/&quot;)
+&nbsp;     * as relative to the current ServletContext, i.e. as relative to the
+&nbsp;     * web application root.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Default is &quot;false&quot;: A URL that starts with a slash will be interpreted
+&nbsp;     * as absolute, i.e. taken as-is. If true, the context path will be
+&nbsp;     * prepended to the URL in such a case.
+&nbsp;     *
+&nbsp;     * @param contextRelative whether to interpret a given URL that starts with a slash (&quot;/&quot;)
+&nbsp;     *                        as relative to the current ServletContext, i.e. as relative to the
+&nbsp;     *                        web application root.
+&nbsp;     * @see javax.servlet.http.HttpServletRequest#getContextPath
+&nbsp;     */
+&nbsp;    public void setContextRelative(boolean contextRelative) {
+<b class="nc">&nbsp;        this.contextRelative = contextRelative;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set whether to stay compatible with HTTP 1.0 clients.
+&nbsp;     * &lt;p&gt;In the default implementation, this will enforce HTTP status code 302
+&nbsp;     * in any case, i.e. delegate to &lt;code&gt;HttpServletResponse.sendRedirect&lt;/code&gt;.
+&nbsp;     * Turning this off will send HTTP status code 303, which is the correct
+&nbsp;     * code for HTTP 1.1 clients, but not understood by HTTP 1.0 clients.
+&nbsp;     * &lt;p&gt;Many HTTP 1.1 clients treat 302 just like 303, not making any
+&nbsp;     * difference. However, some clients depend on 303 when redirecting
+&nbsp;     * after a POST request; turn this flag off in such a scenario.
+&nbsp;     *
+&nbsp;     * @param http10Compatible whether to stay compatible with HTTP 1.0 clients.
+&nbsp;     * @see javax.servlet.http.HttpServletResponse#sendRedirect
+&nbsp;     */
+&nbsp;    public void setHttp10Compatible(boolean http10Compatible) {
+<b class="nc">&nbsp;        this.http10Compatible = http10Compatible;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the encoding scheme for this view. Default is UTF-8.
+&nbsp;     *
+&nbsp;     * @param encodingScheme the encoding scheme for this view. Default is UTF-8.
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    public void setEncodingScheme(String encodingScheme) {
+<b class="nc">&nbsp;        this.encodingScheme = encodingScheme;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convert model to request parameters and redirect to the given URL.
+&nbsp;     *
+&nbsp;     * @param model    the model to convert
+&nbsp;     * @param request  the incoming HttpServletRequest
+&nbsp;     * @param response the outgoing HttpServletResponse
+&nbsp;     * @throws java.io.IOException if there is a problem issuing the redirect
+&nbsp;     * @see #appendQueryProperties
+&nbsp;     * @see #sendRedirect
+&nbsp;     */
+&nbsp;    public final void renderMergedOutputModel(
+&nbsp;            Map model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+&nbsp;
+&nbsp;        // Prepare name URL.
+<b class="fc">&nbsp;        StringBuilder targetUrl = new StringBuilder();</b>
+<b class="pc">&nbsp;        if (this.contextRelative &amp;&amp; getUrl().startsWith(&quot;/&quot;)) {</b>
+&nbsp;            // Do not apply context path to relative URLs.
+<b class="nc">&nbsp;            targetUrl.append(request.getContextPath());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        targetUrl.append(getUrl());</b>
+&nbsp;        //change the following method to accept a StringBuilder instead of a StringBuilder for Shiro 2.x:
+<b class="fc">&nbsp;        appendQueryProperties(targetUrl, model, this.encodingScheme);</b>
+&nbsp;
+<b class="fc">&nbsp;        sendRedirect(request, response, targetUrl.toString(), this.http10Compatible);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Append query properties to the redirect URL.
+&nbsp;     * Stringifies, URL-encodes and formats model attributes as query properties.
+&nbsp;     *
+&nbsp;     * @param targetUrl      the StringBuffer to append the properties to
+&nbsp;     * @param model          Map that contains model attributes
+&nbsp;     * @param encodingScheme the encoding scheme to use
+&nbsp;     * @throws java.io.UnsupportedEncodingException if string encoding failed
+&nbsp;     * @see #urlEncode
+&nbsp;     * @see #queryProperties
+&nbsp;     * @see #urlEncode(String, String)
+&nbsp;     */
+&nbsp;    protected void appendQueryProperties(StringBuilder targetUrl, Map model, String encodingScheme)
+&nbsp;            throws UnsupportedEncodingException {
+&nbsp;
+&nbsp;        // Extract anchor fragment, if any.
+&nbsp;        // The following code does not use JDK 1.4&#39;s StringBuffer.indexOf(String)
+&nbsp;        // method to retain JDK 1.3 compatibility.
+<b class="fc">&nbsp;        String fragment = null;</b>
+<b class="fc">&nbsp;        int anchorIndex = targetUrl.toString().indexOf(&#39;#&#39;);</b>
+<b class="pc">&nbsp;        if (anchorIndex &gt; -1) {</b>
+<b class="nc">&nbsp;            fragment = targetUrl.substring(anchorIndex);</b>
+<b class="nc">&nbsp;            targetUrl.delete(anchorIndex, targetUrl.length());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // If there aren&#39;t already some parameters, we need a &quot;?&quot;.
+<b class="pc">&nbsp;        boolean first = (getUrl().indexOf(&#39;?&#39;) &lt; 0);</b>
+<b class="fc">&nbsp;        Map queryProps = queryProperties(model);</b>
+&nbsp;
+<b class="pc">&nbsp;        if (queryProps != null) {</b>
+<b class="nc">&nbsp;            for (Object o : queryProps.entrySet()) {</b>
+<b class="nc">&nbsp;                if (first) {</b>
+<b class="nc">&nbsp;                    targetUrl.append(&#39;?&#39;);</b>
+<b class="nc">&nbsp;                    first = false;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    targetUrl.append(&#39;&amp;&#39;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                Map.Entry entry = (Map.Entry) o;</b>
+<b class="nc">&nbsp;                String encodedKey = urlEncode(entry.getKey().toString(), encodingScheme);</b>
+&nbsp;                String encodedValue =
+<b class="nc">&nbsp;                        (entry.getValue() != null ? urlEncode(entry.getValue().toString(), encodingScheme) : &quot;&quot;);</b>
+<b class="nc">&nbsp;                targetUrl.append(encodedKey).append(&#39;=&#39;).append(encodedValue);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Append anchor fragment, if any, to end of URL.
+<b class="pc">&nbsp;        if (fragment != null) {</b>
+<b class="nc">&nbsp;            targetUrl.append(fragment);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * URL-encode the given input String with the given encoding scheme, using
+&nbsp;     * {@link URLEncoder#encode(String, String) URLEncoder.encode(input, enc)}.
+&nbsp;     *
+&nbsp;     * @param input          the unencoded input String
+&nbsp;     * @param encodingScheme the encoding scheme
+&nbsp;     * @return the encoded output String
+&nbsp;     * @throws UnsupportedEncodingException if thrown by the JDK URLEncoder
+&nbsp;     * @see java.net.URLEncoder#encode(String, String)
+&nbsp;     * @see java.net.URLEncoder#encode(String)
+&nbsp;     */
+&nbsp;    protected String urlEncode(String input, String encodingScheme) throws UnsupportedEncodingException {
+<b class="nc">&nbsp;        return URLEncoder.encode(input, encodingScheme);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Determine name-value pairs for query strings, which will be stringified,
+&nbsp;     * URL-encoded and formatted by appendQueryProperties.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation returns all model elements as-is.
+&nbsp;     *
+&nbsp;     * @param model the model elements for which to determine name-value pairs.
+&nbsp;     * @return the name-value pairs for query strings.
+&nbsp;     * @see #appendQueryProperties
+&nbsp;     */
+&nbsp;    protected Map queryProperties(Map model) {
+<b class="fc">&nbsp;        return model;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Send a redirect back to the HTTP client
+&nbsp;     *
+&nbsp;     * @param request          current HTTP request (allows for reacting to request method)
+&nbsp;     * @param response         current HTTP response (for sending response headers)
+&nbsp;     * @param targetUrl        the name URL to redirect to
+&nbsp;     * @param http10Compatible whether to stay compatible with HTTP 1.0 clients
+&nbsp;     * @throws IOException if thrown by response methods
+&nbsp;     */
+&nbsp;    protected void sendRedirect(HttpServletRequest request, HttpServletResponse response,
+&nbsp;                                String targetUrl, boolean http10Compatible) throws IOException {
+<b class="fc">&nbsp;        String encodedRedirectURL = response.encodeRedirectURL(targetUrl);</b>
+<b class="pc">&nbsp;        if (http10Compatible) {</b>
+&nbsp;            // Always send status code 302.
+<b class="fc">&nbsp;            response.sendRedirect(encodedRedirectURL);</b>
+&nbsp;        } else {
+&nbsp;            // Correct HTTP status code is 303, in particular for POST requests.
+<b class="nc">&nbsp;            response.setStatus(303);</b>
+<b class="nc">&nbsp;            response.setHeader(&quot;Location&quot;, encodedRedirectURL);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

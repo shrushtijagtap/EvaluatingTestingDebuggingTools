@@ -1,0 +1,546 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DefaultLdapRealm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.realm.ldap</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultLdapRealm (org.apache.shiro.realm.ldap)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultLdapRealm</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/70)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.realm.ldap;
+&nbsp;
+&nbsp;import org.apache.shiro.authc.AuthenticationException;
+&nbsp;import org.apache.shiro.authc.AuthenticationInfo;
+&nbsp;import org.apache.shiro.authc.AuthenticationToken;
+&nbsp;import org.apache.shiro.authc.SimpleAuthenticationInfo;
+&nbsp;import org.apache.shiro.authc.credential.AllowAllCredentialsMatcher;
+&nbsp;import org.apache.shiro.authz.AuthorizationException;
+&nbsp;import org.apache.shiro.authz.AuthorizationInfo;
+&nbsp;import org.apache.shiro.ldap.UnsupportedAuthenticationMechanismException;
+&nbsp;import org.apache.shiro.realm.AuthorizingRealm;
+&nbsp;import org.apache.shiro.subject.PrincipalCollection;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import javax.naming.AuthenticationNotSupportedException;
+&nbsp;import javax.naming.NamingException;
+&nbsp;import javax.naming.ldap.LdapContext;
+&nbsp;
+&nbsp;/**
+&nbsp; * An LDAP {@link org.apache.shiro.realm.Realm Realm} implementation utilizing Sun&#39;s/Oracle&#39;s
+&nbsp; * &lt;a href=&quot;http://download-llnw.oracle.com/javase/tutorial/jndi/ldap/jndi.html&quot;&gt;JNDI API as an LDAP API&lt;/a&gt;.  This is
+&nbsp; * Shiro&#39;s default implementation for supporting LDAP, as using the JNDI API has been a common approach for Java LDAP
+&nbsp; * support for many years.
+&nbsp; * &lt;p/&gt;
+&nbsp; * This realm implementation and its backing {@link JndiLdapContextFactory} should cover 99% of all Shiro-related LDAP
+&nbsp; * authentication and authorization needs.  However, if it does not suit your needs, you might want to look into
+&nbsp; * creating your own realm using an alternative, perhaps more robust, LDAP communication API, such as the
+&nbsp; * &lt;a href=&quot;http://directory.apache.org/api/&quot;&gt;Apache LDAP API&lt;/a&gt;.
+&nbsp; * &lt;h2&gt;Authentication&lt;/h2&gt;
+&nbsp; * During an authentication attempt, if the submitted {@code AuthenticationToken}&#39;s
+&nbsp; * {@link org.apache.shiro.authc.AuthenticationToken#getPrincipal() principal} is a simple username, but the
+&nbsp; * LDAP directory expects a complete User Distinguished Name (User DN) to establish a connection, the
+&nbsp; * {@link #setUserDnTemplate(String) userDnTemplate} property must be configured.  If not configured,
+&nbsp; * the property will pass the simple username directly as the User DN, which is often incorrect in most LDAP
+&nbsp; * environments (maybe Microsoft ActiveDirectory being the exception).
+&nbsp; * &lt;h2&gt;Authorization&lt;/h2&gt;
+&nbsp; * By default, authorization is effectively disabled due to the default
+&nbsp; * {@link #doGetAuthorizationInfo(org.apache.shiro.subject.PrincipalCollection)} implementation returning {@code null}.
+&nbsp; * If you wish to perform authorization based on an LDAP schema, you must subclass this one
+&nbsp; * and override that method to reflect your organization&#39;s data model.
+&nbsp; * &lt;h2&gt;Configuration&lt;/h2&gt;
+&nbsp; * This class primarily provides the {@link #setUserDnTemplate(String) userDnTemplate} property to allow you to specify
+&nbsp; * the your LDAP server&#39;s User DN format.  Most other configuration is performed via the nested
+&nbsp; * {@link LdapContextFactory contextFactory} property.
+&nbsp; * &lt;p/&gt;
+&nbsp; * For example, defining this realm in Shiro .ini:
+&nbsp; * &lt;pre&gt;
+&nbsp; * [main]
+&nbsp; * ldapRealm = org.apache.shiro.realm.ldap.DefaultLdapRealm
+&nbsp; * ldapRealm.userDnTemplate = uid={0},ou=users,dc=mycompany,dc=com
+&nbsp; * ldapRealm.contextFactory.url = ldap://ldapHost:389
+&nbsp; * ldapRealm.contextFactory.authenticationMechanism = DIGEST-MD5
+&nbsp; * ldapRealm.contextFactory.environment[some.obscure.jndi.key] = some value
+&nbsp; * ...
+&nbsp; * &lt;/pre&gt;
+&nbsp; * The default {@link #setContextFactory contextFactory} instance is a {@link JndiLdapContextFactory}.  See that
+&nbsp; * class&#39;s JavaDoc for more information on configuring the LDAP connection as well as specifying JNDI environment
+&nbsp; * properties as necessary.
+&nbsp; *
+&nbsp; * @see JndiLdapContextFactory
+&nbsp; *
+&nbsp; * @since 1.3
+&nbsp; */
+&nbsp;public class DefaultLdapRealm extends AuthorizingRealm {
+&nbsp;
+<b class="nc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(DefaultLdapRealm.class);</b>
+&nbsp;
+&nbsp;    //The zero index currently means nothing, but could be utilized in the future for other substitution techniques.
+&nbsp;    private static final String USERDN_SUBSTITUTION_TOKEN = &quot;{0}&quot;;
+&nbsp;
+&nbsp;    private String userDnPrefix;
+&nbsp;    private String userDnSuffix;
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |    I N S T A N C E   V A R I A B L E S    |
+&nbsp;    ============================================*/
+&nbsp;    /**
+&nbsp;     * The LdapContextFactory instance used to acquire {@link javax.naming.ldap.LdapContext LdapContext}&#39;s at runtime
+&nbsp;     * to acquire connections to the LDAP directory to perform authentication attempts and authorizatino queries.
+&nbsp;     */
+&nbsp;    private LdapContextFactory contextFactory;
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |         C O N S T R U C T O R S           |
+&nbsp;    ============================================*/
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default no-argument constructor that defaults the internal {@link LdapContextFactory} instance to a
+&nbsp;     * {@link JndiLdapContextFactory}.
+&nbsp;     */
+<b class="nc">&nbsp;    public DefaultLdapRealm() {</b>
+&nbsp;        //Credentials Matching is not necessary - the LDAP directory will do it automatically:
+<b class="nc">&nbsp;        setCredentialsMatcher(new AllowAllCredentialsMatcher());</b>
+&nbsp;        //Any Object principal and Object credentials may be passed to the LDAP provider, so accept any token:
+<b class="nc">&nbsp;        setAuthenticationTokenClass(AuthenticationToken.class);</b>
+<b class="nc">&nbsp;        this.contextFactory = new JndiLdapContextFactory();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |  A C C E S S O R S / M O D I F I E R S    |
+&nbsp;    ============================================*/
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the User DN prefix to use when building a runtime User DN value or {@code null} if no
+&nbsp;     * {@link #getUserDnTemplate() userDnTemplate} has been configured.  If configured, this value is the text that
+&nbsp;     * occurs before the {@link #USERDN_SUBSTITUTION_TOKEN} in the {@link #getUserDnTemplate() userDnTemplate} value.
+&nbsp;     *
+&nbsp;     * @return the the User DN prefix to use when building a runtime User DN value or {@code null} if no
+&nbsp;     *         {@link #getUserDnTemplate() userDnTemplate} has been configured.
+&nbsp;     */
+&nbsp;    protected String getUserDnPrefix() {
+<b class="nc">&nbsp;        return userDnPrefix;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the User DN suffix to use when building a runtime User DN value.  or {@code null} if no
+&nbsp;     * {@link #getUserDnTemplate() userDnTemplate} has been configured.  If configured, this value is the text that
+&nbsp;     * occurs after the {@link #USERDN_SUBSTITUTION_TOKEN} in the {@link #getUserDnTemplate() userDnTemplate} value.
+&nbsp;     *
+&nbsp;     * @return the User DN suffix to use when building a runtime User DN value or {@code null} if no
+&nbsp;     *         {@link #getUserDnTemplate() userDnTemplate} has been configured.
+&nbsp;     */
+&nbsp;    protected String getUserDnSuffix() {
+<b class="nc">&nbsp;        return userDnSuffix;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |               M E T H O D S               |
+&nbsp;    ============================================*/
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the User Distinguished Name (DN) template to use when creating User DNs at runtime.  A User DN is an LDAP
+&nbsp;     * fully-qualified unique user identifier which is required to establish a connection with the LDAP
+&nbsp;     * directory to authenticate users and query for authorization information.
+&nbsp;     * &lt;h2&gt;Usage&lt;/h2&gt;
+&nbsp;     * User DN formats are unique to the LDAP directory&#39;s schema, and each environment differs - you will need to
+&nbsp;     * specify the format corresponding to your directory.  You do this by specifying the full User DN as normal, but
+&nbsp;     * but you use a &lt;b&gt;{@code {0}}&lt;/b&gt; placeholder token in the string representing the location where the
+&nbsp;     * user&#39;s submitted principal (usually a username or uid) will be substituted at runtime.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * For example,  if your directory
+&nbsp;     * uses an LDAP {@code uid} attribute to represent usernames, the User DN for the {@code jsmith} user may look like
+&nbsp;     * this:
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;pre&gt;uid=jsmith,ou=users,dc=mycompany,dc=com&lt;/pre&gt;
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * in which case you would set this property with the following template value:
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;pre&gt;uid=&lt;b&gt;{0}&lt;/b&gt;,ou=users,dc=mycompany,dc=com&lt;/pre&gt;
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If no template is configured, the raw {@code AuthenticationToken}
+&nbsp;     * {@link AuthenticationToken#getPrincipal() principal} will be used as the LDAP principal.  This is likely
+&nbsp;     * incorrect as most LDAP directories expect a fully-qualified User DN as opposed to the raw uid or username.  So,
+&nbsp;     * ensure you set this property to match your environment!
+&nbsp;     *
+&nbsp;     * @param template the User Distinguished Name template to use for runtime substitution
+&nbsp;     * @throws IllegalArgumentException if the template is null, empty, or does not contain the
+&nbsp;     *                                  {@code {0}} substitution token.
+&nbsp;     * @see LdapContextFactory#getLdapContext(Object,Object)
+&nbsp;     */
+&nbsp;    public void setUserDnTemplate(String template) throws IllegalArgumentException {
+<b class="nc">&nbsp;        if (!StringUtils.hasText(template)) {</b>
+<b class="nc">&nbsp;            String msg = &quot;User DN template cannot be null or empty.&quot;;</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(msg);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int index = template.indexOf(USERDN_SUBSTITUTION_TOKEN);</b>
+<b class="nc">&nbsp;        if (index &lt; 0) {</b>
+<b class="nc">&nbsp;            String msg = &quot;User DN template must contain the &#39;&quot; +</b>
+&nbsp;                    USERDN_SUBSTITUTION_TOKEN + &quot;&#39; replacement token to understand where to &quot; +
+&nbsp;                    &quot;insert the runtime authentication principal.&quot;;
+<b class="nc">&nbsp;            throw new IllegalArgumentException(msg);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String prefix = template.substring(0, index);</b>
+<b class="nc">&nbsp;        String suffix = template.substring(prefix.length() + USERDN_SUBSTITUTION_TOKEN.length());</b>
+<b class="nc">&nbsp;        if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;            log.debug(&quot;Determined user DN prefix [{}] and suffix [{}]&quot;, prefix, suffix);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.userDnPrefix = prefix;</b>
+<b class="nc">&nbsp;        this.userDnSuffix = suffix;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the User Distinguished Name (DN) template to use when creating User DNs at runtime - see the
+&nbsp;     * {@link #setUserDnTemplate(String) setUserDnTemplate} JavaDoc for a full explanation.
+&nbsp;     *
+&nbsp;     * @return the User Distinguished Name (DN) template to use when creating User DNs at runtime.
+&nbsp;     */
+&nbsp;    public String getUserDnTemplate() {
+<b class="nc">&nbsp;        return getUserDn(USERDN_SUBSTITUTION_TOKEN);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the LDAP User Distinguished Name (DN) to use when acquiring an
+&nbsp;     * {@link javax.naming.ldap.LdapContext LdapContext} from the {@link LdapContextFactory}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If the the {@link #getUserDnTemplate() userDnTemplate} property has been set, this implementation will construct
+&nbsp;     * the User DN by substituting the specified {@code principal} into the configured template.  If the
+&nbsp;     * {@link #getUserDnTemplate() userDnTemplate} has not been set, the method argument will be returned directly
+&nbsp;     * (indicating that the submitted authentication token principal &lt;em&gt;is&lt;/em&gt; the User DN).
+&nbsp;     *
+&nbsp;     * @param principal the principal to substitute into the configured {@link #getUserDnTemplate() userDnTemplate}.
+&nbsp;     * @return the constructed User DN to use at runtime when acquiring an {@link javax.naming.ldap.LdapContext}.
+&nbsp;     * @throws IllegalArgumentException if the method argument is null or empty
+&nbsp;     * @throws IllegalStateException    if the {@link #getUserDnTemplate userDnTemplate} has not been set.
+&nbsp;     * @see LdapContextFactory#getLdapContext(Object, Object)
+&nbsp;     */
+&nbsp;    protected String getUserDn(String principal) throws IllegalArgumentException, IllegalStateException {
+<b class="nc">&nbsp;        if (!StringUtils.hasText(principal)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;User principal cannot be null or empty for User DN construction.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String prefix = getUserDnPrefix();</b>
+<b class="nc">&nbsp;        String suffix = getUserDnSuffix();</b>
+<b class="nc">&nbsp;        if (prefix == null &amp;&amp; suffix == null) {</b>
+<b class="nc">&nbsp;            log.debug(&quot;userDnTemplate property has not been configured, indicating the submitted &quot; +</b>
+&nbsp;                    &quot;AuthenticationToken&#39;s principal is the same as the User DN.  Returning the method argument &quot; +
+&nbsp;                    &quot;as is.&quot;);
+<b class="nc">&nbsp;            return principal;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int prefixLength = prefix != null ? prefix.length() : 0;</b>
+<b class="nc">&nbsp;        int suffixLength = suffix != null ? suffix.length() : 0;</b>
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder(prefixLength + principal.length() + suffixLength);</b>
+<b class="nc">&nbsp;        if (prefixLength &gt; 0) {</b>
+<b class="nc">&nbsp;            sb.append(prefix);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        sb.append(principal);</b>
+<b class="nc">&nbsp;        if (suffixLength &gt; 0) {</b>
+<b class="nc">&nbsp;            sb.append(suffix);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the LdapContextFactory instance used to acquire connections to the LDAP directory during authentication
+&nbsp;     * attempts and authorization queries.  Unless specified otherwise, the default is a {@link JndiLdapContextFactory}
+&nbsp;     * instance.
+&nbsp;     *
+&nbsp;     * @param contextFactory the LdapContextFactory instance used to acquire connections to the LDAP directory during
+&nbsp;     *                       authentication attempts and authorization queries
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    public void setContextFactory(LdapContextFactory contextFactory) {
+<b class="nc">&nbsp;        this.contextFactory = contextFactory;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the LdapContextFactory instance used to acquire connections to the LDAP directory during authentication
+&nbsp;     * attempts and authorization queries.  Unless specified otherwise, the default is a {@link JndiLdapContextFactory}
+&nbsp;     * instance.
+&nbsp;     *
+&nbsp;     * @return the LdapContextFactory instance used to acquire connections to the LDAP directory during
+&nbsp;     *         authentication attempts and authorization queries
+&nbsp;     */
+&nbsp;    public LdapContextFactory getContextFactory() {
+<b class="nc">&nbsp;        return this.contextFactory;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |               M E T H O D S                |
+&nbsp;    ============================================*/
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Delegates to {@link #queryForAuthenticationInfo(org.apache.shiro.authc.AuthenticationToken, LdapContextFactory)},
+&nbsp;     * wrapping any {@link NamingException}s in a Shiro {@link AuthenticationException} to satisfy the parent method
+&nbsp;     * signature.
+&nbsp;     *
+&nbsp;     * @param token the authentication token containing the user&#39;s principal and credentials.
+&nbsp;     * @return the {@link AuthenticationInfo} acquired after a successful authentication attempt
+&nbsp;     * @throws AuthenticationException if the authentication attempt fails or if a
+&nbsp;     *                                 {@link NamingException} occurs.
+&nbsp;     */
+&nbsp;    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+&nbsp;        AuthenticationInfo info;
+&nbsp;        try {
+<b class="nc">&nbsp;            info = queryForAuthenticationInfo(token, getContextFactory());</b>
+<b class="nc">&nbsp;        } catch (AuthenticationNotSupportedException e) {</b>
+<b class="nc">&nbsp;            String msg = &quot;Unsupported configured authentication mechanism&quot;;</b>
+<b class="nc">&nbsp;            throw new UnsupportedAuthenticationMechanismException(msg, e);</b>
+<b class="nc">&nbsp;        } catch (javax.naming.AuthenticationException e) {</b>
+<b class="nc">&nbsp;            throw new AuthenticationException(&quot;LDAP authentication failed.&quot;, e);</b>
+<b class="nc">&nbsp;        } catch (NamingException e) {</b>
+<b class="nc">&nbsp;            String msg = &quot;LDAP naming error while attempting to authenticate user.&quot;;</b>
+<b class="nc">&nbsp;            throw new AuthenticationException(msg, e);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return info;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+&nbsp;        AuthorizationInfo info;
+&nbsp;        try {
+<b class="nc">&nbsp;            info = queryForAuthorizationInfo(principals, getContextFactory());</b>
+<b class="nc">&nbsp;        } catch (NamingException e) {</b>
+<b class="nc">&nbsp;            String msg = &quot;LDAP naming error while attempting to retrieve authorization for user [&quot; + principals + &quot;].&quot;;</b>
+<b class="nc">&nbsp;            throw new AuthorizationException(msg, e);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return info;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the principal to use when creating the LDAP connection for an authentication attempt.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation uses a heuristic: it checks to see if the specified token&#39;s
+&nbsp;     * {@link AuthenticationToken#getPrincipal() principal} is a {@code String}, and if so,
+&nbsp;     * {@link #getUserDn(String) converts it} from what is
+&nbsp;     * assumed to be a raw uid or username {@code String} into a User DN {@code String}.  Almost all LDAP directories
+&nbsp;     * expect the authentication connection to present a User DN and not an unqualified username or uid.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If the token&#39;s {@code principal} is not a String, it is assumed to already be in the format supported by the
+&nbsp;     * underlying {@link LdapContextFactory} implementation and the raw principal is returned directly.
+&nbsp;     *
+&nbsp;     * @param token the {@link AuthenticationToken} submitted during the authentication process
+&nbsp;     * @return the User DN or raw principal to use to acquire the LdapContext.
+&nbsp;     * @see LdapContextFactory#getLdapContext(Object, Object)
+&nbsp;     */
+&nbsp;    protected Object getLdapPrincipal(AuthenticationToken token) {
+<b class="nc">&nbsp;        Object principal = token.getPrincipal();</b>
+<b class="nc">&nbsp;        if (principal instanceof String) {</b>
+<b class="nc">&nbsp;            String sPrincipal = (String) principal;</b>
+<b class="nc">&nbsp;            return getUserDn(sPrincipal);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return principal;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This implementation opens an LDAP connection using the token&#39;s
+&nbsp;     * {@link #getLdapPrincipal(org.apache.shiro.authc.AuthenticationToken) discovered principal} and provided
+&nbsp;     * {@link AuthenticationToken#getCredentials() credentials}.  If the connection opens successfully, the
+&nbsp;     * authentication attempt is immediately considered successful and a new
+&nbsp;     * {@link AuthenticationInfo} instance is
+&nbsp;     * {@link #createAuthenticationInfo(org.apache.shiro.authc.AuthenticationToken, Object, Object, javax.naming.ldap.LdapContext) created}
+&nbsp;     * and returned.  If the connection cannot be opened, either because LDAP authentication failed or some other
+&nbsp;     * JNDI problem, an {@link NamingException} will be thrown.
+&nbsp;     *
+&nbsp;     * @param token              the submitted authentication token that triggered the authentication attempt.
+&nbsp;     * @param ldapContextFactory factory used to retrieve LDAP connections.
+&nbsp;     * @return an {@link AuthenticationInfo} instance representing the authenticated user&#39;s information.
+&nbsp;     * @throws NamingException if any LDAP errors occur.
+&nbsp;     */
+&nbsp;    protected AuthenticationInfo queryForAuthenticationInfo(AuthenticationToken token,
+&nbsp;                                                            LdapContextFactory ldapContextFactory)
+&nbsp;            throws NamingException {
+&nbsp;
+<b class="nc">&nbsp;        Object principal = token.getPrincipal();</b>
+<b class="nc">&nbsp;        Object credentials = token.getCredentials();</b>
+&nbsp;
+<b class="nc">&nbsp;        log.debug(&quot;Authenticating user &#39;{}&#39; through LDAP&quot;, principal);</b>
+&nbsp;
+<b class="nc">&nbsp;        principal = getLdapPrincipal(token);</b>
+&nbsp;
+<b class="nc">&nbsp;        LdapContext ctx = null;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            ctx = ldapContextFactory.getLdapContext(principal, credentials);</b>
+&nbsp;            //context was opened successfully, which means their credentials were valid.  Return the AuthenticationInfo:
+<b class="nc">&nbsp;            return createAuthenticationInfo(token, principal, credentials, ctx);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            LdapUtils.closeContext(ctx);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@link AuthenticationInfo} resulting from a Subject&#39;s successful LDAP authentication attempt.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation ignores the {@code ldapPrincipal}, {@code ldapCredentials}, and the opened
+&nbsp;     * {@code ldapContext} arguments and merely returns an {@code AuthenticationInfo} instance mirroring the
+&nbsp;     * submitted token&#39;s principal and credentials.  This is acceptable because this method is only ever invoked after
+&nbsp;     * a successful authentication attempt, which means the provided principal and credentials were correct, and can
+&nbsp;     * be used directly to populate the (now verified) {@code AuthenticationInfo}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Subclasses however are free to override this method for more advanced construction logic.
+&nbsp;     *
+&nbsp;     * @param token           the submitted {@code AuthenticationToken} that resulted in a successful authentication
+&nbsp;     * @param ldapPrincipal   the LDAP principal used when creating the LDAP connection.  Unlike the token&#39;s
+&nbsp;     *                        {@link AuthenticationToken#getPrincipal() principal}, this value is usually a constructed
+&nbsp;     *                        User DN and not a simple username or uid.  The exact value is depending on the
+&nbsp;     *                        configured
+&nbsp;     *                        &lt;a href=&quot;http://download-llnw.oracle.com/javase/tutorial/jndi/ldap/auth_mechs.html&quot;&gt;
+&nbsp;     *                        LDAP authentication mechanism&lt;/a&gt; in use.
+&nbsp;     * @param ldapCredentials the LDAP credentials used when creating the LDAP connection.
+&nbsp;     * @param ldapContext     the LdapContext created that resulted in a successful authentication.  It can be used
+&nbsp;     *                        further by subclasses for more complex operations.  It does not need to be closed -
+&nbsp;     *                        it will be closed automatically after this method returns.
+&nbsp;     * @return the {@link AuthenticationInfo} resulting from a Subject&#39;s successful LDAP authentication attempt.
+&nbsp;     * @throws NamingException if there was any problem using the {@code LdapContext}
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    protected AuthenticationInfo createAuthenticationInfo(AuthenticationToken token, Object ldapPrincipal,
+&nbsp;                                                          Object ldapCredentials, LdapContext ldapContext)
+&nbsp;            throws NamingException {
+<b class="nc">&nbsp;        return new SimpleAuthenticationInfo(token.getPrincipal(), token.getCredentials(), getName());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that should be implemented by subclasses to build an
+&nbsp;     * {@link AuthorizationInfo} object by querying the LDAP context for the
+&nbsp;     * specified principal.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param principals          the principals of the Subject whose AuthenticationInfo should be queried from the LDAP server.
+&nbsp;     * @param ldapContextFactory factory used to retrieve LDAP connections.
+&nbsp;     * @return an {@link AuthorizationInfo} instance containing information retrieved from the LDAP server.
+&nbsp;     * @throws NamingException if any LDAP errors occur during the search.
+&nbsp;     */
+&nbsp;    protected AuthorizationInfo queryForAuthorizationInfo(PrincipalCollection principals,
+&nbsp;                                                          LdapContextFactory ldapContextFactory) throws NamingException {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

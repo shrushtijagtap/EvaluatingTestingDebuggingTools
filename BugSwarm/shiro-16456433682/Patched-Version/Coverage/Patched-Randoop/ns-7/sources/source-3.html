@@ -1,0 +1,133 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RequiresPermissions</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.authz.annotation</a>
+</div>
+
+<h1>Coverage Summary for Class: RequiresPermissions (org.apache.shiro.authz.annotation)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">RequiresPermissions</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.authz.annotation;
+&nbsp;
+&nbsp;import java.lang.annotation.Documented;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.lang.annotation.Retention;
+&nbsp;import java.lang.annotation.RetentionPolicy;
+&nbsp;import java.lang.annotation.Target;
+&nbsp;
+&nbsp;/**
+&nbsp; * &lt;p&gt;
+&nbsp; * Requires the current executor&#39;s Subject to imply a particular permission in
+&nbsp; * order to execute the annotated method.  If the executor&#39;s associated
+&nbsp; * {@link org.apache.shiro.subject.Subject Subject} determines that the
+&nbsp; * executor does not imply the specified permission, the method will not be executed.
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;For example, this declaration:
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;code&gt;&amp;#64;RequiresPermissions( {&quot;file:read&quot;, &quot;write:aFile.txt&quot;} )&lt;br/&gt;
+&nbsp; * void someMethod();&lt;/code&gt;
+&nbsp; * &lt;p/&gt;
+&nbsp; * indicates the current user must be able to both &lt;tt&gt;read&lt;/tt&gt; and &lt;tt&gt;write&lt;/tt&gt;
+&nbsp; * to the file &lt;tt&gt;aFile.txt&lt;/tt&gt; in order for the &lt;tt&gt;someMethod()&lt;/tt&gt; to execute, otherwise
+&nbsp; * an {@link org.apache.shiro.authz.AuthorizationException AuthorizationException} will be thrown.
+&nbsp; *
+&nbsp; * @see org.apache.shiro.subject.Subject#checkPermission
+&nbsp; * @since 0.1
+&nbsp; */
+&nbsp;@Target({ElementType.TYPE, ElementType.METHOD})
+&nbsp;@Retention(RetentionPolicy.RUNTIME)
+&nbsp;@Documented
+&nbsp;public @interface RequiresPermissions {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The permission string which will be passed to {@link org.apache.shiro.subject.Subject#isPermitted(String)}
+&nbsp;     * to determine if the user is allowed to invoke the code protected by this annotation.
+&nbsp;     */
+&nbsp;    String[] value();
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * The logical operation for the permission checks in case multiple roles are specified. AND is the default
+&nbsp;     * @since 1.1.0
+&nbsp;     */
+&nbsp;    Logical logical() default Logical.AND; 
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

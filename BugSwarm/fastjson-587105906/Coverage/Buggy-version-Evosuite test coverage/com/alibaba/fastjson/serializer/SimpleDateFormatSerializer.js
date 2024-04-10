@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":29,"id":31543,"methods":[{"el":14,"sc":5,"sl":12},{"el":28,"sc":5,"sl":16}],"name":"SimpleDateFormatSerializer","sl":8}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_1442":{"methods":[{"sl":12},{"sl":16}],"name":"test_codec_no_asm","pass":true,"statements":[{"sl":13},{"sl":17},{"sl":22},{"sl":23},{"sl":24},{"sl":26},{"sl":27}]},"test_2111":{"methods":[{"sl":12},{"sl":16}],"name":"test_0","pass":true,"statements":[{"sl":13},{"sl":17},{"sl":22},{"sl":23},{"sl":24},{"sl":26},{"sl":27}]},"test_3865":{"methods":[{"sl":12},{"sl":16}],"name":"test_codec_asm","pass":true,"statements":[{"sl":13},{"sl":17},{"sl":22},{"sl":23},{"sl":24},{"sl":26},{"sl":27}]},"test_4006":{"methods":[{"sl":12},{"sl":16}],"name":"test_0","pass":true,"statements":[{"sl":13},{"sl":17},{"sl":22},{"sl":23},{"sl":24},{"sl":26},{"sl":27}]},"test_4060":{"methods":[{"sl":16}],"name":"test_0","pass":true,"statements":[{"sl":17},{"sl":22},{"sl":23},{"sl":24},{"sl":26},{"sl":27}]},"test_4109":{"methods":[{"sl":12},{"sl":16}],"name":"test_codec_null_no_asm","pass":true,"statements":[{"sl":13},{"sl":17},{"sl":18},{"sl":19}]},"test_4336":{"methods":[{"sl":12},{"sl":16}],"name":"test_codec","pass":true,"statements":[{"sl":13},{"sl":17},{"sl":22},{"sl":23},{"sl":24},{"sl":26},{"sl":27}]},"test_555":{"methods":[{"sl":12}],"name":"test_codec_null_asm","pass":true,"statements":[{"sl":13}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [4336, 4006, 2111, 1442, 555, 4109, 3865], [4336, 4006, 2111, 1442, 555, 4109, 3865], [], [], [4336, 4006, 2111, 1442, 4060, 4109, 3865], [4336, 4006, 2111, 1442, 4060, 4109, 3865], [4109], [4109], [], [], [4336, 4006, 2111, 1442, 4060, 3865], [4336, 4006, 2111, 1442, 4060, 3865], [4336, 4006, 2111, 1442, 4060, 3865], [], [4336, 4006, 2111, 1442, 4060, 3865], [4336, 4006, 2111, 1442, 4060, 3865], [], []]

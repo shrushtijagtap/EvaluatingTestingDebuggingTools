@@ -1,0 +1,433 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DefaultLdapContextFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.realm.ldap</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultLdapContextFactory (org.apache.shiro.realm.ldap)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultLdapContextFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/42)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/53)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.realm.ldap;
+&nbsp;
+&nbsp;import java.util.Hashtable;
+&nbsp;import java.util.Map;
+&nbsp;import javax.naming.AuthenticationException;
+&nbsp;import javax.naming.Context;
+&nbsp;import javax.naming.NamingException;
+&nbsp;import javax.naming.ldap.InitialLdapContext;
+&nbsp;import javax.naming.ldap.LdapContext;
+&nbsp;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;/**
+&nbsp; * &lt;p&gt;Default implementation of {@link LdapContextFactory} that can be configured or extended to
+&nbsp; * customize the way {@link javax.naming.ldap.LdapContext} objects are retrieved.&lt;/p&gt;
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;p&gt;This implementation of {@link LdapContextFactory} is used by the {@link AbstractLdapRealm} if a
+&nbsp; * factory is not explictly configured.&lt;/p&gt;
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;p&gt;Connection pooling is enabled by default on this factory, but can be disabled using the
+&nbsp; * {@link #usePooling} property.&lt;/p&gt;
+&nbsp; *
+&nbsp; * @since 0.2
+&nbsp; * @deprecated replaced by the {@link JndiLdapContextFactory} implementation.  This implementation will be removed
+&nbsp; * prior to Shiro 2.0
+&nbsp; */
+&nbsp;@Deprecated
+<b class="nc">&nbsp;public class DefaultLdapContextFactory implements LdapContextFactory {</b>
+&nbsp;
+&nbsp;    //TODO - complete JavaDoc
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |             C O N S T A N T S             |
+&nbsp;    ============================================*/
+&nbsp;    /**
+&nbsp;     * The Sun LDAP property used to enable connection pooling.  This is used in the default implementation
+&nbsp;     * to enable LDAP connection pooling.
+&nbsp;     */
+&nbsp;    protected static final String SUN_CONNECTION_POOLING_PROPERTY = &quot;com.sun.jndi.ldap.connect.pool&quot;;
+&nbsp;    private static final String SIMPLE_AUTHENTICATION_MECHANISM_NAME = &quot;simple&quot;;
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |    I N S T A N C E   V A R I A B L E S    |
+&nbsp;    ============================================*/
+&nbsp;
+<b class="nc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(DefaultLdapContextFactory.class);</b>
+&nbsp;
+<b class="nc">&nbsp;    protected String authentication = SIMPLE_AUTHENTICATION_MECHANISM_NAME;</b>
+&nbsp;
+<b class="nc">&nbsp;    protected String principalSuffix = null;</b>
+&nbsp;
+<b class="nc">&nbsp;    protected String searchBase = null;</b>
+&nbsp;
+<b class="nc">&nbsp;    protected String contextFactoryClassName = &quot;com.sun.jndi.ldap.LdapCtxFactory&quot;;</b>
+&nbsp;
+<b class="nc">&nbsp;    protected String url = null;</b>
+&nbsp;
+<b class="nc">&nbsp;    protected String referral = &quot;follow&quot;;</b>
+&nbsp;
+<b class="nc">&nbsp;    protected String systemUsername = null;</b>
+&nbsp;
+<b class="nc">&nbsp;    protected String systemPassword = null;</b>
+&nbsp;
+<b class="nc">&nbsp;    private boolean usePooling = true;</b>
+&nbsp;
+&nbsp;    private Map&lt;String, String&gt; additionalEnvironment;
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |         C O N S T R U C T O R S           |
+&nbsp;    ============================================*/
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |  A C C E S S O R S / M O D I F I E R S    |
+&nbsp;    ============================================*/
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the type of LDAP authentication to perform when connecting to the LDAP server.  Defaults to &quot;simple&quot;
+&nbsp;     *
+&nbsp;     * @param authentication the type of LDAP authentication to perform.
+&nbsp;     */
+&nbsp;    public void setAuthentication(String authentication) {
+<b class="nc">&nbsp;        this.authentication = authentication;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A suffix appended to the username. This is typically for
+&nbsp;     * domain names.  (e.g. &quot;@MyDomain.local&quot;)
+&nbsp;     *
+&nbsp;     * @param principalSuffix the suffix.
+&nbsp;     */
+&nbsp;    public void setPrincipalSuffix(String principalSuffix) {
+<b class="nc">&nbsp;        this.principalSuffix = principalSuffix;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The search base for the search to perform in the LDAP server.
+&nbsp;     * (e.g. OU=OrganizationName,DC=MyDomain,DC=local )
+&nbsp;     *
+&nbsp;     * @param searchBase the search base.
+&nbsp;     * @deprecated this attribute existed, but was never used in Shiro 1.x.  It will be removed prior to Shiro 2.0.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public void setSearchBase(String searchBase) {
+<b class="nc">&nbsp;        this.searchBase = searchBase;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The context factory to use. This defaults to the SUN LDAP JNDI implementation
+&nbsp;     * but can be overridden to use custom LDAP factories.
+&nbsp;     *
+&nbsp;     * @param contextFactoryClassName the context factory that should be used.
+&nbsp;     */
+&nbsp;    public void setContextFactoryClassName(String contextFactoryClassName) {
+<b class="nc">&nbsp;        this.contextFactoryClassName = contextFactoryClassName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The LDAP url to connect to. (e.g. ldap://&lt;ldapDirectoryHostname&gt;:&lt;port&gt;)
+&nbsp;     *
+&nbsp;     * @param url the LDAP url.
+&nbsp;     */
+&nbsp;    public void setUrl(String url) {
+<b class="nc">&nbsp;        this.url = url;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the LDAP referral property.  Defaults to &quot;follow&quot;
+&nbsp;     *
+&nbsp;     * @param referral the referral property.
+&nbsp;     */
+&nbsp;    public void setReferral(String referral) {
+<b class="nc">&nbsp;        this.referral = referral;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The system username that will be used when connecting to the LDAP server to retrieve authorization
+&nbsp;     * information about a user.  This must be specified for LDAP authorization to work, but is not required for
+&nbsp;     * only authentication.
+&nbsp;     *
+&nbsp;     * @param systemUsername the username to use when logging into the LDAP server for authorization.
+&nbsp;     */
+&nbsp;    public void setSystemUsername(String systemUsername) {
+<b class="nc">&nbsp;        this.systemUsername = systemUsername;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The system password that will be used when connecting to the LDAP server to retrieve authorization
+&nbsp;     * information about a user.  This must be specified for LDAP authorization to work, but is not required for
+&nbsp;     * only authentication.
+&nbsp;     *
+&nbsp;     * @param systemPassword the password to use when logging into the LDAP server for authorization.
+&nbsp;     */
+&nbsp;    public void setSystemPassword(String systemPassword) {
+<b class="nc">&nbsp;        this.systemPassword = systemPassword;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Determines whether or not LdapContext pooling is enabled for connections made using the system
+&nbsp;     * user account.  In the default implementation, this simply
+&nbsp;     * sets the &lt;tt&gt;com.sun.jndi.ldap.connect.pool&lt;/tt&gt; property in the LDAP context environment.  If you use an
+&nbsp;     * LDAP Context Factory that is not Sun&#39;s default implementation, you will need to override the
+&nbsp;     * default behavior to use this setting in whatever way your underlying LDAP ContextFactory
+&nbsp;     * supports.  By default, pooling is enabled.
+&nbsp;     *
+&nbsp;     * @param usePooling true to enable pooling, or false to disable it.
+&nbsp;     */
+&nbsp;    public void setUsePooling(boolean usePooling) {
+<b class="nc">&nbsp;        this.usePooling = usePooling;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * These entries are added to the environment map before initializing the LDAP context.
+&nbsp;     *
+&nbsp;     * @param additionalEnvironment additional environment entries to be configured on the LDAP context.
+&nbsp;     */
+&nbsp;    public void setAdditionalEnvironment(Map&lt;String, String&gt; additionalEnvironment) {
+<b class="nc">&nbsp;        this.additionalEnvironment = additionalEnvironment;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |               M E T H O D S               |
+&nbsp;    ============================================*/
+&nbsp;    public LdapContext getSystemLdapContext() throws NamingException {
+<b class="nc">&nbsp;        return getLdapContext(systemUsername, systemPassword);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Deprecated - use {@link #getLdapContext(Object, Object)} instead.  This will be removed before Apache Shiro 2.0.
+&nbsp;     *
+&nbsp;     * @param username the username to use when creating the connection.
+&nbsp;     * @param password the password to use when creating the connection.
+&nbsp;     * @return a {@code LdapContext} bound using the given username and password.
+&nbsp;     * @throws javax.naming.NamingException if there is an error creating the context.
+&nbsp;     * @deprecated the {@link #getLdapContext(Object, Object)} method should be used in all cases to ensure more than
+&nbsp;     *             String principals and credentials can be used.  Shiro no longer calls this method - it will be
+&nbsp;     *             removed before the 2.0 release.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public LdapContext getLdapContext(String username, String password) throws NamingException {
+<b class="nc">&nbsp;        if (username != null &amp;&amp; principalSuffix != null) {</b>
+<b class="nc">&nbsp;            username += principalSuffix;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return getLdapContext((Object) username, password);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public LdapContext getLdapContext(Object principal, Object credentials) throws NamingException {
+<b class="nc">&nbsp;        if (url == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;An LDAP URL must be specified of the form ldap://&lt;hostname&gt;:&lt;port&gt;&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Hashtable&lt;String, Object&gt; env = new Hashtable&lt;String, Object&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        env.put(Context.SECURITY_AUTHENTICATION, authentication);</b>
+<b class="nc">&nbsp;        if (principal != null) {</b>
+<b class="nc">&nbsp;            env.put(Context.SECURITY_PRINCIPAL, principal);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (credentials!= null) {</b>
+<b class="nc">&nbsp;            env.put(Context.SECURITY_CREDENTIALS, credentials);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        env.put(Context.INITIAL_CONTEXT_FACTORY, contextFactoryClassName);</b>
+<b class="nc">&nbsp;        env.put(Context.PROVIDER_URL, url);</b>
+<b class="nc">&nbsp;        env.put(Context.REFERRAL, referral);</b>
+&nbsp;
+&nbsp;        // Only pool connections for system contexts
+<b class="nc">&nbsp;        if (usePooling &amp;&amp; principal != null &amp;&amp; principal.equals(systemUsername)) {</b>
+&nbsp;            // Enable connection pooling
+<b class="nc">&nbsp;            env.put(SUN_CONNECTION_POOLING_PROPERTY, &quot;true&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (additionalEnvironment != null) {</b>
+<b class="nc">&nbsp;            env.putAll(additionalEnvironment);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;            log.debug(&quot;Initializing LDAP context using URL [&quot; + url + &quot;] and username [&quot; + systemUsername + &quot;] &quot; +</b>
+<b class="nc">&nbsp;                    &quot;with pooling [&quot; + (usePooling ? &quot;enabled&quot; : &quot;disabled&quot;) + &quot;]&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // validate the config before creating the context
+<b class="nc">&nbsp;        validateAuthenticationInfo(env);</b>
+&nbsp;
+<b class="nc">&nbsp;        return createLdapContext(env);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates and returns a new {@link javax.naming.ldap.InitialLdapContext} instance.  This method exists primarily
+&nbsp;     * to support testing where a mock LdapContext can be returned instead of actually creating a connection, but
+&nbsp;     * subclasses are free to provide a different implementation if necessary.
+&nbsp;     *
+&nbsp;     * @param env the JNDI environment settings used to create the LDAP connection
+&nbsp;     * @return an LdapConnection
+&nbsp;     * @throws NamingException if a problem occurs creating the connection
+&nbsp;     */
+&nbsp;    protected LdapContext createLdapContext(Hashtable env) throws NamingException {
+<b class="nc">&nbsp;        return new InitialLdapContext(env, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Validates the configuration in the JNDI &lt;code&gt;environment&lt;/code&gt; settings and throws an exception if a problem
+&nbsp;     * exists.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation will throw a {@link AuthenticationException} if the authentication mechanism is set to
+&nbsp;     * &#39;simple&#39;, the principal is non-empty, and the credentials are empty (as per
+&nbsp;     * &lt;a href=&quot;http://tools.ietf.org/html/rfc4513#section-5.1.2&quot;&gt;rfc4513 section-5.1.2&lt;/a&gt;).
+&nbsp;     *
+&nbsp;     * @param environment the JNDI environment settings to be validated
+&nbsp;     * @throws AuthenticationException if a configuration problem is detected
+&nbsp;     */
+&nbsp;    private void validateAuthenticationInfo(Hashtable&lt;String, Object&gt; environment)
+&nbsp;        throws AuthenticationException
+&nbsp;    {
+&nbsp;        // validate when using Simple auth both principal and credentials are set
+<b class="nc">&nbsp;        if(SIMPLE_AUTHENTICATION_MECHANISM_NAME.equals(environment.get(Context.SECURITY_AUTHENTICATION))) {</b>
+&nbsp;
+&nbsp;            // only validate credentials if we have a non-empty principal
+<b class="nc">&nbsp;            if( environment.get(Context.SECURITY_PRINCIPAL) != null &amp;&amp;</b>
+<b class="nc">&nbsp;                StringUtils.hasText( String.valueOf( environment.get(Context.SECURITY_PRINCIPAL) ))) {</b>
+&nbsp;
+<b class="nc">&nbsp;                Object credentials = environment.get(Context.SECURITY_CREDENTIALS);</b>
+&nbsp;
+&nbsp;                // from the FAQ, we need to check for empty credentials:
+&nbsp;                // http://docs.oracle.com/javase/tutorial/jndi/ldap/faq.html
+<b class="nc">&nbsp;                if( credentials == null ||</b>
+&nbsp;                    (credentials instanceof byte[] &amp;&amp; ((byte[])credentials).length &lt;= 0) || // empty byte[]
+&nbsp;                    (credentials instanceof char[] &amp;&amp; ((char[])credentials).length &lt;= 0) || // empty char[]
+<b class="nc">&nbsp;                    (String.class.isInstance(credentials) &amp;&amp; !StringUtils.hasText(String.valueOf(credentials)))) {</b>
+&nbsp;
+<b class="nc">&nbsp;                    throw new javax.naming.AuthenticationException(&quot;LDAP Simple authentication requires both a &quot;</b>
+&nbsp;                                                                       + &quot;principal and credentials.&quot;);
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

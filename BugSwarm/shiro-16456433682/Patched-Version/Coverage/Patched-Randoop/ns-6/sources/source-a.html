@@ -1,0 +1,153 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Permission</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.authz</a>
+</div>
+
+<h1>Coverage Summary for Class: Permission (org.apache.shiro.authz)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Permission</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.authz;
+&nbsp;
+&nbsp;/**
+&nbsp; * A Permission represents the ability to perform an action or access a resource.  A Permission is the most
+&nbsp; * granular, or atomic, unit in a system&#39;s security policy and is the cornerstone upon which fine-grained security
+&nbsp; * models are built.
+&nbsp; * &lt;p/&gt;
+&nbsp; * It is important to understand a Permission instance only represents functionality or access - it does not grant it.
+&nbsp; * Granting access to an application functionality or a particular resource is done by the application&#39;s security
+&nbsp; * configuration, typically by assigning Permissions to users, roles and/or groups.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Most typical systems are what the Shiro team calls &lt;em&gt;role-based&lt;/em&gt; in nature, where a role represents
+&nbsp; * common behavior for certain user types.  For example, a system might have an &lt;em&gt;Administrator&lt;/em&gt; role, a
+&nbsp; * &lt;em&gt;User&lt;/em&gt; or &lt;em&gt;Guest&lt;/em&gt; roles, etc.
+&nbsp; * &lt;p/&gt;
+&nbsp; * But if you have a dynamic security model, where roles can be created and deleted at runtime, you can&#39;t hard-code
+&nbsp; * role names in your code.  In this environment, roles themselves aren&#39;t very useful.  What matters is what
+&nbsp; * &lt;em&gt;permissions&lt;/em&gt; are assigned to these roles.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Under this paradigm, permissions are immutable and reflect an application&#39;s raw functionality
+&nbsp; * (opening files, accessing a web URL, creating users, etc).  This is what allows a system&#39;s security policy
+&nbsp; * to be dynamic: because Permissions represent raw functionality and only change when the application&#39;s
+&nbsp; * source code changes, they are immutable at runtime - they represent &#39;what&#39; the system can do.  Roles, users, and
+&nbsp; * groups are the &#39;who&#39; of the application.  Determining &#39;who&#39; can do &#39;what&#39; then becomes a simple exercise of
+&nbsp; * associating Permissions to roles, users, and groups in some way.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Most applications do this by associating a named role with permissions (i.e. a role &#39;has a&#39; collection of
+&nbsp; * Permissions) and then associate users with roles (i.e. a user &#39;has a&#39; collection of roles) so that by transitive
+&nbsp; * association, the user &#39;has&#39; the permissions in their roles.  There are numerous variations on this theme
+&nbsp; * (permissions assigned directly to users, or assigned to groups, and users added to groups and these groups in turn
+&nbsp; * have roles, etc, etc).  When employing a permission-based security model instead of a role-based one, users, roles,
+&nbsp; * and groups can all be created, configured and/or deleted at runtime.  This enables  an extremely powerful security
+&nbsp; * model.
+&nbsp; * &lt;p/&gt;
+&nbsp; * A benefit to Shiro is that, although it assumes most systems are based on these types of static role or
+&nbsp; * dynamic role w/ permission schemes, it does not require a system to model their security data this way - all
+&nbsp; * Permission checks are relegated to {@link org.apache.shiro.realm.Realm} implementations, and only those
+&nbsp; * implementations really determine how a user &#39;has&#39; a permission or not.  The Realm could use the semantics described
+&nbsp; * here, or it could utilize some other mechanism entirely - it is always up to the application developer.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Shiro provides a very powerful default implementation of this interface in the form of the
+&nbsp; * {@link org.apache.shiro.authz.permission.WildcardPermission WildcardPermission}.  We highly recommend that you
+&nbsp; * investigate this class before trying to implement your own &lt;code&gt;Permission&lt;/code&gt;s.
+&nbsp; *
+&nbsp; * @see org.apache.shiro.authz.permission.WildcardPermission WildcardPermission
+&nbsp; * @since 0.2
+&nbsp; */
+&nbsp;public interface Permission {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if this current instance &lt;em&gt;implies&lt;/em&gt; all the functionality and/or resource access
+&nbsp;     * described by the specified {@code Permission} argument, {@code false} otherwise.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;p&gt;That is, this current instance must be exactly equal to or a &lt;em&gt;superset&lt;/em&gt; of the functionality
+&nbsp;     * and/or resource access described by the given {@code Permission} argument.  Yet another way of saying this
+&nbsp;     * would be:
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;p&gt;If &amp;quot;permission1 implies permission2&amp;quot;, i.e. &lt;code&gt;permission1.implies(permission2)&lt;/code&gt; ,
+&nbsp;     * then any Subject granted {@code permission1} would have ability greater than or equal to that defined by
+&nbsp;     * {@code permission2}.
+&nbsp;     *
+&nbsp;     * @param p the permission to check for behavior/functionality comparison.
+&nbsp;     * @return {@code true} if this current instance &lt;em&gt;implies&lt;/em&gt; all the functionality and/or resource access
+&nbsp;     *         described by the specified {@code Permission} argument, {@code false} otherwise.
+&nbsp;     */
+&nbsp;    boolean implies(Permission p);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.JSONTest_Bytes
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0 s <<< FAILURE! -- in com.alibaba.json.bvt.JSONTest_Bytes
-com.alibaba.json.bvt.JSONTest_Bytes.test_bytes -- Time elapsed: 0 s <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.012 s <<< FAILURE! -- in com.alibaba.json.bvt.JSONTest_Bytes
+com.alibaba.json.bvt.JSONTest_Bytes.test_bytes -- Time elapsed: 0.012 s <<< ERROR!
 com.alibaba.fastjson.JSONException: Feature.AllowSingleQuotes is false
 	at com.alibaba.fastjson.parser.JSONLexerBase.nextToken(JSONLexerBase.java:131)
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:593)
@@ -13,7 +13,8 @@ com.alibaba.fastjson.JSONException: Feature.AllowSingleQuotes is false
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:448)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:402)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:394)
-	at com.alibaba.json.bvt.JSONTest_Bytes.test_bytes(JSONTest_Bytes.java:19)
+	at com.alibaba.json.bvt.JSONTest_Bytes.__CLR4_5_2yidwcly9j(JSONTest_Bytes.java:19)
+	at com.alibaba.json.bvt.JSONTest_Bytes.test_bytes(JSONTest_Bytes.java:14)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

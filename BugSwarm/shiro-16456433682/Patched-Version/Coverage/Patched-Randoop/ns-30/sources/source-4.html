@@ -1,0 +1,176 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > WebSessionKey</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.web.session.mgt</a>
+</div>
+
+<h1>Coverage Summary for Class: WebSessionKey (org.apache.shiro.web.session.mgt)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WebSessionKey</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2008 Les Hazlewood
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.web.session.mgt;
+&nbsp;
+&nbsp;import org.apache.shiro.session.mgt.DefaultSessionKey;
+&nbsp;import org.apache.shiro.web.util.RequestPairSource;
+&nbsp;
+&nbsp;import javax.servlet.ServletRequest;
+&nbsp;import javax.servlet.ServletResponse;
+&nbsp;import java.io.Serializable;
+&nbsp;
+&nbsp;/**
+&nbsp; * A {@link org.apache.shiro.session.mgt.SessionKey SessionKey} implementation that also retains the
+&nbsp; * {@code ServletRequest} and {@code ServletResponse} associated with the web request that is performing the
+&nbsp; * session lookup.
+&nbsp; *
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public class WebSessionKey extends DefaultSessionKey implements RequestPairSource {
+&nbsp;
+&nbsp;    private final ServletRequest servletRequest;
+&nbsp;    private final ServletResponse servletResponse;
+&nbsp;
+<b class="nc">&nbsp;    public WebSessionKey(ServletRequest request, ServletResponse response) {</b>
+<b class="nc">&nbsp;        if (request == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(&quot;request argument cannot be null.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (response == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(&quot;response argument cannot be null.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.servletRequest = request;</b>
+<b class="nc">&nbsp;        this.servletResponse = response;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public WebSessionKey(Serializable sessionId, ServletRequest request, ServletResponse response) {
+<b class="nc">&nbsp;        this(request, response);</b>
+<b class="nc">&nbsp;        setSessionId(sessionId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ServletRequest getServletRequest() {
+<b class="nc">&nbsp;        return servletRequest;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ServletResponse getServletResponse() {
+<b class="nc">&nbsp;        return servletResponse;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

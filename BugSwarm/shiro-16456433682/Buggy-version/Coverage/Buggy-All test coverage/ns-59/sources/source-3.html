@@ -1,0 +1,821 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > WebUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.web.util</a>
+</div>
+
+<h1>Coverage Summary for Class: WebUtils (org.apache.shiro.web.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WebUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    55%
+  </span>
+  <span class="absValue">
+    (22/40)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    31.4%
+  </span>
+  <span class="absValue">
+    (32/102)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40.6%
+  </span>
+  <span class="absValue">
+    (65/160)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.web.util;
+&nbsp;
+&nbsp;import org.apache.shiro.SecurityUtils;
+&nbsp;import org.apache.shiro.session.Session;
+&nbsp;import org.apache.shiro.subject.Subject;
+&nbsp;import org.apache.shiro.subject.support.DefaultSubjectContext;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;import org.apache.shiro.web.env.EnvironmentLoader;
+&nbsp;import org.apache.shiro.web.env.WebEnvironment;
+&nbsp;import org.apache.shiro.web.filter.AccessControlFilter;
+&nbsp;import org.owasp.encoder.Encode;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import javax.servlet.ServletContext;
+&nbsp;import javax.servlet.ServletRequest;
+&nbsp;import javax.servlet.ServletResponse;
+&nbsp;import javax.servlet.http.HttpServletRequest;
+&nbsp;import javax.servlet.http.HttpServletResponse;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.UnsupportedEncodingException;
+&nbsp;import java.net.URLDecoder;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * Simple utility class for operations used across multiple class hierarchies in the web framework code.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Some methods in this class were copied from the Spring Framework so we didn&#39;t have to re-invent the wheel,
+&nbsp; * and in these cases, we have retained all license, copyright and author information.
+&nbsp; *
+&nbsp; * @since 0.9
+&nbsp; */
+<b class="nc">&nbsp;public class WebUtils {</b>
+&nbsp;
+&nbsp;    //TODO - complete JavaDoc
+&nbsp;
+<b class="fc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(WebUtils.class);</b>
+&nbsp;
+<b class="fc">&nbsp;    public static final String SERVLET_REQUEST_KEY = ServletRequest.class.getName() + &quot;_SHIRO_THREAD_CONTEXT_KEY&quot;;</b>
+<b class="fc">&nbsp;    public static final String SERVLET_RESPONSE_KEY = ServletResponse.class.getName() + &quot;_SHIRO_THREAD_CONTEXT_KEY&quot;;</b>
+&nbsp;
+&nbsp;    public static final String ALLOW_BACKSLASH = &quot;org.apache.shiro.web.ALLOW_BACKSLASH&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@link org.apache.shiro.session.Session Session} key used to save a request and later restore it, for example when redirecting to a
+&nbsp;     * requested page after login, equal to {@code shiroSavedRequest}.
+&nbsp;     */
+&nbsp;    public static final String SAVED_REQUEST_KEY = &quot;shiroSavedRequest&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Standard Servlet 2.3+ spec request attributes for include URI and paths.
+&nbsp;     * &lt;p&gt;If included via a RequestDispatcher, the current resource will see the
+&nbsp;     * originating request. Its own URI and paths are exposed as request attributes.
+&nbsp;     */
+&nbsp;    public static final String INCLUDE_REQUEST_URI_ATTRIBUTE = &quot;javax.servlet.include.request_uri&quot;;
+&nbsp;    public static final String INCLUDE_CONTEXT_PATH_ATTRIBUTE = &quot;javax.servlet.include.context_path&quot;;
+&nbsp;    public static final String INCLUDE_SERVLET_PATH_ATTRIBUTE = &quot;javax.servlet.include.servlet_path&quot;;
+&nbsp;    public static final String INCLUDE_PATH_INFO_ATTRIBUTE = &quot;javax.servlet.include.path_info&quot;;
+&nbsp;    public static final String INCLUDE_QUERY_STRING_ATTRIBUTE = &quot;javax.servlet.include.query_string&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Standard Servlet 2.4+ spec request attributes for forward URI and paths.
+&nbsp;     * &lt;p&gt;If forwarded to via a RequestDispatcher, the current resource will see its
+&nbsp;     * own URI and paths. The originating URI and paths are exposed as request attributes.
+&nbsp;     */
+&nbsp;    public static final String FORWARD_REQUEST_URI_ATTRIBUTE = &quot;javax.servlet.forward.request_uri&quot;;
+&nbsp;    public static final String FORWARD_CONTEXT_PATH_ATTRIBUTE = &quot;javax.servlet.forward.context_path&quot;;
+&nbsp;    public static final String FORWARD_SERVLET_PATH_ATTRIBUTE = &quot;javax.servlet.forward.servlet_path&quot;;
+&nbsp;    public static final String FORWARD_PATH_INFO_ATTRIBUTE = &quot;javax.servlet.forward.path_info&quot;;
+&nbsp;    public static final String FORWARD_QUERY_STRING_ATTRIBUTE = &quot;javax.servlet.forward.query_string&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default character encoding to use when &lt;code&gt;request.getCharacterEncoding&lt;/code&gt;
+&nbsp;     * returns &lt;code&gt;null&lt;/code&gt;, according to the Servlet spec.
+&nbsp;     *
+&nbsp;     * @see javax.servlet.ServletRequest#getCharacterEncoding
+&nbsp;     */
+&nbsp;    public static final String DEFAULT_CHARACTER_ENCODING = &quot;ISO-8859-1&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the path within the web application for the given request.
+&nbsp;     * Detects include request URL if called within a RequestDispatcher include.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * For example, for a request to URL
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;code&gt;http://www.somehost.com/myapp/my/url.jsp&lt;/code&gt;,
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * for an application deployed to &lt;code&gt;/mayapp&lt;/code&gt; (the application&#39;s context path), this method would return
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;code&gt;/my/url.jsp&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @param request current HTTP request
+&nbsp;     * @return the path within the web application
+&nbsp;     */
+&nbsp;    public static String getPathWithinApplication(HttpServletRequest request) {
+<b class="fc">&nbsp;        return normalize(removeSemicolon(getServletPath(request) + getPathInfo(request)));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the request URI for the given request, detecting an include request
+&nbsp;     * URL if called within a RequestDispatcher include.
+&nbsp;     * &lt;p&gt;As the value returned by &lt;code&gt;request.getRequestURI()&lt;/code&gt; is &lt;i&gt;not&lt;/i&gt;
+&nbsp;     * decoded by the servlet container, this method will decode it.
+&nbsp;     * &lt;p&gt;The URI that the web container resolves &lt;i&gt;should&lt;/i&gt; be correct, but some
+&nbsp;     * containers like JBoss/Jetty incorrectly include &quot;;&quot; strings like &quot;;jsessionid&quot;
+&nbsp;     * in the URI. This method cuts off such incorrect appendices.
+&nbsp;     *
+&nbsp;     * @param request current HTTP request
+&nbsp;     * @return the request URI
+&nbsp;     * @deprecated use getPathWithinApplication() to get the path minus the context path, or call HttpServletRequest.getRequestURI() directly from your code.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public static String getRequestUri(HttpServletRequest request) {
+<b class="nc">&nbsp;        String uri = (String) request.getAttribute(INCLUDE_REQUEST_URI_ATTRIBUTE);</b>
+<b class="nc">&nbsp;        if (uri == null) {</b>
+<b class="nc">&nbsp;            uri = request.getRequestURI();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return normalize(decodeAndCleanUriString(request, uri));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String getServletPath(HttpServletRequest request) {
+<b class="fc">&nbsp;        String servletPath = (String) request.getAttribute(INCLUDE_SERVLET_PATH_ATTRIBUTE);</b>
+<b class="pc">&nbsp;        return servletPath != null ? servletPath : valueOrEmpty(request.getServletPath());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String getPathInfo(HttpServletRequest request) {
+<b class="fc">&nbsp;        String pathInfo = (String) request.getAttribute(INCLUDE_PATH_INFO_ATTRIBUTE);</b>
+<b class="pc">&nbsp;        return pathInfo != null ? pathInfo : valueOrEmpty(request.getPathInfo());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String valueOrEmpty(String input) {
+<b class="fc">&nbsp;        if (input == null) {</b>
+<b class="fc">&nbsp;            return &quot;&quot;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return input;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Normalize a relative URI path that may have relative values (&quot;/./&quot;,
+&nbsp;     * &quot;/../&quot;, and so on ) it it.  &lt;strong&gt;WARNING&lt;/strong&gt; - This method is
+&nbsp;     * useful only for normalizing application-generated paths.  It does not
+&nbsp;     * try to perform security checks for malicious input.
+&nbsp;     * Normalize operations were was happily taken from org.apache.catalina.util.RequestUtil in
+&nbsp;     * Tomcat trunk, r939305
+&nbsp;     *
+&nbsp;     * @param path Relative path to be normalized
+&nbsp;     * @return normalized path
+&nbsp;     */
+&nbsp;    public static String normalize(String path) {
+<b class="fc">&nbsp;        return normalize(path, Boolean.getBoolean(ALLOW_BACKSLASH));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Normalize a relative URI path that may have relative values (&quot;/./&quot;,
+&nbsp;     * &quot;/../&quot;, and so on ) it it.  &lt;strong&gt;WARNING&lt;/strong&gt; - This method is
+&nbsp;     * useful only for normalizing application-generated paths.  It does not
+&nbsp;     * try to perform security checks for malicious input.
+&nbsp;     * Normalize operations were was happily taken from org.apache.catalina.util.RequestUtil in
+&nbsp;     * Tomcat trunk, r939305
+&nbsp;     *
+&nbsp;     * @param path             Relative path to be normalized
+&nbsp;     * @param replaceBackSlash Should &#39;\\&#39; be replaced with &#39;/&#39;
+&nbsp;     * @return normalized path
+&nbsp;     */
+&nbsp;    private static String normalize(String path, boolean replaceBackSlash) {
+&nbsp;
+<b class="pc">&nbsp;        if (path == null)</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;
+&nbsp;        // Create a place for the normalized path
+<b class="fc">&nbsp;        String normalized = path;</b>
+&nbsp;
+<b class="pc">&nbsp;        if (replaceBackSlash &amp;&amp; normalized.indexOf(&#39;\\&#39;) &gt;= 0)</b>
+<b class="nc">&nbsp;            normalized = normalized.replace(&#39;\\&#39;, &#39;/&#39;);</b>
+&nbsp;
+<b class="pc">&nbsp;        if (normalized.equals(&quot;/.&quot;))</b>
+<b class="nc">&nbsp;            return &quot;/&quot;;</b>
+&nbsp;
+&nbsp;        // Add a leading &quot;/&quot; if necessary
+<b class="fc">&nbsp;        if (!normalized.startsWith(&quot;/&quot;))</b>
+<b class="fc">&nbsp;            normalized = &quot;/&quot; + normalized;</b>
+&nbsp;
+&nbsp;        // Resolve occurrences of &quot;//&quot; in the normalized path
+&nbsp;        while (true) {
+<b class="fc">&nbsp;            int index = normalized.indexOf(&quot;//&quot;);</b>
+<b class="fc">&nbsp;            if (index &lt; 0)</b>
+&nbsp;                break;
+<b class="fc">&nbsp;            normalized = normalized.substring(0, index) +</b>
+<b class="fc">&nbsp;                    normalized.substring(index + 1);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Resolve occurrences of &quot;/./&quot; in the normalized path
+&nbsp;        while (true) {
+<b class="fc">&nbsp;            int index = normalized.indexOf(&quot;/./&quot;);</b>
+<b class="fc">&nbsp;            if (index &lt; 0)</b>
+&nbsp;                break;
+<b class="fc">&nbsp;            normalized = normalized.substring(0, index) +</b>
+<b class="fc">&nbsp;                    normalized.substring(index + 2);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Resolve occurrences of &quot;/../&quot; in the normalized path
+&nbsp;        while (true) {
+<b class="fc">&nbsp;            int index = normalized.indexOf(&quot;/../&quot;);</b>
+<b class="fc">&nbsp;            if (index &lt; 0)</b>
+&nbsp;                break;
+<b class="pc">&nbsp;            if (index == 0)</b>
+<b class="nc">&nbsp;                return (null);  // Trying to go outside our context</b>
+<b class="fc">&nbsp;            int index2 = normalized.lastIndexOf(&#39;/&#39;, index - 1);</b>
+<b class="fc">&nbsp;            normalized = normalized.substring(0, index2) +</b>
+<b class="fc">&nbsp;                    normalized.substring(index + 3);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Return the normalized path that we have completed
+<b class="fc">&nbsp;        return (normalized);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Decode the supplied URI string and strips any extraneous portion after a &#39;;&#39;.
+&nbsp;     *
+&nbsp;     * @param request the incoming HttpServletRequest
+&nbsp;     * @param uri     the application&#39;s URI string
+&nbsp;     * @return the supplied URI string stripped of any extraneous portion after a &#39;;&#39;.
+&nbsp;     */
+&nbsp;    private static String decodeAndCleanUriString(HttpServletRequest request, String uri) {
+<b class="nc">&nbsp;        uri = decodeRequestString(request, uri);</b>
+<b class="nc">&nbsp;        return removeSemicolon(uri);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String removeSemicolon(String uri) {
+<b class="fc">&nbsp;        int semicolonIndex = uri.indexOf(&#39;;&#39;);</b>
+<b class="pc">&nbsp;        return (semicolonIndex != -1 ? uri.substring(0, semicolonIndex) : uri);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the context path for the given request, detecting an include request
+&nbsp;     * URL if called within a RequestDispatcher include.
+&nbsp;     * &lt;p&gt;As the value returned by &lt;code&gt;request.getContextPath()&lt;/code&gt; is &lt;i&gt;not&lt;/i&gt;
+&nbsp;     * decoded by the servlet container, this method will decode it.
+&nbsp;     *
+&nbsp;     * @param request current HTTP request
+&nbsp;     * @return the context path
+&nbsp;     */
+&nbsp;    public static String getContextPath(HttpServletRequest request) {
+<b class="nc">&nbsp;        String contextPath = (String) request.getAttribute(INCLUDE_CONTEXT_PATH_ATTRIBUTE);</b>
+<b class="nc">&nbsp;        if (contextPath == null) {</b>
+<b class="nc">&nbsp;            contextPath = request.getContextPath();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        contextPath = normalize(decodeRequestString(request, contextPath));</b>
+<b class="nc">&nbsp;        if (&quot;/&quot;.equals(contextPath)) {</b>
+&nbsp;            // the normalize method will return a &quot;/&quot; and includes on Jetty, will also be a &quot;/&quot;.
+<b class="nc">&nbsp;            contextPath = &quot;&quot;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return contextPath;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Find the Shiro {@link WebEnvironment} for this web application, which is typically loaded via the
+&nbsp;     * {@link org.apache.shiro.web.env.EnvironmentLoaderListener}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation rethrows an exception that happened on environment startup to differentiate between a failed
+&nbsp;     * environment startup and no environment at all.
+&nbsp;     *
+&nbsp;     * @param sc ServletContext to find the web application context for
+&nbsp;     * @return the root WebApplicationContext for this web app
+&nbsp;     * @throws IllegalStateException if the root WebApplicationContext could not be found
+&nbsp;     * @see org.apache.shiro.web.env.EnvironmentLoader#ENVIRONMENT_ATTRIBUTE_KEY
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    public static WebEnvironment getRequiredWebEnvironment(ServletContext sc)
+&nbsp;            throws IllegalStateException {
+&nbsp;
+<b class="nc">&nbsp;        WebEnvironment we = getWebEnvironment(sc);</b>
+<b class="nc">&nbsp;        if (we == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;No WebEnvironment found: no EnvironmentLoaderListener registered?&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return we;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Find the Shiro {@link WebEnvironment} for this web application, which is typically loaded via
+&nbsp;     * {@link org.apache.shiro.web.env.EnvironmentLoaderListener}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation rethrows an exception that happened on environment startup to differentiate between a failed
+&nbsp;     * environment startup and no environment at all.
+&nbsp;     *
+&nbsp;     * @param sc ServletContext to find the web application context for
+&nbsp;     * @return the root WebApplicationContext for this web app, or &lt;code&gt;null&lt;/code&gt; if none
+&nbsp;     * @see org.apache.shiro.web.env.EnvironmentLoader#ENVIRONMENT_ATTRIBUTE_KEY
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    public static WebEnvironment getWebEnvironment(ServletContext sc) {
+<b class="nc">&nbsp;        return getWebEnvironment(sc, EnvironmentLoader.ENVIRONMENT_ATTRIBUTE_KEY);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Find the Shiro {@link WebEnvironment} for this web application.
+&nbsp;     *
+&nbsp;     * @param sc       ServletContext to find the web application context for
+&nbsp;     * @param attrName the name of the ServletContext attribute to look for
+&nbsp;     * @return the desired WebEnvironment for this web app, or &lt;code&gt;null&lt;/code&gt; if none
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    public static WebEnvironment getWebEnvironment(ServletContext sc, String attrName) {
+<b class="nc">&nbsp;        if (sc == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;ServletContext argument must not be null.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Object attr = sc.getAttribute(attrName);</b>
+<b class="nc">&nbsp;        if (attr == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (attr instanceof RuntimeException) {</b>
+<b class="nc">&nbsp;            throw (RuntimeException) attr;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (attr instanceof Error) {</b>
+<b class="nc">&nbsp;            throw (Error) attr;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (attr instanceof Exception) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException((Exception) attr);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!(attr instanceof WebEnvironment)) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Context attribute is not of type WebEnvironment: &quot; + attr);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return (WebEnvironment) attr;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Decode the given source string with a URLDecoder. The encoding will be taken
+&nbsp;     * from the request, falling back to the default &quot;ISO-8859-1&quot;.
+&nbsp;     * &lt;p&gt;The default implementation uses &lt;code&gt;URLDecoder.decode(input, enc)&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @param request current HTTP request
+&nbsp;     * @param source  the String to decode
+&nbsp;     * @return the decoded String
+&nbsp;     * @see #DEFAULT_CHARACTER_ENCODING
+&nbsp;     * @see javax.servlet.ServletRequest#getCharacterEncoding
+&nbsp;     * @see java.net.URLDecoder#decode(String, String)
+&nbsp;     * @see java.net.URLDecoder#decode(String)
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;deprecation&quot;})
+&nbsp;    public static String decodeRequestString(HttpServletRequest request, String source) {
+<b class="nc">&nbsp;        String enc = determineEncoding(request);</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            return URLDecoder.decode(source, enc);</b>
+<b class="nc">&nbsp;        } catch (UnsupportedEncodingException ex) {</b>
+<b class="nc">&nbsp;            if (log.isWarnEnabled()) {</b>
+<b class="nc">&nbsp;                log.warn(&quot;Could not decode request string [&quot; + Encode.forHtml(source) + &quot;] with encoding &#39;&quot; + Encode.forHtml(enc) +</b>
+<b class="nc">&nbsp;                        &quot;&#39;: falling back to platform default encoding; exception message: &quot; + ex.getMessage());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return URLDecoder.decode(source);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Determine the encoding for the given request.
+&nbsp;     * Can be overridden in subclasses.
+&nbsp;     * &lt;p&gt;The default implementation checks the request&#39;s
+&nbsp;     * {@link ServletRequest#getCharacterEncoding() character encoding}, and if that
+&nbsp;     * &lt;code&gt;null&lt;/code&gt;, falls back to the {@link #DEFAULT_CHARACTER_ENCODING}.
+&nbsp;     *
+&nbsp;     * @param request current HTTP request
+&nbsp;     * @return the encoding for the request (never &lt;code&gt;null&lt;/code&gt;)
+&nbsp;     * @see javax.servlet.ServletRequest#getCharacterEncoding()
+&nbsp;     */
+&nbsp;    protected static String determineEncoding(HttpServletRequest request) {
+<b class="nc">&nbsp;        String enc = request.getCharacterEncoding();</b>
+<b class="nc">&nbsp;        if (enc == null) {</b>
+<b class="nc">&nbsp;            enc = DEFAULT_CHARACTER_ENCODING;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return enc;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Returns {@code true} IFF the specified {@code SubjectContext}:
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;A {@link WebSubjectContext} instance&lt;/li&gt;
+&nbsp;     * &lt;li&gt;The {@code WebSubjectContext}&#39;s request/response pair are not null&lt;/li&gt;
+&nbsp;     * &lt;li&gt;The request is an {@link HttpServletRequest} instance&lt;/li&gt;
+&nbsp;     * &lt;li&gt;The response is an {@link HttpServletResponse} instance&lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     *
+&nbsp;     * @param context the SubjectContext to check to see if it is HTTP compatible.
+&nbsp;     * @return {@code true} IFF the specified context has HTTP request/response objects, {@code false} otherwise.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;
+&nbsp;    public static boolean isWeb(Object requestPairSource) {
+<b class="fc">&nbsp;        return requestPairSource instanceof RequestPairSource &amp;&amp; isWeb((RequestPairSource) requestPairSource);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isHttp(Object requestPairSource) {
+<b class="fc">&nbsp;        return requestPairSource instanceof RequestPairSource &amp;&amp; isHttp((RequestPairSource) requestPairSource);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ServletRequest getRequest(Object requestPairSource) {
+<b class="pc">&nbsp;        if (requestPairSource instanceof RequestPairSource) {</b>
+<b class="fc">&nbsp;            return ((RequestPairSource) requestPairSource).getServletRequest();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ServletResponse getResponse(Object requestPairSource) {
+<b class="pc">&nbsp;        if (requestPairSource instanceof RequestPairSource) {</b>
+<b class="fc">&nbsp;            return ((RequestPairSource) requestPairSource).getServletResponse();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static HttpServletRequest getHttpRequest(Object requestPairSource) {
+<b class="fc">&nbsp;        ServletRequest request = getRequest(requestPairSource);</b>
+<b class="pc">&nbsp;        if (request instanceof HttpServletRequest) {</b>
+<b class="fc">&nbsp;            return (HttpServletRequest) request;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static HttpServletResponse getHttpResponse(Object requestPairSource) {
+<b class="fc">&nbsp;        ServletResponse response = getResponse(requestPairSource);</b>
+<b class="pc">&nbsp;        if (response instanceof HttpServletResponse) {</b>
+<b class="fc">&nbsp;            return (HttpServletResponse) response;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean isWeb(RequestPairSource source) {
+<b class="fc">&nbsp;        ServletRequest request = source.getServletRequest();</b>
+<b class="fc">&nbsp;        ServletResponse response = source.getServletResponse();</b>
+<b class="pc">&nbsp;        return request != null &amp;&amp; response != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean isHttp(RequestPairSource source) {
+<b class="fc">&nbsp;        ServletRequest request = source.getServletRequest();</b>
+<b class="fc">&nbsp;        ServletResponse response = source.getServletResponse();</b>
+<b class="pc">&nbsp;        return request instanceof HttpServletRequest &amp;&amp; response instanceof HttpServletResponse;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if a session is allowed to be created for a subject-associated request, {@code false}
+&nbsp;     * otherwise.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;This method exists for Shiro&#39;s internal framework needs and should never be called by Shiro end-users.  It
+&nbsp;     * could be changed/removed at any time.&lt;/b&gt;
+&nbsp;     *
+&nbsp;     * @param requestPairSource a {@link RequestPairSource} instance, almost always a
+&nbsp;     *                          {@link org.apache.shiro.web.subject.WebSubject WebSubject} instance.
+&nbsp;     * @return {@code true} if a session is allowed to be created for a subject-associated request, {@code false}
+&nbsp;     *         otherwise.
+&nbsp;     */
+&nbsp;    public static boolean _isSessionCreationEnabled(Object requestPairSource) {
+<b class="pc">&nbsp;        if (requestPairSource instanceof RequestPairSource) {</b>
+<b class="fc">&nbsp;            RequestPairSource source = (RequestPairSource) requestPairSource;</b>
+<b class="fc">&nbsp;            return _isSessionCreationEnabled(source.getServletRequest());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return true; //by default</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if a session is allowed to be created for a subject-associated request, {@code false}
+&nbsp;     * otherwise.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;This method exists for Shiro&#39;s internal framework needs and should never be called by Shiro end-users.  It
+&nbsp;     * could be changed/removed at any time.&lt;/b&gt;
+&nbsp;     *
+&nbsp;     * @param request incoming servlet request.
+&nbsp;     * @return {@code true} if a session is allowed to be created for a subject-associated request, {@code false}
+&nbsp;     *         otherwise.
+&nbsp;     */
+&nbsp;    public static boolean _isSessionCreationEnabled(ServletRequest request) {
+<b class="pc">&nbsp;        if (request != null) {</b>
+<b class="fc">&nbsp;            Object val = request.getAttribute(DefaultSubjectContext.SESSION_CREATION_ENABLED);</b>
+<b class="pc">&nbsp;            if (val != null &amp;&amp; val instanceof Boolean) {</b>
+<b class="nc">&nbsp;                return (Boolean) val;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return true; //by default</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A convenience method that merely casts the incoming &lt;code&gt;ServletRequest&lt;/code&gt; to an
+&nbsp;     * &lt;code&gt;HttpServletRequest&lt;/code&gt;:
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;code&gt;return (HttpServletRequest)request;&lt;/code&gt;
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Logic could be changed in the future for logging or throwing an meaningful exception in
+&nbsp;     * non HTTP request environments (e.g. Portlet API).
+&nbsp;     *
+&nbsp;     * @param request the incoming ServletRequest
+&nbsp;     * @return the &lt;code&gt;request&lt;/code&gt; argument casted to an &lt;code&gt;HttpServletRequest&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    public static HttpServletRequest toHttp(ServletRequest request) {
+<b class="fc">&nbsp;        return (HttpServletRequest) request;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A convenience method that merely casts the incoming &lt;code&gt;ServletResponse&lt;/code&gt; to an
+&nbsp;     * &lt;code&gt;HttpServletResponse&lt;/code&gt;:
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;code&gt;return (HttpServletResponse)response;&lt;/code&gt;
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Logic could be changed in the future for logging or throwing an meaningful exception in
+&nbsp;     * non HTTP request environments (e.g. Portlet API).
+&nbsp;     *
+&nbsp;     * @param response the outgoing ServletResponse
+&nbsp;     * @return the &lt;code&gt;response&lt;/code&gt; argument casted to an &lt;code&gt;HttpServletResponse&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    public static HttpServletResponse toHttp(ServletResponse response) {
+<b class="fc">&nbsp;        return (HttpServletResponse) response;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Redirects the current request to a new URL based on the given parameters.
+&nbsp;     *
+&nbsp;     * @param request          the servlet request.
+&nbsp;     * @param response         the servlet response.
+&nbsp;     * @param url              the URL to redirect the user to.
+&nbsp;     * @param queryParams      a map of parameters that should be set as request parameters for the new request.
+&nbsp;     * @param contextRelative  true if the URL is relative to the servlet context path, or false if the URL is absolute.
+&nbsp;     * @param http10Compatible whether to stay compatible with HTTP 1.0 clients.
+&nbsp;     * @throws java.io.IOException if thrown by response methods.
+&nbsp;     */
+&nbsp;    public static void issueRedirect(ServletRequest request, ServletResponse response, String url, Map queryParams, boolean contextRelative, boolean http10Compatible) throws IOException {
+<b class="fc">&nbsp;        RedirectView view = new RedirectView(url, contextRelative, http10Compatible);</b>
+<b class="fc">&nbsp;        view.renderMergedOutputModel(queryParams, toHttp(request), toHttp(response));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Redirects the current request to a new URL based on the given parameters and default values
+&nbsp;     * for unspecified parameters.
+&nbsp;     *
+&nbsp;     * @param request  the servlet request.
+&nbsp;     * @param response the servlet response.
+&nbsp;     * @param url      the URL to redirect the user to.
+&nbsp;     * @throws java.io.IOException if thrown by response methods.
+&nbsp;     */
+&nbsp;    public static void issueRedirect(ServletRequest request, ServletResponse response, String url) throws IOException {
+<b class="fc">&nbsp;        issueRedirect(request, response, url, null, true, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Redirects the current request to a new URL based on the given parameters and default values
+&nbsp;     * for unspecified parameters.
+&nbsp;     *
+&nbsp;     * @param request     the servlet request.
+&nbsp;     * @param response    the servlet response.
+&nbsp;     * @param url         the URL to redirect the user to.
+&nbsp;     * @param queryParams a map of parameters that should be set as request parameters for the new request.
+&nbsp;     * @throws java.io.IOException if thrown by response methods.
+&nbsp;     */
+&nbsp;    public static void issueRedirect(ServletRequest request, ServletResponse response, String url, Map queryParams) throws IOException {
+<b class="nc">&nbsp;        issueRedirect(request, response, url, queryParams, true, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Redirects the current request to a new URL based on the given parameters and default values
+&nbsp;     * for unspecified parameters.
+&nbsp;     *
+&nbsp;     * @param request         the servlet request.
+&nbsp;     * @param response        the servlet response.
+&nbsp;     * @param url             the URL to redirect the user to.
+&nbsp;     * @param queryParams     a map of parameters that should be set as request parameters for the new request.
+&nbsp;     * @param contextRelative true if the URL is relative to the servlet context path, or false if the URL is absolute.
+&nbsp;     * @throws java.io.IOException if thrown by response methods.
+&nbsp;     */
+&nbsp;    public static void issueRedirect(ServletRequest request, ServletResponse response, String url, Map queryParams, boolean contextRelative) throws IOException {
+<b class="nc">&nbsp;        issueRedirect(request, response, url, queryParams, contextRelative, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &lt;p&gt;Checks to see if a request param is considered true using a loose matching strategy for
+&nbsp;     * general values that indicate that something is true or enabled, etc.&lt;/p&gt;
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;p&gt;Values that are considered &quot;true&quot; include (case-insensitive): true, t, 1, enabled, y, yes, on.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param request   the servlet request
+&nbsp;     * @param paramName @return true if the param value is considered true or false if it isn&#39;t.
+&nbsp;     * @return true if the given parameter is considered &quot;true&quot; - false otherwise.
+&nbsp;     */
+&nbsp;    public static boolean isTrue(ServletRequest request, String paramName) {
+<b class="nc">&nbsp;        String value = getCleanParam(request, paramName);</b>
+<b class="nc">&nbsp;        return value != null &amp;&amp;</b>
+<b class="nc">&nbsp;                (value.equalsIgnoreCase(&quot;true&quot;) ||</b>
+<b class="nc">&nbsp;                        value.equalsIgnoreCase(&quot;t&quot;) ||</b>
+<b class="nc">&nbsp;                        value.equalsIgnoreCase(&quot;1&quot;) ||</b>
+<b class="nc">&nbsp;                        value.equalsIgnoreCase(&quot;enabled&quot;) ||</b>
+<b class="nc">&nbsp;                        value.equalsIgnoreCase(&quot;y&quot;) ||</b>
+<b class="nc">&nbsp;                        value.equalsIgnoreCase(&quot;yes&quot;) ||</b>
+<b class="nc">&nbsp;                        value.equalsIgnoreCase(&quot;on&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method that returns a request parameter value, first running it through
+&nbsp;     * {@link StringUtils#clean(String)}.
+&nbsp;     *
+&nbsp;     * @param request   the servlet request.
+&nbsp;     * @param paramName the parameter name.
+&nbsp;     * @return the clean param value, or null if the param does not exist or is empty.
+&nbsp;     */
+&nbsp;    public static String getCleanParam(ServletRequest request, String paramName) {
+<b class="nc">&nbsp;        return getCleanParam(request, paramName, true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convenience method that returns a request parameter value, first running it through
+&nbsp;     * {@link StringUtils#clean(String)}.
+&nbsp;     *
+&nbsp;     * @param request   the servlet request.
+&nbsp;     * @param paramName the parameter name.
+&nbsp;     * @param trim specifies whether the parameter value should be trimmed or not
+&nbsp;     * @return the clean param value, or null if the param does not exist or is empty.
+&nbsp;     */
+&nbsp;    public static String getCleanParam(ServletRequest request, String paramName, boolean trim) {
+<b class="nc">&nbsp;        return StringUtils.clean(request.getParameter(paramName), trim);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void saveRequest(ServletRequest request) {
+<b class="nc">&nbsp;        Subject subject = SecurityUtils.getSubject();</b>
+<b class="nc">&nbsp;        Session session = subject.getSession();</b>
+<b class="nc">&nbsp;        HttpServletRequest httpRequest = toHttp(request);</b>
+<b class="nc">&nbsp;        SavedRequest savedRequest = new SavedRequest(httpRequest);</b>
+<b class="nc">&nbsp;        session.setAttribute(SAVED_REQUEST_KEY, savedRequest);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static SavedRequest getAndClearSavedRequest(ServletRequest request) {
+<b class="nc">&nbsp;        SavedRequest savedRequest = getSavedRequest(request);</b>
+<b class="nc">&nbsp;        if (savedRequest != null) {</b>
+<b class="nc">&nbsp;            Subject subject = SecurityUtils.getSubject();</b>
+<b class="nc">&nbsp;            Session session = subject.getSession();</b>
+<b class="nc">&nbsp;            session.removeAttribute(SAVED_REQUEST_KEY);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return savedRequest;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static SavedRequest getSavedRequest(ServletRequest request) {
+<b class="nc">&nbsp;        SavedRequest savedRequest = null;</b>
+<b class="nc">&nbsp;        Subject subject = SecurityUtils.getSubject();</b>
+<b class="nc">&nbsp;        Session session = subject.getSession(false);</b>
+<b class="nc">&nbsp;        if (session != null) {</b>
+<b class="nc">&nbsp;            savedRequest = (SavedRequest) session.getAttribute(SAVED_REQUEST_KEY);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return savedRequest;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Redirects the to the request url from a previously
+&nbsp;     * {@link #saveRequest(javax.servlet.ServletRequest) saved} request, or if there is no saved request, redirects the
+&nbsp;     * end user to the specified {@code fallbackUrl}.  If there is no saved request or fallback url, this method
+&nbsp;     * throws an {@link IllegalStateException}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This method is primarily used to support a common login scenario - if an unauthenticated user accesses a
+&nbsp;     * page that requires authentication, it is expected that request is
+&nbsp;     * {@link #saveRequest(javax.servlet.ServletRequest) saved} first and then redirected to the login page. Then,
+&nbsp;     * after a successful login, this method can be called to redirect them back to their originally requested URL, a
+&nbsp;     * nice usability feature.
+&nbsp;     *
+&nbsp;     * @param request     the incoming request
+&nbsp;     * @param response    the outgoing response
+&nbsp;     * @param fallbackUrl the fallback url to redirect to if there is no saved request available.
+&nbsp;     * @throws IllegalStateException if there is no saved request and the {@code fallbackUrl} is {@code null}.
+&nbsp;     * @throws IOException           if there is an error redirecting
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    public static void redirectToSavedRequest(ServletRequest request, ServletResponse response, String fallbackUrl)
+&nbsp;            throws IOException {
+<b class="nc">&nbsp;        String successUrl = null;</b>
+<b class="nc">&nbsp;        boolean contextRelative = true;</b>
+<b class="nc">&nbsp;        SavedRequest savedRequest = WebUtils.getAndClearSavedRequest(request);</b>
+<b class="nc">&nbsp;        if (savedRequest != null &amp;&amp; savedRequest.getMethod().equalsIgnoreCase(AccessControlFilter.GET_METHOD)) {</b>
+<b class="nc">&nbsp;            successUrl = savedRequest.getRequestUrl();</b>
+<b class="nc">&nbsp;            contextRelative = false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (successUrl == null) {</b>
+<b class="nc">&nbsp;            successUrl = fallbackUrl;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (successUrl == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Success URL not available via saved request or via the &quot; +</b>
+&nbsp;                    &quot;successUrlFallback method parameter. One of these must be non-null for &quot; +
+&nbsp;                    &quot;issueSuccessRedirect() to work.&quot;);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        WebUtils.issueRedirect(request, response, successUrl, null, contextRelative);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

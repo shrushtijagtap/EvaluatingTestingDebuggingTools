@@ -1,0 +1,128 @@
+/* $$ This file has been instrumented by Clover 4.1.10#20230822161652967 $$ */package com.alibaba.json.bvt.parser;
+
+import org.junit.Assert;
+import junit.framework.TestCase;
+
+import com.alibaba.fastjson.parser.Feature;
+import com.alibaba.fastjson.parser.JSONScanner;
+import com.alibaba.fastjson.parser.JSONToken;
+
+public class JSONScannerTest_ISO8601 extends TestCase {static class __CLR4_1_101i5p1i5pluszwck9{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings("unchecked") public static <I, T extends I> I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException("Clover failed to invoke instrumented lambda",e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_1_10();if(20230822161652967L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l("[CLOVER] WARNING: The Clover version used in instrumentation does not match the runtime version. You need to run instrumented classes against the same version of Clover that you instrumented with.");com_atlassian_clover.Clover.l("[CLOVER] WARNING: Instr=4.1.10#20230822161652967,Runtime="+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+"#"+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder("\u002f\u0055\u0073\u0065\u0072\u0073\u002f\u0073\u0068\u0072\u0065\u0079\u0061\u0063\u0068\u0061\u0075\u0064\u0068\u0061\u0072\u0079\u002f\u0044\u0065\u0073\u006b\u0074\u006f\u0070\u002f\u0063\u0073\u0035\u0032\u0037\u002f\u0043\u0053\u0035\u0032\u0037\u002d\u0050\u0072\u006f\u006a\u0065\u0063\u0074\u002f\u0042\u0075\u0067\u0053\u0077\u0061\u0072\u006d\u002f\u0066\u0061\u0073\u0074\u006a\u0073\u006f\u006e\u002d\u0035\u0038\u0037\u0031\u0030\u0035\u0039\u0030\u0036\u002f\u0042\u0075\u0067\u0067\u0079\u002d\u0076\u0065\u0072\u0073\u0069\u006f\u006e\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062",1712704253720L,8589935092L,70299,profiles,new java.lang.String[]{"clover.distributed.coverage",null});}catch(java.lang.SecurityException e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.Throwable t){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. ("+t.getClass()+":"+t.getMessage()+")");}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_1_10_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;
+
+    public void test_0() throws Exception {__CLR4_1_101i5p1i5pluszwck9.R.globalSliceStart(getClass().getName(),70189);int $CLV_p$=0;java.lang.Throwable $CLV_t$=null;try{__CLR4_1_10n53hp21i5p();$CLV_p$=1;}catch(java.lang.Throwable $CLV_t2$){if($CLV_p$==0&&$CLV_t$==null){$CLV_t$=$CLV_t2$;}__CLR4_1_101i5p1i5pluszwck9.R.rethrow($CLV_t2$);}finally{__CLR4_1_101i5p1i5pluszwck9.R.globalSliceEnd(getClass().getName(),"com.alibaba.json.bvt.parser.JSONScannerTest_ISO8601.test_0",__CLR4_1_10_TEST_NAME_SNIFFER.getTestName(),70189,$CLV_p$,$CLV_t$);}}private void  __CLR4_1_10n53hp21i5p() throws Exception{try{__CLR4_1_101i5p1i5pluszwck9.R.inc(70189);
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70190);Assert.assertEquals(false, new JSONScanner("1").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70191);Assert.assertEquals(false, new JSONScanner("2").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70192);Assert.assertEquals(false, new JSONScanner("3").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70193);Assert.assertEquals(true, new JSONScanner("3000-10-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70194);Assert.assertEquals(true, new JSONScanner("4000-10-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70195);Assert.assertEquals(true, new JSONScanner("5000-10-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70196);Assert.assertEquals(true, new JSONScanner("6000-10-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70197);Assert.assertEquals(true, new JSONScanner("7000-10-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70198);Assert.assertEquals(true, new JSONScanner("8000-10-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70199);Assert.assertEquals(false, new JSONScanner("A000-10-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70200);Assert.assertEquals(false, new JSONScanner("a000-10-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70201);Assert.assertEquals(false, new JSONScanner("1997").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70202);Assert.assertEquals(false, new JSONScanner("1997-2-2").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70203);Assert.assertEquals(true, new JSONScanner("1997-02-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70204);Assert.assertEquals(false, new JSONScanner("1997:02-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70205);Assert.assertEquals(false, new JSONScanner("1997-02:02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70206);Assert.assertEquals(false, new JSONScanner("2A00-02-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70207);Assert.assertEquals(false, new JSONScanner("2!00-02-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70208);Assert.assertEquals(false, new JSONScanner("20A0-02-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70209);Assert.assertEquals(false, new JSONScanner("20!0-02-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70210);Assert.assertEquals(false, new JSONScanner("200A-02-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70211);Assert.assertEquals(false, new JSONScanner("200!-02-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70212);Assert.assertEquals(false, new JSONScanner("2000-32-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70213);Assert.assertEquals(false, new JSONScanner("2000-1A-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70214);Assert.assertEquals(false, new JSONScanner("2000-1!-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70215);Assert.assertEquals(true, new JSONScanner("2000-10-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70216);Assert.assertEquals(true, new JSONScanner("2000-11-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70217);Assert.assertEquals(true, new JSONScanner("2000-12-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70218);Assert.assertEquals(false, new JSONScanner("2000-13-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70219);Assert.assertEquals(false, new JSONScanner("2000-20-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70220);Assert.assertEquals(false, new JSONScanner("2000-0A-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70221);Assert.assertEquals(false, new JSONScanner("2000-0!-02").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70222);Assert.assertEquals(true, new JSONScanner("2000-02-01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70223);Assert.assertEquals(false, new JSONScanner("2000-02-00").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70224);Assert.assertEquals(false, new JSONScanner("2000-02-0!").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70225);Assert.assertEquals(false, new JSONScanner("2000-02-0A").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70226);Assert.assertEquals(true, new JSONScanner("2000-02-10").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70227);Assert.assertEquals(true, new JSONScanner("2000-02-20").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70228);Assert.assertEquals(false, new JSONScanner("2000-02-2A").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70229);Assert.assertEquals(false, new JSONScanner("2000-02-2!").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70230);Assert.assertEquals(true, new JSONScanner("2000-02-30").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70231);Assert.assertEquals(true, new JSONScanner("2000-02-31").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70232);Assert.assertEquals(false, new JSONScanner("2000-02-32").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70233);Assert.assertEquals(false, new JSONScanner("2000-02-42").scanISO8601DateIfMatch());
+
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70234);Assert.assertEquals(false, new JSONScanner("2000-02-10T").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70235);Assert.assertEquals(true, new JSONScanner("2000-02-10T00:00:00").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70236);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:00-00").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70237);Assert.assertEquals(true, new JSONScanner("2000-02-10T01:01:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70238);Assert.assertEquals(false, new JSONScanner("2000-02-10T0A:01:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70239);Assert.assertEquals(false, new JSONScanner("2000-02-10T0!:01:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70240);Assert.assertEquals(true, new JSONScanner("2000-02-10T00:10:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70241);Assert.assertEquals(true, new JSONScanner("2000-02-10T00:11:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70242);Assert.assertEquals(false, new JSONScanner("2000-02-10T10011:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70243);Assert.assertEquals(true, new JSONScanner("2000-02-10T10:11:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70244);Assert.assertEquals(false, new JSONScanner("2000-02-10T1!:11:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70245);Assert.assertEquals(false, new JSONScanner("2000-02-10T1a:11:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70246);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:1A:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70247);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:1!:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70248);Assert.assertEquals(true, new JSONScanner("2000-02-10T20:20:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70249);Assert.assertEquals(true, new JSONScanner("2000-02-10T21:21:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70250);Assert.assertEquals(true, new JSONScanner("2000-02-10T22:22:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70251);Assert.assertEquals(true, new JSONScanner("2000-02-10T23:23:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70252);Assert.assertEquals(true, new JSONScanner("2000-02-10T24:24:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70253);Assert.assertEquals(false, new JSONScanner("2000-02-10T25:25:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70254);Assert.assertEquals(false, new JSONScanner("2000-02-10T2!:20:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70255);Assert.assertEquals(false, new JSONScanner("2000-02-10T30:20:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70256);Assert.assertEquals(false, new JSONScanner("2000-02-10T00A22:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70257);Assert.assertEquals(true, new JSONScanner("2000-02-10T00:22:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70258);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:!2:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70259);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:A2:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70260);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:2A:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70261);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:2!:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70262);Assert.assertEquals(true, new JSONScanner("2000-02-10T00:60:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70263);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:61:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70264);Assert.assertEquals(true, new JSONScanner("2000-02-10T00:00:01").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70265);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:00:0!").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70266);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:00:0A").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70267);Assert.assertEquals(true, new JSONScanner("2000-02-10T00:00:60").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70268);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:00:61").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70269);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:00:70").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70270);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:00:!0").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70271);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:00:A0").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70272);Assert.assertEquals(true, new JSONScanner("2000-02-10T00:00:00").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70273);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:00:00.").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70274);Assert.assertEquals(true, new JSONScanner("2000-02-10T00:00:00.0").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70275);Assert.assertEquals(true, new JSONScanner("2000-02-10T00:00:00.00").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70276);Assert.assertEquals(true, new JSONScanner("2000-02-10T00:00:00.000").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70277);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:00:00.A00").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70278);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:00:00.!00").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70279);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:00:00.0A0").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70280);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:00:00.0!0").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70281);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:00:00.00!").scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70282);Assert.assertEquals(false, new JSONScanner("2000-02-10T00:00:00.00a").scanISO8601DateIfMatch());
+    }finally{__CLR4_1_101i5p1i5pluszwck9.R.flushNeeded();}}
+
+    public void test_2() throws Exception {__CLR4_1_101i5p1i5pluszwck9.R.globalSliceStart(getClass().getName(),70283);int $CLV_p$=0;java.lang.Throwable $CLV_t$=null;try{__CLR4_1_10gn3k441i8b();$CLV_p$=1;}catch(java.lang.Throwable $CLV_t2$){if($CLV_p$==0&&$CLV_t$==null){$CLV_t$=$CLV_t2$;}__CLR4_1_101i5p1i5pluszwck9.R.rethrow($CLV_t2$);}finally{__CLR4_1_101i5p1i5pluszwck9.R.globalSliceEnd(getClass().getName(),"com.alibaba.json.bvt.parser.JSONScannerTest_ISO8601.test_2",__CLR4_1_10_TEST_NAME_SNIFFER.getTestName(),70283,$CLV_p$,$CLV_t$);}}private void  __CLR4_1_10gn3k441i8b() throws Exception{try{__CLR4_1_101i5p1i5pluszwck9.R.inc(70283);
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70284);JSONScanner lexer = new JSONScanner("2000-02-10T00:00:00.000");
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70285);lexer.config(Feature.AllowISO8601DateFormat, true);
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70286);Assert.assertEquals(true, lexer.scanISO8601DateIfMatch());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70287);Assert.assertEquals(JSONToken.LITERAL_ISO8601_DATE, lexer.token());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70288);lexer.nextToken();
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70289);Assert.assertEquals(JSONToken.EOF, lexer.token());
+    }finally{__CLR4_1_101i5p1i5pluszwck9.R.flushNeeded();}}
+
+    public void test_3() throws Exception {__CLR4_1_101i5p1i5pluszwck9.R.globalSliceStart(getClass().getName(),70290);int $CLV_p$=0;java.lang.Throwable $CLV_t$=null;try{__CLR4_1_10de3lbn1i8i();$CLV_p$=1;}catch(java.lang.Throwable $CLV_t2$){if($CLV_p$==0&&$CLV_t$==null){$CLV_t$=$CLV_t2$;}__CLR4_1_101i5p1i5pluszwck9.R.rethrow($CLV_t2$);}finally{__CLR4_1_101i5p1i5pluszwck9.R.globalSliceEnd(getClass().getName(),"com.alibaba.json.bvt.parser.JSONScannerTest_ISO8601.test_3",__CLR4_1_10_TEST_NAME_SNIFFER.getTestName(),70290,$CLV_p$,$CLV_t$);}}private void  __CLR4_1_10de3lbn1i8i() throws Exception{try{__CLR4_1_101i5p1i5pluszwck9.R.inc(70290);
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70291);JSONScanner lexer = new JSONScanner("2000-2");
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70292);lexer.config(Feature.AllowISO8601DateFormat, true);
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70293);lexer.nextToken();
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70294);Assert.assertEquals(JSONToken.LITERAL_INT, lexer.token());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70295);lexer.nextToken();
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70296);Assert.assertEquals(JSONToken.LITERAL_INT, lexer.token());
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70297);lexer.nextToken();
+        __CLR4_1_101i5p1i5pluszwck9.R.inc(70298);Assert.assertEquals(JSONToken.EOF, lexer.token());
+    }finally{__CLR4_1_101i5p1i5pluszwck9.R.flushNeeded();}}
+}

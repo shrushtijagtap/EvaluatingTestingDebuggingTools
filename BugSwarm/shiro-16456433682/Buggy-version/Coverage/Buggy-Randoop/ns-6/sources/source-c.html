@@ -1,0 +1,215 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PasswordService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.authc.credential</a>
+</div>
+
+<h1>Coverage Summary for Class: PasswordService (org.apache.shiro.authc.credential)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">PasswordService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; * http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.authc.credential;
+&nbsp;
+&nbsp;import org.apache.shiro.util.ByteSource;
+&nbsp;
+&nbsp;/**
+&nbsp; * A {@code PasswordService} supports common use cases when using passwords as a credentials mechanism.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Most importantly, implementations of this interface are expected to employ best-practices to ensure that
+&nbsp; * passwords remain as safe as possible in application environments.
+&nbsp; * &lt;h2&gt;Usage&lt;/h2&gt;
+&nbsp; * A {@code PasswordService} is used at two different times during an application&#39;s lifecycle:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;When creating a user account or resetting their password&lt;/li&gt;
+&nbsp; * &lt;li&gt;When a user logs in, when passwords must be compared&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * &lt;h3&gt;Account Creation or Password Reset&lt;/h3&gt;
+&nbsp; * Whenever you create a new user account or reset that account&#39;s password, we must translate the end-user submitted
+&nbsp; * raw/plaintext password value to a string format that is much safer to store.  You do that by calling the
+&nbsp; * {@link #encryptPassword(Object)} method to create the safer value.  For
+&nbsp; * example:
+&nbsp; * &lt;pre&gt;
+&nbsp; * String submittedPlaintextPassword = ...
+&nbsp; * String encryptedValue = passwordService.encryptPassword(submittedPlaintextPassword);
+&nbsp; * ...
+&nbsp; * userAccount.setPassword(encryptedValue);
+&nbsp; * userAccount.save(); //create or update to your data store
+&nbsp; * &lt;/pre&gt;
+&nbsp; * Be sure to save this encrypted password in your data store and never the original/raw submitted password.
+&nbsp; * &lt;h3&gt;Login Password Comparison&lt;/h3&gt;
+&nbsp; * Shiro performs the comparison during login automatically.  Along with your {@code PasswordService}, you just
+&nbsp; * have to configure a {@link PasswordMatcher} on a realm that has password-based accounts.   During a login attempt,
+&nbsp; * shiro will use the {@code PasswordMatcher} and the {@code PasswordService} to automatically compare submitted
+&nbsp; * passwords.
+&nbsp; * &lt;p/&gt;
+&nbsp; * For example, if using Shiro&#39;s INI, here is how you might configure the PasswordMatcher and PasswordService:
+&nbsp; * &lt;pre&gt;
+&nbsp; * [main]
+&nbsp; * ...
+&nbsp; * passwordService = org.apache.shiro.authc.credential.DefaultPasswordService
+&nbsp; * # configure the passwordService to use the settings you desire
+&nbsp; * ...
+&nbsp; * passwordMatcher = org.apache.shiro.authc.credential.PasswordMatcher
+&nbsp; * passwordMatcher.passwordService = $passwordService
+&nbsp; * ...
+&nbsp; * # Finally, set the matcher on a realm that requires password matching for account authentication:
+&nbsp; * myRealm = ...
+&nbsp; * myRealm.credentialsMatcher = $passwordMatcher
+&nbsp; * &lt;/pre&gt;
+&nbsp; *
+&nbsp; * @see DefaultPasswordService
+&nbsp; * @see PasswordMatcher
+&nbsp; * @since 1.2
+&nbsp; */
+&nbsp;public interface PasswordService {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts the specified plaintext password (usually acquired from your application&#39;s &#39;new user&#39; or &#39;password reset&#39;
+&nbsp;     * workflow) into a formatted string safe for storage.  The returned string can be safely saved with the
+&nbsp;     * corresponding user account record (e.g. as a &#39;password&#39; attribute).
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * It is expected that the String returned from this method will be presented to the
+&nbsp;     * {@link #passwordsMatch(Object, String) passwordsMatch(plaintext,encrypted)} method when performing a
+&nbsp;     * password comparison check.
+&nbsp;     * &lt;h3&gt;Usage&lt;/h3&gt;
+&nbsp;     * The input argument type can be any &#39;byte backed&#39; {@code Object} - almost always either a
+&nbsp;     * String or character array representing passwords (character arrays are often a safer way to represent passwords
+&nbsp;     * as they can be cleared/nulled-out after use.  Any argument type supported by
+&nbsp;     * {@link ByteSource.Util#isCompatible(Object)} is valid.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * For example:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * String rawPassword = ...
+&nbsp;     * String encryptedValue = passwordService.encryptPassword(rawPassword);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     * or, identically:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * char[] rawPasswordChars = ...
+&nbsp;     * String encryptedValue = passwordService.encryptPassword(rawPasswordChars);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The resulting {@code encryptedValue} should be stored with the account to be retrieved later during a
+&nbsp;     * login attempt.  For example:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * String encryptedValue = passwordService.encryptPassword(rawPassword);
+&nbsp;     * ...
+&nbsp;     * userAccount.setPassword(encryptedValue);
+&nbsp;     * userAccount.save(); //create or update to your data store
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param plaintextPassword the raw password as &#39;byte-backed&#39; object (String, character array, {@link ByteSource},
+&nbsp;     *                          etc) usually acquired from your application&#39;s &#39;new user&#39; or &#39;password reset&#39; workflow.
+&nbsp;     * @return the encrypted password, formatted for storage.
+&nbsp;     * @throws IllegalArgumentException if the argument cannot be easily converted to bytes as defined by
+&nbsp;     *                                  {@link ByteSource.Util#isCompatible(Object)}.
+&nbsp;     * @see ByteSource.Util#isCompatible(Object)
+&nbsp;     */
+&nbsp;    String encryptPassword(Object plaintextPassword) throws IllegalArgumentException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if the {@code submittedPlaintext} password matches the existing {@code saved} password,
+&nbsp;     * {@code false} otherwise.
+&nbsp;     * &lt;h3&gt;Usage&lt;/h3&gt;
+&nbsp;     * The {@code submittedPlaintext} argument type can be any &#39;byte backed&#39; {@code Object} - almost always either a
+&nbsp;     * String or character array representing passwords (character arrays are often a safer way to represent passwords
+&nbsp;     * as they can be cleared/nulled-out after use.  Any argument type supported by
+&nbsp;     * {@link ByteSource.Util#isCompatible(Object)} is valid.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * For example:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * String submittedPassword = ...
+&nbsp;     * passwordService.passwordsMatch(submittedPassword, encryptedPassword);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     * or similarly:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * char[] submittedPasswordCharacters = ...
+&nbsp;     * passwordService.passwordsMatch(submittedPasswordCharacters, encryptedPassword);
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @param submittedPlaintext a raw/plaintext password submitted by an end user/Subject.
+&nbsp;     * @param encrypted          the previously encrypted password known to be associated with an account.
+&nbsp;     *                           This value is expected to have been previously generated from the
+&nbsp;     *                           {@link #encryptPassword(Object) encryptPassword} method (typically
+&nbsp;     *                           when the account is created or the account&#39;s password is reset).
+&nbsp;     * @return {@code true} if the {@code submittedPlaintext} password matches the existing {@code saved} password,
+&nbsp;     *         {@code false} otherwise.
+&nbsp;     * @see ByteSource.Util#isCompatible(Object)
+&nbsp;     */
+&nbsp;    boolean passwordsMatch(Object submittedPlaintext, String encrypted);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

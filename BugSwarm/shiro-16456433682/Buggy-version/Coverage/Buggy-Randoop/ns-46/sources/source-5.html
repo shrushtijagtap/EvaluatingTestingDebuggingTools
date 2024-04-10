@@ -1,0 +1,238 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SubjectRunnable</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.subject.support</a>
+</div>
+
+<h1>Coverage Summary for Class: SubjectRunnable (org.apache.shiro.subject.support)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SubjectRunnable</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.subject.support;
+&nbsp;
+&nbsp;import org.apache.shiro.subject.Subject;
+&nbsp;import org.apache.shiro.util.ThreadState;
+&nbsp;
+&nbsp;/**
+&nbsp; * A {@code SubjectRunnable} ensures that a target/delegate {@link Runnable Runnable} will execute such that any
+&nbsp; * call to {@code SecurityUtils.}{@link org.apache.shiro.SecurityUtils#getSubject() getSubject()} during the
+&nbsp; * {@code Runnable}&#39;s execution will return the associated {@code Subject} instance.  The {@code SubjectRunnable}
+&nbsp; * instance can be run on any thread (the current thread or asynchronously on another thread) and the
+&nbsp; * {@code SecurityUtils.getSubject()} call will still work properly.  This implementation also guarantees that Shiro&#39;s
+&nbsp; * thread state will be identical before and after execution to ensure threads remain clean in any thread-pooled
+&nbsp; * environment.
+&nbsp; * &lt;p/&gt;
+&nbsp; * When instances of this class {@link Runnable#run() run()}, the following occurs:
+&nbsp; * &lt;ol&gt;
+&nbsp; * &lt;li&gt;The Subject and any of its associated thread state is first bound to the thread that executes the
+&nbsp; * {@code Runnable}.&lt;/li&gt;
+&nbsp; * &lt;li&gt;The delegate/target {@code Runnable} is {@link #doRun(Runnable) run}&lt;/li&gt;
+&nbsp; * &lt;li&gt;Any previous thread state that might have existed before the {@code Subject} was bound is fully restored&lt;/li&gt;
+&nbsp; * &lt;/ol&gt;
+&nbsp; * &lt;p/&gt;
+&nbsp; *
+&nbsp; * &lt;h3&gt;Usage&lt;/h3&gt;
+&nbsp; *
+&nbsp; * This is typically considered a support class and is not often directly referenced.  Most people prefer to use
+&nbsp; * the {@code Subject.}{@link Subject#execute(Runnable) execute} or
+&nbsp; * {@code Subject.}{@link Subject#associateWith(Runnable) associateWith} methods, which transparently perform the
+&nbsp; * necessary association logic.
+&nbsp; * &lt;p/&gt;
+&nbsp; * An even more convenient alternative is to use a
+&nbsp; * {@link org.apache.shiro.concurrent.SubjectAwareExecutor SubjectAwareExecutor}, which transparently uses
+&nbsp; * instances of this class but does not require referencing Shiro&#39;s API at all.
+&nbsp; *
+&nbsp; * @see Subject#associateWith(Runnable)
+&nbsp; * @see org.apache.shiro.concurrent.SubjectAwareExecutor SubjectAwareExecutor
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public class SubjectRunnable implements Runnable {
+&nbsp;
+&nbsp;    protected final ThreadState threadState;
+&nbsp;    private final Runnable runnable;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new {@code SubjectRunnable} that, when executed, will execute the target {@code delegate}, but
+&nbsp;     * guarantees that it will run associated with the specified {@code Subject}.
+&nbsp;     *
+&nbsp;     * @param subject  the Subject to associate with the delegate&#39;s execution.
+&nbsp;     * @param delegate the runnable to run.
+&nbsp;     */
+&nbsp;    public SubjectRunnable(Subject subject, Runnable delegate) {
+<b class="nc">&nbsp;        this(new SubjectThreadState(subject), delegate);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new {@code SubjectRunnable} that, when executed, will perform thread state
+&nbsp;     * {@link ThreadState#bind binding} and guaranteed {@link ThreadState#restore restoration} before and after the
+&nbsp;     * {@link Runnable Runnable}&#39;s execution, respectively.
+&nbsp;     *
+&nbsp;     * @param threadState the thread state to bind and unbind before and after the runnable&#39;s execution.
+&nbsp;     * @param delegate    the delegate {@code Runnable} to execute when this instance is {@link #run() run()}.
+&nbsp;     * @throws IllegalArgumentException if either the {@code ThreadState} or {@link Runnable} arguments are {@code null}.
+&nbsp;     */
+<b class="nc">&nbsp;    protected SubjectRunnable(ThreadState threadState, Runnable delegate) throws IllegalArgumentException {</b>
+<b class="nc">&nbsp;        if (threadState == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;ThreadState argument cannot be null.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.threadState = threadState;</b>
+<b class="nc">&nbsp;        if (delegate == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Runnable argument cannot be null.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.runnable = delegate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@link ThreadState#bind Bind}s the Subject thread state, executes the target {@code Runnable} and then guarantees
+&nbsp;     * the previous thread state&#39;s {@link ThreadState#restore restoration}:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * try {
+&nbsp;     *     threadState.{@link ThreadState#bind bind()};
+&nbsp;     *     {@link #doRun doRun}(targetRunnable);
+&nbsp;     * } finally {
+&nbsp;     *     threadState.{@link ThreadState#restore restore()}
+&nbsp;     * }
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     */
+&nbsp;    public void run() {
+&nbsp;        try {
+<b class="nc">&nbsp;            threadState.bind();</b>
+<b class="nc">&nbsp;            doRun(this.runnable);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            threadState.restore();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Simply calls the target {@link Runnable Runnable}&#39;s {@link Runnable#run run()} method.
+&nbsp;     *
+&nbsp;     * @param runnable the target runnable to run.
+&nbsp;     */
+&nbsp;    protected void doRun(Runnable runnable) {
+<b class="nc">&nbsp;        runnable.run();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

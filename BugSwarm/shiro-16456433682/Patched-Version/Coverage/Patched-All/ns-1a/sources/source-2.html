@@ -1,0 +1,784 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AuthorizingRealm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.realm</a>
+</div>
+
+<h1>Coverage Summary for Class: AuthorizingRealm (org.apache.shiro.realm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AuthorizingRealm</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    15.1%
+  </span>
+  <span class="absValue">
+    (8/53)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    5.8%
+  </span>
+  <span class="absValue">
+    (9/156)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    11.5%
+  </span>
+  <span class="absValue">
+    (23/200)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.realm;
+&nbsp;
+&nbsp;import org.apache.shiro.authc.credential.CredentialsMatcher;
+&nbsp;import org.apache.shiro.authz.*;
+&nbsp;import org.apache.shiro.authz.permission.*;
+&nbsp;import org.apache.shiro.cache.Cache;
+&nbsp;import org.apache.shiro.cache.CacheManager;
+&nbsp;import org.apache.shiro.subject.PrincipalCollection;
+&nbsp;import org.apache.shiro.util.CollectionUtils;
+&nbsp;import org.apache.shiro.util.Initializable;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.atomic.AtomicInteger;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * An {@code AuthorizingRealm} extends the {@code AuthenticatingRealm}&#39;s capabilities by adding Authorization
+&nbsp; * (access control) support.
+&nbsp; * &lt;p/&gt;
+&nbsp; * This implementation will perform all role and permission checks automatically (and subclasses do not have to
+&nbsp; * write this logic) as long as the
+&nbsp; * {@link #getAuthorizationInfo(org.apache.shiro.subject.PrincipalCollection)} method returns an
+&nbsp; * {@link AuthorizationInfo}.  Please see that method&#39;s JavaDoc for an in-depth explanation.
+&nbsp; * &lt;p/&gt;
+&nbsp; * If you find that you do not want to utilize the {@link AuthorizationInfo AuthorizationInfo} construct,
+&nbsp; * you are of course free to subclass the {@link AuthenticatingRealm AuthenticatingRealm} directly instead and
+&nbsp; * implement the remaining Realm interface methods directly.  You might do this if you want have better control
+&nbsp; * over how the Role and Permission checks occur for your specific data source.  However, using AuthorizationInfo
+&nbsp; * (and its default implementation {@link org.apache.shiro.authz.SimpleAuthorizationInfo SimpleAuthorizationInfo}) is sufficient in the large
+&nbsp; * majority of Realm cases.
+&nbsp; *
+&nbsp; * @see org.apache.shiro.authz.SimpleAuthorizationInfo
+&nbsp; * @since 0.2
+&nbsp; */
+&nbsp;public abstract class AuthorizingRealm extends AuthenticatingRealm
+&nbsp;        implements Authorizer, Initializable, PermissionResolverAware, RolePermissionResolverAware {
+&nbsp;
+&nbsp;    //TODO - complete JavaDoc
+&nbsp;
+&nbsp;    /*-------------------------------------------
+&nbsp;    |             C O N S T A N T S             |
+&nbsp;    ============================================*/
+<b class="fc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(AuthorizingRealm.class);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The default suffix appended to the realm name for caching AuthorizationInfo instances.
+&nbsp;     */
+&nbsp;    private static final String DEFAULT_AUTHORIZATION_CACHE_SUFFIX = &quot;.authorizationCache&quot;;
+&nbsp;
+<b class="fc">&nbsp;    private static final AtomicInteger INSTANCE_COUNT = new AtomicInteger();</b>
+&nbsp;
+&nbsp;    /*-------------------------------------------
+&nbsp;    |    I N S T A N C E   V A R I A B L E S    |
+&nbsp;    ============================================*/
+&nbsp;    /**
+&nbsp;     * The cache used by this realm to store AuthorizationInfo instances associated with individual Subject principals.
+&nbsp;     */
+&nbsp;    private boolean authorizationCachingEnabled;
+&nbsp;    private Cache&lt;Object, AuthorizationInfo&gt; authorizationCache;
+&nbsp;    private String authorizationCacheName;
+&nbsp;
+&nbsp;    private PermissionResolver permissionResolver;
+&nbsp;
+&nbsp;    private RolePermissionResolver permissionRoleResolver;
+&nbsp;
+&nbsp;    /*-------------------------------------------
+&nbsp;    |         C O N S T R U C T O R S           |
+&nbsp;    ============================================*/
+&nbsp;
+&nbsp;    public AuthorizingRealm() {
+<b class="fc">&nbsp;        this(null, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AuthorizingRealm(CacheManager cacheManager) {
+<b class="nc">&nbsp;        this(cacheManager, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AuthorizingRealm(CredentialsMatcher matcher) {
+<b class="nc">&nbsp;        this(null, matcher);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AuthorizingRealm(CacheManager cacheManager, CredentialsMatcher matcher) {
+<b class="fc">&nbsp;        super();</b>
+<b class="pc">&nbsp;        if (cacheManager != null) setCacheManager(cacheManager);</b>
+<b class="pc">&nbsp;        if (matcher != null) setCredentialsMatcher(matcher);</b>
+&nbsp;
+<b class="fc">&nbsp;        this.authorizationCachingEnabled = true;</b>
+<b class="fc">&nbsp;        this.permissionResolver = new WildcardPermissionResolver();</b>
+&nbsp;
+<b class="fc">&nbsp;        int instanceNumber = INSTANCE_COUNT.getAndIncrement();</b>
+<b class="fc">&nbsp;        this.authorizationCacheName = getClass().getName() + DEFAULT_AUTHORIZATION_CACHE_SUFFIX;</b>
+<b class="fc">&nbsp;        if (instanceNumber &gt; 0) {</b>
+<b class="fc">&nbsp;            this.authorizationCacheName = this.authorizationCacheName + &quot;.&quot; + instanceNumber;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*-------------------------------------------
+&nbsp;    |  A C C E S S O R S / M O D I F I E R S    |
+&nbsp;    ============================================*/
+&nbsp;
+&nbsp;    public void setName(String name) {
+<b class="fc">&nbsp;        super.setName(name);</b>
+<b class="fc">&nbsp;        String authzCacheName = this.authorizationCacheName;</b>
+<b class="pc">&nbsp;        if (authzCacheName != null &amp;&amp; authzCacheName.startsWith(getClass().getName())) {</b>
+&nbsp;            //get rid of the default class-name based cache name.  Create a more meaningful one
+&nbsp;            //based on the application-unique Realm name:
+<b class="fc">&nbsp;            this.authorizationCacheName = name + DEFAULT_AUTHORIZATION_CACHE_SUFFIX;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAuthorizationCache(Cache&lt;Object, AuthorizationInfo&gt; authorizationCache) {
+<b class="nc">&nbsp;        this.authorizationCache = authorizationCache;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Cache&lt;Object, AuthorizationInfo&gt; getAuthorizationCache() {
+<b class="fc">&nbsp;        return this.authorizationCache;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getAuthorizationCacheName() {
+<b class="nc">&nbsp;        return authorizationCacheName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    public void setAuthorizationCacheName(String authorizationCacheName) {
+<b class="nc">&nbsp;        this.authorizationCacheName = authorizationCacheName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if authorization caching should be utilized if a {@link CacheManager} has been
+&nbsp;     * {@link #setCacheManager(org.apache.shiro.cache.CacheManager) configured}, {@code false} otherwise.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The default value is {@code true}.
+&nbsp;     *
+&nbsp;     * @return {@code true} if authorization caching should be utilized, {@code false} otherwise.
+&nbsp;     */
+&nbsp;    public boolean isAuthorizationCachingEnabled() {
+<b class="pc">&nbsp;        return isCachingEnabled() &amp;&amp; authorizationCachingEnabled;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets whether or not authorization caching should be utilized if a {@link CacheManager} has been
+&nbsp;     * {@link #setCacheManager(org.apache.shiro.cache.CacheManager) configured}, {@code false} otherwise.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The default value is {@code true}.
+&nbsp;     *
+&nbsp;     * @param authenticationCachingEnabled the value to set
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    public void setAuthorizationCachingEnabled(boolean authenticationCachingEnabled) {
+<b class="nc">&nbsp;        this.authorizationCachingEnabled = authenticationCachingEnabled;</b>
+<b class="nc">&nbsp;        if (authenticationCachingEnabled) {</b>
+<b class="nc">&nbsp;            setCachingEnabled(true);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public PermissionResolver getPermissionResolver() {
+<b class="nc">&nbsp;        return permissionResolver;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPermissionResolver(PermissionResolver permissionResolver) {
+<b class="nc">&nbsp;        if (permissionResolver == null) throw new IllegalArgumentException(&quot;Null PermissionResolver is not allowed&quot;);</b>
+<b class="nc">&nbsp;        this.permissionResolver = permissionResolver;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public RolePermissionResolver getRolePermissionResolver() {
+<b class="nc">&nbsp;        return permissionRoleResolver;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setRolePermissionResolver(RolePermissionResolver permissionRoleResolver) {
+<b class="nc">&nbsp;        this.permissionRoleResolver = permissionRoleResolver;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |               M E T H O D S               |
+&nbsp;    ============================================*/
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Initializes this realm and potentially enables a cache, depending on configuration.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * When this method is called, the following logic is executed:
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;If the {@link #setAuthorizationCache cache} property has been set, it will be
+&nbsp;     * used to cache the AuthorizationInfo objects returned from {@link #getAuthorizationInfo}
+&nbsp;     * method invocations.
+&nbsp;     * All future calls to {@code getAuthorizationInfo} will attempt to use this cache first
+&nbsp;     * to alleviate any potentially unnecessary calls to an underlying data store.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;If the {@link #setAuthorizationCache cache} property has &lt;b&gt;not&lt;/b&gt; been set,
+&nbsp;     * the {@link #setCacheManager cacheManager} property will be checked.
+&nbsp;     * If a {@code cacheManager} has been set, it will be used to create an authorization
+&nbsp;     * {@code cache}, and this newly created cache which will be used as specified in #1.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;If neither the {@link #setAuthorizationCache (org.apache.shiro.cache.Cache) cache}
+&nbsp;     * or {@link #setCacheManager(org.apache.shiro.cache.CacheManager) cacheManager}
+&nbsp;     * properties are set, caching will be disabled and authorization look-ups will be delegated to
+&nbsp;     * subclass implementations for each authorization check.&lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     */
+&nbsp;    protected void onInit() {
+<b class="fc">&nbsp;        super.onInit();</b>
+&nbsp;        //trigger obtaining the authorization cache if possible
+<b class="fc">&nbsp;        getAvailableAuthorizationCache();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void afterCacheManagerSet() {
+<b class="nc">&nbsp;        super.afterCacheManagerSet();</b>
+&nbsp;        //trigger obtaining the authorization cache if possible
+<b class="nc">&nbsp;        getAvailableAuthorizationCache();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Cache&lt;Object, AuthorizationInfo&gt; getAuthorizationCacheLazy() {
+&nbsp;
+<b class="nc">&nbsp;        if (this.authorizationCache == null) {</b>
+&nbsp;
+<b class="nc">&nbsp;            if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;                log.debug(&quot;No authorizationCache instance set.  Checking for a cacheManager...&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            CacheManager cacheManager = getCacheManager();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (cacheManager != null) {</b>
+<b class="nc">&nbsp;                String cacheName = getAuthorizationCacheName();</b>
+<b class="nc">&nbsp;                if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;                    log.debug(&quot;CacheManager [&quot; + cacheManager + &quot;] has been configured.  Building &quot; +</b>
+&nbsp;                            &quot;authorization cache named [&quot; + cacheName + &quot;]&quot;);
+&nbsp;                }
+<b class="nc">&nbsp;                this.authorizationCache = cacheManager.getCache(cacheName);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;                    log.debug(&quot;No cache or cacheManager properties have been set.  Authorization cache cannot &quot; +</b>
+&nbsp;                            &quot;be obtained.&quot;);
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return this.authorizationCache;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Cache&lt;Object, AuthorizationInfo&gt; getAvailableAuthorizationCache() {
+<b class="fc">&nbsp;        Cache&lt;Object, AuthorizationInfo&gt; cache = getAuthorizationCache();</b>
+<b class="pc">&nbsp;        if (cache == null &amp;&amp; isAuthorizationCachingEnabled()) {</b>
+<b class="nc">&nbsp;            cache = getAuthorizationCacheLazy();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return cache;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an account&#39;s authorization-specific information for the specified {@code principals},
+&nbsp;     * or {@code null} if no account could be found.  The resulting {@code AuthorizationInfo} object is used
+&nbsp;     * by the other method implementations in this class to automatically perform access control checks for the
+&nbsp;     * corresponding {@code Subject}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation obtains the actual {@code AuthorizationInfo} object from the subclass&#39;s
+&nbsp;     * implementation of
+&nbsp;     * {@link #doGetAuthorizationInfo(org.apache.shiro.subject.PrincipalCollection) doGetAuthorizationInfo}, and then
+&nbsp;     * caches it for efficient reuse if caching is enabled (see below).
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Invocations of this method should be thought of as completely orthogonal to acquiring
+&nbsp;     * {@link #getAuthenticationInfo(org.apache.shiro.authc.AuthenticationToken) authenticationInfo}, since either could
+&nbsp;     * occur in any order.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * For example, in &amp;quot;Remember Me&amp;quot; scenarios, the user identity is remembered (and
+&nbsp;     * assumed) for their current session and an authentication attempt during that session might never occur.
+&nbsp;     * But because their identity would be remembered, that is sufficient enough information to call this method to
+&nbsp;     * execute any necessary authorization checks.  For this reason, authentication and authorization should be
+&nbsp;     * loosely coupled and not depend on each other.
+&nbsp;     * &lt;h3&gt;Caching&lt;/h3&gt;
+&nbsp;     * The {@code AuthorizationInfo} values returned from this method are cached for efficient reuse
+&nbsp;     * if caching is enabled.  Caching is enabled automatically when an {@link #setAuthorizationCache authorizationCache}
+&nbsp;     * instance has been explicitly configured, or if a {@link #setCacheManager cacheManager} has been configured, which
+&nbsp;     * will be used to lazily create the {@code authorizationCache} as needed.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If caching is enabled, the authorization cache will be checked first and if found, will return the cached
+&nbsp;     * {@code AuthorizationInfo} immediately.  If caching is disabled, or there is a cache miss, the authorization
+&nbsp;     * info will be looked up from the underlying data store via the
+&nbsp;     * {@link #doGetAuthorizationInfo(org.apache.shiro.subject.PrincipalCollection)} method, which must be implemented
+&nbsp;     * by subclasses.
+&nbsp;     * &lt;h4&gt;Changed Data&lt;/h4&gt;
+&nbsp;     * If caching is enabled and if any authorization data for an account is changed at
+&nbsp;     * runtime, such as adding or removing roles and/or permissions, the subclass implementation should clear the
+&nbsp;     * cached AuthorizationInfo for that account via the
+&nbsp;     * {@link #clearCachedAuthorizationInfo(org.apache.shiro.subject.PrincipalCollection) clearCachedAuthorizationInfo}
+&nbsp;     * method.  This ensures that the next call to {@code getAuthorizationInfo(PrincipalCollection)} will
+&nbsp;     * acquire the account&#39;s fresh authorization data, where it will then be cached for efficient reuse.  This
+&nbsp;     * ensures that stale authorization data will not be reused.
+&nbsp;     *
+&nbsp;     * @param principals the corresponding Subject&#39;s identifying principals with which to look up the Subject&#39;s
+&nbsp;     *                   {@code AuthorizationInfo}.
+&nbsp;     * @return the authorization information for the account associated with the specified {@code principals},
+&nbsp;     *         or {@code null} if no account could be found.
+&nbsp;     */
+&nbsp;    protected AuthorizationInfo getAuthorizationInfo(PrincipalCollection principals) {
+&nbsp;
+<b class="nc">&nbsp;        if (principals == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        AuthorizationInfo info = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;            log.trace(&quot;Retrieving AuthorizationInfo for principals [&quot; + principals + &quot;]&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Cache&lt;Object, AuthorizationInfo&gt; cache = getAvailableAuthorizationCache();</b>
+<b class="nc">&nbsp;        if (cache != null) {</b>
+<b class="nc">&nbsp;            if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;                log.trace(&quot;Attempting to retrieve the AuthorizationInfo from cache.&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Object key = getAuthorizationCacheKey(principals);</b>
+<b class="nc">&nbsp;            info = cache.get(key);</b>
+<b class="nc">&nbsp;            if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;                if (info == null) {</b>
+<b class="nc">&nbsp;                    log.trace(&quot;No AuthorizationInfo found in cache for principals [&quot; + principals + &quot;]&quot;);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    log.trace(&quot;AuthorizationInfo found in cache for principals [&quot; + principals + &quot;]&quot;);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        if (info == null) {</b>
+&nbsp;            // Call template method if the info was not found in a cache
+<b class="nc">&nbsp;            info = doGetAuthorizationInfo(principals);</b>
+&nbsp;            // If the info is not null and the cache has been created, then cache the authorization info.
+<b class="nc">&nbsp;            if (info != null &amp;&amp; cache != null) {</b>
+<b class="nc">&nbsp;                if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;                    log.trace(&quot;Caching authorization info for principals: [&quot; + principals + &quot;].&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                Object key = getAuthorizationCacheKey(principals);</b>
+<b class="nc">&nbsp;                cache.put(key, info);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return info;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Object getAuthorizationCacheKey(PrincipalCollection principals) {
+<b class="nc">&nbsp;        return principals;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Clears out the AuthorizationInfo cache entry for the specified account.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This method is provided as a convenience to subclasses so they can invalidate a cache entry when they
+&nbsp;     * change an account&#39;s authorization data (add/remove roles or permissions) during runtime.  Because an account&#39;s
+&nbsp;     * AuthorizationInfo can be cached, there needs to be a way to invalidate the cache for only that account so that
+&nbsp;     * subsequent authorization operations don&#39;t used the (old) cached value if account data changes.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * After this method is called, the next authorization check for that same account will result in a call to
+&nbsp;     * {@link #getAuthorizationInfo(org.apache.shiro.subject.PrincipalCollection) getAuthorizationInfo}, and the
+&nbsp;     * resulting return value will be cached before being returned so it can be reused for later authorization checks.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If you wish to clear out all associated cached data (and not just authorization data), use the
+&nbsp;     * {@link #clearCache(org.apache.shiro.subject.PrincipalCollection)} method instead (which will in turn call this
+&nbsp;     * method by default).
+&nbsp;     *
+&nbsp;     * @param principals the principals of the account for which to clear the cached AuthorizationInfo.
+&nbsp;     */
+&nbsp;    protected void clearCachedAuthorizationInfo(PrincipalCollection principals) {
+<b class="nc">&nbsp;        if (principals == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Cache&lt;Object, AuthorizationInfo&gt; cache = getAvailableAuthorizationCache();</b>
+&nbsp;        //cache instance will be non-null if caching is enabled:
+<b class="nc">&nbsp;        if (cache != null) {</b>
+<b class="nc">&nbsp;            Object key = getAuthorizationCacheKey(principals);</b>
+<b class="nc">&nbsp;            cache.remove(key);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Retrieves the AuthorizationInfo for the given principals from the underlying data store.  When returning
+&nbsp;     * an instance from this method, you might want to consider using an instance of
+&nbsp;     * {@link org.apache.shiro.authz.SimpleAuthorizationInfo SimpleAuthorizationInfo}, as it is suitable in most cases.
+&nbsp;     *
+&nbsp;     * @param principals the primary identifying principals of the AuthorizationInfo that should be retrieved.
+&nbsp;     * @return the AuthorizationInfo associated with this principals.
+&nbsp;     * @see org.apache.shiro.authz.SimpleAuthorizationInfo
+&nbsp;     */
+&nbsp;    protected abstract AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals);
+&nbsp;
+&nbsp;    //visibility changed from private to protected per SHIRO-332
+&nbsp;    protected Collection&lt;Permission&gt; getPermissions(AuthorizationInfo info) {
+<b class="nc">&nbsp;        Set&lt;Permission&gt; permissions = new HashSet&lt;Permission&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (info != null) {</b>
+<b class="nc">&nbsp;            Collection&lt;Permission&gt; perms = info.getObjectPermissions();</b>
+<b class="nc">&nbsp;            if (!CollectionUtils.isEmpty(perms)) {</b>
+<b class="nc">&nbsp;                permissions.addAll(perms);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            perms = resolvePermissions(info.getStringPermissions());</b>
+<b class="nc">&nbsp;            if (!CollectionUtils.isEmpty(perms)) {</b>
+<b class="nc">&nbsp;                permissions.addAll(perms);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            perms = resolveRolePermissions(info.getRoles());</b>
+<b class="nc">&nbsp;            if (!CollectionUtils.isEmpty(perms)) {</b>
+<b class="nc">&nbsp;                permissions.addAll(perms);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (permissions.isEmpty()) {</b>
+<b class="nc">&nbsp;            return Collections.emptySet();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return Collections.unmodifiableSet(permissions);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private Collection&lt;Permission&gt; resolvePermissions(Collection&lt;String&gt; stringPerms) {
+<b class="nc">&nbsp;        Collection&lt;Permission&gt; perms = Collections.emptySet();</b>
+<b class="nc">&nbsp;        PermissionResolver resolver = getPermissionResolver();</b>
+<b class="nc">&nbsp;        if (resolver != null &amp;&amp; !CollectionUtils.isEmpty(stringPerms)) {</b>
+<b class="nc">&nbsp;            perms = new LinkedHashSet&lt;Permission&gt;(stringPerms.size());</b>
+<b class="nc">&nbsp;            for (String strPermission : stringPerms) {</b>
+<b class="nc">&nbsp;                if (StringUtils.clean(strPermission) != null) {</b>
+<b class="nc">&nbsp;                    Permission permission = resolver.resolvePermission(strPermission);</b>
+<b class="nc">&nbsp;                    perms.add(permission);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return perms;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Collection&lt;Permission&gt; resolveRolePermissions(Collection&lt;String&gt; roleNames) {
+<b class="nc">&nbsp;        Collection&lt;Permission&gt; perms = Collections.emptySet();</b>
+<b class="nc">&nbsp;        RolePermissionResolver resolver = getRolePermissionResolver();</b>
+<b class="nc">&nbsp;        if (resolver != null &amp;&amp; !CollectionUtils.isEmpty(roleNames)) {</b>
+<b class="nc">&nbsp;            perms = new LinkedHashSet&lt;Permission&gt;(roleNames.size());</b>
+<b class="nc">&nbsp;            for (String roleName : roleNames) {</b>
+<b class="nc">&nbsp;                Collection&lt;Permission&gt; resolved = resolver.resolvePermissionsInRole(roleName);</b>
+<b class="nc">&nbsp;                if (!CollectionUtils.isEmpty(resolved)) {</b>
+<b class="nc">&nbsp;                    perms.addAll(resolved);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return perms;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isPermitted(PrincipalCollection principals, String permission) {
+<b class="nc">&nbsp;        Permission p = getPermissionResolver().resolvePermission(permission);</b>
+<b class="nc">&nbsp;        return isPermitted(principals, p);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isPermitted(PrincipalCollection principals, Permission permission) {
+<b class="nc">&nbsp;        AuthorizationInfo info = getAuthorizationInfo(principals);</b>
+<b class="nc">&nbsp;        return isPermitted(permission, info);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //visibility changed from private to protected per SHIRO-332
+&nbsp;    protected boolean isPermitted(Permission permission, AuthorizationInfo info) {
+<b class="nc">&nbsp;        Collection&lt;Permission&gt; perms = getPermissions(info);</b>
+<b class="nc">&nbsp;        if (perms != null &amp;&amp; !perms.isEmpty()) {</b>
+<b class="nc">&nbsp;            for (Permission perm : perms) {</b>
+<b class="nc">&nbsp;                if (perm.implies(permission)) {</b>
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean[] isPermitted(PrincipalCollection subjectIdentifier, String... permissions) {
+<b class="nc">&nbsp;        List&lt;Permission&gt; perms = new ArrayList&lt;Permission&gt;(permissions.length);</b>
+<b class="nc">&nbsp;        for (String permString : permissions) {</b>
+<b class="nc">&nbsp;            perms.add(getPermissionResolver().resolvePermission(permString));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return isPermitted(subjectIdentifier, perms);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean[] isPermitted(PrincipalCollection principals, List&lt;Permission&gt; permissions) {
+<b class="nc">&nbsp;        AuthorizationInfo info = getAuthorizationInfo(principals);</b>
+<b class="nc">&nbsp;        return isPermitted(permissions, info);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean[] isPermitted(List&lt;Permission&gt; permissions, AuthorizationInfo info) {
+&nbsp;        boolean[] result;
+<b class="nc">&nbsp;        if (permissions != null &amp;&amp; !permissions.isEmpty()) {</b>
+<b class="nc">&nbsp;            int size = permissions.size();</b>
+<b class="nc">&nbsp;            result = new boolean[size];</b>
+<b class="nc">&nbsp;            int i = 0;</b>
+<b class="nc">&nbsp;            for (Permission p : permissions) {</b>
+<b class="nc">&nbsp;                result[i++] = isPermitted(p, info);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            result = new boolean[0];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isPermittedAll(PrincipalCollection subjectIdentifier, String... permissions) {
+<b class="nc">&nbsp;        if (permissions != null &amp;&amp; permissions.length &gt; 0) {</b>
+<b class="nc">&nbsp;            Collection&lt;Permission&gt; perms = new ArrayList&lt;Permission&gt;(permissions.length);</b>
+<b class="nc">&nbsp;            for (String permString : permissions) {</b>
+<b class="nc">&nbsp;                perms.add(getPermissionResolver().resolvePermission(permString));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return isPermittedAll(subjectIdentifier, perms);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isPermittedAll(PrincipalCollection principal, Collection&lt;Permission&gt; permissions) {
+<b class="nc">&nbsp;        AuthorizationInfo info = getAuthorizationInfo(principal);</b>
+<b class="nc">&nbsp;        return info != null &amp;&amp; isPermittedAll(permissions, info);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean isPermittedAll(Collection&lt;Permission&gt; permissions, AuthorizationInfo info) {
+<b class="nc">&nbsp;        if (permissions != null &amp;&amp; !permissions.isEmpty()) {</b>
+<b class="nc">&nbsp;            for (Permission p : permissions) {</b>
+<b class="nc">&nbsp;                if (!isPermitted(p, info)) {</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkPermission(PrincipalCollection subjectIdentifier, String permission) throws AuthorizationException {
+<b class="nc">&nbsp;        Permission p = getPermissionResolver().resolvePermission(permission);</b>
+<b class="nc">&nbsp;        checkPermission(subjectIdentifier, p);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkPermission(PrincipalCollection principal, Permission permission) throws AuthorizationException {
+<b class="nc">&nbsp;        AuthorizationInfo info = getAuthorizationInfo(principal);</b>
+<b class="nc">&nbsp;        checkPermission(permission, info);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void checkPermission(Permission permission, AuthorizationInfo info) {
+<b class="nc">&nbsp;        if (!isPermitted(permission, info)) {</b>
+<b class="nc">&nbsp;            String msg = &quot;User is not permitted [&quot; + permission + &quot;]&quot;;</b>
+<b class="nc">&nbsp;            throw new UnauthorizedException(msg);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkPermissions(PrincipalCollection subjectIdentifier, String... permissions) throws AuthorizationException {
+<b class="nc">&nbsp;        if (permissions != null) {</b>
+<b class="nc">&nbsp;            for (String permString : permissions) {</b>
+<b class="nc">&nbsp;                checkPermission(subjectIdentifier, permString);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkPermissions(PrincipalCollection principal, Collection&lt;Permission&gt; permissions) throws AuthorizationException {
+<b class="nc">&nbsp;        AuthorizationInfo info = getAuthorizationInfo(principal);</b>
+<b class="nc">&nbsp;        checkPermissions(permissions, info);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void checkPermissions(Collection&lt;Permission&gt; permissions, AuthorizationInfo info) {
+<b class="nc">&nbsp;        if (permissions != null &amp;&amp; !permissions.isEmpty()) {</b>
+<b class="nc">&nbsp;            for (Permission p : permissions) {</b>
+<b class="nc">&nbsp;                checkPermission(p, info);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasRole(PrincipalCollection principal, String roleIdentifier) {
+<b class="nc">&nbsp;        AuthorizationInfo info = getAuthorizationInfo(principal);</b>
+<b class="nc">&nbsp;        return hasRole(roleIdentifier, info);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean hasRole(String roleIdentifier, AuthorizationInfo info) {
+<b class="nc">&nbsp;        return info != null &amp;&amp; info.getRoles() != null &amp;&amp; info.getRoles().contains(roleIdentifier);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean[] hasRoles(PrincipalCollection principal, List&lt;String&gt; roleIdentifiers) {
+<b class="nc">&nbsp;        AuthorizationInfo info = getAuthorizationInfo(principal);</b>
+<b class="nc">&nbsp;        boolean[] result = new boolean[roleIdentifiers != null ? roleIdentifiers.size() : 0];</b>
+<b class="nc">&nbsp;        if (info != null) {</b>
+<b class="nc">&nbsp;            result = hasRoles(roleIdentifiers, info);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean[] hasRoles(List&lt;String&gt; roleIdentifiers, AuthorizationInfo info) {
+&nbsp;        boolean[] result;
+<b class="nc">&nbsp;        if (roleIdentifiers != null &amp;&amp; !roleIdentifiers.isEmpty()) {</b>
+<b class="nc">&nbsp;            int size = roleIdentifiers.size();</b>
+<b class="nc">&nbsp;            result = new boolean[size];</b>
+<b class="nc">&nbsp;            int i = 0;</b>
+<b class="nc">&nbsp;            for (String roleName : roleIdentifiers) {</b>
+<b class="nc">&nbsp;                result[i++] = hasRole(roleName, info);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            result = new boolean[0];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasAllRoles(PrincipalCollection principal, Collection&lt;String&gt; roleIdentifiers) {
+<b class="nc">&nbsp;        AuthorizationInfo info = getAuthorizationInfo(principal);</b>
+<b class="nc">&nbsp;        return info != null &amp;&amp; hasAllRoles(roleIdentifiers, info);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean hasAllRoles(Collection&lt;String&gt; roleIdentifiers, AuthorizationInfo info) {
+<b class="nc">&nbsp;        if (roleIdentifiers != null &amp;&amp; !roleIdentifiers.isEmpty()) {</b>
+<b class="nc">&nbsp;            for (String roleName : roleIdentifiers) {</b>
+<b class="nc">&nbsp;                if (!hasRole(roleName, info)) {</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkRole(PrincipalCollection principal, String role) throws AuthorizationException {
+<b class="nc">&nbsp;        AuthorizationInfo info = getAuthorizationInfo(principal);</b>
+<b class="nc">&nbsp;        checkRole(role, info);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void checkRole(String role, AuthorizationInfo info) {
+<b class="nc">&nbsp;        if (!hasRole(role, info)) {</b>
+<b class="nc">&nbsp;            String msg = &quot;User does not have role [&quot; + role + &quot;]&quot;;</b>
+<b class="nc">&nbsp;            throw new UnauthorizedException(msg);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkRoles(PrincipalCollection principal, Collection&lt;String&gt; roles) throws AuthorizationException {
+<b class="nc">&nbsp;        AuthorizationInfo info = getAuthorizationInfo(principal);</b>
+<b class="nc">&nbsp;        checkRoles(roles, info);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkRoles(PrincipalCollection principal, String... roles) throws AuthorizationException {
+<b class="nc">&nbsp;        checkRoles(principal, Arrays.asList(roles));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void checkRoles(Collection&lt;String&gt; roles, AuthorizationInfo info) {
+<b class="nc">&nbsp;        if (roles != null &amp;&amp; !roles.isEmpty()) {</b>
+<b class="nc">&nbsp;            for (String roleName : roles) {</b>
+<b class="nc">&nbsp;                checkRole(roleName, info);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calls {@code super.doClearCache} to ensure any cached authentication data is removed and then calls
+&nbsp;     * {@link #clearCachedAuthorizationInfo(org.apache.shiro.subject.PrincipalCollection)} to remove any cached
+&nbsp;     * authorization data.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If overriding in a subclass, be sure to call {@code super.doClearCache} to ensure this behavior is maintained.
+&nbsp;     *
+&nbsp;     * @param principals the principals of the account for which to clear any cached AuthorizationInfo
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    protected void doClearCache(PrincipalCollection principals) {
+<b class="nc">&nbsp;        super.doClearCache(principals);</b>
+<b class="nc">&nbsp;        clearCachedAuthorizationInfo(principals);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

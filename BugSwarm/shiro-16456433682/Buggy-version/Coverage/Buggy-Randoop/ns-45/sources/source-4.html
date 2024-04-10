@@ -1,0 +1,980 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Subject</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.subject</a>
+</div>
+
+<h1>Coverage Summary for Class: Subject (org.apache.shiro.subject)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">Subject$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.subject;
+&nbsp;
+&nbsp;import org.apache.shiro.SecurityUtils;
+&nbsp;import org.apache.shiro.authc.AuthenticationException;
+&nbsp;import org.apache.shiro.authc.AuthenticationToken;
+&nbsp;import org.apache.shiro.authz.AuthorizationException;
+&nbsp;import org.apache.shiro.authz.Permission;
+&nbsp;import org.apache.shiro.mgt.SecurityManager;
+&nbsp;import org.apache.shiro.mgt.SubjectFactory;
+&nbsp;import org.apache.shiro.session.Session;
+&nbsp;import org.apache.shiro.subject.support.DefaultSubjectContext;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.List;
+&nbsp;import java.util.concurrent.Callable;
+&nbsp;
+&nbsp;/**
+&nbsp; * A {@code Subject} represents state and security operations for a &lt;em&gt;single&lt;/em&gt; application user.
+&nbsp; * These operations include authentication (login/logout), authorization (access control), and
+&nbsp; * session access. It is Shiro&#39;s primary mechanism for single-user security functionality.
+&nbsp; * &lt;h3&gt;Acquiring a Subject&lt;/h3&gt;
+&nbsp; * To acquire the currently-executing {@code Subject}, application developers will almost always use
+&nbsp; * {@code SecurityUtils}:
+&nbsp; * &lt;pre&gt;
+&nbsp; * {@link SecurityUtils SecurityUtils}.{@link org.apache.shiro.SecurityUtils#getSubject() getSubject()}&lt;/pre&gt;
+&nbsp; * Almost all security operations should be performed with the {@code Subject} returned from this method.
+&nbsp; * &lt;h3&gt;Permission methods&lt;/h3&gt;
+&nbsp; * Note that there are many *Permission methods in this interface overloaded to accept String arguments instead of
+&nbsp; * {@link Permission Permission} instances. They are a convenience allowing the caller to use a String representation of
+&nbsp; * a {@link Permission Permission} if desired.  The underlying Authorization subsystem implementations will usually
+&nbsp; * simply convert these String values to {@link Permission Permission} instances and then just call the corresponding
+&nbsp; * type-safe method.  (Shiro&#39;s default implementations do String-to-Permission conversion for these methods using
+&nbsp; * {@link org.apache.shiro.authz.permission.PermissionResolver PermissionResolver}s.)
+&nbsp; * &lt;p/&gt;
+&nbsp; * These overloaded *Permission methods forgo type-safety for the benefit of convenience and simplicity,
+&nbsp; * so you should choose which ones to use based on your preferences and needs.
+&nbsp; *
+&nbsp; * @since 0.1
+&nbsp; */
+&nbsp;public interface Subject {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns this Subject&#39;s application-wide uniquely identifying principal, or {@code null} if this
+&nbsp;     * Subject is anonymous because it doesn&#39;t yet have any associated account data (for example,
+&nbsp;     * if they haven&#39;t logged in).
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The term &lt;em&gt;principal&lt;/em&gt; is just a fancy security term for any identifying attribute(s) of an application
+&nbsp;     * user, such as a username, or user id, or public key, or anything else you might use in your application to
+&nbsp;     * identify a user.
+&nbsp;     * &lt;h4&gt;Uniqueness&lt;/h4&gt;
+&nbsp;     * Although given names and family names (first/last) are technically considered principals as well,
+&nbsp;     * Shiro expects the object returned from this method to be an identifying attribute unique across
+&nbsp;     * your entire application.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implies that things like given names and family names are usually poor
+&nbsp;     * candidates as return values since they are rarely guaranteed to be unique;  Things often used for this value:
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;A {@code long} RDBMS surrogate primary key&lt;/li&gt;
+&nbsp;     * &lt;li&gt;An application-unique username&lt;/li&gt;
+&nbsp;     * &lt;li&gt;A {@link java.util.UUID UUID}&lt;/li&gt;
+&nbsp;     * &lt;li&gt;An LDAP Unique ID&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     * or any other similar suitable unique mechanism valuable to your application.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Most implementations will simply return
+&nbsp;     * &lt;code&gt;{@link #getPrincipals()}.{@link org.apache.shiro.subject.PrincipalCollection#getPrimaryPrincipal() getPrimaryPrincipal()}&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @return this Subject&#39;s application-specific unique identity.
+&nbsp;     * @see org.apache.shiro.subject.PrincipalCollection#getPrimaryPrincipal()
+&nbsp;     */
+&nbsp;    Object getPrincipal();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns this Subject&#39;s principals (identifying attributes) in the form of a {@code PrincipalCollection} or
+&nbsp;     * {@code null} if this Subject is anonymous because it doesn&#39;t yet have any associated account data (for example,
+&nbsp;     * if they haven&#39;t logged in).
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The word &amp;quot;principals&amp;quot; is nothing more than a fancy security term for identifying attributes associated
+&nbsp;     * with a Subject, aka, application user.  For example, user id, a surname (family/last name), given (first) name,
+&nbsp;     * social security number, nickname, username, etc, are all examples of a principal.
+&nbsp;     *
+&nbsp;     * @return all of this Subject&#39;s principals (identifying attributes).
+&nbsp;     * @see #getPrincipal()
+&nbsp;     * @see org.apache.shiro.subject.PrincipalCollection#getPrimaryPrincipal()
+&nbsp;     */
+&nbsp;    PrincipalCollection getPrincipals();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if this Subject is permitted to perform an action or access a resource summarized by the
+&nbsp;     * specified permission string.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is an overloaded method for the corresponding type-safe {@link Permission Permission} variant.
+&nbsp;     * Please see the class-level JavaDoc for more information on these String-based permission methods.
+&nbsp;     *
+&nbsp;     * @param permission the String representation of a Permission that is being checked.
+&nbsp;     * @return true if this Subject is permitted, false otherwise.
+&nbsp;     * @see #isPermitted(Permission permission)
+&nbsp;     * @since 0.9
+&nbsp;     */
+&nbsp;    boolean isPermitted(String permission);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if this Subject is permitted to perform an action or access a resource summarized by the
+&nbsp;     * specified permission.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * More specifically, this method determines if any {@code Permission}s associated
+&nbsp;     * with the subject {@link Permission#implies(Permission) imply} the specified permission.
+&nbsp;     *
+&nbsp;     * @param permission the permission that is being checked.
+&nbsp;     * @return true if this Subject is permitted, false otherwise.
+&nbsp;     */
+&nbsp;    boolean isPermitted(Permission permission);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if this Subject implies the given permission strings and returns a boolean array indicating which
+&nbsp;     * permissions are implied.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is an overloaded method for the corresponding type-safe {@link Permission Permission} variant.
+&nbsp;     * Please see the class-level JavaDoc for more information on these String-based permission methods.
+&nbsp;     *
+&nbsp;     * @param permissions the String representations of the Permissions that are being checked.
+&nbsp;     * @return a boolean array where indices correspond to the index of the
+&nbsp;     *         permissions in the given list.  A true value at an index indicates this Subject is permitted for
+&nbsp;     *         for the associated {@code Permission} string in the list.  A false value at an index
+&nbsp;     *         indicates otherwise.
+&nbsp;     * @since 0.9
+&nbsp;     */
+&nbsp;    boolean[] isPermitted(String... permissions);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if this Subject implies the given Permissions and returns a boolean array indicating which permissions
+&nbsp;     * are implied.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * More specifically, this method should determine if each {@code Permission} in
+&nbsp;     * the array is {@link Permission#implies(Permission) implied} by permissions
+&nbsp;     * already associated with the subject.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is primarily a performance-enhancing method to help reduce the number of
+&nbsp;     * {@link #isPermitted} invocations over the wire in client/server systems.
+&nbsp;     *
+&nbsp;     * @param permissions the permissions that are being checked.
+&nbsp;     * @return a boolean array where indices correspond to the index of the
+&nbsp;     *         permissions in the given list.  A true value at an index indicates this Subject is permitted for
+&nbsp;     *         for the associated {@code Permission} object in the list.  A false value at an index
+&nbsp;     *         indicates otherwise.
+&nbsp;     */
+&nbsp;    boolean[] isPermitted(List&lt;Permission&gt; permissions);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if this Subject implies all of the specified permission strings, {@code false} otherwise.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is an overloaded method for the corresponding type-safe {@link org.apache.shiro.authz.Permission Permission}
+&nbsp;     * variant.  Please see the class-level JavaDoc for more information on these String-based permission methods.
+&nbsp;     *
+&nbsp;     * @param permissions the String representations of the Permissions that are being checked.
+&nbsp;     * @return true if this Subject has all of the specified permissions, false otherwise.
+&nbsp;     * @see #isPermittedAll(Collection)
+&nbsp;     * @since 0.9
+&nbsp;     */
+&nbsp;    boolean isPermittedAll(String... permissions);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if this Subject implies all of the specified permissions, {@code false} otherwise.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * More specifically, this method determines if all of the given {@code Permission}s are
+&nbsp;     * {@link Permission#implies(Permission) implied by} permissions already associated with this Subject.
+&nbsp;     *
+&nbsp;     * @param permissions the permissions to check.
+&nbsp;     * @return true if this Subject has all of the specified permissions, false otherwise.
+&nbsp;     */
+&nbsp;    boolean isPermittedAll(Collection&lt;Permission&gt; permissions);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ensures this Subject implies the specified permission String.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If this subject&#39;s existing associated permissions do not {@link Permission#implies(Permission)} imply}
+&nbsp;     * the given permission, an {@link org.apache.shiro.authz.AuthorizationException} will be thrown.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is an overloaded method for the corresponding type-safe {@link Permission Permission} variant.
+&nbsp;     * Please see the class-level JavaDoc for more information on these String-based permission methods.
+&nbsp;     *
+&nbsp;     * @param permission the String representation of the Permission to check.
+&nbsp;     * @throws org.apache.shiro.authz.AuthorizationException
+&nbsp;     *          if the user does not have the permission.
+&nbsp;     * @since 0.9
+&nbsp;     */
+&nbsp;    void checkPermission(String permission) throws AuthorizationException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ensures this Subject {@link Permission#implies(Permission) implies} the specified {@code Permission}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If this subject&#39;s existing associated permissions do not {@link Permission#implies(Permission) imply}
+&nbsp;     * the given permission, an {@link org.apache.shiro.authz.AuthorizationException} will be thrown.
+&nbsp;     *
+&nbsp;     * @param permission the Permission to check.
+&nbsp;     * @throws org.apache.shiro.authz.AuthorizationException
+&nbsp;     *          if this Subject does not have the permission.
+&nbsp;     */
+&nbsp;    void checkPermission(Permission permission) throws AuthorizationException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ensures this Subject
+&nbsp;     * {@link org.apache.shiro.authz.Permission#implies(org.apache.shiro.authz.Permission) implies} all of the
+&nbsp;     * specified permission strings.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If this subject&#39;s existing associated permissions do not
+&nbsp;     * {@link org.apache.shiro.authz.Permission#implies(org.apache.shiro.authz.Permission) imply} all of the given permissions,
+&nbsp;     * an {@link org.apache.shiro.authz.AuthorizationException} will be thrown.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is an overloaded method for the corresponding type-safe {@link Permission Permission} variant.
+&nbsp;     * Please see the class-level JavaDoc for more information on these String-based permission methods.
+&nbsp;     *
+&nbsp;     * @param permissions the string representations of Permissions to check.
+&nbsp;     * @throws AuthorizationException if this Subject does not have all of the given permissions.
+&nbsp;     * @since 0.9
+&nbsp;     */
+&nbsp;    void checkPermissions(String... permissions) throws AuthorizationException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ensures this Subject
+&nbsp;     * {@link org.apache.shiro.authz.Permission#implies(org.apache.shiro.authz.Permission) implies} all of the
+&nbsp;     * specified permission strings.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If this subject&#39;s existing associated permissions do not
+&nbsp;     * {@link org.apache.shiro.authz.Permission#implies(org.apache.shiro.authz.Permission) imply} all of the given permissions,
+&nbsp;     * an {@link org.apache.shiro.authz.AuthorizationException} will be thrown.
+&nbsp;     *
+&nbsp;     * @param permissions the Permissions to check.
+&nbsp;     * @throws AuthorizationException if this Subject does not have all of the given permissions.
+&nbsp;     */
+&nbsp;    void checkPermissions(Collection&lt;Permission&gt; permissions) throws AuthorizationException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if this Subject has the specified role, {@code false} otherwise.
+&nbsp;     *
+&nbsp;     * @param roleIdentifier the application-specific role identifier (usually a role id or role name).
+&nbsp;     * @return {@code true} if this Subject has the specified role, {@code false} otherwise.
+&nbsp;     */
+&nbsp;    boolean hasRole(String roleIdentifier);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if this Subject has the specified roles, returning a boolean array indicating
+&nbsp;     * which roles are associated.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is primarily a performance-enhancing method to help reduce the number of
+&nbsp;     * {@link #hasRole} invocations over the wire in client/server systems.
+&nbsp;     *
+&nbsp;     * @param roleIdentifiers the application-specific role identifiers to check (usually role ids or role names).
+&nbsp;     * @return a boolean array where indices correspond to the index of the
+&nbsp;     *         roles in the given identifiers.  A true value indicates this Subject has the
+&nbsp;     *         role at that index.  False indicates this Subject does not have the role at that index.
+&nbsp;     */
+&nbsp;    boolean[] hasRoles(List&lt;String&gt; roleIdentifiers);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if this Subject has all of the specified roles, {@code false} otherwise.
+&nbsp;     *
+&nbsp;     * @param roleIdentifiers the application-specific role identifiers to check (usually role ids or role names).
+&nbsp;     * @return true if this Subject has all the roles, false otherwise.
+&nbsp;     */
+&nbsp;    boolean hasAllRoles(Collection&lt;String&gt; roleIdentifiers);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Asserts this Subject has the specified role by returning quietly if they do or throwing an
+&nbsp;     * {@link org.apache.shiro.authz.AuthorizationException} if they do not.
+&nbsp;     *
+&nbsp;     * @param roleIdentifier the application-specific role identifier (usually a role id or role name ).
+&nbsp;     * @throws org.apache.shiro.authz.AuthorizationException
+&nbsp;     *          if this Subject does not have the role.
+&nbsp;     */
+&nbsp;    void checkRole(String roleIdentifier) throws AuthorizationException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Asserts this Subject has all of the specified roles by returning quietly if they do or throwing an
+&nbsp;     * {@link org.apache.shiro.authz.AuthorizationException} if they do not.
+&nbsp;     *
+&nbsp;     * @param roleIdentifiers the application-specific role identifiers to check (usually role ids or role names).
+&nbsp;     * @throws org.apache.shiro.authz.AuthorizationException
+&nbsp;     *          if this Subject does not have all of the specified roles.
+&nbsp;     */
+&nbsp;    void checkRoles(Collection&lt;String&gt; roleIdentifiers) throws AuthorizationException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Same as {@link #checkRoles(Collection&lt;String&gt; roleIdentifiers) checkRoles(Collection&lt;String&gt; roleIdentifiers)} but
+&nbsp;     * doesn&#39;t require a collection as a an argument.
+&nbsp;     * Asserts this Subject has all of the specified roles by returning quietly if they do or throwing an
+&nbsp;     * {@link org.apache.shiro.authz.AuthorizationException} if they do not.
+&nbsp;     *
+&nbsp;     * @param roleIdentifiers roleIdentifiers the application-specific role identifiers to check (usually role ids or role names).
+&nbsp;     * @throws AuthorizationException org.apache.shiro.authz.AuthorizationException
+&nbsp;     *          if this Subject does not have all of the specified roles.
+&nbsp;     * @since 1.1.0
+&nbsp;     */
+&nbsp;    void checkRoles(String... roleIdentifiers) throws AuthorizationException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs a login attempt for this Subject/user.  If unsuccessful,
+&nbsp;     * an {@link AuthenticationException} is thrown, the subclass of which identifies why the attempt failed.
+&nbsp;     * If successful, the account data associated with the submitted principals/credentials will be
+&nbsp;     * associated with this {@code Subject} and the method will return quietly.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Upon returning quietly, this {@code Subject} instance can be considered
+&nbsp;     * authenticated and {@link #getPrincipal() getPrincipal()} will be non-null and
+&nbsp;     * {@link #isAuthenticated() isAuthenticated()} will be {@code true}.
+&nbsp;     *
+&nbsp;     * @param token the token encapsulating the subject&#39;s principals and credentials to be passed to the
+&nbsp;     *              Authentication subsystem for verification.
+&nbsp;     * @throws org.apache.shiro.authc.AuthenticationException
+&nbsp;     *          if the authentication attempt fails.
+&nbsp;     * @since 0.9
+&nbsp;     */
+&nbsp;    void login(AuthenticationToken token) throws AuthenticationException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if this Subject/user proved their identity &lt;em&gt;during their current session&lt;/em&gt;
+&nbsp;     * by providing valid credentials matching those known to the system, {@code false} otherwise.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Note that even if this Subject&#39;s identity has been remembered via &#39;remember me&#39; services, this method will
+&nbsp;     * still return {@code false} unless the user has actually logged in with proper credentials &lt;em&gt;during their
+&nbsp;     * current session&lt;/em&gt;.  See the {@link #isRemembered() isRemembered()} method JavaDoc for more.
+&nbsp;     *
+&nbsp;     * @return {@code true} if this Subject proved their identity during their current session
+&nbsp;     *         by providing valid credentials matching those known to the system, {@code false} otherwise.
+&nbsp;     * @since 0.9
+&nbsp;     */
+&nbsp;    boolean isAuthenticated();
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if this {@code Subject} has an identity (it is not anonymous) and the identity
+&nbsp;     * (aka {@link #getPrincipals() principals}) is remembered from a successful authentication during a previous
+&nbsp;     * session.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Although the underlying implementation determines exactly how this method functions, most implementations have
+&nbsp;     * this method act as the logical equivalent to this code:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * {@link #getPrincipal() getPrincipal()} != null &amp;&amp; !{@link #isAuthenticated() isAuthenticated()}&lt;/pre&gt;
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Note as indicated by the above code example, if a {@code Subject} is remembered, they are
+&nbsp;     * &lt;em&gt;NOT&lt;/em&gt; considered authenticated.  A check against {@link #isAuthenticated() isAuthenticated()} is a more
+&nbsp;     * strict check than that reflected by this method.  For example, a check to see if a subject can access financial
+&nbsp;     * information should almost always depend on {@link #isAuthenticated() isAuthenticated()} to &lt;em&gt;guarantee&lt;/em&gt; a
+&nbsp;     * verified identity, and not this method.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Once the subject is authenticated, they are no longer considered only remembered because their identity would
+&nbsp;     * have been verified during the current session.
+&nbsp;     * &lt;h4&gt;Remembered vs Authenticated&lt;/h4&gt;
+&nbsp;     * Authentication is the process of &lt;em&gt;proving&lt;/em&gt; you are who you say you are.  When a user is only remembered,
+&nbsp;     * the remembered identity gives the system an idea who that user probably is, but in reality, has no way of
+&nbsp;     * absolutely &lt;em&gt;guaranteeing&lt;/em&gt; if the remembered {@code Subject} represents the user currently
+&nbsp;     * using the application.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * So although many parts of the application can still perform user-specific logic based on the remembered
+&nbsp;     * {@link #getPrincipals() principals}, such as customized views, it should never perform highly-sensitive
+&nbsp;     * operations until the user has legitimately verified their identity by executing a successful authentication
+&nbsp;     * attempt.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * We see this paradigm all over the web, and we will use &lt;a href=&quot;http://www.amazon.com&quot;&gt;Amazon.com&lt;/a&gt; as an
+&nbsp;     * example:
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * When you visit Amazon.com and perform a login and ask it to &#39;remember me&#39;, it will set a cookie with your
+&nbsp;     * identity.  If you don&#39;t log out and your session expires, and you come back, say the next day, Amazon still knows
+&nbsp;     * who you &lt;em&gt;probably&lt;/em&gt; are: you still see all of your book and movie recommendations and similar user-specific
+&nbsp;     * features since these are based on your (remembered) user id.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * BUT, if you try to do something sensitive, such as access your account&#39;s billing data, Amazon forces you
+&nbsp;     * to do an actual log-in, requiring your username and password.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is because although amazon.com assumed your identity from &#39;remember me&#39;, it recognized that you were not
+&nbsp;     * actually authenticated.  The only way to really guarantee you are who you say you are, and therefore allow you
+&nbsp;     * access to sensitive account data, is to force you to perform an actual successful authentication.  You can
+&nbsp;     * check this guarantee via the {@link #isAuthenticated() isAuthenticated()} method and not via this method.
+&nbsp;     *
+&nbsp;     * @return {@code true} if this {@code Subject}&#39;s identity (aka {@link #getPrincipals() principals}) is
+&nbsp;     *         remembered from a successful authentication during a previous session, {@code false} otherwise.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    boolean isRemembered();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the application {@code Session} associated with this Subject.  If no session exists when this
+&nbsp;     * method is called, a new session will be created, associated with this Subject, and then returned.
+&nbsp;     *
+&nbsp;     * @return the application {@code Session} associated with this Subject.
+&nbsp;     * @see #getSession(boolean)
+&nbsp;     * @since 0.2
+&nbsp;     */
+&nbsp;    Session getSession();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the application {@code Session} associated with this Subject.  Based on the boolean argument,
+&nbsp;     * this method functions as follows:
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;If there is already an existing session associated with this {@code Subject}, it is returned and
+&nbsp;     * the {@code create} argument is ignored.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;If no session exists and {@code create} is {@code true}, a new session will be created, associated with
+&nbsp;     * this {@code Subject} and then returned.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;If no session exists and {@code create} is {@code false}, {@code null} is returned.&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @param create boolean argument determining if a new session should be created or not if there is no existing session.
+&nbsp;     * @return the application {@code Session} associated with this {@code Subject} or {@code null} based
+&nbsp;     *         on the above described logic.
+&nbsp;     * @since 0.2
+&nbsp;     */
+&nbsp;    Session getSession(boolean create);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Logs out this Subject and invalidates and/or removes any associated entities,
+&nbsp;     * such as a {@link Session Session} and authorization data.  After this method is called, the Subject is
+&nbsp;     * considered &#39;anonymous&#39; and may continue to be used for another log-in if desired.
+&nbsp;     * &lt;h3&gt;Web Environment Warning&lt;/h3&gt;
+&nbsp;     * Calling this method in web environments will usually remove any associated session cookie as part of
+&nbsp;     * session invalidation.  Because cookies are part of the HTTP header, and headers can only be set before the
+&nbsp;     * response body (html, image, etc) is sent, this method in web environments must be called before &lt;em&gt;any&lt;/em&gt;
+&nbsp;     * content has been rendered.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The typical approach most applications use in this scenario is to redirect the user to a different
+&nbsp;     * location (e.g. home page) immediately after calling this method.  This is an effect of the HTTP protocol
+&nbsp;     * itself and not a reflection of Shiro&#39;s implementation.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Non-HTTP environments may of course use a logged-out subject for login again if desired.
+&nbsp;     */
+&nbsp;    void logout();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Associates the specified {@code Callable} with this {@code Subject} instance and then executes it on the
+&nbsp;     * currently running thread.  If you want to execute the {@code Callable} on a different thread, it is better to
+&nbsp;     * use the {@link #associateWith(Callable)} method instead.
+&nbsp;     *
+&nbsp;     * @param callable the Callable to associate with this subject and then execute.
+&nbsp;     * @param &lt;V&gt;      the type of return value the {@code Callable} will return
+&nbsp;     * @return the resulting object returned by the {@code Callable}&#39;s execution.
+&nbsp;     * @throws ExecutionException if the {@code Callable}&#39;s {@link Callable#call call} method throws an exception.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    &lt;V&gt; V execute(Callable&lt;V&gt; callable) throws ExecutionException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Associates the specified {@code Runnable} with this {@code Subject} instance and then executes it on the
+&nbsp;     * currently running thread.  If you want to execute the {@code Runnable} on a different thread, it is better to
+&nbsp;     * use the {@link #associateWith(Runnable)} method instead.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;Note&lt;/b&gt;: This method is primarily provided to execute existing/legacy Runnable implementations.  It is better
+&nbsp;     * for new code to use {@link #execute(Callable)} since that supports the ability to return values and catch
+&nbsp;     * exceptions.
+&nbsp;     *
+&nbsp;     * @param runnable the {@code Runnable} to associate with this {@code Subject} and then execute.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    void execute(Runnable runnable);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a {@code Callable} instance matching the given argument while additionally ensuring that it will
+&nbsp;     * retain and execute under this Subject&#39;s identity.  The returned object can be used with an
+&nbsp;     * {@link java.util.concurrent.ExecutorService ExecutorService} to execute as this Subject.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This will effectively ensure that any calls to
+&nbsp;     * {@code SecurityUtils}.{@link SecurityUtils#getSubject() getSubject()} and related functionality will continue
+&nbsp;     * to function properly on any thread that executes the returned {@code Callable} instance.
+&nbsp;     *
+&nbsp;     * @param callable the callable to execute as this {@code Subject}
+&nbsp;     * @param &lt;V&gt;      the {@code Callable}s return value type
+&nbsp;     * @return a {@code Callable} that can be run as this {@code Subject}.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    &lt;V&gt; Callable&lt;V&gt; associateWith(Callable&lt;V&gt; callable);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a {@code Runnable} instance matching the given argument while additionally ensuring that it will
+&nbsp;     * retain and execute under this Subject&#39;s identity.  The returned object can be used with an
+&nbsp;     * {@link java.util.concurrent.Executor Executor} or another thread to execute as this Subject.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This will effectively ensure that any calls to
+&nbsp;     * {@code SecurityUtils}.{@link SecurityUtils#getSubject() getSubject()} and related functionality will continue
+&nbsp;     * to function properly on any thread that executes the returned {@code Runnable} instance.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * *Note that if you need a return value to be returned as a result of the runnable&#39;s execution or if you need to
+&nbsp;     * react to any Exceptions, it is highly recommended to use the
+&nbsp;     * {@link #associateWith(java.util.concurrent.Callable) createCallable} method instead of this one.
+&nbsp;     *
+&nbsp;     * @param runnable the runnable to execute as this {@code Subject}
+&nbsp;     * @return a {@code Runnable} that can be run as this {@code Subject} on another thread.
+&nbsp;     * @see #associateWith (java.util.concurrent.Callable)
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    Runnable associateWith(Runnable runnable);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Allows this subject to &#39;run as&#39; or &#39;assume&#39; another identity indefinitely.  This can only be
+&nbsp;     * called when the {@code Subject} instance already has an identity (i.e. they are remembered from a previous
+&nbsp;     * log-in or they have authenticated during their current session).
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Some notes about {@code runAs}:
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;You can tell if a {@code Subject} is &#39;running as&#39; another identity by calling the
+&nbsp;     * {@link #isRunAs() isRunAs()} method.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;If running as another identity, you can determine what the previous &#39;pre run as&#39; identity
+&nbsp;     * was by calling the {@link #getPreviousPrincipals() getPreviousPrincipals()} method.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;When you want a {@code Subject} to stop running as another identity, you can return to its previous
+&nbsp;     * &#39;pre run as&#39; identity by calling the {@link #releaseRunAs() releaseRunAs()} method.&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * @param principals the identity to &#39;run as&#39;, aka the identity to &lt;em&gt;assume&lt;/em&gt; indefinitely.
+&nbsp;     * @throws NullPointerException  if the specified principals collection is {@code null} or empty.
+&nbsp;     * @throws IllegalStateException if this {@code Subject} does not yet have an identity of its own.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    void runAs(PrincipalCollection principals) throws NullPointerException, IllegalStateException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if this {@code Subject} is &#39;running as&#39; another identity other than its original one or
+&nbsp;     * {@code false} otherwise (normal {@code Subject} state).  See the {@link #runAs runAs} method for more
+&nbsp;     * information.
+&nbsp;     *
+&nbsp;     * @return {@code true} if this {@code Subject} is &#39;running as&#39; another identity other than its original one or
+&nbsp;     *         {@code false} otherwise (normal {@code Subject} state).
+&nbsp;     * @see #runAs
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    boolean isRunAs();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the previous &#39;pre run as&#39; identity of this {@code Subject} before assuming the current
+&nbsp;     * {@link #runAs runAs} identity, or {@code null} if this {@code Subject} is not operating under an assumed
+&nbsp;     * identity (normal state). See the {@link #runAs runAs} method for more information.
+&nbsp;     *
+&nbsp;     * @return the previous &#39;pre run as&#39; identity of this {@code Subject} before assuming the current
+&nbsp;     *         {@link #runAs runAs} identity, or {@code null} if this {@code Subject} is not operating under an assumed
+&nbsp;     *         identity (normal state).
+&nbsp;     * @see #runAs
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    PrincipalCollection getPreviousPrincipals();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Releases the current &#39;run as&#39; (assumed) identity and reverts back to the previous &#39;pre run as&#39;
+&nbsp;     * identity that existed before {@code #runAs runAs} was called.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This method returns &#39;run as&#39; (assumed) identity being released or {@code null} if this {@code Subject} is not
+&nbsp;     * operating under an assumed identity.
+&nbsp;     *
+&nbsp;     * @return the &#39;run as&#39; (assumed) identity being released or {@code null} if this {@code Subject} is not operating
+&nbsp;     *         under an assumed identity.
+&nbsp;     * @see #runAs
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    PrincipalCollection releaseRunAs();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Builder design pattern implementation for creating {@link Subject} instances in a simplified way without
+&nbsp;     * requiring knowledge of Shiro&#39;s construction techniques.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;NOTE&lt;/b&gt;: This is provided for framework development support only and should typically never be used by
+&nbsp;     * application developers.  {@code Subject} instances should generally be acquired by using
+&nbsp;     * &lt;code&gt;SecurityUtils.{@link SecurityUtils#getSubject() getSubject()}&lt;/code&gt;
+&nbsp;     * &lt;h4&gt;Usage&lt;/h4&gt;
+&nbsp;     * The simplest usage of this builder is to construct an anonymous, session-less {@code Subject} instance:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * Subject subject = new Subject.{@link #Builder() Builder}().{@link #buildSubject() buildSubject()};&lt;/pre&gt;
+&nbsp;     * The default, no-arg {@code Subject.Builder()} constructor shown above will use the application&#39;s
+&nbsp;     * currently accessible {@code SecurityManager} via
+&nbsp;     * &lt;code&gt;SecurityUtils.{@link SecurityUtils#getSecurityManager() getSecurityManager()}&lt;/code&gt;.  You may also
+&nbsp;     * specify the exact {@code SecurityManager} instance to be used by the additional
+&nbsp;     * &lt;code&gt;Subject.{@link #Builder(org.apache.shiro.mgt.SecurityManager) Builder(securityManager)}&lt;/code&gt;
+&nbsp;     * constructor if desired.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * All other methods may be called before the {@link #buildSubject() buildSubject()} method to
+&nbsp;     * provide context on how to construct the {@code Subject} instance.  For example, if you have a session id and
+&nbsp;     * want to acquire the {@code Subject} that &#39;owns&#39; that session (assuming the session exists and is not expired):
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * Subject subject = new Subject.Builder().sessionId(sessionId).buildSubject();&lt;/pre&gt;
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Similarly, if you want a {@code Subject} instance reflecting a certain identity:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * PrincipalCollection principals = new SimplePrincipalCollection(&quot;username&quot;, &lt;em&gt;yourRealmName&lt;/em&gt;);
+&nbsp;     * Subject subject = new Subject.Builder().principals(principals).build();&lt;/pre&gt;
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;Note*&lt;/b&gt; that the returned {@code Subject} instance is &lt;b&gt;not&lt;/b&gt; automatically bound to the application (thread)
+&nbsp;     * for further use.  That is,
+&nbsp;     * {@link org.apache.shiro.SecurityUtils SecurityUtils}.{@link org.apache.shiro.SecurityUtils#getSubject() getSubject()}
+&nbsp;     * will not automatically return the same instance as what is returned by the builder.  It is up to the framework
+&nbsp;     * developer to bind the built {@code Subject} for continued use if desired.
+&nbsp;     *
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    public static class Builder {
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Hold all contextual data via the Builder instance&#39;s method invocations to be sent to the
+&nbsp;         * {@code SecurityManager} during the {@link #buildSubject} call.
+&nbsp;         */
+&nbsp;        private final SubjectContext subjectContext;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * The SecurityManager to invoke during the {@link #buildSubject} call.
+&nbsp;         */
+&nbsp;        private final SecurityManager securityManager;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructs a new {@link Subject.Builder} instance, using the {@code SecurityManager} instance available
+&nbsp;         * to the calling code as determined by a call to {@link org.apache.shiro.SecurityUtils#getSecurityManager()}
+&nbsp;         * to build the {@code Subject} instance.
+&nbsp;         */
+&nbsp;        public Builder() {
+<b class="nc">&nbsp;            this(SecurityUtils.getSecurityManager());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructs a new {@link Subject.Builder} instance which will use the specified {@code SecurityManager} when
+&nbsp;         * building the {@code Subject} instance.
+&nbsp;         *
+&nbsp;         * @param securityManager the {@code SecurityManager} to use when building the {@code Subject} instance.
+&nbsp;         */
+<b class="nc">&nbsp;        public Builder(SecurityManager securityManager) {</b>
+<b class="nc">&nbsp;            if (securityManager == null) {</b>
+<b class="nc">&nbsp;                throw new NullPointerException(&quot;SecurityManager method argument cannot be null.&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            this.securityManager = securityManager;</b>
+<b class="nc">&nbsp;            this.subjectContext = newSubjectContextInstance();</b>
+<b class="nc">&nbsp;            if (this.subjectContext == null) {</b>
+<b class="nc">&nbsp;                throw new IllegalStateException(&quot;Subject instance returned from &#39;newSubjectContextInstance&#39; &quot; +</b>
+&nbsp;                        &quot;cannot be null.&quot;);
+&nbsp;            }
+<b class="nc">&nbsp;            this.subjectContext.setSecurityManager(securityManager);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Creates a new {@code SubjectContext} instance to be used to populate with subject contextual data that
+&nbsp;         * will then be sent to the {@code SecurityManager} to create a new {@code Subject} instance.
+&nbsp;         *
+&nbsp;         * @return a new {@code SubjectContext} instance
+&nbsp;         */
+&nbsp;        protected SubjectContext newSubjectContextInstance() {
+<b class="nc">&nbsp;            return new DefaultSubjectContext();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns the backing context used to build the {@code Subject} instance, available to subclasses
+&nbsp;         * since the {@code context} class attribute is marked as {@code private}.
+&nbsp;         *
+&nbsp;         * @return the backing context used to build the {@code Subject} instance, available to subclasses.
+&nbsp;         */
+&nbsp;        protected SubjectContext getSubjectContext() {
+<b class="nc">&nbsp;            return this.subjectContext;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Enables building a {@link Subject Subject} instance that owns the {@link Session Session} with the
+&nbsp;         * specified {@code sessionId}.
+&nbsp;         * &lt;p/&gt;
+&nbsp;         * Usually when specifying a {@code sessionId}, no other {@code Builder} methods would be specified because
+&nbsp;         * everything else (principals, inet address, etc) can usually be reconstructed based on the referenced
+&nbsp;         * session alone.  In other words, this is almost always sufficient:
+&nbsp;         * &lt;pre&gt;
+&nbsp;         * new Subject.Builder().sessionId(sessionId).buildSubject();&lt;/pre&gt;
+&nbsp;         * &lt;p/&gt;
+&nbsp;         * &lt;b&gt;Although simple in concept, this method provides very powerful functionality previously absent in almost
+&nbsp;         * all Java environments:&lt;/b&gt;
+&nbsp;         * &lt;p/&gt;
+&nbsp;         * The ability to reference a {@code Subject} and their server-side session
+&nbsp;         * &lt;em&gt;across clients of different mediums&lt;/em&gt; such as web applications, Java applets,
+&nbsp;         * standalone C# clients over XML-RPC and/or SOAP, and many others. This is a &lt;em&gt;huge&lt;/em&gt;
+&nbsp;         * benefit in heterogeneous enterprise applications.
+&nbsp;         * &lt;p/&gt;
+&nbsp;         * To maintain session integrity across client mediums, the {@code sessionId} &lt;b&gt;must&lt;/b&gt; be transmitted
+&nbsp;         * to all client mediums securely (e.g. over SSL) to prevent man-in-the-middle attacks.  This
+&nbsp;         * is nothing new - all web applications are susceptible to the same problem when transmitting
+&nbsp;         * {@code Cookie}s or when using URL rewriting.  As long as the
+&nbsp;         * {@code sessionId} is transmitted securely, session integrity can be maintained.
+&nbsp;         *
+&nbsp;         * @param sessionId the id of the session that backs the desired Subject being acquired.
+&nbsp;         * @return this {@code Builder} instance for method chaining.
+&nbsp;         */
+&nbsp;        public Builder sessionId(Serializable sessionId) {
+<b class="nc">&nbsp;            if (sessionId != null) {</b>
+<b class="nc">&nbsp;                this.subjectContext.setSessionId(sessionId);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Ensures the {@code Subject} being built will reflect the specified host name or IP as its originating
+&nbsp;         * location.
+&nbsp;         *
+&nbsp;         * @param host the host name or IP address to use as the {@code Subject}&#39;s originating location.
+&nbsp;         * @return this {@code Builder} instance for method chaining.
+&nbsp;         */
+&nbsp;        public Builder host(String host) {
+<b class="nc">&nbsp;            if (StringUtils.hasText(host)) {</b>
+<b class="nc">&nbsp;                this.subjectContext.setHost(host);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Ensures the {@code Subject} being built will use the specified {@link Session} instance.  Note that it is
+&nbsp;         * more common to use the {@link #sessionId sessionId} builder method rather than having to construct a
+&nbsp;         * {@code Session} instance for this method.
+&nbsp;         *
+&nbsp;         * @param session the session to use as the {@code Subject}&#39;s {@link Session}
+&nbsp;         * @return this {@code Builder} instance for method chaining.
+&nbsp;         */
+&nbsp;        public Builder session(Session session) {
+<b class="nc">&nbsp;            if (session != null) {</b>
+<b class="nc">&nbsp;                this.subjectContext.setSession(session);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Ensures the {@code Subject} being built will reflect the specified principals (aka identity).
+&nbsp;         * &lt;p/&gt;
+&nbsp;         * For example, if your application&#39;s unique identifier for users is a {@code String} username, and you wanted
+&nbsp;         * to create a {@code Subject} instance that reflected a user whose username is
+&nbsp;         * &#39;{@code jsmith}&#39;, and you knew the Realm that could acquire {@code jsmith}&#39;s principals based on the username
+&nbsp;         * was named &amp;quot;{@code myRealm}&amp;quot;, you might create the &#39;{@code jsmith} {@code Subject} instance this
+&nbsp;         * way:
+&nbsp;         * &lt;pre&gt;
+&nbsp;         * PrincipalCollection identity = new {@link org.apache.shiro.subject.SimplePrincipalCollection#SimplePrincipalCollection(Object, String) SimplePrincipalCollection}(&amp;quot;jsmith&amp;quot;, &amp;quot;myRealm&amp;quot;);
+&nbsp;         * Subject jsmith = new Subject.Builder().principals(identity).buildSubject();&lt;/pre&gt;
+&nbsp;         * &lt;p/&gt;
+&nbsp;         * Similarly, if your application&#39;s unique identifier for users is a {@code long} value (such as might be used
+&nbsp;         * as a primary key in a relational database) and you were using a {@code JDBC}
+&nbsp;         * {@code Realm} named, (unimaginatively) &amp;quot;jdbcRealm&amp;quot;, you might create the Subject
+&nbsp;         * instance this way:
+&nbsp;         * &lt;pre&gt;
+&nbsp;         * long userId = //get user ID from somewhere
+&nbsp;         * PrincipalCollection userIdentity = new {@link org.apache.shiro.subject.SimplePrincipalCollection#SimplePrincipalCollection(Object, String) SimplePrincipalCollection}(&lt;em&gt;userId&lt;/em&gt;, &amp;quot;jdbcRealm&amp;quot;);
+&nbsp;         * Subject user = new Subject.Builder().principals(identity).buildSubject();&lt;/pre&gt;
+&nbsp;         *
+&nbsp;         * @param principals the principals to use as the {@code Subject}&#39;s identity.
+&nbsp;         * @return this {@code Builder} instance for method chaining.
+&nbsp;         */
+&nbsp;        public Builder principals(PrincipalCollection principals) {
+<b class="nc">&nbsp;            if (principals != null &amp;&amp; !principals.isEmpty()) {</b>
+<b class="nc">&nbsp;                this.subjectContext.setPrincipals(principals);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Configures whether or not the created Subject instance can create a new {@code Session} if one does not
+&nbsp;         * already exist.  If set to {@code false}, any application calls to
+&nbsp;         * {@code subject.getSession()} or {@code subject.getSession(true))} will result in a SessionException.
+&nbsp;         * &lt;p/&gt;
+&nbsp;         * This setting is {@code true} by default, as most applications find value in sessions.
+&nbsp;         *
+&nbsp;         * @param enabled whether or not the created Subject instance can create a new {@code Session} if one does not
+&nbsp;         *                already exist.
+&nbsp;         * @return this {@code Builder} instance for method chaining.
+&nbsp;         * @since 1.2
+&nbsp;         */
+&nbsp;        public Builder sessionCreationEnabled(boolean enabled) {
+<b class="nc">&nbsp;            this.subjectContext.setSessionCreationEnabled(enabled);</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Ensures the {@code Subject} being built will be considered
+&nbsp;         * {@link org.apache.shiro.subject.Subject#isAuthenticated() authenticated}.  Per the
+&nbsp;         * {@link org.apache.shiro.subject.Subject#isAuthenticated() isAuthenticated()} JavaDoc, be careful
+&nbsp;         * when specifying {@code true} - you should know what you are doing and have a good reason for ignoring Shiro&#39;s
+&nbsp;         * default authentication state mechanisms.
+&nbsp;         *
+&nbsp;         * @param authenticated whether or not the built {@code Subject} will be considered authenticated.
+&nbsp;         * @return this {@code Builder} instance for method chaining.
+&nbsp;         * @see org.apache.shiro.subject.Subject#isAuthenticated()
+&nbsp;         */
+&nbsp;        public Builder authenticated(boolean authenticated) {
+<b class="nc">&nbsp;            this.subjectContext.setAuthenticated(authenticated);</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Allows custom attributes to be added to the underlying context {@code Map} used to construct the
+&nbsp;         * {@link Subject} instance.
+&nbsp;         * &lt;p/&gt;
+&nbsp;         * A {@code null} key throws an {@link IllegalArgumentException}. A {@code null} value effectively removes
+&nbsp;         * any previously stored attribute under the given key from the context map.
+&nbsp;         * &lt;p/&gt;
+&nbsp;         * &lt;b&gt;*NOTE*:&lt;/b&gt; This method is only useful when configuring Shiro with a custom {@link SubjectFactory}
+&nbsp;         * implementation.  This method allows end-users to append additional data to the context map which the
+&nbsp;         * {@code SubjectFactory} implementation can use when building custom Subject instances. As such, this method
+&nbsp;         * is only useful when a custom {@code SubjectFactory} implementation has been configured.
+&nbsp;         *
+&nbsp;         * @param attributeKey   the key under which the corresponding value will be stored in the context {@code Map}.
+&nbsp;         * @param attributeValue the value to store in the context map under the specified {@code attributeKey}.
+&nbsp;         * @return this {@code Builder} instance for method chaining.
+&nbsp;         * @throws IllegalArgumentException if the {@code attributeKey} is {@code null}.
+&nbsp;         * @see SubjectFactory#createSubject(SubjectContext)
+&nbsp;         */
+&nbsp;        public Builder contextAttribute(String attributeKey, Object attributeValue) {
+<b class="nc">&nbsp;            if (attributeKey == null) {</b>
+<b class="nc">&nbsp;                String msg = &quot;Subject context map key cannot be null.&quot;;</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(msg);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (attributeValue == null) {</b>
+<b class="nc">&nbsp;                this.subjectContext.remove(attributeKey);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                this.subjectContext.put(attributeKey, attributeValue);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Creates and returns a new {@code Subject} instance reflecting the cumulative state acquired by the
+&nbsp;         * other methods in this class.
+&nbsp;         * &lt;p/&gt;
+&nbsp;         * This {@code Builder} instance will still retain the underlying state after this method is called - it
+&nbsp;         * will not clear it; repeated calls to this method will return multiple {@link Subject} instances, all
+&nbsp;         * reflecting the exact same state.  If a new (different) {@code Subject} is to be constructed, a new
+&nbsp;         * {@code Builder} instance must be created.
+&nbsp;         * &lt;p/&gt;
+&nbsp;         * &lt;b&gt;Note&lt;/b&gt; that the returned {@code Subject} instance is &lt;b&gt;not&lt;/b&gt; automatically bound to the application
+&nbsp;         * (thread) for further use.  That is,
+&nbsp;         * {@link org.apache.shiro.SecurityUtils SecurityUtils}.{@link org.apache.shiro.SecurityUtils#getSubject() getSubject()}
+&nbsp;         * will not automatically return the same instance as what is returned by the builder.  It is up to the
+&nbsp;         * framework developer to bind the returned {@code Subject} for continued use if desired.
+&nbsp;         *
+&nbsp;         * @return a new {@code Subject} instance reflecting the cumulative state acquired by the
+&nbsp;         *         other methods in this class.
+&nbsp;         */
+&nbsp;        public Subject buildSubject() {
+<b class="nc">&nbsp;            return this.securityManager.createSubject(this.subjectContext);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

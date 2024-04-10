@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":29,"id":31543,"methods":[{"el":14,"sc":5,"sl":12},{"el":28,"sc":5,"sl":16}],"name":"SimpleDateFormatSerializer","sl":8}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_2745":{"methods":[{"sl":12},{"sl":16}],"name":"test_0","pass":true,"statements":[{"sl":13},{"sl":17},{"sl":22},{"sl":23},{"sl":24},{"sl":26},{"sl":27}]},"test_3496":{"methods":[{"sl":12},{"sl":16}],"name":"test_0","pass":true,"statements":[{"sl":13},{"sl":17},{"sl":22},{"sl":23},{"sl":24},{"sl":26},{"sl":27}]},"test_3546":{"methods":[{"sl":12},{"sl":16}],"name":"test_codec","pass":true,"statements":[{"sl":13},{"sl":17},{"sl":22},{"sl":23},{"sl":24},{"sl":26},{"sl":27}]},"test_3761":{"methods":[{"sl":16}],"name":"test_0","pass":true,"statements":[{"sl":17},{"sl":22},{"sl":23},{"sl":24},{"sl":26},{"sl":27}]},"test_3809":{"methods":[{"sl":12},{"sl":16}],"name":"test_codec_no_asm","pass":true,"statements":[{"sl":13},{"sl":17},{"sl":22},{"sl":23},{"sl":24},{"sl":26},{"sl":27}]},"test_395":{"methods":[{"sl":12},{"sl":16}],"name":"test_codec_null_no_asm","pass":true,"statements":[{"sl":13},{"sl":17},{"sl":18},{"sl":19}]},"test_751":{"methods":[{"sl":12}],"name":"test_codec_null_asm","pass":true,"statements":[{"sl":13}]},"test_813":{"methods":[{"sl":12},{"sl":16}],"name":"test_codec_asm","pass":true,"statements":[{"sl":13},{"sl":17},{"sl":22},{"sl":23},{"sl":24},{"sl":26},{"sl":27}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [2745, 3496, 813, 751, 3809, 395, 3546], [2745, 3496, 813, 751, 3809, 395, 3546], [], [], [2745, 3496, 813, 3761, 3809, 395, 3546], [2745, 3496, 813, 3761, 3809, 395, 3546], [395], [395], [], [], [2745, 3496, 813, 3761, 3809, 3546], [2745, 3496, 813, 3761, 3809, 3546], [2745, 3496, 813, 3761, 3809, 3546], [], [2745, 3496, 813, 3761, 3809, 3546], [2745, 3496, 813, 3761, 3809, 3546], [], []]

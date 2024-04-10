@@ -1,0 +1,288 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FilterChainManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.web.filter.mgt</a>
+</div>
+
+<h1>Coverage Summary for Class: FilterChainManager (org.apache.shiro.web.filter.mgt)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">FilterChainManager</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.web.filter.mgt;
+&nbsp;
+&nbsp;import org.apache.shiro.config.ConfigurationException;
+&nbsp;
+&nbsp;import javax.servlet.Filter;
+&nbsp;import javax.servlet.FilterChain;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;/**
+&nbsp; * A {@code FilterChainManager} manages the creation and modification of {@link Filter} chains from an available pool
+&nbsp; * of {@link Filter} instances.
+&nbsp; *
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public interface FilterChainManager {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the pool of available {@code Filter}s managed by this manager, keyed by {@code name}.
+&nbsp;     *
+&nbsp;     * @return the pool of available {@code Filter}s managed by this manager, keyed by {@code name}.
+&nbsp;     */
+&nbsp;    Map&lt;String, Filter&gt; getFilters();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the filter chain identified by the specified {@code chainName} or {@code null} if there is no chain with
+&nbsp;     * that name.
+&nbsp;     *
+&nbsp;     * @param chainName the name identifying the filter chain.
+&nbsp;     * @return the filter chain identified by the specified {@code chainName} or {@code null} if there is no chain with
+&nbsp;     *         that name.
+&nbsp;     */
+&nbsp;    NamedFilterList getChain(String chainName);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if one or more configured chains are available, {@code false} if none are configured.
+&nbsp;     *
+&nbsp;     * @return {@code true} if one or more configured chains are available, {@code false} if none are configured.
+&nbsp;     */
+&nbsp;    boolean hasChains();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the names of all configured chains or an empty {@code Set} if no chains have been configured.
+&nbsp;     *
+&nbsp;     * @return the names of all configured chains or an empty {@code Set} if no chains have been configured.
+&nbsp;     */
+&nbsp;    Set&lt;String&gt; getChainNames();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Proxies the specified {@code original} FilterChain with the named chain.  The returned
+&nbsp;     * {@code FilterChain} instance will first execute the configured named chain and then lastly invoke the given
+&nbsp;     * {@code original} chain.
+&nbsp;     *
+&nbsp;     * @param original  the original FilterChain to proxy
+&nbsp;     * @param chainName the name of the internal configured filter chain that should &#39;sit in front&#39; of the specified
+&nbsp;     *                  original chain.
+&nbsp;     * @return a {@code FilterChain} instance that will execute the named chain and then finally the
+&nbsp;     *         specified {@code original} FilterChain instance.
+&nbsp;     * @throws IllegalArgumentException if there is no configured chain with the given {@code chainName}.
+&nbsp;     */
+&nbsp;    FilterChain proxy(FilterChain original, String chainName);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a filter to the &#39;pool&#39; of available filters that can be used when
+&nbsp;     * {@link #addToChain(String, String, String) creating filter chains}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Calling this method is effectively the same as calling
+&nbsp;     * &lt;code&gt;{@link #addFilter(String, javax.servlet.Filter, boolean) addFilter}(name, filter, &lt;b&gt;false&lt;/b&gt;);&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @param name   the name to assign to the filter, used to reference the filter in chain definitions
+&nbsp;     * @param filter the filter to initialize and then add to the pool of available filters that can be used
+&nbsp;     */
+&nbsp;    void addFilter(String name, Filter filter);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a filter to the &#39;pool&#39; of available filters that can be used when
+&nbsp;     * {@link #addToChain(String, String, String) creating filter chains}.
+&nbsp;     *
+&nbsp;     * @param name   the name to assign to the filter, used to reference the filter in chain definitions
+&nbsp;     * @param filter the filter to assign to the filter pool
+&nbsp;     * @param init   whether or not the {@code Filter} should be
+&nbsp;     *               {@link Filter#init(javax.servlet.FilterConfig) initialized} first before being added to the pool.
+&nbsp;     */
+&nbsp;    void addFilter(String name, Filter filter, boolean init);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a filter chain for the given {@code chainName} with the specified {@code chainDefinition}
+&nbsp;     * String.
+&nbsp;     * &lt;h3&gt;Conventional Use&lt;/h3&gt;
+&nbsp;     * Because the {@code FilterChainManager} interface does not impose any restrictions on filter chain names,
+&nbsp;     * (it expects only Strings), a convenient convention is to make the chain name an actual URL path expression
+&nbsp;     * (such as an {@link org.apache.shiro.util.AntPathMatcher Ant path expression}).  For example:
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;code&gt;createChain(&lt;b&gt;&lt;em&gt;path_expression&lt;/em&gt;&lt;/b&gt;, &lt;em&gt;path_specific_filter_chain_definition&lt;/em&gt;);&lt;/code&gt;
+&nbsp;     * This convention can be used by a {@link FilterChainResolver} to inspect request URL paths
+&nbsp;     * against the chain name (path) and, if a match is found, return the corresponding chain for runtime filtering.
+&nbsp;     * &lt;h3&gt;Chain Definition Format&lt;/h3&gt;
+&nbsp;     * The {@code chainDefinition} method argument is expected to conform to the following format:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * filter1[optional_config1], filter2[optional_config2], ..., filterN[optional_configN]&lt;/pre&gt;
+&nbsp;     * where
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;{@code filterN} is the name of a filter previously
+&nbsp;     * {@link #addFilter(String, javax.servlet.Filter) registered} with the manager, and&lt;/li&gt;
+&nbsp;     * &lt;li&gt;{@code [optional_configN]} is an optional bracketed string that has meaning for that particular filter for
+&nbsp;     * &lt;em&gt;this particular chain&lt;/em&gt;&lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     * If the filter does not need specific config for that chain name/URL path,
+&nbsp;     * you may discard the brackets - that is, {@code filterN[]} just becomes {@code filterN}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * And because this method does create a chain, remember that order matters!  The comma-delimited filter tokens in
+&nbsp;     * the {@code chainDefinition} specify the chain&#39;s execution order.
+&nbsp;     * &lt;h3&gt;Examples&lt;/h3&gt;
+&nbsp;     * &lt;pre&gt;/account/** = authcBasic&lt;/pre&gt;
+&nbsp;     * This example says &amp;quot;Create a filter named &#39;{@code /account/**}&#39; consisting of only the &#39;{@code authcBasic}&#39;
+&nbsp;     * filter&amp;quot;.  Also because the {@code authcBasic} filter does not need any path-specific
+&nbsp;     * config, it doesn&#39;t have any config brackets {@code []}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;pre&gt;/remoting/** = authcBasic, roles[b2bClient], perms[&amp;quot;remote:invoke:wan,lan&amp;quot;]&lt;/pre&gt;
+&nbsp;     * This example by contrast uses the &#39;roles&#39; and &#39;perms&#39; filters which &lt;em&gt;do&lt;/em&gt; use bracket notation.  This
+&nbsp;     * definition says:
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Construct a filter chain named &#39;{@code /remoting/**}&#39; which
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;ensures the user is first authenticated ({@code authcBasic}) then&lt;/li&gt;
+&nbsp;     * &lt;li&gt;ensures that user has the {@code b2bClient} role, and then finally&lt;/li&gt;
+&nbsp;     * &lt;li&gt;ensures that they have the {@code remote:invoke:lan,wan} permission.&lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;Note&lt;/b&gt;: because elements within brackets [ ] can be comma-delimited themselves, you must quote the
+&nbsp;     * internal bracket definition if commas are needed (the above example has &#39;lan,wan&#39;).  If we didn&#39;t do that, the
+&nbsp;     * parser would interpret the chain definition as four tokens:
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;authcBasic&lt;/li&gt;
+&nbsp;     * &lt;li&gt;roles[b2bclient]&lt;/li&gt;
+&nbsp;     * &lt;li&gt;perms[remote:invoke:lan&lt;/li&gt;
+&nbsp;     * &lt;li&gt;wan]&lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     * which is obviously incorrect.  So remember to use quotes if your internal bracket definitions need to use commas.
+&nbsp;     *
+&nbsp;     * @param chainName       the name to associate with the chain, conventionally a URL path pattern.
+&nbsp;     * @param chainDefinition the string-formatted chain definition used to construct an actual
+&nbsp;     *                        {@link NamedFilterList} chain instance.
+&nbsp;     * @see FilterChainResolver
+&nbsp;     * @see org.apache.shiro.util.AntPathMatcher AntPathMatcher
+&nbsp;     */
+&nbsp;    void createChain(String chainName, String chainDefinition);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a chain that should match any non-matched request paths, typically {@code /**} assuming an {@link AntPathMatcher} I used.
+&nbsp;     * @param chainName The name of the chain to create, likely {@code /**}.
+&nbsp;     * @since 1.6
+&nbsp;     * @see org.apache.shiro.lang.util.AntPathMatcher AntPathMatcher
+&nbsp;     */
+&nbsp;    void createDefaultChain(String chainName);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds (appends) a filter to the filter chain identified by the given {@code chainName}.  If there is no chain
+&nbsp;     * with the given name, a new one is created and the filter will be the first in the chain.
+&nbsp;     *
+&nbsp;     * @param chainName  the name of the chain where the filter will be appended.
+&nbsp;     * @param filterName the name of the {@link #addFilter registered} filter to add to the chain.
+&nbsp;     * @throws IllegalArgumentException if there is not a {@link #addFilter(String, javax.servlet.Filter) registered}
+&nbsp;     *                                  filter under the given {@code filterName}
+&nbsp;     */
+&nbsp;    void addToChain(String chainName, String filterName);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds (appends) a filter to the filter chain identified by the given {@code chainName}.  If there is no chain
+&nbsp;     * with the given name, a new one is created and the filter will be the first in the chain.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Note that the final argument expects the associated filter to be an instance of
+&nbsp;     * a {@link org.apache.shiro.web.filter.PathConfigProcessor PathConfigProcessor} to accept per-chain configuration.
+&nbsp;     * If it is not, a {@link IllegalArgumentException} will be thrown.
+&nbsp;     *
+&nbsp;     * @param chainName                 the name of the chain where the filter will be appended.
+&nbsp;     * @param filterName                the name of the {@link #addFilter registered} filter to add to the chain.
+&nbsp;     * @param chainSpecificFilterConfig the filter-specific configuration that should be applied for only the specified
+&nbsp;     *                                  filter chain.
+&nbsp;     * @throws IllegalArgumentException if there is not a {@link #addFilter(String, javax.servlet.Filter) registered}
+&nbsp;     *                                  filter under the given {@code filterName}
+&nbsp;     * @throws ConfigurationException   if the filter is not capable of accepting {@code chainSpecificFilterConfig}
+&nbsp;     *                                  (usually such filters implement the
+&nbsp;     *                                  {@link org.apache.shiro.web.filter.PathConfigProcessor PathConfigProcessor}
+&nbsp;     *                                  interface).
+&nbsp;     */
+&nbsp;    void addToChain(String chainName, String filterName, String chainSpecificFilterConfig) throws ConfigurationException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Configures the set of named filters that will match all paths.  These filters will match BEFORE explicitly
+&nbsp;     * configured filter chains i.e. by calling {@link #createChain(String, String)}, {@link #addToChain(String, String)}, etc.
+&nbsp;     * &lt;br&gt;
+&nbsp;     * &lt;strong&gt;Filters configured in this list wll apply to ALL requests.&lt;/strong&gt;
+&nbsp;     *
+&nbsp;     * @param globalFilterNames         the list of filter names to match ALL paths.
+&nbsp;     * @throws ConfigurationException   if one of the filter names is invalid and cannot be loaded from the set of
+&nbsp;     *                                  configured filters {@link #getFilters()}}.
+&nbsp;     * @since 1.6
+&nbsp;     */
+&nbsp;    void setGlobalFilters(List&lt;String&gt; globalFilterNames) throws ConfigurationException;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

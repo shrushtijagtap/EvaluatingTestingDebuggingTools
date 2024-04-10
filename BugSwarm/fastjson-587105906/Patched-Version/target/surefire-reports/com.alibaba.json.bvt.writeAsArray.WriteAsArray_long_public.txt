@@ -1,14 +1,15 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public
 -------------------------------------------------------------------------------
-Tests run: 17, Failures: 12, Errors: 0, Skipped: 0, Time elapsed: 0 s <<< FAILURE! -- in com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public
-com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_value_notmatch_stream -- Time elapsed: 0 s <<< FAILURE!
+Tests run: 17, Failures: 12, Errors: 0, Skipped: 0, Time elapsed: 0.135 s <<< FAILURE! -- in com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public
+com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_value_notmatch_stream -- Time elapsed: 0.040 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_value_notmatch_stream(WriteAsArray_long_public.java:178)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.__CLR4_5_2ssstqa1ync(WriteAsArray_long_public.java:178)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_value_notmatch_stream(WriteAsArray_long_public.java:168)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -31,13 +32,14 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_value_notmatch_2_stream -- Time elapsed: 0 s <<< FAILURE!
+com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_value_notmatch_2_stream -- Time elapsed: 0.006 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_value_notmatch_2_stream(WriteAsArray_long_public.java:202)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.__CLR4_5_2666nyn1yns(WriteAsArray_long_public.java:202)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_value_notmatch_2_stream(WriteAsArray_long_public.java:192)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -60,13 +62,14 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_overflow -- Time elapsed: 0 s <<< FAILURE!
+com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_overflow -- Time elapsed: 0.003 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_overflow(WriteAsArray_long_public.java:141)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.__CLR4_5_26057vx1ymp(WriteAsArray_long_public.java:141)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_overflow(WriteAsArray_long_public.java:133)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -89,13 +92,14 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_stream -- Time elapsed: 0 s <<< FAILURE!
+com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_stream -- Time elapsed: 0.008 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_stream(WriteAsArray_long_public.java:81)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.__CLR4_5_2ze4h791ylk(WriteAsArray_long_public.java:81)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_stream(WriteAsArray_long_public.java:71)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -118,13 +122,14 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_stream_1 -- Time elapsed: 0 s <<< FAILURE!
+com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_stream_1 -- Time elapsed: 0.006 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_stream_1(WriteAsArray_long_public.java:105)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.__CLR4_5_2fy7dy51ym0(WriteAsArray_long_public.java:105)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_stream_1(WriteAsArray_long_public.java:95)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -147,13 +152,14 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_stream_2 -- Time elapsed: 0 s <<< FAILURE!
+com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_stream_2 -- Time elapsed: 0.003 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_stream_2(WriteAsArray_long_public.java:130)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.__CLR4_5_2j77cqm1ymg(WriteAsArray_long_public.java:130)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_stream_2(WriteAsArray_long_public.java:120)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -176,13 +182,14 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_value_notmatch -- Time elapsed: 0 s <<< FAILURE!
+com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_value_notmatch -- Time elapsed: 0.006 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_value_notmatch(WriteAsArray_long_public.java:165)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.__CLR4_5_2g1xphn1yn5(WriteAsArray_long_public.java:165)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_value_notmatch(WriteAsArray_long_public.java:157)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -205,13 +212,14 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_overflow_stream -- Time elapsed: 0 s <<< FAILURE!
+com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_overflow_stream -- Time elapsed: 0.005 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_overflow_stream(WriteAsArray_long_public.java:154)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.__CLR4_5_2dh58kg1ymw(WriteAsArray_long_public.java:154)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_overflow_stream(WriteAsArray_long_public.java:144)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -234,13 +242,14 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_1 -- Time elapsed: 0 s <<< FAILURE!
+com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_1 -- Time elapsed: 0.004 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_1(WriteAsArray_long_public.java:92)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.__CLR4_5_2i9cgqc1ylt(WriteAsArray_long_public.java:92)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_1(WriteAsArray_long_public.java:84)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -263,13 +272,14 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_2 -- Time elapsed: 0 s <<< FAILURE!
+com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_2 -- Time elapsed: 0.005 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_2(WriteAsArray_long_public.java:117)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.__CLR4_5_2licfit1ym9(WriteAsArray_long_public.java:117)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_2(WriteAsArray_long_public.java:109)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -292,13 +302,14 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_value_notmatch_2 -- Time elapsed: 0 s <<< FAILURE!
+com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_value_notmatch_2 -- Time elapsed: 0.007 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_value_notmatch_2(WriteAsArray_long_public.java:189)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.__CLR4_5_2lf5sbi1ynl(WriteAsArray_long_public.java:189)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error_value_notmatch_2(WriteAsArray_long_public.java:181)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -321,13 +332,14 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error -- Time elapsed: 0 s <<< FAILURE!
+com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error -- Time elapsed: 0.009 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error(WriteAsArray_long_public.java:68)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.__CLR4_5_2vbot1a1yld(WriteAsArray_long_public.java:68)
+	at com.alibaba.json.bvt.writeAsArray.WriteAsArray_long_public.test_error(WriteAsArray_long_public.java:60)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

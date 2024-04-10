@@ -1,0 +1,235 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JndiRealmFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.realm.jndi</a>
+</div>
+
+<h1>Coverage Summary for Class: JndiRealmFactory (org.apache.shiro.realm.jndi)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JndiRealmFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.realm.jndi;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import org.apache.shiro.jndi.JndiLocator;
+&nbsp;import org.apache.shiro.realm.Realm;
+&nbsp;import org.apache.shiro.realm.RealmFactory;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Looks up one or more Realm instances from JNDI using specified {@link #setJndiNames jndiNames}.
+&nbsp; *
+&nbsp; * &lt;p&gt;This is primarily provided to support Realm instances configured in JEE and EJB environments, but will
+&nbsp; * work in any environment where {@link Realm Realm} instances are bound in JNDI instead of using
+&nbsp; * programmatic or text-based configuration.
+&nbsp; *
+&nbsp; * @since 0.9
+&nbsp; */
+<b class="nc">&nbsp;public class JndiRealmFactory extends JndiLocator implements RealmFactory {</b>
+&nbsp;
+<b class="nc">&nbsp;    Collection&lt;String&gt; jndiNames = null;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the JNDI names that will be used to look up Realm(s) from JNDI.
+&nbsp;     *
+&nbsp;     * @return the JNDI names that will be used to look up Realm(s) from JNDI.
+&nbsp;     * @see #setJndiNames(String)
+&nbsp;     * @see #setJndiNames(Collection)
+&nbsp;     */
+&nbsp;    public Collection&lt;String&gt; getJndiNames() {
+<b class="nc">&nbsp;        return jndiNames;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the JNDI names that will be used to look up Realm(s) from JNDI.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The order of the collection determines the order that the Realms will be returned to the SecurityManager.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If you find it easier to specify these names as a comma-delmited string, you may use the
+&nbsp;     * {@link #setJndiNames(String)} method instead.
+&nbsp;     *
+&nbsp;     * @param jndiNames the JNDI names that will be used to look up Realm(s) from JNDI.
+&nbsp;     * @see #setJndiNames(String)
+&nbsp;     */
+&nbsp;    public void setJndiNames(Collection&lt;String&gt; jndiNames) {
+<b class="nc">&nbsp;        this.jndiNames = jndiNames;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Specifies a comma-delimited list of JNDI names to lookup, each one corresponding to a jndi-bound
+&nbsp;     * {@link Realm Realm}.  The Realms will be made available to the SecurityManager in the order
+&nbsp;     * they are defined.
+&nbsp;     *
+&nbsp;     * @param commaDelimited a comma-delimited list of JNDI names, each representing the JNDI name used to
+&nbsp;     *                       look up a corresponding jndi-bound Realm.
+&nbsp;     * @throws IllegalStateException if the specified argument is null or the empty string.
+&nbsp;     */
+&nbsp;    public void setJndiNames(String commaDelimited) throws IllegalStateException {
+<b class="nc">&nbsp;        String arg = StringUtils.clean(commaDelimited);</b>
+<b class="nc">&nbsp;        if (arg == null) {</b>
+<b class="nc">&nbsp;            String msg = &quot;One or more comma-delimited jndi names must be specified for the &quot; +</b>
+<b class="nc">&nbsp;                    getClass().getName() + &quot; to locate Realms.&quot;;</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(msg);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String[] names = StringUtils.tokenizeToStringArray(arg, &quot;,&quot;);</b>
+<b class="nc">&nbsp;        setJndiNames(Arrays.asList(names));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs the JNDI lookups for each specified {@link #getJndiNames() JNDI name} and returns all
+&nbsp;     * discovered Realms in an ordered collection.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;The returned Collection is in the same order as the specified
+&nbsp;     * {@link #setJndiNames(java.util.Collection) jndiNames}
+&nbsp;     *
+&nbsp;     * @return an ordered collection of the {@link #setJndiNames(java.util.Collection) specified Realms} found in JNDI.
+&nbsp;     * @throws IllegalStateException if any of the JNDI names fails to successfully look up a Realm instance.
+&nbsp;     */
+&nbsp;    public Collection&lt;Realm&gt; getRealms() throws IllegalStateException {
+<b class="nc">&nbsp;        Collection&lt;String&gt; jndiNames = getJndiNames();</b>
+<b class="nc">&nbsp;        if (jndiNames == null || jndiNames.isEmpty()) {</b>
+<b class="nc">&nbsp;            String msg = &quot;One or more jndi names must be specified for the &quot; +</b>
+<b class="nc">&nbsp;                    getClass().getName() + &quot; to locate Realms.&quot;;</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(msg);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        List&lt;Realm&gt; realms = new ArrayList&lt;Realm&gt;(jndiNames.size());</b>
+<b class="nc">&nbsp;        for (String name : jndiNames) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                Realm realm = (Realm) lookup(name, Realm.class);</b>
+<b class="nc">&nbsp;                realms.add(realm);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                throw new IllegalStateException(&quot;Unable to look up realm with jndi name &#39;&quot; + name + &quot;&#39;.&quot;, e);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return realms.isEmpty() ? null : realms;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>
