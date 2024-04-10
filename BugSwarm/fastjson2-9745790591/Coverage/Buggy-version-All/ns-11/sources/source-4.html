@@ -1,0 +1,347 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JsonGenerator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.adapter.jackson.core</a>
+</div>
+
+<h1>Coverage Summary for Class: JsonGenerator (com.alibaba.fastjson2.adapter.jackson.core)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JsonGenerator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JsonGenerator$Feature</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/46)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.adapter.jackson.core;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;
+&nbsp;public class JsonGenerator
+&nbsp;        implements Closeable, Flushable {
+&nbsp;    protected final JSONWriter jsonWriter;
+&nbsp;    protected final OutputStream out;
+&nbsp;    protected final Charset charset;
+&nbsp;    protected final JsonEncoding encoding;
+&nbsp;
+<b class="nc">&nbsp;    public JsonGenerator(JSONWriter jsonWriter, OutputStream out, JsonEncoding encoding) {</b>
+<b class="nc">&nbsp;        this.jsonWriter = jsonWriter;</b>
+<b class="nc">&nbsp;        this.out = out;</b>
+<b class="nc">&nbsp;        this.encoding = encoding;</b>
+<b class="nc">&nbsp;        this.charset = Charset.forName(encoding.getJavaName());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONWriter getJSONWriter() {
+<b class="nc">&nbsp;        return jsonWriter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeRaw(String text) {
+<b class="nc">&nbsp;        jsonWriter.writeRaw(text);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void flush() throws IOException {
+<b class="nc">&nbsp;        jsonWriter.flushTo(out, charset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeStartObject() {
+<b class="nc">&nbsp;        jsonWriter.startObject();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeEndObject() {
+<b class="nc">&nbsp;        jsonWriter.endObject();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeEndArray() {
+<b class="nc">&nbsp;        jsonWriter.endArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeFieldName(String name) {
+<b class="nc">&nbsp;        jsonWriter.writeName(name);</b>
+<b class="nc">&nbsp;        jsonWriter.writeRaw(&#39;:&#39;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeString(String text) {
+<b class="nc">&nbsp;        jsonWriter.writeString(text);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeNumber(int v) throws IOException {
+<b class="nc">&nbsp;        jsonWriter.writeInt32(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeNumber(BigDecimal v) throws IOException {
+<b class="nc">&nbsp;        jsonWriter.writeDecimal(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeNumber(long v) throws IOException {
+<b class="nc">&nbsp;        jsonWriter.writeInt64(v);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeStringField(String fieldName, String value) throws IOException {
+<b class="nc">&nbsp;        writeFieldName(fieldName);</b>
+<b class="nc">&nbsp;        writeString(value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeNumberField(String fieldName, BigDecimal value) throws IOException {
+<b class="nc">&nbsp;        writeFieldName(fieldName);</b>
+<b class="nc">&nbsp;        writeNumber(value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeNumberField(String fieldName, int value) throws IOException {
+<b class="nc">&nbsp;        writeFieldName(fieldName);</b>
+<b class="nc">&nbsp;        writeNumber(value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void close() throws IOException {
+<b class="nc">&nbsp;        jsonWriter.flushTo(out, charset);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public enum Feature {</b>
+&nbsp;        // // Low-level I/O / content features
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Feature that determines whether generator will automatically
+&nbsp;         * close underlying output target that is NOT owned by the
+&nbsp;         * generator.
+&nbsp;         * If disabled, calling application has to separately
+&nbsp;         * close the underlying {@link OutputStream} and {@link Writer}
+&nbsp;         * instances used to create the generator. If enabled, generator
+&nbsp;         * will handle closing, as long as generator itself gets closed:
+&nbsp;         * this happens when end-of-input is encountered, or generator
+&nbsp;         * is closed by a call to {@link JsonGenerator#close}.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * Feature is enabled by default.
+&nbsp;         */
+<b class="nc">&nbsp;        AUTO_CLOSE_TARGET(true),</b>
+&nbsp;
+<b class="nc">&nbsp;        AUTO_CLOSE_JSON_CONTENT(true),</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Feature that specifies that calls to {@link #flush} will cause
+&nbsp;         * matching &lt;code&gt;flush()&lt;/code&gt; to underlying {@link OutputStream}
+&nbsp;         * or {@link Writer}; if disabled this will not be done.
+&nbsp;         * Main reason to disable this feature is to prevent flushing at
+&nbsp;         * generator level, if it is not possible to prevent method being
+&nbsp;         * called by other code (like &lt;code&gt;ObjectMapper&lt;/code&gt; or third
+&nbsp;         * party libraries).
+&nbsp;         * &lt;p&gt;
+&nbsp;         * Feature is enabled by default.
+&nbsp;         */
+<b class="nc">&nbsp;        FLUSH_PASSED_TO_STREAM(true),</b>
+&nbsp;
+&nbsp;        // // Quoting-related features
+&nbsp;
+<b class="nc">&nbsp;        @Deprecated</b>
+&nbsp;        QUOTE_FIELD_NAMES(true),
+&nbsp;
+<b class="nc">&nbsp;        @Deprecated</b>
+&nbsp;        QUOTE_NON_NUMERIC_NUMBERS(true),
+&nbsp;
+&nbsp;        // // Character escaping features
+&nbsp;
+<b class="nc">&nbsp;        @Deprecated</b>
+&nbsp;        ESCAPE_NON_ASCII(false),
+&nbsp;
+&nbsp;        // // Datatype coercion features
+&nbsp;
+<b class="nc">&nbsp;        @Deprecated</b>
+&nbsp;        WRITE_NUMBERS_AS_STRINGS(false),
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Feature that determines whether {@link BigDecimal} entries are
+&nbsp;         * serialized using {@link BigDecimal#toPlainString()} to prevent
+&nbsp;         * values to be written using scientific notation.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * NOTE: only affects generators that serialize {@link BigDecimal}s
+&nbsp;         * using textual representation (textual formats but potentially some binary
+&nbsp;         * formats).
+&nbsp;         * &lt;p&gt;
+&nbsp;         * Feature is disabled by default, so default output mode is used; this generally
+&nbsp;         * depends on how {@link BigDecimal} has been created.
+&nbsp;         *
+&nbsp;         * @since 2.3
+&nbsp;         */
+<b class="nc">&nbsp;        WRITE_BIGDECIMAL_AS_PLAIN(false),</b>
+&nbsp;
+&nbsp;        // // Schema/Validity support features
+&nbsp;
+<b class="nc">&nbsp;        STRICT_DUPLICATE_DETECTION(false),</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Feature that determines what to do if the underlying data format requires knowledge
+&nbsp;         * of all properties to output, and if no definition is found for a property that
+&nbsp;         * caller tries to write. If enabled, such properties will be quietly ignored;
+&nbsp;         * if disabled, a {@link JsonProcessingException} will be thrown to indicate the
+&nbsp;         * problem.
+&nbsp;         * Typically most textual data formats do NOT require schema information (although
+&nbsp;         * some do, such as CSV), whereas many binary data formats do require definitions
+&nbsp;         * (such as Avro, protobuf), although not all (Smile, CBOR, BSON and MessagePack do not).
+&nbsp;         * &lt;p&gt;
+&nbsp;         * Note that support for this feature is implemented by individual data format
+&nbsp;         * module, if (and only if) it makes sense for the format in question. For JSON,
+&nbsp;         * for example, this feature has no effect as properties need not be pre-defined.
+&nbsp;         * &lt;p&gt;
+&nbsp;         * Feature is disabled by default, meaning that if the underlying data format
+&nbsp;         * requires knowledge of all properties to output, attempts to write an unknown
+&nbsp;         * property will result in a {@link JsonProcessingException}
+&nbsp;         *
+&nbsp;         * @since 2.5
+&nbsp;         */
+<b class="nc">&nbsp;        IGNORE_UNKNOWN(false);</b>
+&nbsp;
+&nbsp;        private final boolean defaultState;
+&nbsp;        private final int mask;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Method that calculates bit set (flags) of all features that
+&nbsp;         * are enabled by default.
+&nbsp;         *
+&nbsp;         * @return Bit field of the features that are enabled by default
+&nbsp;         */
+&nbsp;        public static int collectDefaults() {
+<b class="nc">&nbsp;            int flags = 0;</b>
+<b class="nc">&nbsp;            for (Feature f : values()) {</b>
+<b class="nc">&nbsp;                if (f.enabledByDefault()) {</b>
+<b class="nc">&nbsp;                    flags |= f.getMask();</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return flags;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        private Feature(boolean defaultState) {</b>
+<b class="nc">&nbsp;            this.defaultState = defaultState;</b>
+<b class="nc">&nbsp;            mask = (1 &lt;&lt; ordinal());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean enabledByDefault() {
+<b class="nc">&nbsp;            return defaultState;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // @since 2.3
+&nbsp;        public boolean enabledIn(int flags) {
+<b class="nc">&nbsp;            return (flags &amp; mask) != 0;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getMask() {
+<b class="nc">&nbsp;            return mask;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:01</div>
+</div>
+</body>
+</html>

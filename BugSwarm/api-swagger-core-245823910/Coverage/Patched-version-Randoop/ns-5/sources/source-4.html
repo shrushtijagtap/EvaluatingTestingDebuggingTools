@@ -1,0 +1,199 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SecurityParser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.jaxrs2</a>
+</div>
+
+<h1>Coverage Summary for Class: SecurityParser (io.swagger.jaxrs2)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SecurityParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/47)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package io.swagger.jaxrs2;
+&nbsp;
+&nbsp;import io.swagger.oas.models.security.OAuthFlow;
+&nbsp;import io.swagger.oas.models.security.OAuthFlows;
+&nbsp;import io.swagger.oas.models.security.Scopes;
+&nbsp;import io.swagger.oas.models.security.SecurityRequirement;
+&nbsp;import io.swagger.oas.models.security.SecurityScheme;
+&nbsp;import org.apache.commons.lang3.StringUtils;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;/**
+&nbsp; * Created by RafaelLopez on 5/26/17.
+&nbsp; */
+<b class="nc">&nbsp;public class SecurityParser {</b>
+&nbsp;	public static final String SCOPE_NAME = &quot;name&quot;;
+&nbsp;	public static final String SCOPE_DESCRIPTION = &quot;description&quot;;
+&nbsp;
+&nbsp;	public static Optional&lt;List&lt;SecurityRequirement&gt;&gt; getSecurityRequirement(io.swagger.oas.annotations.security.SecurityRequirement securityRequirement) {
+<b class="nc">&nbsp;		if (securityRequirement == null) {</b>
+<b class="nc">&nbsp;			return Optional.empty();</b>
+&nbsp;		}
+<b class="nc">&nbsp;		List&lt;SecurityRequirement&gt; securityRequirements = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;		SecurityRequirement securityRequirementObject = new SecurityRequirement();</b>
+<b class="nc">&nbsp;		StringBuilder scopes = new StringBuilder();</b>
+<b class="nc">&nbsp;		for (String scope : securityRequirement.scopes()) {</b>
+<b class="nc">&nbsp;			scopes.append(scope);</b>
+&nbsp;		}
+<b class="nc">&nbsp;		securityRequirementObject.addList(securityRequirement.name(), scopes.toString());</b>
+<b class="nc">&nbsp;		securityRequirements.add(securityRequirementObject);</b>
+&nbsp;
+<b class="nc">&nbsp;		return Optional.of(securityRequirements);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public static Optional&lt;SecurityScheme&gt; getSecurityScheme(io.swagger.oas.annotations.security.SecurityScheme securityScheme) {
+<b class="nc">&nbsp;		if (securityScheme == null) {</b>
+<b class="nc">&nbsp;			return Optional.empty();</b>
+&nbsp;		}
+<b class="nc">&nbsp;		SecurityScheme securitySchemeObject = new SecurityScheme();</b>
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(securityScheme.bearerFormat())) {</b>
+<b class="nc">&nbsp;			securitySchemeObject.setBearerFormat(securityScheme.bearerFormat());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(securityScheme.description())) {</b>
+<b class="nc">&nbsp;			securitySchemeObject.setDescription(securityScheme.description());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(securityScheme.name())) {</b>
+<b class="nc">&nbsp;			securitySchemeObject.setName(securityScheme.name());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		getOAuthFlows(securityScheme.flows()).ifPresent(securitySchemeObject::setFlows);</b>
+<b class="nc">&nbsp;		return Optional.of(securitySchemeObject);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public static Optional&lt;OAuthFlows&gt; getOAuthFlows(io.swagger.oas.annotations.security.OAuthFlows oAuthFlows) {
+<b class="nc">&nbsp;		if (oAuthFlows == null) {</b>
+<b class="nc">&nbsp;			return Optional.empty();</b>
+&nbsp;		}
+<b class="nc">&nbsp;		OAuthFlows oAuthFlowsObject = new OAuthFlows();</b>
+<b class="nc">&nbsp;		getOAuthFlow(oAuthFlows.authorizationCode()).ifPresent(oAuthFlowsObject::setAuthorizationCode);</b>
+<b class="nc">&nbsp;		getOAuthFlow(oAuthFlows.clientCredentials()).ifPresent(oAuthFlowsObject::setClientCredentials);</b>
+<b class="nc">&nbsp;		getOAuthFlow(oAuthFlows.implicit()).ifPresent(oAuthFlowsObject::setImplicit);</b>
+<b class="nc">&nbsp;		getOAuthFlow(oAuthFlows.password()).ifPresent(oAuthFlowsObject::setPassword);</b>
+<b class="nc">&nbsp;		return Optional.of(oAuthFlowsObject);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public static Optional&lt;OAuthFlow&gt; getOAuthFlow(io.swagger.oas.annotations.security.OAuthFlow oAuthFlow) {
+<b class="nc">&nbsp;		if (oAuthFlow == null) {</b>
+<b class="nc">&nbsp;			return Optional.empty();</b>
+&nbsp;		}
+<b class="nc">&nbsp;		OAuthFlow oAuthFlowObject = new OAuthFlow();</b>
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(oAuthFlow.authorizationUrl())) {</b>
+<b class="nc">&nbsp;			oAuthFlowObject.setAuthorizationUrl(oAuthFlow.authorizationUrl());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(oAuthFlow.refreshUrl())) {</b>
+<b class="nc">&nbsp;			oAuthFlowObject.setRefreshUrl(oAuthFlow.refreshUrl());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(oAuthFlow.tokenUrl())) {</b>
+<b class="nc">&nbsp;			oAuthFlowObject.setTokenUrl(oAuthFlow.tokenUrl());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		getScopes(oAuthFlow.scopes()).ifPresent(oAuthFlowObject::setScopes);</b>
+<b class="nc">&nbsp;		return Optional.of(oAuthFlowObject);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public static Optional&lt;Scopes&gt; getScopes(io.swagger.oas.annotations.security.Scopes scopes) {
+<b class="nc">&nbsp;		if (scopes == null) {</b>
+<b class="nc">&nbsp;			return Optional.empty();</b>
+&nbsp;		}
+<b class="nc">&nbsp;		Scopes scopesObject = new Scopes();</b>
+<b class="nc">&nbsp;		scopesObject.addString(SCOPE_NAME, scopes.name());</b>
+<b class="nc">&nbsp;		scopesObject.addString(SCOPE_DESCRIPTION, scopes.description());</b>
+<b class="nc">&nbsp;		return Optional.of(scopesObject);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:28</div>
+</div>
+</body>
+</html>

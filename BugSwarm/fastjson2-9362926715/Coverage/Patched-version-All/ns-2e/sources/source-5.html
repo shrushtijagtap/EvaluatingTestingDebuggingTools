@@ -1,0 +1,151 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BooleanSchema</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.schema</a>
+</div>
+
+<h1>Coverage Summary for Class: BooleanSchema (com.alibaba.fastjson2.schema)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BooleanSchema</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (12/14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.schema;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONObject;
+&nbsp;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;final class BooleanSchema
+&nbsp;        extends JSONSchema {
+&nbsp;    BooleanSchema(JSONObject input) {
+<b class="fc">&nbsp;        super(input);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Type getType() {
+<b class="fc">&nbsp;        return Type.Boolean;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ValidateResult validate(Object value) {
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            return FAIL_INPUT_NULL;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Boolean) {</b>
+<b class="fc">&nbsp;            return SUCCESS;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return new ValidateResult(false, &quot;expect type %s, but %s&quot;, Type.Boolean, value.getClass());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="fc">&nbsp;        if (this == o) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (o == null || getClass() != o.getClass()) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        com.alibaba.fastjson2.schema.BooleanSchema that = (com.alibaba.fastjson2.schema.BooleanSchema) o;</b>
+<b class="fc">&nbsp;        return Objects.equals(title, that.title) &amp;&amp; Objects.equals(description, that.description);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="fc">&nbsp;        return Objects.hash(title, description);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:52</div>
+</div>
+</body>
+</html>

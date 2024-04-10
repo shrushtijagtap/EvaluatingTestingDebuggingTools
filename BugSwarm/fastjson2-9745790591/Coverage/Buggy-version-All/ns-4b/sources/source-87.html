@@ -1,0 +1,188 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectWriterImplLocalTime</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectWriterImplLocalTime (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectWriterImplLocalTime</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.1%
+  </span>
+  <span class="absValue">
+    (33/34)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.codec.DateTimeCodec;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.time.*;
+&nbsp;import java.time.format.DateTimeFormatter;
+&nbsp;import java.util.Locale;
+&nbsp;
+&nbsp;final class ObjectWriterImplLocalTime
+&nbsp;        extends DateTimeCodec
+&nbsp;        implements ObjectWriter {
+<b class="fc">&nbsp;    static final ObjectWriterImplLocalTime INSTANCE = new ObjectWriterImplLocalTime(null, null);</b>
+&nbsp;
+&nbsp;    public ObjectWriterImplLocalTime(String format, Locale locale) {
+<b class="fc">&nbsp;        super(format, locale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeJSONB(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="fc">&nbsp;        jsonWriter.writeLocalTime((LocalTime) object);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="fc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        JSONWriter.Context ctx = jsonWriter.getContext();</b>
+&nbsp;
+<b class="fc">&nbsp;        LocalTime time = (LocalTime) object;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (formatMillis || (format == null &amp;&amp; ctx.isDateFormatMillis())) {</b>
+<b class="fc">&nbsp;            LocalDateTime dateTime = LocalDateTime.of(</b>
+<b class="fc">&nbsp;                    LocalDate.of(1970, 1, 1),</b>
+&nbsp;                    time
+&nbsp;            );
+<b class="fc">&nbsp;            Instant instant = dateTime.atZone(ctx.getZoneId()).toInstant();</b>
+<b class="fc">&nbsp;            long millis = instant.toEpochMilli();</b>
+<b class="fc">&nbsp;            jsonWriter.writeInt64(millis);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (formatUnixTime || (format == null &amp;&amp; ctx.isDateFormatUnixTime())) {</b>
+<b class="fc">&nbsp;            LocalDateTime dateTime = LocalDateTime.of(</b>
+<b class="fc">&nbsp;                    LocalDate.of(1970, 1, 1),</b>
+&nbsp;                    time
+&nbsp;            );
+<b class="fc">&nbsp;            Instant instant = dateTime.atZone(ctx.getZoneId()).toInstant();</b>
+<b class="fc">&nbsp;            int seconds = (int) (instant.toEpochMilli() / 1000);</b>
+<b class="fc">&nbsp;            jsonWriter.writeInt32(seconds);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        DateTimeFormatter formatter = this.getDateFormatter();</b>
+<b class="fc">&nbsp;        if (formatter == null) {</b>
+<b class="fc">&nbsp;            formatter = ctx.getDateFormatter();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (formatter == null) {</b>
+<b class="fc">&nbsp;            int hour = time.getHour();</b>
+<b class="fc">&nbsp;            int minute = time.getMinute();</b>
+<b class="fc">&nbsp;            int second = time.getSecond();</b>
+<b class="fc">&nbsp;            int nano = time.getNano();</b>
+<b class="fc">&nbsp;            if (nano == 0) {</b>
+<b class="fc">&nbsp;                jsonWriter.writeTimeHHMMSS8(hour, minute, second);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                jsonWriter.writeLocalTime(time);</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        String str;
+<b class="fc">&nbsp;        if (formatHasDay || ctx.isDateFormatHasDay()) {</b>
+<b class="fc">&nbsp;            str = formatter.format(LocalDateTime.of(LocalDate.of(1970, 1, 1), time));</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            str = formatter.format(time);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        jsonWriter.writeString(str);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:01</div>
+</div>
+</body>
+</html>

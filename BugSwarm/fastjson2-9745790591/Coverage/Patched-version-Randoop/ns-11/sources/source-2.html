@@ -1,0 +1,153 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JsonEncoding</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.adapter.jackson.core</a>
+</div>
+
+<h1>Coverage Summary for Class: JsonEncoding (com.alibaba.fastjson2.adapter.jackson.core)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JsonEncoding</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/* Jackson JSON-processor.
+&nbsp; *
+&nbsp; * Copyright (c) 2007- Tatu Saloranta, tatu.saloranta@iki.fi
+&nbsp; */
+&nbsp;
+&nbsp;package com.alibaba.fastjson2.adapter.jackson.core;
+&nbsp;
+<b class="nc">&nbsp;public enum JsonEncoding {</b>
+<b class="nc">&nbsp;    UTF8(&quot;UTF-8&quot;, false, 8), // N/A for big-endian, really</b>
+<b class="nc">&nbsp;    UTF16_BE(&quot;UTF-16BE&quot;, true, 16),</b>
+<b class="nc">&nbsp;    UTF16_LE(&quot;UTF-16LE&quot;, false, 16),</b>
+<b class="nc">&nbsp;    UTF32_BE(&quot;UTF-32BE&quot;, true, 32),</b>
+<b class="nc">&nbsp;    UTF32_LE(&quot;UTF-32LE&quot;, false, 32);</b>
+&nbsp;
+&nbsp;    private final String javaName;
+&nbsp;    private final boolean bigEndian;
+&nbsp;    private final int bits;
+&nbsp;
+<b class="nc">&nbsp;    JsonEncoding(String javaName, boolean bigEndian, int bits) {</b>
+<b class="nc">&nbsp;        this.javaName = javaName;</b>
+<b class="nc">&nbsp;        this.bigEndian = bigEndian;</b>
+<b class="nc">&nbsp;        this.bits = bits;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method for accessing encoding name that JDK will support.
+&nbsp;     *
+&nbsp;     * @return Matching encoding name that JDK will support.
+&nbsp;     */
+&nbsp;    public String getJavaName() {
+<b class="nc">&nbsp;        return javaName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Whether encoding is big-endian (if encoding supports such
+&nbsp;     * notion). If no such distinction is made (as is the case for
+&nbsp;     * {@link #UTF8}), return value is undefined.
+&nbsp;     *
+&nbsp;     * @return True for big-endian encodings; false for little-endian
+&nbsp;     * (or if not applicable)
+&nbsp;     */
+&nbsp;    public boolean isBigEndian() {
+<b class="nc">&nbsp;        return bigEndian;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int bits() {
+<b class="nc">&nbsp;        return bits;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:08</div>
+</div>
+</body>
+</html>

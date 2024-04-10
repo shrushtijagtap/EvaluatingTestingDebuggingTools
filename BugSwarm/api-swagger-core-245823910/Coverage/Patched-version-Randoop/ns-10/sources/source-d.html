@@ -1,0 +1,362 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EncodingProperty</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.oas.models.media</a>
+</div>
+
+<h1>Coverage Summary for Class: EncodingProperty (io.swagger.oas.models.media)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EncodingProperty</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/60)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">EncodingProperty$StyleEnum</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/68)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/**
+&nbsp; * Copyright 2017 SmartBear Software
+&nbsp; * &lt;p&gt;
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; * &lt;p&gt;
+&nbsp; * http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; * &lt;p&gt;
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package io.swagger.oas.models.media;
+&nbsp;
+&nbsp;import io.swagger.oas.models.headers.Header;
+&nbsp;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;/**
+&nbsp; * EncodingProperty
+&nbsp; *
+&nbsp; * @see &quot;https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc1/versions/3.0.md#encodingPropertyObject&quot;
+&nbsp; */
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;public class EncodingProperty {</b>
+<b class="nc">&nbsp;  private String contentType = null;</b>
+<b class="nc">&nbsp;  private Map&lt;String, Header&gt; headers = null;</b>
+&nbsp;  /**
+&nbsp;   * Gets or Sets style
+&nbsp;   */
+<b class="nc">&nbsp;  public enum StyleEnum {</b>
+<b class="nc">&nbsp;    FORM(&quot;form&quot;),</b>
+&nbsp;    
+<b class="nc">&nbsp;    SPACEDELIMITED(&quot;spaceDelimited&quot;),</b>
+&nbsp;    
+<b class="nc">&nbsp;    PIPEDELIMITED(&quot;pipeDelimited&quot;),</b>
+&nbsp;    
+<b class="nc">&nbsp;    DEEPOBJECT(&quot;deepObject&quot;);</b>
+&nbsp;
+&nbsp;    private String value;
+&nbsp;
+<b class="nc">&nbsp;    StyleEnum(String value) {</b>
+<b class="nc">&nbsp;      this.value = value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;      return String.valueOf(value);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+<b class="nc">&nbsp;  private StyleEnum style = null;</b>
+<b class="nc">&nbsp;  private Boolean explode = null;</b>
+<b class="nc">&nbsp;  private Boolean allowReserved = null;</b>
+<b class="nc">&nbsp;  private java.util.Map&lt;String, Object&gt; extensions = null;</b>
+&nbsp;
+&nbsp;  /**
+&nbsp;   * returns the contentType property from a EncodingProperty instance.
+&nbsp;   *
+&nbsp;   * @return String contentType
+&nbsp;   **/
+&nbsp;
+&nbsp;  public String getContentType() {
+<b class="nc">&nbsp;    return contentType;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setContentType(String contentType) {
+<b class="nc">&nbsp;    this.contentType = contentType;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public EncodingProperty contentType(String contentType) {
+<b class="nc">&nbsp;    this.contentType = contentType;</b>
+<b class="nc">&nbsp;    return this;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * returns the headers property from a EncodingProperty instance.
+&nbsp;   *
+&nbsp;   * @return headers
+&nbsp;   **/
+&nbsp;
+&nbsp;  public Map&lt;String, Header&gt; getHeaders() {
+<b class="nc">&nbsp;    return headers;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setHeaders(Map&lt;String, Header&gt; headers) {
+<b class="nc">&nbsp;    this.headers = headers;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public EncodingProperty headers(Map&lt;String, Header&gt; headers) {
+<b class="nc">&nbsp;    this.headers = headers;</b>
+<b class="nc">&nbsp;    return this;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public EncodingProperty addHeaderObject(String name, Header header) {
+<b class="nc">&nbsp;    if(this.headers == null) {</b>
+<b class="nc">&nbsp;      headers = new HashMap&lt;&gt;();</b>
+&nbsp;    }
+<b class="nc">&nbsp;    headers.put(name, header);</b>
+<b class="nc">&nbsp;    return this;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * returns the style property from a EncodingProperty instance.
+&nbsp;   *
+&nbsp;   * @return StyleEnum style
+&nbsp;   **/
+&nbsp;
+&nbsp;  public StyleEnum getStyle() {
+<b class="nc">&nbsp;    return style;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setStyle(StyleEnum style) {
+<b class="nc">&nbsp;    this.style = style;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public EncodingProperty style(StyleEnum style) {
+<b class="nc">&nbsp;    this.style = style;</b>
+<b class="nc">&nbsp;    return this;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * returns the explode property from a EncodingProperty instance.
+&nbsp;   *
+&nbsp;   * @return Boolean explode
+&nbsp;   **/
+&nbsp;
+&nbsp;  public Boolean getExplode() {
+<b class="nc">&nbsp;    return explode;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setExplode(Boolean explode) {
+<b class="nc">&nbsp;    this.explode = explode;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public EncodingProperty explode(Boolean explode) {
+<b class="nc">&nbsp;    this.explode = explode;</b>
+<b class="nc">&nbsp;    return this;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * returns the allowReserved property from a EncodingProperty instance.
+&nbsp;   *
+&nbsp;   * @return Boolean allowReserved
+&nbsp;   **/
+&nbsp;
+&nbsp;  public Boolean getAllowReserved() {
+<b class="nc">&nbsp;    return allowReserved;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setAllowReserved(Boolean allowReserved) {
+<b class="nc">&nbsp;    this.allowReserved = allowReserved;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public EncodingProperty allowReserved(Boolean allowReserved) {
+<b class="nc">&nbsp;    this.allowReserved = allowReserved;</b>
+<b class="nc">&nbsp;    return this;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public boolean equals(java.lang.Object o) {
+<b class="nc">&nbsp;    if (this == o) {</b>
+<b class="nc">&nbsp;      return true;</b>
+&nbsp;    }
+<b class="nc">&nbsp;    if (o == null || getClass() != o.getClass()) {</b>
+<b class="nc">&nbsp;      return false;</b>
+&nbsp;    }
+<b class="nc">&nbsp;    EncodingProperty encodingProperty = (EncodingProperty) o;</b>
+<b class="nc">&nbsp;    return Objects.equals(this.contentType, encodingProperty.contentType) &amp;&amp;</b>
+<b class="nc">&nbsp;        Objects.equals(this.headers, encodingProperty.headers) &amp;&amp;</b>
+<b class="nc">&nbsp;        Objects.equals(this.style, encodingProperty.style) &amp;&amp;</b>
+<b class="nc">&nbsp;        Objects.equals(this.explode, encodingProperty.explode) &amp;&amp;</b>
+<b class="nc">&nbsp;        Objects.equals(this.allowReserved, encodingProperty.allowReserved) &amp;&amp;</b>
+<b class="nc">&nbsp;        Objects.equals(this.extensions, encodingProperty.extensions);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public int hashCode() {
+<b class="nc">&nbsp;    return Objects.hash(contentType, headers, style, explode, allowReserved, extensions);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;
+&nbsp;  public java.util.Map&lt;String, Object&gt; getExtensions() {
+<b class="nc">&nbsp;    return extensions;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void addExtension(String name, Object value) {
+<b class="nc">&nbsp;    if(this.extensions == null) {</b>
+<b class="nc">&nbsp;      this.extensions = new java.util.HashMap&lt;&gt;();</b>
+&nbsp;    }
+<b class="nc">&nbsp;    this.extensions.put(name, value);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setExtensions(java.util.Map&lt;String, Object&gt; extensions) {
+<b class="nc">&nbsp;    this.extensions = extensions;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public String toString() {
+<b class="nc">&nbsp;    StringBuilder sb = new StringBuilder();</b>
+<b class="nc">&nbsp;    sb.append(&quot;class EncodingProperty {\n&quot;);</b>
+&nbsp;    
+<b class="nc">&nbsp;    sb.append(&quot;    contentType: &quot;).append(toIndentedString(contentType)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;    sb.append(&quot;    headers: &quot;).append(toIndentedString(headers)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;    sb.append(&quot;    style: &quot;).append(toIndentedString(style)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;    sb.append(&quot;    explode: &quot;).append(toIndentedString(explode)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;    sb.append(&quot;    allowReserved: &quot;).append(toIndentedString(allowReserved)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;    sb.append(&quot;}&quot;);</b>
+<b class="nc">&nbsp;    return sb.toString();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Convert the given object to string with each line indented by 4 spaces
+&nbsp;   * (except the first line).
+&nbsp;   */
+&nbsp;  private String toIndentedString(java.lang.Object o) {
+<b class="nc">&nbsp;    if (o == null) {</b>
+<b class="nc">&nbsp;      return &quot;null&quot;;</b>
+&nbsp;    }
+<b class="nc">&nbsp;    return o.toString().replace(&quot;\n&quot;, &quot;\n    &quot;);</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:28</div>
+</div>
+</body>
+</html>

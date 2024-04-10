@@ -1,0 +1,532 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONReaderJSONBUF</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONReaderJSONBUF (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONReaderJSONBUF</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/258)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.IOUtils;
+&nbsp;import com.alibaba.fastjson2.util.JDKUtils;
+&nbsp;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONB.Constants.*;
+&nbsp;import static com.alibaba.fastjson2.JSONB.typeName;
+&nbsp;import static com.alibaba.fastjson2.JSONFactory.*;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.*;
+&nbsp;import static com.alibaba.fastjson2.util.UnsafeUtils.UNSAFE;
+&nbsp;
+&nbsp;final class JSONReaderJSONBUF
+&nbsp;        extends JSONReaderJSONB{
+<b class="nc">&nbsp;    static final long BASE = UNSAFE.arrayBaseOffset(byte[].class);</b>
+&nbsp;
+&nbsp;    JSONReaderJSONBUF(Context ctx, byte[] bytes, int off, int length) {
+<b class="nc">&nbsp;        super(ctx, bytes, off, length);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String readFieldName() {
+<b class="nc">&nbsp;        strtype = bytes[offset];</b>
+<b class="nc">&nbsp;        if (strtype == BC_NULL) {</b>
+<b class="nc">&nbsp;            offset++;</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        offset++;</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean typeSymbol = strtype == BC_SYMBOL;</b>
+<b class="nc">&nbsp;        if (typeSymbol) {</b>
+<b class="nc">&nbsp;            strtype = bytes[offset];</b>
+<b class="nc">&nbsp;            if (strtype &gt;= BC_INT32_NUM_MIN &amp;&amp; strtype &lt;= BC_INT32) {</b>
+<b class="nc">&nbsp;                int symbol = readInt32Value();</b>
+<b class="nc">&nbsp;                if (symbol &lt; 0) {</b>
+<b class="nc">&nbsp;                    return symbolTable.getName(-symbol);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                int index = symbol * 2 + 1;</b>
+<b class="nc">&nbsp;                long strInfo = symbols[index];</b>
+<b class="nc">&nbsp;                strtype = (byte) strInfo;</b>
+<b class="nc">&nbsp;                strlen = ((int) strInfo) &gt;&gt; 8;</b>
+<b class="nc">&nbsp;                strBegin = (int) (strInfo &gt;&gt; 32);</b>
+<b class="nc">&nbsp;                return getString();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            offset++;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        strBegin = offset;</b>
+<b class="nc">&nbsp;        Charset charset = null;</b>
+<b class="nc">&nbsp;        String str = null;</b>
+<b class="nc">&nbsp;        if (strtype &gt;= BC_STR_ASCII_FIX_MIN &amp;&amp; strtype &lt;= BC_STR_ASCII) {</b>
+<b class="nc">&nbsp;            long nameValue0 = -1, nameValue1 = -1;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (strtype == BC_STR_ASCII) {</b>
+<b class="nc">&nbsp;                strlen = readLength();</b>
+<b class="nc">&nbsp;                strBegin = offset;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                strlen = strtype - BC_STR_ASCII_FIX_MIN;</b>
+&nbsp;
+<b class="nc">&nbsp;                if (offset + strlen &gt;= bytes.length) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;illegal jsonb data&quot;);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                switch (strlen) {</b>
+&nbsp;                    case 1:
+<b class="nc">&nbsp;                        nameValue0 = bytes[offset];</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 2:
+<b class="nc">&nbsp;                        nameValue0</b>
+&nbsp;                                = (bytes[offset + 1] &lt;&lt; 8)
+&nbsp;                                + (bytes[offset] &amp; 0xFFL);
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 3:
+<b class="nc">&nbsp;                        nameValue0</b>
+&nbsp;                                = (bytes[offset + 2] &lt;&lt; 16)
+&nbsp;                                + ((bytes[offset + 1] &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                                + (bytes[offset] &amp; 0xFFL);
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 4:
+<b class="nc">&nbsp;                        nameValue0 = UNSAFE.getInt(bytes, BASE + offset);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 5:
+<b class="nc">&nbsp;                        nameValue0</b>
+&nbsp;                                = (((long) bytes[offset + 4]) &lt;&lt; 32)
+<b class="nc">&nbsp;                                + (UNSAFE.getInt(bytes, BASE + offset) &amp; 0xFFFFFFFFL);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 6:
+<b class="nc">&nbsp;                        nameValue0</b>
+&nbsp;                                = (((long) bytes[offset + 5]) &lt;&lt; 40)
+&nbsp;                                + ((bytes[offset + 4] &amp; 0xFFL) &lt;&lt; 32)
+<b class="nc">&nbsp;                                + (UNSAFE.getInt(bytes, BASE + offset) &amp; 0xFFFFFFFFL);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 7:
+<b class="nc">&nbsp;                        nameValue0</b>
+&nbsp;                                = (((long) bytes[offset + 6]) &lt;&lt; 48)
+&nbsp;                                + ((bytes[offset + 5] &amp; 0xFFL) &lt;&lt; 40)
+&nbsp;                                + ((bytes[offset + 4] &amp; 0xFFL) &lt;&lt; 32)
+<b class="nc">&nbsp;                                + (UNSAFE.getInt(bytes, BASE + offset) &amp; 0xFFFFFFFFL);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 8:
+<b class="nc">&nbsp;                        nameValue0 = UNSAFE.getLong(bytes, BASE + offset);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 9:
+<b class="nc">&nbsp;                        nameValue0 = bytes[offset];</b>
+<b class="nc">&nbsp;                        nameValue1 = UNSAFE.getLong(bytes, BASE + offset + 1);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 10:
+<b class="nc">&nbsp;                        nameValue0 = UNSAFE.getShort(bytes, BASE + offset);</b>
+<b class="nc">&nbsp;                        nameValue1 = UNSAFE.getLong(bytes, BASE + offset + 2);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 11:
+<b class="nc">&nbsp;                        nameValue0</b>
+&nbsp;                                = (bytes[offset] &lt;&lt; 16)
+&nbsp;                                + ((bytes[offset + 1] &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                                + (bytes[offset + 2] &amp; 0xFFL);
+<b class="nc">&nbsp;                        nameValue1 = UNSAFE.getLong(bytes, BASE + offset + 3);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 12:
+<b class="nc">&nbsp;                        nameValue0 = UNSAFE.getInt(bytes, BASE + offset);</b>
+<b class="nc">&nbsp;                        nameValue1 = UNSAFE.getLong(bytes, BASE + offset + 4);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 13:
+<b class="nc">&nbsp;                        nameValue0</b>
+&nbsp;                                = (((long) bytes[offset + 4]) &lt;&lt; 32)
+<b class="nc">&nbsp;                                + (UNSAFE.getInt(bytes, BASE + offset) &amp; 0xFFFFFFFFL);</b>
+<b class="nc">&nbsp;                        nameValue1 = UNSAFE.getLong(bytes, BASE + offset + 5);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 14:
+<b class="nc">&nbsp;                        nameValue0</b>
+&nbsp;                                = (((long) bytes[offset + 5]) &lt;&lt; 40)
+&nbsp;                                + ((bytes[offset + 4] &amp; 0xFFL) &lt;&lt; 32)
+<b class="nc">&nbsp;                                + (UNSAFE.getInt(bytes, BASE + offset) &amp; 0xFFFFFFFFL);</b>
+<b class="nc">&nbsp;                        nameValue1 = UNSAFE.getLong(bytes, BASE + offset + 6);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 15:
+<b class="nc">&nbsp;                        nameValue0</b>
+&nbsp;                                = (((long) bytes[offset + 6]) &lt;&lt; 48)
+&nbsp;                                + ((bytes[offset + 5] &amp; 0xFFL) &lt;&lt; 40)
+&nbsp;                                + ((bytes[offset + 4] &amp; 0xFFL) &lt;&lt; 32)
+<b class="nc">&nbsp;                                + (UNSAFE.getInt(bytes, BASE + offset) &amp; 0xFFFFFFFFL);</b>
+<b class="nc">&nbsp;                        nameValue1 = UNSAFE.getLong(bytes, BASE + offset + 7);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 16:
+<b class="nc">&nbsp;                        nameValue0 = UNSAFE.getLong(bytes, BASE + offset);</b>
+<b class="nc">&nbsp;                        nameValue1 = UNSAFE.getLong(bytes, BASE + offset + 8);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    default:
+&nbsp;                        break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (nameValue0 != -1) {</b>
+<b class="nc">&nbsp;                if (nameValue1 != -1) {</b>
+<b class="nc">&nbsp;                    int indexMask = ((int) nameValue1) &amp; (NAME_CACHE2.length - 1);</b>
+<b class="nc">&nbsp;                    JSONFactory.NameCacheEntry2 entry = NAME_CACHE2[indexMask];</b>
+<b class="nc">&nbsp;                    if (entry == null) {</b>
+&nbsp;                        String name;
+<b class="nc">&nbsp;                        if (STRING_CREATOR_JDK8 != null) {</b>
+<b class="nc">&nbsp;                            char[] chars = new char[strlen];</b>
+<b class="nc">&nbsp;                            for (int i = 0; i &lt; strlen; ++i) {</b>
+<b class="nc">&nbsp;                                chars[i] = (char) bytes[offset + i];</b>
+&nbsp;                            }
+<b class="nc">&nbsp;                            name = STRING_CREATOR_JDK8.apply(chars, Boolean.TRUE);</b>
+<b class="nc">&nbsp;                        } else {</b>
+<b class="nc">&nbsp;                            name = new String(bytes, offset, strlen, StandardCharsets.US_ASCII);</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        NAME_CACHE2[indexMask] = new JSONFactory.NameCacheEntry2(name, nameValue0, nameValue1);</b>
+<b class="nc">&nbsp;                        offset += strlen;</b>
+<b class="nc">&nbsp;                        str = name;</b>
+<b class="nc">&nbsp;                    } else if (entry.value0 == nameValue0 &amp;&amp; entry.value1 == nameValue1) {</b>
+<b class="nc">&nbsp;                        offset += strlen;</b>
+<b class="nc">&nbsp;                        str = entry.name;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    int indexMask = ((int) nameValue0) &amp; (NAME_CACHE.length - 1);</b>
+<b class="nc">&nbsp;                    JSONFactory.NameCacheEntry entry = NAME_CACHE[indexMask];</b>
+<b class="nc">&nbsp;                    if (entry == null) {</b>
+&nbsp;                        String name;
+<b class="nc">&nbsp;                        if (STRING_CREATOR_JDK8 != null) {</b>
+<b class="nc">&nbsp;                            char[] chars = new char[strlen];</b>
+<b class="nc">&nbsp;                            for (int i = 0; i &lt; strlen; ++i) {</b>
+<b class="nc">&nbsp;                                chars[i] = (char) bytes[offset + i];</b>
+&nbsp;                            }
+<b class="nc">&nbsp;                            name = STRING_CREATOR_JDK8.apply(chars, Boolean.TRUE);</b>
+<b class="nc">&nbsp;                        } else {</b>
+<b class="nc">&nbsp;                            name = new String(bytes, offset, strlen, StandardCharsets.US_ASCII);</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        NAME_CACHE[indexMask] = new JSONFactory.NameCacheEntry(name, nameValue0);</b>
+<b class="nc">&nbsp;                        offset += strlen;</b>
+<b class="nc">&nbsp;                        str = name;</b>
+<b class="nc">&nbsp;                    } else if (entry.value == nameValue0) {</b>
+<b class="nc">&nbsp;                        offset += strlen;</b>
+<b class="nc">&nbsp;                        str = entry.name;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (str == null) {</b>
+<b class="nc">&nbsp;                if (STRING_CREATOR_JDK8 != null &amp;&amp; strlen &gt;= 0) {</b>
+<b class="nc">&nbsp;                    char[] chars = new char[strlen];</b>
+<b class="nc">&nbsp;                    for (int i = 0; i &lt; strlen; ++i) {</b>
+<b class="nc">&nbsp;                        chars[i] = (char) bytes[offset + i];</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    offset += strlen;</b>
+<b class="nc">&nbsp;                    str = STRING_CREATOR_JDK8.apply(chars, Boolean.TRUE);</b>
+<b class="nc">&nbsp;                } else if (STRING_CREATOR_JDK11 != null &amp;&amp; strlen &gt;= 0) {</b>
+<b class="nc">&nbsp;                    byte[] chars = new byte[strlen];</b>
+<b class="nc">&nbsp;                    System.arraycopy(bytes, offset, chars, 0, strlen);</b>
+<b class="nc">&nbsp;                    str = STRING_CREATOR_JDK11.apply(chars, LATIN1);</b>
+<b class="nc">&nbsp;                    offset += strlen;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                charset = StandardCharsets.US_ASCII;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (strtype == BC_STR_UTF8) {</b>
+<b class="nc">&nbsp;            strlen = readLength();</b>
+<b class="nc">&nbsp;            strBegin = offset;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (STRING_CREATOR_JDK11 != null &amp;&amp; !JDKUtils.BIG_ENDIAN) {</b>
+<b class="nc">&nbsp;                if (valueBytes == null) {</b>
+<b class="nc">&nbsp;                    valueBytes = JSONFactory.allocateByteArray(cachedIndex);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                int minCapacity = strlen &lt;&lt; 1;</b>
+<b class="nc">&nbsp;                if (valueBytes == null) {</b>
+<b class="nc">&nbsp;                    valueBytes = new byte[minCapacity];</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    if (minCapacity &gt; valueBytes.length) {</b>
+<b class="nc">&nbsp;                        valueBytes = new byte[minCapacity];</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                int utf16_len = IOUtils.decodeUTF8(bytes, offset, strlen, valueBytes);</b>
+<b class="nc">&nbsp;                if (utf16_len != -1) {</b>
+<b class="nc">&nbsp;                    byte[] value = new byte[utf16_len];</b>
+<b class="nc">&nbsp;                    System.arraycopy(valueBytes, 0, value, 0, utf16_len);</b>
+<b class="nc">&nbsp;                    str = STRING_CREATOR_JDK11.apply(value, UTF16);</b>
+<b class="nc">&nbsp;                    offset += strlen;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            charset = StandardCharsets.UTF_8;</b>
+<b class="nc">&nbsp;        } else if (strtype == BC_STR_UTF16) {</b>
+<b class="nc">&nbsp;            strlen = readLength();</b>
+<b class="nc">&nbsp;            strBegin = offset;</b>
+<b class="nc">&nbsp;            charset = StandardCharsets.UTF_16;</b>
+<b class="nc">&nbsp;        } else if (strtype == BC_STR_UTF16LE) {</b>
+<b class="nc">&nbsp;            strlen = readLength();</b>
+<b class="nc">&nbsp;            strBegin = offset;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (STRING_CREATOR_JDK11 != null &amp;&amp; !JDKUtils.BIG_ENDIAN) {</b>
+<b class="nc">&nbsp;                byte[] chars = new byte[strlen];</b>
+<b class="nc">&nbsp;                System.arraycopy(bytes, offset, chars, 0, strlen);</b>
+<b class="nc">&nbsp;                str = STRING_CREATOR_JDK11.apply(chars, UTF16);</b>
+<b class="nc">&nbsp;                offset += strlen;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            charset = StandardCharsets.UTF_16LE;</b>
+<b class="nc">&nbsp;        } else if (strtype == BC_STR_UTF16BE) {</b>
+<b class="nc">&nbsp;            strlen = readLength();</b>
+<b class="nc">&nbsp;            strBegin = offset;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (STRING_CREATOR_JDK11 != null &amp;&amp; JDKUtils.BIG_ENDIAN) {</b>
+<b class="nc">&nbsp;                byte[] chars = new byte[strlen];</b>
+<b class="nc">&nbsp;                System.arraycopy(bytes, offset, chars, 0, strlen);</b>
+<b class="nc">&nbsp;                str = STRING_CREATOR_JDK11.apply(chars, UTF16);</b>
+<b class="nc">&nbsp;                offset += strlen;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            charset = StandardCharsets.UTF_16BE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (strlen &lt; 0) {</b>
+<b class="nc">&nbsp;            str = symbolTable.getName(-strlen);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (str == null) {</b>
+<b class="nc">&nbsp;            str = new String(bytes, offset, strlen, charset);</b>
+<b class="nc">&nbsp;            offset += strlen;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (typeSymbol) {</b>
+<b class="nc">&nbsp;            int symbol = readInt32Value();</b>
+&nbsp;
+<b class="nc">&nbsp;            int minCapacity = symbol * 2 + 2;</b>
+<b class="nc">&nbsp;            if (symbols.length &lt; minCapacity) {</b>
+<b class="nc">&nbsp;                symbols = Arrays.copyOf(symbols, symbols.length + 16);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            long strInfo = ((long) strBegin &lt;&lt; 32) + ((long) strlen &lt;&lt; 8) + strtype;</b>
+<b class="nc">&nbsp;            symbols[symbol * 2 + 1] = strInfo;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return str;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public long readFieldNameHashCode() {
+<b class="nc">&nbsp;        strtype = bytes[offset++];</b>
+<b class="nc">&nbsp;        boolean typeSymbol = strtype == BC_SYMBOL;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (typeSymbol) {</b>
+<b class="nc">&nbsp;            strtype = bytes[offset];</b>
+<b class="nc">&nbsp;            if (strtype &gt;= BC_INT32_NUM_MIN &amp;&amp; strtype &lt;= BC_INT32) {</b>
+&nbsp;                int symbol;
+<b class="nc">&nbsp;                if (strtype &gt;= BC_INT32_NUM_MIN &amp;&amp; strtype &lt;= BC_INT32_NUM_MAX) {</b>
+<b class="nc">&nbsp;                    offset++;</b>
+<b class="nc">&nbsp;                    symbol = strtype;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    symbol = readInt32Value();</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (symbol &lt; 0) {</b>
+<b class="nc">&nbsp;                    return symbolTable.getHashCode(-symbol);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                int index = symbol * 2;</b>
+<b class="nc">&nbsp;                long strInfo = symbols[index + 1];</b>
+<b class="nc">&nbsp;                this.strtype = (byte) strInfo;</b>
+<b class="nc">&nbsp;                strlen = ((int) strInfo) &gt;&gt; 8;</b>
+<b class="nc">&nbsp;                strBegin = (int) (strInfo &gt;&gt; 32);</b>
+<b class="nc">&nbsp;                return symbols[index];</b>
+&nbsp;            }
+<b class="nc">&nbsp;            offset++;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        strBegin = offset;</b>
+<b class="nc">&nbsp;        if (strtype &gt;= BC_STR_ASCII_FIX_MIN &amp;&amp; strtype &lt;= BC_STR_ASCII_FIX_MAX) {</b>
+<b class="nc">&nbsp;            strlen = strtype - BC_STR_ASCII_FIX_MIN;</b>
+<b class="nc">&nbsp;        } else if (strtype == BC_STR_ASCII || strtype == BC_STR_UTF8) {</b>
+<b class="nc">&nbsp;            strlen = readLength();</b>
+<b class="nc">&nbsp;            strBegin = offset;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            StringBuffer message = new StringBuffer()</b>
+<b class="nc">&nbsp;                    .append(&quot;fieldName not support input type &quot;)</b>
+<b class="nc">&nbsp;                    .append(typeName(strtype));</b>
+<b class="nc">&nbsp;            if (strtype == BC_REFERENCE) {</b>
+<b class="nc">&nbsp;                message.append(&quot; &quot;)</b>
+<b class="nc">&nbsp;                        .append(readString());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            message.append(&quot;, offset &quot;)</b>
+<b class="nc">&nbsp;                    .append(offset);</b>
+<b class="nc">&nbsp;            throw new JSONException(message.toString());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        long hashCode;
+<b class="nc">&nbsp;        if (strlen &lt; 0) {</b>
+<b class="nc">&nbsp;            hashCode = symbolTable.getHashCode(-strlen);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            long nameValue = 0;</b>
+<b class="nc">&nbsp;            if (MIXED_HASH_ALGORITHM &amp;&amp; strlen &lt;= 8 &amp;&amp; offset + strlen &lt; bytes.length) {</b>
+<b class="nc">&nbsp;                switch (strlen) {</b>
+&nbsp;                    case 1:
+<b class="nc">&nbsp;                        nameValue = bytes[offset];</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 2:
+<b class="nc">&nbsp;                        nameValue = UNSAFE.getShort(bytes, BASE + offset) &amp; 0xFFFFL;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 3:
+<b class="nc">&nbsp;                        nameValue = (bytes[offset + 2] &lt;&lt; 16)</b>
+<b class="nc">&nbsp;                                + (UNSAFE.getShort(bytes, BASE + offset) &amp; 0xFFFFL);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 4:
+<b class="nc">&nbsp;                        nameValue = UNSAFE.getInt(bytes, BASE + offset);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 5:
+<b class="nc">&nbsp;                        nameValue = (((long) bytes[offset + 4]) &lt;&lt; 32)</b>
+<b class="nc">&nbsp;                                + (UNSAFE.getInt(bytes, BASE + offset) &amp; 0xFFFFFFFFL);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 6:
+<b class="nc">&nbsp;                        nameValue = ((long) UNSAFE.getShort(bytes, BASE + offset + 4) &lt;&lt; 32)</b>
+<b class="nc">&nbsp;                                + (UNSAFE.getInt(bytes, BASE + offset) &amp; 0xFFFFFFFFL);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 7:
+<b class="nc">&nbsp;                        nameValue = (((long) bytes[offset + 6]) &lt;&lt; 48)</b>
+&nbsp;                                + (((long) bytes[offset + 5] &amp; 0xFFL) &lt;&lt; 40)
+&nbsp;                                + (((long) bytes[offset + 4] &amp; 0xFFL) &lt;&lt; 32)
+<b class="nc">&nbsp;                                + (UNSAFE.getInt(bytes, BASE + offset) &amp; 0xFFFFFFFFL);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 8:
+<b class="nc">&nbsp;                        nameValue = UNSAFE.getLong(bytes, BASE + offset);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    default:
+&nbsp;                        break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (nameValue != 0) {</b>
+<b class="nc">&nbsp;                offset += strlen;</b>
+<b class="nc">&nbsp;                hashCode = nameValue;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                hashCode = Fnv.MAGIC_HASH_CODE;</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; strlen; ++i) {</b>
+<b class="nc">&nbsp;                    byte c = bytes[offset++];</b>
+<b class="nc">&nbsp;                    hashCode ^= c;</b>
+<b class="nc">&nbsp;                    hashCode *= Fnv.MAGIC_PRIME;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (typeSymbol) {</b>
+&nbsp;            int symbol;
+<b class="nc">&nbsp;            if ((type = bytes[offset]) &gt;= BC_INT32_NUM_MIN &amp;&amp; type &lt;= BC_INT32_NUM_MAX) {</b>
+<b class="nc">&nbsp;                symbol = type;</b>
+<b class="nc">&nbsp;                offset++;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                symbol = readInt32Value();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            long strInfo = ((long) strBegin &lt;&lt; 32) + ((long) strlen &lt;&lt; 8) + strtype;</b>
+&nbsp;
+<b class="nc">&nbsp;            int minCapacity = symbol * 2 + 2;</b>
+<b class="nc">&nbsp;            if (symbols.length &lt; minCapacity) {</b>
+<b class="nc">&nbsp;                symbols = Arrays.copyOf(symbols, minCapacity + 16);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            symbols[symbol * 2] = hashCode;</b>
+<b class="nc">&nbsp;            symbols[symbol * 2 + 1] = strInfo;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return hashCode;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:02</div>
+</div>
+</body>
+</html>

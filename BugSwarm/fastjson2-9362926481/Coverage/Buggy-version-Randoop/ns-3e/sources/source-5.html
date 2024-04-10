@@ -1,0 +1,138 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONType</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.annotation</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONType (com.alibaba.fastjson2.annotation)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">JSONType</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.annotation;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.PropertyNamingStrategy;
+&nbsp;import com.alibaba.fastjson2.filter.Filter;
+&nbsp;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.lang.annotation.Retention;
+&nbsp;import java.lang.annotation.RetentionPolicy;
+&nbsp;import java.lang.annotation.Target;
+&nbsp;
+&nbsp;@Retention(RetentionPolicy.RUNTIME)
+&nbsp;@Target(ElementType.TYPE)
+&nbsp;public @interface JSONType {
+&nbsp;    Class&lt;?&gt; builder() default void.class;
+&nbsp;
+&nbsp;    String typeKey() default &quot;&quot;;
+&nbsp;    String typeName() default &quot;&quot;;
+&nbsp;
+&nbsp;    Class&lt;?&gt;[] seeAlso() default{};
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Property that defines what to do regarding ordering of properties not explicitly included in annotation instance.
+&nbsp;     * If set to true, they will be alphabetically ordered (default setting); if false, order is undefined
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    boolean alphabetic() default true;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Specify {@link JSONReader.Feature}s to use features when deserializing
+&nbsp;     */
+&nbsp;    JSONReader.Feature[] deserializeFeatures() default {};
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Specify {@link JSONWriter.Feature}s to use features when serializing output
+&nbsp;     */
+&nbsp;    JSONWriter.Feature[] serializeFeatures() default {};
+&nbsp;
+&nbsp;    PropertyNamingStrategy naming() default PropertyNamingStrategy.NeverUseThisValueExceptDefaultValue;
+&nbsp;
+&nbsp;    boolean writeEnumAsJavaBean() default false;
+&nbsp;
+&nbsp;    String[] ignores() default {};
+&nbsp;
+&nbsp;    String[] includes() default {};
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Order in which properties of annotated object are to be serialized in.
+&nbsp;     */
+&nbsp;    String[] orders() default {};
+&nbsp;
+&nbsp;    Class&lt;?&gt; serializer() default Void.class;
+&nbsp;
+&nbsp;    Class&lt;?&gt; deserializer() default Void.class;
+&nbsp;
+&nbsp;    Class&lt;? extends Filter&gt;[] serializeFilters() default {};
+&nbsp;
+&nbsp;    String schema() default &quot;&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0.8
+&nbsp;     */
+&nbsp;    String format() default &quot;&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0.8
+&nbsp;     */
+&nbsp;    String locale() default &quot;&quot;;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 19:48</div>
+</div>
+</body>
+</html>

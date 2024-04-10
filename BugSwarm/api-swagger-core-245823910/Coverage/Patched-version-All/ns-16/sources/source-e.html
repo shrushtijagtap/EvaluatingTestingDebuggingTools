@@ -1,0 +1,115 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BaseReaderUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.util</a>
+</div>
+
+<h1>Coverage Summary for Class: BaseReaderUtils (io.swagger.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">BaseReaderUtils</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package io.swagger.util;
+&nbsp;
+&nbsp;/**
+&nbsp; * The &lt;code&gt;BaseReaderUtils&lt;/code&gt; class is utility class which helps read annotations to the Swagger.
+&nbsp; */
+&nbsp;public final class BaseReaderUtils {
+&nbsp;
+&nbsp;    private BaseReaderUtils() {
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Collects extensions.
+&nbsp;     *
+&nbsp;     * @param extensions is an array of extensions
+&nbsp;     * @return the map with extensions
+&nbsp;
+&nbsp;    public static Map&lt;String, Object&gt; parseExtensions(Extension[] extensions) {
+&nbsp;        final Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();
+&nbsp;        for (Extension extension : extensions) {
+&nbsp;            final String name = extension.name();
+&nbsp;            final String key = name.length() &gt; 0 ? StringUtils.prependIfMissing(name, &quot;x-&quot;) : name;
+&nbsp;
+&nbsp;            for (ExtensionProperty property : extension.properties()) {
+&nbsp;                final String propertyName = property.name();
+&nbsp;                final String propertyValue = property.value();
+&nbsp;                if (StringUtils.isNotBlank(propertyName) &amp;&amp; StringUtils.isNotBlank(propertyValue)) {
+&nbsp;                    if (key.isEmpty()) {
+&nbsp;                        map.put(StringUtils.prependIfMissing(propertyName, &quot;x-&quot;), propertyValue);
+&nbsp;                    } else {
+&nbsp;                        Object value = map.get(key);
+&nbsp;                        if (value == null || !(value instanceof Map)) {
+&nbsp;                            value = new HashMap&lt;String, Object&gt;();
+&nbsp;                            map.put(key, value);
+&nbsp;                        }
+&nbsp;                        @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;                        final Map&lt;String, Object&gt; mapValue = (Map&lt;String, Object&gt;) value;
+&nbsp;                        mapValue.put(propertyName, propertyValue);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return map;
+&nbsp;    }
+&nbsp;     */
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:26</div>
+</div>
+</body>
+</html>

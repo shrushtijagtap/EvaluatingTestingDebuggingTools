@@ -1,0 +1,181 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderImplAtomicLongArray</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderImplAtomicLongArray (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderImplAtomicLongArray</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.1%
+  </span>
+  <span class="absValue">
+    (33/34)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.List;
+&nbsp;import java.util.concurrent.atomic.AtomicLongArray;
+&nbsp;
+&nbsp;final class ObjectReaderImplAtomicLongArray
+&nbsp;        extends ObjectReaderPrimitive {
+<b class="fc">&nbsp;    static final ObjectReaderImplAtomicLongArray INSTANCE = new ObjectReaderImplAtomicLongArray();</b>
+&nbsp;
+&nbsp;    public ObjectReaderImplAtomicLongArray() {
+<b class="fc">&nbsp;        super(AtomicLongArray.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createInstance(Collection collection) {
+<b class="fc">&nbsp;        AtomicLongArray array = new AtomicLongArray(collection.size());</b>
+<b class="fc">&nbsp;        int index = 0;</b>
+<b class="fc">&nbsp;        for (Object item : collection) {</b>
+<b class="fc">&nbsp;            array.set(index++, TypeUtils.toLongValue(item));</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return array;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="fc">&nbsp;        if (jsonReader.readIfNull()) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (jsonReader.nextIfMatch(&#39;[&#39;)) {</b>
+<b class="fc">&nbsp;            List&lt;Long&gt; values = new ArrayList&lt;&gt;();</b>
+&nbsp;            for (; ; ) {
+<b class="fc">&nbsp;                if (jsonReader.nextIfMatch(&#39;]&#39;)) {</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                values.add(jsonReader.readInt64());</b>
+&nbsp;            }
+<b class="fc">&nbsp;            jsonReader.nextIfMatch(&#39;,&#39;);</b>
+&nbsp;
+<b class="fc">&nbsp;            AtomicLongArray array = new AtomicLongArray(values.size());</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; values.size(); i++) {</b>
+<b class="fc">&nbsp;                Long value = values.get(i);</b>
+<b class="fc">&nbsp;                if (value == null) {</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                array.set(i, value);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return array;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(jsonReader.info(&quot;TODO&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="fc">&nbsp;        int entryCnt = jsonReader.startArray();</b>
+<b class="fc">&nbsp;        if (entryCnt == -1) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        AtomicLongArray array = new AtomicLongArray(entryCnt);</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; entryCnt; i++) {</b>
+<b class="fc">&nbsp;            Long value = jsonReader.readInt64();</b>
+<b class="fc">&nbsp;            if (value == null) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            array.set(i, value);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return array;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:01</div>
+</div>
+</body>
+</html>

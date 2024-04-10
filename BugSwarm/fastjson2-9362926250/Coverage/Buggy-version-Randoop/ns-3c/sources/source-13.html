@@ -1,0 +1,153 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UUIDUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.util</a>
+</div>
+
+<h1>Coverage Summary for Class: UUIDUtils (com.alibaba.fastjson2.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UUIDUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.util;
+&nbsp;
+<b class="nc">&nbsp;public final class UUIDUtils {</b>
+<b class="nc">&nbsp;    private static final byte[] NIBBLES = new byte[]{</b>
+&nbsp;            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+&nbsp;            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+&nbsp;            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+&nbsp;            +0, +1, +2, +3, +4, +5, +6, +7, +8, +9, -1, -1, -1, -1, -1, -1,
+&nbsp;            -1, 10, 11, 12, 13, 14, 15, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+&nbsp;            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+&nbsp;            -1, 10, 11, 12, 13, 14, 15, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+&nbsp;            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+&nbsp;            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+&nbsp;            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+&nbsp;            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+&nbsp;            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+&nbsp;            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+&nbsp;            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+&nbsp;            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+&nbsp;            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+&nbsp;    };
+&nbsp;
+&nbsp;    public static long parse4Nibbles(byte[] name, int pos) {
+<b class="nc">&nbsp;        byte ch1 = name[pos];</b>
+<b class="nc">&nbsp;        byte ch2 = name[pos + 1];</b>
+<b class="nc">&nbsp;        byte ch3 = name[pos + 2];</b>
+<b class="nc">&nbsp;        byte ch4 = name[pos + 3];</b>
+<b class="nc">&nbsp;        return (ch1 | ch2 | ch3 | ch4) &gt; 0xff ? -1 :</b>
+&nbsp;                NIBBLES[ch1] &lt;&lt; 12 | NIBBLES[ch2] &lt;&lt; 8 | NIBBLES[ch3] &lt;&lt; 4 | NIBBLES[ch4];
+&nbsp;    }
+&nbsp;
+&nbsp;    public static long parse4Nibbles(char[] name, int pos) {
+<b class="nc">&nbsp;        char ch1 = name[pos];</b>
+<b class="nc">&nbsp;        char ch2 = name[pos + 1];</b>
+<b class="nc">&nbsp;        char ch3 = name[pos + 2];</b>
+<b class="nc">&nbsp;        char ch4 = name[pos + 3];</b>
+<b class="nc">&nbsp;        return (ch1 | ch2 | ch3 | ch4) &gt; 0xFF ? -1 :</b>
+&nbsp;                NIBBLES[ch1] &lt;&lt; 12 | NIBBLES[ch2] &lt;&lt; 8 | NIBBLES[ch3] &lt;&lt; 4 | NIBBLES[ch4];
+&nbsp;    }
+&nbsp;
+&nbsp;    public static long parse4Nibbles(String name, int pos) {
+<b class="nc">&nbsp;        char ch1 = name.charAt(pos);</b>
+<b class="nc">&nbsp;        char ch2 = name.charAt(pos + 1);</b>
+<b class="nc">&nbsp;        char ch3 = name.charAt(pos + 2);</b>
+<b class="nc">&nbsp;        char ch4 = name.charAt(pos + 3);</b>
+<b class="nc">&nbsp;        return (ch1 | ch2 | ch3 | ch4) &gt; 0xFF ? -1 :</b>
+&nbsp;                NIBBLES[ch1] &lt;&lt; 12 | NIBBLES[ch2] &lt;&lt; 8 | NIBBLES[ch3] &lt;&lt; 4 | NIBBLES[ch4];
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:12</div>
+</div>
+</body>
+</html>

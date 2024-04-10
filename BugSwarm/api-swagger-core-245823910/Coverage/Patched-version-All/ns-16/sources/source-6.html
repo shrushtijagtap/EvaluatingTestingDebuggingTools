@@ -1,0 +1,646 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ParameterProcessor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.util</a>
+</div>
+
+<h1>Coverage Summary for Class: ParameterProcessor (io.swagger.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ParameterProcessor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/192)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ParameterProcessor$AnnotationsHelper</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/56)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParameterProcessor$ParamWrapper</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/248)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package io.swagger.util;
+&nbsp;
+&nbsp;import io.swagger.converter.ModelConverters;
+&nbsp;import io.swagger.oas.models.OpenAPI;
+&nbsp;import io.swagger.oas.models.media.ArraySchema;
+&nbsp;import io.swagger.oas.models.media.BinarySchema;
+&nbsp;import io.swagger.oas.models.media.ByteArraySchema;
+&nbsp;import io.swagger.oas.models.media.DateSchema;
+&nbsp;import io.swagger.oas.models.media.DateTimeSchema;
+&nbsp;import io.swagger.oas.models.media.EmailSchema;
+&nbsp;import io.swagger.oas.models.media.IntegerSchema;
+&nbsp;import io.swagger.oas.models.media.PasswordSchema;
+&nbsp;import io.swagger.oas.models.media.Schema;
+&nbsp;import io.swagger.oas.models.media.StringSchema;
+&nbsp;import io.swagger.oas.models.media.UUIDSchema;
+&nbsp;import io.swagger.oas.models.parameters.Parameter;
+&nbsp;import org.apache.commons.lang3.StringUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import javax.validation.constraints.DecimalMax;
+&nbsp;import javax.validation.constraints.DecimalMin;
+&nbsp;import javax.validation.constraints.Max;
+&nbsp;import javax.validation.constraints.Min;
+&nbsp;import javax.validation.constraints.NotNull;
+&nbsp;import javax.validation.constraints.Pattern;
+&nbsp;import javax.validation.constraints.Size;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.util.List;
+&nbsp;
+<b class="nc">&nbsp;public class ParameterProcessor {</b>
+<b class="nc">&nbsp;	static Logger LOGGER = LoggerFactory.getLogger(ParameterProcessor.class);</b>
+&nbsp;
+&nbsp;	public static Parameter applyAnnotations(OpenAPI openAPI, Parameter parameter, Type type, List&lt;Annotation&gt; annotations) {
+<b class="nc">&nbsp;		final AnnotationsHelper helper = new AnnotationsHelper(annotations, type);</b>
+<b class="nc">&nbsp;		if (helper.isContext()) {</b>
+<b class="nc">&nbsp;			return null;</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (parameter == null) {</b>
+<b class="nc">&nbsp;			return null;</b>
+&nbsp;		}
+<b class="nc">&nbsp;		final ParamWrapper&lt;?&gt; param = null;</b>
+&nbsp;
+<b class="nc">&nbsp;		for (Annotation annotation : annotations) {</b>
+<b class="nc">&nbsp;			if (annotation instanceof io.swagger.oas.annotations.Parameter) {</b>
+<b class="nc">&nbsp;				io.swagger.oas.annotations.Parameter p = (io.swagger.oas.annotations.Parameter) annotation;</b>
+<b class="nc">&nbsp;				if (StringUtils.isNotBlank(p.description())) {</b>
+<b class="nc">&nbsp;					parameter.setDescription(p.description());</b>
+&nbsp;				}
+<b class="nc">&nbsp;				if (StringUtils.isNotBlank(p.name())) {</b>
+<b class="nc">&nbsp;					parameter.setName(p.name());</b>
+&nbsp;				}
+<b class="nc">&nbsp;				if (StringUtils.isNotBlank(p.in())) {</b>
+<b class="nc">&nbsp;					parameter.setIn(p.in());</b>
+&nbsp;				}
+<b class="nc">&nbsp;				parameter.setDeprecated(p.deprecated());</b>
+<b class="nc">&nbsp;				parameter.setRequired(p.required());</b>
+<b class="nc">&nbsp;				parameter.setStyle(StringUtils.isNoneBlank(p.style()) ? Parameter.StyleEnum.valueOf(p.style()) : null);</b>
+<b class="nc">&nbsp;				parameter.setAllowEmptyValue(p.allowEmptyValue());</b>
+<b class="nc">&nbsp;				parameter.setAllowReserved(p.allowReserved());</b>
+<b class="nc">&nbsp;				parameter.setExplode(p.explode());</b>
+<b class="nc">&nbsp;				if (hasSchemaAnnotation(p.schema())) {</b>
+<b class="nc">&nbsp;					Schema schema = processSchema(p.schema());</b>
+<b class="nc">&nbsp;					if (schema != null) {</b>
+<b class="nc">&nbsp;						parameter.setSchema(schema);</b>
+&nbsp;					}
+<b class="nc">&nbsp;				} else if (hasArrayAnnotation(p.array())) {</b>
+<b class="nc">&nbsp;					Schema arraySchema = processArraySchema(p.array());</b>
+<b class="nc">&nbsp;					if (arraySchema != null) {</b>
+<b class="nc">&nbsp;						parameter.setSchema(arraySchema);</b>
+&nbsp;					}
+&nbsp;				}
+<b class="nc">&nbsp;			} else if (annotation.annotationType().getName().equals(&quot;javax.ws.rs.PathParam&quot;)) {</b>
+&nbsp;				try {
+<b class="nc">&nbsp;					String name = (String) annotation.annotationType().getMethod(&quot;value&quot;).invoke(annotation);</b>
+<b class="nc">&nbsp;					if (StringUtils.isNotBlank(name)) {</b>
+<b class="nc">&nbsp;						parameter.setName(name);</b>
+&nbsp;					}
+<b class="nc">&nbsp;				} catch (Exception e) {</b>
+<b class="nc">&nbsp;				}</b>
+<b class="nc">&nbsp;			} else if (annotation.annotationType().getName().equals(&quot;javax.validation.constraints.Size&quot;)) {</b>
+&nbsp;				try {
+<b class="nc">&nbsp;					if (parameter.getSchema() == null) {</b>
+<b class="nc">&nbsp;						parameter.setSchema(new ArraySchema());</b>
+&nbsp;					}
+<b class="nc">&nbsp;					if (parameter.getSchema() instanceof ArraySchema) {</b>
+<b class="nc">&nbsp;						ArraySchema as = (ArraySchema) parameter.getSchema();</b>
+<b class="nc">&nbsp;						Integer min = (Integer) annotation.annotationType().getMethod(&quot;min&quot;).invoke(annotation);</b>
+<b class="nc">&nbsp;						if (min != null) {</b>
+<b class="nc">&nbsp;							as.setMinItems(min);</b>
+&nbsp;						}
+<b class="nc">&nbsp;						Integer max = (Integer) annotation.annotationType().getMethod(&quot;max&quot;).invoke(annotation);</b>
+<b class="nc">&nbsp;						if (max != null) {</b>
+<b class="nc">&nbsp;							as.setMaxItems(max);</b>
+&nbsp;						}
+&nbsp;					}
+&nbsp;
+<b class="nc">&nbsp;				} catch (Exception e) {</b>
+<b class="nc">&nbsp;					LOGGER.error(&quot;failed on &quot; + annotation.annotationType().getName(), e);</b>
+<b class="nc">&nbsp;				}</b>
+&nbsp;			}
+<b class="nc">&nbsp;		}</b>
+<b class="nc">&nbsp;		if (type != null) {</b>
+<b class="nc">&nbsp;			Schema filled = fillSchema(parameter.getSchema(), type);</b>
+<b class="nc">&nbsp;			if (filled != null) {</b>
+<b class="nc">&nbsp;				parameter.setSchema(filled);</b>
+&nbsp;			}
+&nbsp;		}
+<b class="nc">&nbsp;		final String defaultValue = helper.getDefaultValue();</b>
+&nbsp;
+<b class="nc">&nbsp;		Schema paramSchema = parameter.getSchema();</b>
+&nbsp;
+<b class="nc">&nbsp;		if (paramSchema != null) {</b>
+<b class="nc">&nbsp;			if (paramSchema instanceof ArraySchema) {</b>
+<b class="nc">&nbsp;				ArraySchema as = (ArraySchema) paramSchema;</b>
+<b class="nc">&nbsp;				if (defaultValue != null) {</b>
+<b class="nc">&nbsp;					as.getItems().setDefault(defaultValue);</b>
+&nbsp;				}
+<b class="nc">&nbsp;			} else {</b>
+<b class="nc">&nbsp;				if (defaultValue != null) {</b>
+<b class="nc">&nbsp;					paramSchema.setDefault(defaultValue);</b>
+&nbsp;				}
+&nbsp;			}
+&nbsp;		}
+<b class="nc">&nbsp;		return parameter;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public static Schema fillSchema(Schema schema, Type type) {
+<b class="nc">&nbsp;		if (schema != null) {</b>
+<b class="nc">&nbsp;			if (schema != null &amp;&amp; StringUtils.isBlank(schema.getType())) {</b>
+<b class="nc">&nbsp;				PrimitiveType pt = PrimitiveType.fromType(type);</b>
+<b class="nc">&nbsp;				if (pt != null) {</b>
+<b class="nc">&nbsp;					Schema inner = pt.createProperty();</b>
+<b class="nc">&nbsp;					return merge(schema, inner);</b>
+&nbsp;				} else {
+<b class="nc">&nbsp;					return ModelConverters.getInstance().resolveProperty(type);</b>
+&nbsp;				}
+<b class="nc">&nbsp;			} else if (&quot;array&quot;.equals(schema.getType())) {</b>
+<b class="nc">&nbsp;				Schema inner = fillSchema(((ArraySchema) schema).getItems(), type);</b>
+<b class="nc">&nbsp;				ArraySchema as = (ArraySchema) schema;</b>
+<b class="nc">&nbsp;				as.setItems(inner);</b>
+<b class="nc">&nbsp;				as.setMinItems(schema.getMinItems());</b>
+<b class="nc">&nbsp;				as.setMaxItems(schema.getMaxItems());</b>
+<b class="nc">&nbsp;				return as;</b>
+&nbsp;			}
+&nbsp;		} else {
+<b class="nc">&nbsp;			PrimitiveType pt = PrimitiveType.fromType(type);</b>
+<b class="nc">&nbsp;			if (pt != null) {</b>
+<b class="nc">&nbsp;				Schema inner = pt.createProperty();</b>
+<b class="nc">&nbsp;				return merge(schema, inner);</b>
+&nbsp;			} else {
+<b class="nc">&nbsp;				return ModelConverters.getInstance().resolveProperty(type);</b>
+&nbsp;			}
+&nbsp;		}
+<b class="nc">&nbsp;		return schema;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	// TODO!
+&nbsp;	public static Schema merge(Schema from, Schema to) {
+<b class="nc">&nbsp;		if (from == null) {</b>
+<b class="nc">&nbsp;			return to;</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (to.getDescription() == null) {</b>
+<b class="nc">&nbsp;			to.setDescription(from.getDescription());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (to.getDefault() == null) {</b>
+<b class="nc">&nbsp;			to.setDefault(from.getDefault());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (to.getEnum() == null) {</b>
+<b class="nc">&nbsp;			to.setEnum(from.getEnum());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (to.getExclusiveMinimum() == null) {</b>
+<b class="nc">&nbsp;			to.setExclusiveMinimum(from.getExclusiveMinimum());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (to.getExclusiveMaximum() == null) {</b>
+<b class="nc">&nbsp;			to.setExclusiveMaximum(from.getExclusiveMaximum());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (to.getMinimum() == null) {</b>
+<b class="nc">&nbsp;			to.setMinimum(from.getMinimum());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (to.getMaximum() == null) {</b>
+<b class="nc">&nbsp;			to.setMaximum(from.getMaximum());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		return to;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	private static boolean hasArrayAnnotation(io.swagger.oas.annotations.media.ArraySchema array) {
+<b class="nc">&nbsp;		if (array.uniqueItems() == false</b>
+<b class="nc">&nbsp;				&amp;&amp; array.maxItems() == Integer.MIN_VALUE</b>
+<b class="nc">&nbsp;				&amp;&amp; array.minItems() == Integer.MAX_VALUE</b>
+<b class="nc">&nbsp;				&amp;&amp; !hasSchemaAnnotation(array.schema())</b>
+&nbsp;				) {
+<b class="nc">&nbsp;			return false;</b>
+&nbsp;		}
+<b class="nc">&nbsp;		return true;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	private static boolean hasSchemaAnnotation(io.swagger.oas.annotations.media.Schema schema) {
+<b class="nc">&nbsp;		if (StringUtils.isBlank(schema.type())</b>
+<b class="nc">&nbsp;				&amp;&amp; StringUtils.isBlank(schema.format())</b>
+<b class="nc">&nbsp;				&amp;&amp; StringUtils.isBlank(schema.title())</b>
+<b class="nc">&nbsp;				&amp;&amp; StringUtils.isBlank(schema.description())</b>
+<b class="nc">&nbsp;				&amp;&amp; StringUtils.isBlank(schema.ref())</b>
+<b class="nc">&nbsp;				&amp;&amp; StringUtils.isBlank(schema.name())</b>
+<b class="nc">&nbsp;				&amp;&amp; schema.multipleOf() == 0</b>
+<b class="nc">&nbsp;				&amp;&amp; StringUtils.isBlank(schema.maximum())</b>
+<b class="nc">&nbsp;				&amp;&amp; StringUtils.isBlank(schema.minimum())</b>
+<b class="nc">&nbsp;				&amp;&amp; !schema.exclusiveMinimum()</b>
+<b class="nc">&nbsp;				&amp;&amp; !schema.exclusiveMaximum()</b>
+<b class="nc">&nbsp;				&amp;&amp; schema.maxLength() == Integer.MIN_VALUE</b>
+<b class="nc">&nbsp;				&amp;&amp; schema.minLength() == Integer.MAX_VALUE</b>
+<b class="nc">&nbsp;				&amp;&amp; schema.minProperties() == 0</b>
+<b class="nc">&nbsp;				&amp;&amp; schema.maxProperties() == 0</b>
+<b class="nc">&nbsp;				&amp;&amp; schema.requiredProperties().length == 1 &amp;&amp; StringUtils.isBlank(schema.requiredProperties()[0])</b>
+<b class="nc">&nbsp;				&amp;&amp; schema.required() == false</b>
+<b class="nc">&nbsp;				&amp;&amp; schema.nullable() == false</b>
+<b class="nc">&nbsp;				&amp;&amp; schema.readOnly() == false</b>
+<b class="nc">&nbsp;				&amp;&amp; schema.writeOnly() == false</b>
+<b class="nc">&nbsp;				&amp;&amp; schema.examples().length == 1 &amp;&amp; StringUtils.isBlank(schema.examples()[0])</b>
+<b class="nc">&nbsp;				&amp;&amp; schema.deprecated() == false</b>
+<b class="nc">&nbsp;				&amp;&amp; schema._enum().length == 1 &amp;&amp; StringUtils.isBlank(schema._enum()[0])</b>
+<b class="nc">&nbsp;				&amp;&amp; StringUtils.isBlank(schema._default())</b>
+<b class="nc">&nbsp;				&amp;&amp; StringUtils.isBlank(schema.example())</b>
+<b class="nc">&nbsp;				&amp;&amp; StringUtils.isBlank(schema.pattern())</b>
+<b class="nc">&nbsp;				&amp;&amp; schema.not().equals(Void.class)</b>
+<b class="nc">&nbsp;				&amp;&amp; schema.oneOf().length == 1 &amp;&amp; schema.oneOf()[0].equals(Void.class)</b>
+<b class="nc">&nbsp;				&amp;&amp; schema.anyOf().length == 1 &amp;&amp; schema.anyOf()[0].equals(Void.class)</b>
+&nbsp;				) {
+<b class="nc">&nbsp;			return false;</b>
+&nbsp;		}
+<b class="nc">&nbsp;		return true;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	private static Schema processArraySchema(io.swagger.oas.annotations.media.ArraySchema array) {
+<b class="nc">&nbsp;		ArraySchema output = new ArraySchema();</b>
+&nbsp;
+<b class="nc">&nbsp;		Schema schema = processSchema(array.schema());</b>
+&nbsp;
+<b class="nc">&nbsp;		output.setItems(schema);</b>
+&nbsp;
+<b class="nc">&nbsp;		return output;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	private static Schema processSchema(io.swagger.oas.annotations.media.Schema schema) {
+<b class="nc">&nbsp;		Schema output = null;</b>
+<b class="nc">&nbsp;		if (schema.type() != null) {</b>
+<b class="nc">&nbsp;			if (&quot;integer&quot;.equals(schema.type())) {</b>
+<b class="nc">&nbsp;				output = new IntegerSchema();</b>
+<b class="nc">&nbsp;				if (StringUtils.isNotBlank(schema.format())) {</b>
+<b class="nc">&nbsp;					output.format(schema.format());</b>
+&nbsp;				}
+&nbsp;			}
+<b class="nc">&nbsp;			if (&quot;string&quot;.equals(schema.type())) {</b>
+<b class="nc">&nbsp;				if (&quot;password&quot;.equals(schema.format())) {</b>
+<b class="nc">&nbsp;					output = new PasswordSchema();</b>
+<b class="nc">&nbsp;				} else if (&quot;binary&quot;.equals(schema.format())) {</b>
+<b class="nc">&nbsp;					output = new BinarySchema();</b>
+<b class="nc">&nbsp;				} else if (&quot;byte&quot;.equals(schema.format())) {</b>
+<b class="nc">&nbsp;					output = new ByteArraySchema();</b>
+<b class="nc">&nbsp;				} else if (&quot;date&quot;.equals(schema.format())) {</b>
+<b class="nc">&nbsp;					output = new DateSchema();</b>
+<b class="nc">&nbsp;				} else if (&quot;date-time&quot;.equals(schema.format())) {</b>
+<b class="nc">&nbsp;					output = new DateTimeSchema();</b>
+<b class="nc">&nbsp;				} else if (&quot;email&quot;.equals(schema.format())) {</b>
+<b class="nc">&nbsp;					output = new EmailSchema();</b>
+<b class="nc">&nbsp;				} else if (&quot;uuid&quot;.equals(schema.format())) {</b>
+<b class="nc">&nbsp;					output = new UUIDSchema();</b>
+&nbsp;				} else {
+<b class="nc">&nbsp;					output = new StringSchema();</b>
+&nbsp;				}
+&nbsp;			} else {
+<b class="nc">&nbsp;				output = new Schema();</b>
+&nbsp;			}
+&nbsp;
+&nbsp;			// TODO: other types
+&nbsp;		}
+<b class="nc">&nbsp;		if (output != null) {</b>
+<b class="nc">&nbsp;			if (StringUtils.isNotBlank(schema._default())) {</b>
+<b class="nc">&nbsp;				output.setDefault(schema._default());</b>
+&nbsp;			}
+<b class="nc">&nbsp;			if (StringUtils.isNotBlank(schema.description())) {</b>
+<b class="nc">&nbsp;				output.setDescription(schema.description());</b>
+&nbsp;			}
+<b class="nc">&nbsp;			if (schema._enum() != null) {</b>
+<b class="nc">&nbsp;				for (String v : schema._enum()) {</b>
+<b class="nc">&nbsp;					if (StringUtils.isNotBlank(v)) {</b>
+<b class="nc">&nbsp;						output.addEnumItemObject(v);</b>
+&nbsp;					}
+&nbsp;				}
+&nbsp;			}
+<b class="nc">&nbsp;			if (schema.exclusiveMinimum()) {</b>
+<b class="nc">&nbsp;				output.exclusiveMinimum(true);</b>
+&nbsp;			}
+<b class="nc">&nbsp;			if (schema.exclusiveMaximum()) {</b>
+<b class="nc">&nbsp;				output.exclusiveMaximum(true);</b>
+&nbsp;			}
+<b class="nc">&nbsp;			if (schema.readOnly()) {</b>
+<b class="nc">&nbsp;				output.readOnly(true);</b>
+&nbsp;			}
+<b class="nc">&nbsp;			if (StringUtils.isNotBlank(schema.minimum())) {</b>
+<b class="nc">&nbsp;				output.minimum(new BigDecimal(schema.minimum()));</b>
+&nbsp;			}
+<b class="nc">&nbsp;			if (StringUtils.isNotBlank(schema.maximum())) {</b>
+<b class="nc">&nbsp;				output.maximum(new BigDecimal(schema.maximum()));</b>
+&nbsp;			}
+<b class="nc">&nbsp;			if (schema.minProperties() &gt; 0) {</b>
+<b class="nc">&nbsp;				output.minProperties(schema.minProperties());</b>
+&nbsp;			}
+<b class="nc">&nbsp;			if (schema.maxProperties() &gt; 0) {</b>
+<b class="nc">&nbsp;				output.maxProperties(schema.maxProperties());</b>
+&nbsp;			}
+&nbsp;		}
+<b class="nc">&nbsp;		return output;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	/**
+&nbsp;	 * Wraps either an @ApiParam or and @ApiImplicitParam
+&nbsp;	 */
+&nbsp;
+&nbsp;	public interface ParamWrapper&lt;T extends Annotation&gt; {
+&nbsp;		String getName();
+&nbsp;
+&nbsp;		String getDescription();
+&nbsp;
+&nbsp;		String getDefaultValue();
+&nbsp;
+&nbsp;		String getAllowableValues();
+&nbsp;
+&nbsp;		boolean isRequired();
+&nbsp;
+&nbsp;		String getAccess();
+&nbsp;
+&nbsp;		boolean isAllowMultiple();
+&nbsp;
+&nbsp;		String getDataType();
+&nbsp;
+&nbsp;		String getParamType();
+&nbsp;
+&nbsp;		T getAnnotation();
+&nbsp;
+&nbsp;		boolean isHidden();
+&nbsp;
+&nbsp;		String getExample();
+&nbsp;
+&nbsp;		String getType();
+&nbsp;
+&nbsp;		String getFormat();
+&nbsp;
+&nbsp;		boolean getReadOnly();
+&nbsp;
+&nbsp;		boolean getAllowEmptyValue();
+&nbsp;
+&nbsp;		String getCollectionFormat();
+&nbsp;	}
+&nbsp;
+&nbsp;	/**
+&nbsp;	 * The &lt;code&gt;AnnotationsHelper&lt;/code&gt; class defines helper methods for
+&nbsp;	 * accessing supported parameter annotations.
+&nbsp;	 */
+&nbsp;	private static class AnnotationsHelper {
+&nbsp;		//        private static final ApiParam DEFAULT_API_PARAM = getDefaultApiParam(null);
+&nbsp;		private boolean context;
+&nbsp;		//        private ParamWrapper&lt;?&gt; apiParam = new ApiParamWrapper(DEFAULT_API_PARAM);
+&nbsp;		private String type;
+&nbsp;		private String format;
+&nbsp;		private String defaultValue;
+&nbsp;		private Integer minItems;
+&nbsp;		private Integer maxItems;
+&nbsp;		private Boolean required;
+&nbsp;		private BigDecimal min;
+<b class="nc">&nbsp;		private boolean minExclusive = false;</b>
+&nbsp;		private BigDecimal max;
+<b class="nc">&nbsp;		private boolean maxExclusive = false;</b>
+&nbsp;		private Integer minLength;
+&nbsp;		private Integer maxLength;
+&nbsp;		private String pattern;
+&nbsp;		private Boolean allowEmptyValue;
+&nbsp;		private String collectionFormat;
+&nbsp;
+&nbsp;		/**
+&nbsp;		 * Constructs an instance.
+&nbsp;		 *
+&nbsp;		 * @param annotations array or parameter annotations
+&nbsp;		 */
+<b class="nc">&nbsp;		public AnnotationsHelper(List&lt;Annotation&gt; annotations, Type _type) {</b>
+<b class="nc">&nbsp;			String rsDefault = null;</b>
+<b class="nc">&nbsp;			Size size = null;</b>
+<b class="nc">&nbsp;			if (annotations != null) {</b>
+<b class="nc">&nbsp;				for (Annotation item : annotations) {</b>
+<b class="nc">&nbsp;					if (&quot;javax.ws.rs.core.Context&quot;.equals(item.annotationType().getName())) {</b>
+<b class="nc">&nbsp;						context = true;</b>
+<b class="nc">&nbsp;					} else if (&quot;javax.ws.rs.DefaultValue&quot;.equals(item.annotationType().getName())) {</b>
+&nbsp;						try {
+<b class="nc">&nbsp;							rsDefault = (String) item.annotationType().getMethod(&quot;value&quot;).invoke(item);</b>
+<b class="nc">&nbsp;						} catch (Exception ex) {</b>
+<b class="nc">&nbsp;							LOGGER.error(&quot;Invocation of value method failed&quot;, ex);</b>
+<b class="nc">&nbsp;						}</b>
+<b class="nc">&nbsp;					} else if (item instanceof Size) {</b>
+<b class="nc">&nbsp;						size = (Size) item;</b>
+&nbsp;						/**
+&nbsp;						 * This annotation is handled after the loop, as the allow multiple field of the
+&nbsp;						 * ApiParam annotation can affect how the Size annotation is translated
+&nbsp;						 * Swagger property constraints
+&nbsp;						 */
+<b class="nc">&nbsp;					} else if (item instanceof NotNull) {</b>
+<b class="nc">&nbsp;						required = true;</b>
+<b class="nc">&nbsp;					} else if (item instanceof Min) {</b>
+<b class="nc">&nbsp;						min = new BigDecimal(((Min) item).value());</b>
+<b class="nc">&nbsp;					} else if (item instanceof Max) {</b>
+<b class="nc">&nbsp;						max = new BigDecimal(((Max) item).value());</b>
+<b class="nc">&nbsp;					} else if (item instanceof DecimalMin) {</b>
+<b class="nc">&nbsp;						DecimalMin decimalMinAnnotation = (DecimalMin) item;</b>
+<b class="nc">&nbsp;						min = new BigDecimal(decimalMinAnnotation.value());</b>
+<b class="nc">&nbsp;						minExclusive = !decimalMinAnnotation.inclusive();</b>
+<b class="nc">&nbsp;					} else if (item instanceof DecimalMax) {</b>
+<b class="nc">&nbsp;						DecimalMax decimalMaxAnnotation = (DecimalMax) item;</b>
+<b class="nc">&nbsp;						max = new BigDecimal(decimalMaxAnnotation.value());</b>
+<b class="nc">&nbsp;						maxExclusive = !decimalMaxAnnotation.inclusive();</b>
+<b class="nc">&nbsp;					} else if (item instanceof Pattern) {</b>
+<b class="nc">&nbsp;						pattern = ((Pattern) item).regexp();</b>
+&nbsp;					}
+<b class="nc">&nbsp;				}</b>
+&nbsp;			}
+<b class="nc">&nbsp;			defaultValue = rsDefault;</b>
+&nbsp;
+&nbsp;		}
+&nbsp;
+&nbsp;		private boolean isAssignableToNumber(Class&lt;?&gt; clazz) {
+<b class="nc">&nbsp;			return Number.class.isAssignableFrom(clazz)</b>
+<b class="nc">&nbsp;					|| int.class.isAssignableFrom(clazz)</b>
+<b class="nc">&nbsp;					|| short.class.isAssignableFrom(clazz)</b>
+<b class="nc">&nbsp;					|| long.class.isAssignableFrom(clazz)</b>
+<b class="nc">&nbsp;					|| float.class.isAssignableFrom(clazz)</b>
+<b class="nc">&nbsp;					|| double.class.isAssignableFrom(clazz);</b>
+&nbsp;		}
+&nbsp;
+&nbsp;
+&nbsp;		/**
+&nbsp;		 */
+&nbsp;		public boolean isContext() {
+<b class="nc">&nbsp;			return context;</b>
+&nbsp;		}
+&nbsp;
+&nbsp;		/**
+&nbsp;		 * Returns default value from annotation.
+&nbsp;		 *
+&nbsp;		 * @return default value from annotation
+&nbsp;		 */
+&nbsp;		public String getDefaultValue() {
+<b class="nc">&nbsp;			return defaultValue;</b>
+&nbsp;		}
+&nbsp;
+&nbsp;		public Integer getMinItems() {
+<b class="nc">&nbsp;			return minItems;</b>
+&nbsp;		}
+&nbsp;
+&nbsp;		public Integer getMaxItems() {
+<b class="nc">&nbsp;			return maxItems;</b>
+&nbsp;		}
+&nbsp;
+&nbsp;		public Boolean isRequired() {
+<b class="nc">&nbsp;			return required;</b>
+&nbsp;		}
+&nbsp;
+&nbsp;		public BigDecimal getMax() {
+<b class="nc">&nbsp;			return max;</b>
+&nbsp;		}
+&nbsp;
+&nbsp;		public boolean isMaxExclusive() {
+<b class="nc">&nbsp;			return maxExclusive;</b>
+&nbsp;		}
+&nbsp;
+&nbsp;		public BigDecimal getMin() {
+<b class="nc">&nbsp;			return min;</b>
+&nbsp;		}
+&nbsp;
+&nbsp;		public String getType() {
+<b class="nc">&nbsp;			return type;</b>
+&nbsp;		}
+&nbsp;
+&nbsp;		public String getFormat() {
+<b class="nc">&nbsp;			return format;</b>
+&nbsp;		}
+&nbsp;
+&nbsp;		public boolean isMinExclusive() {
+<b class="nc">&nbsp;			return minExclusive;</b>
+&nbsp;		}
+&nbsp;
+&nbsp;		public Integer getMinLength() {
+<b class="nc">&nbsp;			return minLength;</b>
+&nbsp;		}
+&nbsp;
+&nbsp;		public Integer getMaxLength() {
+<b class="nc">&nbsp;			return maxLength;</b>
+&nbsp;		}
+&nbsp;
+&nbsp;		public String getPattern() {
+<b class="nc">&nbsp;			return pattern;</b>
+&nbsp;		}
+&nbsp;
+&nbsp;		public Boolean getAllowEmptyValue() {
+<b class="nc">&nbsp;			return allowEmptyValue;</b>
+&nbsp;		}
+&nbsp;
+&nbsp;		public String getCollectionFormat() {
+<b class="nc">&nbsp;			return collectionFormat;</b>
+&nbsp;		}
+&nbsp;	}
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:26</div>
+</div>
+</body>
+</html>

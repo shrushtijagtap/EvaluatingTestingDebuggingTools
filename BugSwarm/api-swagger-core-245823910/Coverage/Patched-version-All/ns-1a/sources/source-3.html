@@ -1,0 +1,283 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Schema</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.oas.annotations.media</a>
+</div>
+
+<h1>Coverage Summary for Class: Schema (io.swagger.oas.annotations.media)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Schema</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/**
+&nbsp; * Copyright 2017 SmartBear Software
+&nbsp; * &lt;p&gt;
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; * &lt;p&gt;
+&nbsp; * http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; * &lt;p&gt;
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package io.swagger.oas.annotations.media;
+&nbsp;
+&nbsp;import io.swagger.oas.annotations.ExternalDocumentation;
+&nbsp;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.lang.annotation.Inherited;
+&nbsp;import java.lang.annotation.Retention;
+&nbsp;import java.lang.annotation.RetentionPolicy;
+&nbsp;import java.lang.annotation.Target;
+&nbsp;
+&nbsp;/**
+&nbsp; * 
+&nbsp; *
+&nbsp; * The Schema Object allows the definition of input and output data types. These types can be objects, but also primitives and arrays. This object is an extended subset of the JSON Schema Specification Wright Draft 00.
+&nbsp; **/
+&nbsp;
+&nbsp;
+&nbsp;@Target({ ElementType.FIELD,
+&nbsp;          ElementType.METHOD,
+&nbsp;          ElementType.PARAMETER,
+&nbsp;          ElementType.TYPE })
+&nbsp;@Retention(RetentionPolicy.RUNTIME)
+&nbsp;@Inherited
+&nbsp;public @interface Schema {
+&nbsp;  /**
+&nbsp;   * provides a java class as implementation for this schema.  When provided, additional information in the Schema annotation will augment the java class after introspection
+&nbsp;   **/
+&nbsp;  Class&lt;?&gt; implementation() default Void.class;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * provides a java class to be used to disallow matching properties.
+&nbsp;   **/
+&nbsp;  Class&lt;?&gt; not() default Void.class;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * provides an array of java class implementations which can be used to describe multiple acceptable schemas.  If more than one match the derived schemas, a validation error will occur
+&nbsp;   **/
+&nbsp;  Class&lt;?&gt;[] oneOf() default Void.class;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * provides an array of java class implementations which can be used to describe multiple acceptable schemas.  If any match, the schema will be considered valid
+&nbsp;   **/
+&nbsp;  Class&lt;?&gt;[] anyOf() default Void.class;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * the name of the schema or property
+&nbsp;   **/
+&nbsp;  String name() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * a title to explain the purpose of the schema
+&nbsp;   **/
+&nbsp;  String title() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * constrains a value such that when divided by the multipleOf, the remainder must be an integer.
+&nbsp;   **/
+&nbsp;  int multipleOf() default 0;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * sets the minimum numeric value for a property.  Ignored if the value is an empty string.
+&nbsp;   **/
+&nbsp;  String maximum() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * if true, makes the maximum value exclusive, or a less-than criteria
+&nbsp;   **/
+&nbsp;  boolean exclusiveMaximum() default false;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * if true, makes the maximum value exclusive, or a greater-than criteria
+&nbsp;   **/
+&nbsp;  String minimum() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * 
+&nbsp;   **/
+&nbsp;  boolean exclusiveMinimum() default false;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * sets the maximum length of a string value.  Ignored if the value is Integer.MIN_VALUE.
+&nbsp;   **/
+&nbsp;  int maxLength() default Integer.MIN_VALUE;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * sets the minimum length of a string value.  Ignored if the value is Integer.MAX_VALUE.
+&nbsp;   **/
+&nbsp;  int minLength() default Integer.MAX_VALUE;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * a pattern that the value must satisfy
+&nbsp;   **/
+&nbsp;  String pattern() default &quot;&quot;;
+&nbsp;
+&nbsp;//  /**
+&nbsp;//   * sets the maximum number of items in an array.  Ignored if value is Integer.MIN_VALUE.
+&nbsp;//   **/
+&nbsp;//  int maxItems() default Integer.MIN_VALUE;
+&nbsp;//
+&nbsp;//  /**
+&nbsp;//   * sets the minimum number of items in an array.  Ignored if value is Integer.MAX_VALUE.
+&nbsp;//   **/
+&nbsp;//  int minItems() default Integer.MAX_VALUE;
+&nbsp;//
+&nbsp;//  /**
+&nbsp;//   * determines whether an array of items will be unique
+&nbsp;//   **/
+&nbsp;//  boolean uniqueItems() default false;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * constrains the number of arbitrary properties when additionalProperties is defined.  Ignored if value is 0.
+&nbsp;   **/
+&nbsp;  int maxProperties() default 0;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * constrains the number of arbitrary properties when additionalProperties is defined.  Ignored if value is 0.
+&nbsp;   **/
+&nbsp;  int minProperties() default 0;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Allows multiple properties in an object to be marked as required
+&nbsp;   **/
+&nbsp;  String[] requiredProperties() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Mandates that the annotated item is required or not
+&nbsp;   **/
+&nbsp;  boolean required() default false;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * a description of the schema
+&nbsp;   **/
+&nbsp;  String description() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * provides an optional override for the format.  If a consumer is unaware of the meaning of the format, they shall fall back to using the basic type without format.  For example, if \&amp;quot;type: integer, format: int128\&amp;quot; were used to designate a very large integer, most consumers will not understand how to handle it, and fall back to simply \&amp;quot;type: integer\&amp;quot;
+&nbsp;   **/
+&nbsp;  String format() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * 
+&nbsp;   **/
+&nbsp;  String ref() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * if true, designates a value as possibly null
+&nbsp;   **/
+&nbsp;  boolean nullable() default false;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * sets whether the value can be modified by a consumer
+&nbsp;   **/
+&nbsp;  boolean readOnly() default false;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * sets whether a value can only be written to by a consumer
+&nbsp;   **/
+&nbsp;  boolean writeOnly() default false;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * provides an array examples of the schema.  When associated with a specific media type, the example string shall be parsed by the consumer to be treated as an object or an array.
+&nbsp;   **/
+&nbsp;  String[] examples() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * provides an example of the schema.  When associated with a specific media type, the example string shall be parsed by the consumer to be treated as an object or an array.
+&nbsp;   **/
+&nbsp;  String example() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * 
+&nbsp;   **/
+&nbsp;  ExternalDocumentation externalDocs() default @ExternalDocumentation();
+&nbsp;
+&nbsp;  /**
+&nbsp;   * 
+&nbsp;   **/
+&nbsp;  boolean deprecated() default false;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * provides an override for the basic type of the schema.  Must be a valid type per the OpenAPI Specification
+&nbsp;   **/
+&nbsp;  String type() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * provides a list of allowable values.
+&nbsp;   */
+&nbsp;  String[] _enum() default {&quot;&quot;};
+&nbsp;
+&nbsp;  /**
+&nbsp;   * provides a default value.
+&nbsp;   */
+&nbsp;  String _default() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * allows schema to be marked as hidden
+&nbsp;   */
+&nbsp;  boolean hidden() default false;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:26</div>
+</div>
+</body>
+</html>

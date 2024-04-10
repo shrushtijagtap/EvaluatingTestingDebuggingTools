@@ -1,0 +1,250 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderImplEnum2X4</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderImplEnum2X4 (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderImplEnum2X4</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    79.5%
+  </span>
+  <span class="absValue">
+    (58/73)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONB.Constants.*;
+&nbsp;
+&nbsp;final class ObjectReaderImplEnum2X4
+&nbsp;        implements ObjectReader {
+&nbsp;    final Class enumClass;
+&nbsp;    final long typeNameHash;
+&nbsp;    protected final Enum enum0;
+&nbsp;    protected final Enum enum1;
+&nbsp;
+&nbsp;    protected long enumNameHashCode00;
+&nbsp;    protected long enumNameHashCode01;
+&nbsp;    protected long enumNameHashCode10;
+&nbsp;    protected long enumNameHashCode11;
+&nbsp;
+<b class="fc">&nbsp;    public ObjectReaderImplEnum2X4(Class enumClass, Enum[] enums, Enum[] ordinalEnums, long[] enumNameHashCodes) {</b>
+<b class="fc">&nbsp;        this.enumClass = enumClass;</b>
+<b class="fc">&nbsp;        this.typeNameHash = Fnv.hashCode64(TypeUtils.getTypeName(enumClass));</b>
+<b class="fc">&nbsp;        this.enum0 = ordinalEnums[0];</b>
+<b class="fc">&nbsp;        this.enum1 = ordinalEnums[1];</b>
+&nbsp;
+<b class="fc">&nbsp;        int enum0Index = 0, enum1Index = 0;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; enumNameHashCodes.length; i++) {</b>
+<b class="fc">&nbsp;            long hash = enumNameHashCodes[i];</b>
+<b class="fc">&nbsp;            Enum e = enums[i];</b>
+<b class="fc">&nbsp;            if (e == enum0) {</b>
+<b class="fc">&nbsp;                if (enum0Index++ == 0) {</b>
+<b class="fc">&nbsp;                    enumNameHashCode00 = hash;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    enumNameHashCode01 = hash;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } else if (e == enum1) {</b>
+<b class="fc">&nbsp;                if (enum1Index++ == 0) {</b>
+<b class="fc">&nbsp;                    enumNameHashCode10 = hash;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    enumNameHashCode11 = hash;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class getObjectClass() {
+<b class="fc">&nbsp;        return enumClass;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Enum getEnumByHashCode(long hashCode) {
+<b class="fc">&nbsp;        if (hashCode == enumNameHashCode00) {</b>
+<b class="fc">&nbsp;            return enum0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (hashCode == enumNameHashCode01) {</b>
+<b class="nc">&nbsp;            return enum1;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="fc">&nbsp;        byte type = jsonReader.getType();</b>
+<b class="fc">&nbsp;        if (type == BC_TYPED_ANY) {</b>
+<b class="fc">&nbsp;            jsonReader.next();</b>
+<b class="fc">&nbsp;            long typeNameHash = jsonReader.readTypeHashCode();</b>
+<b class="fc">&nbsp;            if (typeNameHash != this.typeNameHash) {</b>
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;not support enumType : &quot; + jsonReader.getString()));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        Enum fieldValue;
+<b class="fc">&nbsp;        boolean isInt = (type &gt;= BC_INT32_NUM_MIN &amp;&amp; type &lt;= BC_INT32);</b>
+<b class="fc">&nbsp;        if (isInt) {</b>
+&nbsp;            int ordinal;
+<b class="fc">&nbsp;            if (type &lt;= BC_INT32_NUM_MAX) {</b>
+<b class="fc">&nbsp;                ordinal = type;</b>
+<b class="fc">&nbsp;                jsonReader.next();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                ordinal = jsonReader.readInt32Value();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (ordinal == 0) {</b>
+<b class="fc">&nbsp;                fieldValue = enum0;</b>
+<b class="fc">&nbsp;            } else if (ordinal == 1) {</b>
+<b class="fc">&nbsp;                fieldValue = enum1;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                fieldValue = null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else {</b>
+<b class="fc">&nbsp;            long hashCode = jsonReader.readValueHashCode();</b>
+<b class="fc">&nbsp;            if (enumNameHashCode00 == hashCode || enumNameHashCode01 == hashCode) {</b>
+<b class="fc">&nbsp;                fieldValue = enum0;</b>
+<b class="fc">&nbsp;            } else if (enumNameHashCode10 == hashCode || enumNameHashCode11 == hashCode) {</b>
+<b class="fc">&nbsp;                fieldValue = enum1;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                long hashCodeLCase = jsonReader.getNameHashCodeLCase();</b>
+<b class="nc">&nbsp;                if (enumNameHashCode00 == hashCodeLCase || enumNameHashCode01 == hashCodeLCase) {</b>
+<b class="nc">&nbsp;                    fieldValue = enum0;</b>
+<b class="nc">&nbsp;                } else if (enumNameHashCode10 == hashCodeLCase || enumNameHashCode11 == hashCodeLCase) {</b>
+<b class="nc">&nbsp;                    fieldValue = enum1;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    fieldValue = null;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return fieldValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+&nbsp;        Enum fieldValue;
+<b class="fc">&nbsp;        if (jsonReader.isInt()) {</b>
+<b class="fc">&nbsp;            int ordinal = jsonReader.readInt32Value();</b>
+<b class="fc">&nbsp;            if (ordinal == 0) {</b>
+<b class="fc">&nbsp;                fieldValue = enum0;</b>
+<b class="fc">&nbsp;            } else if (ordinal == 1) {</b>
+<b class="fc">&nbsp;                fieldValue = enum1;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                fieldValue = null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else {</b>
+<b class="fc">&nbsp;            long hashCode = jsonReader.readValueHashCode();</b>
+<b class="fc">&nbsp;            if (enumNameHashCode00 == hashCode || enumNameHashCode01 == hashCode) {</b>
+<b class="fc">&nbsp;                fieldValue = enum0;</b>
+<b class="fc">&nbsp;            } else if (enumNameHashCode10 == hashCode || enumNameHashCode11 == hashCode) {</b>
+<b class="fc">&nbsp;                fieldValue = enum1;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                long hashCodeLCase = jsonReader.getNameHashCodeLCase();</b>
+<b class="fc">&nbsp;                if (enumNameHashCode00 == hashCodeLCase || enumNameHashCode01 == hashCodeLCase) {</b>
+<b class="nc">&nbsp;                    fieldValue = enum0;</b>
+<b class="fc">&nbsp;                } else if (enumNameHashCode10 == hashCodeLCase || enumNameHashCode11 == hashCodeLCase) {</b>
+<b class="nc">&nbsp;                    fieldValue = enum1;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    fieldValue = null;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return fieldValue;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:11</div>
+</div>
+</body>
+</html>

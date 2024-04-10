@@ -1,0 +1,181 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StringToAny</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.function.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: StringToAny (com.alibaba.fastjson2.function.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StringToAny</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.function.impl;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONArray;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.List;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;public class StringToAny
+&nbsp;        implements Function {
+&nbsp;    final Object defaultValue;
+&nbsp;    final Class targetClass;
+&nbsp;
+<b class="nc">&nbsp;    public StringToAny(Class targetClass, Object defaultValue) {</b>
+<b class="nc">&nbsp;        this.targetClass = targetClass;</b>
+<b class="nc">&nbsp;        this.defaultValue = defaultValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object apply(Object from) {
+<b class="nc">&nbsp;        String str = (String) from;</b>
+<b class="nc">&nbsp;        if (str == null || &quot;null&quot;.equals(str) || &quot;&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;            return defaultValue;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (targetClass == byte.class || targetClass == Byte.class) {</b>
+<b class="nc">&nbsp;            return Byte.parseByte(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (targetClass == short.class || targetClass == Short.class) {</b>
+<b class="nc">&nbsp;            return Short.parseShort(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (targetClass == int.class || targetClass == Integer.class) {</b>
+<b class="nc">&nbsp;            return Integer.parseInt(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (targetClass == long.class || targetClass == Long.class) {</b>
+<b class="nc">&nbsp;            return Long.parseLong(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (targetClass == float.class || targetClass == Float.class) {</b>
+<b class="nc">&nbsp;            return Float.parseFloat(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (targetClass == double.class || targetClass == Double.class) {</b>
+<b class="nc">&nbsp;            return Double.parseDouble(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (targetClass == char.class || targetClass == Character.class) {</b>
+<b class="nc">&nbsp;            return str.charAt(0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (targetClass == boolean.class || targetClass == Boolean.class) {</b>
+<b class="nc">&nbsp;            return &quot;true&quot;.equals(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (targetClass == BigDecimal.class) {</b>
+<b class="nc">&nbsp;            return new BigDecimal(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (targetClass == BigInteger.class) {</b>
+<b class="nc">&nbsp;            return new BigInteger(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (targetClass == Collections.class || targetClass == List.class || targetClass == JSONArray.class) {</b>
+<b class="nc">&nbsp;            if (&quot;[]&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;                return new JSONArray();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;can not convert to &quot; + targetClass + &quot;, value : &quot; + str);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:08</div>
+</div>
+</body>
+</html>

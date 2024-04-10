@@ -1,0 +1,342 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > IPAddressValidator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.schema</a>
+</div>
+
+<h1>Coverage Summary for Class: IPAddressValidator (com.alibaba.fastjson2.schema)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">IPAddressValidator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (8/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    74.5%
+  </span>
+  <span class="absValue">
+    (102/137)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.schema;
+&nbsp;
+&nbsp;import java.nio.ByteBuffer;
+&nbsp;
+&nbsp;final class IPAddressValidator
+&nbsp;        implements FormatValidator {
+<b class="fc">&nbsp;    static final IPAddressValidator IPV6 = new IPAddressValidator(false);</b>
+<b class="fc">&nbsp;    static final IPAddressValidator IPV4 = new IPAddressValidator(true);</b>
+&nbsp;
+&nbsp;    final boolean v4;
+&nbsp;
+<b class="fc">&nbsp;    public IPAddressValidator(boolean v4) {</b>
+<b class="fc">&nbsp;        this.v4 = v4;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isValid(String address) {
+<b class="fc">&nbsp;        if (address == null) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (!isInetAddress(address)) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (v4) {</b>
+<b class="fc">&nbsp;            return address.indexOf(&#39;.&#39;) != -1;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return address.indexOf(&#39;:&#39;) != -1;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static boolean isInetAddress(String ip) {
+<b class="fc">&nbsp;        String ipString = ip;</b>
+&nbsp;        // Make a first pass to categorize the characters in this string.
+<b class="fc">&nbsp;        boolean hasColon = false;</b>
+<b class="fc">&nbsp;        boolean hasDot = false;</b>
+<b class="fc">&nbsp;        int percentIndex = -1;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; ipString.length(); i++) {</b>
+<b class="fc">&nbsp;            char c = ipString.charAt(i);</b>
+<b class="fc">&nbsp;            if (c == &#39;.&#39;) {</b>
+<b class="fc">&nbsp;                hasDot = true;</b>
+<b class="fc">&nbsp;            } else if (c == &#39;:&#39;) {</b>
+<b class="fc">&nbsp;                if (hasDot) {</b>
+<b class="nc">&nbsp;                    return false; // Colons must not appear after dots.</b>
+&nbsp;                }
+<b class="fc">&nbsp;                hasColon = true;</b>
+<b class="fc">&nbsp;            } else if (c == &#39;%&#39;) {</b>
+<b class="nc">&nbsp;                percentIndex = i;</b>
+<b class="nc">&nbsp;                break; // everything after a &#39;%&#39; is ignored (it&#39;s a Scope ID): http://superuser.com/a/99753</b>
+<b class="fc">&nbsp;            } else if (Character.digit(c, 16) == -1) {</b>
+<b class="fc">&nbsp;                return false; // Everything else must be a decimal or hex digit.</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Now decide which address family to parse.
+<b class="fc">&nbsp;        if (hasColon) {</b>
+<b class="fc">&nbsp;            if (hasDot) {</b>
+<b class="nc">&nbsp;                ipString = convertDottedQuadToHex(ipString);</b>
+<b class="nc">&nbsp;                if (ipString == null) {</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            if (percentIndex != -1) {</b>
+<b class="nc">&nbsp;                ipString = ipString.substring(0, percentIndex);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return numericFormatV6(ipString);</b>
+<b class="fc">&nbsp;        } else if (hasDot) {</b>
+<b class="fc">&nbsp;            if (percentIndex != -1) {</b>
+<b class="nc">&nbsp;                return false; // Scope IDs are not supported for IPV4</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return textToNumericFormatV4(ipString) != null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static String convertDottedQuadToHex(String ipString) {
+<b class="nc">&nbsp;        int lastColon = ipString.lastIndexOf(&#39;:&#39;);</b>
+<b class="nc">&nbsp;        String initialPart = ipString.substring(0, lastColon + 1);</b>
+<b class="nc">&nbsp;        String dottedQuad = ipString.substring(lastColon + 1);</b>
+<b class="nc">&nbsp;        byte[] quad = textToNumericFormatV4(dottedQuad);</b>
+<b class="nc">&nbsp;        if (quad == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String penultimate = Integer.toHexString(((quad[0] &amp; 0xff) &lt;&lt; 8) | (quad[1] &amp; 0xff));</b>
+<b class="nc">&nbsp;        String ultimate = Integer.toHexString(((quad[2] &amp; 0xff) &lt;&lt; 8) | (quad[3] &amp; 0xff));</b>
+<b class="nc">&nbsp;        return initialPart + penultimate + &quot;:&quot; + ultimate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static byte[] textToNumericFormatV4(String ipString) {
+<b class="fc">&nbsp;        int dotCount = 0;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; ipString.length(); i++) {</b>
+<b class="fc">&nbsp;            if (ipString.charAt(i) == &#39;.&#39;) {</b>
+<b class="fc">&nbsp;                dotCount++;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        if (dotCount + 1 != 4) {</b>
+<b class="nc">&nbsp;            return null; // Wrong number of parts</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        byte[] bytes = new byte[4];</b>
+<b class="fc">&nbsp;        int start = 0;</b>
+&nbsp;        // Iterate through the parts of the ip string.
+&nbsp;        // Invariant: start is always the beginning of an octet.
+<b class="fc">&nbsp;        for (int i = 0; i &lt; 4; i++) {</b>
+<b class="fc">&nbsp;            int end = ipString.indexOf(&#39;.&#39;, start);</b>
+<b class="fc">&nbsp;            if (end == -1) {</b>
+<b class="fc">&nbsp;                end = ipString.length();</b>
+&nbsp;            }
+&nbsp;            try {
+<b class="fc">&nbsp;                bytes[i] = parseOctet(ipString, start, end);</b>
+<b class="nc">&nbsp;            } catch (NumberFormatException ex) {</b>
+<b class="nc">&nbsp;                return null;</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            start = end + 1;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return bytes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean numericFormatV6(String ipString) {
+<b class="fc">&nbsp;        final int IPV6_PART_COUNT = 8;</b>
+&nbsp;
+&nbsp;        // An address can have [2..8] colons.
+<b class="fc">&nbsp;        int delimiterCount = 0;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; ipString.length(); i++) {</b>
+<b class="fc">&nbsp;            if (ipString.charAt(i) == &#39;:&#39;) {</b>
+<b class="fc">&nbsp;                delimiterCount++;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (delimiterCount &lt; 2 || delimiterCount &gt; IPV6_PART_COUNT) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int partsSkipped = IPV6_PART_COUNT - (delimiterCount + 1); // estimate; may be modified later</b>
+<b class="fc">&nbsp;        boolean hasSkip = false;</b>
+&nbsp;        // Scan for the appearance of ::, to mark a skip-format IPV6 string and adjust the partsSkipped
+&nbsp;        // estimate.
+<b class="fc">&nbsp;        for (int i = 0; i &lt; ipString.length() - 1; i++) {</b>
+<b class="fc">&nbsp;            if (ipString.charAt(i) == &#39;:&#39; &amp;&amp; ipString.charAt(i + 1) == &#39;:&#39;) {</b>
+<b class="fc">&nbsp;                if (hasSkip) {</b>
+<b class="nc">&nbsp;                    return false; // Can&#39;t have more than one ::</b>
+&nbsp;                }
+<b class="fc">&nbsp;                hasSkip = true;</b>
+<b class="fc">&nbsp;                partsSkipped++; // :: means we skipped an extra part in between the two delimiters.</b>
+<b class="fc">&nbsp;                if (i == 0) {</b>
+<b class="fc">&nbsp;                    partsSkipped++; // Begins with ::, so we skipped the part preceding the first :</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if (i == ipString.length() - 2) {</b>
+<b class="nc">&nbsp;                    partsSkipped++; // Ends with ::, so we skipped the part after the last :</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        if (ipString.charAt(0) == &#39;:&#39; &amp;&amp; ipString.charAt(1) != &#39;:&#39;) {</b>
+<b class="nc">&nbsp;            return false; // ^: requires ^::</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (ipString.charAt(ipString.length() - 1) == &#39;:&#39;</b>
+<b class="nc">&nbsp;                &amp;&amp; ipString.charAt(ipString.length() - 2) != &#39;:&#39;) {</b>
+<b class="nc">&nbsp;            return false; // :$ requires ::$</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (hasSkip &amp;&amp; partsSkipped &lt;= 0) {</b>
+<b class="nc">&nbsp;            return false; // :: must expand to at least one &#39;0&#39;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (!hasSkip &amp;&amp; delimiterCount + 1 != IPV6_PART_COUNT) {</b>
+<b class="nc">&nbsp;            return false; // Incorrect number of parts</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        ByteBuffer rawBytes = ByteBuffer.allocate(2 * IPV6_PART_COUNT);</b>
+&nbsp;        try {
+&nbsp;            // Iterate through the parts of the ip string.
+&nbsp;            // Invariant: start is always the beginning of a hextet, or the second &#39;:&#39; of the skip
+&nbsp;            // sequence &quot;::&quot;
+<b class="fc">&nbsp;            int start = 0;</b>
+<b class="fc">&nbsp;            if (ipString.charAt(0) == &#39;:&#39;) {</b>
+<b class="fc">&nbsp;                start = 1;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            while (start &lt; ipString.length()) {</b>
+<b class="fc">&nbsp;                int end = ipString.indexOf(&#39;:&#39;, start);</b>
+<b class="fc">&nbsp;                if (end == -1) {</b>
+<b class="fc">&nbsp;                    end = ipString.length();</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if (ipString.charAt(start) == &#39;:&#39;) {</b>
+&nbsp;                    // expand zeroes
+<b class="fc">&nbsp;                    for (int i = 0; i &lt; partsSkipped; i++) {</b>
+<b class="fc">&nbsp;                        rawBytes.putShort((short) 0);</b>
+&nbsp;                    }
+&nbsp;                } else {
+<b class="fc">&nbsp;                    rawBytes.putShort(parseHextet(ipString, start, end));</b>
+&nbsp;                }
+<b class="fc">&nbsp;                start = end + 1;</b>
+<b class="fc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } catch (NumberFormatException ex) {</b>
+<b class="nc">&nbsp;            return false;</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static byte parseOctet(String ipString, int start, int end) {
+&nbsp;        // Note: we already verified that this string contains only hex digits, but the string may still
+&nbsp;        // contain non-decimal characters.
+<b class="fc">&nbsp;        int length = end - start;</b>
+<b class="fc">&nbsp;        if (length &lt;= 0 || length &gt; 3) {</b>
+<b class="nc">&nbsp;            throw new NumberFormatException();</b>
+&nbsp;        }
+&nbsp;        // Disallow leading zeroes, because no clear standard exists on
+&nbsp;        // whether these should be interpreted as decimal or octal.
+<b class="fc">&nbsp;        if (length &gt; 1 &amp;&amp; ipString.charAt(start) == &#39;0&#39;) {</b>
+<b class="nc">&nbsp;            throw new NumberFormatException();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        int octet = 0;</b>
+<b class="fc">&nbsp;        for (int i = start; i &lt; end; i++) {</b>
+<b class="fc">&nbsp;            octet *= 10;</b>
+<b class="fc">&nbsp;            int digit = Character.digit(ipString.charAt(i), 10);</b>
+<b class="fc">&nbsp;            if (digit &lt; 0) {</b>
+<b class="nc">&nbsp;                throw new NumberFormatException();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            octet += digit;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (octet &gt; 255) {</b>
+<b class="nc">&nbsp;            throw new NumberFormatException();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return (byte) octet;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static short parseHextet(String ipString, int start, int end) {
+&nbsp;        // Note: we already verified that this string contains only hex digits.
+<b class="fc">&nbsp;        int length = end - start;</b>
+<b class="fc">&nbsp;        if (length &lt;= 0 || length &gt; 4) {</b>
+<b class="nc">&nbsp;            throw new NumberFormatException();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        int hextet = 0;</b>
+<b class="fc">&nbsp;        for (int i = start; i &lt; end; i++) {</b>
+<b class="fc">&nbsp;            hextet = hextet &lt;&lt; 4;</b>
+<b class="fc">&nbsp;            hextet |= Character.digit(ipString.charAt(i), 16);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return (short) hextet;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:45</div>
+</div>
+</body>
+</html>

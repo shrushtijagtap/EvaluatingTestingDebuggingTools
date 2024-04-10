@@ -1,0 +1,393 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReflectionUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.util</a>
+</div>
+
+<h1>Coverage Summary for Class: ReflectionUtils (io.swagger.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReflectionUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/122)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package io.swagger.util;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;import com.google.common.collect.Sets;
+&nbsp;import org.apache.commons.lang3.ArrayUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import com.fasterxml.jackson.databind.type.TypeFactory;
+&nbsp;
+<b class="nc">&nbsp;public class ReflectionUtils {</b>
+<b class="nc">&nbsp;    private static final Logger LOGGER = LoggerFactory.getLogger(ReflectionUtils.class);</b>
+&nbsp;
+&nbsp;    public static Type typeFromString(String type) {
+<b class="nc">&nbsp;        final PrimitiveType primitive = PrimitiveType.fromName(type);</b>
+<b class="nc">&nbsp;        if (primitive != null) {</b>
+<b class="nc">&nbsp;            return primitive.getKeyClass();</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="nc">&nbsp;            return loadClassByName(type);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            LOGGER.error(String.format(&quot;Failed to resolve &#39;%s&#39; into class&quot;, type), e);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Load Class by class name. If class not found in it&#39;s Class loader or one of the parent class loaders - delegate to the Thread&#39;s ContextClassLoader
+&nbsp;     *
+&nbsp;     * @param className Canonical class name
+&nbsp;     * @return Class definition of className
+&nbsp;     * @throws ClassNotFoundException
+&nbsp;     */
+&nbsp;    public static Class&lt;?&gt; loadClassByName(String className) throws ClassNotFoundException {
+&nbsp;        try {
+<b class="nc">&nbsp;            return Class.forName(className);</b>
+<b class="nc">&nbsp;        } catch (ClassNotFoundException e) {</b>
+<b class="nc">&nbsp;            return Thread.currentThread().getContextClassLoader().loadClass(className);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if the method methodToFind is the overridden method from the superclass or superinterface.
+&nbsp;     *
+&nbsp;     * @param methodToFind is method to check
+&nbsp;     * @param cls          is method class
+&nbsp;     * @return true if the method is overridden method
+&nbsp;     */
+&nbsp;    public static boolean isOverriddenMethod(Method methodToFind, Class&lt;?&gt; cls) {
+<b class="nc">&nbsp;        Set&lt;Class&lt;?&gt;&gt; superClasses = Sets.newHashSet(cls.getInterfaces());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (cls.getSuperclass() != null) {</b>
+<b class="nc">&nbsp;            superClasses.add(cls.getSuperclass());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (Class&lt;?&gt; superClass : superClasses) {</b>
+<b class="nc">&nbsp;            if (superClass != null &amp;&amp; !(superClass.equals(Object.class))) {</b>
+<b class="nc">&nbsp;                for (Method method : superClass.getMethods()) {</b>
+<b class="nc">&nbsp;                    if (method.getName().equals(methodToFind.getName()) &amp;&amp; method.getReturnType().isAssignableFrom(methodToFind.getReturnType())</b>
+<b class="nc">&nbsp;                            &amp;&amp; Arrays.equals(method.getParameterTypes(), methodToFind.getParameterTypes()) &amp;&amp; !Arrays.equals(method.getGenericParameterTypes(), methodToFind.getGenericParameterTypes())) {</b>
+<b class="nc">&nbsp;                        return true;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                if (isOverriddenMethod(methodToFind, superClass)) {</b>
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns overridden method from superclass if it exists. If method was not found returns null.
+&nbsp;     *
+&nbsp;     * @param method is method to find
+&nbsp;     * @return overridden method from superclass
+&nbsp;     */
+&nbsp;    public static Method getOverriddenMethod(Method method) {
+<b class="nc">&nbsp;        Class&lt;?&gt; declaringClass = method.getDeclaringClass();</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; superClass = declaringClass.getSuperclass();</b>
+<b class="nc">&nbsp;        Method result = null;</b>
+<b class="nc">&nbsp;        if (superClass != null &amp;&amp; !(superClass.equals(Object.class))) {</b>
+<b class="nc">&nbsp;            result = findMethod(method, superClass);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (result == null) {</b>
+<b class="nc">&nbsp;            for (Class&lt;?&gt; anInterface : declaringClass.getInterfaces()) {</b>
+<b class="nc">&nbsp;                result = findMethod(method, anInterface);</b>
+<b class="nc">&nbsp;                if (result != null) {</b>
+<b class="nc">&nbsp;                    return result;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Searches the method methodToFind in given class cls. If the method is found returns it, else return null.
+&nbsp;     *
+&nbsp;     * @param methodToFind is the method to search
+&nbsp;     * @param cls          is the class or interface where to search
+&nbsp;     * @return method if it is found
+&nbsp;     */
+&nbsp;    public static Method findMethod(Method methodToFind, Class&lt;?&gt; cls) {
+<b class="nc">&nbsp;        if (cls == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String methodToSearch = methodToFind.getName();</b>
+<b class="nc">&nbsp;        Class&lt;?&gt;[] soughtForParameterType = methodToFind.getParameterTypes();</b>
+<b class="nc">&nbsp;        Type[] soughtForGenericParameterType = methodToFind.getGenericParameterTypes();</b>
+<b class="nc">&nbsp;        for (Method method : cls.getMethods()) {</b>
+<b class="nc">&nbsp;            if (method.getName().equals(methodToSearch) &amp;&amp; method.getReturnType().isAssignableFrom(methodToFind.getReturnType())) {</b>
+<b class="nc">&nbsp;                Class&lt;?&gt;[] srcParameterTypes = method.getParameterTypes();</b>
+<b class="nc">&nbsp;                Type[] srcGenericParameterTypes = method.getGenericParameterTypes();</b>
+<b class="nc">&nbsp;                if (soughtForParameterType.length == srcParameterTypes.length &amp;&amp;</b>
+<b class="nc">&nbsp;                        soughtForGenericParameterType.length == srcGenericParameterTypes.length) {</b>
+<b class="nc">&nbsp;                    if (hasIdenticalParameters(srcParameterTypes, soughtForParameterType, srcGenericParameterTypes, soughtForGenericParameterType)) {</b>
+<b class="nc">&nbsp;                        return method;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean hasIdenticalParameters(Class&lt;?&gt;[] srcParameterTypes, Class&lt;?&gt;[] soughtForParameterType,
+&nbsp;                                                  Type[] srcGenericParameterTypes, Type[] soughtForGenericParameterType) {
+<b class="nc">&nbsp;        for (int j = 0; j &lt; soughtForParameterType.length; j++) {</b>
+<b class="nc">&nbsp;            Class&lt;?&gt; parameterType = soughtForParameterType[j];</b>
+<b class="nc">&nbsp;            if (!(srcParameterTypes[j].equals(parameterType) || (!srcGenericParameterTypes[j].equals(soughtForGenericParameterType[j]) &amp;&amp;</b>
+<b class="nc">&nbsp;                    srcParameterTypes[j].isAssignableFrom(parameterType)))) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isInject(List&lt;Annotation&gt; annotations) {
+<b class="nc">&nbsp;        for (Annotation annotation : annotations) {</b>
+&nbsp;            // use string name to avoid additional dependencies
+<b class="nc">&nbsp;            if (&quot;javax.inject.Inject&quot;.equals(annotation.annotationType().getName())) {</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isConstructorCompatible(Constructor&lt;?&gt; constructor) {
+<b class="nc">&nbsp;        if (!Modifier.isPublic(constructor.getModifiers())) {</b>
+<b class="nc">&nbsp;            final int access = Modifier.PUBLIC | Modifier.PROTECTED | Modifier.PRIVATE;</b>
+<b class="nc">&nbsp;            return constructor.getParameterTypes().length == 0 &amp;&amp;</b>
+<b class="nc">&nbsp;                    (constructor.getDeclaringClass().getModifiers() &amp; access) == constructor.getModifiers();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the list of declared fields from the class &lt;code&gt;cls&lt;/code&gt; and its superclasses
+&nbsp;     * excluding &lt;code&gt;Object&lt;/code&gt; class. If the field from child class hides the field from superclass,
+&nbsp;     * the field from superclass won&#39;t be added to the result list.
+&nbsp;     *
+&nbsp;     * @param cls is the processing class
+&nbsp;     * @return list of Fields
+&nbsp;     */
+&nbsp;    public static List&lt;Field&gt; getDeclaredFields(Class&lt;?&gt; cls) {
+<b class="nc">&nbsp;        if (cls == null || Object.class.equals(cls)) {</b>
+<b class="nc">&nbsp;            return Collections.emptyList();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        final List&lt;Field&gt; fields = new ArrayList&lt;Field&gt;();</b>
+<b class="nc">&nbsp;        final Set&lt;String&gt; fieldNames = new HashSet&lt;String&gt;();</b>
+<b class="nc">&nbsp;        for (Field field : cls.getDeclaredFields()) {</b>
+<b class="nc">&nbsp;            fields.add(field);</b>
+<b class="nc">&nbsp;            fieldNames.add(field.getName());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        for (Field field : getDeclaredFields(cls.getSuperclass())) {</b>
+<b class="nc">&nbsp;            if (!fieldNames.contains(field.getName())) {</b>
+<b class="nc">&nbsp;                fields.add(field);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return fields;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an annotation by type from a method.
+&nbsp;     *
+&nbsp;     * @param method          is the method to find
+&nbsp;     * @param annotationClass is the type of annotation
+&nbsp;     * @param &lt;A&gt;             is the type of annotation
+&nbsp;     * @return annotation if it is found
+&nbsp;     */
+&nbsp;    public static &lt;A extends Annotation&gt; A getAnnotation(Method method, Class&lt;A&gt; annotationClass) {
+<b class="nc">&nbsp;        A annotation = method.getAnnotation(annotationClass);</b>
+<b class="nc">&nbsp;        if (annotation == null) {</b>
+<b class="nc">&nbsp;            for (Annotation metaAnnotation : method.getAnnotations()) {</b>
+<b class="nc">&nbsp;                annotation = metaAnnotation.annotationType().getAnnotation(annotationClass);</b>
+<b class="nc">&nbsp;                if (annotation != null) {</b>
+<b class="nc">&nbsp;                    return annotation;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            Method superclassMethod = getOverriddenMethod(method);</b>
+<b class="nc">&nbsp;            if (superclassMethod != null) {</b>
+<b class="nc">&nbsp;                annotation = getAnnotation(superclassMethod, annotationClass);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return annotation;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;A extends Annotation&gt; A getAnnotation(Class&lt;?&gt; cls, Class&lt;A&gt; annotationClass) {
+<b class="nc">&nbsp;        A annotation = cls.getAnnotation(annotationClass);</b>
+<b class="nc">&nbsp;        if (annotation == null) {</b>
+<b class="nc">&nbsp;            for (Annotation metaAnnotation : cls.getAnnotations()) {</b>
+<b class="nc">&nbsp;                annotation = metaAnnotation.annotationType().getAnnotation(annotationClass);</b>
+<b class="nc">&nbsp;                if (annotation != null) {</b>
+<b class="nc">&nbsp;                    return annotation;</b>
+&nbsp;                }
+&nbsp;                ;
+&nbsp;            }
+<b class="nc">&nbsp;            Class&lt;?&gt; superClass = cls.getSuperclass();</b>
+<b class="nc">&nbsp;            if (superClass != null &amp;&amp; !(superClass.equals(Object.class))) {</b>
+<b class="nc">&nbsp;                annotation = getAnnotation(superClass, annotationClass);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (annotation == null) {</b>
+<b class="nc">&nbsp;            for (Class&lt;?&gt; anInterface : cls.getInterfaces()) {</b>
+<b class="nc">&nbsp;                for (Annotation metaAnnotation : anInterface.getAnnotations()) {</b>
+<b class="nc">&nbsp;                    annotation = metaAnnotation.annotationType().getAnnotation(annotationClass);</b>
+<b class="nc">&nbsp;                    if (annotation != null) {</b>
+<b class="nc">&nbsp;                        return annotation;</b>
+&nbsp;                    }
+&nbsp;                    ;
+&nbsp;                }
+<b class="nc">&nbsp;                annotation = getAnnotation(anInterface, annotationClass);</b>
+<b class="nc">&nbsp;                if (annotation != null) {</b>
+<b class="nc">&nbsp;                    return annotation;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return annotation;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Annotation[][] getParameterAnnotations(Method method) {
+<b class="nc">&nbsp;        Annotation[][] methodAnnotations = method.getParameterAnnotations();</b>
+<b class="nc">&nbsp;        Method overriddenmethod = getOverriddenMethod(method);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (overriddenmethod != null) {</b>
+<b class="nc">&nbsp;            Annotation[][] overriddenAnnotations = overriddenmethod</b>
+<b class="nc">&nbsp;                    .getParameterAnnotations();</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; methodAnnotations.length; i++) {</b>
+<b class="nc">&nbsp;                List&lt;Type&gt; types = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                for (int j = 0; j &lt; methodAnnotations[i].length; j++) {</b>
+<b class="nc">&nbsp;                    types.add(methodAnnotations[i][j].annotationType());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                for (int j = 0; j &lt; overriddenAnnotations[i].length; j++) {</b>
+<b class="nc">&nbsp;                    if (!types.contains(overriddenAnnotations[i][j]</b>
+<b class="nc">&nbsp;                            .annotationType())) {</b>
+<b class="nc">&nbsp;                        methodAnnotations[i] = ArrayUtils.add(</b>
+<b class="nc">&nbsp;                                methodAnnotations[i],</b>
+<b class="nc">&nbsp;                                overriddenAnnotations[i][j]);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return methodAnnotations;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if the type is void.
+&nbsp;     *
+&nbsp;     * @param type is the type to check
+&nbsp;     * @return true if the type is void
+&nbsp;     */
+&nbsp;    public static boolean isVoid(Type type) {
+<b class="nc">&nbsp;        final Class&lt;?&gt; cls = TypeFactory.defaultInstance().constructType(type).getRawClass();</b>
+<b class="nc">&nbsp;        return Void.class.isAssignableFrom(cls) || Void.TYPE.isAssignableFrom(cls);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:23</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,945 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Schema</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.oas.models.media</a>
+</div>
+
+<h1>Coverage Summary for Class: Schema (io.swagger.oas.models.media)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Schema</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/106)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/262)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/**
+&nbsp; * Copyright 2017 SmartBear Software
+&nbsp; * &lt;p&gt;
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; * &lt;p&gt;
+&nbsp; * http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; * &lt;p&gt;
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package io.swagger.oas.models.media;
+&nbsp;
+&nbsp;import io.swagger.oas.models.ExternalDocumentation;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;/**
+&nbsp; * Schema
+&nbsp; *
+&nbsp; * @see &quot;https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#schemaObject&quot;
+&nbsp; */
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;public class Schema&lt;T&gt; {</b>
+&nbsp;    protected T _default;
+&nbsp;
+<b class="nc">&nbsp;    private String title = null;</b>
+<b class="nc">&nbsp;    private BigDecimal multipleOf = null;</b>
+<b class="nc">&nbsp;    private BigDecimal maximum = null;</b>
+<b class="nc">&nbsp;    private Boolean exclusiveMaximum = null;</b>
+<b class="nc">&nbsp;    private BigDecimal minimum = null;</b>
+<b class="nc">&nbsp;    private Boolean exclusiveMinimum = null;</b>
+<b class="nc">&nbsp;    private Integer maxLength = null;</b>
+<b class="nc">&nbsp;    private Integer minLength = null;</b>
+<b class="nc">&nbsp;    private String pattern = null;</b>
+<b class="nc">&nbsp;    private Integer maxItems = null;</b>
+<b class="nc">&nbsp;    private Integer minItems = null;</b>
+<b class="nc">&nbsp;    private Boolean uniqueItems = null;</b>
+<b class="nc">&nbsp;    private Integer maxProperties = null;</b>
+<b class="nc">&nbsp;    private Integer minProperties = null;</b>
+<b class="nc">&nbsp;    private List&lt;String&gt; required = null;</b>
+<b class="nc">&nbsp;    private String type = null;</b>
+<b class="nc">&nbsp;    private Schema not = null;</b>
+<b class="nc">&nbsp;    private Map&lt;String, Schema&gt; properties = null;</b>
+<b class="nc">&nbsp;    private Schema additionalProperties = null;</b>
+<b class="nc">&nbsp;    private String description = null;</b>
+<b class="nc">&nbsp;    private String format = null;</b>
+<b class="nc">&nbsp;    private String $ref = null;</b>
+<b class="nc">&nbsp;    private Boolean nullable = null;</b>
+<b class="nc">&nbsp;    private Boolean readOnly = null;</b>
+<b class="nc">&nbsp;    private Boolean writeOnly = null;</b>
+<b class="nc">&nbsp;    protected T example = null;</b>
+<b class="nc">&nbsp;    private ExternalDocumentation externalDocs = null;</b>
+<b class="nc">&nbsp;    private Boolean deprecated = null;</b>
+<b class="nc">&nbsp;    private XML xml = null;</b>
+<b class="nc">&nbsp;    private java.util.Map&lt;String, Object&gt; extensions = null;</b>
+<b class="nc">&nbsp;    protected List&lt;T&gt; _enum = null;</b>
+<b class="nc">&nbsp;    private Discriminator discriminator = null;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the discriminator property from a AllOfSchema instance.
+&nbsp;     *
+&nbsp;     * @return Discriminator discriminator
+&nbsp;     **/
+&nbsp;
+&nbsp;    public Discriminator getDiscriminator() {
+<b class="nc">&nbsp;        return discriminator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDiscriminator(Discriminator discriminator) {
+<b class="nc">&nbsp;        this.discriminator = discriminator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema discriminator(Discriminator discriminator) {
+<b class="nc">&nbsp;        this.discriminator = discriminator;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the title property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return String title
+&nbsp;     **/
+&nbsp;
+&nbsp;    public String getTitle() {
+<b class="nc">&nbsp;        return title;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setTitle(String title) {
+<b class="nc">&nbsp;        this.title = title;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema title(String title) {
+<b class="nc">&nbsp;        this.title = title;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the _default property from a StringSchema instance.
+&nbsp;     *
+&nbsp;     * @return String _default
+&nbsp;     **/
+&nbsp;
+&nbsp;    public T getDefault() {
+<b class="nc">&nbsp;        return _default;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDefault(Object _default) {
+<b class="nc">&nbsp;        this._default = cast(_default);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected T cast(Object value) {
+<b class="nc">&nbsp;        return (T) value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;T&gt; getEnum() {
+<b class="nc">&nbsp;        return _enum;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEnum(List&lt;T&gt; _enum) {
+<b class="nc">&nbsp;        this._enum = _enum;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addEnumItemObject(T _enumItem) {
+<b class="nc">&nbsp;        if (this._enum == null) {</b>
+<b class="nc">&nbsp;            this._enum = new ArrayList&lt;&gt;();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this._enum.add(cast(_enumItem));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the multipleOf property from a Schema instance.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * minimum: 0
+&nbsp;     *
+&nbsp;     * @return BigDecimal multipleOf
+&nbsp;     **/
+&nbsp;
+&nbsp;    public BigDecimal getMultipleOf() {
+<b class="nc">&nbsp;        return multipleOf;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMultipleOf(BigDecimal multipleOf) {
+<b class="nc">&nbsp;        this.multipleOf = multipleOf;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema multipleOf(BigDecimal multipleOf) {
+<b class="nc">&nbsp;        this.multipleOf = multipleOf;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the maximum property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return BigDecimal maximum
+&nbsp;     **/
+&nbsp;
+&nbsp;    public BigDecimal getMaximum() {
+<b class="nc">&nbsp;        return maximum;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMaximum(BigDecimal maximum) {
+<b class="nc">&nbsp;        this.maximum = maximum;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema maximum(BigDecimal maximum) {
+<b class="nc">&nbsp;        this.maximum = maximum;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the exclusiveMaximum property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return Boolean exclusiveMaximum
+&nbsp;     **/
+&nbsp;
+&nbsp;    public Boolean getExclusiveMaximum() {
+<b class="nc">&nbsp;        return exclusiveMaximum;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setExclusiveMaximum(Boolean exclusiveMaximum) {
+<b class="nc">&nbsp;        this.exclusiveMaximum = exclusiveMaximum;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema exclusiveMaximum(Boolean exclusiveMaximum) {
+<b class="nc">&nbsp;        this.exclusiveMaximum = exclusiveMaximum;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the minimum property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return BigDecimal minimum
+&nbsp;     **/
+&nbsp;
+&nbsp;    public BigDecimal getMinimum() {
+<b class="nc">&nbsp;        return minimum;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMinimum(BigDecimal minimum) {
+<b class="nc">&nbsp;        this.minimum = minimum;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema minimum(BigDecimal minimum) {
+<b class="nc">&nbsp;        this.minimum = minimum;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the exclusiveMinimum property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return Boolean exclusiveMinimum
+&nbsp;     **/
+&nbsp;
+&nbsp;    public Boolean getExclusiveMinimum() {
+<b class="nc">&nbsp;        return exclusiveMinimum;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setExclusiveMinimum(Boolean exclusiveMinimum) {
+<b class="nc">&nbsp;        this.exclusiveMinimum = exclusiveMinimum;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema exclusiveMinimum(Boolean exclusiveMinimum) {
+<b class="nc">&nbsp;        this.exclusiveMinimum = exclusiveMinimum;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the maxLength property from a Schema instance.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * minimum: 0
+&nbsp;     *
+&nbsp;     * @return Integer maxLength
+&nbsp;     **/
+&nbsp;
+&nbsp;    public Integer getMaxLength() {
+<b class="nc">&nbsp;        return maxLength;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMaxLength(Integer maxLength) {
+<b class="nc">&nbsp;        this.maxLength = maxLength;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema maxLength(Integer maxLength) {
+<b class="nc">&nbsp;        this.maxLength = maxLength;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the minLength property from a Schema instance.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * minimum: 0
+&nbsp;     *
+&nbsp;     * @return Integer minLength
+&nbsp;     **/
+&nbsp;
+&nbsp;    public Integer getMinLength() {
+<b class="nc">&nbsp;        return minLength;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMinLength(Integer minLength) {
+<b class="nc">&nbsp;        this.minLength = minLength;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema minLength(Integer minLength) {
+<b class="nc">&nbsp;        this.minLength = minLength;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the pattern property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return String pattern
+&nbsp;     **/
+&nbsp;
+&nbsp;    public String getPattern() {
+<b class="nc">&nbsp;        return pattern;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPattern(String pattern) {
+<b class="nc">&nbsp;        this.pattern = pattern;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema pattern(String pattern) {
+<b class="nc">&nbsp;        this.pattern = pattern;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the maxItems property from a Schema instance.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * minimum: 0
+&nbsp;     *
+&nbsp;     * @return Integer maxItems
+&nbsp;     **/
+&nbsp;
+&nbsp;    public Integer getMaxItems() {
+<b class="nc">&nbsp;        return maxItems;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMaxItems(Integer maxItems) {
+<b class="nc">&nbsp;        this.maxItems = maxItems;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema maxItems(Integer maxItems) {
+<b class="nc">&nbsp;        this.maxItems = maxItems;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the minItems property from a Schema instance.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * minimum: 0
+&nbsp;     *
+&nbsp;     * @return Integer minItems
+&nbsp;     **/
+&nbsp;
+&nbsp;    public Integer getMinItems() {
+<b class="nc">&nbsp;        return minItems;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMinItems(Integer minItems) {
+<b class="nc">&nbsp;        this.minItems = minItems;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema minItems(Integer minItems) {
+<b class="nc">&nbsp;        this.minItems = minItems;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the uniqueItems property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return Boolean uniqueItems
+&nbsp;     **/
+&nbsp;
+&nbsp;    public Boolean getUniqueItems() {
+<b class="nc">&nbsp;        return uniqueItems;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setUniqueItems(Boolean uniqueItems) {
+<b class="nc">&nbsp;        this.uniqueItems = uniqueItems;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema uniqueItems(Boolean uniqueItems) {
+<b class="nc">&nbsp;        this.uniqueItems = uniqueItems;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the maxProperties property from a Schema instance.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * minimum: 0
+&nbsp;     *
+&nbsp;     * @return Integer maxProperties
+&nbsp;     **/
+&nbsp;
+&nbsp;    public Integer getMaxProperties() {
+<b class="nc">&nbsp;        return maxProperties;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMaxProperties(Integer maxProperties) {
+<b class="nc">&nbsp;        this.maxProperties = maxProperties;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema maxProperties(Integer maxProperties) {
+<b class="nc">&nbsp;        this.maxProperties = maxProperties;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the minProperties property from a Schema instance.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * minimum: 0
+&nbsp;     *
+&nbsp;     * @return Integer minProperties
+&nbsp;     **/
+&nbsp;
+&nbsp;    public Integer getMinProperties() {
+<b class="nc">&nbsp;        return minProperties;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMinProperties(Integer minProperties) {
+<b class="nc">&nbsp;        this.minProperties = minProperties;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema minProperties(Integer minProperties) {
+<b class="nc">&nbsp;        this.minProperties = minProperties;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the required property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return List&amp;lt;String&amp;gt; required
+&nbsp;     **/
+&nbsp;
+&nbsp;    public List&lt;String&gt; getRequired() {
+<b class="nc">&nbsp;        return required;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setRequired(List&lt;String&gt; required) {
+<b class="nc">&nbsp;        List&lt;String&gt; list = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        if (required != null) {</b>
+<b class="nc">&nbsp;            for (String req : required) {</b>
+<b class="nc">&nbsp;                if (this.properties == null) {</b>
+<b class="nc">&nbsp;                    list.add(req);</b>
+<b class="nc">&nbsp;                } else if (this.properties.containsKey(req)) {</b>
+<b class="nc">&nbsp;                    list.add(req);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Collections.sort(list);</b>
+<b class="nc">&nbsp;        if (list.size() == 0) {</b>
+<b class="nc">&nbsp;            list = null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.required = list;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema required(List&lt;String&gt; required) {
+<b class="nc">&nbsp;        this.required = required;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema addRequiredItem(String requiredItem) {
+<b class="nc">&nbsp;        if (this.required == null) {</b>
+<b class="nc">&nbsp;            this.required = new ArrayList&lt;String&gt;();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.required.add(requiredItem);</b>
+<b class="nc">&nbsp;        Collections.sort(required);</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the type property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return String type
+&nbsp;     **/
+&nbsp;
+&nbsp;    public String getType() {
+<b class="nc">&nbsp;        return type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setType(String type) {
+<b class="nc">&nbsp;        this.type = type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema type(String type) {
+<b class="nc">&nbsp;        this.type = type;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the not property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return Schema not
+&nbsp;     **/
+&nbsp;
+&nbsp;    public Schema getNot() {
+<b class="nc">&nbsp;        return not;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setNot(Schema not) {
+<b class="nc">&nbsp;        this.not = not;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema not(Schema not) {
+<b class="nc">&nbsp;        this.not = not;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the properties property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return Map&amp;lt;String, Schema&amp;gt; properties
+&nbsp;     **/
+&nbsp;
+&nbsp;    public Map&lt;String, Schema&gt; getProperties() {
+<b class="nc">&nbsp;        return properties;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setProperties(Map&lt;String, Schema&gt; properties) {
+<b class="nc">&nbsp;        this.properties = properties;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema properties(Map&lt;String, Schema&gt; properties) {
+<b class="nc">&nbsp;        this.properties = properties;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema addProperties(String key, Schema propertiesItem) {
+<b class="nc">&nbsp;        if (this.properties == null) {</b>
+<b class="nc">&nbsp;            this.properties = new LinkedHashMap&lt;String, Schema&gt;();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.properties.put(key, propertiesItem);</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the additionalProperties property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return Schema additionalProperties
+&nbsp;     **/
+&nbsp;
+&nbsp;    public Schema getAdditionalProperties() {
+<b class="nc">&nbsp;        return additionalProperties;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAdditionalProperties(Schema additionalProperties) {
+<b class="nc">&nbsp;        this.additionalProperties = additionalProperties;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema additionalProperties(Schema additionalProperties) {
+<b class="nc">&nbsp;        this.additionalProperties = additionalProperties;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the description property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return String description
+&nbsp;     **/
+&nbsp;
+&nbsp;    public String getDescription() {
+<b class="nc">&nbsp;        return description;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDescription(String description) {
+<b class="nc">&nbsp;        this.description = description;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema description(String description) {
+<b class="nc">&nbsp;        this.description = description;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the format property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return String format
+&nbsp;     **/
+&nbsp;
+&nbsp;    public String getFormat() {
+<b class="nc">&nbsp;        return format;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFormat(String format) {
+<b class="nc">&nbsp;        this.format = format;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema format(String format) {
+<b class="nc">&nbsp;        this.format = format;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the $ref property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return String $ref
+&nbsp;     **/
+&nbsp;    public String get$ref() {
+<b class="nc">&nbsp;        return $ref;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void set$ref(String $ref) {
+<b class="nc">&nbsp;        if ($ref != null &amp;&amp; ($ref.indexOf(&quot;.&quot;) == -1 &amp;&amp; $ref.indexOf(&quot;/&quot;) == -1)) {</b>
+<b class="nc">&nbsp;            $ref = &quot;#/components/schemas/&quot; + $ref;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.$ref = $ref;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema $ref(String $ref) {
+&nbsp;
+<b class="nc">&nbsp;        set$ref($ref);</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the nullable property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return Boolean nullable
+&nbsp;     **/
+&nbsp;
+&nbsp;    public Boolean getNullable() {
+<b class="nc">&nbsp;        return nullable;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setNullable(Boolean nullable) {
+<b class="nc">&nbsp;        this.nullable = nullable;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema nullable(Boolean nullable) {
+<b class="nc">&nbsp;        this.nullable = nullable;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the readOnly property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return Boolean readOnly
+&nbsp;     **/
+&nbsp;
+&nbsp;    public Boolean getReadOnly() {
+<b class="nc">&nbsp;        return readOnly;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setReadOnly(Boolean readOnly) {
+<b class="nc">&nbsp;        this.readOnly = readOnly;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema readOnly(Boolean readOnly) {
+<b class="nc">&nbsp;        this.readOnly = readOnly;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the writeOnly property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return Boolean writeOnly
+&nbsp;     **/
+&nbsp;
+&nbsp;    public Boolean getWriteOnly() {
+<b class="nc">&nbsp;        return writeOnly;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setWriteOnly(Boolean writeOnly) {
+<b class="nc">&nbsp;        this.writeOnly = writeOnly;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema writeOnly(Boolean writeOnly) {
+<b class="nc">&nbsp;        this.writeOnly = writeOnly;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the example property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return String example
+&nbsp;     **/
+&nbsp;
+&nbsp;    public Object getExample() {
+<b class="nc">&nbsp;        return example;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setExample(Object example) {
+<b class="nc">&nbsp;        this.example = cast(example);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema example(Object example) {
+<b class="nc">&nbsp;        this.example = cast(example);</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the externalDocs property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return ExternalDocumentation externalDocs
+&nbsp;     **/
+&nbsp;
+&nbsp;    public ExternalDocumentation getExternalDocs() {
+<b class="nc">&nbsp;        return externalDocs;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setExternalDocs(ExternalDocumentation externalDocs) {
+<b class="nc">&nbsp;        this.externalDocs = externalDocs;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema externalDocs(ExternalDocumentation externalDocs) {
+<b class="nc">&nbsp;        this.externalDocs = externalDocs;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the deprecated property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return Boolean deprecated
+&nbsp;     **/
+&nbsp;
+&nbsp;    public Boolean getDeprecated() {
+<b class="nc">&nbsp;        return deprecated;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDeprecated(Boolean deprecated) {
+<b class="nc">&nbsp;        this.deprecated = deprecated;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema deprecated(Boolean deprecated) {
+<b class="nc">&nbsp;        this.deprecated = deprecated;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * returns the xml property from a Schema instance.
+&nbsp;     *
+&nbsp;     * @return XML xml
+&nbsp;     **/
+&nbsp;
+&nbsp;    public XML getXml() {
+<b class="nc">&nbsp;        return xml;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setXml(XML xml) {
+<b class="nc">&nbsp;        this.xml = xml;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Schema xml(XML xml) {
+<b class="nc">&nbsp;        this.xml = xml;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(java.lang.Object o) {
+<b class="nc">&nbsp;        if (this == o) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (o == null || getClass() != o.getClass()) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Schema schema = (Schema) o;</b>
+<b class="nc">&nbsp;        return Objects.equals(this.title, schema.title) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.multipleOf, schema.multipleOf) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.maximum, schema.maximum) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.exclusiveMaximum, schema.exclusiveMaximum) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.minimum, schema.minimum) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.exclusiveMinimum, schema.exclusiveMinimum) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.maxLength, schema.maxLength) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.minLength, schema.minLength) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.pattern, schema.pattern) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.maxItems, schema.maxItems) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.minItems, schema.minItems) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.uniqueItems, schema.uniqueItems) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.maxProperties, schema.maxProperties) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.minProperties, schema.minProperties) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.required, schema.required) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.type, schema.type) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.not, schema.not) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.properties, schema.properties) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.additionalProperties, schema.additionalProperties) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.description, schema.description) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.format, schema.format) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.$ref, schema.$ref) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.nullable, schema.nullable) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.readOnly, schema.readOnly) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.writeOnly, schema.writeOnly) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.example, schema.example) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.externalDocs, schema.externalDocs) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.deprecated, schema.deprecated) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.xml, schema.xml) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this.extensions, schema.extensions) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this._enum, schema._enum) &amp;&amp;</b>
+<b class="nc">&nbsp;                Objects.equals(this._default, schema._default);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        return Objects.hash(title, multipleOf, maximum, exclusiveMaximum, minimum, exclusiveMinimum, maxLength, minLength, pattern, maxItems,</b>
+&nbsp;                minItems, uniqueItems, maxProperties, minProperties, required, type, not, properties, additionalProperties, description, format, $ref,
+&nbsp;                nullable, readOnly, writeOnly, example, externalDocs, deprecated, xml, extensions, _enum, _default);
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public java.util.Map&lt;String, Object&gt; getExtensions() {
+<b class="nc">&nbsp;        return extensions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addExtension(String name, Object value) {
+<b class="nc">&nbsp;        if (this.extensions == null) {</b>
+<b class="nc">&nbsp;            this.extensions = new java.util.HashMap&lt;&gt;();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.extensions.put(name, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setExtensions(java.util.Map&lt;String, Object&gt; extensions) {
+<b class="nc">&nbsp;        this.extensions = extensions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="nc">&nbsp;        sb.append(&quot;class Schema {\n&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        sb.append(&quot;    title: &quot;).append(toIndentedString(title)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    multipleOf: &quot;).append(toIndentedString(multipleOf)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    maximum: &quot;).append(toIndentedString(maximum)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    exclusiveMaximum: &quot;).append(toIndentedString(exclusiveMaximum)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    minimum: &quot;).append(toIndentedString(minimum)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    exclusiveMinimum: &quot;).append(toIndentedString(exclusiveMinimum)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    maxLength: &quot;).append(toIndentedString(maxLength)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    minLength: &quot;).append(toIndentedString(minLength)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    pattern: &quot;).append(toIndentedString(pattern)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    maxItems: &quot;).append(toIndentedString(maxItems)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    minItems: &quot;).append(toIndentedString(minItems)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    uniqueItems: &quot;).append(toIndentedString(uniqueItems)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    maxProperties: &quot;).append(toIndentedString(maxProperties)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    minProperties: &quot;).append(toIndentedString(minProperties)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    required: &quot;).append(toIndentedString(required)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    type: &quot;).append(toIndentedString(type)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    not: &quot;).append(toIndentedString(not)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    properties: &quot;).append(toIndentedString(properties)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    additionalProperties: &quot;).append(toIndentedString(additionalProperties)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    description: &quot;).append(toIndentedString(description)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    format: &quot;).append(toIndentedString(format)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    $ref: &quot;).append(toIndentedString($ref)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    nullable: &quot;).append(toIndentedString(nullable)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    readOnly: &quot;).append(toIndentedString(readOnly)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    writeOnly: &quot;).append(toIndentedString(writeOnly)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    example: &quot;).append(toIndentedString(example)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    externalDocs: &quot;).append(toIndentedString(externalDocs)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    deprecated: &quot;).append(toIndentedString(deprecated)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;    xml: &quot;).append(toIndentedString(xml)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        sb.append(&quot;}&quot;);</b>
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convert the given object to string with each line indented by 4 spaces
+&nbsp;     * (except the first line).
+&nbsp;     */
+&nbsp;    private String toIndentedString(java.lang.Object o) {
+<b class="nc">&nbsp;        if (o == null) {</b>
+<b class="nc">&nbsp;            return &quot;null&quot;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return o.toString().replace(&quot;\n&quot;, &quot;\n    &quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:28</div>
+</div>
+</body>
+</html>

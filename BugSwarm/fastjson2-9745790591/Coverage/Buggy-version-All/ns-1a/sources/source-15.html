@@ -1,0 +1,212 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StringCreateBenchmark</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark</a>
+</div>
+
+<h1>Coverage Summary for Class: StringCreateBenchmark (com.alibaba.fastjson2.benchmark)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StringCreateBenchmark</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/46)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.util.UnsafeUtils;
+&nbsp;import org.openjdk.jmh.annotations.Benchmark;
+&nbsp;import org.openjdk.jmh.annotations.Mode;
+&nbsp;import org.openjdk.jmh.runner.Runner;
+&nbsp;import org.openjdk.jmh.runner.RunnerException;
+&nbsp;import org.openjdk.jmh.runner.options.Options;
+&nbsp;import org.openjdk.jmh.runner.options.OptionsBuilder;
+&nbsp;
+&nbsp;import java.lang.invoke.*;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.util.concurrent.TimeUnit;
+&nbsp;import java.util.function.BiFunction;
+&nbsp;
+<b class="nc">&nbsp;public class StringCreateBenchmark {</b>
+<b class="nc">&nbsp;    static final BiFunction&lt;char[], Boolean, String&gt; STRING_CREATOR = getStringCreator();</b>
+<b class="nc">&nbsp;    static final char[] chars = new char[128];</b>
+&nbsp;    static long valueOffset;
+&nbsp;
+&nbsp;    static {
+&nbsp;        try {
+<b class="nc">&nbsp;            Field field = String.class.getDeclaredField(&quot;value&quot;);</b>
+<b class="nc">&nbsp;            field.setAccessible(true);</b>
+<b class="nc">&nbsp;            valueOffset = UnsafeUtils.UNSAFE.objectFieldOffset(field);</b>
+<b class="nc">&nbsp;        } catch (NoSuchFieldException e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static BiFunction&lt;char[], Boolean, String&gt; getStringCreator() {
+&nbsp;        try {
+<b class="nc">&nbsp;            MethodHandles.Lookup caller = MethodHandles.lookup().in(String.class);</b>
+<b class="nc">&nbsp;            Field modes = MethodHandles.Lookup.class.getDeclaredField(&quot;allowedModes&quot;);</b>
+<b class="nc">&nbsp;            modes.setAccessible(true);</b>
+<b class="nc">&nbsp;            modes.setInt(caller, -1);   // -1 == Lookup.TRUSTED</b>
+&nbsp;            // create handle for shared String constructor
+<b class="nc">&nbsp;            MethodHandle handle = caller.findConstructor(</b>
+&nbsp;                    String.class,
+<b class="nc">&nbsp;                    MethodType.methodType(void.class, char[].class, boolean.class)</b>
+&nbsp;            );
+&nbsp;
+<b class="nc">&nbsp;            CallSite callSite = LambdaMetafactory.metafactory(</b>
+&nbsp;                    caller,
+&nbsp;                    &quot;apply&quot;,
+<b class="nc">&nbsp;                    MethodType.methodType(BiFunction.class),</b>
+<b class="nc">&nbsp;                    handle.type().generic(),</b>
+&nbsp;                    handle,
+<b class="nc">&nbsp;                    handle.type()</b>
+&nbsp;            );
+<b class="nc">&nbsp;            return (BiFunction) callSite.getTarget().invokeExact();</b>
+<b class="nc">&nbsp;        } catch (Throwable e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public String creator() {
+<b class="nc">&nbsp;        return STRING_CREATOR.apply(chars, Boolean.TRUE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public String newString() {
+<b class="nc">&nbsp;        return new String(chars);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public String unsafe() throws Exception {
+<b class="nc">&nbsp;        String str = (String) UnsafeUtils.UNSAFE.allocateInstance(String.class);</b>
+<b class="nc">&nbsp;        UnsafeUtils.UNSAFE.putObject(str, valueOffset, chars);</b>
+<b class="nc">&nbsp;        return str;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void creator_benchmark() {
+<b class="nc">&nbsp;        long start = System.currentTimeMillis();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; 1000_000_000; i++) {</b>
+<b class="nc">&nbsp;            creator();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        long millis = System.currentTimeMillis() - start;</b>
+<b class="nc">&nbsp;        System.out.println(&quot;creator : &quot; + millis);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void new_benchmark() throws Exception {
+<b class="nc">&nbsp;        long start = System.currentTimeMillis();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; 1000_000; i++) {</b>
+<b class="nc">&nbsp;            unsafe();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        long millis = System.currentTimeMillis() - start;</b>
+<b class="nc">&nbsp;        System.out.println(&quot;new : &quot; + millis);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //    @Test
+&nbsp;    public void test_benchmark() throws Exception {
+<b class="nc">&nbsp;        for (int i = 0; i &lt; 10; i++) {</b>
+<b class="nc">&nbsp;            new_benchmark();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void main(String[] args) throws RunnerException {
+<b class="nc">&nbsp;        Options options = new OptionsBuilder()</b>
+<b class="nc">&nbsp;                .include(StringCreateBenchmark.class.getName())</b>
+<b class="nc">&nbsp;                .mode(Mode.Throughput)</b>
+<b class="nc">&nbsp;                .timeUnit(TimeUnit.MILLISECONDS)</b>
+<b class="nc">&nbsp;                .forks(1)</b>
+<b class="nc">&nbsp;                .build();</b>
+<b class="nc">&nbsp;        new Runner(options).run();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:01</div>
+</div>
+</body>
+</html>

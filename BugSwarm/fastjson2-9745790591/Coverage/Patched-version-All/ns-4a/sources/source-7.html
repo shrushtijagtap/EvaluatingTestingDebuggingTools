@@ -1,0 +1,164 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FloatingDecimal</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.util</a>
+</div>
+
+<h1>Coverage Summary for Class: FloatingDecimal (com.alibaba.fastjson2.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FloatingDecimal</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.util;
+&nbsp;
+<b class="nc">&nbsp;final class FloatingDecimal {</b>
+&nbsp;    static final int DOUBLE_SIGNIFICAND_WIDTH = 53;
+&nbsp;
+&nbsp;    static final int DOUBLE_EXP_BIAS = 1023;
+&nbsp;    static final long DOUBLE_SIGN_BIT_MASK = 0x8000000000000000L;
+&nbsp;    static final long DOUBLE_EXP_BIT_MASK = 0x7FF0000000000000L;
+&nbsp;    static final long DOUBLE_SIGNIF_BIT_MASK = 0x000FFFFFFFFFFFFFL;
+&nbsp;    static final int FLOAT_SIGNIFICAND_WIDTH = 24;
+&nbsp;    static final int FLOAT_EXP_BIAS = 127;
+&nbsp;    static final int FLOAT_SIGNIF_BIT_MASK = 0x007FFFFF;
+&nbsp;    static final int FLOAT_EXP_BIT_MASK = 0x7F800000;
+&nbsp;    static final int FLOAT_SIGN_BIT_MASK = 0x80000000;
+&nbsp;
+&nbsp;    static final int EXP_SHIFT = DOUBLE_SIGNIFICAND_WIDTH - 1;
+&nbsp;    static final long FRACT_HOB = (1L &lt;&lt; EXP_SHIFT); // assumed High-Order bit
+&nbsp;    static final int MAX_DECIMAL_DIGITS = 15;
+&nbsp;    static final int MAX_DECIMAL_EXPONENT = 308;
+&nbsp;    static final int MIN_DECIMAL_EXPONENT = -324;
+&nbsp;    static final int MAX_NDIGITS = 1100;
+&nbsp;
+&nbsp;    static final int SINGLE_EXP_SHIFT = FLOAT_SIGNIFICAND_WIDTH - 1;
+&nbsp;    static final int SINGLE_FRACT_HOB = 1 &lt;&lt; SINGLE_EXP_SHIFT;
+&nbsp;    static final int SINGLE_MAX_DECIMAL_DIGITS = 7;
+&nbsp;    static final int SINGLE_MAX_DECIMAL_EXPONENT = 38;
+&nbsp;    static final int SINGLE_MIN_DECIMAL_EXPONENT = -45;
+&nbsp;    static final int SINGLE_MAX_NDIGITS = 200;
+&nbsp;
+&nbsp;    static final int INT_DECIMAL_DIGITS = 9;
+&nbsp;
+&nbsp;    static final int BIG_DECIMAL_EXPONENT = 324; // i.e. abs(MIN_DECIMAL_EXPONENT)
+&nbsp;
+&nbsp;    /**
+&nbsp;     * All the positive powers of 10 that can be
+&nbsp;     * represented exactly in double/float.
+&nbsp;     */
+<b class="fc">&nbsp;    static final double[] SMALL_10_POW = {</b>
+&nbsp;            1.0e0,
+&nbsp;            1.0e1, 1.0e2, 1.0e3, 1.0e4, 1.0e5,
+&nbsp;            1.0e6, 1.0e7, 1.0e8, 1.0e9, 1.0e10,
+&nbsp;            1.0e11, 1.0e12, 1.0e13, 1.0e14, 1.0e15,
+&nbsp;            1.0e16, 1.0e17, 1.0e18, 1.0e19, 1.0e20,
+&nbsp;            1.0e21, 1.0e22
+&nbsp;    };
+&nbsp;
+<b class="fc">&nbsp;    static final float[] SINGLE_SMALL_10_POW = {</b>
+&nbsp;            1.0e0f,
+&nbsp;            1.0e1f, 1.0e2f, 1.0e3f, 1.0e4f, 1.0e5f,
+&nbsp;            1.0e6f, 1.0e7f, 1.0e8f, 1.0e9f, 1.0e10f
+&nbsp;    };
+&nbsp;
+<b class="fc">&nbsp;    static final double[] BIG_10_POW = {</b>
+&nbsp;            1e16, 1e32, 1e64, 1e128, 1e256};
+<b class="fc">&nbsp;    static final double[] TINY_10_POW = {</b>
+&nbsp;            1e-16, 1e-32, 1e-64, 1e-128, 1e-256};
+&nbsp;
+<b class="fc">&nbsp;    static final int MAX_SMALL_TEN = SMALL_10_POW.length - 1;</b>
+<b class="fc">&nbsp;    static final int SINGLE_MAX_SMALL_TEN = SINGLE_SMALL_10_POW.length - 1;</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:07</div>
+</div>
+</body>
+</html>

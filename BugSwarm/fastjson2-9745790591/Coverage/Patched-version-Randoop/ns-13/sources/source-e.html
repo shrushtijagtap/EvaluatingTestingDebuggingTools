@@ -1,0 +1,320 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectMapper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.adapter.jackson.databind</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectMapper (com.alibaba.fastjson2.adapter.jackson.databind)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectMapper</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/101)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.adapter.jackson.databind;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.adapter.jackson.core.*;
+&nbsp;import com.alibaba.fastjson2.adapter.jackson.databind.node.ObjectNode;
+&nbsp;import com.alibaba.fastjson2.adapter.jackson.databind.node.TreeNodeUtils;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectReaderModule;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectWriterModule;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReader;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriter;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.net.URL;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONReader.Feature.IgnoreCheckClose;
+&nbsp;
+&nbsp;public class ObjectMapper
+&nbsp;        extends ObjectCodec {
+&nbsp;    protected final JsonFactory factory;
+&nbsp;    protected SerializationConfig serializationConfig;
+&nbsp;    protected DeserializationConfig deserializationConfig;
+&nbsp;
+&nbsp;    public ObjectMapper() {
+<b class="nc">&nbsp;        this(new JsonFactory());</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public ObjectMapper(JsonFactory factory) {</b>
+<b class="nc">&nbsp;        this.factory = factory;</b>
+&nbsp;
+<b class="nc">&nbsp;        serializationConfig = new SerializationConfig();</b>
+<b class="nc">&nbsp;        deserializationConfig = new DeserializationConfig();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String writeValueAsString(Object object) {
+<b class="nc">&nbsp;        JSONWriter.Context context = JSONFactory.createWriteContext(serializationConfig.writerProvider);</b>
+&nbsp;
+<b class="nc">&nbsp;        try (JSONWriter writer = JSONWriter.of(context)) {</b>
+<b class="nc">&nbsp;            if (object == null) {</b>
+<b class="nc">&nbsp;                writer.writeNull();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                writer.setRootObject(object);</b>
+&nbsp;
+<b class="nc">&nbsp;                Class&lt;?&gt; valueClass = object.getClass();</b>
+<b class="nc">&nbsp;                if (valueClass == JSONObject.class) {</b>
+<b class="nc">&nbsp;                    writer.write((JSONObject) object);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    boolean fieldBased = (context.getFeatures() &amp; JSONWriter.Feature.FieldBased.mask) != 0;</b>
+<b class="nc">&nbsp;                    ObjectWriter&lt;?&gt; objectWriter = serializationConfig.writerProvider.getObjectWriter(valueClass, valueClass, fieldBased);</b>
+<b class="nc">&nbsp;                    objectWriter.write(writer, object, null, null, 0);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return writer.toString();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T readValue(String content, Class&lt;T&gt; valueType) {
+<b class="nc">&nbsp;        if (content == null || content.isEmpty()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONReader.Context context = createReaderContext();</b>
+<b class="nc">&nbsp;        long features = context.getFeatures();</b>
+&nbsp;
+<b class="nc">&nbsp;        try (JSONReader reader = JSONReader.of(content, context)) {</b>
+<b class="nc">&nbsp;            boolean fieldBased = (features &amp; JSONReader.Feature.FieldBased.mask) != 0;</b>
+<b class="nc">&nbsp;            ObjectReader&lt;T&gt; objectReader = deserializationConfig.readerProvider.getObjectReader(valueType, fieldBased);</b>
+&nbsp;
+<b class="nc">&nbsp;            T object = objectReader.readObject(reader, null, null, 0);</b>
+<b class="nc">&nbsp;            reader.handleResolveTasks(object);</b>
+<b class="nc">&nbsp;            if ((!reader.isEnd()) &amp;&amp; (features &amp; IgnoreCheckClose.mask) == 0) {</b>
+<b class="nc">&nbsp;                throw new JSONException(reader.info(&quot;input not end&quot;));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return object;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private JSONReader.Context createReaderContext() {
+<b class="nc">&nbsp;        return deserializationConfig.createReaderContext();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T readValue(String content, TypeReference&lt;T&gt; valueTypeRef) {
+<b class="nc">&nbsp;        if (content == null) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;content is null&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return readValue(content, valueTypeRef.getType());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T readValue(String content, Type valueType) {
+<b class="nc">&nbsp;        if (content == null || content.isEmpty()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONReader.Context context = createReaderContext();</b>
+<b class="nc">&nbsp;        long features = context.getFeatures();</b>
+&nbsp;
+<b class="nc">&nbsp;        try (JSONReader reader = JSONReader.of(content)) {</b>
+<b class="nc">&nbsp;            ObjectReader&lt;T&gt; objectReader = context.getObjectReader(valueType);</b>
+&nbsp;
+<b class="nc">&nbsp;            T object = objectReader.readObject(reader, null, null, 0);</b>
+<b class="nc">&nbsp;            reader.handleResolveTasks(object);</b>
+<b class="nc">&nbsp;            if ((!reader.isEnd()) &amp;&amp; (features &amp; IgnoreCheckClose.mask) == 0) {</b>
+<b class="nc">&nbsp;                throw new JSONException(reader.info(&quot;input not end&quot;));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return object;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T readValue(URL url, Class&lt;T&gt; valueType) {
+<b class="nc">&nbsp;        if (url == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        try (InputStream is = url.openStream()) {</b>
+<b class="nc">&nbsp;            return readValue(is, valueType);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;can not readValue &#39;&quot; + url + &quot;&#39; to &#39;&quot; + valueType + &quot;&#39;&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T readValue(File file, Class&lt;T&gt; valueType) {
+<b class="nc">&nbsp;        if (file == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        try (InputStream is = new FileInputStream(file)) {</b>
+<b class="nc">&nbsp;            return readValue(is, valueType);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;can not readValue &#39;&quot; + file + &quot;&#39; to &#39;&quot; + valueType + &quot;&#39;&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T readValue(InputStream input, Class&lt;T&gt; valueType) {
+<b class="nc">&nbsp;        if (input == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONReader.Context context = createReaderContext();</b>
+<b class="nc">&nbsp;        long features = context.getFeatures();</b>
+&nbsp;
+<b class="nc">&nbsp;        try (JSONReader reader = JSONReader.of(input, StandardCharsets.UTF_8, context)) {</b>
+<b class="nc">&nbsp;            if (reader.isEnd()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            ObjectReader&lt;T&gt; objectReader = reader.getObjectReader(valueType);</b>
+&nbsp;
+<b class="nc">&nbsp;            T object = objectReader.readObject(reader, null, null, 0);</b>
+<b class="nc">&nbsp;            reader.handleResolveTasks(object);</b>
+<b class="nc">&nbsp;            if ((!reader.isEnd()) &amp;&amp; (features &amp; IgnoreCheckClose.mask) == 0) {</b>
+<b class="nc">&nbsp;                throw new JSONException(reader.info(&quot;input not end&quot;));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return object;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectNode createObjectNode() {
+<b class="nc">&nbsp;        return new ObjectNode();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectMapper configure(SerializationFeature f, boolean state) {
+<b class="nc">&nbsp;        serializationConfig = state</b>
+<b class="nc">&nbsp;                ? serializationConfig.with(f)</b>
+<b class="nc">&nbsp;                : serializationConfig.without(f);</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectMapper configure(DeserializationFeature f, boolean state) {
+<b class="nc">&nbsp;        deserializationConfig = state</b>
+<b class="nc">&nbsp;                ? deserializationConfig.with(f)</b>
+<b class="nc">&nbsp;                : deserializationConfig.without(f);</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectMapper configure(JsonParser.Feature f, boolean state) {
+<b class="nc">&nbsp;        factory.configure(f, state);</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectMapper configure(JsonGenerator.Feature f, boolean state) {
+<b class="nc">&nbsp;        factory.configure(f, state);</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectMapper registerModule(Module module) {
+<b class="nc">&nbsp;        ObjectWriterModule writerModule = module.getWriterModule();</b>
+<b class="nc">&nbsp;        if (writerModule != null) {</b>
+<b class="nc">&nbsp;            serializationConfig.writerProvider.register(writerModule);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        ObjectReaderModule readerModule = module.getReaderModule();</b>
+<b class="nc">&nbsp;        if (readerModule != null) {</b>
+<b class="nc">&nbsp;            deserializationConfig.readerProvider.register(readerModule);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectMapper addMixIn(Class&lt;?&gt; target, Class&lt;?&gt; mixinSource) {
+<b class="nc">&nbsp;        deserializationConfig.readerProvider.mixIn(target, mixinSource);</b>
+<b class="nc">&nbsp;        deserializationConfig.readerProvider.mixIn(target, mixinSource);</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;T extends TreeNode&gt; T readTree(JsonParser p) throws IOException {
+<b class="nc">&nbsp;        Object any = p.getRaw().readAny();</b>
+<b class="nc">&nbsp;        return (T) TreeNodeUtils.as(any);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public JsonNode readTree(String content) {
+<b class="nc">&nbsp;        JSONReader jsonReader = JSONReader.of(content);</b>
+<b class="nc">&nbsp;        Object any = jsonReader.readAny();</b>
+<b class="nc">&nbsp;        return TreeNodeUtils.as(any);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:08</div>
+</div>
+</body>
+</html>

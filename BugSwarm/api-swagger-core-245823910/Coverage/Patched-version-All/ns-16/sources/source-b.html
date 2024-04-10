@@ -1,0 +1,129 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ResponseDeserializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.util</a>
+</div>
+
+<h1>Coverage Summary for Class: ResponseDeserializer (io.swagger.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ResponseDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package io.swagger.util;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonParser;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.JsonDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.JsonNode;
+&nbsp;import io.swagger.oas.models.responses.ApiResponse;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+<b class="nc">&nbsp;public class ResponseDeserializer extends JsonDeserializer&lt;ApiResponse&gt; {</b>
+&nbsp;    @Override
+&nbsp;    public ApiResponse deserialize(JsonParser jp, DeserializationContext ctxt)
+&nbsp;            throws IOException {
+<b class="nc">&nbsp;        JsonNode node = jp.getCodec().readTree(jp);</b>
+<b class="nc">&nbsp;        JsonNode sub = node.get(&quot;$ref&quot;);</b>
+&nbsp;
+&nbsp;        /*if (sub != null) {
+&nbsp;            return Json.mapper().convertValue(node, RefResponse.class);
+&nbsp;        } else*/ {
+<b class="nc">&nbsp;            ApiResponse response = Json.responseMapper().convertValue(node, ApiResponse.class);</b>
+<b class="nc">&nbsp;            return response;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:26</div>
+</div>
+</body>
+</html>

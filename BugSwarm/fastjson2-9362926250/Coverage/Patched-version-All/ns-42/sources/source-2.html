@@ -1,0 +1,141 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONType</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.annotation</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONType (com.alibaba.fastjson.annotation)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">JSONType</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson.annotation;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.PropertyNamingStrategy;
+&nbsp;import com.alibaba.fastjson.parser.Feature;
+&nbsp;import com.alibaba.fastjson.serializer.SerializeFilter;
+&nbsp;import com.alibaba.fastjson.serializer.SerializerFeature;
+&nbsp;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.lang.annotation.Retention;
+&nbsp;import java.lang.annotation.RetentionPolicy;
+&nbsp;import java.lang.annotation.Target;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author wenshao[szujobs@hotmail.com]
+&nbsp; */
+&nbsp;@Retention(RetentionPolicy.RUNTIME)
+&nbsp;@Target(ElementType.TYPE)
+&nbsp;public @interface JSONType {
+&nbsp;    boolean asm() default true;
+&nbsp;
+&nbsp;    String[] orders() default {};
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.2.6
+&nbsp;     */
+&nbsp;    String[] includes() default {};
+&nbsp;
+&nbsp;    String[] ignores() default {};
+&nbsp;
+&nbsp;    SerializerFeature[] serialzeFeatures() default {};
+&nbsp;
+&nbsp;    Feature[] parseFeatures() default {};
+&nbsp;
+&nbsp;    boolean alphabetic() default true;
+&nbsp;
+&nbsp;    Class&lt;?&gt; mappingTo() default Void.class;
+&nbsp;
+&nbsp;    Class&lt;?&gt; builder() default Void.class;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.2.11
+&nbsp;     */
+&nbsp;    String typeName() default &quot;&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.2.32
+&nbsp;     */
+&nbsp;    String typeKey() default &quot;&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.2.11
+&nbsp;     */
+&nbsp;    Class&lt;?&gt;[] seeAlso() default {};
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.2.14
+&nbsp;     */
+&nbsp;    Class&lt;?&gt; serializer() default Void.class;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.2.14
+&nbsp;     */
+&nbsp;    Class&lt;?&gt; deserializer() default Void.class;
+&nbsp;
+&nbsp;    boolean serializeEnumAsJavaBean() default false;
+&nbsp;
+&nbsp;    PropertyNamingStrategy naming() default PropertyNamingStrategy.NeverUseThisValueExceptDefaultValue;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.2.49
+&nbsp;     */
+&nbsp;    Class&lt;? extends SerializeFilter&gt;[] serialzeFilters() default {};
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:16</div>
+</div>
+</body>
+</html>

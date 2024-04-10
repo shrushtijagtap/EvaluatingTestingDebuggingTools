@@ -1,0 +1,193 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderImplZonedDateTime</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderImplZonedDateTime (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderImplZonedDateTime</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.3%
+  </span>
+  <span class="absValue">
+    (36/37)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.codec.DateTimeCodec;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.time.*;
+&nbsp;import java.time.format.DateTimeFormatter;
+&nbsp;import java.util.Locale;
+&nbsp;
+&nbsp;class ObjectReaderImplZonedDateTime
+&nbsp;        extends DateTimeCodec implements ObjectReader {
+<b class="fc">&nbsp;    static final ObjectReaderImplZonedDateTime INSTANCE = new ObjectReaderImplZonedDateTime(null, null);</b>
+&nbsp;
+&nbsp;    public static ObjectReaderImplZonedDateTime of(String format, Locale locale) {
+<b class="fc">&nbsp;        if (format == null) {</b>
+<b class="nc">&nbsp;            return INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return new ObjectReaderImplZonedDateTime(format, locale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReaderImplZonedDateTime(String format, Locale locale) {
+<b class="fc">&nbsp;        super(format, locale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class getObjectClass() {
+<b class="fc">&nbsp;        return ZonedDateTime.class;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="fc">&nbsp;        return jsonReader.readZonedDateTime();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="fc">&nbsp;        JSONReader.Context context = jsonReader.getContext();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (jsonReader.isInt()) {</b>
+<b class="fc">&nbsp;            long millis = jsonReader.readInt64Value();</b>
+<b class="fc">&nbsp;            if (formatUnixTime) {</b>
+<b class="fc">&nbsp;                millis *= 1000;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Instant instant = Instant.ofEpochMilli(millis);</b>
+<b class="fc">&nbsp;            return ZonedDateTime.ofInstant(instant, context.getZoneId());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (jsonReader.readIfNull()) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (format == null || yyyyMMddhhmmss19 || formatISO8601) {</b>
+<b class="fc">&nbsp;            return jsonReader.readZonedDateTime();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        String str = jsonReader.readString();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (formatMillis || formatUnixTime) {</b>
+<b class="fc">&nbsp;            long millis = Long.parseLong(str);</b>
+<b class="fc">&nbsp;            if (formatUnixTime) {</b>
+<b class="fc">&nbsp;                millis *= 1000L;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            Instant instant = Instant.ofEpochMilli(millis);</b>
+<b class="fc">&nbsp;            return ZonedDateTime.ofInstant(instant, context.getZoneId());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        DateTimeFormatter formatter = getDateFormatter(jsonReader.getLocale());</b>
+<b class="fc">&nbsp;        if (!formatHasHour) {</b>
+<b class="fc">&nbsp;            return ZonedDateTime.of(</b>
+<b class="fc">&nbsp;                    LocalDate.parse(str, formatter),</b>
+&nbsp;                    LocalTime.MIN,
+<b class="fc">&nbsp;                    context.getZoneId()</b>
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (!formatHasDay) {</b>
+<b class="fc">&nbsp;            return ZonedDateTime.of(</b>
+<b class="fc">&nbsp;                    LocalDate.of(1970, 1, 1),</b>
+<b class="fc">&nbsp;                    LocalTime.parse(str, formatter),</b>
+<b class="fc">&nbsp;                    context.getZoneId()</b>
+&nbsp;            );
+&nbsp;        }
+<b class="fc">&nbsp;        LocalDateTime localDateTime = LocalDateTime.parse(str, formatter);</b>
+<b class="fc">&nbsp;        return ZonedDateTime.of(localDateTime, context.getZoneId());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:52</div>
+</div>
+</body>
+</html>

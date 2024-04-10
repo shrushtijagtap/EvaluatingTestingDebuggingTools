@@ -1,0 +1,364 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GeoJsonWriterModule</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.support.spring.data.mongodb</a>
+</div>
+
+<h1>Coverage Summary for Class: GeoJsonWriterModule (com.alibaba.fastjson2.support.spring.data.mongodb)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GeoJsonWriterModule</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GeoJsonWriterModule$GeoJsonLineStringMixin</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GeoJsonWriterModule$GeoJsonMultiPointMixin</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GeoJsonWriterModule$GeoJsonPointWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GeoJsonWriterModule$GeoJsonPolygonWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/33)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GeoJsonWriterModule$PointWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/71)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.support.spring.data.mongodb;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.annotation.JSONType;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectWriterModule;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriter;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriterProvider;
+&nbsp;import org.springframework.data.geo.Point;
+&nbsp;import org.springframework.data.mongodb.core.geo.GeoJsonLineString;
+&nbsp;import org.springframework.data.mongodb.core.geo.GeoJsonMultiPoint;
+&nbsp;import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
+&nbsp;import org.springframework.data.mongodb.core.geo.GeoJsonPolygon;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.List;
+&nbsp;
+<b class="nc">&nbsp;public class GeoJsonWriterModule</b>
+&nbsp;        implements ObjectWriterModule {
+<b class="nc">&nbsp;    public static final GeoJsonWriterModule INSTANCE = new GeoJsonWriterModule();</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void init(ObjectWriterProvider provider) {
+<b class="nc">&nbsp;        provider.register(GeoJsonPoint.class, GeoJsonPointWriter.INSTANCE);</b>
+<b class="nc">&nbsp;        provider.register(Point.class, PointWriter.INSTANCE);</b>
+<b class="nc">&nbsp;        provider.register(GeoJsonPolygon.class, GeoJsonPolygonWriter.INSTANCE);</b>
+<b class="nc">&nbsp;        provider.mixIn(GeoJsonLineString.class, GeoJsonLineStringMixin.class);</b>
+<b class="nc">&nbsp;        provider.mixIn(GeoJsonMultiPoint.class, GeoJsonMultiPointMixin.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JSONType(orders = {&quot;type&quot;, &quot;coordinates&quot;})
+<b class="nc">&nbsp;    static class GeoJsonLineStringMixin {</b>
+&nbsp;        public String getType() {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public List&lt;GeoJsonLineString&gt; getCoordinates() {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @JSONType(includes = {&quot;type&quot;, &quot;coordinates&quot;}, orders = {&quot;type&quot;, &quot;coordinates&quot;})
+<b class="nc">&nbsp;    static class GeoJsonMultiPointMixin {</b>
+&nbsp;        public String getType() {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public List&lt;Point&gt; getCoordinates() {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    static class GeoJsonPolygonWriter</b>
+&nbsp;            implements ObjectWriter {
+<b class="nc">&nbsp;        public static final GeoJsonPolygonWriter INSTANCE = new GeoJsonPolygonWriter();</b>
+&nbsp;
+&nbsp;        static final String PREFIX = &quot;{\&quot;type\&quot;:\&quot;Polygon\&quot;,\&quot;coordinates\&quot;:&quot;;
+<b class="nc">&nbsp;        static final byte[] utf8Prefix = PREFIX.getBytes(StandardCharsets.US_ASCII);</b>
+<b class="nc">&nbsp;        static final char[] charsPrefix = PREFIX.toCharArray();</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;            if (object == null) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeNull();</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            GeoJsonPolygon polygon = (GeoJsonPolygon) object;</b>
+<b class="nc">&nbsp;            if (jsonWriter.isUTF8()) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeRaw(utf8Prefix);</b>
+<b class="nc">&nbsp;            } else if (jsonWriter.isUTF16()) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeRaw(charsPrefix);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                jsonWriter.startObject();</b>
+<b class="nc">&nbsp;                jsonWriter.writeName(&quot;type&quot;);</b>
+<b class="nc">&nbsp;                jsonWriter.writeColon();</b>
+<b class="nc">&nbsp;                jsonWriter.writeString(&quot;Point&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                jsonWriter.writeName(&quot;coordinates&quot;);</b>
+<b class="nc">&nbsp;                jsonWriter.writeColon();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            List&lt;GeoJsonLineString&gt; coordinates = polygon.getCoordinates();</b>
+<b class="nc">&nbsp;            jsonWriter.startArray();</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; coordinates.size(); i++) {</b>
+<b class="nc">&nbsp;                if (i != 0) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeComma();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                GeoJsonLineString lineString = coordinates.get(i);</b>
+<b class="nc">&nbsp;                jsonWriter.startArray();</b>
+<b class="nc">&nbsp;                List&lt;Point&gt; points = lineString.getCoordinates();</b>
+<b class="nc">&nbsp;                for (int j = 0; j &lt; points.size(); j++) {</b>
+<b class="nc">&nbsp;                    if (j != 0) {</b>
+<b class="nc">&nbsp;                        jsonWriter.writeComma();</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    Point point = points.get(i);</b>
+<b class="nc">&nbsp;                    jsonWriter.writeDoubleArray(point.getX(), point.getY());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                jsonWriter.endArray();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            jsonWriter.endArray();</b>
+&nbsp;
+<b class="nc">&nbsp;            jsonWriter.endObject();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    static class PointWriter</b>
+&nbsp;            implements ObjectWriter {
+<b class="nc">&nbsp;        public static final PointWriter INSTANCE = new PointWriter();</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;            if (object == null) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeNull();</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Point point = (Point) object;</b>
+<b class="nc">&nbsp;            jsonWriter.writeDoubleArray(point.getX(), point.getY());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    static class GeoJsonPointWriter</b>
+&nbsp;            implements ObjectWriter {
+<b class="nc">&nbsp;        public static final GeoJsonPointWriter INSTANCE = new GeoJsonPointWriter();</b>
+&nbsp;
+&nbsp;        static final String PREFIX = &quot;{\&quot;type\&quot;:\&quot;Point\&quot;,\&quot;coordinates\&quot;:&quot;;
+<b class="nc">&nbsp;        static final byte[] utf8Prefix = PREFIX.getBytes(StandardCharsets.US_ASCII);</b>
+<b class="nc">&nbsp;        static final char[] charsPrefix = PREFIX.toCharArray();</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;            if (object == null) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeNull();</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            GeoJsonPoint point = (GeoJsonPoint) object;</b>
+<b class="nc">&nbsp;            if (jsonWriter.isUTF8()) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeRaw(utf8Prefix);</b>
+<b class="nc">&nbsp;            } else if (jsonWriter.isUTF16()) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeRaw(charsPrefix);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                jsonWriter.startObject();</b>
+<b class="nc">&nbsp;                jsonWriter.writeName(&quot;type&quot;);</b>
+<b class="nc">&nbsp;                jsonWriter.writeColon();</b>
+<b class="nc">&nbsp;                jsonWriter.writeString(&quot;Point&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                jsonWriter.writeName(&quot;coordinates&quot;);</b>
+<b class="nc">&nbsp;                jsonWriter.writeColon();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            jsonWriter.writeDoubleArray(point.getX(), point.getY());</b>
+&nbsp;
+<b class="nc">&nbsp;            jsonWriter.endObject();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:11</div>
+</div>
+</body>
+</html>

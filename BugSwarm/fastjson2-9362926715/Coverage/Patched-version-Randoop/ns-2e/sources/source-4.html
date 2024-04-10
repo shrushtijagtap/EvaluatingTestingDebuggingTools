@@ -1,0 +1,571 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ArraySchema</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.schema</a>
+</div>
+
+<h1>Coverage Summary for Class: ArraySchema (com.alibaba.fastjson2.schema)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ArraySchema</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/248)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.schema;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONArray;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONObject;
+&nbsp;
+&nbsp;import java.lang.reflect.Array;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;public final class ArraySchema
+&nbsp;        extends JSONSchema {
+&nbsp;    final Map&lt;String, JSONSchema&gt; definitions;
+&nbsp;    final Map&lt;String, JSONSchema&gt; defs;
+&nbsp;
+&nbsp;    final boolean typed;
+&nbsp;
+&nbsp;    final int maxLength;
+&nbsp;    final int minLength;
+&nbsp;    final JSONSchema itemSchema;
+&nbsp;    final JSONSchema[] prefixItems;
+&nbsp;    final boolean additionalItems;
+&nbsp;    final JSONSchema additionalItem;
+&nbsp;    final JSONSchema contains;
+&nbsp;    final int minContains;
+&nbsp;    final int maxContains;
+&nbsp;    final boolean uniqueItems;
+&nbsp;
+&nbsp;    final AllOf allOf;
+&nbsp;    final AnyOf anyOf;
+&nbsp;    final OneOf oneOf;
+&nbsp;
+&nbsp;    public ArraySchema(JSONObject input, JSONSchema root) {
+<b class="nc">&nbsp;        super(input);</b>
+&nbsp;
+<b class="nc">&nbsp;        this.typed = &quot;array&quot;.equals(input.get(&quot;type&quot;));</b>
+<b class="nc">&nbsp;        this.definitions = new LinkedHashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        this.defs = new LinkedHashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        JSONObject definitions = input.getJSONObject(&quot;definitions&quot;);</b>
+<b class="nc">&nbsp;        if (definitions != null) {</b>
+<b class="nc">&nbsp;            for (Iterator&lt;Map.Entry&lt;String, Object&gt;&gt; it = definitions.entrySet().iterator(); it.hasNext(); ) {</b>
+<b class="nc">&nbsp;                Map.Entry&lt;String, Object&gt; entry = it.next();</b>
+<b class="nc">&nbsp;                String entryKey = entry.getKey();</b>
+<b class="nc">&nbsp;                JSONObject entryValue = (JSONObject) entry.getValue();</b>
+<b class="nc">&nbsp;                JSONSchema schema = JSONSchema.of(entryValue, root == null ? this : root);</b>
+<b class="nc">&nbsp;                this.definitions.put(entryKey, schema);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONObject defs = input.getJSONObject(&quot;$defs&quot;);</b>
+<b class="nc">&nbsp;        if (defs != null) {</b>
+<b class="nc">&nbsp;            for (Iterator&lt;Map.Entry&lt;String, Object&gt;&gt; it = defs.entrySet().iterator(); it.hasNext(); ) {</b>
+<b class="nc">&nbsp;                Map.Entry&lt;String, Object&gt; entry = it.next();</b>
+<b class="nc">&nbsp;                String entryKey = entry.getKey();</b>
+<b class="nc">&nbsp;                JSONObject entryValue = (JSONObject) entry.getValue();</b>
+<b class="nc">&nbsp;                JSONSchema schema = JSONSchema.of(entryValue, root == null ? this : root);</b>
+<b class="nc">&nbsp;                this.defs.put(entryKey, schema);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.minLength = input.getIntValue(&quot;minItems&quot;, -1);</b>
+<b class="nc">&nbsp;        this.maxLength = input.getIntValue(&quot;maxItems&quot;, -1);</b>
+&nbsp;
+<b class="nc">&nbsp;        Object items = input.get(&quot;items&quot;);</b>
+<b class="nc">&nbsp;        Object additionalItems = input.get(&quot;additionalItems&quot;);</b>
+<b class="nc">&nbsp;        JSONArray prefixItems = input.getJSONArray(&quot;prefixItems&quot;);</b>
+&nbsp;
+&nbsp;        boolean additionalItemsSupport;
+<b class="nc">&nbsp;        if (items == null) {</b>
+<b class="nc">&nbsp;            additionalItemsSupport = true;</b>
+<b class="nc">&nbsp;            this.itemSchema = null;</b>
+<b class="nc">&nbsp;        } else if (items instanceof Boolean) {</b>
+<b class="nc">&nbsp;            additionalItemsSupport = ((Boolean) items).booleanValue();</b>
+<b class="nc">&nbsp;            this.itemSchema = null;</b>
+<b class="nc">&nbsp;        } else if (items instanceof JSONArray) {</b>
+<b class="nc">&nbsp;            if (prefixItems == null) {</b>
+<b class="nc">&nbsp;                prefixItems = (JSONArray) items;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new JSONException(&quot;schema error, items : &quot; + items);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            this.itemSchema = null;</b>
+<b class="nc">&nbsp;            additionalItemsSupport = true;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            additionalItemsSupport = true;</b>
+<b class="nc">&nbsp;            this.itemSchema = JSONSchema.of((JSONObject) items, root);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (additionalItems instanceof JSONObject) {</b>
+<b class="nc">&nbsp;            additionalItem = JSONSchema.of((JSONObject) additionalItems, root == null ? this : root);</b>
+<b class="nc">&nbsp;            additionalItemsSupport = true;</b>
+<b class="nc">&nbsp;        } else if (additionalItems instanceof Boolean) {</b>
+<b class="nc">&nbsp;            additionalItemsSupport = ((Boolean) additionalItems).booleanValue();</b>
+<b class="nc">&nbsp;            this.additionalItem = null;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            this.additionalItem = null;</b>
+&nbsp;        }
+&nbsp;//        ((itemSchema != null &amp;&amp; !(itemSchema instanceof Any))
+&nbsp;//                || this.prefixItems.length &gt; 0)
+<b class="nc">&nbsp;        if (itemSchema != null &amp;&amp; !(itemSchema instanceof Any)) {</b>
+<b class="nc">&nbsp;            additionalItemsSupport = true;</b>
+<b class="nc">&nbsp;        } else if (prefixItems == null &amp;&amp; !(items instanceof Boolean)) {</b>
+<b class="nc">&nbsp;            additionalItemsSupport = true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.additionalItems = additionalItemsSupport;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (prefixItems == null) {</b>
+<b class="nc">&nbsp;            this.prefixItems = new JSONSchema[0];</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            this.prefixItems = new JSONSchema[prefixItems.size()];</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; prefixItems.size(); i++) {</b>
+&nbsp;                JSONSchema schema;
+&nbsp;
+<b class="nc">&nbsp;                Object prefixItem = prefixItems.get(i);</b>
+<b class="nc">&nbsp;                if (prefixItem instanceof Boolean) {</b>
+<b class="nc">&nbsp;                    schema = ((Boolean) prefixItem).booleanValue() ? Any.INSTANCE : Any.NOT_ANY;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    JSONObject jsonObject = (JSONObject) prefixItem;</b>
+<b class="nc">&nbsp;                    schema = JSONSchema.of(jsonObject, root == null ? this : root);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                this.prefixItems[i] = schema;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.contains = input.getObject(&quot;contains&quot;, JSONSchema::of);</b>
+<b class="nc">&nbsp;        this.minContains = input.getIntValue(&quot;minContains&quot;, -1);</b>
+<b class="nc">&nbsp;        this.maxContains = input.getIntValue(&quot;maxContains&quot;, -1);</b>
+&nbsp;
+<b class="nc">&nbsp;        this.uniqueItems = input.getBooleanValue(&quot;uniqueItems&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        allOf = allOf(input, null);</b>
+<b class="nc">&nbsp;        anyOf = anyOf(input, null);</b>
+<b class="nc">&nbsp;        oneOf = oneOf(input, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Type getType() {
+<b class="nc">&nbsp;        return Type.Array;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ValidateResult validate(Object value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return typed ? FAIL_INPUT_NULL : SUCCESS;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Set uniqueItemsSet = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Object[]) {</b>
+<b class="nc">&nbsp;            Object[] array = (Object[]) value;</b>
+<b class="nc">&nbsp;            final int size = array.length;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (minLength &gt;= 0 &amp;&amp; size &lt; minLength) {</b>
+<b class="nc">&nbsp;                return new ValidateResult(false, &quot;minLength not match, expect &gt;= %s, but %s&quot;, minLength, size);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (maxLength &gt;= 0) {</b>
+<b class="nc">&nbsp;                if (maxLength &gt;= 0 &amp;&amp; size &gt; maxLength) {</b>
+<b class="nc">&nbsp;                    return new ValidateResult(false, &quot;maxLength not match, expect &lt;= %s, but %s&quot;, maxLength, size);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            int containsCount = 0;</b>
+<b class="nc">&nbsp;            for (int index = 0; index &lt; array.length; index++) {</b>
+<b class="nc">&nbsp;                Object item = array[index];</b>
+&nbsp;
+<b class="nc">&nbsp;                boolean prefixMatch = false;</b>
+<b class="nc">&nbsp;                if (index &lt; prefixItems.length) {</b>
+<b class="nc">&nbsp;                    ValidateResult result = prefixItems[index].validate(item);</b>
+<b class="nc">&nbsp;                    if (!result.isSuccess()) {</b>
+<b class="nc">&nbsp;                        return result;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    prefixMatch = true;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (!prefixMatch &amp;&amp; itemSchema != null) {</b>
+<b class="nc">&nbsp;                    ValidateResult result = itemSchema.validate(item);</b>
+<b class="nc">&nbsp;                    if (!result.isSuccess()) {</b>
+<b class="nc">&nbsp;                        return result;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (this.contains != null &amp;&amp; (minContains &gt; 0 || maxContains &gt; 0 || containsCount == 0)) {</b>
+<b class="nc">&nbsp;                    ValidateResult result = this.contains.validate(item);</b>
+<b class="nc">&nbsp;                    if (result == SUCCESS) {</b>
+<b class="nc">&nbsp;                        containsCount++;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (uniqueItems) {</b>
+<b class="nc">&nbsp;                    if (uniqueItemsSet == null) {</b>
+<b class="nc">&nbsp;                        uniqueItemsSet = new HashSet(size);</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (item instanceof BigDecimal) {</b>
+<b class="nc">&nbsp;                        item = ((BigDecimal) item).stripTrailingZeros();</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (!uniqueItemsSet.add(item)) {</b>
+<b class="nc">&nbsp;                        return UNIQUE_ITEMS_NOT_MATCH;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (this.contains != null &amp;&amp; containsCount == 0) {</b>
+<b class="nc">&nbsp;                return CONTAINS_NOT_MATCH;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (minContains &gt;= 0 &amp;&amp; containsCount &lt; minContains) {</b>
+<b class="nc">&nbsp;                return new ValidateResult(false, &quot;minContains not match, expect %s, but %s&quot;, minContains, containsCount);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (maxContains &gt;= 0 &amp;&amp; containsCount &gt; maxContains) {</b>
+<b class="nc">&nbsp;                return new ValidateResult(false, &quot;maxContains not match, expect %s, but %s&quot;, maxContains, containsCount);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (!additionalItems) {</b>
+<b class="nc">&nbsp;                if (size &gt; prefixItems.length) {</b>
+<b class="nc">&nbsp;                    return new ValidateResult(false, &quot;additional items not match, max size %s, but %s&quot;, prefixItems.length, size);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (allOf != null) {</b>
+<b class="nc">&nbsp;                ValidateResult result = allOf.validate(value);</b>
+<b class="nc">&nbsp;                if (!result.isSuccess()) {</b>
+<b class="nc">&nbsp;                    return result;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (anyOf != null) {</b>
+<b class="nc">&nbsp;                ValidateResult result = anyOf.validate(value);</b>
+<b class="nc">&nbsp;                if (!result.isSuccess()) {</b>
+<b class="nc">&nbsp;                    return result;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (oneOf != null) {</b>
+<b class="nc">&nbsp;                ValidateResult result = oneOf.validate(value);</b>
+<b class="nc">&nbsp;                if (!result.isSuccess()) {</b>
+<b class="nc">&nbsp;                    return result;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return SUCCESS;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value.getClass().isArray()) {</b>
+<b class="nc">&nbsp;            final int size = Array.getLength(value);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (minLength &gt;= 0 &amp;&amp; size &lt; minLength) {</b>
+<b class="nc">&nbsp;                return new ValidateResult(false, &quot;minLength not match, expect &gt;= %s, but %s&quot;, minLength, size);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (maxLength &gt;= 0) {</b>
+<b class="nc">&nbsp;                if (maxLength &gt;= 0 &amp;&amp; size &gt; maxLength) {</b>
+<b class="nc">&nbsp;                    return new ValidateResult(false, &quot;maxLength not match, expect &lt;= %s, but %s&quot;, maxLength, size);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            int containsCount = 0;</b>
+<b class="nc">&nbsp;            for (int index = 0; index &lt; size; index++) {</b>
+<b class="nc">&nbsp;                Object item = Array.get(value, index);</b>
+&nbsp;
+<b class="nc">&nbsp;                boolean prefixMatch = false;</b>
+<b class="nc">&nbsp;                if (index &lt; prefixItems.length) {</b>
+<b class="nc">&nbsp;                    ValidateResult result = prefixItems[index].validate(item);</b>
+<b class="nc">&nbsp;                    if (!result.isSuccess()) {</b>
+<b class="nc">&nbsp;                        return result;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    prefixMatch = true;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (!prefixMatch &amp;&amp; itemSchema != null) {</b>
+<b class="nc">&nbsp;                    ValidateResult result = itemSchema.validate(item);</b>
+<b class="nc">&nbsp;                    if (!result.isSuccess()) {</b>
+<b class="nc">&nbsp;                        return result;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (this.contains != null &amp;&amp; (minContains &gt; 0 || maxContains &gt; 0 || containsCount == 0)) {</b>
+<b class="nc">&nbsp;                    ValidateResult result = this.contains.validate(item);</b>
+<b class="nc">&nbsp;                    if (result == SUCCESS) {</b>
+<b class="nc">&nbsp;                        containsCount++;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (uniqueItems) {</b>
+<b class="nc">&nbsp;                    if (uniqueItemsSet == null) {</b>
+<b class="nc">&nbsp;                        uniqueItemsSet = new HashSet(size);</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (item instanceof BigDecimal) {</b>
+<b class="nc">&nbsp;                        item = ((BigDecimal) item).stripTrailingZeros();</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (!uniqueItemsSet.add(item)) {</b>
+<b class="nc">&nbsp;                        return UNIQUE_ITEMS_NOT_MATCH;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            if (this.contains != null &amp;&amp; containsCount == 0) {</b>
+<b class="nc">&nbsp;                return CONTAINS_NOT_MATCH;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (minContains &gt;= 0 &amp;&amp; containsCount &lt; minContains) {</b>
+<b class="nc">&nbsp;                return new ValidateResult(false, &quot;minContains not match, expect %s, but %s&quot;, minContains, containsCount);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (maxContains &gt;= 0 &amp;&amp; containsCount &gt; maxContains) {</b>
+<b class="nc">&nbsp;                return new ValidateResult(false, &quot;maxContains not match, expect %s, but %s&quot;, maxContains, containsCount);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (!additionalItems) {</b>
+<b class="nc">&nbsp;                if (size &gt; prefixItems.length) {</b>
+<b class="nc">&nbsp;                    return new ValidateResult(false, &quot;additional items not match, max size %s, but %s&quot;, prefixItems.length, size);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (allOf != null) {</b>
+<b class="nc">&nbsp;                ValidateResult result = allOf.validate(value);</b>
+<b class="nc">&nbsp;                if (!result.isSuccess()) {</b>
+<b class="nc">&nbsp;                    return result;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (anyOf != null) {</b>
+<b class="nc">&nbsp;                ValidateResult result = anyOf.validate(value);</b>
+<b class="nc">&nbsp;                if (!result.isSuccess()) {</b>
+<b class="nc">&nbsp;                    return result;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (oneOf != null) {</b>
+<b class="nc">&nbsp;                ValidateResult result = oneOf.validate(value);</b>
+<b class="nc">&nbsp;                if (!result.isSuccess()) {</b>
+<b class="nc">&nbsp;                    return result;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return SUCCESS;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Collection) {</b>
+<b class="nc">&nbsp;            int size = ((Collection&lt;?&gt;) value).size();</b>
+<b class="nc">&nbsp;            if (minLength &gt;= 0 &amp;&amp; size &lt; minLength) {</b>
+<b class="nc">&nbsp;                return new ValidateResult(false, &quot;minLength not match, expect &gt;= %s, but %s&quot;, minLength, size);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (maxLength &gt;= 0) {</b>
+<b class="nc">&nbsp;                if (maxLength &gt;= 0 &amp;&amp; size &gt; maxLength) {</b>
+<b class="nc">&nbsp;                    return new ValidateResult(false, &quot;maxLength not match, expect &lt;= %s, but %s&quot;, maxLength, size);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (!additionalItems) {</b>
+<b class="nc">&nbsp;                if (size &gt; prefixItems.length) {</b>
+<b class="nc">&nbsp;                    return new ValidateResult(false, &quot;additional items not match, max size %s, but %s&quot;, prefixItems.length, size);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            int index = 0;</b>
+<b class="nc">&nbsp;            int containsCount = 0;</b>
+<b class="nc">&nbsp;            for (Iterator it = ((Iterable) value).iterator(); it.hasNext(); index++) {</b>
+<b class="nc">&nbsp;                Object item = it.next();</b>
+&nbsp;
+<b class="nc">&nbsp;                boolean prefixMatch = false;</b>
+<b class="nc">&nbsp;                if (index &lt; prefixItems.length) {</b>
+<b class="nc">&nbsp;                    ValidateResult result = prefixItems[index].validate(item);</b>
+<b class="nc">&nbsp;                    if (!result.isSuccess()) {</b>
+<b class="nc">&nbsp;                        return result;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    prefixMatch = true;</b>
+<b class="nc">&nbsp;                } else if (itemSchema == null &amp;&amp; additionalItem != null) {</b>
+<b class="nc">&nbsp;                    ValidateResult result = additionalItem.validate(item);</b>
+<b class="nc">&nbsp;                    if (!result.isSuccess()) {</b>
+<b class="nc">&nbsp;                        return result;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (!prefixMatch &amp;&amp; itemSchema != null) {</b>
+<b class="nc">&nbsp;                    ValidateResult result = itemSchema.validate(item);</b>
+<b class="nc">&nbsp;                    if (!result.isSuccess()) {</b>
+<b class="nc">&nbsp;                        return result;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (this.contains != null &amp;&amp; (minContains &gt; 0 || maxContains &gt; 0 || containsCount == 0)) {</b>
+<b class="nc">&nbsp;                    ValidateResult result = this.contains.validate(item);</b>
+<b class="nc">&nbsp;                    if (result == SUCCESS) {</b>
+<b class="nc">&nbsp;                        containsCount++;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (uniqueItems) {</b>
+<b class="nc">&nbsp;                    if (uniqueItemsSet == null) {</b>
+<b class="nc">&nbsp;                        uniqueItemsSet = new HashSet();</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (item instanceof BigDecimal) {</b>
+<b class="nc">&nbsp;                        item = ((BigDecimal) item).stripTrailingZeros();</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (!uniqueItemsSet.add(item)) {</b>
+<b class="nc">&nbsp;                        return UNIQUE_ITEMS_NOT_MATCH;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (this.contains != null) {</b>
+<b class="nc">&nbsp;                if (minContains &gt;= 0 &amp;&amp; containsCount &lt; minContains) {</b>
+<b class="nc">&nbsp;                    return new ValidateResult(false, &quot;minContains not match, expect %s, but %s&quot;, minContains, containsCount);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    if (containsCount == 0 &amp;&amp; minContains != 0) {</b>
+<b class="nc">&nbsp;                        return CONTAINS_NOT_MATCH;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (maxContains &gt;= 0 &amp;&amp; containsCount &gt; maxContains) {</b>
+<b class="nc">&nbsp;                    return new ValidateResult(false, &quot;maxContains not match, expect %s, but %s&quot;, maxContains, containsCount);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (allOf != null) {</b>
+<b class="nc">&nbsp;                ValidateResult result = allOf.validate(value);</b>
+<b class="nc">&nbsp;                if (!result.isSuccess()) {</b>
+<b class="nc">&nbsp;                    return result;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (anyOf != null) {</b>
+<b class="nc">&nbsp;                ValidateResult result = anyOf.validate(value);</b>
+<b class="nc">&nbsp;                if (!result.isSuccess()) {</b>
+<b class="nc">&nbsp;                    return result;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (oneOf != null) {</b>
+<b class="nc">&nbsp;                ValidateResult result = oneOf.validate(value);</b>
+<b class="nc">&nbsp;                if (!result.isSuccess()) {</b>
+<b class="nc">&nbsp;                    return result;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return SUCCESS;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return typed ? FAIL_TYPE_NOT_MATCH : SUCCESS;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="nc">&nbsp;        if (this == o) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (o == null || getClass() != o.getClass()) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        com.alibaba.fastjson2.schema.ArraySchema that = (com.alibaba.fastjson2.schema.ArraySchema) o;</b>
+<b class="nc">&nbsp;        return Objects.equals(title, that.title) &amp;&amp; Objects.equals(description, that.description);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        return Objects.hash(title, description);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:54</div>
+</div>
+</body>
+</html>

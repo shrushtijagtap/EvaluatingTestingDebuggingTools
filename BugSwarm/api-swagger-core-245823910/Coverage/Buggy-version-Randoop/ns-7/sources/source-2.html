@@ -1,0 +1,142 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > OpenAPIExtensions</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.jaxrs2.ext</a>
+</div>
+
+<h1>Coverage Summary for Class: OpenAPIExtensions (io.swagger.jaxrs2.ext)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OpenAPIExtensions</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package io.swagger.jaxrs2.ext;
+&nbsp;
+&nbsp;import io.swagger.jaxrs2.DefaultParameterExtension;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.ServiceLoader;
+&nbsp;
+<b class="nc">&nbsp;public class OpenAPIExtensions {</b>
+<b class="nc">&nbsp;    private static Logger LOGGER = LoggerFactory.getLogger(OpenAPIExtensions.class);</b>
+&nbsp;
+<b class="nc">&nbsp;    private static List&lt;OpenAPIExtension&gt; extensions = null;</b>
+&nbsp;
+&nbsp;    public static List&lt;OpenAPIExtension&gt; getExtensions() {
+<b class="nc">&nbsp;        return extensions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setExtensions(List&lt;OpenAPIExtension&gt; ext) {
+<b class="nc">&nbsp;        extensions = ext;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Iterator&lt;OpenAPIExtension&gt; chain() {
+<b class="nc">&nbsp;        return extensions.iterator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static {
+<b class="nc">&nbsp;        extensions = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        ServiceLoader&lt;OpenAPIExtension&gt; loader = ServiceLoader.load(OpenAPIExtension.class);</b>
+<b class="nc">&nbsp;        for (OpenAPIExtension ext : loader) {</b>
+<b class="nc">&nbsp;            LOGGER.debug(&quot;adding extension &quot; + ext);</b>
+<b class="nc">&nbsp;            extensions.add(ext);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        extensions.add(new DefaultParameterExtension());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:23</div>
+</div>
+</body>
+</html>

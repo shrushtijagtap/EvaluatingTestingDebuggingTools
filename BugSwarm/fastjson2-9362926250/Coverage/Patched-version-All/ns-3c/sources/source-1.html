@@ -1,0 +1,300 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AnnotationUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.util</a>
+</div>
+
+<h1>Coverage Summary for Class: AnnotationUtils (com.alibaba.fastjson2.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AnnotationUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    64.9%
+  </span>
+  <span class="absValue">
+    (37/57)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.util;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.annotation.Inherited;
+&nbsp;import java.lang.reflect.AccessibleObject;
+&nbsp;import java.lang.reflect.AnnotatedElement;
+&nbsp;import java.lang.reflect.Parameter;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Annotation utils transformed from {@code org.junit.platform.commons.util.AnnotationUtils}
+&nbsp; *
+&nbsp; * @author lzhpo
+&nbsp; */
+&nbsp;public final class AnnotationUtils {
+&nbsp;    private AnnotationUtils() {
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Find the first annotation of {@code annotationType} that is either
+&nbsp;     * &lt;em&gt;directly present&lt;/em&gt;, &lt;em&gt;meta-present&lt;/em&gt;, or &lt;em&gt;indirectly
+&nbsp;     * present&lt;/em&gt; on the supplied {@code element}.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;If the element is a class and the annotation is neither &lt;em&gt;directly
+&nbsp;     * present&lt;/em&gt; nor &lt;em&gt;meta-present&lt;/em&gt; on the class, this method will additionally search on
+&nbsp;     * interfaces implemented by the class before finding an annotation that is &lt;em&gt;indirectly
+&nbsp;     * present&lt;/em&gt; on the class.
+&nbsp;     *
+&nbsp;     * @param element the element on which to search for the annotation
+&nbsp;     * @param annotationType the annotation type of need to search
+&nbsp;     * @param &lt;A&gt; the annotation
+&nbsp;     * @return the searched annotation type
+&nbsp;     */
+&nbsp;    public static &lt;A extends Annotation&gt; A findAnnotation(AnnotatedElement element, Class&lt;A&gt; annotationType) {
+<b class="fc">&nbsp;        if (annotationType == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(&quot;annotationType must not be null&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        boolean inherited = annotationType.isAnnotationPresent(Inherited.class);</b>
+<b class="fc">&nbsp;        return findAnnotation(element, annotationType, inherited, new HashSet&lt;&gt;());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If the {@code annotation}&#39;s annotationType is not {@code annotationType}, then to find the
+&nbsp;     * first annotation of {@code annotationType} that is either
+&nbsp;     * &lt;em&gt;directly present&lt;/em&gt;, &lt;em&gt;meta-present&lt;/em&gt;, or &lt;em&gt;indirectly
+&nbsp;     * present&lt;/em&gt; on the supplied {@code element}.
+&nbsp;     *
+&nbsp;     * @param annotation annotation
+&nbsp;     * @param annotationType the annotation type of need to search
+&nbsp;     * @param &lt;A&gt; the searched annotation type
+&nbsp;     * @return the searched annotation
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public static &lt;A extends Annotation&gt; A findAnnotation(Annotation annotation, Class&lt;A&gt; annotationType) {
+<b class="fc">&nbsp;        if (annotation == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(&quot;annotation must not be null&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (annotationType == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(&quot;annotationType must not be null&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Class&lt;? extends Annotation&gt; annotationTypeClass = annotation.annotationType();</b>
+<b class="fc">&nbsp;        if (annotationTypeClass == annotationType) {</b>
+<b class="fc">&nbsp;            return (A) annotation;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        boolean inherited = annotationType.isAnnotationPresent(Inherited.class);</b>
+<b class="fc">&nbsp;        return findAnnotation(annotationTypeClass, annotationType, inherited, new HashSet&lt;&gt;());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Find the first annotation of {@code annotationType} that is either
+&nbsp;     * &lt;em&gt;directly present&lt;/em&gt;, &lt;em&gt;meta-present&lt;/em&gt;, or &lt;em&gt;indirectly
+&nbsp;     * present&lt;/em&gt; on the supplied {@code element}.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;If the element is a class and the annotation is neither &lt;em&gt;directly
+&nbsp;     * present&lt;/em&gt; nor &lt;em&gt;meta-present&lt;/em&gt; on the class, this method will additionally search on
+&nbsp;     * interfaces implemented by the class before finding an annotation that is &lt;em&gt;indirectly
+&nbsp;     * present&lt;/em&gt; on the class.
+&nbsp;     *
+&nbsp;     * @param element the element on which to search for the annotation
+&nbsp;     * @param annotationType the annotation type of need to search
+&nbsp;     * @param inherited whether has {@link Inherited}
+&nbsp;     * @param visited this annotation whether visited
+&nbsp;     * @param &lt;A&gt; the annotation type
+&nbsp;     * @return the searched annotation
+&nbsp;     */
+&nbsp;    private static &lt;A extends Annotation&gt; A findAnnotation(
+&nbsp;            AnnotatedElement element,
+&nbsp;            Class&lt;A&gt; annotationType,
+&nbsp;            boolean inherited,
+&nbsp;            Set&lt;Annotation&gt; visited
+&nbsp;    ) {
+<b class="fc">&nbsp;        if (element == null || annotationType == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        A annotation = element.getDeclaredAnnotation(annotationType);</b>
+<b class="fc">&nbsp;        if (annotation != null) {</b>
+<b class="fc">&nbsp;            return annotation;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Annotation[] declaredAnnotations = element.getDeclaredAnnotations();</b>
+<b class="fc">&nbsp;        A directMetaAnnotation = findMetaAnnotation(annotationType, declaredAnnotations, inherited, visited);</b>
+<b class="fc">&nbsp;        if (directMetaAnnotation != null) {</b>
+<b class="fc">&nbsp;            return directMetaAnnotation;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (element instanceof Class) {</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; clazz = (Class&lt;?&gt;) element;</b>
+&nbsp;
+<b class="fc">&nbsp;            for (Class&lt;?&gt; ifc : clazz.getInterfaces()) {</b>
+<b class="fc">&nbsp;                if (ifc != Annotation.class) {</b>
+<b class="nc">&nbsp;                    A annotationOnInterface = findAnnotation(ifc, annotationType, inherited, visited);</b>
+<b class="nc">&nbsp;                    if (annotationOnInterface != null) {</b>
+<b class="nc">&nbsp;                        return annotationOnInterface;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (inherited) {</b>
+<b class="nc">&nbsp;                Class&lt;?&gt; superclass = clazz.getSuperclass();</b>
+<b class="nc">&nbsp;                if (superclass != null &amp;&amp; superclass != Object.class) {</b>
+<b class="nc">&nbsp;                    A annotationOnSuperclass = findAnnotation(superclass, annotationType, inherited, visited);</b>
+<b class="nc">&nbsp;                    if (annotationOnSuperclass != null) {</b>
+<b class="nc">&nbsp;                        return annotationOnSuperclass;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return findMetaAnnotation(annotationType, getAnnotations(element), inherited, visited);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Find meta-present on indirectly present annotations.
+&nbsp;     *
+&nbsp;     * @param annotationType the annotation type of need to search
+&nbsp;     * @param candidates annotations for candidates
+&nbsp;     * @param inherited whether has {@link Inherited}
+&nbsp;     * @param visited this annotation whether visited
+&nbsp;     * @param &lt;A&gt; the annotation type
+&nbsp;     * @return the searched annotation
+&nbsp;     */
+&nbsp;    private static &lt;A extends Annotation&gt; A findMetaAnnotation(
+&nbsp;            Class&lt;A&gt; annotationType,
+&nbsp;            Annotation[] candidates,
+&nbsp;            boolean inherited,
+&nbsp;            Set&lt;Annotation&gt; visited
+&nbsp;    ) {
+<b class="fc">&nbsp;        for (Annotation candidateAnnotation : candidates) {</b>
+<b class="fc">&nbsp;            Class&lt;? extends Annotation&gt; candidateAnnotationType = candidateAnnotation.annotationType();</b>
+<b class="fc">&nbsp;            String name = candidateAnnotationType.getName();</b>
+<b class="fc">&nbsp;            boolean isInJavaLangAnnotationPackage = name.startsWith(&quot;java.lang.annotation&quot;) || name.startsWith(&quot;kotlin.&quot;);</b>
+<b class="fc">&nbsp;            if (!isInJavaLangAnnotationPackage &amp;&amp; visited.add(candidateAnnotation)) {</b>
+<b class="fc">&nbsp;                A metaAnnotation = findAnnotation(candidateAnnotationType, annotationType, inherited, visited);</b>
+<b class="fc">&nbsp;                if (metaAnnotation != null) {</b>
+<b class="fc">&nbsp;                    return metaAnnotation;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Annotation[] getAnnotations(AccessibleObject accessibleObject) {
+&nbsp;        try {
+<b class="fc">&nbsp;            return accessibleObject.getAnnotations();</b>
+<b class="nc">&nbsp;        } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;            return new Annotation[0];</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Annotation[] getAnnotations(Class objectClass) {
+&nbsp;        try {
+<b class="fc">&nbsp;            return objectClass.getAnnotations();</b>
+<b class="nc">&nbsp;        } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;            return new Annotation[0];</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Annotation[] getAnnotations(Parameter parameter) {
+&nbsp;        try {
+<b class="fc">&nbsp;            return parameter.getAnnotations();</b>
+<b class="nc">&nbsp;        } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;            return new Annotation[0];</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    public static Annotation[] getAnnotations(AnnotatedElement element) {
+&nbsp;        try {
+<b class="fc">&nbsp;            return element.getAnnotations();</b>
+<b class="nc">&nbsp;        } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;            return new Annotation[0];</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:16</div>
+</div>
+</body>
+</html>

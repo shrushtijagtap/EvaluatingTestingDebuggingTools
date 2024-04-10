@@ -1,0 +1,391 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > OperationParser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.jaxrs2</a>
+</div>
+
+<h1>Coverage Summary for Class: OperationParser (io.swagger.jaxrs2)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OperationParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/150)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package io.swagger.jaxrs2;
+&nbsp;
+&nbsp;import io.swagger.converter.ModelConverters;
+&nbsp;import io.swagger.oas.annotations.media.ExampleObject;
+&nbsp;import io.swagger.oas.models.ExternalDocumentation;
+&nbsp;import io.swagger.oas.models.examples.Example;
+&nbsp;import io.swagger.oas.models.info.Contact;
+&nbsp;import io.swagger.oas.models.info.Info;
+&nbsp;import io.swagger.oas.models.info.License;
+&nbsp;import io.swagger.oas.models.media.Content;
+&nbsp;import io.swagger.oas.models.media.MediaType;
+&nbsp;import io.swagger.oas.models.media.Schema;
+&nbsp;import io.swagger.oas.models.parameters.Parameter;
+&nbsp;import io.swagger.oas.models.parameters.RequestBody;
+&nbsp;import io.swagger.oas.models.responses.ApiResponse;
+&nbsp;import io.swagger.oas.models.responses.ApiResponses;
+&nbsp;import io.swagger.oas.models.servers.Server;
+&nbsp;import io.swagger.oas.models.servers.ServerVariable;
+&nbsp;import io.swagger.oas.models.servers.ServerVariables;
+&nbsp;import io.swagger.oas.models.tags.Tag;
+&nbsp;import org.apache.commons.lang3.StringUtils;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.LinkedHashSet;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Optional;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;/**
+&nbsp; * Created by RafaelLopez on 5/27/17.
+&nbsp; */
+<b class="nc">&nbsp;public class OperationParser {</b>
+&nbsp;
+&nbsp;	public static Optional&lt;List&lt;Parameter&gt;&gt; getParametersList(io.swagger.oas.annotations.Parameter[] parameters) {
+<b class="nc">&nbsp;		if (parameters == null) {</b>
+<b class="nc">&nbsp;			return Optional.empty();</b>
+&nbsp;		}
+<b class="nc">&nbsp;		List&lt;Parameter&gt; parametersObject = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;		for (io.swagger.oas.annotations.Parameter parameter : parameters) {</b>
+<b class="nc">&nbsp;			getParameter(parameter).ifPresent(parametersObject::add);</b>
+&nbsp;
+&nbsp;		}
+<b class="nc">&nbsp;		return Optional.of(parametersObject);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public static Optional&lt;Parameter&gt; getParameter(io.swagger.oas.annotations.Parameter parameter) {
+<b class="nc">&nbsp;		if (parameter == null) {</b>
+<b class="nc">&nbsp;			return Optional.empty();</b>
+&nbsp;		}
+<b class="nc">&nbsp;		Parameter parameterObject = new Parameter();</b>
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(parameter.description())) {</b>
+<b class="nc">&nbsp;			parameterObject.setDescription(parameter.description());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(parameter.name())) {</b>
+<b class="nc">&nbsp;			parameterObject.setName(parameter.name());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(parameter.in())) {</b>
+<b class="nc">&nbsp;			parameterObject.setIn(parameter.in());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		parameterObject.setDeprecated(parameter.deprecated());</b>
+<b class="nc">&nbsp;		parameterObject.setRequired(parameter.required());</b>
+<b class="nc">&nbsp;		parameterObject.setStyle(StringUtils.isNoneBlank(parameter.style()) ? Parameter.StyleEnum.valueOf(parameter.style()) : null);</b>
+<b class="nc">&nbsp;		parameterObject.setAllowEmptyValue(parameter.allowEmptyValue());</b>
+<b class="nc">&nbsp;		parameterObject.setAllowReserved(parameter.allowReserved());</b>
+<b class="nc">&nbsp;		parameterObject.setExplode(parameter.explode());</b>
+<b class="nc">&nbsp;		getContents(parameter.content()).ifPresent(parameterObject::setContent);</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;		return Optional.of(parameterObject);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public static Optional&lt;Map&lt;String, Schema&gt;&gt; getSchema(io.swagger.oas.annotations.media.Schema schema) {
+<b class="nc">&nbsp;		if (schema == null) {</b>
+<b class="nc">&nbsp;			return Optional.empty();</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (schema.implementation() != Void.class) {</b>
+<b class="nc">&nbsp;			return Optional.of(ModelConverters.getInstance().readAll(schema.implementation()));</b>
+&nbsp;		}
+<b class="nc">&nbsp;		return Optional.empty();</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public static Optional&lt;Set&lt;Tag&gt;&gt; getTags(String[] tags) {
+<b class="nc">&nbsp;		if (tags == null) {</b>
+<b class="nc">&nbsp;			return Optional.empty();</b>
+&nbsp;		}
+<b class="nc">&nbsp;		Set&lt;Tag&gt; tagsList = new LinkedHashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;		for (String tag : tags) {</b>
+<b class="nc">&nbsp;			Tag tagObject = new Tag();</b>
+<b class="nc">&nbsp;			tagObject.setDescription(tag);</b>
+<b class="nc">&nbsp;			tagObject.setName(tag);</b>
+<b class="nc">&nbsp;			tagsList.add(tagObject);</b>
+&nbsp;		}
+<b class="nc">&nbsp;		return Optional.of(tagsList);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public static Optional&lt;List&lt;Server&gt;&gt; getServers(io.swagger.oas.annotations.servers.Server[] servers) {
+<b class="nc">&nbsp;		if (servers == null) {</b>
+<b class="nc">&nbsp;			return Optional.empty();</b>
+&nbsp;		}
+<b class="nc">&nbsp;		List&lt;Server&gt; serverObjects = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;		for (io.swagger.oas.annotations.servers.Server server : servers) {</b>
+<b class="nc">&nbsp;			getServer(server).ifPresent(serverObjects::add);</b>
+&nbsp;		}
+<b class="nc">&nbsp;		return Optional.of(serverObjects);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public static Optional&lt;Server&gt; getServer(io.swagger.oas.annotations.servers.Server server) {
+<b class="nc">&nbsp;		if (server == null) {</b>
+<b class="nc">&nbsp;			return Optional.empty();</b>
+&nbsp;		}
+&nbsp;
+<b class="nc">&nbsp;		Server serverObject = new Server();</b>
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(server.url())) {</b>
+<b class="nc">&nbsp;			serverObject.setUrl(server.url());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(server.description())) {</b>
+<b class="nc">&nbsp;			serverObject.setDescription(server.description());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		io.swagger.oas.annotations.servers.ServerVariable[] serverVariables = server.variables();</b>
+<b class="nc">&nbsp;		ServerVariables serverVariablesObject = new ServerVariables();</b>
+<b class="nc">&nbsp;		for (io.swagger.oas.annotations.servers.ServerVariable serverVariable : serverVariables) {</b>
+<b class="nc">&nbsp;			ServerVariable serverVariableObject = new ServerVariable();</b>
+<b class="nc">&nbsp;			if (StringUtils.isNotBlank(serverVariable.description())) {</b>
+<b class="nc">&nbsp;				serverVariableObject.setDescription(serverVariable.description());</b>
+&nbsp;			}
+<b class="nc">&nbsp;			serverVariablesObject.addServerVariable(serverVariable.name(), serverVariableObject);</b>
+&nbsp;		}
+<b class="nc">&nbsp;		serverObject.setVariables(serverVariablesObject);</b>
+&nbsp;
+<b class="nc">&nbsp;		return Optional.of(serverObject);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public static Optional&lt;ExternalDocumentation&gt; getExternalDocumentation(io.swagger.oas.annotations.ExternalDocumentation externalDocumentation) {
+<b class="nc">&nbsp;		if (externalDocumentation == null) {</b>
+<b class="nc">&nbsp;			return Optional.empty();</b>
+&nbsp;		}
+<b class="nc">&nbsp;		ExternalDocumentation external = new ExternalDocumentation();</b>
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(externalDocumentation.description())) {</b>
+<b class="nc">&nbsp;			external.setDescription(externalDocumentation.description());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(externalDocumentation.url())) {</b>
+<b class="nc">&nbsp;			external.setUrl(externalDocumentation.url());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		return Optional.of(external);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public static Optional&lt;RequestBody&gt; getRequestBody(io.swagger.oas.annotations.parameters.RequestBody requestBody) {
+<b class="nc">&nbsp;		if (requestBody == null) {</b>
+<b class="nc">&nbsp;			return Optional.empty();</b>
+&nbsp;		}
+<b class="nc">&nbsp;		RequestBody requestBodyObject = new RequestBody();</b>
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(requestBody.description())) {</b>
+<b class="nc">&nbsp;			requestBodyObject.setDescription(requestBody.description());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		requestBodyObject.setRequired(requestBody.required());</b>
+<b class="nc">&nbsp;		getContents(requestBody.content()).ifPresent(requestBodyObject::setContent);</b>
+<b class="nc">&nbsp;		return Optional.of(requestBodyObject);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public static Optional&lt;ApiResponses&gt; getApiResponses(final io.swagger.oas.annotations.responses.ApiResponse[] responses, io.swagger.oas.annotations.links.Link links) {
+<b class="nc">&nbsp;		if (responses == null) {</b>
+<b class="nc">&nbsp;			return Optional.empty();</b>
+&nbsp;		}
+<b class="nc">&nbsp;		ApiResponses apiResponsesObject = new ApiResponses();</b>
+<b class="nc">&nbsp;		for (io.swagger.oas.annotations.responses.ApiResponse response : responses) {</b>
+<b class="nc">&nbsp;			ApiResponse apiResponseObject = new ApiResponse();</b>
+<b class="nc">&nbsp;			getContent(response.content()).ifPresent(apiResponseObject::content);</b>
+<b class="nc">&nbsp;			if (StringUtils.isNotBlank(response.description())) {</b>
+<b class="nc">&nbsp;				apiResponseObject.setDescription(response.description());</b>
+&nbsp;			}
+&nbsp;
+<b class="nc">&nbsp;			apiResponsesObject.addApiResponse(response.responseCode(), apiResponseObject);</b>
+&nbsp;		}
+<b class="nc">&nbsp;		return Optional.of(apiResponsesObject);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public static Optional&lt;Content&gt; getContents(io.swagger.oas.annotations.media.Content[] contents) {
+<b class="nc">&nbsp;		if (contents == null) {</b>
+<b class="nc">&nbsp;			return Optional.empty();</b>
+&nbsp;		}
+<b class="nc">&nbsp;		Content contentObject = new Content();</b>
+<b class="nc">&nbsp;		for (io.swagger.oas.annotations.media.Content content : contents) {</b>
+<b class="nc">&nbsp;			ExampleObject[] examples = content.examples();</b>
+<b class="nc">&nbsp;			for (ExampleObject example : examples) {</b>
+<b class="nc">&nbsp;				getMediaType(example).ifPresent(mediaType -&gt; contentObject.addMediaType(content.mediaType(), mediaType));</b>
+&nbsp;			}
+&nbsp;		}
+<b class="nc">&nbsp;		return Optional.of(contentObject);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public static Optional&lt;Content&gt; getContent(io.swagger.oas.annotations.media.Content annotationContent) {
+<b class="nc">&nbsp;		if (annotationContent == null) {</b>
+<b class="nc">&nbsp;			Optional.empty();</b>
+&nbsp;		}
+<b class="nc">&nbsp;		Content content = new Content();</b>
+&nbsp;		// TODO - Add the Schema from the Content annotation an use the ModelConverter
+<b class="nc">&nbsp;		if (annotationContent != null) {</b>
+<b class="nc">&nbsp;			ExampleObject[] examples = annotationContent.examples();</b>
+<b class="nc">&nbsp;			for (ExampleObject example : examples) {</b>
+<b class="nc">&nbsp;				getMediaType(example).ifPresent(mediaType -&gt; content.addMediaType(annotationContent.mediaType(), mediaType));</b>
+&nbsp;			}
+&nbsp;		}
+<b class="nc">&nbsp;		return Optional.of(content);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public static Optional&lt;MediaType&gt; getMediaType(ExampleObject example) {
+<b class="nc">&nbsp;		if (example == null) {</b>
+<b class="nc">&nbsp;			return Optional.empty();</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(example.name())) {</b>
+<b class="nc">&nbsp;			MediaType mediaType = new MediaType();</b>
+<b class="nc">&nbsp;			Example exampleObject = new Example();</b>
+<b class="nc">&nbsp;			if (StringUtils.isNotBlank(example.name())) {</b>
+<b class="nc">&nbsp;				exampleObject.setDescription(example.name());</b>
+&nbsp;			}
+<b class="nc">&nbsp;			if (StringUtils.isNotBlank(example.summary())) {</b>
+<b class="nc">&nbsp;				exampleObject.setSummary(example.summary());</b>
+&nbsp;			}
+<b class="nc">&nbsp;			if (StringUtils.isNotBlank(example.externalValue())) {</b>
+<b class="nc">&nbsp;				exampleObject.setExternalValue(example.externalValue());</b>
+&nbsp;			}
+<b class="nc">&nbsp;			if (StringUtils.isNotBlank(example.value())) {</b>
+<b class="nc">&nbsp;				exampleObject.setValue(example.value());</b>
+&nbsp;			}
+&nbsp;
+<b class="nc">&nbsp;			mediaType.addExamples(example.name(), exampleObject);</b>
+<b class="nc">&nbsp;			return Optional.of(mediaType);</b>
+&nbsp;		}
+<b class="nc">&nbsp;		return Optional.empty();</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public static Optional&lt;Info&gt; getInfo(io.swagger.oas.annotations.info.Info info) {
+<b class="nc">&nbsp;		if (info == null) {</b>
+<b class="nc">&nbsp;			return Optional.empty();</b>
+&nbsp;		}
+<b class="nc">&nbsp;		Info infoObject = new Info();</b>
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(info.description())) {</b>
+<b class="nc">&nbsp;			infoObject.setDescription(info.description());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(info.termsOfService())) {</b>
+<b class="nc">&nbsp;			infoObject.setTermsOfService(info.termsOfService());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(info.title())) {</b>
+<b class="nc">&nbsp;			infoObject.setTitle(info.title());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(info.version())) {</b>
+<b class="nc">&nbsp;			infoObject.setVersion(info.version());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		getContact(info.contact()).ifPresent(infoObject::setContact);</b>
+<b class="nc">&nbsp;		getLicense(info.license()).ifPresent(infoObject::setLicense);</b>
+&nbsp;
+<b class="nc">&nbsp;		return Optional.of(infoObject);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public static Optional&lt;Contact&gt; getContact(io.swagger.oas.annotations.info.Contact contact) {
+<b class="nc">&nbsp;		if (contact == null) {</b>
+<b class="nc">&nbsp;			return Optional.empty();</b>
+&nbsp;		}
+<b class="nc">&nbsp;		Contact contactObject = new Contact();</b>
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(contact.email())) {</b>
+<b class="nc">&nbsp;			contactObject.setEmail(contact.email());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(contact.name())) {</b>
+<b class="nc">&nbsp;			contactObject.setName(contact.name());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(contact.url())) {</b>
+<b class="nc">&nbsp;			contactObject.setUrl(contact.url());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		return Optional.of(contactObject);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public static Optional&lt;License&gt; getLicense(io.swagger.oas.annotations.info.License license) {
+<b class="nc">&nbsp;		if (license == null) {</b>
+<b class="nc">&nbsp;			return Optional.empty();</b>
+&nbsp;		}
+<b class="nc">&nbsp;		License licenseObject = new License();</b>
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(license.name())) {</b>
+<b class="nc">&nbsp;			licenseObject.setName(license.name());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if (StringUtils.isNotBlank(license.url())) {</b>
+<b class="nc">&nbsp;			licenseObject.setUrl(license.url());</b>
+&nbsp;		}
+<b class="nc">&nbsp;		return Optional.of(licenseObject);</b>
+&nbsp;	}
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:26</div>
+</div>
+</body>
+</html>

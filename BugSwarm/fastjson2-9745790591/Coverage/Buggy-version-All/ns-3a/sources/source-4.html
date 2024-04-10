@@ -1,0 +1,497 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FieldReader</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldReader (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FieldReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (30/30)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    89.7%
+  </span>
+  <span class="absValue">
+    (139/155)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONPath;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.codec.FieldInfo;
+&nbsp;import com.alibaba.fastjson2.schema.JSONSchema;
+&nbsp;import com.alibaba.fastjson2.util.BeanUtils;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.JdbcSupport;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.lang.reflect.*;
+&nbsp;import java.time.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;public abstract class FieldReader&lt;T&gt;
+&nbsp;        implements Comparable&lt;FieldReader&gt; {
+&nbsp;    public final int ordinal;
+&nbsp;    public final String fieldName;
+&nbsp;    public final Class fieldClass;
+&nbsp;    public final Type fieldType;
+&nbsp;    public final long features;
+&nbsp;    public final String format;
+&nbsp;    public final Method method;
+&nbsp;    public final Field field;
+&nbsp;    public final Object defaultValue;
+&nbsp;    public final Locale locale;
+&nbsp;    public final JSONSchema schema;
+&nbsp;
+&nbsp;    final boolean fieldClassSerializable;
+&nbsp;    final long fieldNameHash;
+&nbsp;    final long fieldNameHashLCase;
+&nbsp;
+&nbsp;    volatile ObjectReader reader;
+&nbsp;
+&nbsp;    volatile JSONPath referenceCache;
+&nbsp;    final boolean noneStaticMemberClass;
+&nbsp;
+&nbsp;    Type itemType;
+&nbsp;    Class itemClass;
+&nbsp;    volatile ObjectReader itemReader;
+&nbsp;
+&nbsp;    public FieldReader(String fieldName, Type fieldType) {
+<b class="fc">&nbsp;        this (fieldName, fieldType, TypeUtils.getClass(fieldType), 0, 0L, null, null, null, null, null, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public FieldReader(
+&nbsp;            String fieldName,
+&nbsp;            Type fieldType,
+&nbsp;            Class fieldClass,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            Locale locale,
+&nbsp;            Object defaultValue,
+&nbsp;            JSONSchema schema,
+&nbsp;            Method method,
+&nbsp;            Field field
+<b class="fc">&nbsp;    ) {</b>
+<b class="fc">&nbsp;        this.fieldName = fieldName;</b>
+<b class="fc">&nbsp;        this.fieldType = fieldType;</b>
+<b class="fc">&nbsp;        this.fieldClass = fieldClass;</b>
+<b class="fc">&nbsp;        this.fieldClassSerializable = fieldClass != null &amp;&amp; (Serializable.class.isAssignableFrom(fieldClass)</b>
+<b class="fc">&nbsp;                || Modifier.isInterface(fieldClass.getModifiers()));</b>
+<b class="fc">&nbsp;        this.features = features;</b>
+<b class="fc">&nbsp;        this.fieldNameHash = Fnv.hashCode64(fieldName);</b>
+<b class="fc">&nbsp;        this.fieldNameHashLCase = Fnv.hashCode64LCase(fieldName);</b>
+<b class="fc">&nbsp;        this.ordinal = ordinal;</b>
+<b class="fc">&nbsp;        this.format = format;</b>
+<b class="fc">&nbsp;        this.locale = locale;</b>
+<b class="fc">&nbsp;        this.defaultValue = defaultValue;</b>
+<b class="fc">&nbsp;        this.schema = schema;</b>
+<b class="fc">&nbsp;        this.method = method;</b>
+<b class="fc">&nbsp;        this.field = field;</b>
+&nbsp;
+<b class="fc">&nbsp;        Class declaringClass = null;</b>
+<b class="fc">&nbsp;        if (method != null) {</b>
+<b class="fc">&nbsp;            declaringClass = method.getDeclaringClass();</b>
+<b class="fc">&nbsp;        } else if (field != null) {</b>
+<b class="fc">&nbsp;            declaringClass = field.getDeclaringClass();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        this.noneStaticMemberClass = BeanUtils.isNoneStaticMemberClass(declaringClass, fieldClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void acceptDefaultValue(T object) {
+<b class="fc">&nbsp;        if (defaultValue != null) {</b>
+<b class="fc">&nbsp;            accept(object, defaultValue);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReader getObjectReader(JSONReader jsonReader) {
+<b class="fc">&nbsp;        if (reader != null) {</b>
+<b class="fc">&nbsp;            return reader;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return reader = jsonReader.getObjectReader(fieldType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReader getObjectReader(JSONReader.Context context) {
+<b class="fc">&nbsp;        if (reader != null) {</b>
+<b class="fc">&nbsp;            return reader;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return reader = context.getObjectReader(fieldType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Type getItemType() {
+<b class="fc">&nbsp;        return itemType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Class getItemClass() {
+<b class="fc">&nbsp;        if (itemType == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (itemClass == null) {</b>
+<b class="nc">&nbsp;            itemClass = TypeUtils.getClass(itemType);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return itemClass;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getItemClassHash() {
+<b class="fc">&nbsp;        Class itemClass = getItemClass();</b>
+<b class="fc">&nbsp;        if (itemClass == null) {</b>
+<b class="fc">&nbsp;            return 0;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Fnv.hashCode64(itemClass.getName());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="fc">&nbsp;        Member member = this.method != null ? this.method : this.field;</b>
+<b class="fc">&nbsp;        if (member != null) {</b>
+<b class="fc">&nbsp;            return member.getName();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return fieldName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addResolveTask(JSONReader jsonReader, Object object, String reference) {
+&nbsp;        JSONPath path;
+<b class="fc">&nbsp;        if (referenceCache != null &amp;&amp; referenceCache.toString().equals(reference)) {</b>
+<b class="fc">&nbsp;            path = referenceCache;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            path = referenceCache = JSONPath.of(reference);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        jsonReader.addResolveTask(this, object, path);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int compareTo(FieldReader o) {
+<b class="fc">&nbsp;        int nameCompare = this.fieldName.compareTo(o.fieldName);</b>
+<b class="fc">&nbsp;        if (nameCompare != 0) {</b>
+<b class="fc">&nbsp;            if (this.ordinal &lt; o.ordinal) {</b>
+<b class="fc">&nbsp;                return -1;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (this.ordinal &gt; o.ordinal) {</b>
+<b class="fc">&nbsp;                return 1;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return nameCompare;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int cmp = (isReadOnly() == o.isReadOnly()) ? 0 : (isReadOnly() ? 1 : -1);</b>
+<b class="fc">&nbsp;        if (cmp != 0) {</b>
+<b class="fc">&nbsp;            return cmp;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Member thisMember = this.field != null ? this.field : this.method;</b>
+<b class="fc">&nbsp;        Member otherMember = o.field != null ? o.field : o.method;</b>
+<b class="fc">&nbsp;        if (thisMember != null &amp;&amp; otherMember != null &amp;&amp; thisMember.getClass() != otherMember.getClass()) {</b>
+<b class="fc">&nbsp;            Class otherDeclaringClass = otherMember.getDeclaringClass();</b>
+<b class="fc">&nbsp;            Class thisDeclaringClass = thisMember.getDeclaringClass();</b>
+<b class="fc">&nbsp;            if (thisDeclaringClass != otherDeclaringClass &amp;&amp; thisDeclaringClass != null &amp;&amp; otherDeclaringClass != null) {</b>
+<b class="fc">&nbsp;                if (thisDeclaringClass.isAssignableFrom(otherDeclaringClass)) {</b>
+<b class="fc">&nbsp;                    return 1;</b>
+<b class="nc">&nbsp;                } else if (otherDeclaringClass.isAssignableFrom(thisDeclaringClass)) {</b>
+<b class="nc">&nbsp;                    return -1;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (this.field != null &amp;&amp; o.field != null) {</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; thisFieldDeclaringClass = this.field.getDeclaringClass();</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; otherFieldDeclaringClass = o.field.getDeclaringClass();</b>
+&nbsp;
+<b class="fc">&nbsp;            for (Class superClass = thisFieldDeclaringClass.getSuperclass(); superClass != null &amp;&amp; superClass != Object.class; superClass = superClass.getSuperclass()) {</b>
+<b class="fc">&nbsp;                if (superClass == otherFieldDeclaringClass) {</b>
+<b class="fc">&nbsp;                    return 1;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            for (Class superClass = otherFieldDeclaringClass.getSuperclass(); superClass != null &amp;&amp; superClass != Object.class; superClass = superClass.getSuperclass()) {</b>
+<b class="nc">&nbsp;                if (superClass == thisFieldDeclaringClass) {</b>
+<b class="nc">&nbsp;                    return -1;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (this.method != null &amp;&amp; o.method != null) {</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; thisMethodDeclaringClass = this.method.getDeclaringClass();</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; otherMethodDeclaringClass = o.method.getDeclaringClass();</b>
+&nbsp;
+<b class="fc">&nbsp;            for (Class superClass = thisMethodDeclaringClass.getSuperclass(); superClass != null &amp;&amp; superClass != Object.class; superClass = superClass.getSuperclass()) {</b>
+<b class="fc">&nbsp;                if (superClass == otherMethodDeclaringClass) {</b>
+<b class="nc">&nbsp;                    return -1;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            for (Class superClass = otherMethodDeclaringClass.getSuperclass(); superClass != null &amp;&amp; superClass != Object.class; superClass = superClass.getSuperclass()) {</b>
+<b class="fc">&nbsp;                if (superClass == thisMethodDeclaringClass) {</b>
+<b class="nc">&nbsp;                    return 1;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (this.method.getParameterCount() == 1 &amp;&amp; o.method.getParameterCount() == 1) {</b>
+<b class="fc">&nbsp;                Class&lt;?&gt; thisParamType = this.method.getParameterTypes()[0];</b>
+<b class="fc">&nbsp;                Class&lt;?&gt; otherParamType = o.method.getParameterTypes()[0];</b>
+&nbsp;
+<b class="fc">&nbsp;                if (thisParamType.isAssignableFrom(otherParamType)) {</b>
+<b class="nc">&nbsp;                    return 1;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (otherParamType.isAssignableFrom(thisParamType)) {</b>
+<b class="fc">&nbsp;                    return -1;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (thisParamType.isEnum() &amp;&amp; (otherParamType == Integer.class || otherParamType == int.class)) {</b>
+<b class="fc">&nbsp;                    return 1;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (otherParamType.isEnum() &amp;&amp; (thisParamType == Integer.class || thisParamType == int.class)) {</b>
+<b class="fc">&nbsp;                    return -1;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        ObjectReader thisInitReader = this.getInitReader();</b>
+<b class="fc">&nbsp;        ObjectReader otherInitReader = o.getInitReader();</b>
+<b class="fc">&nbsp;        if (thisInitReader != null &amp;&amp; otherInitReader == null) {</b>
+<b class="nc">&nbsp;            return -1;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (thisInitReader == null &amp;&amp; otherInitReader != null) {</b>
+<b class="nc">&nbsp;            return 1;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return cmp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isUnwrapped() {
+<b class="fc">&nbsp;        return (features &amp; FieldInfo.UNWRAPPED_MASK) != 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addResolveTask(JSONReader jsonReader, List object, int i, String reference) {
+<b class="fc">&nbsp;        jsonReader.addResolveTask(object, i, JSONPath.of(reference));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void readFieldValueJSONB(JSONReader jsonReader, T object) {
+<b class="fc">&nbsp;        readFieldValue(jsonReader, object);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract Object readFieldValue(JSONReader jsonReader);
+&nbsp;
+&nbsp;    public void accept(T object, boolean value) {
+<b class="fc">&nbsp;        accept(object, Boolean.valueOf(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void accept(T object, byte value) {
+<b class="fc">&nbsp;        accept(object, Byte.valueOf(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void accept(T object, short value) {
+<b class="fc">&nbsp;        accept(object, Short.valueOf(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void accept(T object, int value) {
+<b class="fc">&nbsp;        accept(object, Integer.valueOf(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void accept(T object, long value) {
+<b class="fc">&nbsp;        accept(object, Long.valueOf(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void accept(T object, char value) {
+<b class="fc">&nbsp;        accept(object, Character.valueOf(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void accept(T object, float value) {
+<b class="fc">&nbsp;        accept(object, Float.valueOf(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void accept(T object, double value) {
+<b class="fc">&nbsp;        accept(object, Double.valueOf(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract void accept(T object, Object value);
+&nbsp;
+&nbsp;    public abstract void readFieldValue(JSONReader jsonReader, T object);
+&nbsp;
+&nbsp;    public ObjectReader checkObjectAutoType(JSONReader jsonReader) {
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isReadOnly() {
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReader getInitReader() {
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void processExtra(JSONReader jsonReader, Object object) {
+<b class="fc">&nbsp;        jsonReader.skipValue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void acceptExtra(Object object, String name, Object value) {
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public ObjectReader getItemObjectReader(JSONReader.Context ctx) {
+<b class="fc">&nbsp;        if (itemReader != null) {</b>
+<b class="fc">&nbsp;            return itemReader;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return itemReader = ctx.getObjectReader(itemType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReader getItemObjectReader(JSONReader jsonReader) {
+<b class="fc">&nbsp;        return getItemObjectReader(jsonReader.getContext());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static ObjectReader createFormattedObjectReader(Type fieldType, Class fieldClass, String format, Locale locale) {
+<b class="fc">&nbsp;        if (format != null &amp;&amp; !format.isEmpty()) {</b>
+<b class="fc">&nbsp;            String typeName = fieldType.getTypeName();</b>
+<b class="fc">&nbsp;            switch (typeName) {</b>
+&nbsp;                case &quot;java.sql.Time&quot;:
+<b class="fc">&nbsp;                    return JdbcSupport.createTimeReader((Class) fieldType, format, locale);</b>
+&nbsp;                case &quot;java.sql.Timestamp&quot;:
+<b class="fc">&nbsp;                    return JdbcSupport.createTimestampReader((Class) fieldType, format, locale);</b>
+&nbsp;                case &quot;java.sql.Date&quot;:
+<b class="fc">&nbsp;                    return JdbcSupport.createDateReader((Class) fieldType, format, locale);</b>
+&nbsp;                case &quot;byte[]&quot;:
+&nbsp;                case &quot;[B&quot;:
+<b class="fc">&nbsp;                    return new ObjectReaderImplInt8Array(format);</b>
+&nbsp;                default:
+<b class="fc">&nbsp;                    if (Calendar.class.isAssignableFrom(fieldClass)) {</b>
+<b class="fc">&nbsp;                        return ObjectReaderImplCalendar.of(format, locale);</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    if (fieldClass == ZonedDateTime.class) {</b>
+<b class="fc">&nbsp;                        return ObjectReaderImplZonedDateTime.of(format, locale);</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    if (fieldClass == LocalDateTime.class) {</b>
+<b class="fc">&nbsp;                        if (format == null) {</b>
+<b class="nc">&nbsp;                            return ObjectReaderImplLocalDateTime.INSTANCE;</b>
+&nbsp;                        }
+&nbsp;
+<b class="fc">&nbsp;                        return new ObjectReaderImplLocalDateTime(format, locale);</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    if (fieldClass == LocalDate.class) {</b>
+<b class="fc">&nbsp;                        if (format == null) {</b>
+<b class="nc">&nbsp;                            return ObjectReaderImplLocalDate.INSTANCE;</b>
+&nbsp;                        }
+&nbsp;
+<b class="fc">&nbsp;                        return new ObjectReaderImplLocalDate(format, locale);</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    if (fieldClass == LocalTime.class) {</b>
+<b class="fc">&nbsp;                        if (format == null) {</b>
+<b class="nc">&nbsp;                            return ObjectReaderImplLocalTime.INSTANCE;</b>
+&nbsp;                        }
+&nbsp;
+<b class="fc">&nbsp;                        return new ObjectReaderImplLocalTime(format, locale);</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    if (fieldClass == Instant.class) {</b>
+<b class="fc">&nbsp;                        return ObjectReaderImplInstant.of(format, locale);</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    if (fieldClass == Optional.class) {</b>
+<b class="fc">&nbsp;                        return ObjectReaderImplOptional.of(fieldType, format, locale);</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    if (fieldClass == Date.class) {</b>
+<b class="fc">&nbsp;                        return ObjectReaderImplDate.of(format, locale);</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:01</div>
+</div>
+</body>
+</html>

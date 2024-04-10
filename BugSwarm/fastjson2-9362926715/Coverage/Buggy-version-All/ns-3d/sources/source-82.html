@@ -1,0 +1,485 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectWriterImplList</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectWriterImplList (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectWriterImplList</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.8%
+  </span>
+  <span class="absValue">
+    (181/216)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONArray;
+&nbsp;import com.alibaba.fastjson2.JSONB;
+&nbsp;import com.alibaba.fastjson2.JSONObject;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.ParameterizedType;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONB.Constants.BC_ARRAY_FIX_0;
+&nbsp;import static com.alibaba.fastjson2.util.TypeUtils.CLASS_JSON_ARRAY_1x;
+&nbsp;import static com.alibaba.fastjson2.util.TypeUtils.CLASS_JSON_OBJECT_1x;
+&nbsp;
+&nbsp;final class ObjectWriterImplList
+&nbsp;        extends ObjectWriterBaseModule.PrimitiveImpl {
+&nbsp;    static final ObjectWriterImplList
+<b class="fc">&nbsp;            INSTANCE = new ObjectWriterImplList(null, null, null, null, 0);</b>
+&nbsp;
+&nbsp;    static final ObjectWriterImplList
+<b class="fc">&nbsp;            INSTANCE_JSON_ARRAY = new ObjectWriterImplList(JSONArray.class, null, null, null, 0);</b>
+&nbsp;    static final ObjectWriterImplList INSTANCE_JSON_ARRAY_1x;
+&nbsp;
+&nbsp;    static {
+<b class="fc">&nbsp;        if (CLASS_JSON_ARRAY_1x == null) {</b>
+<b class="nc">&nbsp;            INSTANCE_JSON_ARRAY_1x = null;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            INSTANCE_JSON_ARRAY_1x = new ObjectWriterImplList(CLASS_JSON_ARRAY_1x, null, null, null, 0);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    static final Class CLASS_SUBLIST = new ArrayList().subList(0, 0).getClass();</b>
+<b class="fc">&nbsp;    static final String TYPE_NAME_ARRAY_LIST = TypeUtils.getTypeName(ArrayList.class);</b>
+<b class="fc">&nbsp;    static final byte[] TYPE_NAME_JSONB_ARRAY_LIST = JSONB.toBytes(TYPE_NAME_ARRAY_LIST);</b>
+<b class="fc">&nbsp;    static final long TYPE_NAME_HASH_ARRAY_LIST = Fnv.hashCode64(TYPE_NAME_ARRAY_LIST);</b>
+&nbsp;
+&nbsp;    final Class defineClass;
+&nbsp;    final Type defineType;
+&nbsp;    final Class itemClass;
+&nbsp;    final Type itemType;
+&nbsp;    final long features;
+&nbsp;    final boolean itemClassRefDetect;
+&nbsp;    volatile ObjectWriter itemClassWriter;
+&nbsp;
+&nbsp;    public ObjectWriterImplList(
+&nbsp;            Class defineClass,
+&nbsp;            Type defineType,
+&nbsp;            Class itemClass,
+&nbsp;            Type itemType,
+&nbsp;            long features
+<b class="fc">&nbsp;    ) {</b>
+<b class="fc">&nbsp;        this.defineClass = defineClass;</b>
+<b class="fc">&nbsp;        this.defineType = defineType;</b>
+<b class="fc">&nbsp;        this.itemClass = itemClass;</b>
+<b class="fc">&nbsp;        this.itemType = itemType;</b>
+<b class="fc">&nbsp;        this.features = features;</b>
+<b class="fc">&nbsp;        this.itemClassRefDetect = itemClass != null &amp;&amp; !ObjectWriterProvider.isNotReferenceDetect(itemClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeArrayMappingJSONB(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="fc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeArrayNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        List list = (List) object;</b>
+<b class="fc">&nbsp;        Class previousClass = null;</b>
+<b class="fc">&nbsp;        ObjectWriter previousObjectWriter = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        jsonWriter.startArray(list.size());</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; list.size(); i++) {</b>
+<b class="fc">&nbsp;            Object item = list.get(i);</b>
+<b class="fc">&nbsp;            if (item == null) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeNull();</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            Class&lt;?&gt; itemClass = item.getClass();</b>
+&nbsp;            ObjectWriter itemObjectWriter;
+<b class="fc">&nbsp;            if (itemClass == previousClass) {</b>
+<b class="fc">&nbsp;                itemObjectWriter = previousObjectWriter;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                itemObjectWriter = jsonWriter.getObjectWriter(itemClass);</b>
+<b class="fc">&nbsp;                previousClass = itemClass;</b>
+<b class="fc">&nbsp;                previousObjectWriter = itemObjectWriter;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            itemObjectWriter.writeArrayMappingJSONB(jsonWriter, item, i, this.itemType, this.features | features);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeJSONB(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="fc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeArrayNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Type fieldItemType = null;</b>
+<b class="fc">&nbsp;        Class fieldItemClass = null;</b>
+<b class="fc">&nbsp;        Class fieldClass = null;</b>
+<b class="fc">&nbsp;        if (fieldType instanceof Class) {</b>
+<b class="fc">&nbsp;            fieldClass = (Class) fieldType;</b>
+<b class="fc">&nbsp;        } else if (fieldType == this.defineType) {</b>
+<b class="fc">&nbsp;            fieldClass = this.itemClass;</b>
+<b class="fc">&nbsp;        } else if (fieldType instanceof ParameterizedType) {</b>
+<b class="fc">&nbsp;            ParameterizedType parameterizedType = (ParameterizedType) fieldType;</b>
+<b class="fc">&nbsp;            Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();</b>
+<b class="fc">&nbsp;            if (actualTypeArguments.length == 1) {</b>
+<b class="fc">&nbsp;                fieldItemType = actualTypeArguments[0];</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Type rawType = parameterizedType.getRawType();</b>
+<b class="fc">&nbsp;            if (rawType instanceof Class) {</b>
+<b class="fc">&nbsp;                fieldClass = (Class) rawType;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (fieldItemType instanceof Class) {</b>
+<b class="fc">&nbsp;            fieldItemClass = (Class) fieldItemType;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Class&lt;?&gt; objectClass = object.getClass();</b>
+<b class="fc">&nbsp;        if (jsonWriter.isWriteTypeInfo(object, fieldClass, features)) {</b>
+<b class="fc">&nbsp;            if (objectClass == CLASS_SUBLIST || objectClass == ArrayList.class) {</b>
+<b class="fc">&nbsp;                jsonWriter.writeTypeName(TYPE_NAME_JSONB_ARRAY_LIST, TYPE_NAME_HASH_ARRAY_LIST);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                String typeName = TypeUtils.getTypeName(objectClass);</b>
+<b class="fc">&nbsp;                jsonWriter.writeTypeName(typeName);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        List list = (List) object;</b>
+<b class="fc">&nbsp;        Class previousClass = null;</b>
+<b class="fc">&nbsp;        ObjectWriter previousObjectWriter = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        int size = list.size();</b>
+<b class="fc">&nbsp;        if (size == 0) {</b>
+<b class="fc">&nbsp;            jsonWriter.writeRaw(BC_ARRAY_FIX_0);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        boolean beanToArray = jsonWriter.isBeanToArray();</b>
+<b class="fc">&nbsp;        if (beanToArray) {</b>
+<b class="fc">&nbsp;            jsonWriter.startArray(size);</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; size; i++) {</b>
+<b class="fc">&nbsp;                Object item = list.get(i);</b>
+<b class="fc">&nbsp;                if (item == null) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeNull();</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                Class&lt;?&gt; itemClass = item.getClass();</b>
+&nbsp;                ObjectWriter itemObjectWriter;
+<b class="fc">&nbsp;                if (itemClass == previousClass) {</b>
+<b class="nc">&nbsp;                    itemObjectWriter = previousObjectWriter;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    itemObjectWriter = jsonWriter.getObjectWriter(itemClass);</b>
+<b class="fc">&nbsp;                    previousClass = itemClass;</b>
+<b class="fc">&nbsp;                    previousObjectWriter = itemObjectWriter;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                itemObjectWriter.writeArrayMappingJSONB(jsonWriter, item, i, fieldItemClass, features);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            jsonWriter.endArray();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        JSONWriter.Context context = jsonWriter.getContext();</b>
+&nbsp;
+<b class="fc">&nbsp;        jsonWriter.startArray(size);</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; size; i++) {</b>
+<b class="fc">&nbsp;            Object item = list.get(i);</b>
+<b class="fc">&nbsp;            if (item == null) {</b>
+<b class="fc">&nbsp;                jsonWriter.writeNull();</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Class&lt;?&gt; itemClass = item.getClass();</b>
+&nbsp;
+<b class="fc">&nbsp;            if (itemClass == String.class) {</b>
+<b class="fc">&nbsp;                jsonWriter.writeString((String) item);</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            boolean refDetect = (itemClass == this.itemClass)</b>
+<b class="fc">&nbsp;                    ? this.itemClassRefDetect &amp;&amp; jsonWriter.isRefDetect()</b>
+<b class="fc">&nbsp;                    : jsonWriter.isRefDetect(item);</b>
+&nbsp;
+&nbsp;            ObjectWriter itemObjectWriter;
+&nbsp;
+<b class="fc">&nbsp;            if (itemClass == this.itemClass &amp;&amp; itemClassWriter != null) {</b>
+<b class="fc">&nbsp;                itemObjectWriter = itemClassWriter;</b>
+<b class="fc">&nbsp;            } else if (itemClass == previousClass) {</b>
+<b class="fc">&nbsp;                itemObjectWriter = previousObjectWriter;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                refDetect = jsonWriter.isRefDetect();</b>
+&nbsp;
+<b class="fc">&nbsp;                if (itemClass == JSONObject.class) {</b>
+<b class="fc">&nbsp;                    itemObjectWriter = ObjectWriterImplMap.INSTANCE;</b>
+<b class="fc">&nbsp;                } else if (itemClass == CLASS_JSON_OBJECT_1x) {</b>
+<b class="fc">&nbsp;                    itemObjectWriter = ObjectWriterImplMap.INSTANCE_1x;</b>
+<b class="fc">&nbsp;                } else if (itemClass == JSONArray.class) {</b>
+<b class="fc">&nbsp;                    itemObjectWriter = ObjectWriterImplList.INSTANCE_JSON_ARRAY;</b>
+<b class="fc">&nbsp;                } else if (itemClass == CLASS_JSON_ARRAY_1x) {</b>
+<b class="nc">&nbsp;                    itemObjectWriter = ObjectWriterImplList.INSTANCE_JSON_ARRAY_1x;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    itemObjectWriter = context.getObjectWriter(itemClass);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                previousClass = itemClass;</b>
+<b class="fc">&nbsp;                previousObjectWriter = itemObjectWriter;</b>
+<b class="fc">&nbsp;                if (itemClass == this.itemClass) {</b>
+<b class="fc">&nbsp;                    this.itemClassWriter = itemObjectWriter;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (refDetect) {</b>
+<b class="fc">&nbsp;                String refPath = jsonWriter.setPath(i, item);</b>
+<b class="fc">&nbsp;                if (refPath != null) {</b>
+<b class="fc">&nbsp;                    jsonWriter.writeReference(refPath);</b>
+<b class="fc">&nbsp;                    jsonWriter.popPath(item);</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            itemObjectWriter.writeJSONB(jsonWriter, item, i, this.itemType, this.features);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (refDetect) {</b>
+<b class="fc">&nbsp;                jsonWriter.popPath(item);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        jsonWriter.endArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="fc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeArrayNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        List list = (List) object;</b>
+&nbsp;
+<b class="fc">&nbsp;        Class previousClass = null;</b>
+<b class="fc">&nbsp;        ObjectWriter previousObjectWriter = null;</b>
+<b class="fc">&nbsp;        boolean previousRefDetect = true;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (jsonWriter.isJSONB()) {</b>
+<b class="nc">&nbsp;            jsonWriter.startArray(list.size());</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; list.size(); i++) {</b>
+<b class="nc">&nbsp;                Object item = list.get(i);</b>
+<b class="nc">&nbsp;                if (item == null) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeNull();</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                Class&lt;?&gt; itemClass = item.getClass();</b>
+&nbsp;                ObjectWriter itemObjectWriter;
+<b class="nc">&nbsp;                if (itemClass == previousClass) {</b>
+<b class="nc">&nbsp;                    itemObjectWriter = previousObjectWriter;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    itemObjectWriter = jsonWriter.getObjectWriter(itemClass);</b>
+<b class="nc">&nbsp;                    previousClass = itemClass;</b>
+<b class="nc">&nbsp;                    previousObjectWriter = itemObjectWriter;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                itemObjectWriter.writeJSONB(jsonWriter, item, i, itemType, features);</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        JSONWriter.Context context = jsonWriter.getContext();</b>
+<b class="fc">&nbsp;        ObjectWriterProvider provider = context.getProvider();</b>
+&nbsp;
+<b class="fc">&nbsp;        jsonWriter.startArray();</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; list.size(); i++) {</b>
+<b class="fc">&nbsp;            if (i != 0) {</b>
+<b class="fc">&nbsp;                jsonWriter.writeComma();</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Object item = list.get(i);</b>
+<b class="fc">&nbsp;            if (item == null) {</b>
+<b class="fc">&nbsp;                jsonWriter.writeNull();</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Class&lt;?&gt; itemClass = item.getClass();</b>
+<b class="fc">&nbsp;            if (itemClass == String.class) {</b>
+<b class="fc">&nbsp;                jsonWriter.writeString((String) item);</b>
+<b class="fc">&nbsp;                continue;</b>
+<b class="fc">&nbsp;            } else if (itemClass == Integer.class) {</b>
+<b class="fc">&nbsp;                if ((provider.userDefineMask &amp; ObjectWriterProvider.TYPE_INT32_MASK) == 0) {</b>
+<b class="fc">&nbsp;                    jsonWriter.writeInt32((Integer) item);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    ObjectWriter valueWriter = provider.getObjectWriter(itemClass, itemClass, false);</b>
+<b class="nc">&nbsp;                    valueWriter.write(jsonWriter, item, i, Integer.class, features);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                continue;</b>
+<b class="fc">&nbsp;            } else if (itemClass == Long.class) {</b>
+<b class="fc">&nbsp;                if ((provider.userDefineMask &amp; ObjectWriterProvider.TYPE_INT64_MASK) == 0) {</b>
+<b class="fc">&nbsp;                    jsonWriter.writeInt64((Long) item);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    ObjectWriter valueWriter = provider.getObjectWriter(itemClass, itemClass, false);</b>
+<b class="fc">&nbsp;                    valueWriter.write(jsonWriter, item, i, Long.class, features);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                continue;</b>
+<b class="fc">&nbsp;            } else if (itemClass == Boolean.class) {</b>
+<b class="fc">&nbsp;                if ((provider.userDefineMask &amp; ObjectWriterProvider.TYPE_INT32_MASK) == 0) {</b>
+<b class="fc">&nbsp;                    jsonWriter.writeBool((Boolean) item);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    ObjectWriter valueWriter = provider.getObjectWriter(itemClass, itemClass, false);</b>
+<b class="nc">&nbsp;                    valueWriter.write(jsonWriter, item, i, Boolean.class, features);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                continue;</b>
+<b class="fc">&nbsp;            } else if (itemClass == BigDecimal.class) {</b>
+<b class="fc">&nbsp;                if ((provider.userDefineMask &amp; ObjectWriterProvider.TYPE_DECIMAL_MASK) == 0) {</b>
+<b class="fc">&nbsp;                    jsonWriter.writeDecimal((BigDecimal) item);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    ObjectWriter valueWriter = provider.getObjectWriter(itemClass, itemClass, false);</b>
+<b class="nc">&nbsp;                    valueWriter.write(jsonWriter, item, i, BigDecimal.class, features);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            boolean refDetect;
+&nbsp;            ObjectWriter itemObjectWriter;
+&nbsp;
+<b class="fc">&nbsp;            if (itemClass == this.itemClass &amp;&amp; itemClassWriter != null) {</b>
+<b class="fc">&nbsp;                itemObjectWriter = itemClassWriter;</b>
+<b class="fc">&nbsp;                refDetect = this.itemClassRefDetect &amp;&amp; jsonWriter.isRefDetect();</b>
+<b class="fc">&nbsp;            } else if (itemClass == previousClass) {</b>
+<b class="fc">&nbsp;                itemObjectWriter = previousObjectWriter;</b>
+<b class="fc">&nbsp;                refDetect = previousRefDetect;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                if (itemClass == JSONObject.class) {</b>
+<b class="fc">&nbsp;                    itemObjectWriter = ObjectWriterImplMap.INSTANCE;</b>
+<b class="fc">&nbsp;                    refDetect = jsonWriter.isRefDetect();</b>
+<b class="fc">&nbsp;                } else if (itemClass == CLASS_JSON_OBJECT_1x) {</b>
+<b class="fc">&nbsp;                    itemObjectWriter = ObjectWriterImplMap.INSTANCE_1x;</b>
+<b class="fc">&nbsp;                    refDetect = jsonWriter.isRefDetect();</b>
+<b class="fc">&nbsp;                } else if (itemClass == JSONArray.class) {</b>
+<b class="fc">&nbsp;                    itemObjectWriter = ObjectWriterImplList.INSTANCE_JSON_ARRAY;</b>
+<b class="fc">&nbsp;                    refDetect = jsonWriter.isRefDetect();</b>
+<b class="fc">&nbsp;                } else if (itemClass == CLASS_JSON_ARRAY_1x) {</b>
+<b class="nc">&nbsp;                    itemObjectWriter = ObjectWriterImplList.INSTANCE_JSON_ARRAY_1x;</b>
+<b class="nc">&nbsp;                    refDetect = jsonWriter.isRefDetect();</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    itemObjectWriter = context.getObjectWriter(itemClass);</b>
+<b class="fc">&nbsp;                    refDetect = jsonWriter.isRefDetect(item);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                previousClass = itemClass;</b>
+<b class="fc">&nbsp;                previousObjectWriter = itemObjectWriter;</b>
+<b class="fc">&nbsp;                previousRefDetect = refDetect;</b>
+<b class="fc">&nbsp;                if (itemClass == this.itemClass) {</b>
+<b class="nc">&nbsp;                    this.itemClassWriter = itemObjectWriter;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (refDetect) {</b>
+<b class="fc">&nbsp;                String refPath = jsonWriter.setPath(i, item);</b>
+<b class="fc">&nbsp;                if (refPath != null) {</b>
+<b class="fc">&nbsp;                    jsonWriter.writeReference(refPath);</b>
+<b class="fc">&nbsp;                    jsonWriter.popPath(item);</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            itemObjectWriter.write(jsonWriter, item, i, this.itemType, this.features);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (refDetect) {</b>
+<b class="fc">&nbsp;                jsonWriter.popPath(item);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        jsonWriter.endArray();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:45</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,214 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AwtRederModule</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.support</a>
+</div>
+
+<h1>Coverage Summary for Class: AwtRederModule (com.alibaba.fastjson2.support)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AwtRederModule</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AwtRederModule$ColorCreator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/42)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.support;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectReaderModule;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReader;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReaderProvider;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;
+&nbsp;import java.awt.*;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.reader.ObjectReaders.createObjectReader;
+&nbsp;import static com.alibaba.fastjson2.reader.ObjectReaders.fieldReader;
+&nbsp;
+<b class="nc">&nbsp;public class AwtRederModule</b>
+&nbsp;        implements ObjectReaderModule {
+&nbsp;    // Android not support
+<b class="nc">&nbsp;    static final long HASH_X = Fnv.hashCode64(&quot;x&quot;);</b>
+<b class="nc">&nbsp;    static final long HASH_Y = Fnv.hashCode64(&quot;y&quot;);</b>
+<b class="nc">&nbsp;    static final long HASH_NAME = Fnv.hashCode64(&quot;name&quot;);</b>
+<b class="nc">&nbsp;    static final long HASH_SIZE = Fnv.hashCode64(&quot;size&quot;);</b>
+<b class="nc">&nbsp;    static final long HASH_STYLE = Fnv.hashCode64(&quot;style&quot;);</b>
+<b class="nc">&nbsp;    public static AwtRederModule INSTANCE = new AwtRederModule();</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObjectReader getObjectReader(ObjectReaderProvider provider, Type type) {
+<b class="nc">&nbsp;        if (type == Color.class) {</b>
+<b class="nc">&nbsp;            return createObjectReader(</b>
+&nbsp;                    new ColorCreator(),
+<b class="nc">&nbsp;                    fieldReader(&quot;rgb&quot;, int.class),</b>
+<b class="nc">&nbsp;                    fieldReader(&quot;r&quot;, int.class),</b>
+<b class="nc">&nbsp;                    fieldReader(&quot;g&quot;, int.class),</b>
+<b class="nc">&nbsp;                    fieldReader(&quot;b&quot;, int.class)</b>
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == Point.class) {</b>
+<b class="nc">&nbsp;            return createObjectReader(</b>
+<b class="nc">&nbsp;                    (values) -&gt; new Point(</b>
+<b class="nc">&nbsp;                            (Integer) values.get(HASH_X),</b>
+<b class="nc">&nbsp;                            (Integer) values.get(HASH_Y)</b>
+&nbsp;                    ),
+<b class="nc">&nbsp;                    fieldReader(&quot;x&quot;, int.class),</b>
+<b class="nc">&nbsp;                    fieldReader(&quot;y&quot;, int.class)</b>
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == Font.class) {</b>
+<b class="nc">&nbsp;            return createObjectReader(</b>
+<b class="nc">&nbsp;                    (values) -&gt; new Font(</b>
+<b class="nc">&nbsp;                            (String) values.get(HASH_NAME),</b>
+<b class="nc">&nbsp;                            (Integer) values.get(HASH_STYLE),</b>
+<b class="nc">&nbsp;                            (Integer) values.get(HASH_SIZE)</b>
+&nbsp;                    ),
+<b class="nc">&nbsp;                    fieldReader(&quot;name&quot;, String.class),</b>
+<b class="nc">&nbsp;                    fieldReader(&quot;style&quot;, int.class),</b>
+<b class="nc">&nbsp;                    fieldReader(&quot;size&quot;, int.class)</b>
+&nbsp;            );
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    static class ColorCreator</b>
+&nbsp;            implements Function&lt;Map&lt;Long, Object&gt;, Color&gt; {
+<b class="nc">&nbsp;        static final long HASH_RGB = Fnv.hashCode64(&quot;rgb&quot;);</b>
+<b class="nc">&nbsp;        static final long HASH_R = Fnv.hashCode64(&quot;r&quot;);</b>
+<b class="nc">&nbsp;        static final long HASH_G = Fnv.hashCode64(&quot;g&quot;);</b>
+<b class="nc">&nbsp;        static final long HASH_B = Fnv.hashCode64(&quot;b&quot;);</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Color apply(Map&lt;Long, Object&gt; values) {
+<b class="nc">&nbsp;            Integer rgb = (Integer) values.get(HASH_RGB);</b>
+<b class="nc">&nbsp;            if (rgb != null) {</b>
+<b class="nc">&nbsp;                return new Color(rgb.intValue());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Integer r = (Integer) values.get(HASH_R);</b>
+<b class="nc">&nbsp;            Integer g = (Integer) values.get(HASH_G);</b>
+<b class="nc">&nbsp;            Integer b = (Integer) values.get(HASH_B);</b>
+<b class="nc">&nbsp;            return new Color(r, g, b);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:11</div>
+</div>
+</body>
+</html>

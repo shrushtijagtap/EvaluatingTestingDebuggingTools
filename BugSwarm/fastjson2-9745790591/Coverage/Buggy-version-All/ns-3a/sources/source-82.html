@@ -1,0 +1,172 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderImplClass</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderImplClass (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderImplClass</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.1%
+  </span>
+  <span class="absValue">
+    (27/31)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONB;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;
+&nbsp;final class ObjectReaderImplClass
+&nbsp;        extends ObjectReaderPrimitive {
+<b class="fc">&nbsp;    static final ObjectReaderImplClass INSTANCE = new ObjectReaderImplClass();</b>
+<b class="fc">&nbsp;    static final long TYPE_HASH = Fnv.hashCode64(&quot;java.lang.Class&quot;);</b>
+&nbsp;
+&nbsp;    ObjectReaderImplClass() {
+<b class="fc">&nbsp;        super(Class.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="fc">&nbsp;        if (jsonReader.nextIfMatch(JSONB.Constants.BC_TYPED_ANY)) {</b>
+<b class="nc">&nbsp;            long valueHashCode = jsonReader.readTypeHashCode();</b>
+<b class="nc">&nbsp;            if (valueHashCode != TYPE_HASH) {</b>
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;not support autoType : &quot; + jsonReader.getString()));</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return readObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="fc">&nbsp;        long classNameHash = jsonReader.readValueHashCode();</b>
+&nbsp;
+<b class="fc">&nbsp;        JSONReader.Context context = jsonReader.getContext();</b>
+<b class="fc">&nbsp;        JSONReader.AutoTypeBeforeHandler typeFilter = context.getContextAutoTypeBeforeHandler();</b>
+<b class="fc">&nbsp;        if (typeFilter != null) {</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; filterClass = typeFilter.apply(classNameHash, Class.class, features);</b>
+<b class="fc">&nbsp;            if (filterClass == null) {</b>
+<b class="fc">&nbsp;                String className = jsonReader.getString();</b>
+<b class="fc">&nbsp;                filterClass = typeFilter.apply(className, Class.class, features);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (filterClass != null) {</b>
+<b class="fc">&nbsp;                return filterClass;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        String className = jsonReader.getString();</b>
+<b class="fc">&nbsp;        boolean classForName = ((context.getFeatures() | features) &amp; JSONReader.Feature.SupportClassForName.mask) != 0;</b>
+<b class="fc">&nbsp;        if (!classForName) {</b>
+<b class="fc">&nbsp;            String msg = jsonReader.info(&quot;not support ClassForName : &quot; + className + &quot;, you can config &#39;JSONReader.Feature.SupportClassForName&#39;&quot;);</b>
+<b class="fc">&nbsp;            throw new JSONException(msg);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Class mappingClass = TypeUtils.getMapping(className);</b>
+<b class="fc">&nbsp;        if (mappingClass != null) {</b>
+<b class="fc">&nbsp;            return mappingClass;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        ObjectReaderProvider provider = context.getProvider();</b>
+<b class="fc">&nbsp;        Class&lt;?&gt; resolvedClass = provider.checkAutoType(className, null, JSONReader.Feature.SupportAutoType.mask);</b>
+<b class="fc">&nbsp;        if (resolvedClass == null) {</b>
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info(&quot;class not found &quot; + className));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return resolvedClass;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:01</div>
+</div>
+</body>
+</html>

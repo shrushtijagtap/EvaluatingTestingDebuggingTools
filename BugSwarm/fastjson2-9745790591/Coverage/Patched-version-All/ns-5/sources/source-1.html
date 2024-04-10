@@ -1,0 +1,354 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FastJsonConfig</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.support.config</a>
+</div>
+
+<h1>Coverage Summary for Class: FastJsonConfig (com.alibaba.fastjson.support.config)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FastJsonConfig</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson.support.config;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.JSON;
+&nbsp;import com.alibaba.fastjson.parser.Feature;
+&nbsp;import com.alibaba.fastjson.parser.ParserConfig;
+&nbsp;import com.alibaba.fastjson.parser.deserializer.ParseProcess;
+&nbsp;import com.alibaba.fastjson.serializer.SerializeConfig;
+&nbsp;import com.alibaba.fastjson.serializer.SerializeFilter;
+&nbsp;import com.alibaba.fastjson.serializer.SerializerFeature;
+&nbsp;import com.alibaba.fastjson.util.IOUtils;
+&nbsp;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * Configuration for FastJson.
+&nbsp; * &lt;p&gt;
+&nbsp; * Compatible fastjson 1.2.x
+&nbsp; *
+&nbsp; * @author VictorZeng
+&nbsp; * @see SerializeConfig
+&nbsp; * @see ParserConfig
+&nbsp; * @see ParseProcess
+&nbsp; * @see SerializerFeature
+&nbsp; * @see SerializeFilter
+&nbsp; * @see Feature
+&nbsp; * @since 2.0.2
+&nbsp; */
+&nbsp;
+&nbsp;public class FastJsonConfig {
+&nbsp;    /**
+&nbsp;     * default charset
+&nbsp;     */
+&nbsp;    private Charset charset;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * serializeConfig
+&nbsp;     */
+&nbsp;    private SerializeConfig serializeConfig;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * parserConfig
+&nbsp;     */
+&nbsp;    private ParserConfig parserConfig;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * parseProcess
+&nbsp;     */
+&nbsp;    private ParseProcess parseProcess;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * serializerFeatures
+&nbsp;     */
+&nbsp;    private SerializerFeature[] serializerFeatures;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * serializeFilters
+&nbsp;     */
+&nbsp;    private SerializeFilter[] serializeFilters;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * features
+&nbsp;     */
+&nbsp;    private Feature[] features;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * class level serializeFilter
+&nbsp;     */
+&nbsp;    private Map&lt;Class&lt;?&gt;, SerializeFilter&gt; classSerializeFilters;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * format date type
+&nbsp;     */
+&nbsp;    private String dateFormat;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The Write content length.
+&nbsp;     */
+&nbsp;    private boolean writeContentLength;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * init param.
+&nbsp;     */
+<b class="nc">&nbsp;    public FastJsonConfig() {</b>
+<b class="nc">&nbsp;        this.charset = IOUtils.UTF8;</b>
+&nbsp;
+<b class="nc">&nbsp;        this.serializeConfig = SerializeConfig.getGlobalInstance();</b>
+<b class="nc">&nbsp;        this.parserConfig = ParserConfig.getGlobalInstance();</b>
+&nbsp;
+<b class="nc">&nbsp;        this.serializerFeatures = new SerializerFeature[]{</b>
+&nbsp;                SerializerFeature.BrowserSecure
+&nbsp;        };
+&nbsp;
+<b class="nc">&nbsp;        this.serializeFilters = new SerializeFilter[0];</b>
+<b class="nc">&nbsp;        this.features = new Feature[0];</b>
+&nbsp;
+<b class="nc">&nbsp;        this.writeContentLength = true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return the serializeConfig
+&nbsp;     */
+&nbsp;    public SerializeConfig getSerializeConfig() {
+<b class="nc">&nbsp;        return serializeConfig;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param serializeConfig the serializeConfig to set
+&nbsp;     */
+&nbsp;    public void setSerializeConfig(SerializeConfig serializeConfig) {
+<b class="nc">&nbsp;        this.serializeConfig = serializeConfig;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return the parserConfig
+&nbsp;     */
+&nbsp;    public ParserConfig getParserConfig() {
+<b class="nc">&nbsp;        return parserConfig;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param parserConfig the parserConfig to set
+&nbsp;     */
+&nbsp;    public void setParserConfig(ParserConfig parserConfig) {
+<b class="nc">&nbsp;        this.parserConfig = parserConfig;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return the serializerFeatures
+&nbsp;     */
+&nbsp;    public SerializerFeature[] getSerializerFeatures() {
+<b class="nc">&nbsp;        return serializerFeatures;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param serializerFeatures the serializerFeatures to set
+&nbsp;     */
+&nbsp;    public void setSerializerFeatures(SerializerFeature... serializerFeatures) {
+<b class="nc">&nbsp;        this.serializerFeatures = serializerFeatures;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return the serializeFilters
+&nbsp;     */
+&nbsp;    public SerializeFilter[] getSerializeFilters() {
+<b class="nc">&nbsp;        return serializeFilters;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param serializeFilters the serializeFilters to set
+&nbsp;     */
+&nbsp;    public void setSerializeFilters(SerializeFilter... serializeFilters) {
+<b class="nc">&nbsp;        this.serializeFilters = serializeFilters;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return the features
+&nbsp;     */
+&nbsp;    public Feature[] getFeatures() {
+<b class="nc">&nbsp;        return features;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param features the features to set
+&nbsp;     */
+&nbsp;    public void setFeatures(Feature... features) {
+<b class="nc">&nbsp;        this.features = features;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return the classSerializeFilters
+&nbsp;     */
+&nbsp;    public Map&lt;Class&lt;?&gt;, SerializeFilter&gt; getClassSerializeFilters() {
+<b class="nc">&nbsp;        return classSerializeFilters;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param classSerializeFilters the classSerializeFilters to set
+&nbsp;     */
+&nbsp;    public void setClassSerializeFilters(
+&nbsp;            Map&lt;Class&lt;?&gt;, SerializeFilter&gt; classSerializeFilters) {
+<b class="nc">&nbsp;        this.classSerializeFilters = classSerializeFilters;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return the dateFormat
+&nbsp;     */
+&nbsp;    public String getDateFormat() {
+<b class="nc">&nbsp;        dateFormat = JSON.DEFFAULT_DATE_FORMAT;</b>
+<b class="nc">&nbsp;        return dateFormat;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param dateFormat the dateFormat to set
+&nbsp;     */
+&nbsp;    public void setDateFormat(String dateFormat) {
+<b class="nc">&nbsp;        JSON.DEFFAULT_DATE_FORMAT = dateFormat;</b>
+<b class="nc">&nbsp;        this.dateFormat = dateFormat;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return the charset
+&nbsp;     */
+&nbsp;    public Charset getCharset() {
+<b class="nc">&nbsp;        return charset;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param charset the charset to set
+&nbsp;     */
+&nbsp;    public void setCharset(Charset charset) {
+<b class="nc">&nbsp;        this.charset = charset;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Is write content length boolean.
+&nbsp;     *
+&nbsp;     * @return the boolean
+&nbsp;     */
+&nbsp;    public boolean isWriteContentLength() {
+<b class="nc">&nbsp;        return writeContentLength;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets write content length.
+&nbsp;     *
+&nbsp;     * @param writeContentLength the write content length
+&nbsp;     */
+&nbsp;    public void setWriteContentLength(boolean writeContentLength) {
+<b class="nc">&nbsp;        this.writeContentLength = writeContentLength;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets parse process.
+&nbsp;     *
+&nbsp;     * @return the parse process
+&nbsp;     */
+&nbsp;    public ParseProcess getParseProcess() {
+<b class="nc">&nbsp;        return parseProcess;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets parse process.
+&nbsp;     *
+&nbsp;     * @param parseProcess the parse process
+&nbsp;     */
+&nbsp;    public void setParseProcess(ParseProcess parseProcess) {
+<b class="nc">&nbsp;        this.parseProcess = parseProcess;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:07</div>
+</div>
+</body>
+</html>

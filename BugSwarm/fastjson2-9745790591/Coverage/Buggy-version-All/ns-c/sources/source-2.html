@@ -1,0 +1,619 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FieldInfo</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.util</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldInfo (com.alibaba.fastjson.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FieldInfo</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (12/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    37.1%
+  </span>
+  <span class="absValue">
+    (109/294)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson.util;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.TypeReference;
+&nbsp;import com.alibaba.fastjson.annotation.JSONField;
+&nbsp;
+&nbsp;import java.lang.reflect.*;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;public class FieldInfo
+&nbsp;        implements Comparable&lt;FieldInfo&gt; {
+&nbsp;    public final String name;
+&nbsp;    public final Method method;
+&nbsp;    public final Field field;
+&nbsp;
+&nbsp;    private int ordinal;
+&nbsp;    public final Class&lt;?&gt; fieldClass;
+&nbsp;    public final Type fieldType;
+&nbsp;    public final Class&lt;?&gt; declaringClass;
+&nbsp;    public final boolean getOnly;
+&nbsp;    public final int serialzeFeatures;
+&nbsp;    public final int parserFeatures;
+&nbsp;    public final String label;
+&nbsp;
+&nbsp;    private final JSONField fieldAnnotation;
+&nbsp;    private final JSONField methodAnnotation;
+<b class="fc">&nbsp;</b>
+&nbsp;    public final boolean fieldAccess;
+&nbsp;    public final boolean fieldTransient;
+&nbsp;
+&nbsp;    public final char[] nameChars;
+&nbsp;
+&nbsp;    public final boolean isEnum;
+&nbsp;    public final boolean jsonDirect;
+&nbsp;    public final boolean unwrapped;
+&nbsp;
+&nbsp;    public final String format;
+&nbsp;
+&nbsp;    public final String[] alternateNames;
+&nbsp;
+&nbsp;    public final long nameHashCode;
+&nbsp;
+&nbsp;    public FieldInfo(
+&nbsp;            String name,
+&nbsp;            Method method,
+&nbsp;            Field field,
+&nbsp;            Class&lt;?&gt; clazz,
+&nbsp;            Type type,
+&nbsp;            int ordinal,
+&nbsp;            int serialzeFeatures,
+&nbsp;            int parserFeatures,
+&nbsp;            JSONField fieldAnnotation,
+&nbsp;            JSONField methodAnnotation,
+&nbsp;            String label
+&nbsp;    ) {
+&nbsp;        this(name, method, field, clazz, type, ordinal, serialzeFeatures, parserFeatures,
+&nbsp;                fieldAnnotation, methodAnnotation, label, null);
+&nbsp;    }
+&nbsp;
+&nbsp;    public FieldInfo(
+<b class="nc">&nbsp;            String name,</b>
+<b class="nc">&nbsp;            Method method,</b>
+<b class="nc">&nbsp;            Field field,</b>
+&nbsp;            Class&lt;?&gt; clazz,
+&nbsp;            Type type,
+<b class="nc">&nbsp;            int ordinal,</b>
+<b class="nc">&nbsp;            int serialzeFeatures,</b>
+<b class="nc">&nbsp;            int parserFeatures,</b>
+<b class="nc">&nbsp;            JSONField fieldAnnotation,</b>
+<b class="nc">&nbsp;            JSONField methodAnnotation,</b>
+<b class="nc">&nbsp;            String label,</b>
+<b class="nc">&nbsp;            Map&lt;TypeVariable, Type&gt; genericInfo) {</b>
+<b class="nc">&nbsp;        if (field != null) {</b>
+<b class="nc">&nbsp;            String fieldName = field.getName();</b>
+&nbsp;            if (fieldName.equals(name)) {
+<b class="nc">&nbsp;                name = fieldName;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (ordinal &lt; 0) {</b>
+<b class="nc">&nbsp;            ordinal = 0;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        this.name = name;</b>
+&nbsp;        this.method = method;
+&nbsp;        this.field = field;
+<b class="nc">&nbsp;        this.ordinal = ordinal;</b>
+&nbsp;        this.serialzeFeatures = serialzeFeatures;
+<b class="nc">&nbsp;        this.parserFeatures = parserFeatures;</b>
+<b class="nc">&nbsp;        this.fieldAnnotation = fieldAnnotation;</b>
+&nbsp;        this.methodAnnotation = methodAnnotation;
+&nbsp;
+<b class="nc">&nbsp;        if (field != null) {</b>
+<b class="nc">&nbsp;            int modifiers = field.getModifiers();</b>
+<b class="nc">&nbsp;            fieldAccess = ((modifiers &amp; Modifier.PUBLIC) != 0 || method == null);</b>
+<b class="nc">&nbsp;            fieldTransient = Modifier.isTransient(modifiers)</b>
+<b class="nc">&nbsp;                    || TypeUtils.isTransient(method);</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            fieldAccess = false;</b>
+<b class="nc">&nbsp;            fieldTransient = TypeUtils.isTransient(method);</b>
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+&nbsp;        if (label != null &amp;&amp; label.length() &gt; 0) {
+&nbsp;            this.label = label;
+&nbsp;        } else {
+&nbsp;            this.label = &quot;&quot;;
+&nbsp;        }
+&nbsp;
+&nbsp;        String format = null;
+&nbsp;        JSONField annotation = getAnnotation();
+&nbsp;
+&nbsp;        nameHashCode = nameHashCode64(name, annotation);
+&nbsp;
+&nbsp;        boolean jsonDirect = false;
+&nbsp;        if (annotation != null) {
+<b class="fc">&nbsp;            format = annotation.format();</b>
+&nbsp;
+&nbsp;            if (format.trim().length() == 0) {
+&nbsp;                format = null;
+&nbsp;            }
+&nbsp;            jsonDirect = annotation.jsonDirect();
+&nbsp;            unwrapped = annotation.unwrapped();
+&nbsp;            alternateNames = annotation.alternateNames();
+&nbsp;        } else {
+&nbsp;            jsonDirect = false;
+&nbsp;            unwrapped = false;
+&nbsp;            alternateNames = new String[0];
+&nbsp;        }
+&nbsp;        this.format = format;
+&nbsp;
+<b class="fc">&nbsp;        nameChars = genFieldNameChars();</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        if (method != null) {</b>
+<b class="fc">&nbsp;            TypeUtils.setAccessible(method);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        if (field != null) {
+&nbsp;            TypeUtils.setAccessible(field);
+<b class="fc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        boolean getOnly = false;
+&nbsp;        Type fieldType;
+<b class="fc">&nbsp;        Class&lt;?&gt; fieldClass;</b>
+<b class="fc">&nbsp;        if (method != null) {</b>
+<b class="fc">&nbsp;            Class&lt;?&gt;[] types;</b>
+<b class="fc">&nbsp;            if ((types = method.getParameterTypes()).length == 1) {</b>
+<b class="fc">&nbsp;                fieldClass = types[0];</b>
+<b class="fc">&nbsp;                fieldType = method.getGenericParameterTypes()[0];</b>
+<b class="fc">&nbsp;            } else if (types.length == 2 &amp;&amp; types[0] == String.class &amp;&amp; types[1] == Object.class) {</b>
+<b class="fc">&nbsp;                fieldType = fieldClass = types[0];</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                fieldClass = method.getReturnType();</b>
+<b class="fc">&nbsp;                fieldType = method.getGenericReturnType();</b>
+<b class="fc">&nbsp;                getOnly = true;</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            this.declaringClass = method.getDeclaringClass();</b>
+<b class="fc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            fieldClass = field.getType();</b>
+<b class="nc">&nbsp;            fieldType = field.getGenericType();</b>
+&nbsp;            this.declaringClass = field.getDeclaringClass();
+&nbsp;            getOnly = Modifier.isFinal(field.getModifiers());
+<b class="fc">&nbsp;        }</b>
+<b class="nc">&nbsp;        this.getOnly = getOnly;</b>
+&nbsp;        this.jsonDirect = jsonDirect &amp;&amp; fieldClass == String.class;
+<b class="fc">&nbsp;</b>
+&nbsp;        if (clazz != null &amp;&amp; fieldClass == Object.class &amp;&amp; fieldType instanceof TypeVariable) {
+&nbsp;            TypeVariable&lt;?&gt; tv = (TypeVariable&lt;?&gt;) fieldType;
+<b class="fc">&nbsp;            Type genericFieldType = getInheritGenericType(clazz, type, tv);</b>
+<b class="fc">&nbsp;            if (genericFieldType != null) {</b>
+&nbsp;                this.fieldClass = TypeUtils.getClass(genericFieldType);
+<b class="fc">&nbsp;                this.fieldType = genericFieldType;</b>
+&nbsp;
+<b class="fc">&nbsp;                isEnum = fieldClass.isEnum();</b>
+<b class="fc">&nbsp;                return;</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="nc">&nbsp;        Type genericFieldType = fieldType;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (!(fieldType instanceof Class)) {</b>
+<b class="fc">&nbsp;            genericFieldType = getFieldType(clazz, type != null ? type : clazz, fieldType, genericInfo);</b>
+<b class="fc">&nbsp;</b>
+&nbsp;            if (genericFieldType != fieldType) {
+<b class="fc">&nbsp;                if (genericFieldType instanceof ParameterizedType) {</b>
+<b class="fc">&nbsp;                    fieldClass = TypeUtils.getClass(genericFieldType);</b>
+<b class="fc">&nbsp;                } else if (genericFieldType instanceof Class) {</b>
+&nbsp;                    fieldClass = TypeUtils.getClass(genericFieldType);
+<b class="fc">&nbsp;                }</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        this.fieldType = genericFieldType;</b>
+<b class="fc">&nbsp;        this.fieldClass = fieldClass;</b>
+&nbsp;
+&nbsp;        isEnum = fieldClass.isEnum();
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    private long nameHashCode64(String name, JSONField annotation) {
+&nbsp;        if (annotation != null &amp;&amp; annotation.name().length() != 0) {
+<b class="fc">&nbsp;            return TypeUtils.fnv1a_64_lower(name);</b>
+&nbsp;        }
+&nbsp;        return TypeUtils.fnv1a_64_extract(name);
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    protected char[] genFieldNameChars() {</b>
+<b class="fc">&nbsp;        int nameLen = this.name.length();</b>
+<b class="fc">&nbsp;        char[] name_chars = new char[nameLen + 3];</b>
+<b class="fc">&nbsp;        this.name.getChars(0, this.name.length(), name_chars, 1);</b>
+<b class="nc">&nbsp;        name_chars[0] = &#39;&quot;&#39;;</b>
+&nbsp;        name_chars[nameLen + 1] = &#39;&quot;&#39;;
+<b class="fc">&nbsp;        name_chars[nameLen + 2] = &#39;:&#39;;</b>
+<b class="fc">&nbsp;        return name_chars;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    public static Type getFieldType(</b>
+<b class="fc">&nbsp;            final Class&lt;?&gt; clazz,</b>
+<b class="fc">&nbsp;            final Type type,</b>
+<b class="fc">&nbsp;            Type fieldType,</b>
+<b class="fc">&nbsp;            Map&lt;TypeVariable, Type&gt; genericInfo</b>
+<b class="fc">&nbsp;    ) {</b>
+&nbsp;        if (clazz == null || type == null) {
+<b class="fc">&nbsp;            return fieldType;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        if (fieldType instanceof GenericArrayType) {</b>
+<b class="nc">&nbsp;            GenericArrayType genericArrayType = (GenericArrayType) fieldType;</b>
+<b class="nc">&nbsp;            Type componentType = genericArrayType.getGenericComponentType();</b>
+<b class="nc">&nbsp;            Type componentTypeX = getFieldType(clazz, type, componentType, genericInfo);</b>
+<b class="nc">&nbsp;            if (componentType != componentTypeX) {</b>
+<b class="nc">&nbsp;                Type fieldTypeX = Array.newInstance(TypeUtils.getClass(componentTypeX), 0).getClass();</b>
+&nbsp;                return fieldTypeX;
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            return fieldType;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (!TypeUtils.isGenericParamType(type)) {</b>
+&nbsp;            return fieldType;
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        if (fieldType instanceof TypeVariable) {
+<b class="fc">&nbsp;            ParameterizedType paramType = (ParameterizedType) TypeUtils.getGenericParamType(type);</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; parameterizedClass = TypeUtils.getClass(paramType);</b>
+<b class="nc">&nbsp;            final TypeVariable&lt;?&gt; typeVar = (TypeVariable&lt;?&gt;) fieldType;</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            TypeVariable&lt;?&gt;[] typeVariables = parameterizedClass.getTypeParameters();</b>
+&nbsp;            for (int i = 0; i &lt; typeVariables.length; ++i) {
+&nbsp;                if (typeVariables[i].getName().equals(typeVar.getName())) {
+&nbsp;                    fieldType = paramType.getActualTypeArguments()[i];
+&nbsp;                    return fieldType;
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        if (fieldType instanceof ParameterizedType) {
+&nbsp;            ParameterizedType parameterizedFieldType = (ParameterizedType) fieldType;
+&nbsp;
+&nbsp;            Type[] arguments = parameterizedFieldType.getActualTypeArguments();
+<b class="fc">&nbsp;            TypeVariable&lt;?&gt;[] typeVariables;</b>
+<b class="fc">&nbsp;            ParameterizedType paramType;</b>
+&nbsp;
+<b class="fc">&nbsp;            boolean changed = getArgument(arguments, genericInfo);</b>
+&nbsp;            //if genericInfo is not working use the old path;
+&nbsp;            if (!changed) {
+&nbsp;                if (type instanceof ParameterizedType) {
+<b class="fc">&nbsp;                    paramType = (ParameterizedType) type;</b>
+<b class="fc">&nbsp;                    typeVariables = clazz.getTypeParameters();</b>
+<b class="fc">&nbsp;                } else if (clazz.getGenericSuperclass() instanceof ParameterizedType) {</b>
+<b class="fc">&nbsp;                    paramType = (ParameterizedType) clazz.getGenericSuperclass();</b>
+<b class="fc">&nbsp;                    typeVariables = clazz.getSuperclass().getTypeParameters();</b>
+<b class="fc">&nbsp;                } else {</b>
+<b class="fc">&nbsp;                    paramType = parameterizedFieldType;</b>
+&nbsp;                    typeVariables = type.getClass().getTypeParameters();
+&nbsp;                }
+&nbsp;
+&nbsp;                changed = getArgument(arguments, typeVariables, paramType.getActualTypeArguments());
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;            if (changed) {
+&nbsp;                fieldType = TypeReference.intern(
+<b class="nc">&nbsp;                        new ParameterizedTypeImpl(arguments, parameterizedFieldType.getOwnerType(),</b>
+<b class="nc">&nbsp;                                parameterizedFieldType.getRawType())</b>
+<b class="nc">&nbsp;                );</b>
+&nbsp;                return fieldType;
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        return fieldType;
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+&nbsp;    private static boolean getArgument(Type[] typeArgs, Map&lt;TypeVariable, Type&gt; genericInfo) {
+&nbsp;        if (genericInfo == null || genericInfo.size() == 0) {
+&nbsp;            return false;
+<b class="fc">&nbsp;        }</b>
+&nbsp;        boolean changed = false;
+&nbsp;        for (int i = 0; i &lt; typeArgs.length; ++i) {
+&nbsp;            Type typeArg = typeArgs[i];
+<b class="fc">&nbsp;            if (typeArg instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;                ParameterizedType p_typeArg = (ParameterizedType) typeArg;</b>
+&nbsp;                Type[] p_typeArg_args = p_typeArg.getActualTypeArguments();
+&nbsp;                boolean p_changed = getArgument(p_typeArg_args, genericInfo);
+<b class="fc">&nbsp;                if (p_changed) {</b>
+<b class="nc">&nbsp;                    typeArgs[i] = TypeReference.intern(</b>
+<b class="nc">&nbsp;                            new ParameterizedTypeImpl(p_typeArg_args, p_typeArg.getOwnerType(), p_typeArg.getRawType())</b>
+<b class="nc">&nbsp;                    );</b>
+<b class="nc">&nbsp;                    changed = true;</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            } else if (typeArg instanceof TypeVariable) {</b>
+&nbsp;                if (genericInfo.containsKey(typeArg)) {
+&nbsp;                    typeArgs[i] = genericInfo.get(typeArg);
+<b class="nc">&nbsp;                    changed = true;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        return changed;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    private static boolean getArgument(Type[] typeArgs, TypeVariable[] typeVariables, Type[] arguments) {</b>
+<b class="fc">&nbsp;        if (arguments == null || typeVariables.length == 0) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        boolean changed = false;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; typeArgs.length; ++i) {</b>
+<b class="fc">&nbsp;            Type typeArg = typeArgs[i];</b>
+<b class="fc">&nbsp;            if (typeArg instanceof ParameterizedType) {</b>
+&nbsp;                ParameterizedType p_typeArg = (ParameterizedType) typeArg;
+&nbsp;                Type[] p_typeArg_args = p_typeArg.getActualTypeArguments();
+&nbsp;                boolean p_changed = getArgument(p_typeArg_args, typeVariables, arguments);
+&nbsp;                if (p_changed) {
+<b class="fc">&nbsp;                    typeArgs[i] = TypeReference.intern(</b>
+<b class="nc">&nbsp;                            new ParameterizedTypeImpl(p_typeArg_args, p_typeArg.getOwnerType(), p_typeArg.getRawType())</b>
+&nbsp;                    );
+<b class="nc">&nbsp;                    changed = true;</b>
+&nbsp;                }
+&nbsp;            } else if (typeArg instanceof TypeVariable) {
+&nbsp;                for (int j = 0; j &lt; typeVariables.length; ++j) {
+<b class="nc">&nbsp;                    if (typeArg.equals(typeVariables[j])) {</b>
+&nbsp;                        typeArgs[i] = arguments[j];
+<b class="nc">&nbsp;                        changed = true;</b>
+<b class="nc">&nbsp;                    }</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        return changed;</b>
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    private static Type getInheritGenericType(Class&lt;?&gt; clazz, Type type, TypeVariable&lt;?&gt; tv) {</b>
+&nbsp;        GenericDeclaration gd = tv.getGenericDeclaration();
+&nbsp;
+<b class="nc">&nbsp;        Class&lt;?&gt; class_gd = null;</b>
+&nbsp;        if (gd instanceof Class) {
+&nbsp;            class_gd = (Class&lt;?&gt;) tv.getGenericDeclaration();
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        Type[] arguments = null;</b>
+<b class="nc">&nbsp;        if (class_gd == clazz) {</b>
+&nbsp;            if (type instanceof ParameterizedType) {
+<b class="nc">&nbsp;                ParameterizedType ptype = (ParameterizedType) type;</b>
+&nbsp;                arguments = ptype.getActualTypeArguments();
+&nbsp;            }
+&nbsp;        } else {
+<b class="fc">&nbsp;            for (Class&lt;?&gt; c = clazz; c != null &amp;&amp; c != Object.class &amp;&amp; c != class_gd; c = c.getSuperclass()) {</b>
+&nbsp;                Type superType = c.getGenericSuperclass();
+&nbsp;
+&nbsp;                if (superType instanceof ParameterizedType) {
+<b class="nc">&nbsp;                    ParameterizedType p_superType = (ParameterizedType) superType;</b>
+<b class="nc">&nbsp;                    Type[] p_superType_args = p_superType.getActualTypeArguments();</b>
+&nbsp;                    getArgument(p_superType_args, c.getTypeParameters(), arguments);
+<b class="nc">&nbsp;                    arguments = p_superType_args;</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (arguments == null || class_gd == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        Type actualType = null;</b>
+&nbsp;        TypeVariable&lt;?&gt;[] typeVariables = class_gd.getTypeParameters();
+<b class="nc">&nbsp;        for (int j = 0; j &lt; typeVariables.length; ++j) {</b>
+&nbsp;            if (tv.equals(typeVariables[j])) {
+<b class="nc">&nbsp;                actualType = arguments[j];</b>
+<b class="nc">&nbsp;                break;</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        return actualType;
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public String toString() {</b>
+&nbsp;        return this.name;
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public Member getMember() {</b>
+<b class="nc">&nbsp;        if (method != null) {</b>
+&nbsp;            return method;
+&nbsp;        } else {
+<b class="nc">&nbsp;            return field;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    protected Class&lt;?&gt; getDeclaredClass() {</b>
+<b class="nc">&nbsp;        if (this.method != null) {</b>
+<b class="nc">&nbsp;            return this.method.getDeclaringClass();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (this.field != null) {</b>
+&nbsp;            return this.field.getDeclaringClass();
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public int compareTo(FieldInfo o) {</b>
+<b class="nc">&nbsp;        // Deal extend bridge</b>
+&nbsp;        if (o.method != null &amp;&amp; this.method != null
+&nbsp;                &amp;&amp; o.method.isBridge() &amp;&amp; !this.method.isBridge()
+&nbsp;                &amp;&amp; o.method.getName().equals(this.method.getName())) {
+&nbsp;            return 1;
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+&nbsp;        if (this.ordinal &lt; o.ordinal) {
+&nbsp;            return -1;
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+&nbsp;        if (this.ordinal &gt; o.ordinal) {
+<b class="nc">&nbsp;            return 1;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        int result = this.name.compareTo(o.name);
+&nbsp;
+<b class="nc">&nbsp;        if (result != 0) {</b>
+<b class="nc">&nbsp;            return result;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; thisDeclaringClass = this.getDeclaredClass();</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; otherDeclaringClass = o.getDeclaredClass();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (thisDeclaringClass != null &amp;&amp; otherDeclaringClass != null &amp;&amp; thisDeclaringClass != otherDeclaringClass) {</b>
+<b class="nc">&nbsp;            if (thisDeclaringClass.isAssignableFrom(otherDeclaringClass)) {</b>
+&nbsp;                return -1;
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;            if (otherDeclaringClass.isAssignableFrom(thisDeclaringClass)) {</b>
+<b class="nc">&nbsp;                return 1;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;        boolean isSampeType = this.field != null &amp;&amp; this.field.getType() == this.fieldClass;
+&nbsp;        boolean oSameType = o.field != null &amp;&amp; o.field.getType() == o.fieldClass;
+&nbsp;
+<b class="nc">&nbsp;        if (isSampeType &amp;&amp; !oSameType) {</b>
+<b class="nc">&nbsp;            return 1;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (oSameType &amp;&amp; !isSampeType) {</b>
+<b class="nc">&nbsp;            return -1;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (o.fieldClass.isPrimitive() &amp;&amp; !this.fieldClass.isPrimitive()) {</b>
+<b class="nc">&nbsp;            return 1;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.fieldClass.isPrimitive() &amp;&amp; !o.fieldClass.isPrimitive()) {
+<b class="nc">&nbsp;            return -1;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        if (o.fieldClass.getName().startsWith(&quot;java.&quot;) &amp;&amp; !this.fieldClass.getName().startsWith(&quot;java.&quot;)) {
+<b class="nc">&nbsp;            return 1;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.fieldClass.getName().startsWith(&quot;java.&quot;) &amp;&amp; !o.fieldClass.getName().startsWith(&quot;java.&quot;)) {
+<b class="fc">&nbsp;            return -1;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return this.fieldClass.getName().compareTo(o.fieldClass.getName());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONField getAnnotation() {
+&nbsp;        if (this.fieldAnnotation != null) {
+<b class="nc">&nbsp;            return this.fieldAnnotation;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        return this.methodAnnotation;
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public String getFormat() {
+&nbsp;        return format;
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Object get(Object javaObject) throws IllegalAccessException, InvocationTargetException {
+&nbsp;        return method != null
+&nbsp;                ? method.invoke(javaObject)
+<b class="nc">&nbsp;                : field.get(javaObject);</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public void set(Object javaObject, Object value) throws IllegalAccessException, InvocationTargetException {</b>
+&nbsp;        if (method != null) {
+&nbsp;            method.invoke(javaObject, new Object[]{value});
+<b class="nc">&nbsp;            return;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        field.set(javaObject, value);
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public void setAccessible() throws SecurityException {
+&nbsp;        if (method != null) {
+<b class="nc">&nbsp;            TypeUtils.setAccessible(method);</b>
+&nbsp;            return;
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        TypeUtils.setAccessible(field);
+&nbsp;    }
+<b class="nc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:01</div>
+</div>
+</body>
+</html>

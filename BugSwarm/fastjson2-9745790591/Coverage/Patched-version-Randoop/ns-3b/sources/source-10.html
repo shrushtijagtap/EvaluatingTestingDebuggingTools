@@ -1,0 +1,826 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONSchema</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.schema</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONSchema (com.alibaba.fastjson2.schema)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONSchema</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/311)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JSONSchema$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONSchema$Type</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/39)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/337)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.schema;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.annotation.JSONCreator;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.net.URL;
+&nbsp;import java.net.URLDecoder;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;import java.util.concurrent.atomic.AtomicInteger;
+&nbsp;import java.util.concurrent.atomic.AtomicLong;
+&nbsp;
+&nbsp;public abstract class JSONSchema {
+<b class="nc">&nbsp;    static final Map&lt;String, JSONSchema&gt; CACHE = new ConcurrentHashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    final String title;
+&nbsp;    final String description;
+&nbsp;
+<b class="nc">&nbsp;    static final JSONReader.Context CONTEXT = JSONFactory.createReadContext();</b>
+&nbsp;
+<b class="nc">&nbsp;    JSONSchema(JSONObject input) {</b>
+<b class="nc">&nbsp;        this.title = input.getString(&quot;title&quot;);</b>
+<b class="nc">&nbsp;        this.description = input.getString(&quot;description&quot;);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    JSONSchema(String title, String description) {</b>
+<b class="nc">&nbsp;        this.title = title;</b>
+<b class="nc">&nbsp;        this.description = description;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONSchema of(JSONObject input, Class objectClass) {
+<b class="nc">&nbsp;        if (input == null || input.isEmpty()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectClass == null || objectClass == Object.class) {</b>
+<b class="nc">&nbsp;            return of(input);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectClass == byte.class</b>
+&nbsp;                || objectClass == short.class
+&nbsp;                || objectClass == int.class
+&nbsp;                || objectClass == long.class
+&nbsp;                || objectClass == Byte.class
+&nbsp;                || objectClass == Short.class
+&nbsp;                || objectClass == Integer.class
+&nbsp;                || objectClass == Long.class
+&nbsp;                || objectClass == BigInteger.class
+&nbsp;                || objectClass == AtomicInteger.class
+&nbsp;                || objectClass == AtomicLong.class
+&nbsp;        ) {
+<b class="nc">&nbsp;            if (input.containsKey(&quot;AnyOf&quot;)) {</b>
+<b class="nc">&nbsp;                return anyOf(input, objectClass);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (input.containsKey(&quot;anyOf&quot;)) {</b>
+<b class="nc">&nbsp;                return anyOf(input, objectClass);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (input.containsKey(&quot;oneOf&quot;)) {</b>
+<b class="nc">&nbsp;                return oneOf(input, objectClass);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (input.containsKey(&quot;not&quot;)) {</b>
+<b class="nc">&nbsp;                return ofNot(input, objectClass);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return new IntegerSchema(input);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectClass == BigDecimal.class</b>
+&nbsp;                || objectClass == float.class
+&nbsp;                || objectClass == double.class
+&nbsp;                || objectClass == Float.class
+&nbsp;                || objectClass == Double.class
+&nbsp;                || objectClass == Number.class
+&nbsp;        ) {
+<b class="nc">&nbsp;            if (input.containsKey(&quot;AnyOf&quot;)) {</b>
+<b class="nc">&nbsp;                return anyOf(input, objectClass);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (input.containsKey(&quot;anyOf&quot;)) {</b>
+<b class="nc">&nbsp;                return anyOf(input, objectClass);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (input.containsKey(&quot;oneOf&quot;)) {</b>
+<b class="nc">&nbsp;                return oneOf(input, objectClass);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (input.containsKey(&quot;not&quot;)) {</b>
+<b class="nc">&nbsp;                return ofNot(input, objectClass);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return new NumberSchema(input);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectClass == boolean.class</b>
+&nbsp;                || objectClass == Boolean.class) {
+<b class="nc">&nbsp;            return new BooleanSchema(input);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectClass == String.class) {</b>
+<b class="nc">&nbsp;            return new StringSchema(input);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Collection.class.isAssignableFrom(objectClass)) {</b>
+<b class="nc">&nbsp;            return new ArraySchema(input, null);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectClass.isArray()) {</b>
+<b class="nc">&nbsp;            return new ArraySchema(input, null);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Map.class.isAssignableFrom(objectClass)) {</b>
+<b class="nc">&nbsp;            return new ObjectSchema(input, null);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new ObjectSchema(input, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static Not ofNot(JSONObject input, Class objectClass) {
+<b class="nc">&nbsp;        Object not = input.get(&quot;not&quot;);</b>
+<b class="nc">&nbsp;        if (not instanceof Boolean) {</b>
+<b class="nc">&nbsp;            return new Not(null, null, (Boolean) not);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONObject object = (JSONObject) not;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (object != null &amp;&amp; object.isEmpty()) {</b>
+<b class="nc">&nbsp;            return new Not(null, new Type[] {Type.Any}, null);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (object.size() == 1) {</b>
+<b class="nc">&nbsp;            Object type = object.get(&quot;type&quot;);</b>
+<b class="nc">&nbsp;            if (type instanceof JSONArray) {</b>
+<b class="nc">&nbsp;                JSONArray array = (JSONArray) type;</b>
+<b class="nc">&nbsp;                Type[] types = new Type[array.size()];</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; array.size(); i++) {</b>
+<b class="nc">&nbsp;                    types[i] = array.getObject(i, Type.class);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return new Not(null, types, null);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONSchema schema = of(object, objectClass);</b>
+<b class="nc">&nbsp;        return new Not(schema, null, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONSchema parseSchema(String schema) {
+<b class="nc">&nbsp;        Object input = JSON.parse(schema);</b>
+<b class="nc">&nbsp;        if (input instanceof JSONObject) {</b>
+<b class="nc">&nbsp;            return of((JSONObject) input);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (input instanceof Boolean) {</b>
+<b class="nc">&nbsp;            return ((Boolean) input).booleanValue() ? Any.INSTANCE : Any.NOT_ANY;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JSONCreator
+&nbsp;    public static JSONSchema of(JSONObject input) {
+<b class="nc">&nbsp;        return of(input, (JSONSchema) null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JSONCreator
+&nbsp;    public static JSONSchema of(JSONObject input, JSONSchema parent) {
+<b class="nc">&nbsp;        Type type = Type.of(</b>
+<b class="nc">&nbsp;                input.getString(&quot;type&quot;)</b>
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        if (type == null) {</b>
+<b class="nc">&nbsp;            Object[] enums = input.getObject(&quot;enum&quot;, Object[].class);</b>
+<b class="nc">&nbsp;            if (enums != null) {</b>
+<b class="nc">&nbsp;                return new EnumSchema(enums);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Object constValue = input.get(&quot;const&quot;);</b>
+<b class="nc">&nbsp;            if (constValue instanceof String) {</b>
+<b class="nc">&nbsp;                return new ConstString((String) constValue);</b>
+<b class="nc">&nbsp;            } else if (constValue instanceof Integer || constValue instanceof Long) {</b>
+<b class="nc">&nbsp;                return new ConstLong(((Number) constValue).longValue());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (input.size() == 1) {</b>
+<b class="nc">&nbsp;                String ref = input.getString(&quot;$ref&quot;);</b>
+<b class="nc">&nbsp;                if (ref != null &amp;&amp; !ref.isEmpty()) {</b>
+<b class="nc">&nbsp;                    if (&quot;http://json-schema.org/draft-04/schema#&quot;.equals(ref)) {</b>
+<b class="nc">&nbsp;                        JSONSchema schema = CACHE.get(ref);</b>
+<b class="nc">&nbsp;                        if (schema == null) {</b>
+<b class="nc">&nbsp;                            URL draf4Resource = JSONSchema.class.getClassLoader().getResource(&quot;schema/draft-04.json&quot;);</b>
+<b class="nc">&nbsp;                            schema = JSONSchema.of(</b>
+<b class="nc">&nbsp;                                    JSON.parseObject(draf4Resource),</b>
+&nbsp;                                    (JSONSchema) null
+&nbsp;                            );
+<b class="nc">&nbsp;                            JSONSchema origin = CACHE.putIfAbsent(ref, schema);</b>
+<b class="nc">&nbsp;                            if (origin != null) {</b>
+<b class="nc">&nbsp;                                schema = origin;</b>
+&nbsp;                            }
+&nbsp;                        }
+<b class="nc">&nbsp;                        return schema;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (&quot;#&quot;.equals(ref)) {</b>
+<b class="nc">&nbsp;                        return parent;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    Map&lt;String, JSONSchema&gt; definitions = null, defs = null, properties = null;</b>
+<b class="nc">&nbsp;                    if (parent instanceof ObjectSchema) {</b>
+<b class="nc">&nbsp;                        ObjectSchema objectSchema = (ObjectSchema) parent;</b>
+&nbsp;
+<b class="nc">&nbsp;                        definitions = objectSchema.definitions;</b>
+<b class="nc">&nbsp;                        defs = objectSchema.defs;</b>
+<b class="nc">&nbsp;                        properties = objectSchema.properties;</b>
+<b class="nc">&nbsp;                    } else if (parent instanceof ArraySchema) {</b>
+<b class="nc">&nbsp;                        definitions = ((ArraySchema) parent).definitions;</b>
+<b class="nc">&nbsp;                        defs = ((ArraySchema) parent).defs;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (definitions != null) {</b>
+<b class="nc">&nbsp;                        if (ref.startsWith(&quot;#/definitions/&quot;)) {</b>
+<b class="nc">&nbsp;                            final int PREFIX_LEN = 14; // &quot;#/definitions/&quot;.length();</b>
+<b class="nc">&nbsp;                            String refName = ref.substring(PREFIX_LEN);</b>
+<b class="nc">&nbsp;                            JSONSchema refSchema = definitions.get(refName);</b>
+<b class="nc">&nbsp;                            return refSchema;</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (defs != null) {</b>
+<b class="nc">&nbsp;                        if (ref.startsWith(&quot;#/$defs/&quot;)) {</b>
+<b class="nc">&nbsp;                            final int PREFIX_LEN = 8; // &quot;#/$defs/&quot;.length();</b>
+<b class="nc">&nbsp;                            String refName = ref.substring(PREFIX_LEN);</b>
+<b class="nc">&nbsp;                            refName = URLDecoder.decode(refName);</b>
+<b class="nc">&nbsp;                            JSONSchema refSchema = defs.get(refName);</b>
+<b class="nc">&nbsp;                            if (refSchema == null) {</b>
+<b class="nc">&nbsp;                                refSchema = Any.NOT_ANY;</b>
+&nbsp;                            }
+<b class="nc">&nbsp;                            return refSchema;</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (properties != null) {</b>
+<b class="nc">&nbsp;                        if (ref.startsWith(&quot;#/properties/&quot;)) {</b>
+<b class="nc">&nbsp;                            final int PREFIX_LEN = 13; // &quot;#/properties/&quot;.length();</b>
+<b class="nc">&nbsp;                            String refName = ref.substring(PREFIX_LEN);</b>
+<b class="nc">&nbsp;                            JSONSchema refSchema = properties.get(refName);</b>
+<b class="nc">&nbsp;                            return refSchema;</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (ref.startsWith(&quot;#/prefixItems/&quot;) &amp;&amp; parent instanceof ArraySchema) {</b>
+<b class="nc">&nbsp;                        final int PREFIX_LEN = 14; // &quot;#/properties/&quot;.length();</b>
+<b class="nc">&nbsp;                        int index = Integer.parseInt(ref.substring(PREFIX_LEN));</b>
+<b class="nc">&nbsp;                        JSONSchema refSchema = ((ArraySchema) parent).prefixItems[index];</b>
+<b class="nc">&nbsp;                        return refSchema;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Object exclusiveMaximum = input.get(&quot;exclusiveMaximum&quot;);</b>
+<b class="nc">&nbsp;                Object exclusiveMinimum = input.get(&quot;exclusiveMinimum&quot;);</b>
+<b class="nc">&nbsp;                if (exclusiveMaximum instanceof Integer</b>
+&nbsp;                        || exclusiveMinimum instanceof Integer
+&nbsp;                        || exclusiveMaximum instanceof Long
+&nbsp;                        || exclusiveMinimum instanceof Long) {
+<b class="nc">&nbsp;                    return new IntegerSchema(input);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (exclusiveMaximum instanceof Number || exclusiveMinimum instanceof Number) {</b>
+<b class="nc">&nbsp;                    return new NumberSchema(input);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (input.containsKey(&quot;properties&quot;)</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;dependentSchemas&quot;)</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;if&quot;)</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;required&quot;)</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;patternProperties&quot;)</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;additionalProperties&quot;)</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;minProperties&quot;)</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;maxProperties&quot;)</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;propertyNames&quot;)</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;$ref&quot;)</b>
+&nbsp;            ) {
+<b class="nc">&nbsp;                return new ObjectSchema(input, parent);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (input.containsKey(&quot;maxItems&quot;)</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;minItems&quot;)</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;additionalItems&quot;)</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;items&quot;)</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;prefixItems&quot;)</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;uniqueItems&quot;)</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;maxContains&quot;)</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;minContains&quot;)</b>
+&nbsp;            ) {
+<b class="nc">&nbsp;                return new ArraySchema(input, parent);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (input.containsKey(&quot;pattern&quot;)</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;format&quot;)</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;minLength&quot;)</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;maxLength&quot;)</b>
+&nbsp;            ) {
+<b class="nc">&nbsp;                return new StringSchema(input);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            boolean allOf = input.containsKey(&quot;allOf&quot;);</b>
+<b class="nc">&nbsp;            boolean anyOf = input.containsKey(&quot;anyOf&quot;);</b>
+<b class="nc">&nbsp;            boolean oneOf = input.containsKey(&quot;oneOf&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (allOf || anyOf || oneOf) {</b>
+<b class="nc">&nbsp;                int count = (allOf ? 1 : 0) + (anyOf ? 1 : 0) + (oneOf ? 1 : 0);</b>
+<b class="nc">&nbsp;                if (count == 1) {</b>
+<b class="nc">&nbsp;                    if (allOf) {</b>
+<b class="nc">&nbsp;                        return new AllOf(input, parent);</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (anyOf) {</b>
+<b class="nc">&nbsp;                        return new AnyOf(input, parent);</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (oneOf) {</b>
+<b class="nc">&nbsp;                        return new OneOf(input, parent);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                JSONSchema[] items = new JSONSchema[count];</b>
+<b class="nc">&nbsp;                int index = 0;</b>
+<b class="nc">&nbsp;                if (allOf) {</b>
+<b class="nc">&nbsp;                    items[index++] = new AllOf(input, parent);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (anyOf) {</b>
+<b class="nc">&nbsp;                    items[index++] = new AnyOf(input, parent);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (oneOf) {</b>
+<b class="nc">&nbsp;                    items[index++] = new OneOf(input, parent);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return new AllOf(items);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (input.containsKey(&quot;not&quot;)) {</b>
+<b class="nc">&nbsp;                return ofNot(input, null);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (input.get(&quot;maximum&quot;) instanceof Number</b>
+<b class="nc">&nbsp;                    || input.get(&quot;minimum&quot;) instanceof Number</b>
+<b class="nc">&nbsp;                    || input.containsKey(&quot;multipleOf&quot;)</b>
+&nbsp;            ) {
+<b class="nc">&nbsp;                return new NumberSchema(input);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (input.isEmpty()) {</b>
+<b class="nc">&nbsp;                return Any.INSTANCE;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (input.size() == 1) {</b>
+<b class="nc">&nbsp;                Object propertyType = input.get(&quot;type&quot;);</b>
+<b class="nc">&nbsp;                if (propertyType instanceof JSONArray) {</b>
+<b class="nc">&nbsp;                    JSONArray array = (JSONArray) propertyType;</b>
+<b class="nc">&nbsp;                    JSONSchema[] typeSchemas = new JSONSchema[array.size()];</b>
+<b class="nc">&nbsp;                    for (int i = 0; i &lt; array.size(); i++) {</b>
+<b class="nc">&nbsp;                        Type itemType = Type.of(array.getString(i));</b>
+<b class="nc">&nbsp;                        switch (itemType) {</b>
+&nbsp;                            case String:
+<b class="nc">&nbsp;                                typeSchemas[i] = new StringSchema(JSONObject.of(&quot;type&quot;, &quot;string&quot;));</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case Integer:
+<b class="nc">&nbsp;                                typeSchemas[i] = new IntegerSchema(JSONObject.of(&quot;type&quot;, &quot;integer&quot;));</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case Number:
+<b class="nc">&nbsp;                                typeSchemas[i] = new NumberSchema(JSONObject.of(&quot;type&quot;, &quot;number&quot;));</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case Boolean:
+<b class="nc">&nbsp;                                typeSchemas[i] = new BooleanSchema(JSONObject.of(&quot;type&quot;, &quot;boolean&quot;));</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case Null:
+<b class="nc">&nbsp;                                typeSchemas[i] = new NullSchema(JSONObject.of(&quot;type&quot;, &quot;null&quot;));</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case Object:
+<b class="nc">&nbsp;                                typeSchemas[i] = new ObjectSchema(JSONObject.of(&quot;type&quot;, &quot;object&quot;));</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case Array:
+<b class="nc">&nbsp;                                typeSchemas[i] = new ArraySchema(JSONObject.of(&quot;type&quot;, &quot;array&quot;), null);</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            default:
+<b class="nc">&nbsp;                                throw new JSONException(&quot;not support type : &quot; + itemType);</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                    return new AnyOf(typeSchemas);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            throw new JSONException(&quot;type required&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        switch (type) {</b>
+&nbsp;            case String:
+<b class="nc">&nbsp;                return new StringSchema(input);</b>
+&nbsp;            case Integer:
+<b class="nc">&nbsp;                return new IntegerSchema(input);</b>
+&nbsp;            case Number:
+<b class="nc">&nbsp;                return new NumberSchema(input);</b>
+&nbsp;            case Boolean:
+<b class="nc">&nbsp;                return new BooleanSchema(input);</b>
+&nbsp;            case Null:
+<b class="nc">&nbsp;                return new NullSchema(input);</b>
+&nbsp;            case Object:
+<b class="nc">&nbsp;                return new ObjectSchema(input, parent);</b>
+&nbsp;            case Array:
+<b class="nc">&nbsp;                return new ArraySchema(input, parent);</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new JSONException(&quot;not support type : &quot; + type);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static AnyOf anyOf(JSONObject input, Class type) {
+<b class="nc">&nbsp;        JSONArray array = input.getJSONArray(&quot;anyOf&quot;);</b>
+<b class="nc">&nbsp;        if (array == null || array.isEmpty()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        JSONSchema[] items = new JSONSchema[array.size()];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; items.length; i++) {</b>
+<b class="nc">&nbsp;            items[i] = JSONSchema.of(array.getJSONObject(i), type);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        AnyOf anyOf = new AnyOf(items);</b>
+&nbsp;
+<b class="nc">&nbsp;        return anyOf;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static AnyOf anyOf(JSONArray array, Class type) {
+<b class="nc">&nbsp;        if (array == null || array.isEmpty()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        JSONSchema[] items = new JSONSchema[array.size()];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; items.length; i++) {</b>
+<b class="nc">&nbsp;            items[i] = JSONSchema.of(array.getJSONObject(i), type);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        AnyOf anyOf = new AnyOf(items);</b>
+&nbsp;
+<b class="nc">&nbsp;        return anyOf;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static AllOf allOf(JSONObject input, Class type) {
+<b class="nc">&nbsp;        JSONArray array = input.getJSONArray(&quot;allOf&quot;);</b>
+<b class="nc">&nbsp;        if (array == null || array.isEmpty()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONSchema[] items = new JSONSchema[array.size()];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; items.length; i++) {</b>
+<b class="nc">&nbsp;            items[i] = JSONSchema.of(array.getJSONObject(i), type);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new AllOf(items);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static OneOf oneOf(JSONObject input, Class type) {
+<b class="nc">&nbsp;        JSONArray array = input.getJSONArray(&quot;oneOf&quot;);</b>
+<b class="nc">&nbsp;        if (array == null || array.isEmpty()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONSchema[] items = new JSONSchema[array.size()];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; items.length; i++) {</b>
+<b class="nc">&nbsp;            items[i] = JSONSchema.of(array.getJSONObject(i), type);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new OneOf(items);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static OneOf oneOf(JSONArray array, Class type) {
+<b class="nc">&nbsp;        if (array == null || array.isEmpty()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONSchema[] items = new JSONSchema[array.size()];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; items.length; i++) {</b>
+<b class="nc">&nbsp;            items[i] = JSONSchema.of(array.getJSONObject(i), type);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new OneOf(items);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getTitle() {
+<b class="nc">&nbsp;        return title;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getDescription() {
+<b class="nc">&nbsp;        return description;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract Type getType();
+&nbsp;
+&nbsp;    public abstract ValidateResult validate(Object value);
+&nbsp;
+&nbsp;    public boolean isValid(Object value) {
+<b class="nc">&nbsp;        return validate(value)</b>
+<b class="nc">&nbsp;                .isSuccess();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isValid(long value) {
+<b class="nc">&nbsp;        return validate(value)</b>
+<b class="nc">&nbsp;                .isSuccess();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isValid(double value) {
+<b class="nc">&nbsp;        return validate(value)</b>
+<b class="nc">&nbsp;                .isSuccess();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isValid(Double value) {
+<b class="nc">&nbsp;        return validate(value)</b>
+<b class="nc">&nbsp;                .isSuccess();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isValid(float value) {
+<b class="nc">&nbsp;        return validate(value)</b>
+<b class="nc">&nbsp;                .isSuccess();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isValid(Float value) {
+<b class="nc">&nbsp;        return validate(value)</b>
+<b class="nc">&nbsp;                .isSuccess();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isValid(Integer value) {
+<b class="nc">&nbsp;        return validate(value)</b>
+<b class="nc">&nbsp;                .isSuccess();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isValid(Long value) {
+<b class="nc">&nbsp;        return validate(value)</b>
+<b class="nc">&nbsp;                .isSuccess();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ValidateResult validate(long value) {
+<b class="nc">&nbsp;        return validate((Object) Long.valueOf(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ValidateResult validate(double value) {
+<b class="nc">&nbsp;        return validate((Object) Double.valueOf(value));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ValidateResult validate(Float value) {
+<b class="nc">&nbsp;        return validate((Object) value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ValidateResult validate(Double value) {
+<b class="nc">&nbsp;        return validate((Object) value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ValidateResult validate(Integer value) {
+<b class="nc">&nbsp;        return validate((Object) value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ValidateResult validate(Long value) {
+<b class="nc">&nbsp;        return validate((Object) value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void assertValidate(Object value) {
+<b class="nc">&nbsp;        ValidateResult result = validate(value);</b>
+<b class="nc">&nbsp;        if (result.isSuccess()) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        throw new JSONSchemaValidException(result.getMessage());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void assertValidate(Integer value) {
+<b class="nc">&nbsp;        ValidateResult result = validate(value);</b>
+<b class="nc">&nbsp;        if (result.isSuccess()) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        throw new JSONSchemaValidException(result.getMessage());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void assertValidate(Long value) {
+<b class="nc">&nbsp;        ValidateResult result = validate(value);</b>
+<b class="nc">&nbsp;        if (result.isSuccess()) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        throw new JSONSchemaValidException(result.getMessage());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void assertValidate(Double value) {
+<b class="nc">&nbsp;        ValidateResult result = validate(value);</b>
+<b class="nc">&nbsp;        if (result.isSuccess()) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        throw new JSONSchemaValidException(result.getMessage());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void assertValidate(Float value) {
+<b class="nc">&nbsp;        ValidateResult result = validate(value);</b>
+<b class="nc">&nbsp;        if (result.isSuccess()) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        throw new JSONSchemaValidException(result.getMessage());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void assertValidate(long value) {
+<b class="nc">&nbsp;        ValidateResult result = validate(value);</b>
+<b class="nc">&nbsp;        if (result.isSuccess()) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        throw new JSONSchemaValidException(result.getMessage());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void assertValidate(double value) {
+<b class="nc">&nbsp;        ValidateResult result = validate(value);</b>
+<b class="nc">&nbsp;        if (result.isSuccess()) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        throw new JSONSchemaValidException(result.getMessage());</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public enum Type {</b>
+<b class="nc">&nbsp;        Null,</b>
+<b class="nc">&nbsp;        Boolean,</b>
+<b class="nc">&nbsp;        Object,</b>
+<b class="nc">&nbsp;        Array,</b>
+<b class="nc">&nbsp;        Number,</b>
+<b class="nc">&nbsp;        String,</b>
+&nbsp;
+&nbsp;        // extended type
+<b class="nc">&nbsp;        Integer,</b>
+<b class="nc">&nbsp;        Enum,</b>
+<b class="nc">&nbsp;        Const,</b>
+<b class="nc">&nbsp;        OneOf,</b>
+<b class="nc">&nbsp;        AllOf,</b>
+<b class="nc">&nbsp;        AnyOf,</b>
+<b class="nc">&nbsp;        Any;</b>
+&nbsp;
+&nbsp;        public static Type of(String typeStr) {
+<b class="nc">&nbsp;            if (typeStr == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            switch (typeStr) {</b>
+&nbsp;                case &quot;Null&quot;:
+&nbsp;                case &quot;null&quot;:
+<b class="nc">&nbsp;                    return Type.Null;</b>
+&nbsp;                case &quot;String&quot;:
+&nbsp;                case &quot;string&quot;:
+<b class="nc">&nbsp;                    return Type.String;</b>
+&nbsp;                case &quot;Integer&quot;:
+&nbsp;                case &quot;integer&quot;:
+<b class="nc">&nbsp;                    return Type.Integer;</b>
+&nbsp;                case &quot;Number&quot;:
+&nbsp;                case &quot;number&quot;:
+<b class="nc">&nbsp;                    return Type.Number;</b>
+&nbsp;                case &quot;Boolean&quot;:
+&nbsp;                case &quot;boolean&quot;:
+<b class="nc">&nbsp;                    return Type.Boolean;</b>
+&nbsp;                case &quot;Object&quot;:
+&nbsp;                case &quot;object&quot;:
+<b class="nc">&nbsp;                    return Type.Object;</b>
+&nbsp;                case &quot;Array&quot;:
+&nbsp;                case &quot;array&quot;:
+<b class="nc">&nbsp;                    return Type.Array;</b>
+&nbsp;                default:
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    static final ValidateResult SUCCESS = new ValidateResult(true, &quot;success&quot;);</b>
+<b class="nc">&nbsp;    static final ValidateResult FAIL_INPUT_NULL = new ValidateResult(false, &quot;input null&quot;);</b>
+<b class="nc">&nbsp;    static final ValidateResult FAIL_ANY_OF = new ValidateResult(false, &quot;anyOf fail&quot;);</b>
+<b class="nc">&nbsp;    static final ValidateResult FAIL_ONE_OF = new ValidateResult(false, &quot;oneOf fail&quot;);</b>
+<b class="nc">&nbsp;    static final ValidateResult FAIL_NOT = new ValidateResult(false, &quot;not fail&quot;);</b>
+<b class="nc">&nbsp;    static final ValidateResult FAIL_TYPE_NOT_MATCH = new ValidateResult(false, &quot;type not match&quot;);</b>
+<b class="nc">&nbsp;    static final ValidateResult FAIL_PROPERTY_NAME = new ValidateResult(false, &quot;propertyName not match&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;    static final ValidateResult CONTAINS_NOT_MATCH = new ValidateResult(false, &quot;contains not match&quot;);</b>
+<b class="nc">&nbsp;    static final ValidateResult UNIQUE_ITEMS_NOT_MATCH = new ValidateResult(false, &quot;uniqueItems not match&quot;);</b>
+<b class="nc">&nbsp;    static final ValidateResult REQUIRED_NOT_MATCH = new ValidateResult(false, &quot;required&quot;);</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:08</div>
+</div>
+</body>
+</html>

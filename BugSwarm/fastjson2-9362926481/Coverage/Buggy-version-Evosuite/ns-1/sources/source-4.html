@@ -1,0 +1,432 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ContextAutoTypeBeforeHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.filter</a>
+</div>
+
+<h1>Coverage Summary for Class: ContextAutoTypeBeforeHandler (com.alibaba.fastjson2.filter)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ContextAutoTypeBeforeHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/115)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.filter;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSON;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.text.SimpleDateFormat;
+&nbsp;import java.time.Instant;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.time.LocalDateTime;
+&nbsp;import java.time.LocalTime;
+&nbsp;import java.time.format.DateTimeFormatter;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.*;
+&nbsp;import java.util.concurrent.atomic.*;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.util.Fnv.MAGIC_HASH_CODE;
+&nbsp;import static com.alibaba.fastjson2.util.Fnv.MAGIC_PRIME;
+&nbsp;import static com.alibaba.fastjson2.util.TypeUtils.*;
+&nbsp;
+&nbsp;public class ContextAutoTypeBeforeHandler
+&nbsp;        implements JSONReader.AutoTypeBeforeHandler {
+<b class="nc">&nbsp;    static final Class[] BASIC_TYPES = {</b>
+&nbsp;            Object.class,
+&nbsp;            byte.class,
+&nbsp;            Byte.class,
+&nbsp;            short.class,
+&nbsp;            Short.class,
+&nbsp;            int.class,
+&nbsp;            Integer.class,
+&nbsp;            long.class,
+&nbsp;            Long.class,
+&nbsp;            float.class,
+&nbsp;            Float.class,
+&nbsp;            double.class,
+&nbsp;            Double.class,
+&nbsp;
+&nbsp;            Number.class,
+&nbsp;            BigInteger.class,
+&nbsp;            BigDecimal.class,
+&nbsp;
+&nbsp;            AtomicInteger.class,
+&nbsp;            AtomicLong.class,
+&nbsp;            AtomicBoolean.class,
+&nbsp;            AtomicIntegerArray.class,
+&nbsp;            AtomicLongArray.class,
+&nbsp;            AtomicReference.class,
+&nbsp;
+&nbsp;            boolean.class,
+&nbsp;            Boolean.class,
+&nbsp;            char.class,
+&nbsp;            Character.class,
+&nbsp;
+&nbsp;            String.class,
+&nbsp;            UUID.class,
+&nbsp;            Currency.class,
+&nbsp;            BitSet.class,
+&nbsp;            EnumSet.class,
+&nbsp;
+&nbsp;            Date.class,
+&nbsp;            Calendar.class,
+&nbsp;            LocalTime.class,
+&nbsp;            LocalDate.class,
+&nbsp;            LocalDateTime.class,
+&nbsp;            Instant.class,
+&nbsp;            SimpleDateFormat.class,
+&nbsp;            DateTimeFormatter.class,
+&nbsp;            TimeUnit.class,
+&nbsp;
+&nbsp;            Set.class,
+&nbsp;            HashSet.class,
+&nbsp;            LinkedHashSet.class,
+&nbsp;            TreeSet.class,
+&nbsp;            List.class,
+&nbsp;            ArrayList.class,
+&nbsp;            LinkedList.class,
+&nbsp;            ConcurrentLinkedQueue.class,
+&nbsp;            ConcurrentSkipListSet.class,
+&nbsp;            CopyOnWriteArrayList.class,
+&nbsp;
+<b class="nc">&nbsp;            Collections.emptyList().getClass(),</b>
+<b class="nc">&nbsp;            Collections.emptyMap().getClass(),</b>
+&nbsp;            CLASS_SINGLE_SET,
+&nbsp;            CLASS_UNMODIFIABLE_COLLECTION,
+&nbsp;            CLASS_UNMODIFIABLE_LIST,
+&nbsp;            CLASS_UNMODIFIABLE_SET,
+&nbsp;            CLASS_UNMODIFIABLE_SORTED_SET,
+&nbsp;            CLASS_UNMODIFIABLE_NAVIGABLE_SET,
+<b class="nc">&nbsp;            Collections.unmodifiableMap(new HashMap&lt;&gt;()).getClass(),</b>
+<b class="nc">&nbsp;            Collections.unmodifiableNavigableMap(new TreeMap&lt;&gt;()).getClass(),</b>
+<b class="nc">&nbsp;            Collections.unmodifiableSortedMap(new TreeMap&lt;&gt;()).getClass(),</b>
+&nbsp;
+&nbsp;            Map.class,
+&nbsp;            HashMap.class,
+&nbsp;            Hashtable.class,
+&nbsp;            TreeMap.class,
+&nbsp;            LinkedHashMap.class,
+&nbsp;            WeakHashMap.class,
+&nbsp;            IdentityHashMap.class,
+&nbsp;            ConcurrentMap.class,
+&nbsp;            ConcurrentHashMap.class,
+&nbsp;            ConcurrentSkipListMap.class,
+&nbsp;
+&nbsp;            Exception.class,
+&nbsp;            IllegalAccessError.class,
+&nbsp;            IllegalAccessException.class,
+&nbsp;            IllegalArgumentException.class,
+&nbsp;            IllegalMonitorStateException.class,
+&nbsp;            IllegalStateException.class,
+&nbsp;            IllegalThreadStateException.class,
+&nbsp;            IndexOutOfBoundsException.class,
+&nbsp;            InstantiationError.class,
+&nbsp;            InstantiationException.class,
+&nbsp;            InternalError.class,
+&nbsp;            InterruptedException.class,
+&nbsp;            LinkageError.class,
+&nbsp;            NegativeArraySizeException.class,
+&nbsp;            NoClassDefFoundError.class,
+&nbsp;            NoSuchFieldError.class,
+&nbsp;            NoSuchFieldException.class,
+&nbsp;            NoSuchMethodError.class,
+&nbsp;            NoSuchMethodException.class,
+&nbsp;            NullPointerException.class,
+&nbsp;            NumberFormatException.class,
+&nbsp;            OutOfMemoryError.class,
+&nbsp;            RuntimeException.class,
+&nbsp;            SecurityException.class,
+&nbsp;            StackOverflowError.class,
+&nbsp;            StringIndexOutOfBoundsException.class,
+&nbsp;            TypeNotPresentException.class,
+&nbsp;            VerifyError.class,
+&nbsp;            StackTraceElement.class,
+&nbsp;    };
+&nbsp;
+&nbsp;    final long[] acceptHashCodes;
+<b class="nc">&nbsp;    final ConcurrentMap&lt;Integer, ConcurrentHashMap&lt;Long, Class&gt;&gt; tclHashCaches = new ConcurrentHashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;    final Map&lt;Long, Class&gt; classCache = new ConcurrentHashMap&lt;&gt;(16, 0.75f, 1);</b>
+&nbsp;
+&nbsp;    public ContextAutoTypeBeforeHandler(Class... types) {
+<b class="nc">&nbsp;        this(false, types);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ContextAutoTypeBeforeHandler(boolean includeBasic, Class... types) {
+<b class="nc">&nbsp;        this(</b>
+&nbsp;                includeBasic,
+<b class="nc">&nbsp;                names(</b>
+<b class="nc">&nbsp;                        Arrays.asList(types)</b>
+&nbsp;                )
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public ContextAutoTypeBeforeHandler(String... acceptNames) {
+<b class="nc">&nbsp;        this(false, acceptNames);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ContextAutoTypeBeforeHandler(boolean includeBasic) {
+<b class="nc">&nbsp;        this(includeBasic, new String[0]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static String[] names(Collection&lt;Class&gt; types) {
+<b class="nc">&nbsp;        Set&lt;String&gt; nameSet = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (Class type : types) {</b>
+<b class="nc">&nbsp;            if (type == null) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String name = TypeUtils.getTypeName(type);</b>
+<b class="nc">&nbsp;            nameSet.add(name);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return nameSet.toArray(new String[nameSet.size()]);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public ContextAutoTypeBeforeHandler(boolean includeBasic, String... acceptNames) {</b>
+<b class="nc">&nbsp;        Set&lt;String&gt; nameSet = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        if (includeBasic) {</b>
+<b class="nc">&nbsp;            for (Class basicType : BASIC_TYPES) {</b>
+<b class="nc">&nbsp;                String name = TypeUtils.getTypeName(basicType);</b>
+<b class="nc">&nbsp;                nameSet.add(name);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (String name : acceptNames) {</b>
+<b class="nc">&nbsp;            if (name == null || name.isEmpty()) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Class mapping = TypeUtils.getMapping(name);</b>
+<b class="nc">&nbsp;            if (mapping != null) {</b>
+<b class="nc">&nbsp;                name = TypeUtils.getTypeName(mapping);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            nameSet.add(name);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long[] array = new long[nameSet.size()];</b>
+&nbsp;
+<b class="nc">&nbsp;        int index = 0;</b>
+<b class="nc">&nbsp;        for (String name : nameSet) {</b>
+<b class="nc">&nbsp;            long hashCode = MAGIC_HASH_CODE;</b>
+<b class="nc">&nbsp;            for (int j = 0; j &lt; name.length(); ++j) {</b>
+<b class="nc">&nbsp;                char ch = name.charAt(j);</b>
+<b class="nc">&nbsp;                if (ch == &#39;$&#39;) {</b>
+<b class="nc">&nbsp;                    ch = &#39;.&#39;;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                hashCode ^= ch;</b>
+<b class="nc">&nbsp;                hashCode *= MAGIC_PRIME;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            array[index++] = hashCode;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (index != array.length) {</b>
+<b class="nc">&nbsp;            array = Arrays.copyOf(array, index);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Arrays.sort(array);</b>
+<b class="nc">&nbsp;        this.acceptHashCodes = array;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Class&lt;?&gt; apply(long typeNameHash, Class&lt;?&gt; expectClass, long features) {
+<b class="nc">&nbsp;        ClassLoader tcl = Thread.currentThread().getContextClassLoader();</b>
+<b class="nc">&nbsp;        if (tcl != null &amp;&amp; tcl != JSON.class.getClassLoader()) {</b>
+<b class="nc">&nbsp;            int tclHash = System.identityHashCode(tcl);</b>
+<b class="nc">&nbsp;            ConcurrentHashMap&lt;Long, Class&gt; tclHashCache = tclHashCaches.get(tclHash);</b>
+<b class="nc">&nbsp;            if (tclHashCache != null) {</b>
+<b class="nc">&nbsp;                return tclHashCache.get(typeNameHash);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return classCache.get(typeNameHash);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class&lt;?&gt; apply(String typeName, Class&lt;?&gt; expectClass, long features) {
+<b class="nc">&nbsp;        if (&quot;O&quot;.equals(typeName)) {</b>
+<b class="nc">&nbsp;            typeName = &quot;Object&quot;;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long hash = MAGIC_HASH_CODE;</b>
+<b class="nc">&nbsp;        for (int i = 0, typeNameLength = typeName.length(); i &lt; typeNameLength; ++i) {</b>
+<b class="nc">&nbsp;            char ch = typeName.charAt(i);</b>
+<b class="nc">&nbsp;            if (ch == &#39;$&#39;) {</b>
+<b class="nc">&nbsp;                ch = &#39;.&#39;;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            hash ^= ch;</b>
+<b class="nc">&nbsp;            hash *= MAGIC_PRIME;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (Arrays.binarySearch(acceptHashCodes, hash) &gt;= 0) {</b>
+<b class="nc">&nbsp;                long typeNameHash = Fnv.hashCode64(typeName);</b>
+<b class="nc">&nbsp;                Class clazz = apply(typeNameHash, expectClass, features);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (clazz == null) {</b>
+<b class="nc">&nbsp;                    clazz = loadClass(typeName);</b>
+<b class="nc">&nbsp;                    if (clazz != null) {</b>
+<b class="nc">&nbsp;                        Class origin = putCacheIfAbsent(typeNameHash, clazz);</b>
+<b class="nc">&nbsp;                        if (origin != null) {</b>
+<b class="nc">&nbsp;                            clazz = origin;</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (clazz != null) {</b>
+<b class="nc">&nbsp;                    return clazz;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long typeNameHash = Fnv.hashCode64(typeName);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (typeName.length() &gt; 0</b>
+<b class="nc">&nbsp;                &amp;&amp; typeName.charAt(0) == &#39;[&#39;) {</b>
+<b class="nc">&nbsp;            Class clazz = apply(typeNameHash, expectClass, features);</b>
+<b class="nc">&nbsp;            if (clazz != null) {</b>
+<b class="nc">&nbsp;                return clazz;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String itemTypeName = typeName.substring(1);</b>
+<b class="nc">&nbsp;            Class itemExpectClass = null;</b>
+<b class="nc">&nbsp;            if (expectClass != null) {</b>
+<b class="nc">&nbsp;                itemExpectClass = expectClass.getComponentType();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Class itemType = apply(itemTypeName, itemExpectClass, features);</b>
+<b class="nc">&nbsp;            if (itemType != null) {</b>
+&nbsp;                Class arrayType;
+<b class="nc">&nbsp;                if (itemType == itemExpectClass) {</b>
+<b class="nc">&nbsp;                    arrayType = expectClass;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    arrayType = TypeUtils.getArrayClass(itemType);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                Class origin = putCacheIfAbsent(typeNameHash, arrayType);</b>
+<b class="nc">&nbsp;                if (origin != null) {</b>
+<b class="nc">&nbsp;                    arrayType = origin;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return arrayType;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Class mapping = TypeUtils.getMapping(typeName);</b>
+<b class="nc">&nbsp;        if (mapping != null) {</b>
+<b class="nc">&nbsp;            String mappingTypeName = TypeUtils.getTypeName(mapping);</b>
+<b class="nc">&nbsp;            if (!typeName.equals(mappingTypeName)) {</b>
+<b class="nc">&nbsp;                Class&lt;?&gt; mappingClass = apply(mappingTypeName, expectClass, features);</b>
+<b class="nc">&nbsp;                if (mappingClass != null) {</b>
+<b class="nc">&nbsp;                    putCacheIfAbsent(typeNameHash, mappingClass);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return mappingClass;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Class putCacheIfAbsent(long typeNameHash, Class type) {
+<b class="nc">&nbsp;        ClassLoader tcl = Thread.currentThread().getContextClassLoader();</b>
+<b class="nc">&nbsp;        if (tcl != null &amp;&amp; tcl != JSON.class.getClassLoader()) {</b>
+<b class="nc">&nbsp;            int tclHash = System.identityHashCode(tcl);</b>
+<b class="nc">&nbsp;            ConcurrentHashMap&lt;Long, Class&gt; tclHashCache = tclHashCaches.get(tclHash);</b>
+<b class="nc">&nbsp;            if (tclHashCache == null) {</b>
+<b class="nc">&nbsp;                tclHashCaches.putIfAbsent(tclHash, new ConcurrentHashMap&lt;&gt;());</b>
+<b class="nc">&nbsp;                tclHashCache = tclHashCaches.get(tclHash);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return tclHashCache.putIfAbsent(typeNameHash, type);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return classCache.putIfAbsent(typeNameHash, type);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 19:46</div>
+</div>
+</body>
+</html>

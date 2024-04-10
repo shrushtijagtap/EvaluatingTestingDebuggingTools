@@ -1,0 +1,1096 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FloatingDecimal</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: FloatingDecimal (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FloatingDecimal</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.8%
+  </span>
+  <span class="absValue">
+    (488/582)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2;
+&nbsp;
+<b class="fc">&nbsp;final class FloatingDecimal {</b>
+&nbsp;    static final int DOUBLE_SIGNIFICAND_WIDTH = 53;
+&nbsp;
+&nbsp;    static final int DOUBLE_EXP_BIAS = 1023;
+&nbsp;    static final long DOUBLE_SIGN_BIT_MASK = 0x8000000000000000L;
+&nbsp;    static final long DOUBLE_EXP_BIT_MASK = 0x7FF0000000000000L;
+&nbsp;    static final long DOUBLE_SIGNIF_BIT_MASK = 0x000FFFFFFFFFFFFFL;
+&nbsp;    static final int FLOAT_SIGNIFICAND_WIDTH = 24;
+&nbsp;    static final int FLOAT_EXP_BIAS = 127;
+&nbsp;    static final int FLOAT_SIGNIF_BIT_MASK = 0x007FFFFF;
+&nbsp;    static final int FLOAT_EXP_BIT_MASK = 0x7F800000;
+&nbsp;    static final int FLOAT_SIGN_BIT_MASK = 0x80000000;
+&nbsp;
+&nbsp;    static final int EXP_SHIFT = DOUBLE_SIGNIFICAND_WIDTH - 1;
+&nbsp;    static final long FRACT_HOB = (1L &lt;&lt; EXP_SHIFT); // assumed High-Order bit
+&nbsp;    static final int MAX_DECIMAL_DIGITS = 15;
+&nbsp;    static final int MAX_DECIMAL_EXPONENT = 308;
+&nbsp;    static final int MIN_DECIMAL_EXPONENT = -324;
+&nbsp;    static final int MAX_NDIGITS = 1100;
+&nbsp;
+&nbsp;    static final int SINGLE_EXP_SHIFT = FLOAT_SIGNIFICAND_WIDTH - 1;
+&nbsp;    static final int SINGLE_FRACT_HOB = 1 &lt;&lt; SINGLE_EXP_SHIFT;
+&nbsp;    static final int SINGLE_MAX_DECIMAL_DIGITS = 7;
+&nbsp;    static final int SINGLE_MAX_DECIMAL_EXPONENT = 38;
+&nbsp;    static final int SINGLE_MIN_DECIMAL_EXPONENT = -45;
+&nbsp;    static final int SINGLE_MAX_NDIGITS = 200;
+&nbsp;
+&nbsp;    static final int INT_DECIMAL_DIGITS = 9;
+&nbsp;
+&nbsp;    static final int BIG_DECIMAL_EXPONENT = 324; // i.e. abs(MIN_DECIMAL_EXPONENT)
+&nbsp;
+&nbsp;    public static double parseDouble(char[] in, int off, int len) throws NumberFormatException {
+<b class="fc">&nbsp;        boolean isNegative = false;</b>
+<b class="fc">&nbsp;        boolean signSeen = false;</b>
+&nbsp;        int decExp;
+&nbsp;        char c;
+<b class="fc">&nbsp;        int end = off + len;</b>
+&nbsp;
+&nbsp;        parseNumber:
+&nbsp;        try {
+&nbsp;            // throws NullPointerException if null
+<b class="fc">&nbsp;            if (len == 0) {</b>
+<b class="nc">&nbsp;                throw new NumberFormatException(&quot;empty String&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            int i = off;</b>
+<b class="fc">&nbsp;            switch (in[i]) {</b>
+&nbsp;                case &#39;-&#39;:
+<b class="fc">&nbsp;                    isNegative = true;</b>
+&nbsp;                case &#39;+&#39;:
+<b class="fc">&nbsp;                    i++;</b>
+<b class="fc">&nbsp;                    signSeen = true;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            char[] digits = new char[len];</b>
+&nbsp;
+<b class="fc">&nbsp;            int nDigits = 0;</b>
+<b class="fc">&nbsp;            boolean decSeen = false;</b>
+<b class="fc">&nbsp;            int decPt = 0;</b>
+<b class="fc">&nbsp;            int nLeadZero = 0;</b>
+<b class="fc">&nbsp;            int nTrailZero = 0;</b>
+&nbsp;
+&nbsp;            skipLeadingZerosLoop:
+<b class="fc">&nbsp;            while (i &lt; end) {</b>
+<b class="fc">&nbsp;                c = in[i];</b>
+<b class="fc">&nbsp;                if (c == &#39;0&#39;) {</b>
+<b class="fc">&nbsp;                    nLeadZero++;</b>
+<b class="fc">&nbsp;                } else if (c == &#39;.&#39;) {</b>
+<b class="fc">&nbsp;                    if (decSeen) {</b>
+<b class="nc">&nbsp;                        throw new NumberFormatException(&quot;multiple points&quot;);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    decPt = i - off;</b>
+<b class="fc">&nbsp;                    if (signSeen) {</b>
+<b class="fc">&nbsp;                        decPt -= 1;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    decSeen = true;</b>
+&nbsp;                } else {
+&nbsp;                    break skipLeadingZerosLoop;
+&nbsp;                }
+<b class="fc">&nbsp;                i++;</b>
+&nbsp;            }
+&nbsp;            digitLoop:
+<b class="fc">&nbsp;            while (i &lt; end) {</b>
+<b class="fc">&nbsp;                c = in[i];</b>
+<b class="fc">&nbsp;                if (c &gt;= &#39;1&#39; &amp;&amp; c &lt;= &#39;9&#39;) {</b>
+<b class="fc">&nbsp;                    digits[nDigits++] = c;</b>
+<b class="fc">&nbsp;                    nTrailZero = 0;</b>
+<b class="fc">&nbsp;                } else if (c == &#39;0&#39;) {</b>
+<b class="fc">&nbsp;                    digits[nDigits++] = c;</b>
+<b class="fc">&nbsp;                    nTrailZero++;</b>
+<b class="fc">&nbsp;                } else if (c == &#39;.&#39;) {</b>
+<b class="fc">&nbsp;                    if (decSeen) {</b>
+<b class="nc">&nbsp;                        throw new NumberFormatException(&quot;multiple points&quot;);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    decPt = i - off;</b>
+<b class="fc">&nbsp;                    if (signSeen) {</b>
+<b class="fc">&nbsp;                        decPt -= 1;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    decSeen = true;</b>
+&nbsp;                } else {
+&nbsp;                    break digitLoop;
+&nbsp;                }
+<b class="fc">&nbsp;                i++;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            nDigits -= nTrailZero;</b>
+&nbsp;
+<b class="fc">&nbsp;            boolean isZero = (nDigits == 0);</b>
+<b class="fc">&nbsp;            if (isZero &amp;&amp; nLeadZero == 0) {</b>
+<b class="nc">&nbsp;                break parseNumber; // go throw exception</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (decSeen) {</b>
+<b class="fc">&nbsp;                decExp = decPt - nLeadZero;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                decExp = nDigits + nTrailZero;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if ((i &lt; end) &amp;&amp; (((c = in[i]) == &#39;e&#39;) || (c == &#39;E&#39;))) {</b>
+<b class="fc">&nbsp;                int expSign = 1;</b>
+<b class="fc">&nbsp;                int expVal = 0;</b>
+<b class="fc">&nbsp;                int reallyBig = Integer.MAX_VALUE / 10;</b>
+<b class="fc">&nbsp;                boolean expOverflow = false;</b>
+<b class="fc">&nbsp;                switch (in[++i]) {</b>
+&nbsp;                    case &#39;-&#39;:
+<b class="fc">&nbsp;                        expSign = -1;</b>
+&nbsp;                    case &#39;+&#39;:
+<b class="fc">&nbsp;                        i++;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                int expAt = i;</b>
+&nbsp;                expLoop:
+<b class="fc">&nbsp;                while (i &lt; end) {</b>
+<b class="fc">&nbsp;                    if (expVal &gt;= reallyBig) {</b>
+<b class="nc">&nbsp;                        expOverflow = true;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    c = in[i++];</b>
+<b class="fc">&nbsp;                    if (c &gt;= &#39;0&#39; &amp;&amp; c &lt;= &#39;9&#39;) {</b>
+<b class="fc">&nbsp;                        expVal = expVal * 10 + ((int) c - (int) &#39;0&#39;);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        i--;           // back up.</b>
+<b class="nc">&nbsp;                        break expLoop; // stop parsing exponent.</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                int expLimit = BIG_DECIMAL_EXPONENT + nDigits + nTrailZero;</b>
+<b class="fc">&nbsp;                if (expOverflow || (expVal &gt; expLimit)) {</b>
+<b class="nc">&nbsp;                    decExp = expSign * expLimit;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    decExp = decExp + expSign * expVal;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (i == expAt) {</b>
+<b class="nc">&nbsp;                    break parseNumber; // certainly bad</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (i &lt; end &amp;&amp; (i != end - 1)) {</b>
+<b class="nc">&nbsp;                break parseNumber; // go throw exception</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (isZero) {</b>
+<b class="fc">&nbsp;                return 0;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return doubleValue(isNegative, decExp, digits, nDigits);</b>
+<b class="nc">&nbsp;        } catch (StringIndexOutOfBoundsException e) {</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new NumberFormatException(&quot;For input string: \&quot;&quot; + new String(in, off, len) + &quot;\&quot;&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static double parseDouble(byte[] in, int off, int len) throws NumberFormatException {
+<b class="fc">&nbsp;        boolean isNegative = false;</b>
+<b class="fc">&nbsp;        boolean signSeen = false;</b>
+&nbsp;        int decExp;
+&nbsp;        byte c;
+<b class="fc">&nbsp;        int end = off + len;</b>
+&nbsp;
+&nbsp;        parseNumber:
+&nbsp;        try {
+&nbsp;            // throws NullPointerException if null
+<b class="fc">&nbsp;            if (len == 0) {</b>
+<b class="nc">&nbsp;                throw new NumberFormatException(&quot;empty String&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            int i = off;</b>
+<b class="fc">&nbsp;            switch (in[i]) {</b>
+&nbsp;                case &#39;-&#39;:
+<b class="fc">&nbsp;                    isNegative = true;</b>
+&nbsp;                case &#39;+&#39;:
+<b class="fc">&nbsp;                    i++;</b>
+<b class="fc">&nbsp;                    signSeen = true;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            char[] digits = new char[len];</b>
+&nbsp;
+<b class="fc">&nbsp;            int nDigits = 0;</b>
+<b class="fc">&nbsp;            boolean decSeen = false;</b>
+<b class="fc">&nbsp;            int decPt = 0;</b>
+<b class="fc">&nbsp;            int nLeadZero = 0;</b>
+<b class="fc">&nbsp;            int nTrailZero = 0;</b>
+&nbsp;
+&nbsp;            skipLeadingZerosLoop:
+<b class="fc">&nbsp;            while (i &lt; end) {</b>
+<b class="fc">&nbsp;                c = in[i];</b>
+<b class="fc">&nbsp;                if (c == &#39;0&#39;) {</b>
+<b class="fc">&nbsp;                    nLeadZero++;</b>
+<b class="fc">&nbsp;                } else if (c == &#39;.&#39;) {</b>
+<b class="fc">&nbsp;                    if (decSeen) {</b>
+<b class="nc">&nbsp;                        throw new NumberFormatException(&quot;multiple points&quot;);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    decPt = i - off;</b>
+<b class="fc">&nbsp;                    if (signSeen) {</b>
+<b class="fc">&nbsp;                        decPt -= 1;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    decSeen = true;</b>
+&nbsp;                } else {
+&nbsp;                    break skipLeadingZerosLoop;
+&nbsp;                }
+<b class="fc">&nbsp;                i++;</b>
+&nbsp;            }
+&nbsp;            digitLoop:
+<b class="fc">&nbsp;            while (i &lt; end) {</b>
+<b class="fc">&nbsp;                c = in[i];</b>
+<b class="fc">&nbsp;                if (c &gt;= &#39;1&#39; &amp;&amp; c &lt;= &#39;9&#39;) {</b>
+<b class="fc">&nbsp;                    digits[nDigits++] = (char) c;</b>
+<b class="fc">&nbsp;                    nTrailZero = 0;</b>
+<b class="fc">&nbsp;                } else if (c == &#39;0&#39;) {</b>
+<b class="fc">&nbsp;                    digits[nDigits++] = (char) c;</b>
+<b class="fc">&nbsp;                    nTrailZero++;</b>
+<b class="fc">&nbsp;                } else if (c == &#39;.&#39;) {</b>
+<b class="fc">&nbsp;                    if (decSeen) {</b>
+<b class="nc">&nbsp;                        throw new NumberFormatException(&quot;multiple points&quot;);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    decPt = i - off;</b>
+<b class="fc">&nbsp;                    if (signSeen) {</b>
+<b class="fc">&nbsp;                        decPt -= 1;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    decSeen = true;</b>
+&nbsp;                } else {
+&nbsp;                    break digitLoop;
+&nbsp;                }
+<b class="fc">&nbsp;                i++;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            nDigits -= nTrailZero;</b>
+&nbsp;
+<b class="fc">&nbsp;            boolean isZero = (nDigits == 0);</b>
+<b class="fc">&nbsp;            if (isZero &amp;&amp; nLeadZero == 0) {</b>
+<b class="nc">&nbsp;                break parseNumber; // go throw exception</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (decSeen) {</b>
+<b class="fc">&nbsp;                decExp = decPt - nLeadZero;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                decExp = nDigits + nTrailZero;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if ((i &lt; end) &amp;&amp; (((c = in[i]) == &#39;e&#39;) || (c == &#39;E&#39;))) {</b>
+<b class="fc">&nbsp;                int expSign = 1;</b>
+<b class="fc">&nbsp;                int expVal = 0;</b>
+<b class="fc">&nbsp;                int reallyBig = Integer.MAX_VALUE / 10;</b>
+<b class="fc">&nbsp;                boolean expOverflow = false;</b>
+<b class="fc">&nbsp;                switch (in[++i]) {</b>
+&nbsp;                    case &#39;-&#39;:
+<b class="fc">&nbsp;                        expSign = -1;</b>
+&nbsp;                    case &#39;+&#39;:
+<b class="fc">&nbsp;                        i++;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                int expAt = i;</b>
+&nbsp;                expLoop:
+<b class="fc">&nbsp;                while (i &lt; end) {</b>
+<b class="fc">&nbsp;                    if (expVal &gt;= reallyBig) {</b>
+<b class="nc">&nbsp;                        expOverflow = true;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    c = in[i++];</b>
+<b class="fc">&nbsp;                    if (c &gt;= &#39;0&#39; &amp;&amp; c &lt;= &#39;9&#39;) {</b>
+<b class="fc">&nbsp;                        expVal = expVal * 10 + ((int) c - (int) &#39;0&#39;);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        i--;           // back up.</b>
+<b class="nc">&nbsp;                        break expLoop; // stop parsing exponent.</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                int expLimit = BIG_DECIMAL_EXPONENT + nDigits + nTrailZero;</b>
+<b class="fc">&nbsp;                if (expOverflow || (expVal &gt; expLimit)) {</b>
+<b class="nc">&nbsp;                    decExp = expSign * expLimit;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    decExp = decExp + expSign * expVal;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (i == expAt) {</b>
+<b class="nc">&nbsp;                    break parseNumber; // certainly bad</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (i &lt; end &amp;&amp; (i != end - 1)) {</b>
+<b class="nc">&nbsp;                break parseNumber; // go throw exception</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (isZero) {</b>
+<b class="fc">&nbsp;                return 0;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return doubleValue(isNegative, decExp, digits, nDigits);</b>
+<b class="nc">&nbsp;        } catch (StringIndexOutOfBoundsException e) {</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new NumberFormatException(&quot;For input string: \&quot;&quot; + new String(in, off, len) + &quot;\&quot;&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static double doubleValue(boolean isNegative, int decExp, char[] digits, int nDigits) {
+<b class="fc">&nbsp;        int kDigits = Math.min(nDigits, MAX_DECIMAL_DIGITS + 1);</b>
+&nbsp;
+<b class="fc">&nbsp;        int iValue = (int) digits[0] - (int) &#39;0&#39;;</b>
+<b class="fc">&nbsp;        int iDigits = Math.min(kDigits, INT_DECIMAL_DIGITS);</b>
+<b class="fc">&nbsp;        for (int i = 1; i &lt; iDigits; i++) {</b>
+<b class="fc">&nbsp;            iValue = iValue * 10 + (int) digits[i] - (int) &#39;0&#39;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        long lValue = (long) iValue;</b>
+<b class="fc">&nbsp;        for (int i = iDigits; i &lt; kDigits; i++) {</b>
+<b class="fc">&nbsp;            lValue = lValue * 10L + (long) ((int) digits[i] - (int) &#39;0&#39;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        double dValue = (double) lValue;</b>
+<b class="fc">&nbsp;        int exp = decExp - kDigits;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (nDigits &lt;= MAX_DECIMAL_DIGITS) {</b>
+<b class="fc">&nbsp;            if (exp == 0 || dValue == 0.0) {</b>
+<b class="fc">&nbsp;                return (isNegative) ? -dValue : dValue; // small floating integer</b>
+<b class="fc">&nbsp;            } else if (exp &gt;= 0) {</b>
+<b class="fc">&nbsp;                if (exp &lt;= MAX_SMALL_TEN) {</b>
+<b class="fc">&nbsp;                    double rValue = dValue * SMALL_10_POW[exp];</b>
+<b class="fc">&nbsp;                    return (isNegative) ? -rValue : rValue;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                int slop = MAX_DECIMAL_DIGITS - kDigits;</b>
+<b class="fc">&nbsp;                if (exp &lt;= MAX_SMALL_TEN + slop) {</b>
+<b class="nc">&nbsp;                    dValue *= SMALL_10_POW[slop];</b>
+<b class="nc">&nbsp;                    double rValue = dValue * SMALL_10_POW[exp - slop];</b>
+<b class="nc">&nbsp;                    return (isNegative) ? -rValue : rValue;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } else {</b>
+<b class="fc">&nbsp;                if (exp &gt;= -MAX_SMALL_TEN) {</b>
+<b class="fc">&nbsp;                    double rValue = dValue / SMALL_10_POW[-exp];</b>
+<b class="fc">&nbsp;                    return (isNegative) ? -rValue : rValue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (exp &gt; 0) {</b>
+<b class="fc">&nbsp;            if (decExp &gt; MAX_DECIMAL_EXPONENT + 1) {</b>
+<b class="nc">&nbsp;                return (isNegative) ? Double.NEGATIVE_INFINITY : Double.POSITIVE_INFINITY;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if ((exp &amp; 15) != 0) {</b>
+<b class="fc">&nbsp;                dValue *= SMALL_10_POW[exp &amp; 15];</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if ((exp &gt;&gt;= 4) != 0) {</b>
+&nbsp;                int j;
+<b class="fc">&nbsp;                for (j = 0; exp &gt; 1; j++, exp &gt;&gt;= 1) {</b>
+<b class="fc">&nbsp;                    if ((exp &amp; 1) != 0) {</b>
+<b class="fc">&nbsp;                        dValue *= BIG_10_POW[j];</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                double t = dValue * BIG_10_POW[j];</b>
+<b class="fc">&nbsp;                if (Double.isInfinite(t)) {</b>
+<b class="nc">&nbsp;                    t = dValue / 2.0;</b>
+<b class="nc">&nbsp;                    t *= BIG_10_POW[j];</b>
+<b class="nc">&nbsp;                    if (Double.isInfinite(t)) {</b>
+<b class="nc">&nbsp;                        return (isNegative) ? Double.NEGATIVE_INFINITY : Double.POSITIVE_INFINITY;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    t = Double.MAX_VALUE;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                dValue = t;</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        } else if (exp &lt; 0) {</b>
+<b class="fc">&nbsp;            exp = -exp;</b>
+<b class="fc">&nbsp;            if (decExp &lt; MIN_DECIMAL_EXPONENT - 1) {</b>
+<b class="nc">&nbsp;                return (isNegative) ? -0.0 : 0.0;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if ((exp &amp; 15) != 0) {</b>
+<b class="fc">&nbsp;                dValue /= SMALL_10_POW[exp &amp; 15];</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if ((exp &gt;&gt;= 4) != 0) {</b>
+&nbsp;                int j;
+<b class="fc">&nbsp;                for (j = 0; exp &gt; 1; j++, exp &gt;&gt;= 1) {</b>
+<b class="fc">&nbsp;                    if ((exp &amp; 1) != 0) {</b>
+<b class="fc">&nbsp;                        dValue *= TINY_10_POW[j];</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                double t = dValue * TINY_10_POW[j];</b>
+<b class="fc">&nbsp;                if (t == 0.0) {</b>
+<b class="nc">&nbsp;                    t = dValue * 2.0;</b>
+<b class="nc">&nbsp;                    t *= TINY_10_POW[j];</b>
+<b class="nc">&nbsp;                    if (t == 0.0) {</b>
+<b class="nc">&nbsp;                        return (isNegative) ? -0.0 : 0.0;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    t = Double.MIN_VALUE;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                dValue = t;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (nDigits &gt; MAX_NDIGITS) {</b>
+<b class="nc">&nbsp;            nDigits = MAX_NDIGITS + 1;</b>
+<b class="nc">&nbsp;            digits[MAX_NDIGITS] = &#39;1&#39;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        FDBigInteger bigD0 = new FDBigInteger(lValue, digits, kDigits, nDigits);</b>
+<b class="fc">&nbsp;        exp = decExp - nDigits;</b>
+&nbsp;
+<b class="fc">&nbsp;        long ieeeBits = Double.doubleToRawLongBits(dValue); // IEEE-754 bits of double candidate</b>
+<b class="fc">&nbsp;        final int B5 = Math.max(0, -exp); // powers of 5 in bigB, value is not modified inside correctionLoop</b>
+<b class="fc">&nbsp;        final int D5 = Math.max(0, exp); // powers of 5 in bigD, value is not modified inside correctionLoop</b>
+<b class="fc">&nbsp;        bigD0 = bigD0.multByPow52(D5, 0);</b>
+<b class="fc">&nbsp;        bigD0.makeImmutable();   // prevent bigD0 modification inside correctionLoop</b>
+<b class="fc">&nbsp;        FDBigInteger bigD = null;</b>
+<b class="fc">&nbsp;        int prevD2 = 0;</b>
+&nbsp;
+&nbsp;        correctionLoop:
+&nbsp;        while (true) {
+&nbsp;            // here ieeeBits can&#39;t be NaN, Infinity or zero
+<b class="fc">&nbsp;            int binexp = (int) (ieeeBits &gt;&gt;&gt; EXP_SHIFT);</b>
+<b class="fc">&nbsp;            long bigBbits = ieeeBits &amp; DOUBLE_SIGNIF_BIT_MASK;</b>
+<b class="fc">&nbsp;            if (binexp &gt; 0) {</b>
+<b class="fc">&nbsp;                bigBbits |= FRACT_HOB;</b>
+&nbsp;            } else { // Normalize denormalized numbers.
+<b class="nc">&nbsp;                assert bigBbits != 0L : bigBbits; // doubleToBigInt(0.0)</b>
+<b class="nc">&nbsp;                int leadingZeros = Long.numberOfLeadingZeros(bigBbits);</b>
+<b class="nc">&nbsp;                int shift = leadingZeros - (63 - EXP_SHIFT);</b>
+<b class="nc">&nbsp;                bigBbits &lt;&lt;= shift;</b>
+<b class="nc">&nbsp;                binexp = 1 - shift;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            binexp -= DOUBLE_EXP_BIAS;</b>
+<b class="fc">&nbsp;            int lowOrderZeros = Long.numberOfTrailingZeros(bigBbits);</b>
+<b class="fc">&nbsp;            bigBbits &gt;&gt;&gt;= lowOrderZeros;</b>
+<b class="fc">&nbsp;            final int bigIntExp = binexp - EXP_SHIFT + lowOrderZeros;</b>
+<b class="fc">&nbsp;            final int bigIntNBits = EXP_SHIFT + 1 - lowOrderZeros;</b>
+&nbsp;
+<b class="fc">&nbsp;            int B2 = B5; // powers of 2 in bigB</b>
+<b class="fc">&nbsp;            int D2 = D5; // powers of 2 in bigD</b>
+&nbsp;            int Ulp2;   // powers of 2 in halfUlp.
+<b class="fc">&nbsp;            if (bigIntExp &gt;= 0) {</b>
+<b class="fc">&nbsp;                B2 += bigIntExp;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                D2 -= bigIntExp;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            Ulp2 = B2;</b>
+&nbsp;            // shift bigB and bigD left by a number s. t.
+&nbsp;            // halfUlp is still an integer.
+&nbsp;            int hulpbias;
+<b class="fc">&nbsp;            if (binexp &lt;= -DOUBLE_EXP_BIAS) {</b>
+&nbsp;                // This is going to be a denormalized number
+&nbsp;                // (if not actually zero).
+&nbsp;                // half an ULP is at 2^-(EXP_BIAS+EXP_SHIFT+1)
+<b class="nc">&nbsp;                hulpbias = binexp + lowOrderZeros + DOUBLE_EXP_BIAS;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                hulpbias = 1 + lowOrderZeros;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            B2 += hulpbias;</b>
+<b class="fc">&nbsp;            D2 += hulpbias;</b>
+&nbsp;            // if there are common factors of 2, we might just as well
+&nbsp;            // factor them out, as they add nothing useful.
+<b class="fc">&nbsp;            int common2 = Math.min(B2, Math.min(D2, Ulp2));</b>
+<b class="fc">&nbsp;            B2 -= common2;</b>
+<b class="fc">&nbsp;            D2 -= common2;</b>
+<b class="fc">&nbsp;            Ulp2 -= common2;</b>
+&nbsp;            // do multiplications by powers of 5 and 2
+<b class="fc">&nbsp;            FDBigInteger bigB = FDBigInteger.valueOfMulPow52(bigBbits, B5, B2);</b>
+<b class="fc">&nbsp;            if (bigD == null || prevD2 != D2) {</b>
+<b class="fc">&nbsp;                bigD = bigD0.leftShift(D2);</b>
+<b class="fc">&nbsp;                prevD2 = D2;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            FDBigInteger diff;
+&nbsp;            int cmpResult;
+&nbsp;            boolean overvalue;
+<b class="fc">&nbsp;            if ((cmpResult = bigB.cmp(bigD)) &gt; 0) {</b>
+<b class="fc">&nbsp;                overvalue = true; // our candidate is too big.</b>
+<b class="fc">&nbsp;                diff = bigB.leftInplaceSub(bigD); // bigB is not user further - reuse</b>
+<b class="fc">&nbsp;                if ((bigIntNBits == 1) &amp;&amp; (bigIntExp &gt; -DOUBLE_EXP_BIAS + 1)) {</b>
+&nbsp;                    // candidate is a normalized exact power of 2 and
+&nbsp;                    // is too big (larger than Double.MIN_NORMAL). We will be subtracting.
+&nbsp;                    // For our purposes, ulp is the ulp of the
+&nbsp;                    // next smaller range.
+<b class="fc">&nbsp;                    Ulp2 -= 1;</b>
+<b class="fc">&nbsp;                    if (Ulp2 &lt; 0) {</b>
+&nbsp;                        // rats. Cannot de-scale ulp this far.
+&nbsp;                        // must scale diff in other direction.
+<b class="fc">&nbsp;                        Ulp2 = 0;</b>
+<b class="fc">&nbsp;                        diff = diff.leftShift(1);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;            } else if (cmpResult &lt; 0) {</b>
+<b class="fc">&nbsp;                overvalue = false; // our candidate is too small.</b>
+<b class="fc">&nbsp;                diff = bigD.rightInplaceSub(bigB); // bigB is not user further - reuse</b>
+&nbsp;            } else {
+&nbsp;                // the candidate is exactly right!
+&nbsp;                // this happens with surprising frequency
+&nbsp;                break correctionLoop;
+&nbsp;            }
+<b class="fc">&nbsp;            cmpResult = diff.cmpPow52(B5, Ulp2);</b>
+<b class="fc">&nbsp;            if ((cmpResult) &lt; 0) {</b>
+&nbsp;                // difference is small.
+&nbsp;                // this is close enough
+<b class="fc">&nbsp;                break correctionLoop;</b>
+<b class="fc">&nbsp;            } else if (cmpResult == 0) {</b>
+&nbsp;                // difference is exactly half an ULP
+&nbsp;                // round to some other value maybe, then finish
+<b class="nc">&nbsp;                if ((ieeeBits &amp; 1) != 0) { // half ties to even</b>
+<b class="nc">&nbsp;                    ieeeBits += overvalue ? -1 : 1; // nextDown or nextUp</b>
+&nbsp;                }
+&nbsp;                break correctionLoop;
+&nbsp;            } else {
+&nbsp;                // difference is non-trivial.
+&nbsp;                // could scale addend by ratio of difference to
+&nbsp;                // halfUlp here, if we bothered to compute that difference.
+&nbsp;                // Most of the time ( I hope ) it is about 1 anyway.
+<b class="fc">&nbsp;                ieeeBits += overvalue ? -1 : 1; // nextDown or nextUp</b>
+<b class="fc">&nbsp;                if (ieeeBits == 0 || ieeeBits == DOUBLE_EXP_BIT_MASK) { // 0.0 or Double.POSITIVE_INFINITY</b>
+<b class="nc">&nbsp;                    break correctionLoop; // oops. Fell off end of range.</b>
+&nbsp;                }
+&nbsp;                continue; // try again.
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        if (isNegative) {</b>
+<b class="fc">&nbsp;            ieeeBits |= DOUBLE_SIGN_BIT_MASK;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return Double.longBitsToDouble(ieeeBits);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static float parseFloat(char[] in, int off, int len) throws NumberFormatException {
+<b class="fc">&nbsp;        boolean isNegative = false;</b>
+<b class="fc">&nbsp;        boolean signSeen = false;</b>
+&nbsp;        int decExp;
+&nbsp;        char c;
+<b class="fc">&nbsp;        int end = off + len;</b>
+&nbsp;
+&nbsp;        parseNumber:
+&nbsp;        try {
+&nbsp;            // throws NullPointerException if null
+<b class="fc">&nbsp;            if (len == 0) {</b>
+<b class="nc">&nbsp;                throw new NumberFormatException(&quot;empty String&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            int i = off;</b>
+<b class="fc">&nbsp;            switch (in[i]) {</b>
+&nbsp;                case &#39;-&#39;:
+<b class="fc">&nbsp;                    isNegative = true;</b>
+&nbsp;                case &#39;+&#39;:
+<b class="fc">&nbsp;                    i++;</b>
+<b class="fc">&nbsp;                    signSeen = true;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            char[] digits = new char[len];</b>
+&nbsp;
+<b class="fc">&nbsp;            int nDigits = 0;</b>
+<b class="fc">&nbsp;            boolean decSeen = false;</b>
+<b class="fc">&nbsp;            int decPt = 0;</b>
+<b class="fc">&nbsp;            int nLeadZero = 0;</b>
+<b class="fc">&nbsp;            int nTrailZero = 0;</b>
+&nbsp;
+&nbsp;            skipLeadingZerosLoop:
+<b class="fc">&nbsp;            while (i &lt; end) {</b>
+<b class="fc">&nbsp;                c = in[i];</b>
+<b class="fc">&nbsp;                if (c == &#39;0&#39;) {</b>
+<b class="fc">&nbsp;                    nLeadZero++;</b>
+<b class="fc">&nbsp;                } else if (c == &#39;.&#39;) {</b>
+<b class="fc">&nbsp;                    if (decSeen) {</b>
+<b class="nc">&nbsp;                        throw new NumberFormatException(&quot;multiple points&quot;);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    decPt = i - off;</b>
+<b class="fc">&nbsp;                    if (signSeen) {</b>
+<b class="fc">&nbsp;                        decPt -= 1;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    decSeen = true;</b>
+&nbsp;                } else {
+&nbsp;                    break skipLeadingZerosLoop;
+&nbsp;                }
+<b class="fc">&nbsp;                i++;</b>
+&nbsp;            }
+&nbsp;            digitLoop:
+<b class="fc">&nbsp;            while (i &lt; end) {</b>
+<b class="fc">&nbsp;                c = in[i];</b>
+<b class="fc">&nbsp;                if (c &gt;= &#39;1&#39; &amp;&amp; c &lt;= &#39;9&#39;) {</b>
+<b class="fc">&nbsp;                    digits[nDigits++] = c;</b>
+<b class="fc">&nbsp;                    nTrailZero = 0;</b>
+<b class="fc">&nbsp;                } else if (c == &#39;0&#39;) {</b>
+<b class="fc">&nbsp;                    digits[nDigits++] = c;</b>
+<b class="fc">&nbsp;                    nTrailZero++;</b>
+<b class="fc">&nbsp;                } else if (c == &#39;.&#39;) {</b>
+<b class="fc">&nbsp;                    if (decSeen) {</b>
+<b class="nc">&nbsp;                        throw new NumberFormatException(&quot;multiple points&quot;);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    decPt = i - off;</b>
+<b class="fc">&nbsp;                    if (signSeen) {</b>
+<b class="fc">&nbsp;                        decPt -= 1;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    decSeen = true;</b>
+&nbsp;                } else {
+&nbsp;                    break digitLoop;
+&nbsp;                }
+<b class="fc">&nbsp;                i++;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            nDigits -= nTrailZero;</b>
+&nbsp;
+<b class="fc">&nbsp;            boolean isZero = (nDigits == 0);</b>
+<b class="fc">&nbsp;            if (isZero &amp;&amp; nLeadZero == 0) {</b>
+<b class="nc">&nbsp;                break parseNumber; // go throw exception</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (decSeen) {</b>
+<b class="fc">&nbsp;                decExp = decPt - nLeadZero;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                decExp = nDigits + nTrailZero;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if ((i &lt; end) &amp;&amp; (((c = in[i]) == &#39;e&#39;) || (c == &#39;E&#39;))) {</b>
+<b class="fc">&nbsp;                int expSign = 1;</b>
+<b class="fc">&nbsp;                int expVal = 0;</b>
+<b class="fc">&nbsp;                int reallyBig = Integer.MAX_VALUE / 10;</b>
+<b class="fc">&nbsp;                boolean expOverflow = false;</b>
+<b class="fc">&nbsp;                switch (in[++i]) {</b>
+&nbsp;                    case &#39;-&#39;:
+<b class="fc">&nbsp;                        expSign = -1;</b>
+&nbsp;                    case &#39;+&#39;:
+<b class="fc">&nbsp;                        i++;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                int expAt = i;</b>
+&nbsp;                expLoop:
+<b class="fc">&nbsp;                while (i &lt; end) {</b>
+<b class="fc">&nbsp;                    if (expVal &gt;= reallyBig) {</b>
+<b class="nc">&nbsp;                        expOverflow = true;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    c = in[i++];</b>
+<b class="fc">&nbsp;                    if (c &gt;= &#39;0&#39; &amp;&amp; c &lt;= &#39;9&#39;) {</b>
+<b class="fc">&nbsp;                        expVal = expVal * 10 + ((int) c - (int) &#39;0&#39;);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        i--;           // back up.</b>
+<b class="nc">&nbsp;                        break expLoop; // stop parsing exponent.</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                int expLimit = BIG_DECIMAL_EXPONENT + nDigits + nTrailZero;</b>
+<b class="fc">&nbsp;                if (expOverflow || (expVal &gt; expLimit)) {</b>
+<b class="nc">&nbsp;                    decExp = expSign * expLimit;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    decExp = decExp + expSign * expVal;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (i == expAt) {</b>
+<b class="nc">&nbsp;                    break parseNumber; // certainly bad</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (i &lt; end &amp;&amp; (i != end - 1)) {</b>
+<b class="nc">&nbsp;                break parseNumber; // go throw exception</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (isZero) {</b>
+<b class="fc">&nbsp;                return 0;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return floatValue(isNegative, decExp, digits, nDigits);</b>
+<b class="nc">&nbsp;        } catch (StringIndexOutOfBoundsException e) {</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new NumberFormatException(&quot;For input string: \&quot;&quot; + new String(in, off, len) + &quot;\&quot;&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static float parseFloat(byte[] in, int off, int len) throws NumberFormatException {
+<b class="fc">&nbsp;        boolean isNegative = false;</b>
+<b class="fc">&nbsp;        boolean signSeen = false;</b>
+&nbsp;        int decExp;
+&nbsp;        byte c;
+<b class="fc">&nbsp;        int end = off + len;</b>
+&nbsp;
+&nbsp;        parseNumber:
+&nbsp;        try {
+&nbsp;            // throws NullPointerException if null
+<b class="fc">&nbsp;            if (len == 0) {</b>
+<b class="nc">&nbsp;                throw new NumberFormatException(&quot;empty String&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            int i = off;</b>
+<b class="fc">&nbsp;            switch (in[i]) {</b>
+&nbsp;                case &#39;-&#39;:
+<b class="fc">&nbsp;                    isNegative = true;</b>
+&nbsp;                case &#39;+&#39;:
+<b class="fc">&nbsp;                    i++;</b>
+<b class="fc">&nbsp;                    signSeen = true;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            char[] digits = new char[len];</b>
+&nbsp;
+<b class="fc">&nbsp;            int nDigits = 0;</b>
+<b class="fc">&nbsp;            boolean decSeen = false;</b>
+<b class="fc">&nbsp;            int decPt = 0;</b>
+<b class="fc">&nbsp;            int nLeadZero = 0;</b>
+<b class="fc">&nbsp;            int nTrailZero = 0;</b>
+&nbsp;
+&nbsp;            skipLeadingZerosLoop:
+<b class="fc">&nbsp;            while (i &lt; end) {</b>
+<b class="fc">&nbsp;                c = in[i];</b>
+<b class="fc">&nbsp;                if (c == &#39;0&#39;) {</b>
+<b class="fc">&nbsp;                    nLeadZero++;</b>
+<b class="fc">&nbsp;                } else if (c == &#39;.&#39;) {</b>
+<b class="fc">&nbsp;                    if (decSeen) {</b>
+<b class="nc">&nbsp;                        throw new NumberFormatException(&quot;multiple points&quot;);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    decPt = i - off;</b>
+<b class="fc">&nbsp;                    if (signSeen) {</b>
+<b class="fc">&nbsp;                        decPt -= 1;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    decSeen = true;</b>
+&nbsp;                } else {
+&nbsp;                    break skipLeadingZerosLoop;
+&nbsp;                }
+<b class="fc">&nbsp;                i++;</b>
+&nbsp;            }
+&nbsp;            digitLoop:
+<b class="fc">&nbsp;            while (i &lt; end) {</b>
+<b class="fc">&nbsp;                c = in[i];</b>
+<b class="fc">&nbsp;                if (c &gt;= &#39;1&#39; &amp;&amp; c &lt;= &#39;9&#39;) {</b>
+<b class="fc">&nbsp;                    digits[nDigits++] = (char) c;</b>
+<b class="fc">&nbsp;                    nTrailZero = 0;</b>
+<b class="fc">&nbsp;                } else if (c == &#39;0&#39;) {</b>
+<b class="fc">&nbsp;                    digits[nDigits++] = (char) c;</b>
+<b class="fc">&nbsp;                    nTrailZero++;</b>
+<b class="fc">&nbsp;                } else if (c == &#39;.&#39;) {</b>
+<b class="fc">&nbsp;                    if (decSeen) {</b>
+<b class="nc">&nbsp;                        throw new NumberFormatException(&quot;multiple points&quot;);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    decPt = i - off;</b>
+<b class="fc">&nbsp;                    if (signSeen) {</b>
+<b class="fc">&nbsp;                        decPt -= 1;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    decSeen = true;</b>
+&nbsp;                } else {
+&nbsp;                    break digitLoop;
+&nbsp;                }
+<b class="fc">&nbsp;                i++;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            nDigits -= nTrailZero;</b>
+&nbsp;
+<b class="fc">&nbsp;            boolean isZero = (nDigits == 0);</b>
+<b class="fc">&nbsp;            if (isZero &amp;&amp; nLeadZero == 0) {</b>
+<b class="nc">&nbsp;                break parseNumber; // go throw exception</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (decSeen) {</b>
+<b class="fc">&nbsp;                decExp = decPt - nLeadZero;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                decExp = nDigits + nTrailZero;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if ((i &lt; end) &amp;&amp; (((c = in[i]) == &#39;e&#39;) || (c == &#39;E&#39;))) {</b>
+<b class="fc">&nbsp;                int expSign = 1;</b>
+<b class="fc">&nbsp;                int expVal = 0;</b>
+<b class="fc">&nbsp;                int reallyBig = Integer.MAX_VALUE / 10;</b>
+<b class="fc">&nbsp;                boolean expOverflow = false;</b>
+<b class="fc">&nbsp;                switch (in[++i]) {</b>
+&nbsp;                    case &#39;-&#39;:
+<b class="fc">&nbsp;                        expSign = -1;</b>
+&nbsp;                    case &#39;+&#39;:
+<b class="fc">&nbsp;                        i++;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                int expAt = i;</b>
+&nbsp;                expLoop:
+<b class="fc">&nbsp;                while (i &lt; end) {</b>
+<b class="fc">&nbsp;                    if (expVal &gt;= reallyBig) {</b>
+<b class="nc">&nbsp;                        expOverflow = true;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    c = in[i++];</b>
+<b class="fc">&nbsp;                    if (c &gt;= &#39;0&#39; &amp;&amp; c &lt;= &#39;9&#39;) {</b>
+<b class="fc">&nbsp;                        expVal = expVal * 10 + ((int) c - (int) &#39;0&#39;);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        i--;           // back up.</b>
+<b class="nc">&nbsp;                        break expLoop; // stop parsing exponent.</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                int expLimit = BIG_DECIMAL_EXPONENT + nDigits + nTrailZero;</b>
+<b class="fc">&nbsp;                if (expOverflow || (expVal &gt; expLimit)) {</b>
+<b class="nc">&nbsp;                    decExp = expSign * expLimit;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    decExp = decExp + expSign * expVal;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (i == expAt) {</b>
+<b class="nc">&nbsp;                    break parseNumber; // certainly bad</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (i &lt; end &amp;&amp; (i != end - 1)) {</b>
+<b class="nc">&nbsp;                break parseNumber; // go throw exception</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (isZero) {</b>
+<b class="fc">&nbsp;                return 0;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return floatValue(isNegative, decExp, digits, nDigits);</b>
+<b class="nc">&nbsp;        } catch (StringIndexOutOfBoundsException e) {</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new NumberFormatException(&quot;For input string: \&quot;&quot; + new String(in, off, len) + &quot;\&quot;&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static float floatValue(boolean isNegative, int decExponent, char[] digits, int nDigits) {
+<b class="fc">&nbsp;        int kDigits = Math.min(nDigits, SINGLE_MAX_DECIMAL_DIGITS + 1);</b>
+<b class="fc">&nbsp;        int iValue = (int) digits[0] - (int) &#39;0&#39;;</b>
+<b class="fc">&nbsp;        for (int i = 1; i &lt; kDigits; i++) {</b>
+<b class="fc">&nbsp;            iValue = iValue * 10 + (int) digits[i] - (int) &#39;0&#39;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        float fValue = (float) iValue;</b>
+<b class="fc">&nbsp;        int exp = decExponent - kDigits;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (nDigits &lt;= SINGLE_MAX_DECIMAL_DIGITS) {</b>
+<b class="fc">&nbsp;            if (exp == 0 || fValue == 0.0f) {</b>
+<b class="fc">&nbsp;                return (isNegative) ? -fValue : fValue; // small floating integer</b>
+<b class="fc">&nbsp;            } else if (exp &gt;= 0) {</b>
+<b class="fc">&nbsp;                if (exp &lt;= SINGLE_MAX_SMALL_TEN) {</b>
+<b class="fc">&nbsp;                    fValue *= SINGLE_SMALL_10_POW[exp];</b>
+<b class="fc">&nbsp;                    return (isNegative) ? -fValue : fValue;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                int slop = SINGLE_MAX_DECIMAL_DIGITS - kDigits;</b>
+<b class="nc">&nbsp;                if (exp &lt;= SINGLE_MAX_SMALL_TEN + slop) {</b>
+<b class="nc">&nbsp;                    fValue *= SINGLE_SMALL_10_POW[slop];</b>
+<b class="nc">&nbsp;                    fValue *= SINGLE_SMALL_10_POW[exp - slop];</b>
+<b class="nc">&nbsp;                    return (isNegative) ? -fValue : fValue;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else {</b>
+<b class="fc">&nbsp;                if (exp &gt;= -SINGLE_MAX_SMALL_TEN) {</b>
+<b class="fc">&nbsp;                    fValue /= SINGLE_SMALL_10_POW[-exp];</b>
+<b class="fc">&nbsp;                    return (isNegative) ? -fValue : fValue;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;        } else if ((decExponent &gt;= nDigits) &amp;&amp; (nDigits + decExponent &lt;= MAX_DECIMAL_DIGITS)) {</b>
+<b class="nc">&nbsp;            long lValue = (long) iValue;</b>
+<b class="nc">&nbsp;            for (int i = kDigits; i &lt; nDigits; i++) {</b>
+<b class="nc">&nbsp;                lValue = lValue * 10L + (long) ((int) digits[i] - (int) &#39;0&#39;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            double dValue = (double) lValue;</b>
+<b class="nc">&nbsp;            exp = decExponent - nDigits;</b>
+<b class="nc">&nbsp;            dValue *= SMALL_10_POW[exp];</b>
+<b class="nc">&nbsp;            fValue = (float) dValue;</b>
+<b class="nc">&nbsp;            return (isNegative) ? -fValue : fValue;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        double dValue = fValue;</b>
+<b class="fc">&nbsp;        if (exp &gt; 0) {</b>
+<b class="fc">&nbsp;            if (decExponent &gt; SINGLE_MAX_DECIMAL_EXPONENT + 1) {</b>
+<b class="nc">&nbsp;                return (isNegative) ? Float.NEGATIVE_INFINITY : Float.POSITIVE_INFINITY;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if ((exp &amp; 15) != 0) {</b>
+<b class="fc">&nbsp;                dValue *= SMALL_10_POW[exp &amp; 15];</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if ((exp &gt;&gt;= 4) != 0) {</b>
+&nbsp;                int j;
+<b class="fc">&nbsp;                for (j = 0; exp &gt; 0; j++, exp &gt;&gt;= 1) {</b>
+<b class="fc">&nbsp;                    if ((exp &amp; 1) != 0) {</b>
+<b class="fc">&nbsp;                        dValue *= BIG_10_POW[j];</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        } else if (exp &lt; 0) {</b>
+<b class="fc">&nbsp;            exp = -exp;</b>
+<b class="fc">&nbsp;            if (decExponent &lt; SINGLE_MIN_DECIMAL_EXPONENT - 1) {</b>
+<b class="nc">&nbsp;                return (isNegative) ? -0.0f : 0.0f;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if ((exp &amp; 15) != 0) {</b>
+<b class="fc">&nbsp;                dValue /= SMALL_10_POW[exp &amp; 15];</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if ((exp &gt;&gt;= 4) != 0) {</b>
+&nbsp;                int j;
+<b class="fc">&nbsp;                for (j = 0; exp &gt; 0; j++, exp &gt;&gt;= 1) {</b>
+<b class="fc">&nbsp;                    if ((exp &amp; 1) != 0) {</b>
+<b class="fc">&nbsp;                        dValue *= TINY_10_POW[j];</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        fValue = Math.max(Float.MIN_VALUE, Math.min(Float.MAX_VALUE, (float) dValue));</b>
+&nbsp;
+<b class="fc">&nbsp;        if (nDigits &gt; SINGLE_MAX_NDIGITS) {</b>
+<b class="nc">&nbsp;            nDigits = SINGLE_MAX_NDIGITS + 1;</b>
+<b class="nc">&nbsp;            digits[SINGLE_MAX_NDIGITS] = &#39;1&#39;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        FDBigInteger bigD0 = new FDBigInteger(iValue, digits, kDigits, nDigits);</b>
+<b class="fc">&nbsp;        exp = decExponent - nDigits;</b>
+&nbsp;
+<b class="fc">&nbsp;        int ieeeBits = Float.floatToRawIntBits(fValue); // IEEE-754 bits of float candidate</b>
+<b class="fc">&nbsp;        final int B5 = Math.max(0, -exp); // powers of 5 in bigB, value is not modified inside correctionLoop</b>
+<b class="fc">&nbsp;        final int D5 = Math.max(0, exp); // powers of 5 in bigD, value is not modified inside correctionLoop</b>
+<b class="fc">&nbsp;        bigD0 = bigD0.multByPow52(D5, 0);</b>
+<b class="fc">&nbsp;        bigD0.makeImmutable();   // prevent bigD0 modification inside correctionLoop</b>
+<b class="fc">&nbsp;        FDBigInteger bigD = null;</b>
+<b class="fc">&nbsp;        int prevD2 = 0;</b>
+&nbsp;
+&nbsp;        correctionLoop:
+&nbsp;        while (true) {
+&nbsp;            // here ieeeBits can&#39;t be NaN, Infinity or zero
+<b class="fc">&nbsp;            int binexp = ieeeBits &gt;&gt;&gt; SINGLE_EXP_SHIFT;</b>
+<b class="fc">&nbsp;            int bigBbits = ieeeBits &amp; FLOAT_SIGNIF_BIT_MASK;</b>
+<b class="fc">&nbsp;            if (binexp &gt; 0) {</b>
+<b class="fc">&nbsp;                bigBbits |= SINGLE_FRACT_HOB;</b>
+&nbsp;            } else { // Normalize denormalized numbers.
+<b class="fc">&nbsp;                assert bigBbits != 0 : bigBbits; // floatToBigInt(0.0)</b>
+<b class="fc">&nbsp;                int leadingZeros = Integer.numberOfLeadingZeros(bigBbits);</b>
+<b class="fc">&nbsp;                int shift = leadingZeros - (31 - SINGLE_EXP_SHIFT);</b>
+<b class="fc">&nbsp;                bigBbits &lt;&lt;= shift;</b>
+<b class="fc">&nbsp;                binexp = 1 - shift;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            binexp -= FLOAT_EXP_BIAS;</b>
+<b class="fc">&nbsp;            int lowOrderZeros = Integer.numberOfTrailingZeros(bigBbits);</b>
+<b class="fc">&nbsp;            bigBbits &gt;&gt;&gt;= lowOrderZeros;</b>
+<b class="fc">&nbsp;            final int bigIntExp = binexp - SINGLE_EXP_SHIFT + lowOrderZeros;</b>
+<b class="fc">&nbsp;            final int bigIntNBits = SINGLE_EXP_SHIFT + 1 - lowOrderZeros;</b>
+&nbsp;
+<b class="fc">&nbsp;            int B2 = B5; // powers of 2 in bigB</b>
+<b class="fc">&nbsp;            int D2 = D5; // powers of 2 in bigD</b>
+&nbsp;            int Ulp2;   // powers of 2 in halfUlp.
+<b class="fc">&nbsp;            if (bigIntExp &gt;= 0) {</b>
+<b class="fc">&nbsp;                B2 += bigIntExp;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                D2 -= bigIntExp;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            Ulp2 = B2;</b>
+&nbsp;
+&nbsp;            int hulpbias;
+<b class="fc">&nbsp;            if (binexp &lt;= -FLOAT_EXP_BIAS) {</b>
+<b class="fc">&nbsp;                hulpbias = binexp + lowOrderZeros + FLOAT_EXP_BIAS;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                hulpbias = 1 + lowOrderZeros;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            B2 += hulpbias;</b>
+<b class="fc">&nbsp;            D2 += hulpbias;</b>
+&nbsp;
+<b class="fc">&nbsp;            int common2 = Math.min(B2, Math.min(D2, Ulp2));</b>
+<b class="fc">&nbsp;            B2 -= common2;</b>
+<b class="fc">&nbsp;            D2 -= common2;</b>
+<b class="fc">&nbsp;            Ulp2 -= common2;</b>
+&nbsp;            // do multiplications by powers of 5 and 2
+<b class="fc">&nbsp;            FDBigInteger bigB = FDBigInteger.valueOfMulPow52(bigBbits, B5, B2);</b>
+<b class="fc">&nbsp;            if (bigD == null || prevD2 != D2) {</b>
+<b class="fc">&nbsp;                bigD = bigD0.leftShift(D2);</b>
+<b class="fc">&nbsp;                prevD2 = D2;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            FDBigInteger diff;
+&nbsp;            int cmpResult;
+&nbsp;            boolean overvalue;
+<b class="fc">&nbsp;            if ((cmpResult = bigB.cmp(bigD)) &gt; 0) {</b>
+<b class="fc">&nbsp;                overvalue = true; // our candidate is too big.</b>
+<b class="fc">&nbsp;                diff = bigB.leftInplaceSub(bigD); // bigB is not user further - reuse</b>
+<b class="fc">&nbsp;                if ((bigIntNBits == 1) &amp;&amp; (bigIntExp &gt; -FLOAT_EXP_BIAS + 1)) {</b>
+<b class="fc">&nbsp;                    Ulp2 -= 1;</b>
+<b class="fc">&nbsp;                    if (Ulp2 &lt; 0) {</b>
+<b class="fc">&nbsp;                        Ulp2 = 0;</b>
+<b class="fc">&nbsp;                        diff = diff.leftShift(1);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;            } else if (cmpResult &lt; 0) {</b>
+<b class="fc">&nbsp;                overvalue = false; // our candidate is too small.</b>
+<b class="fc">&nbsp;                diff = bigD.rightInplaceSub(bigB); // bigB is not user further - reuse</b>
+&nbsp;            } else {
+&nbsp;                break correctionLoop;
+&nbsp;            }
+<b class="fc">&nbsp;            cmpResult = diff.cmpPow52(B5, Ulp2);</b>
+<b class="fc">&nbsp;            if ((cmpResult) &lt; 0) {</b>
+<b class="fc">&nbsp;                break correctionLoop;</b>
+<b class="fc">&nbsp;            } else if (cmpResult == 0) {</b>
+<b class="nc">&nbsp;                if ((ieeeBits &amp; 1) != 0) { // half ties to even</b>
+<b class="nc">&nbsp;                    ieeeBits += overvalue ? -1 : 1; // nextDown or nextUp</b>
+&nbsp;                }
+&nbsp;                break correctionLoop;
+&nbsp;            } else {
+<b class="fc">&nbsp;                ieeeBits += overvalue ? -1 : 1; // nextDown or nextUp</b>
+<b class="fc">&nbsp;                if (ieeeBits == 0 || ieeeBits == FLOAT_EXP_BIT_MASK) { // 0.0 or Float.POSITIVE_INFINITY</b>
+<b class="fc">&nbsp;                    break correctionLoop; // oops. Fell off end of range.</b>
+&nbsp;                }
+&nbsp;                continue; // try again.
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        if (isNegative) {</b>
+<b class="fc">&nbsp;            ieeeBits |= FLOAT_SIGN_BIT_MASK;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return Float.intBitsToFloat(ieeeBits);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * All the positive powers of 10 that can be
+&nbsp;     * represented exactly in double/float.
+&nbsp;     */
+<b class="fc">&nbsp;    private static final double[] SMALL_10_POW = {</b>
+&nbsp;            1.0e0,
+&nbsp;            1.0e1, 1.0e2, 1.0e3, 1.0e4, 1.0e5,
+&nbsp;            1.0e6, 1.0e7, 1.0e8, 1.0e9, 1.0e10,
+&nbsp;            1.0e11, 1.0e12, 1.0e13, 1.0e14, 1.0e15,
+&nbsp;            1.0e16, 1.0e17, 1.0e18, 1.0e19, 1.0e20,
+&nbsp;            1.0e21, 1.0e22
+&nbsp;    };
+&nbsp;
+<b class="fc">&nbsp;    private static final float[] SINGLE_SMALL_10_POW = {</b>
+&nbsp;            1.0e0f,
+&nbsp;            1.0e1f, 1.0e2f, 1.0e3f, 1.0e4f, 1.0e5f,
+&nbsp;            1.0e6f, 1.0e7f, 1.0e8f, 1.0e9f, 1.0e10f
+&nbsp;    };
+&nbsp;
+<b class="fc">&nbsp;    private static final double[] BIG_10_POW = {</b>
+&nbsp;            1e16, 1e32, 1e64, 1e128, 1e256};
+<b class="fc">&nbsp;    private static final double[] TINY_10_POW = {</b>
+&nbsp;            1e-16, 1e-32, 1e-64, 1e-128, 1e-256};
+&nbsp;
+<b class="fc">&nbsp;    private static final int MAX_SMALL_TEN = SMALL_10_POW.length - 1;</b>
+<b class="fc">&nbsp;    private static final int SINGLE_MAX_SMALL_TEN = SINGLE_SMALL_10_POW.length - 1;</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:52</div>
+</div>
+</body>
+</html>

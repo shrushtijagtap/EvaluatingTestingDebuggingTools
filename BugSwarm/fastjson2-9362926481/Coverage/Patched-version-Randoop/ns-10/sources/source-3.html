@@ -1,0 +1,150 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MediaMixin</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.eishay.mixin</a>
+</div>
+
+<h1>Coverage Summary for Class: MediaMixin (com.alibaba.fastjson2.benchmark.eishay.mixin)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MediaMixin</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.eishay.mixin;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.annotation.JSONAutowired;
+&nbsp;import com.alibaba.fastjson2.benchmark.eishay.vo.Media;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReader;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReaders;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriter;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriters;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.reader.ObjectReaders.*;
+&nbsp;
+&nbsp;@JSONAutowired
+<b class="nc">&nbsp;public class MediaMixin {</b>
+<b class="nc">&nbsp;    public static final ObjectWriter&lt;Media&gt; objectWriter = ObjectWriters.objectWriter(</b>
+&nbsp;            Media.class,
+<b class="nc">&nbsp;            ObjectWriters.fieldWriter(&quot;bitrate&quot;, (Media e) -&gt; e.bitrate),</b>
+<b class="nc">&nbsp;            ObjectWriters.fieldWriter(&quot;duration&quot;, (Media e) -&gt; e.duration),</b>
+<b class="nc">&nbsp;            ObjectWriters.fieldWriter(&quot;format&quot;, (Media e) -&gt; e.format),</b>
+<b class="nc">&nbsp;            ObjectWriters.fieldWriter(&quot;height&quot;, (Media e) -&gt; e.height),</b>
+<b class="nc">&nbsp;            ObjectWriters.fieldWriterList(&quot;persons&quot;, String.class, (Media e) -&gt; e.persons),</b>
+<b class="nc">&nbsp;            ObjectWriters.fieldWriter(&quot;player&quot;, Media.Player.class, (Media e) -&gt; e.player),</b>
+<b class="nc">&nbsp;            ObjectWriters.fieldWriter(&quot;size&quot;, (Media e) -&gt; e.size),</b>
+<b class="nc">&nbsp;            ObjectWriters.fieldWriter(&quot;title&quot;, (Media e) -&gt; e.title),</b>
+<b class="nc">&nbsp;            ObjectWriters.fieldWriter(&quot;uri&quot;, (Media e) -&gt; e.uri),</b>
+<b class="nc">&nbsp;            ObjectWriters.fieldWriter(&quot;width&quot;, (Media e) -&gt; e.width),</b>
+<b class="nc">&nbsp;            ObjectWriters.fieldWriter(&quot;copyright&quot;, (Media e) -&gt; e.copyright)</b>
+&nbsp;    );
+&nbsp;
+<b class="nc">&nbsp;    public static final ObjectReader&lt;Media&gt; objectReader = ObjectReaders.of(</b>
+&nbsp;            Media::new,
+<b class="nc">&nbsp;            fieldReaderInt(&quot;bitrate&quot;, (Media o, int v) -&gt; o.bitrate = v),</b>
+<b class="nc">&nbsp;            fieldReaderLong(&quot;duration&quot;, (Media o, long v) -&gt; o.duration = v),</b>
+<b class="nc">&nbsp;            fieldReaderString(&quot;format&quot;, (Media o, String v) -&gt; o.format = v),</b>
+<b class="nc">&nbsp;            fieldReaderInt(&quot;height&quot;, (Media o, int v) -&gt; o.height = v),</b>
+<b class="nc">&nbsp;            fieldReaderList(&quot;persons&quot;, String.class, ArrayList::new, (Media o, List&lt;String&gt; v) -&gt; o.persons = v),</b>
+<b class="nc">&nbsp;            fieldReader(&quot;player&quot;, Media.Player.class, (Media o, Media.Player v) -&gt; o.player = v),</b>
+<b class="nc">&nbsp;            fieldReaderLong(&quot;size&quot;, (Media o, long v) -&gt; o.size = v),</b>
+<b class="nc">&nbsp;            fieldReaderString(&quot;title&quot;, (Media o, String v) -&gt; o.title = v),</b>
+<b class="nc">&nbsp;            fieldReaderString(&quot;uri&quot;, (Media o, String v) -&gt; o.uri = v),</b>
+<b class="nc">&nbsp;            fieldReaderInt(&quot;width&quot;, (Media o, int v) -&gt; o.width = v),</b>
+<b class="nc">&nbsp;            fieldReaderString(&quot;copyright&quot;, (Media o, String v) -&gt; o.copyright = v)</b>
+&nbsp;    );
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 19:56</div>
+</div>
+</body>
+</html>

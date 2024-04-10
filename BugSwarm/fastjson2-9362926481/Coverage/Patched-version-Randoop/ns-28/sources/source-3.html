@@ -1,0 +1,437 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ClassReader</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.internal.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: ClassReader (com.alibaba.fastjson2.internal.asm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClassReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/186)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.internal.asm;
+&nbsp;
+&nbsp;import java.io.ByteArrayOutputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;
+&nbsp;/**
+&nbsp; * Created by wenshao on 05/08/2017.
+&nbsp; */
+&nbsp;public class ClassReader {
+&nbsp;    public final byte[] b;
+&nbsp;    private final int[] items;
+&nbsp;    private final String[] strings;
+&nbsp;    private final int maxStringLength;
+&nbsp;    public final int header;
+&nbsp;    private boolean readAnnotations;
+&nbsp;
+<b class="nc">&nbsp;    public ClassReader(InputStream is, boolean readAnnotations) throws IOException {</b>
+<b class="nc">&nbsp;        this.readAnnotations = readAnnotations;</b>
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            ByteArrayOutputStream out = new ByteArrayOutputStream();</b>
+<b class="nc">&nbsp;            byte[] buf = new byte[1024];</b>
+&nbsp;            for (; ; ) {
+<b class="nc">&nbsp;                int len = is.read(buf);</b>
+<b class="nc">&nbsp;                if (len == -1) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (len &gt; 0) {</b>
+<b class="nc">&nbsp;                    out.write(buf, 0, len);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            is.close();</b>
+<b class="nc">&nbsp;            this.b = out.toByteArray();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // parses the constant pool
+<b class="nc">&nbsp;        items = new int[readUnsignedShort(8)];</b>
+<b class="nc">&nbsp;        int n = items.length;</b>
+<b class="nc">&nbsp;        strings = new String[n];</b>
+<b class="nc">&nbsp;        int max = 0;</b>
+<b class="nc">&nbsp;        int index = 10;</b>
+<b class="nc">&nbsp;        for (int i = 1; i &lt; n; ++i) {</b>
+<b class="nc">&nbsp;            items[i] = index + 1;</b>
+&nbsp;            int size;
+<b class="nc">&nbsp;            switch (b[index]) {</b>
+&nbsp;                case 9: // FIELD:
+&nbsp;                case 10: // METH:
+&nbsp;                case 11: //IMETH:
+&nbsp;                case 3: //INT:
+&nbsp;                case 4: //FLOAT:
+&nbsp;                case 18: //INVOKEDYN:
+&nbsp;                case 12: //NAME_TYPE:
+<b class="nc">&nbsp;                    size = 5;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 5: //LONG:
+&nbsp;                case 6: //DOUBLE:
+<b class="nc">&nbsp;                    size = 9;</b>
+<b class="nc">&nbsp;                    ++i;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 15: //MHANDLE:
+<b class="nc">&nbsp;                    size = 4;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 1: //UTF8:
+<b class="nc">&nbsp;                    size = 3 + readUnsignedShort(index + 1);</b>
+<b class="nc">&nbsp;                    if (size &gt; max) {</b>
+<b class="nc">&nbsp;                        max = size;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                // case HamConstants.CLASS:
+&nbsp;                // case HamConstants.STR:
+&nbsp;                default:
+<b class="nc">&nbsp;                    size = 3;</b>
+&nbsp;                    break;
+&nbsp;            }
+<b class="nc">&nbsp;            index += size;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        maxStringLength = max;</b>
+&nbsp;        // the class header information starts just after the constant pool
+<b class="nc">&nbsp;        header = index;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void accept(final TypeCollector classVisitor) {
+<b class="nc">&nbsp;        char[] c = new char[maxStringLength]; // buffer used to read strings</b>
+&nbsp;        int i, j; // loop variables
+&nbsp;        int u, v; // indexes in b
+<b class="nc">&nbsp;        int anns = 0;</b>
+&nbsp;
+&nbsp;        //read annotations
+<b class="nc">&nbsp;        if (readAnnotations) {</b>
+<b class="nc">&nbsp;            u = getAttributes();</b>
+<b class="nc">&nbsp;            for (i = readUnsignedShort(u); i &gt; 0; --i) {</b>
+<b class="nc">&nbsp;                String attrName = readUTF8(u + 2, c);</b>
+<b class="nc">&nbsp;                if (&quot;RuntimeVisibleAnnotations&quot;.equals(attrName)) {</b>
+<b class="nc">&nbsp;                    anns = u + 8;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                u += 6 + readInt(u + 4);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // visits the header
+<b class="nc">&nbsp;        u = header;</b>
+<b class="nc">&nbsp;        int len = readUnsignedShort(u + 6);</b>
+<b class="nc">&nbsp;        u += 8;</b>
+<b class="nc">&nbsp;        for (i = 0; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;            u += 2;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        v = u;</b>
+<b class="nc">&nbsp;        i = readUnsignedShort(v);</b>
+<b class="nc">&nbsp;        v += 2;</b>
+<b class="nc">&nbsp;        for (; i &gt; 0; --i) {</b>
+<b class="nc">&nbsp;            j = readUnsignedShort(v + 6);</b>
+<b class="nc">&nbsp;            v += 8;</b>
+<b class="nc">&nbsp;            for (; j &gt; 0; --j) {</b>
+<b class="nc">&nbsp;                v += 6 + readInt(v + 2);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        i = readUnsignedShort(v);</b>
+<b class="nc">&nbsp;        v += 2;</b>
+<b class="nc">&nbsp;        for (; i &gt; 0; --i) {</b>
+<b class="nc">&nbsp;            j = readUnsignedShort(v + 6);</b>
+<b class="nc">&nbsp;            v += 8;</b>
+<b class="nc">&nbsp;            for (; j &gt; 0; --j) {</b>
+<b class="nc">&nbsp;                v += 6 + readInt(v + 2);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        i = readUnsignedShort(v);</b>
+<b class="nc">&nbsp;        v += 2;</b>
+<b class="nc">&nbsp;        for (; i &gt; 0; --i) {</b>
+<b class="nc">&nbsp;            v += 6 + readInt(v + 2);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (anns != 0) {</b>
+<b class="nc">&nbsp;            for (i = readUnsignedShort(anns), v = anns + 2; i &gt; 0; --i) {</b>
+<b class="nc">&nbsp;                String name = readUTF8(v, c);</b>
+<b class="nc">&nbsp;                classVisitor.visitAnnotation(name);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // visits the fields
+<b class="nc">&nbsp;        i = readUnsignedShort(u);</b>
+<b class="nc">&nbsp;        u += 2;</b>
+<b class="nc">&nbsp;        for (; i &gt; 0; --i) {</b>
+<b class="nc">&nbsp;            j = readUnsignedShort(u + 6);</b>
+<b class="nc">&nbsp;            u += 8;</b>
+<b class="nc">&nbsp;            for (; j &gt; 0; --j) {</b>
+<b class="nc">&nbsp;                u += 6 + readInt(u + 2);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // visits the methods
+<b class="nc">&nbsp;        i = readUnsignedShort(u);</b>
+<b class="nc">&nbsp;        u += 2;</b>
+<b class="nc">&nbsp;        for (; i &gt; 0; --i) {</b>
+&nbsp;            // inlined in original ASM source, now a method call
+<b class="nc">&nbsp;            u = readMethod(classVisitor, c, u);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private int getAttributes() {
+&nbsp;        // skips the header
+<b class="nc">&nbsp;        int u = header + 8 + readUnsignedShort(header + 6) * 2;</b>
+&nbsp;        // skips fields and methods
+<b class="nc">&nbsp;        for (int i = readUnsignedShort(u); i &gt; 0; --i) {</b>
+<b class="nc">&nbsp;            for (int j = readUnsignedShort(u + 8); j &gt; 0; --j) {</b>
+<b class="nc">&nbsp;                u += 6 + readInt(u + 12);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            u += 8;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        u += 2;</b>
+<b class="nc">&nbsp;        for (int i = readUnsignedShort(u); i &gt; 0; --i) {</b>
+<b class="nc">&nbsp;            for (int j = readUnsignedShort(u + 8); j &gt; 0; --j) {</b>
+<b class="nc">&nbsp;                u += 6 + readInt(u + 12);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            u += 8;</b>
+&nbsp;        }
+&nbsp;        // the attribute_info structure starts just after the methods
+<b class="nc">&nbsp;        return u + 2;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private int readMethod(TypeCollector classVisitor, char[] c, int u) {
+&nbsp;        int v;
+&nbsp;        int w;
+&nbsp;        int j;
+&nbsp;        String attrName;
+&nbsp;        int k;
+<b class="nc">&nbsp;        int access = readUnsignedShort(u);</b>
+<b class="nc">&nbsp;        String name = readUTF8(u + 2, c);</b>
+<b class="nc">&nbsp;        String desc = readUTF8(u + 4, c);</b>
+<b class="nc">&nbsp;        v = 0;</b>
+<b class="nc">&nbsp;        w = 0;</b>
+&nbsp;
+&nbsp;        // looks for Code and Exceptions attributes
+<b class="nc">&nbsp;        j = readUnsignedShort(u + 6);</b>
+<b class="nc">&nbsp;        u += 8;</b>
+<b class="nc">&nbsp;        for (; j &gt; 0; --j) {</b>
+<b class="nc">&nbsp;            attrName = readUTF8(u, c);</b>
+<b class="nc">&nbsp;            int attrSize = readInt(u + 2);</b>
+<b class="nc">&nbsp;            u += 6;</b>
+&nbsp;            // tests are sorted in decreasing frequency order
+&nbsp;            // (based on frequencies observed on typical classes)
+<b class="nc">&nbsp;            if (&quot;Code&quot;.equals(attrName)) {</b>
+<b class="nc">&nbsp;                v = u;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            u += attrSize;</b>
+&nbsp;        }
+&nbsp;        // reads declared exceptions
+<b class="nc">&nbsp;        if (w != 0) {</b>
+<b class="nc">&nbsp;            w += 2;</b>
+<b class="nc">&nbsp;            for (j = 0; j &lt; readUnsignedShort(w); ++j) {</b>
+<b class="nc">&nbsp;                w += 2;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // visits the method&#39;s code, if any
+<b class="nc">&nbsp;        MethodCollector mv = classVisitor.visitMethod(access, name, desc);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (mv != null &amp;&amp; v != 0) {</b>
+<b class="nc">&nbsp;            int codeLength = readInt(v + 4);</b>
+<b class="nc">&nbsp;            v += 8;</b>
+&nbsp;
+<b class="nc">&nbsp;            int codeStart = v;</b>
+<b class="nc">&nbsp;            int codeEnd = v + codeLength;</b>
+<b class="nc">&nbsp;            v = codeEnd;</b>
+&nbsp;
+<b class="nc">&nbsp;            j = readUnsignedShort(v);</b>
+<b class="nc">&nbsp;            v += 2;</b>
+<b class="nc">&nbsp;            for (; j &gt; 0; --j) {</b>
+<b class="nc">&nbsp;                v += 8;</b>
+&nbsp;            }
+&nbsp;            // parses the local variable, line number tables, and code
+&nbsp;            // attributes
+<b class="nc">&nbsp;            int varTable = 0;</b>
+<b class="nc">&nbsp;            int varTypeTable = 0;</b>
+<b class="nc">&nbsp;            j = readUnsignedShort(v);</b>
+<b class="nc">&nbsp;            v += 2;</b>
+<b class="nc">&nbsp;            for (; j &gt; 0; --j) {</b>
+<b class="nc">&nbsp;                attrName = readUTF8(v, c);</b>
+<b class="nc">&nbsp;                if (&quot;LocalVariableTable&quot;.equals(attrName)) {</b>
+<b class="nc">&nbsp;                    varTable = v + 6;</b>
+<b class="nc">&nbsp;                } else if (&quot;LocalVariableTypeTable&quot;.equals(attrName)) {</b>
+<b class="nc">&nbsp;                    varTypeTable = v + 6;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                v += 6 + readInt(v + 2);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            v = codeStart;</b>
+&nbsp;            // visits the local variable tables
+<b class="nc">&nbsp;            if (varTable != 0) {</b>
+<b class="nc">&nbsp;                if (varTypeTable != 0) {</b>
+<b class="nc">&nbsp;                    k = readUnsignedShort(varTypeTable) * 3;</b>
+<b class="nc">&nbsp;                    w = varTypeTable + 2;</b>
+<b class="nc">&nbsp;                    int[] typeTable = new int[k];</b>
+<b class="nc">&nbsp;                    while (k &gt; 0) {</b>
+<b class="nc">&nbsp;                        typeTable[--k] = w + 6; // signature</b>
+<b class="nc">&nbsp;                        typeTable[--k] = readUnsignedShort(w + 8); // index</b>
+<b class="nc">&nbsp;                        typeTable[--k] = readUnsignedShort(w); // start</b>
+<b class="nc">&nbsp;                        w += 10;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                k = readUnsignedShort(varTable);</b>
+<b class="nc">&nbsp;                w = varTable + 2;</b>
+<b class="nc">&nbsp;                for (; k &gt; 0; --k) {</b>
+<b class="nc">&nbsp;                    int index = readUnsignedShort(w + 8);</b>
+<b class="nc">&nbsp;                    mv.visitLocalVariable(readUTF8(w + 4, c), index);</b>
+<b class="nc">&nbsp;                    w += 10;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return u;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private int readUnsignedShort(final int index) {
+<b class="nc">&nbsp;        byte[] b = this.b;</b>
+<b class="nc">&nbsp;        return ((b[index] &amp; 0xFF) &lt;&lt; 8) | (b[index + 1] &amp; 0xFF);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private int readInt(final int index) {
+<b class="nc">&nbsp;        byte[] b = this.b;</b>
+<b class="nc">&nbsp;        return ((b[index] &amp; 0xFF) &lt;&lt; 24) | ((b[index + 1] &amp; 0xFF) &lt;&lt; 16)</b>
+&nbsp;                | ((b[index + 2] &amp; 0xFF) &lt;&lt; 8) | (b[index + 3] &amp; 0xFF);
+&nbsp;    }
+&nbsp;
+&nbsp;    private String readUTF8(int index, final char[] buf) {
+<b class="nc">&nbsp;        int item = readUnsignedShort(index);</b>
+<b class="nc">&nbsp;        String s = strings[item];</b>
+<b class="nc">&nbsp;        if (s != null) {</b>
+<b class="nc">&nbsp;            return s;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        index = items[item];</b>
+<b class="nc">&nbsp;        return strings[item] = readUTF(index + 2, readUnsignedShort(index), buf);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String readUTF(int index, final int utfLen, final char[] buf) {
+<b class="nc">&nbsp;        int endIndex = index + utfLen;</b>
+<b class="nc">&nbsp;        byte[] b = this.b;</b>
+<b class="nc">&nbsp;        int strLen = 0;</b>
+&nbsp;        int c;
+<b class="nc">&nbsp;        int st = 0;</b>
+<b class="nc">&nbsp;        char cc = 0;</b>
+<b class="nc">&nbsp;        while (index &lt; endIndex) {</b>
+<b class="nc">&nbsp;            c = b[index++];</b>
+<b class="nc">&nbsp;            switch (st) {</b>
+&nbsp;                case 0:
+<b class="nc">&nbsp;                    c = c &amp; 0xFF;</b>
+<b class="nc">&nbsp;                    if (c &lt; 0x80) {  // 0xxxxxxx</b>
+<b class="nc">&nbsp;                        buf[strLen++] = (char) c;</b>
+<b class="nc">&nbsp;                    } else if (c &lt; 0xE0 &amp;&amp; c &gt; 0xBF) {  // 110x xxxx 10xx xxxx</b>
+<b class="nc">&nbsp;                        cc = (char) (c &amp; 0x1F);</b>
+<b class="nc">&nbsp;                        st = 1;</b>
+&nbsp;                    } else {  // 1110 xxxx 10xx xxxx 10xx xxxx
+<b class="nc">&nbsp;                        cc = (char) (c &amp; 0x0F);</b>
+<b class="nc">&nbsp;                        st = 2;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;
+&nbsp;                case 1:  // byte 2 of 2-byte char or byte 3 of 3-byte char
+<b class="nc">&nbsp;                    buf[strLen++] = (char) ((cc &lt;&lt; 6) | (c &amp; 0x3F));</b>
+<b class="nc">&nbsp;                    st = 0;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;
+&nbsp;                case 2:  // byte 2 of 3-byte char
+<b class="nc">&nbsp;                    cc = (char) ((cc &lt;&lt; 6) | (c &amp; 0x3F));</b>
+<b class="nc">&nbsp;                    st = 1;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return new String(buf, 0, strLen);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 19:56</div>
+</div>
+</body>
+</html>

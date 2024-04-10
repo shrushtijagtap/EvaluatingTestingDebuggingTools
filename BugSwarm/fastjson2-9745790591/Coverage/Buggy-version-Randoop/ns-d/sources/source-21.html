@@ -1,0 +1,233 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONPathTypedMulti</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONPathTypedMulti (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONPathTypedMulti</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/42)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.time.ZoneId;
+&nbsp;import java.util.function.BiFunction;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.util.IOUtils.DEFAULT_ZONE_ID;
+&nbsp;
+&nbsp;class JSONPathTypedMulti
+&nbsp;        extends JSONPath {
+&nbsp;    final JSONPath[] paths;
+&nbsp;    final Type[] types;
+&nbsp;    final String[] formats;
+&nbsp;    final long[] pathFeatures;
+&nbsp;    final ZoneId zoneId;
+&nbsp;
+&nbsp;    protected JSONPathTypedMulti(
+&nbsp;            JSONPath[] paths,
+&nbsp;            Type[] types,
+&nbsp;            String[] formats,
+&nbsp;            long[] pathFeatures,
+&nbsp;            ZoneId zoneId,
+&nbsp;            long features
+&nbsp;    ) {
+<b class="nc">&nbsp;        super(JSON.toJSONString(paths), features);</b>
+<b class="nc">&nbsp;        this.types = types;</b>
+<b class="nc">&nbsp;        this.paths = paths;</b>
+<b class="nc">&nbsp;        this.formats = formats;</b>
+<b class="nc">&nbsp;        this.pathFeatures = pathFeatures;</b>
+<b class="nc">&nbsp;        this.zoneId = zoneId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isRef() {
+<b class="nc">&nbsp;        for (JSONPath jsonPath : paths) {</b>
+<b class="nc">&nbsp;            if (!jsonPath.isRef()) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean contains(Object object) {
+<b class="nc">&nbsp;        for (JSONPath jsonPath : paths) {</b>
+<b class="nc">&nbsp;            if (jsonPath.contains(object)) {</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean isIgnoreError(int index) {
+<b class="nc">&nbsp;        if (pathFeatures != null &amp;&amp; index &lt; pathFeatures.length) {</b>
+<b class="nc">&nbsp;            long features = pathFeatures[index];</b>
+<b class="nc">&nbsp;            return (features &amp; Feature.NullOnError.mask) != 0;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object eval(Object object) {
+<b class="nc">&nbsp;        Object[] array = new Object[paths.length];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; paths.length; i++) {</b>
+<b class="nc">&nbsp;            JSONPath jsonPath = paths[i];</b>
+<b class="nc">&nbsp;            Object result = jsonPath.eval(object);</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                array[i] = TypeUtils.cast(result, types[i]);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                if (!isIgnoreError(i)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;jsonpath eval path, path : &quot; + jsonPath + &quot;, msg : &quot; + e.getMessage(), e);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return array;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected JSONReader.Context createContext() {
+<b class="nc">&nbsp;        JSONReader.Context context = JSONFactory.createReadContext();</b>
+<b class="nc">&nbsp;        if (zoneId != null &amp;&amp; zoneId != DEFAULT_ZONE_ID) {</b>
+<b class="nc">&nbsp;            context.zoneId = zoneId;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return context;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object extract(JSONReader jsonReader) {
+<b class="nc">&nbsp;        Object object = jsonReader.readAny();</b>
+<b class="nc">&nbsp;        return eval(object);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String extractScalar(JSONReader jsonReader) {
+<b class="nc">&nbsp;        Object object = extract(jsonReader);</b>
+<b class="nc">&nbsp;        return JSON.toJSONString(object);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void set(Object object, Object value) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void set(Object object, Object value, JSONReader.Feature... readerFeatures) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setCallback(Object object, BiFunction callback) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setInt(Object object, int value) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setLong(Object object, long value) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean remove(Object object) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:02</div>
+</div>
+</body>
+</html>

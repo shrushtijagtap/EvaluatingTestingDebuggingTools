@@ -1,0 +1,3322 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectWriterCreatorASM</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectWriterCreatorASM (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectWriterCreatorASM</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/42)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1785)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ObjectWriterCreatorASM$MethodWriterContext</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/68)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/52)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1853)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.codec.BeanInfo;
+&nbsp;import com.alibaba.fastjson2.codec.FieldInfo;
+&nbsp;import com.alibaba.fastjson2.internal.asm.*;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectWriterAnnotationProcessor;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectWriterModule;
+&nbsp;import com.alibaba.fastjson2.util.*;
+&nbsp;
+&nbsp;import java.lang.reflect.*;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.atomic.AtomicIntegerArray;
+&nbsp;import java.util.concurrent.atomic.AtomicLong;
+&nbsp;import java.util.concurrent.atomic.AtomicLongArray;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONWriter.Feature.*;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.UNSAFE_SUPPORT;
+&nbsp;import static com.alibaba.fastjson2.writer.ObjectWriterProvider.TYPE_INT64_MASK;
+&nbsp;
+&nbsp;public class ObjectWriterCreatorASM
+&nbsp;        extends ObjectWriterCreator {
+&nbsp;    // GraalVM not support
+&nbsp;    // Android not support
+<b class="nc">&nbsp;    public static final ObjectWriterCreatorASM INSTANCE = new ObjectWriterCreatorASM();</b>
+&nbsp;
+<b class="nc">&nbsp;    protected static final AtomicLong seed = new AtomicLong();</b>
+&nbsp;    protected final DynamicClassLoader classLoader;
+&nbsp;
+<b class="nc">&nbsp;    static final String TYPE_OBJECT_WRITER = ASMUtils.type(ObjectWriter.class);</b>
+<b class="nc">&nbsp;    static final String TYPE_JSON_WRITER = ASMUtils.type(JSONWriter.class);</b>
+<b class="nc">&nbsp;    static final String TYPE_FIELD_WRITER = ASMUtils.type(FieldWriter.class);</b>
+<b class="nc">&nbsp;    static final String TYPE_OBJECT_WRITER_ADAPTER = ASMUtils.type(ObjectWriterAdapter.class);</b>
+<b class="nc">&nbsp;    static final String TYPE_OBJECT_WRITER_1 = ASMUtils.type(ObjectWriter1.class);</b>
+<b class="nc">&nbsp;    static final String TYPE_OBJECT_WRITER_2 = ASMUtils.type(ObjectWriter2.class);</b>
+<b class="nc">&nbsp;    static final String TYPE_OBJECT_WRITER_3 = ASMUtils.type(ObjectWriter3.class);</b>
+<b class="nc">&nbsp;    static final String TYPE_OBJECT_WRITER_4 = ASMUtils.type(ObjectWriter4.class);</b>
+<b class="nc">&nbsp;    static final String TYPE_OBJECT_WRITER_5 = ASMUtils.type(ObjectWriter5.class);</b>
+<b class="nc">&nbsp;    static final String TYPE_OBJECT_WRITER_6 = ASMUtils.type(ObjectWriter6.class);</b>
+<b class="nc">&nbsp;    static final String TYPE_OBJECT_WRITER_7 = ASMUtils.type(ObjectWriter7.class);</b>
+<b class="nc">&nbsp;    static final String TYPE_OBJECT_WRITER_8 = ASMUtils.type(ObjectWriter8.class);</b>
+<b class="nc">&nbsp;    static final String TYPE_OBJECT_WRITER_9 = ASMUtils.type(ObjectWriter9.class);</b>
+<b class="nc">&nbsp;    static final String TYPE_OBJECT_WRITER_10 = ASMUtils.type(ObjectWriter10.class);</b>
+<b class="nc">&nbsp;    static final String TYPE_OBJECT_WRITER_11 = ASMUtils.type(ObjectWriter11.class);</b>
+<b class="nc">&nbsp;    static final String TYPE_OBJECT_WRITER_12 = ASMUtils.type(ObjectWriter12.class);</b>
+&nbsp;
+<b class="nc">&nbsp;    static final String[] INTERFACES = {TYPE_OBJECT_WRITER};</b>
+&nbsp;
+<b class="nc">&nbsp;    static final String DESC_OBJECT_WRITER = ASMUtils.desc(ObjectWriter.class);</b>
+<b class="nc">&nbsp;    static final String DESC_JSON_WRITER = ASMUtils.desc(JSONWriter.class);</b>
+<b class="nc">&nbsp;    static final String DESC_FIELD_WRITER = ASMUtils.desc(FieldWriter.class);</b>
+<b class="nc">&nbsp;    static final String DESC_FIELD_WRITER_ARRAY = ASMUtils.desc(FieldWriter[].class);</b>
+&nbsp;
+<b class="nc">&nbsp;    static final String METHOD_DESC_WRITE_VALUE = &quot;(&quot; + DESC_JSON_WRITER + &quot;Ljava/lang/Object;)V&quot;;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_WRITE = &quot;(&quot; + DESC_JSON_WRITER + &quot;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/reflect/Type;J)V&quot;;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_WRITE_FIELD_NAME = &quot;(&quot; + DESC_JSON_WRITER + &quot;)V&quot;;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_WRITE_OBJECT = &quot;(&quot; + DESC_JSON_WRITER + &quot;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/reflect/Type;J)V&quot;;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_WRITE_J = &quot;(&quot; + DESC_JSON_WRITER + &quot;J)V&quot;;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_WRITE_DATE_WITH_FIELD_NAME = &quot;(&quot; + DESC_JSON_WRITER + &quot;Z&quot; + ASMUtils.desc(Date.class) + &quot;)V&quot;;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_WRITE_Z = &quot;(&quot; + DESC_JSON_WRITER + &quot;Z)V&quot;;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_WRITE_ZARRAY = &quot;(&quot; + DESC_JSON_WRITER + &quot;[Z)V&quot;;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_WRITE_FARRAY = &quot;(&quot; + DESC_JSON_WRITER + &quot;[F)V&quot;;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_WRITE_DARRAY = &quot;(&quot; + DESC_JSON_WRITER + &quot;[D)V&quot;;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_WRITE_I = &quot;(&quot; + DESC_JSON_WRITER + &quot;I)V&quot;;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_WRITE_SArray = &quot;(&quot; + DESC_JSON_WRITER + &quot;[S)V&quot;;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_WRITE_BArray = &quot;(&quot; + DESC_JSON_WRITER + &quot;[B)V&quot;;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_WRITE_CArray = &quot;(&quot; + DESC_JSON_WRITER + &quot;[C)V&quot;;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_WRITE_ENUM = &quot;(&quot; + DESC_JSON_WRITER + &quot;Ljava/lang/Enum;)V&quot;;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_WRITE_LIST = &quot;(&quot; + DESC_JSON_WRITER + &quot;ZLjava/util/List;)V&quot;;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_FIELD_WRITE_OBJECT = &quot;(&quot; + DESC_JSON_WRITER + &quot;Ljava/lang/Object;)Z&quot;;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_GET_OBJECT_WRITER = &quot;(&quot; + DESC_JSON_WRITER + &quot;Ljava/lang/Class;)&quot; + DESC_OBJECT_WRITER;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_GET_ITEM_WRITER = &quot;(&quot; + DESC_JSON_WRITER + &quot;Ljava/lang/reflect/Type;)&quot; + DESC_OBJECT_WRITER;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_WRITE_TYPE_INFO = &quot;(&quot; + DESC_JSON_WRITER + &quot;)Z&quot;;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_HAS_FILTER = &quot;(&quot; + DESC_JSON_WRITER + &quot;)Z&quot;;</b>
+<b class="nc">&nbsp;    static final String METHOD_DESC_SET_PATH2 = &quot;(&quot; + DESC_FIELD_WRITER + &quot;Ljava/lang/Object;)Ljava/lang/String;&quot;;</b>
+&nbsp;    static final String METHOD_DESC_WRITE_REFERENCE = &quot;(Ljava/lang/String;)V&quot;;
+<b class="nc">&nbsp;    static final String METHOD_DESC_WRITE_CLASS_INFO = &quot;(&quot; + DESC_JSON_WRITER + &quot;)V&quot;;</b>
+&nbsp;
+&nbsp;    static final int THIS = 0;
+&nbsp;    static final int JSON_WRITER = 1;
+&nbsp;    static final String NOT_WRITE_DEFAULT_VALUE = &quot;WRITE_DEFAULT_VALUE&quot;;
+&nbsp;    static final String WRITE_NULLS = &quot;WRITE_NULLS&quot;;
+&nbsp;    static final String CONTEXT_FEATURES = &quot;CONTEXT_FEATURES&quot;;
+&nbsp;
+&nbsp;    static String fieldWriter(int i) {
+<b class="nc">&nbsp;        switch (i) {</b>
+&nbsp;            case 0:
+<b class="nc">&nbsp;                return &quot;fieldWriter0&quot;;</b>
+&nbsp;            case 1:
+<b class="nc">&nbsp;                return &quot;fieldWriter1&quot;;</b>
+&nbsp;            case 2:
+<b class="nc">&nbsp;                return &quot;fieldWriter2&quot;;</b>
+&nbsp;            case 3:
+<b class="nc">&nbsp;                return &quot;fieldWriter3&quot;;</b>
+&nbsp;            case 4:
+<b class="nc">&nbsp;                return &quot;fieldWriter4&quot;;</b>
+&nbsp;            case 5:
+<b class="nc">&nbsp;                return &quot;fieldWriter5&quot;;</b>
+&nbsp;            case 6:
+<b class="nc">&nbsp;                return &quot;fieldWriter6&quot;;</b>
+&nbsp;            case 7:
+<b class="nc">&nbsp;                return &quot;fieldWriter7&quot;;</b>
+&nbsp;            case 8:
+<b class="nc">&nbsp;                return &quot;fieldWriter8&quot;;</b>
+&nbsp;            case 9:
+<b class="nc">&nbsp;                return &quot;fieldWriter9&quot;;</b>
+&nbsp;            case 10:
+<b class="nc">&nbsp;                return &quot;fieldWriter10&quot;;</b>
+&nbsp;            case 11:
+<b class="nc">&nbsp;                return &quot;fieldWriter11&quot;;</b>
+&nbsp;            case 12:
+<b class="nc">&nbsp;                return &quot;fieldWriter12&quot;;</b>
+&nbsp;            case 13:
+<b class="nc">&nbsp;                return &quot;fieldWriter13&quot;;</b>
+&nbsp;            case 14:
+<b class="nc">&nbsp;                return &quot;fieldWriter14&quot;;</b>
+&nbsp;            case 15:
+<b class="nc">&nbsp;                return &quot;fieldWriter15&quot;;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                String base = &quot;fieldWriter&quot;;</b>
+<b class="nc">&nbsp;                int size = IOUtils.stringSize(i);</b>
+<b class="nc">&nbsp;                char[] chars = new char[base.length() + size];</b>
+<b class="nc">&nbsp;                base.getChars(0, base.length(), chars, 0);</b>
+<b class="nc">&nbsp;                IOUtils.getChars(i, chars.length, chars);</b>
+<b class="nc">&nbsp;                return new String(chars);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public ObjectWriterCreatorASM() {</b>
+<b class="nc">&nbsp;        this.classLoader = new DynamicClassLoader();</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public ObjectWriterCreatorASM(ClassLoader classLoader) {</b>
+<b class="nc">&nbsp;        this.classLoader = new DynamicClassLoader(classLoader);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObjectWriter createObjectWriter(
+&nbsp;            Class objectClass,
+&nbsp;            long features,
+&nbsp;            ObjectWriterProvider provider
+&nbsp;    ) {
+<b class="nc">&nbsp;        int modifiers = objectClass.getModifiers();</b>
+<b class="nc">&nbsp;        boolean externalClass = classLoader.isExternalClass(objectClass);</b>
+<b class="nc">&nbsp;        boolean publicClass = Modifier.isPublic(modifiers);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (!publicClass || externalClass) {</b>
+<b class="nc">&nbsp;            if (!UNSAFE_SUPPORT) {</b>
+<b class="nc">&nbsp;                return super.createObjectWriter(objectClass, features, provider);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        BeanInfo beanInfo = new BeanInfo();</b>
+<b class="nc">&nbsp;        for (ObjectWriterModule module : provider.modules) {</b>
+<b class="nc">&nbsp;            ObjectWriterAnnotationProcessor annotationProcessor = module.getAnnotationProcessor();</b>
+<b class="nc">&nbsp;            if (annotationProcessor == null) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            annotationProcessor.getBeanInfo(beanInfo, objectClass);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (beanInfo.serializer != null &amp;&amp; ObjectWriter.class.isAssignableFrom(beanInfo.serializer)) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                return (ObjectWriter) beanInfo.serializer.newInstance();</b>
+<b class="nc">&nbsp;            } catch (InstantiationException | IllegalAccessException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;create serializer error&quot;, e);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectWriter annotatedObjectWriter = getAnnotatedObjectWriter(provider, objectClass, beanInfo);</b>
+<b class="nc">&nbsp;        if (annotatedObjectWriter != null) {</b>
+<b class="nc">&nbsp;            return annotatedObjectWriter;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long writerFeatures = features | beanInfo.writerFeatures;</b>
+<b class="nc">&nbsp;        final boolean fieldBased = (writerFeatures &amp; JSONWriter.Feature.FieldBased.mask) != 0</b>
+<b class="nc">&nbsp;                &amp;&amp; !(objectClass.isInterface() || objectClass.isInterface());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (Throwable.class.isAssignableFrom(objectClass)) {</b>
+<b class="nc">&nbsp;            return super.createObjectWriter(objectClass, features, provider);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean record = BeanUtils.isRecord(objectClass);</b>
+&nbsp;
+&nbsp;        List&lt;FieldWriter&gt; fieldWriters;
+<b class="nc">&nbsp;        if (fieldBased &amp;&amp; !record) {</b>
+<b class="nc">&nbsp;            Map&lt;String, FieldWriter&gt; fieldWriterMap = new LinkedHashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;            final FieldInfo fieldInfo = new FieldInfo();</b>
+<b class="nc">&nbsp;            BeanUtils.declaredFields(objectClass, field -&gt; {</b>
+<b class="nc">&nbsp;                if (Modifier.isTransient(field.getModifiers())) {</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                fieldInfo.init();</b>
+<b class="nc">&nbsp;                FieldWriter fieldWriter = creteFieldWriter(objectClass, writerFeatures, provider.modules, beanInfo, fieldInfo, field);</b>
+<b class="nc">&nbsp;                if (fieldWriter != null) {</b>
+<b class="nc">&nbsp;                    fieldWriterMap.put(fieldWriter.fieldName, fieldWriter);</b>
+&nbsp;                }
+&nbsp;            });
+<b class="nc">&nbsp;            fieldWriters = new ArrayList&lt;&gt;(fieldWriterMap.values());</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            Map&lt;String, FieldWriter&gt; fieldWriterMap = new LinkedHashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;            List&lt;FieldWriter&gt; fieldWriterList = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;            boolean fieldWritersCreated = false;</b>
+<b class="nc">&nbsp;            for (ObjectWriterModule module : provider.modules) {</b>
+<b class="nc">&nbsp;                if (module.createFieldWriters(this, objectClass, fieldWriterList)) {</b>
+<b class="nc">&nbsp;                    fieldWritersCreated = true;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            if (fieldWritersCreated) {</b>
+<b class="nc">&nbsp;                for (FieldWriter fieldWriter : fieldWriterList) {</b>
+<b class="nc">&nbsp;                    Method method = fieldWriter.method;</b>
+<b class="nc">&nbsp;                    if (method == null) {</b>
+<b class="nc">&nbsp;                        return super.createObjectWriter(objectClass, writerFeatures, provider);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    fieldWriterMap.putIfAbsent(fieldWriter.fieldName, fieldWriter);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                final FieldInfo fieldInfo = new FieldInfo();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (!record) {</b>
+<b class="nc">&nbsp;                    BeanUtils.fields(objectClass, field -&gt; {</b>
+<b class="nc">&nbsp;                        if (!fieldBased &amp;&amp; !Modifier.isPublic(field.getModifiers())) {</b>
+&nbsp;                            return;
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        fieldInfo.init();</b>
+<b class="nc">&nbsp;                        FieldWriter fieldWriter = creteFieldWriter(objectClass, writerFeatures, provider.modules, beanInfo, fieldInfo, field);</b>
+<b class="nc">&nbsp;                        if (fieldWriter != null) {</b>
+<b class="nc">&nbsp;                            fieldWriterMap.putIfAbsent(fieldWriter.fieldName, fieldWriter);</b>
+&nbsp;                        }
+&nbsp;                    });
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                BeanUtils.getters(objectClass, method -&gt; {</b>
+<b class="nc">&nbsp;                    fieldInfo.init();</b>
+<b class="nc">&nbsp;                    fieldInfo.features |= writerFeatures;</b>
+<b class="nc">&nbsp;                    for (ObjectWriterModule module : provider.modules) {</b>
+<b class="nc">&nbsp;                        ObjectWriterAnnotationProcessor annotationProcessor = module.getAnnotationProcessor();</b>
+<b class="nc">&nbsp;                        if (annotationProcessor == null) {</b>
+<b class="nc">&nbsp;                            continue;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        annotationProcessor.getFieldInfo(beanInfo, fieldInfo, objectClass, method);</b>
+<b class="nc">&nbsp;                    }</b>
+<b class="nc">&nbsp;                    if (fieldInfo.ignore) {</b>
+&nbsp;                        return;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    String fieldName;
+<b class="nc">&nbsp;                    if (fieldInfo.fieldName == null || fieldInfo.fieldName.isEmpty()) {</b>
+<b class="nc">&nbsp;                        if (record) {</b>
+<b class="nc">&nbsp;                            fieldName = method.getName();</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            fieldName = BeanUtils.getterName(method, beanInfo.namingStrategy);</b>
+&nbsp;
+<b class="nc">&nbsp;                            if (fieldName.length() &gt; 2</b>
+<b class="nc">&nbsp;                                    &amp;&amp; fieldName.charAt(0) &gt;= &#39;A&#39; &amp;&amp; fieldName.charAt(0) &lt;= &#39;Z&#39;</b>
+<b class="nc">&nbsp;                                    &amp;&amp; fieldName.charAt(1) &gt;= &#39;A&#39; &amp;&amp; fieldName.charAt(1) &lt;= &#39;Z&#39;</b>
+&nbsp;                            ) {
+<b class="nc">&nbsp;                                char[] chars = fieldName.toCharArray();</b>
+<b class="nc">&nbsp;                                chars[0] = (char) (chars[0] + 32);</b>
+<b class="nc">&nbsp;                                String fieldName1 = new String(chars);</b>
+<b class="nc">&nbsp;                                Field field = BeanUtils.getDeclaredField(objectClass, fieldName1);</b>
+<b class="nc">&nbsp;                                if (field != null &amp;&amp; Modifier.isPublic(field.getModifiers())) {</b>
+<b class="nc">&nbsp;                                    fieldName = field.getName();</b>
+&nbsp;                                }
+<b class="nc">&nbsp;                            }</b>
+&nbsp;                        }
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        fieldName = fieldInfo.fieldName;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (beanInfo.orders != null) {</b>
+<b class="nc">&nbsp;                        boolean match = false;</b>
+<b class="nc">&nbsp;                        for (int i = 0; i &lt; beanInfo.orders.length; i++) {</b>
+<b class="nc">&nbsp;                            if (fieldName.equals(beanInfo.orders[i])) {</b>
+<b class="nc">&nbsp;                                fieldInfo.ordinal = i;</b>
+<b class="nc">&nbsp;                                match = true;</b>
+&nbsp;                            }
+&nbsp;                        }
+<b class="nc">&nbsp;                        if (!match) {</b>
+<b class="nc">&nbsp;                            if (fieldInfo.ordinal == 0) {</b>
+<b class="nc">&nbsp;                                fieldInfo.ordinal = beanInfo.orders.length;</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (beanInfo.includes != null &amp;&amp; beanInfo.includes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                        boolean match = false;</b>
+<b class="nc">&nbsp;                        for (String include : beanInfo.includes) {</b>
+<b class="nc">&nbsp;                            if (include.equals(fieldName)) {</b>
+<b class="nc">&nbsp;                                match = true;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            }
+&nbsp;                        }
+<b class="nc">&nbsp;                        if (!match) {</b>
+&nbsp;                            return;
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    method.setAccessible(true);</b>
+&nbsp;
+<b class="nc">&nbsp;                    ObjectWriter writeUsingWriter = null;</b>
+<b class="nc">&nbsp;                    if (fieldInfo.writeUsing != null) {</b>
+&nbsp;                        try {
+<b class="nc">&nbsp;                            writeUsingWriter = (ObjectWriter) fieldInfo.writeUsing.newInstance();</b>
+<b class="nc">&nbsp;                        } catch (InstantiationException | IllegalAccessException e) {</b>
+<b class="nc">&nbsp;                            throw new JSONException(&quot;create writeUsing Writer error&quot;, e);</b>
+<b class="nc">&nbsp;                        }</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (writeUsingWriter == null &amp;&amp; fieldInfo.fieldClassMixIn) {</b>
+<b class="nc">&nbsp;                        writeUsingWriter = ObjectWriterBaseModule.VoidObjectWriter.INSTANCE;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    FieldWriter fieldWriter = createFieldWriter(</b>
+&nbsp;                            provider,
+&nbsp;                            objectClass,
+&nbsp;                            fieldName,
+&nbsp;                            fieldInfo.ordinal,
+&nbsp;                            fieldInfo.features,
+&nbsp;                            fieldInfo.format,
+&nbsp;                            fieldInfo.label,
+&nbsp;                            method,
+&nbsp;                            writeUsingWriter
+&nbsp;                    );
+&nbsp;
+<b class="nc">&nbsp;                    FieldWriter origin = fieldWriterMap.putIfAbsent(fieldName, fieldWriter);</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (origin != null &amp;&amp; origin.compareTo(fieldWriter) &gt; 0) {</b>
+<b class="nc">&nbsp;                        fieldWriterMap.put(fieldName, fieldWriter);</b>
+&nbsp;                    }
+&nbsp;                });
+&nbsp;            }
+<b class="nc">&nbsp;            fieldWriters = new ArrayList&lt;&gt;(fieldWriterMap.values());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        handleIgnores(beanInfo, fieldWriters);</b>
+<b class="nc">&nbsp;        if (beanInfo.alphabetic) {</b>
+<b class="nc">&nbsp;            Collections.sort(fieldWriters);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean match = true;</b>
+<b class="nc">&nbsp;        if (fieldWriters.size() &gt;= 100 || Throwable.class.isAssignableFrom(objectClass)) {</b>
+<b class="nc">&nbsp;            match = false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!publicClass || externalClass) {</b>
+<b class="nc">&nbsp;            for (FieldWriter fieldWriter : fieldWriters) {</b>
+<b class="nc">&nbsp;                if (fieldWriter.method != null) {</b>
+<b class="nc">&nbsp;                    match = false;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (FieldWriter fieldWriter : fieldWriters) {</b>
+<b class="nc">&nbsp;            if (fieldWriter.getInitWriter() != null</b>
+&nbsp;                    || (fieldWriter.features &amp; FieldInfo.VALUE_MASK) != 0
+&nbsp;                    || (fieldWriter.features &amp; FieldInfo.RAW_VALUE_MASK) != 0
+&nbsp;            ) {
+<b class="nc">&nbsp;                match = false;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (!match) {</b>
+<b class="nc">&nbsp;            return super.createObjectWriter(objectClass, writerFeatures, provider);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ClassWriter cw = new ClassWriter(null);</b>
+&nbsp;
+<b class="nc">&nbsp;        String className = &quot;ObjectWriter_&quot; + seed.incrementAndGet();</b>
+&nbsp;        String classNameType;
+&nbsp;        String classNameFull;
+&nbsp;
+<b class="nc">&nbsp;        Package pkg = ObjectWriterCreatorASM.class.getPackage();</b>
+<b class="nc">&nbsp;        if (pkg != null) {</b>
+<b class="nc">&nbsp;            String packageName = pkg.getName();</b>
+<b class="nc">&nbsp;            int packageNameLength = packageName.length();</b>
+<b class="nc">&nbsp;            int charsLength = packageNameLength + 1 + className.length();</b>
+<b class="nc">&nbsp;            char[] chars = new char[charsLength];</b>
+<b class="nc">&nbsp;            packageName.getChars(0, packageName.length(), chars, 0);</b>
+<b class="nc">&nbsp;            chars[packageNameLength] = &#39;.&#39;;</b>
+<b class="nc">&nbsp;            className.getChars(0, className.length(), chars, packageNameLength + 1);</b>
+<b class="nc">&nbsp;            classNameFull = new String(chars);</b>
+&nbsp;
+<b class="nc">&nbsp;            chars[packageNameLength] = &#39;/&#39;;</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; packageNameLength; ++i) {</b>
+<b class="nc">&nbsp;                if (chars[i] == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;                    chars[i] = &#39;/&#39;;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            classNameType = new String(chars);</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            classNameType = className;</b>
+<b class="nc">&nbsp;            classNameFull = className;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        String objectWriterSupper;
+<b class="nc">&nbsp;        switch (fieldWriters.size()) {</b>
+&nbsp;            case 1:
+<b class="nc">&nbsp;                objectWriterSupper = TYPE_OBJECT_WRITER_1;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 2:
+<b class="nc">&nbsp;                objectWriterSupper = TYPE_OBJECT_WRITER_2;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 3:
+<b class="nc">&nbsp;                objectWriterSupper = TYPE_OBJECT_WRITER_3;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 4:
+<b class="nc">&nbsp;                objectWriterSupper = TYPE_OBJECT_WRITER_4;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 5:
+<b class="nc">&nbsp;                objectWriterSupper = TYPE_OBJECT_WRITER_5;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 6:
+<b class="nc">&nbsp;                objectWriterSupper = TYPE_OBJECT_WRITER_6;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 7:
+<b class="nc">&nbsp;                objectWriterSupper = TYPE_OBJECT_WRITER_7;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 8:
+<b class="nc">&nbsp;                objectWriterSupper = TYPE_OBJECT_WRITER_8;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 9:
+<b class="nc">&nbsp;                objectWriterSupper = TYPE_OBJECT_WRITER_9;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 10:
+<b class="nc">&nbsp;                objectWriterSupper = TYPE_OBJECT_WRITER_10;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 11:
+<b class="nc">&nbsp;                objectWriterSupper = TYPE_OBJECT_WRITER_11;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 12:
+<b class="nc">&nbsp;                objectWriterSupper = TYPE_OBJECT_WRITER_12;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                objectWriterSupper = TYPE_OBJECT_WRITER_ADAPTER;</b>
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        cw.visit(Opcodes.V1_8,</b>
+&nbsp;                Opcodes.ACC_PUBLIC + Opcodes.ACC_FINAL + Opcodes.ACC_SUPER,
+&nbsp;                classNameType,
+&nbsp;                objectWriterSupper,
+&nbsp;                INTERFACES
+&nbsp;        );
+&nbsp;
+&nbsp;        // // define fieldWriter
+<b class="nc">&nbsp;        genFields(fieldWriters, cw, objectWriterSupper);</b>
+&nbsp;
+&nbsp;        // init fieldWriter
+<b class="nc">&nbsp;        genMethodInit(fieldWriters, cw, classNameType, objectWriterSupper);</b>
+&nbsp;//
+&nbsp;//        if (objectWriterSupper == TYPE_OBJECT_WRITER_ADAPTER) {
+&nbsp;//            genGetFieldReader(
+&nbsp;//                    fieldWriters,
+&nbsp;//                    cw,
+&nbsp;//                    classNameType,
+&nbsp;//                    new ObjectWriterAdapter(objectClass, null, null, features, fieldWriters)
+&nbsp;//            );
+&nbsp;//        }
+&nbsp;
+<b class="nc">&nbsp;        genMethodWriteJSONB(provider, objectClass, fieldWriters, cw, classNameType, writerFeatures);</b>
+&nbsp;
+<b class="nc">&nbsp;        if ((writerFeatures &amp; JSONWriter.Feature.BeanToArray.mask) != 0) {</b>
+<b class="nc">&nbsp;            genMethodWriteArrayMapping(provider, &quot;write&quot;, objectClass, writerFeatures, fieldWriters, cw, classNameType);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            genMethodWrite(provider, objectClass, fieldWriters, cw, classNameType, writerFeatures);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        genMethodWriteArrayMappingJSONB(provider, objectClass, writerFeatures, fieldWriters, cw, classNameType, writerFeatures);</b>
+&nbsp;
+<b class="nc">&nbsp;        genMethodWriteArrayMapping(provider, &quot;writeArrayMapping&quot;, objectClass, writerFeatures, fieldWriters, cw, classNameType);</b>
+&nbsp;
+<b class="nc">&nbsp;        byte[] code = cw.toByteArray();</b>
+&nbsp;
+<b class="nc">&nbsp;        Class&lt;?&gt; deserClass = classLoader.defineClassPublic(classNameFull, code, 0, code.length);</b>
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            Constructor&lt;?&gt; constructor = deserClass.getConstructor(Class.class, String.class, String.class, long.class, List.class);</b>
+<b class="nc">&nbsp;            ObjectWriterAdapter objectWriter = (ObjectWriterAdapter) constructor.newInstance(</b>
+&nbsp;                    objectClass,
+&nbsp;                    beanInfo.typeKey,
+&nbsp;                    beanInfo.typeName,
+<b class="nc">&nbsp;                    writerFeatures,</b>
+&nbsp;                    fieldWriters
+&nbsp;            );
+<b class="nc">&nbsp;            if (beanInfo.serializeFilters != null) {</b>
+<b class="nc">&nbsp;                configSerializeFilters(beanInfo, objectWriter);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return objectWriter;</b>
+<b class="nc">&nbsp;        } catch (Throwable e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;create objectWriter error, objectType &quot; + objectClass, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void genMethodWrite(
+&nbsp;            ObjectWriterProvider provider,
+&nbsp;            Class objectType,
+&nbsp;            List&lt;FieldWriter&gt; fieldWriters,
+&nbsp;            ClassWriter cw,
+&nbsp;            String classNameType,
+&nbsp;            long objectFeatures
+&nbsp;    ) {
+<b class="nc">&nbsp;        MethodWriter mw = cw.visitMethod(</b>
+&nbsp;                Opcodes.ACC_PUBLIC,
+&nbsp;                &quot;write&quot;,
+&nbsp;                METHOD_DESC_WRITE,
+<b class="nc">&nbsp;                fieldWriters.size() &lt; 6 ? 512 : 1024</b>
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        final int OBJECT = 2;</b>
+<b class="nc">&nbsp;        final int FIELD_NAME = 3;</b>
+<b class="nc">&nbsp;        final int FIELD_TYPE = 4;</b>
+<b class="nc">&nbsp;        final int FIELD_FEATURES = 5;</b>
+<b class="nc">&nbsp;        final int COMMA = 7;</b>
+&nbsp;
+<b class="nc">&nbsp;        Label json_ = new Label(), jsonb_ = new Label(), notSuper_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        MethodWriterContext mwc = new MethodWriterContext(provider, objectType, objectFeatures, classNameType, mw, 8, false);</b>
+<b class="nc">&nbsp;        mwc.genVariantsMethodBefore();</b>
+&nbsp;
+<b class="nc">&nbsp;        mwc.genIsEnabled(JSONWriter.Feature.IgnoreErrorGetter.mask, notSuper_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_NAME);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_TYPE);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LLOAD, FIELD_FEATURES);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKESPECIAL, TYPE_OBJECT_WRITER_ADAPTER, &quot;write&quot;, METHOD_DESC_WRITE_OBJECT, false);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.RETURN);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(notSuper_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;isJSONB&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFEQ, json_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mwc.genIsEnabled(JSONWriter.Feature.BeanToArray.mask, jsonb_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_NAME);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_TYPE);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LLOAD, FIELD_FEATURES);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, classNameType, &quot;writeArrayMappingJSONB&quot;, METHOD_DESC_WRITE_OBJECT, false);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.RETURN);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(jsonb_);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_NAME);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_TYPE);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LLOAD, FIELD_FEATURES);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, classNameType, &quot;writeJSONB&quot;, METHOD_DESC_WRITE_OBJECT, false);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.RETURN);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(json_);</b>
+&nbsp;
+<b class="nc">&nbsp;        Label checkFilter_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        mwc.genIsEnabled(JSONWriter.Feature.BeanToArray.mask, checkFilter_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_NAME);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_TYPE);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LLOAD, FIELD_FEATURES);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, classNameType, &quot;writeArrayMapping&quot;, METHOD_DESC_WRITE_OBJECT, false);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.RETURN);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(checkFilter_);</b>
+&nbsp;
+<b class="nc">&nbsp;        Label object_ = new Label();</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, TYPE_OBJECT_WRITER, &quot;hasFilter&quot;, METHOD_DESC_HAS_FILTER, true);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFEQ, object_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_NAME);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_TYPE);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LLOAD, FIELD_FEATURES);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, classNameType, &quot;writeWithFilter&quot;, METHOD_DESC_WRITE_OBJECT, false);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.RETURN);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(object_);</b>
+&nbsp;
+<b class="nc">&nbsp;        Label return_ = new Label();</b>
+<b class="nc">&nbsp;        if (!java.io.Serializable.class.isAssignableFrom(objectType)) {</b>
+<b class="nc">&nbsp;            Label endIgnoreNoneSerializable_ = new Label();</b>
+<b class="nc">&nbsp;            mwc.genIsEnabled(JSONWriter.Feature.IgnoreNoneSerializable.mask, endIgnoreNoneSerializable_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeNull&quot;, &quot;()V&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, return_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(endIgnoreNoneSerializable_);</b>
+&nbsp;
+<b class="nc">&nbsp;            Label endErrorOnNoneSerializable_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;            mwc.genIsEnabled(JSONWriter.Feature.ErrorOnNoneSerializable.mask, endErrorOnNoneSerializable_);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, mwc.classNameType, &quot;errorOnNoneSerializable&quot;, &quot;()V&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, return_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(endErrorOnNoneSerializable_);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;startObject&quot;, &quot;()V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.ICONST_1);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ISTORE, COMMA); // comma = false</b>
+&nbsp;
+<b class="nc">&nbsp;        Label writeFields_ = new Label();</b>
+<b class="nc">&nbsp;        if ((objectFeatures &amp; JSONWriter.Feature.WriteClassName.mask) == 0) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_TYPE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;isWriteTypeInfo&quot;, &quot;(Ljava/lang/Object;Ljava/lang/reflect/Type;)Z&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFEQ, writeFields_);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, TYPE_OBJECT_WRITER, &quot;writeTypeInfo&quot;, METHOD_DESC_WRITE_TYPE_INFO, true);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.ICONST_1);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.IXOR);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ISTORE, COMMA);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(writeFields_);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; fieldWriters.size(); i++) {</b>
+<b class="nc">&nbsp;            FieldWriter fieldWriter = fieldWriters.get(i);</b>
+<b class="nc">&nbsp;            gwFieldValue(mwc, fieldWriter, OBJECT, i);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, 1);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;endObject&quot;, &quot;()V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(return_);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.RETURN);</b>
+<b class="nc">&nbsp;        mw.visitMaxs(mwc.maxVariant + 1, mwc.maxVariant + 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void genMethodWriteJSONB(
+&nbsp;            ObjectWriterProvider provider,
+&nbsp;            Class objectType,
+&nbsp;            List&lt;FieldWriter&gt; fieldWriters,
+&nbsp;            ClassWriter cw,
+&nbsp;            String classNameType,
+&nbsp;            long objectFeatures
+&nbsp;    ) {
+<b class="nc">&nbsp;        MethodWriter mw = cw.visitMethod(</b>
+&nbsp;                Opcodes.ACC_PUBLIC,
+&nbsp;                &quot;writeJSONB&quot;,
+&nbsp;                METHOD_DESC_WRITE,
+<b class="nc">&nbsp;                fieldWriters.size() &lt; 6 ? 512 : 1024</b>
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        final int OBJECT = 2;</b>
+<b class="nc">&nbsp;        final int FIELD_NAME = 3;</b>
+<b class="nc">&nbsp;        final int FIELD_TYPE = 4;</b>
+<b class="nc">&nbsp;        final int FIELD_FEATURES = 5;</b>
+&nbsp;
+<b class="nc">&nbsp;        MethodWriterContext mwc = new MethodWriterContext(provider, objectType, objectFeatures, classNameType, mw, 7, true);</b>
+<b class="nc">&nbsp;        mwc.genVariantsMethodBefore();</b>
+&nbsp;
+<b class="nc">&nbsp;        Label return_ = new Label();</b>
+<b class="nc">&nbsp;        if (!java.io.Serializable.class.isAssignableFrom(objectType)) {</b>
+<b class="nc">&nbsp;            Label endIgnoreNoneSerializable_ = new Label();</b>
+<b class="nc">&nbsp;            mwc.genIsEnabled(JSONWriter.Feature.IgnoreNoneSerializable.mask, endIgnoreNoneSerializable_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeNull&quot;, &quot;()V&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, return_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(endIgnoreNoneSerializable_);</b>
+&nbsp;
+<b class="nc">&nbsp;            Label endErrorOnNoneSerializable_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;            mwc.genIsEnabled(JSONWriter.Feature.ErrorOnNoneSerializable.mask, endErrorOnNoneSerializable_);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, mwc.classNameType, &quot;errorOnNoneSerializable&quot;, &quot;()V&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, return_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(endErrorOnNoneSerializable_);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Label notWriteType = new Label();</b>
+<b class="nc">&nbsp;        if ((objectFeatures &amp; JSONWriter.Feature.WriteClassName.mask) == 0) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_TYPE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;isWriteTypeInfo&quot;, &quot;(Ljava/lang/Object;Ljava/lang/reflect/Type;)Z&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFEQ, notWriteType);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, classNameType, &quot;writeClassInfo&quot;, METHOD_DESC_WRITE_CLASS_INFO, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(notWriteType);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;startObject&quot;, &quot;()V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; fieldWriters.size(); i++) {</b>
+<b class="nc">&nbsp;            FieldWriter fieldWriter = fieldWriters.get(i);</b>
+<b class="nc">&nbsp;            gwFieldValueJSONB(mwc, fieldWriter, OBJECT, i);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;endObject&quot;, &quot;()V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(return_);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.RETURN);</b>
+<b class="nc">&nbsp;        mw.visitMaxs(mwc.maxVariant + 1, mwc.maxVariant + 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void genMethodWriteArrayMappingJSONB(
+&nbsp;            ObjectWriterProvider provider,
+&nbsp;            Class objectType,
+&nbsp;            long objectFeatures,
+&nbsp;            List&lt;FieldWriter&gt; fieldWriters,
+&nbsp;            ClassWriter cw,
+&nbsp;            String classNameType,
+&nbsp;            long features
+&nbsp;    ) {
+<b class="nc">&nbsp;        MethodWriter mw = cw.visitMethod(</b>
+&nbsp;                Opcodes.ACC_PUBLIC,
+&nbsp;                &quot;writeArrayMappingJSONB&quot;,
+&nbsp;                METHOD_DESC_WRITE,
+&nbsp;                512
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        final int OBJECT = 2;</b>
+<b class="nc">&nbsp;        final int FIELD_NAME = 3;</b>
+<b class="nc">&nbsp;        final int FIELD_TYPE = 4;</b>
+<b class="nc">&nbsp;        final int FIELD_FEATURES = 5;</b>
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            Label notWriteType = new Label();</b>
+<b class="nc">&nbsp;            if ((objectFeatures &amp; JSONWriter.Feature.WriteClassName.mask) == 0) {</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, FIELD_TYPE);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;isWriteTypeInfo&quot;, &quot;(Ljava/lang/Object;Ljava/lang/reflect/Type;)Z&quot;, false);</b>
+<b class="nc">&nbsp;                mw.visitJumpInsn(Opcodes.IFEQ, notWriteType);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, classNameType, &quot;writeClassInfo&quot;, METHOD_DESC_WRITE_CLASS_INFO, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(notWriteType);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int size = fieldWriters.size();</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        if (size &gt;= 128) {</b>
+<b class="nc">&nbsp;            mw.visitIntInsn(Opcodes.SIPUSH, size);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            mw.visitIntInsn(Opcodes.BIPUSH, size);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;startArray&quot;, &quot;(I)V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        MethodWriterContext mwc = new MethodWriterContext(provider, objectType, objectFeatures, classNameType, mw, 7, true);</b>
+&nbsp;
+<b class="nc">&nbsp;        mwc.genVariantsMethodBefore();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; size; i++) {</b>
+<b class="nc">&nbsp;            gwValueJSONB(</b>
+&nbsp;                    mwc,
+<b class="nc">&nbsp;                    fieldWriters.get(i),</b>
+&nbsp;                    OBJECT,
+&nbsp;                    i,
+&nbsp;                    false
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.RETURN);</b>
+<b class="nc">&nbsp;        mw.visitMaxs(mwc.maxVariant + 1, mwc.maxVariant + 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwValueJSONB(
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            int OBJECT,
+&nbsp;            int i,
+&nbsp;            boolean table
+&nbsp;    ) {
+<b class="nc">&nbsp;        long features = fieldWriter.features | mwc.objectFeatures;</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = fieldWriter.fieldClass;</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean beanToArray = (features &amp; JSONWriter.Feature.BeanToArray.mask) != 0 || table;</b>
+<b class="nc">&nbsp;        boolean userDefineWriter = false;</b>
+<b class="nc">&nbsp;        if ((fieldClass == long.class || fieldClass == Long.class || fieldClass == long[].class)</b>
+&nbsp;                &amp;&amp; (mwc.provider.userDefineMask &amp; TYPE_INT64_MASK) != 0) {
+<b class="nc">&nbsp;            userDefineWriter = mwc.provider.getObjectWriter(Long.class) != ObjectWriterImplInt64.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == boolean.class</b>
+&nbsp;                || fieldClass == boolean[].class
+&nbsp;                || fieldClass == char.class
+&nbsp;                || fieldClass == char[].class
+&nbsp;                || fieldClass == byte.class
+&nbsp;                || fieldClass == byte[].class
+&nbsp;                || fieldClass == short.class
+&nbsp;                || fieldClass == short[].class
+&nbsp;                || fieldClass == int.class
+&nbsp;                || fieldClass == int[].class
+&nbsp;                || fieldClass == long.class
+&nbsp;                || (fieldClass == long[].class &amp;&amp; !userDefineWriter)
+&nbsp;                || fieldClass == float.class
+&nbsp;                || fieldClass == float[].class
+&nbsp;                || fieldClass == double.class
+&nbsp;                || fieldClass == double[].class
+&nbsp;                || fieldClass == String.class
+<b class="nc">&nbsp;                || fieldClass.isEnum()</b>
+&nbsp;        ) {
+<b class="nc">&nbsp;            gwValue(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == Date.class) {</b>
+<b class="nc">&nbsp;            gwDate(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldWriter instanceof FieldWriterList) {</b>
+<b class="nc">&nbsp;            gwListJSONB(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass.isArray()) {</b>
+<b class="nc">&nbsp;            gwObjectA(mwc, fieldWriter, OBJECT, i);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            gwObjectJSONB(fieldWriter, OBJECT, mwc, i, beanToArray);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwObjectJSONB(
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            int OBJECT,
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            int i,
+&nbsp;            boolean beanToArray
+&nbsp;    ) {
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = fieldWriter.fieldClass;</b>
+<b class="nc">&nbsp;        String fieldName = fieldWriter.fieldName;</b>
+&nbsp;
+<b class="nc">&nbsp;        String classNameType = mwc.classNameType;</b>
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        int FIELD_VALUE = mwc.var(fieldClass);</b>
+<b class="nc">&nbsp;        int REF_PATH = mwc.var(&quot;REF_PATH&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        Label endIfNull_ = new Label(), notNull_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, FIELD_VALUE);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNONNULL, notNull_);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeNull&quot;, &quot;()V&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, endIfNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean refDetection = !ObjectWriterProvider.isNotReferenceDetect(fieldClass);</b>
+<b class="nc">&nbsp;        if (refDetection) {</b>
+<b class="nc">&nbsp;            Label endDetect_ = new Label(), refSetPath_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;            mwc.genIsEnabled(JSONWriter.Feature.ReferenceDetection.mask, endDetect_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IF_ACMPNE, refSetPath_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitLdcInsn(&quot;..&quot;);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeReference&quot;, &quot;(Ljava/lang/String;)V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, endIfNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(refSetPath_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;setPath&quot;, METHOD_DESC_SET_PATH2, false);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ASTORE, REF_PATH);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFNULL, endDetect_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, REF_PATH);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeReference&quot;, METHOD_DESC_WRITE_REFERENCE, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;popPath&quot;, &quot;(Ljava/lang/Object;)V&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, endIfNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(endDetect_);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // fw.getObjectWriter(w, value.getClass());
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, &quot;java/lang/Object&quot;, &quot;getClass&quot;, &quot;()Ljava/lang/Class;&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL,</b>
+&nbsp;                TYPE_FIELD_WRITER,
+&nbsp;                &quot;getObjectWriter&quot;,
+&nbsp;                METHOD_DESC_GET_OBJECT_WRITER,
+&nbsp;                false);
+&nbsp;
+&nbsp;        // objectWriter.write(jw, ctx, value);
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;        mw.visitLdcInsn(fieldName);</b>
+<b class="nc">&nbsp;        mwc.loadFieldType(i, fieldWriter.fieldType);</b>
+<b class="nc">&nbsp;        mw.visitLdcInsn(fieldWriter.features);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(</b>
+&nbsp;                Opcodes.INVOKEINTERFACE,
+&nbsp;                TYPE_OBJECT_WRITER,
+&nbsp;                beanToArray ? &quot;writeJSONB&quot; : &quot;writeArrayMappingJSONB&quot;,
+&nbsp;                METHOD_DESC_WRITE_OBJECT,
+&nbsp;                true
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        if (refDetection) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;popPath&quot;, &quot;(Ljava/lang/Object;)V&quot;, false);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(endIfNull_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwListJSONB(
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            int OBJECT,
+&nbsp;            int i
+&nbsp;    ) {
+<b class="nc">&nbsp;        Type fieldType = fieldWriter.fieldType;</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = fieldWriter.fieldClass;</b>
+&nbsp;
+<b class="nc">&nbsp;        String classNameType = mwc.classNameType;</b>
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        int LIST = mwc.var(fieldClass);</b>
+<b class="nc">&nbsp;        int REF_PATH = mwc.var(&quot;REF_PATH&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean listStr = false;</b>
+&nbsp;        Type itemType;
+<b class="nc">&nbsp;        if (fieldType instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;            ParameterizedType parameterizedType = (ParameterizedType) fieldType;</b>
+<b class="nc">&nbsp;            Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (actualTypeArguments.length == 1) {</b>
+<b class="nc">&nbsp;                itemType = actualTypeArguments[0];</b>
+<b class="nc">&nbsp;                listStr = itemType == String.class;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Label endIfListNull_ = new Label(), listNotNull_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, LIST);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNONNULL, listNotNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeNull&quot;, &quot;()V&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, endIfListNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(listNotNull_);</b>
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            Label endDetect_ = new Label(), refSetPath_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;            mwc.genIsEnabled(JSONWriter.Feature.ReferenceDetection.mask, endDetect_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IF_ACMPNE, refSetPath_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitLdcInsn(&quot;..&quot;);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeReference&quot;, &quot;(Ljava/lang/String;)V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, endIfListNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(refSetPath_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;setPath&quot;, METHOD_DESC_SET_PATH2, false);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ASTORE, REF_PATH);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFNULL, endDetect_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, REF_PATH);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeReference&quot;, METHOD_DESC_WRITE_REFERENCE, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;popPath&quot;, &quot;(Ljava/lang/Object;)V&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, endIfListNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(endDetect_);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int ITEM_CLASS = mwc.var(Class.class);</b>
+<b class="nc">&nbsp;        int PREVIOUS_CLASS = mwc.var(&quot;ITEM_CLASS&quot;);</b>
+<b class="nc">&nbsp;        int ITEM_OBJECT_WRITER = mwc.var(&quot;ITEM_OBJECT_WRITER&quot;);</b>
+<b class="nc">&nbsp;        if (!listStr) {</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ACONST_NULL);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ASTORE, PREVIOUS_CLASS);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ASTORE, ITEM_OBJECT_WRITER);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // TODO writeTypeInfo
+&nbsp;
+<b class="nc">&nbsp;        if (listStr) {</b>
+&nbsp;            // void writeListStr(JSONWriter jw, List&lt;String&gt; list)
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ICONST_0);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_WRITER, &quot;writeListStr&quot;, METHOD_DESC_WRITE_LIST, false);</b>
+&nbsp;        } else {
+&nbsp;            // void writeList(JSONWriter jw, ObjectWriterContext ctx, List list) {
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ICONST_0);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_WRITER, &quot;writeList&quot;, METHOD_DESC_WRITE_LIST, false);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;popPath&quot;, &quot;(Ljava/lang/Object;)V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(endIfListNull_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwDate(MethodWriterContext mwc, FieldWriter fieldWriter, int OBJECT, int i) {
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitFieldInsn(Opcodes.GETFIELD, mwc.classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.ICONST_0);</b>
+&nbsp;
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_WRITER, &quot;writeDate&quot;, METHOD_DESC_WRITE_DATE_WITH_FIELD_NAME, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwValue(MethodWriterContext mwc, FieldWriter fieldWriter, int OBJECT) {
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        Class fieldClass = fieldWriter.fieldClass;</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+&nbsp;
+&nbsp;        String methodName, methodDesc;
+<b class="nc">&nbsp;        if (fieldClass == boolean.class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeBool&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = &quot;(Z)V&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == char.class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeChar&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = &quot;(C)V&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == byte.class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeInt32&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = &quot;(I)V&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == short.class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeInt32&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = &quot;(I)V&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == int.class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeInt32&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = &quot;(I)V&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == long.class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeInt64&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = &quot;(J)V&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == float.class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeFloat&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = &quot;(F)V&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == double.class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeDouble&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = &quot;(D)V&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == boolean[].class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeBool&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = &quot;([Z)V&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == char[].class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeString&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = &quot;([C)V&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == byte[].class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeBinary&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = &quot;([B)V&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == short[].class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeInt16&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = &quot;([S)V&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == int[].class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeInt32&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = &quot;([I)V&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == long[].class &amp;&amp; mwc.provider.getObjectWriter(Long.class) == ObjectWriterImplInt64.INSTANCE) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeInt64&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = &quot;([J)V&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == float[].class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeFloat&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = &quot;([F)V&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == double[].class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeDouble&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = &quot;([D)V&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == String.class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeString&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = &quot;(Ljava/lang/String;)V&quot;;</b>
+<b class="nc">&nbsp;        } else if (Enum.class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeEnum&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = &quot;(Ljava/lang/Enum;)V&quot;;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new UnsupportedOperationException();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, methodName, methodDesc, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwObjectA(
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            int OBJECT,
+&nbsp;            int i
+&nbsp;    ) {
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitFieldInsn(Opcodes.GETFIELD, mwc.classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_WRITER, &quot;writeValue&quot;, METHOD_DESC_WRITE_VALUE, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void genMethodWriteArrayMapping(
+&nbsp;            ObjectWriterProvider provider,
+&nbsp;            String methodName,
+&nbsp;            Class objectType,
+&nbsp;            long objectFeatures,
+&nbsp;            List&lt;FieldWriter&gt; fieldWriters,
+&nbsp;            ClassWriter cw,
+&nbsp;            String classNameType
+&nbsp;    ) {
+<b class="nc">&nbsp;        MethodWriter mw = cw.visitMethod(Opcodes.ACC_PUBLIC,</b>
+&nbsp;                methodName,
+&nbsp;                METHOD_DESC_WRITE,
+&nbsp;                512
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        final int OBJECT = 2;</b>
+<b class="nc">&nbsp;        final int FIELD_NAME = 3;</b>
+<b class="nc">&nbsp;        final int FIELD_TYPE = 4;</b>
+<b class="nc">&nbsp;        final int FIELD_FEATURES = 5;</b>
+&nbsp;
+<b class="nc">&nbsp;        Label jsonb_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;isJSONB&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFEQ, jsonb_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_NAME);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_TYPE);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LLOAD, FIELD_FEATURES);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, classNameType, &quot;writeArrayMappingJSONB&quot;, METHOD_DESC_WRITE_OBJECT, false);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.RETURN);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(jsonb_);</b>
+&nbsp;
+<b class="nc">&nbsp;        Label object_ = new Label();</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, TYPE_OBJECT_WRITER, &quot;hasFilter&quot;, METHOD_DESC_HAS_FILTER, true);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFEQ, object_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_NAME);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_TYPE);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LLOAD, FIELD_FEATURES);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKESPECIAL, TYPE_OBJECT_WRITER_ADAPTER, methodName, METHOD_DESC_WRITE, false);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.RETURN);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(object_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;startArray&quot;, &quot;()V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        MethodWriterContext mwc = new MethodWriterContext(provider, objectType, objectFeatures, classNameType, mw, 7, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; fieldWriters.size(); i++) {</b>
+<b class="nc">&nbsp;            if (i != 0) {</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeComma&quot;, &quot;()V&quot;, false);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            gwFieldValueArrayMapping(</b>
+<b class="nc">&nbsp;                    fieldWriters.get(i),</b>
+&nbsp;                    mwc,
+&nbsp;                    OBJECT,
+&nbsp;                    i
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;endArray&quot;, &quot;()V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.RETURN);</b>
+<b class="nc">&nbsp;        mw.visitMaxs(mwc.maxVariant + 1, mwc.maxVariant + 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwFieldValueArrayMapping(
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            int OBJECT,
+&nbsp;            int i
+&nbsp;    ) {
+<b class="nc">&nbsp;        Class objectType = mwc.objectClass;</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = fieldWriter.fieldClass;</b>
+&nbsp;
+<b class="nc">&nbsp;        final String TYPE_OBJECT = ASMUtils.type(objectType);</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean userDefineWriter = false;</b>
+<b class="nc">&nbsp;        if ((fieldClass == long.class || fieldClass == Long.class || fieldClass == long[].class)</b>
+&nbsp;                &amp;&amp; (mwc.provider.userDefineMask &amp; TYPE_INT64_MASK) != 0) {
+<b class="nc">&nbsp;            userDefineWriter = mwc.provider.getObjectWriter(Long.class) != ObjectWriterImplInt64.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == boolean.class</b>
+&nbsp;                || fieldClass == boolean[].class
+&nbsp;                || fieldClass == char.class
+&nbsp;                || fieldClass == char[].class
+&nbsp;                || fieldClass == byte.class
+&nbsp;                || fieldClass == byte[].class
+&nbsp;                || fieldClass == short.class
+&nbsp;                || fieldClass == short[].class
+&nbsp;                || fieldClass == int.class
+&nbsp;                || fieldClass == int[].class
+&nbsp;                || fieldClass == long.class
+&nbsp;                || (fieldClass == long[].class &amp;&amp; !userDefineWriter)
+&nbsp;                || fieldClass == float.class
+&nbsp;                || fieldClass == float[].class
+&nbsp;                || fieldClass == double.class
+&nbsp;                || fieldClass == double[].class
+&nbsp;                || fieldClass == String.class
+<b class="nc">&nbsp;                || fieldClass.isEnum()</b>
+&nbsp;        ) {
+<b class="nc">&nbsp;            gwValue(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == Date.class) {</b>
+<b class="nc">&nbsp;            gwDate(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldWriter instanceof FieldWriterList) {</b>
+<b class="nc">&nbsp;            gwList(mwc, OBJECT, i, fieldWriter, TYPE_OBJECT);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            gwObject(mwc, OBJECT, i, fieldWriter, TYPE_OBJECT);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwObject(
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            int OBJECT,
+&nbsp;            int i,
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            String TYPE_OBJECT
+&nbsp;    ) {
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = fieldWriter.fieldClass;</b>
+<b class="nc">&nbsp;        String fieldName = fieldWriter.fieldName;</b>
+&nbsp;
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        int FIELD_VALUE = mwc.var(fieldClass);</b>
+<b class="nc">&nbsp;        int REF_PATH = mwc.var(&quot;REF_PATH&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        Label endIfNull_ = new Label(), notNull_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, FIELD_VALUE);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNONNULL, notNull_);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeNull&quot;, &quot;()V&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, endIfNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean refDetection = !ObjectWriterProvider.isNotReferenceDetect(fieldClass);</b>
+<b class="nc">&nbsp;        if (refDetection) {</b>
+<b class="nc">&nbsp;            Label endDetect_ = new Label(), refSetPath_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;isRefDetect&quot;, &quot;()Z&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFEQ, endDetect_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IF_ACMPNE, refSetPath_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitLdcInsn(&quot;..&quot;);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeReference&quot;, &quot;(Ljava/lang/String;)V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, endIfNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(refSetPath_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, mwc.classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;setPath&quot;, METHOD_DESC_SET_PATH2, false);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ASTORE, REF_PATH);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFNULL, endDetect_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, REF_PATH);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeReference&quot;, METHOD_DESC_WRITE_REFERENCE, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;popPath&quot;, &quot;(Ljava/lang/Object;)V&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, endIfNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(endDetect_);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // fw.getObjectWriter(w, value.getClass());
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitFieldInsn(Opcodes.GETFIELD, mwc.classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, &quot;java/lang/Object&quot;, &quot;getClass&quot;, &quot;()Ljava/lang/Class;&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL,</b>
+&nbsp;                TYPE_FIELD_WRITER,
+&nbsp;                &quot;getObjectWriter&quot;,
+&nbsp;                METHOD_DESC_GET_OBJECT_WRITER,
+&nbsp;                false);
+&nbsp;
+&nbsp;        // objectWriter.write(jw, ctx, value);
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;        mw.visitLdcInsn(fieldWriter.fieldName);</b>
+<b class="nc">&nbsp;        mwc.loadFieldType(i, fieldWriter.fieldType);</b>
+<b class="nc">&nbsp;        mw.visitLdcInsn(fieldWriter.features);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, TYPE_OBJECT_WRITER, &quot;write&quot;, METHOD_DESC_WRITE_OBJECT, true);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (refDetection) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;popPath&quot;, &quot;(Ljava/lang/Object;)V&quot;, false);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(endIfNull_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwList(MethodWriterContext mwc, int OBJECT, int i, FieldWriter fieldWriter, String TYPE_OBJECT) {
+<b class="nc">&nbsp;        Type fieldType = fieldWriter.fieldType;</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = fieldWriter.fieldClass;</b>
+<b class="nc">&nbsp;        int LIST = mwc.var(fieldClass);</b>
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean listStr = false;</b>
+&nbsp;        Type itemType;
+<b class="nc">&nbsp;        Class itemClass = null;</b>
+<b class="nc">&nbsp;        if (fieldType instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;            ParameterizedType parameterizedType = (ParameterizedType) fieldType;</b>
+<b class="nc">&nbsp;            Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (actualTypeArguments.length == 1) {</b>
+<b class="nc">&nbsp;                itemType = actualTypeArguments[0];</b>
+<b class="nc">&nbsp;                itemClass = TypeUtils.getMapping(itemType);</b>
+<b class="nc">&nbsp;                listStr = itemType == String.class;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Label endIfListNull_ = new Label(), listNotNull_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, LIST);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNONNULL, listNotNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeNull&quot;, &quot;()V&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, endIfListNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(listNotNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        int LIST_SIZE = mwc.var(&quot;LIST_SIZE&quot;);</b>
+<b class="nc">&nbsp;        int J = mwc.var(&quot;J&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        int ITEM_CLASS = mwc.var(Class.class);</b>
+<b class="nc">&nbsp;        int PREVIOUS_CLASS = mwc.var(&quot;PREVIOUS_CLASS&quot;);</b>
+<b class="nc">&nbsp;        int ITEM_OBJECT_WRITER = mwc.var(&quot;ITEM_OBJECT_WRITER&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (!listStr) {</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ACONST_NULL);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ASTORE, PREVIOUS_CLASS);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ASTORE, ITEM_OBJECT_WRITER);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // for(int j = 0；
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, &quot;java/util/List&quot;, &quot;size&quot;, &quot;()I&quot;, true);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ISTORE, LIST_SIZE);</b>
+&nbsp;
+&nbsp;        // startArray(int size)
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;startArray&quot;, &quot;()V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        Label for_start_j_ = new Label(), for_end_j_ = new Label(), for_inc_j_ = new Label(), notFirst_ = new Label();</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.ICONST_0);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ISTORE, J);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(for_start_j_);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ILOAD, J);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ILOAD, LIST_SIZE);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IF_ICMPGE, for_end_j_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ILOAD, J);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFEQ, notFirst_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeComma&quot;, &quot;()V&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitLabel(notFirst_);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (listStr) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ILOAD, J);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, &quot;java/util/List&quot;, &quot;get&quot;, &quot;(I)Ljava/lang/Object;&quot;, true);</b>
+<b class="nc">&nbsp;            mw.visitTypeInsn(Opcodes.CHECKCAST, &quot;java/lang/String&quot;); // cast</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeString&quot;, &quot;(Ljava/lang/String;)V&quot;, false);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            int ITEM = mwc.var(itemClass);</b>
+<b class="nc">&nbsp;            Label notNull_ = new Label(), classEQ_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ILOAD, J);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, &quot;java/util/List&quot;, &quot;get&quot;, &quot;(I)Ljava/lang/Object;&quot;, true);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ASTORE, ITEM);</b>
+&nbsp;
+&nbsp;            // if(item == null)
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFNONNULL, notNull_);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeNull&quot;, &quot;()V&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, for_inc_j_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, ITEM);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, &quot;java/lang/Object&quot;, &quot;getClass&quot;, &quot;()Ljava/lang/Class;&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ASTORE, ITEM_CLASS);</b>
+&nbsp;
+&nbsp;            // if (itemClass == previousClass) {
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, PREVIOUS_CLASS);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IF_ACMPEQ, classEQ_);</b>
+&nbsp;
+&nbsp;            // previousObjectWriter = fw_i.getItemWriter(jsonWriter.getContext(), itemClass);
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, 0);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, mwc.classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, ITEM_CLASS);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_WRITER,</b>
+&nbsp;                    &quot;getItemWriter&quot;,
+&nbsp;                    METHOD_DESC_GET_ITEM_WRITER,
+&nbsp;                    false
+&nbsp;            );
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ASTORE, ITEM_OBJECT_WRITER);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, ITEM_CLASS);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ASTORE, PREVIOUS_CLASS);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(classEQ_);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, ITEM_OBJECT_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, ITEM);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ILOAD, J);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKESTATIC, &quot;java/lang/Integer&quot;, &quot;valueOf&quot;, &quot;(I)Ljava/lang/Integer;&quot;, false);</b>
+<b class="nc">&nbsp;            mwc.loadFieldType(i, fieldType);</b>
+<b class="nc">&nbsp;            mw.visitLdcInsn(fieldWriter.features);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, TYPE_OBJECT_WRITER, &quot;write&quot;, METHOD_DESC_WRITE_OBJECT, true);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(for_inc_j_);</b>
+<b class="nc">&nbsp;        mw.visitIincInsn(J, 1);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, for_start_j_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(for_end_j_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;endArray&quot;, &quot;()V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(endIfListNull_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwFieldValue(
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            int OBJECT,
+&nbsp;            int i
+&nbsp;    ) {
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+&nbsp;
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = fieldWriter.fieldClass;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == boolean.class) {</b>
+<b class="nc">&nbsp;            gwFieldValueBooleanV(mwc, fieldWriter, OBJECT, i, false);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == boolean[].class) {</b>
+<b class="nc">&nbsp;            gwFieldValueArray(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == char.class) {</b>
+<b class="nc">&nbsp;            gwFieldName(mwc, i);</b>
+<b class="nc">&nbsp;            gwValue(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == char[].class) {</b>
+<b class="nc">&nbsp;            gwFieldValueArray(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == byte.class) {</b>
+<b class="nc">&nbsp;            gwFieldName(mwc, i);</b>
+<b class="nc">&nbsp;            gwValue(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == byte[].class) {</b>
+<b class="nc">&nbsp;            gwFieldValueArray(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == short.class) {</b>
+<b class="nc">&nbsp;            gwFieldName(mwc, i);</b>
+<b class="nc">&nbsp;            gwValue(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == short[].class) {</b>
+<b class="nc">&nbsp;            gwFieldValueArray(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == int.class) {</b>
+<b class="nc">&nbsp;            gwFieldValueInt32V(mwc, fieldWriter, OBJECT, i, false);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == int[].class) {</b>
+<b class="nc">&nbsp;            gwFieldValueIntVA(mwc, fieldWriter, OBJECT, i, false);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == long.class) {</b>
+<b class="nc">&nbsp;            gwFieldValueInt64V(mwc, fieldWriter, OBJECT, i, false);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == long[].class</b>
+<b class="nc">&nbsp;                &amp;&amp; mwc.provider.getObjectWriter(Long.class) == ObjectWriterImplInt64.INSTANCE</b>
+&nbsp;        ) {
+<b class="nc">&nbsp;            gwFieldValueInt64VA(mwc, fieldWriter, OBJECT, i, false);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == float.class) {</b>
+<b class="nc">&nbsp;            gwFieldName(mwc, i);</b>
+<b class="nc">&nbsp;            gwValue(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == float[].class) {</b>
+<b class="nc">&nbsp;            gwFieldValueArray(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == double.class) {</b>
+<b class="nc">&nbsp;            gwFieldName(mwc, i);</b>
+<b class="nc">&nbsp;            gwValue(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == double[].class) {</b>
+<b class="nc">&nbsp;            gwFieldValueArray(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == Integer.class) {</b>
+<b class="nc">&nbsp;            gwInt32(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == Long.class) {</b>
+<b class="nc">&nbsp;            gwInt64(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == String.class) {</b>
+<b class="nc">&nbsp;            gwFieldValueString(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass.isEnum()</b>
+<b class="nc">&nbsp;                &amp;&amp; BeanUtils.getEnumValueField(fieldClass, mwc.provider) == null</b>
+&nbsp;                &amp;&amp; !(fieldWriter instanceof FieldWriterObject)
+&nbsp;        ) {
+<b class="nc">&nbsp;            gwFieldValueEnum(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == Date.class) {</b>
+<b class="nc">&nbsp;            gwFieldValueDate(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == List.class) {</b>
+<b class="nc">&nbsp;            gwFieldValueList(mwc, fieldWriter, OBJECT, i);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            gwFieldValueObject(mwc, fieldWriter, OBJECT, i);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwFieldValueEnum(
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            int OBJECT,
+&nbsp;            int i
+&nbsp;    ) {
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = fieldWriter.fieldClass;</b>
+&nbsp;
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+&nbsp;
+<b class="nc">&nbsp;        int FIELD_VALUE = mwc.var(fieldClass);</b>
+&nbsp;
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, FIELD_VALUE);</b>
+&nbsp;
+<b class="nc">&nbsp;        Label null_ = new Label(), notNull_ = new Label();</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNULL, null_);</b>
+&nbsp;
+&nbsp;        // void writeEnum(JSONWriter jw, Enum e)
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, 0);</b>
+<b class="nc">&nbsp;        mw.visitFieldInsn(Opcodes.GETFIELD, mwc.classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_WRITER, &quot;writeEnum&quot;, METHOD_DESC_WRITE_ENUM, false);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(null_);</b>
+&nbsp;
+&nbsp;        // if (!jw.isWriteNulls())
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ILOAD, mwc.var(WRITE_NULLS));</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFEQ, notNull_);</b>
+&nbsp;
+&nbsp;        // writeFieldName(w);
+<b class="nc">&nbsp;        gwFieldName(mwc, i);</b>
+&nbsp;
+&nbsp;        // jw.writeNulll
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeNull&quot;, &quot;()V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(notNull_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwFieldValueObject(
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            int OBJECT,
+&nbsp;            int i
+&nbsp;    ) {
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = fieldWriter.fieldClass;</b>
+<b class="nc">&nbsp;        Type fieldType = fieldWriter.fieldType;</b>
+<b class="nc">&nbsp;        String fieldName = fieldWriter.fieldName;</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean refDetection = !ObjectWriterProvider.isNotReferenceDetect(fieldClass);</b>
+<b class="nc">&nbsp;        int FIELD_VALUE = mwc.var(fieldClass);</b>
+&nbsp;
+<b class="nc">&nbsp;        Integer REF_PATH = null;</b>
+<b class="nc">&nbsp;        if (refDetection) {</b>
+<b class="nc">&nbsp;            REF_PATH = mwc.var(&quot;REF_PATH&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long features = fieldWriter.features | mwc.objectFeatures;</b>
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+&nbsp;
+<b class="nc">&nbsp;        Label null_ = new Label(), notNull_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (fieldWriter.unwrapped()) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, mwc.classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_WRITER,</b>
+&nbsp;                    &quot;write&quot;, METHOD_DESC_FIELD_WRITE_OBJECT, false);
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.POP);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, notNull_);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, FIELD_VALUE);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNULL, null_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        if (!fieldWriter.isFieldClassSerializable()) {</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;isIgnoreNoneSerializable&quot;, &quot;()Z&quot;, false);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;isIgnoreNoneSerializable&quot;, &quot;(Ljava/lang/Object;)Z&quot;, false);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNE, notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (refDetection) {</b>
+<b class="nc">&nbsp;            Label endDetect_ = new Label(), refSetPath_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;            int REF_DETECT = mwc.var(&quot;REF_DETECT&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            if (fieldClass == Object.class) {</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;isRefDetect&quot;, &quot;(Ljava/lang/Object;)Z&quot;, false);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;isRefDetect&quot;, &quot;()Z&quot;, false);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ISTORE, REF_DETECT);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFEQ, endDetect_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IF_ACMPNE, refSetPath_);</b>
+&nbsp;
+<b class="nc">&nbsp;            gwFieldName(mwc, i);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitLdcInsn(&quot;..&quot;);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeReference&quot;, &quot;(Ljava/lang/String;)V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(refSetPath_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, mwc.classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;setPath&quot;, METHOD_DESC_SET_PATH2, false);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ASTORE, REF_PATH);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFNULL, endDetect_);</b>
+&nbsp;
+<b class="nc">&nbsp;            gwFieldName(mwc, i);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, REF_PATH);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeReference&quot;, METHOD_DESC_WRITE_REFERENCE, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;popPath&quot;, &quot;(Ljava/lang/Object;)V&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(endDetect_);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Object[].class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;            Label notWriteEmptyArrayEnd_ = new Label();</b>
+<b class="nc">&nbsp;            mwc.genIsEnabled(JSONWriter.Feature.NotWriteEmptyArray.mask, notWriteEmptyArrayEnd_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitTypeInsn(Opcodes.CHECKCAST, &quot;[Ljava/lang/Object;&quot;);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ARRAYLENGTH);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFNE, notWriteEmptyArrayEnd_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(notWriteEmptyArrayEnd_);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // writeFieldName(w);
+<b class="nc">&nbsp;        gwFieldName(mwc, i);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == BigDecimal.class) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            if (features == 0) {</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeDecimal&quot;, &quot;(Ljava/math/BigDecimal;)V&quot;, false);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                mw.visitLdcInsn(features);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeDecimal&quot;, &quot;(Ljava/math/BigDecimal;J)V&quot;, false);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (fieldClass == BigInteger.class) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            if (features == 0) {</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeBigInt&quot;, &quot;(Ljava/math/BigInteger;)V&quot;, false);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                mw.visitLdcInsn(features);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeBigInt&quot;, &quot;(Ljava/math/BigInteger;J)V&quot;, false);</b>
+&nbsp;            }
+&nbsp;        } else {
+&nbsp;            // fw.getObjectWriter(w, value.getClass());
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, mwc.classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, &quot;java/lang/Object&quot;, &quot;getClass&quot;, &quot;()Ljava/lang/Class;&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_WRITER,</b>
+&nbsp;                    &quot;getObjectWriter&quot;, METHOD_DESC_GET_OBJECT_WRITER, false);
+&nbsp;
+&nbsp;            // objectWriter.write(jw, ctx, value);
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitLdcInsn(fieldName);</b>
+<b class="nc">&nbsp;            mwc.loadFieldType(i, fieldType);</b>
+<b class="nc">&nbsp;            mw.visitLdcInsn(features);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(</b>
+&nbsp;                    Opcodes.INVOKEINTERFACE,
+&nbsp;                    TYPE_OBJECT_WRITER,
+&nbsp;                    (features &amp; JSONWriter.Feature.BeanToArray.mask) != 0 ? &quot;writeArrayMapping&quot; : &quot;write&quot;,
+&nbsp;                    METHOD_DESC_WRITE_OBJECT,
+&nbsp;                    true
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (refDetection) {</b>
+<b class="nc">&nbsp;            int REF_DETECT = mwc.var(&quot;REF_DETECT&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            Label endDetect_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ILOAD, REF_DETECT);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFEQ, endDetect_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;popPath&quot;, &quot;(Ljava/lang/Object;)V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(endDetect_);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(null_);</b>
+&nbsp;
+&nbsp;        // if (!jw.isWriteNulls())
+<b class="nc">&nbsp;        if ((features &amp; JSONWriter.Feature.WriteNulls.mask) == 0) {</b>
+<b class="nc">&nbsp;            long nullFeatures = JSONWriter.Feature.WriteNulls.mask;</b>
+<b class="nc">&nbsp;            if (fieldClass == AtomicLongArray.class</b>
+&nbsp;                    || fieldClass == AtomicIntegerArray.class
+<b class="nc">&nbsp;                    || Collection.class.isAssignableFrom(fieldClass)</b>
+<b class="nc">&nbsp;                    || fieldClass.isArray()) {</b>
+<b class="nc">&nbsp;                nullFeatures |= WriteNullListAsEmpty.mask;</b>
+<b class="nc">&nbsp;                nullFeatures |= NullAsDefaultValue.mask;</b>
+<b class="nc">&nbsp;            } else if (Number.class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;                nullFeatures |= WriteNullNumberAsZero.mask;</b>
+<b class="nc">&nbsp;                nullFeatures |= NullAsDefaultValue.mask;</b>
+<b class="nc">&nbsp;            } else if (fieldClass == Boolean.class) {</b>
+<b class="nc">&nbsp;                nullFeatures |= WriteNullBooleanAsFalse.mask;</b>
+<b class="nc">&nbsp;                nullFeatures |= NullAsDefaultValue.mask;</b>
+<b class="nc">&nbsp;            } else if (fieldClass == String.class) {</b>
+<b class="nc">&nbsp;                nullFeatures |= WriteNullStringAsEmpty.mask;</b>
+<b class="nc">&nbsp;                nullFeatures |= NullAsDefaultValue.mask;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            mwc.genIsEnabled(nullFeatures, notNull_);</b>
+&nbsp;//            mw.visitVarInsn(Opcodes.ILOAD, mwc.var(WRITE_NULLS));
+&nbsp;//            mw.visitJumpInsn(Opcodes.IFEQ, notNull_);
+&nbsp;        }
+&nbsp;
+&nbsp;        // writeFieldName(w);
+<b class="nc">&nbsp;        gwFieldName(mwc, i);</b>
+&nbsp;
+&nbsp;        // jw.writeNulll
+&nbsp;        String WRITE_NULL_METHOD;
+<b class="nc">&nbsp;        if (fieldClass == AtomicLongArray.class</b>
+&nbsp;                || fieldClass == AtomicIntegerArray.class
+<b class="nc">&nbsp;                || Collection.class.isAssignableFrom(fieldClass)</b>
+<b class="nc">&nbsp;                || fieldClass.isArray()) {</b>
+<b class="nc">&nbsp;            WRITE_NULL_METHOD = &quot;writeArrayNull&quot;;</b>
+<b class="nc">&nbsp;        } else if (Number.class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;            WRITE_NULL_METHOD = &quot;writeNumberNull&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == Boolean.class) {</b>
+<b class="nc">&nbsp;            WRITE_NULL_METHOD = &quot;writeBooleanNull&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == String.class) {</b>
+<b class="nc">&nbsp;            WRITE_NULL_METHOD = &quot;writeStringNull&quot;;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            WRITE_NULL_METHOD = &quot;writeNull&quot;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, WRITE_NULL_METHOD, &quot;()V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(notNull_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwFieldValueList(
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            int OBJECT,
+&nbsp;            int i
+&nbsp;    ) {
+<b class="nc">&nbsp;        Type fieldType = fieldWriter.fieldType;</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = fieldWriter.fieldClass;</b>
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+&nbsp;
+<b class="nc">&nbsp;        int LIST = mwc.var(fieldClass);</b>
+<b class="nc">&nbsp;        int REF_PATH = mwc.var(&quot;REF_PATH&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean listStr = false;</b>
+<b class="nc">&nbsp;        if (fieldType instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;            ParameterizedType parameterizedType = (ParameterizedType) fieldType;</b>
+<b class="nc">&nbsp;            Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();</b>
+&nbsp;
+<b class="nc">&nbsp;            listStr = actualTypeArguments.length == 1 &amp;&amp; actualTypeArguments[0] == String.class;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int FIELD_VALUE = mwc.var(fieldClass);</b>
+&nbsp;
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, FIELD_VALUE);</b>
+&nbsp;
+<b class="nc">&nbsp;        Label null_ = new Label(), notNull_ = new Label();</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNULL, null_);</b>
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            Label endDetect_ = new Label(), refSetPath_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;            mwc.genIsEnabled(JSONWriter.Feature.ReferenceDetection.mask, endDetect_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IF_ACMPNE, refSetPath_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitLdcInsn(&quot;..&quot;);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeReference&quot;, &quot;(Ljava/lang/String;)V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(refSetPath_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, mwc.classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;setPath&quot;, METHOD_DESC_SET_PATH2, false);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ASTORE, REF_PATH);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFNULL, endDetect_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, REF_PATH);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeReference&quot;, METHOD_DESC_WRITE_REFERENCE, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;popPath&quot;, &quot;(Ljava/lang/Object;)V&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(endDetect_);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            Label notWriteEmptyArrayEnd_ = new Label();</b>
+<b class="nc">&nbsp;            mwc.genIsEnabled(JSONWriter.Feature.NotWriteEmptyArray.mask, notWriteEmptyArrayEnd_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, LIST);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, &quot;java/util/Collection&quot;, &quot;isEmpty&quot;, &quot;()Z&quot;, true);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFEQ, notWriteEmptyArrayEnd_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(notWriteEmptyArrayEnd_);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // listStr
+<b class="nc">&nbsp;        if (listStr) {</b>
+&nbsp;            // void writeListStr(JSONWriter jw, List&lt;String&gt; list)
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, mwc.classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ICONST_1);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_WRITER, &quot;writeListStr&quot;, METHOD_DESC_WRITE_LIST, false);</b>
+&nbsp;        } else {
+&nbsp;            // void writeList(JSONWriter jw, ObjectWriterContext ctx, List list) {
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, mwc.classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ICONST_1);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_WRITER, &quot;writeList&quot;, METHOD_DESC_WRITE_LIST, false);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(null_);</b>
+<b class="nc">&nbsp;        mwc.genIsEnabled(WriteNulls.mask | NullAsDefaultValue.mask | WriteNullListAsEmpty.mask, notNull_);</b>
+&nbsp;
+&nbsp;        // writeFieldName(w);
+<b class="nc">&nbsp;        gwFieldName(mwc, i);</b>
+&nbsp;
+&nbsp;        // jw.writeNulll
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeArrayNull&quot;, &quot;()V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(notNull_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwFieldValueJSONB(
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            int OBJECT,
+&nbsp;            int i
+&nbsp;    ) {
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        Class objectType = mwc.objectClass;</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = fieldWriter.fieldClass;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == boolean.class) {</b>
+<b class="nc">&nbsp;            gwFieldValueBooleanV(mwc, fieldWriter, OBJECT, i, true);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == boolean[].class) {</b>
+<b class="nc">&nbsp;            gwFieldValueArray(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == char.class) {</b>
+<b class="nc">&nbsp;            gwFieldName(mwc, i);</b>
+<b class="nc">&nbsp;            gwValue(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == char[].class) {</b>
+<b class="nc">&nbsp;            gwFieldValueArray(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == byte.class) {</b>
+<b class="nc">&nbsp;            gwFieldName(mwc, i);</b>
+<b class="nc">&nbsp;            gwValue(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == byte[].class) {</b>
+<b class="nc">&nbsp;            gwFieldValueArray(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == short.class) {</b>
+<b class="nc">&nbsp;            gwFieldName(mwc, i);</b>
+<b class="nc">&nbsp;            gwValue(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == short[].class) {</b>
+<b class="nc">&nbsp;            gwFieldValueArray(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == int.class) {</b>
+<b class="nc">&nbsp;            gwFieldValueInt32V(mwc, fieldWriter, OBJECT, i, true);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == int[].class) {</b>
+<b class="nc">&nbsp;            gwFieldValueIntVA(mwc, fieldWriter, OBJECT, i, true);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == long.class) {</b>
+<b class="nc">&nbsp;            gwFieldValueInt64V(mwc, fieldWriter, OBJECT, i, true);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == long[].class</b>
+<b class="nc">&nbsp;                &amp;&amp; mwc.provider.getObjectWriter(Long.class) == ObjectWriterImplInt64.INSTANCE</b>
+&nbsp;        ) {
+<b class="nc">&nbsp;            gwFieldValueInt64VA(mwc, fieldWriter, OBJECT, i, true);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == float.class) {</b>
+<b class="nc">&nbsp;            gwFieldName(mwc, i);</b>
+<b class="nc">&nbsp;            gwValue(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == float[].class) {</b>
+<b class="nc">&nbsp;            gwFieldValueArray(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == double.class) {</b>
+<b class="nc">&nbsp;            gwFieldName(mwc, i);</b>
+<b class="nc">&nbsp;            gwValue(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == double[].class) {</b>
+<b class="nc">&nbsp;            gwFieldValueArray(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == Integer.class) {</b>
+<b class="nc">&nbsp;            gwInt32(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == Long.class) {</b>
+<b class="nc">&nbsp;            gwInt64(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == String.class) {</b>
+<b class="nc">&nbsp;            gwFieldValueString(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass.isEnum()) {</b>
+&nbsp;            // gwFieldValueEnumJSONB(classNameType, mw, objectType, OBJECT, i, member, fieldClass, TYPE_OBJECT, true);
+<b class="nc">&nbsp;            gwFieldValueArray(mwc, fieldWriter, OBJECT, i);</b>
+<b class="nc">&nbsp;        } else if (fieldClass == Date.class) {</b>
+<b class="nc">&nbsp;            gwFieldValueDate(mwc, fieldWriter, OBJECT, i);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            gwFieldValueObjectJSONB(mwc, fieldWriter, OBJECT, i);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwInt32(
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            int OBJECT,
+&nbsp;            int i
+&nbsp;    ) {
+<b class="nc">&nbsp;        boolean jsonb = mwc.jsonb;</b>
+<b class="nc">&nbsp;        String classNameType = mwc.classNameType;</b>
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = fieldWriter.fieldClass;</b>
+&nbsp;
+<b class="nc">&nbsp;        int FIELD_VALUE = mwc.var(fieldClass);</b>
+&nbsp;
+<b class="nc">&nbsp;        Label endIfNull_ = new Label(), notNull_ = new Label(), writeNullValue_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, FIELD_VALUE);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNONNULL, notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mwc.genIsEnabled(</b>
+&nbsp;                WriteNulls.mask | NullAsDefaultValue.mask | WriteNullNumberAsZero.mask,
+&nbsp;                writeNullValue_,
+&nbsp;                endIfNull_
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(writeNullValue_);</b>
+&nbsp;
+<b class="nc">&nbsp;        gwFieldName(mwc, i);</b>
+&nbsp;
+&nbsp;        // TODO : if ((features &amp; (JSONWriter.Feature.WriteNulls.mask | JSONWriter.Feature.NullAsEmpty.mask)) == 0) {
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeNumberNull&quot;, &quot;()V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, endIfNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (jsonb) {</b>
+<b class="nc">&nbsp;            gwFieldName(mwc, i);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, &quot;java/lang/Integer&quot;, &quot;intValue&quot;, &quot;()I&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeInt32&quot;, &quot;(I)V&quot;, false);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, &quot;java/lang/Integer&quot;, &quot;intValue&quot;, &quot;()I&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_WRITER, &quot;writeInt32&quot;, METHOD_DESC_WRITE_I, false);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        mw.visitLabel(endIfNull_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwInt64(
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            int OBJECT,
+&nbsp;            int i
+&nbsp;    ) {
+<b class="nc">&nbsp;        boolean jsonb = mwc.jsonb;</b>
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = fieldWriter.fieldClass;</b>
+<b class="nc">&nbsp;        String classNameType = mwc.classNameType;</b>
+&nbsp;
+<b class="nc">&nbsp;        int FIELD_VALUE = mwc.var(fieldClass);</b>
+&nbsp;
+<b class="nc">&nbsp;        Label endIfNull_ = new Label(), notNull_ = new Label(), writeNullValue_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, FIELD_VALUE);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNONNULL, notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mwc.genIsEnabled(</b>
+&nbsp;                WriteNulls.mask | NullAsDefaultValue.mask | WriteNullNumberAsZero.mask,
+&nbsp;                writeNullValue_,
+&nbsp;                endIfNull_
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(writeNullValue_);</b>
+&nbsp;
+<b class="nc">&nbsp;        gwFieldName(mwc, i);</b>
+&nbsp;
+&nbsp;        // TODO if ((features &amp; (JSONWriter.Feature.WriteNulls.mask | JSONWriter.Feature.NullAsEmpty.mask)) == 0) {
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeNumberNull&quot;, &quot;()V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, endIfNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (jsonb) {</b>
+<b class="nc">&nbsp;            gwFieldName(mwc, i);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, &quot;java/lang/Long&quot;, &quot;longValue&quot;, &quot;()J&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeInt64&quot;, &quot;(J)V&quot;, false);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, &quot;java/lang/Long&quot;, &quot;longValue&quot;, &quot;()J&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_WRITER, &quot;writeInt64&quot;, METHOD_DESC_WRITE_J, false);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(endIfNull_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwFieldValueObjectJSONB(
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            int OBJECT,
+&nbsp;            int i
+&nbsp;    ) {
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = fieldWriter.fieldClass;</b>
+<b class="nc">&nbsp;        String fieldName = fieldWriter.fieldName;</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean refDetection = !ObjectWriterProvider.isNotReferenceDetect(fieldClass);</b>
+&nbsp;
+<b class="nc">&nbsp;        int FIELD_VALUE = mwc.var(fieldClass);</b>
+&nbsp;
+<b class="nc">&nbsp;        Integer REF_PATH = null;</b>
+<b class="nc">&nbsp;        if (refDetection) {</b>
+<b class="nc">&nbsp;            REF_PATH = mwc.var(&quot;REF_PATH&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Label endIfNull_ = new Label(), notNull_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, FIELD_VALUE);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNULL, endIfNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        if (!fieldWriter.isFieldClassSerializable()) {</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;isIgnoreNoneSerializable&quot;, &quot;()Z&quot;, false);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;isIgnoreNoneSerializable&quot;, &quot;(Ljava/lang/Object;)Z&quot;, false);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNE, endIfNull_);</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * boolean refDetect = jsonWriter.isRefDetect();
+&nbsp;         * if (refDetect) {
+&nbsp;         *     if (value == object) {
+&nbsp;         *         writeFieldName(jsonWriter);
+&nbsp;         *         jsonWriter.writeReference(&quot;..&quot;);
+&nbsp;         *         goto endIfNull_
+&nbsp;         *     }
+&nbsp;         *
+&nbsp;         *     String refPath = context.setPath(name, value);
+&nbsp;         *     if (refPath != null) {
+&nbsp;         *         writeFieldName(jsonWriter);
+&nbsp;         *         jsonWriter.writeReference(refPath);
+&nbsp;         *         context.popPath();
+&nbsp;         *         goto endIfNull_
+&nbsp;         *     }
+&nbsp;         * }
+&nbsp;         */
+&nbsp;
+<b class="nc">&nbsp;        if (refDetection) {</b>
+<b class="nc">&nbsp;            Label endDetect_ = new Label(), refSetPath_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;            int REF_DETECT = mwc.var(&quot;REF_DETECT&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            if (fieldClass == Object.class) {</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;isRefDetect&quot;, &quot;(Ljava/lang/Object;)Z&quot;, false);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;isRefDetect&quot;, &quot;()Z&quot;, false);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ISTORE, REF_DETECT);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFEQ, endDetect_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IF_ACMPNE, refSetPath_);</b>
+&nbsp;
+<b class="nc">&nbsp;            gwFieldName(mwc, i);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitLdcInsn(&quot;..&quot;);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeReference&quot;, &quot;(Ljava/lang/String;)V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, endIfNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(refSetPath_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, mwc.classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;setPath&quot;, METHOD_DESC_SET_PATH2, false);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ASTORE, REF_PATH);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFNULL, endDetect_);</b>
+&nbsp;
+<b class="nc">&nbsp;            gwFieldName(mwc, i);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, REF_PATH);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeReference&quot;, METHOD_DESC_WRITE_REFERENCE, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;popPath&quot;, &quot;(Ljava/lang/Object;)V&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, endIfNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(endDetect_);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        gwFieldName(mwc, i);</b>
+&nbsp;
+&nbsp;        // fw.getObjectWriter(w, value.getClass());
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitFieldInsn(Opcodes.GETFIELD, mwc.classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, &quot;java/lang/Object&quot;, &quot;getClass&quot;, &quot;()Ljava/lang/Class;&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL,</b>
+&nbsp;                TYPE_FIELD_WRITER,
+&nbsp;                &quot;getObjectWriter&quot;,
+&nbsp;                METHOD_DESC_GET_OBJECT_WRITER,
+&nbsp;                false);
+&nbsp;
+&nbsp;        // objectWriter.write(jw, ctx, value);
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;        mw.visitLdcInsn(fieldName);</b>
+<b class="nc">&nbsp;        mwc.loadFieldType(i, fieldWriter.fieldType);</b>
+<b class="nc">&nbsp;        mw.visitLdcInsn(fieldWriter.features);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEINTERFACE, TYPE_OBJECT_WRITER, &quot;writeJSONB&quot;, METHOD_DESC_WRITE_OBJECT, true);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (refDetection) {</b>
+<b class="nc">&nbsp;            int REF_DETECT = mwc.var(&quot;REF_DETECT&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            Label endDetect_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ILOAD, REF_DETECT);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFEQ, endDetect_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;popPath&quot;, &quot;(Ljava/lang/Object;)V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(endDetect_);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(endIfNull_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwFieldValueDate(
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            int OBJECT,
+&nbsp;            int i
+&nbsp;    ) {
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = fieldWriter.fieldClass;</b>
+&nbsp;
+<b class="nc">&nbsp;        Label null_ = new Label(), writeNull_ = new Label(), endIfNull_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        int FIELD_VALUE = mwc.var(fieldClass);</b>
+&nbsp;
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, FIELD_VALUE);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNULL, null_);</b>
+&nbsp;
+&nbsp;        // void writeEnum(JSONWriter jw, Enum e)
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitFieldInsn(Opcodes.GETFIELD, mwc.classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, &quot;java/util/Date&quot;, &quot;getTime&quot;, &quot;()J&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_WRITER, &quot;writeDate&quot;, METHOD_DESC_WRITE_J, false);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, endIfNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(null_);</b>
+&nbsp;
+&nbsp;        // if (!jw.isWriteNulls())
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ILOAD, mwc.var(WRITE_NULLS));</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNE, writeNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, endIfNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(writeNull_);</b>
+<b class="nc">&nbsp;        gwFieldName(mwc, i);</b>
+&nbsp;
+&nbsp;        // jw.writeNulll
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeNull&quot;, &quot;()V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(endIfNull_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwFieldValueArray(MethodWriterContext mwc, FieldWriter fieldWriter, int OBJECT, int i) {
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        Class fieldClass = fieldWriter.fieldClass;</b>
+&nbsp;
+&nbsp;        String methodName, methodDesc;
+<b class="nc">&nbsp;        if (fieldClass == char[].class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeString&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = METHOD_DESC_WRITE_CArray;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == boolean[].class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeBool&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = METHOD_DESC_WRITE_ZARRAY;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == byte[].class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeBinary&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = METHOD_DESC_WRITE_BArray;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == short[].class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeInt16&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = METHOD_DESC_WRITE_SArray;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == float[].class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeFloat&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = METHOD_DESC_WRITE_FARRAY;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == double[].class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeDouble&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = METHOD_DESC_WRITE_DARRAY;</b>
+<b class="nc">&nbsp;        } else if (fieldClass.isEnum()) {</b>
+<b class="nc">&nbsp;            methodName = &quot;writeEnumJSONB&quot;;</b>
+<b class="nc">&nbsp;            methodDesc = METHOD_DESC_WRITE_ENUM;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new UnsupportedOperationException();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitFieldInsn(Opcodes.GETFIELD, mwc.classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_WRITER, methodName, methodDesc, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwFieldName(MethodWriterContext mwc, int i) {
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        String classNameType = mwc.classNameType;</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_WRITER, &quot;writeFieldName&quot;, METHOD_DESC_WRITE_FIELD_NAME, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwFieldValueInt64VA(
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            int OBJECT,
+&nbsp;            int i,
+&nbsp;            boolean jsonb
+&nbsp;    ) {
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = fieldWriter.fieldClass;</b>
+&nbsp;
+<b class="nc">&nbsp;        int FIELD_VALUE = mwc.var(fieldClass);</b>
+&nbsp;
+<b class="nc">&nbsp;        Label endIfNull_ = new Label(), notNull_ = new Label(), writeNullValue_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, FIELD_VALUE);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNONNULL, notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ILOAD, mwc.var(WRITE_NULLS));</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNE, writeNullValue_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, endIfNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(writeNullValue_);</b>
+&nbsp;
+<b class="nc">&nbsp;        gwFieldName(mwc, i);</b>
+&nbsp;
+&nbsp;        // TODO if ((features &amp; (JSONWriter.Feature.WriteNulls.mask | JSONWriter.Feature.NullAsEmpty.mask)) == 0) {
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeArrayNull&quot;, &quot;()V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, endIfNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        gwFieldName(mwc, i);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeInt64&quot;, &quot;([J)V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(endIfNull_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwFieldValueInt64V(
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            int OBJECT,
+&nbsp;            int i,
+&nbsp;            boolean jsonb
+&nbsp;    ) {
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        String format = fieldWriter.format;</b>
+<b class="nc">&nbsp;        String classNameType = mwc.classNameType;</b>
+&nbsp;
+<b class="nc">&nbsp;        int FIELD_VALUE = mwc.var(long.class);</b>
+<b class="nc">&nbsp;        int WRITE_DEFAULT_VALUE = mwc.var(NOT_WRITE_DEFAULT_VALUE);</b>
+<b class="nc">&nbsp;        Label notDefaultValue_ = new Label(), endWriteValue_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP2);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LSTORE, FIELD_VALUE);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.LCONST_0);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNE, notDefaultValue_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ILOAD, WRITE_DEFAULT_VALUE);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFEQ, notDefaultValue_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, endWriteValue_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(notDefaultValue_);</b>
+<b class="nc">&nbsp;        if (jsonb) {</b>
+<b class="nc">&nbsp;            gwFieldName(mwc, i);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LLOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeInt64&quot;, &quot;(J)V&quot;, false);</b>
+&nbsp;        } else {
+&nbsp;            // Int32FieldWriter.writeInt64(JSONWriter w, long value);
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LLOAD, FIELD_VALUE);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (&quot;iso8601&quot;.equals(format)) {</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_WRITER, &quot;writeDate&quot;, METHOD_DESC_WRITE_J, false);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_WRITER, &quot;writeInt64&quot;, METHOD_DESC_WRITE_J, false);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(endWriteValue_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    void gwFieldValueIntVA(
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            int OBJECT,
+&nbsp;            int i,
+&nbsp;            boolean jsonb
+&nbsp;    ) {
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = fieldWriter.fieldClass;</b>
+&nbsp;
+<b class="nc">&nbsp;        int FIELD_VALUE = mwc.var(fieldClass);</b>
+&nbsp;
+<b class="nc">&nbsp;        Label endIfNull_ = new Label(), notNull_ = new Label(), writeNullValue_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, FIELD_VALUE);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNONNULL, notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ILOAD, mwc.var(WRITE_NULLS));</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNE, writeNullValue_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, endIfNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(writeNullValue_);</b>
+&nbsp;
+<b class="nc">&nbsp;        gwFieldName(mwc, i);</b>
+&nbsp;
+&nbsp;        // TODO if ((features &amp; (JSONWriter.Feature.WriteNulls.mask | JSONWriter.Feature.NullAsEmpty.mask)) == 0) {
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeArrayNull&quot;, &quot;()V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, endIfNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(notNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        gwFieldName(mwc, i);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeInt32&quot;, &quot;([I)V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(endIfNull_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwFieldValueInt32V(
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            int OBJECT,
+&nbsp;            int i,
+&nbsp;            boolean jsonb
+&nbsp;    ) {
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        String format = fieldWriter.format;</b>
+<b class="nc">&nbsp;        String classNameType = mwc.classNameType;</b>
+&nbsp;
+<b class="nc">&nbsp;        int FIELD_VALUE = mwc.var(int.class);</b>
+<b class="nc">&nbsp;        Integer WRITE_DEFAULT_VALUE = mwc.var(NOT_WRITE_DEFAULT_VALUE);</b>
+<b class="nc">&nbsp;        Label notDefaultValue_ = new Label(), endWriteValue_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ISTORE, FIELD_VALUE);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNE, notDefaultValue_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ILOAD, WRITE_DEFAULT_VALUE);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFEQ, notDefaultValue_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, endWriteValue_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(notDefaultValue_);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (&quot;string&quot;.equals(format)) {</b>
+<b class="nc">&nbsp;            gwFieldName(mwc, i);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ILOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKESTATIC, &quot;java/lang/Integer&quot;, &quot;toString&quot;, &quot;(I)Ljava/lang/String;&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeString&quot;, &quot;(Ljava/lang/String;)V&quot;, false);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (jsonb) {</b>
+<b class="nc">&nbsp;                gwFieldName(mwc, i);</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ILOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeInt32&quot;, &quot;(I)V&quot;, false);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;                mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ILOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;                mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_WRITER, &quot;writeInt32&quot;, METHOD_DESC_WRITE_I, false);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(endWriteValue_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwFieldValueBooleanV(
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            int OBJECT,
+&nbsp;            int i,
+&nbsp;            boolean jsonb
+&nbsp;    ) {
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        String classNameType = mwc.classNameType;</b>
+&nbsp;
+<b class="nc">&nbsp;        int FIELD_VALUE = mwc.var(boolean.class);</b>
+<b class="nc">&nbsp;        int WRITE_DEFAULT_VALUE = mwc.var(NOT_WRITE_DEFAULT_VALUE);</b>
+<b class="nc">&nbsp;        Label notDefaultValue_ = new Label(), endWriteValue_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ISTORE, FIELD_VALUE);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNE, notDefaultValue_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ILOAD, WRITE_DEFAULT_VALUE);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFEQ, notDefaultValue_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, endWriteValue_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(notDefaultValue_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ILOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_FIELD_WRITER, &quot;writeBool&quot;, METHOD_DESC_WRITE_Z, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(endWriteValue_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void gwFieldValueString(
+&nbsp;            MethodWriterContext mwc,
+&nbsp;            FieldWriter fieldWriter,
+&nbsp;            int OBJECT,
+&nbsp;            int i
+&nbsp;    ) {
+<b class="nc">&nbsp;        boolean jsonb = mwc.jsonb;</b>
+<b class="nc">&nbsp;        long features = fieldWriter.features | mwc.objectFeatures;</b>
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = fieldWriter.fieldClass;</b>
+<b class="nc">&nbsp;        String format = fieldWriter.format;</b>
+&nbsp;
+<b class="nc">&nbsp;        int FIELD_VALUE = mwc.var(fieldClass);</b>
+&nbsp;
+<b class="nc">&nbsp;        Label null_ = new Label(), endIfNull_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        genGetObject(mwc, fieldWriter, OBJECT);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.DUP);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ASTORE, FIELD_VALUE);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.IFNULL, null_);</b>
+&nbsp;
+&nbsp;        // void writeFieldName(JSONWriter w)
+<b class="nc">&nbsp;        gwFieldName(mwc, i);</b>
+&nbsp;
+&nbsp;        // void writeString(String str)
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, FIELD_VALUE);</b>
+<b class="nc">&nbsp;        if (&quot;trim&quot;.equals(format)) {</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, &quot;java/lang/String&quot;, &quot;trim&quot;, &quot;()Ljava/lang/String;&quot;, false);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        mw.visitMethodInsn(</b>
+&nbsp;                Opcodes.INVOKEVIRTUAL,
+&nbsp;                TYPE_JSON_WRITER,
+<b class="nc">&nbsp;                jsonb &amp;&amp; &quot;symbol&quot;.equals(format) ? &quot;writeSymbol&quot; : &quot;writeString&quot;,</b>
+&nbsp;                &quot;(Ljava/lang/String;)V&quot;,
+&nbsp;                false
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, endIfNull_);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(null_);</b>
+&nbsp;
+<b class="nc">&nbsp;        Label writeNullValue_ = new Label(), writeNull_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;        final long defaultValueMask = NullAsDefaultValue.mask</b>
+&nbsp;                | WriteNullNumberAsZero.mask
+&nbsp;                | WriteNullBooleanAsFalse.mask
+&nbsp;                | WriteNullListAsEmpty.mask
+&nbsp;                | WriteNullStringAsEmpty.mask;
+&nbsp;
+&nbsp;        // if (!jw.isWriteNulls())
+<b class="nc">&nbsp;        if ((features &amp; (JSONWriter.Feature.WriteNulls.mask</b>
+&nbsp;                | defaultValueMask)) == 0) {
+<b class="nc">&nbsp;            mwc.genIsEnabled(</b>
+&nbsp;                    WriteNulls.mask | NullAsDefaultValue.mask | WriteNullStringAsEmpty.mask,
+&nbsp;                    writeNull_,
+&nbsp;                    endIfNull_
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(writeNull_);</b>
+<b class="nc">&nbsp;        mwc.genIsDisabled(NotWriteDefaultValue.mask, endIfNull_);</b>
+&nbsp;
+&nbsp;        // writeFieldName(w);
+<b class="nc">&nbsp;        gwFieldName(mwc, i);</b>
+&nbsp;
+<b class="nc">&nbsp;        if ((features &amp; defaultValueMask) == 0) {</b>
+<b class="nc">&nbsp;            long mask = NullAsDefaultValue.mask;</b>
+<b class="nc">&nbsp;            if (fieldClass == String.class) {</b>
+<b class="nc">&nbsp;                mask |= WriteNullStringAsEmpty.mask;</b>
+<b class="nc">&nbsp;            } else if (fieldClass == Boolean.class) {</b>
+<b class="nc">&nbsp;                mask |= WriteNullBooleanAsFalse.mask;</b>
+<b class="nc">&nbsp;            } else if (Number.class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;                mask |= JSONWriter.Feature.WriteNullNumberAsZero.mask;</b>
+<b class="nc">&nbsp;            } else if (Collection.class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;                mask |= WriteNullListAsEmpty.mask;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitLdcInsn(mask);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;isEnabled&quot;, &quot;(J)Z&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFEQ, writeNullValue_);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitLdcInsn(&quot;&quot;);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeString&quot;, &quot;(Ljava/lang/String;)V&quot;, false);</b>
+<b class="nc">&nbsp;        mw.visitJumpInsn(Opcodes.GOTO, endIfNull_);</b>
+&nbsp;
+&nbsp;        // jw.writeNulll
+<b class="nc">&nbsp;        mw.visitLabel(writeNullValue_);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;writeStringNull&quot;, &quot;()V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.visitLabel(endIfNull_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void genMethodInit(List&lt;FieldWriter&gt; fieldWriters, ClassWriter cw, String classNameType, String objectWriterSupper) {
+<b class="nc">&nbsp;        MethodWriter mw = cw.visitMethod(</b>
+&nbsp;                Opcodes.ACC_PUBLIC,
+&nbsp;                &quot;&lt;init&gt;&quot;,
+&nbsp;                &quot;(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;JLjava/util/List;)V&quot;,
+&nbsp;                64
+&nbsp;        );
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, 1);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, 2);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, 3);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.LLOAD, 4);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, 6);</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKESPECIAL, objectWriterSupper, &quot;&lt;init&gt;&quot;, &quot;(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;JLjava/util/List;)V&quot;, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (objectWriterSupper == TYPE_OBJECT_WRITER_ADAPTER) {</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; fieldWriters.size(); i++) {</b>
+<b class="nc">&nbsp;                mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;                mw.visitInsn(Opcodes.DUP);</b>
+&nbsp;
+<b class="nc">&nbsp;                mw.visitFieldInsn(Opcodes.GETFIELD, TYPE_OBJECT_WRITER_ADAPTER, &quot;fieldWriterArray&quot;, DESC_FIELD_WRITER_ARRAY);</b>
+<b class="nc">&nbsp;                switch (i) {</b>
+&nbsp;                    case 0:
+<b class="nc">&nbsp;                        mw.visitInsn(Opcodes.ICONST_0);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 1:
+<b class="nc">&nbsp;                        mw.visitInsn(Opcodes.ICONST_1);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 2:
+<b class="nc">&nbsp;                        mw.visitInsn(Opcodes.ICONST_2);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 3:
+<b class="nc">&nbsp;                        mw.visitInsn(Opcodes.ICONST_3);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 4:
+<b class="nc">&nbsp;                        mw.visitInsn(Opcodes.ICONST_4);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 5:
+<b class="nc">&nbsp;                        mw.visitInsn(Opcodes.ICONST_5);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    default:
+<b class="nc">&nbsp;                        if (i &gt;= 128) {</b>
+<b class="nc">&nbsp;                            mw.visitIntInsn(Opcodes.SIPUSH, i);</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            mw.visitIntInsn(Opcodes.BIPUSH, i);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                }
+<b class="nc">&nbsp;                mw.visitInsn(Opcodes.AALOAD); // fieldWriterArray</b>
+<b class="nc">&nbsp;                mw.visitTypeInsn(Opcodes.CHECKCAST,</b>
+&nbsp;                        TYPE_FIELD_WRITER); // cast
+<b class="nc">&nbsp;                mw.visitFieldInsn(Opcodes.PUTFIELD, classNameType, fieldWriter(i), DESC_FIELD_WRITER);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitInsn(Opcodes.RETURN);</b>
+<b class="nc">&nbsp;        mw.visitMaxs(7, 7);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void genFields(List&lt;FieldWriter&gt; fieldWriters, ClassWriter cw, String objectWriterSupper) {
+<b class="nc">&nbsp;        if (objectWriterSupper != TYPE_OBJECT_WRITER_ADAPTER) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; fieldWriters.size(); i++) {</b>
+<b class="nc">&nbsp;            cw.visitField(</b>
+&nbsp;                    Opcodes.ACC_PUBLIC,
+<b class="nc">&nbsp;                    fieldWriter(i),</b>
+&nbsp;                    DESC_FIELD_WRITER
+<b class="nc">&nbsp;            ).visitEnd();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;T&gt; FieldWriter&lt;T&gt; createFieldWriter(
+&nbsp;            ObjectWriterProvider provider,
+&nbsp;            String fieldName,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            String label,
+&nbsp;            Field field,
+&nbsp;            ObjectWriter initObjectWriter
+&nbsp;    ) {
+<b class="nc">&nbsp;        Class&lt;?&gt; declaringClass = field.getDeclaringClass();</b>
+<b class="nc">&nbsp;        if (Throwable.class.isAssignableFrom(declaringClass)</b>
+<b class="nc">&nbsp;                || declaringClass.getName().startsWith(&quot;java.lang&quot;)</b>
+&nbsp;        ) {
+<b class="nc">&nbsp;            return super.createFieldWriter(provider, fieldName, ordinal, features, format, label, field, initObjectWriter);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = field.getType();</b>
+<b class="nc">&nbsp;        Type fieldType = field.getGenericType();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (initObjectWriter != null) {</b>
+<b class="nc">&nbsp;            if (fieldClass == byte.class) {</b>
+<b class="nc">&nbsp;                fieldType = fieldClass = Byte.class;</b>
+<b class="nc">&nbsp;            } else if (fieldClass == short.class) {</b>
+<b class="nc">&nbsp;                fieldType = fieldClass = Short.class;</b>
+<b class="nc">&nbsp;            } else if (fieldClass == int.class) {</b>
+<b class="nc">&nbsp;                fieldType = fieldClass = Integer.class;</b>
+<b class="nc">&nbsp;            } else if (fieldClass == long.class) {</b>
+<b class="nc">&nbsp;                fieldType = fieldClass = Long.class;</b>
+<b class="nc">&nbsp;            } else if (fieldClass == float.class) {</b>
+<b class="nc">&nbsp;                fieldType = fieldClass = Float.class;</b>
+<b class="nc">&nbsp;            } else if (fieldClass == double.class) {</b>
+<b class="nc">&nbsp;                fieldType = fieldClass = Double.class;</b>
+<b class="nc">&nbsp;            } else if (fieldClass == boolean.class) {</b>
+<b class="nc">&nbsp;                fieldType = fieldClass = Boolean.class;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            FieldWriterObjectField objImp = new FieldWriterObjectField(</b>
+&nbsp;                    fieldName,
+&nbsp;                    ordinal,
+&nbsp;                    features,
+&nbsp;                    format,
+&nbsp;                    label,
+&nbsp;                    fieldType,
+&nbsp;                    fieldClass,
+&nbsp;                    field
+&nbsp;            );
+<b class="nc">&nbsp;            objImp.initValueClass = fieldClass;</b>
+<b class="nc">&nbsp;            if (initObjectWriter != ObjectWriterBaseModule.VoidObjectWriter.INSTANCE) {</b>
+<b class="nc">&nbsp;                objImp.initObjectWriter = initObjectWriter;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return objImp;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == boolean.class || fieldClass == Boolean.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterBooleanField(fieldName, ordinal, features, format, label, field, fieldClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == byte.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterInt8ValField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == short.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterInt16ValField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == int.class) {</b>
+<b class="nc">&nbsp;            if (UNSAFE_SUPPORT) {</b>
+<b class="nc">&nbsp;                return new FieldWriterInt32ValUF&lt;&gt;(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return new FieldWriterInt32Val(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == long.class) {</b>
+<b class="nc">&nbsp;            if (format == null || format.isEmpty()) {</b>
+<b class="nc">&nbsp;                return new FieldWriterInt64ValField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return new FieldWriterMillisField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == float.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterFloatValField(fieldName, ordinal, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == double.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterDoubleValField(fieldName, ordinal, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == char.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterCharValField(fieldName, ordinal, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Integer.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterInt32Field(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Long.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterInt64Field(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Short.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterInt16Field(fieldName, ordinal, features, format, label, field, fieldClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Byte.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterInt8Field(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == BigInteger.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterBigIntField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == BigDecimal.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterBigDecimalField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == java.util.Date.class) {</b>
+<b class="nc">&nbsp;            if (format != null) {</b>
+<b class="nc">&nbsp;                format = format.trim();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (format.isEmpty()) {</b>
+<b class="nc">&nbsp;                    format = null;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return new FieldWriterDateField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == String.class) {</b>
+<b class="nc">&nbsp;            return new FieldWriterStringField(fieldName, ordinal, features, format, label, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass.isEnum()) {</b>
+<b class="nc">&nbsp;            Member enumValueField = BeanUtils.getEnumValueField(fieldClass, provider);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (enumValueField == null) {</b>
+<b class="nc">&nbsp;                return new FIeldWriterEnumField(fieldName, ordinal, features, format, label, fieldClass, field);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == List.class || fieldClass == ArrayList.class) {</b>
+<b class="nc">&nbsp;            Type itemType = null;</b>
+<b class="nc">&nbsp;            if (fieldType instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;                itemType = ((ParameterizedType) fieldType).getActualTypeArguments()[0];</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return new FieldWriterListField(fieldName, itemType, ordinal, features, format, label, fieldType, fieldClass, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass.isArray()) {</b>
+<b class="nc">&nbsp;            Class&lt;?&gt; itemClass = fieldClass.getComponentType();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (declaringClass == Throwable.class &amp;&amp; &quot;stackTrace&quot;.equals(fieldName)) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    Method method = Throwable.class.getMethod(&quot;getStackTrace&quot;);</b>
+<b class="nc">&nbsp;                    return new FieldWriterObjectArrayMethod(fieldName, itemClass, ordinal, features, format, label, fieldType, fieldClass, method);</b>
+<b class="nc">&nbsp;                } catch (NoSuchMethodException ignored) {</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;//
+&nbsp;//            boolean base64 = fieldClass == byte[].class &amp;&amp; &quot;base64&quot;.equals(format);
+&nbsp;//            if (!base64) {
+&nbsp;//                return new FieldWriterObjectArrayField(fieldName, itemClass, ordinal, features, format, label, fieldType, fieldClass, field);
+&nbsp;//            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new FieldWriterObjectFieldUF(fieldName, ordinal, features, format, label, field.getGenericType(), fieldClass, field);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    void genGetObject(MethodWriterContext mwc, FieldWriter fieldWriter, int OBJECT) {
+<b class="nc">&nbsp;        MethodWriter mw = mwc.mw;</b>
+<b class="nc">&nbsp;        Class objectClass = mwc.objectClass;</b>
+<b class="nc">&nbsp;        final String TYPE_OBJECT = ASMUtils.type(objectClass);</b>
+<b class="nc">&nbsp;        Class fieldClass = fieldWriter.fieldClass;</b>
+<b class="nc">&nbsp;        Member member = fieldWriter.field != null ? fieldWriter.field : fieldWriter.method;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (member instanceof Method) {</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitTypeInsn(Opcodes.CHECKCAST, TYPE_OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_OBJECT, member.getName(), &quot;()&quot; + ASMUtils.desc(fieldClass), false);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Modifier.isPublic(objectClass.getModifiers())</b>
+<b class="nc">&nbsp;                &amp;&amp; Modifier.isPublic(member.getModifiers())</b>
+<b class="nc">&nbsp;                &amp;&amp; !classLoader.isExternalClass(objectClass)</b>
+&nbsp;        ) {
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitTypeInsn(Opcodes.CHECKCAST, TYPE_OBJECT);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, TYPE_OBJECT, member.getName(), ASMUtils.desc(fieldClass));</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Field field = (Field) member;</b>
+&nbsp;
+<b class="nc">&nbsp;        String methodName, methodDes, castToType = null;</b>
+<b class="nc">&nbsp;        if (fieldClass == int.class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;getInt&quot;;</b>
+<b class="nc">&nbsp;            methodDes = &quot;(Ljava/lang/Object;J)I&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == long.class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;getLong&quot;;</b>
+<b class="nc">&nbsp;            methodDes = &quot;(Ljava/lang/Object;J)J&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == float.class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;getFloat&quot;;</b>
+<b class="nc">&nbsp;            methodDes = &quot;(Ljava/lang/Object;J)F&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == double.class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;getDouble&quot;;</b>
+<b class="nc">&nbsp;            methodDes = &quot;(Ljava/lang/Object;J)D&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == char.class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;getChar&quot;;</b>
+<b class="nc">&nbsp;            methodDes = &quot;(Ljava/lang/Object;J)C&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == byte.class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;getByte&quot;;</b>
+<b class="nc">&nbsp;            methodDes = &quot;(Ljava/lang/Object;J)B&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == short.class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;getShort&quot;;</b>
+<b class="nc">&nbsp;            methodDes = &quot;(Ljava/lang/Object;J)S&quot;;</b>
+<b class="nc">&nbsp;        } else if (fieldClass == boolean.class) {</b>
+<b class="nc">&nbsp;            methodName = &quot;getBoolean&quot;;</b>
+<b class="nc">&nbsp;            methodDes = &quot;(Ljava/lang/Object;J)Z&quot;;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            methodName = &quot;getObject&quot;;</b>
+<b class="nc">&nbsp;            methodDes = &quot;(Ljava/lang/Object;J)Ljava/lang/Object;&quot;;</b>
+<b class="nc">&nbsp;            if (fieldClass.isEnum()) {</b>
+<b class="nc">&nbsp;                castToType = &quot;java/lang/Enum&quot;;</b>
+<b class="nc">&nbsp;            } else if (ObjectWriterProvider.isPrimitiveOrEnum(fieldClass)) {</b>
+<b class="nc">&nbsp;                castToType = ASMUtils.type(fieldClass);</b>
+<b class="nc">&nbsp;            } else if (fieldClass.isArray() &amp;&amp; ObjectWriterProvider.isPrimitiveOrEnum(fieldClass.getComponentType())) {</b>
+<b class="nc">&nbsp;                castToType = ASMUtils.type(fieldClass);</b>
+<b class="nc">&nbsp;            } else if (Map.class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;                castToType = &quot;java/util/Map&quot;;</b>
+<b class="nc">&nbsp;            } else if (List.class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;                castToType = &quot;java/util/List&quot;;</b>
+<b class="nc">&nbsp;            } else if (Collection.class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;                castToType = &quot;java/util/Collection&quot;;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        mw.visitFieldInsn(Opcodes.GETSTATIC, ObjectWriterCreatorASMUtils.TYPE_UNSAFE_UTILS, &quot;UNSAFE&quot;, &quot;Lsun/misc/Unsafe;&quot;);</b>
+<b class="nc">&nbsp;        mw.visitVarInsn(Opcodes.ALOAD, OBJECT);</b>
+<b class="nc">&nbsp;        mw.visitLdcInsn(</b>
+<b class="nc">&nbsp;                UnsafeUtils.objectFieldOffset(field));</b>
+<b class="nc">&nbsp;        mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, &quot;sun/misc/Unsafe&quot;, methodName, methodDes, false);</b>
+<b class="nc">&nbsp;        if (castToType != null) {</b>
+<b class="nc">&nbsp;            mw.visitTypeInsn(Opcodes.CHECKCAST, castToType);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    static class MethodWriterContext {</b>
+&nbsp;        final ObjectWriterProvider provider;
+&nbsp;        final Class objectClass;
+&nbsp;        final long objectFeatures;
+&nbsp;        final String classNameType;
+&nbsp;        final MethodWriter mw;
+<b class="nc">&nbsp;        final Map&lt;Object, Integer&gt; variants = new LinkedHashMap&lt;&gt;();</b>
+&nbsp;        final boolean jsonb;
+&nbsp;        int maxVariant;
+&nbsp;
+&nbsp;        public MethodWriterContext(
+&nbsp;                ObjectWriterProvider provider,
+&nbsp;                Class objectClass,
+&nbsp;                long objectFeatures,
+&nbsp;                String classNameType,
+&nbsp;                MethodWriter mw,
+&nbsp;                int maxVariant,
+&nbsp;                boolean jsonb
+<b class="nc">&nbsp;        ) {</b>
+<b class="nc">&nbsp;            this.provider = provider;</b>
+<b class="nc">&nbsp;            this.objectClass = objectClass;</b>
+<b class="nc">&nbsp;            this.objectFeatures = objectFeatures;</b>
+<b class="nc">&nbsp;            this.classNameType = classNameType;</b>
+<b class="nc">&nbsp;            this.mw = mw;</b>
+<b class="nc">&nbsp;            this.jsonb = jsonb;</b>
+<b class="nc">&nbsp;            this.maxVariant = maxVariant;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int var(Object key) {
+<b class="nc">&nbsp;            Integer var = variants.get(key);</b>
+<b class="nc">&nbsp;            if (var == null) {</b>
+<b class="nc">&nbsp;                var = maxVariant;</b>
+<b class="nc">&nbsp;                variants.put(key, var);</b>
+<b class="nc">&nbsp;                if (key == long.class || key == double.class) {</b>
+<b class="nc">&nbsp;                    maxVariant += 2;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    maxVariant += 1;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return var;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int var2(Object key) {
+<b class="nc">&nbsp;            Integer var = variants.get(key);</b>
+<b class="nc">&nbsp;            if (var == null) {</b>
+<b class="nc">&nbsp;                var = maxVariant;</b>
+<b class="nc">&nbsp;                variants.put(key, var);</b>
+<b class="nc">&nbsp;                maxVariant += 2;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return var;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        void genVariantsMethodBefore() {
+<b class="nc">&nbsp;            Label notDefault_ = new Label(), end_ = new Label();</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, JSON_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, TYPE_JSON_WRITER, &quot;getFeatures&quot;, &quot;()J&quot;, false);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LSTORE, var2(CONTEXT_FEATURES));</b>
+&nbsp;
+<b class="nc">&nbsp;            genIsEnabledAndAssign(NotWriteDefaultValue.mask, var(NOT_WRITE_DEFAULT_VALUE));</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ILOAD, var(NOT_WRITE_DEFAULT_VALUE));</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFEQ, notDefault_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.ICONST_0);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ISTORE, var(WRITE_NULLS));</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, end_);</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(notDefault_);</b>
+&nbsp;
+<b class="nc">&nbsp;            long features = WriteNulls.mask | NullAsDefaultValue.mask;</b>
+&nbsp;//            genIsEnabled(features);
+&nbsp;//            mw.visitVarInsn(Opcodes.ISTORE, var(WRITE_NULLS));
+<b class="nc">&nbsp;            genIsEnabledAndAssign(features, var(WRITE_NULLS));</b>
+&nbsp;
+<b class="nc">&nbsp;            mw.visitLabel(end_);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        void genIsEnabled(long features, Label elseLabel) {
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LLOAD, var2(CONTEXT_FEATURES));</b>
+<b class="nc">&nbsp;            mw.visitLdcInsn(features);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LAND);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LCONST_0);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFEQ, elseLabel);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        void genIsDisabled(long features, Label elseLabel) {
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LLOAD, var2(CONTEXT_FEATURES));</b>
+<b class="nc">&nbsp;            mw.visitLdcInsn(features);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LAND);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LCONST_0);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFNE, elseLabel);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        void genIsEnabled(long features, Label trueLabel, Label falseLabel) {
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LLOAD, var2(CONTEXT_FEATURES));</b>
+<b class="nc">&nbsp;            mw.visitLdcInsn(features);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LAND);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LCONST_0);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.IFEQ, falseLabel);</b>
+<b class="nc">&nbsp;            mw.visitJumpInsn(Opcodes.GOTO, trueLabel);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        void genIsEnabledAndAssign(long features, int var) {
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.LLOAD, var2(CONTEXT_FEATURES));</b>
+<b class="nc">&nbsp;            mw.visitLdcInsn(features);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LAND);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LCONST_0);</b>
+<b class="nc">&nbsp;            mw.visitInsn(Opcodes.LCMP);</b>
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ISTORE, var);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private void loadFieldType(int fieldIndex, Type fieldType) {
+<b class="nc">&nbsp;            if (fieldType instanceof Class &amp;&amp; fieldType.getTypeName().startsWith(&quot;java&quot;)) {</b>
+<b class="nc">&nbsp;                mw.visitLdcInsn((Class) fieldType);</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;            mw.visitVarInsn(Opcodes.ALOAD, THIS);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, classNameType, fieldWriter(fieldIndex), DESC_FIELD_WRITER);</b>
+<b class="nc">&nbsp;            mw.visitFieldInsn(Opcodes.GETFIELD, TYPE_FIELD_WRITER, &quot;fieldType&quot;, &quot;Ljava/lang/reflect/Type;&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:54</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,169 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Operation</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.oas.annotations</a>
+</div>
+
+<h1>Coverage Summary for Class: Operation (io.swagger.oas.annotations)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Operation</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/**
+&nbsp; * Copyright 2017 SmartBear Software
+&nbsp; * &lt;p&gt;
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; * &lt;p&gt;
+&nbsp; * http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; * &lt;p&gt;
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package io.swagger.oas.annotations;
+&nbsp;
+&nbsp;import io.swagger.oas.annotations.links.Link;
+&nbsp;import io.swagger.oas.annotations.parameters.RequestBody;
+&nbsp;import io.swagger.oas.annotations.responses.ApiResponse;
+&nbsp;import io.swagger.oas.annotations.servers.Server;
+&nbsp;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.lang.annotation.Inherited;
+&nbsp;import java.lang.annotation.Retention;
+&nbsp;import java.lang.annotation.RetentionPolicy;
+&nbsp;import java.lang.annotation.Target;
+&nbsp;
+&nbsp;/**
+&nbsp; * Operation Annotation
+&nbsp; *
+&nbsp; * TODO: longer description
+&nbsp; **/
+&nbsp;
+&nbsp;
+&nbsp;@Target({ ElementType.METHOD })
+&nbsp;@Retention(RetentionPolicy.RUNTIME)
+&nbsp;@Inherited
+&nbsp;public @interface Operation {
+&nbsp;  /**
+&nbsp;   * the HTTP method for this operation
+&nbsp;   **/
+&nbsp;  String method() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Tags can be used for logical grouping of operations by resources or any other qualifier.
+&nbsp;   **/
+&nbsp;  String[] tags() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Provides a brief description of this operation. Should be 120 characters or less for proper visibility in Swagger-UI.
+&nbsp;   **/
+&nbsp;  String summary() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * A verbose description of the operation.
+&nbsp;   **/
+&nbsp;  String description() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * 
+&nbsp;   **/
+&nbsp;  ExternalDocumentation externalDocs() default @ExternalDocumentation();
+&nbsp;
+&nbsp;  /**
+&nbsp;   * The operationId is used by third-party tools to uniquely identify this operation.
+&nbsp;   **/
+&nbsp;  String operationId() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * An optional array of parameters which will be added to any automatically detected parameters in the method itself
+&nbsp;   **/
+&nbsp;  Parameter[] parameters() default @Parameter();
+&nbsp;
+&nbsp;  /**
+&nbsp;   * 
+&nbsp;   **/
+&nbsp;  RequestBody requestBody() default @RequestBody();
+&nbsp;
+&nbsp;  /**
+&nbsp;   * 
+&nbsp;   **/
+&nbsp;  ApiResponse[] responses() default @ApiResponse();
+&nbsp;
+&nbsp;  /**
+&nbsp;   * 
+&nbsp;   **/
+&nbsp;  Link[] links() default @Link();
+&nbsp;
+&nbsp;  /**
+&nbsp;   * allows an operation to be marked as deprecated.  Alternatively use the @Deprecated annotation
+&nbsp;   **/
+&nbsp;  boolean deprecated() default false;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * 
+&nbsp;   **/
+&nbsp;  Server[] servers() default @Server();
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:28</div>
+</div>
+</body>
+</html>

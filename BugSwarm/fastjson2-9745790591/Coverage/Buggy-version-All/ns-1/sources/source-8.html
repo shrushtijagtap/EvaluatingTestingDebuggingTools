@@ -1,0 +1,274 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONReader</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONReader (com.alibaba.fastjson)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/144)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JSONReader$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/145)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.parser.Feature;
+&nbsp;
+&nbsp;import java.io.Closeable;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.Reader;
+&nbsp;import java.util.Locale;
+&nbsp;import java.util.TimeZone;
+&nbsp;
+&nbsp;public class JSONReader
+&nbsp;        implements Closeable {
+&nbsp;    private final Reader input;
+&nbsp;    private final com.alibaba.fastjson2.JSONReader raw;
+&nbsp;
+&nbsp;    public JSONReader(Reader reader) {
+&nbsp;        this(reader, new Feature[0]);
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONReader(Reader input, Feature... features) {
+&nbsp;        com.alibaba.fastjson2.JSONReader.Context context = JSON.createReadContext(JSON.DEFAULT_PARSER_FEATURE, features);
+&nbsp;        this.raw = com.alibaba.fastjson2.JSONReader.of(input, context);
+&nbsp;        this.input = input;
+&nbsp;        for (Feature feature : features) {
+&nbsp;            if (feature == Feature.SupportArrayToBean) {
+&nbsp;                context.config(com.alibaba.fastjson2.JSONReader.Feature.SupportArrayToBean);
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+&nbsp;    public void setLocale(Locale locale) {
+&nbsp;        raw.getContext().setLocale(locale);
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public void setTimzeZone(TimeZone timezone) {</b>
+<b class="nc">&nbsp;        raw.getContext().setTimeZone(timezone);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T readObject(Class&lt;T&gt; type) {
+&nbsp;        raw.nextIfMatch(&#39;:&#39;);
+<b class="nc">&nbsp;        try {</b>
+&nbsp;            return raw.read(type);
+&nbsp;        } catch (com.alibaba.fastjson2.JSONException ex) {
+<b class="nc">&nbsp;            throw new JSONException(ex.getMessage(), ex.getCause());</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object readObject() {
+<b class="nc">&nbsp;        raw.nextIfMatch(&#39;:&#39;);</b>
+&nbsp;        return raw.readAny();
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public void readObject(Object object) {</b>
+&nbsp;        raw.nextIfMatch(&#39;:&#39;);
+&nbsp;        raw.readObject(object);
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+&nbsp;    public Integer readInteger() {
+&nbsp;        raw.nextIfMatch(&#39;:&#39;);
+&nbsp;        return raw.readInt32();
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Long readLong() {
+&nbsp;        raw.nextIfMatch(&#39;:&#39;);
+<b class="nc">&nbsp;        return raw.readInt64();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String readString() {
+<b class="nc">&nbsp;        raw.nextIfMatch(&#39;:&#39;);</b>
+<b class="nc">&nbsp;        return raw.readString();</b>
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public boolean hasNext() {</b>
+&nbsp;        if (raw.isEnd()) {
+<b class="nc">&nbsp;            return false;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        char ch = raw.current();
+&nbsp;        return ch != &#39;]&#39; &amp;&amp; ch != &#39;}&#39;;
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void startArray() {
+&nbsp;        raw.nextIfMatch(&#39;:&#39;);
+<b class="nc">&nbsp;        if (!raw.nextIfMatch(&#39;[&#39;)) {</b>
+&nbsp;            throw new JSONException(&quot;not support operation&quot;);
+&nbsp;        }
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public void endArray() {</b>
+&nbsp;        if (!raw.nextIfMatch(&#39;]&#39;)) {
+&nbsp;            throw new JSONException(&quot;not support operation&quot;);
+&nbsp;        }
+<b class="nc">&nbsp;        raw.nextIfMatch(&#39;,&#39;);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+<b class="nc">&nbsp;    public void startObject() {</b>
+&nbsp;        raw.nextIfMatch(&#39;:&#39;);
+<b class="nc">&nbsp;        if (!raw.nextIfMatch(&#39;{&#39;)) {</b>
+&nbsp;            throw new JSONException(&quot;not support operation&quot;);
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void endObject() {
+<b class="nc">&nbsp;        if (!raw.nextIfMatch(&#39;}&#39;)) {</b>
+<b class="nc">&nbsp;            throw new JSONException(raw.info(&quot;not support operation&quot;));</b>
+&nbsp;        }
+&nbsp;        raw.nextIfMatch(&#39;,&#39;);
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public Locale getLocal() {</b>
+&nbsp;        return raw.getContext().getLocale();
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public TimeZone getTimeZone() {
+&nbsp;        return raw.getContext().getTimeZone();
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public void config(Feature feature, boolean state) {
+&nbsp;        com.alibaba.fastjson2.JSONReader.Feature rawFeature = null;
+<b class="nc">&nbsp;        switch (feature) {</b>
+&nbsp;            case SupportArrayToBean:
+<b class="nc">&nbsp;                rawFeature = com.alibaba.fastjson2.JSONReader.Feature.SupportArrayToBean;</b>
+&nbsp;                break;
+&nbsp;            case UseNativeJavaObject:
+&nbsp;                rawFeature = com.alibaba.fastjson2.JSONReader.Feature.UseNativeObject;
+&nbsp;                break;
+<b class="nc">&nbsp;            case SupportAutoType:</b>
+<b class="nc">&nbsp;                rawFeature = com.alibaba.fastjson2.JSONReader.Feature.SupportAutoType;</b>
+&nbsp;                break;
+<b class="nc">&nbsp;            default:</b>
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (rawFeature == null) {</b>
+<b class="nc">&nbsp;            return;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;        raw.getContext().config(rawFeature, state);
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    @Override
+<b class="nc">&nbsp;    public void close() throws IOException {</b>
+<b class="nc">&nbsp;        input.close();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:01</div>
+</div>
+</body>
+</html>

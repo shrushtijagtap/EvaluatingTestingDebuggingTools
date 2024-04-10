@@ -1,0 +1,160 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONPathPerf</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.jsonpath</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONPathPerf (com.alibaba.fastjson2.benchmark.jsonpath)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONPathPerf</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.jsonpath;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONPath;
+&nbsp;import com.jayway.jsonpath.JsonPath;
+&nbsp;import org.apache.commons.io.IOUtils;
+&nbsp;import org.openjdk.jmh.annotations.Benchmark;
+&nbsp;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.util.List;
+&nbsp;
+<b class="nc">&nbsp;public class JSONPathPerf {</b>
+&nbsp;    private static String str;
+&nbsp;
+&nbsp;    static {
+&nbsp;        try {
+<b class="nc">&nbsp;            InputStream is = JSONPathPerf.class.getClassLoader().getResourceAsStream(&quot;data/path_02.json&quot;);</b>
+<b class="nc">&nbsp;            str = IOUtils.toString(is, &quot;UTF-8&quot;);</b>
+<b class="nc">&nbsp;        } catch (Exception ex) {</b>
+<b class="nc">&nbsp;            ex.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //    @Test
+&nbsp;    public void fastjsonReaderAuthors_perf() throws Exception {
+<b class="nc">&nbsp;        for (int i = 0; i &lt; 10; ++i) {</b>
+<b class="nc">&nbsp;            long start = System.currentTimeMillis();</b>
+<b class="nc">&nbsp;            for (int j = 0; j &lt; 1000 * 1000; ++j) {</b>
+<b class="nc">&nbsp;                fastjsonReaderAuthors();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            long millis = System.currentTimeMillis() - start;</b>
+<b class="nc">&nbsp;            System.out.println(millis); // 447 438 361</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public Object fastjsonReaderAuthors() {
+<b class="nc">&nbsp;        return JSONPath.extract(str, &quot;$.store.book[*].author&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public List&lt;String&gt; jaywayReadAuthors() {
+<b class="nc">&nbsp;        return JsonPath.read(str, &quot;$.store.book[*].author&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void main(String[] args) throws Exception {
+<b class="nc">&nbsp;        new JSONPathPerf().fastjsonReaderAuthors_perf();</b>
+&nbsp;//
+&nbsp;//        Options options = new OptionsBuilder()
+&nbsp;//                .include(JSONPathPerf.class.getName())
+&nbsp;//                .mode(Mode.Throughput)
+&nbsp;//                .timeUnit(TimeUnit.MILLISECONDS)
+&nbsp;//                .forks(1)
+&nbsp;//                .build();
+&nbsp;//        new Runner(options).run();
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:17</div>
+</div>
+</body>
+</html>
