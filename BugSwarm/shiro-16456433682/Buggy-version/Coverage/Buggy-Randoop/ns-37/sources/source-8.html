@@ -1,0 +1,278 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Session</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.session</a>
+</div>
+
+<h1>Coverage Summary for Class: Session (org.apache.shiro.session)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Session</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.session;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;/**
+&nbsp; * A {@code Session} is a stateful data context associated with a single Subject (user, daemon process,
+&nbsp; * etc) who interacts with a software system over a period of time.
+&nbsp; * &lt;p/&gt;
+&nbsp; * A {@code Session} is intended to be managed by the business tier and accessible via other
+&nbsp; * tiers without being tied to any given client technology.  This is a &lt;em&gt;great&lt;/em&gt; benefit to Java
+&nbsp; * systems, since until now, the only viable session mechanisms were the
+&nbsp; * {@code javax.servlet.http.HttpSession} or Stateful Session EJB&#39;s, which many times
+&nbsp; * unnecessarily coupled applications to web or ejb technologies.
+&nbsp; *
+&nbsp; * @since 0.1
+&nbsp; */
+&nbsp;public interface Session {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the unique identifier assigned by the system upon session creation.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * All return values from this method are expected to have proper {@code toString()},
+&nbsp;     * {@code equals()}, and {@code hashCode()} implementations. Good candidates for such
+&nbsp;     * an identifier are {@link java.util.UUID UUID}s, {@link java.lang.Integer Integer}s, and
+&nbsp;     * {@link java.lang.String String}s.
+&nbsp;     *
+&nbsp;     * @return The unique identifier assigned to the session upon creation.
+&nbsp;     */
+&nbsp;    Serializable getId();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the time the session was started; that is, the time the system created the instance.
+&nbsp;     *
+&nbsp;     * @return The time the system created the session.
+&nbsp;     */
+&nbsp;    Date getStartTimestamp();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the last time the application received a request or method invocation from the user associated
+&nbsp;     * with this session.  Application calls to this method do not affect this access time.
+&nbsp;     *
+&nbsp;     * @return The time the user last interacted with the system.
+&nbsp;     * @see #touch()
+&nbsp;     */
+&nbsp;    Date getLastAccessTime();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the time in milliseconds that the session session may remain idle before expiring.
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;A negative return value means the session will never expire.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;A non-negative return value (0 or greater) means the session expiration will occur if idle for that
+&nbsp;     * length of time.&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     * &lt;b&gt;*Note:&lt;/b&gt; if you are used to the {@code HttpSession}&#39;s {@code getMaxInactiveInterval()} method, the scale on
+&nbsp;     * this method is different: Shiro Sessions use millisecond values for timeout whereas
+&nbsp;     * {@code HttpSession.getMaxInactiveInterval} uses seconds.  Always use millisecond values with Shiro sessions.
+&nbsp;     *
+&nbsp;     * @return the time in milliseconds the session may remain idle before expiring.
+&nbsp;     * @throws InvalidSessionException if the session has been stopped or expired prior to calling this method.
+&nbsp;     * @since 0.2
+&nbsp;     */
+&nbsp;    long getTimeout() throws InvalidSessionException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the time in milliseconds that the session may remain idle before expiring.
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;A negative value means the session will never expire.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;A non-negative value (0 or greater) means the session expiration will occur if idle for that
+&nbsp;     * length of time.&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;*Note:&lt;/b&gt; if you are used to the {@code HttpSession}&#39;s {@code getMaxInactiveInterval()} method, the scale on
+&nbsp;     * this method is different: Shiro Sessions use millisecond values for timeout whereas
+&nbsp;     * {@code HttpSession.getMaxInactiveInterval} uses seconds.  Always use millisecond values with Shiro sessions.
+&nbsp;     *
+&nbsp;     * @param maxIdleTimeInMillis the time in milliseconds that the session may remain idle before expiring.
+&nbsp;     * @throws InvalidSessionException if the session has been stopped or expired prior to calling this method.
+&nbsp;     * @since 0.2
+&nbsp;     */
+&nbsp;    void setTimeout(long maxIdleTimeInMillis) throws InvalidSessionException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the host name or IP string of the host that originated this session, or {@code null}
+&nbsp;     * if the host is unknown.
+&nbsp;     *
+&nbsp;     * @return the host name or IP string of the host that originated this session, or {@code null}
+&nbsp;     *         if the host address is unknown.
+&nbsp;     */
+&nbsp;    String getHost();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Explicitly updates the {@link #getLastAccessTime() lastAccessTime} of this session to the current time when
+&nbsp;     * this method is invoked.  This method can be used to ensure a session does not time out.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Most programmers won&#39;t use this method directly and will instead rely on the last access time to be updated
+&nbsp;     * automatically as a result of an incoming web request or remote procedure call/method invocation.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * However, this method is particularly useful when supporting rich-client applications such as
+&nbsp;     * Java Web Start app, Java or Flash applets, etc.  Although rare, it is possible in a rich-client
+&nbsp;     * environment that a user continuously interacts with the client-side application without a
+&nbsp;     * server-side method call ever being invoked.  If this happens over a long enough period of
+&nbsp;     * time, the user&#39;s server-side session could time-out.  Again, such cases are rare since most
+&nbsp;     * rich-clients frequently require server-side method invocations.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * In this example though, the user&#39;s session might still be considered valid because
+&nbsp;     * the user is actively &amp;quot;using&amp;quot; the application, just not communicating with the
+&nbsp;     * server. But because no server-side method calls are invoked, there is no way for the server
+&nbsp;     * to know if the user is sitting idle or not, so it must assume so to maintain session
+&nbsp;     * integrity.  This {@code touch()} method could be invoked by the rich-client application code during those
+&nbsp;     * times to ensure that the next time a server-side method is invoked, the invocation will not
+&nbsp;     * throw an {@link ExpiredSessionException ExpiredSessionException}.  In short terms, it could be used periodically
+&nbsp;     * to ensure a session does not time out.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * How often this rich-client &amp;quot;maintenance&amp;quot; might occur is entirely dependent upon
+&nbsp;     * the application and would be based on variables such as session timeout configuration,
+&nbsp;     * usage characteristics of the client application, network utilization and application server
+&nbsp;     * performance.
+&nbsp;     *
+&nbsp;     * @throws InvalidSessionException if this session has stopped or expired prior to calling this method.
+&nbsp;     */
+&nbsp;    void touch() throws InvalidSessionException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Explicitly stops (invalidates) this session and releases all associated resources.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If this session has already been authenticated (i.e. the {@code Subject} that
+&nbsp;     * owns this session has logged-in), calling this method explicitly might have undesired side effects:
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * It is common for a {@code Subject} implementation to retain authentication state in the
+&nbsp;     * {@code Session}.  If the session
+&nbsp;     * is explicitly stopped by application code by calling this method directly, it could clear out any
+&nbsp;     * authentication state that might exist, thereby effectively &amp;quot;unauthenticating&amp;quot; the {@code Subject}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * As such, you might consider {@link org.apache.shiro.subject.Subject#logout logging-out} the &#39;owning&#39;
+&nbsp;     * {@code Subject} instead of manually calling this method, as a log out is expected to stop the
+&nbsp;     * corresponding session automatically, and also allows framework code to execute additional cleanup logic.
+&nbsp;     *
+&nbsp;     * @throws InvalidSessionException if this session has stopped or expired prior to calling this method.
+&nbsp;     */
+&nbsp;    void stop() throws InvalidSessionException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the keys of all the attributes stored under this session.  If there are no
+&nbsp;     * attributes, this returns an empty collection.
+&nbsp;     *
+&nbsp;     * @return the keys of all attributes stored under this session, or an empty collection if
+&nbsp;     *         there are no session attributes.
+&nbsp;     * @throws InvalidSessionException if this session has stopped or expired prior to calling this method.
+&nbsp;     * @since 0.2
+&nbsp;     */
+&nbsp;    Collection&lt;Object&gt; getAttributeKeys() throws InvalidSessionException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the object bound to this session identified by the specified key.  If there is no
+&nbsp;     * object bound under the key, {@code null} is returned.
+&nbsp;     *
+&nbsp;     * @param key the unique name of the object bound to this session
+&nbsp;     * @return the object bound under the specified {@code key} name or {@code null} if there is
+&nbsp;     *         no object bound under that name.
+&nbsp;     * @throws InvalidSessionException if this session has stopped or expired prior to calling
+&nbsp;     *                                 this method.
+&nbsp;     */
+&nbsp;    Object getAttribute(Object key) throws InvalidSessionException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Binds the specified {@code value} to this session, uniquely identified by the specified
+&nbsp;     * {@code key} name.  If there is already an object bound under the {@code key} name, that
+&nbsp;     * existing object will be replaced by the new {@code value}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If the {@code value} parameter is null, it has the same effect as if
+&nbsp;     * {@link #removeAttribute(Object) removeAttribute} was called.
+&nbsp;     *
+&nbsp;     * @param key   the name under which the {@code value} object will be bound in this session
+&nbsp;     * @param value the object to bind in this session.
+&nbsp;     * @throws InvalidSessionException if this session has stopped or expired prior to calling
+&nbsp;     *                                 this method.
+&nbsp;     */
+&nbsp;    void setAttribute(Object key, Object value) throws InvalidSessionException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes (unbinds) the object bound to this session under the specified {@code key} name.
+&nbsp;     *
+&nbsp;     * @param key the name uniquely identifying the object to remove
+&nbsp;     * @return the object removed or {@code null} if there was no object bound under the name
+&nbsp;     *         {@code key}.
+&nbsp;     * @throws InvalidSessionException if this session has stopped or expired prior to calling
+&nbsp;     *                                 this method.
+&nbsp;     */
+&nbsp;    Object removeAttribute(Object key) throws InvalidSessionException;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

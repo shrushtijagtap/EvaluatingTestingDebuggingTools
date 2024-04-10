@@ -1,0 +1,152 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ThreadState</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.util</a>
+</div>
+
+<h1>Coverage Summary for Class: ThreadState (org.apache.shiro.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ThreadState</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.util;
+&nbsp;
+&nbsp;/**
+&nbsp; * A {@code ThreadState} instance manages any state that might need to be bound and/or restored during a thread&#39;s
+&nbsp; * execution.
+&nbsp; * &lt;h3&gt;Usage&lt;/h3&gt;
+&nbsp; * Calling {@link #bind bind()} will place state on the currently executing thread to be accessed later during
+&nbsp; * the thread&#39;s execution.
+&nbsp; * &lt;h4&gt;WARNING&lt;/h4&gt;
+&nbsp; * After the thread is finished executing, or if an exception occurs, any previous state &lt;b&gt;MUST&lt;/b&gt; be
+&nbsp; * {@link #restore restored} to guarantee all threads stay clean in any thread-pooled environment.  This should always
+&nbsp; * be done in a {@code try/finally} block:
+&nbsp; * &lt;pre&gt;
+&nbsp; * ThreadState state = //acquire or instantiate as necessary
+&nbsp; * try {
+&nbsp; *     state.bind();
+&nbsp; *     doSomething(); //execute any logic downstream logic that might need to access the state
+&nbsp; * } &lt;b&gt;finally {
+&nbsp; *     state.restore();
+&nbsp; * }&lt;/b&gt;
+&nbsp; * &lt;/pre&gt;
+&nbsp; *
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public interface ThreadState {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Binds any state that should be made accessible during a thread&#39;s execution.  This should typically always
+&nbsp;     * be called in a {@code try/finally} block paired with the {@link #restore} call to guarantee that the thread
+&nbsp;     * is cleanly restored back to its original state.  For example:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * ThreadState state = //acquire or instantiate as necessary
+&nbsp;     * &lt;b&gt;try {
+&nbsp;     *     state.bind();
+&nbsp;     *     doSomething(); //execute any logic downstream logic that might need to access the state
+&nbsp;     * } &lt;/b&gt; finally {
+&nbsp;     *     state.restore();
+&nbsp;     * }
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     */
+&nbsp;    void bind();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restores a thread to its state before bind {@link #bind bind} was invoked.  This should typically always be
+&nbsp;     * called in a {@code finally} block to guarantee that the thread is cleanly restored back to its original state
+&nbsp;     * before {@link #bind bind}&#39;s bind was called.  For example:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * ThreadState state = //acquire or instantiate as necessary
+&nbsp;     * try {
+&nbsp;     *     state.bind();
+&nbsp;     *     doSomething(); //execute any logic downstream logic that might need to access the state
+&nbsp;     * } &lt;b&gt;finally {
+&nbsp;     *     state.restore();
+&nbsp;     * }&lt;/b&gt;
+&nbsp;     * &lt;/pre&gt;
+&nbsp;     */
+&nbsp;    void restore();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Completely clears/removes the {@code ThreadContext} state.  Typically this method should
+&nbsp;     * only be called in special cases - it is more &#39;correct&#39; to {@link #restore restore} a thread to its previous
+&nbsp;     * state than to clear it entirely.
+&nbsp;     */
+&nbsp;    void clear();
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

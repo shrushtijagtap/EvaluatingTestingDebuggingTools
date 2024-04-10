@@ -1,0 +1,183 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AuthenticationStrategy</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.authc.pam</a>
+</div>
+
+<h1>Coverage Summary for Class: AuthenticationStrategy (org.apache.shiro.authc.pam)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">AuthenticationStrategy</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.authc.pam;
+&nbsp;
+&nbsp;import org.apache.shiro.authc.AuthenticationException;
+&nbsp;import org.apache.shiro.authc.AuthenticationInfo;
+&nbsp;import org.apache.shiro.authc.AuthenticationToken;
+&nbsp;import org.apache.shiro.realm.Realm;
+&nbsp;
+&nbsp;import java.util.Collection;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * A {@code AuthenticationStrategy} implementation assists the {@link ModularRealmAuthenticator} during the
+&nbsp; * log-in process in a pluggable realm (PAM) environment.
+&nbsp; *
+&nbsp; * &lt;p&gt;The {@code ModularRealmAuthenticator} will consult implementations of this interface on what to do during each
+&nbsp; * interaction with the configured Realms.  This allows a pluggable strategy of whether or not an authentication
+&nbsp; * attempt must be successful for all realms, only 1 or more realms, no realms, etc.
+&nbsp; *
+&nbsp; * @see AllSuccessfulStrategy
+&nbsp; * @see AtLeastOneSuccessfulStrategy
+&nbsp; * @see FirstSuccessfulStrategy
+&nbsp; * @since 0.2
+&nbsp; */
+&nbsp;public interface AuthenticationStrategy {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method invoked by the ModularAuthenticator signifying that the authentication process is about to begin for the
+&nbsp;     * specified {@code token} - called before any {@code Realm} is actually invoked.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;The {@code AuthenticationInfo} object returned from this method is essentially an empty place holder for
+&nbsp;     * aggregating account data across multiple realms.  It should be populated by the strategy implementation over the
+&nbsp;     * course of authentication attempts across the multiple realms.  It will be passed into the
+&nbsp;     * {@link #beforeAttempt} calls, allowing inspection of the aggregated account data up to that point in the
+&nbsp;     * multi-realm authentication, allowing any logic to be executed accordingly.
+&nbsp;     *
+&nbsp;     * @param realms the Realms that will be consulted during the authentication process for the specified token.
+&nbsp;     * @param token  the Principal/Credential representation to be used during authentication for a corresponding subject.
+&nbsp;     * @return an empty AuthenticationInfo object that will populated with data from multiple realms.
+&nbsp;     * @throws AuthenticationException if the strategy implementation does not wish the Authentication attempt to execute.
+&nbsp;     */
+&nbsp;    AuthenticationInfo beforeAllAttempts(Collection&lt;? extends Realm&gt; realms, AuthenticationToken token) throws AuthenticationException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method invoked by the ModularAuthenticator just prior to the realm being consulted for account data,
+&nbsp;     * allowing pre-authentication-attempt logic for that realm only.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This method returns an {@code AuthenticationInfo} object that will be used for further interaction with realms.  Most
+&nbsp;     * implementations will merely return the {@code aggregate} method argument if they don&#39;t have a need to
+&nbsp;     * manipulate it.
+&nbsp;     *
+&nbsp;     * @param realm     the realm that will be consulted for {@code AuthenticationInfo} for the specified {@code token}.
+&nbsp;     * @param token     the {@code AuthenticationToken} submitted for the subject attempting system log-in.
+&nbsp;     * @param aggregate the aggregated AuthenticationInfo object being used across the multi-realm authentication attempt
+&nbsp;     * @return the AuthenticationInfo object that will be presented to further realms in the authentication process - returning
+&nbsp;     *         the {@code aggregate} method argument is the normal case if no special action needs to be taken.
+&nbsp;     * @throws org.apache.shiro.authc.AuthenticationException
+&nbsp;     *          an exception thrown by the Strategy implementation if it wishes the login
+&nbsp;     *          process for the associated subject (user) to stop immediately.
+&nbsp;     */
+&nbsp;    AuthenticationInfo beforeAttempt(Realm realm, AuthenticationToken token, AuthenticationInfo aggregate) throws AuthenticationException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method invoked by the ModularAuthenticator just after the given realm has been consulted for authentication,
+&nbsp;     * allowing post-authentication-attempt logic for that realm only.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This method returns an {@code AuthenticationInfo} object that will be used for further interaction with realms.  Most
+&nbsp;     * implementations will merge the {@code singleRealmInfo} into the {@code aggregateInfo} and
+&nbsp;     * just return the {@code aggregateInfo} for continued use throughout the authentication process.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param realm           the realm that was just consulted for {@code AuthenticationInfo} for the given {@code token}.
+&nbsp;     * @param token           the {@code AuthenticationToken} submitted for the subject attempting system log-in.
+&nbsp;     * @param singleRealmInfo the info returned from a single realm.
+&nbsp;     * @param aggregateInfo   the aggregate info representing all realms in a multi-realm environment.
+&nbsp;     * @param t               the Throwable thrown by the Realm during the attempt, or {@code null} if the method returned normally.
+&nbsp;     * @return the AuthenticationInfo object that will be presented to further realms in the authentication process - returning
+&nbsp;     *         the {@code aggregateAccount} method argument is the normal case if no special action needs to be taken.
+&nbsp;     * @throws AuthenticationException an exception thrown by the Strategy implementation if it wishes the login process
+&nbsp;     *                                 for the associated subject (user) to stop immediately.
+&nbsp;     */
+&nbsp;    AuthenticationInfo afterAttempt(Realm realm, AuthenticationToken token, AuthenticationInfo singleRealmInfo, AuthenticationInfo aggregateInfo, Throwable t)
+&nbsp;            throws AuthenticationException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method invoked by the ModularAuthenticator signifying that all of its configured Realms have been consulted
+&nbsp;     * for account data, allowing post-processing after all realms have completed.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Returns the final AuthenticationInfo object that will be returned from the Authenticator to the authenticate() caller.
+&nbsp;     * This is most likely the aggregate AuthenticationInfo object that has been populated by many realms, but the actual return value is
+&nbsp;     * always up to the implementation.
+&nbsp;     *
+&nbsp;     * @param token     the {@code AuthenticationToken} submitted for the subject attempting system log-in.
+&nbsp;     * @param aggregate the aggregate {@code AuthenticationInfo} instance populated by all realms during the log-in attempt.
+&nbsp;     * @return the final {@code AuthenticationInfo} object to return to the Authenticator.authenticate() caller.
+&nbsp;     * @throws AuthenticationException if the Strategy implementation wishes to fail the authentication attempt.
+&nbsp;     */
+&nbsp;    AuthenticationInfo afterAllAttempts(AuthenticationToken token, AuthenticationInfo aggregate) throws AuthenticationException;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

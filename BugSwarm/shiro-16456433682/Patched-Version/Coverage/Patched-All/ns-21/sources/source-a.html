@@ -1,0 +1,657 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SimpleSession</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.session.mgt</a>
+</div>
+
+<h1>Coverage Summary for Class: SimpleSession (org.apache.shiro.session.mgt)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SimpleSession</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    53.8%
+  </span>
+  <span class="absValue">
+    (21/39)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    10.6%
+  </span>
+  <span class="absValue">
+    (14/132)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    36.1%
+  </span>
+  <span class="absValue">
+    (61/169)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.session.mgt;
+&nbsp;
+&nbsp;import org.apache.shiro.session.ExpiredSessionException;
+&nbsp;import org.apache.shiro.session.InvalidSessionException;
+&nbsp;import org.apache.shiro.session.StoppedSessionException;
+&nbsp;import org.apache.shiro.util.CollectionUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.ObjectInputStream;
+&nbsp;import java.io.ObjectOutputStream;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.text.DateFormat;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Simple {@link org.apache.shiro.session.Session} JavaBeans-compatible POJO implementation, intended to be used on the
+&nbsp; * business/server tier.
+&nbsp; *
+&nbsp; * @since 0.1
+&nbsp; */
+&nbsp;public class SimpleSession implements ValidatingSession, Serializable {
+&nbsp;
+&nbsp;    // Serialization reminder:
+&nbsp;    // You _MUST_ change this number if you introduce a change to this class
+&nbsp;    // that is NOT serialization backwards compatible.  Serialization-compatible
+&nbsp;    // changes do not require a change to this number.  If you need to generate
+&nbsp;    // a new number in this case, use the JDK&#39;s &#39;serialver&#39; program to generate it.
+&nbsp;    private static final long serialVersionUID = -7125642695178165650L;
+&nbsp;
+&nbsp;    //TODO - complete JavaDoc
+<b class="fc">&nbsp;    private transient static final Logger log = LoggerFactory.getLogger(SimpleSession.class);</b>
+&nbsp;
+&nbsp;    protected static final long MILLIS_PER_SECOND = 1000;
+&nbsp;    protected static final long MILLIS_PER_MINUTE = 60 * MILLIS_PER_SECOND;
+&nbsp;    protected static final long MILLIS_PER_HOUR = 60 * MILLIS_PER_MINUTE;
+&nbsp;
+&nbsp;    //serialization bitmask fields. DO NOT CHANGE THE ORDER THEY ARE DECLARED!
+<b class="fc">&nbsp;    static int bitIndexCounter = 0;</b>
+<b class="fc">&nbsp;    private static final int ID_BIT_MASK = 1 &lt;&lt; bitIndexCounter++;</b>
+<b class="fc">&nbsp;    private static final int START_TIMESTAMP_BIT_MASK = 1 &lt;&lt; bitIndexCounter++;</b>
+<b class="fc">&nbsp;    private static final int STOP_TIMESTAMP_BIT_MASK = 1 &lt;&lt; bitIndexCounter++;</b>
+<b class="fc">&nbsp;    private static final int LAST_ACCESS_TIME_BIT_MASK = 1 &lt;&lt; bitIndexCounter++;</b>
+<b class="fc">&nbsp;    private static final int TIMEOUT_BIT_MASK = 1 &lt;&lt; bitIndexCounter++;</b>
+<b class="fc">&nbsp;    private static final int EXPIRED_BIT_MASK = 1 &lt;&lt; bitIndexCounter++;</b>
+<b class="fc">&nbsp;    private static final int HOST_BIT_MASK = 1 &lt;&lt; bitIndexCounter++;</b>
+<b class="fc">&nbsp;    private static final int ATTRIBUTES_BIT_MASK = 1 &lt;&lt; bitIndexCounter++;</b>
+&nbsp;
+&nbsp;    // ==============================================================
+&nbsp;    // NOTICE:
+&nbsp;    //
+&nbsp;    // The following fields are marked as transient to avoid double-serialization.
+&nbsp;    // They are in fact serialized (even though &#39;transient&#39; usually indicates otherwise),
+&nbsp;    // but they are serialized explicitly via the writeObject and readObject implementations
+&nbsp;    // in this class.
+&nbsp;    //
+&nbsp;    // If we didn&#39;t declare them as transient, the out.defaultWriteObject(); call in writeObject would
+&nbsp;    // serialize all non-transient fields as well, effectively doubly serializing the fields (also
+&nbsp;    // doubling the serialization size).
+&nbsp;    //
+&nbsp;    // This finding, with discussion, was covered here:
+&nbsp;    //
+&nbsp;    // http://mail-archives.apache.org/mod_mbox/shiro-user/201109.mbox/%3C4E81BCBD.8060909@metaphysis.net%3E
+&nbsp;    //
+&nbsp;    // ==============================================================
+&nbsp;    private transient Serializable id;
+&nbsp;    private transient Date startTimestamp;
+&nbsp;    private transient Date stopTimestamp;
+&nbsp;    private transient Date lastAccessTime;
+&nbsp;    private transient long timeout;
+&nbsp;    private transient boolean expired;
+&nbsp;    private transient String host;
+&nbsp;    private transient Map&lt;Object, Object&gt; attributes;
+&nbsp;
+<b class="fc">&nbsp;    public SimpleSession() {</b>
+<b class="fc">&nbsp;        this.timeout = DefaultSessionManager.DEFAULT_GLOBAL_SESSION_TIMEOUT; //TODO - remove concrete reference to DefaultSessionManager</b>
+<b class="fc">&nbsp;        this.startTimestamp = new Date();</b>
+<b class="fc">&nbsp;        this.lastAccessTime = this.startTimestamp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SimpleSession(String host) {
+<b class="nc">&nbsp;        this();</b>
+<b class="nc">&nbsp;        this.host = host;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Serializable getId() {
+<b class="fc">&nbsp;        return this.id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setId(Serializable id) {
+<b class="fc">&nbsp;        this.id = id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Date getStartTimestamp() {
+<b class="nc">&nbsp;        return startTimestamp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setStartTimestamp(Date startTimestamp) {
+<b class="nc">&nbsp;        this.startTimestamp = startTimestamp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the time the session was stopped, or &lt;tt&gt;null&lt;/tt&gt; if the session is still active.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * A session may become stopped under a number of conditions:
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;If the user logs out of the system, their current session is terminated (released).&lt;/li&gt;
+&nbsp;     * &lt;li&gt;If the session expires&lt;/li&gt;
+&nbsp;     * &lt;li&gt;The application explicitly calls {@link #stop()}&lt;/li&gt;
+&nbsp;     * &lt;li&gt;If there is an internal system error and the session state can no longer accurately
+&nbsp;     * reflect the user&#39;s behavior, such in the case of a system crash&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Once stopped, a session may no longer be used.  It is locked from all further activity.
+&nbsp;     *
+&nbsp;     * @return The time the session was stopped, or &lt;tt&gt;null&lt;/tt&gt; if the session is still
+&nbsp;     *         active.
+&nbsp;     */
+&nbsp;    public Date getStopTimestamp() {
+<b class="fc">&nbsp;        return stopTimestamp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setStopTimestamp(Date stopTimestamp) {
+<b class="nc">&nbsp;        this.stopTimestamp = stopTimestamp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Date getLastAccessTime() {
+<b class="fc">&nbsp;        return lastAccessTime;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setLastAccessTime(Date lastAccessTime) {
+<b class="nc">&nbsp;        this.lastAccessTime = lastAccessTime;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if this session has expired, false otherwise.  If the session has
+&nbsp;     * expired, no further user interaction with the system may be done under this session.
+&nbsp;     *
+&nbsp;     * @return true if this session has expired, false otherwise.
+&nbsp;     */
+&nbsp;    public boolean isExpired() {
+<b class="fc">&nbsp;        return expired;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setExpired(boolean expired) {
+<b class="fc">&nbsp;        this.expired = expired;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getTimeout() {
+<b class="fc">&nbsp;        return timeout;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setTimeout(long timeout) {
+<b class="fc">&nbsp;        this.timeout = timeout;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getHost() {
+<b class="fc">&nbsp;        return host;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setHost(String host) {
+<b class="nc">&nbsp;        this.host = host;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;Object, Object&gt; getAttributes() {
+<b class="fc">&nbsp;        return attributes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAttributes(Map&lt;Object, Object&gt; attributes) {
+<b class="fc">&nbsp;        this.attributes = attributes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void touch() {
+<b class="nc">&nbsp;        this.lastAccessTime = new Date();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void stop() {
+<b class="pc">&nbsp;        if (this.stopTimestamp == null) {</b>
+<b class="fc">&nbsp;            this.stopTimestamp = new Date();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean isStopped() {
+<b class="pc">&nbsp;        return getStopTimestamp() != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void expire() {
+<b class="fc">&nbsp;        stop();</b>
+<b class="fc">&nbsp;        this.expired = true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 0.9
+&nbsp;     */
+&nbsp;    public boolean isValid() {
+<b class="nc">&nbsp;        return !isStopped() &amp;&amp; !isExpired();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Determines if this session is expired.
+&nbsp;     *
+&nbsp;     * @return true if the specified session has expired, false otherwise.
+&nbsp;     */
+&nbsp;    protected boolean isTimedOut() {
+&nbsp;
+<b class="pc">&nbsp;        if (isExpired()) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        long timeout = getTimeout();</b>
+&nbsp;
+<b class="pc">&nbsp;        if (timeout &gt;= 0l) {</b>
+&nbsp;
+<b class="fc">&nbsp;            Date lastAccessTime = getLastAccessTime();</b>
+&nbsp;
+<b class="pc">&nbsp;            if (lastAccessTime == null) {</b>
+<b class="nc">&nbsp;                String msg = &quot;session.lastAccessTime for session with id [&quot; +</b>
+<b class="nc">&nbsp;                        getId() + &quot;] is null.  This value must be set at &quot; +</b>
+&nbsp;                        &quot;least once, preferably at least upon instantiation.  Please check the &quot; +
+<b class="nc">&nbsp;                        getClass().getName() + &quot; implementation and ensure &quot; +</b>
+&nbsp;                        &quot;this value will be set (perhaps in the constructor?)&quot;;
+<b class="nc">&nbsp;                throw new IllegalStateException(msg);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // Calculate at what time a session would have been last accessed
+&nbsp;            // for it to be expired at this point.  In other words, subtract
+&nbsp;            // from the current time the amount of time that a session can
+&nbsp;            // be inactive before expiring.  If the session was last accessed
+&nbsp;            // before this time, it is expired.
+<b class="fc">&nbsp;            long expireTimeMillis = System.currentTimeMillis() - timeout;</b>
+<b class="fc">&nbsp;            Date expireTime = new Date(expireTimeMillis);</b>
+<b class="fc">&nbsp;            return lastAccessTime.before(expireTime);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;                log.trace(&quot;No timeout for session with id [&quot; + getId() +</b>
+&nbsp;                        &quot;].  Session is not considered expired.&quot;);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void validate() throws InvalidSessionException {
+&nbsp;        //check for stopped:
+<b class="pc">&nbsp;        if (isStopped()) {</b>
+&nbsp;            //timestamp is set, so the session is considered stopped:
+<b class="nc">&nbsp;            String msg = &quot;Session with id [&quot; + getId() + &quot;] has been &quot; +</b>
+&nbsp;                    &quot;explicitly stopped.  No further interaction under this session is &quot; +
+&nbsp;                    &quot;allowed.&quot;;
+<b class="nc">&nbsp;            throw new StoppedSessionException(msg);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //check for expiration
+<b class="fc">&nbsp;        if (isTimedOut()) {</b>
+<b class="fc">&nbsp;            expire();</b>
+&nbsp;
+&nbsp;            //throw an exception explaining details of why it expired:
+<b class="fc">&nbsp;            Date lastAccessTime = getLastAccessTime();</b>
+<b class="fc">&nbsp;            long timeout = getTimeout();</b>
+&nbsp;
+<b class="fc">&nbsp;            Serializable sessionId = getId();</b>
+&nbsp;
+<b class="fc">&nbsp;            DateFormat df = DateFormat.getInstance();</b>
+<b class="fc">&nbsp;            String msg = &quot;Session with id [&quot; + sessionId + &quot;] has expired. &quot; +</b>
+<b class="fc">&nbsp;                    &quot;Last access time: &quot; + df.format(lastAccessTime) +</b>
+<b class="fc">&nbsp;                    &quot;.  Current time: &quot; + df.format(new Date()) +</b>
+&nbsp;                    &quot;.  Session timeout is set to &quot; + timeout / MILLIS_PER_SECOND + &quot; seconds (&quot; +
+&nbsp;                    timeout / MILLIS_PER_MINUTE + &quot; minutes)&quot;;
+<b class="pc">&nbsp;            if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;                log.trace(msg);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            throw new ExpiredSessionException(msg);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private Map&lt;Object, Object&gt; getAttributesLazy() {
+<b class="fc">&nbsp;        Map&lt;Object, Object&gt; attributes = getAttributes();</b>
+<b class="fc">&nbsp;        if (attributes == null) {</b>
+<b class="fc">&nbsp;            attributes = new HashMap&lt;Object, Object&gt;();</b>
+<b class="fc">&nbsp;            setAttributes(attributes);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return attributes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Object&gt; getAttributeKeys() throws InvalidSessionException {
+<b class="nc">&nbsp;        Map&lt;Object, Object&gt; attributes = getAttributes();</b>
+<b class="nc">&nbsp;        if (attributes == null) {</b>
+<b class="nc">&nbsp;            return Collections.emptySet();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return attributes.keySet();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object getAttribute(Object key) {
+<b class="fc">&nbsp;        Map&lt;Object, Object&gt; attributes = getAttributes();</b>
+<b class="fc">&nbsp;        if (attributes == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return attributes.get(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAttribute(Object key, Object value) {
+<b class="pc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            removeAttribute(key);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            getAttributesLazy().put(key, value);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object removeAttribute(Object key) {
+<b class="nc">&nbsp;        Map&lt;Object, Object&gt; attributes = getAttributes();</b>
+<b class="nc">&nbsp;        if (attributes == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return attributes.remove(key);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if the specified argument is an {@code instanceof} {@code SimpleSession} and both
+&nbsp;     * {@link #getId() id}s are equal.  If the argument is a {@code SimpleSession} and either &#39;this&#39; or the argument
+&nbsp;     * does not yet have an ID assigned, the value of {@link #onEquals(SimpleSession) onEquals} is returned, which
+&nbsp;     * does a necessary attribute-based comparison when IDs are not available.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Do your best to ensure {@code SimpleSession} instances receive an ID very early in their lifecycle to
+&nbsp;     * avoid the more expensive attributes-based comparison.
+&nbsp;     *
+&nbsp;     * @param obj the object to compare with this one for equality.
+&nbsp;     * @return {@code true} if this object is equivalent to the specified argument, {@code false} otherwise.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object obj) {
+<b class="nc">&nbsp;        if (this == obj) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (obj instanceof SimpleSession) {</b>
+<b class="nc">&nbsp;            SimpleSession other = (SimpleSession) obj;</b>
+<b class="nc">&nbsp;            Serializable thisId = getId();</b>
+<b class="nc">&nbsp;            Serializable otherId = other.getId();</b>
+<b class="nc">&nbsp;            if (thisId != null &amp;&amp; otherId != null) {</b>
+<b class="nc">&nbsp;                return thisId.equals(otherId);</b>
+&nbsp;            } else {
+&nbsp;                //fall back to an attribute based comparison:
+<b class="nc">&nbsp;                return onEquals(other);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Provides an attribute-based comparison (no ID comparison) - incurred &lt;em&gt;only&lt;/em&gt; when &#39;this&#39; or the
+&nbsp;     * session object being compared for equality do not have a session id.
+&nbsp;     *
+&nbsp;     * @param ss the SimpleSession instance to compare for equality.
+&nbsp;     * @return true if all the attributes, except the id, are equal to this object&#39;s attributes.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    protected boolean onEquals(SimpleSession ss) {
+<b class="nc">&nbsp;        return (getStartTimestamp() != null ? getStartTimestamp().equals(ss.getStartTimestamp()) : ss.getStartTimestamp() == null) &amp;&amp;</b>
+<b class="nc">&nbsp;                (getStopTimestamp() != null ? getStopTimestamp().equals(ss.getStopTimestamp()) : ss.getStopTimestamp() == null) &amp;&amp;</b>
+<b class="nc">&nbsp;                (getLastAccessTime() != null ? getLastAccessTime().equals(ss.getLastAccessTime()) : ss.getLastAccessTime() == null) &amp;&amp;</b>
+<b class="nc">&nbsp;                (getTimeout() == ss.getTimeout()) &amp;&amp;</b>
+<b class="nc">&nbsp;                (isExpired() == ss.isExpired()) &amp;&amp;</b>
+<b class="nc">&nbsp;                (getHost() != null ? getHost().equals(ss.getHost()) : ss.getHost() == null) &amp;&amp;</b>
+<b class="nc">&nbsp;                (getAttributes() != null ? getAttributes().equals(ss.getAttributes()) : ss.getAttributes() == null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the hashCode.  If the {@link #getId() id} is not {@code null}, its hashcode is returned immediately.
+&nbsp;     * If it is {@code null}, an attributes-based hashCode will be calculated and returned.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Do your best to ensure {@code SimpleSession} instances receive an ID very early in their lifecycle to
+&nbsp;     * avoid the more expensive attributes-based calculation.
+&nbsp;     *
+&nbsp;     * @return this object&#39;s hashCode
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        Serializable id = getId();</b>
+<b class="nc">&nbsp;        if (id != null) {</b>
+<b class="nc">&nbsp;            return id.hashCode();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int hashCode = getStartTimestamp() != null ? getStartTimestamp().hashCode() : 0;</b>
+<b class="nc">&nbsp;        hashCode = 31 * hashCode + (getStopTimestamp() != null ? getStopTimestamp().hashCode() : 0);</b>
+<b class="nc">&nbsp;        hashCode = 31 * hashCode + (getLastAccessTime() != null ? getLastAccessTime().hashCode() : 0);</b>
+<b class="nc">&nbsp;        hashCode = 31 * hashCode + Long.valueOf(Math.max(getTimeout(), 0)).hashCode();</b>
+<b class="nc">&nbsp;        hashCode = 31 * hashCode + Boolean.valueOf(isExpired()).hashCode();</b>
+<b class="nc">&nbsp;        hashCode = 31 * hashCode + (getHost() != null ? getHost().hashCode() : 0);</b>
+<b class="nc">&nbsp;        hashCode = 31 * hashCode + (getAttributes() != null ? getAttributes().hashCode() : 0);</b>
+<b class="nc">&nbsp;        return hashCode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the string representation of this SimpleSession, equal to
+&nbsp;     * &lt;code&gt;getClass().getName() + &amp;quot;,id=&amp;quot; + getId()&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @return the string representation of this SimpleSession, equal to
+&nbsp;     *         &lt;code&gt;getClass().getName() + &amp;quot;,id=&amp;quot; + getId()&lt;/code&gt;.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="nc">&nbsp;        sb.append(getClass().getName()).append(&quot;,id=&quot;).append(getId());</b>
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serializes this object to the specified output stream for JDK Serialization.
+&nbsp;     *
+&nbsp;     * @param out output stream used for Object serialization.
+&nbsp;     * @throws IOException if any of this object&#39;s fields cannot be written to the stream.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    private void writeObject(ObjectOutputStream out) throws IOException {
+<b class="nc">&nbsp;        out.defaultWriteObject();</b>
+<b class="nc">&nbsp;        short alteredFieldsBitMask = getAlteredFieldsBitMask();</b>
+<b class="nc">&nbsp;        out.writeShort(alteredFieldsBitMask);</b>
+<b class="nc">&nbsp;        if (id != null) {</b>
+<b class="nc">&nbsp;            out.writeObject(id);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (startTimestamp != null) {</b>
+<b class="nc">&nbsp;            out.writeObject(startTimestamp);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (stopTimestamp != null) {</b>
+<b class="nc">&nbsp;            out.writeObject(stopTimestamp);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (lastAccessTime != null) {</b>
+<b class="nc">&nbsp;            out.writeObject(lastAccessTime);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (timeout != 0l) {</b>
+<b class="nc">&nbsp;            out.writeLong(timeout);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (expired) {</b>
+<b class="nc">&nbsp;            out.writeBoolean(expired);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (host != null) {</b>
+<b class="nc">&nbsp;            out.writeUTF(host);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!CollectionUtils.isEmpty(attributes)) {</b>
+<b class="nc">&nbsp;            out.writeObject(attributes);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Reconstitutes this object based on the specified InputStream for JDK Serialization.
+&nbsp;     *
+&nbsp;     * @param in the input stream to use for reading data to populate this object.
+&nbsp;     * @throws IOException            if the input stream cannot be used.
+&nbsp;     * @throws ClassNotFoundException if a required class needed for instantiation is not available in the present JVM
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;unchecked&quot;})
+&nbsp;    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+<b class="nc">&nbsp;        in.defaultReadObject();</b>
+<b class="nc">&nbsp;        short bitMask = in.readShort();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (isFieldPresent(bitMask, ID_BIT_MASK)) {</b>
+<b class="nc">&nbsp;            this.id = (Serializable) in.readObject();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (isFieldPresent(bitMask, START_TIMESTAMP_BIT_MASK)) {</b>
+<b class="nc">&nbsp;            this.startTimestamp = (Date) in.readObject();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (isFieldPresent(bitMask, STOP_TIMESTAMP_BIT_MASK)) {</b>
+<b class="nc">&nbsp;            this.stopTimestamp = (Date) in.readObject();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (isFieldPresent(bitMask, LAST_ACCESS_TIME_BIT_MASK)) {</b>
+<b class="nc">&nbsp;            this.lastAccessTime = (Date) in.readObject();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (isFieldPresent(bitMask, TIMEOUT_BIT_MASK)) {</b>
+<b class="nc">&nbsp;            this.timeout = in.readLong();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (isFieldPresent(bitMask, EXPIRED_BIT_MASK)) {</b>
+<b class="nc">&nbsp;            this.expired = in.readBoolean();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (isFieldPresent(bitMask, HOST_BIT_MASK)) {</b>
+<b class="nc">&nbsp;            this.host = in.readUTF();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (isFieldPresent(bitMask, ATTRIBUTES_BIT_MASK)) {</b>
+<b class="nc">&nbsp;            this.attributes = (Map&lt;Object, Object&gt;) in.readObject();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a bit mask used during serialization indicating which fields have been serialized. Fields that have been
+&nbsp;     * altered (not null and/or not retaining the class defaults) will be serialized and have 1 in their respective
+&nbsp;     * index, fields that are null and/or retain class default values have 0.
+&nbsp;     *
+&nbsp;     * @return a bit mask used during serialization indicating which fields have been serialized.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    private short getAlteredFieldsBitMask() {
+<b class="nc">&nbsp;        int bitMask = 0;</b>
+<b class="nc">&nbsp;        bitMask = id != null ? bitMask | ID_BIT_MASK : bitMask;</b>
+<b class="nc">&nbsp;        bitMask = startTimestamp != null ? bitMask | START_TIMESTAMP_BIT_MASK : bitMask;</b>
+<b class="nc">&nbsp;        bitMask = stopTimestamp != null ? bitMask | STOP_TIMESTAMP_BIT_MASK : bitMask;</b>
+<b class="nc">&nbsp;        bitMask = lastAccessTime != null ? bitMask | LAST_ACCESS_TIME_BIT_MASK : bitMask;</b>
+<b class="nc">&nbsp;        bitMask = timeout != 0l ? bitMask | TIMEOUT_BIT_MASK : bitMask;</b>
+<b class="nc">&nbsp;        bitMask = expired ? bitMask | EXPIRED_BIT_MASK : bitMask;</b>
+<b class="nc">&nbsp;        bitMask = host != null ? bitMask | HOST_BIT_MASK : bitMask;</b>
+<b class="nc">&nbsp;        bitMask = !CollectionUtils.isEmpty(attributes) ? bitMask | ATTRIBUTES_BIT_MASK : bitMask;</b>
+<b class="nc">&nbsp;        return (short) bitMask;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if the given {@code bitMask} argument indicates that the specified field has been
+&nbsp;     * serialized and therefore should be read during deserialization, {@code false} otherwise.
+&nbsp;     *
+&nbsp;     * @param bitMask      the aggregate bitmask for all fields that have been serialized.  Individual bits represent
+&nbsp;     *                     the fields that have been serialized.  A bit set to 1 means that corresponding field has
+&nbsp;     *                     been serialized, 0 means it hasn&#39;t been serialized.
+&nbsp;     * @param fieldBitMask the field bit mask constant identifying which bit to inspect (corresponds to a class attribute).
+&nbsp;     * @return {@code true} if the given {@code bitMask} argument indicates that the specified field has been
+&nbsp;     *         serialized and therefore should be read during deserialization, {@code false} otherwise.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    private static boolean isFieldPresent(short bitMask, int fieldBitMask) {
+<b class="nc">&nbsp;        return (bitMask &amp; fieldBitMask) != 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

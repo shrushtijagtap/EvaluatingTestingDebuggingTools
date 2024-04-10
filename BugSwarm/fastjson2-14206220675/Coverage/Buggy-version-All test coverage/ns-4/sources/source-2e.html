@@ -1,0 +1,174 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONWriterUTF16JDK8</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONWriterUTF16JDK8 (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONWriterUTF16JDK8</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/34)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.util.JDKUtils;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONWriter.Feature.BrowserSecure;
+&nbsp;import static com.alibaba.fastjson2.JSONWriter.Feature.EscapeNoneAscii;
+&nbsp;
+&nbsp;final class JSONWriterUTF16JDK8
+&nbsp;        extends JSONWriterUTF16 {
+&nbsp;    JSONWriterUTF16JDK8(Context ctx) {
+<b class="nc">&nbsp;        super(ctx);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeString(String str) {
+<b class="nc">&nbsp;        if (str == null) {</b>
+<b class="nc">&nbsp;            if (isEnabled(Feature.NullAsDefaultValue.mask | Feature.WriteNullStringAsEmpty.mask)) {</b>
+<b class="nc">&nbsp;                writeString(&quot;&quot;);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean browserSecure = (context.features &amp; BrowserSecure.mask) != 0;</b>
+<b class="nc">&nbsp;        boolean escapeNoneAscii = (context.features &amp; EscapeNoneAscii.mask) != 0;</b>
+<b class="nc">&nbsp;        char[] value = JDKUtils.getCharArray(str);</b>
+<b class="nc">&nbsp;        final int strlen = value.length;</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean escape = false;</b>
+<b class="nc">&nbsp;        for (char c0 : value) {</b>
+<b class="nc">&nbsp;            if (c0 == quote || c0 == &#39;\\&#39; || c0 &lt; &#39; &#39;</b>
+&nbsp;                    || (browserSecure &amp;&amp; (c0 == &#39;&lt;&#39; || c0 == &#39;&gt;&#39; || c0 == &#39;(&#39; || c0 == &#39;)&#39;))
+&nbsp;                    || (escapeNoneAscii &amp;&amp; c0 &gt; 0x007F)
+&nbsp;            ) {
+<b class="nc">&nbsp;                escape = true;</b>
+&nbsp;                break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!escape) {</b>
+&nbsp;            // inline ensureCapacity(off + strlen + 2);
+<b class="nc">&nbsp;            int minCapacity = off + strlen + 2;</b>
+<b class="nc">&nbsp;            if (minCapacity &gt;= chars.length) {</b>
+<b class="nc">&nbsp;                ensureCapacity(minCapacity);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            chars[off++] = quote;</b>
+<b class="nc">&nbsp;            System.arraycopy(value, 0, chars, off, value.length);</b>
+<b class="nc">&nbsp;            off += strlen;</b>
+<b class="nc">&nbsp;            chars[off++] = quote;</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        writeStringEscape(str);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:42</div>
+</div>
+</body>
+</html>

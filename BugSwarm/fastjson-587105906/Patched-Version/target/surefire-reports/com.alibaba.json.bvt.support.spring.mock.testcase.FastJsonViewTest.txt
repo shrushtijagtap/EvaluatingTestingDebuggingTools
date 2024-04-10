@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonViewTest
 -------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.438 s -- in com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonViewTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.141 s -- in com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonViewTest

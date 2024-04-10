@@ -1,0 +1,228 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderImplValue</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderImplValue (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderImplValue</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/38)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.schema.JSONSchema;
+&nbsp;
+&nbsp;import java.lang.reflect.Array;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;public class ObjectReaderImplValue&lt;I, T&gt;
+&nbsp;        implements ObjectReader&lt;T&gt; {
+&nbsp;    final Type valueType;
+&nbsp;    final Class&lt;I&gt; valueClass;
+&nbsp;    final long features;
+&nbsp;    final Constructor&lt;T&gt; constructor;
+&nbsp;    final Method factoryMethod;
+&nbsp;    final Function&lt;I, T&gt; function;
+&nbsp;    final JSONSchema schema;
+&nbsp;    final Object emptyVariantArgs;
+&nbsp;    ObjectReader valueReader;
+&nbsp;
+&nbsp;    public ObjectReaderImplValue(
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            Type valueType,
+&nbsp;            Class&lt;I&gt; valueClass,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            Object defaultValue,
+&nbsp;            JSONSchema schema,
+&nbsp;            Constructor&lt;T&gt; constructor,
+&nbsp;            Method factoryMethod,
+&nbsp;            Function&lt;I, T&gt; function
+<b class="nc">&nbsp;    ) {</b>
+<b class="nc">&nbsp;        this.valueType = valueType;</b>
+<b class="nc">&nbsp;        this.valueClass = valueClass;</b>
+<b class="nc">&nbsp;        this.features = features;</b>
+<b class="nc">&nbsp;        this.schema = schema;</b>
+<b class="nc">&nbsp;        this.constructor = constructor;</b>
+<b class="nc">&nbsp;        this.factoryMethod = factoryMethod;</b>
+<b class="nc">&nbsp;        this.function = function;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (factoryMethod != null &amp;&amp; factoryMethod.getParameterCount() == 2) {</b>
+<b class="nc">&nbsp;            Class&lt;?&gt; varArgType = factoryMethod.getParameterTypes()[1].getComponentType();</b>
+<b class="nc">&nbsp;            emptyVariantArgs = Array.newInstance(varArgType, 0);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            emptyVariantArgs = null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public T readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        return readObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public T readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        if (valueReader == null) {</b>
+<b class="nc">&nbsp;            valueReader = jsonReader.getObjectReader(valueType);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        I value = (I) valueReader.readObject(jsonReader, fieldType, fieldName, features | this.features);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (schema != null) {</b>
+<b class="nc">&nbsp;            schema.validate(value);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        T object;
+&nbsp;
+<b class="nc">&nbsp;        if (function != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                object = function.apply(value);</b>
+<b class="nc">&nbsp;            } catch (Exception ex) {</b>
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;create object error&quot;), ex);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (constructor != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                object = constructor.newInstance(value);</b>
+<b class="nc">&nbsp;            } catch (Exception ex) {</b>
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;create object error&quot;), ex);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (factoryMethod != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                if (emptyVariantArgs != null) {</b>
+<b class="nc">&nbsp;                    object = (T) factoryMethod.invoke(null, value, emptyVariantArgs);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    object = (T) factoryMethod.invoke(null, value);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Exception ex) {</b>
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;create object error&quot;), ex);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info(&quot;create object error&quot;));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return object;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;I, T&gt; ObjectReaderImplValue&lt;I, T&gt; of(Class&lt;T&gt; objectClass, Class&lt;I&gt; valueClass, Method method) {
+<b class="nc">&nbsp;        return new ObjectReaderImplValue(objectClass, valueClass, valueClass, 0L, null, null, null, null, method, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;I, T&gt; ObjectReaderImplValue&lt;I, T&gt; of(Class&lt;T&gt; objectClass, Class&lt;I&gt; valueClass, Function&lt;I, T&gt; function) {
+<b class="nc">&nbsp;        return new ObjectReaderImplValue(objectClass, valueClass, valueClass, 0L, null, null, null, null, null, function);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:20</div>
+</div>
+</body>
+</html>

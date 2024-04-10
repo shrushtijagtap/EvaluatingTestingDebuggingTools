@@ -1,0 +1,131 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PrincipalMap</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.subject</a>
+</div>
+
+<h1>Coverage Summary for Class: PrincipalMap (org.apache.shiro.subject)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">PrincipalMap</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; * http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.subject;
+&nbsp;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * EXPERIMENTAL - DO NOT USE YET
+&nbsp; * &lt;p/&gt;
+&nbsp; * A {@code PrincipalMap} is map of all of a subject&#39;s principals - its identifying attributes like username, userId,
+&nbsp; * etc.
+&nbsp; * &lt;p/&gt;
+&nbsp; * The {@link Map} methods allow you to interact with a unified representation of
+&nbsp; * all of the Subject&#39;s principals, even if they came from different realms.  You can think of the {@code Map} methods
+&nbsp; * as the general purpose API for a Subject&#39;s principals.  That is, you can access a principal generally:
+&nbsp; * &lt;pre&gt;
+&nbsp; * Object principal = subject.getPrincipals().get(principalName);
+&nbsp; * &lt;/pre&gt;
+&nbsp; * For example, to get the Subject&#39;s username (if the
+&nbsp; * username principal indeed exists and was populated by a Realm), you can do the following:
+&nbsp; * &lt;pre&gt;
+&nbsp; * String username = (String)subject.getPrincipals().get(&quot;username&quot;);
+&nbsp; * &lt;/pre&gt;
+&nbsp; * &lt;h3&gt;Multi-Realm Environments&lt;/h3&gt;
+&nbsp; * If your application uses multiple realms, the {@code Map} methods reflect
+&nbsp; * the the aggregate principals from &lt;em&gt;all&lt;/em&gt; realms that authenticated the owning {@code Subject}.
+&nbsp; * &lt;p/&gt;
+&nbsp; * But in these multi-realm environments, it is often convenient or necessary to acquire only the principals contributed
+&nbsp; * by a specific realm (often in a realm implementation itself).  This {@code PrincipalMap} interface satisfies
+&nbsp; * those needs by providing additional realm-specific accessor/mutator methods.
+&nbsp; *
+&nbsp; * @author Les Hazlewood
+&nbsp; * @since 1.2
+&nbsp; */
+&nbsp;public interface PrincipalMap extends PrincipalCollection, Map&lt;String,Object&gt; {
+&nbsp;
+&nbsp;    Map&lt;String,Object&gt; getRealmPrincipals(String realmName);
+&nbsp;
+&nbsp;    Map&lt;String,Object&gt; setRealmPrincipals(String realmName, Map&lt;String,Object&gt; principals);
+&nbsp;
+&nbsp;    Object setRealmPrincipal(String realmName, String principalName, Object principal);
+&nbsp;
+&nbsp;    Object getRealmPrincipal(String realmName, String realmPrincipal);
+&nbsp;
+&nbsp;    Object removeRealmPrincipal(String realmName, String principalName);
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

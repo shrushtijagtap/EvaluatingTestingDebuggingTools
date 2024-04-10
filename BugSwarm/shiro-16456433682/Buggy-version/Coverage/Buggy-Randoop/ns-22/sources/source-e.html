@@ -1,0 +1,160 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RememberMeManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.mgt</a>
+</div>
+
+<h1>Coverage Summary for Class: RememberMeManager (org.apache.shiro.mgt)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">RememberMeManager</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.mgt;
+&nbsp;
+&nbsp;import org.apache.shiro.authc.AuthenticationException;
+&nbsp;import org.apache.shiro.authc.AuthenticationInfo;
+&nbsp;import org.apache.shiro.authc.AuthenticationToken;
+&nbsp;import org.apache.shiro.subject.PrincipalCollection;
+&nbsp;import org.apache.shiro.subject.Subject;
+&nbsp;import org.apache.shiro.subject.SubjectContext;
+&nbsp;
+&nbsp;/**
+&nbsp; * A RememberMeManager is responsible for remembering a Subject&#39;s identity across that Subject&#39;s sessions with
+&nbsp; * the application.
+&nbsp; *
+&nbsp; * @since 0.9
+&nbsp; */
+&nbsp;public interface RememberMeManager {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Based on the specified subject context map being used to build a Subject instance, returns any previously
+&nbsp;     * remembered principals for the subject for automatic identity association (aka &#39;Remember Me&#39;).
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The context map is usually populated by a {@link Subject.Builder} implementation.
+&nbsp;     * See the {@link SubjectFactory} class constants for Shiro&#39;s known map keys.
+&nbsp;     *
+&nbsp;     * @param subjectContext the contextual data, usually provided by a {@link Subject.Builder} implementation, that
+&nbsp;     *                       is being used to construct a {@link Subject} instance.
+&nbsp;     * @return he remembered principals or {@code null} if none could be acquired.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    PrincipalCollection getRememberedPrincipals(SubjectContext subjectContext);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Forgets any remembered identity corresponding to the subject context map being used to build a subject instance.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The context map is usually populated by a {@link Subject.Builder} implementation.
+&nbsp;     * See the {@link SubjectFactory} class constants for Shiro&#39;s known map keys.
+&nbsp;     *
+&nbsp;     * @param subjectContext the contextual data, usually provided by a {@link Subject.Builder} implementation, that
+&nbsp;     *                       is being used to construct a {@link Subject} instance.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    void forgetIdentity(SubjectContext subjectContext);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Reacts to a successful authentication attempt, typically saving the principals to be retrieved (&#39;remembered&#39;)
+&nbsp;     * for future system access.
+&nbsp;     *
+&nbsp;     * @param subject the subject that executed a successful authentication attempt
+&nbsp;     * @param token   the authentication token submitted resulting in a successful authentication attempt
+&nbsp;     * @param info    the authenticationInfo returned as a result of the successful authentication attempt
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    void onSuccessfulLogin(Subject subject, AuthenticationToken token, AuthenticationInfo info);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Reacts to a failed authentication attempt, typically by forgetting any previously remembered principals for the
+&nbsp;     * Subject.
+&nbsp;     *
+&nbsp;     * @param subject the subject that executed the failed authentication attempt
+&nbsp;     * @param token   the authentication token submitted resulting in the failed authentication attempt
+&nbsp;     * @param ae      the authentication exception thrown as a result of the failed authentication attempt
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    void onFailedLogin(Subject subject, AuthenticationToken token, AuthenticationException ae);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Reacts to a Subject logging out of the application, typically by forgetting any previously remembered
+&nbsp;     * principals for the Subject.
+&nbsp;     *
+&nbsp;     * @param subject the subject logging out.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    void onLogout(Subject subject);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

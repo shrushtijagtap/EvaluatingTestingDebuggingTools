@@ -1,0 +1,280 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > IniFactorySupport</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.config</a>
+</div>
+
+<h1>Coverage Summary for Class: IniFactorySupport (org.apache.shiro.config)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">IniFactorySupport</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (8/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (3/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    44.1%
+  </span>
+  <span class="absValue">
+    (15/34)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.config;
+&nbsp;
+&nbsp;import org.apache.shiro.io.ResourceUtils;
+&nbsp;import org.apache.shiro.util.AbstractFactory;
+&nbsp;import org.apache.shiro.util.CollectionUtils;
+&nbsp;import org.apache.shiro.util.Factory;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base support class for {@link Factory} implementations that generate their instance(s) based on
+&nbsp; * {@link Ini} configuration.
+&nbsp; *
+&nbsp; * @since 1.0
+&nbsp; * @deprecated use Shiro&#39;s {@code Environment} mechanisms instead.
+&nbsp; */
+&nbsp;@Deprecated
+&nbsp;public abstract class IniFactorySupport&lt;T&gt; extends AbstractFactory&lt;T&gt; {
+&nbsp;
+&nbsp;    public static final String DEFAULT_INI_RESOURCE_PATH = &quot;classpath:shiro.ini&quot;;
+&nbsp;
+<b class="fc">&nbsp;    private static transient final Logger log = LoggerFactory.getLogger(IniFactorySupport.class);</b>
+&nbsp;
+&nbsp;    private Ini ini;
+&nbsp;
+&nbsp;    private Map&lt;String, ?&gt; defaultBeans;
+&nbsp;
+<b class="fc">&nbsp;    protected IniFactorySupport() {</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    protected IniFactorySupport(Ini ini) {</b>
+<b class="nc">&nbsp;        this.ini = ini;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Ini getIni() {
+<b class="fc">&nbsp;        return ini;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setIni(Ini ini) {
+<b class="fc">&nbsp;        this.ini = ini;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a mapping of String to bean representing the default set of object used by the factory.
+&nbsp;     * These beans can be used by this factory in conjunction with objects parsed from the INI configuration.
+&nbsp;     * @return A Map of default objects, or &lt;code&gt;null&lt;/code&gt;.
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    protected Map&lt;String, ?&gt; getDefaults() {
+<b class="fc">&nbsp;        return defaultBeans;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the default objects used by this factory. These defaults may be used in conjunction with the INI
+&nbsp;     * configuration.
+&nbsp;     * @param defaultBeans String to object mapping used for default configuration in this factory.
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    public void setDefaults(Map&lt;String, ?&gt; defaultBeans) {
+<b class="fc">&nbsp;        this.defaultBeans = defaultBeans;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a new Ini instance created from the default {@code classpath:shiro.ini} file, or {@code null} if
+&nbsp;     * the file does not exist.
+&nbsp;     *
+&nbsp;     * @return a new Ini instance created from the default {@code classpath:shiro.ini} file, or {@code null} if
+&nbsp;     *         the file does not exist.
+&nbsp;     */
+&nbsp;    public static Ini loadDefaultClassPathIni() {
+<b class="nc">&nbsp;        Ini ini = null;</b>
+<b class="nc">&nbsp;        if (ResourceUtils.resourceExists(DEFAULT_INI_RESOURCE_PATH)) {</b>
+<b class="nc">&nbsp;            log.debug(&quot;Found shiro.ini at the root of the classpath.&quot;);</b>
+<b class="nc">&nbsp;            ini = new Ini();</b>
+<b class="nc">&nbsp;            ini.loadFromPath(DEFAULT_INI_RESOURCE_PATH);</b>
+<b class="nc">&nbsp;            if (CollectionUtils.isEmpty(ini)) {</b>
+<b class="nc">&nbsp;                log.warn(&quot;shiro.ini found at the root of the classpath, but it did not contain any data.&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return ini;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Tries to resolve the Ini instance to use for configuration.  This implementation functions as follows:
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;The {@code Ini} instance returned from {@link #getIni()} will be returned if it is not null or empty.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;If {@link #getIni()} is {@code null} or empty, this implementation will attempt to find and load the
+&nbsp;     * {@link #loadDefaultClassPathIni() default class path Ini}.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;If neither of the two attempts above returns an instance, {@code null} is returned&lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     *
+&nbsp;     * @return the Ini instance to use for configuration.
+&nbsp;     */
+&nbsp;    protected Ini resolveIni() {
+<b class="fc">&nbsp;        Ini ini = getIni();</b>
+<b class="pc">&nbsp;        if (CollectionUtils.isEmpty(ini)) {</b>
+<b class="nc">&nbsp;            log.debug(&quot;Null or empty Ini instance.  Falling back to the default {} file.&quot;, DEFAULT_INI_RESOURCE_PATH);</b>
+<b class="nc">&nbsp;            ini = loadDefaultClassPathIni();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return ini;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new object instance by using a configured INI source.  This implementation functions as follows:
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;{@link #resolveIni() Resolve} the {@code Ini} source to use for configuration.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;If there was no resolved Ini source, create and return a simple default instance via the
+&nbsp;     * {@link #createDefaultInstance()} method.&lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     *
+&nbsp;     * @return a new {@code SecurityManager} instance by using a configured INI source.
+&nbsp;     */
+&nbsp;    public T createInstance() {
+<b class="fc">&nbsp;        Ini ini = resolveIni();</b>
+&nbsp;
+&nbsp;        T instance;
+&nbsp;
+<b class="pc">&nbsp;        if (CollectionUtils.isEmpty(ini)) {</b>
+<b class="nc">&nbsp;            log.debug(&quot;No populated Ini available.  Creating a default instance.&quot;);</b>
+<b class="nc">&nbsp;            instance = createDefaultInstance();</b>
+<b class="nc">&nbsp;            if (instance == null) {</b>
+<b class="nc">&nbsp;                String msg = getClass().getName() + &quot; implementation did not return a default instance in &quot; +</b>
+&nbsp;                        &quot;the event of a null/empty Ini configuration.  This is required to support the &quot; +
+&nbsp;                        &quot;Factory interface.  Please check your implementation.&quot;;
+<b class="nc">&nbsp;                throw new IllegalStateException(msg);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="fc">&nbsp;            log.debug(&quot;Creating instance from Ini [&quot; + ini + &quot;]&quot;);</b>
+<b class="fc">&nbsp;            instance = createInstance(ini);</b>
+<b class="pc">&nbsp;            if (instance == null) {</b>
+<b class="nc">&nbsp;                String msg = getClass().getName() + &quot; implementation did not return a constructed instance from &quot; +</b>
+&nbsp;                        &quot;the createInstance(Ini) method implementation.&quot;;
+<b class="nc">&nbsp;                throw new IllegalStateException(msg);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return instance;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected abstract T createInstance(Ini ini);
+&nbsp;
+&nbsp;    protected abstract T createDefaultInstance();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

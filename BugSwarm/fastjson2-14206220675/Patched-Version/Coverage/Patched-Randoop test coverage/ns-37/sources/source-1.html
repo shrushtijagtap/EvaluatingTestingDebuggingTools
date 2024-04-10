@@ -1,0 +1,212 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Fastjson2Decoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.support.spring.http.codec</a>
+</div>
+
+<h1>Coverage Summary for Class: Fastjson2Decoder (com.alibaba.fastjson2.support.spring.http.codec)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Fastjson2Decoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.support.spring.http.codec;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSON;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.support.config.FastJsonConfig;
+&nbsp;import com.fasterxml.jackson.databind.ObjectMapper;
+&nbsp;import org.reactivestreams.Publisher;
+&nbsp;import org.springframework.core.ResolvableType;
+&nbsp;import org.springframework.core.codec.DecodingException;
+&nbsp;import org.springframework.core.codec.Hints;
+&nbsp;import org.springframework.core.io.buffer.DataBuffer;
+&nbsp;import org.springframework.core.io.buffer.DataBufferUtils;
+&nbsp;import org.springframework.core.log.LogFormatUtils;
+&nbsp;import org.springframework.http.codec.json.AbstractJackson2Decoder;
+&nbsp;import org.springframework.lang.NonNull;
+&nbsp;import org.springframework.lang.Nullable;
+&nbsp;import org.springframework.util.MimeType;
+&nbsp;import reactor.core.publisher.Flux;
+&nbsp;
+&nbsp;import java.io.ByteArrayOutputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * Fastjson2 for Spring WebFlux.
+&nbsp; *
+&nbsp; * @author Xi.Liu
+&nbsp; * @see AbstractJackson2Decoder
+&nbsp; */
+&nbsp;public class Fastjson2Decoder
+&nbsp;        extends AbstractJackson2Decoder {
+&nbsp;    private final FastJsonConfig config;
+&nbsp;
+&nbsp;    public Fastjson2Decoder(ObjectMapper mapper, MimeType... mimeTypes) {
+<b class="nc">&nbsp;        super(mapper, mimeTypes);</b>
+<b class="nc">&nbsp;        this.config = new FastJsonConfig();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Fastjson2Decoder(ObjectMapper mapper, FastJsonConfig config, MimeType... mimeTypes) {
+<b class="nc">&nbsp;        super(mapper, mimeTypes);</b>
+<b class="nc">&nbsp;        this.config = config;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @NonNull
+&nbsp;    @Override
+&nbsp;    public Flux&lt;Object&gt; decode(@NonNull Publisher&lt;DataBuffer&gt; input,
+&nbsp;                               @NonNull ResolvableType elementType,
+&nbsp;                               MimeType mimeType,
+&nbsp;                               Map&lt;String, Object&gt; hints) {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException(&quot;Does not support stream decoding yet&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object decode(@NonNull DataBuffer dataBuffer,
+&nbsp;                         @NonNull ResolvableType targetType,
+&nbsp;                         MimeType mimeType,
+&nbsp;                         Map&lt;String, Object&gt; hints) throws DecodingException {
+<b class="nc">&nbsp;        try (ByteArrayOutputStream os = new ByteArrayOutputStream();</b>
+<b class="nc">&nbsp;                InputStream in = dataBuffer.asInputStream()) {</b>
+<b class="nc">&nbsp;            byte[] buf = new byte[1 &lt;&lt; 16];</b>
+&nbsp;            for (; ; ) {
+<b class="nc">&nbsp;                int len = in.read(buf);</b>
+<b class="nc">&nbsp;                if (len == -1) {</b>
+&nbsp;                    break;
+&nbsp;                }
+<b class="nc">&nbsp;                if (len &gt; 0) {</b>
+<b class="nc">&nbsp;                    os.write(buf, 0, len);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            Object value = JSON.parseObject(os.toByteArray(),</b>
+<b class="nc">&nbsp;                    targetType.getType(),</b>
+<b class="nc">&nbsp;                    this.config.getDateFormat(),</b>
+<b class="nc">&nbsp;                    this.config.getReaderFilters(),</b>
+<b class="nc">&nbsp;                    this.config.getReaderFeatures());</b>
+<b class="nc">&nbsp;            logValue(value, hints);</b>
+<b class="nc">&nbsp;            return value;</b>
+<b class="nc">&nbsp;        } catch (JSONException ex) {</b>
+<b class="nc">&nbsp;            throw new DecodingException(&quot;JSON parse error: &quot; + ex.getMessage(), ex);</b>
+<b class="nc">&nbsp;        } catch (IOException ex) {</b>
+<b class="nc">&nbsp;            throw new DecodingException(&quot;I/O error while reading input message&quot;, ex);</b>
+<b class="nc">&nbsp;        } finally {</b>
+<b class="nc">&nbsp;            DataBufferUtils.release(dataBuffer);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void logValue(@Nullable Object value,
+&nbsp;                          @Nullable Map&lt;String, Object&gt; hints) {
+<b class="nc">&nbsp;        if (!Hints.isLoggingSuppressed(hints)) {</b>
+<b class="nc">&nbsp;            LogFormatUtils.traceDebug(logger, traceOn -&gt; {</b>
+<b class="nc">&nbsp;                String formatted = LogFormatUtils.formatValue(value, !traceOn);</b>
+<b class="nc">&nbsp;                return Hints.getLogPrefix(hints) + &quot;Decoded [&quot; + formatted + &quot;]&quot;;</b>
+&nbsp;            });
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:16</div>
+</div>
+</body>
+</html>

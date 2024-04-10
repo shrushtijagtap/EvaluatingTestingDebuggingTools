@@ -1,0 +1,647 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DefaultBlockCipherService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.crypto</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultBlockCipherService (org.apache.shiro.crypto)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultBlockCipherService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76%
+  </span>
+  <span class="absValue">
+    (19/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    43.8%
+  </span>
+  <span class="absValue">
+    (14/32)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    69.7%
+  </span>
+  <span class="absValue">
+    (46/66)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.crypto;
+&nbsp;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;
+&nbsp;/**
+&nbsp; * Base abstract class for block cipher algorithms.
+&nbsp; *
+&nbsp; * &lt;h2&gt;Usage&lt;/h2&gt;
+&nbsp; * Note that this class exists mostly to simplify algorithm-specific subclasses.  Unless you understand the concepts of
+&nbsp; * cipher modes of operation, block sizes, and padding schemes, and you want direct control of these things, you should
+&nbsp; * typically not uses instances of this class directly.  Instead, algorithm-specific subclasses, such as
+&nbsp; * {@link AesCipherService}, {@link BlowfishCipherService}, and others are usually better suited for regular use.
+&nbsp; * &lt;p/&gt;
+&nbsp; * However, if you have the need to create a custom block cipher service where no sufficient algorithm-specific subclass
+&nbsp; * exists in Shiro, this class would be very useful.
+&nbsp; *
+&nbsp; * &lt;h2&gt;Configuration&lt;/h2&gt;
+&nbsp; * Block ciphers can accept configuration parameters that direct how they operate.  These parameters concatenated
+&nbsp; * together in a single String comprise what the JDK JCA documentation calls a
+&nbsp; * &lt;a href=&quot;http://java.sun.com/javase/6/docs/technotes/guides/security/crypto/CryptoSpec.html#trans&quot;&gt;transformation
+&nbsp; * string&lt;/a&gt;.  We think that it is better for Shiro to construct this transformation string automatically based on its
+&nbsp; * constituent parts instead of having the end-user construct the string manually, which may be error prone or
+&nbsp; * confusing.  To that end, Shiro {@link DefaultBlockCipherService}s have attributes that can be set individually in
+&nbsp; * a type-safe manner based on your configuration needs, and Shiro will build the transformation string for you.
+&nbsp; * &lt;p/&gt;
+&nbsp; * The following sections typically document the configuration options for block (byte array)
+&nbsp; * {@link #encrypt(byte[], byte[])} and {@link #decrypt(byte[], byte[])} method invocations.  Streaming configuration
+&nbsp; * for those same attributes are done via mirrored {@code streaming}* attributes, and their purpose is identical, but
+&nbsp; * they&#39;re only used during streaming {@link #encrypt(java.io.InputStream, java.io.OutputStream, byte[])} and
+&nbsp; * {@link #decrypt(java.io.InputStream, java.io.OutputStream, byte[])} methods.  See the &amp;quot;Streaming&amp;quot;
+&nbsp; * section below for more.
+&nbsp; *
+&nbsp; * &lt;h3&gt;Block Size&lt;/h3&gt;
+&nbsp; * The block size specifies the number of bits (not bytes) that the cipher operates on when performing an operation.
+&nbsp; * It can be specified explicitly via the {@link #setBlockSize blockSize} attribute.  If not set, the JCA Provider
+&nbsp; * default will be used based on the cipher algorithm.  Block sizes are usually very algorithm specific, so set this
+&nbsp; * value only if you know you don&#39;t want the JCA Provider&#39;s default for the desired algorithm.  For example, the
+&nbsp; * AES algorithm&#39;s Rijndael implementation &lt;em&gt;only&lt;/em&gt; supports a 128 bit block size and will not work with any other
+&nbsp; * size.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Also note that the {@link #setInitializationVectorSize initializationVectorSize} is usually the same as the
+&nbsp; * {@link #setBlockSize blockSize} in block ciphers.  If you change either attribute, you should ensure that the other
+&nbsp; * attribute is correct for the target cipher algorithm.
+&nbsp; *
+&nbsp; * &lt;h3&gt;Operation Mode&lt;/h3&gt;
+&nbsp; * You may set the block cipher&#39;s&lt;a href=&quot;http://en.wikipedia.org/wiki/Block_cipher_modes_of_operation&quot;&gt;mode of
+&nbsp; * operation&lt;/a&gt; via the {@link #setMode(OperationMode) mode} attribute, which accepts a type-safe
+&nbsp; * {@link OperationMode OperationMode} enum instance.  This type safety helps avoid typos when specifying the mode and
+&nbsp; * guarantees that the mode name will be recognized by the underlying JCA Provider.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;b&gt;*&lt;/b&gt;If no operation mode is specified, Shiro defaults all of its block {@code CipherService} instances to the
+&nbsp; * {@link OperationMode#CBC CBC} mode, specifically to support auto-generation of initialization vectors during
+&nbsp; * encryption.  This is different than the JDK&#39;s default {@link OperationMode#ECB ECB} mode because {@code ECB} does
+&nbsp; * not support initialization vectors, which are necessary for strong encryption.  See  the
+&nbsp; * {@link org.apache.shiro.crypto.JcaCipherService JcaCipherService parent class} class JavaDoc for an extensive
+&nbsp; * explanation on why we do this and why we do not use the Sun {@code ECB} default.  You also might also want read
+&nbsp; * the &lt;a href=&quot;http://en.wikipedia.org/wiki/Block_cipher_modes_of_operation#Electronic_codebook_.28ECB.29&quot;&gt;Wikipedia
+&nbsp; * section on ECB&lt;a/&gt; and look at the encrypted image to see an example of why {@code ECB} should not be used in
+&nbsp; * security-sensitive environments.
+&nbsp; * &lt;p/&gt;
+&nbsp; * In the rare case that you need to override the default with a mode not represented
+&nbsp; * by the {@link OperationMode} enum, you may specify the raw mode name string that will be recognized by your JCA
+&nbsp; * provider via the {@link #setModeName modeName} attribute.  Because this is not type-safe, it is recommended only to
+&nbsp; * use this attribute if the {@link OperationMode} enum does not represent your desired mode.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;b&gt;NOTE:&lt;/b&gt; If you change the mode to one that does not support initialization vectors (such as
+&nbsp; * {@link OperationMode#ECB ECB} or {@link OperationMode#NONE NONE}), you &lt;em&gt;must&lt;/em&gt; turn off auto-generated
+&nbsp; * initialization vectors by setting {@link #setGenerateInitializationVectors(boolean) generateInitializationVectors}
+&nbsp; * to {@code false}.  Abandoning initialization vectors significantly weakens encryption, so think twice before
+&nbsp; * disabling this feature.
+&nbsp; *
+&nbsp; * &lt;h3&gt;Padding Scheme&lt;/h3&gt;
+&nbsp; * Because block ciphers process messages in fixed-length blocks, if the final block in a message is not equal to the
+&nbsp; * block length, &lt;a href=&quot;http://en.wikipedia.org/wiki/Padding_(cryptography)&quot;&gt;padding&lt;/a&gt; is applied to match that
+&nbsp; * size to maintain the total length of the message.  This is good because it protects data patterns from being
+&nbsp; * identified  - when all chunks look the same length, it is much harder to infer what that data might be.
+&nbsp; * &lt;p/&gt;
+&nbsp; * You may set a padding scheme via the {@link #setPaddingScheme(PaddingScheme) paddingScheme} attribute, which
+&nbsp; * accepts a type-safe {@link PaddingScheme PaddingScheme} enum instance.  Like the {@link OperationMode} enum,
+&nbsp; * this enum offers type safety to help avoid typos and guarantees that the mode will be recongized by the underlying
+&nbsp; * JCA provider.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;b&gt;*&lt;/b&gt;If no padding scheme is specified, this class defaults to the {@link PaddingScheme#PKCS5} scheme, specifically
+&nbsp; * to be compliant with the default behavior of auto-generating initialization vectors during encryption (see the
+&nbsp; * {@link org.apache.shiro.crypto.JcaCipherService JcaCipherService parent class} class JavaDoc for why).
+&nbsp; * &lt;p/&gt;
+&nbsp; * In the rare case that you need to override the default with a scheme not represented by the {@link PaddingScheme}
+&nbsp; * enum, you may specify the raw padding scheme name string that will be recognized by your JCA provider via the
+&nbsp; * {@link #setPaddingScheme paddingSchemeName} attribute.  Because this is not type-safe, it is recommended only to
+&nbsp; * use this attribute if the {@link PaddingScheme} enum does not represent your desired scheme.
+&nbsp; *
+&nbsp; * &lt;h2&gt;Streaming&lt;/h2&gt;
+&nbsp; * Most people don&#39;t think of using block ciphers as stream ciphers, since their name implies working
+&nbsp; * with block data (i.e. byte arrays) only.  However, block ciphers can be turned into byte-oriented stream ciphers by
+&nbsp; * using an appropriate {@link OperationMode operation mode} with a {@link #getStreamingBlockSize() streaming block size}
+&nbsp; * of 8 bits.  This is why the {@link CipherService} interface provides both block and streaming operations.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Because this streaming 8-bit block size rarely changes across block-cipher algorithms, default values have been set
+&nbsp; * for all three streaming configuration parameters.  The defaults are:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;{@link #setStreamingBlockSize(int) streamingBlockSize} = {@code 8} (bits)&lt;/li&gt;
+&nbsp; * &lt;li&gt;{@link #setStreamingMode streamingMode} = {@link OperationMode#CBC CBC}&lt;/li&gt;
+&nbsp; * &lt;li&gt;{@link #setStreamingPaddingScheme(PaddingScheme) streamingPaddingScheme} = {@link PaddingScheme#PKCS5 PKCS5}&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * &lt;p/&gt;
+&nbsp; * These attributes have the same meaning as the {@code mode}, {@code blockSize}, and {@code paddingScheme} attributes
+&nbsp; * described above, but they are applied during streaming method invocations only ({@link #encrypt(java.io.InputStream, java.io.OutputStream, byte[])}
+&nbsp; * and {@link #decrypt(java.io.InputStream, java.io.OutputStream, byte[])}).
+&nbsp; *
+&nbsp; * @see BlowfishCipherService
+&nbsp; * @see AesCipherService
+&nbsp; * @see &lt;a href=&quot;http://en.wikipedia.org/wiki/Block_cipher_modes_of_operation&quot;&gt;Wikipedia: Block Cipher Modes of Operation&lt;/a&gt;
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public class DefaultBlockCipherService extends AbstractSymmetricCipherService {
+&nbsp;
+&nbsp;    private static final int DEFAULT_BLOCK_SIZE = 0;
+&nbsp;
+&nbsp;    private static final String TRANSFORMATION_STRING_DELIMITER = &quot;/&quot;;
+&nbsp;    private static final int DEFAULT_STREAMING_BLOCK_SIZE = 8; //8 bits (1 byte)
+&nbsp;
+&nbsp;    private String modeName;
+&nbsp;    private int blockSize; //size in bits (not bytes) - i.e. a blockSize of 8 equals 1 byte. negative or zero value = use system default
+&nbsp;    private String paddingSchemeName;
+&nbsp;
+&nbsp;    private String streamingModeName;
+&nbsp;    private int streamingBlockSize;
+&nbsp;    private String streamingPaddingSchemeName;
+&nbsp;
+&nbsp;    private String transformationString; //cached value - rebuilt whenever any of its constituent parts change
+&nbsp;    private String streamingTransformationString; //cached value - rebuilt whenever any of its constituent parts change
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new {@link DefaultBlockCipherService} using the specified block cipher {@code algorithmName}.  Per this
+&nbsp;     * class&#39;s JavaDoc, this constructor also sets the following defaults:
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;{@code streamingMode} = {@link OperationMode#CBC CBC}&lt;/li&gt;
+&nbsp;     * &lt;li&gt;{@code streamingPaddingScheme} = {@link PaddingScheme#NONE none}&lt;/li&gt;
+&nbsp;     * &lt;li&gt;{@code streamingBlockSize} = 8&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     * All other attributes are null/unset, indicating the JCA Provider defaults will be used.
+&nbsp;     *
+&nbsp;     * @param algorithmName the block cipher algorithm to use when encrypting and decrypting
+&nbsp;     */
+&nbsp;    public DefaultBlockCipherService(String algorithmName) {
+<b class="fc">&nbsp;        super(algorithmName);</b>
+&nbsp;
+<b class="fc">&nbsp;        this.modeName = OperationMode.CBC.name();</b>
+<b class="fc">&nbsp;        this.paddingSchemeName = PaddingScheme.PKCS5.getTransformationName();</b>
+<b class="fc">&nbsp;        this.blockSize = DEFAULT_BLOCK_SIZE; //0 = use the JCA provider&#39;s default</b>
+&nbsp;
+<b class="fc">&nbsp;        this.streamingModeName = OperationMode.CBC.name();</b>
+<b class="fc">&nbsp;        this.streamingPaddingSchemeName = PaddingScheme.PKCS5.getTransformationName();</b>
+<b class="fc">&nbsp;        this.streamingBlockSize = DEFAULT_STREAMING_BLOCK_SIZE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the cipher operation mode name (as a String) to be used when constructing
+&nbsp;     * {@link javax.crypto.Cipher Cipher} transformation string or {@code null} if the JCA Provider default mode for
+&nbsp;     * the specified {@link #getAlgorithmName() algorithm} should be used.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This attribute is used &lt;em&gt;only&lt;/em&gt; when constructing the transformation string for block (byte array)
+&nbsp;     * operations ({@link #encrypt(byte[], byte[])} and {@link #decrypt(byte[], byte[])}).  The
+&nbsp;     * {@link #getStreamingModeName() streamingModeName} attribute is used when the block cipher is used for
+&nbsp;     * streaming operations.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The default value is {@code null} to retain the JCA Provider default.
+&nbsp;     *
+&nbsp;     * @return the cipher operation mode name (as a String) to be used when constructing the
+&nbsp;     *         {@link javax.crypto.Cipher Cipher} transformation string, or {@code null} if the JCA Provider default
+&nbsp;     *         mode for the specified {@link #getAlgorithmName() algorithm} should be used.
+&nbsp;     */
+&nbsp;    public String getModeName() {
+<b class="fc">&nbsp;        return modeName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the cipher operation mode name to be used when constructing the
+&nbsp;     * {@link javax.crypto.Cipher Cipher} transformation string.  A {@code null} value indicates that the JCA Provider
+&nbsp;     * default mode for the specified {@link #getAlgorithmName() algorithm} should be used.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This attribute is used &lt;em&gt;only&lt;/em&gt; when constructing the transformation string for block (byte array)
+&nbsp;     * operations ({@link #encrypt(byte[], byte[])} and {@link #decrypt(byte[], byte[])}).  The
+&nbsp;     * {@link #getStreamingModeName() streamingModeName} attribute is used when the block cipher is used for
+&nbsp;     * streaming operations.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The default value is {@code null} to retain the JCA Provider default.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;NOTE:&lt;/b&gt; most standard mode names are represented by the {@link OperationMode OperationMode} enum.  That enum
+&nbsp;     * should be used with the {@link #setMode mode} attribute when possible to retain type-safety and reduce the
+&nbsp;     * possibility of errors.  This method is better used if the {@link OperationMode} enum does not represent the
+&nbsp;     * necessary mode.
+&nbsp;     *
+&nbsp;     * @param modeName the cipher operation mode name to be used when constructing
+&nbsp;     *                 {@link javax.crypto.Cipher Cipher} transformation string, or {@code null} if the JCA Provider
+&nbsp;     *                 default mode for the specified {@link #getAlgorithmName() algorithm} should be used.
+&nbsp;     * @see #setMode
+&nbsp;     */
+&nbsp;    public void setModeName(String modeName) {
+<b class="fc">&nbsp;        this.modeName = modeName;</b>
+&nbsp;        //clear out the transformation string so the next invocation will rebuild it with the new mode:
+<b class="fc">&nbsp;        this.transformationString = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the cipher operation mode of operation to be used when constructing the
+&nbsp;     * {@link javax.crypto.Cipher Cipher} transformation string.  A {@code null} value indicates that the JCA Provider
+&nbsp;     * default mode for the specified {@link #getAlgorithmName() algorithm} should be used.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This attribute is used &lt;em&gt;only&lt;/em&gt; when constructing the transformation string for block (byte array)
+&nbsp;     * operations ({@link #encrypt(byte[], byte[])} and {@link #decrypt(byte[], byte[])}).  The
+&nbsp;     * {@link #setStreamingMode streamingMode} attribute is used when the block cipher is used for
+&nbsp;     * streaming operations.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If the {@link OperationMode} enum cannot represent your desired mode, you can set the name explicitly
+&nbsp;     * via the {@link #setModeName modeName} attribute directly.  However, because {@link OperationMode} represents all
+&nbsp;     * standard JDK mode names already, ensure that your underlying JCA Provider supports the non-standard name first.
+&nbsp;     *
+&nbsp;     * @param mode the cipher operation mode to be used when constructing
+&nbsp;     *             {@link javax.crypto.Cipher Cipher} transformation string, or {@code null} if the JCA Provider
+&nbsp;     *             default mode for the specified {@link #getAlgorithmName() algorithm} should be used.
+&nbsp;     */
+&nbsp;    public void setMode(OperationMode mode) {
+<b class="fc">&nbsp;        setModeName(mode.name());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the cipher algorithm padding scheme name (as a String) to be used when constructing
+&nbsp;     * {@link javax.crypto.Cipher Cipher} transformation string or {@code null} if the JCA Provider default mode for
+&nbsp;     * the specified {@link #getAlgorithmName() algorithm} should be used.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This attribute is used &lt;em&gt;only&lt;/em&gt; when constructing the transformation string for block (byte array)
+&nbsp;     * operations ({@link #encrypt(byte[], byte[])} and {@link #decrypt(byte[], byte[])}).  The
+&nbsp;     * {@link #getStreamingPaddingSchemeName() streamingPaddingSchemeName} attribute is used when the block cipher is
+&nbsp;     * used for streaming operations.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The default value is {@code null} to retain the JCA Provider default.
+&nbsp;     *
+&nbsp;     * @return the padding scheme name (as a String) to be used when constructing the
+&nbsp;     *         {@link javax.crypto.Cipher Cipher} transformation string, or {@code null} if the JCA Provider default
+&nbsp;     *         padding scheme for the specified {@link #getAlgorithmName() algorithm} should be used.
+&nbsp;     */
+&nbsp;    public String getPaddingSchemeName() {
+<b class="fc">&nbsp;        return paddingSchemeName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the padding scheme name to be used when constructing the
+&nbsp;     * {@link javax.crypto.Cipher Cipher} transformation string, or {@code null} if the JCA Provider default mode for
+&nbsp;     * the specified {@link #getAlgorithmName() algorithm} should be used.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This attribute is used &lt;em&gt;only&lt;/em&gt; when constructing the transformation string for block (byte array)
+&nbsp;     * operations ({@link #encrypt(byte[], byte[])} and {@link #decrypt(byte[], byte[])}).  The
+&nbsp;     * {@link #getStreamingPaddingSchemeName() streamingPaddingSchemeName} attribute is used when the block cipher is
+&nbsp;     * used for streaming operations.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The default value is {@code null} to retain the JCA Provider default.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;NOTE:&lt;/b&gt; most standard padding schemes are represented by the {@link PaddingScheme PaddingScheme} enum.
+&nbsp;     * That enum should be used with the {@link #setPaddingScheme paddingScheme} attribute when possible to retain
+&nbsp;     * type-safety and reduce the possibility of errors.  Calling this method however is suitable if the
+&nbsp;     * {@code PaddingScheme} enum does not represent the desired scheme.
+&nbsp;     *
+&nbsp;     * @param paddingSchemeName the padding scheme name to be used when constructing
+&nbsp;     *                          {@link javax.crypto.Cipher Cipher} transformation string, or {@code null} if the JCA
+&nbsp;     *                          Provider default padding scheme for the specified {@link #getAlgorithmName() algorithm}
+&nbsp;     *                          should be used.
+&nbsp;     * @see #setPaddingScheme
+&nbsp;     */
+&nbsp;    public void setPaddingSchemeName(String paddingSchemeName) {
+<b class="fc">&nbsp;        this.paddingSchemeName = paddingSchemeName;</b>
+&nbsp;        //clear out the transformation string so the next invocation will rebuild it with the new padding scheme:
+<b class="fc">&nbsp;        this.transformationString = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the padding scheme to be used when constructing the
+&nbsp;     * {@link javax.crypto.Cipher Cipher} transformation string. A {@code null} value indicates that the JCA Provider
+&nbsp;     * default padding scheme for the specified {@link #getAlgorithmName() algorithm} should be used.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This attribute is used &lt;em&gt;only&lt;/em&gt; when constructing the transformation string for block (byte array)
+&nbsp;     * operations ({@link #encrypt(byte[], byte[])} and {@link #decrypt(byte[], byte[])}).  The
+&nbsp;     * {@link #setStreamingPaddingScheme streamingPaddingScheme} attribute is used when the block cipher is used for
+&nbsp;     * streaming operations.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If the {@link PaddingScheme PaddingScheme} enum does represent your desired scheme, you can set the name explicitly
+&nbsp;     * via the {@link #setPaddingSchemeName paddingSchemeName} attribute directly.  However, because
+&nbsp;     * {@code PaddingScheme} represents all standard JDK scheme names already, ensure that your underlying JCA Provider
+&nbsp;     * supports the non-standard name first.
+&nbsp;     *
+&nbsp;     * @param paddingScheme the padding scheme to be used when constructing
+&nbsp;     *                      {@link javax.crypto.Cipher Cipher} transformation string, or {@code null} if the JCA Provider
+&nbsp;     *                      default padding scheme for the specified {@link #getAlgorithmName() algorithm} should be used.
+&nbsp;     */
+&nbsp;    public void setPaddingScheme(PaddingScheme paddingScheme) {
+<b class="fc">&nbsp;        setPaddingSchemeName(paddingScheme.getTransformationName());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the block cipher&#39;s block size to be used when constructing
+&nbsp;     * {@link javax.crypto.Cipher Cipher} transformation string or {@code 0} if the JCA Provider default block size
+&nbsp;     * for the specified {@link #getAlgorithmName() algorithm} should be used.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This attribute is used &lt;em&gt;only&lt;/em&gt; when constructing the transformation string for block (byte array)
+&nbsp;     * operations ({@link #encrypt(byte[], byte[])} and {@link #decrypt(byte[], byte[])}).  The
+&nbsp;     * {@link #getStreamingBlockSize() streamingBlockSize} attribute is used when the block cipher is used for
+&nbsp;     * streaming operations.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The default value is {@code 0} which retains the JCA Provider default.
+&nbsp;     *
+&nbsp;     * @return the block cipher block size to be used when constructing the
+&nbsp;     *         {@link javax.crypto.Cipher Cipher} transformation string, or {@code 0} if the JCA Provider default
+&nbsp;     *         block size for the specified {@link #getAlgorithmName() algorithm} should be used.
+&nbsp;     */
+&nbsp;    public int getBlockSize() {
+<b class="fc">&nbsp;        return blockSize;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the block cipher&#39;s block size to be used when constructing
+&nbsp;     * {@link javax.crypto.Cipher Cipher} transformation string.  {@code 0} indicates that the JCA Provider default
+&nbsp;     * block size for the specified {@link #getAlgorithmName() algorithm} should be used.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This attribute is used &lt;em&gt;only&lt;/em&gt; when constructing the transformation string for block (byte array)
+&nbsp;     * operations ({@link #encrypt(byte[], byte[])} and {@link #decrypt(byte[], byte[])}).  The
+&nbsp;     * {@link #getStreamingBlockSize() streamingBlockSize} attribute is used when the block cipher is used for
+&nbsp;     * streaming operations.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The default value is {@code 0} which retains the JCA Provider default.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;NOTE:&lt;/b&gt; block cipher block sizes are very algorithm-specific.  If you change this value, ensure that it
+&nbsp;     * will work with the specified {@link #getAlgorithmName() algorithm}.
+&nbsp;     *
+&nbsp;     * @param blockSize the block cipher block size to be used when constructing the
+&nbsp;     *                  {@link javax.crypto.Cipher Cipher} transformation string, or {@code 0} if the JCA Provider
+&nbsp;     *                  default block size for the specified {@link #getAlgorithmName() algorithm} should be used.
+&nbsp;     */
+&nbsp;    public void setBlockSize(int blockSize) {
+<b class="nc">&nbsp;        this.blockSize = Math.max(DEFAULT_BLOCK_SIZE, blockSize);</b>
+&nbsp;        //clear out the transformation string so the next invocation will rebuild it with the new block size:
+<b class="nc">&nbsp;        this.transformationString = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Same purpose as the {@link #getModeName modeName} attribute, but is used instead only for for streaming
+&nbsp;     * operations ({@link #encrypt(java.io.InputStream, java.io.OutputStream, byte[])} and
+&nbsp;     * {@link #decrypt(java.io.InputStream, java.io.OutputStream, byte[])}).
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Note that unlike the {@link #getModeName modeName} attribute, the default value of this attribute is not
+&nbsp;     * {@code null} - it is {@link OperationMode#CBC CBC} for reasons described in the class-level JavaDoc in the
+&nbsp;     * {@code Streaming} section.
+&nbsp;     *
+&nbsp;     * @return the transformation string mode name to be used for streaming operations only.
+&nbsp;     */
+&nbsp;    public String getStreamingModeName() {
+<b class="nc">&nbsp;        return streamingModeName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean isModeStreamingCompatible(String modeName) {
+<b class="pc">&nbsp;        return modeName != null &amp;&amp;</b>
+<b class="pc">&nbsp;                !modeName.equalsIgnoreCase(OperationMode.ECB.name()) &amp;&amp;</b>
+<b class="fc">&nbsp;                !modeName.equalsIgnoreCase(OperationMode.NONE.name());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the transformation string mode name to be used for streaming operations only.  The default value is
+&nbsp;     * {@link OperationMode#CBC CBC} for reasons described in the class-level JavaDoc in the {@code Streaming} section.
+&nbsp;     *
+&nbsp;     * @param streamingModeName transformation string mode name to be used for streaming operations only
+&nbsp;     */
+&nbsp;    public void setStreamingModeName(String streamingModeName) {
+<b class="pc">&nbsp;        if (!isModeStreamingCompatible(streamingModeName)) {</b>
+<b class="nc">&nbsp;            String msg = &quot;mode [&quot; + streamingModeName + &quot;] is not a valid operation mode for block cipher streaming.&quot;;</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(msg);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.streamingModeName = streamingModeName;</b>
+&nbsp;        //clear out the streaming transformation string so the next invocation will rebuild it with the new mode:
+<b class="fc">&nbsp;        this.streamingTransformationString = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the transformation string mode to be used for streaming operations only.  The default value is
+&nbsp;     * {@link OperationMode#CBC CBC} for reasons described in the class-level JavaDoc in the {@code Streaming} section.
+&nbsp;     *
+&nbsp;     * @param mode the transformation string mode to be used for streaming operations only
+&nbsp;     */
+&nbsp;    public void setStreamingMode(OperationMode mode) {
+<b class="fc">&nbsp;        setStreamingModeName(mode.name());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getStreamingPaddingSchemeName() {
+<b class="nc">&nbsp;        return streamingPaddingSchemeName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setStreamingPaddingSchemeName(String streamingPaddingSchemeName) {
+<b class="fc">&nbsp;        this.streamingPaddingSchemeName = streamingPaddingSchemeName;</b>
+&nbsp;        //clear out the streaming transformation string so the next invocation will rebuild it with the new scheme:
+<b class="fc">&nbsp;        this.streamingTransformationString = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setStreamingPaddingScheme(PaddingScheme scheme) {
+<b class="fc">&nbsp;        setStreamingPaddingSchemeName(scheme.getTransformationName());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getStreamingBlockSize() {
+<b class="nc">&nbsp;        return streamingBlockSize;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setStreamingBlockSize(int streamingBlockSize) {
+<b class="nc">&nbsp;        this.streamingBlockSize = Math.max(DEFAULT_BLOCK_SIZE, streamingBlockSize);</b>
+&nbsp;        //clear out the streaming transformation string so the next invocation will rebuild it with the new block size:
+<b class="nc">&nbsp;        this.streamingTransformationString = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the transformation string to use with the {@link javax.crypto.Cipher#getInstance} call.  If
+&nbsp;     * {@code streaming} is {@code true}, a block-cipher transformation string compatible with streaming operations will
+&nbsp;     * be constructed and cached for re-use later (see the class-level JavaDoc for more on using block ciphers
+&nbsp;     * for streaming).  If {@code streaming} is {@code false} a normal block-cipher transformation string will
+&nbsp;     * be constructed and cached for later re-use.
+&nbsp;     *
+&nbsp;     * @param streaming if the transformation string is going to be used for a Cipher performing stream-based encryption or not.
+&nbsp;     * @return the transformation string
+&nbsp;     */
+&nbsp;    protected String getTransformationString(boolean streaming) {
+<b class="pc">&nbsp;        if (streaming) {</b>
+<b class="nc">&nbsp;            if (this.streamingTransformationString == null) {</b>
+<b class="nc">&nbsp;                this.streamingTransformationString = buildStreamingTransformationString();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return this.streamingTransformationString;</b>
+&nbsp;        } else {
+<b class="pc">&nbsp;            if (this.transformationString == null) {</b>
+<b class="fc">&nbsp;                this.transformationString = buildTransformationString();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return this.transformationString;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private String buildTransformationString() {
+<b class="fc">&nbsp;        return buildTransformationString(getModeName(), getPaddingSchemeName(), getBlockSize());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String buildStreamingTransformationString() {
+<b class="nc">&nbsp;        return buildTransformationString(getStreamingModeName(), getStreamingPaddingSchemeName(), 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String buildTransformationString(String modeName, String paddingSchemeName, int blockSize) {
+<b class="fc">&nbsp;        StringBuilder sb = new StringBuilder(getAlgorithmName());</b>
+<b class="pc">&nbsp;        if (StringUtils.hasText(modeName)) {</b>
+<b class="fc">&nbsp;            sb.append(TRANSFORMATION_STRING_DELIMITER).append(modeName);</b>
+&nbsp;        }
+<b class="pc">&nbsp;        if (blockSize &gt; 0) {</b>
+<b class="nc">&nbsp;            sb.append(blockSize);</b>
+&nbsp;        }
+<b class="pc">&nbsp;        if (StringUtils.hasText(paddingSchemeName)) {</b>
+<b class="fc">&nbsp;            sb.append(TRANSFORMATION_STRING_DELIMITER).append(paddingSchemeName);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if the specified cipher operation mode name supports initialization vectors,
+&nbsp;     * {@code false} otherwise.
+&nbsp;     *
+&nbsp;     * @param modeName the raw text name of the mode of operation
+&nbsp;     * @return {@code true} if the specified cipher operation mode name supports initialization vectors,
+&nbsp;     *         {@code false} otherwise.
+&nbsp;     */
+&nbsp;    private boolean isModeInitializationVectorCompatible(String modeName) {
+<b class="pc">&nbsp;        return modeName != null &amp;&amp;</b>
+<b class="pc">&nbsp;                !modeName.equalsIgnoreCase(OperationMode.ECB.name()) &amp;&amp;</b>
+<b class="fc">&nbsp;                !modeName.equalsIgnoreCase(OperationMode.NONE.name());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Overrides the parent implementation to ensure initialization vectors are always generated if streaming is
+&nbsp;     * enabled (block ciphers &lt;em&gt;must&lt;/em&gt; use initialization vectors if they are to be used as a stream cipher).  If
+&nbsp;     * not being used as a stream cipher, then the value is computed based on whether or not the currently configured
+&nbsp;     * {@link #getModeName modeName} is compatible with initialization vectors as well as the result of the configured
+&nbsp;     * {@link #setGenerateInitializationVectors(boolean) generateInitializationVectors} value.
+&nbsp;     *
+&nbsp;     * @param streaming whether or not streaming is being performed
+&nbsp;     * @return {@code true} if streaming or a value computed based on if the currently configured mode is compatible
+&nbsp;     *         with initialization vectors.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    protected boolean isGenerateInitializationVectors(boolean streaming) {
+<b class="pc">&nbsp;        return streaming || super.isGenerateInitializationVectors() &amp;&amp; isModeInitializationVectorCompatible(getModeName());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected byte[] generateInitializationVector(boolean streaming) {
+<b class="pc">&nbsp;        if (streaming) {</b>
+<b class="nc">&nbsp;            String streamingModeName = getStreamingModeName();</b>
+<b class="nc">&nbsp;            if (!isModeInitializationVectorCompatible(streamingModeName)) {</b>
+<b class="nc">&nbsp;                String msg = &quot;streamingMode attribute value [&quot; + streamingModeName + &quot;] does not support &quot; +</b>
+&nbsp;                        &quot;Initialization Vectors.  Ensure the streamingMode value represents an operation mode &quot; +
+&nbsp;                        &quot;that is compatible with initialization vectors.&quot;;
+<b class="nc">&nbsp;                throw new IllegalStateException(msg);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="fc">&nbsp;            String modeName = getModeName();</b>
+<b class="pc">&nbsp;            if (!isModeInitializationVectorCompatible(modeName)) {</b>
+<b class="nc">&nbsp;                String msg = &quot;mode attribute value [&quot; + modeName + &quot;] does not support &quot; +</b>
+&nbsp;                        &quot;Initialization Vectors.  Ensure the mode value represents an operation mode &quot; +
+&nbsp;                        &quot;that is compatible with initialization vectors.&quot;;
+<b class="nc">&nbsp;                throw new IllegalStateException(msg);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return super.generateInitializationVector(streaming);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

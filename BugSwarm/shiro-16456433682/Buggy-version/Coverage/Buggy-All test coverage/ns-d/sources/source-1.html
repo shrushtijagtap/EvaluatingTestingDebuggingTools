@@ -1,0 +1,365 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EhCache</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.cache.ehcache</a>
+</div>
+
+<h1>Coverage Summary for Class: EhCache (org.apache.shiro.cache.ehcache)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EhCache</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/68)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.cache.ehcache;
+&nbsp;
+&nbsp;import net.sf.ehcache.Element;
+&nbsp;import org.apache.shiro.cache.Cache;
+&nbsp;import org.apache.shiro.cache.CacheException;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Shiro {@link org.apache.shiro.cache.Cache} implementation that wraps an {@link net.sf.ehcache.Ehcache} instance.
+&nbsp; *
+&nbsp; * @since 0.2
+&nbsp; */
+&nbsp;public class EhCache&lt;K, V&gt; implements Cache&lt;K, V&gt; {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Private internal log instance.
+&nbsp;     */
+<b class="nc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(EhCache.class);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The wrapped Ehcache instance.
+&nbsp;     */
+&nbsp;    private net.sf.ehcache.Ehcache cache;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new EhCache instance with the given cache.
+&nbsp;     *
+&nbsp;     * @param cache - delegate EhCache instance this Shiro cache instance will wrap.
+&nbsp;     */
+<b class="nc">&nbsp;    public EhCache(net.sf.ehcache.Ehcache cache) {</b>
+<b class="nc">&nbsp;        if (cache == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Cache argument cannot be null.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.cache = cache;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a value of an element which matches the given key.
+&nbsp;     *
+&nbsp;     * @param key the key of the element to return.
+&nbsp;     * @return The value placed into the cache with an earlier put, or null if not found or expired
+&nbsp;     */
+&nbsp;    public V get(K key) throws CacheException {
+&nbsp;        try {
+<b class="nc">&nbsp;            if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;                log.trace(&quot;Getting object from cache [&quot; + cache.getName() + &quot;] for key [&quot; + key + &quot;]&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (key == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                Element element = cache.get(key);</b>
+<b class="nc">&nbsp;                if (element == null) {</b>
+<b class="nc">&nbsp;                    if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;                        log.trace(&quot;Element for [&quot; + key + &quot;] is null.&quot;);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                } else {
+&nbsp;                    //noinspection unchecked
+<b class="nc">&nbsp;                    return (V) element.getObjectValue();</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Throwable t) {</b>
+<b class="nc">&nbsp;            throw new CacheException(t);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Puts an object into the cache.
+&nbsp;     *
+&nbsp;     * @param key   the key.
+&nbsp;     * @param value the value.
+&nbsp;     */
+&nbsp;    public V put(K key, V value) throws CacheException {
+<b class="nc">&nbsp;        if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;            log.trace(&quot;Putting object in cache [&quot; + cache.getName() + &quot;] for key [&quot; + key + &quot;]&quot;);</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="nc">&nbsp;            V previous = get(key);</b>
+<b class="nc">&nbsp;            Element element = new Element(key, value);</b>
+<b class="nc">&nbsp;            cache.put(element);</b>
+<b class="nc">&nbsp;            return previous;</b>
+<b class="nc">&nbsp;        } catch (Throwable t) {</b>
+<b class="nc">&nbsp;            throw new CacheException(t);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes the element which matches the key.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;If no element matches, nothing is removed and no Exception is thrown.&lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @param key the key of the element to remove
+&nbsp;     */
+&nbsp;    public V remove(K key) throws CacheException {
+<b class="nc">&nbsp;        if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;            log.trace(&quot;Removing object from cache [&quot; + cache.getName() + &quot;] for key [&quot; + key + &quot;]&quot;);</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="nc">&nbsp;            V previous = get(key);</b>
+<b class="nc">&nbsp;            cache.remove(key);</b>
+<b class="nc">&nbsp;            return previous;</b>
+<b class="nc">&nbsp;        } catch (Throwable t) {</b>
+<b class="nc">&nbsp;            throw new CacheException(t);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes all elements in the cache, but leaves the cache in a useable state.
+&nbsp;     */
+&nbsp;    public void clear() throws CacheException {
+<b class="nc">&nbsp;        if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;            log.trace(&quot;Clearing all objects from cache [&quot; + cache.getName() + &quot;]&quot;);</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="nc">&nbsp;            cache.removeAll();</b>
+<b class="nc">&nbsp;        } catch (Throwable t) {</b>
+<b class="nc">&nbsp;            throw new CacheException(t);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public int size() {
+&nbsp;        try {
+<b class="nc">&nbsp;            return cache.getSize();</b>
+<b class="nc">&nbsp;        } catch (Throwable t) {</b>
+<b class="nc">&nbsp;            throw new CacheException(t);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Set&lt;K&gt; keys() {
+&nbsp;        try {
+&nbsp;            @SuppressWarnings({&quot;unchecked&quot;})
+<b class="nc">&nbsp;            List&lt;K&gt; keys = cache.getKeys();</b>
+<b class="nc">&nbsp;            if (!isEmpty(keys)) {</b>
+<b class="nc">&nbsp;                return Collections.unmodifiableSet(new LinkedHashSet&lt;K&gt;(keys));</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return Collections.emptySet();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Throwable t) {</b>
+<b class="nc">&nbsp;            throw new CacheException(t);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;V&gt; values() {
+&nbsp;        try {
+&nbsp;            @SuppressWarnings({&quot;unchecked&quot;})
+<b class="nc">&nbsp;            List&lt;K&gt; keys = cache.getKeys();</b>
+<b class="nc">&nbsp;            if (!isEmpty(keys)) {</b>
+<b class="nc">&nbsp;                List&lt;V&gt; values = new ArrayList&lt;V&gt;(keys.size());</b>
+<b class="nc">&nbsp;                for (K key : keys) {</b>
+<b class="nc">&nbsp;                    V value = get(key);</b>
+<b class="nc">&nbsp;                    if (value != null) {</b>
+<b class="nc">&nbsp;                        values.add(value);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                return Collections.unmodifiableList(values);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return Collections.emptyList();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Throwable t) {</b>
+<b class="nc">&nbsp;            throw new CacheException(t);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the size (in bytes) that this EhCache is using in memory (RAM), or &lt;code&gt;-1&lt;/code&gt; if that
+&nbsp;     * number is unknown or cannot be calculated.
+&nbsp;     *
+&nbsp;     * @return the size (in bytes) that this EhCache is using in memory (RAM), or &lt;code&gt;-1&lt;/code&gt; if that
+&nbsp;     *         number is unknown or cannot be calculated.
+&nbsp;     */
+&nbsp;    public long getMemoryUsage() {
+&nbsp;        try {
+<b class="nc">&nbsp;            return cache.calculateInMemorySize();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        catch (Throwable t) {</b>
+<b class="nc">&nbsp;            return -1;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the size (in bytes) that this EhCache&#39;s memory store is using (RAM), or &lt;code&gt;-1&lt;/code&gt; if
+&nbsp;     * that number is unknown or cannot be calculated.
+&nbsp;     *
+&nbsp;     * @return the size (in bytes) that this EhCache&#39;s memory store is using (RAM), or &lt;code&gt;-1&lt;/code&gt; if
+&nbsp;     *         that number is unknown or cannot be calculated.
+&nbsp;     */
+&nbsp;    public long getMemoryStoreSize() {
+&nbsp;        try {
+<b class="nc">&nbsp;            return cache.getMemoryStoreSize();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        catch (Throwable t) {</b>
+<b class="nc">&nbsp;            throw new CacheException(t);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the size (in bytes) that this EhCache&#39;s disk store is consuming or &lt;code&gt;-1&lt;/code&gt; if
+&nbsp;     * that number is unknown or cannot be calculated.
+&nbsp;     *
+&nbsp;     * @return the size (in bytes) that this EhCache&#39;s disk store is consuming or &lt;code&gt;-1&lt;/code&gt; if
+&nbsp;     *         that number is unknown or cannot be calculated.
+&nbsp;     */
+&nbsp;    public long getDiskStoreSize() {
+&nbsp;        try {
+<b class="nc">&nbsp;            return cache.getDiskStoreSize();</b>
+<b class="nc">&nbsp;        } catch (Throwable t) {</b>
+<b class="nc">&nbsp;            throw new CacheException(t);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns &amp;quot;EhCache [&amp;quot; + cache.getName() + &amp;quot;]&amp;quot;
+&nbsp;     *
+&nbsp;     * @return &amp;quot;EhCache [&amp;quot; + cache.getName() + &amp;quot;]&amp;quot;
+&nbsp;     */
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;EhCache [&quot; + cache.getName() + &quot;]&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //////////////////////////
+&nbsp;    // From CollectionUtils //
+&nbsp;    //////////////////////////
+&nbsp;    // CollectionUtils cannot be removed from shiro-core until 2.0 as it has a dependency on PrincipalCollection
+&nbsp;
+&nbsp;    private static boolean isEmpty(Collection c) {
+<b class="nc">&nbsp;        return c == null || c.isEmpty();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

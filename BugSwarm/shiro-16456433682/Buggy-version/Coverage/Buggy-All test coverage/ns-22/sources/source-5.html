@@ -1,0 +1,740 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DefaultSecurityManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.mgt</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultSecurityManager (org.apache.shiro.mgt)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultSecurityManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (24/36)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    27.3%
+  </span>
+  <span class="absValue">
+    (18/66)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    44%
+  </span>
+  <span class="absValue">
+    (66/150)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.mgt;
+&nbsp;
+&nbsp;import org.apache.shiro.authc.AuthenticationException;
+&nbsp;import org.apache.shiro.authc.AuthenticationInfo;
+&nbsp;import org.apache.shiro.authc.AuthenticationToken;
+&nbsp;import org.apache.shiro.authc.Authenticator;
+&nbsp;import org.apache.shiro.authc.LogoutAware;
+&nbsp;import org.apache.shiro.authz.Authorizer;
+&nbsp;import org.apache.shiro.realm.Realm;
+&nbsp;import org.apache.shiro.session.InvalidSessionException;
+&nbsp;import org.apache.shiro.session.Session;
+&nbsp;import org.apache.shiro.session.mgt.DefaultSessionContext;
+&nbsp;import org.apache.shiro.session.mgt.DefaultSessionKey;
+&nbsp;import org.apache.shiro.session.mgt.SessionContext;
+&nbsp;import org.apache.shiro.session.mgt.SessionKey;
+&nbsp;import org.apache.shiro.subject.PrincipalCollection;
+&nbsp;import org.apache.shiro.subject.Subject;
+&nbsp;import org.apache.shiro.subject.SubjectContext;
+&nbsp;import org.apache.shiro.subject.support.DefaultSubjectContext;
+&nbsp;import org.apache.shiro.util.CollectionUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.Collection;
+&nbsp;
+&nbsp;/**
+&nbsp; * The Shiro framework&#39;s default concrete implementation of the {@link SecurityManager} interface,
+&nbsp; * based around a collection of {@link org.apache.shiro.realm.Realm}s.  This implementation delegates its
+&nbsp; * authentication, authorization, and session operations to wrapped {@link Authenticator}, {@link Authorizer}, and
+&nbsp; * {@link org.apache.shiro.session.mgt.SessionManager SessionManager} instances respectively via superclass
+&nbsp; * implementation.
+&nbsp; * &lt;p/&gt;
+&nbsp; * To greatly reduce and simplify configuration, this implementation (and its superclasses) will
+&nbsp; * create suitable defaults for all of its required dependencies, &lt;em&gt;except&lt;/em&gt; the required one or more
+&nbsp; * {@link Realm Realm}s.  Because {@code Realm} implementations usually interact with an application&#39;s data model,
+&nbsp; * they are almost always application specific;  you will want to specify at least one custom
+&nbsp; * {@code Realm} implementation that &#39;knows&#39; about your application&#39;s data/security model
+&nbsp; * (via {@link #setRealm} or one of the overloaded constructors).  All other attributes in this class hierarchy
+&nbsp; * will have suitable defaults for most enterprise applications.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;b&gt;RememberMe notice&lt;/b&gt;: This class supports the ability to configure a
+&nbsp; * {@link #setRememberMeManager RememberMeManager}
+&nbsp; * for {@code RememberMe} identity services for login/logout, BUT, a default instance &lt;em&gt;will not&lt;/em&gt; be created
+&nbsp; * for this attribute at startup.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Because RememberMe services are inherently client tier-specific and
+&nbsp; * therefore aplication-dependent, if you want {@code RememberMe} services enabled, you will have to specify an
+&nbsp; * instance yourself via the {@link #setRememberMeManager(RememberMeManager) setRememberMeManager}
+&nbsp; * mutator.  However if you&#39;re reading this JavaDoc with the
+&nbsp; * expectation of operating in a Web environment, take a look at the
+&nbsp; * {@code org.apache.shiro.web.DefaultWebSecurityManager} implementation, which
+&nbsp; * &lt;em&gt;does&lt;/em&gt; support {@code RememberMe} services by default at startup.
+&nbsp; *
+&nbsp; * @since 0.2
+&nbsp; */
+&nbsp;public class DefaultSecurityManager extends SessionsSecurityManager {
+&nbsp;
+<b class="fc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(DefaultSecurityManager.class);</b>
+&nbsp;
+&nbsp;    protected RememberMeManager rememberMeManager;
+&nbsp;    protected SubjectDAO subjectDAO;
+&nbsp;    protected SubjectFactory subjectFactory;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default no-arg constructor.
+&nbsp;     */
+&nbsp;    public DefaultSecurityManager() {
+<b class="fc">&nbsp;        super();</b>
+<b class="fc">&nbsp;        this.subjectFactory = new DefaultSubjectFactory();</b>
+<b class="fc">&nbsp;        this.subjectDAO = new DefaultSubjectDAO();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Supporting constructor for a single-realm application.
+&nbsp;     *
+&nbsp;     * @param singleRealm the single realm used by this SecurityManager.
+&nbsp;     */
+&nbsp;    public DefaultSecurityManager(Realm singleRealm) {
+<b class="fc">&nbsp;        this();</b>
+<b class="fc">&nbsp;        setRealm(singleRealm);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Supporting constructor for multiple {@link #setRealms realms}.
+&nbsp;     *
+&nbsp;     * @param realms the realm instances backing this SecurityManager.
+&nbsp;     */
+&nbsp;    public DefaultSecurityManager(Collection&lt;Realm&gt; realms) {
+<b class="nc">&nbsp;        this();</b>
+<b class="nc">&nbsp;        setRealms(realms);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@code SubjectFactory} responsible for creating {@link Subject} instances exposed to the application.
+&nbsp;     *
+&nbsp;     * @return the {@code SubjectFactory} responsible for creating {@link Subject} instances exposed to the application.
+&nbsp;     */
+&nbsp;    public SubjectFactory getSubjectFactory() {
+<b class="fc">&nbsp;        return subjectFactory;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the {@code SubjectFactory} responsible for creating {@link Subject} instances exposed to the application.
+&nbsp;     *
+&nbsp;     * @param subjectFactory the {@code SubjectFactory} responsible for creating {@link Subject} instances exposed to the application.
+&nbsp;     */
+&nbsp;    public void setSubjectFactory(SubjectFactory subjectFactory) {
+<b class="fc">&nbsp;        this.subjectFactory = subjectFactory;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@code SubjectDAO} responsible for persisting Subject state, typically used after login or when an
+&nbsp;     * Subject identity is discovered (eg after RememberMe services).  Unless configured otherwise, the default
+&nbsp;     * implementation is a {@link DefaultSubjectDAO}.
+&nbsp;     *
+&nbsp;     * @return the {@code SubjectDAO} responsible for persisting Subject state, typically used after login or when an
+&nbsp;     *         Subject identity is discovered (eg after RememberMe services).
+&nbsp;     * @see DefaultSubjectDAO
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    public SubjectDAO getSubjectDAO() {
+<b class="fc">&nbsp;        return subjectDAO;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the {@code SubjectDAO} responsible for persisting Subject state, typically used after login or when an
+&nbsp;     * Subject identity is discovered (eg after RememberMe services). Unless configured otherwise, the default
+&nbsp;     * implementation is a {@link DefaultSubjectDAO}.
+&nbsp;     *
+&nbsp;     * @param subjectDAO the {@code SubjectDAO} responsible for persisting Subject state, typically used after login or when an
+&nbsp;     *                   Subject identity is discovered (eg after RememberMe services).
+&nbsp;     * @see DefaultSubjectDAO
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    public void setSubjectDAO(SubjectDAO subjectDAO) {
+<b class="nc">&nbsp;        this.subjectDAO = subjectDAO;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public RememberMeManager getRememberMeManager() {
+<b class="fc">&nbsp;        return rememberMeManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setRememberMeManager(RememberMeManager rememberMeManager) {
+<b class="fc">&nbsp;        this.rememberMeManager = rememberMeManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected SubjectContext createSubjectContext() {
+<b class="fc">&nbsp;        return new DefaultSubjectContext();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a {@code Subject} instance for the user represented by the given method arguments.
+&nbsp;     *
+&nbsp;     * @param token    the {@code AuthenticationToken} submitted for the successful authentication.
+&nbsp;     * @param info     the {@code AuthenticationInfo} of a newly authenticated user.
+&nbsp;     * @param existing the existing {@code Subject} instance that initiated the authentication attempt
+&nbsp;     * @return the {@code Subject} instance that represents the context and session data for the newly
+&nbsp;     *         authenticated subject.
+&nbsp;     */
+&nbsp;    protected Subject createSubject(AuthenticationToken token, AuthenticationInfo info, Subject existing) {
+<b class="fc">&nbsp;        SubjectContext context = createSubjectContext();</b>
+<b class="fc">&nbsp;        context.setAuthenticated(true);</b>
+<b class="fc">&nbsp;        context.setAuthenticationToken(token);</b>
+<b class="fc">&nbsp;        context.setAuthenticationInfo(info);</b>
+<b class="fc">&nbsp;        context.setSecurityManager(this);</b>
+<b class="pc">&nbsp;        if (existing != null) {</b>
+<b class="fc">&nbsp;            context.setSubject(existing);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return createSubject(context);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Binds a {@code Subject} instance created after authentication to the application for later use.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * As of Shiro 1.2, this method has been deprecated in favor of {@link #save(org.apache.shiro.subject.Subject)},
+&nbsp;     * which this implementation now calls.
+&nbsp;     *
+&nbsp;     * @param subject the {@code Subject} instance created after authentication to be bound to the application
+&nbsp;     *                for later use.
+&nbsp;     * @see #save(org.apache.shiro.subject.Subject)
+&nbsp;     * @deprecated in favor of {@link #save(org.apache.shiro.subject.Subject) save(subject)}.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    protected void bind(Subject subject) {
+<b class="nc">&nbsp;        save(subject);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void rememberMeSuccessfulLogin(AuthenticationToken token, AuthenticationInfo info, Subject subject) {
+<b class="fc">&nbsp;        RememberMeManager rmm = getRememberMeManager();</b>
+<b class="fc">&nbsp;        if (rmm != null) {</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                rmm.onSuccessfulLogin(subject, token, info);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                if (log.isWarnEnabled()) {</b>
+<b class="nc">&nbsp;                    String msg = &quot;Delegate RememberMeManager instance of type [&quot; + rmm.getClass().getName() +</b>
+&nbsp;                            &quot;] threw an exception during onSuccessfulLogin.  RememberMe services will not be &quot; +
+&nbsp;                            &quot;performed for account [&quot; + info + &quot;].&quot;;
+<b class="nc">&nbsp;                    log.warn(msg, e);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        } else {
+<b class="pc">&nbsp;            if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;                log.trace(&quot;This &quot; + getClass().getName() + &quot; instance does not have a &quot; +</b>
+<b class="nc">&nbsp;                        &quot;[&quot; + RememberMeManager.class.getName() + &quot;] instance configured.  RememberMe services &quot; +</b>
+&nbsp;                        &quot;will not be performed for account [&quot; + info + &quot;].&quot;);
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void rememberMeFailedLogin(AuthenticationToken token, AuthenticationException ex, Subject subject) {
+<b class="nc">&nbsp;        RememberMeManager rmm = getRememberMeManager();</b>
+<b class="nc">&nbsp;        if (rmm != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                rmm.onFailedLogin(subject, token, ex);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                if (log.isWarnEnabled()) {</b>
+<b class="nc">&nbsp;                    String msg = &quot;Delegate RememberMeManager instance of type [&quot; + rmm.getClass().getName() +</b>
+&nbsp;                            &quot;] threw an exception during onFailedLogin for AuthenticationToken [&quot; +
+&nbsp;                            token + &quot;].&quot;;
+<b class="nc">&nbsp;                    log.warn(msg, e);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void rememberMeLogout(Subject subject) {
+<b class="nc">&nbsp;        RememberMeManager rmm = getRememberMeManager();</b>
+<b class="nc">&nbsp;        if (rmm != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                rmm.onLogout(subject);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                if (log.isWarnEnabled()) {</b>
+<b class="nc">&nbsp;                    String msg = &quot;Delegate RememberMeManager instance of type [&quot; + rmm.getClass().getName() +</b>
+&nbsp;                            &quot;] threw an exception during onLogout for subject with principals [&quot; +
+<b class="nc">&nbsp;                            (subject != null ? subject.getPrincipals() : null) + &quot;]&quot;;</b>
+<b class="nc">&nbsp;                    log.warn(msg, e);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * First authenticates the {@code AuthenticationToken} argument, and if successful, constructs a
+&nbsp;     * {@code Subject} instance representing the authenticated account&#39;s identity.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Once constructed, the {@code Subject} instance is then {@link #bind bound} to the application for
+&nbsp;     * subsequent access before being returned to the caller.
+&nbsp;     *
+&nbsp;     * @param token the authenticationToken to process for the login attempt.
+&nbsp;     * @return a Subject representing the authenticated user.
+&nbsp;     * @throws AuthenticationException if there is a problem authenticating the specified {@code token}.
+&nbsp;     */
+&nbsp;    public Subject login(Subject subject, AuthenticationToken token) throws AuthenticationException {
+&nbsp;        AuthenticationInfo info;
+&nbsp;        try {
+<b class="fc">&nbsp;            info = authenticate(token);</b>
+<b class="nc">&nbsp;        } catch (AuthenticationException ae) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                onFailedLogin(token, ae, subject);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                if (log.isInfoEnabled()) {</b>
+<b class="nc">&nbsp;                    log.info(&quot;onFailedLogin method threw an &quot; +</b>
+&nbsp;                            &quot;exception.  Logging and propagating original AuthenticationException.&quot;, e);
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            throw ae; //propagate</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Subject loggedIn = createSubject(token, info, subject);</b>
+&nbsp;
+<b class="fc">&nbsp;        onSuccessfulLogin(token, info, loggedIn);</b>
+&nbsp;
+<b class="fc">&nbsp;        return loggedIn;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void onSuccessfulLogin(AuthenticationToken token, AuthenticationInfo info, Subject subject) {
+<b class="fc">&nbsp;        rememberMeSuccessfulLogin(token, info, subject);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void onFailedLogin(AuthenticationToken token, AuthenticationException ae, Subject subject) {
+<b class="nc">&nbsp;        rememberMeFailedLogin(token, ae, subject);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void beforeLogout(Subject subject) {
+<b class="nc">&nbsp;        rememberMeLogout(subject);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected SubjectContext copy(SubjectContext subjectContext) {
+<b class="fc">&nbsp;        return new DefaultSubjectContext(subjectContext);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This implementation functions as follows:
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;Ensures the {@code SubjectContext} is as populated as it can be, using heuristics to acquire
+&nbsp;     * data that may not have already been available to it (such as a referenced session or remembered principals).&lt;/li&gt;
+&nbsp;     * &lt;li&gt;Calls {@link #doCreateSubject(org.apache.shiro.subject.SubjectContext)} to actually perform the
+&nbsp;     * {@code Subject} instance creation.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;calls {@link #save(org.apache.shiro.subject.Subject) save(subject)} to ensure the constructed
+&nbsp;     * {@code Subject}&#39;s state is accessible for future requests/invocations if necessary.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;returns the constructed {@code Subject} instance.&lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     *
+&nbsp;     * @param subjectContext any data needed to direct how the Subject should be constructed.
+&nbsp;     * @return the {@code Subject} instance reflecting the specified contextual data.
+&nbsp;     * @see #ensureSecurityManager(org.apache.shiro.subject.SubjectContext)
+&nbsp;     * @see #resolveSession(org.apache.shiro.subject.SubjectContext)
+&nbsp;     * @see #resolvePrincipals(org.apache.shiro.subject.SubjectContext)
+&nbsp;     * @see #doCreateSubject(org.apache.shiro.subject.SubjectContext)
+&nbsp;     * @see #save(org.apache.shiro.subject.Subject)
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    public Subject createSubject(SubjectContext subjectContext) {
+&nbsp;        //create a copy so we don&#39;t modify the argument&#39;s backing map:
+<b class="fc">&nbsp;        SubjectContext context = copy(subjectContext);</b>
+&nbsp;
+&nbsp;        //ensure that the context has a SecurityManager instance, and if not, add one:
+<b class="fc">&nbsp;        context = ensureSecurityManager(context);</b>
+&nbsp;
+&nbsp;        //Resolve an associated Session (usually based on a referenced session ID), and place it in the context before
+&nbsp;        //sending to the SubjectFactory.  The SubjectFactory should not need to know how to acquire sessions as the
+&nbsp;        //process is often environment specific - better to shield the SF from these details:
+<b class="fc">&nbsp;        context = resolveSession(context);</b>
+&nbsp;
+&nbsp;        //Similarly, the SubjectFactory should not require any concept of RememberMe - translate that here first
+&nbsp;        //if possible before handing off to the SubjectFactory:
+<b class="fc">&nbsp;        context = resolvePrincipals(context);</b>
+&nbsp;
+<b class="fc">&nbsp;        Subject subject = doCreateSubject(context);</b>
+&nbsp;
+&nbsp;        //save this subject for future reference if necessary:
+&nbsp;        //(this is needed here in case rememberMe principals were resolved and they need to be stored in the
+&nbsp;        //session, so we don&#39;t constantly rehydrate the rememberMe PrincipalCollection on every operation).
+&nbsp;        //Added in 1.2:
+<b class="fc">&nbsp;        save(subject);</b>
+&nbsp;
+<b class="fc">&nbsp;        return subject;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Actually creates a {@code Subject} instance by delegating to the internal
+&nbsp;     * {@link #getSubjectFactory() subjectFactory}.  By the time this method is invoked, all possible
+&nbsp;     * {@code SubjectContext} data (session, principals, et. al.) has been made accessible using all known heuristics
+&nbsp;     * and will be accessible to the {@code subjectFactory} via the {@code subjectContext.resolve*} methods.
+&nbsp;     *
+&nbsp;     * @param context the populated context (data map) to be used by the {@code SubjectFactory} when creating a
+&nbsp;     *                {@code Subject} instance.
+&nbsp;     * @return a {@code Subject} instance reflecting the data in the specified {@code SubjectContext} data map.
+&nbsp;     * @see #getSubjectFactory()
+&nbsp;     * @see SubjectFactory#createSubject(org.apache.shiro.subject.SubjectContext)
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    protected Subject doCreateSubject(SubjectContext context) {
+<b class="fc">&nbsp;        return getSubjectFactory().createSubject(context);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Saves the subject&#39;s state to a persistent location for future reference if necessary.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation merely delegates to the internal {@link #setSubjectDAO(SubjectDAO) subjectDAO} and calls
+&nbsp;     * {@link SubjectDAO#save(org.apache.shiro.subject.Subject) subjectDAO.save(subject)}.
+&nbsp;     *
+&nbsp;     * @param subject the subject for which state will potentially be persisted
+&nbsp;     * @see SubjectDAO#save(org.apache.shiro.subject.Subject)
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    protected void save(Subject subject) {
+<b class="fc">&nbsp;        this.subjectDAO.save(subject);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes (or &#39;unbinds&#39;) the Subject&#39;s state from the application, typically called during {@link #logout}..
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation merely delegates to the internal {@link #setSubjectDAO(SubjectDAO) subjectDAO} and calls
+&nbsp;     * {@link SubjectDAO#delete(org.apache.shiro.subject.Subject) delete(subject)}.
+&nbsp;     *
+&nbsp;     * @param subject the subject for which state will be removed
+&nbsp;     * @see SubjectDAO#delete(org.apache.shiro.subject.Subject)
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    protected void delete(Subject subject) {
+<b class="nc">&nbsp;        this.subjectDAO.delete(subject);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Determines if there is a {@code SecurityManager} instance in the context, and if not, adds &#39;this&#39; to the
+&nbsp;     * context.  This ensures the SubjectFactory instance will have access to a SecurityManager during Subject
+&nbsp;     * construction if necessary.
+&nbsp;     *
+&nbsp;     * @param context the subject context data that may contain a SecurityManager instance.
+&nbsp;     * @return The SubjectContext to use to pass to a {@link SubjectFactory} for subject creation.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;unchecked&quot;})
+&nbsp;    protected SubjectContext ensureSecurityManager(SubjectContext context) {
+<b class="pc">&nbsp;        if (context.resolveSecurityManager() != null) {</b>
+<b class="fc">&nbsp;            log.trace(&quot;Context already contains a SecurityManager instance.  Returning.&quot;);</b>
+<b class="fc">&nbsp;            return context;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        log.trace(&quot;No SecurityManager found in context.  Adding self reference.&quot;);</b>
+<b class="nc">&nbsp;        context.setSecurityManager(this);</b>
+<b class="nc">&nbsp;        return context;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Attempts to resolve any associated session based on the context and returns a
+&nbsp;     * context that represents this resolved {@code Session} to ensure it may be referenced if necessary by the
+&nbsp;     * invoked {@link SubjectFactory} that performs actual {@link Subject} construction.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If there is a {@code Session} already in the context because that is what the caller wants to be used for
+&nbsp;     * {@code Subject} construction, or if no session is resolved, this method effectively does nothing
+&nbsp;     * returns the context method argument unaltered.
+&nbsp;     *
+&nbsp;     * @param context the subject context data that may resolve a Session instance.
+&nbsp;     * @return The context to use to pass to a {@link SubjectFactory} for subject creation.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;unchecked&quot;})
+&nbsp;    protected SubjectContext resolveSession(SubjectContext context) {
+<b class="pc">&nbsp;        if (context.resolveSession() != null) {</b>
+<b class="nc">&nbsp;            log.debug(&quot;Context already contains a session.  Returning.&quot;);</b>
+<b class="nc">&nbsp;            return context;</b>
+&nbsp;        }
+&nbsp;        try {
+&nbsp;            //Context couldn&#39;t resolve it directly, let&#39;s see if we can since we have direct access to 
+&nbsp;            //the session manager:
+<b class="fc">&nbsp;            Session session = resolveContextSession(context);</b>
+<b class="fc">&nbsp;            if (session != null) {</b>
+<b class="fc">&nbsp;                context.setSession(session);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (InvalidSessionException e) {</b>
+<b class="nc">&nbsp;            log.debug(&quot;Resolved SubjectContext context session is invalid.  Ignoring and creating an anonymous &quot; +</b>
+&nbsp;                    &quot;(session-less) Subject instance.&quot;, e);
+&nbsp;        }
+<b class="fc">&nbsp;        return context;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Session resolveContextSession(SubjectContext context) throws InvalidSessionException {
+<b class="fc">&nbsp;        SessionKey key = getSessionKey(context);</b>
+<b class="fc">&nbsp;        if (key != null) {</b>
+<b class="fc">&nbsp;            return getSession(key);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected SessionKey getSessionKey(SubjectContext context) {
+<b class="fc">&nbsp;        Serializable sessionId = context.getSessionId();</b>
+<b class="pc">&nbsp;        if (sessionId != null) {</b>
+<b class="nc">&nbsp;            return new DefaultSessionKey(sessionId);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean isEmpty(PrincipalCollection pc) {
+<b class="fc">&nbsp;        return pc == null || pc.isEmpty();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Attempts to resolve an identity (a {@link PrincipalCollection}) for the context using heuristics.  This
+&nbsp;     * implementation functions as follows:
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;Check the context to see if it can already {@link SubjectContext#resolvePrincipals resolve an identity}.  If
+&nbsp;     * so, this method does nothing and returns the method argument unaltered.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;Check for a RememberMe identity by calling {@link #getRememberedIdentity}.  If that method returns a
+&nbsp;     * non-null value, place the remembered {@link PrincipalCollection} in the context.&lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     *
+&nbsp;     * @param context the subject context data that may provide (directly or indirectly through one of its values) a
+&nbsp;     *                {@link PrincipalCollection} identity.
+&nbsp;     * @return The Subject context to use to pass to a {@link SubjectFactory} for subject creation.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;unchecked&quot;})
+&nbsp;    protected SubjectContext resolvePrincipals(SubjectContext context) {
+&nbsp;
+<b class="fc">&nbsp;        PrincipalCollection principals = context.resolvePrincipals();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (isEmpty(principals)) {</b>
+<b class="fc">&nbsp;            log.trace(&quot;No identity (PrincipalCollection) found in the context.  Looking for a remembered identity.&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;            principals = getRememberedIdentity(context);</b>
+&nbsp;
+<b class="pc">&nbsp;            if (!isEmpty(principals)) {</b>
+<b class="nc">&nbsp;                log.debug(&quot;Found remembered PrincipalCollection.  Adding to the context to be used &quot; +</b>
+&nbsp;                        &quot;for subject construction by the SubjectFactory.&quot;);
+&nbsp;
+<b class="nc">&nbsp;                context.setPrincipals(principals);</b>
+&nbsp;
+&nbsp;                // The following call was removed (commented out) in Shiro 1.2 because it uses the session as an
+&nbsp;                // implementation strategy.  Session use for Shiro&#39;s own needs should be controlled in a single place
+&nbsp;                // to be more manageable for end-users: there are a number of stateless (e.g. REST) applications that
+&nbsp;                // use Shiro that need to ensure that sessions are only used when desirable.  If Shiro&#39;s internal
+&nbsp;                // implementations used Subject sessions (setting attributes) whenever we wanted, it would be much
+&nbsp;                // harder for end-users to control when/where that occurs.
+&nbsp;                //
+&nbsp;                // Because of this, the SubjectDAO was created as the single point of control, and session state logic
+&nbsp;                // has been moved to the DefaultSubjectDAO implementation.
+&nbsp;
+&nbsp;                // Removed in Shiro 1.2.  SHIRO-157 is still satisfied by the new DefaultSubjectDAO implementation
+&nbsp;                // introduced in 1.2
+&nbsp;                // Satisfies SHIRO-157:
+&nbsp;                // bindPrincipalsToSession(principals, context);
+&nbsp;
+&nbsp;            } else {
+<b class="fc">&nbsp;                log.trace(&quot;No remembered identity found.  Returning original context.&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return context;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected SessionContext createSessionContext(SubjectContext subjectContext) {
+<b class="nc">&nbsp;        DefaultSessionContext sessionContext = new DefaultSessionContext();</b>
+<b class="nc">&nbsp;        if (!CollectionUtils.isEmpty(subjectContext)) {</b>
+<b class="nc">&nbsp;            sessionContext.putAll(subjectContext);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Serializable sessionId = subjectContext.getSessionId();</b>
+<b class="nc">&nbsp;        if (sessionId != null) {</b>
+<b class="nc">&nbsp;            sessionContext.setSessionId(sessionId);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String host = subjectContext.resolveHost();</b>
+<b class="nc">&nbsp;        if (host != null) {</b>
+<b class="nc">&nbsp;            sessionContext.setHost(host);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return sessionContext;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void logout(Subject subject) {
+&nbsp;
+<b class="nc">&nbsp;        if (subject == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Subject method argument cannot be null.&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        beforeLogout(subject);</b>
+&nbsp;
+<b class="nc">&nbsp;        PrincipalCollection principals = subject.getPrincipals();</b>
+<b class="nc">&nbsp;        if (principals != null &amp;&amp; !principals.isEmpty()) {</b>
+<b class="nc">&nbsp;            if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;                log.debug(&quot;Logging out subject with primary principal {}&quot;, principals.getPrimaryPrincipal());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Authenticator authc = getAuthenticator();</b>
+<b class="nc">&nbsp;            if (authc instanceof LogoutAware) {</b>
+<b class="nc">&nbsp;                ((LogoutAware) authc).onLogout(principals);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            delete(subject);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;                String msg = &quot;Unable to cleanly unbind Subject.  Ignoring (logging out).&quot;;</b>
+<b class="nc">&nbsp;                log.debug(msg, e);</b>
+&nbsp;            }
+&nbsp;        } finally {
+<b class="nc">&nbsp;            try {</b>
+<b class="nc">&nbsp;                stopSession(subject);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;                    String msg = &quot;Unable to cleanly stop Session for Subject [&quot; + subject.getPrincipal() + &quot;] &quot; +</b>
+&nbsp;                            &quot;Ignoring (logging out).&quot;;
+<b class="nc">&nbsp;                    log.debug(msg, e);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void stopSession(Subject subject) {
+<b class="nc">&nbsp;        Session s = subject.getSession(false);</b>
+<b class="nc">&nbsp;        if (s != null) {</b>
+<b class="nc">&nbsp;            s.stop();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Unbinds or removes the Subject&#39;s state from the application, typically called during {@link #logout}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This has been deprecated in Shiro 1.2 in favor of the {@link #delete(org.apache.shiro.subject.Subject) delete}
+&nbsp;     * method.  The implementation has been updated to invoke that method.
+&nbsp;     *
+&nbsp;     * @param subject the subject to unbind from the application as it will no longer be used.
+&nbsp;     * @deprecated in Shiro 1.2 in favor of {@link #delete(org.apache.shiro.subject.Subject)}
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    protected void unbind(Subject subject) {
+<b class="nc">&nbsp;        delete(subject);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected PrincipalCollection getRememberedIdentity(SubjectContext subjectContext) {
+<b class="fc">&nbsp;        RememberMeManager rmm = getRememberMeManager();</b>
+<b class="fc">&nbsp;        if (rmm != null) {</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                return rmm.getRememberedPrincipals(subjectContext);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                if (log.isWarnEnabled()) {</b>
+<b class="nc">&nbsp;                    String msg = &quot;Delegate RememberMeManager instance of type [&quot; + rmm.getClass().getName() +</b>
+&nbsp;                            &quot;] threw an exception during getRememberedPrincipals().&quot;;
+<b class="nc">&nbsp;                    log.warn(msg, e);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

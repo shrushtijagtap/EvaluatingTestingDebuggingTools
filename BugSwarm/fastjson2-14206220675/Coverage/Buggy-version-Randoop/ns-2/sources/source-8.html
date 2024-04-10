@@ -1,0 +1,525 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONPathCompilerReflect</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONPathCompilerReflect (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONPathCompilerReflect</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    4.3%
+  </span>
+  <span class="absValue">
+    (2/46)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JSONPathCompilerReflect$NameSegmentTyped</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONPathCompilerReflect$SingleNamePathTyped</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONPathCompilerReflect$TwoNameSegmentTypedPath</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    7.7%
+  </span>
+  <span class="absValue">
+    (2/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/70)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    1.7%
+  </span>
+  <span class="absValue">
+    (2/117)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.reader.FieldReader;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReader;
+&nbsp;import com.alibaba.fastjson2.writer.FieldWriter;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriter;
+&nbsp;
+&nbsp;import java.util.function.BiFunction;
+&nbsp;
+<b class="fc">&nbsp;public class JSONPathCompilerReflect</b>
+&nbsp;        implements JSONFactory.JSONPathCompiler {
+<b class="fc">&nbsp;    static final JSONPathCompilerReflect INSTANCE = new JSONPathCompilerReflect();</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JSONPath compile(
+&nbsp;            Class objectClass, JSONPath path
+&nbsp;    ) {
+<b class="nc">&nbsp;        if (path instanceof JSONPathSingleName) {</b>
+<b class="nc">&nbsp;            return compileSingleNamePath(objectClass, (JSONPathSingleName) path);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (path instanceof JSONPathTwoSegment) {</b>
+<b class="nc">&nbsp;            JSONPathTwoSegment twoSegmentPath = (JSONPathTwoSegment) path;</b>
+&nbsp;
+<b class="nc">&nbsp;            JSONPathSegment first = compile(objectClass, path, twoSegmentPath.first, null);</b>
+<b class="nc">&nbsp;            JSONPathSegment segment = compile(objectClass, path, twoSegmentPath.second, first);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (first != twoSegmentPath.first || segment != twoSegmentPath.second) {</b>
+<b class="nc">&nbsp;                if (first instanceof NameSegmentTyped &amp;&amp; segment instanceof NameSegmentTyped) {</b>
+<b class="nc">&nbsp;                    return new TwoNameSegmentTypedPath(twoSegmentPath.path, (NameSegmentTyped) first, (NameSegmentTyped) segment);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return new JSONPathTwoSegment(twoSegmentPath.path, first, segment);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return path;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected JSONPath compileSingleNamePath(Class objectClass, JSONPathSingleName path) {
+<b class="nc">&nbsp;        String fieldName = path.name;</b>
+&nbsp;
+<b class="nc">&nbsp;        ObjectReader objectReader = path.getReaderContext().getObjectReader(objectClass);</b>
+<b class="nc">&nbsp;        FieldReader fieldReader = objectReader.getFieldReader(fieldName);</b>
+&nbsp;
+<b class="nc">&nbsp;        ObjectWriter objectWriter = path.getWriterContext().getObjectWriter(objectClass);</b>
+<b class="nc">&nbsp;        FieldWriter fieldWriter = objectWriter.getFieldWriter(fieldName);</b>
+&nbsp;
+<b class="nc">&nbsp;        return new SingleNamePathTyped(path.path, objectClass, objectReader, fieldReader, objectWriter, fieldWriter);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected JSONPathSegment compile(Class objectClass, JSONPath path, JSONPathSegment segment, JSONPathSegment parent) {
+<b class="nc">&nbsp;        if (segment instanceof JSONPathSegmentName) {</b>
+<b class="nc">&nbsp;            JSONPathSegmentName nameSegment = (JSONPathSegmentName) segment;</b>
+<b class="nc">&nbsp;            String fieldName = nameSegment.name;</b>
+&nbsp;
+<b class="nc">&nbsp;            JSONReader.Context readerContext = path.getReaderContext();</b>
+<b class="nc">&nbsp;            JSONWriter.Context writerContext = path.getWriterContext();</b>
+&nbsp;
+<b class="nc">&nbsp;            ObjectReader objectReader = null;</b>
+<b class="nc">&nbsp;            FieldReader fieldReader = null;</b>
+<b class="nc">&nbsp;            if (parent == null) {</b>
+<b class="nc">&nbsp;                objectReader = readerContext.getObjectReader(objectClass);</b>
+<b class="nc">&nbsp;            } else if (parent instanceof NameSegmentTyped) {</b>
+<b class="nc">&nbsp;                NameSegmentTyped nameSegmentTyped = (NameSegmentTyped) parent;</b>
+<b class="nc">&nbsp;                if (nameSegmentTyped.fieldReader != null) {</b>
+<b class="nc">&nbsp;                    objectReader = readerContext.getObjectReader(nameSegmentTyped.fieldReader.fieldType);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            if (objectReader != null) {</b>
+<b class="nc">&nbsp;                fieldReader = objectReader.getFieldReader(fieldName);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            ObjectWriter objectWriter = null;</b>
+<b class="nc">&nbsp;            FieldWriter fieldWriter = null;</b>
+<b class="nc">&nbsp;            if (parent == null) {</b>
+<b class="nc">&nbsp;                objectWriter = writerContext.getObjectWriter(objectClass);</b>
+<b class="nc">&nbsp;            } else if (parent instanceof NameSegmentTyped) {</b>
+<b class="nc">&nbsp;                NameSegmentTyped nameSegmentTyped = (NameSegmentTyped) parent;</b>
+<b class="nc">&nbsp;                if (nameSegmentTyped.fieldWriter != null) {</b>
+<b class="nc">&nbsp;                    objectWriter = writerContext.getObjectWriter(nameSegmentTyped.fieldWriter.fieldClass);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (objectWriter != null) {</b>
+<b class="nc">&nbsp;                fieldWriter = objectWriter.getFieldWriter(fieldName);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return new NameSegmentTyped(objectClass, objectReader, fieldReader, objectWriter, fieldWriter, fieldName, nameSegment.nameHashCode);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return segment;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class TwoNameSegmentTypedPath
+&nbsp;            extends JSONPathTwoSegment {
+&nbsp;        final NameSegmentTyped first;
+&nbsp;        final NameSegmentTyped second;
+&nbsp;        public TwoNameSegmentTypedPath(String path, NameSegmentTyped first, NameSegmentTyped second) {
+<b class="nc">&nbsp;            super(path, first, second);</b>
+<b class="nc">&nbsp;            this.first = first;</b>
+<b class="nc">&nbsp;            this.second = second;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object eval(Object root) {
+<b class="nc">&nbsp;            Object firstValue = first.fieldWriter.getFieldValue(root);</b>
+<b class="nc">&nbsp;            if (firstValue == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return second.fieldWriter.getFieldValue(firstValue);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void set(Object root, Object value) {
+<b class="nc">&nbsp;            Object firstValue = first.fieldWriter.getFieldValue(root);</b>
+<b class="nc">&nbsp;            if (firstValue == null) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            second.fieldReader.accept(firstValue, value);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void setInt(Object root, int value) {
+<b class="nc">&nbsp;            Object firstValue = first.fieldWriter.getFieldValue(root);</b>
+<b class="nc">&nbsp;            if (firstValue == null) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            second.fieldReader.accept(firstValue, value);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void setLong(Object root, long value) {
+<b class="nc">&nbsp;            Object firstValue = first.fieldWriter.getFieldValue(root);</b>
+<b class="nc">&nbsp;            if (firstValue == null) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            second.fieldReader.accept(firstValue, value);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void setCallback(Object root, BiFunction callback) {
+<b class="nc">&nbsp;            Object firstValue = first.fieldWriter.getFieldValue(root);</b>
+<b class="nc">&nbsp;            if (firstValue == null) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Object secondValue = second.fieldWriter.getFieldValue(firstValue);</b>
+<b class="nc">&nbsp;            Object secondValueApply = callback.apply(firstValue, secondValue);</b>
+<b class="nc">&nbsp;            if (secondValueApply == secondValue) {</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;            if (second.fieldReader == null) {</b>
+<b class="nc">&nbsp;                throw new UnsupportedOperationException();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            second.fieldReader.accept(firstValue, secondValueApply);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class NameSegmentTyped
+&nbsp;            extends JSONPathSegmentName {
+&nbsp;        final Class objectClass;
+&nbsp;        final FieldReader fieldReader;
+&nbsp;        final FieldWriter fieldWriter;
+&nbsp;        public NameSegmentTyped(
+&nbsp;                Class objectClass,
+&nbsp;                ObjectReader objectReader,
+&nbsp;                FieldReader fieldReader,
+&nbsp;                ObjectWriter objectWriter,
+&nbsp;                FieldWriter fieldWriter,
+&nbsp;                String name,
+&nbsp;                long nameHashCode
+&nbsp;        ) {
+<b class="nc">&nbsp;            super(name, nameHashCode);</b>
+<b class="nc">&nbsp;            this.objectClass = objectClass;</b>
+<b class="nc">&nbsp;            this.fieldReader = fieldReader;</b>
+<b class="nc">&nbsp;            this.fieldWriter = fieldWriter;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void eval(JSONPath.Context context) {
+<b class="nc">&nbsp;            if (fieldWriter == null) {</b>
+<b class="nc">&nbsp;                throw new UnsupportedOperationException();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Object object = context.parent == null</b>
+<b class="nc">&nbsp;                    ? context.root</b>
+<b class="nc">&nbsp;                    : context.parent.value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (object == null) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            context.value = fieldWriter.getFieldValue(object);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class SingleNamePathTyped
+&nbsp;            extends JSONPath {
+&nbsp;        final Class objectClass;
+&nbsp;        final ObjectReader objectReader;
+&nbsp;        final FieldReader fieldReader;
+&nbsp;        final ObjectWriter objectWriter;
+&nbsp;        final FieldWriter fieldWriter;
+&nbsp;        public SingleNamePathTyped(
+&nbsp;                String path,
+&nbsp;                Class objectClass,
+&nbsp;                ObjectReader objectReader,
+&nbsp;                FieldReader fieldReader,
+&nbsp;                ObjectWriter objectWriter,
+&nbsp;                FieldWriter fieldWriter
+&nbsp;        ) {
+<b class="nc">&nbsp;            super(path);</b>
+<b class="nc">&nbsp;            this.objectClass = objectClass;</b>
+<b class="nc">&nbsp;            this.objectReader = objectReader;</b>
+<b class="nc">&nbsp;            this.fieldReader = fieldReader;</b>
+<b class="nc">&nbsp;            this.objectWriter = objectWriter;</b>
+<b class="nc">&nbsp;            this.fieldWriter = fieldWriter;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public JSONPath getParent() {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean isRef() {
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean contains(Object rootObject) {
+<b class="nc">&nbsp;            return fieldWriter != null</b>
+<b class="nc">&nbsp;                    &amp;&amp; fieldWriter.getFieldValue(rootObject) != null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object eval(Object object) {
+<b class="nc">&nbsp;            if (fieldWriter == null) {</b>
+<b class="nc">&nbsp;                throw new UnsupportedOperationException();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return fieldWriter.getFieldValue(object);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object extract(JSONReader jsonReader) {
+<b class="nc">&nbsp;            throw new UnsupportedOperationException();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String extractScalar(JSONReader jsonReader) {
+<b class="nc">&nbsp;            throw new UnsupportedOperationException();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void set(Object rootObject, Object value) {
+<b class="nc">&nbsp;            if (fieldReader == null) {</b>
+<b class="nc">&nbsp;                throw new UnsupportedOperationException();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            fieldReader.accept(rootObject, value);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void set(Object rootObject, Object value, JSONReader.Feature... readerFeatures) {
+<b class="nc">&nbsp;            if (fieldReader == null) {</b>
+<b class="nc">&nbsp;                throw new UnsupportedOperationException();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            fieldReader.accept(rootObject, value);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void setCallback(Object rootObject, BiFunction callback) {
+<b class="nc">&nbsp;            if (fieldWriter == null) {</b>
+<b class="nc">&nbsp;                throw new UnsupportedOperationException();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Object fieldValue = fieldWriter.getFieldValue(rootObject);</b>
+<b class="nc">&nbsp;            Object fieldValueApply = callback.apply(rootObject, fieldValue);</b>
+<b class="nc">&nbsp;            if (fieldValueApply == fieldValue) {</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;            if (fieldReader == null) {</b>
+<b class="nc">&nbsp;                throw new UnsupportedOperationException();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            fieldReader.accept(rootObject, fieldValueApply);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void setInt(Object rootObject, int value) {
+<b class="nc">&nbsp;            if (fieldReader == null) {</b>
+<b class="nc">&nbsp;                throw new UnsupportedOperationException();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            fieldReader.accept(rootObject, value);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void setLong(Object rootObject, long value) {
+<b class="nc">&nbsp;            if (fieldReader == null) {</b>
+<b class="nc">&nbsp;                throw new UnsupportedOperationException();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            fieldReader.accept(rootObject, value);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean remove(Object rootObject) {
+<b class="nc">&nbsp;            throw new UnsupportedOperationException();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:40</div>
+</div>
+</body>
+</html>

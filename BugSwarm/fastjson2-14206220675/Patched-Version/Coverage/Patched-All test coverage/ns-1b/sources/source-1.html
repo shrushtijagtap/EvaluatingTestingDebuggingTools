@@ -1,0 +1,496 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EishayTest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.sonic</a>
+</div>
+
+<h1>Coverage Summary for Class: EishayTest (com.alibaba.fastjson2.benchmark.sonic)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EishayTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">EishayTest$Image</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">EishayTest$Media</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">EishayTest$MediaContent</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">EishayTest$Player</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">EishayTest$Size</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/43)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/66)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.sonic;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSON;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.util.JDKUtils;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+<b class="nc">&nbsp;public class EishayTest {</b>
+&nbsp;    public static void main(String[] args) throws Exception {
+<b class="nc">&nbsp;        String str = &quot;{\&quot;images\&quot;: [{\n&quot; +</b>
+&nbsp;                &quot;      \&quot;height\&quot;:768,\n&quot; +
+&nbsp;                &quot;      \&quot;size\&quot;:\&quot;LARGE\&quot;,\n&quot; +
+&nbsp;                &quot;      \&quot;title\&quot;:\&quot;Javaone Keynote\&quot;,\n&quot; +
+&nbsp;                &quot;      \&quot;uri\&quot;:\&quot;http://javaone.com/keynote_large.jpg\&quot;,\n&quot; +
+&nbsp;                &quot;      \&quot;width\&quot;:1024\n&quot; +
+&nbsp;                &quot;    }, {\n&quot; +
+&nbsp;                &quot;      \&quot;height\&quot;:240,\n&quot; +
+&nbsp;                &quot;      \&quot;size\&quot;:\&quot;SMALL\&quot;,\n&quot; +
+&nbsp;                &quot;      \&quot;title\&quot;:\&quot;Javaone Keynote\&quot;,\n&quot; +
+&nbsp;                &quot;      \&quot;uri\&quot;:\&quot;http://javaone.com/keynote_small.jpg\&quot;,\n&quot; +
+&nbsp;                &quot;      \&quot;width\&quot;:320\n&quot; +
+&nbsp;                &quot;    }\n&quot; +
+&nbsp;                &quot;  ],\n&quot; +
+&nbsp;                &quot;  \&quot;media\&quot;: {\n&quot; +
+&nbsp;                &quot;    \&quot;bitrate\&quot;:262144,\n&quot; +
+&nbsp;                &quot;    \&quot;duration\&quot;:18000000,\n&quot; +
+&nbsp;                &quot;    \&quot;format\&quot;:\&quot;video/mpg4\&quot;,\n&quot; +
+&nbsp;                &quot;    \&quot;height\&quot;:480,\n&quot; +
+&nbsp;                &quot;    \&quot;persons\&quot;: [\n&quot; +
+&nbsp;                &quot;      \&quot;Bill Gates\&quot;,\n&quot; +
+&nbsp;                &quot;      \&quot;Steve Jobs\&quot;\n&quot; +
+&nbsp;                &quot;    ],\n&quot; +
+&nbsp;                &quot;    \&quot;player\&quot;:\&quot;JAVA\&quot;,\n&quot; +
+&nbsp;                &quot;    \&quot;size\&quot;:58982400,\n&quot; +
+&nbsp;                &quot;    \&quot;title\&quot;:\&quot;Javaone Keynote\&quot;,\n&quot; +
+&nbsp;                &quot;    \&quot;uri\&quot;:\&quot;http://javaone.com/keynote.mpg\&quot;,\n&quot; +
+&nbsp;                &quot;    \&quot;width\&quot;:640\n&quot; +
+&nbsp;                &quot;  }\n&quot; +
+&nbsp;                &quot;}&quot;;
+&nbsp;
+<b class="nc">&nbsp;        System.out.println(&quot;JDKUtils_vector_bit_length : &quot; + JDKUtils.VECTOR_BIT_LENGTH);</b>
+&nbsp;
+<b class="nc">&nbsp;        JSONReader reader = JSONReader.of(str);</b>
+<b class="nc">&nbsp;        reader.close();</b>
+<b class="nc">&nbsp;        System.out.println(&quot;reader class : &quot; + reader.getClass().getName());</b>
+&nbsp;
+<b class="nc">&nbsp;        JSONWriter writer = JSONWriter.of();</b>
+<b class="nc">&nbsp;        writer.close();</b>
+<b class="nc">&nbsp;        System.out.println(&quot;writer class : &quot; + writer.getClass().getName());</b>
+&nbsp;
+<b class="nc">&nbsp;        MediaContent mediaContent = JSON.parseObject(str, MediaContent.class);</b>
+&nbsp;
+<b class="nc">&nbsp;        int LOOP_COUNT = 1000000;</b>
+<b class="nc">&nbsp;        for (int j = 0; j &lt; 5; ++j) {</b>
+<b class="nc">&nbsp;            long start = System.currentTimeMillis();</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; LOOP_COUNT; i++) {</b>
+<b class="nc">&nbsp;                JSON.toJSONString(mediaContent);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            long millis = System.currentTimeMillis() - start;</b>
+<b class="nc">&nbsp;            System.out.println(&quot;fastjson2 eishay toJSONString time : &quot; + millis);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        for (int j = 0; j &lt; 5; ++j) {</b>
+<b class="nc">&nbsp;            long start = System.currentTimeMillis();</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; LOOP_COUNT; i++) {</b>
+<b class="nc">&nbsp;                JSON.parseObject(str, MediaContent.class);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            long millis = System.currentTimeMillis() - start;</b>
+<b class="nc">&nbsp;            System.out.println(&quot;fastjson2 eishay parseObject time : &quot; + millis);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // write 325
+&nbsp;        // parse 599
+&nbsp;
+&nbsp;        // write_vec : 266
+&nbsp;        // parse_vec : 572
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class MediaContent
+&nbsp;            implements java.io.Serializable {
+&nbsp;        public Media media;
+&nbsp;        public List&lt;Image&gt; images;
+&nbsp;
+<b class="nc">&nbsp;        public MediaContent() {</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setMedia(Media media) {
+<b class="nc">&nbsp;            this.media = media;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setImages(List&lt;Image&gt; images) {
+<b class="nc">&nbsp;            this.images = images;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Media getMedia() {
+<b class="nc">&nbsp;            return media;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public List&lt;Image&gt; getImages() {
+<b class="nc">&nbsp;            return images;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public enum Size {</b>
+<b class="nc">&nbsp;        SMALL, LARGE</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class Image
+&nbsp;            implements java.io.Serializable {
+&nbsp;        private int height;
+&nbsp;        private Size size;
+&nbsp;        private String title;
+&nbsp;        private String uri;
+&nbsp;        private int width;
+&nbsp;
+<b class="nc">&nbsp;        public Image() {</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setUri(String uri) {
+<b class="nc">&nbsp;            this.uri = uri;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setTitle(String title) {
+<b class="nc">&nbsp;            this.title = title;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setWidth(int width) {
+<b class="nc">&nbsp;            this.width = width;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setHeight(int height) {
+<b class="nc">&nbsp;            this.height = height;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setSize(Size size) {
+<b class="nc">&nbsp;            this.size = size;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getUri() {
+<b class="nc">&nbsp;            return uri;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getTitle() {
+<b class="nc">&nbsp;            return title;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getWidth() {
+<b class="nc">&nbsp;            return width;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getHeight() {
+<b class="nc">&nbsp;            return height;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Size getSize() {
+<b class="nc">&nbsp;            return size;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public enum Player {</b>
+<b class="nc">&nbsp;        JAVA, FLASH</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class Media
+&nbsp;            implements java.io.Serializable {
+&nbsp;        private int bitrate;   // Can be unset.
+&nbsp;        private long duration;
+&nbsp;        private String format;
+&nbsp;        private int height;
+&nbsp;        private List&lt;String&gt; persons;
+&nbsp;        private Player player;
+&nbsp;        private long size;
+&nbsp;        private String title;
+&nbsp;        private String uri;
+&nbsp;        private int width;
+&nbsp;        private String copyright;
+&nbsp;
+<b class="nc">&nbsp;        public Media() {</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getUri() {
+<b class="nc">&nbsp;            return uri;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setUri(String uri) {
+<b class="nc">&nbsp;            this.uri = uri;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getTitle() {
+<b class="nc">&nbsp;            return title;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setTitle(String title) {
+<b class="nc">&nbsp;            this.title = title;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getWidth() {
+<b class="nc">&nbsp;            return width;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setWidth(int width) {
+<b class="nc">&nbsp;            this.width = width;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getHeight() {
+<b class="nc">&nbsp;            return height;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setHeight(int height) {
+<b class="nc">&nbsp;            this.height = height;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getFormat() {
+<b class="nc">&nbsp;            return format;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setFormat(String format) {
+<b class="nc">&nbsp;            this.format = format;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public long getDuration() {
+<b class="nc">&nbsp;            return duration;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setDuration(long duration) {
+<b class="nc">&nbsp;            this.duration = duration;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public long getSize() {
+<b class="nc">&nbsp;            return size;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setSize(long size) {
+<b class="nc">&nbsp;            this.size = size;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getBitrate() {
+<b class="nc">&nbsp;            return bitrate;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setBitrate(int bitrate) {
+<b class="nc">&nbsp;            this.bitrate = bitrate;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public List&lt;String&gt; getPersons() {
+<b class="nc">&nbsp;            return persons;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setPersons(List&lt;String&gt; persons) {
+<b class="nc">&nbsp;            this.persons = persons;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Player getPlayer() {
+<b class="nc">&nbsp;            return player;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setPlayer(Player player) {
+<b class="nc">&nbsp;            this.player = player;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getCopyright() {
+<b class="nc">&nbsp;            return copyright;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setCopyright(String copyright) {
+<b class="nc">&nbsp;            this.copyright = copyright;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:20</div>
+</div>
+</body>
+</html>

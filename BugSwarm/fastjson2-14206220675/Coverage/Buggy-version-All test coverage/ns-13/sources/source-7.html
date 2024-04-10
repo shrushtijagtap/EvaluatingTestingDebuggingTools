@@ -1,0 +1,240 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Fnv</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.util</a>
+</div>
+
+<h1>Coverage Summary for Class: Fnv (com.alibaba.fastjson2.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Fnv</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    24.3%
+  </span>
+  <span class="absValue">
+    (18/74)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (21/63)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.util;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONFactory.MIXED_HASH_ALGORITHM;
+&nbsp;
+&nbsp;// fnv1a 64
+<b class="nc">&nbsp;public final class Fnv {</b>
+&nbsp;    public static final long MAGIC_HASH_CODE = 0xcbf29ce484222325L;
+&nbsp;    public static final long MAGIC_PRIME = 0x100000001b3L;
+&nbsp;
+&nbsp;    public static long hashCode64LCase(String name) {
+<b class="nc">&nbsp;        if (MIXED_HASH_ALGORITHM) {</b>
+<b class="nc">&nbsp;            boolean ascii = true;</b>
+<b class="nc">&nbsp;            long nameValue = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;            int scoreCount = 0;</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; name.length(); ++i) {</b>
+<b class="nc">&nbsp;                char ch = name.charAt(i);</b>
+<b class="nc">&nbsp;                if (ch &gt; 0xFF || (i == 0 &amp;&amp; ch == 0)) {</b>
+<b class="nc">&nbsp;                    ascii = false;</b>
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (ch == &#39;-&#39; || ch == &#39;_&#39; || ch == &#39; &#39;) {</b>
+<b class="nc">&nbsp;                    scoreCount++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (ascii &amp;&amp; (name.length() - scoreCount) &lt;= 8) {</b>
+<b class="nc">&nbsp;                for (int i = name.length() - 1, j = 0; i &gt;= 0; --i) {</b>
+<b class="nc">&nbsp;                    char ch = name.charAt(i);</b>
+<b class="nc">&nbsp;                    if (ch == &#39;-&#39; || ch == &#39;_&#39; || ch == &#39; &#39;) {</b>
+&nbsp;                        continue;
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (ch &gt;= &#39;A&#39; &amp;&amp; ch &lt;= &#39;Z&#39;) {</b>
+<b class="nc">&nbsp;                        ch = (char) (ch + 32);</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (j == 0) {</b>
+<b class="nc">&nbsp;                        nameValue = (byte) ch;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        nameValue &lt;&lt;= 8;</b>
+<b class="nc">&nbsp;                        nameValue += ch;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    j++;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (nameValue != 0) {</b>
+<b class="nc">&nbsp;                    return nameValue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long hashCode = MAGIC_HASH_CODE;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; name.length(); ++i) {</b>
+<b class="nc">&nbsp;            char ch = name.charAt(i);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (ch == &#39;-&#39; || ch == &#39;_&#39; || ch == &#39; &#39;) {</b>
+&nbsp;                continue;
+&nbsp;            }
+<b class="nc">&nbsp;            if (ch &gt;= &#39;A&#39; &amp;&amp; ch &lt;= &#39;Z&#39;) {</b>
+<b class="nc">&nbsp;                ch = (char) (ch + 32);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            hashCode ^= ch;</b>
+<b class="nc">&nbsp;            hashCode *= MAGIC_PRIME;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return hashCode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static long hashCode64(String... names) {
+<b class="nc">&nbsp;        if (names.length == 1) {</b>
+<b class="nc">&nbsp;            return hashCode64(names[0]);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long hashCode = MAGIC_HASH_CODE;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (String name : names) {</b>
+<b class="nc">&nbsp;            long h = hashCode64(name);</b>
+<b class="nc">&nbsp;            hashCode ^= h;</b>
+<b class="nc">&nbsp;            hashCode *= MAGIC_PRIME;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return hashCode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static long hashCode64(String name) {
+<b class="pc">&nbsp;        if (MIXED_HASH_ALGORITHM &amp;&amp; name.length() &lt;= 8) {</b>
+<b class="fc">&nbsp;            boolean ascii = true;</b>
+<b class="fc">&nbsp;            long nameValue = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;            for (int i = 0; i &lt; name.length(); ++i) {</b>
+<b class="fc">&nbsp;                char ch = name.charAt(i);</b>
+<b class="pc">&nbsp;                if (ch &gt; 0xFF || (i == 0 &amp;&amp; ch == 0)) {</b>
+<b class="nc">&nbsp;                    ascii = false;</b>
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="pc">&nbsp;            if (ascii) {</b>
+<b class="fc">&nbsp;                for (int i = name.length() - 1; i &gt;= 0; --i) {</b>
+<b class="fc">&nbsp;                    char ch = name.charAt(i);</b>
+<b class="fc">&nbsp;                    if (i == name.length() - 1) {</b>
+<b class="fc">&nbsp;                        nameValue = (byte) ch;</b>
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        nameValue &lt;&lt;= 8;</b>
+<b class="fc">&nbsp;                        nameValue += ch;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (nameValue != 0) {</b>
+<b class="fc">&nbsp;                    return nameValue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        long hashCode = MAGIC_HASH_CODE;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; name.length(); ++i) {</b>
+<b class="fc">&nbsp;            char ch = name.charAt(i);</b>
+<b class="fc">&nbsp;            hashCode ^= ch;</b>
+<b class="fc">&nbsp;            hashCode *= MAGIC_PRIME;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return hashCode;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:42</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":82,"id":44356,"methods":[{"el":27,"sc":5,"sl":20},{"el":36,"sc":5,"sl":29},{"el":45,"sc":5,"sl":38},{"el":54,"sc":5,"sl":47},{"el":59,"sc":5,"sl":56},{"el":68,"sc":5,"sl":61},{"el":77,"sc":5,"sl":70},{"el":81,"sc":5,"sl":79}],"name":"JSONTest2","sl":18}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_1144":{"methods":[{"sl":47}],"name":"test_3","pass":true,"statements":[{"sl":48},{"sl":49},{"sl":50},{"sl":51},{"sl":52},{"sl":53}]},"test_1256":{"methods":[{"sl":79}],"name":"test_7","pass":true,"statements":[{"sl":80}]},"test_1439":{"methods":[{"sl":38}],"name":"test_2","pass":true,"statements":[{"sl":39},{"sl":40},{"sl":41},{"sl":42},{"sl":43},{"sl":44}]},"test_1514":{"methods":[{"sl":56}],"name":"test_4","pass":true,"statements":[{"sl":57},{"sl":58}]},"test_227":{"methods":[{"sl":20}],"name":"test_0","pass":true,"statements":[{"sl":21},{"sl":22},{"sl":23},{"sl":24},{"sl":25},{"sl":26}]},"test_2552":{"methods":[{"sl":70}],"name":"test_6","pass":true,"statements":[{"sl":71},{"sl":72},{"sl":73},{"sl":74},{"sl":75},{"sl":76}]},"test_3801":{"methods":[{"sl":61}],"name":"test_5","pass":true,"statements":[{"sl":62},{"sl":63},{"sl":64},{"sl":65},{"sl":66},{"sl":67}]},"test_4331":{"methods":[{"sl":29}],"name":"test_1","pass":true,"statements":[{"sl":30},{"sl":31},{"sl":32},{"sl":33},{"sl":34},{"sl":35}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [227], [227], [227], [227], [227], [227], [227], [], [], [4331], [4331], [4331], [4331], [4331], [4331], [4331], [], [], [1439], [1439], [1439], [1439], [1439], [1439], [1439], [], [], [1144], [1144], [1144], [1144], [1144], [1144], [1144], [], [], [1514], [1514], [1514], [], [], [3801], [3801], [3801], [3801], [3801], [3801], [3801], [], [], [2552], [2552], [2552], [2552], [2552], [2552], [2552], [], [], [1256], [1256], [], []]

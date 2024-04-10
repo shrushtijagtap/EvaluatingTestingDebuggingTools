@@ -1,0 +1,399 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractContainerIT</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.testing.web</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractContainerIT (org.apache.shiro.testing.web)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractContainerIT</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/48)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AbstractContainerIT$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AbstractContainerIT$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/75)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.testing.web;
+&nbsp;
+&nbsp;import org.apache.shiro.codec.Base64;
+&nbsp;
+&nbsp;import com.gargoylesoftware.htmlunit.WebClient;
+&nbsp;import com.github.mjeanroy.junit.servers.jetty.EmbeddedJetty;
+&nbsp;import com.github.mjeanroy.junit.servers.jetty.EmbeddedJettyConfiguration;
+&nbsp;import org.eclipse.jetty.annotations.AnnotationConfiguration;
+&nbsp;import org.eclipse.jetty.http.HttpVersion;
+&nbsp;import org.eclipse.jetty.server.HttpConfiguration;
+&nbsp;import org.eclipse.jetty.server.HttpConnectionFactory;
+&nbsp;import org.eclipse.jetty.server.SecureRequestCustomizer;
+&nbsp;import org.eclipse.jetty.server.Server;
+&nbsp;import org.eclipse.jetty.server.ServerConnector;
+&nbsp;import org.eclipse.jetty.server.SslConnectionFactory;
+&nbsp;import org.eclipse.jetty.util.resource.FileResource;
+&nbsp;import org.eclipse.jetty.util.ssl.SslContextFactory;
+&nbsp;import org.eclipse.jetty.webapp.Configuration;
+&nbsp;import org.eclipse.jetty.webapp.FragmentConfiguration;
+&nbsp;import org.eclipse.jetty.webapp.JettyWebXmlConfiguration;
+&nbsp;import org.eclipse.jetty.webapp.MetaInfConfiguration;
+&nbsp;import org.eclipse.jetty.webapp.WebAppContext;
+&nbsp;import org.eclipse.jetty.webapp.WebInfConfiguration;
+&nbsp;import org.eclipse.jetty.webapp.WebXmlConfiguration;
+&nbsp;import org.junit.AfterClass;
+&nbsp;import org.junit.Before;
+&nbsp;import org.junit.BeforeClass;
+&nbsp;
+&nbsp;import java.io.File;
+&nbsp;import java.io.FilenameFilter;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.UnsupportedEncodingException;
+&nbsp;import java.net.ServerSocket;
+&nbsp;import java.net.URL;
+&nbsp;import java.nio.file.Files;
+&nbsp;import java.nio.file.Path;
+&nbsp;import java.nio.file.StandardCopyOption;
+&nbsp;
+&nbsp;import static com.github.mjeanroy.junit.servers.commons.Strings.isNotBlank;
+&nbsp;import static org.eclipse.jetty.util.resource.Resource.newResource;
+&nbsp;import static org.junit.Assert.assertEquals;
+&nbsp;import static org.junit.Assert.assertTrue;
+&nbsp;
+<b class="nc">&nbsp;public abstract class AbstractContainerIT {</b>
+&nbsp;
+&nbsp;    protected static EmbeddedJetty jetty;
+&nbsp;
+&nbsp;    protected static int tlsPort;
+&nbsp;
+<b class="nc">&nbsp;    protected final WebClient webClient = new WebClient();</b>
+&nbsp;
+<b class="nc">&nbsp;    protected static final File TEST_KEYSTORE_PATH = setupKeyStore();</b>
+&nbsp;    protected static final String TEST_KEYSTORE_PASSWORD = &quot;password&quot;;
+&nbsp;
+&nbsp;    @BeforeClass
+&nbsp;    public static void startContainer() throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        EmbeddedJettyConfiguration config = EmbeddedJettyConfiguration.builder()</b>
+<b class="nc">&nbsp;                .withWebapp(getWarDir())</b>
+<b class="nc">&nbsp;                .build();</b>
+&nbsp;
+<b class="nc">&nbsp;        jetty = new EmbeddedJetty(config) {</b>
+&nbsp;
+&nbsp;            /**
+&nbsp;             * Overriding with contents of this pull request, to make fragment scanning work.
+&nbsp;             * https://github.com/mjeanroy/junit-servers/pull/3
+&nbsp;             */
+&nbsp;            protected WebAppContext createdWebAppContext() throws Exception {
+<b class="nc">&nbsp;                final String path = configuration.getPath();</b>
+<b class="nc">&nbsp;                final String webapp = configuration.getWebapp();</b>
+<b class="nc">&nbsp;                final String classpath = configuration.getClasspath();</b>
+&nbsp;
+<b class="nc">&nbsp;                WebAppContext ctx = new WebAppContext();</b>
+<b class="nc">&nbsp;                ctx.setClassLoader(Thread.currentThread().getContextClassLoader());</b>
+<b class="nc">&nbsp;                ctx.setContextPath(path);</b>
+&nbsp;
+&nbsp;                // Useful for WebXmlConfiguration
+<b class="nc">&nbsp;                ctx.setBaseResource(newResource(webapp));</b>
+&nbsp;
+<b class="nc">&nbsp;                ctx.setConfigurations(new Configuration[]{</b>
+<b class="nc">&nbsp;                        new WebInfConfiguration(),</b>
+<b class="nc">&nbsp;                        new WebXmlConfiguration(),</b>
+<b class="nc">&nbsp;                        new AnnotationConfiguration(),</b>
+<b class="nc">&nbsp;                        new JettyWebXmlConfiguration(),</b>
+<b class="nc">&nbsp;                        new MetaInfConfiguration(),</b>
+<b class="nc">&nbsp;                        new FragmentConfiguration(),</b>
+&nbsp;                });
+&nbsp;
+<b class="nc">&nbsp;                if (isNotBlank(classpath)) {</b>
+&nbsp;                    // Fix to scan Spring WebApplicationInitializer
+&nbsp;                    // This will add compiled classes to jetty classpath
+&nbsp;                    // See: http://stackoverflow.com/questions/13222071/spring-3-1-webapplicationinitializer-embedded-jetty-8-annotationconfiguration
+&nbsp;                    // And more precisely: http://stackoverflow.com/a/18449506/1215828
+<b class="nc">&nbsp;                    File classes = new File(classpath);</b>
+<b class="nc">&nbsp;                    FileResource containerResources = new FileResource(classes.toURI());</b>
+<b class="nc">&nbsp;                    ctx.getMetaData().addContainerResource(containerResources);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Server server = getDelegate();</b>
+&nbsp;
+&nbsp;                // web app
+<b class="nc">&nbsp;                ctx.setParentLoaderPriority(true);</b>
+<b class="nc">&nbsp;                ctx.setWar(webapp);</b>
+<b class="nc">&nbsp;                ctx.setServer(server);</b>
+&nbsp;
+&nbsp;                // Add server context
+<b class="nc">&nbsp;                server.setHandler(ctx);</b>
+&nbsp;
+<b class="nc">&nbsp;                return ctx;</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;
+<b class="nc">&nbsp;        Server server = jetty.getDelegate();</b>
+&nbsp;
+&nbsp;        // TLS
+<b class="nc">&nbsp;        tlsPort = getFreePort();</b>
+&nbsp;
+<b class="nc">&nbsp;        final SslContextFactory sslContextFactory = new SslContextFactory.Server();</b>
+<b class="nc">&nbsp;        sslContextFactory.setKeyStorePath(TEST_KEYSTORE_PATH.getAbsolutePath());</b>
+<b class="nc">&nbsp;        sslContextFactory.setKeyStorePassword(TEST_KEYSTORE_PASSWORD);</b>
+<b class="nc">&nbsp;        sslContextFactory.setKeyManagerPassword(TEST_KEYSTORE_PASSWORD);</b>
+&nbsp;
+<b class="nc">&nbsp;        HttpConfiguration https = new HttpConfiguration();</b>
+<b class="nc">&nbsp;        https.addCustomizer(new SecureRequestCustomizer());</b>
+&nbsp;
+<b class="nc">&nbsp;        final ServerConnector httpsConnector = new ServerConnector(</b>
+<b class="nc">&nbsp;                server,</b>
+<b class="nc">&nbsp;                new SslConnectionFactory(sslContextFactory, HttpVersion.HTTP_1_1.asString()),</b>
+<b class="nc">&nbsp;                new HttpConnectionFactory(https));</b>
+<b class="nc">&nbsp;        httpsConnector.setPort(tlsPort);</b>
+<b class="nc">&nbsp;        server.addConnector(httpsConnector);</b>
+&nbsp;
+<b class="nc">&nbsp;        jetty.start();</b>
+&nbsp;
+<b class="nc">&nbsp;        assertTrue(jetty.isStarted());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static String getBaseUri() {
+<b class="nc">&nbsp;        return &quot;http://localhost:&quot; + jetty.getPort() + &quot;/&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static String getTlsBaseUri() {
+<b class="nc">&nbsp;        return &quot;https://localhost:&quot; + tlsPort + &quot;/&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static String getWarDir() {
+<b class="nc">&nbsp;        File[] warFiles = new File(&quot;target&quot;).listFiles(new FilenameFilter() {</b>
+&nbsp;            @Override
+&nbsp;            public boolean accept(File dir, String name) {
+<b class="nc">&nbsp;                return name.endsWith(&quot;.war&quot;);</b>
+&nbsp;            }
+&nbsp;        });
+&nbsp;
+<b class="nc">&nbsp;        assertEquals(&quot;Expected only one war file in target directory, run &#39;mvn clean&#39; and try again&quot;, 1, warFiles.length);</b>
+&nbsp;
+<b class="nc">&nbsp;        return warFiles[0].getAbsolutePath().replaceFirst(&quot;\\.war$&quot;, &quot;&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static String getBasicAuthorizationHeaderValue(String username, String password) throws UnsupportedEncodingException {
+<b class="nc">&nbsp;        String authorizationHeader = username + &quot;:&quot; + password;</b>
+&nbsp;        byte[] valueBytes;
+<b class="nc">&nbsp;        valueBytes = authorizationHeader.getBytes(&quot;UTF-8&quot;);</b>
+<b class="nc">&nbsp;        authorizationHeader = new String(Base64.encode(valueBytes));</b>
+<b class="nc">&nbsp;        return &quot;Basic &quot; + authorizationHeader;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Before
+&nbsp;    public void beforeTest() {
+<b class="nc">&nbsp;        webClient.getOptions().setThrowExceptionOnFailingStatusCode(true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @AfterClass
+&nbsp;    public static void stopContainer() {
+<b class="nc">&nbsp;        if (jetty != null) {</b>
+<b class="nc">&nbsp;            jetty.stop();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int getFreePort() {
+<b class="nc">&nbsp;        try (ServerSocket socket = new ServerSocket(0)) {</b>
+<b class="nc">&nbsp;            return socket.getLocalPort();</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Failed to allocate free port&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // Dealing with a keystore is NOT fun, it&#39;s easier to script one with the keytool
+&nbsp;    // see src/main/resources/createKeyStore.sh for more info
+&nbsp;    private static File setupKeyStore() {
+&nbsp;        try {
+<b class="nc">&nbsp;            Path outKeyStoreFile = File.createTempFile(&quot;test-keystore&quot;, &quot;jks&quot;).toPath();</b>
+<b class="nc">&nbsp;            URL keyStoreResource = Thread.currentThread().getContextClassLoader().getResource(&quot;test-keystore.jks&quot;);</b>
+<b class="nc">&nbsp;            Files.copy(keyStoreResource.openStream(), outKeyStoreFile, StandardCopyOption.REPLACE_EXISTING);</b>
+<b class="nc">&nbsp;            File keyStoreFile = outKeyStoreFile.toFile();</b>
+&nbsp;
+&nbsp;            // clients will pick up the ssl keystore this way, so just set SSL properties
+<b class="nc">&nbsp;            System.setProperty(&quot;javax.net.ssl.trustStore&quot;, keyStoreFile.getAbsolutePath());</b>
+<b class="nc">&nbsp;            System.setProperty(&quot;javax.net.ssl.trustStorePassword&quot;, TEST_KEYSTORE_PASSWORD);</b>
+<b class="nc">&nbsp;            return keyStoreFile;</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Failed to create test keystore&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

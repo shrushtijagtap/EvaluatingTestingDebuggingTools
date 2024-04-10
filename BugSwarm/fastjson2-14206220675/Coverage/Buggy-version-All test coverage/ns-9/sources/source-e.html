@@ -1,0 +1,216 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TypeCollector</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.internal.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: TypeCollector (com.alibaba.fastjson2.internal.asm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TypeCollector</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/44)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.internal.asm;
+&nbsp;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;public class TypeCollector {
+&nbsp;//    static final String JSON_TYPE = ASMUtils.desc(JSONType.class);
+&nbsp;    static final Map&lt;String, String&gt; PRIMITIVES;
+&nbsp;
+&nbsp;    static {
+<b class="nc">&nbsp;        HashMap map = new HashMap();</b>
+<b class="nc">&nbsp;        map.put(&quot;int&quot;, &quot;I&quot;);</b>
+<b class="nc">&nbsp;        map.put(&quot;boolean&quot;, &quot;Z&quot;);</b>
+<b class="nc">&nbsp;        map.put(&quot;byte&quot;, &quot;B&quot;);</b>
+<b class="nc">&nbsp;        map.put(&quot;char&quot;, &quot;C&quot;);</b>
+<b class="nc">&nbsp;        map.put(&quot;short&quot;, &quot;S&quot;);</b>
+<b class="nc">&nbsp;        map.put(&quot;float&quot;, &quot;F&quot;);</b>
+<b class="nc">&nbsp;        map.put(&quot;long&quot;, &quot;J&quot;);</b>
+<b class="nc">&nbsp;        map.put(&quot;double&quot;, &quot;D&quot;);</b>
+<b class="nc">&nbsp;        PRIMITIVES = map;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    final String methodName;
+&nbsp;
+&nbsp;    final Class&lt;?&gt;[] parameterTypes;
+&nbsp;
+&nbsp;    protected MethodCollector collector;
+&nbsp;
+&nbsp;//    protected boolean jsonType;
+&nbsp;
+<b class="nc">&nbsp;    public TypeCollector(String methodName, Class&lt;?&gt;[] parameterTypes) {</b>
+<b class="nc">&nbsp;        this.methodName = methodName;</b>
+<b class="nc">&nbsp;        this.parameterTypes = parameterTypes;</b>
+<b class="nc">&nbsp;        this.collector = null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected MethodCollector visitMethod(int access, String name, String desc) {
+<b class="nc">&nbsp;        if (collector != null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!name.equals(methodName)) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Type[] argTypes = Type.getArgumentTypes(desc);</b>
+<b class="nc">&nbsp;        int longOrDoubleQuantity = 0;</b>
+<b class="nc">&nbsp;        for (Type t : argTypes) {</b>
+<b class="nc">&nbsp;            String className = t.getClassName();</b>
+<b class="nc">&nbsp;            if (&quot;long&quot;.equals(className) || &quot;double&quot;.equals(className)) {</b>
+<b class="nc">&nbsp;                longOrDoubleQuantity++;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (argTypes.length != this.parameterTypes.length) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        for (int i = 0; i &lt; argTypes.length; i++) {</b>
+<b class="nc">&nbsp;            if (!correctTypeName(argTypes[i], this.parameterTypes[i].getName())) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return collector = new MethodCollector(</b>
+<b class="nc">&nbsp;                Modifier.isStatic(access) ? 0 : 1,</b>
+&nbsp;                argTypes.length + longOrDoubleQuantity);
+&nbsp;    }
+&nbsp;//
+&nbsp;//    public void visitAnnotation(String desc) {
+&nbsp;//        if (JSON_TYPE.equals(desc)) {
+&nbsp;//            jsonType = true;
+&nbsp;//        }
+&nbsp;//    }
+&nbsp;
+&nbsp;    private boolean correctTypeName(Type type, String paramTypeName) {
+<b class="nc">&nbsp;        String s = type.getClassName();</b>
+&nbsp;        // array notation needs cleanup.
+<b class="nc">&nbsp;        StringBuilder braces = new StringBuilder();</b>
+<b class="nc">&nbsp;        while (s.endsWith(&quot;[]&quot;)) {</b>
+<b class="nc">&nbsp;            braces.append(&#39;[&#39;);</b>
+<b class="nc">&nbsp;            s = s.substring(0, s.length() - 2);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (braces.length() != 0) {</b>
+<b class="nc">&nbsp;            if (PRIMITIVES.containsKey(s)) {</b>
+<b class="nc">&nbsp;                s = braces.append(PRIMITIVES.get(s)).toString();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                s = braces.append(&#39;L&#39;).append(s).append(&#39;;&#39;).toString();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return s.equals(paramTypeName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String[] getParameterNamesForMethod() {
+<b class="nc">&nbsp;        if (collector == null || !collector.debugInfoPresent) {</b>
+<b class="nc">&nbsp;            return new String[0];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return collector.getResult().split(&quot;,&quot;);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:42</div>
+</div>
+</body>
+</html>

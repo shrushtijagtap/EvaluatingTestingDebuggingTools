@@ -1,0 +1,291 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AuthorizingSecurityManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.mgt</a>
+</div>
+
+<h1>Coverage Summary for Class: AuthorizingSecurityManager (org.apache.shiro.mgt)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AuthorizingSecurityManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    19%
+  </span>
+  <span class="absValue">
+    (4/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    31%
+  </span>
+  <span class="absValue">
+    (9/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.mgt;
+&nbsp;
+&nbsp;import org.apache.shiro.authz.AuthorizationException;
+&nbsp;import org.apache.shiro.authz.Authorizer;
+&nbsp;import org.apache.shiro.authz.ModularRealmAuthorizer;
+&nbsp;import org.apache.shiro.authz.Permission;
+&nbsp;import org.apache.shiro.subject.PrincipalCollection;
+&nbsp;import org.apache.shiro.util.LifecycleUtils;
+&nbsp;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Shiro support of a {@link SecurityManager} class hierarchy that delegates all
+&nbsp; * authorization (access control) operations to a wrapped {@link Authorizer Authorizer} instance.  That is,
+&nbsp; * this class implements all the &lt;tt&gt;Authorizer&lt;/tt&gt; methods in the {@link SecurityManager SecurityManager}
+&nbsp; * interface, but in reality, those methods are merely passthrough calls to the underlying &#39;real&#39;
+&nbsp; * &lt;tt&gt;Authorizer&lt;/tt&gt; instance.
+&nbsp; *
+&nbsp; * &lt;p&gt;All remaining &lt;tt&gt;SecurityManager&lt;/tt&gt; methods not covered by this class or its parents (mostly Session support)
+&nbsp; * are left to be implemented by subclasses.
+&nbsp; *
+&nbsp; * &lt;p&gt;In keeping with the other classes in this hierarchy and Shiro&#39;s desire to minimize configuration whenever
+&nbsp; * possible, suitable default instances for all dependencies will be created upon instantiation.
+&nbsp; *
+&nbsp; * @since 0.9
+&nbsp; */
+&nbsp;public abstract class AuthorizingSecurityManager extends AuthenticatingSecurityManager {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The wrapped instance to which all of this &lt;tt&gt;SecurityManager&lt;/tt&gt; authorization calls are delegated.
+&nbsp;     */
+&nbsp;    private Authorizer authorizer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default no-arg constructor that initializes an internal default
+&nbsp;     * {@link org.apache.shiro.authz.ModularRealmAuthorizer ModularRealmAuthorizer}.
+&nbsp;     */
+&nbsp;    public AuthorizingSecurityManager() {
+<b class="fc">&nbsp;        super();</b>
+<b class="fc">&nbsp;        this.authorizer = new ModularRealmAuthorizer();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the underlying wrapped &lt;tt&gt;Authorizer&lt;/tt&gt; instance to which this &lt;tt&gt;SecurityManager&lt;/tt&gt;
+&nbsp;     * implementation delegates all of its authorization calls.
+&nbsp;     *
+&nbsp;     * @return the wrapped &lt;tt&gt;Authorizer&lt;/tt&gt; used by this &lt;tt&gt;SecurityManager&lt;/tt&gt; implementation.
+&nbsp;     */
+&nbsp;    public Authorizer getAuthorizer() {
+<b class="fc">&nbsp;        return authorizer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the underlying &lt;tt&gt;Authorizer&lt;/tt&gt; instance to which this &lt;tt&gt;SecurityManager&lt;/tt&gt; implementation will
+&nbsp;     * delegate all of its authorization calls.
+&nbsp;     *
+&nbsp;     * @param authorizer the &lt;tt&gt;Authorizer&lt;/tt&gt; this &lt;tt&gt;SecurityManager&lt;/tt&gt; should wrap and delegate all of its
+&nbsp;     *                   authorization calls to.
+&nbsp;     */
+&nbsp;    public void setAuthorizer(Authorizer authorizer) {
+<b class="nc">&nbsp;        if (authorizer == null) {</b>
+<b class="nc">&nbsp;            String msg = &quot;Authorizer argument cannot be null.&quot;;</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(msg);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.authorizer = authorizer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * First calls &lt;code&gt;super.afterRealmsSet()&lt;/code&gt; and then sets these same &lt;code&gt;Realm&lt;/code&gt; objects on this
+&nbsp;     * instance&#39;s wrapped {@link Authorizer Authorizer}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The setting of realms the Authorizer will only occur if it is an instance of
+&nbsp;     * {@link org.apache.shiro.authz.ModularRealmAuthorizer ModularRealmAuthorizer}, that is:
+&nbsp;     * &lt;pre&gt;
+&nbsp;     * if ( this.authorizer instanceof ModularRealmAuthorizer ) {
+&nbsp;     *     ((ModularRealmAuthorizer)this.authorizer).setRealms(realms);
+&nbsp;     * }&lt;/pre&gt;
+&nbsp;     */
+&nbsp;    protected void afterRealmsSet() {
+<b class="fc">&nbsp;        super.afterRealmsSet();</b>
+<b class="pc">&nbsp;        if (this.authorizer instanceof ModularRealmAuthorizer) {</b>
+<b class="fc">&nbsp;            ((ModularRealmAuthorizer) this.authorizer).setRealms(getRealms());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void destroy() {
+<b class="fc">&nbsp;        LifecycleUtils.destroy(getAuthorizer());</b>
+<b class="fc">&nbsp;        this.authorizer = null;</b>
+<b class="fc">&nbsp;        super.destroy();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isPermitted(PrincipalCollection principals, String permissionString) {
+<b class="nc">&nbsp;        return this.authorizer.isPermitted(principals, permissionString);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isPermitted(PrincipalCollection principals, Permission permission) {
+<b class="nc">&nbsp;        return this.authorizer.isPermitted(principals, permission);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean[] isPermitted(PrincipalCollection principals, String... permissions) {
+<b class="nc">&nbsp;        return this.authorizer.isPermitted(principals, permissions);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean[] isPermitted(PrincipalCollection principals, List&lt;Permission&gt; permissions) {
+<b class="nc">&nbsp;        return this.authorizer.isPermitted(principals, permissions);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isPermittedAll(PrincipalCollection principals, String... permissions) {
+<b class="nc">&nbsp;        return this.authorizer.isPermittedAll(principals, permissions);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isPermittedAll(PrincipalCollection principals, Collection&lt;Permission&gt; permissions) {
+<b class="nc">&nbsp;        return this.authorizer.isPermittedAll(principals, permissions);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkPermission(PrincipalCollection principals, String permission) throws AuthorizationException {
+<b class="nc">&nbsp;        this.authorizer.checkPermission(principals, permission);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkPermission(PrincipalCollection principals, Permission permission) throws AuthorizationException {
+<b class="nc">&nbsp;        this.authorizer.checkPermission(principals, permission);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkPermissions(PrincipalCollection principals, String... permissions) throws AuthorizationException {
+<b class="nc">&nbsp;        this.authorizer.checkPermissions(principals, permissions);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkPermissions(PrincipalCollection principals, Collection&lt;Permission&gt; permissions) throws AuthorizationException {
+<b class="nc">&nbsp;        this.authorizer.checkPermissions(principals, permissions);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasRole(PrincipalCollection principals, String roleIdentifier) {
+<b class="nc">&nbsp;        return this.authorizer.hasRole(principals, roleIdentifier);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean[] hasRoles(PrincipalCollection principals, List&lt;String&gt; roleIdentifiers) {
+<b class="nc">&nbsp;        return this.authorizer.hasRoles(principals, roleIdentifiers);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasAllRoles(PrincipalCollection principals, Collection&lt;String&gt; roleIdentifiers) {
+<b class="nc">&nbsp;        return this.authorizer.hasAllRoles(principals, roleIdentifiers);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkRole(PrincipalCollection principals, String role) throws AuthorizationException {
+<b class="nc">&nbsp;        this.authorizer.checkRole(principals, role);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void checkRoles(PrincipalCollection principals, Collection&lt;String&gt; roles) throws AuthorizationException {
+<b class="nc">&nbsp;        this.authorizer.checkRoles(principals, roles);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public void checkRoles(PrincipalCollection principals, String... roles) throws AuthorizationException {
+<b class="nc">&nbsp;        this.authorizer.checkRoles(principals, roles);</b>
+&nbsp;    }    
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

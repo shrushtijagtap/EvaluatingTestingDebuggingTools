@@ -1,0 +1,182 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UserAnnotationHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.authz.aop</a>
+</div>
+
+<h1>Coverage Summary for Class: UserAnnotationHandler (org.apache.shiro.authz.aop)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserAnnotationHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.authz.aop;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;
+&nbsp;import org.apache.shiro.authz.AuthorizationException;
+&nbsp;import org.apache.shiro.authz.UnauthenticatedException;
+&nbsp;import org.apache.shiro.authz.annotation.RequiresUser;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Checks to see if a @{@link org.apache.shiro.authz.annotation.RequiresUser RequiresUser} annotation
+&nbsp; * is declared, and if so, ensures the calling &lt;code&gt;Subject&lt;/code&gt; is &lt;em&gt;either&lt;/em&gt;
+&nbsp; * {@link org.apache.shiro.subject.Subject#isAuthenticated() authenticated} &lt;b&gt;&lt;em&gt;or&lt;/em&gt;&lt;/b&gt; remembered via remember
+&nbsp; * me services before allowing access.
+&nbsp; * &lt;p&gt;
+&nbsp; * This annotation essentially ensures that &lt;code&gt;subject.{@link org.apache.shiro.subject.Subject#getPrincipal() getPrincipal()} != null&lt;/code&gt;.
+&nbsp; *
+&nbsp; * @since 0.9.0
+&nbsp; */
+&nbsp;public class UserAnnotationHandler extends AuthorizingAnnotationHandler {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default no-argument constructor that ensures this handler looks for
+&nbsp;     *
+&nbsp;     * {@link org.apache.shiro.authz.annotation.RequiresUser RequiresUser} annotations.
+&nbsp;     */
+&nbsp;    public UserAnnotationHandler() {
+<b class="nc">&nbsp;        super(RequiresUser.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ensures that the calling &lt;code&gt;Subject&lt;/code&gt; is a &lt;em&gt;user&lt;/em&gt;, that is, they are &lt;em&gt;either&lt;/code&gt;
+&nbsp;     * {@link org.apache.shiro.subject.Subject#isAuthenticated() authenticated} &lt;b&gt;&lt;em&gt;or&lt;/em&gt;&lt;/b&gt; remembered via remember
+&nbsp;     * me services before allowing access, and if not, throws an
+&nbsp;     * &lt;code&gt;AuthorizingException&lt;/code&gt; indicating access is not allowed.
+&nbsp;     *
+&nbsp;     * @param a the RequiresUser annotation to check
+&nbsp;     * @throws org.apache.shiro.authz.AuthorizationException
+&nbsp;     *         if the calling &lt;code&gt;Subject&lt;/code&gt; is not authenticated or remembered via rememberMe services.
+&nbsp;     */
+&nbsp;    public void assertAuthorized(Annotation a) throws AuthorizationException {
+<b class="nc">&nbsp;        if (a instanceof RequiresUser &amp;&amp; getSubject().getPrincipal() == null) {</b>
+<b class="nc">&nbsp;            throw new UnauthenticatedException(&quot;Attempting to perform a user-only operation.  The current Subject is &quot; +</b>
+&nbsp;                    &quot;not a user (they haven&#39;t been authenticated or remembered from a previous login).  &quot; +
+&nbsp;                    &quot;Access denied.&quot;);
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

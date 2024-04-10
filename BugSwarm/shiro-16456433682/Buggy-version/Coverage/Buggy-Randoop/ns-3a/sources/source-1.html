@@ -1,0 +1,202 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > QuartzSessionValidationJob</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.session.mgt.quartz</a>
+</div>
+
+<h1>Coverage Summary for Class: QuartzSessionValidationJob (org.apache.shiro.session.mgt.quartz)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">QuartzSessionValidationJob</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.session.mgt.quartz;
+&nbsp;
+&nbsp;import org.quartz.Job;
+&nbsp;import org.quartz.JobDataMap;
+&nbsp;import org.quartz.JobExecutionContext;
+&nbsp;import org.quartz.JobExecutionException;
+&nbsp;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import org.apache.shiro.session.mgt.ValidatingSessionManager;
+&nbsp;
+&nbsp;/**
+&nbsp; * A quartz job that basically just calls the {@link org.apache.shiro.session.mgt.ValidatingSessionManager#validateSessions()}
+&nbsp; * method on a configured session manager.  The session manager will automatically be injected by the
+&nbsp; * superclass if it is in the job data map or the scheduler map.
+&nbsp; *
+&nbsp; * @since 0.1
+&nbsp; */
+<b class="nc">&nbsp;public class QuartzSessionValidationJob implements Job {</b>
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |             C O N S T A N T S             |
+&nbsp;    ============================================*/
+&nbsp;    /**
+&nbsp;     * Key used to store the session manager in the job data map for this job.
+&nbsp;     */
+&nbsp;    static final String SESSION_MANAGER_KEY = &quot;sessionManager&quot;;
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |    I N S T A N C E   V A R I A B L E S    |
+&nbsp;    ============================================*/
+<b class="nc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(QuartzSessionValidationJob.class);</b>
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |         C O N S T R U C T O R S           |
+&nbsp;    ============================================*/
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |  A C C E S S O R S / M O D I F I E R S    |
+&nbsp;    ============================================*/
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |               M E T H O D S               |
+&nbsp;    ============================================*/
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Called when the job is executed by quartz.  This method delegates to the
+&nbsp;     * &lt;tt&gt;validateSessions()&lt;/tt&gt; method on the associated session manager.
+&nbsp;     *
+&nbsp;     * @param context the Quartz job execution context for this execution.
+&nbsp;     */
+&nbsp;    public void execute(JobExecutionContext context) throws JobExecutionException {
+&nbsp;
+<b class="nc">&nbsp;        JobDataMap jobDataMap = context.getMergedJobDataMap();</b>
+<b class="nc">&nbsp;        ValidatingSessionManager sessionManager = (ValidatingSessionManager) jobDataMap.get(SESSION_MANAGER_KEY);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;            log.debug(&quot;Executing session validation Quartz job...&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        sessionManager.validateSessions();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;            log.debug(&quot;Session validation Quartz job complete.&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

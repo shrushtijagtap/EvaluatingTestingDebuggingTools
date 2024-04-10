@@ -1,0 +1,215 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PrincipalCollection</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.subject</a>
+</div>
+
+<h1>Coverage Summary for Class: PrincipalCollection (org.apache.shiro.subject)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">PrincipalCollection</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.subject;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;/**
+&nbsp; * A collection of all principals associated with a corresponding {@link Subject Subject}.  A &lt;em&gt;principal&lt;/em&gt; is
+&nbsp; * just a security term for an identifying attribute, such as a username or user id or social security number or
+&nbsp; * anything else that can be considered an &#39;identifying&#39; attribute for a {@code Subject}.
+&nbsp; * &lt;p/&gt;
+&nbsp; * A PrincipalCollection organizes its internal principals based on the {@code Realm} where they came from when the
+&nbsp; * Subject was first created.  To obtain the principal(s) for a specific Realm, see the {@link #fromRealm} method.  You
+&nbsp; * can also see which realms contributed to this collection via the {@link #getRealmNames() getRealmNames()} method.
+&nbsp; *
+&nbsp; * @see #getPrimaryPrincipal()
+&nbsp; * @see #fromRealm(String realmName)
+&nbsp; * @see #getRealmNames()
+&nbsp; * @since 0.9
+&nbsp; */
+&nbsp;public interface PrincipalCollection extends Iterable, Serializable {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the primary principal used application-wide to uniquely identify the owning account/Subject.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The value is usually always a uniquely identifying attribute specific to the data source that retrieved the
+&nbsp;     * account data.  Some examples:
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;a {@link java.util.UUID UUID}&lt;/li&gt;
+&nbsp;     * &lt;li&gt;a {@code long} value such as a surrogate primary key in a relational database&lt;/li&gt;
+&nbsp;     * &lt;li&gt;an LDAP UUID or static DN&lt;/li&gt;
+&nbsp;     * &lt;li&gt;a String username unique across all user accounts&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     * &lt;h3&gt;Multi-Realm Applications&lt;/h3&gt;
+&nbsp;     * In a single-{@code Realm} application, typically there is only ever one unique principal to retain and that
+&nbsp;     * is the value returned from this method.  However, in a multi-{@code Realm} application, where the
+&nbsp;     * {@code PrincipalCollection} might retain principals across more than one realm, the value returned from this
+&nbsp;     * method should be the single principal that uniquely identifies the subject for the entire application.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * That value is of course application specific, but most applications will typically choose one of the primary
+&nbsp;     * principals from one of the {@code Realm}s.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Shiro&#39;s default implementations of this interface make this
+&nbsp;     * assumption by usually simply returning {@link #iterator()}.{@link java.util.Iterator#next() next()}, which just
+&nbsp;     * returns the first returned principal obtained from the first consulted/configured {@code Realm} during the
+&nbsp;     * authentication attempt.  This means in a multi-{@code Realm} application, {@code Realm} configuration order
+&nbsp;     * matters if you want to retain this default heuristic.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If this heuristic is not sufficient, most Shiro end-users will need to implement a custom
+&nbsp;     * {@link org.apache.shiro.authc.pam.AuthenticationStrategy}.  An {@code AuthenticationStrategy} has exact control
+&nbsp;     * over the {@link PrincipalCollection} returned at the end of an authentication attempt via the
+&nbsp;     * &lt;code&gt;AuthenticationStrategy#{@link org.apache.shiro.authc.pam.AuthenticationStrategy#afterAllAttempts(org.apache.shiro.authc.AuthenticationToken, org.apache.shiro.authc.AuthenticationInfo) afterAllAttempts}&lt;/code&gt;
+&nbsp;     * implementation.
+&nbsp;     *
+&nbsp;     * @return the primary principal used to uniquely identify the owning account/Subject
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    Object getPrimaryPrincipal();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the first discovered principal assignable from the specified type, or {@code null} if there are none
+&nbsp;     * of the specified type.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Note that this will return {@code null} if the &#39;owning&#39; subject has not yet logged in.
+&nbsp;     *
+&nbsp;     * @param type the type of the principal that should be returned.
+&nbsp;     * @return a principal of the specified type or {@code null} if there isn&#39;t one of the specified type.
+&nbsp;     */
+&nbsp;    &lt;T&gt; T oneByType(Class&lt;T&gt; type);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns all principals assignable from the specified type, or an empty Collection if no principals of that
+&nbsp;     * type are contained.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Note that this will return an empty Collection if the &#39;owning&#39; subject has not yet logged in.
+&nbsp;     *
+&nbsp;     * @param type the type of the principals that should be returned.
+&nbsp;     * @return a Collection of principals that are assignable from the specified type, or
+&nbsp;     *         an empty Collection if no principals of this type are associated.
+&nbsp;     */
+&nbsp;    &lt;T&gt; Collection&lt;T&gt; byType(Class&lt;T&gt; type);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a single Subject&#39;s principals retrieved from all configured Realms as a List, or an empty List if
+&nbsp;     * there are not any principals.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Note that this will return an empty List if the &#39;owning&#39; subject has not yet logged in.
+&nbsp;     *
+&nbsp;     * @return a single Subject&#39;s principals retrieved from all configured Realms as a List.
+&nbsp;     */
+&nbsp;    List asList();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a single Subject&#39;s principals retrieved from all configured Realms as a Set, or an empty Set if there
+&nbsp;     * are not any principals.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Note that this will return an empty Set if the &#39;owning&#39; subject has not yet logged in.
+&nbsp;     *
+&nbsp;     * @return a single Subject&#39;s principals retrieved from all configured Realms as a Set.
+&nbsp;     */
+&nbsp;    Set asSet();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a single Subject&#39;s principals retrieved from the specified Realm &lt;em&gt;only&lt;/em&gt; as a Collection, or an empty
+&nbsp;     * Collection if there are not any principals from that realm.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Note that this will return an empty Collection if the &#39;owning&#39; subject has not yet logged in.
+&nbsp;     *
+&nbsp;     * @param realmName the name of the Realm from which the principals were retrieved.
+&nbsp;     * @return the Subject&#39;s principals from the specified Realm only as a Collection or an empty Collection if there
+&nbsp;     *         are not any principals from that realm.
+&nbsp;     */
+&nbsp;    Collection fromRealm(String realmName);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the realm names that this collection has principals for.
+&nbsp;     *
+&nbsp;     * @return the names of realms that this collection has one or more principals for.
+&nbsp;     */
+&nbsp;    Set&lt;String&gt; getRealmNames();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if this collection is empty, {@code false} otherwise.
+&nbsp;     *
+&nbsp;     * @return {@code true} if this collection is empty, {@code false} otherwise.
+&nbsp;     */
+&nbsp;    boolean isEmpty();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

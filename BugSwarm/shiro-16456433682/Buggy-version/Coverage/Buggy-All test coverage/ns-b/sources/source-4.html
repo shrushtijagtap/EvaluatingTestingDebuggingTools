@@ -1,0 +1,380 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > WildcardPermission</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.authz.permission</a>
+</div>
+
+<h1>Coverage Summary for Class: WildcardPermission (org.apache.shiro.authz.permission)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WildcardPermission</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/53)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.authz.permission;
+&nbsp;
+&nbsp;import org.apache.shiro.authz.Permission;
+&nbsp;import org.apache.shiro.util.CollectionUtils;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.LinkedHashSet;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;/**
+&nbsp; * A &lt;code&gt;WildcardPermission&lt;/code&gt; is a very flexible permission construct supporting multiple levels of
+&nbsp; * permission matching. However, most people will probably follow some standard conventions as explained below.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;h3&gt;Simple Usage&lt;/h3&gt;
+&nbsp; * &lt;p/&gt;
+&nbsp; * In the simplest form, &lt;code&gt;WildcardPermission&lt;/code&gt; can be used as a simple permission string. You could grant a
+&nbsp; * user an &amp;quot;editNewsletter&amp;quot; permission and then check to see if the user has the editNewsletter
+&nbsp; * permission by calling
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;code&gt;subject.isPermitted(&amp;quot;editNewsletter&amp;quot;)&lt;/code&gt;
+&nbsp; * &lt;p/&gt;
+&nbsp; * This is (mostly) equivalent to
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;code&gt;subject.isPermitted( new WildcardPermission(&amp;quot;editNewsletter&amp;quot;) )&lt;/code&gt;
+&nbsp; * &lt;p/&gt;
+&nbsp; * but more on that later.
+&nbsp; * &lt;p/&gt;
+&nbsp; * The simple permission string may work for simple applications, but it requires you to have permissions like
+&nbsp; * &lt;code&gt;&amp;quot;viewNewsletter&amp;quot;&lt;/code&gt;, &lt;code&gt;&amp;quot;deleteNewsletter&amp;quot;&lt;/code&gt;,
+&nbsp; * &lt;code&gt;&amp;quot;createNewsletter&amp;quot;&lt;/code&gt;, etc. You can also grant a user &lt;code&gt;&amp;quot;*&amp;quot;&lt;/code&gt; permissions
+&nbsp; * using the wildcard character (giving this class its name), which means they have &lt;em&gt;all&lt;/em&gt; permissions. But
+&nbsp; * using this approach there&#39;s no way to just say a user has &amp;quot;all newsletter permissions&amp;quot;.
+&nbsp; * &lt;p/&gt;
+&nbsp; * For this reason, &lt;code&gt;WildcardPermission&lt;/code&gt; supports multiple &lt;em&gt;levels&lt;/em&gt; of permissioning.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;h3&gt;Multiple Levels&lt;/h3&gt;
+&nbsp; * &lt;p/&gt;
+&nbsp; * WildcardPermission&lt;/code&gt; also supports the concept of multiple &lt;em&gt;levels&lt;/em&gt;.  For example, you could
+&nbsp; * restructure the previous simple example by granting a user the permission &lt;code&gt;&amp;quot;newsletter:edit&amp;quot;&lt;/code&gt;.
+&nbsp; * The colon in this example is a special character used by the &lt;code&gt;WildcardPermission&lt;/code&gt; that delimits the
+&nbsp; * next token in the permission.
+&nbsp; * &lt;p/&gt;
+&nbsp; * In this example, the first token is the &lt;em&gt;domain&lt;/em&gt; that is being operated on
+&nbsp; * and the second token is the &lt;em&gt;action&lt;/em&gt; being performed. Each level can contain multiple values.  So you
+&nbsp; * could simply grant a user the permission &lt;code&gt;&amp;quot;newsletter:view,edit,create&amp;quot;&lt;/code&gt; which gives them
+&nbsp; * access to perform &lt;code&gt;view&lt;/code&gt;, &lt;code&gt;edit&lt;/code&gt;, and &lt;code&gt;create&lt;/code&gt; actions in the &lt;code&gt;newsletter&lt;/code&gt;
+&nbsp; * &lt;em&gt;domain&lt;/em&gt;. Then you could check to see if the user has the &lt;code&gt;&amp;quot;newsletter:create&amp;quot;&lt;/code&gt;
+&nbsp; * permission by calling
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;code&gt;subject.isPermitted(&amp;quot;newsletter:create&amp;quot;)&lt;/code&gt;
+&nbsp; * &lt;p/&gt;
+&nbsp; * (which would return true).
+&nbsp; * &lt;p/&gt;
+&nbsp; * In addition to granting multiple permissions via a single string, you can grant all permission for a particular
+&nbsp; * level. So if you wanted to grant a user all actions in the &lt;code&gt;newsletter&lt;/code&gt; domain, you could simply give
+&nbsp; * them &lt;code&gt;&amp;quot;newsletter:*&amp;quot;&lt;/code&gt;. Now, any permission check for &lt;code&gt;&amp;quot;newsletter:XXX&amp;quot;&lt;/code&gt;
+&nbsp; * will return &lt;code&gt;true&lt;/code&gt;. It is also possible to use the wildcard token at the domain level (or both): so you
+&nbsp; * could grant a user the &lt;code&gt;&amp;quot;view&amp;quot;&lt;/code&gt; action across all domains &lt;code&gt;&amp;quot;*:view&amp;quot;&lt;/code&gt;.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;h3&gt;Instance-level Access Control&lt;/h3&gt;
+&nbsp; * &lt;p/&gt;
+&nbsp; * Another common usage of the &lt;code&gt;WildcardPermission&lt;/code&gt; is to model instance-level Access Control Lists.
+&nbsp; * In this scenario you use three tokens - the first is the &lt;em&gt;domain&lt;/em&gt;, the second is the &lt;em&gt;action&lt;/em&gt;, and
+&nbsp; * the third is the &lt;em&gt;instance&lt;/em&gt; you are acting on.
+&nbsp; * &lt;p/&gt;
+&nbsp; * So for example you could grant a user &lt;code&gt;&amp;quot;newsletter:edit:12,13,18&amp;quot;&lt;/code&gt;.  In this example, assume
+&nbsp; * that the third token is the system&#39;s ID of the newsletter. That would allow the user to edit newsletters
+&nbsp; * &lt;code&gt;12&lt;/code&gt;, &lt;code&gt;13&lt;/code&gt;, and &lt;code&gt;18&lt;/code&gt;. This is an extremely powerful way to express permissions,
+&nbsp; * since you can now say things like &lt;code&gt;&amp;quot;newsletter:*:13&amp;quot;&lt;/code&gt; (grant a user all actions for newsletter
+&nbsp; * &lt;code&gt;13&lt;/code&gt;), &lt;code&gt;&amp;quot;newsletter:view,create,edit:*&amp;quot;&lt;/code&gt; (allow the user to
+&nbsp; * &lt;code&gt;view&lt;/code&gt;, &lt;code&gt;create&lt;/code&gt;, or &lt;code&gt;edit&lt;/code&gt; &lt;em&gt;any&lt;/em&gt; newsletter), or
+&nbsp; * &lt;code&gt;&amp;quot;newsletter:*:*&lt;/code&gt; (allow the user to perform &lt;em&gt;any&lt;/em&gt; action on &lt;em&gt;any&lt;/em&gt; newsletter).
+&nbsp; * &lt;p/&gt;
+&nbsp; * To perform checks against these instance-level permissions, the application should include the instance ID in the
+&nbsp; * permission check like so:
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;code&gt;subject.isPermitted( &amp;quot;newsletter:edit:13&amp;quot; )&lt;/code&gt;
+&nbsp; * &lt;p/&gt;
+&nbsp; * There is no limit to the number of tokens that can be used, so it is up to your imagination in terms of ways that
+&nbsp; * this could be used in your application.  However, the Shiro team likes to standardize some common usages shown
+&nbsp; * above to help people get started and provide consistency in the Shiro community.
+&nbsp; *
+&nbsp; * @since 0.9
+&nbsp; */
+&nbsp;public class WildcardPermission implements Permission, Serializable {
+&nbsp;
+&nbsp;    //TODO - JavaDoc methods
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |             C O N S T A N T S             |
+&nbsp;    ============================================*/
+&nbsp;    protected static final String WILDCARD_TOKEN = &quot;*&quot;;
+&nbsp;    protected static final String PART_DIVIDER_TOKEN = &quot;:&quot;;
+&nbsp;    protected static final String SUBPART_DIVIDER_TOKEN = &quot;,&quot;;
+&nbsp;    protected static final boolean DEFAULT_CASE_SENSITIVE = false;
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |    I N S T A N C E   V A R I A B L E S    |
+&nbsp;    ============================================*/
+&nbsp;    private List&lt;Set&lt;String&gt;&gt; parts;
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |         C O N S T R U C T O R S           |
+&nbsp;    ============================================*/
+&nbsp;    /**
+&nbsp;     * Default no-arg constructor for subclasses only - end-user developers instantiating Permission instances must
+&nbsp;     * provide a wildcard string at a minimum, since Permission instances are immutable once instantiated.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Note that the WildcardPermission class is very robust and typically subclasses are not necessary unless you
+&nbsp;     * wish to create type-safe Permission objects that would be used in your application, such as perhaps a
+&nbsp;     * {@code UserPermission}, {@code SystemPermission}, {@code PrinterPermission}, etc.  If you want such type-safe
+&nbsp;     * permission usage, consider subclassing the {@link DomainPermission DomainPermission} class for your needs.
+&nbsp;     */
+<b class="nc">&nbsp;    protected WildcardPermission() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public WildcardPermission(String wildcardString) {
+<b class="nc">&nbsp;        this(wildcardString, DEFAULT_CASE_SENSITIVE);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public WildcardPermission(String wildcardString, boolean caseSensitive) {</b>
+<b class="nc">&nbsp;        setParts(wildcardString, caseSensitive);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void setParts(String wildcardString) {
+<b class="nc">&nbsp;        setParts(wildcardString, DEFAULT_CASE_SENSITIVE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void setParts(String wildcardString, boolean caseSensitive) {
+<b class="nc">&nbsp;        wildcardString = StringUtils.clean(wildcardString);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (wildcardString == null || wildcardString.isEmpty()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Wildcard string cannot be null or empty. Make sure permission strings are properly formatted.&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!caseSensitive) {</b>
+<b class="nc">&nbsp;            wildcardString = wildcardString.toLowerCase();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        List&lt;String&gt; parts = CollectionUtils.asList(wildcardString.split(PART_DIVIDER_TOKEN));</b>
+&nbsp;
+<b class="nc">&nbsp;        this.parts = new ArrayList&lt;Set&lt;String&gt;&gt;();</b>
+<b class="nc">&nbsp;        for (String part : parts) {</b>
+<b class="nc">&nbsp;            Set&lt;String&gt; subparts = CollectionUtils.asSet(part.split(SUBPART_DIVIDER_TOKEN));</b>
+&nbsp;
+<b class="nc">&nbsp;            if (subparts.isEmpty()) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Wildcard string cannot contain parts with only dividers. Make sure permission strings are properly formatted.&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            this.parts.add(subparts);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (this.parts.isEmpty()) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Wildcard string cannot contain only dividers. Make sure permission strings are properly formatted.&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |  A C C E S S O R S / M O D I F I E R S    |
+&nbsp;    ============================================*/
+&nbsp;    protected List&lt;Set&lt;String&gt;&gt; getParts() {
+<b class="nc">&nbsp;        return this.parts;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the pre-split String parts of this &lt;code&gt;WildcardPermission&lt;/code&gt;.
+&nbsp;     * @since 1.3.0
+&nbsp;     * @param parts pre-split String parts.
+&nbsp;     */
+&nbsp;    protected void setParts(List&lt;Set&lt;String&gt;&gt; parts) {
+<b class="nc">&nbsp;        this.parts = parts;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |               M E T H O D S               |
+&nbsp;    ============================================*/
+&nbsp;
+&nbsp;    public boolean implies(Permission p) {
+&nbsp;        // By default only supports comparisons with other WildcardPermissions
+<b class="nc">&nbsp;        if (!(p instanceof WildcardPermission)) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        WildcardPermission wp = (WildcardPermission) p;</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Set&lt;String&gt;&gt; otherParts = wp.getParts();</b>
+&nbsp;
+<b class="nc">&nbsp;        int i = 0;</b>
+<b class="nc">&nbsp;        for (Set&lt;String&gt; otherPart : otherParts) {</b>
+&nbsp;            // If this permission has less parts than the other permission, everything after the number of parts contained
+&nbsp;            // in this permission is automatically implied, so return true
+<b class="nc">&nbsp;            if (getParts().size() - 1 &lt; i) {</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                Set&lt;String&gt; part = getParts().get(i);</b>
+<b class="nc">&nbsp;                if (!part.contains(WILDCARD_TOKEN) &amp;&amp; !part.containsAll(otherPart)) {</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                i++;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // If this permission has more parts than the other parts, only imply it if all of the other parts are wildcards
+<b class="nc">&nbsp;        for (; i &lt; getParts().size(); i++) {</b>
+<b class="nc">&nbsp;            Set&lt;String&gt; part = getParts().get(i);</b>
+<b class="nc">&nbsp;            if (!part.contains(WILDCARD_TOKEN)) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        StringBuilder buffer = new StringBuilder();</b>
+<b class="nc">&nbsp;        for (Set&lt;String&gt; part : parts) {</b>
+<b class="nc">&nbsp;            if (buffer.length() &gt; 0) {</b>
+<b class="nc">&nbsp;                buffer.append(PART_DIVIDER_TOKEN);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Iterator&lt;String&gt; partIt = part.iterator();</b>
+<b class="nc">&nbsp;            while(partIt.hasNext()) {</b>
+<b class="nc">&nbsp;                buffer.append(partIt.next());</b>
+<b class="nc">&nbsp;                if (partIt.hasNext()) {</b>
+<b class="nc">&nbsp;                    buffer.append(SUBPART_DIVIDER_TOKEN);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return buffer.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean equals(Object o) {
+<b class="nc">&nbsp;        if (o instanceof WildcardPermission) {</b>
+<b class="nc">&nbsp;            WildcardPermission wp = (WildcardPermission) o;</b>
+<b class="nc">&nbsp;            return parts.equals(wp.parts);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        return parts.hashCode();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

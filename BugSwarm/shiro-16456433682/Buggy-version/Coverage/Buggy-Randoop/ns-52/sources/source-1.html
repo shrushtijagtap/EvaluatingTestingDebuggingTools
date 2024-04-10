@@ -1,0 +1,419 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CookieRememberMeManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.web.mgt</a>
+</div>
+
+<h1>Coverage Summary for Class: CookieRememberMeManager (org.apache.shiro.web.mgt)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CookieRememberMeManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    63.6%
+  </span>
+  <span class="absValue">
+    (7/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    13.3%
+  </span>
+  <span class="absValue">
+    (4/30)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (13/65)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.web.mgt;
+&nbsp;
+&nbsp;import org.apache.shiro.codec.Base64;
+&nbsp;import org.apache.shiro.mgt.AbstractRememberMeManager;
+&nbsp;import org.apache.shiro.subject.Subject;
+&nbsp;import org.apache.shiro.subject.SubjectContext;
+&nbsp;import org.apache.shiro.web.servlet.Cookie;
+&nbsp;import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
+&nbsp;import org.apache.shiro.web.servlet.SimpleCookie;
+&nbsp;import org.apache.shiro.web.subject.WebSubject;
+&nbsp;import org.apache.shiro.web.subject.WebSubjectContext;
+&nbsp;import org.apache.shiro.web.util.WebUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import javax.servlet.ServletRequest;
+&nbsp;import javax.servlet.http.HttpServletRequest;
+&nbsp;import javax.servlet.http.HttpServletResponse;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Remembers a Subject&#39;s identity by saving the Subject&#39;s {@link Subject#getPrincipals() principals} to a {@link Cookie}
+&nbsp; * for later retrieval.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Cookie attributes (path, domain, maxAge, etc) may be set on this class&#39;s default
+&nbsp; * {@link #getCookie() cookie} attribute, which acts as a template to use to set all properties of outgoing cookies
+&nbsp; * created by this implementation.
+&nbsp; * &lt;p/&gt;
+&nbsp; * The default cookie has the following attribute values set:
+&nbsp; * &lt;table&gt;
+&nbsp; * &lt;tr&gt;
+&nbsp; * &lt;th&gt;Attribute Name&lt;/th&gt;
+&nbsp; * &lt;th&gt;Value&lt;/th&gt;
+&nbsp; * &lt;/tr&gt;
+&nbsp; * &lt;tr&gt;&lt;td&gt;{@link Cookie#getName() name}&lt;/td&gt;
+&nbsp; * &lt;td&gt;{@code rememberMe}&lt;/td&gt;
+&nbsp; * &lt;/tr&gt;
+&nbsp; * &lt;tr&gt;
+&nbsp; * &lt;td&gt;{@link Cookie#getPath() path}&lt;/td&gt;
+&nbsp; * &lt;td&gt;{@code /}&lt;/td&gt;
+&nbsp; * &lt;/tr&gt;
+&nbsp; * &lt;tr&gt;
+&nbsp; * &lt;td&gt;{@link Cookie#getMaxAge() maxAge}&lt;/td&gt;
+&nbsp; * &lt;td&gt;{@link Cookie#ONE_YEAR Cookie.ONE_YEAR}&lt;/td&gt;
+&nbsp; * &lt;/tr&gt;
+&nbsp; * &lt;/table&gt;
+&nbsp; * &lt;p/&gt;
+&nbsp; * Note that because this class subclasses the {@link AbstractRememberMeManager} which already provides serialization
+&nbsp; * and encryption logic, this class utilizes both for added security before setting the cookie value.
+&nbsp; *
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public class CookieRememberMeManager extends AbstractRememberMeManager {
+&nbsp;
+&nbsp;    //TODO - complete JavaDoc
+&nbsp;
+<b class="fc">&nbsp;    private static transient final Logger log = LoggerFactory.getLogger(CookieRememberMeManager.class);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The default name of the underlying rememberMe cookie which is {@code rememberMe}.
+&nbsp;     */
+&nbsp;    public static final String DEFAULT_REMEMBER_ME_COOKIE_NAME = &quot;rememberMe&quot;;
+&nbsp;
+&nbsp;    private Cookie cookie;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new {@code CookieRememberMeManager} with a default {@code rememberMe} cookie template.
+&nbsp;     */
+<b class="fc">&nbsp;    public CookieRememberMeManager() {</b>
+<b class="fc">&nbsp;        Cookie cookie = new SimpleCookie(DEFAULT_REMEMBER_ME_COOKIE_NAME);</b>
+<b class="fc">&nbsp;        cookie.setHttpOnly(true);</b>
+&nbsp;        //One year should be long enough - most sites won&#39;t object to requiring a user to log in if they haven&#39;t visited
+&nbsp;        //in a year:
+<b class="fc">&nbsp;        cookie.setMaxAge(Cookie.ONE_YEAR);</b>
+<b class="fc">&nbsp;        this.cookie = cookie;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the cookie &#39;template&#39; that will be used to set all attributes of outgoing rememberMe cookies created by
+&nbsp;     * this {@code RememberMeManager}.  Outgoing cookies will match this one except for the
+&nbsp;     * {@link Cookie#getValue() value} attribute, which is necessarily set dynamically at runtime.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Please see the class-level JavaDoc for the default cookie&#39;s attribute values.
+&nbsp;     *
+&nbsp;     * @return the cookie &#39;template&#39; that will be used to set all attributes of outgoing rememberMe cookies created by
+&nbsp;     *         this {@code RememberMeManager}.
+&nbsp;     */
+&nbsp;    public Cookie getCookie() {
+<b class="fc">&nbsp;        return cookie;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the cookie &#39;template&#39; that will be used to set all attributes of outgoing rememberMe cookies created by
+&nbsp;     * this {@code RememberMeManager}.  Outgoing cookies will match this one except for the
+&nbsp;     * {@link Cookie#getValue() value} attribute, which is necessarily set dynamically at runtime.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Please see the class-level JavaDoc for the default cookie&#39;s attribute values.
+&nbsp;     *
+&nbsp;     * @param cookie the cookie &#39;template&#39; that will be used to set all attributes of outgoing rememberMe cookies created
+&nbsp;     *               by this {@code RememberMeManager}.
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    public void setCookie(Cookie cookie) {
+<b class="fc">&nbsp;        this.cookie = cookie;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Base64-encodes the specified serialized byte array and sets that base64-encoded String as the cookie value.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The {@code subject} instance is expected to be a {@link WebSubject} instance with an HTTP Request/Response pair
+&nbsp;     * so an HTTP cookie can be set on the outgoing response.  If it is not a {@code WebSubject} or that
+&nbsp;     * {@code WebSubject} does not have an HTTP Request/Response pair, this implementation does nothing.
+&nbsp;     *
+&nbsp;     * @param subject    the Subject for which the identity is being serialized.
+&nbsp;     * @param serialized the serialized bytes to be persisted.
+&nbsp;     */
+&nbsp;    protected void rememberSerializedIdentity(Subject subject, byte[] serialized) {
+&nbsp;
+<b class="nc">&nbsp;        if (!WebUtils.isHttp(subject)) {</b>
+<b class="nc">&nbsp;            if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;                String msg = &quot;Subject argument is not an HTTP-aware instance.  This is required to obtain a servlet &quot; +</b>
+&nbsp;                        &quot;request and response in order to set the rememberMe cookie. Returning immediately and &quot; +
+&nbsp;                        &quot;ignoring rememberMe operation.&quot;;
+<b class="nc">&nbsp;                log.debug(msg);</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        HttpServletRequest request = WebUtils.getHttpRequest(subject);</b>
+<b class="nc">&nbsp;        HttpServletResponse response = WebUtils.getHttpResponse(subject);</b>
+&nbsp;
+&nbsp;        //base 64 encode it and store as a cookie:
+<b class="nc">&nbsp;        String base64 = Base64.encodeToString(serialized);</b>
+&nbsp;
+<b class="nc">&nbsp;        Cookie template = getCookie(); //the class attribute is really a template for the outgoing cookies</b>
+<b class="nc">&nbsp;        Cookie cookie = new SimpleCookie(template);</b>
+<b class="nc">&nbsp;        cookie.setValue(base64);</b>
+<b class="nc">&nbsp;        cookie.saveTo(request, response);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean isIdentityRemoved(WebSubjectContext subjectContext) {
+<b class="nc">&nbsp;        ServletRequest request = subjectContext.resolveServletRequest();</b>
+<b class="nc">&nbsp;        if (request != null) {</b>
+<b class="nc">&nbsp;            Boolean removed = (Boolean) request.getAttribute(ShiroHttpServletRequest.IDENTITY_REMOVED_KEY);</b>
+<b class="nc">&nbsp;            return removed != null &amp;&amp; removed;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a previously serialized identity byte array or {@code null} if the byte array could not be acquired.
+&nbsp;     * This implementation retrieves an HTTP cookie, Base64-decodes the cookie value, and returns the resulting byte
+&nbsp;     * array.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The {@code SubjectContext} instance is expected to be a {@link WebSubjectContext} instance with an HTTP
+&nbsp;     * Request/Response pair so an HTTP cookie can be retrieved from the incoming request.  If it is not a
+&nbsp;     * {@code WebSubjectContext} or that {@code WebSubjectContext} does not have an HTTP Request/Response pair, this
+&nbsp;     * implementation returns {@code null}.
+&nbsp;     *
+&nbsp;     * @param subjectContext the contextual data, usually provided by a {@link Subject.Builder} implementation, that
+&nbsp;     *                       is being used to construct a {@link Subject} instance.  To be used to assist with data
+&nbsp;     *                       lookup.
+&nbsp;     * @return a previously serialized identity byte array or {@code null} if the byte array could not be acquired.
+&nbsp;     */
+&nbsp;    protected byte[] getRememberedSerializedIdentity(SubjectContext subjectContext) {
+&nbsp;
+<b class="pc">&nbsp;        if (!WebUtils.isHttp(subjectContext)) {</b>
+<b class="pc">&nbsp;            if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;                String msg = &quot;SubjectContext argument is not an HTTP-aware instance.  This is required to obtain a &quot; +</b>
+&nbsp;                        &quot;servlet request and response in order to retrieve the rememberMe cookie. Returning &quot; +
+&nbsp;                        &quot;immediately and ignoring rememberMe operation.&quot;;
+<b class="nc">&nbsp;                log.debug(msg);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        WebSubjectContext wsc = (WebSubjectContext) subjectContext;</b>
+<b class="nc">&nbsp;        if (isIdentityRemoved(wsc)) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        HttpServletRequest request = WebUtils.getHttpRequest(wsc);</b>
+<b class="nc">&nbsp;        HttpServletResponse response = WebUtils.getHttpResponse(wsc);</b>
+&nbsp;
+<b class="nc">&nbsp;        String base64 = getCookie().readValue(request, response);</b>
+&nbsp;        // Browsers do not always remove cookies immediately (SHIRO-183)
+&nbsp;        // ignore cookies that are scheduled for removal
+<b class="nc">&nbsp;        if (Cookie.DELETED_COOKIE_VALUE.equals(base64)) return null;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (base64 != null) {</b>
+<b class="nc">&nbsp;            base64 = ensurePadding(base64);</b>
+<b class="nc">&nbsp;            if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;                log.trace(&quot;Acquired Base64 encoded identity [&quot; + base64 + &quot;]&quot;);</b>
+&nbsp;            }
+&nbsp;            byte[] decoded;
+&nbsp;            try {
+<b class="nc">&nbsp;                decoded = Base64.decode(base64);</b>
+<b class="nc">&nbsp;            } catch (RuntimeException rtEx) {</b>
+&nbsp;                /*
+&nbsp;                 * https://issues.apache.org/jira/browse/SHIRO-766:
+&nbsp;                 * If the base64 string cannot be decoded, just assume there is no valid cookie value.
+&nbsp;                 * */
+<b class="nc">&nbsp;                getCookie().removeFrom(request, response);</b>
+<b class="nc">&nbsp;                log.warn(&quot;Unable to decode existing base64 encoded entity: [&quot; + base64 + &quot;].&quot;, rtEx);</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;                log.trace(&quot;Base64 decoded byte array length: &quot; + decoded.length + &quot; bytes.&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return decoded;</b>
+&nbsp;        } else {
+&nbsp;            //no cookie set - new site visitor?
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sometimes a user agent will send the rememberMe cookie value without padding,
+&nbsp;     * most likely because {@code =} is a separator in the cookie header.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Contributed by Luis Arias.  Thanks Luis!
+&nbsp;     *
+&nbsp;     * @param base64 the base64 encoded String that may need to be padded
+&nbsp;     * @return the base64 String padded if necessary.
+&nbsp;     */
+&nbsp;    protected String ensurePadding(String base64) {
+<b class="nc">&nbsp;        int length = base64.length();</b>
+<b class="nc">&nbsp;        if (length % 4 != 0) {</b>
+<b class="nc">&nbsp;            StringBuilder sb = new StringBuilder(base64);</b>
+<b class="nc">&nbsp;            while (sb.length() % 4 != 0) {</b>
+<b class="nc">&nbsp;                sb.append(&#39;=&#39;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            base64 = sb.toString();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return base64;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes the &#39;rememberMe&#39; cookie from the associated {@link WebSubject}&#39;s request/response pair.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The {@code subject} instance is expected to be a {@link WebSubject} instance with an HTTP Request/Response pair.
+&nbsp;     * If it is not a {@code WebSubject} or that {@code WebSubject} does not have an HTTP Request/Response pair, this
+&nbsp;     * implementation does nothing.
+&nbsp;     *
+&nbsp;     * @param subject the subject instance for which identity data should be forgotten from the underlying persistence
+&nbsp;     */
+&nbsp;    protected void forgetIdentity(Subject subject) {
+<b class="pc">&nbsp;        if (WebUtils.isHttp(subject)) {</b>
+<b class="nc">&nbsp;            HttpServletRequest request = WebUtils.getHttpRequest(subject);</b>
+<b class="nc">&nbsp;            HttpServletResponse response = WebUtils.getHttpResponse(subject);</b>
+<b class="nc">&nbsp;            forgetIdentity(request, response);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes the &#39;rememberMe&#39; cookie from the associated {@link WebSubjectContext}&#39;s request/response pair.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The {@code SubjectContext} instance is expected to be a {@link WebSubjectContext} instance with an HTTP
+&nbsp;     * Request/Response pair.  If it is not a {@code WebSubjectContext} or that {@code WebSubjectContext} does not
+&nbsp;     * have an HTTP Request/Response pair, this implementation does nothing.
+&nbsp;     *
+&nbsp;     * @param subjectContext the contextual data, usually provided by a {@link Subject.Builder} implementation
+&nbsp;     */
+&nbsp;    public void forgetIdentity(SubjectContext subjectContext) {
+<b class="pc">&nbsp;        if (WebUtils.isHttp(subjectContext)) {</b>
+<b class="nc">&nbsp;            HttpServletRequest request = WebUtils.getHttpRequest(subjectContext);</b>
+<b class="nc">&nbsp;            HttpServletResponse response = WebUtils.getHttpResponse(subjectContext);</b>
+<b class="nc">&nbsp;            forgetIdentity(request, response);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes the rememberMe cookie from the given request/response pair.
+&nbsp;     *
+&nbsp;     * @param request  the incoming HTTP servlet request
+&nbsp;     * @param response the outgoing HTTP servlet response
+&nbsp;     */
+&nbsp;    private void forgetIdentity(HttpServletRequest request, HttpServletResponse response) {
+<b class="nc">&nbsp;        getCookie().removeFrom(request, response);</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,180 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UsersParseUTF8Bytes</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.jjb</a>
+</div>
+
+<h1>Coverage Summary for Class: UsersParseUTF8Bytes (com.alibaba.fastjson2.benchmark.jjb)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UsersParseUTF8Bytes</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.jjb;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSON;
+&nbsp;import com.alibaba.fastjson2.benchmark.eishay.EishayParseUTF8BytesPretty;
+&nbsp;import com.dslplatform.json.DslJson;
+&nbsp;import com.dslplatform.json.runtime.Settings;
+&nbsp;import com.fasterxml.jackson.databind.ObjectMapper;
+&nbsp;import com.google.gson.Gson;
+&nbsp;import org.apache.commons.io.IOUtils;
+&nbsp;import org.openjdk.jmh.annotations.Benchmark;
+&nbsp;import org.openjdk.jmh.annotations.Mode;
+&nbsp;import org.openjdk.jmh.infra.Blackhole;
+&nbsp;import org.openjdk.jmh.runner.Runner;
+&nbsp;import org.openjdk.jmh.runner.RunnerException;
+&nbsp;import org.openjdk.jmh.runner.options.Options;
+&nbsp;import org.openjdk.jmh.runner.options.OptionsBuilder;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.concurrent.TimeUnit;
+&nbsp;
+<b class="nc">&nbsp;public class UsersParseUTF8Bytes {</b>
+&nbsp;    static byte[] utf8Bytes;
+<b class="nc">&nbsp;    static final ObjectMapper mapper = new ObjectMapper();</b>
+<b class="nc">&nbsp;    static final Gson gson = new Gson();</b>
+<b class="nc">&nbsp;    static final DslJson&lt;Object&gt; dslJson = new DslJson&lt;&gt;(Settings.withRuntime().includeServiceLoader());</b>
+&nbsp;    static {
+&nbsp;        try {
+<b class="nc">&nbsp;            InputStream is = UsersParseUTF8Bytes.class.getClassLoader().getResourceAsStream(&quot;data/jjb/user.json&quot;);</b>
+<b class="nc">&nbsp;            utf8Bytes = IOUtils.toString(is, &quot;UTF-8&quot;).getBytes(StandardCharsets.UTF_8);</b>
+<b class="nc">&nbsp;        } catch (Throwable ex) {</b>
+<b class="nc">&nbsp;            ex.printStackTrace();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void fastjson2(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(JSON.parseObject(utf8Bytes, Users.class));</b>
+&nbsp;        // zulu17.40.19 : 3515
+&nbsp;        // zulu17.40.19_vec : 338
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void dsljson(Blackhole bh) throws IOException {
+<b class="nc">&nbsp;        bh.consume(dslJson.deserialize(Users.class, utf8Bytes, utf8Bytes.length));</b>
+&nbsp;        // zulu17.40.19 : 3560
+&nbsp;    }
+&nbsp;
+&nbsp;//    @Benchmark
+&nbsp;    public void jackson(Blackhole bh) throws Exception {
+<b class="nc">&nbsp;        bh.consume(mapper.readValue(utf8Bytes, Users.class));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;//    @Benchmark
+&nbsp;    public void gson(Blackhole bh) throws Exception {
+<b class="nc">&nbsp;        bh.consume(gson</b>
+<b class="nc">&nbsp;                .fromJson(</b>
+<b class="nc">&nbsp;                        new String(utf8Bytes, 0, utf8Bytes.length, StandardCharsets.UTF_8),</b>
+<b class="nc">&nbsp;                        Users.class)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void main(String[] args) throws RunnerException {
+<b class="nc">&nbsp;        Options options = new OptionsBuilder()</b>
+<b class="nc">&nbsp;                .include(UsersParseUTF8Bytes.class.getName())</b>
+<b class="nc">&nbsp;                .exclude(EishayParseUTF8BytesPretty.class.getName())</b>
+<b class="nc">&nbsp;                .mode(Mode.Throughput)</b>
+<b class="nc">&nbsp;                .timeUnit(TimeUnit.MILLISECONDS)</b>
+<b class="nc">&nbsp;                .warmupIterations(3)</b>
+<b class="nc">&nbsp;                .forks(2)</b>
+<b class="nc">&nbsp;                .threads(16)</b>
+<b class="nc">&nbsp;                .build();</b>
+<b class="nc">&nbsp;        new Runner(options).run();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:20</div>
+</div>
+</body>
+</html>

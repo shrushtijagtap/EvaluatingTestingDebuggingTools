@@ -1,0 +1,114 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SessionKey</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.session.mgt</a>
+</div>
+
+<h1>Coverage Summary for Class: SessionKey (org.apache.shiro.session.mgt)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">SessionKey</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2008 Les Hazlewood
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.session.mgt;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;
+&nbsp;/**
+&nbsp; * A {@code SessionKey} is a key that allows look-up of any particular {@link org.apache.shiro.session.Session Session}
+&nbsp; * instance.  This is not to be confused what is probably better recognized as a session &lt;em&gt;attribute&lt;/em&gt; key - a key
+&nbsp; * that is used to acquire a session attribute via the
+&nbsp; * {@link org.apache.shiro.session.Session#getAttribute(Object) Session.getAttribute} method.  A {@code SessionKey}
+&nbsp; * looks up a Session object directly.
+&nbsp; * &lt;p/&gt;
+&nbsp; * While a {@code SessionKey} allows lookup of &lt;em&gt;any&lt;/em&gt; Session that might exist, this is not something in practice
+&nbsp; * done too often by most Shiro end-users.  Instead, it is usually more convenient to acquire the currently executing
+&nbsp; * {@code Subject}&#39;s session via the {@link org.apache.shiro.subject.Subject#getSession} method.  This interface and
+&nbsp; * its usages are best suited for framework development.
+&nbsp; *
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public interface SessionKey {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the id of the session to acquire.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Acquiring sessions by ID only is a suitable strategy when sessions are natively managed by Shiro directly.
+&nbsp;     * For example, the Servlet specification does not have an API that allows session acquisition by session ID, so
+&nbsp;     * the session ID alone is not sufficient for ServletContainer-based SessionManager implementations.
+&nbsp;     *
+&nbsp;     * @return the id of the session to acquire.
+&nbsp;     */
+&nbsp;    Serializable getSessionId();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

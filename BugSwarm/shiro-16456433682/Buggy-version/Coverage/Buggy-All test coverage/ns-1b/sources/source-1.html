@@ -1,0 +1,350 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BeanTypeListener</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.guice</a>
+</div>
+
+<h1>Coverage Summary for Class: BeanTypeListener (org.apache.shiro.guice)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BeanTypeListener</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/45)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BeanTypeListener$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BeanTypeListener$BeanTypeKey</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/57)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.guice;
+&nbsp;
+&nbsp;import java.beans.PropertyDescriptor;
+&nbsp;import java.lang.reflect.InvocationTargetException;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;import com.google.inject.Binder;
+&nbsp;import com.google.inject.ConfigurationException;
+&nbsp;import com.google.inject.Injector;
+&nbsp;import com.google.inject.Key;
+&nbsp;import com.google.inject.MembersInjector;
+&nbsp;import com.google.inject.Provider;
+&nbsp;import com.google.inject.TypeLiteral;
+&nbsp;import com.google.inject.matcher.Matcher;
+&nbsp;import com.google.inject.matcher.Matchers;
+&nbsp;import com.google.inject.multibindings.MapBinder;
+&nbsp;import com.google.inject.name.Names;
+&nbsp;import com.google.inject.spi.TypeEncounter;
+&nbsp;import com.google.inject.spi.TypeListener;
+&nbsp;import com.google.inject.util.Types;
+&nbsp;
+&nbsp;import org.apache.commons.beanutils.BeanUtilsBean;
+&nbsp;import org.apache.commons.beanutils.SuppressPropertiesBeanIntrospector;
+&nbsp;import org.apache.shiro.SecurityUtils;
+&nbsp;
+&nbsp;/**
+&nbsp; * TypeListener that injects setter methods on Shiro objects.
+&nbsp; */
+&nbsp;class BeanTypeListener implements TypeListener {
+<b class="nc">&nbsp;    public static final Package SHIRO_GUICE_PACKAGE = ShiroModule.class.getPackage();</b>
+<b class="nc">&nbsp;    public static final Package SHIRO_PACKAGE = SecurityUtils.class.getPackage();</b>
+&nbsp;
+<b class="nc">&nbsp;    private static Matcher&lt;Class&gt; shiroMatcher = Matchers.inSubpackage(SHIRO_PACKAGE.getName());</b>
+<b class="nc">&nbsp;    private static Matcher&lt;Class&gt; shiroGuiceMatcher = Matchers.inSubpackage(SHIRO_GUICE_PACKAGE.getName());</b>
+&nbsp;
+<b class="nc">&nbsp;    private static Matcher&lt;Class&gt; classMatcher = ShiroMatchers.ANY_PACKAGE.and(shiroMatcher.and(Matchers.not(shiroGuiceMatcher)));</b>
+&nbsp;
+<b class="nc">&nbsp;    public static final Matcher&lt;TypeLiteral&gt; MATCHER = ShiroMatchers.typeLiteral(classMatcher);</b>
+&nbsp;
+&nbsp;    private static final String BEAN_TYPE_MAP_NAME = &quot;__SHIRO_BEAN_TYPES__&quot;;
+<b class="nc">&nbsp;    static final Key&lt;?&gt; MAP_KEY = Key.get(Types.mapOf(TypeLiteral.class, BeanTypeKey.class), Names.named(BEAN_TYPE_MAP_NAME));</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    private final BeanUtilsBean beanUtilsBean;
+&nbsp;
+<b class="nc">&nbsp;    private static final Set&lt;Class&lt;?&gt;&gt; WRAPPER_TYPES = new HashSet&lt;Class&lt;?&gt;&gt;(Arrays.asList(</b>
+<b class="nc">&nbsp;        Byte.class,</b>
+<b class="nc">&nbsp;        Boolean.class,</b>
+<b class="nc">&nbsp;        Character.class,</b>
+<b class="nc">&nbsp;        Double.class,</b>
+<b class="nc">&nbsp;        Float.class,</b>
+<b class="nc">&nbsp;        Integer.class,</b>
+<b class="nc">&nbsp;        Long.class,</b>
+<b class="nc">&nbsp;        Short.class,</b>
+<b class="nc">&nbsp;        Void.class));</b>
+&nbsp;
+<b class="nc">&nbsp;    public BeanTypeListener() {</b>
+&nbsp;        // SHIRO-619
+<b class="nc">&nbsp;        beanUtilsBean = new BeanUtilsBean();</b>
+<b class="nc">&nbsp;        beanUtilsBean.getPropertyUtils().addBeanIntrospector(</b>
+<b class="nc">&nbsp;                SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;I&gt; void hear(TypeLiteral&lt;I&gt; type, final TypeEncounter&lt;I&gt; encounter) {
+<b class="nc">&nbsp;        PropertyDescriptor propertyDescriptors[] = beanUtilsBean.getPropertyUtils().getPropertyDescriptors(type.getRawType());</b>
+<b class="nc">&nbsp;        final Map&lt;PropertyDescriptor, Key&lt;?&gt;&gt; propertyDependencies = new HashMap&lt;PropertyDescriptor, Key&lt;?&gt;&gt;(propertyDescriptors.length);</b>
+<b class="nc">&nbsp;        final Provider&lt;Injector&gt; injectorProvider = encounter.getProvider(Injector.class);</b>
+<b class="nc">&nbsp;        for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {</b>
+<b class="nc">&nbsp;            if (propertyDescriptor.getWriteMethod() != null &amp;&amp; Modifier.isPublic(propertyDescriptor.getWriteMethod().getModifiers())) {</b>
+<b class="nc">&nbsp;                Type propertyType = propertyDescriptor.getWriteMethod().getGenericParameterTypes()[0];</b>
+<b class="nc">&nbsp;                propertyDependencies.put(propertyDescriptor, createDependencyKey(propertyDescriptor, propertyType));</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        encounter.register(new MembersInjector&lt;I&gt;() {</b>
+&nbsp;            public void injectMembers(I instance) {
+<b class="nc">&nbsp;                for (Map.Entry&lt;PropertyDescriptor, Key&lt;?&gt;&gt; dependency : propertyDependencies.entrySet()) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        final Injector injector = injectorProvider.get();</b>
+&nbsp;
+<b class="nc">&nbsp;                        Object value = injector.getInstance(getMappedKey(injector, dependency.getValue()));</b>
+<b class="nc">&nbsp;                        dependency.getKey().getWriteMethod().invoke(instance, value);</b>
+&nbsp;
+<b class="nc">&nbsp;                    } catch (ConfigurationException e) {</b>
+&nbsp;                        // This is ok, it simply means that we can&#39;t fulfill this dependency.
+&nbsp;                        // Is there a better way to do this?
+<b class="nc">&nbsp;                    } catch (InvocationTargetException e) {</b>
+<b class="nc">&nbsp;                        throw new RuntimeException(&quot;Couldn&#39;t set property &quot; + dependency.getKey().getDisplayName(), e);</b>
+<b class="nc">&nbsp;                    } catch (IllegalAccessException e) {</b>
+<b class="nc">&nbsp;                        throw new RuntimeException(&quot;We shouldn&#39;t have ever reached this point, we don&#39;t try to inject to non-accessible methods.&quot;, e);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;            }
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static Key&lt;?&gt; getMappedKey(Injector injector, Key&lt;?&gt; key) {</b>
+<b class="nc">&nbsp;        Map&lt;TypeLiteral, BeanTypeKey&gt; beanTypeMap = getBeanTypeMap(injector);</b>
+<b class="nc">&nbsp;        if(key.getAnnotation() == null &amp;&amp; beanTypeMap.containsKey(key.getTypeLiteral())) {</b>
+<b class="nc">&nbsp;            return beanTypeMap.get(key.getTypeLiteral()).key;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return key;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings({&quot;unchecked&quot;})
+&nbsp;    private static Map&lt;TypeLiteral, BeanTypeKey&gt; getBeanTypeMap(Injector injector) {
+<b class="nc">&nbsp;        return (Map&lt;TypeLiteral, BeanTypeKey&gt;) injector.getInstance(MAP_KEY);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Key&lt;?&gt; createDependencyKey(PropertyDescriptor propertyDescriptor, Type propertyType) {
+<b class="nc">&nbsp;        if(requiresName(propertyType)) {</b>
+<b class="nc">&nbsp;            return Key.get(propertyType, Names.named(&quot;shiro.&quot; + propertyDescriptor.getName()));</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return Key.get(propertyType);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean requiresName(Type propertyType) {
+<b class="nc">&nbsp;        if (propertyType instanceof Class) {</b>
+<b class="nc">&nbsp;            Class&lt;?&gt; aClass = (Class&lt;?&gt;) propertyType;</b>
+<b class="nc">&nbsp;            return aClass.isPrimitive() || aClass.isEnum() || WRAPPER_TYPES.contains(aClass) || CharSequence.class.isAssignableFrom(aClass);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static void ensureBeanTypeMapExists(Binder binder) {
+<b class="nc">&nbsp;        beanTypeMapBinding(binder).addBinding(TypeLiteral.get(BeanTypeKey.class)).toInstance(new BeanTypeKey(null));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static &lt;T&gt; void bindBeanType(Binder binder, TypeLiteral&lt;T&gt; typeLiteral, Key&lt;? extends T&gt; key) {
+<b class="nc">&nbsp;        beanTypeMapBinding(binder).addBinding(typeLiteral).toInstance(new BeanTypeKey(key));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static MapBinder&lt;TypeLiteral, BeanTypeKey&gt; beanTypeMapBinding(Binder binder) {
+<b class="nc">&nbsp;        return MapBinder.newMapBinder(binder, TypeLiteral.class, BeanTypeKey.class, Names.named(BEAN_TYPE_MAP_NAME));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static class BeanTypeKey {
+&nbsp;        Key&lt;?&gt; key;
+&nbsp;
+<b class="nc">&nbsp;        private BeanTypeKey(Key&lt;?&gt; key) {</b>
+<b class="nc">&nbsp;            this.key = key;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

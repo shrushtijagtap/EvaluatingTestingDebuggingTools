@@ -1,0 +1,466 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CachingSessionDAO</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.session.mgt.eis</a>
+</div>
+
+<h1>Coverage Summary for Class: CachingSessionDAO (org.apache.shiro.session.mgt.eis)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CachingSessionDAO</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/54)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.session.mgt.eis;
+&nbsp;
+&nbsp;import org.apache.shiro.cache.Cache;
+&nbsp;import org.apache.shiro.cache.CacheManager;
+&nbsp;import org.apache.shiro.cache.CacheManagerAware;
+&nbsp;import org.apache.shiro.session.Session;
+&nbsp;import org.apache.shiro.session.UnknownSessionException;
+&nbsp;import org.apache.shiro.session.mgt.ValidatingSession;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Collections;
+&nbsp;
+&nbsp;/**
+&nbsp; * An CachingSessionDAO is a SessionDAO that provides a transparent caching layer between the components that
+&nbsp; * use it and the underlying EIS (Enterprise Information System) session backing store (for example, filesystem,
+&nbsp; * database, enterprise grid/cloud, etc).
+&nbsp; * &lt;p/&gt;
+&nbsp; * This implementation caches all active sessions in a configured
+&nbsp; * {@link #getActiveSessionsCache() activeSessionsCache}.  This property is {@code null} by default and if one is
+&nbsp; * not explicitly set, a {@link #setCacheManager cacheManager} is expected to be configured which will in turn be used
+&nbsp; * to acquire the {@code Cache} instance to use for the {@code activeSessionsCache}.
+&nbsp; * &lt;p/&gt;
+&nbsp; * All {@code SessionDAO} methods are implemented by this class to employ
+&nbsp; * caching behavior and delegates the actual EIS operations to respective do* methods to be implemented by
+&nbsp; * subclasses (doCreate, doRead, etc).
+&nbsp; *
+&nbsp; * @since 0.2
+&nbsp; */
+&nbsp;public abstract class CachingSessionDAO extends AbstractSessionDAO implements CacheManagerAware {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The default active sessions cache name, equal to {@code shiro-activeSessionCache}.
+&nbsp;     */
+&nbsp;    public static final String ACTIVE_SESSION_CACHE_NAME = &quot;shiro-activeSessionCache&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The CacheManager to use to acquire the Session cache.
+&nbsp;     */
+&nbsp;    private CacheManager cacheManager;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The Cache instance responsible for caching Sessions.
+&nbsp;     */
+&nbsp;    private Cache&lt;Serializable, Session&gt; activeSessions;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The name of the session cache, defaults to {@link #ACTIVE_SESSION_CACHE_NAME}.
+&nbsp;     */
+<b class="nc">&nbsp;    private String activeSessionsCacheName = ACTIVE_SESSION_CACHE_NAME;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default no-arg constructor.
+&nbsp;     */
+<b class="nc">&nbsp;    public CachingSessionDAO() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the cacheManager to use for acquiring the {@link #getActiveSessionsCache() activeSessionsCache} if
+&nbsp;     * one is not configured.
+&nbsp;     *
+&nbsp;     * @param cacheManager the manager to use for constructing the session cache.
+&nbsp;     */
+&nbsp;    public void setCacheManager(CacheManager cacheManager) {
+<b class="nc">&nbsp;        this.cacheManager = cacheManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the CacheManager to use for acquiring the {@link #getActiveSessionsCache() activeSessionsCache} if
+&nbsp;     * one is not configured.  That is, the {@code CacheManager} will only be used if the
+&nbsp;     * {@link #getActiveSessionsCache() activeSessionsCache} property is {@code null}.
+&nbsp;     *
+&nbsp;     * @return the CacheManager used by the implementation that creates the activeSessions Cache.
+&nbsp;     */
+&nbsp;    public CacheManager getCacheManager() {
+<b class="nc">&nbsp;        return cacheManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the name of the actives sessions cache to be returned by the {@code CacheManager}.  Unless
+&nbsp;     * overridden by {@link #setActiveSessionsCacheName(String)}, defaults to {@link #ACTIVE_SESSION_CACHE_NAME}.
+&nbsp;     *
+&nbsp;     * @return the name of the active sessions cache.
+&nbsp;     */
+&nbsp;    public String getActiveSessionsCacheName() {
+<b class="nc">&nbsp;        return activeSessionsCacheName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the name of the active sessions cache to be returned by the {@code CacheManager}.  Defaults to
+&nbsp;     * {@link #ACTIVE_SESSION_CACHE_NAME}.
+&nbsp;     *
+&nbsp;     * @param activeSessionsCacheName the name of the active sessions cache to be returned by the {@code CacheManager}.
+&nbsp;     */
+&nbsp;    public void setActiveSessionsCacheName(String activeSessionsCacheName) {
+<b class="nc">&nbsp;        this.activeSessionsCacheName = activeSessionsCacheName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the cache instance to use for storing active sessions.  If one is not available (it is {@code null}),
+&nbsp;     * it will be {@link CacheManager#getCache(String) acquired} from the {@link #setCacheManager configured}
+&nbsp;     * {@code CacheManager} using the {@link #getActiveSessionsCacheName() activeSessionsCacheName}.
+&nbsp;     *
+&nbsp;     * @return the cache instance to use for storing active sessions or {@code null} if the {@code Cache} instance
+&nbsp;     *         should be retrieved from the
+&nbsp;     */
+&nbsp;    public Cache&lt;Serializable, Session&gt; getActiveSessionsCache() {
+<b class="nc">&nbsp;        return this.activeSessions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the cache instance to use for storing active sessions.  If one is not set (it remains {@code null}),
+&nbsp;     * it will be {@link CacheManager#getCache(String) acquired} from the {@link #setCacheManager configured}
+&nbsp;     * {@code CacheManager} using the {@link #getActiveSessionsCacheName() activeSessionsCacheName}.
+&nbsp;     *
+&nbsp;     * @param cache the cache instance to use for storing active sessions or {@code null} if the cache is to be
+&nbsp;     *              acquired from the {@link #setCacheManager configured} {@code CacheManager}.
+&nbsp;     */
+&nbsp;    public void setActiveSessionsCache(Cache&lt;Serializable, Session&gt; cache) {
+<b class="nc">&nbsp;        this.activeSessions = cache;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the active sessions cache, but if that cache instance is null, first lazily creates the cache instance
+&nbsp;     * via the {@link #createActiveSessionsCache()} method and then returns the instance.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Note that this method will only return a non-null value code if the {@code CacheManager} has been set.  If
+&nbsp;     * not set, there will be no cache.
+&nbsp;     *
+&nbsp;     * @return the active sessions cache instance.
+&nbsp;     */
+&nbsp;    private Cache&lt;Serializable, Session&gt; getActiveSessionsCacheLazy() {
+<b class="nc">&nbsp;        if (this.activeSessions == null) {</b>
+<b class="nc">&nbsp;            this.activeSessions = createActiveSessionsCache();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return activeSessions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a cache instance used to store active sessions.  Creation is done by first
+&nbsp;     * {@link #getCacheManager() acquiring} the {@code CacheManager}.  If the cache manager is not null, the
+&nbsp;     * cache returned is that resulting from the following call:
+&nbsp;     * &lt;pre&gt;       String name = {@link #getActiveSessionsCacheName() getActiveSessionsCacheName()};
+&nbsp;     * cacheManager.getCache(name);&lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * @return a cache instance used to store active sessions, or {@code null} if the {@code CacheManager} has
+&nbsp;     *         not been set.
+&nbsp;     */
+&nbsp;    protected Cache&lt;Serializable, Session&gt; createActiveSessionsCache() {
+<b class="nc">&nbsp;        Cache&lt;Serializable, Session&gt; cache = null;</b>
+<b class="nc">&nbsp;        CacheManager mgr = getCacheManager();</b>
+<b class="nc">&nbsp;        if (mgr != null) {</b>
+<b class="nc">&nbsp;            String name = getActiveSessionsCacheName();</b>
+<b class="nc">&nbsp;            cache = mgr.getCache(name);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return cache;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calls {@code super.create(session)}, then caches the session keyed by the returned {@code sessionId}, and then
+&nbsp;     * returns this {@code sessionId}.
+&nbsp;     *
+&nbsp;     * @param session Session object to create in the EIS and then cache.
+&nbsp;     */
+&nbsp;    public Serializable create(Session session) {
+<b class="nc">&nbsp;        Serializable sessionId = super.create(session);</b>
+<b class="nc">&nbsp;        cache(session, sessionId);</b>
+<b class="nc">&nbsp;        return sessionId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the cached session with the corresponding {@code sessionId} or {@code null} if there is
+&nbsp;     * no session cached under that id (or if there is no Cache).
+&nbsp;     *
+&nbsp;     * @param sessionId the id of the cached session to acquire.
+&nbsp;     * @return the cached session with the corresponding {@code sessionId}, or {@code null} if the session
+&nbsp;     *         does not exist or is not cached.
+&nbsp;     */
+&nbsp;    protected Session getCachedSession(Serializable sessionId) {
+<b class="nc">&nbsp;        Session cached = null;</b>
+<b class="nc">&nbsp;        if (sessionId != null) {</b>
+<b class="nc">&nbsp;            Cache&lt;Serializable, Session&gt; cache = getActiveSessionsCacheLazy();</b>
+<b class="nc">&nbsp;            if (cache != null) {</b>
+<b class="nc">&nbsp;                cached = getCachedSession(sessionId, cache);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return cached;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the Session with the specified id from the specified cache.  This method simply calls
+&nbsp;     * {@code cache.get(sessionId)} and can be overridden by subclasses for custom acquisition behavior.
+&nbsp;     *
+&nbsp;     * @param sessionId the id of the session to acquire.
+&nbsp;     * @param cache     the cache to acquire the session from
+&nbsp;     * @return the cached session, or {@code null} if the session wasn&#39;t in the cache.
+&nbsp;     */
+&nbsp;    protected Session getCachedSession(Serializable sessionId, Cache&lt;Serializable, Session&gt; cache) {
+<b class="nc">&nbsp;        return cache.get(sessionId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Caches the specified session under the cache entry key of {@code sessionId}.
+&nbsp;     *
+&nbsp;     * @param session   the session to cache
+&nbsp;     * @param sessionId the session id, to be used as the cache entry key.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    protected void cache(Session session, Serializable sessionId) {
+<b class="nc">&nbsp;        if (session == null || sessionId == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        Cache&lt;Serializable, Session&gt; cache = getActiveSessionsCacheLazy();</b>
+<b class="nc">&nbsp;        if (cache == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        cache(session, sessionId, cache);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Caches the specified session in the given cache under the key of {@code sessionId}.  This implementation
+&nbsp;     * simply calls {@code cache.put(sessionId,session)} and can be overridden for custom behavior.
+&nbsp;     *
+&nbsp;     * @param session   the session to cache
+&nbsp;     * @param sessionId the id of the session, expected to be the cache key.
+&nbsp;     * @param cache     the cache to store the session
+&nbsp;     */
+&nbsp;    protected void cache(Session session, Serializable sessionId, Cache&lt;Serializable, Session&gt; cache) {
+<b class="nc">&nbsp;        cache.put(sessionId, session);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Attempts to acquire the Session from the cache first using the session ID as the cache key.  If no session
+&nbsp;     * is found, {@code super.readSession(sessionId)} is called to perform the actual retrieval.
+&nbsp;     *
+&nbsp;     * @param sessionId the id of the session to retrieve from the EIS.
+&nbsp;     * @return the session identified by {@code sessionId} in the EIS.
+&nbsp;     * @throws UnknownSessionException if the id specified does not correspond to any session in the cache or EIS.
+&nbsp;     */
+&nbsp;    public Session readSession(Serializable sessionId) throws UnknownSessionException {
+<b class="nc">&nbsp;        Session s = getCachedSession(sessionId);</b>
+<b class="nc">&nbsp;        if (s == null) {</b>
+<b class="nc">&nbsp;            s = super.readSession(sessionId);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return s;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Updates the state of the given session to the EIS by first delegating to
+&nbsp;     * {@link #doUpdate(org.apache.shiro.session.Session)}.  If the session is a {@link ValidatingSession}, it will
+&nbsp;     * be added to the cache only if it is {@link ValidatingSession#isValid()} and if invalid, will be removed from the
+&nbsp;     * cache.  If it is not a {@code ValidatingSession} instance, it will be added to the cache in any event.
+&nbsp;     *
+&nbsp;     * @param session the session object to update in the EIS.
+&nbsp;     * @throws UnknownSessionException if no existing EIS session record exists with the
+&nbsp;     *                                 identifier of {@link Session#getId() session.getId()}
+&nbsp;     */
+&nbsp;    public void update(Session session) throws UnknownSessionException {
+<b class="nc">&nbsp;        doUpdate(session);</b>
+<b class="nc">&nbsp;        if (session instanceof ValidatingSession) {</b>
+<b class="nc">&nbsp;            if (((ValidatingSession) session).isValid()) {</b>
+<b class="nc">&nbsp;                cache(session, session.getId());</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                uncache(session);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            cache(session, session.getId());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Subclass implementation hook to actually persist the {@code Session}&#39;s state to the underlying EIS.
+&nbsp;     *
+&nbsp;     * @param session the session object whose state will be propagated to the EIS.
+&nbsp;     */
+&nbsp;    protected abstract void doUpdate(Session session);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes the specified session from any cache and then permanently deletes the session from the EIS by
+&nbsp;     * delegating to {@link #doDelete}.
+&nbsp;     *
+&nbsp;     * @param session the session to remove from caches and permanently delete from the EIS.
+&nbsp;     */
+&nbsp;    public void delete(Session session) {
+<b class="nc">&nbsp;        uncache(session);</b>
+<b class="nc">&nbsp;        doDelete(session);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Subclass implementation hook to permanently delete the given Session from the underlying EIS.
+&nbsp;     *
+&nbsp;     * @param session the session instance to permanently delete from the EIS.
+&nbsp;     */
+&nbsp;    protected abstract void doDelete(Session session);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes the specified Session from the cache.
+&nbsp;     *
+&nbsp;     * @param session the session to remove from the cache.
+&nbsp;     */
+&nbsp;    protected void uncache(Session session) {
+<b class="nc">&nbsp;        if (session == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        Serializable id = session.getId();</b>
+<b class="nc">&nbsp;        if (id == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        Cache&lt;Serializable, Session&gt; cache = getActiveSessionsCacheLazy();</b>
+<b class="nc">&nbsp;        if (cache != null) {</b>
+<b class="nc">&nbsp;            cache.remove(id);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns all active sessions in the system.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;p&gt;This implementation merely returns the sessions found in the activeSessions cache.  Subclass implementations
+&nbsp;     * may wish to override this method to retrieve them in a different way, perhaps by an RDBMS query or by other
+&nbsp;     * means.
+&nbsp;     *
+&nbsp;     * @return the sessions found in the activeSessions cache.
+&nbsp;     */
+&nbsp;    public Collection&lt;Session&gt; getActiveSessions() {
+<b class="nc">&nbsp;        Cache&lt;Serializable, Session&gt; cache = getActiveSessionsCacheLazy();</b>
+<b class="nc">&nbsp;        if (cache != null) {</b>
+<b class="nc">&nbsp;            return cache.values();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return Collections.emptySet();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

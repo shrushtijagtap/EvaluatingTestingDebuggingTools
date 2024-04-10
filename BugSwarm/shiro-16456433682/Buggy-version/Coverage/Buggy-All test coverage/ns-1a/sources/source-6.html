@@ -1,0 +1,118 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EventListenerResolver</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.event.support</a>
+</div>
+
+<h1>Coverage Summary for Class: EventListenerResolver (org.apache.shiro.event.support)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">EventListenerResolver</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.event.support;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * An {@code EventListenerResolver} knows how to resolve (either create or lookup) {@link EventListener} instances
+&nbsp; * as a result of inspecting a subscriber object, mostly likely a
+&nbsp; * {@link org.apache.shiro.event.Subscribe Subscribe}-annotated object instance.
+&nbsp; * &lt;p/&gt;
+&nbsp; * This interface exists primarily as a support concept for the {@link DefaultEventBus} implementation.  Custom
+&nbsp; * implementations of this interface can be configured on a {@link DefaultEventBus} instance to determine exactly
+&nbsp; * how a subscriber receives events.
+&nbsp; * &lt;p/&gt;
+&nbsp; * For example, the {@link AnnotationEventListenerResolver AnnotationEventListenerResolver} will inspect a runtime
+&nbsp; * object for {@link org.apache.shiro.event.Subscribe Subscribe}-annotated methods, and for each method found, return
+&nbsp; * an {@link EventListener} instance representing the method to invoke.
+&nbsp; *
+&nbsp; * @see AnnotationEventListenerResolver
+&nbsp; * @see SingleArgumentMethodEventListener
+&nbsp; * @since 1.3
+&nbsp; */
+&nbsp;public interface EventListenerResolver {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@link EventListener} instances as a result of inspecting a subscriber object, mostly likely with
+&nbsp;     * {@link org.apache.shiro.event.Subscribe Subscribe}-annotated methods.
+&nbsp;     *
+&nbsp;     * @param instance the subscriber instance for which EventListener instances should be acquired.
+&nbsp;     * @return {@link EventListener} instances as a result of inspecting a subscriber object.
+&nbsp;     */
+&nbsp;    List&lt;EventListener&gt; getEventListeners(Object instance);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

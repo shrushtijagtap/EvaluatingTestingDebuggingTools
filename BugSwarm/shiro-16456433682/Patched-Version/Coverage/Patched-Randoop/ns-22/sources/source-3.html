@@ -1,0 +1,212 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EnterpriseCacheSessionDAO</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.session.mgt.eis</a>
+</div>
+
+<h1>Coverage Summary for Class: EnterpriseCacheSessionDAO (org.apache.shiro.session.mgt.eis)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EnterpriseCacheSessionDAO</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">EnterpriseCacheSessionDAO$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.session.mgt.eis;
+&nbsp;
+&nbsp;import org.apache.shiro.cache.AbstractCacheManager;
+&nbsp;import org.apache.shiro.cache.Cache;
+&nbsp;import org.apache.shiro.cache.CacheException;
+&nbsp;import org.apache.shiro.cache.MapCache;
+&nbsp;import org.apache.shiro.session.Session;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;
+&nbsp;/**
+&nbsp; * SessionDAO implementation that relies on an enterprise caching product as the EIS system of record for all sessions.
+&nbsp; * It is expected that an injected {@link org.apache.shiro.cache.Cache Cache} or
+&nbsp; * {@link org.apache.shiro.cache.CacheManager CacheManager} is backed by an enterprise caching product that can support
+&nbsp; * all application sessions and/or provide disk paging for resilient data storage.
+&nbsp; * &lt;h2&gt;Production Note&lt;/h2&gt;
+&nbsp; * This implementation defaults to using an in-memory map-based {@code CacheManager}, which is great for testing but
+&nbsp; * will typically not scale for production environments and could easily cause {@code OutOfMemoryException}s.  Just
+&nbsp; * don&#39;t forget to configure&lt;b&gt;*&lt;/b&gt; an instance of this class with a production-grade {@code CacheManager} that can
+&nbsp; * handle disk paging for large numbers of sessions and you&#39;ll be fine.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;b&gt;*&lt;/b&gt;If you configure Shiro&#39;s {@code SecurityManager} instance with such a {@code CacheManager}, it will be
+&nbsp; * automatically applied to an instance of this class and you won&#39;t need to explicitly set it in configuration.
+&nbsp; * &lt;h3&gt;Implementation Details&lt;/h3&gt;
+&nbsp; * This implementation relies heavily on the {@link CachingSessionDAO parent class}&#39;s transparent caching behavior for
+&nbsp; * all storage operations with the enterprise caching product.  Because the parent class uses a {@code Cache} or
+&nbsp; * {@code CacheManager} to perform caching, and the cache is considered the system of record, nothing further needs to
+&nbsp; * be done for the {@link #doReadSession}, {@link #doUpdate} and {@link #doDelete} method implementations.  This class
+&nbsp; * implements those methods as required by the parent class, but they essentially do nothing.
+&nbsp; *
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public class EnterpriseCacheSessionDAO extends CachingSessionDAO {
+&nbsp;
+<b class="nc">&nbsp;    public EnterpriseCacheSessionDAO() {</b>
+<b class="nc">&nbsp;        setCacheManager(new AbstractCacheManager() {</b>
+&nbsp;            @Override
+&nbsp;            protected Cache&lt;Serializable, Session&gt; createCache(String name) throws CacheException {
+<b class="nc">&nbsp;                return new MapCache&lt;Serializable, Session&gt;(name, new ConcurrentHashMap&lt;Serializable, Session&gt;());</b>
+&nbsp;            }
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Serializable doCreate(Session session) {
+<b class="nc">&nbsp;        Serializable sessionId = generateSessionId(session);</b>
+<b class="nc">&nbsp;        assignSessionId(session, sessionId);</b>
+<b class="nc">&nbsp;        return sessionId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Session doReadSession(Serializable sessionId) {
+<b class="nc">&nbsp;        return null; //should never execute because this implementation relies on parent class to access cache, which</b>
+&nbsp;        //is where all sessions reside - it is the cache implementation that determines if the
+&nbsp;        //cache is memory only or disk-persistent, etc.
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void doUpdate(Session session) {
+&nbsp;        //does nothing - parent class persists to cache.
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    protected void doDelete(Session session) {
+&nbsp;        //does nothing - parent class removes from cache.
+<b class="nc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":77,"id":75284,"methods":[{"el":21,"sc":5,"sl":12},{"el":32,"sc":5,"sl":23},{"el":43,"sc":5,"sl":34},{"el":54,"sc":5,"sl":45},{"el":65,"sc":5,"sl":56},{"el":76,"sc":5,"sl":67}],"name":"IntegerParseTest","sl":11}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_1091":{"methods":[{"sl":67}],"name":"test_m","pass":true,"statements":[{"sl":68},{"sl":69},{"sl":70},{"sl":71},{"sl":72},{"sl":73},{"sl":74},{"sl":75}]},"test_1324":{"methods":[{"sl":12}],"name":"test_l","pass":true,"statements":[{"sl":13},{"sl":14},{"sl":15},{"sl":16},{"sl":17},{"sl":18},{"sl":19},{"sl":20}]},"test_1349":{"methods":[{"sl":56}],"name":"test_d","pass":true,"statements":[{"sl":57},{"sl":58},{"sl":59},{"sl":60},{"sl":61},{"sl":62},{"sl":63},{"sl":64}]},"test_1357":{"methods":[{"sl":45}],"name":"test_f","pass":true,"statements":[{"sl":46},{"sl":47},{"sl":48},{"sl":49},{"sl":50},{"sl":51},{"sl":52},{"sl":53}]},"test_4020":{"methods":[{"sl":34}],"name":"test_b","pass":true,"statements":[{"sl":35},{"sl":36},{"sl":37},{"sl":38},{"sl":39},{"sl":40},{"sl":41},{"sl":42}]},"test_4086":{"methods":[{"sl":23}],"name":"test_s","pass":true,"statements":[{"sl":24},{"sl":25},{"sl":26},{"sl":27},{"sl":28},{"sl":29},{"sl":30},{"sl":31}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [1324], [1324], [1324], [1324], [1324], [1324], [1324], [1324], [1324], [], [], [4086], [4086], [4086], [4086], [4086], [4086], [4086], [4086], [4086], [], [], [4020], [4020], [4020], [4020], [4020], [4020], [4020], [4020], [4020], [], [], [1357], [1357], [1357], [1357], [1357], [1357], [1357], [1357], [1357], [], [], [1349], [1349], [1349], [1349], [1349], [1349], [1349], [1349], [1349], [], [], [1091], [1091], [1091], [1091], [1091], [1091], [1091], [1091], [1091], [], []]

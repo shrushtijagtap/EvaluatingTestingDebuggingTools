@@ -1,0 +1,112 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > HostAuthenticationToken</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.authc</a>
+</div>
+
+<h1>Coverage Summary for Class: HostAuthenticationToken (org.apache.shiro.authc)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">HostAuthenticationToken</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.authc;
+&nbsp;
+&nbsp;/**
+&nbsp; * A {@code HostAuthenticationToken} retains the host information from where
+&nbsp; * an authentication attempt originates.
+&nbsp; *
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public interface HostAuthenticationToken extends AuthenticationToken {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the host name of the client from where the
+&nbsp;     * authentication attempt originates or if the Shiro environment cannot or
+&nbsp;     * chooses not to resolve the hostname to improve performance, this method
+&nbsp;     * returns the String representation of the client&#39;s IP address.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * When used in web environments, this value is usually the same as the
+&nbsp;     * {@code ServletRequest.getRemoteHost()} value.
+&nbsp;     *
+&nbsp;     * @return the fully qualified name of the client from where the
+&nbsp;     *         authentication attempt originates or the String representation
+&nbsp;     *         of the client&#39;s IP address is hostname resolution is not
+&nbsp;     *         available or disabled.
+&nbsp;     */
+&nbsp;    String getHost();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

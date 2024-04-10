@@ -1,14 +1,15 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.parser.JSONReaderScannerTest_decimal
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.001 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.JSONReaderScannerTest_decimal
-com.alibaba.json.bvt.parser.JSONReaderScannerTest_decimal.test_scanInt -- Time elapsed: 0.001 s <<< FAILURE!
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.017 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.JSONReaderScannerTest_decimal
+com.alibaba.json.bvt.parser.JSONReaderScannerTest_decimal.test_scanInt -- Time elapsed: 0.017 s <<< FAILURE!
 java.lang.AssertionError: expected: java.math.BigDecimal<0.0> but was: java.lang.Double<0.0>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:834)
 	at org.junit.Assert.assertEquals(Assert.java:118)
 	at org.junit.Assert.assertEquals(Assert.java:144)
-	at com.alibaba.json.bvt.parser.JSONReaderScannerTest_decimal.test_scanInt(JSONReaderScannerTest_decimal.java:35)
+	at com.alibaba.json.bvt.parser.JSONReaderScannerTest_decimal.__CLR4_1_10lzj1lg1hs7(JSONReaderScannerTest_decimal.java:35)
+	at com.alibaba.json.bvt.parser.JSONReaderScannerTest_decimal.test_scanInt(JSONReaderScannerTest_decimal.java:16)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

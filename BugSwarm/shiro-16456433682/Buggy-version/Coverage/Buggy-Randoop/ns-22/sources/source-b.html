@@ -1,0 +1,116 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SubjectFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.mgt</a>
+</div>
+
+<h1>Coverage Summary for Class: SubjectFactory (org.apache.shiro.mgt)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">SubjectFactory</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.mgt;
+&nbsp;
+&nbsp;import org.apache.shiro.subject.Subject;
+&nbsp;import org.apache.shiro.subject.SubjectContext;
+&nbsp;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * A {@code SubjectFactory} is responsible for constructing {@link Subject Subject} instances as needed.
+&nbsp; *
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public interface SubjectFactory {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new Subject instance reflecting the state of the specified contextual data.  The data would be
+&nbsp;     * anything required to required to construct a {@code Subject} instance and its contents can vary based on
+&nbsp;     * environment.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Any data supported by Shiro core will be accessible by one of the {@code SubjectContext}&#39;s {@code get*}
+&nbsp;     * or {@code resolve*} methods.  All other data is available as map {@link Map#get attribute}s.
+&nbsp;     *
+&nbsp;     * @param context the contextual data to be used by the implementation to construct an appropriate {@code Subject}
+&nbsp;     *                instance.
+&nbsp;     * @return a {@code Subject} instance created based on the specified context.
+&nbsp;     * @see SubjectContext
+&nbsp;     */
+&nbsp;    Subject createSubject(SubjectContext context);
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

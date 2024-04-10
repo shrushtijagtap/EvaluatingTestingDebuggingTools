@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="../../../../img/clover.ico" />
+
+    <link rel="stylesheet" href="../../../../aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="../../../../aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="../../../../aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('../../../../style.css');
+        @import url('../../../../tree.css');
+        
+    </style>
+
+    <script src="../../../../jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../../../../aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="../../../../aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="../../../../aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="../../../../package-nodes-tree.js" type="text/javascript"></script>
+    <script src="../../../../clover-tree.js" type="text/javascript"></script>
+    <script src="../../../../clover.js" type="text/javascript"></script>
+    <script src="../../../../clover-descriptions.js" type="text/javascript"></script>
+    <script src="../../../../cloud.js" type="text/javascript"></script>
+
+            <title>fastjson 1.2.60_preview_04</title>
+    </head>
+
+<body  onload="onLoad('fastjson 1.2.60_preview_04: com.alibaba.fastjson.serializer.EnumSerializer.java')">
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="https://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="https://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                    <a href="https://github.com/alibaba/fastjson" target="_top">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="../../../../img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+                    </a>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                            <a href="https://github.com/alibaba/fastjson" target="_top">
+                                        fastjson 1.2.60_preview_04
+                                        </a>
+                    </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="">
+                    <a href="../../../../dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                <div class="packages-tree-wrapper" data-root-relative="../../../../" data-package-name="com.alibaba.fastjson.serializer">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="../../../../dashboard.html">Project Clover database Tue Apr 9 2024 17:33:15 CDT</a></li> 
+        <li><a href="pkg-summary.html">        Package com.alibaba.fastjson.serializer</a></li> 
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            File EnumSerializer.java
+    </h1>
+
+
+
+
+
+
+
+
+    
+<div class="aui-tabs horizontal-tabs" id="tabs-file">
+            <div class="tabs-pane aui-tabs-pane-100-pcnt active-pane" id="tabs-file-source">
+        <div>&#160;</div>
+
+        
+                <div style="display: table; width: 100%">
+                            <div class="clover-histogram-table-cell">
+                                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Coverage histogram</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div class="aui-item clover-aui-item-histogram">
+                    <img src="../../../../img/srcFileCovDistChart10.png" alt="../../../../img/srcFileCovDistChart10.png"
+                         usemap="#srcFileCovDistChart10.png" class="clover-histogram-img"/>
+                    <map id="srcFileCovDistChart10.png" name="srcFileCovDistChart10.png">
+<area shape="rect" coords="100,41,107,66" title="104 files have 91-100% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="91,58,98,66" title="35 files have 81-90% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="82,60,89,66" title="27 files have 71-80% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="73,63,80,65" title="12 files have 61-70% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="64,65,71,66" title="5 files have 51-60% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="56,65,63,66" title="6 files have 41-50% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="47,65,54,66" title="4 files have 31-40% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="38,65,45,66" title="6 files have 21-30% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="29,65,36,66" title="6 files have 11-20% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="20,66,27,67" title="2 files have 1-10% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="11,8,18,65" title="238 files have 0% coverage" alt="" nohref="nohref"/>
+</map><br />
+                    <span class="subtle"><strong>0% </strong>of files have more coverage</span>
+                </div>
+            </div>
+        </div>
+                    </div>
+                        <div style="display: table-cell; width: 67%;">
+                    <div class="dashboard-widget">
+        <header class="dashboard-widget-header">
+            <h3>Code metrics</h3>
+        </header>
+        <div class="dashboard-widget-content">
+                        
+
+<div id="td-header-stats" class="aui-item" style="display: ">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this file">Branches:</label></div>
+        <div class="stats-box-value">0</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this file">Statements:</label></div>
+        <div class="stats-box-value">2</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this file">Methods:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this file">Classes:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+            <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this file">LOC:</label></div>
+        <div class="stats-box-value">32</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this file">NCLOC:</label></div>
+        <div class="stats-box-value">10</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this file">Total complexity:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this file">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.5</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">2</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this file">Average method complexity:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+</div>
+
+</div>
+                        
+
+<div id="td-filtered-header-stats" class="aui-item" style="display: none">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this file">Branches:</label></div>
+        <div class="stats-box-value">0</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this file">Statements:</label></div>
+        <div class="stats-box-value">2</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this file">Methods:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this file">Classes:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+            <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this file">LOC:</label></div>
+        <div class="stats-box-value">32</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this file">NCLOC:</label></div>
+        <div class="stats-box-value">10</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this file">Total complexity:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this file">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.5</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">2</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this file">Average method complexity:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+</div>
+
+</div>        </div>
+    </div>
+            </div>
+        </div>
+
+        
+        
+
+
+    <h2>Classes</h2>
+
+        <table class="aui aui-table-sortable">
+        <thead>
+                        <tr>     <th>Class</th>
+    <th>Line #</th>
+
+            
+        <th class="">
+            <label  title="The total number of statements.">Total Statements</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The percentage of elements that have been filtered from this report.">% Filtered</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label>
+        </th>
+        
+    
+            <th>Actions</th>
+    </tr>         </thead>
+        <tbody>
+                              <tr> <td id="EnumSerializer">
+        <span><a href="#24" title="EnumSerializer" onclick="closeDialogAndScrollTo('dialog-EnumSerializer', '24');">EnumSerializer</a></span>
+</td>
+<td>24<a name="sl-24"></a></td>
+    <td class="">2</td>
+    <td class="">0%</td>
+    <td class="">1</td>
+    <td class="">0</td>
+    <td class=""><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+    <td><button data-dialog-id="dialog-EnumSerializer" class="aui-button aui-button-link dialog-show-button">Show methods</button></td>
+</tr>                      </tbody>
+    </table>
+
+    
+     
+        <section role="dialog" id="dialog-EnumSerializer" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+            
+            <header class="aui-dialog2-header">
+                <h1 class="aui-dialog2-header-main">Class EnumSerializer</h1>
+                <div class="aui-dialog2-header-secondary">
+                    <input id="dialog-EnumSerializer-method-filter" class="test-filter text" type="text" name="method-filter"
+                           placeholder="Type to filter methods..." autocomplete="off"
+                           onkeyup="filterMethods('dialog-EnumSerializer-methods-body', 'dialog-EnumSerializer-method-filter');"/>
+                </div>
+            </header>
+
+            
+            <div class="aui-dialog2-content">
+
+                
+
+                <table class="aui aui-table-sortable">
+                                                                                                            
+                    <thead>
+                                                 <tr> <th id="EnumSerializer">
+    Class<br/>    <span><a href="#24" title="EnumSerializer" onclick="closeDialogAndScrollTo('dialog-EnumSerializer', '24');">EnumSerializer</a></span>
+</th>
+<th>Line #<br/>24<a name="sl-24"></a></th>
+    <th class=""><label  title="The total number of statements.">Total Statements</label><br/>2</th>
+    <th class=""><label  title="The percentage of elements that have been filtered from this report.">% Filtered</label><br/>0%</th>
+    <th class=""><label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label><br/>1</th>
+    <th class=""><label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label><br/>0</th>
+    <th class=""><label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label><br/><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></th>
+</tr>                     </thead>
+                    <tbody id="dialog-EnumSerializer-methods-body">
+                                                                                                            <tr id="EnumSerializer-1">
+<td id="summary-28-5">
+ <span class="sortValue">write(JSONSerializer,Object,Object,Type,int)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#28" title="write(JSONSerializer,Object,Object,Type,int)&#160;:&#160;void" name="sl-28" onclick="closeDialogAndScrollTo('dialog-EnumSerializer', '28');">write(JSONSerializer,Object,Object,Type,int)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">28</span>28</td>
+<td class="" align="right"><span class="sortValue">2.0</span>2</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                         </tbody>
+                </table>
+
+                <div>&#160;</div>
+                
+
+            </div>
+
+            
+            <footer class="aui-dialog2-footer">
+                <div class="aui-dialog2-footer-actions">
+                    <button class="aui-button aui-button-primary dialog-close-button"
+                            data-dialog-id="dialog-EnumSerializer">Close</button>
+                </div>
+                <div class="aui-dialog2-footer-hint">Click on a class or a method name to jump to source.</div>
+            </footer>
+        </section>
+
+     
+ 
+        
+        <div>&#160;</div>
+
+<h2>Contributing tests</h2>
+
+    <div>
+                This file is covered by 54 tests.
+        <button data-dialog-id="contr-tests-dialog" class="aui-button aui-button-link dialog-show-button">
+            Select tests to highlight the test coverage
+        </button>.
+    </div>
+
+<section role="dialog" id="contr-tests-dialog" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+    
+    <header class="aui-dialog2-header">
+        <h1 class="aui-dialog2-header-main">Contributing tests</h1>
+        <div class="aui-dialog2-header-secondary">
+            <input id="test-filter" class="test-filter text" type="text" name="test-filter"
+                   placeholder="Type to filter tests..." autocomplete="off"
+                   onkeyup="filterTests('tests-body', 'test-filter', 3);"/>
+        </div>
+    </header>
+
+    
+    <div class="aui-dialog2-content">
+    
+
+        <p class="aui-buttons">
+            <button title="Selects all tests for this file, highlighting their coverage."
+                    class="aui-button" id="selectalltests">Select all</button>
+        </p>
+
+        <table class="aui aui-table-sortable">
+            <thead id="tests-head">
+            <tr id="testHeaderRow">
+                <th class="aui-table-column-unsortable"></th>
+                <th>
+                    <label title="The percentage of coverage contributed by each single test.">Test contribution</label>
+                </th>
+                <th>
+                    <label title="The test (or test iteration) which was executed.">Test</label>
+                </th>
+                <th>
+                    <label>Result</label>
+                </th>
+                <th class="aui-table-column-unsortable">
+                    <label>Actions</label>
+                </th>
+            </tr>
+            </thead>
+            <tbody id="tests-body">
+
+<tr id="test-3054">
+<td><a name="testA-3054"></a><input type="checkbox" id="cb-3054" value="3054" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay_Image_test_0_2cu.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3054">  <span class="sortValue">com.alibaba.json.bvt.writeAsArray.WriteAsArray_Eishay_Image.test_0</span><a href="../../../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay_Image_test_0_2cu.html" title="View Test Summary Page">com.alibaba.json.bvt.writeAsArray.WriteAsArray_Eishay_Image.test_0</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay_Image.html?line=15#src-15" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay_Image_test_0_2cu.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-103">
+<td><a name="testA-103"></a><input type="checkbox" id="cb-103" value="103" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/EnumFieldTest3_test_null_2v.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-103">  <span class="sortValue">com.alibaba.json.bvt.EnumFieldTest3.test_null</span><a href="../../../../com/alibaba/json/bvt/EnumFieldTest3_test_null_2v.html" title="View Test Summary Page">com.alibaba.json.bvt.EnumFieldTest3.test_null</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/EnumFieldTest3.html?line=50#src-50" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/EnumFieldTest3_test_null_2v.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4367">
+<td><a name="testA-4367"></a><input type="checkbox" id="cb-4367" value="4367" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/parser/deser/asm/TestASM_test_asm_3db.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4367">  <span class="sortValue">com.alibaba.json.bvt.parser.deser.asm.TestASM.test_asm</span><a href="../../../../com/alibaba/json/bvt/parser/deser/asm/TestASM_test_asm_3db.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.deser.asm.TestASM.test_asm</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/parser/deser/asm/TestASM.html?line=15#src-15" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/parser/deser/asm/TestASM_test_asm_3db.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1607">
+<td><a name="testA-1607"></a><input type="checkbox" id="cb-1607" value="1607" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest2_test_enum_18n.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1607">  <span class="sortValue">com.alibaba.json.bvt.serializer.enum_.EnumFieldsTest2.test_enum</span><a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest2_test_enum_18n.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.enum_.EnumFieldsTest2.test_enum</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest2.html?line=12#src-12" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest2_test_enum_18n.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4381">
+<td><a name="testA-4381"></a><input type="checkbox" id="cb-4381" value="4381" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/bug/Bug_for_issue_268_test_for_issue_private_3dp.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4381">  <span class="sortValue">com.alibaba.json.bvt.bug.Bug_for_issue_268.test_for_issue_private</span><a href="../../../../com/alibaba/json/bvt/bug/Bug_for_issue_268_test_for_issue_private_3dp.html" title="View Test Summary Page">com.alibaba.json.bvt.bug.Bug_for_issue_268.test_for_issue_private</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/bug/Bug_for_issue_268.html?line=26#src-26" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/bug/Bug_for_issue_268_test_for_issue_private_3dp.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2399">
+<td><a name="testA-2399"></a><input type="checkbox" id="cb-2399" value="2399" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/issue_1300/Issue1371_testFastjsonEnum_1un.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-2399">  <span class="sortValue">com.alibaba.json.bvt.issue_1300.Issue1371.testFastjsonEnum</span><a href="../../../../com/alibaba/json/bvt/issue_1300/Issue1371_testFastjsonEnum_1un.html" title="View Test Summary Page">com.alibaba.json.bvt.issue_1300.Issue1371.testFastjsonEnum</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/issue_1300/Issue1371.html?line=23#src-23" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/issue_1300/Issue1371_testFastjsonEnum_1un.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3376">
+<td><a name="testA-3376"></a><input type="checkbox" id="cb-3376" value="3376" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/parser/deser/asm/TestASMEishay_test_asm_2ls.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3376">  <span class="sortValue">com.alibaba.json.bvt.parser.deser.asm.TestASMEishay.test_asm</span><a href="../../../../com/alibaba/json/bvt/parser/deser/asm/TestASMEishay_test_asm_2ls.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.deser.asm.TestASMEishay.test_asm</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/parser/deser/asm/TestASMEishay.html?line=12#src-12" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/parser/deser/asm/TestASMEishay_test_asm_2ls.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-943">
+<td><a name="testA-943"></a><input type="checkbox" id="cb-943" value="943" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/issue_1300/Issue1319_test_for_issue_q7.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-943">  <span class="sortValue">com.alibaba.json.bvt.issue_1300.Issue1319.test_for_issue</span><a href="../../../../com/alibaba/json/bvt/issue_1300/Issue1319_test_for_issue_q7.html" title="View Test Summary Page">com.alibaba.json.bvt.issue_1300.Issue1319.test_for_issue</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/issue_1300/Issue1319.html?line=12#src-12" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/issue_1300/Issue1319_test_for_issue_q7.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4109">
+<td><a name="testA-4109"></a><input type="checkbox" id="cb-4109" value="4109" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/JSONSerializerTest2_test_3_365.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4109">  <span class="sortValue">com.alibaba.json.bvt.serializer.JSONSerializerTest2.test_3</span><a href="../../../../com/alibaba/json/bvt/serializer/JSONSerializerTest2_test_3_365.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.JSONSerializerTest2.test_3</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/JSONSerializerTest2.html?line=49#src-49" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/JSONSerializerTest2_test_3_365.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-518">
+<td><a name="testA-518"></a><input type="checkbox" id="cb-518" value="518" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/EnumFieldTest3_private_test_1_writer_ee.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-518">  <span class="sortValue">com.alibaba.json.bvt.EnumFieldTest3_private.test_1_writer</span><a href="../../../../com/alibaba/json/bvt/EnumFieldTest3_private_test_1_writer_ee.html" title="View Test Summary Page">com.alibaba.json.bvt.EnumFieldTest3_private.test_1_writer</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/EnumFieldTest3_private.html?line=31#src-31" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/EnumFieldTest3_private_test_1_writer_ee.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3073">
+<td><a name="testA-3073"></a><input type="checkbox" id="cb-3073" value="3073" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/EnumFieldTest3_private_test_null_2dd.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3073">  <span class="sortValue">com.alibaba.json.bvt.EnumFieldTest3_private.test_null</span><a href="../../../../com/alibaba/json/bvt/EnumFieldTest3_private_test_null_2dd.html" title="View Test Summary Page">com.alibaba.json.bvt.EnumFieldTest3_private.test_null</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/EnumFieldTest3_private.html?line=50#src-50" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/EnumFieldTest3_private_test_null_2dd.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3585">
+<td><a name="testA-3585"></a><input type="checkbox" id="cb-3585" value="3585" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/bug/Bug_for_Johnny_test_bug_2rl.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3585">  <span class="sortValue">com.alibaba.json.bvt.bug.Bug_for_Johnny.test_bug</span><a href="../../../../com/alibaba/json/bvt/bug/Bug_for_Johnny_test_bug_2rl.html" title="View Test Summary Page">com.alibaba.json.bvt.bug.Bug_for_Johnny.test_bug</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/bug/Bug_for_Johnny.html?line=22#src-22" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/bug/Bug_for_Johnny_test_bug_2rl.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3050">
+<td><a name="testA-3050"></a><input type="checkbox" id="cb-3050" value="3050" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/TestTimeUnit_test_0_2cq.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3050">  <span class="sortValue">com.alibaba.json.bvt.TestTimeUnit.test_0</span><a href="../../../../com/alibaba/json/bvt/TestTimeUnit_test_0_2cq.html" title="View Test Summary Page">com.alibaba.json.bvt.TestTimeUnit.test_0</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/TestTimeUnit.html?line=12#src-12" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/TestTimeUnit_test_0_2cq.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2906">
+<td><a name="testA-2906"></a><input type="checkbox" id="cb-2906" value="2906" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/parser/deser/EnumMapTest_test_for_enum_map_28q.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-2906">  <span class="sortValue">com.alibaba.json.bvt.parser.deser.EnumMapTest.test_for_enum_map</span><a href="../../../../com/alibaba/json/bvt/parser/deser/EnumMapTest_test_for_enum_map_28q.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.deser.EnumMapTest.test_for_enum_map</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/parser/deser/EnumMapTest.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/parser/deser/EnumMapTest_test_for_enum_map_28q.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-65">
+<td><a name="testA-65"></a><input type="checkbox" id="cb-65" value="65" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/bug/SerDeserTest_test_for_yaolei_1t.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-65">  <span class="sortValue">com.alibaba.json.bvt.bug.SerDeserTest.test_for_yaolei</span><a href="../../../../com/alibaba/json/bvt/bug/SerDeserTest_test_for_yaolei_1t.html" title="View Test Summary Page">com.alibaba.json.bvt.bug.SerDeserTest.test_for_yaolei</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/bug/SerDeserTest.html?line=56#src-56" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/bug/SerDeserTest_test_for_yaolei_1t.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-353">
+<td><a name="testA-353"></a><input type="checkbox" id="cb-353" value="353" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case3Test_test5_2_9t.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-353">  <span class="sortValue">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonpHttpMessageConverter4Case3Test.test5_2</span><a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case3Test_test5_2_9t.html" title="View Test Summary Page">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonpHttpMessageConverter4Case3Test.test5_2</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case3Test.html?line=179#src-179" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case3Test_test5_2_9t.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2064">
+<td><a name="testA-2064"></a><input type="checkbox" id="cb-2064" value="2064" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest4_test_enum_1lc.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-2064">  <span class="sortValue">com.alibaba.json.bvt.serializer.enum_.EnumFieldsTest4.test_enum</span><a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest4_test_enum_1lc.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.enum_.EnumFieldsTest4.test_enum</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest4.html?line=11#src-11" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest4_test_enum_1lc.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-433">
+<td><a name="testA-433"></a><input type="checkbox" id="cb-433" value="433" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonHttpMessageConverterJSONPCaseTest_test5_2_c1.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-433">  <span class="sortValue">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonHttpMessageConverterJSONPCaseTest.test5_2</span><a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonHttpMessageConverterJSONPCaseTest_test5_2_c1.html" title="View Test Summary Page">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonHttpMessageConverterJSONPCaseTest.test5_2</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonHttpMessageConverterJSONPCaseTest.html?line=178#src-178" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonHttpMessageConverterJSONPCaseTest_test5_2_c1.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2536">
+<td><a name="testA-2536"></a><input type="checkbox" id="cb-2536" value="2536" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/bug/Bug_for_issue_268_test_for_issue_1yg.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-2536">  <span class="sortValue">com.alibaba.json.bvt.bug.Bug_for_issue_268.test_for_issue</span><a href="../../../../com/alibaba/json/bvt/bug/Bug_for_issue_268_test_for_issue_1yg.html" title="View Test Summary Page">com.alibaba.json.bvt.bug.Bug_for_issue_268.test_for_issue</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/bug/Bug_for_issue_268.html?line=14#src-14" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/bug/Bug_for_issue_268_test_for_issue_1yg.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4591">
+<td><a name="testA-4591"></a><input type="checkbox" id="cb-4591" value="4591" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/parser/deser/asm/TestASM_List_test_decimal_3_3jj.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4591">  <span class="sortValue">com.alibaba.json.bvt.parser.deser.asm.TestASM_List.test_decimal_3</span><a href="../../../../com/alibaba/json/bvt/parser/deser/asm/TestASM_List_test_decimal_3_3jj.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.deser.asm.TestASM_List.test_decimal_3</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/parser/deser/asm/TestASM_List.html?line=14#src-14" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/parser/deser/asm/TestASM_List_test_decimal_3_3jj.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1709">
+<td><a name="testA-1709"></a><input type="checkbox" id="cb-1709" value="1709" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest_test_enum_1bh.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1709">  <span class="sortValue">com.alibaba.json.bvt.serializer.enum_.EnumFieldsTest.test_enum</span><a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest_test_enum_1bh.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.enum_.EnumFieldsTest.test_enum</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest.html?line=11#src-11" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest_test_enum_1bh.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3447">
+<td><a name="testA-3447"></a><input type="checkbox" id="cb-3447" value="3447" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay_test_0_2nr.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3447">  <span class="sortValue">com.alibaba.json.bvt.writeAsArray.WriteAsArray_Eishay.test_0</span><a href="../../../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay_test_0_2nr.html" title="View Test Summary Page">com.alibaba.json.bvt.writeAsArray.WriteAsArray_Eishay.test_0</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay_test_0_2nr.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-52">
+<td><a name="testA-52"></a><input type="checkbox" id="cb-52" value="52" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/JSONSerializerTest2_test_1_1g.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-52">  <span class="sortValue">com.alibaba.json.bvt.serializer.JSONSerializerTest2.test_1</span><a href="../../../../com/alibaba/json/bvt/serializer/JSONSerializerTest2_test_1_1g.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.JSONSerializerTest2.test_1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/JSONSerializerTest2.html?line=30#src-30" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/JSONSerializerTest2_test_1_1g.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3786">
+<td><a name="testA-3786"></a><input type="checkbox" id="cb-3786" value="3786" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonHttpMessageConverterJSONPCaseTest_test5_2x6.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3786">  <span class="sortValue">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonHttpMessageConverterJSONPCaseTest.test5</span><a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonHttpMessageConverterJSONPCaseTest_test5_2x6.html" title="View Test Summary Page">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonHttpMessageConverterJSONPCaseTest.test5</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonHttpMessageConverterJSONPCaseTest.html?line=168#src-168" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonHttpMessageConverterJSONPCaseTest_test5_2x6.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2641">
+<td><a name="testA-2641"></a><input type="checkbox" id="cb-2641" value="2641" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonHttpMessageConverter4Test_test5_21d.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-2641">  <span class="sortValue">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonHttpMessageConverter4Test.test5</span><a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonHttpMessageConverter4Test_test5_21d.html" title="View Test Summary Page">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonHttpMessageConverter4Test.test5</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonHttpMessageConverter4Test.html?line=97#src-97" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonHttpMessageConverter4Test_test5_21d.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-715">
+<td><a name="testA-715"></a><input type="checkbox" id="cb-715" value="715" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case1Test_test5_jv.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-715">  <span class="sortValue">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonpHttpMessageConverter4Case1Test.test5</span><a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case1Test_test5_jv.html" title="View Test Summary Page">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonpHttpMessageConverter4Case1Test.test5</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case1Test.html?line=140#src-140" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case1Test_test5_jv.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4572">
+<td><a name="testA-4572"></a><input type="checkbox" id="cb-4572" value="4572" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonHttpMessageConverterTest_test5_3j0.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4572">  <span class="sortValue">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonHttpMessageConverterTest.test5</span><a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonHttpMessageConverterTest_test5_3j0.html" title="View Test Summary Page">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonHttpMessageConverterTest.test5</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonHttpMessageConverterTest.html?line=99#src-99" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonHttpMessageConverterTest_test5_3j0.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3943">
+<td><a name="testA-3943"></a><input type="checkbox" id="cb-3943" value="3943" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest7_test_enum_31j.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3943">  <span class="sortValue">com.alibaba.json.bvt.serializer.enum_.EnumFieldsTest7.test_enum</span><a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest7_test_enum_31j.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.enum_.EnumFieldsTest7.test_enum</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest7.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest7_test_enum_31j.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-27">
+<td><a name="testA-27"></a><input type="checkbox" id="cb-27" value="27" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest8_test_enum_r.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-27">  <span class="sortValue">com.alibaba.json.bvt.serializer.enum_.EnumFieldsTest8.test_enum</span><a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest8_test_enum_r.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.enum_.EnumFieldsTest8.test_enum</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest8.html?line=15#src-15" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest8_test_enum_r.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1937">
+<td><a name="testA-1937"></a><input type="checkbox" id="cb-1937" value="1937" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/JSONSerializerTest2_test_0_1ht.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1937">  <span class="sortValue">com.alibaba.json.bvt.serializer.JSONSerializerTest2.test_0</span><a href="../../../../com/alibaba/json/bvt/serializer/JSONSerializerTest2_test_0_1ht.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.JSONSerializerTest2.test_0</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/JSONSerializerTest2.html?line=16#src-16" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/JSONSerializerTest2_test_0_1ht.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3739">
+<td><a name="testA-3739"></a><input type="checkbox" id="cb-3739" value="3739" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case2Test_test5_2vv.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3739">  <span class="sortValue">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonpHttpMessageConverter4Case2Test.test5</span><a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case2Test_test5_2vv.html" title="View Test Summary Page">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonpHttpMessageConverter4Case2Test.test5</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case2Test.html?line=163#src-163" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case2Test_test5_2vv.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1745">
+<td><a name="testA-1745"></a><input type="checkbox" id="cb-1745" value="1745" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay_Media_test_0_1ch.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1745">  <span class="sortValue">com.alibaba.json.bvt.writeAsArray.WriteAsArray_Eishay_Media.test_0</span><a href="../../../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay_Media_test_0_1ch.html" title="View Test Summary Page">com.alibaba.json.bvt.writeAsArray.WriteAsArray_Eishay_Media.test_0</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay_Media.html?line=17#src-17" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_Eishay_Media_test_0_1ch.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-453">
+<td><a name="testA-453"></a><input type="checkbox" id="cb-453" value="453" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/issue_2000/Issue2040_test_for_issue_2040_2_cl.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-453">  <span class="sortValue">com.alibaba.json.bvt.issue_2000.Issue2040.test_for_issue_2040_2</span><a href="../../../../com/alibaba/json/bvt/issue_2000/Issue2040_test_for_issue_2040_2_cl.html" title="View Test Summary Page">com.alibaba.json.bvt.issue_2000.Issue2040.test_for_issue_2040_2</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/issue_2000/Issue2040.html?line=27#src-27" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/issue_2000/Issue2040_test_for_issue_2040_2_cl.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1742">
+<td><a name="testA-1742"></a><input type="checkbox" id="cb-1742" value="1742" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/bug/Bug_for_chengchao_test_0_1ce.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1742">  <span class="sortValue">com.alibaba.json.bvt.bug.Bug_for_chengchao.test_0</span><a href="../../../../com/alibaba/json/bvt/bug/Bug_for_chengchao_test_0_1ce.html" title="View Test Summary Page">com.alibaba.json.bvt.bug.Bug_for_chengchao.test_0</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/bug/Bug_for_chengchao.html?line=12#src-12" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/bug/Bug_for_chengchao_test_0_1ce.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1588">
+<td><a name="testA-1588"></a><input type="checkbox" id="cb-1588" value="1588" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest_test_enum_184.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1588">  <span class="sortValue">com.alibaba.json.bvt.serializer.enum_.EnumTest.test_enum</span><a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest_test_enum_184.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.enum_.EnumTest.test_enum</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest.html?line=16#src-16" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest_test_enum_184.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-598">
+<td><a name="testA-598"></a><input type="checkbox" id="cb-598" value="598" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/EnumFieldTest3_test_1_gm.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-598">  <span class="sortValue">com.alibaba.json.bvt.EnumFieldTest3.test_1</span><a href="../../../../com/alibaba/json/bvt/EnumFieldTest3_test_1_gm.html" title="View Test Summary Page">com.alibaba.json.bvt.EnumFieldTest3.test_1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/EnumFieldTest3.html?line=14#src-14" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/EnumFieldTest3_test_1_gm.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-613">
+<td><a name="testA-613"></a><input type="checkbox" id="cb-613" value="613" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest3_testDefault2_h1.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-613">  <span class="sortValue">com.alibaba.json.bvt.serializer.enum_.EnumTest3.testDefault2</span><a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest3_testDefault2_h1.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.enum_.EnumTest3.testDefault2</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest3.html?line=62#src-62" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest3_testDefault2_h1.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3506">
+<td><a name="testA-3506"></a><input type="checkbox" id="cb-3506" value="3506" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest3_test_enum_2pe.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3506">  <span class="sortValue">com.alibaba.json.bvt.serializer.enum_.EnumFieldsTest3.test_enum</span><a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest3_test_enum_2pe.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.enum_.EnumFieldsTest3.test_enum</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest3.html?line=14#src-14" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest3_test_enum_2pe.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2289">
+<td><a name="testA-2289"></a><input type="checkbox" id="cb-2289" value="2289" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case3Test_test5_1rl.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-2289">  <span class="sortValue">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonpHttpMessageConverter4Case3Test.test5</span><a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case3Test_test5_1rl.html" title="View Test Summary Page">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonpHttpMessageConverter4Case3Test.test5</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case3Test.html?line=169#src-169" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case3Test_test5_1rl.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1649">
+<td><a name="testA-1649"></a><input type="checkbox" id="cb-1649" value="1649" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest3_testDefault1_19t.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1649">  <span class="sortValue">com.alibaba.json.bvt.serializer.enum_.EnumTest3.testDefault1</span><a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest3_testDefault1_19t.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.enum_.EnumTest3.testDefault1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest3.html?line=55#src-55" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest3_testDefault1_19t.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3820">
+<td><a name="testA-3820"></a><input type="checkbox" id="cb-3820" value="3820" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/EnumFieldTest3_test_1_writer_2y4.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3820">  <span class="sortValue">com.alibaba.json.bvt.EnumFieldTest3.test_1_writer</span><a href="../../../../com/alibaba/json/bvt/EnumFieldTest3_test_1_writer_2y4.html" title="View Test Summary Page">com.alibaba.json.bvt.EnumFieldTest3.test_1_writer</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/EnumFieldTest3.html?line=31#src-31" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/EnumFieldTest3_test_1_writer_2y4.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1234">
+<td><a name="testA-1234"></a><input type="checkbox" id="cb-1234" value="1234" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/asm/Case_Eishay_test_0_ya.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1234">  <span class="sortValue">com.alibaba.json.bvt.asm.Case_Eishay.test_0</span><a href="../../../../com/alibaba/json/bvt/asm/Case_Eishay_test_0_ya.html" title="View Test Summary Page">com.alibaba.json.bvt.asm.Case_Eishay.test_0</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/asm/Case_Eishay.html?line=20#src-20" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/asm/Case_Eishay_test_0_ya.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4647">
+<td><a name="testA-4647"></a><input type="checkbox" id="cb-4647" value="4647" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest3_testDefault_3l3.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4647">  <span class="sortValue">com.alibaba.json.bvt.serializer.enum_.EnumTest3.testDefault</span><a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest3_testDefault_3l3.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.enum_.EnumTest3.testDefault</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest3.html?line=27#src-27" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest3_testDefault_3l3.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-762">
+<td><a name="testA-762"></a><input type="checkbox" id="cb-762" value="762" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/dubbo/TestForDubbo_testPerson_l6.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-762">  <span class="sortValue">com.alibaba.json.bvt.dubbo.TestForDubbo.testPerson</span><a href="../../../../com/alibaba/json/bvt/dubbo/TestForDubbo_testPerson_l6.html" title="View Test Summary Page">com.alibaba.json.bvt.dubbo.TestForDubbo.testPerson</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/dubbo/TestForDubbo.html?line=67#src-67" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/dubbo/TestForDubbo_testPerson_l6.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-808">
+<td><a name="testA-808"></a><input type="checkbox" id="cb-808" value="808" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest6_test_enum_mg.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-808">  <span class="sortValue">com.alibaba.json.bvt.serializer.enum_.EnumFieldsTest6.test_enum</span><a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest6_test_enum_mg.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.enum_.EnumFieldsTest6.test_enum</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest6.html?line=11#src-11" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest6_test_enum_mg.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1148">
+<td><a name="testA-1148"></a><input type="checkbox" id="cb-1148" value="1148" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest3_testName_vw.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1148">  <span class="sortValue">com.alibaba.json.bvt.serializer.enum_.EnumTest3.testName</span><a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest3_testName_vw.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.enum_.EnumTest3.testName</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest3.html?line=87#src-87" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumTest3_testName_vw.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-60">
+<td><a name="testA-60"></a><input type="checkbox" id="cb-60" value="60" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case2Test_test5_2_1o.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-60">  <span class="sortValue">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonpHttpMessageConverter4Case2Test.test5_2</span><a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case2Test_test5_2_1o.html" title="View Test Summary Page">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonpHttpMessageConverter4Case2Test.test5_2</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case2Test.html?line=173#src-173" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case2Test_test5_2_1o.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-545">
+<td><a name="testA-545"></a><input type="checkbox" id="cb-545" value="545" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest5_test_enum_f5.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-545">  <span class="sortValue">com.alibaba.json.bvt.serializer.enum_.EnumFieldsTest5.test_enum</span><a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest5_test_enum_f5.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.enum_.EnumFieldsTest5.test_enum</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest5.html?line=15#src-15" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumFieldsTest5_test_enum_f5.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4146">
+<td><a name="testA-4146"></a><input type="checkbox" id="cb-4146" value="4146" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/bug/Bug_for_ruiqi_test_0_376.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4146">  <span class="sortValue">com.alibaba.json.bvt.bug.Bug_for_ruiqi.test_0</span><a href="../../../../com/alibaba/json/bvt/bug/Bug_for_ruiqi_test_0_376.html" title="View Test Summary Page">com.alibaba.json.bvt.bug.Bug_for_ruiqi.test_0</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/bug/Bug_for_ruiqi.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/bug/Bug_for_ruiqi_test_0_376.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1096">
+<td><a name="testA-1096"></a><input type="checkbox" id="cb-1096" value="1096" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/enum_/EnumOrdinalTest_test_enum_ordinal_ug.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1096">  <span class="sortValue">com.alibaba.json.bvt.serializer.enum_.EnumOrdinalTest.test_enum_ordinal</span><a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumOrdinalTest_test_enum_ordinal_ug.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.enum_.EnumOrdinalTest.test_enum_ordinal</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumOrdinalTest.html?line=11#src-11" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/enum_/EnumOrdinalTest_test_enum_ordinal_ug.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1376">
+<td><a name="testA-1376"></a><input type="checkbox" id="cb-1376" value="1376" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_enum_public_test_0_128.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1376">  <span class="sortValue">com.alibaba.json.bvt.writeAsArray.WriteAsArray_enum_public.test_0</span><a href="../../../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_enum_public_test_0_128.html" title="View Test Summary Page">com.alibaba.json.bvt.writeAsArray.WriteAsArray_enum_public.test_0</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_enum_public.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/writeAsArray/WriteAsArray_enum_public_test_0_128.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3115">
+<td><a name="testA-3115"></a><input type="checkbox" id="cb-3115" value="3115" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/issue_1000/Issue1066_test_for_issue_2ej.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3115">  <span class="sortValue">com.alibaba.json.bvt.issue_1000.Issue1066.test_for_issue</span><a href="../../../../com/alibaba/json/bvt/issue_1000/Issue1066_test_for_issue_2ej.html" title="View Test Summary Page">com.alibaba.json.bvt.issue_1000.Issue1066.test_for_issue</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/issue_1000/Issue1066.html?line=24#src-24" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/issue_1000/Issue1066_test_for_issue_2ej.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2061">
+<td><a name="testA-2061"></a><input type="checkbox" id="cb-2061" value="2061" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case1Test_test5_2_1l9.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-2061">  <span class="sortValue">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonpHttpMessageConverter4Case1Test.test5_2</span><a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case1Test_test5_2_1l9.html" title="View Test Summary Page">com.alibaba.json.bvt.support.spring.mock.testcase.FastJsonpHttpMessageConverter4Case1Test.test5_2</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case1Test.html?line=150#src-150" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/support/spring/mock/testcase/FastJsonpHttpMessageConverter4Case1Test_test5_2_1l9.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4177">
+<td><a name="testA-4177"></a><input type="checkbox" id="cb-4177" value="4177" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/EnumFieldTest3_private_test_1_381.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4177">  <span class="sortValue">com.alibaba.json.bvt.EnumFieldTest3_private.test_1</span><a href="../../../../com/alibaba/json/bvt/EnumFieldTest3_private_test_1_381.html" title="View Test Summary Page">com.alibaba.json.bvt.EnumFieldTest3_private.test_1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/EnumFieldTest3_private.html?line=14#src-14" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/EnumFieldTest3_private_test_1_381.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+
+            </tbody>
+        </table>
+
+        
+        <div>&#160;</div>
+
+    
+    </div>
+
+    
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button data-dialog-id="contr-tests-dialog" class="aui-button aui-button-primary dialog-close-button">Apply</button>
+        </div>
+        <div class="aui-dialog2-footer-hint">Select tests to highlight code covered by them in the source view.</div>
+    </footer>
+</section>
+
+ 
+        
+        
+
+
+
+
+
+<h2>Source view</h2>
+
+
+<div style="display: table; width: 100%;">
+    <div style="display: table-cell">
+        <button class="aui-button aui-button-link"
+                title="Toggles all methods in the source to be either expanded or collapsed."
+                onclick="toggleAllInlineMethods(this); return false;" id="method-expander">
+            Collapse all methods
+        </button>
+    </div>
+    <div style="display: table-cell">
+        <div style="text-align: right; margin-bottom: 10px">
+            <button class="aui-button aui-button-subtle" id="popupHelp">
+    <span class="aui-icon aui-icon-small aui-iconfont-help"></span>&#160;Show legend
+</button>
+<script>
+    AJS.InlineDialog(AJS.$("#popupHelp"), "helpDialog",
+            function(content, trigger, showPopup) {
+                content.css({"padding":"20px"}).html(SRC_FILE_LEGEND_TEXT);
+                showPopup();
+                return false;
+            },
+            {
+                width: 700, hideDelay: 60000
+            }
+    );
+</script>        </div>
+    </div>
+</div>
+
+<table cellspacing="0" cellpadding="0" class="srcView" width="100%">
+
+    
+<tbody> <tr id="l1">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=1#src-1">1</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-1" class="srcLine"><span class="comment">/*</span></span></td>
+</tr>
+ <tr id="l2">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=2#src-2">2</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-2" class="srcLine"><span class="comment"> * Copyright 1999-2018 Alibaba Group.</span></span></td>
+</tr>
+ <tr id="l3">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=3#src-3">3</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-3" class="srcLine"><span class="comment"> *</span></span></td>
+</tr>
+ <tr id="l4">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=4#src-4">4</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-4" class="srcLine"><span class="comment"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></span></td>
+</tr>
+ <tr id="l5">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=5#src-5">5</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-5" class="srcLine"><span class="comment"> * you may not use this file except in compliance with the License.</span></span></td>
+</tr>
+ <tr id="l6">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=6#src-6">6</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-6" class="srcLine"><span class="comment"> * You may obtain a copy of the License at</span></span></td>
+</tr>
+ <tr id="l7">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=7#src-7">7</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-7" class="srcLine"><span class="comment"> *</span></span></td>
+</tr>
+ <tr id="l8">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=8#src-8">8</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-8" class="srcLine"><span class="comment"> *      http://www.apache.org/licenses/LICENSE-2.0</span></span></td>
+</tr>
+ <tr id="l9">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=9#src-9">9</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-9" class="srcLine"><span class="comment"> *</span></span></td>
+</tr>
+ <tr id="l10">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=10#src-10">10</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-10" class="srcLine"><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></span></td>
+</tr>
+ <tr id="l11">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=11#src-11">11</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-11" class="srcLine"><span class="comment"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></span></td>
+</tr>
+ <tr id="l12">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=12#src-12">12</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-12" class="srcLine"><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></span></td>
+</tr>
+ <tr id="l13">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=13#src-13">13</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-13" class="srcLine"><span class="comment"> * See the License for the specific language governing permissions and</span></span></td>
+</tr>
+ <tr id="l14">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=14#src-14">14</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-14" class="srcLine"><span class="comment"> * limitations under the License.</span></span></td>
+</tr>
+ <tr id="l15">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=15#src-15">15</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-15" class="srcLine"><span class="comment"> */</span></span></td>
+</tr>
+ <tr id="l16">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=16#src-16">16</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-16" class="srcLine"><span class="keyword">package</span> com.alibaba.<a href="../../fastjson/pkg-summary.html">fastjson</a>.<a href="../serializer/pkg-summary.html">serializer</a>;</span></td>
+</tr>
+ <tr id="l17">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=17#src-17">17</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-17" class="srcLine"></span></td>
+</tr>
+ <tr id="l18">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=18#src-18">18</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-18" class="srcLine"><span class="keyword">import</span> java.io.IOException;</span></td>
+</tr>
+ <tr id="l19">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=19#src-19">19</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-19" class="srcLine"><span class="keyword">import</span> java.lang.reflect.Type;</span></td>
+</tr>
+ <tr id="l20">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=20#src-20">20</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-20" class="srcLine"></span></td>
+</tr>
+ <tr id="l21">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=21#src-21">21</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-21" class="srcLine"><span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l22">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=22#src-22">22</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-22" class="srcLine"><span class="comment"> * </span><span class="javadoc">@author</span><span class="comment"> wenshao[szujobs</span><span class="comment">@hotmail.com]</span></span></td>
+</tr>
+ <tr id="l23">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=23#src-23">23</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-23" class="srcLine"><span class="comment"> */</span></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="24" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-24' onclick="toggleInlineStats(this, 'inlinestats-24');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-24" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-24'), 'inlinestats-24');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (3)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 0.5</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l24">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=24#src-24">24</a></td>
+<td align="right" class="coverageCount NoHilight "   onclick="return showTestsForLine(this, 24, 'Tests that hit EnumSerializer');" >&#160;&#160;</td>
+<td class=" srcCell" id="id-24"><span class="spacer"></span><span id="src-24" class="srcLine"><span class="keyword">public</span> <span class="keyword">class</span> <a href="../../../../com/alibaba/fastjson/serializer/EnumSerializer.html#EnumSerializer">EnumSerializer</a> <span class="keyword">implements</span> <a href="../../../../com/alibaba/fastjson/serializer/ObjectSerializer.html#ObjectSerializer">ObjectSerializer</a> {</span></td>
+</tr>
+ <tr id="l25">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=25#src-25">25</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-25" class="srcLine"></span></td>
+</tr>
+ <tr id="l26">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=26#src-26">26</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-26" class="srcLine">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> <a href="../../../../com/alibaba/fastjson/serializer/EnumSerializer.html#EnumSerializer">EnumSerializer</a> instance = <span class="keyword">new</span> <a href="../../../../com/alibaba/fastjson/serializer/EnumSerializer.html#EnumSerializer">EnumSerializer</a>();</span></td>
+</tr>
+ <tr id="l27">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=27#src-27">27</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-27" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="28" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-28' onclick="toggleInlineStats(this, 'inlinestats-28');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-28" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-28'), 'inlinestats-28');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (2)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 0.5</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l28">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=28#src-28">28</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 28, 'Tests that hit write(JSONSerializer,Object,Object,Type,int)&#160;:&#160;void');" ><span title="Line 28, Col 5: method entered 12,390 times." class="nolink">&#160;12390</span></td>
+<td class=" methodStart  srcCell" id="id-28"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 28,31);" id="img-28" src="../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-28" class="srcLine"><span class="nolink" title="Line 28, Col 5: method entered 12,390 times.">    <span class="keyword">public</span> <span class="keyword">void</span> write(<a href="../../../../com/alibaba/fastjson/serializer/JSONSerializer.html#JSONSerializer">JSONSerializer</a> serializer, Object object, Object fieldName, Type fieldType, <span class="keyword">int</span> features) <span class="keyword">throws</span> IOException {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-28'), 28,31);" id="e28" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l29">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=29#src-29">29</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 29, 'Tests that hit line # 29');" ><span title="Line 29, Col 9: statement executed 12,390 times." class="nolink">&#160;12390</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-29" class="srcLine"><span class="nolink" title="Line 29, Col 9: statement executed 12,390 times.">        <a href="../../../../com/alibaba/fastjson/serializer/SerializeWriter.html#SerializeWriter">SerializeWriter</a> out = serializer.out;</span></span></td>
+</tr>
+ <tr id="l30">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=30#src-30">30</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 30, 'Tests that hit line # 30');" ><span title="Line 30, Col 9: statement executed 12,390 times." class="nolink">&#160;12390</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-30" class="srcLine"><span class="nolink" title="Line 30, Col 9: statement executed 12,390 times.">        out.writeEnum((Enum&lt;?&gt;) object);</span></span></td>
+</tr>
+ <tr id="l31">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=31#src-31">31</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-31" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l32">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=32#src-32">32</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-32" class="srcLine">}</span></td>
+</tr>
+ 
+    </tbody></table>    </div>
+</div><!-- .aui-tabs -->
+
+<script type="text/javascript"> 
+    var ol_bgclass = "overBG";
+    var ol_fgclass = "overFG";
+    var ol_cgclass = "overCaption";
+    var ol_captionfontclass= "overCaption";
+    var ol_closefontclass = "closeFont";
+    var ol_closeclick = 1;
+    var ol_close = 'X';
+    var ol_wrap = 1;
+    var rootRelPath = '../../../../';
+    var testsPerFile = -1;
+</script>
+<script src="EnumSerializer.js" type="text/javascript"></script>
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="https://openclover.org">OpenClover</a> v 4.5.2
+                on Tue Apr 9 2024 17:41:14 CDT using coverage data from Tue Apr 9 2024 17:40:42 CDT.
+            </li>
+        </ul>
+        <ul>
+            <li>OpenClover is free and open-source software. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>

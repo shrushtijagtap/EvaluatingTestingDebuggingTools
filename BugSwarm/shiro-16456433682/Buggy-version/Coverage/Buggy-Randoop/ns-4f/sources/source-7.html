@@ -1,0 +1,122 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FilterChainResolver</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.web.filter.mgt</a>
+</div>
+
+<h1>Coverage Summary for Class: FilterChainResolver (org.apache.shiro.web.filter.mgt)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">FilterChainResolver</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.web.filter.mgt;
+&nbsp;
+&nbsp;import javax.servlet.FilterChain;
+&nbsp;import javax.servlet.ServletRequest;
+&nbsp;import javax.servlet.ServletResponse;
+&nbsp;
+&nbsp;/**
+&nbsp; * A {@code FilterChainResolver} can resolve an appropriate {@link FilterChain} to execute during a
+&nbsp; * {@code ServletRequest}.  It allows resolution of arbitrary filter chains which can be executed for any given
+&nbsp; * request or URI/URL.
+&nbsp; * &lt;p/&gt;
+&nbsp; * This mechanism allows for a much more flexible FilterChain resolution than normal {@code web.xml} servlet filter
+&nbsp; * definitions:  it allows arbitrary filter chains to be defined per URL in a much more concise and easy to read manner,
+&nbsp; * and even allows filter chains to be dynamically resolved or constructed at runtime if the underlying implementation
+&nbsp; * supports it.
+&nbsp; *
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public interface FilterChainResolver {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the filter chain that should be executed for the given request, or {@code null} if the
+&nbsp;     * original chain should be used.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This method allows a implementation to define arbitrary security {@link javax.servlet.Filter Filter}
+&nbsp;     * chains for any given request or URL pattern.
+&nbsp;     *
+&nbsp;     * @param request       the incoming ServletRequest
+&nbsp;     * @param response      the outgoing ServletResponse
+&nbsp;     * @param originalChain the original {@code FilterChain} intercepted by the ShiroFilter implementation.
+&nbsp;     * @return the filter chain that should be executed for the given request, or {@code null} if the
+&nbsp;     *         original chain should be used.
+&nbsp;     */
+&nbsp;    FilterChain getChain(ServletRequest request, ServletResponse response, FilterChain originalChain);
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

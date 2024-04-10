@@ -1,0 +1,247 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > OperationMode</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.crypto</a>
+</div>
+
+<h1>Coverage Summary for Class: OperationMode (org.apache.shiro.crypto)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OperationMode</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.crypto;
+&nbsp;
+&nbsp;/**
+&nbsp; * A cipher &lt;a href=&quot;http://en.wikipedia.org/wiki/Block_cipher_modes_of_operation&quot;&gt;mode of operation&lt;/a&gt;
+&nbsp; * directs a cipher algorithm how to convert data during the encryption or decryption process.  This enum represents
+&nbsp; * all JDK-standard Cipher operation mode names as defined in
+&nbsp; * &lt;a href=&quot;http://java.sun.com/javase/6/docs/technotes/guides/security/StandardNames.html&quot;&gt;JDK Security Standard
+&nbsp; * Names&lt;/a&gt;, as well as a few more that are well-known and supported by other JCA Providers.
+&nbsp; * &lt;p/&gt;
+&nbsp; * This {@code enum} exists to provide Shiro end-users type-safety when declaring an operation mode.  This helps reduce
+&nbsp; * error by providing a compile-time mechanism to specify a mode and guarantees a valid name that will be
+&nbsp; * recognized by an underlying JCA Provider.
+&nbsp; * &lt;h2&gt;Standard or Non-Standard?&lt;/h2&gt;
+&nbsp; * All modes listed specify whether they are a JDK standard mode or a non-standard mode.  Standard modes are included
+&nbsp; * in all JDK distributions.  Non-standard modes can
+&nbsp; * sometimes result in better performance or more secure output, but may not be available on the target JDK
+&nbsp; * platform and rely on an external JCA Provider to be installed.  Some providers
+&nbsp; * (like &lt;a href=&quot;http://www.bouncycastle.org&quot;&gt;Bouncy Castle&lt;/a&gt;) may support these modes however.
+&nbsp; *
+&nbsp; * @see &lt;a href=&quot;http://en.wikipedia.org/wiki/Block_cipher_modes_of_operation&quot;&gt;Block Cipher Modes of Operation&lt;a/&gt;
+&nbsp; * @since 1.0
+&nbsp; */
+<b class="fc">&nbsp;public enum OperationMode {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &lt;a href=&quot;http://en.wikipedia.org/wiki/Block_cipher_modes_of_operation#Cipher-block_chaining_.28CBC.29&quot;&gt;
+&nbsp;     * Cipher-block Chaining&lt;/a&gt; mode, defined in &lt;a href=&quot;http://csrc.nist.gov/publications/fips/index.html&quot;&gt;FIPS
+&nbsp;     * PUB 81&lt;/a&gt;.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is a standard JDK operation mode and should be supported by all JDK environments.
+&nbsp;     */
+<b class="fc">&nbsp;    CBC,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &lt;a href=&quot;http://en.wikipedia.org/wiki/CCM_mode&quot;&gt;Counter with CBC-MAC&lt;/a&gt; mode&lt;b&gt;*&lt;/b&gt; - for block ciphers with
+&nbsp;     * 128 bit block-size only. See &lt;a href=&quot;http://www.ietf.org/rfc/rfc3610.txt&quot;&gt;RFC 3610&lt;/a&gt; for AES Ciphers.
+&nbsp;     * This mode has essentially been replaced by the more-capable {@link #EAX EAX} mode.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;*THIS IS A NON-STANDARD MODE&lt;/b&gt;. It is not guaranteed to be supported across JDK installations.  You must
+&nbsp;     * ensure you have a JCA Provider that can support this cipher operation mode.
+&nbsp;     * &lt;a href=&quot;http://www.bouncycastle.org&quot;&gt;Bouncy Castle&lt;/a&gt; &lt;em&gt;may&lt;/em&gt; be one such provider.
+&nbsp;     */
+<b class="fc">&nbsp;    CCM,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &lt;a href=&quot;http://en.wikipedia.org/wiki/Block_cipher_modes_of_operation#Cipher_feedback_.28CFB.29&quot;&gt;Cipher
+&nbsp;     * Feedback&lt;a/&gt; mode, defined in &lt;a href=&quot;http://csrc.nist.gov/publications/fips/index.html&quot;&gt;FIPS PUB 81&lt;/a&gt;.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is a standard JDK operation mode and should be supported by all JDK environments.
+&nbsp;     */
+<b class="fc">&nbsp;    CFB,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &lt;a href=&quot;http://en.wikipedia.org/wiki/Block_cipher_modes_of_operation#Counter_.28CTR.29&quot;&gt;Counter Mode&lt;/a&gt;, aka
+&nbsp;     * Integer Counter Mode (ICM) and Segmented Integer Counter (SIC).  Counter is a simplification of {@link #OFB OFB}
+&nbsp;     * and updates the input block as a counter.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is a standard JDK operation mode and should be supported by all JDK environments.
+&nbsp;     */
+<b class="fc">&nbsp;    CTR,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &lt;a href=&quot;http://en.wikipedia.org/wiki/EAX_mode&quot;&gt;EAX Mode&lt;/a&gt;&lt;b&gt;*&lt;/b&gt;.  This is a patent-free but less-effecient
+&nbsp;     * alternative to {@link #OCB OCB} and has capabilities beyond what {@link #CCM CCM} can provide.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;*THIS IS A NON-STANDARD MODE&lt;/b&gt;. It is not guaranteed to be supported across JDK installations.  You must
+&nbsp;     * ensure you have a JCA Provider that can support this cipher operation mode.
+&nbsp;     * &lt;a href=&quot;http://www.bouncycastle.org&quot;&gt;Bouncy Castle&lt;/a&gt; &lt;em&gt;may&lt;/em&gt; be one such provider.
+&nbsp;     */
+<b class="fc">&nbsp;    EAX,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &lt;a href=&quot;http://en.wikipedia.org/wiki/Block_cipher_modes_of_operation#Electronic_codebook_.28ECB.29&quot;&gt;Electronic
+&nbsp;     * Codebook&lt;/a&gt; mode, defined in &lt;a href=&quot;http://csrc.nist.gov/publications/fips/index.html&quot;&gt;FIPS PUB 81&lt;/a&gt;.
+&nbsp;     * ECB is the only mode that does &lt;em&gt;not&lt;/em&gt; require an Initialization Vector, but because of this, can be seen
+&nbsp;     * as less secure than operation modes that require an IV.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is a standard JDK operation mode and should be supported by all JDK environments.
+&nbsp;     */
+<b class="fc">&nbsp;    ECB,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &lt;a href=&quot;http://en.wikipedia.org/wiki/GCM_mode&quot;&gt;Galois/Counter&lt;/a&gt; mode&lt;b&gt;*&lt;/b&gt; - for block ciphers with 128
+&nbsp;     * bit block-size only.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;*THIS IS A NON-STANDARD MODE&lt;/b&gt;. It is not guaranteed to be supported across JDK installations.  You must
+&nbsp;     * ensure you have a JCA Provider that can support this cipher operation mode.
+&nbsp;     * &lt;a href=&quot;http://www.bouncycastle.org&quot;&gt;Bouncy Castle&lt;/a&gt; &lt;em&gt;may&lt;/em&gt; be one such provider.
+&nbsp;     */
+<b class="fc">&nbsp;    GCM,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * No mode.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is a standard JDK operation mode and should be supported by all JDK environments.
+&nbsp;     */
+<b class="fc">&nbsp;    NONE,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &lt;a href=&quot;http://en.wikipedia.org/wiki/OCB_mode&quot;&gt;Offset Codebook&lt;/a&gt; mode&lt;b&gt;*&lt;/b&gt;.  Parallel mode that provides
+&nbsp;     * both message privacy and authenticity in a single pass.  This is a very efficient mode, but is patent-encumbered.
+&nbsp;     * A less-efficient (two pass) alternative is available by using {@link #EAX EAX} mode.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;*THIS IS A NON-STANDARD MODE&lt;/b&gt;. It is not guaranteed to be supported across JDK installations.  You must
+&nbsp;     * ensure you have a JCA Provider that can support this cipher operation mode.
+&nbsp;     * &lt;a href=&quot;http://www.bouncycastle.org&quot;&gt;Bouncy Castle&lt;/a&gt; &lt;em&gt;may&lt;/em&gt; be one such provider.
+&nbsp;     */
+<b class="fc">&nbsp;    OCB,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &lt;a href=&quot;http://en.wikipedia.org/wiki/Block_cipher_modes_of_operation#Output_feedback_.28OFB.29&quot;&gt;Output
+&nbsp;     * Feedback&lt;/a&gt; mode, defined in &lt;a href=&quot;http://csrc.nist.gov/publications/fips/index.html&quot;&gt;FIPS PUB 81&lt;/a&gt;.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is a standard JDK operation mode and should be supported by all JDK environments.
+&nbsp;     */
+<b class="fc">&nbsp;    OFB,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * &lt;a href=&quot;http://en.wikipedia.org/wiki/Block_cipher_modes_of_operation#Propagating_cipher-block_chaining_.28PCBC.29&quot;&gt;
+&nbsp;     * Propagating Cipher Block Chaining&lt;/a&gt; mode, defined in &lt;a href=&quot;http://web.mit.edu/kerberos/&quot;&gt;Kerberos version 4&lt;a/&gt;.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is a standard JDK operation mode and should be supported by all JDK environments.
+&nbsp;     */
+<b class="fc">&nbsp;    PCBC</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

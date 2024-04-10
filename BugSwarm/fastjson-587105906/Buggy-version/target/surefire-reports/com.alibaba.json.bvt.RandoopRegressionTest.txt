@@ -1,12 +1,13 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.RandoopRegressionTest
 -------------------------------------------------------------------------------
-Tests run: 80, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.021 s <<< FAILURE! -- in com.alibaba.json.bvt.RandoopRegressionTest
-com.alibaba.json.bvt.RandoopRegressionTest0.test31 -- Time elapsed: 0.004 s <<< FAILURE!
+Tests run: 80, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.265 s <<< FAILURE! -- in com.alibaba.json.bvt.RandoopRegressionTest
+com.alibaba.json.bvt.RandoopRegressionTest0.test31 -- Time elapsed: 0.016 s <<< FAILURE!
 org.junit.ComparisonFailure: expected:<C[hina] Standard Time> but was:<C[entral] Standard Time>
 	at org.junit.Assert.assertEquals(Assert.java:115)
 	at org.junit.Assert.assertEquals(Assert.java:144)
-	at com.alibaba.json.bvt.RandoopRegressionTest0.test31(RandoopRegressionTest0.java:421)
+	at com.alibaba.json.bvt.RandoopRegressionTest0.__CLR4_1_10m39qrbzmu(RandoopRegressionTest0.java:421)
+	at com.alibaba.json.bvt.RandoopRegressionTest0.test31(RandoopRegressionTest0.java:415)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

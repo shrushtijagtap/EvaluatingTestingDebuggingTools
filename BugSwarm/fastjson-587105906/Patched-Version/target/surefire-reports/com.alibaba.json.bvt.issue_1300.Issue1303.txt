@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.issue_1300.Issue1303
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.002 s <<< FAILURE! -- in com.alibaba.json.bvt.issue_1300.Issue1303
-com.alibaba.json.bvt.issue_1300.Issue1303.test_for_issue -- Time elapsed: 0.001 s <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.005 s <<< FAILURE! -- in com.alibaba.json.bvt.issue_1300.Issue1303
+com.alibaba.json.bvt.issue_1300.Issue1303.test_for_issue -- Time elapsed: 0.004 s <<< ERROR!
 java.lang.NullPointerException
 	at java.util.concurrent.ConcurrentHashMap.get(ConcurrentHashMap.java:936)
 	at sun.util.locale.provider.LocaleProviderAdapter.getAdapter(LocaleProviderAdapter.java:245)
@@ -16,7 +16,8 @@ java.lang.NullPointerException
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parseArray(DefaultJSONParser.java:1216)
 	at com.alibaba.fastjson.parser.DefaultJSONParser.parseArray(DefaultJSONParser.java:1146)
 	at com.alibaba.fastjson.JSON.parseArray(JSON.java:580)
-	at com.alibaba.json.bvt.issue_1300.Issue1303.test_for_issue(Issue1303.java:18)
+	at com.alibaba.json.bvt.issue_1300.Issue1303.__CLR4_5_2e86tqb19vh(Issue1303.java:18)
+	at com.alibaba.json.bvt.issue_1300.Issue1303.test_for_issue(Issue1303.java:16)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

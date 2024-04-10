@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.issue_1600.Issue1612
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0 s <<< FAILURE! -- in com.alibaba.json.bvt.issue_1600.Issue1612
-com.alibaba.json.bvt.issue_1600.Issue1612.test -- Time elapsed: 0 s <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.010 s <<< FAILURE! -- in com.alibaba.json.bvt.issue_1600.Issue1612
+com.alibaba.json.bvt.issue_1600.Issue1612.test -- Time elapsed: 0.010 s <<< ERROR!
 com.alibaba.fastjson.JSONException: setter not found, class com.alibaba.json.bvt.issue_1600.User, property name
 	at com.alibaba.fastjson.parser.deserializer.JavaBeanDeserializer.parseField(JavaBeanDeserializer.java:1132)
 	at com.alibaba.fastjson.parser.deserializer.JavaBeanDeserializer.deserialze(JavaBeanDeserializer.java:850)

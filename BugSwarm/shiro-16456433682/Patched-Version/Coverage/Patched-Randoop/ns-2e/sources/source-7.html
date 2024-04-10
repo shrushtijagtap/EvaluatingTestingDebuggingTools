@@ -1,0 +1,357 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > OncePerRequestFilter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.web.servlet</a>
+</div>
+
+<h1>Coverage Summary for Class: OncePerRequestFilter (org.apache.shiro.web.servlet)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OncePerRequestFilter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/28)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.web.servlet;
+&nbsp;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import javax.servlet.FilterChain;
+&nbsp;import javax.servlet.ServletException;
+&nbsp;import javax.servlet.ServletRequest;
+&nbsp;import javax.servlet.ServletResponse;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;/**
+&nbsp; * Filter base class that guarantees to be just executed once per request,
+&nbsp; * on any servlet container. It provides a {@link #doFilterInternal}
+&nbsp; * method with HttpServletRequest and HttpServletResponse arguments.
+&nbsp; * &lt;p/&gt;
+&nbsp; * The {@link #getAlreadyFilteredAttributeName} method determines how
+&nbsp; * to identify that a request is already filtered. The default implementation
+&nbsp; * is based on the configured name of the concrete filter instance.
+&nbsp; * &lt;h3&gt;Controlling filter execution&lt;/h3&gt;
+&nbsp; * 1.2 introduced the {@link #isEnabled(javax.servlet.ServletRequest, javax.servlet.ServletResponse)} method and
+&nbsp; * {@link #isEnabled()} property to allow explicit control over whether the filter executes (or allows passthrough)
+&nbsp; * for any given request.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;b&gt;NOTE&lt;/b&gt; This class was initially borrowed from the Spring framework but has continued modifications.
+&nbsp; *
+&nbsp; * @since 0.1
+&nbsp; */
+<b class="nc">&nbsp;public abstract class OncePerRequestFilter extends NameableFilter {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Private internal log instance.
+&nbsp;     */
+<b class="nc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(OncePerRequestFilter.class);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Suffix that gets appended to the filter name for the &quot;already filtered&quot; request attribute.
+&nbsp;     *
+&nbsp;     * @see #getAlreadyFilteredAttributeName
+&nbsp;     */
+&nbsp;    public static final String ALREADY_FILTERED_SUFFIX = &quot;.FILTERED&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Determines generally if this filter should execute or let requests fall through to the next chain element.
+&nbsp;     *
+&nbsp;     * @see #isEnabled()
+&nbsp;     */
+<b class="nc">&nbsp;    private boolean enabled = true; //most filters wish to execute when configured, so default to true</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Determines if the filter&#39;s once per request functionality is enabled, defaults to false. It is recommended
+&nbsp;     * to leave this disabled if you are using a {@link javax.servlet.RequestDispatcher RequestDispatcher} to forward
+&nbsp;     * or include request (JSP tags, programmatically, or via a framework).
+&nbsp;     */
+<b class="nc">&nbsp;    private boolean filterOncePerRequest = false;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if this filter should &lt;em&gt;generally&lt;/em&gt;&lt;b&gt;*&lt;/b&gt; execute for any request,
+&nbsp;     * {@code false} if it should let the request/response pass through immediately to the next
+&nbsp;     * element in the {@link FilterChain}.  The default value is {@code true}, as most filters would inherently need
+&nbsp;     * to execute when configured.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;*&lt;/b&gt; This configuration property is for general configuration for any request that comes through
+&nbsp;     * the filter.  The
+&nbsp;     * {@link #isEnabled(javax.servlet.ServletRequest, javax.servlet.ServletResponse) isEnabled(request,response)}
+&nbsp;     * method actually determines whether or not if the filter is enabled based on the current request.
+&nbsp;     *
+&nbsp;     * @return {@code true} if this filter should &lt;em&gt;generally&lt;/em&gt; execute, {@code false} if it should let the
+&nbsp;     * request/response pass through immediately to the next element in the {@link FilterChain}.
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    public boolean isEnabled() {
+<b class="nc">&nbsp;        return enabled;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets whether or not this filter &lt;em&gt;generally&lt;/em&gt; executes for any request.  See the
+&nbsp;     * {@link #isEnabled() isEnabled()} JavaDoc as to what &lt;em&gt;general&lt;/em&gt; execution means.
+&nbsp;     *
+&nbsp;     * @param enabled whether or not this filter &lt;em&gt;generally&lt;/em&gt; executes.
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    public void setEnabled(boolean enabled) {
+<b class="nc">&nbsp;        this.enabled = enabled;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if this filter should only execute once per request. If set to {@code false} this filter
+&nbsp;     * will execute each time it is invoked.
+&nbsp;     * @return {@code true} if this filter should only execute once per request.
+&nbsp;     * @since 1.10
+&nbsp;     */
+&nbsp;    public boolean isFilterOncePerRequest() {
+<b class="nc">&nbsp;        return filterOncePerRequest;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets whether this filter executes once per request or for every invocation of the filter. It is recommended
+&nbsp;     * to leave this disabled if you are using a {@link javax.servlet.RequestDispatcher RequestDispatcher} to forward
+&nbsp;     * or include request (JSP tags, programmatically, or via a framework). 
+&nbsp;     *
+&nbsp;     * @param filterOncePerRequest Whether this filter executes once per request.
+&nbsp;     * @since 1.10
+&nbsp;     */
+&nbsp;    public void setFilterOncePerRequest(boolean filterOncePerRequest) {
+<b class="nc">&nbsp;        this.filterOncePerRequest = filterOncePerRequest;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This {@code doFilter} implementation stores a request attribute for
+&nbsp;     * &quot;already filtered&quot;, proceeding without filtering again if the
+&nbsp;     * attribute is already there.
+&nbsp;     *
+&nbsp;     * @see #getAlreadyFilteredAttributeName
+&nbsp;     * @see #shouldNotFilter
+&nbsp;     * @see #doFilterInternal
+&nbsp;     */
+&nbsp;    public final void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
+&nbsp;            throws ServletException, IOException {
+<b class="nc">&nbsp;        String alreadyFilteredAttributeName = getAlreadyFilteredAttributeName();</b>
+<b class="nc">&nbsp;        if ( request.getAttribute(alreadyFilteredAttributeName) != null &amp;&amp; filterOncePerRequest) {</b>
+<b class="nc">&nbsp;            log.trace(&quot;Filter &#39;{}&#39; already executed.  Proceeding without invoking this filter.&quot;, getName());</b>
+<b class="nc">&nbsp;            filterChain.doFilter(request, response);</b>
+&nbsp;        } else //noinspection deprecation
+<b class="nc">&nbsp;            if (/* added in 1.2: */ !isEnabled(request, response) ||</b>
+<b class="nc">&nbsp;                /* retain backwards compatibility: */ shouldNotFilter(request) ) {</b>
+<b class="nc">&nbsp;            log.debug(&quot;Filter &#39;{}&#39; is not enabled for the current request.  Proceeding without invoking this filter.&quot;,</b>
+<b class="nc">&nbsp;                    getName());</b>
+<b class="nc">&nbsp;            filterChain.doFilter(request, response);</b>
+&nbsp;        } else {
+&nbsp;            // Do invoke this filter...
+<b class="nc">&nbsp;            log.trace(&quot;Filter &#39;{}&#39; not yet executed.  Executing now.&quot;, getName());</b>
+<b class="nc">&nbsp;            request.setAttribute(alreadyFilteredAttributeName, Boolean.TRUE);</b>
+&nbsp;
+&nbsp;            try {
+<b class="nc">&nbsp;                doFilterInternal(request, response, filterChain);</b>
+&nbsp;            } finally {
+&nbsp;                // Once the request has finished, we&#39;re done and we don&#39;t
+&nbsp;                // need to mark as &#39;already filtered&#39; any more.
+<b class="nc">&nbsp;                request.removeAttribute(alreadyFilteredAttributeName);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if this filter should filter the specified request, {@code false} if it should let the
+&nbsp;     * request/response pass through immediately to the next element in the {@code FilterChain}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This default implementation merely returns the value of {@link #isEnabled() isEnabled()}, which is
+&nbsp;     * {@code true} by default (to ensure the filter always executes by default), but it can be overridden by
+&nbsp;     * subclasses for request-specific behavior if necessary.  For example, a filter could be enabled or disabled
+&nbsp;     * based on the request path being accessed.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;Helpful Hint:&lt;/b&gt; if your subclass extends {@link org.apache.shiro.web.filter.PathMatchingFilter PathMatchingFilter},
+&nbsp;     * you may wish to instead override the
+&nbsp;     * {@link org.apache.shiro.web.filter.PathMatchingFilter#isEnabled(javax.servlet.ServletRequest, javax.servlet.ServletResponse, String, Object)
+&nbsp;     * PathMatchingFilter.isEnabled(request,response,path,pathSpecificConfig)}
+&nbsp;     * method if you want to make your enable/disable decision based on any path-specific configuration.
+&nbsp;     *
+&nbsp;     * @param request the incoming servlet request
+&nbsp;     * @param response the outbound servlet response
+&nbsp;     * @return {@code true} if this filter should filter the specified request, {@code false} if it should let the
+&nbsp;     * request/response pass through immediately to the next element in the {@code FilterChain}.
+&nbsp;     * @throws IOException in the case of any IO error
+&nbsp;     * @throws ServletException in the case of any error
+&nbsp;     * @see org.apache.shiro.web.filter.PathMatchingFilter#isEnabled(javax.servlet.ServletRequest, javax.servlet.ServletResponse, String, Object)
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;UnusedParameters&quot;})
+&nbsp;    protected boolean isEnabled(ServletRequest request, ServletResponse response) throws ServletException, IOException {
+<b class="nc">&nbsp;        return isEnabled();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return name of the request attribute that identifies that a request has already been filtered.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The default implementation takes the configured {@link #getName() name} and appends &amp;quot;{@code .FILTERED}&amp;quot;.
+&nbsp;     * If the filter is not fully initialized, it falls back to the implementation&#39;s class name.
+&nbsp;     *
+&nbsp;     * @return the name of the request attribute that identifies that a request has already been filtered.
+&nbsp;     * @see #getName
+&nbsp;     * @see #ALREADY_FILTERED_SUFFIX
+&nbsp;     */
+&nbsp;    protected String getAlreadyFilteredAttributeName() {
+<b class="nc">&nbsp;        String name = getName();</b>
+<b class="nc">&nbsp;        if (name == null) {</b>
+<b class="nc">&nbsp;            name = getClass().getName();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return name + ALREADY_FILTERED_SUFFIX;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Can be overridden in subclasses for custom filtering control,
+&nbsp;     * returning &lt;code&gt;true&lt;/code&gt; to avoid filtering of the given request.
+&nbsp;     * &lt;p&gt;The default implementation always returns &lt;code&gt;false&lt;/code&gt;.
+&nbsp;     *
+&nbsp;     * @param request current HTTP request
+&nbsp;     * @return whether the given request should &lt;i&gt;not&lt;/i&gt; be filtered
+&nbsp;     * @throws ServletException in case of errors
+&nbsp;     * @deprecated in favor of overriding {@link #isEnabled(javax.servlet.ServletRequest, javax.servlet.ServletResponse)}
+&nbsp;     * for custom behavior.  This method will be removed in Shiro 2.0.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    protected boolean shouldNotFilter(ServletRequest request) throws ServletException {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Same contract as for
+&nbsp;     * {@link #doFilter(javax.servlet.ServletRequest, javax.servlet.ServletResponse, javax.servlet.FilterChain)},
+&nbsp;     * but guaranteed to be invoked only once per request.
+&nbsp;     *
+&nbsp;     * @param request  incoming {@code ServletRequest}
+&nbsp;     * @param response outgoing {@code ServletResponse}
+&nbsp;     * @param chain    the {@code FilterChain} to execute
+&nbsp;     * @throws ServletException if there is a problem processing the request
+&nbsp;     * @throws IOException      if there is an I/O problem processing the request
+&nbsp;     */
+&nbsp;    protected abstract void doFilterInternal(ServletRequest request, ServletResponse response, FilterChain chain)
+&nbsp;            throws ServletException, IOException;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

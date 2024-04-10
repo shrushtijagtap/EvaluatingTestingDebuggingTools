@@ -1,0 +1,140 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ValidatingSessionManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.session.mgt</a>
+</div>
+
+<h1>Coverage Summary for Class: ValidatingSessionManager (org.apache.shiro.session.mgt)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ValidatingSessionManager</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.session.mgt;
+&nbsp;
+&nbsp;/**
+&nbsp; * A ValidatingSessionManager is a SessionManager that can proactively validate any or all sessions
+&nbsp; * that may be expired.
+&nbsp; *
+&nbsp; * @since 0.1
+&nbsp; */
+&nbsp;public interface ValidatingSessionManager extends SessionManager {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs session validation for all open/active sessions in the system (those that
+&nbsp;     * have not been stopped or expired), and validates each one.  If a session is
+&nbsp;     * found to be invalid (e.g. it has expired), it is updated and saved to the EIS.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This method is necessary in order to handle orphaned sessions and is expected to be run at
+&nbsp;     * a regular interval, such as once an hour, once a day or once a week, etc.
+&nbsp;     * The &amp;quot;best&amp;quot; frequency to run this method is entirely dependent upon the application
+&nbsp;     * and would be based on factors such as performance, average number of active users, hours of
+&nbsp;     * least activity, and other things.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Most enterprise applications use a request/response programming model.
+&nbsp;     * This is obvious in the case of web applications due to the HTTP protocol, but it is
+&nbsp;     * equally true of remote client applications making remote method invocations.  The server
+&nbsp;     * essentially sits idle and only &amp;quot;works&amp;quot; when responding to client requests and/or
+&nbsp;     * method invocations.  This type of model is particularly efficient since it means the
+&nbsp;     * security system only has to validate a session during those cases.  Such
+&nbsp;     * &amp;quot;lazy&amp;quot; behavior enables the system to lie stateless and/or idle and only incur
+&nbsp;     * overhead for session validation when necessary.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * However, if a client forgets to log-out, or in the event of a server failure, it is
+&nbsp;     * possible for sessions to be orphaned since no further requests would utilize that session.
+&nbsp;     * Because of these lower-probability cases, it might be required to regularly clean-up the sessions
+&nbsp;     * maintained by the system, especially if sessions are backed by a persistent data store.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Even in applications that aren&#39;t primarily based on a request/response model,
+&nbsp;     * such as those that use enterprise asynchronous messaging (where data is pushed to
+&nbsp;     * a client without first receiving a client request), it is almost always acceptable to
+&nbsp;     * utilize this lazy approach and run this method at defined interval.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Systems that want to proactively validate individual sessions may simply call the
+&nbsp;     * {@link #getSession(SessionKey) getSession(SessionKey)} method on any
+&nbsp;     * {@code ValidatingSessionManager} instance as that method is expected to
+&nbsp;     * validate the session before retrieving it.  Note that even with proactive calls to {@code getSession},
+&nbsp;     * this {@code validateSessions()} method should be invoked regularly anyway to &lt;em&gt;guarantee&lt;/em&gt; no
+&nbsp;     * orphans exist.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;Note:&lt;/b&gt; Shiro supports automatic execution of this method at a regular interval
+&nbsp;     * by using {@link SessionValidationScheduler}s.  The Shiro default SecurityManager implementations
+&nbsp;     * needing session validation will create and use one by default if one is not provided by the
+&nbsp;     * application configuration.
+&nbsp;     */
+&nbsp;    void validateSessions();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

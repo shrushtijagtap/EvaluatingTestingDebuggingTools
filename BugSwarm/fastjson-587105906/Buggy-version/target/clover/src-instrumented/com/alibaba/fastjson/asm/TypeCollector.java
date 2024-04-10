@@ -1,0 +1,109 @@
+/* $$ This file has been instrumented by Clover 4.1.10#20230822161652967 $$ */package com.alibaba.fastjson.asm;
+
+import com.alibaba.fastjson.util.ASMUtils;
+
+import java.lang.reflect.Modifier;
+import java.util.HashMap;
+import java.util.Map;
+
+public class TypeCollector {public static class __CLR4_1_1050y50yluszvtt1{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings("unchecked") public static <I, T extends I> I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException("Clover failed to invoke instrumented lambda",e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_1_10();if(20230822161652967L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l("[CLOVER] WARNING: The Clover version used in instrumentation does not match the runtime version. You need to run instrumented classes against the same version of Clover that you instrumented with.");com_atlassian_clover.Clover.l("[CLOVER] WARNING: Instr=4.1.10#20230822161652967,Runtime="+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+"#"+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder("\u002f\u0055\u0073\u0065\u0072\u0073\u002f\u0073\u0068\u0072\u0065\u0079\u0061\u0063\u0068\u0061\u0075\u0064\u0068\u0061\u0072\u0079\u002f\u0044\u0065\u0073\u006b\u0074\u006f\u0070\u002f\u0063\u0073\u0035\u0032\u0037\u002f\u0043\u0053\u0035\u0032\u0037\u002d\u0050\u0072\u006f\u006a\u0065\u0063\u0074\u002f\u0042\u0075\u0067\u0053\u0077\u0061\u0072\u006d\u002f\u0066\u0061\u0073\u0074\u006a\u0073\u006f\u006e\u002d\u0035\u0038\u0037\u0031\u0030\u0035\u0039\u0030\u0036\u002f\u0042\u0075\u0067\u0067\u0079\u002d\u0076\u0065\u0072\u0073\u0069\u006f\u006e\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062",1712704234731L,8589935092L,6590,profiles,new java.lang.String[]{"clover.distributed.coverage",null});}catch(java.lang.SecurityException e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.Throwable t){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. ("+t.getClass()+":"+t.getMessage()+")");}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_1_10_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;
+    private static String JSONType = ASMUtils.desc(com.alibaba.fastjson.annotation.JSONType.class);
+
+    private static final Map<String, String> primitives = new HashMap<String, String>() {
+        {try{__CLR4_1_1050y50yluszvtt1.R.inc(6514);
+            __CLR4_1_1050y50yluszvtt1.R.inc(6515);put("int","I");
+            __CLR4_1_1050y50yluszvtt1.R.inc(6516);put("boolean","Z");
+            __CLR4_1_1050y50yluszvtt1.R.inc(6517);put("byte", "B");
+            __CLR4_1_1050y50yluszvtt1.R.inc(6518);put("char","C");
+            __CLR4_1_1050y50yluszvtt1.R.inc(6519);put("short","S");
+            __CLR4_1_1050y50yluszvtt1.R.inc(6520);put("float","F");
+            __CLR4_1_1050y50yluszvtt1.R.inc(6521);put("long","J");
+            __CLR4_1_1050y50yluszvtt1.R.inc(6522);put("double","D");
+        }finally{__CLR4_1_1050y50yluszvtt1.R.flushNeeded();}}
+    };
+
+    private final String methodName;
+
+    private final Class<?>[] parameterTypes;
+
+    protected MethodCollector collector;
+
+    protected boolean jsonType;
+
+    public TypeCollector(String methodName, Class<?>[] parameterTypes) {try{__CLR4_1_1050y50yluszvtt1.R.inc(6523);
+        __CLR4_1_1050y50yluszvtt1.R.inc(6524);this.methodName = methodName;
+        __CLR4_1_1050y50yluszvtt1.R.inc(6525);this.parameterTypes = parameterTypes;
+        __CLR4_1_1050y50yluszvtt1.R.inc(6526);this.collector = null;
+    }finally{__CLR4_1_1050y50yluszvtt1.R.flushNeeded();}}
+
+    protected MethodCollector visitMethod(int access, String name, String desc) {try{__CLR4_1_1050y50yluszvtt1.R.inc(6527);
+        __CLR4_1_1050y50yluszvtt1.R.inc(6528);if ((((collector != null)&&(__CLR4_1_1050y50yluszvtt1.R.iget(6529)!=0|true))||(__CLR4_1_1050y50yluszvtt1.R.iget(6530)==0&false))) {{
+            __CLR4_1_1050y50yluszvtt1.R.inc(6531);return null;
+        }
+
+        }__CLR4_1_1050y50yluszvtt1.R.inc(6532);if ((((!name.equals(methodName))&&(__CLR4_1_1050y50yluszvtt1.R.iget(6533)!=0|true))||(__CLR4_1_1050y50yluszvtt1.R.iget(6534)==0&false))) {{
+            __CLR4_1_1050y50yluszvtt1.R.inc(6535);return null;
+        }
+
+        }__CLR4_1_1050y50yluszvtt1.R.inc(6536);Type[] argTypes = Type.getArgumentTypes(desc);
+        __CLR4_1_1050y50yluszvtt1.R.inc(6537);int longOrDoubleQuantity = 0;
+        __CLR4_1_1050y50yluszvtt1.R.inc(6538);for (Type t : argTypes) {{
+            __CLR4_1_1050y50yluszvtt1.R.inc(6539);String className = t.getClassName();
+            __CLR4_1_1050y50yluszvtt1.R.inc(6540);if ((((className.equals("long") || className.equals("double"))&&(__CLR4_1_1050y50yluszvtt1.R.iget(6541)!=0|true))||(__CLR4_1_1050y50yluszvtt1.R.iget(6542)==0&false))) {{
+                __CLR4_1_1050y50yluszvtt1.R.inc(6543);longOrDoubleQuantity++;
+            }
+        }}
+
+        }__CLR4_1_1050y50yluszvtt1.R.inc(6544);if ((((argTypes.length != this.parameterTypes.length)&&(__CLR4_1_1050y50yluszvtt1.R.iget(6545)!=0|true))||(__CLR4_1_1050y50yluszvtt1.R.iget(6546)==0&false))) {{
+            __CLR4_1_1050y50yluszvtt1.R.inc(6547);return null;
+        }
+        }__CLR4_1_1050y50yluszvtt1.R.inc(6548);for (int i = 0; (((i < argTypes.length)&&(__CLR4_1_1050y50yluszvtt1.R.iget(6549)!=0|true))||(__CLR4_1_1050y50yluszvtt1.R.iget(6550)==0&false)); i++) {{
+            __CLR4_1_1050y50yluszvtt1.R.inc(6551);if ((((!correctTypeName(argTypes[i], this.parameterTypes[i].getName()))&&(__CLR4_1_1050y50yluszvtt1.R.iget(6552)!=0|true))||(__CLR4_1_1050y50yluszvtt1.R.iget(6553)==0&false))) {{
+                __CLR4_1_1050y50yluszvtt1.R.inc(6554);return null;
+            }
+        }}
+
+        }__CLR4_1_1050y50yluszvtt1.R.inc(6555);return collector = new MethodCollector(
+                (((Modifier.isStatic(access) )&&(__CLR4_1_1050y50yluszvtt1.R.iget(6556)!=0|true))||(__CLR4_1_1050y50yluszvtt1.R.iget(6557)==0&false))? 0 : 1,
+                argTypes.length + longOrDoubleQuantity);
+    }finally{__CLR4_1_1050y50yluszvtt1.R.flushNeeded();}}
+
+    public void visitAnnotation(String desc) {try{__CLR4_1_1050y50yluszvtt1.R.inc(6558);
+        __CLR4_1_1050y50yluszvtt1.R.inc(6559);if ((((JSONType.equals(desc))&&(__CLR4_1_1050y50yluszvtt1.R.iget(6560)!=0|true))||(__CLR4_1_1050y50yluszvtt1.R.iget(6561)==0&false))) {{
+            __CLR4_1_1050y50yluszvtt1.R.inc(6562);jsonType = true;
+        }
+    }}finally{__CLR4_1_1050y50yluszvtt1.R.flushNeeded();}}
+
+    private boolean correctTypeName(Type type, String paramTypeName) {try{__CLR4_1_1050y50yluszvtt1.R.inc(6563);
+        __CLR4_1_1050y50yluszvtt1.R.inc(6564);String s = type.getClassName();
+        // array notation needs cleanup.
+        __CLR4_1_1050y50yluszvtt1.R.inc(6565);String braces = "";
+        __CLR4_1_1050y50yluszvtt1.R.inc(6566);while ((((s.endsWith("[]"))&&(__CLR4_1_1050y50yluszvtt1.R.iget(6567)!=0|true))||(__CLR4_1_1050y50yluszvtt1.R.iget(6568)==0&false))) {{
+            __CLR4_1_1050y50yluszvtt1.R.inc(6569);braces = braces + "[";
+            __CLR4_1_1050y50yluszvtt1.R.inc(6570);s = s.substring(0, s.length() - 2);
+        }
+        }__CLR4_1_1050y50yluszvtt1.R.inc(6571);if ((((!braces.equals(""))&&(__CLR4_1_1050y50yluszvtt1.R.iget(6572)!=0|true))||(__CLR4_1_1050y50yluszvtt1.R.iget(6573)==0&false))) {{
+            __CLR4_1_1050y50yluszvtt1.R.inc(6574);if ((((primitives.containsKey(s))&&(__CLR4_1_1050y50yluszvtt1.R.iget(6575)!=0|true))||(__CLR4_1_1050y50yluszvtt1.R.iget(6576)==0&false))) {{
+                __CLR4_1_1050y50yluszvtt1.R.inc(6577);s = braces + primitives.get(s);
+            } }else {{
+                __CLR4_1_1050y50yluszvtt1.R.inc(6578);s = braces + "L" + s + ";";
+            }
+        }}
+        }__CLR4_1_1050y50yluszvtt1.R.inc(6579);return s.equals(paramTypeName);
+    }finally{__CLR4_1_1050y50yluszvtt1.R.flushNeeded();}}
+
+    public String[] getParameterNamesForMethod() {try{__CLR4_1_1050y50yluszvtt1.R.inc(6580);
+        __CLR4_1_1050y50yluszvtt1.R.inc(6581);if ((((collector == null || !collector.debugInfoPresent)&&(__CLR4_1_1050y50yluszvtt1.R.iget(6582)!=0|true))||(__CLR4_1_1050y50yluszvtt1.R.iget(6583)==0&false))) {{
+            __CLR4_1_1050y50yluszvtt1.R.inc(6584);return new String[0];
+        }
+        }__CLR4_1_1050y50yluszvtt1.R.inc(6585);return collector.getResult().split(",");
+    }finally{__CLR4_1_1050y50yluszvtt1.R.flushNeeded();}}
+
+    public boolean matched() {try{__CLR4_1_1050y50yluszvtt1.R.inc(6586);
+        __CLR4_1_1050y50yluszvtt1.R.inc(6587);return collector != null;
+    }finally{__CLR4_1_1050y50yluszvtt1.R.flushNeeded();}}
+
+    public boolean hasJsonType() {try{__CLR4_1_1050y50yluszvtt1.R.inc(6588);
+        __CLR4_1_1050y50yluszvtt1.R.inc(6589);return jsonType;
+    }finally{__CLR4_1_1050y50yluszvtt1.R.flushNeeded();}}
+}

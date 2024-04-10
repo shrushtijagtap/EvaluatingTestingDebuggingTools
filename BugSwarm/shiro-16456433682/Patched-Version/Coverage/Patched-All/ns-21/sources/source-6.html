@@ -1,0 +1,364 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DefaultSessionManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.session.mgt</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultSessionManager (org.apache.shiro.session.mgt)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultSessionManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    69.6%
+  </span>
+  <span class="absValue">
+    (16/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (8/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    63.5%
+  </span>
+  <span class="absValue">
+    (33/52)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.session.mgt;
+&nbsp;
+&nbsp;import org.apache.shiro.cache.CacheManager;
+&nbsp;import org.apache.shiro.cache.CacheManagerAware;
+&nbsp;import org.apache.shiro.session.Session;
+&nbsp;import org.apache.shiro.session.UnknownSessionException;
+&nbsp;import org.apache.shiro.session.mgt.eis.MemorySessionDAO;
+&nbsp;import org.apache.shiro.session.mgt.eis.SessionDAO;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;/**
+&nbsp; * Default business-tier implementation of a {@link ValidatingSessionManager}.  All session CRUD operations are
+&nbsp; * delegated to an internal {@link SessionDAO}.
+&nbsp; *
+&nbsp; * @since 0.1
+&nbsp; */
+&nbsp;public class DefaultSessionManager extends AbstractValidatingSessionManager implements CacheManagerAware {
+&nbsp;
+&nbsp;    //TODO - complete JavaDoc
+&nbsp;
+<b class="fc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(DefaultSessionManager.class);</b>
+&nbsp;
+&nbsp;    private SessionFactory sessionFactory;
+&nbsp;
+&nbsp;    protected SessionDAO sessionDAO;  //todo - move SessionDAO up to AbstractValidatingSessionManager?
+&nbsp;
+&nbsp;    private CacheManager cacheManager;
+&nbsp;
+&nbsp;    private boolean deleteInvalidSessions;
+&nbsp;
+<b class="fc">&nbsp;    public DefaultSessionManager() {</b>
+<b class="fc">&nbsp;        this.deleteInvalidSessions = true;</b>
+<b class="fc">&nbsp;        this.sessionFactory = new SimpleSessionFactory();</b>
+<b class="fc">&nbsp;        this.sessionDAO = new MemorySessionDAO();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setSessionDAO(SessionDAO sessionDAO) {
+<b class="nc">&nbsp;        this.sessionDAO = sessionDAO;</b>
+<b class="nc">&nbsp;        applyCacheManagerToSessionDAO();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SessionDAO getSessionDAO() {
+<b class="nc">&nbsp;        return this.sessionDAO;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@code SessionFactory} used to generate new {@link Session} instances.  The default instance
+&nbsp;     * is a {@link SimpleSessionFactory}.
+&nbsp;     *
+&nbsp;     * @return the {@code SessionFactory} used to generate new {@link Session} instances.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    public SessionFactory getSessionFactory() {
+<b class="fc">&nbsp;        return sessionFactory;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the {@code SessionFactory} used to generate new {@link Session} instances.  The default instance
+&nbsp;     * is a {@link SimpleSessionFactory}.
+&nbsp;     *
+&nbsp;     * @param sessionFactory the {@code SessionFactory} used to generate new {@link Session} instances.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    public void setSessionFactory(SessionFactory sessionFactory) {
+<b class="nc">&nbsp;        this.sessionFactory = sessionFactory;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if sessions should be automatically deleted after they are discovered to be invalid,
+&nbsp;     * {@code false} if invalid sessions will be manually deleted by some process external to Shiro&#39;s control.  The
+&nbsp;     * default is {@code true} to ensure no orphans exist in the underlying data store.
+&nbsp;     * &lt;h4&gt;Usage&lt;/h4&gt;
+&nbsp;     * It is ok to set this to {@code false} &lt;b&gt;&lt;em&gt;ONLY&lt;/em&gt;&lt;/b&gt; if you have some other process that you manage yourself
+&nbsp;     * that periodically deletes invalid sessions from the backing data store over time, such as via a Quartz or Cron
+&nbsp;     * job.  If you do not do this, the invalid sessions will become &#39;orphans&#39; and fill up the data store over time.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This property is provided because some systems need the ability to perform querying/reporting against sessions in
+&nbsp;     * the data store, even after they have stopped or expired.  Setting this attribute to {@code false} will allow
+&nbsp;     * such querying, but with the caveat that the application developer/configurer deletes the sessions themselves by
+&nbsp;     * some other means (cron, quartz, etc).
+&nbsp;     *
+&nbsp;     * @return {@code true} if sessions should be automatically deleted after they are discovered to be invalid,
+&nbsp;     *         {@code false} if invalid sessions will be manually deleted by some process external to Shiro&#39;s control.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    public boolean isDeleteInvalidSessions() {
+<b class="fc">&nbsp;        return deleteInvalidSessions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets whether or not sessions should be automatically deleted after they are discovered to be invalid.  Default
+&nbsp;     * value is {@code true} to ensure no orphans will exist in the underlying data store.
+&nbsp;     * &lt;h4&gt;WARNING&lt;/h4&gt;
+&nbsp;     * Only set this value to {@code false} if you are manually going to delete sessions yourself by some process
+&nbsp;     * (quartz, cron, etc) external to Shiro&#39;s control.  See the
+&nbsp;     * {@link #isDeleteInvalidSessions() isDeleteInvalidSessions()} JavaDoc for more.
+&nbsp;     *
+&nbsp;     * @param deleteInvalidSessions whether or not sessions should be automatically deleted after they are discovered
+&nbsp;     *                              to be invalid.
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;UnusedDeclaration&quot;})
+&nbsp;    public void setDeleteInvalidSessions(boolean deleteInvalidSessions) {
+<b class="nc">&nbsp;        this.deleteInvalidSessions = deleteInvalidSessions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCacheManager(CacheManager cacheManager) {
+<b class="fc">&nbsp;        this.cacheManager = cacheManager;</b>
+<b class="fc">&nbsp;        applyCacheManagerToSessionDAO();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the internal {@code CacheManager} on the {@code SessionDAO} if it implements the
+&nbsp;     * {@link org.apache.shiro.cache.CacheManagerAware CacheManagerAware} interface.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This method is called after setting a cacheManager via the
+&nbsp;     * {@link #setCacheManager(org.apache.shiro.cache.CacheManager) setCacheManager} method &lt;em&gt;em&lt;/em&gt; when
+&nbsp;     * setting a {@code SessionDAO} via the {@link #setSessionDAO} method to allow it to be propagated
+&nbsp;     * in either case.
+&nbsp;     *
+&nbsp;     * @since 1.0
+&nbsp;     */
+&nbsp;    private void applyCacheManagerToSessionDAO() {
+<b class="pc">&nbsp;        if (this.cacheManager != null &amp;&amp; this.sessionDAO != null &amp;&amp; this.sessionDAO instanceof CacheManagerAware) {</b>
+<b class="nc">&nbsp;            ((CacheManagerAware) this.sessionDAO).setCacheManager(this.cacheManager);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Session doCreateSession(SessionContext context) {
+<b class="fc">&nbsp;        Session s = newSessionInstance(context);</b>
+<b class="pc">&nbsp;        if (log.isTraceEnabled()) {</b>
+<b class="nc">&nbsp;            log.trace(&quot;Creating session for host {}&quot;, s.getHost());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        create(s);</b>
+<b class="fc">&nbsp;        return s;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Session newSessionInstance(SessionContext context) {
+<b class="fc">&nbsp;        return getSessionFactory().createSession(context);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Persists the given session instance to an underlying EIS (Enterprise Information System).  This implementation
+&nbsp;     * delegates and calls
+&nbsp;     * &lt;code&gt;this.{@link SessionDAO sessionDAO}.{@link SessionDAO#create(org.apache.shiro.session.Session) create}(session);&lt;code&gt;
+&nbsp;     *
+&nbsp;     * @param session the Session instance to persist to the underlying EIS.
+&nbsp;     */
+&nbsp;    protected void create(Session session) {
+<b class="pc">&nbsp;        if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;            log.debug(&quot;Creating new EIS record for new session instance [&quot; + session + &quot;]&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        sessionDAO.create(session);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void onStop(Session session) {
+<b class="nc">&nbsp;        if (session instanceof SimpleSession) {</b>
+<b class="nc">&nbsp;            SimpleSession ss = (SimpleSession) session;</b>
+<b class="nc">&nbsp;            Date stopTs = ss.getStopTimestamp();</b>
+<b class="nc">&nbsp;            ss.setLastAccessTime(stopTs);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        onChange(session);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void afterStopped(Session session) {
+<b class="nc">&nbsp;        if (isDeleteInvalidSessions()) {</b>
+<b class="nc">&nbsp;            delete(session);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void onExpiration(Session session) {
+<b class="pc">&nbsp;        if (session instanceof SimpleSession) {</b>
+<b class="fc">&nbsp;            ((SimpleSession) session).setExpired(true);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        onChange(session);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void afterExpired(Session session) {
+<b class="pc">&nbsp;        if (isDeleteInvalidSessions()) {</b>
+<b class="fc">&nbsp;            delete(session);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void onChange(Session session) {
+<b class="fc">&nbsp;        sessionDAO.update(session);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Session retrieveSession(SessionKey sessionKey) throws UnknownSessionException {
+<b class="fc">&nbsp;        Serializable sessionId = getSessionId(sessionKey);</b>
+<b class="fc">&nbsp;        if (sessionId == null) {</b>
+<b class="fc">&nbsp;            log.debug(&quot;Unable to resolve session ID from SessionKey [{}].  Returning null to indicate a &quot; +</b>
+&nbsp;                    &quot;session could not be found.&quot;, sessionKey);
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Session s = retrieveSessionFromDataSource(sessionId);</b>
+<b class="pc">&nbsp;        if (s == null) {</b>
+&nbsp;            //session ID was provided, meaning one is expected to be found, but we couldn&#39;t find one:
+<b class="nc">&nbsp;            String msg = &quot;Could not find session with ID [&quot; + sessionId + &quot;]&quot;;</b>
+<b class="nc">&nbsp;            throw new UnknownSessionException(msg);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return s;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Serializable getSessionId(SessionKey sessionKey) {
+<b class="fc">&nbsp;        return sessionKey.getSessionId();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Session retrieveSessionFromDataSource(Serializable sessionId) throws UnknownSessionException {
+<b class="fc">&nbsp;        return sessionDAO.readSession(sessionId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void delete(Session session) {
+<b class="fc">&nbsp;        sessionDAO.delete(session);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Collection&lt;Session&gt; getActiveSessions() {
+<b class="nc">&nbsp;        Collection&lt;Session&gt; active = sessionDAO.getActiveSessions();</b>
+<b class="nc">&nbsp;        return active != null ? active : Collections.&lt;Session&gt;emptySet();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

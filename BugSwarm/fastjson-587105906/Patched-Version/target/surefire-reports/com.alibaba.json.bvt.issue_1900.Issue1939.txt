@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.issue_1900.Issue1939
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.009 s <<< FAILURE! -- in com.alibaba.json.bvt.issue_1900.Issue1939
-com.alibaba.json.bvt.issue_1900.Issue1939.test_for_issue -- Time elapsed: 0.004 s <<< ERROR!
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.012 s <<< FAILURE! -- in com.alibaba.json.bvt.issue_1900.Issue1939
+com.alibaba.json.bvt.issue_1900.Issue1939.test_for_issue -- Time elapsed: 0.009 s <<< ERROR!
 java.lang.NoClassDefFoundError: com/sun/xml/bind/v2/model/annotation/AnnotationReader
 	at java.lang.ClassLoader.defineClass1(Native Method)
 	at java.lang.ClassLoader.defineClass(ClassLoader.java:756)
@@ -26,7 +26,8 @@ java.lang.NoClassDefFoundError: com/sun/xml/bind/v2/model/annotation/AnnotationR
 	at javax.xml.bind.ContextFinder.find(ContextFinder.java:441)
 	at javax.xml.bind.JAXBContext.newInstance(JAXBContext.java:641)
 	at javax.xml.bind.JAXBContext.newInstance(JAXBContext.java:584)
-	at com.alibaba.json.bvt.issue_1900.Issue1939.test_for_issue(Issue1939.java:27)
+	at com.alibaba.json.bvt.issue_1900.Issue1939.__CLR4_5_2e86tqb1cpb(Issue1939.java:27)
+	at com.alibaba.json.bvt.issue_1900.Issue1939.test_for_issue(Issue1939.java:26)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -53,9 +54,9 @@ Caused by: java.lang.ClassNotFoundException: com.sun.xml.bind.v2.model.annotatio
 	at java.lang.ClassLoader.loadClass(ClassLoader.java:418)
 	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:352)
 	at java.lang.ClassLoader.loadClass(ClassLoader.java:351)
-	... 44 more
+	... 45 more
 
-com.alibaba.json.bvt.issue_1900.Issue1939.test_for_issue_1 -- Time elapsed: 0.003 s <<< ERROR!
+com.alibaba.json.bvt.issue_1900.Issue1939.test_for_issue_1 -- Time elapsed: 0.001 s <<< ERROR!
 java.lang.NoClassDefFoundError: com/sun/xml/bind/v2/model/annotation/AnnotationReader
 	at java.lang.ClassLoader.defineClass1(Native Method)
 	at java.lang.ClassLoader.defineClass(ClassLoader.java:756)
@@ -79,7 +80,8 @@ java.lang.NoClassDefFoundError: com/sun/xml/bind/v2/model/annotation/AnnotationR
 	at javax.xml.bind.ContextFinder.find(ContextFinder.java:441)
 	at javax.xml.bind.JAXBContext.newInstance(JAXBContext.java:641)
 	at javax.xml.bind.JAXBContext.newInstance(JAXBContext.java:584)
-	at com.alibaba.json.bvt.issue_1900.Issue1939.test_for_issue_1(Issue1939.java:34)
+	at com.alibaba.json.bvt.issue_1900.Issue1939.__CLR4_5_2uhstn51cpf(Issue1939.java:34)
+	at com.alibaba.json.bvt.issue_1900.Issue1939.test_for_issue_1(Issue1939.java:33)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -106,5 +108,5 @@ Caused by: java.lang.ClassNotFoundException: com.sun.xml.bind.v2.model.annotatio
 	at java.lang.ClassLoader.loadClass(ClassLoader.java:418)
 	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:352)
 	at java.lang.ClassLoader.loadClass(ClassLoader.java:351)
-	... 44 more
+	... 45 more
 

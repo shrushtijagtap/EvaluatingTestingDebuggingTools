@@ -1,0 +1,302 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SimpleAccountRealm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.realm</a>
+</div>
+
+<h1>Coverage Summary for Class: SimpleAccountRealm (org.apache.shiro.realm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SimpleAccountRealm</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/57)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.realm;
+&nbsp;
+&nbsp;import org.apache.shiro.authc.AuthenticationException;
+&nbsp;import org.apache.shiro.authc.AuthenticationInfo;
+&nbsp;import org.apache.shiro.authc.AuthenticationToken;
+&nbsp;import org.apache.shiro.authc.ExpiredCredentialsException;
+&nbsp;import org.apache.shiro.authc.LockedAccountException;
+&nbsp;import org.apache.shiro.authc.SimpleAccount;
+&nbsp;import org.apache.shiro.authc.UsernamePasswordToken;
+&nbsp;import org.apache.shiro.authz.AuthorizationInfo;
+&nbsp;import org.apache.shiro.authz.SimpleRole;
+&nbsp;import org.apache.shiro.subject.PrincipalCollection;
+&nbsp;import org.apache.shiro.util.CollectionUtils;
+&nbsp;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.concurrent.locks.ReadWriteLock;
+&nbsp;import java.util.concurrent.locks.ReentrantReadWriteLock;
+&nbsp;
+&nbsp;/**
+&nbsp; * A simple implementation of the {@link Realm Realm} interface that
+&nbsp; * uses a set of configured user accounts and roles to support authentication and authorization.  Each account entry
+&nbsp; * specifies the username, password, and roles for a user.  Roles can also be mapped
+&nbsp; * to permissions and associated with users.
+&nbsp; * &lt;p/&gt;
+&nbsp; * User accounts and roles are stored in two {@code Map}s in memory, so it is expected that the total number of either
+&nbsp; * is not sufficiently large.
+&nbsp; *
+&nbsp; * @since 0.1
+&nbsp; */
+&nbsp;public class SimpleAccountRealm extends AuthorizingRealm {
+&nbsp;
+&nbsp;    //TODO - complete JavaDoc
+&nbsp;    protected final Map&lt;String, SimpleAccount&gt; users; //username-to-SimpleAccount
+&nbsp;    protected final Map&lt;String, SimpleRole&gt; roles; //roleName-to-SimpleRole
+&nbsp;    protected final ReadWriteLock USERS_LOCK;
+&nbsp;    protected final ReadWriteLock ROLES_LOCK;
+&nbsp;
+<b class="nc">&nbsp;    public SimpleAccountRealm() {</b>
+<b class="nc">&nbsp;        this.users = new LinkedHashMap&lt;String, SimpleAccount&gt;();</b>
+<b class="nc">&nbsp;        this.roles = new LinkedHashMap&lt;String, SimpleRole&gt;();</b>
+<b class="nc">&nbsp;        USERS_LOCK = new ReentrantReadWriteLock();</b>
+<b class="nc">&nbsp;        ROLES_LOCK = new ReentrantReadWriteLock();</b>
+&nbsp;        //SimpleAccountRealms are memory-only realms - no need for an additional cache mechanism since we&#39;re
+&nbsp;        //already as memory-efficient as we can be:
+<b class="nc">&nbsp;        setCachingEnabled(false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SimpleAccountRealm(String name) {
+<b class="nc">&nbsp;        this();</b>
+<b class="nc">&nbsp;        setName(name);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected SimpleAccount getUser(String username) {
+<b class="nc">&nbsp;        USERS_LOCK.readLock().lock();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            return this.users.get(username);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            USERS_LOCK.readLock().unlock();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean accountExists(String username) {
+<b class="nc">&nbsp;        return getUser(username) != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addAccount(String username, String password) {
+<b class="nc">&nbsp;        addAccount(username, password, (String[]) null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addAccount(String username, String password, String... roles) {
+<b class="nc">&nbsp;        Set&lt;String&gt; roleNames = CollectionUtils.asSet(roles);</b>
+<b class="nc">&nbsp;        SimpleAccount account = new SimpleAccount(username, password, getName(), roleNames, null);</b>
+<b class="nc">&nbsp;        add(account);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected String getUsername(SimpleAccount account) {
+<b class="nc">&nbsp;        return getUsername(account.getPrincipals());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected String getUsername(PrincipalCollection principals) {
+<b class="nc">&nbsp;        return getAvailablePrincipal(principals).toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void add(SimpleAccount account) {
+<b class="nc">&nbsp;        String username = getUsername(account);</b>
+<b class="nc">&nbsp;        USERS_LOCK.writeLock().lock();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            this.users.put(username, account);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            USERS_LOCK.writeLock().unlock();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected SimpleRole getRole(String rolename) {
+<b class="nc">&nbsp;        ROLES_LOCK.readLock().lock();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            return roles.get(rolename);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            ROLES_LOCK.readLock().unlock();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean roleExists(String name) {
+<b class="nc">&nbsp;        return getRole(name) != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addRole(String name) {
+<b class="nc">&nbsp;        add(new SimpleRole(name));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void add(SimpleRole role) {
+<b class="nc">&nbsp;        ROLES_LOCK.writeLock().lock();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            roles.put(role.getName(), role);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            ROLES_LOCK.writeLock().unlock();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static Set&lt;String&gt; toSet(String delimited, String delimiter) {
+<b class="nc">&nbsp;        if (delimited == null || delimited.trim().equals(&quot;&quot;)) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Set&lt;String&gt; values = new HashSet&lt;String&gt;();</b>
+<b class="nc">&nbsp;        String[] rolenamesArray = delimited.split(delimiter);</b>
+<b class="nc">&nbsp;        for (String s : rolenamesArray) {</b>
+<b class="nc">&nbsp;            String trimmed = s.trim();</b>
+<b class="nc">&nbsp;            if (trimmed.length() &gt; 0) {</b>
+<b class="nc">&nbsp;                values.add(trimmed);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return values;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+<b class="nc">&nbsp;        UsernamePasswordToken upToken = (UsernamePasswordToken) token;</b>
+<b class="nc">&nbsp;        SimpleAccount account = getUser(upToken.getUsername());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (account != null) {</b>
+&nbsp;
+<b class="nc">&nbsp;            if (account.isLocked()) {</b>
+<b class="nc">&nbsp;                throw new LockedAccountException(&quot;Account [&quot; + account + &quot;] is locked.&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (account.isCredentialsExpired()) {</b>
+<b class="nc">&nbsp;                String msg = &quot;The credentials for account [&quot; + account + &quot;] are expired&quot;;</b>
+<b class="nc">&nbsp;                throw new ExpiredCredentialsException(msg);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return account;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+<b class="nc">&nbsp;        String username = getUsername(principals);</b>
+<b class="nc">&nbsp;        USERS_LOCK.readLock().lock();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            return this.users.get(username);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            USERS_LOCK.readLock().unlock();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

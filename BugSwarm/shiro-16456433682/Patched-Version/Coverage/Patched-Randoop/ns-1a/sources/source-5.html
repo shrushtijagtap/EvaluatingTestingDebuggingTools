@@ -1,0 +1,173 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Realm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.realm</a>
+</div>
+
+<h1>Coverage Summary for Class: Realm (org.apache.shiro.realm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Realm</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.realm;
+&nbsp;
+&nbsp;import org.apache.shiro.authc.AuthenticationException;
+&nbsp;import org.apache.shiro.authc.AuthenticationInfo;
+&nbsp;import org.apache.shiro.authc.AuthenticationToken;
+&nbsp;
+&nbsp;/**
+&nbsp; * A &lt;tt&gt;Realm&lt;/tt&gt; is a security component that can access application-specific security entities
+&nbsp; * such as users, roles, and permissions to determine authentication and authorization operations.
+&nbsp; *
+&nbsp; * &lt;p&gt;&lt;tt&gt;Realm&lt;/tt&gt;s usually have a 1-to-1 correspondence with a datasource such as a relational database,
+&nbsp; * file system, or other similar resource.  As such, implementations of this interface use datasource-specific APIs to
+&nbsp; * determine authorization data (roles, permissions, etc), such as JDBC, File IO, Hibernate or JPA, or any other
+&nbsp; * Data Access API.  They are essentially security-specific
+&nbsp; * &lt;a href=&quot;http://en.wikipedia.org/wiki/Data_Access_Object&quot; target=&quot;_blank&quot;&gt;DAO&lt;/a&gt;s.
+&nbsp; *
+&nbsp; * &lt;p&gt;Because most of these datasources usually contain Subject (a.k.a. User) information such as usernames and
+&nbsp; * passwords, a Realm can act as a pluggable authentication module in a
+&nbsp; * &lt;a href=&quot;http://en.wikipedia.org/wiki/Pluggable_Authentication_Modules&quot;&gt;PAM&lt;/a&gt; configuration.  This allows a Realm to
+&nbsp; * perform &lt;i&gt;both&lt;/i&gt; authentication and authorization duties for a single datasource, which caters to the large
+&nbsp; * majority of applications.  If for some reason you don&#39;t want your Realm implementation to perform authentication
+&nbsp; * duties, you should override the {@link #supports(org.apache.shiro.authc.AuthenticationToken)} method to always
+&nbsp; * return &lt;tt&gt;false&lt;/tt&gt;.
+&nbsp; *
+&nbsp; * &lt;p&gt;Because every application is different, security data such as users and roles can be
+&nbsp; * represented in any number of ways.  Shiro tries to maintain a non-intrusive development philosophy whenever
+&nbsp; * possible - it does not require you to implement or extend any &lt;tt&gt;User&lt;/tt&gt;, &lt;tt&gt;Group&lt;/tt&gt; or &lt;tt&gt;Role&lt;/tt&gt;
+&nbsp; * interfaces or classes.
+&nbsp; *
+&nbsp; * &lt;p&gt;Instead, Shiro allows applications to implement this interface to access environment-specific datasources
+&nbsp; * and data model objects.  The implementation can then be plugged in to the application&#39;s Shiro configuration.
+&nbsp; * This modular technique abstracts away any environment/modeling details and allows Shiro to be deployed in
+&nbsp; * practically any application environment.
+&nbsp; *
+&nbsp; * &lt;p&gt;Most users will not implement the &lt;tt&gt;Realm&lt;/tt&gt; interface directly, but will extend one of the subclasses,
+&nbsp; * {@link org.apache.shiro.realm.AuthenticatingRealm AuthenticatingRealm} or {@link org.apache.shiro.realm.AuthorizingRealm}, greatly reducing the effort requird
+&nbsp; * to implement a &lt;tt&gt;Realm&lt;/tt&gt; from scratch.&lt;/p&gt;
+&nbsp; *
+&nbsp; * @see org.apache.shiro.realm.CachingRealm CachingRealm
+&nbsp; * @see org.apache.shiro.realm.AuthenticatingRealm AuthenticatingRealm
+&nbsp; * @see org.apache.shiro.realm.AuthorizingRealm AuthorizingRealm
+&nbsp; * @see org.apache.shiro.authc.pam.ModularRealmAuthenticator ModularRealmAuthenticator
+&nbsp; * @since 0.1
+&nbsp; */
+&nbsp;public interface Realm {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the (application-unique) name assigned to this &lt;code&gt;Realm&lt;/code&gt;. All realms configured for a single
+&nbsp;     * application must have a unique name.
+&nbsp;     *
+&nbsp;     * @return the (application-unique) name assigned to this &lt;code&gt;Realm&lt;/code&gt;.
+&nbsp;     */
+&nbsp;    String getName();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns &lt;tt&gt;true&lt;/tt&gt; if this realm wishes to authenticate the Subject represented by the given
+&nbsp;     * {@link org.apache.shiro.authc.AuthenticationToken AuthenticationToken} instance, &lt;tt&gt;false&lt;/tt&gt; otherwise.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;If this method returns &lt;tt&gt;false&lt;/tt&gt;, it will not be called to authenticate the Subject represented by
+&nbsp;     * the token - more specifically, a &lt;tt&gt;false&lt;/tt&gt; return value means this Realm instance&#39;s
+&nbsp;     * {@link #getAuthenticationInfo} method will not be invoked for that token.
+&nbsp;     *
+&nbsp;     * @param token the AuthenticationToken submitted for the authentication attempt
+&nbsp;     * @return &lt;tt&gt;true&lt;/tt&gt; if this realm can/will authenticate Subjects represented by specified token,
+&nbsp;     *         &lt;tt&gt;false&lt;/tt&gt; otherwise.
+&nbsp;     */
+&nbsp;    boolean supports(AuthenticationToken token);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an account&#39;s authentication-specific information for the specified &lt;tt&gt;token&lt;/tt&gt;,
+&nbsp;     * or &lt;tt&gt;null&lt;/tt&gt; if no account could be found based on the &lt;tt&gt;token&lt;/tt&gt;.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This method effectively represents a login attempt for the corresponding user with the underlying EIS datasource.
+&nbsp;     * Most implementations merely just need to lookup and return the account data only (as the method name implies)
+&nbsp;     * and let Shiro do the rest, but implementations may of course perform eis specific login operations if so
+&nbsp;     * desired.
+&nbsp;     *
+&nbsp;     * @param token the application-specific representation of an account principal and credentials.
+&nbsp;     * @return the authentication information for the account associated with the specified &lt;tt&gt;token&lt;/tt&gt;,
+&nbsp;     *         or &lt;tt&gt;null&lt;/tt&gt; if no account could be found.
+&nbsp;     * @throws org.apache.shiro.authc.AuthenticationException
+&nbsp;     *          if there is an error obtaining or constructing an AuthenticationInfo object based on the
+&nbsp;     *          specified &lt;tt&gt;token&lt;/tt&gt; or implementation-specific login behavior fails.
+&nbsp;     */
+&nbsp;    AuthenticationInfo getAuthenticationInfo(AuthenticationToken token) throws AuthenticationException;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

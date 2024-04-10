@@ -1,0 +1,665 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JndiLdapContextFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.realm.ldap</a>
+</div>
+
+<h1>Coverage Summary for Class: JndiLdapContextFactory (org.apache.shiro.realm.ldap)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JndiLdapContextFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/44)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/56)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.realm.ldap;
+&nbsp;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import javax.naming.AuthenticationException;
+&nbsp;import javax.naming.Context;
+&nbsp;import javax.naming.NamingException;
+&nbsp;import javax.naming.ldap.InitialLdapContext;
+&nbsp;import javax.naming.ldap.LdapContext;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Hashtable;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * {@link LdapContextFactory} implementation using the default Sun/Oracle JNDI Ldap API, utilizing JNDI
+&nbsp; * environment properties and an {@link javax.naming.InitialContext}.
+&nbsp; * &lt;h2&gt;Configuration&lt;/h2&gt;
+&nbsp; * This class basically wraps a default template JNDI environment properties Map.  This properties map is the base
+&nbsp; * configuration template used to acquire JNDI {@link LdapContext} connections at runtime.  The
+&nbsp; * {@link #getLdapContext(Object, Object)} method implementation merges this default template with other properties
+&nbsp; * accessible at runtime only (for example per-method principals and credentials).  The constructed runtime map is the
+&nbsp; * one used to acquire the {@link LdapContext}.
+&nbsp; * &lt;p/&gt;
+&nbsp; * The template can be configured directly via the {@link #getEnvironment()}/{@link #setEnvironment(java.util.Map)}
+&nbsp; * properties directly if necessary, but it is usually more convenient to use the supporting wrapper get/set methods
+&nbsp; * for various environment properties.  These wrapper methods interact with the environment
+&nbsp; * template on your behalf, leaving your configuration cleaner and easier to understand.
+&nbsp; * &lt;p/&gt;
+&nbsp; * For example, consider the following two identical configurations:
+&nbsp; * &lt;pre&gt;
+&nbsp; * [main]
+&nbsp; * ldapRealm = org.apache.shiro.realm.ldap.DefaultLdapRealm
+&nbsp; * ldapRealm.contextFactory.url = ldap://localhost:389
+&nbsp; * ldapRealm.contextFactory.authenticationMechanism = DIGEST-MD5
+&nbsp; * &lt;/pre&gt;
+&nbsp; * and
+&nbsp; * &lt;pre&gt;
+&nbsp; * [main]
+&nbsp; * ldapRealm = org.apache.shiro.realm.ldap.DefaultLdapRealm
+&nbsp; * ldapRealm.contextFactory.environment[java.naming.provider.url] = ldap://localhost:389
+&nbsp; * ldapRealm.contextFactory.environment[java.naming.security.authentication] = DIGEST-MD5
+&nbsp; * &lt;/pre&gt;
+&nbsp; * As you can see, the 2nd configuration block is a little more difficult to read and also requires knowledge
+&nbsp; * of the underlying JNDI Context property keys.  The first is easier to read and understand.
+&nbsp; * &lt;p/&gt;
+&nbsp; * Note that occasionally it will be necessary to use the latter configuration style to set environment properties
+&nbsp; * where no corresponding wrapper method exists.  In this case, the hybrid approach is still a little easier to read.
+&nbsp; * For example:
+&nbsp; * &lt;pre&gt;
+&nbsp; * [main]
+&nbsp; * ldapRealm = org.apache.shiro.realm.ldap.DefaultLdapRealm
+&nbsp; * ldapRealm.contextFactory.url = ldap://localhost:389
+&nbsp; * ldapRealm.contextFactory.authenticationMechanism = DIGEST-MD5
+&nbsp; * ldapRealm.contextFactory.environment[some.other.obscure.jndi.key] = some value
+&nbsp; * &lt;/pre&gt;
+&nbsp; *
+&nbsp; * @since 1.1
+&nbsp; */
+&nbsp;public class JndiLdapContextFactory implements LdapContextFactory {
+&nbsp;
+&nbsp;    /*-------------------------------------------
+&nbsp;     |             C O N S T A N T S            |
+&nbsp;     ===========================================*/
+&nbsp;    /**
+&nbsp;     * The Sun LDAP property used to enable connection pooling.  This is used in the default implementation
+&nbsp;     * to enable LDAP connection pooling.
+&nbsp;     */
+&nbsp;    protected static final String SUN_CONNECTION_POOLING_PROPERTY = &quot;com.sun.jndi.ldap.connect.pool&quot;;
+&nbsp;    protected static final String DEFAULT_CONTEXT_FACTORY_CLASS_NAME = &quot;com.sun.jndi.ldap.LdapCtxFactory&quot;;
+&nbsp;    protected static final String SIMPLE_AUTHENTICATION_MECHANISM_NAME = &quot;simple&quot;;
+&nbsp;    protected static final String DEFAULT_REFERRAL = &quot;follow&quot;;
+&nbsp;
+<b class="nc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(JndiLdapContextFactory.class);</b>
+&nbsp;
+&nbsp;    /*-------------------------------------------
+&nbsp;     |    I N S T A N C E   V A R I A B L E S   |
+&nbsp;     ============================================*/
+&nbsp;    private Map&lt;String, Object&gt; environment;
+&nbsp;    private boolean poolingEnabled;
+&nbsp;    private String systemPassword;
+&nbsp;    private String systemUsername;
+&nbsp;
+&nbsp;    /*-------------------------------------------
+&nbsp;     |         C O N S T R U C T O R S          |
+&nbsp;     ===========================================*/
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default no-argument constructor that initializes the backing {@link #getEnvironment() environment template} with
+&nbsp;     * the {@link #setContextFactoryClassName(String) contextFactoryClassName} equal to
+&nbsp;     * {@code com.sun.jndi.ldap.LdapCtxFactory} (the Sun/Oracle default) and the default
+&nbsp;     * {@link #setReferral(String) referral} behavior to {@code follow}.
+&nbsp;     */
+<b class="nc">&nbsp;    public JndiLdapContextFactory() {</b>
+<b class="nc">&nbsp;        this.environment = new HashMap&lt;String, Object&gt;();</b>
+<b class="nc">&nbsp;        setContextFactoryClassName(DEFAULT_CONTEXT_FACTORY_CLASS_NAME);</b>
+<b class="nc">&nbsp;        setReferral(DEFAULT_REFERRAL);</b>
+<b class="nc">&nbsp;        poolingEnabled = true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*-------------------------------------------
+&nbsp;     |  A C C E S S O R S / M O D I F I E R S   |
+&nbsp;     ===========================================*/
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the type of LDAP authentication mechanism to use when connecting to the LDAP server.
+&nbsp;     * This is a wrapper method for setting the JNDI {@link #getEnvironment() environment template}&#39;s
+&nbsp;     * {@link Context#SECURITY_AUTHENTICATION} property.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &quot;none&quot; (i.e. anonymous) and &quot;simple&quot; authentications are supported automatically and don&#39;t need to be configured
+&nbsp;     * via this property.  However, if you require a different mechanism, such as a SASL or External mechanism, you
+&nbsp;     * must configure that explicitly via this property.  See the
+&nbsp;     * &lt;a href=&quot;http://download-llnw.oracle.com/javase/tutorial/jndi/ldap/auth_mechs.html&quot;&gt;JNDI LDAP
+&nbsp;     * Authentication Mechanisms&lt;/a&gt; for more information.
+&nbsp;     *
+&nbsp;     * @param authenticationMechanism the type of LDAP authentication to perform.
+&nbsp;     * @see &lt;a href=&quot;http://download-llnw.oracle.com/javase/tutorial/jndi/ldap/auth_mechs.html&quot;&gt;
+&nbsp;     *      http://download-llnw.oracle.com/javase/tutorial/jndi/ldap/auth_mechs.html&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public void setAuthenticationMechanism(String authenticationMechanism) {
+<b class="nc">&nbsp;        setEnvironmentProperty(Context.SECURITY_AUTHENTICATION, authenticationMechanism);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the type of LDAP authentication mechanism to use when connecting to the LDAP server.
+&nbsp;     * This is a wrapper method for getting the JNDI {@link #getEnvironment() environment template}&#39;s
+&nbsp;     * {@link Context#SECURITY_AUTHENTICATION} property.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If this property remains un-configured (i.e. {@code null} indicating the
+&nbsp;     * {@link #setAuthenticationMechanism(String)} method wasn&#39;t used), this indicates that the default JNDI
+&nbsp;     * &quot;none&quot; (anonymous) and &quot;simple&quot; authentications are supported automatically.  Any non-null value returned
+&nbsp;     * represents an explicitly configured mechanism (e.g. a SASL or external mechanism). See the
+&nbsp;     * &lt;a href=&quot;http://download-llnw.oracle.com/javase/tutorial/jndi/ldap/auth_mechs.html&quot;&gt;JNDI LDAP
+&nbsp;     * Authentication Mechanisms&lt;/a&gt; for more information.
+&nbsp;     *
+&nbsp;     * @return the type of LDAP authentication mechanism to use when connecting to the LDAP server.
+&nbsp;     * @see &lt;a href=&quot;http://download-llnw.oracle.com/javase/tutorial/jndi/ldap/auth_mechs.html&quot;&gt;
+&nbsp;     *      http://download-llnw.oracle.com/javase/tutorial/jndi/ldap/auth_mechs.html&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public String getAuthenticationMechanism() {
+<b class="nc">&nbsp;        return (String) getEnvironmentProperty(Context.SECURITY_AUTHENTICATION);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The name of the ContextFactory class to use. This defaults to the SUN LDAP JNDI implementation
+&nbsp;     * but can be overridden to use custom LDAP factories.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is a wrapper method for setting the JNDI environment&#39;s {@link Context#INITIAL_CONTEXT_FACTORY} property.
+&nbsp;     *
+&nbsp;     * @param contextFactoryClassName the context factory that should be used.
+&nbsp;     */
+&nbsp;    public void setContextFactoryClassName(String contextFactoryClassName) {
+<b class="nc">&nbsp;        setEnvironmentProperty(Context.INITIAL_CONTEXT_FACTORY, contextFactoryClassName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the name of the ContextFactory class to use. This defaults to the SUN LDAP JNDI implementation
+&nbsp;     * but can be overridden to use custom LDAP factories.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This is a wrapper method for getting the JNDI environment&#39;s {@link Context#INITIAL_CONTEXT_FACTORY} property.
+&nbsp;     *
+&nbsp;     * @return the name of the ContextFactory class to use.
+&nbsp;     */
+&nbsp;    public String getContextFactoryClassName() {
+<b class="nc">&nbsp;        return (String) getEnvironmentProperty(Context.INITIAL_CONTEXT_FACTORY);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the base JNDI environment template to use when acquiring an LDAP connection (an {@link LdapContext}).
+&nbsp;     * This property is the base configuration template to use for all connections.  This template is then
+&nbsp;     * merged with appropriate runtime values as necessary in the
+&nbsp;     * {@link #getLdapContext(Object, Object)} implementation.  The merged environment instance is what is used to
+&nbsp;     * acquire the {@link LdapContext} at runtime.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Most other get/set methods in this class act as thin proxy wrappers that interact with this property.  The
+&nbsp;     * benefit of using them is you have an easier-to-use configuration mechanism compared to setting map properties
+&nbsp;     * based on JNDI context keys.
+&nbsp;     *
+&nbsp;     * @return the base JNDI environment template to use when acquiring an LDAP connection (an {@link LdapContext})
+&nbsp;     */
+&nbsp;    public Map getEnvironment() {
+<b class="nc">&nbsp;        return this.environment;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the base JNDI environment template to use when acquiring LDAP connections.  It is typically more common
+&nbsp;     * to use the other get/set methods in this class to set individual environment settings rather than use
+&nbsp;     * this method, but it is available for advanced users that want full control over the base JNDI environment
+&nbsp;     * settings.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Note that this template only represents the base/default environment settings.  It is then merged with
+&nbsp;     * appropriate runtime values as necessary in the {@link #getLdapContext(Object, Object)} implementation.
+&nbsp;     * The merged environment instance is what is used to acquire the connection ({@link LdapContext}) at runtime.
+&nbsp;     *
+&nbsp;     * @param env the base JNDI environment template to use when acquiring LDAP connections.
+&nbsp;     */
+&nbsp;    @SuppressWarnings({&quot;unchecked&quot;})
+&nbsp;    public void setEnvironment(Map env) {
+<b class="nc">&nbsp;        this.environment = env;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the environment property value bound under the specified key.
+&nbsp;     *
+&nbsp;     * @param name the name of the environment property
+&nbsp;     * @return the property value or {@code null} if the value has not been set.
+&nbsp;     */
+&nbsp;    private Object getEnvironmentProperty(String name) {
+<b class="nc">&nbsp;        return this.environment.get(name);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Will apply the value to the environment attribute if and only if the value is not null or empty.  If it is
+&nbsp;     * null or empty, the corresponding environment attribute will be removed.
+&nbsp;     *
+&nbsp;     * @param name  the environment property key
+&nbsp;     * @param value the environment property value.  A null/empty value will trigger removal.
+&nbsp;     */
+&nbsp;    private void setEnvironmentProperty(String name, String value) {
+<b class="nc">&nbsp;        if (StringUtils.hasText(value)) {</b>
+<b class="nc">&nbsp;            this.environment.put(name, value);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            this.environment.remove(name);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns whether or not connection pooling should be used when possible and appropriate.  This property is NOT
+&nbsp;     * backed by the {@link #getEnvironment() environment template} like most other properties in this class.  It
+&nbsp;     * is a flag to indicate that pooling is preferred.  The default value is {@code true}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * However, pooling will only actually be enabled if this property is {@code true} &lt;em&gt;and&lt;/em&gt; the connection
+&nbsp;     * being created is for the {@link #getSystemUsername() systemUsername} user.  Connection pooling is not used for
+&nbsp;     * general authentication attempts by application end-users because the probability of re-use for that same
+&nbsp;     * user-specific connection after an authentication attempt is extremely low.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If this attribute is {@code true} and it has been determined that the connection is being made with the
+&nbsp;     * {@link #getSystemUsername() systemUsername}, the
+&nbsp;     * {@link #getLdapContext(Object, Object)} implementation will set the Sun/Oracle-specific
+&nbsp;     * {@code com.sun.jndi.ldap.connect.pool} environment property to &amp;quot;{@code true}&amp;quot;.  This means setting
+&nbsp;     * this property is only likely to work if using the Sun/Oracle default context factory class (i.e. not using
+&nbsp;     * a custom {@link #getContextFactoryClassName() contextFactoryClassName}).
+&nbsp;     *
+&nbsp;     * @return whether or not connection pooling should be used when possible and appropriate
+&nbsp;     */
+&nbsp;    public boolean isPoolingEnabled() {
+<b class="nc">&nbsp;        return poolingEnabled;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets whether or not connection pooling should be used when possible and appropriate.  This property is NOT
+&nbsp;     * a wrapper to the {@link #getEnvironment() environment template} like most other properties in this class.  It
+&nbsp;     * is a flag to indicate that pooling is preferred.  The default value is {@code true}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * However, pooling will only actually be enabled if this property is {@code true} &lt;em&gt;and&lt;/em&gt; the connection
+&nbsp;     * being created is for the {@link #getSystemUsername() systemUsername} user.  Connection pooling is not used for
+&nbsp;     * general authentication attempts by application end-users because the probability of re-use for that same
+&nbsp;     * user-specific connection after an authentication attempt is extremely low.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If this attribute is {@code true} and it has been determined that the connection is being made with the
+&nbsp;     * {@link #getSystemUsername() systemUsername}, the
+&nbsp;     * {@link #getLdapContext(Object, Object)} implementation will set the Sun/Oracle-specific
+&nbsp;     * {@code com.sun.jndi.ldap.connect.pool} environment property to &amp;quot;{@code true}&amp;quot;.  This means setting
+&nbsp;     * this property is only likely to work if using the Sun/Oracle default context factory class (i.e. not using
+&nbsp;     * a custom {@link #getContextFactoryClassName() contextFactoryClassName}).
+&nbsp;     *
+&nbsp;     * @param poolingEnabled whether or not connection pooling should be used when possible and appropriate
+&nbsp;     */
+&nbsp;    public void setPoolingEnabled(boolean poolingEnabled) {
+<b class="nc">&nbsp;        this.poolingEnabled = poolingEnabled;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the LDAP referral behavior when creating a connection.  Defaults to {@code follow}.  See the Sun/Oracle LDAP
+&nbsp;     * &lt;a href=&quot;http://java.sun.com/products/jndi/tutorial/ldap/referral/jndi.html&quot;&gt;referral documentation&lt;/a&gt; for more.
+&nbsp;     *
+&nbsp;     * @param referral the referral property.
+&nbsp;     * @see &lt;a href=&quot;http://java.sun.com/products/jndi/tutorial/ldap/referral/jndi.html&quot;&gt;Referrals in JNDI&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public void setReferral(String referral) {
+<b class="nc">&nbsp;        setEnvironmentProperty(Context.REFERRAL, referral);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the LDAP referral behavior when creating a connection.  Defaults to {@code follow}.
+&nbsp;     * See the Sun/Oracle LDAP
+&nbsp;     * &lt;a href=&quot;http://java.sun.com/products/jndi/tutorial/ldap/referral/jndi.html&quot;&gt;referral documentation&lt;/a&gt; for more.
+&nbsp;     *
+&nbsp;     * @return the LDAP referral behavior when creating a connection.
+&nbsp;     * @see &lt;a href=&quot;http://java.sun.com/products/jndi/tutorial/ldap/referral/jndi.html&quot;&gt;Referrals in JNDI&lt;/a&gt;
+&nbsp;     */
+&nbsp;    public String getReferral() {
+<b class="nc">&nbsp;        return (String) getEnvironmentProperty(Context.REFERRAL);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The LDAP url to connect to. (e.g. ldap://&amp;lt;ldapDirectoryHostname&amp;gt;:&amp;lt;port&amp;gt;).  This must be configured.
+&nbsp;     *
+&nbsp;     * @param url the LDAP url to connect to. (e.g. ldap://&amp;lt;ldapDirectoryHostname&amp;gt;:&amp;lt;port&amp;gt;)
+&nbsp;     */
+&nbsp;    public void setUrl(String url) {
+<b class="nc">&nbsp;        setEnvironmentProperty(Context.PROVIDER_URL, url);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the LDAP url to connect to. (e.g. ldap://&amp;lt;ldapDirectoryHostname&amp;gt;:&amp;lt;port&amp;gt;).
+&nbsp;     * This must be configured.
+&nbsp;     *
+&nbsp;     * @return the LDAP url to connect to. (e.g. ldap://&amp;lt;ldapDirectoryHostname&amp;gt;:&amp;lt;port&amp;gt;)
+&nbsp;     */
+&nbsp;    public String getUrl() {
+<b class="nc">&nbsp;        return (String) getEnvironmentProperty(Context.PROVIDER_URL);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the password of the {@link #setSystemUsername(String) systemUsername} that will be used when creating an
+&nbsp;     * LDAP connection used for authorization queries.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Note that setting this property is not required if the calling LDAP Realm does not perform authorization
+&nbsp;     * checks.
+&nbsp;     *
+&nbsp;     * @param systemPassword the password of the {@link #setSystemUsername(String) systemUsername} that will be used
+&nbsp;     *                       when creating an LDAP connection used for authorization queries.
+&nbsp;     */
+&nbsp;    public void setSystemPassword(String systemPassword) {
+<b class="nc">&nbsp;        this.systemPassword = systemPassword;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the password of the {@link #setSystemUsername(String) systemUsername} that will be used when creating an
+&nbsp;     * LDAP connection used for authorization queries.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Note that setting this property is not required if the calling LDAP Realm does not perform authorization
+&nbsp;     * checks.
+&nbsp;     *
+&nbsp;     * @return the password of the {@link #setSystemUsername(String) systemUsername} that will be used when creating an
+&nbsp;     *         LDAP connection used for authorization queries.
+&nbsp;     */
+&nbsp;    public String getSystemPassword() {
+<b class="nc">&nbsp;        return this.systemPassword;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the system username that will be used when creating an LDAP connection used for authorization queries.
+&nbsp;     * The user must have the ability to query for authorization data for any application user.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Note that setting this property is not required if the calling LDAP Realm does not perform authorization
+&nbsp;     * checks.
+&nbsp;     *
+&nbsp;     * @param systemUsername the system username that will be used when creating an LDAP connection used for
+&nbsp;     *                       authorization queries.
+&nbsp;     */
+&nbsp;    public void setSystemUsername(String systemUsername) {
+<b class="nc">&nbsp;        this.systemUsername = systemUsername;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the system username that will be used when creating an LDAP connection used for authorization queries.
+&nbsp;     * The user must have the ability to query for authorization data for any application user.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * Note that setting this property is not required if the calling LDAP Realm does not perform authorization
+&nbsp;     * checks.
+&nbsp;     *
+&nbsp;     * @return the system username that will be used when creating an LDAP connection used for authorization queries.
+&nbsp;     */
+&nbsp;    public String getSystemUsername() {
+<b class="nc">&nbsp;        return systemUsername;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*--------------------------------------------
+&nbsp;    |               M E T H O D S               |
+&nbsp;    ============================================*/
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This implementation delegates to {@link #getLdapContext(Object, Object)} using the
+&nbsp;     * {@link #getSystemUsername() systemUsername} and {@link #getSystemPassword() systemPassword} properties as
+&nbsp;     * arguments.
+&nbsp;     *
+&nbsp;     * @return the system LdapContext
+&nbsp;     * @throws NamingException if there is a problem connecting to the LDAP directory
+&nbsp;     */
+&nbsp;    public LdapContext getSystemLdapContext() throws NamingException {
+<b class="nc">&nbsp;        return getLdapContext((Object)getSystemUsername(), getSystemPassword());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Deprecated - use {@link #getLdapContext(Object, Object)} instead.  This will be removed before Apache Shiro 2.0.
+&nbsp;     *
+&nbsp;     * @param username the username to use when creating the connection.
+&nbsp;     * @param password the password to use when creating the connection.
+&nbsp;     * @return a {@code LdapContext} bound using the given username and password.
+&nbsp;     * @throws javax.naming.NamingException if there is an error creating the context.
+&nbsp;     * @deprecated the {@link #getLdapContext(Object, Object)} method should be used in all cases to ensure more than
+&nbsp;     *             String principals and credentials can be used.  Shiro no longer calls this method - it will be
+&nbsp;     *             removed before the 2.0 release.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public LdapContext getLdapContext(String username, String password) throws NamingException {
+<b class="nc">&nbsp;        return getLdapContext((Object) username, password);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if LDAP connection pooling should be used when acquiring a connection based on the specified
+&nbsp;     * account principal, {@code false} otherwise.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation returns {@code true} only if {@link #isPoolingEnabled()} and the principal equals the
+&nbsp;     * {@link #getSystemUsername()}.  The reasoning behind this is that connection pooling is not desirable for
+&nbsp;     * general authentication attempts by application end-users because the probability of re-use for that same
+&nbsp;     * user-specific connection after an authentication attempt is extremely low.
+&nbsp;     *
+&nbsp;     * @param principal the principal under which the connection will be made
+&nbsp;     * @return {@code true} if LDAP connection pooling should be used when acquiring a connection based on the specified
+&nbsp;     *         account principal, {@code false} otherwise.
+&nbsp;     */
+&nbsp;    protected boolean isPoolingConnections(Object principal) {
+<b class="nc">&nbsp;        return isPoolingEnabled() &amp;&amp; principal != null &amp;&amp; principal.equals(getSystemUsername());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This implementation returns an LdapContext based on the configured JNDI/LDAP environment configuration.
+&nbsp;     * The environnmet (Map) used at runtime is created by merging the default/configured
+&nbsp;     * {@link #getEnvironment() environment template} with some runtime values as necessary (e.g. a principal and
+&nbsp;     * credential available at runtime only).
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * After the merged Map instance is created, the LdapContext connection is
+&nbsp;     * {@link #createLdapContext(java.util.Hashtable) created} and returned.
+&nbsp;     *
+&nbsp;     * @param principal   the principal to use when acquiring a connection to the LDAP directory
+&nbsp;     * @param credentials the credentials (password, X.509 certificate, etc) to use when acquiring a connection to the
+&nbsp;     *                    LDAP directory
+&nbsp;     * @return the acquired {@code LdapContext} connection bound using the specified principal and credentials.
+&nbsp;     * @throws NamingException
+&nbsp;     * @throws IllegalStateException
+&nbsp;     */
+&nbsp;    public LdapContext getLdapContext(Object principal, Object credentials) throws NamingException,
+&nbsp;            IllegalStateException {
+&nbsp;
+<b class="nc">&nbsp;        String url = getUrl();</b>
+<b class="nc">&nbsp;        if (url == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;An LDAP URL must be specified of the form ldap://&lt;hostname&gt;:&lt;port&gt;&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //copy the environment template into the runtime instance that will be further edited based on
+&nbsp;        //the method arguments and other class attributes.
+<b class="nc">&nbsp;        Hashtable&lt;String, Object&gt; env = new Hashtable&lt;String, Object&gt;(this.environment);</b>
+&nbsp;
+<b class="nc">&nbsp;        Object authcMech = getAuthenticationMechanism();</b>
+<b class="nc">&nbsp;        if (authcMech == null &amp;&amp; (principal != null || credentials != null)) {</b>
+&nbsp;            //authenticationMechanism has not been set, but either a principal and/or credentials were
+&nbsp;            //supplied, indicating that at least a &#39;simple&#39; authentication attempt is indeed occurring - the Shiro
+&nbsp;            //end-user just didn&#39;t configure it explicitly.  So we set it to be &#39;simple&#39; here as a convenience;
+&nbsp;            //the Sun provider implementation already does this same logic, but by repeating that logic here, we ensure
+&nbsp;            //this convenience exists regardless of provider implementation):
+<b class="nc">&nbsp;            env.put(Context.SECURITY_AUTHENTICATION, SIMPLE_AUTHENTICATION_MECHANISM_NAME);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (principal != null) {</b>
+<b class="nc">&nbsp;            env.put(Context.SECURITY_PRINCIPAL, principal);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (credentials != null) {</b>
+<b class="nc">&nbsp;            env.put(Context.SECURITY_CREDENTIALS, credentials);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean pooling = isPoolingConnections(principal);</b>
+<b class="nc">&nbsp;        if (pooling) {</b>
+<b class="nc">&nbsp;            env.put(SUN_CONNECTION_POOLING_PROPERTY, &quot;true&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;            log.debug(&quot;Initializing LDAP context using URL [{}] and principal [{}] with pooling {}&quot;,</b>
+<b class="nc">&nbsp;                    new Object[]{url, principal, (pooling ? &quot;enabled&quot; : &quot;disabled&quot;)});</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // validate the config before creating the context
+<b class="nc">&nbsp;        validateAuthenticationInfo(env);</b>
+&nbsp;
+<b class="nc">&nbsp;        return createLdapContext(env);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates and returns a new {@link javax.naming.ldap.InitialLdapContext} instance.  This method exists primarily
+&nbsp;     * to support testing where a mock LdapContext can be returned instead of actually creating a connection, but
+&nbsp;     * subclasses are free to provide a different implementation if necessary.
+&nbsp;     *
+&nbsp;     * @param env the JNDI environment settings used to create the LDAP connection
+&nbsp;     * @return an LdapConnection
+&nbsp;     * @throws NamingException if a problem occurs creating the connection
+&nbsp;     */
+&nbsp;    protected LdapContext createLdapContext(Hashtable env) throws NamingException {
+<b class="nc">&nbsp;        return new InitialLdapContext(env, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Validates the configuration in the JNDI &lt;code&gt;environment&lt;/code&gt; settings and throws an exception if a problem
+&nbsp;     * exists.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation will throw a {@link AuthenticationException} if the authentication mechanism is set to
+&nbsp;     * &#39;simple&#39;, the principal is non-empty, and the credentials are empty (as per
+&nbsp;     * &lt;a href=&quot;http://tools.ietf.org/html/rfc4513#section-5.1.2&quot;&gt;rfc4513 section-5.1.2&lt;/a&gt;).
+&nbsp;     *
+&nbsp;     * @param environment the JNDI environment settings to be validated
+&nbsp;     * @throws AuthenticationException if a configuration problem is detected
+&nbsp;     */
+&nbsp;    protected void validateAuthenticationInfo(Hashtable&lt;String, Object&gt; environment)
+&nbsp;        throws AuthenticationException
+&nbsp;    {
+&nbsp;        // validate when using Simple auth both principal and credentials are set
+<b class="nc">&nbsp;        if(SIMPLE_AUTHENTICATION_MECHANISM_NAME.equals(environment.get(Context.SECURITY_AUTHENTICATION))) {</b>
+&nbsp;
+&nbsp;            // only validate credentials if we have a non-empty principal
+<b class="nc">&nbsp;            if( environment.get(Context.SECURITY_PRINCIPAL) != null &amp;&amp;</b>
+<b class="nc">&nbsp;                StringUtils.hasText( String.valueOf( environment.get(Context.SECURITY_PRINCIPAL) ))) {</b>
+&nbsp;
+<b class="nc">&nbsp;                Object credentials = environment.get(Context.SECURITY_CREDENTIALS);</b>
+&nbsp;
+&nbsp;                // from the FAQ, we need to check for empty credentials:
+&nbsp;                // http://docs.oracle.com/javase/tutorial/jndi/ldap/faq.html
+<b class="nc">&nbsp;                if( credentials == null ||</b>
+&nbsp;                    (credentials instanceof byte[] &amp;&amp; ((byte[])credentials).length &lt;= 0) || // empty byte[]
+&nbsp;                    (credentials instanceof char[] &amp;&amp; ((char[])credentials).length &lt;= 0) || // empty char[]
+<b class="nc">&nbsp;                    (String.class.isInstance(credentials) &amp;&amp; !StringUtils.hasText(String.valueOf(credentials)))) {</b>
+&nbsp;
+<b class="nc">&nbsp;                    throw new javax.naming.AuthenticationException(&quot;LDAP Simple authentication requires both a &quot;</b>
+&nbsp;                                                                       + &quot;principal and credentials.&quot;);
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

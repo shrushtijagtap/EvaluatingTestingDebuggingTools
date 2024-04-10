@@ -1,0 +1,408 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > IniSecurityManagerFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.config</a>
+</div>
+
+<h1>Coverage Summary for Class: IniSecurityManagerFactory (org.apache.shiro.config)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">IniSecurityManagerFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    78.3%
+  </span>
+  <span class="absValue">
+    (18/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    56.5%
+  </span>
+  <span class="absValue">
+    (26/46)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    74.2%
+  </span>
+  <span class="absValue">
+    (66/89)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.config;
+&nbsp;
+&nbsp;import org.apache.shiro.mgt.DefaultSecurityManager;
+&nbsp;import org.apache.shiro.mgt.RealmSecurityManager;
+&nbsp;import org.apache.shiro.mgt.SecurityManager;
+&nbsp;import org.apache.shiro.realm.Realm;
+&nbsp;import org.apache.shiro.realm.RealmFactory;
+&nbsp;import org.apache.shiro.realm.text.IniRealm;
+&nbsp;import org.apache.shiro.util.CollectionUtils;
+&nbsp;import org.apache.shiro.util.Factory;
+&nbsp;import org.apache.shiro.util.LifecycleUtils;
+&nbsp;import org.apache.shiro.util.Nameable;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * A {@link Factory} that creates {@link SecurityManager} instances based on {@link Ini} configuration.
+&nbsp; *
+&nbsp; * @since 1.0
+&nbsp; * @deprecated use Shiro&#39;s {@code Environment} mechanisms instead.
+&nbsp; */
+&nbsp;@Deprecated
+&nbsp;public class IniSecurityManagerFactory extends IniFactorySupport&lt;SecurityManager&gt; {
+&nbsp;
+&nbsp;    public static final String MAIN_SECTION_NAME = &quot;main&quot;;
+&nbsp;
+&nbsp;    public static final String SECURITY_MANAGER_NAME = &quot;securityManager&quot;;
+&nbsp;    public static final String INI_REALM_NAME = &quot;iniRealm&quot;;
+&nbsp;
+<b class="fc">&nbsp;    private static transient final Logger log = LoggerFactory.getLogger(IniSecurityManagerFactory.class);</b>
+&nbsp;
+&nbsp;    private ReflectionBuilder builder;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new instance.  See the {@link #getInstance()} JavaDoc for detailed explanation of how an INI
+&nbsp;     * source will be resolved to use to build the instance.
+&nbsp;     */
+<b class="fc">&nbsp;    public IniSecurityManagerFactory() {</b>
+<b class="fc">&nbsp;        this.builder = new ReflectionBuilder();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public IniSecurityManagerFactory(Ini config) {
+<b class="fc">&nbsp;        this();</b>
+<b class="fc">&nbsp;        setIni(config);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public IniSecurityManagerFactory(String iniResourcePath) {
+<b class="nc">&nbsp;        this(Ini.fromResourcePath(iniResourcePath));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;String, ?&gt; getBeans() {
+<b class="pc">&nbsp;        return this.builder != null ? Collections.unmodifiableMap(builder.getObjects()) : null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void destroy() {
+<b class="nc">&nbsp;        if(getReflectionBuilder() != null) {</b>
+<b class="nc">&nbsp;            getReflectionBuilder().destroy();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private SecurityManager getSecurityManagerBean() {
+<b class="fc">&nbsp;        return getReflectionBuilder().getBean(SECURITY_MANAGER_NAME, SecurityManager.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected SecurityManager createDefaultInstance() {
+<b class="nc">&nbsp;        return new DefaultSecurityManager();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected SecurityManager createInstance(Ini ini) {
+<b class="pc">&nbsp;        if (CollectionUtils.isEmpty(ini)) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(&quot;Ini argument cannot be null or empty.&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        SecurityManager securityManager = createSecurityManager(ini);</b>
+<b class="pc">&nbsp;        if (securityManager == null) {</b>
+<b class="nc">&nbsp;            String msg = SecurityManager.class + &quot; instance cannot be null.&quot;;</b>
+<b class="nc">&nbsp;            throw new ConfigurationException(msg);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return securityManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private SecurityManager createSecurityManager(Ini ini) {
+<b class="fc">&nbsp;        return createSecurityManager(ini, getConfigSection(ini));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Ini.Section getConfigSection(Ini ini) {
+&nbsp;
+<b class="fc">&nbsp;        Ini.Section mainSection = ini.getSection(MAIN_SECTION_NAME);</b>
+<b class="fc">&nbsp;        if (CollectionUtils.isEmpty(mainSection)) {</b>
+&nbsp;            //try the default:
+<b class="fc">&nbsp;            mainSection = ini.getSection(Ini.DEFAULT_SECTION_NAME);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return mainSection;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean isAutoApplyRealms(SecurityManager securityManager) {
+<b class="fc">&nbsp;        boolean autoApply = true;</b>
+<b class="pc">&nbsp;        if (securityManager instanceof RealmSecurityManager) {</b>
+&nbsp;            //only apply realms if they haven&#39;t been explicitly set by the user:
+<b class="fc">&nbsp;            RealmSecurityManager realmSecurityManager = (RealmSecurityManager) securityManager;</b>
+<b class="fc">&nbsp;            Collection&lt;Realm&gt; realms = realmSecurityManager.getRealms();</b>
+<b class="pc">&nbsp;            if (!CollectionUtils.isEmpty(realms)) {</b>
+<b class="nc">&nbsp;                log.info(&quot;Realms have been explicitly set on the SecurityManager instance - auto-setting of &quot; +</b>
+&nbsp;                        &quot;realms will not occur.&quot;);
+<b class="nc">&nbsp;                autoApply = false;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return autoApply;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings({&quot;unchecked&quot;})
+&nbsp;    private SecurityManager createSecurityManager(Ini ini, Ini.Section mainSection) {
+&nbsp;
+<b class="fc">&nbsp;        getReflectionBuilder().setObjects(createDefaults(ini, mainSection));</b>
+<b class="fc">&nbsp;        Map&lt;String, ?&gt; objects = buildInstances(mainSection);</b>
+&nbsp;
+<b class="fc">&nbsp;        SecurityManager securityManager = getSecurityManagerBean();</b>
+&nbsp;
+<b class="fc">&nbsp;        boolean autoApplyRealms = isAutoApplyRealms(securityManager);</b>
+&nbsp;
+<b class="pc">&nbsp;        if (autoApplyRealms) {</b>
+&nbsp;            //realms and realm factory might have been created - pull them out first so we can
+&nbsp;            //initialize the securityManager:
+<b class="fc">&nbsp;            Collection&lt;Realm&gt; realms = getRealms(objects);</b>
+&nbsp;            //set them on the SecurityManager
+<b class="fc">&nbsp;            if (!CollectionUtils.isEmpty(realms)) {</b>
+<b class="fc">&nbsp;                applyRealmsToSecurityManager(realms, securityManager);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return securityManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Map&lt;String, ?&gt; createDefaults(Ini ini, Ini.Section mainSection) {
+<b class="fc">&nbsp;        Map&lt;String, Object&gt; defaults = new LinkedHashMap&lt;String, Object&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        SecurityManager securityManager = createDefaultInstance();</b>
+<b class="fc">&nbsp;        defaults.put(SECURITY_MANAGER_NAME, securityManager);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (shouldImplicitlyCreateRealm(ini)) {</b>
+<b class="fc">&nbsp;            Realm realm = createRealm(ini);</b>
+<b class="pc">&nbsp;            if (realm != null) {</b>
+<b class="fc">&nbsp;                defaults.put(INI_REALM_NAME, realm);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // The values from &#39;getDefaults()&#39; will override the above.
+<b class="fc">&nbsp;        Map&lt;String, ?&gt; defaultBeans = getDefaults();</b>
+<b class="fc">&nbsp;        if (!CollectionUtils.isEmpty(defaultBeans)) {</b>
+<b class="fc">&nbsp;            defaults.putAll(defaultBeans);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return defaults;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Map&lt;String, ?&gt; buildInstances(Ini.Section section) {
+<b class="fc">&nbsp;        return getReflectionBuilder().buildObjects(section);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addToRealms(Collection&lt;Realm&gt; realms, RealmFactory factory) {
+<b class="nc">&nbsp;        LifecycleUtils.init(factory);</b>
+<b class="nc">&nbsp;        Collection&lt;Realm&gt; factoryRealms = factory.getRealms();</b>
+&nbsp;        //SHIRO-238: check factoryRealms (was &#39;realms&#39;):
+<b class="nc">&nbsp;        if (!CollectionUtils.isEmpty(factoryRealms)) {</b>
+<b class="nc">&nbsp;            realms.addAll(factoryRealms);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private Collection&lt;Realm&gt; getRealms(Map&lt;String, ?&gt; instances) {
+&nbsp;
+&nbsp;        //realms and realm factory might have been created - pull them out first so we can
+&nbsp;        //initialize the securityManager:
+<b class="fc">&nbsp;        List&lt;Realm&gt; realms = new ArrayList&lt;Realm&gt;();</b>
+&nbsp;
+&nbsp;        //iterate over the map entries to pull out the realm factory(s):
+<b class="fc">&nbsp;        for (Map.Entry&lt;String, ?&gt; entry : instances.entrySet()) {</b>
+&nbsp;
+<b class="fc">&nbsp;            String name = entry.getKey();</b>
+<b class="fc">&nbsp;            Object value = entry.getValue();</b>
+&nbsp;
+<b class="pc">&nbsp;            if (value instanceof RealmFactory) {</b>
+<b class="nc">&nbsp;                addToRealms(realms, (RealmFactory) value);</b>
+<b class="fc">&nbsp;            } else if (value instanceof Realm) {</b>
+<b class="fc">&nbsp;                Realm realm = (Realm) value;</b>
+&nbsp;                //set the name if null:
+<b class="fc">&nbsp;                String existingName = realm.getName();</b>
+<b class="pc">&nbsp;                if (existingName == null || existingName.startsWith(realm.getClass().getName())) {</b>
+<b class="nc">&nbsp;                    if (realm instanceof Nameable) {</b>
+<b class="nc">&nbsp;                        ((Nameable) realm).setName(name);</b>
+<b class="nc">&nbsp;                        log.debug(&quot;Applied name &#39;{}&#39; to Nameable realm instance {}&quot;, name, realm);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        log.info(&quot;Realm does not implement the {} interface.  Configured name will not be applied.&quot;,</b>
+<b class="nc">&nbsp;                                Nameable.class.getName());</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                realms.add(realm);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return realms;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void assertRealmSecurityManager(SecurityManager securityManager) {
+<b class="pc">&nbsp;        if (securityManager == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(&quot;securityManager instance cannot be null&quot;);</b>
+&nbsp;        }
+<b class="pc">&nbsp;        if (!(securityManager instanceof RealmSecurityManager)) {</b>
+<b class="nc">&nbsp;            String msg = &quot;securityManager instance is not a &quot; + RealmSecurityManager.class.getName() +</b>
+&nbsp;                    &quot; instance.  This is required to access or configure realms on the instance.&quot;;
+<b class="nc">&nbsp;            throw new ConfigurationException(msg);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void applyRealmsToSecurityManager(Collection&lt;Realm&gt; realms, SecurityManager securityManager) {
+<b class="fc">&nbsp;        assertRealmSecurityManager(securityManager);</b>
+<b class="fc">&nbsp;        ((RealmSecurityManager) securityManager).setRealms(realms);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if the Ini contains account data and a {@code Realm} should be implicitly
+&nbsp;     * {@link #createRealm(Ini) created} to reflect the account data, {@code false} if no realm should be implicitly
+&nbsp;     * created.
+&nbsp;     *
+&nbsp;     * @param ini the Ini instance to inspect for account data resulting in an implicitly created realm.
+&nbsp;     * @return {@code true} if the Ini contains account data and a {@code Realm} should be implicitly
+&nbsp;     *         {@link #createRealm(Ini) created} to reflect the account data, {@code false} if no realm should be
+&nbsp;     *         implicitly created.
+&nbsp;     */
+&nbsp;    protected boolean shouldImplicitlyCreateRealm(Ini ini) {
+<b class="pc">&nbsp;        return !CollectionUtils.isEmpty(ini) &amp;&amp;</b>
+<b class="pc">&nbsp;                (!CollectionUtils.isEmpty(ini.getSection(IniRealm.ROLES_SECTION_NAME)) ||</b>
+<b class="fc">&nbsp;                        !CollectionUtils.isEmpty(ini.getSection(IniRealm.USERS_SECTION_NAME)));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a {@code Realm} from the Ini instance containing account data.
+&nbsp;     *
+&nbsp;     * @param ini the Ini instance from which to acquire the account data.
+&nbsp;     * @return a new Realm instance reflecting the account data discovered in the {@code Ini}.
+&nbsp;     */
+&nbsp;    protected Realm createRealm(Ini ini) {
+&nbsp;        //IniRealm realm = new IniRealm(ini); changed to support SHIRO-322
+<b class="fc">&nbsp;        IniRealm realm = new IniRealm();</b>
+<b class="fc">&nbsp;        realm.setName(INI_REALM_NAME);</b>
+<b class="fc">&nbsp;        realm.setIni(ini); //added for SHIRO-322</b>
+<b class="fc">&nbsp;        return realm;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the ReflectionBuilder instance used to create SecurityManagers object graph.
+&nbsp;     * @return ReflectionBuilder instance used to create SecurityManagers object graph.
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    public ReflectionBuilder getReflectionBuilder() {
+<b class="fc">&nbsp;        return builder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the ReflectionBuilder that will be used to create the SecurityManager based on the contents of
+&nbsp;     * the Ini configuration.
+&nbsp;     * @param builder The ReflectionBuilder used to parse the Ini configuration.
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unused&quot;)
+&nbsp;    public void setReflectionBuilder(ReflectionBuilder builder) {
+<b class="nc">&nbsp;        this.builder = builder;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

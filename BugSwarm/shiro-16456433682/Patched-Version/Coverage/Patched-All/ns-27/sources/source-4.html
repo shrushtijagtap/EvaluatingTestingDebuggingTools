@@ -1,0 +1,546 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > IniWebEnvironment</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.web.env</a>
+</div>
+
+<h1>Coverage Summary for Class: IniWebEnvironment (org.apache.shiro.web.env)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">IniWebEnvironment</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.5%
+  </span>
+  <span class="absValue">
+    (19/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    35.5%
+  </span>
+  <span class="absValue">
+    (22/62)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.9%
+  </span>
+  <span class="absValue">
+    (88/113)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.web.env;
+&nbsp;
+&nbsp;import org.apache.shiro.config.ConfigurationException;
+&nbsp;import org.apache.shiro.config.Ini;
+&nbsp;import org.apache.shiro.config.IniFactorySupport;
+&nbsp;import org.apache.shiro.io.ResourceUtils;
+&nbsp;import org.apache.shiro.util.*;
+&nbsp;import org.apache.shiro.web.config.IniFilterChainResolverFactory;
+&nbsp;import org.apache.shiro.web.config.ShiroFilterConfiguration;
+&nbsp;import org.apache.shiro.web.config.WebIniSecurityManagerFactory;
+&nbsp;import org.apache.shiro.web.filter.mgt.FilterChainResolver;
+&nbsp;import org.apache.shiro.web.mgt.WebSecurityManager;
+&nbsp;import org.apache.shiro.web.util.WebUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import javax.servlet.ServletContext;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * {@link WebEnvironment} implementation configured by an {@link Ini} instance or {@code Ini} resource locations.
+&nbsp; *
+&nbsp; * @since 1.2
+&nbsp; */
+&nbsp;public class IniWebEnvironment extends ResourceBasedWebEnvironment implements Initializable, Destroyable {
+&nbsp;
+&nbsp;    public static final String DEFAULT_WEB_INI_RESOURCE_PATH = &quot;/WEB-INF/shiro.ini&quot;;
+&nbsp;    public static final String FILTER_CHAIN_RESOLVER_NAME = &quot;filterChainResolver&quot;;
+&nbsp;    public static final String SHIRO_FILTER_CONFIG_NAME = &quot;shiroFilter&quot;;
+&nbsp;
+<b class="fc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(IniWebEnvironment.class);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The Ini that configures this WebEnvironment instance.
+&nbsp;     */
+&nbsp;    private Ini ini;
+&nbsp;
+&nbsp;    private WebIniSecurityManagerFactory factory;
+&nbsp;
+<b class="fc">&nbsp;    public IniWebEnvironment() {</b>
+<b class="fc">&nbsp;        factory = new WebIniSecurityManagerFactory();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Initializes this instance by resolving any potential (explicit or resource-configured) {@link Ini}
+&nbsp;     * configuration and calling {@link #configure() configure} for actual instance configuration.
+&nbsp;     */
+&nbsp;    public void init() {
+&nbsp;
+<b class="fc">&nbsp;        setIni(parseConfig());</b>
+&nbsp;
+<b class="fc">&nbsp;        configure();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Loads configuration {@link Ini} from {@link #getConfigLocations()} if set, otherwise falling back
+&nbsp;     * to the {@link #getDefaultConfigLocations()}. Finally any Ini objects will be merged with the value returned
+&nbsp;     * from {@link #getFrameworkIni()}
+&nbsp;     * @return Ini configuration to be used by this Environment.
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    protected Ini parseConfig() {
+<b class="fc">&nbsp;        Ini ini = getIni();</b>
+&nbsp;
+<b class="fc">&nbsp;        String[] configLocations = getConfigLocations();</b>
+&nbsp;
+<b class="pc">&nbsp;        if (log.isWarnEnabled() &amp;&amp; !CollectionUtils.isEmpty(ini) &amp;&amp;</b>
+&nbsp;                configLocations != null &amp;&amp; configLocations.length &gt; 0) {
+<b class="nc">&nbsp;            log.warn(&quot;Explicit INI instance has been provided, but configuration locations have also been &quot; +</b>
+&nbsp;                    &quot;specified.  The {} implementation does not currently support multiple Ini config, but this may &quot; +
+&nbsp;                    &quot;be supported in the future. Only the INI instance will be used for configuration.&quot;,
+<b class="nc">&nbsp;                    IniWebEnvironment.class.getName());</b>
+&nbsp;        }
+&nbsp;
+<b class="pc">&nbsp;        if (CollectionUtils.isEmpty(ini)) {</b>
+<b class="fc">&nbsp;            log.debug(&quot;Checking any specified config locations.&quot;);</b>
+<b class="fc">&nbsp;            ini = getSpecifiedIni(configLocations);</b>
+&nbsp;        }
+&nbsp;
+<b class="pc">&nbsp;        if (CollectionUtils.isEmpty(ini)) {</b>
+<b class="fc">&nbsp;            log.debug(&quot;No INI instance or config locations specified.  Trying default config locations.&quot;);</b>
+<b class="fc">&nbsp;            ini = getDefaultIni();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Allow for integrations to provide default that will be merged other configuration.
+&nbsp;        // to retain backwards compatibility this must be a different method then &#39;getDefaultIni()&#39;
+<b class="fc">&nbsp;        ini = mergeIni(getFrameworkIni(), ini);</b>
+&nbsp;
+<b class="pc">&nbsp;        if (CollectionUtils.isEmpty(ini)) {</b>
+<b class="nc">&nbsp;            String msg = &quot;Shiro INI configuration was either not found or discovered to be empty/unconfigured.&quot;;</b>
+<b class="nc">&nbsp;            throw new ConfigurationException(msg);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return ini;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void configure() {
+&nbsp;
+<b class="fc">&nbsp;        this.objects.clear();</b>
+&nbsp;
+<b class="fc">&nbsp;        WebSecurityManager securityManager = createWebSecurityManager();</b>
+<b class="fc">&nbsp;        setWebSecurityManager(securityManager);</b>
+&nbsp;
+<b class="fc">&nbsp;        ShiroFilterConfiguration filterConfiguration = createFilterConfiguration();</b>
+<b class="fc">&nbsp;        setShiroFilterConfiguration(filterConfiguration);</b>
+&nbsp;
+<b class="fc">&nbsp;        FilterChainResolver resolver = createFilterChainResolver();</b>
+<b class="pc">&nbsp;        if (resolver != null) {</b>
+<b class="fc">&nbsp;            setFilterChainResolver(resolver);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Extension point to allow subclasses to provide an {@link Ini} configuration that will be merged into the
+&nbsp;     * users configuration.  The users configuration will override anything set here.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * &lt;strong&gt;NOTE:&lt;/strong&gt; Framework developers should use with caution. It is possible a user could provide
+&nbsp;     * configuration that would conflict with the frameworks configuration.  For example: if this method returns an
+&nbsp;     * Ini object with the following configuration:
+&nbsp;     * &lt;pre&gt;&lt;code&gt;
+&nbsp;     *     [main]
+&nbsp;     *     realm = com.myco.FoobarRealm
+&nbsp;     *     realm.foobarSpecificField = A string
+&nbsp;     * &lt;/code&gt;&lt;/pre&gt;
+&nbsp;     * And the user provides a similar configuration:
+&nbsp;     * &lt;pre&gt;&lt;code&gt;
+&nbsp;     *     [main]
+&nbsp;     *     realm = net.differentco.MyCustomRealm
+&nbsp;     * &lt;/code&gt;&lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * This would merge into:
+&nbsp;     * &lt;pre&gt;&lt;code&gt;
+&nbsp;     *     [main]
+&nbsp;     *     realm = net.differentco.MyCustomRealm
+&nbsp;     *     realm.foobarSpecificField = A string
+&nbsp;     * &lt;/code&gt;&lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * This may cause a configuration error if &lt;code&gt;MyCustomRealm&lt;/code&gt; does not contain the field &lt;code&gt;foobarSpecificField&lt;/code&gt;.
+&nbsp;     * This can be avoided if the Framework Ini uses more unique names, such as &lt;code&gt;foobarRealm&lt;/code&gt;. which would result
+&nbsp;     * in a merged configuration that looks like:
+&nbsp;     * &lt;pre&gt;&lt;code&gt;
+&nbsp;     *     [main]
+&nbsp;     *     foobarRealm = com.myco.FoobarRealm
+&nbsp;     *     foobarRealm.foobarSpecificField = A string
+&nbsp;     *     realm = net.differentco.MyCustomRealm
+&nbsp;     * &lt;/code&gt;&lt;/pre&gt;
+&nbsp;     *
+&nbsp;     * &lt;/p&gt;
+&nbsp;     *
+&nbsp;     * @return Ini configuration used by the framework integrations.
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    protected Ini getFrameworkIni() {
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Ini getSpecifiedIni(String[] configLocations) throws ConfigurationException {
+&nbsp;
+<b class="fc">&nbsp;        Ini ini = null;</b>
+&nbsp;
+<b class="pc">&nbsp;        if (configLocations != null &amp;&amp; configLocations.length &gt; 0) {</b>
+&nbsp;
+<b class="nc">&nbsp;            if (configLocations.length &gt; 1) {</b>
+<b class="nc">&nbsp;                log.warn(&quot;More than one Shiro .ini config location has been specified.  Only the first will be &quot; +</b>
+&nbsp;                        &quot;used for configuration as the {} implementation does not currently support multiple &quot; +
+<b class="nc">&nbsp;                        &quot;files.  This may be supported in the future however.&quot;, IniWebEnvironment.class.getName());</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            //required, as it is user specified:
+<b class="nc">&nbsp;            ini = createIni(configLocations[0], true);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return ini;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Ini mergeIni(Ini ini1, Ini ini2) {
+&nbsp;
+<b class="pc">&nbsp;        if (ini1 == null) {</b>
+<b class="fc">&nbsp;            return ini2;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (ini2 == null) {</b>
+<b class="nc">&nbsp;            return ini1;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // at this point we have two valid ini objects, create a new one and merge the contents of 2 into 1
+<b class="nc">&nbsp;        Ini iniResult = new Ini(ini1);</b>
+<b class="nc">&nbsp;        iniResult.merge(ini2);</b>
+&nbsp;
+<b class="nc">&nbsp;        return iniResult;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Ini getDefaultIni() {
+&nbsp;
+<b class="fc">&nbsp;        Ini ini = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        String[] configLocations = getDefaultConfigLocations();</b>
+<b class="pc">&nbsp;        if (configLocations != null) {</b>
+<b class="pc">&nbsp;            for (String location : configLocations) {</b>
+<b class="fc">&nbsp;                ini = createIni(location, false);</b>
+<b class="pc">&nbsp;                if (!CollectionUtils.isEmpty(ini)) {</b>
+<b class="fc">&nbsp;                    log.debug(&quot;Discovered non-empty INI configuration at location &#39;{}&#39;.  Using for configuration.&quot;,</b>
+&nbsp;                            location);
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return ini;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates an {@link Ini} instance reflecting the specified path, or {@code null} if the path does not exist and
+&nbsp;     * is not required.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If the path is required and does not exist or is empty, a {@link ConfigurationException} will be thrown.
+&nbsp;     *
+&nbsp;     * @param configLocation the resource path to load into an {@code Ini} instance.
+&nbsp;     * @param required       if the path must exist and be converted to a non-empty {@link Ini} instance.
+&nbsp;     * @return an {@link Ini} instance reflecting the specified path, or {@code null} if the path does not exist and
+&nbsp;     *         is not required.
+&nbsp;     * @throws ConfigurationException if the path is required but results in a null or empty Ini instance.
+&nbsp;     */
+&nbsp;    protected Ini createIni(String configLocation, boolean required) throws ConfigurationException {
+&nbsp;
+<b class="fc">&nbsp;        Ini ini = null;</b>
+&nbsp;
+<b class="pc">&nbsp;        if (configLocation != null) {</b>
+<b class="fc">&nbsp;            ini = convertPathToIni(configLocation, required);</b>
+&nbsp;        }
+<b class="pc">&nbsp;        if (required &amp;&amp; CollectionUtils.isEmpty(ini)) {</b>
+<b class="nc">&nbsp;            String msg = &quot;Required configuration location &#39;&quot; + configLocation + &quot;&#39; does not exist or did not &quot; +</b>
+&nbsp;                    &quot;contain any INI configuration.&quot;;
+<b class="nc">&nbsp;            throw new ConfigurationException(msg);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return ini;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    protected ShiroFilterConfiguration createFilterConfiguration() {
+<b class="fc">&nbsp;        return (ShiroFilterConfiguration) this.objects.get(SHIRO_FILTER_CONFIG_NAME);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected FilterChainResolver createFilterChainResolver() {
+&nbsp;
+<b class="fc">&nbsp;        FilterChainResolver resolver = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        Ini ini = getIni();</b>
+&nbsp;
+<b class="pc">&nbsp;        if (!CollectionUtils.isEmpty(ini)) {</b>
+<b class="fc">&nbsp;            Factory&lt;FilterChainResolver&gt; factory = (Factory&lt;FilterChainResolver&gt;) this.objects.get(FILTER_CHAIN_RESOLVER_NAME);</b>
+<b class="pc">&nbsp;            if (factory instanceof IniFactorySupport) {</b>
+<b class="fc">&nbsp;                IniFactorySupport iniFactory = (IniFactorySupport) factory;</b>
+<b class="fc">&nbsp;                iniFactory.setIni(ini);</b>
+<b class="fc">&nbsp;                iniFactory.setDefaults(this.objects);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            resolver = factory.getInstance();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return resolver;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected WebSecurityManager createWebSecurityManager() {
+&nbsp;
+<b class="fc">&nbsp;        Ini ini = getIni();</b>
+<b class="pc">&nbsp;        if (!CollectionUtils.isEmpty(ini)) {</b>
+<b class="fc">&nbsp;            factory.setIni(ini);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Map&lt;String, Object&gt; defaults = getDefaults();</b>
+<b class="pc">&nbsp;        if (!CollectionUtils.isEmpty(defaults)) {</b>
+<b class="fc">&nbsp;            factory.setDefaults(defaults);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        WebSecurityManager wsm = (WebSecurityManager)factory.getInstance();</b>
+&nbsp;
+&nbsp;        //SHIRO-306 - get beans after they&#39;ve been created (the call was before the factory.getInstance() call,
+&nbsp;        //which always returned null.
+<b class="fc">&nbsp;        Map&lt;String, ?&gt; beans = factory.getBeans();</b>
+<b class="pc">&nbsp;        if (!CollectionUtils.isEmpty(beans)) {</b>
+<b class="fc">&nbsp;            this.objects.putAll(beans);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return wsm;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an array with two elements, {@code /WEB-INF/shiro.ini} and {@code classpath:shiro.ini}.
+&nbsp;     *
+&nbsp;     * @return an array with two elements, {@code /WEB-INF/shiro.ini} and {@code classpath:shiro.ini}.
+&nbsp;     */
+&nbsp;    protected String[] getDefaultConfigLocations() {
+<b class="fc">&nbsp;        return new String[]{</b>
+&nbsp;                DEFAULT_WEB_INI_RESOURCE_PATH,
+&nbsp;                IniFactorySupport.DEFAULT_INI_RESOURCE_PATH
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts the specified file path to an {@link Ini} instance.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If the path does not have a resource prefix as defined by {@link org.apache.shiro.io.ResourceUtils#hasResourcePrefix(String)}, the
+&nbsp;     * path is expected to be resolvable by the {@code ServletContext} via
+&nbsp;     * {@link javax.servlet.ServletContext#getResourceAsStream(String)}.
+&nbsp;     *
+&nbsp;     * @param path     the path of the INI resource to load into an INI instance.
+&nbsp;     * @param required if the specified path must exist
+&nbsp;     * @return an INI instance populated based on the given INI resource path.
+&nbsp;     */
+&nbsp;    private Ini convertPathToIni(String path, boolean required) {
+&nbsp;
+&nbsp;        //TODO - this logic is ugly - it&#39;d be ideal if we had a Resource API to polymorphically encaspulate this behavior
+&nbsp;
+<b class="fc">&nbsp;        Ini ini = null;</b>
+&nbsp;
+<b class="pc">&nbsp;        if (StringUtils.hasText(path)) {</b>
+<b class="fc">&nbsp;            InputStream is = null;</b>
+&nbsp;
+&nbsp;            //SHIRO-178: Check for servlet context resource and not only resource paths:
+<b class="pc">&nbsp;            if (!ResourceUtils.hasResourcePrefix(path)) {</b>
+<b class="fc">&nbsp;                is = getServletContextResourceStream(path);</b>
+&nbsp;            } else {
+&nbsp;                try {
+<b class="nc">&nbsp;                    is = ResourceUtils.getInputStreamForPath(path);</b>
+<b class="nc">&nbsp;                } catch (IOException e) {</b>
+<b class="nc">&nbsp;                    if (required) {</b>
+<b class="nc">&nbsp;                        throw new ConfigurationException(e);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;                            log.debug(&quot;Unable to load optional path &#39;&quot; + path + &quot;&#39;.&quot;, e);</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="pc">&nbsp;            if (is != null) {</b>
+<b class="fc">&nbsp;                ini = new Ini();</b>
+<b class="fc">&nbsp;                ini.load(is);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (required) {</b>
+<b class="nc">&nbsp;                    throw new ConfigurationException(&quot;Unable to load resource path &#39;&quot; + path + &quot;&#39;&quot;);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return ini;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //TODO - this logic is ugly - it&#39;d be ideal if we had a Resource API to polymorphically encaspulate this behavior
+&nbsp;    private InputStream getServletContextResourceStream(String path) {
+<b class="fc">&nbsp;        InputStream is = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        path = WebUtils.normalize(path);</b>
+<b class="fc">&nbsp;        ServletContext sc = getServletContext();</b>
+<b class="pc">&nbsp;        if (sc != null) {</b>
+<b class="fc">&nbsp;            is = sc.getResourceAsStream(path);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return is;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@code Ini} instance reflecting this WebEnvironment&#39;s configuration.
+&nbsp;     *
+&nbsp;     * @return the {@code Ini} instance reflecting this WebEnvironment&#39;s configuration.
+&nbsp;     */
+&nbsp;    public Ini getIni() {
+<b class="fc">&nbsp;        return this.ini;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Allows for configuration via a direct {@link Ini} instance instead of via
+&nbsp;     * {@link #getConfigLocations() config locations}.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If the specified instance is null or empty, the fallback/default resource-based configuration will be used.
+&nbsp;     *
+&nbsp;     * @param ini the ini instance to use for creation.
+&nbsp;     */
+&nbsp;    public void setIni(Ini ini) {
+<b class="fc">&nbsp;        this.ini = ini;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Map&lt;String, Object&gt; getDefaults() {
+<b class="fc">&nbsp;        Map&lt;String, Object&gt; defaults = new HashMap&lt;String, Object&gt;();</b>
+<b class="fc">&nbsp;        defaults.put(FILTER_CHAIN_RESOLVER_NAME, new IniFilterChainResolverFactory());</b>
+<b class="fc">&nbsp;        defaults.put(SHIRO_FILTER_CONFIG_NAME, new ShiroFilterConfiguration());</b>
+<b class="fc">&nbsp;        return defaults;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the SecurityManager factory used by this WebEnvironment.
+&nbsp;     *
+&nbsp;     * @return the SecurityManager factory used by this WebEnvironment.
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unused&quot;)
+&nbsp;    protected WebIniSecurityManagerFactory getSecurityManagerFactory() {
+<b class="nc">&nbsp;        return factory;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Allows for setting the SecurityManager factory which will be used to create the SecurityManager.
+&nbsp;     *
+&nbsp;     * @param factory the SecurityManager factory to used.
+&nbsp;     * @since 1.4
+&nbsp;     */
+&nbsp;    protected void setSecurityManagerFactory(WebIniSecurityManagerFactory factory) {
+<b class="nc">&nbsp;        this.factory = factory;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

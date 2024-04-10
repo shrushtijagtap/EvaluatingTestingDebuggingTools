@@ -1,0 +1,322 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ParserConfig</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.parser</a>
+</div>
+
+<h1>Coverage Summary for Class: ParserConfig (com.alibaba.fastjson.parser)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">ParserConfig$AutoTypeCheckHandler</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson.parser;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.parser.deserializer.ObjectDeserializer;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONFactory;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReader;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReaderProvider;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Properties;
+&nbsp;
+&nbsp;public class ParserConfig {
+&nbsp;    public static final String DENY_PROPERTY = &quot;fastjson.parser.deny&quot;;
+&nbsp;    public static final String AUTOTYPE_ACCEPT = &quot;fastjson.parser.autoTypeAccept&quot;;
+&nbsp;
+&nbsp;    public static ParserConfig global = new ParserConfig(JSONFactory.getDefaultObjectReaderProvider(), false);
+&nbsp;
+&nbsp;    public static ParserConfig getGlobalInstance() {
+&nbsp;        return global;
+&nbsp;    }
+&nbsp;
+&nbsp;    final ObjectReaderProvider provider;
+&nbsp;    public final boolean fieldBase;
+&nbsp;    private boolean asmEnable;
+&nbsp;    private boolean autoTypeSupport;
+&nbsp;
+&nbsp;    ParserConfig(ObjectReaderProvider provider, boolean fieldBase) {
+&nbsp;        this.provider = provider;
+&nbsp;        this.fieldBase = fieldBase;
+&nbsp;    }
+&nbsp;
+&nbsp;    public ParserConfig() {
+&nbsp;        this(new ObjectReaderProvider(), false);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ParserConfig(ClassLoader parentClassLoader) {
+&nbsp;        this(new ObjectReaderProvider(), false);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ParserConfig(boolean fieldBase) {
+&nbsp;        this(new ObjectReaderProvider(), fieldBase);
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isAsmEnable() {
+&nbsp;        return asmEnable;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAsmEnable(boolean asmEnable) {
+&nbsp;        this.asmEnable = asmEnable;
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReaderProvider getProvider() {
+&nbsp;        return provider;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void putDeserializer(Type type, ObjectDeserializer deserializer) {
+&nbsp;        getProvider().register(type, deserializer);
+&nbsp;    }
+&nbsp;
+&nbsp;    public Class&lt;?&gt; checkAutoType(Class type) {
+&nbsp;        return JSONFactory.getDefaultObjectReaderProvider().checkAutoType(type.getName(), null, 0);
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isSafeMode() {
+&nbsp;        return ObjectReaderProvider.SAFE_MODE;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setSafeMode(boolean safeMode) {
+&nbsp;        if (safeMode != ObjectReaderProvider.SAFE_MODE) {
+&nbsp;            throw new JSONException(&quot;not support operation&quot;);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isAutoTypeSupport() {
+&nbsp;        return autoTypeSupport;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAutoTypeSupport(boolean autoTypeSupport) {
+&nbsp;        this.autoTypeSupport = autoTypeSupport;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addAccept(String name) {
+&nbsp;        getProvider().addAutoTypeAccept(name);
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addDeny(String name) {
+&nbsp;        getProvider().addAutoTypeDeny(name);
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addDenyInternal(String name) {
+&nbsp;        getProvider().addAutoTypeDeny(name);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    public void setDefaultClassLoader(ClassLoader defaultClassLoader) {
+&nbsp;        // skip
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addAutoTypeCheckHandler(AutoTypeCheckHandler h) {
+&nbsp;        if (getProvider().getAutoTypeBeforeHandler() != null) {
+&nbsp;            throw new JSONException(&quot;not support operation&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        getProvider().setAutoTypeBeforeHandler(h);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.2.68
+&nbsp;     */
+&nbsp;    public interface AutoTypeCheckHandler
+&nbsp;            extends JSONReader.AutoTypeBeforeHandler {
+&nbsp;        Class&lt;?&gt; handler(String typeName, Class&lt;?&gt; expectClass, int features);
+&nbsp;
+&nbsp;        default Class&lt;?&gt; apply(long typeNameHash, Class&lt;?&gt; expectClass, long features) {
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;
+&nbsp;        default Class&lt;?&gt; apply(String typeName, Class&lt;?&gt; expectClass, long features) {
+&nbsp;            return handler(typeName, expectClass, (int) features);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void configFromPropety(Properties properties) {
+&nbsp;        {
+&nbsp;            String property = properties.getProperty(DENY_PROPERTY);
+&nbsp;            String[] items = splitItemsFormProperty(property);
+&nbsp;            addItemsToDeny(items);
+&nbsp;        }
+&nbsp;        {
+&nbsp;            String property = properties.getProperty(AUTOTYPE_ACCEPT);
+&nbsp;            String[] items = splitItemsFormProperty(property);
+&nbsp;            addItemsToAccept(items);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addItemsToDeny(final String[] items) {
+&nbsp;        if (items == null) {
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        for (int i = 0; i &lt; items.length; ++i) {
+&nbsp;            String item = items[i];
+&nbsp;            this.addDeny(item);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addItemsToAccept(final String[] items) {
+&nbsp;        if (items == null) {
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        for (int i = 0; i &lt; items.length; ++i) {
+&nbsp;            String item = items[i];
+&nbsp;            this.addAccept(item);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String[] splitItemsFormProperty(final String property) {
+&nbsp;        if (property != null &amp;&amp; property.length() &gt; 0) {
+&nbsp;            return property.split(&quot;,&quot;);
+&nbsp;        }
+&nbsp;        return null;
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectDeserializer get(Type type) {
+&nbsp;        ObjectReader objectReader = getProvider().getObjectReader(type);
+&nbsp;        if (objectReader instanceof ObjectDeserializer) {
+&nbsp;            return (ObjectDeserializer) objectReader;
+&nbsp;        }
+&nbsp;        return new ObjectDeserializerWrapper(objectReader);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectDeserializer getDeserializer(Type type) {
+&nbsp;        ObjectReader objectReader = getProvider().getObjectReader(type);
+&nbsp;        if (objectReader instanceof ObjectDeserializer) {
+&nbsp;            return (ObjectDeserializer) objectReader;
+&nbsp;        }
+&nbsp;        return new ObjectDeserializerWrapper(objectReader);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectDeserializer getDeserializer(Class&lt;?&gt; clazz, Type type) {
+&nbsp;        if (type == null) {
+&nbsp;            type = clazz;
+&nbsp;        }
+&nbsp;
+&nbsp;        ObjectReader objectReader = getProvider().getObjectReader(type);
+&nbsp;        if (objectReader instanceof ObjectDeserializer) {
+&nbsp;            return (ObjectDeserializer) objectReader;
+&nbsp;        }
+&nbsp;        return new ObjectDeserializerWrapper(objectReader);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * fieldName,field ，先生成fieldName的快照，减少之后的findField的轮询
+&nbsp;     *
+&nbsp;     * @param clazz
+&nbsp;     * @param fieldCacheMap :map&amp;lt;fieldName ,Field&amp;gt;
+&nbsp;     */
+&nbsp;    public static void parserAllFieldToCache(Class&lt;?&gt; clazz, Map&lt;String, Field&gt; fieldCacheMap) {
+&nbsp;        Field[] fields = clazz.getDeclaredFields();
+&nbsp;        for (Field field : fields) {
+&nbsp;            String fieldName = field.getName();
+&nbsp;            if (!fieldCacheMap.containsKey(fieldName)) {
+&nbsp;                fieldCacheMap.put(fieldName, field);
+&nbsp;            }
+&nbsp;        }
+&nbsp;        if (clazz.getSuperclass() != null &amp;&amp; clazz.getSuperclass() != Object.class) {
+&nbsp;            parserAllFieldToCache(clazz.getSuperclass(), fieldCacheMap);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Field getFieldFromCache(String fieldName, Map&lt;String, Field&gt; fieldCacheMap) {
+&nbsp;        Field field = fieldCacheMap.get(fieldName);
+&nbsp;
+&nbsp;        if (field == null) {
+&nbsp;            field = fieldCacheMap.get(&quot;_&quot; + fieldName);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (field == null) {
+&nbsp;            field = fieldCacheMap.get(&quot;m_&quot; + fieldName);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (field == null) {
+&nbsp;            char c0 = fieldName.charAt(0);
+&nbsp;            if (c0 &gt;= &#39;a&#39; &amp;&amp; c0 &lt;= &#39;z&#39;) {
+&nbsp;                char[] chars = fieldName.toCharArray();
+&nbsp;                chars[0] -= 32; // lower
+&nbsp;                String fieldNameX = new String(chars);
+&nbsp;                field = fieldCacheMap.get(fieldNameX);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (fieldName.length() &gt; 2) {
+&nbsp;                char c1 = fieldName.charAt(1);
+&nbsp;                if (c0 &gt;= &#39;a&#39; &amp;&amp; c0 &lt;= &#39;z&#39;
+&nbsp;                        &amp;&amp; c1 &gt;= &#39;A&#39; &amp;&amp; c1 &lt;= &#39;Z&#39;) {
+&nbsp;                    for (Map.Entry&lt;String, Field&gt; entry : fieldCacheMap.entrySet()) {
+&nbsp;                        if (fieldName.equalsIgnoreCase(entry.getKey())) {
+&nbsp;                            field = entry.getValue();
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return field;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:42</div>
+</div>
+</body>
+</html>

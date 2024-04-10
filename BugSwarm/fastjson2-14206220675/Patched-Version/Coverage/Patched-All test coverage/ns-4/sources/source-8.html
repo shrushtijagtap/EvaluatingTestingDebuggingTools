@@ -1,0 +1,267 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CSVCOVID19</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark</a>
+</div>
+
+<h1>Coverage Summary for Class: CSVCOVID19 (com.alibaba.fastjson2.benchmark)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CSVCOVID19</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CSVCOVID19$Covid19</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.benchmark.eishay.EishayParseBinary;
+&nbsp;import com.alibaba.fastjson2.support.csv.CSVReader;
+&nbsp;import com.univocity.parsers.annotations.Parsed;
+&nbsp;import com.univocity.parsers.csv.CsvParserSettings;
+&nbsp;import com.univocity.parsers.csv.CsvRoutines;
+&nbsp;import org.apache.commons.io.IOUtils;
+&nbsp;import org.openjdk.jmh.annotations.Benchmark;
+&nbsp;import org.openjdk.jmh.annotations.Mode;
+&nbsp;import org.openjdk.jmh.infra.Blackhole;
+&nbsp;import org.openjdk.jmh.runner.Runner;
+&nbsp;import org.openjdk.jmh.runner.RunnerException;
+&nbsp;import org.openjdk.jmh.runner.options.Options;
+&nbsp;import org.openjdk.jmh.runner.options.OptionsBuilder;
+&nbsp;import org.openjdk.jmh.runner.options.TimeValue;
+&nbsp;
+&nbsp;import java.io.ByteArrayInputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.util.concurrent.TimeUnit;
+&nbsp;
+<b class="nc">&nbsp;public class CSVCOVID19 {</b>
+&nbsp;    static final String file = &quot;csv/COVID-19_Public_Therapeutic_Locator.csv&quot;;
+&nbsp;    static byte[] byteArray;
+&nbsp;    static {
+<b class="nc">&nbsp;        try (InputStream is = EishayParseBinary.class.getClassLoader().getResourceAsStream(file)) {</b>
+<b class="nc">&nbsp;            String str = IOUtils.toString(is, &quot;UTF-8&quot;);</b>
+<b class="nc">&nbsp;            byteArray = str.getBytes();</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void fastjson2(Blackhole BH) {
+&nbsp;        CSVReader
+<b class="nc">&nbsp;                .of(new ByteArrayInputStream(byteArray), Covid19.class)</b>
+<b class="nc">&nbsp;                .readLineObjectAll(BH::consume);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void univocity(Blackhole BH) {
+<b class="nc">&nbsp;        CsvParserSettings settings = new CsvParserSettings();</b>
+<b class="nc">&nbsp;        CsvRoutines processor = new CsvRoutines(settings);</b>
+<b class="nc">&nbsp;        settings.getFormat().setLineSeparator(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;        settings.setNumberOfRowsToSkip(1);</b>
+<b class="nc">&nbsp;        processor.iterate(Covid19.class, new ByteArrayInputStream(byteArray))</b>
+<b class="nc">&nbsp;                .forEach(BH::consume);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void cainiao(Blackhole BH) {
+&nbsp;//        com.cainiao.ai.seq.csv.CsvType.of(Covid19.class, false)
+&nbsp;//                .csvReader(&#39;,&#39;)
+&nbsp;//                .read(com.cainiao.ai.seq.InputSource.of(byteArray), 1)
+&nbsp;//                .supply(BH::consume);
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+<b class="nc">&nbsp;    public static class Covid19 {</b>
+&nbsp;        @Parsed(index = 0)
+&nbsp;        public String providerName;
+&nbsp;
+&nbsp;        @Parsed(index = 1)
+&nbsp;        public String address1;
+&nbsp;
+&nbsp;        @Parsed(index = 2)
+&nbsp;        public String address2;
+&nbsp;
+&nbsp;        @Parsed(index = 3)
+&nbsp;        public String city;
+&nbsp;
+&nbsp;        @Parsed(index = 4)
+&nbsp;        public String county;
+&nbsp;
+&nbsp;        @Parsed(index = 5)
+&nbsp;        public String stateCode;
+&nbsp;
+&nbsp;        @Parsed(index = 6)
+&nbsp;        public Integer zip;
+&nbsp;
+&nbsp;        @Parsed(index = 7)
+&nbsp;        public String nationalDrugCode;
+&nbsp;
+&nbsp;        @Parsed(index = 8)
+&nbsp;        public String orderLabel;
+&nbsp;
+&nbsp;        @Parsed(index = 9)
+&nbsp;        public Integer coursesAvailable;
+&nbsp;
+&nbsp;        @Parsed(index = 10)
+&nbsp;        public String geocodedAddress;
+&nbsp;
+&nbsp;        @Parsed(index = 11)
+&nbsp;        public String npi;
+&nbsp;
+&nbsp;        @Parsed(index = 12)
+&nbsp;        public String lastReportDate;
+&nbsp;
+&nbsp;        @Parsed(index = 13)
+&nbsp;        public String providerStatus;
+&nbsp;
+&nbsp;        @Parsed(index = 14)
+&nbsp;        public String providerNote;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void main(String[] args) throws RunnerException {
+<b class="nc">&nbsp;        Options options = new OptionsBuilder()</b>
+<b class="nc">&nbsp;                .include(CSVCOVID19.class.getName())</b>
+<b class="nc">&nbsp;                .mode(Mode.Throughput)</b>
+<b class="nc">&nbsp;                .timeUnit(TimeUnit.MILLISECONDS)</b>
+<b class="nc">&nbsp;                .warmupIterations(3)</b>
+<b class="nc">&nbsp;                .forks(1)</b>
+<b class="nc">&nbsp;                .measurementTime(TimeValue.seconds(30))</b>
+<b class="nc">&nbsp;                .build();</b>
+<b class="nc">&nbsp;        new Runner(options).run();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:20</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SessionValidationScheduler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.session.mgt</a>
+</div>
+
+<h1>Coverage Summary for Class: SessionValidationScheduler (org.apache.shiro.session.mgt)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">SessionValidationScheduler</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.session.mgt;
+&nbsp;
+&nbsp;/**
+&nbsp; * Interface that should be implemented by classes that can control validating sessions on a regular
+&nbsp; * basis.  This interface is used as a delegate for session validation by the {@link org.apache.shiro.session.mgt.DefaultSessionManager}
+&nbsp; *
+&nbsp; * @see org.apache.shiro.session.mgt.DefaultSessionManager#setSessionValidationScheduler(SessionValidationScheduler)
+&nbsp; * @since 0.1
+&nbsp; */
+&nbsp;public interface SessionValidationScheduler {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns &lt;code&gt;true&lt;/code&gt; if this Scheduler is enabled and ready to begin validation at the appropriate time,
+&nbsp;     * &lt;code&gt;false&lt;/code&gt; otherwise.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * It does &lt;em&gt;not&lt;/em&gt; indicate if the validation is actually executing at that instant - only that it is prepared
+&nbsp;     * to do so at the appropriate time.
+&nbsp;     *
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt; if this Scheduler is enabled and ready to begin validation at the appropriate time,
+&nbsp;     * &lt;code&gt;false&lt;/code&gt; otherwise.
+&nbsp;     */
+&nbsp;    boolean isEnabled();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Enables the session validation job.
+&nbsp;     */
+&nbsp;    void enableSessionValidation();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Disables the session validation job.
+&nbsp;     */
+&nbsp;    void disableSessionValidation();
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

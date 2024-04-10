@@ -1,0 +1,402 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DefaultSubjectDAO</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.mgt</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultSubjectDAO (org.apache.shiro.mgt)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultSubjectDAO</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (10/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    52.8%
+  </span>
+  <span class="absValue">
+    (19/36)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    68%
+  </span>
+  <span class="absValue">
+    (34/50)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.mgt;
+&nbsp;
+&nbsp;import org.apache.shiro.session.Session;
+&nbsp;import org.apache.shiro.subject.PrincipalCollection;
+&nbsp;import org.apache.shiro.subject.Subject;
+&nbsp;import org.apache.shiro.subject.support.DefaultSubjectContext;
+&nbsp;import org.apache.shiro.subject.support.DelegatingSubject;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;
+&nbsp;/**
+&nbsp; * Default {@code SubjectDAO} implementation that stores Subject state in the Subject&#39;s Session by default (but this
+&nbsp; * can be disabled - see below).  The Subject instance
+&nbsp; * can be re-created at a later time by first acquiring the associated Session (typically from a
+&nbsp; * {@link org.apache.shiro.session.mgt.SessionManager SessionManager}) via a session ID or session key and then
+&nbsp; * building a {@code Subject} instance from {@code Session} attributes.
+&nbsp; * &lt;h2&gt;Controlling how Sessions are used&lt;/h2&gt;
+&nbsp; * Whether or not a {@code Subject}&#39;s {@code Session} is used or not to persist its own state is controlled on a
+&nbsp; * &lt;em&gt;per-Subject&lt;/em&gt; basis as determined by the configured
+&nbsp; * {@link #setSessionStorageEvaluator(SessionStorageEvaluator) sessionStorageEvaluator}.
+&nbsp; * The default {@code Evaluator} is a {@link DefaultSessionStorageEvaluator}, which supports enabling or disabling
+&nbsp; * session usage for Subject persistence at a global level for all subjects (and defaults to allowing sessions to be
+&nbsp; * used).
+&nbsp; * &lt;h3&gt;Disabling Session Persistence Entirely&lt;/h3&gt;
+&nbsp; * Because the default {@code SessionStorageEvaluator} instance is a {@link DefaultSessionStorageEvaluator}, you
+&nbsp; * can disable Session usage for Subject state entirely by configuring that instance directly, e.g.:
+&nbsp; * &lt;pre&gt;
+&nbsp; *     ((DefaultSessionStorageEvaluator)sessionDAO.getSessionStorageEvaluator()).setSessionStorageEnabled(false);
+&nbsp; * &lt;/pre&gt;
+&nbsp; * or, for example, in {@code shiro.ini}:
+&nbsp; * &lt;pre&gt;
+&nbsp; *     securityManager.subjectDAO.sessionStorageEvaluator.sessionStorageEnabled = false
+&nbsp; * &lt;/pre&gt;
+&nbsp; * but &lt;b&gt;note:&lt;/b&gt; ONLY do this your
+&nbsp; * application is 100% stateless and you &lt;em&gt;DO NOT&lt;/em&gt; need subjects to be remembered across remote
+&nbsp; * invocations, or in a web environment across HTTP requests.
+&nbsp; * &lt;h3&gt;Supporting Both Stateful and Stateless Subject paradigms&lt;/h3&gt;
+&nbsp; * Perhaps your application needs to support a hybrid approach of both stateful and stateless Subjects:
+&nbsp; * &lt;ul&gt;
+&nbsp; * &lt;li&gt;Stateful: Stateful subjects might represent web end-users that need their identity and authentication
+&nbsp; * state to be remembered from page to page.&lt;/li&gt;
+&nbsp; * &lt;li&gt;Stateless: Stateless subjects might represent API clients (e.g. REST clients) that authenticate on every
+&nbsp; * request, and therefore don&#39;t need authentication state to be stored across requests in a session.&lt;/li&gt;
+&nbsp; * &lt;/ul&gt;
+&nbsp; * To support the hybrid &lt;em&gt;per-Subject&lt;/em&gt; approach, you will need to create your own implementation of the
+&nbsp; * {@link SessionStorageEvaluator} interface and configure it via the
+&nbsp; * {@link #setSessionStorageEvaluator(SessionStorageEvaluator)} method, or, with {@code shiro.ini}:
+&nbsp; * &lt;pre&gt;
+&nbsp; *     myEvaluator = com.my.CustomSessionStorageEvaluator
+&nbsp; *     securityManager.subjectDAO.sessionStorageEvaluator = $myEvaluator
+&nbsp; * &lt;/pre&gt;
+&nbsp; * &lt;p/&gt;
+&nbsp; * Unless overridden, the default evaluator is a {@link DefaultSessionStorageEvaluator}, which enables session usage for
+&nbsp; * Subject state by default.
+&nbsp; *
+&nbsp; * @see #isSessionStorageEnabled(org.apache.shiro.subject.Subject)
+&nbsp; * @see SessionStorageEvaluator
+&nbsp; * @see DefaultSessionStorageEvaluator
+&nbsp; * @since 1.2
+&nbsp; */
+&nbsp;public class DefaultSubjectDAO implements SubjectDAO {
+&nbsp;
+<b class="fc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(DefaultSubjectDAO.class);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Evaluator that determines if a Subject&#39;s session may be used to store the Subject&#39;s own state.
+&nbsp;     */
+&nbsp;    private SessionStorageEvaluator sessionStorageEvaluator;
+&nbsp;
+<b class="fc">&nbsp;    public DefaultSubjectDAO() {</b>
+&nbsp;        //default implementation allows enabling/disabling session usages at a global level for all subjects:
+<b class="fc">&nbsp;        this.sessionStorageEvaluator = new DefaultSessionStorageEvaluator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Determines if the subject&#39;s session will be used to persist subject state or not.  This implementation
+&nbsp;     * merely delegates to the internal {@link SessionStorageEvaluator} (a
+&nbsp;     * {@code DefaultSessionStorageEvaluator} by default).
+&nbsp;     *
+&nbsp;     * @param subject the subject to inspect to determine if the subject&#39;s session will be used to persist subject
+&nbsp;     *                state or not.
+&nbsp;     * @return {@code true} if the subject&#39;s session will be used to persist subject state, {@code false} otherwise.
+&nbsp;     * @see #setSessionStorageEvaluator(SessionStorageEvaluator)
+&nbsp;     * @see DefaultSessionStorageEvaluator
+&nbsp;     */
+&nbsp;    protected boolean isSessionStorageEnabled(Subject subject) {
+<b class="fc">&nbsp;        return getSessionStorageEvaluator().isSessionStorageEnabled(subject);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the {@code SessionStorageEvaluator} that will determine if a {@code Subject}&#39;s state may be persisted in
+&nbsp;     * the Subject&#39;s session.  The default instance is a {@link DefaultSessionStorageEvaluator}.
+&nbsp;     *
+&nbsp;     * @return the {@code SessionStorageEvaluator} that will determine if a {@code Subject}&#39;s state may be persisted in
+&nbsp;     *         the Subject&#39;s session.
+&nbsp;     * @see DefaultSessionStorageEvaluator
+&nbsp;     */
+&nbsp;    public SessionStorageEvaluator getSessionStorageEvaluator() {
+<b class="fc">&nbsp;        return sessionStorageEvaluator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the {@code SessionStorageEvaluator} that will determine if a {@code Subject}&#39;s state may be persisted in
+&nbsp;     * the Subject&#39;s session. The default instance is a {@link DefaultSessionStorageEvaluator}.
+&nbsp;     *
+&nbsp;     * @param sessionStorageEvaluator the {@code SessionStorageEvaluator} that will determine if a {@code Subject}&#39;s
+&nbsp;     *                                state may be persisted in the Subject&#39;s session.
+&nbsp;     * @see DefaultSessionStorageEvaluator
+&nbsp;     */
+&nbsp;    public void setSessionStorageEvaluator(SessionStorageEvaluator sessionStorageEvaluator) {
+<b class="fc">&nbsp;        this.sessionStorageEvaluator = sessionStorageEvaluator;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Saves the subject&#39;s state to the subject&#39;s {@link org.apache.shiro.subject.Subject#getSession() session} only
+&nbsp;     * if {@link #isSessionStorageEnabled(Subject) sessionStorageEnabled(subject)}.  If session storage is not enabled
+&nbsp;     * for the specific {@code Subject}, this method does nothing.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * In either case, the argument {@code Subject} is returned directly (a new Subject instance is not created).
+&nbsp;     *
+&nbsp;     * @param subject the Subject instance for which its state will be created or updated.
+&nbsp;     * @return the same {@code Subject} passed in (a new Subject instance is not created).
+&nbsp;     */
+&nbsp;    public Subject save(Subject subject) {
+<b class="fc">&nbsp;        if (isSessionStorageEnabled(subject)) {</b>
+<b class="fc">&nbsp;            saveToSession(subject);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            log.trace(&quot;Session storage of subject state for Subject [{}] has been disabled: identity and &quot; +</b>
+&nbsp;                    &quot;authentication state are expected to be initialized on every request or invocation.&quot;, subject);
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return subject;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Saves the subject&#39;s state (it&#39;s principals and authentication state) to its
+&nbsp;     * {@link org.apache.shiro.subject.Subject#getSession() session}.  The session can be retrieved at a later time
+&nbsp;     * (typically from a {@link org.apache.shiro.session.mgt.SessionManager SessionManager} to be used to recreate
+&nbsp;     * the {@code Subject} instance.
+&nbsp;     *
+&nbsp;     * @param subject the subject for which state will be persisted to its session.
+&nbsp;     */
+&nbsp;    protected void saveToSession(Subject subject) {
+&nbsp;        //performs merge logic, only updating the Subject&#39;s session if it does not match the current state:
+<b class="fc">&nbsp;        mergePrincipals(subject);</b>
+<b class="fc">&nbsp;        mergeAuthenticationState(subject);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean isEmpty(PrincipalCollection pc) {
+<b class="fc">&nbsp;        return pc == null || pc.isEmpty();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Merges the Subject&#39;s current {@link org.apache.shiro.subject.Subject#getPrincipals()} with whatever may be in
+&nbsp;     * any available session.  Only updates the Subject&#39;s session if the session does not match the current principals
+&nbsp;     * state.
+&nbsp;     *
+&nbsp;     * @param subject the Subject for which principals will potentially be merged into the Subject&#39;s session.
+&nbsp;     */
+&nbsp;    protected void mergePrincipals(Subject subject) {
+&nbsp;        //merge PrincipalCollection state:
+&nbsp;
+<b class="fc">&nbsp;        PrincipalCollection currentPrincipals = null;</b>
+&nbsp;
+&nbsp;        //SHIRO-380: added if/else block - need to retain original (source) principals
+&nbsp;        //This technique (reflection) is only temporary - a proper long term solution needs to be found,
+&nbsp;        //but this technique allowed an immediate fix that is API point-version forwards and backwards compatible
+&nbsp;        //
+&nbsp;        //A more comprehensive review / cleaning of runAs should be performed for Shiro 1.3 / 2.0 +
+<b class="pc">&nbsp;        if (subject.isRunAs() &amp;&amp; subject instanceof DelegatingSubject) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                Field field = DelegatingSubject.class.getDeclaredField(&quot;principals&quot;);</b>
+<b class="nc">&nbsp;                field.setAccessible(true);</b>
+<b class="nc">&nbsp;                currentPrincipals = (PrincipalCollection)field.get(subject);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                throw new IllegalStateException(&quot;Unable to access DelegatingSubject principals property.&quot;, e);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="pc">&nbsp;        if (currentPrincipals == null || currentPrincipals.isEmpty()) {</b>
+<b class="fc">&nbsp;            currentPrincipals = subject.getPrincipals();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Session session = subject.getSession(false);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (session == null) {</b>
+<b class="fc">&nbsp;            if (!isEmpty(currentPrincipals)) {</b>
+<b class="fc">&nbsp;                session = subject.getSession();</b>
+<b class="fc">&nbsp;                session.setAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY, currentPrincipals);</b>
+&nbsp;            }
+&nbsp;            // otherwise no session and no principals - nothing to save
+&nbsp;        } else {
+<b class="fc">&nbsp;            PrincipalCollection existingPrincipals =</b>
+<b class="fc">&nbsp;                    (PrincipalCollection) session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);</b>
+&nbsp;
+<b class="pc">&nbsp;            if (isEmpty(currentPrincipals)) {</b>
+<b class="pc">&nbsp;                if (!isEmpty(existingPrincipals)) {</b>
+<b class="nc">&nbsp;                    session.removeAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);</b>
+&nbsp;                }
+&nbsp;                // otherwise both are null or empty - no need to update the session
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (!currentPrincipals.equals(existingPrincipals)) {</b>
+<b class="nc">&nbsp;                    session.setAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY, currentPrincipals);</b>
+&nbsp;                }
+&nbsp;                // otherwise they&#39;re the same - no need to update the session
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Merges the Subject&#39;s current authentication state with whatever may be in
+&nbsp;     * any available session.  Only updates the Subject&#39;s session if the session does not match the current
+&nbsp;     * authentication state.
+&nbsp;     *
+&nbsp;     * @param subject the Subject for which principals will potentially be merged into the Subject&#39;s session.
+&nbsp;     */
+&nbsp;    protected void mergeAuthenticationState(Subject subject) {
+&nbsp;
+<b class="fc">&nbsp;        Session session = subject.getSession(false);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (session == null) {</b>
+<b class="pc">&nbsp;            if (subject.isAuthenticated()) {</b>
+<b class="nc">&nbsp;                session = subject.getSession();</b>
+<b class="nc">&nbsp;                session.setAttribute(DefaultSubjectContext.AUTHENTICATED_SESSION_KEY, Boolean.TRUE);</b>
+&nbsp;            }
+&nbsp;            //otherwise no session and not authenticated - nothing to save
+&nbsp;        } else {
+<b class="fc">&nbsp;            Boolean existingAuthc = (Boolean) session.getAttribute(DefaultSubjectContext.AUTHENTICATED_SESSION_KEY);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (subject.isAuthenticated()) {</b>
+<b class="pc">&nbsp;                if (existingAuthc == null || !existingAuthc) {</b>
+<b class="fc">&nbsp;                    session.setAttribute(DefaultSubjectContext.AUTHENTICATED_SESSION_KEY, Boolean.TRUE);</b>
+&nbsp;                }
+&nbsp;                //otherwise authc state matches - no need to update the session
+&nbsp;            } else {
+<b class="pc">&nbsp;                if (existingAuthc != null) {</b>
+&nbsp;                    //existing doesn&#39;t match the current state - remove it:
+<b class="nc">&nbsp;                    session.removeAttribute(DefaultSubjectContext.AUTHENTICATED_SESSION_KEY);</b>
+&nbsp;                }
+&nbsp;                //otherwise not in the session and not authenticated - no need to update the session
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes any existing subject state from the Subject&#39;s session (if the session exists).  If the session
+&nbsp;     * does not exist, this method does not do anything.
+&nbsp;     *
+&nbsp;     * @param subject the subject for which any existing subject state will be removed from its session.
+&nbsp;     */
+&nbsp;    protected void removeFromSession(Subject subject) {
+<b class="nc">&nbsp;        Session session = subject.getSession(false);</b>
+<b class="nc">&nbsp;        if (session != null) {</b>
+<b class="nc">&nbsp;            session.removeAttribute(DefaultSubjectContext.AUTHENTICATED_SESSION_KEY);</b>
+<b class="nc">&nbsp;            session.removeAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes any existing subject state from the subject&#39;s session (if the session exists).
+&nbsp;     *
+&nbsp;     * @param subject the Subject instance for which any persistent state should be deleted.
+&nbsp;     */
+&nbsp;    public void delete(Subject subject) {
+<b class="nc">&nbsp;        removeFromSession(subject);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

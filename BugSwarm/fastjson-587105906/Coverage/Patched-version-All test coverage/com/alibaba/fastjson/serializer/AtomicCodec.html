@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="../../../../img/clover.ico" />
+
+    <link rel="stylesheet" href="../../../../aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="../../../../aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="../../../../aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('../../../../style.css');
+        @import url('../../../../tree.css');
+        
+    </style>
+
+    <script src="../../../../jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../../../../aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="../../../../aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="../../../../aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="../../../../package-nodes-tree.js" type="text/javascript"></script>
+    <script src="../../../../clover-tree.js" type="text/javascript"></script>
+    <script src="../../../../clover.js" type="text/javascript"></script>
+    <script src="../../../../clover-descriptions.js" type="text/javascript"></script>
+    <script src="../../../../cloud.js" type="text/javascript"></script>
+
+            <title>fastjson 1.2.60_preview_04</title>
+    </head>
+
+<body  onload="onLoad('fastjson 1.2.60_preview_04: com.alibaba.fastjson.serializer.AtomicCodec.java')">
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="https://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="https://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                    <a href="https://github.com/alibaba/fastjson" target="_top">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="../../../../img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+                    </a>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                            <a href="https://github.com/alibaba/fastjson" target="_top">
+                                        fastjson 1.2.60_preview_04
+                                        </a>
+                    </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="">
+                    <a href="../../../../dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                <div class="packages-tree-wrapper" data-root-relative="../../../../" data-package-name="com.alibaba.fastjson.serializer">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="../../../../dashboard.html">Project Clover database Tue Apr 9 2024 16:11:52 CDT</a></li> 
+        <li><a href="pkg-summary.html">        Package com.alibaba.fastjson.serializer</a></li> 
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            File AtomicCodec.java
+    </h1>
+
+
+
+
+
+
+
+
+    
+<div class="aui-tabs horizontal-tabs" id="tabs-file">
+            <div class="tabs-pane aui-tabs-pane-100-pcnt active-pane" id="tabs-file-source">
+        <div>&#160;</div>
+
+        
+                <div style="display: table; width: 100%">
+                            <div class="clover-histogram-table-cell">
+                                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Coverage histogram</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div class="aui-item clover-aui-item-histogram">
+                    <img src="../../../../img/srcFileCovDistChart10.png" alt="../../../../img/srcFileCovDistChart10.png"
+                         usemap="#srcFileCovDistChart10.png" class="clover-histogram-img"/>
+                    <map id="srcFileCovDistChart10.png" name="srcFileCovDistChart10.png">
+<area shape="rect" coords="100,41,107,66" title="104 files have 91-100% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="91,58,98,66" title="35 files have 81-90% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="82,60,89,66" title="27 files have 71-80% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="73,63,80,65" title="12 files have 61-70% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="64,65,71,66" title="5 files have 51-60% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="56,65,63,66" title="6 files have 41-50% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="47,65,54,66" title="4 files have 31-40% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="38,65,45,66" title="6 files have 21-30% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="29,65,36,66" title="6 files have 11-20% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="20,66,27,67" title="2 files have 1-10% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="11,8,18,65" title="238 files have 0% coverage" alt="" nohref="nohref"/>
+</map><br />
+                    <span class="subtle"><strong>0% </strong>of files have more coverage</span>
+                </div>
+            </div>
+        </div>
+                    </div>
+                        <div style="display: table-cell; width: 67%;">
+                    <div class="dashboard-widget">
+        <header class="dashboard-widget-header">
+            <h3>Code metrics</h3>
+        </header>
+        <div class="dashboard-widget-content">
+                        
+
+<div id="td-header-stats" class="aui-item" style="display: ">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this file">Branches:</label></div>
+        <div class="stats-box-value">28</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this file">Statements:</label></div>
+        <div class="stats-box-value">51</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this file">Methods:</label></div>
+        <div class="stats-box-value">3</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this file">Classes:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+            <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this file">LOC:</label></div>
+        <div class="stats-box-value">123</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this file">NCLOC:</label></div>
+        <div class="stats-box-value">86</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this file">Total complexity:</label></div>
+        <div class="stats-box-value">17</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this file">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.33</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">17</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">3</div>
+    </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this file">Average method complexity:</label></div>
+        <div class="stats-box-value">5.67</div>
+    </div>
+</div>
+
+</div>
+                        
+
+<div id="td-filtered-header-stats" class="aui-item" style="display: none">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this file">Branches:</label></div>
+        <div class="stats-box-value">28</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this file">Statements:</label></div>
+        <div class="stats-box-value">51</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this file">Methods:</label></div>
+        <div class="stats-box-value">3</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this file">Classes:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+            <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this file">LOC:</label></div>
+        <div class="stats-box-value">123</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this file">NCLOC:</label></div>
+        <div class="stats-box-value">86</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this file">Total complexity:</label></div>
+        <div class="stats-box-value">17</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this file">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.33</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">17</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">3</div>
+    </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this file">Average method complexity:</label></div>
+        <div class="stats-box-value">5.67</div>
+    </div>
+</div>
+
+</div>        </div>
+    </div>
+            </div>
+        </div>
+
+        
+        
+
+
+    <h2>Classes</h2>
+
+        <table class="aui aui-table-sortable">
+        <thead>
+                        <tr>     <th>Class</th>
+    <th>Line #</th>
+
+            
+        <th class="">
+            <label  title="The total number of statements.">Total Statements</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The percentage of elements that have been filtered from this report.">% Filtered</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label>
+        </th>
+        
+    
+            <th>Actions</th>
+    </tr>         </thead>
+        <tbody>
+                              <tr> <td id="AtomicCodec">
+        <span><a href="#34" title="AtomicCodec" onclick="closeDialogAndScrollTo('dialog-AtomicCodec', '34');">AtomicCodec</a></span>
+</td>
+<td>34<a name="sl-34"></a></td>
+    <td class="">51</td>
+    <td class="">0%</td>
+    <td class="">17</td>
+    <td class="">0</td>
+    <td class=""><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+    <td><button data-dialog-id="dialog-AtomicCodec" class="aui-button aui-button-link dialog-show-button">Show methods</button></td>
+</tr>                      </tbody>
+    </table>
+
+    
+     
+        <section role="dialog" id="dialog-AtomicCodec" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+            
+            <header class="aui-dialog2-header">
+                <h1 class="aui-dialog2-header-main">Class AtomicCodec</h1>
+                <div class="aui-dialog2-header-secondary">
+                    <input id="dialog-AtomicCodec-method-filter" class="test-filter text" type="text" name="method-filter"
+                           placeholder="Type to filter methods..." autocomplete="off"
+                           onkeyup="filterMethods('dialog-AtomicCodec-methods-body', 'dialog-AtomicCodec-method-filter');"/>
+                </div>
+            </header>
+
+            
+            <div class="aui-dialog2-content">
+
+                
+
+                <table class="aui aui-table-sortable">
+                                                                                                                                                                                                                                                    
+                    <thead>
+                                                 <tr> <th id="AtomicCodec">
+    Class<br/>    <span><a href="#34" title="AtomicCodec" onclick="closeDialogAndScrollTo('dialog-AtomicCodec', '34');">AtomicCodec</a></span>
+</th>
+<th>Line #<br/>34<a name="sl-34"></a></th>
+    <th class=""><label  title="The total number of statements.">Total Statements</label><br/>51</th>
+    <th class=""><label  title="The percentage of elements that have been filtered from this report.">% Filtered</label><br/>0%</th>
+    <th class=""><label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label><br/>17</th>
+    <th class=""><label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label><br/>0</th>
+    <th class=""><label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label><br/><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></th>
+</tr>                     </thead>
+                    <tbody id="dialog-AtomicCodec-methods-body">
+                                                                                                            <tr id="AtomicCodec-1">
+<td id="summary-38-5">
+ <span class="sortValue">write(JSONSerializer,Object,Object,Type,int)&#160;:&#160;void</span>
+&#160;&#160;<a href="?line=29#38" title="write(JSONSerializer,Object,Object,Type,int)&#160;:&#160;void" name="sl-38" onclick="closeDialogAndScrollTo('dialog-AtomicCodec', '38');">write(JSONSerializer,Object,Object,Type,int)&#160;:&#160;void</a>
+</td>
+<td align="right"><span class="sortValue">38</span>38</td>
+<td class="" align="right"><span class="sortValue">36.0</span>36</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">11.0</span>11</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="AtomicCodec-2">
+<td id="summary-93-5">
+ <span class="sortValue">deserialze(DefaultJSONParser,Type,Object)&#160;:&#160;T</span>
+&#160;&#160;<a href="?line=29#93" title="deserialze(DefaultJSONParser,Type,Object)&#160;:&#160;T" name="sl-93" onclick="closeDialogAndScrollTo('dialog-AtomicCodec', '93');">deserialze(DefaultJSONParser,Type,Object)&#160;:&#160;T</a>
+</td>
+<td align="right"><span class="sortValue">93</span>93</td>
+<td class="" align="right"><span class="sortValue">14.0</span>14</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">5.0</span>5</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="AtomicCodec-3">
+<td id="summary-120-5">
+ <span class="sortValue">getFastMatchToken()&#160;:&#160;int</span>
+&#160;&#160;<a href="?line=29#120" title="getFastMatchToken()&#160;:&#160;int" name="sl-120" onclick="closeDialogAndScrollTo('dialog-AtomicCodec', '120');">getFastMatchToken()&#160;:&#160;int</a>
+</td>
+<td align="right"><span class="sortValue">120</span>120</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                         </tbody>
+                </table>
+
+                <div>&#160;</div>
+                
+
+            </div>
+
+            
+            <footer class="aui-dialog2-footer">
+                <div class="aui-dialog2-footer-actions">
+                    <button class="aui-button aui-button-primary dialog-close-button"
+                            data-dialog-id="dialog-AtomicCodec">Close</button>
+                </div>
+                <div class="aui-dialog2-footer-hint">Click on a class or a method name to jump to source.</div>
+            </footer>
+        </section>
+
+     
+ 
+        
+        <div>&#160;</div>
+
+<h2>Contributing tests</h2>
+
+    <div>
+                This file is covered by 25 tests.
+        <button data-dialog-id="contr-tests-dialog" class="aui-button aui-button-link dialog-show-button">
+            Select tests to highlight the test coverage
+        </button>.
+    </div>
+
+<section role="dialog" id="contr-tests-dialog" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+    
+    <header class="aui-dialog2-header">
+        <h1 class="aui-dialog2-header-main">Contributing tests</h1>
+        <div class="aui-dialog2-header-secondary">
+            <input id="test-filter" class="test-filter text" type="text" name="test-filter"
+                   placeholder="Type to filter tests..." autocomplete="off"
+                   onkeyup="filterTests('tests-body', 'test-filter', 3);"/>
+        </div>
+    </header>
+
+    
+    <div class="aui-dialog2-content">
+    
+
+        <p class="aui-buttons">
+            <button title="Selects all tests for this file, highlighting their coverage."
+                    class="aui-button" id="selectalltests">Select all</button>
+        </p>
+
+        <table class="aui aui-table-sortable">
+            <thead id="tests-head">
+            <tr id="testHeaderRow">
+                <th class="aui-table-column-unsortable"></th>
+                <th>
+                    <label title="The percentage of coverage contributed by each single test.">Test contribution</label>
+                </th>
+                <th>
+                    <label title="The test (or test iteration) which was executed.">Test</label>
+                </th>
+                <th>
+                    <label>Result</label>
+                </th>
+                <th class="aui-table-column-unsortable">
+                    <label>Actions</label>
+                </th>
+            </tr>
+            </thead>
+            <tbody id="tests-body">
+
+<tr id="test-2400">
+<td><a name="testA-2400"></a><input type="checkbox" id="cb-2400" value="2400" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/atomic/AtomicIntegerArrayFieldTest_test_codec_null_2_1uo.html';">
+<span class="sortValue">0.47560975</span>
+<div>
+<div title="47.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:47.6%"></div></div></div></td>
+<td id="tc-2400">  <span class="sortValue">com.alibaba.json.bvt.atomic.AtomicIntegerArrayFieldTest.test_codec_null_2</span><a href="../../../../com/alibaba/json/bvt/atomic/AtomicIntegerArrayFieldTest_test_codec_null_2_1uo.html" title="View Test Summary Page">com.alibaba.json.bvt.atomic.AtomicIntegerArrayFieldTest.test_codec_null_2</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/atomic/AtomicIntegerArrayFieldTest.html?line=38#src-38" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/atomic/AtomicIntegerArrayFieldTest_test_codec_null_2_1uo.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4481">
+<td><a name="testA-4481"></a><input type="checkbox" id="cb-4481" value="4481" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/atomic/AtomicLongArrayFieldTest_test_codec_null_2_3gh.html';">
+<span class="sortValue">0.46341464</span>
+<div>
+<div title="46.3% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.3%"></div></div></div></td>
+<td id="tc-4481">  <span class="sortValue">com.alibaba.json.bvt.atomic.AtomicLongArrayFieldTest.test_codec_null_2</span><a href="../../../../com/alibaba/json/bvt/atomic/AtomicLongArrayFieldTest_test_codec_null_2_3gh.html" title="View Test Summary Page">com.alibaba.json.bvt.atomic.AtomicLongArrayFieldTest.test_codec_null_2</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/atomic/AtomicLongArrayFieldTest.html?line=38#src-38" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/atomic/AtomicLongArrayFieldTest_test_codec_null_2_3gh.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4020">
+<td><a name="testA-4020"></a><input type="checkbox" id="cb-4020" value="4020" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/bug/Bug_7_test_AtomicIntegerArray_33o.html';">
+<span class="sortValue">0.31707317</span>
+<div>
+<div title="31.7% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:31.7%"></div></div></div></td>
+<td id="tc-4020">  <span class="sortValue">com.alibaba.json.bvt.bug.Bug_7.test_AtomicIntegerArray</span><a href="../../../../com/alibaba/json/bvt/bug/Bug_7_test_AtomicIntegerArray_33o.html" title="View Test Summary Page">com.alibaba.json.bvt.bug.Bug_7.test_AtomicIntegerArray</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/bug/Bug_7.html?line=37#src-37" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/bug/Bug_7_test_AtomicIntegerArray_33o.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-729">
+<td><a name="testA-729"></a><input type="checkbox" id="cb-729" value="729" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/bug/Bug_7_test_AtomicLongArray_k9.html';">
+<span class="sortValue">0.30487806</span>
+<div>
+<div title="30.5% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:30.5%"></div></div></div></td>
+<td id="tc-729">  <span class="sortValue">com.alibaba.json.bvt.bug.Bug_7.test_AtomicLongArray</span><a href="../../../../com/alibaba/json/bvt/bug/Bug_7_test_AtomicLongArray_k9.html" title="View Test Summary Page">com.alibaba.json.bvt.bug.Bug_7.test_AtomicLongArray</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/bug/Bug_7.html?line=46#src-46" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/bug/Bug_7_test_AtomicLongArray_k9.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2174">
+<td><a name="testA-2174"></a><input type="checkbox" id="cb-2174" value="2174" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/atomic/AtomicLongArrayFieldTest_test_codec_null_1oe.html';">
+<span class="sortValue">0.20731707</span>
+<div>
+<div title="20.7% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:20.7%"></div></div></div></td>
+<td id="tc-2174">  <span class="sortValue">com.alibaba.json.bvt.atomic.AtomicLongArrayFieldTest.test_codec_null</span><a href="../../../../com/alibaba/json/bvt/atomic/AtomicLongArrayFieldTest_test_codec_null_1oe.html" title="View Test Summary Page">com.alibaba.json.bvt.atomic.AtomicLongArrayFieldTest.test_codec_null</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/atomic/AtomicLongArrayFieldTest.html?line=14#src-14" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/atomic/AtomicLongArrayFieldTest_test_codec_null_1oe.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4145">
+<td><a name="testA-4145"></a><input type="checkbox" id="cb-4145" value="4145" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/atomic/AtomicIntegerArrayFieldTest_test_codec_null_375.html';">
+<span class="sortValue">0.20731707</span>
+<div>
+<div title="20.7% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:20.7%"></div></div></div></td>
+<td id="tc-4145">  <span class="sortValue">com.alibaba.json.bvt.atomic.AtomicIntegerArrayFieldTest.test_codec_null</span><a href="../../../../com/alibaba/json/bvt/atomic/AtomicIntegerArrayFieldTest_test_codec_null_375.html" title="View Test Summary Page">com.alibaba.json.bvt.atomic.AtomicIntegerArrayFieldTest.test_codec_null</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/atomic/AtomicIntegerArrayFieldTest.html?line=14#src-14" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/atomic/AtomicIntegerArrayFieldTest_test_codec_null_375.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4628">
+<td><a name="testA-4628"></a><input type="checkbox" id="cb-4628" value="4628" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/atomic/AtomicIntegerArrayFieldTest_test_codec_null_1_3kk.html';">
+<span class="sortValue">0.14634146</span>
+<div>
+<div title="14.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:14.6%"></div></div></div></td>
+<td id="tc-4628">  <span class="sortValue">com.alibaba.json.bvt.atomic.AtomicIntegerArrayFieldTest.test_codec_null_1</span><a href="../../../../com/alibaba/json/bvt/atomic/AtomicIntegerArrayFieldTest_test_codec_null_1_3kk.html" title="View Test Summary Page">com.alibaba.json.bvt.atomic.AtomicIntegerArrayFieldTest.test_codec_null_1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/atomic/AtomicIntegerArrayFieldTest.html?line=28#src-28" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/atomic/AtomicIntegerArrayFieldTest_test_codec_null_1_3kk.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4856">
+<td><a name="testA-4856"></a><input type="checkbox" id="cb-4856" value="4856" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/BugTest1_test_0_3qw.html';">
+<span class="sortValue">0.14634146</span>
+<div>
+<div title="14.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:14.6%"></div></div></div></td>
+<td id="tc-4856">  <span class="sortValue">com.alibaba.json.bvt.serializer.BugTest1.test_0</span><a href="../../../../com/alibaba/json/bvt/serializer/BugTest1_test_0_3qw.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.BugTest1.test_0</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/BugTest1.html?line=16#src-16" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/BugTest1_test_0_3qw.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2625">
+<td><a name="testA-2625"></a><input type="checkbox" id="cb-2625" value="2625" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/atomic/AtomicLongArrayFieldTest_test_codec_null_1_20x.html';">
+<span class="sortValue">0.14634146</span>
+<div>
+<div title="14.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:14.6%"></div></div></div></td>
+<td id="tc-2625">  <span class="sortValue">com.alibaba.json.bvt.atomic.AtomicLongArrayFieldTest.test_codec_null_1</span><a href="../../../../com/alibaba/json/bvt/atomic/AtomicLongArrayFieldTest_test_codec_null_1_20x.html" title="View Test Summary Page">com.alibaba.json.bvt.atomic.AtomicLongArrayFieldTest.test_codec_null_1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/atomic/AtomicLongArrayFieldTest.html?line=28#src-28" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/atomic/AtomicLongArrayFieldTest_test_codec_null_1_20x.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-766">
+<td><a name="testA-766"></a><input type="checkbox" id="cb-766" value="766" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/ConcurrentHashMapTest3_test_concurrentHashmap_la.html';">
+<span class="sortValue">0.14634146</span>
+<div>
+<div title="14.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:14.6%"></div></div></div></td>
+<td id="tc-766">  <span class="sortValue">com.alibaba.json.bvt.serializer.ConcurrentHashMapTest3.test_concurrentHashmap</span><a href="../../../../com/alibaba/json/bvt/serializer/ConcurrentHashMapTest3_test_concurrentHashmap_la.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.ConcurrentHashMapTest3.test_concurrentHashmap</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/ConcurrentHashMapTest3.html?line=18#src-18" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/ConcurrentHashMapTest3_test_concurrentHashmap_la.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-251">
+<td><a name="testA-251"></a><input type="checkbox" id="cb-251" value="251" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicBooleanTest_field_test_readOnly_6z.html';">
+<span class="sortValue">0.14634146</span>
+<div>
+<div title="14.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:14.6%"></div></div></div></td>
+<td id="tc-251">  <span class="sortValue">com.alibaba.json.bvt.parser.ReadOnlyAtomicBooleanTest_field.test_readOnly</span><a href="../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicBooleanTest_field_test_readOnly_6z.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.ReadOnlyAtomicBooleanTest_field.test_readOnly</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicBooleanTest_field.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicBooleanTest_field_test_readOnly_6z.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1610">
+<td><a name="testA-1610"></a><input type="checkbox" id="cb-1610" value="1610" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/BugTest1_test_1_18q.html';">
+<span class="sortValue">0.14634146</span>
+<div>
+<div title="14.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:14.6%"></div></div></div></td>
+<td id="tc-1610">  <span class="sortValue">com.alibaba.json.bvt.serializer.BugTest1.test_1</span><a href="../../../../com/alibaba/json/bvt/serializer/BugTest1_test_1_18q.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.BugTest1.test_1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/BugTest1.html?line=21#src-21" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/BugTest1_test_1_18q.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1912">
+<td><a name="testA-1912"></a><input type="checkbox" id="cb-1912" value="1912" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicBooleanTest_test_readOnly_1h4.html';">
+<span class="sortValue">0.14634146</span>
+<div>
+<div title="14.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:14.6%"></div></div></div></td>
+<td id="tc-1912">  <span class="sortValue">com.alibaba.json.bvt.parser.ReadOnlyAtomicBooleanTest.test_readOnly</span><a href="../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicBooleanTest_test_readOnly_1h4.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.ReadOnlyAtomicBooleanTest.test_readOnly</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicBooleanTest.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicBooleanTest_test_readOnly_1h4.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2481">
+<td><a name="testA-2481"></a><input type="checkbox" id="cb-2481" value="2481" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/atomic/AtomicBooleanReadOnlyTest_test_codec_null_1wx.html';">
+<span class="sortValue">0.14634146</span>
+<div>
+<div title="14.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:14.6%"></div></div></div></td>
+<td id="tc-2481">  <span class="sortValue">com.alibaba.json.bvt.atomic.AtomicBooleanReadOnlyTest.test_codec_null</span><a href="../../../../com/alibaba/json/bvt/atomic/AtomicBooleanReadOnlyTest_test_codec_null_1wx.html" title="View Test Summary Page">com.alibaba.json.bvt.atomic.AtomicBooleanReadOnlyTest.test_codec_null</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/atomic/AtomicBooleanReadOnlyTest.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/atomic/AtomicBooleanReadOnlyTest_test_codec_null_1wx.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4235">
+<td><a name="testA-4235"></a><input type="checkbox" id="cb-4235" value="4235" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicLongTest_field_test_readOnly_39n.html';">
+<span class="sortValue">0.1097561</span>
+<div>
+<div title="11% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:11%"></div></div></div></td>
+<td id="tc-4235">  <span class="sortValue">com.alibaba.json.bvt.parser.ReadOnlyAtomicLongTest_field.test_readOnly</span><a href="../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicLongTest_field_test_readOnly_39n.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.ReadOnlyAtomicLongTest_field.test_readOnly</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicLongTest_field.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicLongTest_field_test_readOnly_39n.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3089">
+<td><a name="testA-3089"></a><input type="checkbox" id="cb-3089" value="3089" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/ConcurrentHashMapTest_test_concurrentHashmap_2dt.html';">
+<span class="sortValue">0.1097561</span>
+<div>
+<div title="11% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:11%"></div></div></div></td>
+<td id="tc-3089">  <span class="sortValue">com.alibaba.json.bvt.serializer.ConcurrentHashMapTest.test_concurrentHashmap</span><a href="../../../../com/alibaba/json/bvt/serializer/ConcurrentHashMapTest_test_concurrentHashmap_2dt.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.ConcurrentHashMapTest.test_concurrentHashmap</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/ConcurrentHashMapTest.html?line=18#src-18" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/ConcurrentHashMapTest_test_concurrentHashmap_2dt.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3741">
+<td><a name="testA-3741"></a><input type="checkbox" id="cb-3741" value="3741" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/atomic/AtomicLongReadOnlyTest_test_codec_null_2vx.html';">
+<span class="sortValue">0.1097561</span>
+<div>
+<div title="11% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:11%"></div></div></div></td>
+<td id="tc-3741">  <span class="sortValue">com.alibaba.json.bvt.atomic.AtomicLongReadOnlyTest.test_codec_null</span><a href="../../../../com/alibaba/json/bvt/atomic/AtomicLongReadOnlyTest_test_codec_null_2vx.html" title="View Test Summary Page">com.alibaba.json.bvt.atomic.AtomicLongReadOnlyTest.test_codec_null</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/atomic/AtomicLongReadOnlyTest.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/atomic/AtomicLongReadOnlyTest_test_codec_null_2vx.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1519">
+<td><a name="testA-1519"></a><input type="checkbox" id="cb-1519" value="1519" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicLongTest_test_readOnly_167.html';">
+<span class="sortValue">0.1097561</span>
+<div>
+<div title="11% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:11%"></div></div></div></td>
+<td id="tc-1519">  <span class="sortValue">com.alibaba.json.bvt.parser.ReadOnlyAtomicLongTest.test_readOnly</span><a href="../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicLongTest_test_readOnly_167.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.ReadOnlyAtomicLongTest.test_readOnly</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicLongTest.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicLongTest_test_readOnly_167.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3701">
+<td><a name="testA-3701"></a><input type="checkbox" id="cb-3701" value="3701" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/BugTest1_test_3_2ut.html';">
+<span class="sortValue">0.1097561</span>
+<div>
+<div title="11% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:11%"></div></div></div></td>
+<td id="tc-3701">  <span class="sortValue">com.alibaba.json.bvt.serializer.BugTest1.test_3</span><a href="../../../../com/alibaba/json/bvt/serializer/BugTest1_test_3_2ut.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.BugTest1.test_3</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/BugTest1.html?line=31#src-31" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/BugTest1_test_3_2ut.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-917">
+<td><a name="testA-917"></a><input type="checkbox" id="cb-917" value="917" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/BugTest1_test_2_ph.html';">
+<span class="sortValue">0.085365854</span>
+<div>
+<div title="8.5% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:8.5%"></div></div></div></td>
+<td id="tc-917">  <span class="sortValue">com.alibaba.json.bvt.serializer.BugTest1.test_2</span><a href="../../../../com/alibaba/json/bvt/serializer/BugTest1_test_2_ph.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.BugTest1.test_2</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/BugTest1.html?line=26#src-26" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/BugTest1_test_2_ph.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2061">
+<td><a name="testA-2061"></a><input type="checkbox" id="cb-2061" value="2061" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicIntegerTest_field_test_readOnly_1l9.html';">
+<span class="sortValue">0.085365854</span>
+<div>
+<div title="8.5% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:8.5%"></div></div></div></td>
+<td id="tc-2061">  <span class="sortValue">com.alibaba.json.bvt.parser.ReadOnlyAtomicIntegerTest_field.test_readOnly</span><a href="../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicIntegerTest_field_test_readOnly_1l9.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.ReadOnlyAtomicIntegerTest_field.test_readOnly</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicIntegerTest_field.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicIntegerTest_field_test_readOnly_1l9.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2092">
+<td><a name="testA-2092"></a><input type="checkbox" id="cb-2092" value="2092" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicIntegerTest_test_readOnly_1m4.html';">
+<span class="sortValue">0.085365854</span>
+<div>
+<div title="8.5% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:8.5%"></div></div></div></td>
+<td id="tc-2092">  <span class="sortValue">com.alibaba.json.bvt.parser.ReadOnlyAtomicIntegerTest.test_readOnly</span><a href="../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicIntegerTest_test_readOnly_1m4.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.ReadOnlyAtomicIntegerTest.test_readOnly</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicIntegerTest.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/parser/ReadOnlyAtomicIntegerTest_test_readOnly_1m4.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-783">
+<td><a name="testA-783"></a><input type="checkbox" id="cb-783" value="783" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/atomic/AtomicIntegerReadOnlyTest_test_codec_null_lr.html';">
+<span class="sortValue">0.085365854</span>
+<div>
+<div title="8.5% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:8.5%"></div></div></div></td>
+<td id="tc-783">  <span class="sortValue">com.alibaba.json.bvt.atomic.AtomicIntegerReadOnlyTest.test_codec_null</span><a href="../../../../com/alibaba/json/bvt/atomic/AtomicIntegerReadOnlyTest_test_codec_null_lr.html" title="View Test Summary Page">com.alibaba.json.bvt.atomic.AtomicIntegerReadOnlyTest.test_codec_null</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/atomic/AtomicIntegerReadOnlyTest.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/atomic/AtomicIntegerReadOnlyTest_test_codec_null_lr.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1746">
+<td><a name="testA-1746"></a><input type="checkbox" id="cb-1746" value="1746" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/serializer/ConcurrentHashMapTest2_test_concurrentHashmap_1ci.html';">
+<span class="sortValue">0.085365854</span>
+<div>
+<div title="8.5% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:8.5%"></div></div></div></td>
+<td id="tc-1746">  <span class="sortValue">com.alibaba.json.bvt.serializer.ConcurrentHashMapTest2.test_concurrentHashmap</span><a href="../../../../com/alibaba/json/bvt/serializer/ConcurrentHashMapTest2_test_concurrentHashmap_1ci.html" title="View Test Summary Page">com.alibaba.json.bvt.serializer.ConcurrentHashMapTest2.test_concurrentHashmap</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/serializer/ConcurrentHashMapTest2.html?line=18#src-18" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/serializer/ConcurrentHashMapTest2_test_concurrentHashmap_1ci.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-953">
+<td><a name="testA-953"></a><input type="checkbox" id="cb-953" value="953" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../com/alibaba/json/bvt/parser/FastMatchCheckTest_test_match_qh.html';">
+<span class="sortValue">0.024390243</span>
+<div>
+<div title="2.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:2.4%"></div></div></div></td>
+<td id="tc-953">  <span class="sortValue">com.alibaba.json.bvt.parser.FastMatchCheckTest.test_match</span><a href="../../../../com/alibaba/json/bvt/parser/FastMatchCheckTest_test_match_qh.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.FastMatchCheckTest.test_match</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../com/alibaba/json/bvt/parser/FastMatchCheckTest.html?line=16#src-16" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../com/alibaba/json/bvt/parser/FastMatchCheckTest_test_match_qh.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+
+            </tbody>
+        </table>
+
+        
+        <div>&#160;</div>
+
+    
+    </div>
+
+    
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button data-dialog-id="contr-tests-dialog" class="aui-button aui-button-primary dialog-close-button">Apply</button>
+        </div>
+        <div class="aui-dialog2-footer-hint">Select tests to highlight code covered by them in the source view.</div>
+    </footer>
+</section>
+
+ 
+        
+        
+
+
+
+
+
+<h2>Source view</h2>
+
+
+<div style="display: table; width: 100%;">
+    <div style="display: table-cell">
+        <button class="aui-button aui-button-link"
+                title="Toggles all methods in the source to be either expanded or collapsed."
+                onclick="toggleAllInlineMethods(this); return false;" id="method-expander">
+            Collapse all methods
+        </button>
+    </div>
+    <div style="display: table-cell">
+        <div style="text-align: right; margin-bottom: 10px">
+            <button class="aui-button aui-button-subtle" id="popupHelp">
+    <span class="aui-icon aui-icon-small aui-iconfont-help"></span>&#160;Show legend
+</button>
+<script>
+    AJS.InlineDialog(AJS.$("#popupHelp"), "helpDialog",
+            function(content, trigger, showPopup) {
+                content.css({"padding":"20px"}).html(SRC_FILE_LEGEND_TEXT);
+                showPopup();
+                return false;
+            },
+            {
+                width: 700, hideDelay: 60000
+            }
+    );
+</script>        </div>
+    </div>
+</div>
+
+<table cellspacing="0" cellpadding="0" class="srcView" width="100%">
+
+    
+<tbody> <tr id="l1">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=1#src-1">1</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-1" class="srcLine"><span class="comment">/*</span></span></td>
+</tr>
+ <tr id="l2">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=2#src-2">2</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-2" class="srcLine"><span class="comment"> * Copyright 1999-2018 Alibaba Group.</span></span></td>
+</tr>
+ <tr id="l3">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=3#src-3">3</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-3" class="srcLine"><span class="comment"> *</span></span></td>
+</tr>
+ <tr id="l4">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=4#src-4">4</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-4" class="srcLine"><span class="comment"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></span></td>
+</tr>
+ <tr id="l5">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=5#src-5">5</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-5" class="srcLine"><span class="comment"> * you may not use this file except in compliance with the License.</span></span></td>
+</tr>
+ <tr id="l6">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=6#src-6">6</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-6" class="srcLine"><span class="comment"> * You may obtain a copy of the License at</span></span></td>
+</tr>
+ <tr id="l7">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=7#src-7">7</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-7" class="srcLine"><span class="comment"> *</span></span></td>
+</tr>
+ <tr id="l8">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=8#src-8">8</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-8" class="srcLine"><span class="comment"> *      http://www.apache.org/licenses/LICENSE-2.0</span></span></td>
+</tr>
+ <tr id="l9">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=9#src-9">9</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-9" class="srcLine"><span class="comment"> *</span></span></td>
+</tr>
+ <tr id="l10">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=10#src-10">10</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-10" class="srcLine"><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></span></td>
+</tr>
+ <tr id="l11">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=11#src-11">11</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-11" class="srcLine"><span class="comment"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></span></td>
+</tr>
+ <tr id="l12">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=12#src-12">12</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-12" class="srcLine"><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></span></td>
+</tr>
+ <tr id="l13">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=13#src-13">13</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-13" class="srcLine"><span class="comment"> * See the License for the specific language governing permissions and</span></span></td>
+</tr>
+ <tr id="l14">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=14#src-14">14</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-14" class="srcLine"><span class="comment"> * limitations under the License.</span></span></td>
+</tr>
+ <tr id="l15">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=15#src-15">15</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-15" class="srcLine"><span class="comment"> */</span></span></td>
+</tr>
+ <tr id="l16">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=16#src-16">16</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-16" class="srcLine"><span class="keyword">package</span> com.alibaba.<a href="../../fastjson/pkg-summary.html">fastjson</a>.<a href="../serializer/pkg-summary.html">serializer</a>;</span></td>
+</tr>
+ <tr id="l17">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=17#src-17">17</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-17" class="srcLine"></span></td>
+</tr>
+ <tr id="l18">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=18#src-18">18</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-18" class="srcLine"><span class="keyword">import</span> java.io.IOException;</span></td>
+</tr>
+ <tr id="l19">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=19#src-19">19</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-19" class="srcLine"><span class="keyword">import</span> java.lang.reflect.Type;</span></td>
+</tr>
+ <tr id="l20">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=20#src-20">20</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-20" class="srcLine"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicBoolean;</span></td>
+</tr>
+ <tr id="l21">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=21#src-21">21</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-21" class="srcLine"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicInteger;</span></td>
+</tr>
+ <tr id="l22">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=22#src-22">22</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-22" class="srcLine"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicIntegerArray;</span></td>
+</tr>
+ <tr id="l23">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=23#src-23">23</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-23" class="srcLine"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicLong;</span></td>
+</tr>
+ <tr id="l24">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=24#src-24">24</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-24" class="srcLine"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicLongArray;</span></td>
+</tr>
+ <tr id="l25">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=25#src-25">25</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-25" class="srcLine"></span></td>
+</tr>
+ <tr id="l26">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=26#src-26">26</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-26" class="srcLine"><span class="keyword">import</span> com.alibaba.<a href="../../fastjson/pkg-summary.html">fastjson</a>.<a href="../../../../com/alibaba/fastjson/JSONArray.html#JSONArray">JSONArray</a>;</span></td>
+</tr>
+ <tr id="l27">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=27#src-27">27</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-27" class="srcLine"><span class="keyword">import</span> com.alibaba.<a href="../../fastjson/pkg-summary.html">fastjson</a>.<a href="../parser/pkg-summary.html">parser</a>.<a href="../../../../com/alibaba/fastjson/parser/DefaultJSONParser.html#DefaultJSONParser">DefaultJSONParser</a>;</span></td>
+</tr>
+ <tr id="l28">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=28#src-28">28</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-28" class="srcLine"><span class="keyword">import</span> com.alibaba.<a href="../../fastjson/pkg-summary.html">fastjson</a>.<a href="../parser/pkg-summary.html">parser</a>.<a href="../../../../com/alibaba/fastjson/parser/JSONToken.html#JSONToken">JSONToken</a>;</span></td>
+</tr>
+ <tr id="l29">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=29#src-29">29</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-29" class="srcLine"><span class="keyword">import</span> com.alibaba.<a href="../../fastjson/pkg-summary.html">fastjson</a>.<a href="../parser/pkg-summary.html">parser</a>.<a href="../parser/deserializer/pkg-summary.html">deserializer</a>.<a href="../../../../com/alibaba/fastjson/parser/deserializer/ObjectDeserializer.html#ObjectDeserializer">ObjectDeserializer</a>;</span></td>
+</tr>
+ <tr id="l30">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=30#src-30">30</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-30" class="srcLine"></span></td>
+</tr>
+ <tr id="l31">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=31#src-31">31</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-31" class="srcLine"><span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l32">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=32#src-32">32</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-32" class="srcLine"><span class="comment"> * </span><span class="javadoc">@author</span><span class="comment"> wenshao[szujobs</span><span class="comment">@hotmail.com]</span></span></td>
+</tr>
+ <tr id="l33">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=33#src-33">33</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-33" class="srcLine"><span class="comment"> */</span></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="34" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-34' onclick="toggleInlineStats(this, 'inlinestats-34');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-34" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-34'), 'inlinestats-34');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (82)</td>
+                <td class="inlineStat">Complexity: 17</td>
+                <td class="inlineStat">Complexity Density: 0.33</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l34">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=34#src-34">34</a></td>
+<td align="right" class="coverageCount NoHilight "   onclick="return showTestsForLine(this, 34, 'Tests that hit AtomicCodec');" >&#160;&#160;</td>
+<td class=" srcCell" id="id-34"><span class="spacer"></span><span id="src-34" class="srcLine"><span class="keyword">public</span> <span class="keyword">class</span> <a href="../../../../com/alibaba/fastjson/serializer/AtomicCodec.html#AtomicCodec">AtomicCodec</a> <span class="keyword">implements</span> <a href="../../../../com/alibaba/fastjson/serializer/ObjectSerializer.html#ObjectSerializer">ObjectSerializer</a>, <a href="../../../../com/alibaba/fastjson/parser/deserializer/ObjectDeserializer.html#ObjectDeserializer">ObjectDeserializer</a> {</span></td>
+</tr>
+ <tr id="l35">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=35#src-35">35</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-35" class="srcLine"></span></td>
+</tr>
+ <tr id="l36">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=36#src-36">36</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-36" class="srcLine">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> <a href="../../../../com/alibaba/fastjson/serializer/AtomicCodec.html#AtomicCodec">AtomicCodec</a> instance = <span class="keyword">new</span> <a href="../../../../com/alibaba/fastjson/serializer/AtomicCodec.html#AtomicCodec">AtomicCodec</a>();</span></td>
+</tr>
+ <tr id="l37">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=37#src-37">37</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-37" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="38" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-38' onclick="toggleInlineStats(this, 'inlinestats-38');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-38" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-38'), 'inlinestats-38');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (56)</td>
+                <td class="inlineStat">Complexity: 11</td>
+                <td class="inlineStat">Complexity Density: 0.31</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l38">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=38#src-38">38</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 38, 'Tests that hit write(JSONSerializer,Object,Object,Type,int)&#160;:&#160;void');" ><span title="Line 38, Col 5: method entered 24 times." class="nolink">&#160;24</span></td>
+<td class=" methodStart  srcCell" id="id-38"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 38,91);" id="img-38" src="../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-38" class="srcLine"><span class="nolink" title="Line 38, Col 5: method entered 24 times.">    <span class="keyword">public</span> <span class="keyword">void</span> write(<a href="../../../../com/alibaba/fastjson/serializer/JSONSerializer.html#JSONSerializer">JSONSerializer</a> serializer, Object object, Object fieldName, Type fieldType, <span class="keyword">int</span> features) <span class="keyword">throws</span> IOException {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-38'), 38,91);" id="e38" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l39">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=39#src-39">39</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 39, 'Tests that hit line # 39');" ><span title="Line 39, Col 9: statement executed 24 times." class="nolink">&#160;24</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-39" class="srcLine"><span class="nolink" title="Line 39, Col 9: statement executed 24 times.">        <a href="../../../../com/alibaba/fastjson/serializer/SerializeWriter.html#SerializeWriter">SerializeWriter</a> out = serializer.out;</span></span></td>
+</tr>
+ <tr id="l40">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=40#src-40">40</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-40" class="srcLine">        </span></td>
+</tr>
+ <tr id="l41">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=41#src-41">41</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 41, 'Tests that hit line # 41');" ><span title="Line 41, Col 12: true branch executed 5 times, false branch executed 19 times." class="nolink">&#160;24</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-41" class="srcLine"><span class="nolink" title="Line 41, Col 12: true branch executed 5 times, false branch executed 19 times.">        <span class="keyword">if</span> (object <span class="keyword">instanceof</span> AtomicInteger) {</span></span></td>
+</tr>
+ <tr id="l42">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=42#src-42">42</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 42, 'Tests that hit line # 42');" ><span title="Line 42, Col 13: statement executed 5 times." class="nolink">&#160;5</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-42" class="srcLine"><span class="nolink" title="Line 42, Col 13: statement executed 5 times.">            AtomicInteger val = (AtomicInteger) object;</span></span></td>
+</tr>
+ <tr id="l43">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=43#src-43">43</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 43, 'Tests that hit line # 43');" ><span title="Line 43, Col 13: statement executed 5 times." class="nolink">&#160;5</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-43" class="srcLine"><span class="nolink" title="Line 43, Col 13: statement executed 5 times.">            out.writeInt(val.get());</span></span></td>
+</tr>
+ <tr id="l44">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=44#src-44">44</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 44, 'Tests that hit line # 44');" ><span title="Line 44, Col 13: statement executed 5 times." class="nolink">&#160;5</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-44" class="srcLine"><span class="nolink" title="Line 44, Col 13: statement executed 5 times.">            <span class="keyword">return</span>;</span></span></td>
+</tr>
+ <tr id="l45">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=45#src-45">45</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-45" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l46">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=46#src-46">46</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-46" class="srcLine">        </span></td>
+</tr>
+ <tr id="l47">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=47#src-47">47</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 47, 'Tests that hit line # 47');" ><span title="Line 47, Col 12: true branch executed 5 times, false branch executed 14 times." class="nolink">&#160;19</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-47" class="srcLine"><span class="nolink" title="Line 47, Col 12: true branch executed 5 times, false branch executed 14 times.">        <span class="keyword">if</span> (object <span class="keyword">instanceof</span> AtomicLong) {</span></span></td>
+</tr>
+ <tr id="l48">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=48#src-48">48</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 48, 'Tests that hit line # 48');" ><span title="Line 48, Col 13: statement executed 5 times." class="nolink">&#160;5</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-48" class="srcLine"><span class="nolink" title="Line 48, Col 13: statement executed 5 times.">            AtomicLong val = (AtomicLong) object;</span></span></td>
+</tr>
+ <tr id="l49">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=49#src-49">49</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 49, 'Tests that hit line # 49');" ><span title="Line 49, Col 13: statement executed 5 times." class="nolink">&#160;5</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-49" class="srcLine"><span class="nolink" title="Line 49, Col 13: statement executed 5 times.">            out.writeLong(val.get());</span></span></td>
+</tr>
+ <tr id="l50">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=50#src-50">50</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 50, 'Tests that hit line # 50');" ><span title="Line 50, Col 13: statement executed 5 times." class="nolink">&#160;5</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-50" class="srcLine"><span class="nolink" title="Line 50, Col 13: statement executed 5 times.">            <span class="keyword">return</span>;</span></span></td>
+</tr>
+ <tr id="l51">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=51#src-51">51</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-51" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l52">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=52#src-52">52</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-52" class="srcLine">        </span></td>
+</tr>
+ <tr id="l53">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=53#src-53">53</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 53, 'Tests that hit line # 53');" ><span title="Line 53, Col 12: true branch executed 6 times, false branch executed 8 times." class="nolink">&#160;14</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-53" class="srcLine"><span class="nolink" title="Line 53, Col 12: true branch executed 6 times, false branch executed 8 times.">        <span class="keyword">if</span> (object <span class="keyword">instanceof</span> AtomicBoolean) {</span></span></td>
+</tr>
+ <tr id="l54">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=54#src-54">54</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 54, 'Tests that hit line # 54');" ><span title="Line 54, Col 13: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-54" class="srcLine"><span class="nolink" title="Line 54, Col 13: statement executed 6 times.">            AtomicBoolean val = (AtomicBoolean) object;</span></span></td>
+</tr>
+ <tr id="l55">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=55#src-55">55</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 55, 'Tests that hit line # 55');" ><span title="Line 55, Col 23: true branch executed 5 times, false branch executed 1 time." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-55" class="srcLine"><span class="nolink" title="Line 55, Col 23: true branch executed 5 times, false branch executed 1 time.">            out.append(val.get() ? <span class="string">&quot;true&quot;</span> : <span class="string">&quot;false&quot;</span>);</span></span></td>
+</tr>
+ <tr id="l56">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=56#src-56">56</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 56, 'Tests that hit line # 56');" ><span title="Line 56, Col 13: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-56" class="srcLine"><span class="nolink" title="Line 56, Col 13: statement executed 6 times.">            <span class="keyword">return</span>;</span></span></td>
+</tr>
+ <tr id="l57">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=57#src-57">57</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-57" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l58">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=58#src-58">58</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-58" class="srcLine"></span></td>
+</tr>
+ <tr id="l59">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=59#src-59">59</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 59, 'Tests that hit line # 59');" ><span title="Line 59, Col 12: true branch executed 4 times, false branch executed 4 times." class="nolink">&#160;8</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-59" class="srcLine"><span class="nolink" title="Line 59, Col 12: true branch executed 4 times, false branch executed 4 times.">        <span class="keyword">if</span> (object == <span class="keyword">null</span>) {</span></span></td>
+</tr>
+ <tr id="l60">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=60#src-60">60</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 60, 'Tests that hit line # 60');" ><span title="Line 60, Col 13: statement executed 4 times." class="nolink">&#160;4</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-60" class="srcLine"><span class="nolink" title="Line 60, Col 13: statement executed 4 times.">            out.writeNull(<a href="../../../../com/alibaba/fastjson/serializer/SerializerFeature.html#SerializerFeature">SerializerFeature</a>.WriteNullListAsEmpty);</span></span></td>
+</tr>
+ <tr id="l61">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=61#src-61">61</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 61, 'Tests that hit line # 61');" ><span title="Line 61, Col 13: statement executed 4 times." class="nolink">&#160;4</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-61" class="srcLine"><span class="nolink" title="Line 61, Col 13: statement executed 4 times.">            <span class="keyword">return</span>;</span></span></td>
+</tr>
+ <tr id="l62">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=62#src-62">62</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-62" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l63">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=63#src-63">63</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-63" class="srcLine"></span></td>
+</tr>
+ <tr id="l64">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=64#src-64">64</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 64, 'Tests that hit line # 64');" ><span title="Line 64, Col 12: true branch executed 2 times, false branch executed 2 times." class="nolink">&#160;4</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-64" class="srcLine"><span class="nolink" title="Line 64, Col 12: true branch executed 2 times, false branch executed 2 times.">        <span class="keyword">if</span> (object <span class="keyword">instanceof</span> AtomicIntegerArray) {</span></span></td>
+</tr>
+ <tr id="l65">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=65#src-65">65</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 65, 'Tests that hit line # 65');" ><span title="Line 65, Col 13: statement executed 2 times." class="nolink">&#160;2</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-65" class="srcLine"><span class="nolink" title="Line 65, Col 13: statement executed 2 times.">            AtomicIntegerArray array = (AtomicIntegerArray) object;</span></span></td>
+</tr>
+ <tr id="l66">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=66#src-66">66</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 66, 'Tests that hit line # 66');" ><span title="Line 66, Col 13: statement executed 2 times." class="nolink">&#160;2</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-66" class="srcLine"><span class="nolink" title="Line 66, Col 13: statement executed 2 times.">            <span class="keyword">int</span> len = array.length();</span></span></td>
+</tr>
+ <tr id="l67">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=67#src-67">67</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 67, 'Tests that hit line # 67');" ><span title="Line 67, Col 13: statement executed 2 times." class="nolink">&#160;2</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-67" class="srcLine"><span class="nolink" title="Line 67, Col 13: statement executed 2 times.">            out.write('[');</span></span></td>
+</tr>
+ <tr id="l68">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=68#src-68">68</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 68, 'Tests that hit line # 68');" ><span title="Line 68, Col 28: true branch executed 5 times, false branch executed 2 times." class="nolink">&#160;7</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-68" class="srcLine"><span class="nolink" title="Line 68, Col 28: true branch executed 5 times, false branch executed 2 times.">            <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; len; ++i) {</span></span></td>
+</tr>
+ <tr id="l69">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=69#src-69">69</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 69, 'Tests that hit line # 69');" ><span title="Line 69, Col 17: statement executed 5 times." class="nolink">&#160;5</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-69" class="srcLine"><span class="nolink" title="Line 69, Col 17: statement executed 5 times.">                <span class="keyword">int</span> val = array.get(i);</span></span></td>
+</tr>
+ <tr id="l70">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=70#src-70">70</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 70, 'Tests that hit line # 70');" ><span title="Line 70, Col 20: true branch executed 3 times, false branch executed 2 times." class="nolink">&#160;5</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-70" class="srcLine"><span class="nolink" title="Line 70, Col 20: true branch executed 3 times, false branch executed 2 times.">                <span class="keyword">if</span> (i != 0) {</span></span></td>
+</tr>
+ <tr id="l71">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=71#src-71">71</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 71, 'Tests that hit line # 71');" ><span title="Line 71, Col 21: statement executed 3 times." class="nolink">&#160;3</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-71" class="srcLine"><span class="nolink" title="Line 71, Col 21: statement executed 3 times.">                    out.write(',');</span></span></td>
+</tr>
+ <tr id="l72">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=72#src-72">72</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-72" class="srcLine">                }</span></td>
+</tr>
+ <tr id="l73">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=73#src-73">73</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 73, 'Tests that hit line # 73');" ><span title="Line 73, Col 17: statement executed 5 times." class="nolink">&#160;5</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-73" class="srcLine"><span class="nolink" title="Line 73, Col 17: statement executed 5 times.">                out.writeInt(val);</span></span></td>
+</tr>
+ <tr id="l74">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=74#src-74">74</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-74" class="srcLine">            }</span></td>
+</tr>
+ <tr id="l75">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=75#src-75">75</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 75, 'Tests that hit line # 75');" ><span title="Line 75, Col 13: statement executed 2 times." class="nolink">&#160;2</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-75" class="srcLine"><span class="nolink" title="Line 75, Col 13: statement executed 2 times.">            out.write(']');</span></span></td>
+</tr>
+ <tr id="l76">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=76#src-76">76</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-76" class="srcLine">            </span></td>
+</tr>
+ <tr id="l77">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=77#src-77">77</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 77, 'Tests that hit line # 77');" ><span title="Line 77, Col 13: statement executed 2 times." class="nolink">&#160;2</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-77" class="srcLine"><span class="nolink" title="Line 77, Col 13: statement executed 2 times.">            <span class="keyword">return</span>;</span></span></td>
+</tr>
+ <tr id="l78">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=78#src-78">78</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-78" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l79">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=79#src-79">79</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-79" class="srcLine">        </span></td>
+</tr>
+ <tr id="l80">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=80#src-80">80</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 80, 'Tests that hit line # 80');" ><span title="Line 80, Col 9: statement executed 2 times." class="nolink">&#160;2</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-80" class="srcLine"><span class="nolink" title="Line 80, Col 9: statement executed 2 times.">        AtomicLongArray array = (AtomicLongArray) object;</span></span></td>
+</tr>
+ <tr id="l81">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=81#src-81">81</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 81, 'Tests that hit line # 81');" ><span title="Line 81, Col 9: statement executed 2 times." class="nolink">&#160;2</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-81" class="srcLine"><span class="nolink" title="Line 81, Col 9: statement executed 2 times.">        <span class="keyword">int</span> len = array.length();</span></span></td>
+</tr>
+ <tr id="l82">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=82#src-82">82</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 82, 'Tests that hit line # 82');" ><span title="Line 82, Col 9: statement executed 2 times." class="nolink">&#160;2</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-82" class="srcLine"><span class="nolink" title="Line 82, Col 9: statement executed 2 times.">        out.write('[');</span></span></td>
+</tr>
+ <tr id="l83">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=83#src-83">83</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 83, 'Tests that hit line # 83');" ><span title="Line 83, Col 24: true branch executed 5 times, false branch executed 2 times." class="nolink">&#160;7</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-83" class="srcLine"><span class="nolink" title="Line 83, Col 24: true branch executed 5 times, false branch executed 2 times.">        <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; len; ++i) {</span></span></td>
+</tr>
+ <tr id="l84">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=84#src-84">84</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 84, 'Tests that hit line # 84');" ><span title="Line 84, Col 13: statement executed 5 times." class="nolink">&#160;5</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-84" class="srcLine"><span class="nolink" title="Line 84, Col 13: statement executed 5 times.">            <span class="keyword">long</span> val = array.get(i);</span></span></td>
+</tr>
+ <tr id="l85">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=85#src-85">85</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 85, 'Tests that hit line # 85');" ><span title="Line 85, Col 16: true branch executed 3 times, false branch executed 2 times." class="nolink">&#160;5</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-85" class="srcLine"><span class="nolink" title="Line 85, Col 16: true branch executed 3 times, false branch executed 2 times.">            <span class="keyword">if</span> (i != 0) {</span></span></td>
+</tr>
+ <tr id="l86">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=86#src-86">86</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 86, 'Tests that hit line # 86');" ><span title="Line 86, Col 17: statement executed 3 times." class="nolink">&#160;3</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-86" class="srcLine"><span class="nolink" title="Line 86, Col 17: statement executed 3 times.">                out.write(',');</span></span></td>
+</tr>
+ <tr id="l87">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=87#src-87">87</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-87" class="srcLine">            }</span></td>
+</tr>
+ <tr id="l88">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=88#src-88">88</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 88, 'Tests that hit line # 88');" ><span title="Line 88, Col 13: statement executed 5 times." class="nolink">&#160;5</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-88" class="srcLine"><span class="nolink" title="Line 88, Col 13: statement executed 5 times.">            out.writeLong(val);</span></span></td>
+</tr>
+ <tr id="l89">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=89#src-89">89</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-89" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l90">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=90#src-90">90</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 90, 'Tests that hit line # 90');" ><span title="Line 90, Col 9: statement executed 2 times." class="nolink">&#160;2</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-90" class="srcLine"><span class="nolink" title="Line 90, Col 9: statement executed 2 times.">        out.write(']');</span></span></td>
+</tr>
+ <tr id="l91">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=91#src-91">91</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-91" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l92">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=92#src-92">92</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-92" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="93" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-93' onclick="toggleInlineStats(this, 'inlinestats-93');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-93" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-93'), 'inlinestats-93');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (22)</td>
+                <td class="inlineStat">Complexity: 5</td>
+                <td class="inlineStat">Complexity Density: 0.36</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l93">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=93#src-93">93</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 93, 'Tests that hit deserialze(DefaultJSONParser,Type,Object)&#160;:&#160;T');" ><span title="Line 93, Col 5: method entered 4 times." class="nolink">&#160;4</span></td>
+<td class=" methodStart  srcCell" id="id-93"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 93,118);" id="img-93" src="../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-93" class="srcLine"><span class="nolink" title="Line 93, Col 5: method entered 4 times.">    @SuppressWarnings(<span class="string">&quot;unchecked&quot;</span>)</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-93'), 93,118);" id="e93" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l94">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=94#src-94">94</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-94" class="srcLine">    <span class="keyword">public</span> &lt;T&gt; T deserialze(<a href="../../../../com/alibaba/fastjson/parser/DefaultJSONParser.html#DefaultJSONParser">DefaultJSONParser</a> parser, Type clazz, Object fieldName) {</span></td>
+</tr>
+ <tr id="l95">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=95#src-95">95</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 95, 'Tests that hit line # 95');" ><span title="Line 95, Col 12: true branch executed 2 times, false branch executed 2 times." class="nolink">&#160;4</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-95" class="srcLine"><span class="nolink" title="Line 95, Col 12: true branch executed 2 times, false branch executed 2 times.">        <span class="keyword">if</span> (parser.lexer.token() == <a href="../../../../com/alibaba/fastjson/parser/JSONToken.html#JSONToken">JSONToken</a>.NULL) {</span></span></td>
+</tr>
+ <tr id="l96">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=96#src-96">96</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 96, 'Tests that hit line # 96');" ><span title="Line 96, Col 13: statement executed 2 times." class="nolink">&#160;2</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-96" class="srcLine"><span class="nolink" title="Line 96, Col 13: statement executed 2 times.">            parser.lexer.nextToken(<a href="../../../../com/alibaba/fastjson/parser/JSONToken.html#JSONToken">JSONToken</a>.COMMA);</span></span></td>
+</tr>
+ <tr id="l97">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=97#src-97">97</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 97, 'Tests that hit line # 97');" ><span title="Line 97, Col 13: statement executed 2 times." class="nolink">&#160;2</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-97" class="srcLine"><span class="nolink" title="Line 97, Col 13: statement executed 2 times.">            <span class="keyword">return</span> <span class="keyword">null</span>;</span></span></td>
+</tr>
+ <tr id="l98">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=98#src-98">98</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-98" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l99">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=99#src-99">99</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-99" class="srcLine"></span></td>
+</tr>
+ <tr id="l100">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=100#src-100">100</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 100, 'Tests that hit line # 100');" ><span title="Line 100, Col 9: statement executed 2 times." class="nolink">&#160;2</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-100" class="srcLine"><span class="nolink" title="Line 100, Col 9: statement executed 2 times.">        <a href="../../../../com/alibaba/fastjson/JSONArray.html#JSONArray">JSONArray</a> array = <span class="keyword">new</span> <a href="../../../../com/alibaba/fastjson/JSONArray.html#JSONArray">JSONArray</a>();</span></span></td>
+</tr>
+ <tr id="l101">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=101#src-101">101</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 101, 'Tests that hit line # 101');" ><span title="Line 101, Col 9: statement executed 2 times." class="nolink">&#160;2</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-101" class="srcLine"><span class="nolink" title="Line 101, Col 9: statement executed 2 times.">        parser.parseArray(array);</span></span></td>
+</tr>
+ <tr id="l102">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=102#src-102">102</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-102" class="srcLine"></span></td>
+</tr>
+ <tr id="l103">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=103#src-103">103</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 103, 'Tests that hit line # 103');" ><span title="Line 103, Col 12: true branch executed 1 time, false branch executed 1 time." class="nolink">&#160;2</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-103" class="srcLine"><span class="nolink" title="Line 103, Col 12: true branch executed 1 time, false branch executed 1 time.">        <span class="keyword">if</span> (clazz == AtomicIntegerArray.<span class="keyword">class</span>) {</span></span></td>
+</tr>
+ <tr id="l104">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=104#src-104">104</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 104, 'Tests that hit line # 104');" ><span title="Line 104, Col 13: statement executed 1 time." class="nolink">&#160;1</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-104" class="srcLine"><span class="nolink" title="Line 104, Col 13: statement executed 1 time.">            AtomicIntegerArray atomicArray = <span class="keyword">new</span> AtomicIntegerArray(array.size());</span></span></td>
+</tr>
+ <tr id="l105">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=105#src-105">105</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 105, 'Tests that hit line # 105');" ><span title="Line 105, Col 28: true branch executed 2 times, false branch executed 1 time." class="nolink">&#160;3</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-105" class="srcLine"><span class="nolink" title="Line 105, Col 28: true branch executed 2 times, false branch executed 1 time.">            <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; array.size(); ++i) {</span></span></td>
+</tr>
+ <tr id="l106">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=106#src-106">106</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 106, 'Tests that hit line # 106');" ><span title="Line 106, Col 17: statement executed 2 times." class="nolink">&#160;2</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-106" class="srcLine"><span class="nolink" title="Line 106, Col 17: statement executed 2 times.">                atomicArray.set(i, array.getInteger(i));</span></span></td>
+</tr>
+ <tr id="l107">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=107#src-107">107</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-107" class="srcLine">            }</span></td>
+</tr>
+ <tr id="l108">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=108#src-108">108</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-108" class="srcLine">    </span></td>
+</tr>
+ <tr id="l109">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=109#src-109">109</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 109, 'Tests that hit line # 109');" ><span title="Line 109, Col 13: statement executed 1 time." class="nolink">&#160;1</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-109" class="srcLine"><span class="nolink" title="Line 109, Col 13: statement executed 1 time.">            <span class="keyword">return</span> (T) atomicArray;</span></span></td>
+</tr>
+ <tr id="l110">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=110#src-110">110</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-110" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l111">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=111#src-111">111</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-111" class="srcLine">        </span></td>
+</tr>
+ <tr id="l112">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=112#src-112">112</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 112, 'Tests that hit line # 112');" ><span title="Line 112, Col 9: statement executed 1 time." class="nolink">&#160;1</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-112" class="srcLine"><span class="nolink" title="Line 112, Col 9: statement executed 1 time.">        AtomicLongArray atomicArray = <span class="keyword">new</span> AtomicLongArray(array.size());</span></span></td>
+</tr>
+ <tr id="l113">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=113#src-113">113</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 113, 'Tests that hit line # 113');" ><span title="Line 113, Col 24: true branch executed 2 times, false branch executed 1 time." class="nolink">&#160;3</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-113" class="srcLine"><span class="nolink" title="Line 113, Col 24: true branch executed 2 times, false branch executed 1 time.">        <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; array.size(); ++i) {</span></span></td>
+</tr>
+ <tr id="l114">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=114#src-114">114</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 114, 'Tests that hit line # 114');" ><span title="Line 114, Col 13: statement executed 2 times." class="nolink">&#160;2</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-114" class="srcLine"><span class="nolink" title="Line 114, Col 13: statement executed 2 times.">            atomicArray.set(i, array.getLong(i));</span></span></td>
+</tr>
+ <tr id="l115">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=115#src-115">115</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-115" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l116">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=116#src-116">116</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-116" class="srcLine"></span></td>
+</tr>
+ <tr id="l117">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=117#src-117">117</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 117, 'Tests that hit line # 117');" ><span title="Line 117, Col 9: statement executed 1 time." class="nolink">&#160;1</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-117" class="srcLine"><span class="nolink" title="Line 117, Col 9: statement executed 1 time.">        <span class="keyword">return</span> (T) atomicArray;</span></span></td>
+</tr>
+ <tr id="l118">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=118#src-118">118</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-118" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l119">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=119#src-119">119</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-119" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="120" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-120' onclick="toggleInlineStats(this, 'inlinestats-120');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-120" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-120'), 'inlinestats-120');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l120">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=120#src-120">120</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 120, 'Tests that hit getFastMatchToken()&#160;:&#160;int');" ><span title="Line 120, Col 5: method entered 1 time." class="nolink">&#160;1</span></td>
+<td class=" methodStart  srcCell" id="id-120"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 120,122);" id="img-120" src="../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-120" class="srcLine"><span class="nolink" title="Line 120, Col 5: method entered 1 time.">    <span class="keyword">public</span> <span class="keyword">int</span> getFastMatchToken() {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-120'), 120,122);" id="e120" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l121">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=121#src-121">121</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 121, 'Tests that hit line # 121');" ><span title="Line 121, Col 9: statement executed 1 time." class="nolink">&#160;1</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-121" class="srcLine"><span class="nolink" title="Line 121, Col 9: statement executed 1 time.">        <span class="keyword">return</span> <a href="../../../../com/alibaba/fastjson/parser/JSONToken.html#JSONToken">JSONToken</a>.LBRACKET;</span></span></td>
+</tr>
+ <tr id="l122">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=122#src-122">122</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-122" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l123">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=123#src-123">123</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-123" class="srcLine">}</span></td>
+</tr>
+ 
+    </tbody></table>    </div>
+</div><!-- .aui-tabs -->
+
+<script type="text/javascript"> 
+    var ol_bgclass = "overBG";
+    var ol_fgclass = "overFG";
+    var ol_cgclass = "overCaption";
+    var ol_captionfontclass= "overCaption";
+    var ol_closefontclass = "closeFont";
+    var ol_closeclick = 1;
+    var ol_close = 'X';
+    var ol_wrap = 1;
+    var rootRelPath = '../../../../';
+    var testsPerFile = -1;
+</script>
+<script src="AtomicCodec.js" type="text/javascript"></script>
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="https://openclover.org">OpenClover</a> v 4.5.2
+                on Tue Apr 9 2024 16:45:45 CDT using coverage data from Tue Apr 9 2024 16:43:32 CDT.
+            </li>
+        </ul>
+        <ul>
+            <li>OpenClover is free and open-source software. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>

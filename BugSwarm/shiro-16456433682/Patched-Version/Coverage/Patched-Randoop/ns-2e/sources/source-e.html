@@ -1,0 +1,592 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SimpleCookie</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.web.servlet</a>
+</div>
+
+<h1>Coverage Summary for Class: SimpleCookie (org.apache.shiro.web.servlet)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SimpleCookie</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    11.9%
+  </span>
+  <span class="absValue">
+    (5/42)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/52)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    6.6%
+  </span>
+  <span class="absValue">
+    (10/151)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.web.servlet;
+&nbsp;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;import org.owasp.encoder.Encode;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import javax.servlet.http.HttpServletRequest;
+&nbsp;import javax.servlet.http.HttpServletResponse;
+&nbsp;import java.text.DateFormat;
+&nbsp;import java.text.SimpleDateFormat;
+&nbsp;import java.util.Calendar;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.Locale;
+&nbsp;import java.util.TimeZone;
+&nbsp;
+&nbsp;/**
+&nbsp; * Default {@link Cookie Cookie} implementation.  &#39;HttpOnly&#39; is supported out of the box, even on
+&nbsp; * Servlet {@code 2.4} and {@code 2.5} container implementations, using raw header writing logic and not
+&nbsp; * {@link javax.servlet.http.Cookie javax.servlet.http.Cookie} objects (which only has &#39;HttpOnly&#39; support in Servlet
+&nbsp; * {@code 2.6} specifications and above).
+&nbsp; *
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public class SimpleCookie implements Cookie {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@code -1}, indicating the cookie should expire when the browser closes.
+&nbsp;     */
+&nbsp;    public static final int DEFAULT_MAX_AGE = -1;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@code -1} indicating that no version property should be set on the cookie.
+&nbsp;     */
+&nbsp;    public static final int DEFAULT_VERSION = -1;
+&nbsp;
+&nbsp;    //These constants are protected on purpose so that the test case can use them
+&nbsp;    protected static final String NAME_VALUE_DELIMITER = &quot;=&quot;;
+&nbsp;    protected static final String ATTRIBUTE_DELIMITER = &quot;; &quot;;
+&nbsp;    protected static final long DAY_MILLIS = 86400000; //1 day = 86,400,000 milliseconds
+&nbsp;    protected static final String GMT_TIME_ZONE_ID = &quot;GMT&quot;;
+&nbsp;    protected static final String COOKIE_DATE_FORMAT_STRING = &quot;EEE, dd-MMM-yyyy HH:mm:ss z&quot;;
+&nbsp;
+&nbsp;    protected static final String COOKIE_HEADER_NAME = &quot;Set-Cookie&quot;;
+&nbsp;    protected static final String PATH_ATTRIBUTE_NAME = &quot;Path&quot;;
+&nbsp;    protected static final String EXPIRES_ATTRIBUTE_NAME = &quot;Expires&quot;;
+&nbsp;    protected static final String MAXAGE_ATTRIBUTE_NAME = &quot;Max-Age&quot;;
+&nbsp;    protected static final String DOMAIN_ATTRIBUTE_NAME = &quot;Domain&quot;;
+&nbsp;    protected static final String VERSION_ATTRIBUTE_NAME = &quot;Version&quot;;
+&nbsp;    protected static final String COMMENT_ATTRIBUTE_NAME = &quot;Comment&quot;;
+&nbsp;    protected static final String SECURE_ATTRIBUTE_NAME = &quot;Secure&quot;;
+&nbsp;    protected static final String HTTP_ONLY_ATTRIBUTE_NAME = &quot;HttpOnly&quot;;
+&nbsp;    protected static final String SAME_SITE_ATTRIBUTE_NAME = &quot;SameSite&quot;;
+&nbsp;
+<b class="fc">&nbsp;    private static final transient Logger log = LoggerFactory.getLogger(SimpleCookie.class);</b>
+&nbsp;
+&nbsp;    private String name;
+&nbsp;    private String value;
+&nbsp;    private String comment;
+&nbsp;    private String domain;
+&nbsp;    private String path;
+&nbsp;    private int maxAge;
+&nbsp;    private int version;
+&nbsp;    private boolean secure;
+&nbsp;    private boolean httpOnly;
+&nbsp;    private SameSiteOptions sameSite;
+&nbsp;
+<b class="fc">&nbsp;    public SimpleCookie() {</b>
+<b class="fc">&nbsp;        this.maxAge = DEFAULT_MAX_AGE;</b>
+<b class="fc">&nbsp;        this.version = DEFAULT_VERSION;</b>
+<b class="fc">&nbsp;        this.httpOnly = true; //most of the cookies ever used by Shiro should be as secure as possible.</b>
+<b class="fc">&nbsp;        this.sameSite = SameSiteOptions.LAX;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SimpleCookie(String name) {
+<b class="fc">&nbsp;        this();</b>
+<b class="fc">&nbsp;        this.name = name;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public SimpleCookie(Cookie cookie) {</b>
+<b class="nc">&nbsp;        this.name = cookie.getName();</b>
+<b class="nc">&nbsp;        this.value = cookie.getValue();</b>
+<b class="nc">&nbsp;        this.comment = cookie.getComment();</b>
+<b class="nc">&nbsp;        this.domain = cookie.getDomain();</b>
+<b class="nc">&nbsp;        this.path = cookie.getPath();</b>
+<b class="nc">&nbsp;        this.maxAge = Math.max(DEFAULT_MAX_AGE, cookie.getMaxAge());</b>
+<b class="nc">&nbsp;        this.version = Math.max(DEFAULT_VERSION, cookie.getVersion());</b>
+<b class="nc">&nbsp;        this.secure = cookie.isSecure();</b>
+<b class="nc">&nbsp;        this.httpOnly = cookie.isHttpOnly();</b>
+<b class="nc">&nbsp;        this.sameSite = cookie.getSameSite();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String getName() {
+<b class="nc">&nbsp;        return name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setName(String name) {
+<b class="nc">&nbsp;        if (!StringUtils.hasText(name)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Name cannot be null/empty.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.name = name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String getValue() {
+<b class="nc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setValue(String value) {
+<b class="nc">&nbsp;        this.value = value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String getComment() {
+<b class="nc">&nbsp;        return comment;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setComment(String comment) {
+<b class="nc">&nbsp;        this.comment = comment;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String getDomain() {
+<b class="nc">&nbsp;        return domain;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setDomain(String domain) {
+<b class="nc">&nbsp;        this.domain = domain;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String getPath() {
+<b class="nc">&nbsp;        return path;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setPath(String path) {
+<b class="nc">&nbsp;        this.path = path;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int getMaxAge() {
+<b class="nc">&nbsp;        return maxAge;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setMaxAge(int maxAge) {
+<b class="fc">&nbsp;        this.maxAge = Math.max(DEFAULT_MAX_AGE, maxAge);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int getVersion() {
+<b class="nc">&nbsp;        return version;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setVersion(int version) {
+<b class="nc">&nbsp;        this.version = Math.max(DEFAULT_VERSION, version);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isSecure() {
+<b class="nc">&nbsp;        return secure;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setSecure(boolean secure) {
+<b class="nc">&nbsp;        this.secure = secure;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isHttpOnly() {
+<b class="nc">&nbsp;        return httpOnly;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setHttpOnly(boolean httpOnly) {
+<b class="fc">&nbsp;        this.httpOnly = httpOnly;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public SameSiteOptions getSameSite() {
+<b class="nc">&nbsp;        return sameSite;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setSameSite(SameSiteOptions sameSite) {
+<b class="nc">&nbsp;        this.sameSite = sameSite;</b>
+<b class="nc">&nbsp;        if (this.sameSite == SameSiteOptions.NONE) {</b>
+&nbsp;            // do not allow invalid cookies. Only secure cookies are allowed if SameSite is set to NONE.
+<b class="nc">&nbsp;            setSecure(true);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the Cookie&#39;s calculated path setting.  If the {@link javax.servlet.http.Cookie#getPath() path} is {@code null}, then the
+&nbsp;     * {@code request}&#39;s {@link javax.servlet.http.HttpServletRequest#getContextPath() context path}
+&nbsp;     * will be returned. If getContextPath() is the empty string or null then the ROOT_PATH constant is returned.
+&nbsp;     *
+&nbsp;     * @param request the incoming HttpServletRequest
+&nbsp;     * @return the path to be used as the path when the cookie is created or removed
+&nbsp;     */
+&nbsp;    private String calculatePath(HttpServletRequest request) {
+<b class="nc">&nbsp;        String path = StringUtils.clean(getPath());</b>
+<b class="nc">&nbsp;        if (!StringUtils.hasText(path)) {</b>
+<b class="nc">&nbsp;            path = StringUtils.clean(request.getContextPath());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //fix for http://issues.apache.org/jira/browse/SHIRO-9:
+<b class="nc">&nbsp;        if (path == null) {</b>
+<b class="nc">&nbsp;            path = ROOT_PATH;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        log.trace(&quot;calculated path: {}&quot;, path);</b>
+<b class="nc">&nbsp;        return path;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void saveTo(HttpServletRequest request, HttpServletResponse response) {
+&nbsp;
+<b class="nc">&nbsp;        String name = getName();</b>
+<b class="nc">&nbsp;        String value = getValue();</b>
+<b class="nc">&nbsp;        String comment = getComment();</b>
+<b class="nc">&nbsp;        String domain = getDomain();</b>
+<b class="nc">&nbsp;        String path = calculatePath(request);</b>
+<b class="nc">&nbsp;        int maxAge = getMaxAge();</b>
+<b class="nc">&nbsp;        int version = getVersion();</b>
+<b class="nc">&nbsp;        boolean secure = isSecure();</b>
+<b class="nc">&nbsp;        boolean httpOnly = isHttpOnly();</b>
+<b class="nc">&nbsp;        SameSiteOptions sameSite = getSameSite();</b>
+&nbsp;
+<b class="nc">&nbsp;        addCookieHeader(response, name, value, comment, domain, path, maxAge, version, secure, httpOnly, sameSite);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addCookieHeader(HttpServletResponse response, String name, String value, String comment,
+&nbsp;                                 String domain, String path, int maxAge, int version,
+&nbsp;                                 boolean secure, boolean httpOnly, SameSiteOptions sameSite) {
+&nbsp;
+<b class="nc">&nbsp;        String headerValue = buildHeaderValue(name, value, comment, domain, path, maxAge, version, secure, httpOnly, sameSite);</b>
+<b class="nc">&nbsp;        response.addHeader(COOKIE_HEADER_NAME, headerValue);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (log.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;            log.debug(&quot;Added HttpServletResponse Cookie [{}]&quot;, headerValue);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * This implementation followed the grammar defined here for convenience:
+&nbsp;     * &lt;a href=&quot;http://github.com/abarth/http-state/blob/master/notes/2009-11-07-Yui-Naruse.txt&quot;&gt;Cookie grammar&lt;/a&gt;.
+&nbsp;     *
+&nbsp;     * @return the &#39;Set-Cookie&#39; header value for this cookie instance.
+&nbsp;     */
+&nbsp;
+&nbsp;    protected String buildHeaderValue(String name, String value, String comment,
+&nbsp;                                      String domain, String path, int maxAge, int version,
+&nbsp;                                      boolean secure, boolean httpOnly) {
+&nbsp;
+<b class="nc">&nbsp;        return buildHeaderValue(name, value, comment, domain, path, maxAge, version, secure, httpOnly, getSameSite());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected String buildHeaderValue(String name, String value, String comment,
+&nbsp;                                      String domain, String path, int maxAge, int version,
+&nbsp;                                      boolean secure, boolean httpOnly, SameSiteOptions sameSite) {
+&nbsp;
+<b class="nc">&nbsp;        if (!StringUtils.hasText(name)) {</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Cookie name cannot be null/empty.&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder(name).append(NAME_VALUE_DELIMITER);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (StringUtils.hasText(value)) {</b>
+<b class="nc">&nbsp;            sb.append(value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        appendComment(sb, comment);</b>
+<b class="nc">&nbsp;        appendDomain(sb, domain);</b>
+<b class="nc">&nbsp;        appendPath(sb, path);</b>
+<b class="nc">&nbsp;        appendExpires(sb, maxAge);</b>
+<b class="nc">&nbsp;        appendVersion(sb, version);</b>
+<b class="nc">&nbsp;        appendSecure(sb, secure);</b>
+<b class="nc">&nbsp;        appendHttpOnly(sb, httpOnly);</b>
+<b class="nc">&nbsp;        appendSameSite(sb, sameSite);</b>
+&nbsp;
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void appendComment(StringBuilder sb, String comment) {
+<b class="nc">&nbsp;        if (StringUtils.hasText(comment)) {</b>
+<b class="nc">&nbsp;            sb.append(ATTRIBUTE_DELIMITER);</b>
+<b class="nc">&nbsp;            sb.append(COMMENT_ATTRIBUTE_NAME).append(NAME_VALUE_DELIMITER).append(comment);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void appendDomain(StringBuilder sb, String domain) {
+<b class="nc">&nbsp;        if (StringUtils.hasText(domain)) {</b>
+<b class="nc">&nbsp;            sb.append(ATTRIBUTE_DELIMITER);</b>
+<b class="nc">&nbsp;            sb.append(DOMAIN_ATTRIBUTE_NAME).append(NAME_VALUE_DELIMITER).append(domain);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void appendPath(StringBuilder sb, String path) {
+<b class="nc">&nbsp;        if (StringUtils.hasText(path)) {</b>
+<b class="nc">&nbsp;            sb.append(ATTRIBUTE_DELIMITER);</b>
+<b class="nc">&nbsp;            sb.append(PATH_ATTRIBUTE_NAME).append(NAME_VALUE_DELIMITER).append(path);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void appendExpires(StringBuilder sb, int maxAge) {
+&nbsp;        // if maxAge is negative, cookie should should expire when browser closes
+&nbsp;	// Don&#39;t write the maxAge cookie value if it&#39;s negative - at least on Firefox it&#39;ll cause the 
+&nbsp;	// cookie to be deleted immediately
+&nbsp;        // Write the expires header used by older browsers, but may be unnecessary
+&nbsp;        // and it is not by the spec, see http://www.faqs.org/rfcs/rfc2965.html
+&nbsp;        // TODO consider completely removing the following 
+<b class="nc">&nbsp;        if (maxAge &gt;= 0) {</b>
+<b class="nc">&nbsp;            sb.append(ATTRIBUTE_DELIMITER);</b>
+<b class="nc">&nbsp;            sb.append(MAXAGE_ATTRIBUTE_NAME).append(NAME_VALUE_DELIMITER).append(maxAge);</b>
+<b class="nc">&nbsp;            sb.append(ATTRIBUTE_DELIMITER);</b>
+&nbsp;            Date expires;
+<b class="nc">&nbsp;            if (maxAge == 0) {</b>
+&nbsp;                //delete the cookie by specifying a time in the past (1 day ago):
+<b class="nc">&nbsp;                expires = new Date(System.currentTimeMillis() - DAY_MILLIS);</b>
+&nbsp;            } else {
+&nbsp;                //Value is in seconds.  So take &#39;now&#39; and add that many seconds, and that&#39;s our expiration date:
+<b class="nc">&nbsp;                Calendar cal = Calendar.getInstance();</b>
+<b class="nc">&nbsp;                cal.add(Calendar.SECOND, maxAge);</b>
+<b class="nc">&nbsp;                expires = cal.getTime();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            String formatted = toCookieDate(expires);</b>
+<b class="nc">&nbsp;            sb.append(EXPIRES_ATTRIBUTE_NAME).append(NAME_VALUE_DELIMITER).append(formatted);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void appendVersion(StringBuilder sb, int version) {
+<b class="nc">&nbsp;        if (version &gt; DEFAULT_VERSION) {</b>
+<b class="nc">&nbsp;            sb.append(ATTRIBUTE_DELIMITER);</b>
+<b class="nc">&nbsp;            sb.append(VERSION_ATTRIBUTE_NAME).append(NAME_VALUE_DELIMITER).append(version);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void appendSecure(StringBuilder sb, boolean secure) {
+<b class="nc">&nbsp;        if (secure) {</b>
+<b class="nc">&nbsp;            sb.append(ATTRIBUTE_DELIMITER);</b>
+<b class="nc">&nbsp;            sb.append(SECURE_ATTRIBUTE_NAME); //No value for this attribute</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void appendHttpOnly(StringBuilder sb, boolean httpOnly) {
+<b class="nc">&nbsp;        if (httpOnly) {</b>
+<b class="nc">&nbsp;            sb.append(ATTRIBUTE_DELIMITER);</b>
+<b class="nc">&nbsp;            sb.append(HTTP_ONLY_ATTRIBUTE_NAME); //No value for this attribute</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void appendSameSite(StringBuilder sb, SameSiteOptions sameSite) {
+<b class="nc">&nbsp;        if (sameSite != null) {</b>
+<b class="nc">&nbsp;            sb.append(ATTRIBUTE_DELIMITER);</b>
+<b class="nc">&nbsp;            sb.append(SAME_SITE_ATTRIBUTE_NAME).append(NAME_VALUE_DELIMITER).append(sameSite.toString().toLowerCase(Locale.ENGLISH));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check whether the given {@code cookiePath} matches the {@code requestPath}
+&nbsp;     *
+&nbsp;     * @param cookiePath
+&nbsp;     * @param requestPath
+&nbsp;     * @return
+&nbsp;     * @see &lt;a href=&quot;https://tools.ietf.org/html/rfc6265#section-5.1.4&quot;&gt;RFC 6265, Section 5.1.4 &quot;Paths and Path-Match&quot;&lt;/a&gt;
+&nbsp;     */
+&nbsp;    private boolean pathMatches(String cookiePath, String requestPath) {
+<b class="nc">&nbsp;        if (!requestPath.startsWith(cookiePath)) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return requestPath.length() == cookiePath.length()</b>
+<b class="nc">&nbsp;            || cookiePath.charAt(cookiePath.length() - 1) == &#39;/&#39;</b>
+<b class="nc">&nbsp;            || requestPath.charAt(cookiePath.length()) == &#39;/&#39;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Formats a date into a cookie date compatible string (Netscape&#39;s specification).
+&nbsp;     *
+&nbsp;     * @param date the date to format
+&nbsp;     * @return an HTTP 1.0/1.1 Cookie compatible date string (GMT-based).
+&nbsp;     */
+&nbsp;    private static String toCookieDate(Date date) {
+<b class="nc">&nbsp;        TimeZone tz = TimeZone.getTimeZone(GMT_TIME_ZONE_ID);</b>
+<b class="nc">&nbsp;        DateFormat fmt = new SimpleDateFormat(COOKIE_DATE_FORMAT_STRING, Locale.US);</b>
+<b class="nc">&nbsp;        fmt.setTimeZone(tz);</b>
+<b class="nc">&nbsp;        return fmt.format(date);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void removeFrom(HttpServletRequest request, HttpServletResponse response) {
+<b class="nc">&nbsp;        String name = getName();</b>
+<b class="nc">&nbsp;        String value = DELETED_COOKIE_VALUE;</b>
+<b class="nc">&nbsp;        String comment = null; //don&#39;t need to add extra size to the response - comments are irrelevant for deletions</b>
+<b class="nc">&nbsp;        String domain = getDomain();</b>
+<b class="nc">&nbsp;        String path = calculatePath(request);</b>
+<b class="nc">&nbsp;        int maxAge = 0; //always zero for deletion</b>
+<b class="nc">&nbsp;        int version = getVersion();</b>
+<b class="nc">&nbsp;        boolean secure = isSecure();</b>
+<b class="nc">&nbsp;        boolean httpOnly = false; //no need to add the extra text, plus the value &#39;deleteMe&#39; is not sensitive at all</b>
+<b class="nc">&nbsp;        SameSiteOptions sameSite = getSameSite();</b>
+&nbsp;
+<b class="nc">&nbsp;        addCookieHeader(response, name, value, comment, domain, path, maxAge, version, secure, httpOnly, sameSite);</b>
+&nbsp;
+<b class="nc">&nbsp;        log.trace(&quot;Removed &#39;{}&#39; cookie by setting maxAge=0&quot;, name);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String readValue(HttpServletRequest request, HttpServletResponse ignored) {
+<b class="nc">&nbsp;        String name = getName();</b>
+<b class="nc">&nbsp;        String value = null;</b>
+<b class="nc">&nbsp;        javax.servlet.http.Cookie cookie = getCookie(request, name);</b>
+<b class="nc">&nbsp;        if (cookie != null) {</b>
+&nbsp;            // Validate that the cookie is used at the correct place.
+<b class="nc">&nbsp;            String path = StringUtils.clean(getPath());</b>
+<b class="nc">&nbsp;            if (path != null &amp;&amp; !pathMatches(path, request.getRequestURI())) {</b>
+<b class="nc">&nbsp;                log.warn(&quot;Found &#39;{}&#39; cookie at path &#39;{}&#39;, but should be only used for &#39;{}&#39;&quot;, </b>
+<b class="nc">&nbsp;                		new Object[] { name, Encode.forHtml(request.getRequestURI()), path});</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                value = cookie.getValue();</b>
+<b class="nc">&nbsp;                log.debug(&quot;Found &#39;{}&#39; cookie value [{}]&quot;, name, Encode.forHtml(value));</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            log.trace(&quot;No &#39;{}&#39; cookie value&quot;, name);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the cookie with the given name from the request or {@code null} if no cookie
+&nbsp;     * with that name could be found.
+&nbsp;     *
+&nbsp;     * @param request    the current executing http request.
+&nbsp;     * @param cookieName the name of the cookie to find and return.
+&nbsp;     * @return the cookie with the given name from the request or {@code null} if no cookie
+&nbsp;     *         with that name could be found.
+&nbsp;     */
+&nbsp;    private static javax.servlet.http.Cookie getCookie(HttpServletRequest request, String cookieName) {
+<b class="nc">&nbsp;        javax.servlet.http.Cookie cookies[] = request.getCookies();</b>
+<b class="nc">&nbsp;        if (cookies != null) {</b>
+<b class="nc">&nbsp;            for (javax.servlet.http.Cookie cookie : cookies) {</b>
+<b class="nc">&nbsp;                if (cookie.getName().equals(cookieName)) {</b>
+<b class="nc">&nbsp;                    return cookie;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

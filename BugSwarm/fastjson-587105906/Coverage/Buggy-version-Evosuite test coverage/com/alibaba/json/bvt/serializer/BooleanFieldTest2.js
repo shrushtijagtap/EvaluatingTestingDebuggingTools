@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":82,"id":82265,"methods":[{"el":19,"sc":5,"sl":14},{"el":26,"sc":5,"sl":21},{"el":35,"sc":5,"sl":28},{"el":44,"sc":5,"sl":37},{"el":51,"sc":5,"sl":46},{"el":58,"sc":5,"sl":53},{"el":67,"sc":5,"sl":60},{"el":76,"sc":5,"sl":69}],"name":"BooleanFieldTest2","sl":12},{"el":81,"id":82305,"methods":[],"name":"BooleanFieldTest2.Model","sl":78}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_1801":{"methods":[{"sl":46}],"name":"test_1","pass":true,"statements":[{"sl":47},{"sl":49},{"sl":50}]},"test_2172":{"methods":[{"sl":60}],"name":"test_1_reader","pass":true,"statements":[{"sl":61},{"sl":63},{"sl":64},{"sl":65},{"sl":66}]},"test_2638":{"methods":[{"sl":28}],"name":"test_true_reader","pass":true,"statements":[{"sl":29},{"sl":31},{"sl":32},{"sl":33},{"sl":34}]},"test_2902":{"methods":[{"sl":21}],"name":"test_false","pass":true,"statements":[{"sl":22},{"sl":24},{"sl":25}]},"test_3037":{"methods":[{"sl":69}],"name":"test_0_reader","pass":true,"statements":[{"sl":70},{"sl":72},{"sl":73},{"sl":74},{"sl":75}]},"test_3555":{"methods":[{"sl":14}],"name":"test_true","pass":true,"statements":[{"sl":15},{"sl":17},{"sl":18}]},"test_4156":{"methods":[{"sl":37}],"name":"test_false_reader","pass":true,"statements":[{"sl":38},{"sl":40},{"sl":41},{"sl":42},{"sl":43}]},"test_4307":{"methods":[{"sl":53}],"name":"test_0","pass":true,"statements":[{"sl":54},{"sl":56},{"sl":57}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [3555], [3555], [], [3555], [3555], [], [], [2902], [2902], [], [2902], [2902], [], [], [2638], [2638], [], [2638], [2638], [2638], [2638], [], [], [4156], [4156], [], [4156], [4156], [4156], [4156], [], [], [1801], [1801], [], [1801], [1801], [], [], [4307], [4307], [], [4307], [4307], [], [], [2172], [2172], [], [2172], [2172], [2172], [2172], [], [], [3037], [3037], [], [3037], [3037], [3037], [3037], [], [], [], [], [], [], []]

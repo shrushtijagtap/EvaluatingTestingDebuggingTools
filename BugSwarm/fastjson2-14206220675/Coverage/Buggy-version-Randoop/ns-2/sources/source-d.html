@@ -1,0 +1,4238 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONReader</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONReader (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/136)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1667)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1530)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.filter.ContextAutoTypeBeforeHandler;
+&nbsp;import com.alibaba.fastjson2.filter.ExtraProcessor;
+&nbsp;import com.alibaba.fastjson2.filter.Filter;
+&nbsp;import com.alibaba.fastjson2.reader.*;
+&nbsp;import com.alibaba.fastjson2.util.*;
+&nbsp;
+&nbsp;import java.io.Closeable;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.lang.invoke.*;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.net.URL;
+&nbsp;import java.nio.ByteBuffer;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.text.ParseException;
+&nbsp;import java.text.SimpleDateFormat;
+&nbsp;import java.time.*;
+&nbsp;import java.time.format.DateTimeFormatter;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.BiFunction;
+&nbsp;import java.util.function.Function;
+&nbsp;import java.util.function.Supplier;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONFactory.*;
+&nbsp;import static com.alibaba.fastjson2.JSONReader.BigIntegerCreator.BIG_INTEGER_CREATOR;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.*;
+&nbsp;import static com.alibaba.fastjson2.util.TypeUtils.toBigDecimal;
+&nbsp;
+&nbsp;public abstract class JSONReader
+&nbsp;        implements Closeable {
+&nbsp;    static final int MAX_EXP = 1023;
+&nbsp;
+&nbsp;    static final byte JSON_TYPE_INT = 1;
+&nbsp;    static final byte JSON_TYPE_DEC = 2;
+&nbsp;    static final byte JSON_TYPE_STRING = 3;
+&nbsp;    static final byte JSON_TYPE_BOOL = 4;
+&nbsp;    static final byte JSON_TYPE_NULL = 5;
+&nbsp;    static final byte JSON_TYPE_OBJECT = 6;
+&nbsp;    static final byte JSON_TYPE_ARRAY = 7;
+&nbsp;    static final byte JSON_TYPE_BIG_DEC = 8;
+&nbsp;
+&nbsp;    static final byte JSON_TYPE_INT8 = 9;
+&nbsp;    static final byte JSON_TYPE_INT16 = 10;
+&nbsp;    static final byte JSON_TYPE_INT64 = 11;
+&nbsp;    static final byte JSON_TYPE_FLOAT = 12;
+&nbsp;    static final byte JSON_TYPE_DOUBLE = 13;
+&nbsp;
+&nbsp;    static final char EOI = 0x1A;
+&nbsp;    static final long SPACE = (1L &lt;&lt; &#39; &#39;) | (1L &lt;&lt; &#39;\n&#39;) | (1L &lt;&lt; &#39;\r&#39;) | (1L &lt;&lt; &#39;\f&#39;) | (1L &lt;&lt; &#39;\t&#39;) | (1L &lt;&lt; &#39;\b&#39;);
+&nbsp;
+&nbsp;    protected final Context context;
+&nbsp;    List&lt;ResolveTask&gt; resolveTasks;
+&nbsp;
+&nbsp;    protected int offset;
+&nbsp;    protected char ch;
+&nbsp;    protected boolean comma;
+&nbsp;
+&nbsp;    protected boolean nameEscape;
+&nbsp;    protected boolean valueEscape;
+&nbsp;    protected boolean wasNull;
+&nbsp;    protected boolean boolValue;
+&nbsp;    protected boolean negative;
+&nbsp;
+&nbsp;    protected byte valueType;
+&nbsp;    protected short exponent;
+&nbsp;    protected byte scale;
+&nbsp;
+&nbsp;    protected int mag0;
+&nbsp;    protected int mag1;
+&nbsp;    protected int mag2;
+&nbsp;    protected int mag3;
+&nbsp;
+&nbsp;    protected int level;
+&nbsp;
+&nbsp;    protected String stringValue;
+&nbsp;    protected Object complex; // Map | List
+&nbsp;
+&nbsp;    protected boolean typeRedirect; // redirect for {&quot;@type&quot;:&quot;xxx&quot;&quot;,...
+&nbsp;
+&nbsp;    protected char[] doubleChars;
+&nbsp;
+&nbsp;    public final char current() {
+<b class="nc">&nbsp;        return ch;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isEnd() {
+<b class="nc">&nbsp;        return ch == EOI;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public byte getType() {
+<b class="nc">&nbsp;        return -128;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isInt() {
+<b class="nc">&nbsp;        return ch == &#39;-&#39; || ch == &#39;+&#39; || (ch &gt;= &#39;0&#39; &amp;&amp; ch &lt;= &#39;9&#39;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract boolean isNull();
+&nbsp;
+&nbsp;    public final boolean hasComma() {
+<b class="nc">&nbsp;        return comma;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract Date readNullOrNewDate();
+&nbsp;
+&nbsp;    public abstract boolean nextIfNull();
+&nbsp;
+<b class="nc">&nbsp;    public JSONReader(Context context) {</b>
+<b class="nc">&nbsp;        this.context = context;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final Context getContext() {
+<b class="nc">&nbsp;        return context;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void errorOnNoneSerializable(Class objectClass) {
+<b class="nc">&nbsp;        if ((context.features &amp; Feature.ErrorOnNoneSerializable.mask) != 0</b>
+<b class="nc">&nbsp;                &amp;&amp; !Serializable.class.isAssignableFrom(objectClass)) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;not support none-Serializable, class &quot; + objectClass.getName());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public final boolean isEnabled(Feature feature) {
+<b class="nc">&nbsp;        return (context.features &amp; feature.mask) != 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final Locale getLocale() {
+<b class="nc">&nbsp;        return context.getLocale();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final ZoneId getZoneId() {
+<b class="nc">&nbsp;        return context.getZoneId();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final long features(long features) {
+<b class="nc">&nbsp;        return context.features | features;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void handleResolveTasks(Object root) {
+<b class="nc">&nbsp;        if (resolveTasks == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Object previous = null;</b>
+<b class="nc">&nbsp;        for (ResolveTask resolveTask : resolveTasks) {</b>
+<b class="nc">&nbsp;            JSONPath path = resolveTask.reference;</b>
+<b class="nc">&nbsp;            FieldReader fieldReader = resolveTask.fieldReader;</b>
+&nbsp;
+&nbsp;            Object fieldValue;
+<b class="nc">&nbsp;            if (path.isPrevious()) {</b>
+<b class="nc">&nbsp;                fieldValue = previous;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (!path.isRef()) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;reference path invalid : &quot; + path);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                path.setReaderContext(context);</b>
+<b class="nc">&nbsp;                if ((context.features &amp; Feature.FieldBased.mask) != 0) {</b>
+<b class="nc">&nbsp;                    JSONWriter.Context writeContext = JSONFactory.createWriteContext();</b>
+<b class="nc">&nbsp;                    writeContext.features |= JSONWriter.Feature.FieldBased.mask;</b>
+<b class="nc">&nbsp;                    path.setWriterContext(writeContext);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                fieldValue = path.eval(root);</b>
+<b class="nc">&nbsp;                previous = fieldValue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Object resolvedName = resolveTask.name;</b>
+<b class="nc">&nbsp;            Object resolvedObject = resolveTask.object;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (resolvedName != null) {</b>
+<b class="nc">&nbsp;                if (resolvedObject instanceof Map) {</b>
+<b class="nc">&nbsp;                    Map map = (Map) resolvedObject;</b>
+<b class="nc">&nbsp;                    if (resolvedName instanceof ReferenceKey) {</b>
+<b class="nc">&nbsp;                        if (map instanceof LinkedHashMap) {</b>
+<b class="nc">&nbsp;                            int size = map.size();</b>
+<b class="nc">&nbsp;                            if (size == 0) {</b>
+&nbsp;                                continue;
+&nbsp;                            }
+&nbsp;
+<b class="nc">&nbsp;                            Object[] keys = new Object[size];</b>
+<b class="nc">&nbsp;                            Object[] values = new Object[size];</b>
+&nbsp;
+<b class="nc">&nbsp;                            int index = 0;</b>
+<b class="nc">&nbsp;                            for (Object o : map.entrySet()) {</b>
+<b class="nc">&nbsp;                                Map.Entry entry = (Map.Entry) o;</b>
+<b class="nc">&nbsp;                                Object entryKey = entry.getKey();</b>
+<b class="nc">&nbsp;                                if (resolvedName == entryKey) {</b>
+<b class="nc">&nbsp;                                    keys[index] = fieldValue;</b>
+&nbsp;                                } else {
+<b class="nc">&nbsp;                                    keys[index] = entryKey;</b>
+&nbsp;                                }
+<b class="nc">&nbsp;                                values[index++] = entry.getValue();</b>
+&nbsp;                            }
+<b class="nc">&nbsp;                            map.clear();</b>
+&nbsp;
+<b class="nc">&nbsp;                            for (int j = 0; j &lt; keys.length; j++) {</b>
+<b class="nc">&nbsp;                                map.put(keys[j], values[j]);</b>
+&nbsp;                            }
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            map.put(fieldValue, map.remove(resolvedName));</b>
+&nbsp;                        }
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        map.put(resolvedName, fieldValue);</b>
+&nbsp;                    }
+&nbsp;                    continue;
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (resolvedName instanceof Integer) {</b>
+<b class="nc">&nbsp;                    if (resolvedObject instanceof List) {</b>
+<b class="nc">&nbsp;                        int index = (Integer) resolvedName;</b>
+<b class="nc">&nbsp;                        List list = (List) resolvedObject;</b>
+<b class="nc">&nbsp;                        if (index == list.size()) {</b>
+<b class="nc">&nbsp;                            list.add(fieldValue);</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            list.set(index, fieldValue);</b>
+&nbsp;                        }
+&nbsp;                        continue;
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (resolvedObject instanceof Object[]) {</b>
+<b class="nc">&nbsp;                        int index = (Integer) resolvedName;</b>
+<b class="nc">&nbsp;                        Object[] array = (Object[]) resolvedObject;</b>
+<b class="nc">&nbsp;                        array[index] = fieldValue;</b>
+&nbsp;                        continue;
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (resolvedObject instanceof Collection) {</b>
+<b class="nc">&nbsp;                        Collection collection = (Collection) resolvedObject;</b>
+<b class="nc">&nbsp;                        collection.add(fieldValue);</b>
+&nbsp;                        continue;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            fieldReader.accept(resolvedObject, fieldValue);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public final ObjectReader getObjectReader(Type type) {
+<b class="nc">&nbsp;        boolean fieldBased = (context.features &amp; JSONReader.Feature.FieldBased.mask) != 0;</b>
+<b class="nc">&nbsp;        return context.provider.getObjectReader(type, fieldBased);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final boolean isSupportSmartMatch() {
+<b class="nc">&nbsp;        return (context.features &amp; Feature.SupportSmartMatch.mask) != 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final boolean isInitStringFieldAsEmpty() {
+<b class="nc">&nbsp;        return (context.features &amp; Feature.InitStringFieldAsEmpty.mask) != 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final boolean isSupportSmartMatch(long features) {
+<b class="nc">&nbsp;        return ((context.features | features) &amp; Feature.SupportSmartMatch.mask) != 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final boolean isSupportBeanArray() {
+<b class="nc">&nbsp;        return (context.features &amp; Feature.SupportArrayToBean.mask) != 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final boolean isSupportBeanArray(long features) {
+<b class="nc">&nbsp;        return ((context.features | features) &amp; Feature.SupportArrayToBean.mask) != 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final boolean isSupportAutoType(long features) {
+<b class="nc">&nbsp;        return ((context.features | features) &amp; Feature.SupportAutoType.mask) != 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final boolean isSupportAutoTypeOrHandler(long features) {
+<b class="nc">&nbsp;        return ((context.features | features) &amp; Feature.SupportAutoType.mask) != 0 || context.autoTypeBeforeHandler != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isJSONB() {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final boolean isIgnoreNoneSerializable() {
+<b class="nc">&nbsp;        return (context.features &amp; Feature.IgnoreNoneSerializable.mask) != 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReader checkAutoType(Class expectClass, long expectClassHash, long features) {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    final char char1(int c) {
+<b class="nc">&nbsp;        switch (c) {</b>
+&nbsp;            case &#39;0&#39;:
+<b class="nc">&nbsp;                return &#39;\0&#39;;</b>
+&nbsp;            case &#39;1&#39;:
+<b class="nc">&nbsp;                return &#39;\1&#39;;</b>
+&nbsp;            case &#39;2&#39;:
+<b class="nc">&nbsp;                return &#39;\2&#39;;</b>
+&nbsp;            case &#39;3&#39;:
+<b class="nc">&nbsp;                return &#39;\3&#39;;</b>
+&nbsp;            case &#39;4&#39;:
+<b class="nc">&nbsp;                return &#39;\4&#39;;</b>
+&nbsp;            case &#39;5&#39;:
+<b class="nc">&nbsp;                return &#39;\5&#39;;</b>
+&nbsp;            case &#39;6&#39;:
+<b class="nc">&nbsp;                return &#39;\6&#39;;</b>
+&nbsp;            case &#39;7&#39;:
+<b class="nc">&nbsp;                return &#39;\7&#39;;</b>
+&nbsp;            case &#39;b&#39;: // 8
+<b class="nc">&nbsp;                return &#39;\b&#39;;</b>
+&nbsp;            case &#39;t&#39;: // 9
+<b class="nc">&nbsp;                return &#39;\t&#39;;</b>
+&nbsp;            case &#39;n&#39;: // 10
+<b class="nc">&nbsp;                return &#39;\n&#39;;</b>
+&nbsp;            case &#39;v&#39;: // 11
+<b class="nc">&nbsp;                return &#39;\u000B&#39;;</b>
+&nbsp;            case &#39;f&#39;: // 12
+&nbsp;            case &#39;F&#39;:
+<b class="nc">&nbsp;                return &#39;\f&#39;;</b>
+&nbsp;            case &#39;r&#39;: // 13
+<b class="nc">&nbsp;                return &#39;\r&#39;;</b>
+&nbsp;            case &#39;&quot;&#39;: // 34
+&nbsp;            case &#39;\&#39;&#39;: // 39
+&nbsp;            case &#39;/&#39;: // 47
+&nbsp;            case &#39;.&#39;: // 47
+&nbsp;            case &#39;\\&#39;: // 92
+&nbsp;            case &#39;#&#39;:
+&nbsp;            case &#39;&amp;&#39;:
+&nbsp;            case &#39;[&#39;:
+&nbsp;            case &#39;]&#39;:
+&nbsp;            case &#39;@&#39;:
+&nbsp;            case &#39;(&#39;:
+&nbsp;            case &#39;)&#39;:
+&nbsp;            case &#39;_&#39;:
+<b class="nc">&nbsp;                return (char) c;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new JSONException(info(&quot;unclosed.str &#39;\\&quot; + (char) c));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static char char2(int c1, int c2) {
+<b class="nc">&nbsp;        return (char) (DIGITS2[c1] * 0x10</b>
+&nbsp;                + DIGITS2[c2]);
+&nbsp;    }
+&nbsp;
+&nbsp;    static char char4(int c1, int c2, int c3, int c4) {
+<b class="nc">&nbsp;        return (char) (DIGITS2[c1] * 0x1000</b>
+&nbsp;                + DIGITS2[c2] * 0x100
+&nbsp;                + DIGITS2[c3] * 0x10
+&nbsp;                + DIGITS2[c4]);
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract boolean nextIfObjectStart();
+&nbsp;    public abstract boolean nextIfNullOrEmptyString();
+&nbsp;    public abstract boolean nextIfObjectEnd();
+&nbsp;
+&nbsp;    public int startArray() {
+<b class="nc">&nbsp;        if (!nextIfMatch(&#39;[&#39;)) {</b>
+<b class="nc">&nbsp;            throw new JSONException(info(&quot;illegal input, expect &#39;[&#39;, but &quot; + ch));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Integer.MAX_VALUE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract boolean isReference();
+&nbsp;
+&nbsp;    public abstract String readReference();
+&nbsp;
+&nbsp;    public final void addResolveTask(FieldReader fieldReader, Object object, JSONPath path) {
+<b class="nc">&nbsp;        if (resolveTasks == null) {</b>
+<b class="nc">&nbsp;            resolveTasks = new ArrayList&lt;&gt;();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        resolveTasks.add(new ResolveTask(fieldReader, object, fieldReader.fieldName, path));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void addResolveTask(Map object, Object key, JSONPath reference) {
+<b class="nc">&nbsp;        if (resolveTasks == null) {</b>
+<b class="nc">&nbsp;            resolveTasks = new ArrayList&lt;&gt;();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (object instanceof LinkedHashMap) {</b>
+<b class="nc">&nbsp;            object.put(key, null);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        resolveTasks.add(new ResolveTask(null, object, key, reference));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void addResolveTask(Collection object, int i, JSONPath reference) {
+<b class="nc">&nbsp;        if (resolveTasks == null) {</b>
+<b class="nc">&nbsp;            resolveTasks = new ArrayList&lt;&gt;();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        resolveTasks.add(new ResolveTask(null, object, i, reference));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void addResolveTask(Object[] object, int i, JSONPath reference) {
+<b class="nc">&nbsp;        if (resolveTasks == null) {</b>
+<b class="nc">&nbsp;            resolveTasks = new ArrayList&lt;&gt;();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        resolveTasks.add(new ResolveTask(null, object, i, reference));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isArray() {
+<b class="nc">&nbsp;        return this.ch == &#39;[&#39;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isObject() {
+<b class="nc">&nbsp;        return this.ch == &#39;{&#39;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isNumber() {
+<b class="nc">&nbsp;        switch (this.ch) {</b>
+&nbsp;            case &#39;-&#39;:
+&nbsp;            case &#39;+&#39;:
+&nbsp;            case &#39;0&#39;:
+&nbsp;            case &#39;1&#39;:
+&nbsp;            case &#39;2&#39;:
+&nbsp;            case &#39;3&#39;:
+&nbsp;            case &#39;4&#39;:
+&nbsp;            case &#39;5&#39;:
+&nbsp;            case &#39;6&#39;:
+&nbsp;            case &#39;7&#39;:
+&nbsp;            case &#39;8&#39;:
+&nbsp;            case &#39;9&#39;:
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isString() {
+<b class="nc">&nbsp;        return this.ch == &#39;&quot;&#39; || this.ch == &#39;\&#39;&#39;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void endArray() {
+<b class="nc">&nbsp;        next();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract boolean nextIfMatch(char ch);
+&nbsp;
+&nbsp;    public abstract boolean nextIfSet();
+&nbsp;
+&nbsp;    public abstract boolean nextIfInfinity();
+&nbsp;
+&nbsp;    public abstract String readPattern();
+&nbsp;
+&nbsp;    public final int getOffset() {
+<b class="nc">&nbsp;        return offset;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract void next();
+&nbsp;
+&nbsp;    public abstract long readValueHashCode();
+&nbsp;
+&nbsp;    public long readTypeHashCode() {
+<b class="nc">&nbsp;        return readValueHashCode();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract long readFieldNameHashCode();
+&nbsp;
+&nbsp;    public abstract long getNameHashCodeLCase();
+&nbsp;
+&nbsp;    public abstract String readFieldName();
+&nbsp;
+&nbsp;    public abstract String getFieldName();
+&nbsp;
+&nbsp;    public final void setTypeRedirect(boolean typeRedirect) {
+<b class="nc">&nbsp;        this.typeRedirect = typeRedirect;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final boolean isTypeRedirect() {
+<b class="nc">&nbsp;        return typeRedirect;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract long readFieldNameHashCodeUnquote();
+&nbsp;
+&nbsp;    public final String readFieldNameUnquote() {
+<b class="nc">&nbsp;        readFieldNameHashCodeUnquote();</b>
+<b class="nc">&nbsp;        return getFieldName();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract boolean skipName();
+&nbsp;
+&nbsp;    public abstract void skipValue();
+&nbsp;
+&nbsp;    public boolean isBinary() {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract byte[] readHex();
+&nbsp;
+&nbsp;    public byte[] readBinary() {
+<b class="nc">&nbsp;        if (ch == &#39;x&#39;) {</b>
+<b class="nc">&nbsp;            return readHex();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (isString()) {</b>
+<b class="nc">&nbsp;            String str = readString();</b>
+<b class="nc">&nbsp;            if (str.isEmpty()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if ((context.features &amp; Feature.Base64StringAsByteArray.mask) != 0) {</b>
+<b class="nc">&nbsp;                return Base64.getDecoder().decode(str);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            throw new JSONException(info(&quot;not support input &quot; + str));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (nextIfMatch(&#39;[&#39;)) {</b>
+<b class="nc">&nbsp;            int index = 0;</b>
+<b class="nc">&nbsp;            byte[] bytes = new byte[64];</b>
+&nbsp;            while (true) {
+<b class="nc">&nbsp;                if (ch == &#39;]&#39;) {</b>
+<b class="nc">&nbsp;                    next();</b>
+&nbsp;                    break;
+&nbsp;                }
+<b class="nc">&nbsp;                if (index == bytes.length) {</b>
+<b class="nc">&nbsp;                    int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                    bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                bytes[index++] = (byte) readInt32Value();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            nextIfMatch(&#39;,&#39;);</b>
+<b class="nc">&nbsp;            return Arrays.copyOf(bytes, index);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(info(&quot;not support read binary&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract int readInt32Value();
+&nbsp;
+&nbsp;    public boolean nextIfMatch(byte type) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;UnsupportedOperation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean nextIfMatchTypedAny() {
+<b class="nc">&nbsp;        throw new JSONException(&quot;UnsupportedOperation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract boolean nextIfMatchIdent(char c0, char c1, char c2);
+&nbsp;
+&nbsp;    public abstract boolean nextIfMatchIdent(char c0, char c1, char c2, char c3);
+&nbsp;
+&nbsp;    public abstract boolean nextIfMatchIdent(char c0, char c1, char c2, char c3, char c4);
+&nbsp;
+&nbsp;    public abstract boolean nextIfMatchIdent(char c0, char c1, char c2, char c3, char c4, char c5);
+&nbsp;
+&nbsp;    public abstract Integer readInt32();
+&nbsp;
+&nbsp;    public final int getInt32Value() {
+<b class="nc">&nbsp;        switch (valueType) {</b>
+&nbsp;            case JSON_TYPE_INT:
+<b class="nc">&nbsp;                if (mag1 == 0 &amp;&amp; mag2 == 0 &amp;&amp; mag3 != Integer.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                    return negative ? -mag3 : mag3;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                Number number = getNumber();</b>
+<b class="nc">&nbsp;                if (number instanceof Long) {</b>
+<b class="nc">&nbsp;                    long longValue = number.longValue();</b>
+<b class="nc">&nbsp;                    if (longValue &lt; Integer.MIN_VALUE || longValue &gt; Integer.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(info(&quot;integer overflow &quot; + longValue));</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    return (int) longValue;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return number.intValue();</b>
+&nbsp;            case JSON_TYPE_DEC:
+<b class="nc">&nbsp;                return getNumber().intValue();</b>
+&nbsp;            case JSON_TYPE_BOOL:
+<b class="nc">&nbsp;                return boolValue ? 1 : 0;</b>
+&nbsp;            case JSON_TYPE_NULL:
+<b class="nc">&nbsp;                if ((context.features &amp; Feature.ErrorOnNullForPrimitives.mask) != 0) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(info(&quot;int value not support input null&quot;));</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return 0;</b>
+&nbsp;            case JSON_TYPE_STRING: {
+<b class="nc">&nbsp;                return toInt32(stringValue);</b>
+&nbsp;            }
+&nbsp;            case JSON_TYPE_OBJECT: {
+<b class="nc">&nbsp;                Number num = toNumber((Map) complex);</b>
+<b class="nc">&nbsp;                if (num != null) {</b>
+<b class="nc">&nbsp;                    return num.intValue();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return 0;</b>
+&nbsp;            }
+&nbsp;            case JSON_TYPE_ARRAY: {
+<b class="nc">&nbsp;                return toInt((List) complex);</b>
+&nbsp;            }
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new JSONException(&quot;TODO : &quot; + valueType);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public final long getInt64Value() {
+<b class="nc">&nbsp;        switch (valueType) {</b>
+&nbsp;            case JSON_TYPE_INT:
+<b class="nc">&nbsp;                if (mag1 == 0 &amp;&amp; mag2 == 0 &amp;&amp; mag3 != Integer.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                    return negative ? -mag3 : mag3;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return getNumber().longValue();</b>
+&nbsp;            case JSON_TYPE_DEC:
+<b class="nc">&nbsp;                return getNumber().longValue();</b>
+&nbsp;            case JSON_TYPE_BOOL:
+<b class="nc">&nbsp;                return boolValue ? 1 : 0;</b>
+&nbsp;            case JSON_TYPE_NULL:
+<b class="nc">&nbsp;                if ((context.features &amp; Feature.ErrorOnNullForPrimitives.mask) != 0) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(info(&quot;long value not support input null&quot;));</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return 0;</b>
+&nbsp;            case JSON_TYPE_STRING: {
+<b class="nc">&nbsp;                return toInt64(stringValue);</b>
+&nbsp;            }
+&nbsp;            case JSON_TYPE_OBJECT: {
+<b class="nc">&nbsp;                return toLong((Map) complex);</b>
+&nbsp;            }
+&nbsp;            case JSON_TYPE_ARRAY: {
+<b class="nc">&nbsp;                return toInt((List) complex);</b>
+&nbsp;            }
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new JSONException(&quot;TODO&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final Long getInt64() {
+<b class="nc">&nbsp;        switch (valueType) {</b>
+&nbsp;            case JSON_TYPE_INT:
+<b class="nc">&nbsp;                if (mag1 == 0 &amp;&amp; mag2 == 0 &amp;&amp; mag3 != Integer.MIN_VALUE) {</b>
+<b class="nc">&nbsp;                    return (long) (negative ? -mag3 : mag3);</b>
+&nbsp;                }
+&nbsp;                int[] mag;
+<b class="nc">&nbsp;                if (mag0 == 0) {</b>
+<b class="nc">&nbsp;                    if (mag1 == 0) {</b>
+<b class="nc">&nbsp;                        if (mag2 == Integer.MIN_VALUE &amp;&amp; mag3 == 0 &amp;&amp; !negative) {</b>
+<b class="nc">&nbsp;                            return Long.MIN_VALUE;</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        long v3 = mag3 &amp; 0XFFFFFFFFL;</b>
+<b class="nc">&nbsp;                        long v2 = mag2 &amp; 0XFFFFFFFFL;</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (v2 &lt;= Integer.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                            long v23 = (v2 &lt;&lt; 32) + (v3);</b>
+<b class="nc">&nbsp;                            return negative ? -v23 : v23;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        mag = new int[]{mag2, mag3};</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        mag = new int[]{mag1, mag2, mag3};</b>
+&nbsp;                    }
+&nbsp;                } else {
+<b class="nc">&nbsp;                    mag = new int[]{mag0, mag1, mag2, mag3};</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                int signum = negative ? -1 : 1;</b>
+<b class="nc">&nbsp;                BigInteger bigInt = BIG_INTEGER_CREATOR.apply(signum, mag);</b>
+<b class="nc">&nbsp;                return bigInt.longValue();</b>
+&nbsp;            case JSON_TYPE_DEC:
+<b class="nc">&nbsp;                return getNumber().longValue();</b>
+&nbsp;            case JSON_TYPE_BOOL:
+<b class="nc">&nbsp;                return (long) (boolValue ? 1 : 0);</b>
+&nbsp;            case JSON_TYPE_NULL:
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            case JSON_TYPE_STRING: {
+<b class="nc">&nbsp;                return toInt64(stringValue);</b>
+&nbsp;            }
+&nbsp;            case JSON_TYPE_OBJECT: {
+<b class="nc">&nbsp;                Number num = toNumber((Map) complex);</b>
+<b class="nc">&nbsp;                if (num != null) {</b>
+<b class="nc">&nbsp;                    return num.longValue();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new JSONException(&quot;TODO&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public long[] readInt64ValueArray() {
+<b class="nc">&nbsp;        if (nextIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (nextIfMatch(&#39;[&#39;)) {</b>
+<b class="nc">&nbsp;            long[] values = new long[8];</b>
+<b class="nc">&nbsp;            int size = 0;</b>
+<b class="nc">&nbsp;            while (!nextIfMatch(&#39;]&#39;)) {</b>
+<b class="nc">&nbsp;                if (isEnd()) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(info(&quot;input end&quot;));</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (size == values.length) {</b>
+<b class="nc">&nbsp;                    values = Arrays.copyOf(values, values.length &lt;&lt; 1);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                values[size++] = readInt64Value();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            nextIfMatch(&#39;,&#39;);</b>
+&nbsp;
+&nbsp;            long[] array;
+<b class="nc">&nbsp;            if (size == values.length) {</b>
+<b class="nc">&nbsp;                array = values;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                array = Arrays.copyOf(values, size);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return array;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (isString()) {</b>
+<b class="nc">&nbsp;            String str = readString();</b>
+<b class="nc">&nbsp;            if (str.isEmpty()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            throw new JSONException(info(&quot;not support input &quot; + str));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(info(&quot;TODO&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract long readInt64Value();
+&nbsp;
+&nbsp;    public abstract Long readInt64();
+&nbsp;
+&nbsp;    public abstract float readFloatValue();
+&nbsp;
+&nbsp;    public final Float readFloat() {
+<b class="nc">&nbsp;        if (nextIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        wasNull = false;</b>
+<b class="nc">&nbsp;        float value = readFloatValue();</b>
+<b class="nc">&nbsp;        if (wasNull) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract double readDoubleValue();
+&nbsp;
+&nbsp;    public final Double readDouble() {
+<b class="nc">&nbsp;        if (nextIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        wasNull = false;</b>
+<b class="nc">&nbsp;        double value = readDoubleValue();</b>
+<b class="nc">&nbsp;        if (wasNull) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Number readNumber() {
+<b class="nc">&nbsp;        readNumber0();</b>
+<b class="nc">&nbsp;        return getNumber();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public BigInteger readBigInteger() {
+<b class="nc">&nbsp;        readNumber0();</b>
+<b class="nc">&nbsp;        return getBigInteger();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract BigDecimal readBigDecimal();
+&nbsp;
+&nbsp;    public abstract UUID readUUID();
+&nbsp;
+&nbsp;    public final boolean isLocalDate() {
+<b class="nc">&nbsp;        if (!isString()) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        LocalDate localDate;
+<b class="nc">&nbsp;        int len = getStringLength();</b>
+<b class="nc">&nbsp;        switch (len) {</b>
+&nbsp;            case 8:
+<b class="nc">&nbsp;                localDate = readLocalDate8();</b>
+&nbsp;                break;
+&nbsp;            case 9:
+<b class="nc">&nbsp;                localDate = readLocalDate9();</b>
+&nbsp;                break;
+&nbsp;            case 10:
+<b class="nc">&nbsp;                localDate = readLocalDate10();</b>
+&nbsp;                break;
+&nbsp;            case 11:
+<b class="nc">&nbsp;                localDate = readLocalDate11();</b>
+&nbsp;                break;
+&nbsp;            default:
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return localDate != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public LocalDate readLocalDate() {
+<b class="nc">&nbsp;        if (nextIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (isInt()) {</b>
+<b class="nc">&nbsp;            long millis = readInt64Value();</b>
+<b class="nc">&nbsp;            if (context.formatUnixTime) {</b>
+<b class="nc">&nbsp;                millis *= 1000L;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Instant instant = Instant.ofEpochMilli(millis);</b>
+<b class="nc">&nbsp;            ZonedDateTime zdt = instant.atZone(context.getZoneId());</b>
+<b class="nc">&nbsp;            return zdt.toLocalDate();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (context.dateFormat == null</b>
+&nbsp;                || context.formatyyyyMMddhhmmss19
+&nbsp;                || context.formatyyyyMMddhhmmssT19
+&nbsp;                || context.formatyyyyMMdd8
+&nbsp;                || context.formatISO8601) {
+<b class="nc">&nbsp;            int len = getStringLength();</b>
+<b class="nc">&nbsp;            LocalDateTime ldt = null;</b>
+&nbsp;            LocalDate localDate;
+<b class="nc">&nbsp;            switch (len) {</b>
+&nbsp;                case 8:
+<b class="nc">&nbsp;                    localDate = readLocalDate8();</b>
+<b class="nc">&nbsp;                    ldt = localDate == null ? null : LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;                    break;
+&nbsp;                case 9:
+<b class="nc">&nbsp;                    localDate = readLocalDate9();</b>
+<b class="nc">&nbsp;                    ldt = localDate == null ? null : LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;                    break;
+&nbsp;                case 10:
+<b class="nc">&nbsp;                    localDate = readLocalDate10();</b>
+<b class="nc">&nbsp;                    ldt = localDate == null ? null : LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;                    break;
+&nbsp;                case 11:
+<b class="nc">&nbsp;                    localDate = readLocalDate11();</b>
+<b class="nc">&nbsp;                    ldt = localDate == null ? null : LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;                    break;
+&nbsp;                case 19:
+<b class="nc">&nbsp;                    ldt = readLocalDateTime19();</b>
+&nbsp;                    break;
+&nbsp;                case 20:
+<b class="nc">&nbsp;                    ldt = readLocalDateTime20();</b>
+&nbsp;                    break;
+&nbsp;                default:
+<b class="nc">&nbsp;                    if (len &gt; 20) {</b>
+<b class="nc">&nbsp;                        ldt = readLocalDateTimeX(len);</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;            }
+<b class="nc">&nbsp;            if (ldt != null) {</b>
+<b class="nc">&nbsp;                return ldt.toLocalDate();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String str = readString();</b>
+<b class="nc">&nbsp;        if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        DateTimeFormatter formatter = context.getDateFormatter();</b>
+<b class="nc">&nbsp;        if (formatter != null) {</b>
+<b class="nc">&nbsp;            if (context.formatHasHour) {</b>
+<b class="nc">&nbsp;                return LocalDateTime</b>
+<b class="nc">&nbsp;                        .parse(str, formatter)</b>
+<b class="nc">&nbsp;                        .toLocalDate();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return LocalDate.parse(str, formatter);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (IOUtils.isNumber(str)) {</b>
+<b class="nc">&nbsp;            long millis = Long.parseLong(str);</b>
+<b class="nc">&nbsp;            Instant instant = Instant.ofEpochMilli(millis);</b>
+<b class="nc">&nbsp;            ZonedDateTime zdt = instant.atZone(context.getZoneId());</b>
+<b class="nc">&nbsp;            return zdt.toLocalDate();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;not support input : &quot; + str);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final boolean isLocalDateTime() {
+<b class="nc">&nbsp;        if (!isString()) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int len = getStringLength();</b>
+<b class="nc">&nbsp;        switch (len) {</b>
+&nbsp;            case 16:
+<b class="nc">&nbsp;                return readLocalDateTime16() != null;</b>
+&nbsp;            case 17:
+<b class="nc">&nbsp;                return readLocalDateTime17() != null;</b>
+&nbsp;            case 18:
+<b class="nc">&nbsp;                return readLocalDateTime18() != null;</b>
+&nbsp;            case 19:
+<b class="nc">&nbsp;                return readLocalDateTime19() != null;</b>
+&nbsp;            case 20:
+<b class="nc">&nbsp;                return readLocalDateTime20() != null;</b>
+&nbsp;            case 21:
+&nbsp;            case 22:
+&nbsp;            case 23:
+&nbsp;            case 24:
+&nbsp;            case 25:
+&nbsp;            case 26:
+&nbsp;            case 27:
+&nbsp;            case 28:
+&nbsp;            case 29:
+<b class="nc">&nbsp;                return readLocalDateTimeX(len) != null;</b>
+&nbsp;            default:
+&nbsp;                break;
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public LocalDateTime readLocalDateTime() {
+<b class="nc">&nbsp;        if (isInt()) {</b>
+<b class="nc">&nbsp;            long millis = readInt64Value();</b>
+<b class="nc">&nbsp;            Instant instant = Instant.ofEpochMilli(millis);</b>
+<b class="nc">&nbsp;            ZonedDateTime zdt = instant.atZone(context.getZoneId());</b>
+<b class="nc">&nbsp;            return zdt.toLocalDateTime();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (context.dateFormat == null</b>
+&nbsp;                || context.formatyyyyMMddhhmmss19
+&nbsp;                || context.formatyyyyMMddhhmmssT19
+&nbsp;                || context.formatyyyyMMdd8
+&nbsp;                || context.formatISO8601) {
+<b class="nc">&nbsp;            int len = getStringLength();</b>
+&nbsp;            LocalDate localDate;
+<b class="nc">&nbsp;            switch (len) {</b>
+&nbsp;                case 8:
+<b class="nc">&nbsp;                    localDate = readLocalDate8();</b>
+<b class="nc">&nbsp;                    return localDate == null ? null : LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;                case 9:
+<b class="nc">&nbsp;                    localDate = readLocalDate9();</b>
+<b class="nc">&nbsp;                    return localDate == null ? null : LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;                case 10:
+<b class="nc">&nbsp;                    localDate = readLocalDate10();</b>
+<b class="nc">&nbsp;                    return localDate == null ? null : LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;                case 11:
+<b class="nc">&nbsp;                    localDate = readLocalDate11();</b>
+<b class="nc">&nbsp;                    return localDate == null ? null : LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;                case 16:
+<b class="nc">&nbsp;                    return readLocalDateTime16();</b>
+&nbsp;                case 17: {
+<b class="nc">&nbsp;                    LocalDateTime ldt = readLocalDateTime17();</b>
+<b class="nc">&nbsp;                    if (ldt != null) {</b>
+<b class="nc">&nbsp;                        return ldt;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case 18: {
+<b class="nc">&nbsp;                    LocalDateTime ldt = readLocalDateTime18();</b>
+<b class="nc">&nbsp;                    if (ldt != null) {</b>
+<b class="nc">&nbsp;                        return ldt;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case 19: {
+<b class="nc">&nbsp;                    LocalDateTime ldt = readLocalDateTime19();</b>
+<b class="nc">&nbsp;                    if (ldt != null) {</b>
+<b class="nc">&nbsp;                        return ldt;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case 20: {
+<b class="nc">&nbsp;                    LocalDateTime ldt = readLocalDateTime20();</b>
+<b class="nc">&nbsp;                    if (ldt != null) {</b>
+<b class="nc">&nbsp;                        return ldt;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    ZonedDateTime zdt = readZonedDateTimeX(len);</b>
+<b class="nc">&nbsp;                    if (zdt != null) {</b>
+<b class="nc">&nbsp;                        return zdt.toLocalDateTime();</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case 21:
+&nbsp;                case 22:
+&nbsp;                case 23:
+&nbsp;                case 24:
+&nbsp;                case 25:
+&nbsp;                case 26:
+&nbsp;                case 27:
+&nbsp;                case 28:
+&nbsp;                case 29:
+<b class="nc">&nbsp;                    LocalDateTime ldt = readLocalDateTimeX(len);</b>
+<b class="nc">&nbsp;                    if (ldt != null) {</b>
+<b class="nc">&nbsp;                        return ldt;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    ZonedDateTime zdt = readZonedDateTimeX(len);</b>
+<b class="nc">&nbsp;                    if (zdt != null) {</b>
+<b class="nc">&nbsp;                        ZoneId contextZoneId = context.getZoneId();</b>
+<b class="nc">&nbsp;                        if (!zdt.getZone().equals(contextZoneId)) {</b>
+<b class="nc">&nbsp;                            ldt = zdt.toInstant().atZone(contextZoneId).toLocalDateTime();</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            ldt = zdt.toLocalDateTime();</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        return ldt;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String str = readString();</b>
+<b class="nc">&nbsp;        if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;            wasNull = true;</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        DateTimeFormatter formatter = context.getDateFormatter();</b>
+<b class="nc">&nbsp;        if (formatter != null) {</b>
+<b class="nc">&nbsp;            if (!context.formatHasHour) {</b>
+<b class="nc">&nbsp;                return LocalDateTime.of(</b>
+<b class="nc">&nbsp;                        LocalDate.parse(str, formatter),</b>
+&nbsp;                        LocalTime.MIN
+&nbsp;                );
+&nbsp;            }
+<b class="nc">&nbsp;            return LocalDateTime.parse(str, formatter);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (IOUtils.isNumber(str)) {</b>
+<b class="nc">&nbsp;            long millis = Long.parseLong(str);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (context.formatUnixTime) {</b>
+<b class="nc">&nbsp;                millis *= 1000L;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Instant instant = Instant.ofEpochMilli(millis);</b>
+<b class="nc">&nbsp;            return LocalDateTime.ofInstant(instant, context.getZoneId());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (str.startsWith(&quot;/Date(&quot;) &amp;&amp; str.endsWith(&quot;)/&quot;)) {</b>
+<b class="nc">&nbsp;            String dotnetDateStr = str.substring(6, str.length() - 2);</b>
+<b class="nc">&nbsp;            int i = dotnetDateStr.indexOf(&#39;+&#39;);</b>
+<b class="nc">&nbsp;            if (i == -1) {</b>
+<b class="nc">&nbsp;                i = dotnetDateStr.indexOf(&#39;-&#39;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (i != -1) {</b>
+<b class="nc">&nbsp;                dotnetDateStr = dotnetDateStr.substring(0, i);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            long millis = Long.parseLong(dotnetDateStr);</b>
+<b class="nc">&nbsp;            Instant instant = Instant.ofEpochMilli(millis);</b>
+<b class="nc">&nbsp;            return LocalDateTime.ofInstant(instant, context.getZoneId());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (str.equals(&quot;0000-00-00 00:00:00&quot;)) {</b>
+<b class="nc">&nbsp;            wasNull = true;</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new JSONException(info(&quot;read LocalDateTime error &quot; + str));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract OffsetDateTime readOffsetDateTime();
+&nbsp;
+&nbsp;    public ZonedDateTime readZonedDateTime() {
+<b class="nc">&nbsp;        if (isInt()) {</b>
+<b class="nc">&nbsp;            long millis = readInt64Value();</b>
+<b class="nc">&nbsp;            if (context.formatUnixTime) {</b>
+<b class="nc">&nbsp;                millis *= 1000L;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Instant instant = Instant.ofEpochMilli(millis);</b>
+<b class="nc">&nbsp;            return instant.atZone(context.getZoneId());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (isString()) {</b>
+<b class="nc">&nbsp;            if (context.dateFormat == null</b>
+&nbsp;                    || context.formatyyyyMMddhhmmss19
+&nbsp;                    || context.formatyyyyMMddhhmmssT19
+&nbsp;                    || context.formatyyyyMMdd8
+&nbsp;                    || context.formatISO8601) {
+<b class="nc">&nbsp;                int len = getStringLength();</b>
+<b class="nc">&nbsp;                LocalDateTime ldt = null;</b>
+&nbsp;                LocalDate localDate;
+<b class="nc">&nbsp;                switch (len) {</b>
+&nbsp;                    case 8:
+<b class="nc">&nbsp;                        localDate = readLocalDate8();</b>
+<b class="nc">&nbsp;                        ldt = localDate == null ? null : LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;                        break;
+&nbsp;                    case 9:
+<b class="nc">&nbsp;                        localDate = readLocalDate9();</b>
+<b class="nc">&nbsp;                        ldt = localDate == null ? null : LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;                        break;
+&nbsp;                    case 10:
+<b class="nc">&nbsp;                        localDate = readLocalDate10();</b>
+<b class="nc">&nbsp;                        ldt = localDate == null ? null : LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;                        break;
+&nbsp;                    case 11:
+<b class="nc">&nbsp;                        localDate = readLocalDate11();</b>
+<b class="nc">&nbsp;                        ldt = LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;                        break;
+&nbsp;                    case 16:
+<b class="nc">&nbsp;                        ldt = readLocalDateTime16();</b>
+&nbsp;                        break;
+&nbsp;                    case 17:
+<b class="nc">&nbsp;                        ldt = readLocalDateTime17();</b>
+&nbsp;                        break;
+&nbsp;                    case 18:
+<b class="nc">&nbsp;                        ldt = readLocalDateTime18();</b>
+&nbsp;                        break;
+&nbsp;                    case 19:
+<b class="nc">&nbsp;                        ldt = readLocalDateTime19();</b>
+&nbsp;                        break;
+&nbsp;                    case 20: {
+<b class="nc">&nbsp;                        ldt = readLocalDateTime20();</b>
+&nbsp;                        break;
+&nbsp;                    }
+&nbsp;                    default:
+<b class="nc">&nbsp;                        ZonedDateTime zdt = readZonedDateTimeX(len);</b>
+<b class="nc">&nbsp;                        if (zdt != null) {</b>
+<b class="nc">&nbsp;                            return zdt;</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                }
+<b class="nc">&nbsp;                if (ldt != null) {</b>
+<b class="nc">&nbsp;                    return ZonedDateTime.ofLocal(</b>
+&nbsp;                            ldt,
+<b class="nc">&nbsp;                            context.getZoneId(),</b>
+&nbsp;                            null
+&nbsp;                    );
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String str = readString();</b>
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            DateTimeFormatter formatter = context.getDateFormatter();</b>
+<b class="nc">&nbsp;            if (formatter != null) {</b>
+<b class="nc">&nbsp;                if (!context.formatHasHour) {</b>
+<b class="nc">&nbsp;                    LocalDate localDate = LocalDate.parse(str, formatter);</b>
+<b class="nc">&nbsp;                    return ZonedDateTime.of(localDate, LocalTime.MIN, context.getZoneId());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                LocalDateTime localDateTime = LocalDateTime.parse(str, formatter);</b>
+<b class="nc">&nbsp;                return ZonedDateTime.of(localDateTime, context.getZoneId());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (IOUtils.isNumber(str)) {</b>
+<b class="nc">&nbsp;                long millis = Long.parseLong(str);</b>
+<b class="nc">&nbsp;                if (context.formatUnixTime) {</b>
+<b class="nc">&nbsp;                    millis *= 1000L;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                Instant instant = Instant.ofEpochMilli(millis);</b>
+<b class="nc">&nbsp;                return instant.atZone(context.getZoneId());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return ZonedDateTime.parse(str);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new JSONException(&quot;TODO : &quot; + ch);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public LocalTime readLocalTime() {
+<b class="nc">&nbsp;        if (nextIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (isInt()) {</b>
+<b class="nc">&nbsp;            long millis = readInt64Value();</b>
+<b class="nc">&nbsp;            Instant instant = Instant.ofEpochMilli(millis);</b>
+<b class="nc">&nbsp;            ZonedDateTime zdt = instant.atZone(context.getZoneId());</b>
+<b class="nc">&nbsp;            return zdt.toLocalTime();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int len = getStringLength();</b>
+<b class="nc">&nbsp;        switch (len) {</b>
+&nbsp;            case 5:
+<b class="nc">&nbsp;                return readLocalTime5();</b>
+&nbsp;            case 8:
+<b class="nc">&nbsp;                return readLocalTime8();</b>
+&nbsp;            case 10:
+<b class="nc">&nbsp;                return readLocalTime10();</b>
+&nbsp;            case 11:
+<b class="nc">&nbsp;                return readLocalTime11();</b>
+&nbsp;            case 12:
+<b class="nc">&nbsp;                return readLocalTime12();</b>
+&nbsp;            case 18:
+<b class="nc">&nbsp;                return readLocalTime18();</b>
+&nbsp;            case 19:
+<b class="nc">&nbsp;                return readLocalDateTime19()</b>
+<b class="nc">&nbsp;                        .toLocalTime();</b>
+&nbsp;            case 20:
+<b class="nc">&nbsp;                return readLocalDateTime20()</b>
+<b class="nc">&nbsp;                        .toLocalTime();</b>
+&nbsp;            default:
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String str = readString();</b>
+<b class="nc">&nbsp;        if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (IOUtils.isNumber(str)) {</b>
+<b class="nc">&nbsp;            long millis = Long.parseLong(str);</b>
+<b class="nc">&nbsp;            Instant instant = Instant.ofEpochMilli(millis);</b>
+<b class="nc">&nbsp;            ZonedDateTime zdt = instant.atZone(context.getZoneId());</b>
+<b class="nc">&nbsp;            return zdt.toLocalTime();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;not support len : &quot; + len);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected abstract int getStringLength();
+&nbsp;
+&nbsp;    public Instant readInstant() {
+<b class="nc">&nbsp;        if (nextIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (isNumber()) {</b>
+<b class="nc">&nbsp;            long millis = readInt64Value();</b>
+<b class="nc">&nbsp;            if (context.formatUnixTime) {</b>
+<b class="nc">&nbsp;                millis *= 1000L;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return Instant.ofEpochMilli(millis);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (isObject()) {</b>
+<b class="nc">&nbsp;            return (Instant) getObjectReader(Instant.class)</b>
+<b class="nc">&nbsp;                    .createInstance(</b>
+<b class="nc">&nbsp;                            readObject(),</b>
+&nbsp;                            0L
+&nbsp;                    );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ZonedDateTime zdt = readZonedDateTime();</b>
+<b class="nc">&nbsp;        if (zdt == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return Instant.ofEpochSecond(</b>
+<b class="nc">&nbsp;                zdt.toEpochSecond(),</b>
+<b class="nc">&nbsp;                zdt.toLocalTime().getNano());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final long readMillisFromString() {
+<b class="nc">&nbsp;        wasNull = false;</b>
+<b class="nc">&nbsp;        String format = context.dateFormat;</b>
+<b class="nc">&nbsp;        if (format == null</b>
+&nbsp;                || context.formatyyyyMMddhhmmss19
+&nbsp;                || context.formatyyyyMMddhhmmssT19
+&nbsp;                || context.formatyyyyMMdd8
+&nbsp;                || context.formatISO8601) {
+<b class="nc">&nbsp;            int len = getStringLength();</b>
+<b class="nc">&nbsp;            LocalDateTime ldt = null;</b>
+&nbsp;            LocalDate localDate;
+<b class="nc">&nbsp;            switch (len) {</b>
+&nbsp;                case 8: {
+<b class="nc">&nbsp;                    localDate = readLocalDate8();</b>
+<b class="nc">&nbsp;                    if (localDate == null) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(&quot;TODO : &quot; + readString());</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    ldt = LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case 9: {
+<b class="nc">&nbsp;                    localDate = readLocalDate9();</b>
+<b class="nc">&nbsp;                    if (localDate != null) {</b>
+<b class="nc">&nbsp;                        ldt = LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case 10: {
+<b class="nc">&nbsp;                    localDate = readLocalDate10();</b>
+<b class="nc">&nbsp;                    if (localDate == null) {</b>
+<b class="nc">&nbsp;                        String str = readString();</b>
+<b class="nc">&nbsp;                        if (&quot;0000-00-00&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;                            wasNull = true;</b>
+<b class="nc">&nbsp;                            return 0;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        if (IOUtils.isNumber(str)) {</b>
+<b class="nc">&nbsp;                            return Long.parseLong(str);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        throw new JSONException(&quot;TODO : &quot; + str);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        ldt = LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case 11: {
+<b class="nc">&nbsp;                    localDate = readLocalDate11();</b>
+<b class="nc">&nbsp;                    if (localDate != null) {</b>
+<b class="nc">&nbsp;                        ldt = LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case 12: {
+<b class="nc">&nbsp;                    ldt = readLocalDateTime12();</b>
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case 14: {
+<b class="nc">&nbsp;                    ldt = readLocalDateTime14();</b>
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case 16: {
+<b class="nc">&nbsp;                    ldt = readLocalDateTime16();</b>
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case 17: {
+<b class="nc">&nbsp;                    ldt = readLocalDateTime17();</b>
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case 18: {
+<b class="nc">&nbsp;                    ldt = readLocalDateTime18();</b>
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case 19: {
+<b class="nc">&nbsp;                    long millis = readMillis19();</b>
+<b class="nc">&nbsp;                    if (millis != 0 || !wasNull) {</b>
+<b class="nc">&nbsp;                        return millis;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    ldt = readLocalDateTime19();</b>
+&nbsp;                }
+&nbsp;                case 20: {
+<b class="nc">&nbsp;                    ldt = readLocalDateTime20();</b>
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            ZonedDateTime zdt = null;</b>
+<b class="nc">&nbsp;            if (ldt != null) {</b>
+<b class="nc">&nbsp;                zdt = ZonedDateTime.ofLocal(ldt, context.getZoneId(), null);</b>
+<b class="nc">&nbsp;            } else if (len &gt;= 20) {</b>
+<b class="nc">&nbsp;                zdt = readZonedDateTimeX(len);</b>
+<b class="nc">&nbsp;                if (zdt == null &amp;&amp; (len &gt;= 32 &amp;&amp; len &lt;= 35)) {</b>
+<b class="nc">&nbsp;                    String str = readString();</b>
+<b class="nc">&nbsp;                    zdt = DateUtils.parseZonedDateTime(str, null);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (zdt != null) {</b>
+<b class="nc">&nbsp;                long seconds = zdt.toEpochSecond();</b>
+<b class="nc">&nbsp;                int nanos = zdt.toLocalTime().getNano();</b>
+<b class="nc">&nbsp;                if (seconds &lt; 0 &amp;&amp; nanos &gt; 0) {</b>
+<b class="nc">&nbsp;                    long millis = (seconds + 1) * 1000;</b>
+<b class="nc">&nbsp;                    long adjustment = nanos / 1000_000 - 1000;</b>
+<b class="nc">&nbsp;                    return millis + adjustment;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    long millis = seconds * 1000L;</b>
+<b class="nc">&nbsp;                    return millis + nanos / 1000_000;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String str = readString();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;            wasNull = true;</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (context.formatMillis || context.formatUnixTime) {</b>
+<b class="nc">&nbsp;            long millis = Long.parseLong(str);</b>
+<b class="nc">&nbsp;            if (context.formatUnixTime) {</b>
+<b class="nc">&nbsp;                millis *= 1000L;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return millis;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (format != null &amp;&amp; !format.isEmpty()) {</b>
+<b class="nc">&nbsp;            if (&quot;yyyy-MM-dd HH:mm:ss&quot;.equals(format)) {</b>
+<b class="nc">&nbsp;                if ((str.length() &lt; 4 || str.charAt(4) != &#39;-&#39;) &amp;&amp; IOUtils.isNumber(str)) {</b>
+<b class="nc">&nbsp;                    return Long.parseLong(str);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return DateUtils.parseMillis19(str, null);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            SimpleDateFormat utilFormat = new SimpleDateFormat(format);</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                return utilFormat</b>
+<b class="nc">&nbsp;                        .parse(str)</b>
+<b class="nc">&nbsp;                        .getTime();</b>
+<b class="nc">&nbsp;            } catch (ParseException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;parse date error, &quot; + str + &quot;, expect format &quot; + utilFormat.toPattern());</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (&quot;0000-00-00T00:00:00&quot;.equals(str)</b>
+<b class="nc">&nbsp;                || &quot;0001-01-01T00:00:00+08:00&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (str.startsWith(&quot;/Date(&quot;) &amp;&amp; str.endsWith(&quot;)/&quot;)) {</b>
+<b class="nc">&nbsp;            String dotnetDateStr = str.substring(6, str.length() - 2);</b>
+<b class="nc">&nbsp;            int i = dotnetDateStr.indexOf(&#39;+&#39;);</b>
+<b class="nc">&nbsp;            if (i == -1) {</b>
+<b class="nc">&nbsp;                i = dotnetDateStr.indexOf(&#39;-&#39;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (i != -1) {</b>
+<b class="nc">&nbsp;                dotnetDateStr = dotnetDateStr.substring(0, i);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return Long.parseLong(dotnetDateStr);</b>
+<b class="nc">&nbsp;        } else if (IOUtils.isNumber(str)) {</b>
+<b class="nc">&nbsp;            return Long.parseLong(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(info(&quot;format &quot; + format + &quot; not support, input &quot; + str));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected abstract LocalDateTime readLocalDateTime12();
+&nbsp;
+&nbsp;    protected abstract LocalDateTime readLocalDateTime14();
+&nbsp;
+&nbsp;    protected abstract LocalDateTime readLocalDateTime16();
+&nbsp;
+&nbsp;    protected abstract LocalDateTime readLocalDateTime17();
+&nbsp;
+&nbsp;    protected abstract LocalDateTime readLocalDateTime18();
+&nbsp;
+&nbsp;    protected abstract LocalDateTime readLocalDateTime19();
+&nbsp;
+&nbsp;    protected abstract LocalDateTime readLocalDateTime20();
+&nbsp;
+&nbsp;    public abstract long readMillis19();
+&nbsp;
+&nbsp;    protected abstract LocalDateTime readLocalDateTimeX(int len);
+&nbsp;
+&nbsp;    protected abstract LocalTime readLocalTime5();
+&nbsp;
+&nbsp;    protected abstract LocalTime readLocalTime8();
+&nbsp;
+&nbsp;    protected abstract LocalTime readLocalTime10();
+&nbsp;
+&nbsp;    protected abstract LocalTime readLocalTime11();
+&nbsp;
+&nbsp;    protected abstract LocalTime readLocalTime12();
+&nbsp;
+&nbsp;    protected abstract LocalTime readLocalTime18();
+&nbsp;
+&nbsp;    protected abstract LocalDate readLocalDate8();
+&nbsp;
+&nbsp;    protected abstract LocalDate readLocalDate9();
+&nbsp;
+&nbsp;    protected abstract LocalDate readLocalDate10();
+&nbsp;
+&nbsp;    protected abstract LocalDate readLocalDate11();
+&nbsp;
+&nbsp;    protected abstract ZonedDateTime readZonedDateTimeX(int len);
+&nbsp;
+&nbsp;    public void readNumber(ValueConsumer consumer, boolean quoted) {
+<b class="nc">&nbsp;        readNumber0();</b>
+<b class="nc">&nbsp;        Number number = getNumber();</b>
+<b class="nc">&nbsp;        consumer.accept(number);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void readString(ValueConsumer consumer, boolean quoted) {
+<b class="nc">&nbsp;        String str = readString(); //</b>
+<b class="nc">&nbsp;        if (quoted) {</b>
+<b class="nc">&nbsp;            consumer.accept(JSON.toJSONString(str));</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            consumer.accept(str);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected abstract void readNumber0();
+&nbsp;
+&nbsp;    public abstract String readString();
+&nbsp;
+&nbsp;    public String[] readStringArray() {
+<b class="nc">&nbsp;        if ((ch == &#39;n&#39;) &amp;&amp; nextIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (nextIfMatch(&#39;[&#39;)) {</b>
+<b class="nc">&nbsp;            String[] values = null;</b>
+<b class="nc">&nbsp;            int size = 0;</b>
+&nbsp;            for (; ; ) {
+<b class="nc">&nbsp;                if (nextIfMatch(&#39;]&#39;)) {</b>
+<b class="nc">&nbsp;                    if (values == null) {</b>
+<b class="nc">&nbsp;                        values = new String[0];</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (isEnd()) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(info(&quot;input end&quot;));</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (values == null) {</b>
+<b class="nc">&nbsp;                    values = new String[16];</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    if (size == values.length) {</b>
+<b class="nc">&nbsp;                        values = Arrays.copyOf(values, values.length &lt;&lt; 1);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                values[size++] = readString();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            nextIfMatch(&#39;,&#39;);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (values.length == size) {</b>
+<b class="nc">&nbsp;                return values;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return Arrays.copyOf(values, size);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (this.ch == &#39;&quot;&#39; || this.ch == &#39;\&#39;&#39;) {</b>
+<b class="nc">&nbsp;            String str = readString();</b>
+<b class="nc">&nbsp;            if (str.isEmpty()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            throw new JSONException(info(&quot;not support input &quot; + str));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(info(&quot;not support input&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public char readCharValue() {
+<b class="nc">&nbsp;        String str = readString();</b>
+<b class="nc">&nbsp;        if (str == null || str.isEmpty()) {</b>
+<b class="nc">&nbsp;            wasNull = true;</b>
+<b class="nc">&nbsp;            return &#39;\0&#39;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return str.charAt(0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract void readNull();
+&nbsp;
+&nbsp;    public abstract boolean readIfNull();
+&nbsp;
+&nbsp;    public abstract String getString();
+&nbsp;
+&nbsp;    public boolean wasNull() {
+<b class="nc">&nbsp;        return wasNull;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T read(Type type) {
+<b class="nc">&nbsp;        boolean fieldBased = (context.features &amp; Feature.FieldBased.mask) != 0;</b>
+<b class="nc">&nbsp;        ObjectReader objectReader = context.provider.getObjectReader(type, fieldBased);</b>
+<b class="nc">&nbsp;        return (T) objectReader.readObject(this, null, null, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void read(List list) {
+<b class="nc">&nbsp;        if (!nextIfMatch(&#39;[&#39;)) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;illegal input, offset &quot; + offset + &quot;, char &quot; + ch);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        level++;</b>
+<b class="nc">&nbsp;        if (level &gt;= context.maxLevel) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;level too large : &quot; + level);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        for (; ; ) {
+<b class="nc">&nbsp;            if (nextIfMatch(&#39;]&#39;)) {</b>
+<b class="nc">&nbsp;                level--;</b>
+&nbsp;                break;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Object item = ObjectReaderImplObject.INSTANCE.readObject(this, null, null, 0);</b>
+<b class="nc">&nbsp;            list.add(item);</b>
+&nbsp;
+<b class="nc">&nbsp;            nextIfMatch(&#39;,&#39;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        nextIfMatch(&#39;,&#39;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void read(Collection list) {
+<b class="nc">&nbsp;        if (!nextIfMatch(&#39;[&#39;)) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;illegal input, offset &quot; + offset + &quot;, char &quot; + ch);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        level++;</b>
+<b class="nc">&nbsp;        if (level &gt;= context.maxLevel) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;level too large : &quot; + level);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        for (; ; ) {
+<b class="nc">&nbsp;            if (nextIfMatch(&#39;]&#39;)) {</b>
+<b class="nc">&nbsp;                level--;</b>
+&nbsp;                break;
+&nbsp;            }
+<b class="nc">&nbsp;            Object item = readAny();</b>
+<b class="nc">&nbsp;            list.add(item);</b>
+&nbsp;
+<b class="nc">&nbsp;            nextIfMatch(&#39;,&#39;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        nextIfMatch(&#39;,&#39;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void readObject(Object object, Feature... features) {
+<b class="nc">&nbsp;        long featuresLong = 0;</b>
+<b class="nc">&nbsp;        for (Feature feature : features) {</b>
+<b class="nc">&nbsp;            featuresLong |= feature.mask;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        readObject(object, featuresLong);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void readObject(Object object, long features) {
+<b class="nc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;object is null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Class objectClass = object.getClass();</b>
+<b class="nc">&nbsp;        boolean fieldBased = ((context.features | features) &amp; Feature.FieldBased.mask) != 0;</b>
+<b class="nc">&nbsp;        ObjectReader objectReader = context.provider.getObjectReader(objectClass, fieldBased);</b>
+<b class="nc">&nbsp;        if (objectReader instanceof ObjectReaderBean) {</b>
+<b class="nc">&nbsp;            ObjectReaderBean objectReaderBean = (ObjectReaderBean) objectReader;</b>
+<b class="nc">&nbsp;            objectReaderBean.readObject(this, object, features);</b>
+<b class="nc">&nbsp;        } else if (object instanceof Map) {</b>
+<b class="nc">&nbsp;            read((Map) object, features);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new JSONException(&quot;read object not support&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void read(Map object, long features) {
+<b class="nc">&nbsp;        boolean match = nextIfMatch(&#39;{&#39;);</b>
+<b class="nc">&nbsp;        boolean typeRedirect = false;</b>
+<b class="nc">&nbsp;        if (!match) {</b>
+<b class="nc">&nbsp;            if (typeRedirect = isTypeRedirect()) {</b>
+<b class="nc">&nbsp;                setTypeRedirect(false);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (isString()) {</b>
+<b class="nc">&nbsp;                    String str = readString();</b>
+<b class="nc">&nbsp;                    if (str.isEmpty()) {</b>
+&nbsp;                        return;
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                throw new JSONException(&quot;illegal input， offset &quot; + offset + &quot;, char &quot; + ch);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        Map map;
+<b class="nc">&nbsp;        if (object instanceof Wrapper) {</b>
+<b class="nc">&nbsp;            map = ((Wrapper) object).unwrap(Map.class);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            map = object;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; ; ++i) {</b>
+<b class="nc">&nbsp;            if (ch == &#39;/&#39;) {</b>
+<b class="nc">&nbsp;                skipLineComment();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (nextIfMatch(&#39;}&#39;)) {</b>
+&nbsp;                break;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (i != 0 &amp;&amp; !comma) {</b>
+<b class="nc">&nbsp;                throw new JSONException(info());</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            Object name;
+<b class="nc">&nbsp;            if (match || typeRedirect) {</b>
+<b class="nc">&nbsp;                if (ch &gt;= &#39;1&#39; &amp;&amp; ch &lt;= &#39;9&#39;) {</b>
+<b class="nc">&nbsp;                    name = null;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    name = readFieldName();</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                name = getFieldName();</b>
+<b class="nc">&nbsp;                match = true;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (name == null) {</b>
+<b class="nc">&nbsp;                if (isNumber()) {</b>
+<b class="nc">&nbsp;                    name = readNumber();</b>
+<b class="nc">&nbsp;                    if ((context.features &amp; Feature.NonStringKeyAsString.mask) != 0) {</b>
+<b class="nc">&nbsp;                        name = name.toString();</b>
+&nbsp;                    }
+&nbsp;                } else {
+<b class="nc">&nbsp;                    if ((context.features &amp; Feature.AllowUnQuotedFieldNames.mask) != 0) {</b>
+<b class="nc">&nbsp;                        name = readFieldNameUnquote();</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        throw new JSONException(info(&quot;not allow unquoted fieldName&quot;));</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                if (ch == &#39;:&#39;) {</b>
+<b class="nc">&nbsp;                    next();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            comma = false;</b>
+&nbsp;            Object value;
+<b class="nc">&nbsp;            switch (ch) {</b>
+&nbsp;                case &#39;-&#39;:
+&nbsp;                case &#39;+&#39;:
+&nbsp;                case &#39;0&#39;:
+&nbsp;                case &#39;1&#39;:
+&nbsp;                case &#39;2&#39;:
+&nbsp;                case &#39;3&#39;:
+&nbsp;                case &#39;4&#39;:
+&nbsp;                case &#39;5&#39;:
+&nbsp;                case &#39;6&#39;:
+&nbsp;                case &#39;7&#39;:
+&nbsp;                case &#39;8&#39;:
+&nbsp;                case &#39;9&#39;:
+&nbsp;                case &#39;.&#39;:
+<b class="nc">&nbsp;                    value = readNumber();</b>
+&nbsp;                    break;
+&nbsp;                case &#39;[&#39;:
+<b class="nc">&nbsp;                    value = readArray();</b>
+&nbsp;                    break;
+&nbsp;                case &#39;{&#39;:
+<b class="nc">&nbsp;                    if (typeRedirect) {</b>
+<b class="nc">&nbsp;                        value = ObjectReaderImplObject.INSTANCE.readObject(this, null, name, features);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        value = readObject();</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                case &#39;&quot;&#39;:
+&nbsp;                case &#39;\&#39;&#39;:
+<b class="nc">&nbsp;                    value = readString();</b>
+&nbsp;                    break;
+&nbsp;                case &#39;t&#39;:
+&nbsp;                case &#39;f&#39;:
+<b class="nc">&nbsp;                    value = readBoolValue();</b>
+&nbsp;                    break;
+&nbsp;                case &#39;n&#39;:
+<b class="nc">&nbsp;                    value = readNullOrNewDate();</b>
+&nbsp;                    break;
+&nbsp;                case &#39;/&#39;:
+<b class="nc">&nbsp;                    next();</b>
+<b class="nc">&nbsp;                    if (ch == &#39;/&#39;) {</b>
+<b class="nc">&nbsp;                        skipLineComment();</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        throw new JSONException(&quot;FASTJSON&quot; + JSON.VERSION + &quot;input not support &quot; + ch + &quot;, offset &quot; + offset);</b>
+&nbsp;                    }
+&nbsp;                    continue;
+&nbsp;                case &#39;S&#39;:
+<b class="nc">&nbsp;                    if (nextIfSet()) {</b>
+<b class="nc">&nbsp;                        value = read(HashSet.class);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        throw new JSONException(&quot;FASTJSON&quot; + JSON.VERSION + &quot;error, offset &quot; + offset + &quot;, char &quot; + ch);</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                case &#39;I&#39;:
+<b class="nc">&nbsp;                    if (nextIfInfinity()) {</b>
+<b class="nc">&nbsp;                        value = Double.POSITIVE_INFINITY;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        throw new JSONException(&quot;FASTJSON&quot; + JSON.VERSION + &quot;error, offset &quot; + offset + &quot;, char &quot; + ch);</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                case &#39;x&#39;:
+<b class="nc">&nbsp;                    value = readBinary();</b>
+&nbsp;                    break;
+&nbsp;                default:
+<b class="nc">&nbsp;                    throw new JSONException(&quot;FASTJSON&quot; + JSON.VERSION + &quot;error, offset &quot; + offset + &quot;, char &quot; + ch);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Object origin = map.put(name, value);</b>
+<b class="nc">&nbsp;            if (origin != null) {</b>
+<b class="nc">&nbsp;                long contextFeatures = features | context.getFeatures();</b>
+<b class="nc">&nbsp;                if ((contextFeatures &amp; JSONReader.Feature.DuplicateKeyValueAsArray.mask) != 0) {</b>
+<b class="nc">&nbsp;                    if (origin instanceof Collection) {</b>
+<b class="nc">&nbsp;                        ((Collection) origin).add(value);</b>
+<b class="nc">&nbsp;                        map.put(name, origin);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        JSONArray array = JSONArray.of(origin, value);</b>
+<b class="nc">&nbsp;                        map.put(name, array);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        nextIfMatch(&#39;,&#39;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void read(Map object, Type keyType, Type valueType, long features) {
+<b class="nc">&nbsp;        boolean match = nextIfMatch(&#39;{&#39;);</b>
+<b class="nc">&nbsp;        if (!match) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;illegal input， offset &quot; + offset + &quot;, char &quot; + ch);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectReader keyReader = context.getObjectReader(keyType);</b>
+<b class="nc">&nbsp;        ObjectReader valueReader = context.getObjectReader(valueType);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; ; ++i) {</b>
+<b class="nc">&nbsp;            if (ch == &#39;/&#39;) {</b>
+<b class="nc">&nbsp;                skipLineComment();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (nextIfMatch(&#39;}&#39;)) {</b>
+&nbsp;                break;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (i != 0 &amp;&amp; !comma) {</b>
+<b class="nc">&nbsp;                throw new JSONException(info());</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            Object name;
+&nbsp;
+<b class="nc">&nbsp;            if (keyType == String.class) {</b>
+<b class="nc">&nbsp;                name = readFieldName();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                name = keyReader.readObject(this, null, null, 0L);</b>
+<b class="nc">&nbsp;                nextIfMatch(&#39;:&#39;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Object value = valueReader.readObject(this, null, null, 0L);</b>
+<b class="nc">&nbsp;            Object origin = object.put(name, value);</b>
+<b class="nc">&nbsp;            if (origin != null) {</b>
+<b class="nc">&nbsp;                long contextFeatures = features | context.getFeatures();</b>
+<b class="nc">&nbsp;                if ((contextFeatures &amp; JSONReader.Feature.DuplicateKeyValueAsArray.mask) != 0) {</b>
+<b class="nc">&nbsp;                    if (origin instanceof Collection) {</b>
+<b class="nc">&nbsp;                        ((Collection) origin).add(value);</b>
+<b class="nc">&nbsp;                        object.put(name, origin);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        JSONArray array = JSONArray.of(origin, value);</b>
+<b class="nc">&nbsp;                        object.put(name, array);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        nextIfMatch(&#39;,&#39;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T read(Class&lt;T&gt; type) {
+<b class="nc">&nbsp;        boolean fieldBased = (context.features &amp; Feature.FieldBased.mask) != 0;</b>
+<b class="nc">&nbsp;        ObjectReader objectReader = context.provider.getObjectReader(type, fieldBased);</b>
+<b class="nc">&nbsp;        return (T) objectReader.readObject(this, null, null, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;String, Object&gt; readObject() {
+<b class="nc">&nbsp;        nextIfObjectStart();</b>
+&nbsp;
+<b class="nc">&nbsp;        level++;</b>
+<b class="nc">&nbsp;        if (level &gt;= context.maxLevel) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;level too large : &quot; + level);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        Map object;
+<b class="nc">&nbsp;        if (context.objectSupplier == null) {</b>
+<b class="nc">&nbsp;            if ((context.features &amp; Feature.UseNativeObject.mask) != 0) {</b>
+<b class="nc">&nbsp;                object = new HashMap();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                object = new JSONObject();</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            object = (Map) context.objectSupplier.get();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; ; ++i) {</b>
+<b class="nc">&nbsp;            if (ch == &#39;}&#39;) {</b>
+<b class="nc">&nbsp;                next();</b>
+&nbsp;                break;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Object name = readFieldName();</b>
+<b class="nc">&nbsp;            if (name == null) {</b>
+<b class="nc">&nbsp;                if (ch == EOI) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;input end&quot;);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (ch == &#39;-&#39; || (ch &gt;= &#39;0&#39; &amp;&amp; ch &lt;= &#39;9&#39;)) {</b>
+<b class="nc">&nbsp;                    readNumber0();</b>
+<b class="nc">&nbsp;                    name = getNumber();</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    name = readFieldNameUnquote();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                nextIfMatch(&#39;:&#39;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (i == 0 &amp;&amp; (context.features &amp; Feature.ErrorOnNotSupportAutoType.mask) != 0 &amp;&amp; &quot;@type&quot;.equals(name)) {</b>
+<b class="nc">&nbsp;                String typeName = readString();</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;autoType not support : &quot; + typeName);</b>
+&nbsp;            }
+&nbsp;            Object val;
+<b class="nc">&nbsp;            switch (ch) {</b>
+&nbsp;                case &#39;-&#39;:
+&nbsp;                case &#39;+&#39;:
+&nbsp;                case &#39;0&#39;:
+&nbsp;                case &#39;1&#39;:
+&nbsp;                case &#39;2&#39;:
+&nbsp;                case &#39;3&#39;:
+&nbsp;                case &#39;4&#39;:
+&nbsp;                case &#39;5&#39;:
+&nbsp;                case &#39;6&#39;:
+&nbsp;                case &#39;7&#39;:
+&nbsp;                case &#39;8&#39;:
+&nbsp;                case &#39;9&#39;:
+<b class="nc">&nbsp;                    readNumber0();</b>
+<b class="nc">&nbsp;                    val = getNumber();</b>
+&nbsp;                    break;
+&nbsp;                case &#39;[&#39;:
+<b class="nc">&nbsp;                    val = readArray();</b>
+&nbsp;                    break;
+&nbsp;                case &#39;{&#39;:
+<b class="nc">&nbsp;                    val = readObject();</b>
+&nbsp;                    break;
+&nbsp;                case &#39;&quot;&#39;:
+&nbsp;                case &#39;\&#39;&#39;:
+<b class="nc">&nbsp;                    val = readString();</b>
+&nbsp;                    break;
+&nbsp;                case &#39;t&#39;:
+&nbsp;                case &#39;f&#39;:
+<b class="nc">&nbsp;                    val = readBoolValue();</b>
+&nbsp;                    break;
+&nbsp;                case &#39;n&#39;:
+<b class="nc">&nbsp;                    readNull();</b>
+<b class="nc">&nbsp;                    val = null;</b>
+&nbsp;                    break;
+&nbsp;                case &#39;/&#39;:
+<b class="nc">&nbsp;                    next();</b>
+<b class="nc">&nbsp;                    if (ch == &#39;/&#39;) {</b>
+<b class="nc">&nbsp;                        skipLineComment();</b>
+&nbsp;                    }
+&nbsp;                    continue;
+&nbsp;                case &#39;I&#39;:
+<b class="nc">&nbsp;                    if (nextIfInfinity()) {</b>
+<b class="nc">&nbsp;                        val = Double.POSITIVE_INFINITY;</b>
+&nbsp;                        break;
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        throw new JSONException(info(&quot;illegal input &quot; + ch));</b>
+&nbsp;                    }
+&nbsp;                case &#39;S&#39;:
+<b class="nc">&nbsp;                    if (nextIfSet()) {</b>
+<b class="nc">&nbsp;                        val = read(Set.class);</b>
+&nbsp;                        break;
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        throw new JSONException(info(&quot;illegal input &quot; + ch));</b>
+&nbsp;                    }
+&nbsp;                default:
+<b class="nc">&nbsp;                    throw new JSONException(info(&quot;illegal input &quot; + ch));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            object.put(name, val);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (comma = (ch == &#39;,&#39;)) {</b>
+<b class="nc">&nbsp;            next();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        level--;</b>
+&nbsp;
+<b class="nc">&nbsp;        return object;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract void skipLineComment();
+&nbsp;
+&nbsp;    public final Boolean readBool() {
+<b class="nc">&nbsp;        if (isNull()) {</b>
+<b class="nc">&nbsp;            readNull();</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean boolValue = readBoolValue();</b>
+<b class="nc">&nbsp;        if (!boolValue &amp;&amp; wasNull) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return boolValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract boolean readBoolValue();
+&nbsp;
+&nbsp;    public Object readAny() {
+<b class="nc">&nbsp;        return read(Object.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List readArray(Type itemType) {
+<b class="nc">&nbsp;        if (nextIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        List list = new ArrayList();</b>
+<b class="nc">&nbsp;        if (!nextIfMatch(&#39;[&#39;)) {</b>
+<b class="nc">&nbsp;            throw new JSONException(info(&quot;syntax error : &quot; + ch));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean fieldBased = (context.features &amp; Feature.FieldBased.mask) != 0;</b>
+<b class="nc">&nbsp;        ObjectReader objectReader = context.provider.getObjectReader(itemType, fieldBased);</b>
+&nbsp;
+<b class="nc">&nbsp;        while (!nextIfMatch(&#39;]&#39;)) {</b>
+<b class="nc">&nbsp;            Object item = objectReader.readObject(this, null, null, 0);</b>
+<b class="nc">&nbsp;            list.add(item);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (ch == &#39;}&#39; || ch == EOI) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;illegal input : &quot; + ch + &quot;, offset &quot; + getOffset());</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (comma = (ch == &#39;,&#39;)) {</b>
+<b class="nc">&nbsp;            next();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List readList(Type[] types) {
+<b class="nc">&nbsp;        if (nextIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        List list = new ArrayList(types.length);</b>
+<b class="nc">&nbsp;        if (!nextIfMatch(&#39;[&#39;)) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;syntax error : &quot; + ch);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; ; ++i) {</b>
+<b class="nc">&nbsp;            if (nextIfMatch(&#39;]&#39;)) {</b>
+&nbsp;                break;
+&nbsp;            }
+<b class="nc">&nbsp;            Type itemType = types[i];</b>
+<b class="nc">&nbsp;            Object item = read(itemType);</b>
+<b class="nc">&nbsp;            list.add(item);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (ch == &#39;}&#39; || ch == EOI) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;illegal input : &quot; + ch + &quot;, offset &quot; + getOffset());</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (comma = (ch == &#39;,&#39;)) {</b>
+<b class="nc">&nbsp;            next();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final Object[] readArray(Type[] types) {
+<b class="nc">&nbsp;        if (nextIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!nextIfMatch(&#39;[&#39;)) {</b>
+<b class="nc">&nbsp;            throw new JSONException(info(&quot;syntax error&quot;));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean arrayEnd = false;</b>
+<b class="nc">&nbsp;        Object[] list = new Object[types.length];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; types.length; i++) {</b>
+<b class="nc">&nbsp;            if (i != 0) {</b>
+<b class="nc">&nbsp;                if (nextIfMatch(&#39;]&#39;)) {</b>
+<b class="nc">&nbsp;                    arrayEnd = true;</b>
+&nbsp;                    break;
+<b class="nc">&nbsp;                } else if (isEnd()) {</b>
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Type itemType = types[i];</b>
+<b class="nc">&nbsp;            Object item = read(itemType);</b>
+<b class="nc">&nbsp;            list[i] = item;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (i == types.length - 1) {</b>
+<b class="nc">&nbsp;                arrayEnd = true;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!arrayEnd) {</b>
+<b class="nc">&nbsp;            throw new JSONException(info(&quot;syntax error&quot;));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void readArray(List list, Type itemType) {
+<b class="nc">&nbsp;        readArray((Collection) list, itemType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void readArray(Collection list, Type itemType) {
+<b class="nc">&nbsp;        if (nextIfMatch(&#39;[&#39;)) {</b>
+<b class="nc">&nbsp;            while (!nextIfMatch(&#39;]&#39;)) {</b>
+<b class="nc">&nbsp;                Object item = read(itemType);</b>
+<b class="nc">&nbsp;                list.add(item);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (ch == &#39;}&#39; || ch == EOI) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(info());</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (comma = (ch == &#39;,&#39;)) {</b>
+<b class="nc">&nbsp;                next();</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (isString()) {</b>
+<b class="nc">&nbsp;            String str = readString();</b>
+<b class="nc">&nbsp;            if (itemType == String.class) {</b>
+<b class="nc">&nbsp;                list.add(str);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                Function typeConvert = context.getProvider().getTypeConvert(String.class, itemType);</b>
+<b class="nc">&nbsp;                if (typeConvert == null) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(info(&quot;not support input &quot; + str));</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (str.indexOf(&#39;,&#39;) != -1) {</b>
+<b class="nc">&nbsp;                    String[] items = str.split(&quot;,&quot;);</b>
+<b class="nc">&nbsp;                    for (String strItem : items) {</b>
+<b class="nc">&nbsp;                        Object item = typeConvert.apply(strItem);</b>
+<b class="nc">&nbsp;                        list.add(item);</b>
+&nbsp;                    }
+&nbsp;                } else {
+<b class="nc">&nbsp;                    Object item = typeConvert.apply(str);</b>
+<b class="nc">&nbsp;                    list.add(item);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            Object item = read(itemType);</b>
+<b class="nc">&nbsp;            list.add(item);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (comma = (ch == &#39;,&#39;)) {</b>
+<b class="nc">&nbsp;            next();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public List readArray() {
+<b class="nc">&nbsp;        next();</b>
+&nbsp;
+<b class="nc">&nbsp;        level++;</b>
+<b class="nc">&nbsp;        if (level &gt;= context.maxLevel) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;level too large : &quot; + level);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int i = 0;</b>
+<b class="nc">&nbsp;        List&lt;Object&gt; list = null;</b>
+<b class="nc">&nbsp;        Object first = null, second = null;</b>
+&nbsp;
+&nbsp;        _for:
+<b class="nc">&nbsp;        for (; ; ++i) {</b>
+&nbsp;            Object val;
+<b class="nc">&nbsp;            switch (ch) {</b>
+&nbsp;                case &#39;]&#39;:
+<b class="nc">&nbsp;                    next();</b>
+&nbsp;                    break _for;
+&nbsp;                case &#39;[&#39;:
+<b class="nc">&nbsp;                    val = readArray();</b>
+&nbsp;                    break;
+&nbsp;                case &#39;{&#39;:
+<b class="nc">&nbsp;                    if (context.autoTypeBeforeHandler != null || (context.features &amp; Feature.SupportAutoType.mask) != 0) {</b>
+<b class="nc">&nbsp;                        val = ObjectReaderImplObject.INSTANCE.readObject(this, null, null, 0);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        val = readObject();</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                case &#39;\&#39;&#39;:
+&nbsp;                case &#39;&quot;&#39;:
+<b class="nc">&nbsp;                    val = readString();</b>
+&nbsp;                    break;
+&nbsp;                case &#39;-&#39;:
+&nbsp;                case &#39;+&#39;:
+&nbsp;                case &#39;0&#39;:
+&nbsp;                case &#39;1&#39;:
+&nbsp;                case &#39;2&#39;:
+&nbsp;                case &#39;3&#39;:
+&nbsp;                case &#39;4&#39;:
+&nbsp;                case &#39;5&#39;:
+&nbsp;                case &#39;6&#39;:
+&nbsp;                case &#39;7&#39;:
+&nbsp;                case &#39;8&#39;:
+&nbsp;                case &#39;9&#39;:
+<b class="nc">&nbsp;                    readNumber0();</b>
+<b class="nc">&nbsp;                    val = getNumber();</b>
+&nbsp;                    break;
+&nbsp;                case &#39;t&#39;:
+&nbsp;                case &#39;f&#39;:
+<b class="nc">&nbsp;                    val = readBoolValue();</b>
+&nbsp;                    break;
+&nbsp;                case &#39;n&#39;: {
+<b class="nc">&nbsp;                    readNull();</b>
+<b class="nc">&nbsp;                    val = null;</b>
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case &#39;/&#39;:
+<b class="nc">&nbsp;                    skipLineComment();</b>
+&nbsp;                    continue;
+&nbsp;                default:
+<b class="nc">&nbsp;                    throw new JSONException(&quot;TODO : &quot; + ch);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (i == 0) {</b>
+<b class="nc">&nbsp;                first = val;</b>
+<b class="nc">&nbsp;            } else if (i == 1) {</b>
+<b class="nc">&nbsp;                second = val;</b>
+<b class="nc">&nbsp;            } else if (i == 2) {</b>
+<b class="nc">&nbsp;                if (context.arraySupplier != null) {</b>
+<b class="nc">&nbsp;                    list = context.arraySupplier.get();</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    list = new JSONArray();</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                list.add(first);</b>
+<b class="nc">&nbsp;                list.add(second);</b>
+<b class="nc">&nbsp;                list.add(val);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                list.add(val);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (list == null) {</b>
+<b class="nc">&nbsp;            if (context.arraySupplier != null) {</b>
+<b class="nc">&nbsp;                list = context.arraySupplier.get();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (context.isEnabled(Feature.UseNativeObject)) {</b>
+<b class="nc">&nbsp;                    list = i == 2 ? new ArrayList(2) : new ArrayList(1);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    list = i == 2 ? new JSONArray(2) : new JSONArray(1);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (i == 1) {</b>
+<b class="nc">&nbsp;                list.add(first);</b>
+<b class="nc">&nbsp;            } else if (i == 2) {</b>
+<b class="nc">&nbsp;                list.add(first);</b>
+<b class="nc">&nbsp;                list.add(second);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (comma = (ch == &#39;,&#39;)) {</b>
+<b class="nc">&nbsp;            next();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        level--;</b>
+&nbsp;
+<b class="nc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final BigInteger getBigInteger() {
+<b class="nc">&nbsp;        Number number = getNumber();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (number == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (number instanceof BigInteger) {</b>
+<b class="nc">&nbsp;            return (BigInteger) number;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return BigInteger.valueOf(number.longValue());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final BigDecimal getBigDecimal() {
+<b class="nc">&nbsp;        if (wasNull) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        switch (valueType) {</b>
+&nbsp;            case JSON_TYPE_INT: {
+<b class="nc">&nbsp;                if (mag1 == 0 &amp;&amp; mag2 == 0 &amp;&amp; mag3 &gt;= 0) {</b>
+<b class="nc">&nbsp;                    return BigDecimal.valueOf(negative ? -mag3 : mag3);</b>
+&nbsp;                }
+&nbsp;                int[] mag;
+<b class="nc">&nbsp;                if (mag0 == 0) {</b>
+<b class="nc">&nbsp;                    if (mag1 == 0) {</b>
+<b class="nc">&nbsp;                        long v3 = mag3 &amp; 0XFFFFFFFFL;</b>
+<b class="nc">&nbsp;                        long v2 = mag2 &amp; 0XFFFFFFFFL;</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (v2 &lt;= Integer.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                            long v23 = (v2 &lt;&lt; 32) + (v3);</b>
+<b class="nc">&nbsp;                            return BigDecimal.valueOf(negative ? -v23 : v23);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        mag = new int[]{mag2, mag3};</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        mag = new int[]{mag1, mag2, mag3};</b>
+&nbsp;                    }
+&nbsp;                } else {
+<b class="nc">&nbsp;                    mag = new int[]{mag0, mag1, mag2, mag3};</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                int signum = negative ? -1 : 1;</b>
+<b class="nc">&nbsp;                BigInteger bigInt = BIG_INTEGER_CREATOR.apply(signum, mag);</b>
+<b class="nc">&nbsp;                return new BigDecimal(bigInt);</b>
+&nbsp;            }
+&nbsp;            case JSON_TYPE_DEC: {
+<b class="nc">&nbsp;                BigDecimal decimal = null;</b>
+&nbsp;
+<b class="nc">&nbsp;                if (exponent == 0 &amp;&amp; mag0 == 0 &amp;&amp; mag1 == 0) {</b>
+<b class="nc">&nbsp;                    if (mag2 == 0 &amp;&amp; mag3 &gt;= 0) {</b>
+<b class="nc">&nbsp;                        int unscaledVal = negative ? -mag3 : mag3;</b>
+<b class="nc">&nbsp;                        decimal = BigDecimal.valueOf(unscaledVal, scale);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        long v3 = mag3 &amp; 0XFFFFFFFFL;</b>
+<b class="nc">&nbsp;                        long v2 = mag2 &amp; 0XFFFFFFFFL;</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (v2 &lt;= Integer.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                            long v23 = (v2 &lt;&lt; 32) + (v3);</b>
+<b class="nc">&nbsp;                            long unscaledVal = negative ? -v23 : v23;</b>
+<b class="nc">&nbsp;                            decimal = BigDecimal.valueOf(unscaledVal, scale);</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (decimal == null) {</b>
+<b class="nc">&nbsp;                    int[] mag = mag0 == 0</b>
+<b class="nc">&nbsp;                            ? mag1 == 0</b>
+<b class="nc">&nbsp;                            ? mag2 == 0</b>
+<b class="nc">&nbsp;                            ? new int[]{mag3}</b>
+<b class="nc">&nbsp;                            : new int[]{mag2, mag3}</b>
+<b class="nc">&nbsp;                            : new int[]{mag1, mag2, mag3}</b>
+<b class="nc">&nbsp;                            : new int[]{mag0, mag1, mag2, mag3};</b>
+&nbsp;
+<b class="nc">&nbsp;                    int signum = negative ? -1 : 1;</b>
+<b class="nc">&nbsp;                    BigInteger bigInt = BIG_INTEGER_CREATOR.apply(signum, mag);</b>
+<b class="nc">&nbsp;                    decimal = new BigDecimal(bigInt, scale);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (exponent != 0) {</b>
+<b class="nc">&nbsp;                    String doubleStr = decimal.toPlainString() + &quot;E&quot; + exponent;</b>
+<b class="nc">&nbsp;                    double doubleValue = Double.parseDouble(doubleStr);</b>
+<b class="nc">&nbsp;                    return toBigDecimal(doubleValue);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return decimal;</b>
+&nbsp;            }
+&nbsp;            case JSON_TYPE_BIG_DEC: {
+<b class="nc">&nbsp;                return toBigDecimal(stringValue);</b>
+&nbsp;            }
+&nbsp;            case JSON_TYPE_BOOL:
+<b class="nc">&nbsp;                return boolValue ? BigDecimal.ONE : BigDecimal.ZERO;</b>
+&nbsp;            case JSON_TYPE_STRING: {
+&nbsp;                try {
+<b class="nc">&nbsp;                    return toBigDecimal(stringValue);</b>
+<b class="nc">&nbsp;                } catch (NumberFormatException ex) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(info(&quot;read decimal error, value &quot; + stringValue), ex);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;            case JSON_TYPE_OBJECT: {
+<b class="nc">&nbsp;                JSONObject object = (JSONObject) complex;</b>
+<b class="nc">&nbsp;                BigDecimal decimal = object.getBigDecimal(&quot;value&quot;);</b>
+<b class="nc">&nbsp;                if (decimal == null) {</b>
+<b class="nc">&nbsp;                    decimal = object.getBigDecimal(&quot;$numberDecimal&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (decimal != null) {</b>
+<b class="nc">&nbsp;                    return decimal;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                throw new JSONException(&quot;TODO : &quot; + valueType);</b>
+&nbsp;            }
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new JSONException(&quot;TODO : &quot; + valueType);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public final Number getNumber() {
+<b class="nc">&nbsp;        if (wasNull) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        switch (valueType) {</b>
+&nbsp;            case JSON_TYPE_INT:
+&nbsp;            case JSON_TYPE_INT64: {
+<b class="nc">&nbsp;                if (mag0 == 0 &amp;&amp; mag1 == 0 &amp;&amp; mag2 == 0 &amp;&amp; mag3 != Integer.MIN_VALUE) {</b>
+&nbsp;                    int intVlaue;
+<b class="nc">&nbsp;                    if (negative) {</b>
+<b class="nc">&nbsp;                        if (mag3 &lt; 0) {</b>
+<b class="nc">&nbsp;                            return -(mag3 &amp; 0xFFFFFFFFL);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        intVlaue = -mag3;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        if (mag3 &lt; 0) {</b>
+<b class="nc">&nbsp;                            return mag3 &amp; 0xFFFFFFFFL;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        intVlaue = mag3;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (valueType == JSON_TYPE_INT64) {</b>
+<b class="nc">&nbsp;                        return (long) intVlaue;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    return intVlaue;</b>
+&nbsp;                }
+&nbsp;                int[] mag;
+<b class="nc">&nbsp;                if (mag0 == 0) {</b>
+<b class="nc">&nbsp;                    if (mag1 == 0) {</b>
+<b class="nc">&nbsp;                        long v3 = mag3 &amp; 0XFFFFFFFFL;</b>
+<b class="nc">&nbsp;                        long v2 = mag2 &amp; 0XFFFFFFFFL;</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (v2 &lt;= Integer.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                            long v23 = (v2 &lt;&lt; 32) + (v3);</b>
+<b class="nc">&nbsp;                            return negative ? -v23 : v23;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        mag = new int[]{mag2, mag3};</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        mag = new int[]{mag1, mag2, mag3};</b>
+&nbsp;                    }
+&nbsp;                } else {
+<b class="nc">&nbsp;                    mag = new int[]{mag0, mag1, mag2, mag3};</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                int signum = negative ? -1 : 1;</b>
+<b class="nc">&nbsp;                return BIG_INTEGER_CREATOR.apply(signum, mag);</b>
+&nbsp;            }
+&nbsp;            case JSON_TYPE_INT16: {
+<b class="nc">&nbsp;                if (mag0 == 0 &amp;&amp; mag1 == 0 &amp;&amp; mag2 == 0 &amp;&amp; mag3 &gt;= 0) {</b>
+<b class="nc">&nbsp;                    int intValue = negative ? -mag3 : mag3;</b>
+<b class="nc">&nbsp;                    return (short) intValue;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                throw new JSONException(info(&quot;shortValue overflow&quot;));</b>
+&nbsp;            }
+&nbsp;            case JSON_TYPE_INT8: {
+<b class="nc">&nbsp;                if (mag0 == 0 &amp;&amp; mag1 == 0 &amp;&amp; mag2 == 0 &amp;&amp; mag3 &gt;= 0) {</b>
+<b class="nc">&nbsp;                    int intValue = negative ? -mag3 : mag3;</b>
+<b class="nc">&nbsp;                    return (byte) intValue;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                throw new JSONException(info(&quot;shortValue overflow&quot;));</b>
+&nbsp;            }
+&nbsp;            case JSON_TYPE_DEC: {
+<b class="nc">&nbsp;                BigDecimal decimal = null;</b>
+&nbsp;
+<b class="nc">&nbsp;                if (mag0 == 0 &amp;&amp; mag1 == 0) {</b>
+<b class="nc">&nbsp;                    if (mag2 == 0 &amp;&amp; mag3 &gt;= 0) {</b>
+<b class="nc">&nbsp;                        int unscaledVal = negative ? -mag3 : mag3;</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (exponent == 0) {</b>
+<b class="nc">&nbsp;                            if ((context.features &amp; Feature.UseBigDecimalForFloats.mask) != 0) {</b>
+<b class="nc">&nbsp;                                switch (scale) {</b>
+&nbsp;                                    case 1:
+&nbsp;                                    case 2:
+&nbsp;                                    case 3:
+&nbsp;                                    case 4:
+&nbsp;                                    case 5:
+&nbsp;                                    case 6:
+&nbsp;                                    case 7:
+&nbsp;                                    case 8:
+&nbsp;                                    case 9:
+&nbsp;                                    case 10:
+<b class="nc">&nbsp;                                        return (float) (unscaledVal / DOUBLE_10_POW[scale]);</b>
+&nbsp;                                    default:
+&nbsp;                                        break;
+&nbsp;                                }
+<b class="nc">&nbsp;                            } else if ((context.features &amp; Feature.UseBigDecimalForDoubles.mask) != 0) {</b>
+<b class="nc">&nbsp;                                if (unscaledVal == 0) {</b>
+<b class="nc">&nbsp;                                    return DOUBLE_ZERO;</b>
+&nbsp;                                }
+&nbsp;
+<b class="nc">&nbsp;                                switch (scale) {</b>
+&nbsp;                                    case 1:
+&nbsp;                                    case 2:
+&nbsp;                                    case 3:
+&nbsp;                                    case 4:
+&nbsp;                                    case 5:
+&nbsp;                                    case 6:
+&nbsp;                                    case 7:
+&nbsp;                                    case 8:
+&nbsp;                                    case 9:
+&nbsp;                                    case 10:
+&nbsp;                                    case 11:
+&nbsp;                                    case 12:
+&nbsp;                                    case 13:
+&nbsp;                                    case 14:
+&nbsp;                                    case 15:
+<b class="nc">&nbsp;                                        return unscaledVal / DOUBLE_10_POW[scale];</b>
+&nbsp;                                    default:
+&nbsp;                                        break;
+&nbsp;                                }
+&nbsp;                            }
+&nbsp;                        }
+<b class="nc">&nbsp;                        decimal = BigDecimal.valueOf(unscaledVal, scale);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        long v3 = mag3 &amp; 0XFFFFFFFFL;</b>
+<b class="nc">&nbsp;                        long v2 = mag2 &amp; 0XFFFFFFFFL;</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (v2 &lt;= Integer.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                            long v23 = (v2 &lt;&lt; 32) + (v3);</b>
+<b class="nc">&nbsp;                            long unscaledVal = negative ? -v23 : v23;</b>
+&nbsp;
+<b class="nc">&nbsp;                            if (exponent == 0) {</b>
+<b class="nc">&nbsp;                                if ((context.features &amp; Feature.UseBigDecimalForFloats.mask) != 0) {</b>
+&nbsp;                                    boolean isNegative;
+&nbsp;                                    long unsignedUnscaledVal;
+<b class="nc">&nbsp;                                    if (unscaledVal &lt; 0) {</b>
+<b class="nc">&nbsp;                                        isNegative = true;</b>
+<b class="nc">&nbsp;                                        unsignedUnscaledVal = -unscaledVal;</b>
+&nbsp;                                    } else {
+<b class="nc">&nbsp;                                        isNegative = false;</b>
+<b class="nc">&nbsp;                                        unsignedUnscaledVal = unscaledVal;</b>
+&nbsp;                                    }
+&nbsp;
+&nbsp;                                    /*
+&nbsp;                                     * If both unscaledVal and the scale can be exactly
+&nbsp;                                     * represented as float values, perform a single float
+&nbsp;                                     * multiply or divide to compute the (properly
+&nbsp;                                     * rounded) result.
+&nbsp;                                     */
+&nbsp;
+<b class="nc">&nbsp;                                    int len = IOUtils.stringSize(unsignedUnscaledVal);</b>
+<b class="nc">&nbsp;                                    if (doubleChars == null) {</b>
+<b class="nc">&nbsp;                                        doubleChars = new char[20];</b>
+&nbsp;                                    }
+<b class="nc">&nbsp;                                    IOUtils.getChars(unsignedUnscaledVal, len, doubleChars);</b>
+<b class="nc">&nbsp;                                    return TypeUtils.floatValue(isNegative, len - scale, doubleChars, len);</b>
+<b class="nc">&nbsp;                                } else if ((context.features &amp; Feature.UseBigDecimalForDoubles.mask) != 0) {</b>
+&nbsp;                                    boolean isNegative;
+&nbsp;                                    long unsignedUnscaledVal;
+<b class="nc">&nbsp;                                    if (unscaledVal &lt; 0) {</b>
+<b class="nc">&nbsp;                                        isNegative = true;</b>
+<b class="nc">&nbsp;                                        unsignedUnscaledVal = -unscaledVal;</b>
+&nbsp;                                    } else {
+<b class="nc">&nbsp;                                        isNegative = false;</b>
+<b class="nc">&nbsp;                                        unsignedUnscaledVal = unscaledVal;</b>
+&nbsp;                                    }
+&nbsp;
+&nbsp;                                    /*
+&nbsp;                                     * If both unscaledVal and the scale can be exactly
+&nbsp;                                     * represented as double values, perform a single
+&nbsp;                                     * double multiply or divide to compute the (properly
+&nbsp;                                     * rounded) result.
+&nbsp;                                     */
+<b class="nc">&nbsp;                                    if (unsignedUnscaledVal &lt; 1L &lt;&lt; 52) {</b>
+&nbsp;                                        // Don&#39;t have too guard against
+&nbsp;                                        // Math.abs(MIN_VALUE) because of outer check
+&nbsp;                                        // against INFLATED.
+<b class="nc">&nbsp;                                        if (scale &gt; 0 &amp;&amp; scale &lt; DOUBLE_10_POW.length) {</b>
+<b class="nc">&nbsp;                                            return (double) unscaledVal / DOUBLE_10_POW[scale];</b>
+<b class="nc">&nbsp;                                        } else if (scale &lt; 0 &amp;&amp; scale &gt; -DOUBLE_10_POW.length) {</b>
+<b class="nc">&nbsp;                                            return (double) unscaledVal * DOUBLE_10_POW[-scale];</b>
+&nbsp;                                        }
+&nbsp;                                    }
+&nbsp;
+<b class="nc">&nbsp;                                    int len = unsignedUnscaledVal &lt; 10000000000000000L</b>
+<b class="nc">&nbsp;                                            ? 16</b>
+<b class="nc">&nbsp;                                            : unsignedUnscaledVal &lt; 100000000000000000L</b>
+<b class="nc">&nbsp;                                            ? 17</b>
+<b class="nc">&nbsp;                                            : unsignedUnscaledVal &lt; 1000000000000000000L ? 18 : 19;</b>
+<b class="nc">&nbsp;                                    if (doubleChars == null) {</b>
+<b class="nc">&nbsp;                                        doubleChars = new char[20];</b>
+&nbsp;                                    }
+<b class="nc">&nbsp;                                    IOUtils.getChars(unsignedUnscaledVal, len, doubleChars);</b>
+<b class="nc">&nbsp;                                    return TypeUtils.doubleValue(isNegative, len - scale, doubleChars, len);</b>
+&nbsp;                                }
+&nbsp;                            }
+<b class="nc">&nbsp;                            decimal = BigDecimal.valueOf(unscaledVal, scale);</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (decimal == null) {</b>
+<b class="nc">&nbsp;                    int[] mag = mag0 == 0</b>
+<b class="nc">&nbsp;                            ? mag1 == 0</b>
+<b class="nc">&nbsp;                            ? new int[]{mag2, mag3}</b>
+<b class="nc">&nbsp;                            : new int[]{mag1, mag2, mag3}</b>
+<b class="nc">&nbsp;                            : new int[]{mag0, mag1, mag2, mag3};</b>
+<b class="nc">&nbsp;                    int signum = negative ? -1 : 1;</b>
+<b class="nc">&nbsp;                    BigInteger bigInt = BIG_INTEGER_CREATOR.apply(signum, mag);</b>
+&nbsp;
+<b class="nc">&nbsp;                    int adjustedScale = scale - exponent;</b>
+<b class="nc">&nbsp;                    decimal = new BigDecimal(bigInt, adjustedScale);</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (exponent != 0) {</b>
+<b class="nc">&nbsp;                        return decimal.doubleValue();</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (exponent != 0) {</b>
+<b class="nc">&nbsp;                    String decimalStr = decimal.toPlainString();</b>
+<b class="nc">&nbsp;                    return Double.parseDouble(</b>
+&nbsp;                            decimalStr + &quot;E&quot; + exponent);
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if ((context.features &amp; Feature.UseBigDecimalForFloats.mask) != 0) {</b>
+<b class="nc">&nbsp;                    return decimal.floatValue();</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if ((context.features &amp; Feature.UseBigDecimalForDoubles.mask) != 0) {</b>
+<b class="nc">&nbsp;                    return decimal.doubleValue();</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return decimal;</b>
+&nbsp;            }
+&nbsp;            case JSON_TYPE_BIG_DEC: {
+<b class="nc">&nbsp;                if (scale &gt; 0) {</b>
+<b class="nc">&nbsp;                    return toBigDecimal(stringValue);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    return new BigInteger(stringValue);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;            case JSON_TYPE_FLOAT:
+&nbsp;            case JSON_TYPE_DOUBLE: {
+<b class="nc">&nbsp;                int[] mag = mag0 == 0</b>
+<b class="nc">&nbsp;                        ? mag1 == 0</b>
+<b class="nc">&nbsp;                        ? mag2 == 0</b>
+<b class="nc">&nbsp;                        ? new int[]{mag3}</b>
+<b class="nc">&nbsp;                        : new int[]{mag2, mag3}</b>
+<b class="nc">&nbsp;                        : new int[]{mag1, mag2, mag3}</b>
+<b class="nc">&nbsp;                        : new int[]{mag0, mag1, mag2, mag3};</b>
+<b class="nc">&nbsp;                int signum = negative ? -1 : 1;</b>
+<b class="nc">&nbsp;                BigInteger bigInt = BIG_INTEGER_CREATOR.apply(signum, mag);</b>
+<b class="nc">&nbsp;                BigDecimal decimal = new BigDecimal(bigInt, scale);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (valueType == JSON_TYPE_FLOAT) {</b>
+<b class="nc">&nbsp;                    if (exponent != 0) {</b>
+<b class="nc">&nbsp;                        return Float.parseFloat(</b>
+&nbsp;                                decimal + &quot;E&quot; + exponent);
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    return decimal.floatValue();</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (exponent != 0) {</b>
+<b class="nc">&nbsp;                    return Double.parseDouble(</b>
+&nbsp;                            decimal + &quot;E&quot; + exponent);
+&nbsp;                }
+<b class="nc">&nbsp;                return decimal.doubleValue();</b>
+&nbsp;            }
+&nbsp;            case JSON_TYPE_BOOL:
+<b class="nc">&nbsp;                return boolValue ? 1 : 0;</b>
+&nbsp;            case JSON_TYPE_NULL:
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            case JSON_TYPE_STRING: {
+<b class="nc">&nbsp;                return toInt64(stringValue);</b>
+&nbsp;            }
+&nbsp;            case JSON_TYPE_OBJECT: {
+<b class="nc">&nbsp;                return toNumber((Map) complex);</b>
+&nbsp;            }
+&nbsp;            case JSON_TYPE_ARRAY: {
+<b class="nc">&nbsp;                return toNumber((List) complex);</b>
+&nbsp;            }
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new JSONException(&quot;TODO : &quot; + valueType);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public abstract void close();
+&nbsp;
+&nbsp;    protected final int toInt32(String val) {
+<b class="nc">&nbsp;        if (IOUtils.isNumber(val)) {</b>
+<b class="nc">&nbsp;            return Integer.parseInt(val);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new JSONException(&quot;parseInt error, value : &quot; + val);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final long toInt64(String val) {
+<b class="nc">&nbsp;        if (IOUtils.isNumber(val)) {</b>
+<b class="nc">&nbsp;            return Long.parseLong(val);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (val.length() &gt; 10 &amp;&amp; val.length() &lt; 40) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                return DateUtils.parseMillis(val, context.zoneId);</b>
+<b class="nc">&nbsp;            } catch (DateTimeException | JSONException ignored) {</b>
+&nbsp;                // ignored
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;parseLong error, value : &quot; + val);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final long toLong(Map map) {
+<b class="nc">&nbsp;        Object val = map.get(&quot;val&quot;);</b>
+<b class="nc">&nbsp;        if (val instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) val).intValue();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new JSONException(&quot;parseLong error, value : &quot; + map);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final int toInt(List list) {
+<b class="nc">&nbsp;        if (list.size() == 1) {</b>
+<b class="nc">&nbsp;            Object val = list.get(0);</b>
+<b class="nc">&nbsp;            if (val instanceof Number) {</b>
+<b class="nc">&nbsp;                return ((Number) val).intValue();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (val instanceof String) {</b>
+<b class="nc">&nbsp;                return Integer.parseInt((String) val);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;parseLong error, field : value &quot; + list);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final Number toNumber(Map map) {
+<b class="nc">&nbsp;        Object val = map.get(&quot;val&quot;);</b>
+<b class="nc">&nbsp;        if (val instanceof Number) {</b>
+<b class="nc">&nbsp;            return (Number) val;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final BigDecimal decimal(JSONObject object) {
+<b class="nc">&nbsp;        BigDecimal decimal = object.getBigDecimal(&quot;value&quot;);</b>
+<b class="nc">&nbsp;        if (decimal == null) {</b>
+<b class="nc">&nbsp;            decimal = object.getBigDecimal(&quot;$numberDecimal&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (decimal != null) {</b>
+<b class="nc">&nbsp;            return decimal;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        throw new JSONException(&quot;can not cast to decimal &quot; + object);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final Number toNumber(List list) {
+<b class="nc">&nbsp;        if (list.size() == 1) {</b>
+<b class="nc">&nbsp;            Object val = list.get(0);</b>
+<b class="nc">&nbsp;            if (val instanceof Number) {</b>
+<b class="nc">&nbsp;                return (Number) val;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (val instanceof String) {</b>
+<b class="nc">&nbsp;                return toBigDecimal((String) val);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final String toString(List array) {
+<b class="nc">&nbsp;        JSONWriter writer = JSONWriter.of();</b>
+<b class="nc">&nbsp;        writer.setRootObject(array);</b>
+<b class="nc">&nbsp;        writer.write(array);</b>
+<b class="nc">&nbsp;        return writer.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected final String toString(Map object) {
+<b class="nc">&nbsp;        JSONWriter writer = JSONWriter.of();</b>
+<b class="nc">&nbsp;        writer.setRootObject(object);</b>
+<b class="nc">&nbsp;        writer.write(object);</b>
+<b class="nc">&nbsp;        return writer.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader of(byte[] utf8Bytes) {
+<b class="nc">&nbsp;        boolean ascii = false;</b>
+<b class="nc">&nbsp;        if (PREDICATE_IS_ASCII != null) {</b>
+<b class="nc">&nbsp;            ascii = PREDICATE_IS_ASCII.test(utf8Bytes);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Context context = createReadContext();</b>
+<b class="nc">&nbsp;        if (ascii) {</b>
+<b class="nc">&nbsp;            if (INCUBATOR_VECTOR_READER_CREATOR_ASCII != null) {</b>
+<b class="nc">&nbsp;                return INCUBATOR_VECTOR_READER_CREATOR_ASCII.create(context, null, utf8Bytes, 0, utf8Bytes.length);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return new JSONReaderASCII(context, null, utf8Bytes, 0, utf8Bytes.length);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (INCUBATOR_VECTOR_READER_CREATOR_UTF8 != null) {</b>
+<b class="nc">&nbsp;            return INCUBATOR_VECTOR_READER_CREATOR_UTF8.create(context, null, utf8Bytes, 0, utf8Bytes.length);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return new JSONReaderUTF8(context, null, utf8Bytes, 0, utf8Bytes.length);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    public static JSONReader of(JSONReader.Context context, byte[] utf8Bytes) {
+<b class="nc">&nbsp;        boolean ascii = false;</b>
+<b class="nc">&nbsp;        if (PREDICATE_IS_ASCII != null) {</b>
+<b class="nc">&nbsp;            ascii = PREDICATE_IS_ASCII.test(utf8Bytes);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (ascii) {</b>
+<b class="nc">&nbsp;            if (INCUBATOR_VECTOR_READER_CREATOR_ASCII != null) {</b>
+<b class="nc">&nbsp;                return INCUBATOR_VECTOR_READER_CREATOR_ASCII.create(context, null, utf8Bytes, 0, utf8Bytes.length);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return new JSONReaderASCII(context, null, utf8Bytes, 0, utf8Bytes.length);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (INCUBATOR_VECTOR_READER_CREATOR_UTF8 != null) {</b>
+<b class="nc">&nbsp;            return INCUBATOR_VECTOR_READER_CREATOR_UTF8.create(context, null, utf8Bytes, 0, utf8Bytes.length);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return new JSONReaderUTF8(context, null, utf8Bytes, 0, utf8Bytes.length);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader of(byte[] utf8Bytes, JSONReader.Context context) {
+<b class="nc">&nbsp;        boolean ascii = false;</b>
+<b class="nc">&nbsp;        if (PREDICATE_IS_ASCII != null) {</b>
+<b class="nc">&nbsp;            ascii = PREDICATE_IS_ASCII.test(utf8Bytes);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (ascii) {</b>
+<b class="nc">&nbsp;            if (INCUBATOR_VECTOR_READER_CREATOR_ASCII != null) {</b>
+<b class="nc">&nbsp;                return INCUBATOR_VECTOR_READER_CREATOR_ASCII.create(context, null, utf8Bytes, 0, utf8Bytes.length);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return new JSONReaderASCII(context, null, utf8Bytes, 0, utf8Bytes.length);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (INCUBATOR_VECTOR_READER_CREATOR_UTF8 != null) {</b>
+<b class="nc">&nbsp;            return INCUBATOR_VECTOR_READER_CREATOR_UTF8.create(context, null, utf8Bytes, 0, utf8Bytes.length);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return new JSONReaderUTF8(context, null, utf8Bytes, 0, utf8Bytes.length);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader of(char[] chars) {
+<b class="nc">&nbsp;        Context context = createReadContext();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (INCUBATOR_VECTOR_READER_CREATOR_UTF16 != null) {</b>
+<b class="nc">&nbsp;            return INCUBATOR_VECTOR_READER_CREATOR_UTF16.create(</b>
+&nbsp;                    context,
+&nbsp;                    null,
+&nbsp;                    chars,
+&nbsp;                    0,
+&nbsp;                    chars.length);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new JSONReaderUTF16(</b>
+&nbsp;                context,
+&nbsp;                null,
+&nbsp;                chars,
+&nbsp;                0,
+&nbsp;                chars.length);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    public static JSONReader of(Context context, char[] chars) {
+<b class="nc">&nbsp;        if (INCUBATOR_VECTOR_READER_CREATOR_UTF16 != null) {</b>
+<b class="nc">&nbsp;            return INCUBATOR_VECTOR_READER_CREATOR_UTF16.create(</b>
+&nbsp;                    context,
+&nbsp;                    null,
+&nbsp;                    chars,
+&nbsp;                    0,
+&nbsp;                    chars.length);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new JSONReaderUTF16(</b>
+&nbsp;                context,
+&nbsp;                null,
+&nbsp;                chars,
+&nbsp;                0,
+&nbsp;                chars.length
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader of(char[] chars, Context context) {
+<b class="nc">&nbsp;        return new JSONReaderUTF16(</b>
+&nbsp;                context,
+&nbsp;                null,
+&nbsp;                chars,
+&nbsp;                0,
+&nbsp;                chars.length
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader ofJSONB(byte[] jsonbBytes) {
+<b class="nc">&nbsp;        return new JSONReaderJSONB(</b>
+<b class="nc">&nbsp;                JSONFactory.createReadContext(),</b>
+&nbsp;                jsonbBytes,
+&nbsp;                0,
+&nbsp;                jsonbBytes.length);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    public static JSONReader ofJSONB(JSONReader.Context context, byte[] jsonbBytes) {
+<b class="nc">&nbsp;        return new JSONReaderJSONB(</b>
+&nbsp;                context,
+&nbsp;                jsonbBytes,
+&nbsp;                0,
+&nbsp;                jsonbBytes.length);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader ofJSONB(byte[] jsonbBytes, JSONReader.Context context) {
+<b class="nc">&nbsp;        return new JSONReaderJSONB(</b>
+&nbsp;                context,
+&nbsp;                jsonbBytes,
+&nbsp;                0,
+&nbsp;                jsonbBytes.length);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader ofJSONB(byte[] jsonbBytes, JSONReader.Feature... features) {
+<b class="nc">&nbsp;        Context context = JSONFactory.createReadContext();</b>
+<b class="nc">&nbsp;        context.config(features);</b>
+<b class="nc">&nbsp;        return new JSONReaderJSONB(</b>
+&nbsp;                context,
+&nbsp;                jsonbBytes,
+&nbsp;                0,
+&nbsp;                jsonbBytes.length);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader ofJSONB(byte[] bytes, int offset, int length) {
+<b class="nc">&nbsp;        return new JSONReaderJSONB(</b>
+<b class="nc">&nbsp;                JSONFactory.createReadContext(),</b>
+&nbsp;                bytes,
+&nbsp;                offset,
+&nbsp;                length);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader ofJSONB(byte[] bytes, int offset, int length, SymbolTable symbolTable) {
+<b class="nc">&nbsp;        return new JSONReaderJSONB(</b>
+<b class="nc">&nbsp;                JSONFactory.createReadContext(symbolTable),</b>
+&nbsp;                bytes,
+&nbsp;                offset,
+&nbsp;                length);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader of(byte[] bytes, int offset, int length, Charset charset) {
+<b class="nc">&nbsp;        Context context = JSONFactory.createReadContext();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (charset == StandardCharsets.UTF_8) {</b>
+<b class="nc">&nbsp;            if (INCUBATOR_VECTOR_READER_CREATOR_UTF8 != null) {</b>
+<b class="nc">&nbsp;                return INCUBATOR_VECTOR_READER_CREATOR_UTF8.create(context, null, bytes, offset, length);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return new JSONReaderUTF8(context, null, bytes, offset, length);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (charset == StandardCharsets.UTF_16) {</b>
+<b class="nc">&nbsp;            return new JSONReaderUTF16(context, bytes, offset, length);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (charset == StandardCharsets.US_ASCII || charset == StandardCharsets.ISO_8859_1) {</b>
+<b class="nc">&nbsp;            if (INCUBATOR_VECTOR_READER_CREATOR_ASCII != null) {</b>
+<b class="nc">&nbsp;                return INCUBATOR_VECTOR_READER_CREATOR_ASCII.create(context, null, bytes, offset, length);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return new JSONReaderASCII(context, null, bytes, offset, length);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;not support charset &quot; + charset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader of(byte[] bytes, int offset, int length, Charset charset, Context context) {
+<b class="nc">&nbsp;        if (charset == StandardCharsets.UTF_8) {</b>
+<b class="nc">&nbsp;            if (offset == 0 &amp;&amp; bytes.length == length) {</b>
+<b class="nc">&nbsp;                return of(bytes, context);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            boolean hasNegative = true;</b>
+<b class="nc">&nbsp;            if (METHOD_HANDLE_HAS_NEGATIVE != null) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    hasNegative = (Boolean) METHOD_HANDLE_HAS_NEGATIVE.invoke(bytes, 0, bytes.length);</b>
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (!hasNegative) {</b>
+<b class="nc">&nbsp;                if (INCUBATOR_VECTOR_READER_CREATOR_ASCII != null) {</b>
+<b class="nc">&nbsp;                    return INCUBATOR_VECTOR_READER_CREATOR_ASCII.create(context, null, bytes, offset, length);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    return new JSONReaderASCII(context, null, bytes, offset, length);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (INCUBATOR_VECTOR_READER_CREATOR_UTF8 != null) {</b>
+<b class="nc">&nbsp;                return INCUBATOR_VECTOR_READER_CREATOR_UTF8.create(context, null, bytes, offset, length);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return new JSONReaderUTF8(context, null, bytes, offset, length);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (charset == StandardCharsets.UTF_16) {</b>
+<b class="nc">&nbsp;            return new JSONReaderUTF16(context, bytes, offset, length);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (charset == StandardCharsets.US_ASCII || charset == StandardCharsets.ISO_8859_1) {</b>
+<b class="nc">&nbsp;            if (INCUBATOR_VECTOR_READER_CREATOR_ASCII != null) {</b>
+<b class="nc">&nbsp;                return INCUBATOR_VECTOR_READER_CREATOR_ASCII.create(context, null, bytes, offset, length);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return new JSONReaderASCII(context, null, bytes, offset, length);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;not support charset &quot; + charset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader of(byte[] bytes, int offset, int length) {
+<b class="nc">&nbsp;        Context context = createReadContext();</b>
+<b class="nc">&nbsp;        if (INCUBATOR_VECTOR_READER_CREATOR_UTF8 != null) {</b>
+<b class="nc">&nbsp;            return INCUBATOR_VECTOR_READER_CREATOR_UTF8.create(context, null, bytes, offset, length);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return new JSONReaderUTF8(context, null, bytes, offset, length);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader of(char[] chars, int offset, int length) {
+<b class="nc">&nbsp;        Context context = createReadContext();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (INCUBATOR_VECTOR_READER_CREATOR_UTF16 != null) {</b>
+<b class="nc">&nbsp;            return INCUBATOR_VECTOR_READER_CREATOR_UTF16.create(</b>
+&nbsp;                    context,
+&nbsp;                    null,
+&nbsp;                    chars,
+&nbsp;                    offset,
+&nbsp;                    length);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new JSONReaderUTF16(context, null, chars, offset, length);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader of(char[] chars, int offset, int length, Context context) {
+<b class="nc">&nbsp;        if (INCUBATOR_VECTOR_READER_CREATOR_UTF16 != null) {</b>
+<b class="nc">&nbsp;            return INCUBATOR_VECTOR_READER_CREATOR_UTF16.create(</b>
+&nbsp;                    context,
+&nbsp;                    null,
+&nbsp;                    chars,
+&nbsp;                    offset,
+&nbsp;                    length);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new JSONReaderUTF16(context, null, chars, offset, length);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader of(URL url, Context context) throws IOException {
+<b class="nc">&nbsp;        try (InputStream is = url.openStream()) {</b>
+<b class="nc">&nbsp;            return of(is, StandardCharsets.UTF_8, context);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader of(InputStream is, Charset charset) {
+<b class="nc">&nbsp;        Context context = JSONFactory.createReadContext();</b>
+<b class="nc">&nbsp;        return of(is, charset, context);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader of(InputStream is, Charset charset, Context context) {
+<b class="nc">&nbsp;        if (charset == StandardCharsets.UTF_8 || charset == null) {</b>
+<b class="nc">&nbsp;            return new JSONReaderUTF8(context, is);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (charset == StandardCharsets.UTF_16) {</b>
+<b class="nc">&nbsp;            return new JSONReaderUTF16(context, is);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;not support charset &quot; + charset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader of(java.io.Reader is) {
+<b class="nc">&nbsp;        return new JSONReaderUTF16(</b>
+<b class="nc">&nbsp;                JSONFactory.createReadContext(),</b>
+&nbsp;                is
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader of(java.io.Reader is, Context context) {
+<b class="nc">&nbsp;        return new JSONReaderUTF16(</b>
+&nbsp;                context,
+&nbsp;                is
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader of(ByteBuffer buffer, Charset charset) {
+<b class="nc">&nbsp;        Context context = JSONFactory.createReadContext();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (charset == StandardCharsets.UTF_8 || charset == null) {</b>
+<b class="nc">&nbsp;            return new JSONReaderUTF8(context, buffer);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;not support charset &quot; + charset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    public static JSONReader of(Context context, String str) {
+<b class="nc">&nbsp;        return of(str, context);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader of(String str) {
+<b class="nc">&nbsp;        if (str == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Context context = JSONFactory.createReadContext();</b>
+<b class="nc">&nbsp;        if (STRING_VALUE != null &amp;&amp; STRING_CODER != null &amp;&amp; PREDICATE_IS_ASCII != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                final int LATIN1 = 0;</b>
+<b class="nc">&nbsp;                int coder = STRING_CODER.applyAsInt(str);</b>
+<b class="nc">&nbsp;                if (coder == LATIN1) {</b>
+<b class="nc">&nbsp;                    byte[] bytes = STRING_VALUE.apply(str);</b>
+<b class="nc">&nbsp;                    if (PREDICATE_IS_ASCII.test(bytes)) {</b>
+<b class="nc">&nbsp;                        if (INCUBATOR_VECTOR_READER_CREATOR_ASCII != null) {</b>
+<b class="nc">&nbsp;                            return INCUBATOR_VECTOR_READER_CREATOR_ASCII.create(context, str, bytes, 0, bytes.length);</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            return new JSONReaderASCII(context, str, bytes, 0, bytes.length);</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;unsafe get String.coder error&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final int length = str.length();</b>
+&nbsp;        char[] chars;
+<b class="nc">&nbsp;        if (JVM_VERSION == 8) {</b>
+<b class="nc">&nbsp;            chars = JDKUtils.getCharArray(str);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            chars = str.toCharArray();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (INCUBATOR_VECTOR_READER_CREATOR_UTF16 != null) {</b>
+<b class="nc">&nbsp;            return INCUBATOR_VECTOR_READER_CREATOR_UTF16.create(</b>
+&nbsp;                    context,
+&nbsp;                    str,
+&nbsp;                    chars,
+&nbsp;                    0,
+&nbsp;                    length);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new JSONReaderUTF16(context, str, chars, 0, length);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader of(String str, Context context) {
+<b class="nc">&nbsp;        if (str == null || context == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (STRING_VALUE != null &amp;&amp; STRING_CODER != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                final int LATIN1 = 0;</b>
+<b class="nc">&nbsp;                int coder = STRING_CODER.applyAsInt(str);</b>
+<b class="nc">&nbsp;                if (coder == LATIN1) {</b>
+<b class="nc">&nbsp;                    byte[] bytes = STRING_VALUE.apply(str);</b>
+<b class="nc">&nbsp;                    if (INCUBATOR_VECTOR_READER_CREATOR_ASCII != null) {</b>
+<b class="nc">&nbsp;                        return INCUBATOR_VECTOR_READER_CREATOR_ASCII.create(context, str, bytes, 0, bytes.length);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        return new JSONReaderASCII(context, str, bytes, 0, bytes.length);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;unsafe get String.coder error&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final int length = str.length();</b>
+&nbsp;        char[] chars;
+<b class="nc">&nbsp;        if (JVM_VERSION == 8) {</b>
+<b class="nc">&nbsp;            chars = JDKUtils.getCharArray(str);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            chars = str.toCharArray();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (INCUBATOR_VECTOR_READER_CREATOR_UTF16 != null) {</b>
+<b class="nc">&nbsp;            return INCUBATOR_VECTOR_READER_CREATOR_UTF16.create(</b>
+&nbsp;                    context,
+&nbsp;                    str,
+&nbsp;                    chars,
+&nbsp;                    0,
+&nbsp;                    length);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new JSONReaderUTF16(context, str, chars, 0, length);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader of(String str, int offset, int length) {
+<b class="nc">&nbsp;        if (str == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Context context = JSONFactory.createReadContext();</b>
+<b class="nc">&nbsp;        if (STRING_VALUE != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                final int LATIN1 = 0;</b>
+<b class="nc">&nbsp;                int coder = STRING_CODER.applyAsInt(str);</b>
+<b class="nc">&nbsp;                if (coder == LATIN1) {</b>
+<b class="nc">&nbsp;                    byte[] bytes = STRING_VALUE.apply(str);</b>
+<b class="nc">&nbsp;                    if (INCUBATOR_VECTOR_READER_CREATOR_ASCII != null) {</b>
+<b class="nc">&nbsp;                        return INCUBATOR_VECTOR_READER_CREATOR_ASCII.create(context, str, bytes, offset, length);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        return new JSONReaderASCII(context, str, bytes, offset, length);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;unsafe get String.coder error&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        char[] chars;
+<b class="nc">&nbsp;        if (JVM_VERSION == 8) {</b>
+<b class="nc">&nbsp;            chars = JDKUtils.getCharArray(str);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            chars = str.toCharArray();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (INCUBATOR_VECTOR_READER_CREATOR_UTF16 != null) {</b>
+<b class="nc">&nbsp;            return INCUBATOR_VECTOR_READER_CREATOR_UTF16.create(</b>
+&nbsp;                    context,
+&nbsp;                    str,
+&nbsp;                    chars,
+&nbsp;                    offset,
+&nbsp;                    length);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new JSONReaderUTF16(context, str, chars, offset, length);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static JSONReader of(String str, int offset, int length, Context context) {
+<b class="nc">&nbsp;        if (str == null || context == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (STRING_VALUE != null &amp;&amp; STRING_CODER != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                final int LATIN1 = 0;</b>
+<b class="nc">&nbsp;                int coder = STRING_CODER.applyAsInt(str);</b>
+<b class="nc">&nbsp;                if (coder == LATIN1) {</b>
+<b class="nc">&nbsp;                    byte[] bytes = STRING_VALUE.apply(str);</b>
+<b class="nc">&nbsp;                    if (INCUBATOR_VECTOR_READER_CREATOR_ASCII != null) {</b>
+<b class="nc">&nbsp;                        return INCUBATOR_VECTOR_READER_CREATOR_ASCII.create(context, str, bytes, offset, length);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        return new JSONReaderASCII(context, str, bytes, offset, length);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;unsafe get String.coder error&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        char[] chars;
+<b class="nc">&nbsp;        if (JVM_VERSION == 8) {</b>
+<b class="nc">&nbsp;            chars = JDKUtils.getCharArray(str);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            chars = str.toCharArray();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (INCUBATOR_VECTOR_READER_CREATOR_UTF16 != null) {</b>
+<b class="nc">&nbsp;            return INCUBATOR_VECTOR_READER_CREATOR_UTF16.create(</b>
+&nbsp;                    context,
+&nbsp;                    str,
+&nbsp;                    chars,
+&nbsp;                    offset,
+&nbsp;                    length);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new JSONReaderUTF16(context, str, chars, offset, length);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    final void bigInt(char[] chars, int off, int len) {
+<b class="nc">&nbsp;        int cursor = off, numDigits;</b>
+&nbsp;
+<b class="nc">&nbsp;        numDigits = len - cursor;</b>
+<b class="nc">&nbsp;        if (scale &gt; 0) {</b>
+<b class="nc">&nbsp;            numDigits--;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (numDigits &gt; 38) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;number too large : &quot; + new String(chars, off, numDigits));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Process first (potentially short) digit group
+<b class="nc">&nbsp;        int firstGroupLen = numDigits % 9;</b>
+<b class="nc">&nbsp;        if (firstGroupLen == 0) {</b>
+<b class="nc">&nbsp;            firstGroupLen = 9;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            int start = cursor;</b>
+<b class="nc">&nbsp;            int end = cursor += firstGroupLen;</b>
+&nbsp;
+<b class="nc">&nbsp;            char c = chars[start++];</b>
+<b class="nc">&nbsp;            if (c == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;                c = chars[start++];</b>
+<b class="nc">&nbsp;                cursor++;</b>
+&nbsp;//                    end++;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            int result = c - &#39;0&#39;;</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int index = start; index &lt; end; index++) {</b>
+<b class="nc">&nbsp;                c = chars[index];</b>
+<b class="nc">&nbsp;                if (c == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;                    c = chars[++index];</b>
+<b class="nc">&nbsp;                    cursor++;</b>
+<b class="nc">&nbsp;                    if (end &lt; len) {</b>
+<b class="nc">&nbsp;                        end++;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                int nextVal = c - &#39;0&#39;;</b>
+<b class="nc">&nbsp;                result = 10 * result + nextVal;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            mag3 = result;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Process remaining digit groups
+<b class="nc">&nbsp;        while (cursor &lt; len) {</b>
+&nbsp;            int groupVal;
+&nbsp;            {
+<b class="nc">&nbsp;                int start = cursor;</b>
+<b class="nc">&nbsp;                int end = cursor += 9;</b>
+&nbsp;
+<b class="nc">&nbsp;                char c = chars[start++];</b>
+<b class="nc">&nbsp;                if (c == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;                    c = chars[start++];</b>
+<b class="nc">&nbsp;                    cursor++;</b>
+<b class="nc">&nbsp;                    end++;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                int result = c - &#39;0&#39;;</b>
+&nbsp;
+<b class="nc">&nbsp;                for (int index = start; index &lt; end; index++) {</b>
+<b class="nc">&nbsp;                    c = chars[index];</b>
+<b class="nc">&nbsp;                    if (c == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;                        c = chars[++index];</b>
+<b class="nc">&nbsp;                        cursor++;</b>
+<b class="nc">&nbsp;                        end++;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    int nextVal = c - &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    result = 10 * result + nextVal;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                groupVal = result;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // destructiveMulAdd
+<b class="nc">&nbsp;            long ylong = 1000000000 &amp; 0XFFFFFFFFL;</b>
+&nbsp;
+<b class="nc">&nbsp;            long product = 0;</b>
+<b class="nc">&nbsp;            long carry = 0;</b>
+<b class="nc">&nbsp;            for (int i = 3; i &gt;= 0; i--) {</b>
+<b class="nc">&nbsp;                switch (i) {</b>
+&nbsp;                    case 0:
+<b class="nc">&nbsp;                        product = ylong * (mag0 &amp; 0XFFFFFFFFL) + carry;</b>
+<b class="nc">&nbsp;                        mag0 = (int) product;</b>
+&nbsp;                        break;
+&nbsp;                    case 1:
+<b class="nc">&nbsp;                        product = ylong * (mag1 &amp; 0XFFFFFFFFL) + carry;</b>
+<b class="nc">&nbsp;                        mag1 = (int) product;</b>
+&nbsp;                        break;
+&nbsp;                    case 2:
+<b class="nc">&nbsp;                        product = ylong * (mag2 &amp; 0XFFFFFFFFL) + carry;</b>
+<b class="nc">&nbsp;                        mag2 = (int) product;</b>
+&nbsp;                        break;
+&nbsp;                    case 3:
+<b class="nc">&nbsp;                        product = ylong * (mag3 &amp; 0XFFFFFFFFL) + carry;</b>
+<b class="nc">&nbsp;                        mag3 = (int) product;</b>
+&nbsp;                        break;
+&nbsp;                    default:
+<b class="nc">&nbsp;                        throw new ArithmeticException(&quot;BigInteger would overflow supported range&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                carry = product &gt;&gt;&gt; 32;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            long zlong = groupVal &amp; 0XFFFFFFFFL;</b>
+<b class="nc">&nbsp;            long sum = (mag3 &amp; 0XFFFFFFFFL) + zlong;</b>
+<b class="nc">&nbsp;            mag3 = (int) sum;</b>
+&nbsp;
+&nbsp;            // Perform the addition
+<b class="nc">&nbsp;            carry = sum &gt;&gt;&gt; 32;</b>
+<b class="nc">&nbsp;            for (int i = 2; i &gt;= 0; i--) {</b>
+<b class="nc">&nbsp;                switch (i) {</b>
+&nbsp;                    case 0:
+<b class="nc">&nbsp;                        sum = (mag0 &amp; 0XFFFFFFFFL) + carry;</b>
+<b class="nc">&nbsp;                        mag0 = (int) sum;</b>
+&nbsp;                        break;
+&nbsp;                    case 1:
+<b class="nc">&nbsp;                        sum = (mag1 &amp; 0XFFFFFFFFL) + carry;</b>
+<b class="nc">&nbsp;                        mag1 = (int) sum;</b>
+&nbsp;                        break;
+&nbsp;                    case 2:
+<b class="nc">&nbsp;                        sum = (mag2 &amp; 0XFFFFFFFFL) + carry;</b>
+<b class="nc">&nbsp;                        mag2 = (int) sum;</b>
+&nbsp;                        break;
+&nbsp;                    case 3:
+<b class="nc">&nbsp;                        sum = (mag3 &amp; 0XFFFFFFFFL) + carry;</b>
+<b class="nc">&nbsp;                        mag3 = (int) sum;</b>
+&nbsp;                        break;
+&nbsp;                    default:
+<b class="nc">&nbsp;                        throw new ArithmeticException(&quot;BigInteger would overflow supported range&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                carry = sum &gt;&gt;&gt; 32;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    final void bigInt(byte[] chars, int off, int len) {
+<b class="nc">&nbsp;        int cursor = off, numDigits;</b>
+&nbsp;
+<b class="nc">&nbsp;        numDigits = len - cursor;</b>
+<b class="nc">&nbsp;        if (scale &gt; 0) {</b>
+<b class="nc">&nbsp;            numDigits--;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (numDigits &gt; 38) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;number too large : &quot; + new String(chars, off, numDigits));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Process first (potentially short) digit group
+<b class="nc">&nbsp;        int firstGroupLen = numDigits % 9;</b>
+<b class="nc">&nbsp;        if (firstGroupLen == 0) {</b>
+<b class="nc">&nbsp;            firstGroupLen = 9;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            int start = cursor;</b>
+<b class="nc">&nbsp;            int end = cursor += firstGroupLen;</b>
+&nbsp;
+<b class="nc">&nbsp;            char c = (char) chars[start++];</b>
+<b class="nc">&nbsp;            if (c == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;                c = (char) chars[start++];</b>
+<b class="nc">&nbsp;                cursor++;</b>
+&nbsp;//                    end++;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            int result = c - &#39;0&#39;;</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int index = start; index &lt; end; index++) {</b>
+<b class="nc">&nbsp;                c = (char) chars[index];</b>
+<b class="nc">&nbsp;                if (c == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;                    c = (char) chars[++index];</b>
+<b class="nc">&nbsp;                    cursor++;</b>
+<b class="nc">&nbsp;                    if (end &lt; len) {</b>
+<b class="nc">&nbsp;                        end++;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                int nextVal = c - &#39;0&#39;;</b>
+<b class="nc">&nbsp;                result = 10 * result + nextVal;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            mag3 = result;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Process remaining digit groups
+<b class="nc">&nbsp;        while (cursor &lt; len) {</b>
+&nbsp;            int groupVal;
+&nbsp;            {
+<b class="nc">&nbsp;                int start = cursor;</b>
+<b class="nc">&nbsp;                int end = cursor += 9;</b>
+&nbsp;
+<b class="nc">&nbsp;                char c = (char) chars[start++];</b>
+<b class="nc">&nbsp;                if (c == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;                    c = (char) chars[start++];</b>
+<b class="nc">&nbsp;                    cursor++;</b>
+<b class="nc">&nbsp;                    end++;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                int result = c - &#39;0&#39;;</b>
+&nbsp;
+<b class="nc">&nbsp;                for (int index = start; index &lt; end; index++) {</b>
+<b class="nc">&nbsp;                    c = (char) chars[index];</b>
+<b class="nc">&nbsp;                    if (c == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;                        c = (char) chars[++index];</b>
+<b class="nc">&nbsp;                        cursor++;</b>
+<b class="nc">&nbsp;                        end++;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    int nextVal = c - &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    result = 10 * result + nextVal;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                groupVal = result;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // destructiveMulAdd
+<b class="nc">&nbsp;            long ylong = 1000000000 &amp; 0XFFFFFFFFL;</b>
+<b class="nc">&nbsp;            long zlong = groupVal &amp; 0XFFFFFFFFL;</b>
+&nbsp;
+<b class="nc">&nbsp;            long product = 0;</b>
+<b class="nc">&nbsp;            long carry = 0;</b>
+<b class="nc">&nbsp;            for (int i = 3; i &gt;= 0; i--) {</b>
+<b class="nc">&nbsp;                switch (i) {</b>
+&nbsp;                    case 0:
+<b class="nc">&nbsp;                        product = ylong * (mag0 &amp; 0XFFFFFFFFL) + carry;</b>
+<b class="nc">&nbsp;                        mag0 = (int) product;</b>
+&nbsp;                        break;
+&nbsp;                    case 1:
+<b class="nc">&nbsp;                        product = ylong * (mag1 &amp; 0XFFFFFFFFL) + carry;</b>
+<b class="nc">&nbsp;                        mag1 = (int) product;</b>
+&nbsp;                        break;
+&nbsp;                    case 2:
+<b class="nc">&nbsp;                        product = ylong * (mag2 &amp; 0XFFFFFFFFL) + carry;</b>
+<b class="nc">&nbsp;                        mag2 = (int) product;</b>
+&nbsp;                        break;
+&nbsp;                    case 3:
+<b class="nc">&nbsp;                        product = ylong * (mag3 &amp; 0XFFFFFFFFL) + carry;</b>
+<b class="nc">&nbsp;                        mag3 = (int) product;</b>
+&nbsp;                        break;
+&nbsp;                    default:
+<b class="nc">&nbsp;                        throw new ArithmeticException(&quot;BigInteger would overflow supported range&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                carry = product &gt;&gt;&gt; 32;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            long sum = (mag3 &amp; 0XFFFFFFFFL) + zlong;</b>
+<b class="nc">&nbsp;            mag3 = (int) sum;</b>
+&nbsp;
+&nbsp;            // Perform the addition
+<b class="nc">&nbsp;            carry = sum &gt;&gt;&gt; 32;</b>
+<b class="nc">&nbsp;            for (int i = 2; i &gt;= 0; i--) {</b>
+<b class="nc">&nbsp;                switch (i) {</b>
+&nbsp;                    case 0:
+<b class="nc">&nbsp;                        sum = (mag0 &amp; 0XFFFFFFFFL) + carry;</b>
+<b class="nc">&nbsp;                        mag0 = (int) sum;</b>
+&nbsp;                        break;
+&nbsp;                    case 1:
+<b class="nc">&nbsp;                        sum = (mag1 &amp; 0XFFFFFFFFL) + carry;</b>
+<b class="nc">&nbsp;                        mag1 = (int) sum;</b>
+&nbsp;                        break;
+&nbsp;                    case 2:
+<b class="nc">&nbsp;                        sum = (mag2 &amp; 0XFFFFFFFFL) + carry;</b>
+<b class="nc">&nbsp;                        mag2 = (int) sum;</b>
+&nbsp;                        break;
+&nbsp;                    case 3:
+<b class="nc">&nbsp;                        sum = (mag3 &amp; 0XFFFFFFFFL) + carry;</b>
+<b class="nc">&nbsp;                        mag3 = (int) sum;</b>
+&nbsp;                        break;
+&nbsp;                    default:
+<b class="nc">&nbsp;                        throw new ArithmeticException(&quot;BigInteger would overflow supported range&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                carry = sum &gt;&gt;&gt; 32;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface AutoTypeBeforeHandler
+&nbsp;            extends Filter {
+&nbsp;        default Class&lt;?&gt; apply(long typeNameHash, Class&lt;?&gt; expectClass, long features) {
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;
+&nbsp;        Class&lt;?&gt; apply(String typeName, Class&lt;?&gt; expectClass, long features);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static AutoTypeBeforeHandler autoTypeFilter(String... names) {
+<b class="nc">&nbsp;        return new ContextAutoTypeBeforeHandler(names);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static AutoTypeBeforeHandler autoTypeFilter(boolean includeBasic, String... names) {
+<b class="nc">&nbsp;        return new ContextAutoTypeBeforeHandler(includeBasic, names);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static AutoTypeBeforeHandler autoTypeFilter(Class... types) {
+<b class="nc">&nbsp;        return new ContextAutoTypeBeforeHandler(types);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static AutoTypeBeforeHandler autoTypeFilter(boolean includeBasic, Class... types) {
+<b class="nc">&nbsp;        return new ContextAutoTypeBeforeHandler(includeBasic, types);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final class Context {
+&nbsp;        String dateFormat;
+&nbsp;        boolean formatyyyyMMddhhmmss19;
+&nbsp;        boolean formatyyyyMMddhhmmssT19;
+&nbsp;        boolean formatyyyyMMdd8;
+&nbsp;        boolean formatMillis;
+&nbsp;        boolean formatUnixTime;
+&nbsp;        boolean formatISO8601;
+&nbsp;        boolean formatHasDay;
+&nbsp;        boolean formatHasHour;
+&nbsp;        boolean useSimpleFormatter;
+&nbsp;        int maxLevel = 2048;
+&nbsp;        int bufferSize = 1024 * 512;
+&nbsp;        DateTimeFormatter dateFormatter;
+&nbsp;        ZoneId zoneId;
+&nbsp;        long features;
+&nbsp;        Locale locale;
+&nbsp;        TimeZone timeZone;
+&nbsp;        Supplier&lt;Map&gt; objectSupplier;
+&nbsp;        Supplier&lt;List&gt; arraySupplier;
+&nbsp;        AutoTypeBeforeHandler autoTypeBeforeHandler;
+&nbsp;        ExtraProcessor extraProcessor;
+&nbsp;
+&nbsp;        final ObjectReaderProvider provider;
+&nbsp;        final SymbolTable symbolTable;
+&nbsp;
+&nbsp;        public Context(ObjectReaderProvider provider) {
+&nbsp;            this.features = defaultReaderFeatures;
+&nbsp;            this.provider = provider;
+&nbsp;            this.objectSupplier = JSONFactory.defaultObjectSupplier;
+&nbsp;            this.arraySupplier = JSONFactory.defaultArraySupplier;
+&nbsp;            this.symbolTable = null;
+&nbsp;
+&nbsp;            String format = defaultReaderFormat;
+&nbsp;            if (format != null) {
+&nbsp;                setDateFormat(format);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public Context(ObjectReaderProvider provider, long features) {
+&nbsp;            this.features = features;
+&nbsp;            this.provider = provider;
+&nbsp;            this.objectSupplier = JSONFactory.defaultObjectSupplier;
+&nbsp;            this.arraySupplier = JSONFactory.defaultArraySupplier;
+&nbsp;            this.symbolTable = null;
+&nbsp;
+&nbsp;            String format = defaultReaderFormat;
+&nbsp;            if (format != null) {
+&nbsp;                setDateFormat(format);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public Context(Feature... features) {
+&nbsp;            this.features = defaultReaderFeatures;
+&nbsp;            this.provider = JSONFactory.getDefaultObjectReaderProvider();
+&nbsp;            this.objectSupplier = JSONFactory.defaultObjectSupplier;
+&nbsp;            this.arraySupplier = JSONFactory.defaultArraySupplier;
+&nbsp;            this.symbolTable = null;
+&nbsp;
+&nbsp;            String format = defaultReaderFormat;
+&nbsp;            if (format != null) {
+&nbsp;                setDateFormat(format);
+&nbsp;            }
+&nbsp;
+&nbsp;            for (Feature feature : features) {
+&nbsp;                this.features |= feature.mask;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public Context(String dateFormat, Feature... features) {
+&nbsp;            this.features = defaultReaderFeatures;
+&nbsp;            this.provider = JSONFactory.getDefaultObjectReaderProvider();
+&nbsp;            this.objectSupplier = JSONFactory.defaultObjectSupplier;
+&nbsp;            this.arraySupplier = JSONFactory.defaultArraySupplier;
+&nbsp;            this.symbolTable = null;
+&nbsp;
+&nbsp;            String format = defaultReaderFormat;
+&nbsp;            if (format != null) {
+&nbsp;                setDateFormat(format);
+&nbsp;            }
+&nbsp;
+&nbsp;            for (Feature feature : features) {
+&nbsp;                this.features |= feature.mask;
+&nbsp;            }
+&nbsp;            setDateFormat(dateFormat);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Context(ObjectReaderProvider provider, Feature... features) {
+&nbsp;            this.features = defaultReaderFeatures;
+&nbsp;            this.provider = provider;
+&nbsp;            this.objectSupplier = JSONFactory.defaultObjectSupplier;
+&nbsp;            this.arraySupplier = JSONFactory.defaultArraySupplier;
+&nbsp;            this.symbolTable = null;
+&nbsp;
+&nbsp;            String format = defaultReaderFormat;
+&nbsp;            if (format != null) {
+&nbsp;                setDateFormat(format);
+&nbsp;            }
+&nbsp;
+&nbsp;            for (Feature feature : features) {
+&nbsp;                this.features |= feature.mask;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public Context(ObjectReaderProvider provider, SymbolTable symbolTable) {
+&nbsp;            this.features = defaultReaderFeatures;
+&nbsp;            this.provider = provider;
+&nbsp;            this.symbolTable = symbolTable;
+&nbsp;
+&nbsp;            String format = defaultReaderFormat;
+&nbsp;            if (format != null) {
+&nbsp;                setDateFormat(format);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public Context(ObjectReaderProvider provider, SymbolTable symbolTable, Feature... features) {
+&nbsp;            this.features = defaultReaderFeatures;
+&nbsp;            this.provider = provider;
+&nbsp;            this.symbolTable = symbolTable;
+&nbsp;
+&nbsp;            String format = defaultReaderFormat;
+&nbsp;            if (format != null) {
+&nbsp;                setDateFormat(format);
+&nbsp;            }
+&nbsp;
+&nbsp;            for (Feature feature : features) {
+&nbsp;                this.features |= feature.mask;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isFormatUnixTime() {
+&nbsp;            return formatUnixTime;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isFormatyyyyMMddhhmmss19() {
+&nbsp;            return formatyyyyMMddhhmmss19;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isFormatyyyyMMddhhmmssT19() {
+&nbsp;            return formatyyyyMMddhhmmssT19;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isFormatyyyyMMdd8() {
+&nbsp;            return formatyyyyMMdd8;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isFormatMillis() {
+&nbsp;            return formatMillis;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isFormatISO8601() {
+&nbsp;            return formatISO8601;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isFormatHasHour() {
+&nbsp;            return formatHasHour;
+&nbsp;        }
+&nbsp;
+&nbsp;        public ObjectReader getObjectReader(Type type) {
+&nbsp;            boolean fieldBased = (features &amp; Feature.FieldBased.mask) != 0;
+&nbsp;            return provider.getObjectReader(type, fieldBased);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ObjectReaderProvider getProvider() {
+&nbsp;            return provider;
+&nbsp;        }
+&nbsp;
+&nbsp;        public ObjectReader getObjectReaderAutoType(long hashCode) {
+&nbsp;            return provider.getObjectReader(hashCode);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ObjectReader getObjectReaderAutoType(String typeName, Class expectClass) {
+&nbsp;            if (autoTypeBeforeHandler != null) {
+&nbsp;                Class&lt;?&gt; autoTypeClass = autoTypeBeforeHandler.apply(typeName, expectClass, features);
+&nbsp;                if (autoTypeClass != null) {
+&nbsp;                    boolean fieldBased = (features &amp; Feature.FieldBased.mask) != 0;
+&nbsp;                    return provider.getObjectReader(autoTypeClass, fieldBased);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            return provider.getObjectReader(typeName, expectClass, features);
+&nbsp;        }
+&nbsp;
+&nbsp;        public AutoTypeBeforeHandler getContextAutoTypeBeforeHandler() {
+&nbsp;            return autoTypeBeforeHandler;
+&nbsp;        }
+&nbsp;
+&nbsp;        public ObjectReader getObjectReaderAutoType(String typeName, Class expectClass, long features) {
+&nbsp;            if (autoTypeBeforeHandler != null) {
+&nbsp;                Class&lt;?&gt; autoTypeClass = autoTypeBeforeHandler.apply(typeName, expectClass, features);
+&nbsp;                if (autoTypeClass != null) {
+&nbsp;                    boolean fieldBased = (features &amp; Feature.FieldBased.mask) != 0;
+&nbsp;                    return provider.getObjectReader(autoTypeClass, fieldBased);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            return provider.getObjectReader(typeName, expectClass, this.features | features);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ExtraProcessor getExtraProcessor() {
+&nbsp;            return extraProcessor;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setExtraProcessor(ExtraProcessor extraProcessor) {
+&nbsp;            this.extraProcessor = extraProcessor;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Supplier&lt;Map&gt; getObjectSupplier() {
+&nbsp;            return objectSupplier;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setObjectSupplier(Supplier&lt;Map&gt; objectSupplier) {
+&nbsp;            this.objectSupplier = objectSupplier;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Supplier&lt;List&gt; getArraySupplier() {
+&nbsp;            return arraySupplier;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setArraySupplier(Supplier&lt;List&gt; arraySupplier) {
+&nbsp;            this.arraySupplier = arraySupplier;
+&nbsp;        }
+&nbsp;
+&nbsp;        public DateTimeFormatter getDateFormatter() {
+&nbsp;            if (dateFormatter == null &amp;&amp; dateFormat != null &amp;&amp; !formatMillis &amp;&amp; !formatISO8601 &amp;&amp; !formatUnixTime) {
+&nbsp;                dateFormatter = locale == null
+&nbsp;                        ? DateTimeFormatter.ofPattern(dateFormat)
+&nbsp;                        : DateTimeFormatter.ofPattern(dateFormat, locale);
+&nbsp;            }
+&nbsp;            return dateFormatter;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setDateFormatter(DateTimeFormatter dateFormatter) {
+&nbsp;            this.dateFormatter = dateFormatter;
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getDateFormat() {
+&nbsp;            return dateFormat;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setDateFormat(String format) {
+&nbsp;            if (format != null) {
+&nbsp;                if (format.isEmpty()) {
+&nbsp;                    format = null;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            boolean formatUnixTime = false, formatISO8601 = false, formatMillis = false, hasDay = false, hasHour = false, useSimpleFormatter = false;
+&nbsp;            if (format != null) {
+&nbsp;                switch (format) {
+&nbsp;                    case &quot;unixtime&quot;:
+&nbsp;                        formatUnixTime = true;
+&nbsp;                        break;
+&nbsp;                    case &quot;iso8601&quot;:
+&nbsp;                        formatISO8601 = true;
+&nbsp;                        break;
+&nbsp;                    case &quot;millis&quot;:
+&nbsp;                        formatMillis = true;
+&nbsp;                        break;
+&nbsp;                    case &quot;yyyyMMddHHmmssSSSZ&quot;:
+&nbsp;                        useSimpleFormatter = true;
+&nbsp;                    case &quot;yyyy-MM-dd HH:mm:ss&quot;:
+&nbsp;                    case &quot;yyyy-MM-ddTHH:mm:ss&quot;:
+&nbsp;                        formatyyyyMMddhhmmss19 = true;
+&nbsp;                        hasDay = true;
+&nbsp;                        hasHour = true;
+&nbsp;                        break;
+&nbsp;                    case &quot;yyyy-MM-dd&#39;T&#39;HH:mm:ss&quot;:
+&nbsp;                        formatyyyyMMddhhmmssT19 = true;
+&nbsp;                        hasDay = true;
+&nbsp;                        hasHour = true;
+&nbsp;                        break;
+&nbsp;                    case &quot;yyyy-MM-dd&quot;:
+&nbsp;                        formatyyyyMMdd8 = true;
+&nbsp;                        hasDay = true;
+&nbsp;                        hasHour = false;
+&nbsp;                        break;
+&nbsp;                    default:
+&nbsp;                        hasDay = format.indexOf(&#39;d&#39;) != -1;
+&nbsp;                        hasHour = format.indexOf(&#39;H&#39;) != -1
+&nbsp;                                || format.indexOf(&#39;h&#39;) != -1
+&nbsp;                                || format.indexOf(&#39;K&#39;) != -1
+&nbsp;                                || format.indexOf(&#39;k&#39;) != -1;
+&nbsp;                        break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            if (!Objects.equals(this.dateFormat, format)) {
+&nbsp;                this.dateFormatter = null;
+&nbsp;            }
+&nbsp;            this.dateFormat = format;
+&nbsp;            this.formatUnixTime = formatUnixTime;
+&nbsp;            this.formatMillis = formatMillis;
+&nbsp;            this.formatISO8601 = formatISO8601;
+&nbsp;
+&nbsp;            this.formatHasDay = hasDay;
+&nbsp;            this.formatHasHour = hasHour;
+&nbsp;            this.useSimpleFormatter = useSimpleFormatter;
+&nbsp;        }
+&nbsp;
+&nbsp;        public ZoneId getZoneId() {
+&nbsp;            if (zoneId == null) {
+&nbsp;                zoneId = DateUtils.DEFAULT_ZONE_ID;
+&nbsp;            }
+&nbsp;            return zoneId;
+&nbsp;        }
+&nbsp;
+&nbsp;        public long getFeatures() {
+&nbsp;            return features;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setZoneId(ZoneId zoneId) {
+&nbsp;            this.zoneId = zoneId;
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getMaxLevel() {
+&nbsp;            return maxLevel;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setMaxLevel(int maxLevel) {
+&nbsp;            this.maxLevel = maxLevel;
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getBufferSize() {
+&nbsp;            return bufferSize;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Context setBufferSize(int bufferSize) {
+&nbsp;            if (bufferSize &lt; 0) {
+&nbsp;                throw new IllegalArgumentException(&quot;buffer size can not be less than zero&quot;);
+&nbsp;            }
+&nbsp;            this.bufferSize = bufferSize;
+&nbsp;            return this;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Locale getLocale() {
+&nbsp;            return locale;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setLocale(Locale locale) {
+&nbsp;            this.locale = locale;
+&nbsp;        }
+&nbsp;
+&nbsp;        public TimeZone getTimeZone() {
+&nbsp;            return timeZone;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setTimeZone(TimeZone timeZone) {
+&nbsp;            this.timeZone = timeZone;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void config(Feature... features) {
+&nbsp;            for (Feature feature : features) {
+&nbsp;                this.features |= feature.mask;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public void config(Filter filter, Feature... features) {
+&nbsp;            if (filter instanceof AutoTypeBeforeHandler) {
+&nbsp;                autoTypeBeforeHandler = (AutoTypeBeforeHandler) filter;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (filter instanceof ExtraProcessor) {
+&nbsp;                extraProcessor = (ExtraProcessor) filter;
+&nbsp;            }
+&nbsp;
+&nbsp;            for (Feature feature : features) {
+&nbsp;                this.features |= feature.mask;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public void config(Filter[] filters, Feature... features) {
+&nbsp;            for (Filter filter : filters) {
+&nbsp;                if (filter instanceof AutoTypeBeforeHandler) {
+&nbsp;                    autoTypeBeforeHandler = (AutoTypeBeforeHandler) filter;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (filter instanceof ExtraProcessor) {
+&nbsp;                    extraProcessor = (ExtraProcessor) filter;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            for (Feature feature : features) {
+&nbsp;                this.features |= feature.mask;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isEnabled(Feature feature) {
+&nbsp;            return (this.features &amp; feature.mask) != 0;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void config(Feature feature, boolean state) {
+&nbsp;            if (state) {
+&nbsp;                features |= feature.mask;
+&nbsp;            } else {
+&nbsp;                features &amp;= ~feature.mask;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public enum Feature {
+&nbsp;        FieldBased(1),
+&nbsp;        IgnoreNoneSerializable(1 &lt;&lt; 1),
+&nbsp;        /**
+&nbsp;         * @since 2.0.14
+&nbsp;         */
+&nbsp;        ErrorOnNoneSerializable(1 &lt;&lt; 2),
+&nbsp;        SupportArrayToBean(1 &lt;&lt; 3),
+&nbsp;        InitStringFieldAsEmpty(1 &lt;&lt; 4),
+&nbsp;        SupportAutoType(1 &lt;&lt; 5),
+&nbsp;        SupportSmartMatch(1 &lt;&lt; 6),
+&nbsp;        UseNativeObject(1 &lt;&lt; 7),
+&nbsp;        SupportClassForName(1 &lt;&lt; 8),
+&nbsp;        IgnoreSetNullValue(1 &lt;&lt; 9),
+&nbsp;        UseDefaultConstructorAsPossible(1 &lt;&lt; 10),
+&nbsp;        UseBigDecimalForFloats(1 &lt;&lt; 11),
+&nbsp;        UseBigDecimalForDoubles(1 &lt;&lt; 12),
+&nbsp;        ErrorOnEnumNotMatch(1 &lt;&lt; 13),
+&nbsp;        TrimString(1 &lt;&lt; 14),
+&nbsp;        ErrorOnNotSupportAutoType(1 &lt;&lt; 15),
+&nbsp;        DuplicateKeyValueAsArray(1 &lt;&lt; 16),
+&nbsp;        AllowUnQuotedFieldNames(1 &lt;&lt; 17),
+&nbsp;        NonStringKeyAsString(1 &lt;&lt; 18),
+&nbsp;        /**
+&nbsp;         * @since 2.0.13
+&nbsp;         */
+&nbsp;        Base64StringAsByteArray(1 &lt;&lt; 19),
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @since 2.0.16
+&nbsp;         */
+&nbsp;        IgnoreCheckClose(1 &lt;&lt; 20),
+&nbsp;        /**
+&nbsp;         * @since 2.0.20
+&nbsp;         */
+&nbsp;        ErrorOnNullForPrimitives(1 &lt;&lt; 21),
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @since 2.0.20
+&nbsp;         */
+&nbsp;        NullOnError(1 &lt;&lt; 22),
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @since 2.0.21
+&nbsp;         */
+&nbsp;        IgnoreAutoTypeNotMatch(1 &lt;&lt; 23),
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @since 2.0.24
+&nbsp;         */
+&nbsp;        NonZeroNumberCastToBooleanAsTrue(1 &lt;&lt; 24);
+&nbsp;
+&nbsp;        public final long mask;
+&nbsp;
+&nbsp;        Feature(long mask) {
+&nbsp;            this.mask = mask;
+&nbsp;        }
+&nbsp;
+&nbsp;        public static long of(Feature[] features) {
+&nbsp;            if (features == null) {
+&nbsp;                return 0;
+&nbsp;            }
+&nbsp;
+&nbsp;            long value = 0;
+&nbsp;
+&nbsp;            for (Feature feature : features) {
+&nbsp;                value |= feature.mask;
+&nbsp;            }
+&nbsp;
+&nbsp;            return value;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static class ResolveTask {
+&nbsp;        final FieldReader fieldReader;
+&nbsp;        final Object object;
+&nbsp;        final Object name;
+&nbsp;        final JSONPath reference;
+&nbsp;
+&nbsp;        ResolveTask(FieldReader fieldReader, Object object, Object name, JSONPath reference) {
+&nbsp;            this.fieldReader = fieldReader;
+&nbsp;            this.object = object;
+&nbsp;            this.name = name;
+&nbsp;            this.reference = reference;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString() {
+&nbsp;            return reference.toString();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public SavePoint mark() {
+<b class="nc">&nbsp;        return new SavePoint(this.offset, this.ch);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void reset(SavePoint savePoint) {
+<b class="nc">&nbsp;        this.offset = savePoint.offset;</b>
+<b class="nc">&nbsp;        this.ch = (char) savePoint.current;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final String info() {
+<b class="nc">&nbsp;        return info(null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String info(String message) {
+<b class="nc">&nbsp;        if (message == null || message.isEmpty()) {</b>
+<b class="nc">&nbsp;            return &quot;offset &quot; + offset;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return message + &quot;, offset &quot; + offset;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static boolean isFirstIdentifier(char ch) {
+<b class="nc">&nbsp;        return (ch &gt;= &#39;A&#39; &amp;&amp; ch &lt;= &#39;Z&#39;) || (ch &gt;= &#39;a&#39; &amp;&amp; ch &lt;= &#39;z&#39;) || ch == &#39;_&#39; || ch == &#39;$&#39; || (ch &gt;= &#39;0&#39; &amp;&amp; ch &lt;= &#39;9&#39;) || ch &gt; 0x7F;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class SavePoint {
+&nbsp;        protected final int offset;
+&nbsp;        protected final int current;
+&nbsp;
+&nbsp;        protected SavePoint(int offset, int current) {
+&nbsp;            this.offset = offset;
+&nbsp;            this.current = current;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class BigIntegerCreator
+&nbsp;            implements BiFunction&lt;Integer, int[], BigInteger&gt; {
+&nbsp;        static final BiFunction&lt;Integer, int[], BigInteger&gt; BIG_INTEGER_CREATOR;
+&nbsp;
+&nbsp;        static {
+&nbsp;            BiFunction&lt;Integer, int[], BigInteger&gt; bigIntegerCreator = null;
+&nbsp;            if (!ANDROID &amp;&amp; !GRAAL) {
+&nbsp;                try {
+&nbsp;                    MethodHandles.Lookup caller = JDKUtils.trustedLookup(BigInteger.class);
+&nbsp;                    MethodHandle handle = caller.findConstructor(
+&nbsp;                            BigInteger.class, MethodType.methodType(void.class, int.class, int[].class)
+&nbsp;                    );
+&nbsp;                    CallSite callSite = LambdaMetafactory.metafactory(
+&nbsp;                            caller,
+&nbsp;                            &quot;apply&quot;,
+&nbsp;                            MethodType.methodType(BiFunction.class),
+&nbsp;                            handle.type().generic(),
+&nbsp;                            handle,
+&nbsp;                            MethodType.methodType(BigInteger.class, Integer.class, int[].class)
+&nbsp;                    );
+&nbsp;                    bigIntegerCreator = (BiFunction&lt;Integer, int[], BigInteger&gt;) callSite.getTarget().invokeExact();
+&nbsp;                } catch (Throwable ignored) {
+&nbsp;                    // ignored
+&nbsp;                }
+&nbsp;            }
+&nbsp;            if (bigIntegerCreator == null) {
+&nbsp;                bigIntegerCreator = new BigIntegerCreator();
+&nbsp;            }
+&nbsp;            BIG_INTEGER_CREATOR = bigIntegerCreator;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public BigInteger apply(Integer integer, int[] mag) {
+&nbsp;            int signum = integer;
+&nbsp;            final int bitLength;
+&nbsp;            if (mag.length == 0) {
+&nbsp;                bitLength = 0; // offset by one to initialize
+&nbsp;            } else {
+&nbsp;                // Calculate the bit length of the magnitude
+&nbsp;                int bitLengthForInt = 32 - Integer.numberOfLeadingZeros(mag[0]);
+&nbsp;                int magBitLength = ((mag.length - 1) &lt;&lt; 5) + bitLengthForInt;
+&nbsp;                if (signum &lt; 0) {
+&nbsp;                    // Check if magnitude is a power of two
+&nbsp;                    boolean pow2 = (Integer.bitCount(mag[0]) == 1);
+&nbsp;                    for (int i = 1; i &lt; mag.length &amp;&amp; pow2; i++) {
+&nbsp;                        pow2 = (mag[i] == 0);
+&nbsp;                    }
+&nbsp;                    bitLength = (pow2 ? magBitLength - 1 : magBitLength);
+&nbsp;                } else {
+&nbsp;                    bitLength = magBitLength;
+&nbsp;                }
+&nbsp;            }
+&nbsp;            int byteLen = bitLength / 8 + 1;
+&nbsp;
+&nbsp;            byte[] bytes = new byte[byteLen];
+&nbsp;            for (int i = byteLen - 1, bytesCopied = 4, nextInt = 0, intIndex = 0; i &gt;= 0; i--) {
+&nbsp;                if (bytesCopied == 4) {
+&nbsp;                    // nextInt = getInt(intIndex++
+&nbsp;                    int n = intIndex++;
+&nbsp;                    if (n &lt; 0) {
+&nbsp;                        nextInt = 0;
+&nbsp;                    } else if (n &gt;= mag.length) {
+&nbsp;                        nextInt = signum &lt; 0 ? -1 : 0;
+&nbsp;                    } else {
+&nbsp;                        int magInt = mag[mag.length - n - 1];
+&nbsp;                        if (signum &gt;= 0) {
+&nbsp;                            nextInt = magInt;
+&nbsp;                        } else {
+&nbsp;                            int firstNonzeroIntNum;
+&nbsp;                            {
+&nbsp;                                int j;
+&nbsp;                                int mlen = mag.length;
+&nbsp;                                for (j = mlen - 1; j &gt;= 0 &amp;&amp; mag[j] == 0; j--) {
+&nbsp;                                    // empty
+&nbsp;                                }
+&nbsp;                                firstNonzeroIntNum = mlen - j - 1;
+&nbsp;                            }
+&nbsp;
+&nbsp;                            if (n &lt;= firstNonzeroIntNum) {
+&nbsp;                                nextInt = -magInt;
+&nbsp;                            } else {
+&nbsp;                                nextInt = ~magInt;
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    bytesCopied = 1;
+&nbsp;                } else {
+&nbsp;                    nextInt &gt;&gt;&gt;= 8;
+&nbsp;                    bytesCopied++;
+&nbsp;                }
+&nbsp;                bytes[i] = (byte) nextInt;
+&nbsp;            }
+&nbsp;
+&nbsp;            return new BigInteger(bytes);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReader getObjectReaderAutoType(long typeHash, Class expectClass, long features) {
+<b class="nc">&nbsp;        ObjectReader autoTypeObjectReader = context.getObjectReaderAutoType(typeHash);</b>
+<b class="nc">&nbsp;        if (autoTypeObjectReader != null) {</b>
+<b class="nc">&nbsp;            return autoTypeObjectReader;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String typeName = getString();</b>
+<b class="nc">&nbsp;        if (context.autoTypeBeforeHandler != null) {</b>
+<b class="nc">&nbsp;            Class&lt;?&gt; autoTypeClass = context.autoTypeBeforeHandler.apply(typeName, expectClass, features);</b>
+<b class="nc">&nbsp;            if (autoTypeClass != null) {</b>
+<b class="nc">&nbsp;                boolean fieldBased = (features &amp; Feature.FieldBased.mask) != 0;</b>
+<b class="nc">&nbsp;                return context.provider.getObjectReader(autoTypeClass, fieldBased);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return context.provider.getObjectReader(typeName, expectClass, context.features | features);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:40</div>
+</div>
+</body>
+</html>

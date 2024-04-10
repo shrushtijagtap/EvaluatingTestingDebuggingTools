@@ -1,0 +1,237 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SaltAwareJdbcRealm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.samples.spring.realm</a>
+</div>
+
+<h1>Coverage Summary for Class: SaltAwareJdbcRealm (org.apache.shiro.samples.spring.realm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SaltAwareJdbcRealm</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/41)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.samples.spring.realm;
+&nbsp;
+&nbsp;import org.apache.shiro.authc.*;
+&nbsp;import org.apache.shiro.realm.jdbc.JdbcRealm;
+&nbsp;import org.apache.shiro.util.ByteSource;
+&nbsp;import org.apache.shiro.util.JdbcUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import java.sql.Connection;
+&nbsp;import java.sql.PreparedStatement;
+&nbsp;import java.sql.ResultSet;
+&nbsp;import java.sql.SQLException;
+&nbsp;
+&nbsp;/**
+&nbsp; * Realm that exists to support salted credentials.  The JdbcRealm implementation needs to be updated in a future
+&nbsp; * Shiro release to handle this.
+&nbsp; */
+<b class="nc">&nbsp;public class SaltAwareJdbcRealm extends JdbcRealm {</b>
+&nbsp;
+<b class="nc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(SaltAwareJdbcRealm.class);</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+<b class="nc">&nbsp;        UsernamePasswordToken upToken = (UsernamePasswordToken) token;</b>
+<b class="nc">&nbsp;        String username = upToken.getUsername();</b>
+&nbsp;
+&nbsp;        // Null username is invalid
+<b class="nc">&nbsp;        if (username == null) {</b>
+<b class="nc">&nbsp;            throw new AccountException(&quot;Null usernames are not allowed by this realm.&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Connection conn = null;</b>
+<b class="nc">&nbsp;        AuthenticationInfo info = null;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            conn = dataSource.getConnection();</b>
+&nbsp;
+<b class="nc">&nbsp;            String password = getPasswordForUser(conn, username);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (password == null) {</b>
+<b class="nc">&nbsp;                throw new UnknownAccountException(&quot;No account found for user [&quot; + username + &quot;]&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            SimpleAuthenticationInfo saInfo = new SimpleAuthenticationInfo(username, password, getName());</b>
+&nbsp;            /**
+&nbsp;             * This (very bad) example uses the username as the salt in this sample app.  DON&#39;T DO THIS IN A REAL APP!
+&nbsp;             *
+&nbsp;             * Salts should not be based on anything that a user could enter (attackers can exploit this).  Instead
+&nbsp;             * they should ideally be cryptographically-strong randomly generated numbers.
+&nbsp;             */
+<b class="nc">&nbsp;            saInfo.setCredentialsSalt(ByteSource.Util.bytes(username));</b>
+&nbsp;
+<b class="nc">&nbsp;            info = saInfo;</b>
+&nbsp;
+<b class="nc">&nbsp;        } catch (SQLException e) {</b>
+<b class="nc">&nbsp;            final String message = &quot;There was a SQL error while authenticating user [&quot; + username + &quot;]&quot;;</b>
+<b class="nc">&nbsp;            if (log.isErrorEnabled()) {</b>
+<b class="nc">&nbsp;                log.error(message, e);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // Rethrow any SQL errors as an authentication exception
+<b class="nc">&nbsp;            throw new AuthenticationException(message, e);</b>
+<b class="nc">&nbsp;        } finally {</b>
+<b class="nc">&nbsp;            JdbcUtils.closeConnection(conn);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return info;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String getPasswordForUser(Connection conn, String username) throws SQLException {
+&nbsp;
+<b class="nc">&nbsp;        PreparedStatement ps = null;</b>
+<b class="nc">&nbsp;        ResultSet rs = null;</b>
+<b class="nc">&nbsp;        String password = null;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            ps = conn.prepareStatement(authenticationQuery);</b>
+<b class="nc">&nbsp;            ps.setString(1, username);</b>
+&nbsp;
+&nbsp;            // Execute query
+<b class="nc">&nbsp;            rs = ps.executeQuery();</b>
+&nbsp;
+&nbsp;            // Loop over results - although we are only expecting one result, since usernames should be unique
+<b class="nc">&nbsp;            boolean foundResult = false;</b>
+<b class="nc">&nbsp;            while (rs.next()) {</b>
+&nbsp;
+&nbsp;                // Check to ensure only one row is processed
+<b class="nc">&nbsp;                if (foundResult) {</b>
+<b class="nc">&nbsp;                    throw new AuthenticationException(&quot;More than one user row found for user [&quot; + username + &quot;]. Usernames must be unique.&quot;);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                password = rs.getString(1);</b>
+&nbsp;
+<b class="nc">&nbsp;                foundResult = true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } finally {</b>
+<b class="nc">&nbsp;            JdbcUtils.closeResultSet(rs);</b>
+<b class="nc">&nbsp;            JdbcUtils.closeStatement(ps);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return password;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>

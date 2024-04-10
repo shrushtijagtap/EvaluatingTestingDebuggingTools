@@ -1,0 +1,413 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ShiroHttpServletRequest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.web.servlet</a>
+</div>
+
+<h1>Coverage Summary for Class: ShiroHttpServletRequest (org.apache.shiro.web.servlet)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ShiroHttpServletRequest</td>
+<td class="coverageStat">
+  <span class="percent">
+    31.2%
+  </span>
+  <span class="absValue">
+    (5/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    23.1%
+  </span>
+  <span class="absValue">
+    (12/52)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    32.1%
+  </span>
+  <span class="absValue">
+    (26/81)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ShiroHttpServletRequest$ObjectPrincipal</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    22.7%
+  </span>
+  <span class="absValue">
+    (5/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    22.2%
+  </span>
+  <span class="absValue">
+    (12/54)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    28.3%
+  </span>
+  <span class="absValue">
+    (26/92)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.web.servlet;
+&nbsp;
+&nbsp;import org.apache.shiro.SecurityUtils;
+&nbsp;import org.apache.shiro.session.Session;
+&nbsp;import org.apache.shiro.subject.Subject;
+&nbsp;import org.apache.shiro.subject.support.DisabledSessionException;
+&nbsp;import org.apache.shiro.web.util.WebUtils;
+&nbsp;
+&nbsp;import javax.servlet.ServletContext;
+&nbsp;import javax.servlet.http.HttpServletRequest;
+&nbsp;import javax.servlet.http.HttpServletRequestWrapper;
+&nbsp;import javax.servlet.http.HttpSession;
+&nbsp;import java.security.Principal;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * A {@code ShiroHttpServletRequest} wraps the Servlet container&#39;s original {@code ServletRequest} instance, but ensures
+&nbsp; * that all {@link HttpServletRequest} invocations that require Shiro&#39;s support ({@link #getRemoteUser getRemoteUser},
+&nbsp; * {@link #getSession getSession}, etc) can be executed first by Shiro as necessary before allowing the underlying
+&nbsp; * Servlet container instance&#39;s method to be invoked.
+&nbsp; *
+&nbsp; * @since 0.2
+&nbsp; */
+&nbsp;public class ShiroHttpServletRequest extends HttpServletRequestWrapper {
+&nbsp;
+&nbsp;    //TODO - complete JavaDoc
+&nbsp;
+&nbsp;    //The following 7 constants support the Shiro&#39;s implementation of the Servlet Specification
+&nbsp;    public static final String COOKIE_SESSION_ID_SOURCE = &quot;cookie&quot;;
+&nbsp;    public static final String URL_SESSION_ID_SOURCE = &quot;url&quot;;
+<b class="fc">&nbsp;    public static final String REFERENCED_SESSION_ID = ShiroHttpServletRequest.class.getName() + &quot;_REQUESTED_SESSION_ID&quot;;</b>
+<b class="fc">&nbsp;    public static final String REFERENCED_SESSION_ID_IS_VALID = ShiroHttpServletRequest.class.getName() + &quot;_REQUESTED_SESSION_ID_VALID&quot;;</b>
+<b class="fc">&nbsp;    public static final String REFERENCED_SESSION_IS_NEW = ShiroHttpServletRequest.class.getName() + &quot;_REFERENCED_SESSION_IS_NEW&quot;;</b>
+<b class="fc">&nbsp;    public static final String REFERENCED_SESSION_ID_SOURCE = ShiroHttpServletRequest.class.getName() + &quot;REFERENCED_SESSION_ID_SOURCE&quot;;</b>
+<b class="fc">&nbsp;    public static final String IDENTITY_REMOVED_KEY = ShiroHttpServletRequest.class.getName() + &quot;_IDENTITY_REMOVED_KEY&quot;;</b>
+<b class="fc">&nbsp;    public static final String SESSION_ID_URL_REWRITING_ENABLED = ShiroHttpServletRequest.class.getName() + &quot;_SESSION_ID_URL_REWRITING_ENABLED&quot;;</b>
+&nbsp;
+<b class="fc">&nbsp;    protected ServletContext servletContext = null;</b>
+&nbsp;
+<b class="fc">&nbsp;    protected HttpSession session = null;</b>
+<b class="fc">&nbsp;    protected boolean httpSessions = true;</b>
+&nbsp;
+&nbsp;    public ShiroHttpServletRequest(HttpServletRequest wrapped, ServletContext servletContext, boolean httpSessions) {
+<b class="fc">&nbsp;        super(wrapped);</b>
+<b class="fc">&nbsp;        this.servletContext = servletContext;</b>
+<b class="fc">&nbsp;        this.httpSessions = httpSessions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isHttpSessions() {
+<b class="fc">&nbsp;        return httpSessions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getRemoteUser() {
+&nbsp;        String remoteUser;
+<b class="nc">&nbsp;        Object scPrincipal = getSubjectPrincipal();</b>
+<b class="nc">&nbsp;        if (scPrincipal != null) {</b>
+<b class="nc">&nbsp;            if (scPrincipal instanceof String) {</b>
+<b class="nc">&nbsp;                return (String) scPrincipal;</b>
+<b class="nc">&nbsp;            } else if (scPrincipal instanceof Principal) {</b>
+<b class="nc">&nbsp;                remoteUser = ((Principal) scPrincipal).getName();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                remoteUser = scPrincipal.toString();</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            remoteUser = super.getRemoteUser();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return remoteUser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Subject getSubject() {
+<b class="fc">&nbsp;        return SecurityUtils.getSubject();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Object getSubjectPrincipal() {
+<b class="nc">&nbsp;        Object userPrincipal = null;</b>
+<b class="nc">&nbsp;        Subject subject = getSubject();</b>
+<b class="nc">&nbsp;        if (subject != null) {</b>
+<b class="nc">&nbsp;            userPrincipal = subject.getPrincipal();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return userPrincipal;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isUserInRole(String s) {
+<b class="nc">&nbsp;        Subject subject = getSubject();</b>
+<b class="nc">&nbsp;        boolean inRole = (subject != null &amp;&amp; subject.hasRole(s));</b>
+<b class="nc">&nbsp;        if (!inRole) {</b>
+<b class="nc">&nbsp;            inRole = super.isUserInRole(s);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return inRole;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Principal getUserPrincipal() {
+&nbsp;        Principal userPrincipal;
+<b class="nc">&nbsp;        Object scPrincipal = getSubjectPrincipal();</b>
+<b class="nc">&nbsp;        if (scPrincipal != null) {</b>
+<b class="nc">&nbsp;            if (scPrincipal instanceof Principal) {</b>
+<b class="nc">&nbsp;                userPrincipal = (Principal) scPrincipal;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                userPrincipal = new ObjectPrincipal(scPrincipal);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            userPrincipal = super.getUserPrincipal();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return userPrincipal;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getRequestedSessionId() {
+<b class="nc">&nbsp;        String requestedSessionId = null;</b>
+<b class="nc">&nbsp;        if (isHttpSessions()) {</b>
+<b class="nc">&nbsp;            requestedSessionId = super.getRequestedSessionId();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            Object sessionId = getAttribute(REFERENCED_SESSION_ID);</b>
+<b class="nc">&nbsp;            if (sessionId != null) {</b>
+<b class="nc">&nbsp;                requestedSessionId = sessionId.toString();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return requestedSessionId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public HttpSession getSession(boolean create) {
+&nbsp;
+&nbsp;        HttpSession httpSession;
+&nbsp;
+<b class="pc">&nbsp;        if (isHttpSessions()) {</b>
+<b class="nc">&nbsp;            httpSession = super.getSession(false);</b>
+<b class="nc">&nbsp;            if (httpSession == null &amp;&amp; create) {</b>
+&nbsp;                //Shiro 1.2: assert that creation is enabled (SHIRO-266):
+<b class="nc">&nbsp;                if (WebUtils._isSessionCreationEnabled(this)) {</b>
+<b class="nc">&nbsp;                    httpSession = super.getSession(create);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    throw newNoSessionCreationException();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        } else {
+<b class="fc">&nbsp;            boolean existing = getSubject().getSession(false) != null;</b>
+&nbsp;            
+<b class="fc">&nbsp;            if (this.session == null || !existing) {</b>
+<b class="fc">&nbsp;                Session shiroSession = getSubject().getSession(create);</b>
+<b class="fc">&nbsp;                if (shiroSession != null) {</b>
+<b class="fc">&nbsp;                    this.session = new ShiroHttpSession(shiroSession, this, this.servletContext);</b>
+<b class="fc">&nbsp;                    if (!existing) {</b>
+<b class="fc">&nbsp;                        setAttribute(REFERENCED_SESSION_IS_NEW, Boolean.TRUE);</b>
+&nbsp;                    }
+<b class="pc">&nbsp;                } else if (this.session != null) {</b>
+<b class="fc">&nbsp;                    this.session = null;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            httpSession = this.session;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return httpSession;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs and returns a {@link DisabledSessionException} with an appropriate message explaining why
+&nbsp;     * session creation has been disabled.
+&nbsp;     *
+&nbsp;     * @return a new DisabledSessionException with appropriate no creation message
+&nbsp;     * @since 1.2
+&nbsp;     */
+&nbsp;    private DisabledSessionException newNoSessionCreationException() {
+<b class="nc">&nbsp;        String msg = &quot;Session creation has been disabled for the current request.  This exception indicates &quot; +</b>
+&nbsp;                &quot;that there is either a programming error (using a session when it should never be &quot; +
+&nbsp;                &quot;used) or that Shiro&#39;s configuration needs to be adjusted to allow Sessions to be created &quot; +
+<b class="nc">&nbsp;                &quot;for the current request.  See the &quot; + DisabledSessionException.class.getName() + &quot; JavaDoc &quot; +</b>
+&nbsp;                &quot;for more.&quot;;
+<b class="nc">&nbsp;        return new DisabledSessionException(msg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public HttpSession getSession() {
+<b class="nc">&nbsp;        return getSession(true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isRequestedSessionIdValid() {
+<b class="nc">&nbsp;        if (isHttpSessions()) {</b>
+<b class="nc">&nbsp;            return super.isRequestedSessionIdValid();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            Boolean value = (Boolean) getAttribute(REFERENCED_SESSION_ID_IS_VALID);</b>
+<b class="nc">&nbsp;            return (value != null &amp;&amp; value.equals(Boolean.TRUE));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isRequestedSessionIdFromCookie() {
+<b class="nc">&nbsp;        if (isHttpSessions()) {</b>
+<b class="nc">&nbsp;            return super.isRequestedSessionIdFromCookie();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String value = (String) getAttribute(REFERENCED_SESSION_ID_SOURCE);</b>
+<b class="nc">&nbsp;            return value != null &amp;&amp; value.equals(COOKIE_SESSION_ID_SOURCE);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isRequestedSessionIdFromURL() {
+<b class="nc">&nbsp;        if (isHttpSessions()) {</b>
+<b class="nc">&nbsp;            return super.isRequestedSessionIdFromURL();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String value = (String) getAttribute(REFERENCED_SESSION_ID_SOURCE);</b>
+<b class="nc">&nbsp;            return value != null &amp;&amp; value.equals(URL_SESSION_ID_SOURCE);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isRequestedSessionIdFromUrl() {
+<b class="nc">&nbsp;        return isRequestedSessionIdFromURL();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private class ObjectPrincipal implements java.security.Principal {
+<b class="nc">&nbsp;        private Object object = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        public ObjectPrincipal(Object object) {</b>
+<b class="nc">&nbsp;            this.object = object;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Object getObject() {
+<b class="nc">&nbsp;            return object;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getName() {
+<b class="nc">&nbsp;            return getObject().toString();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+<b class="nc">&nbsp;            return object.hashCode();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object o) {
+<b class="nc">&nbsp;            if (o instanceof ObjectPrincipal) {</b>
+<b class="nc">&nbsp;                ObjectPrincipal op = (ObjectPrincipal) o;</b>
+<b class="nc">&nbsp;                return getObject().equals(op.getObject());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String toString() {
+<b class="nc">&nbsp;            return object.toString();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":30,"id":67369,"methods":[{"el":17,"sc":5,"sl":13},{"el":23,"sc":5,"sl":19},{"el":29,"sc":5,"sl":25}],"name":"AtomicLongComptableAndroidTest","sl":12}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_128":{"methods":[{"sl":13}],"name":"test_for_compatible_zero","pass":true,"statements":[{"sl":14},{"sl":16}]},"test_3638":{"methods":[{"sl":25}],"name":"test_for_compatible_five","pass":true,"statements":[{"sl":26},{"sl":28}]},"test_4660":{"methods":[{"sl":19}],"name":"test_for_compatible_six","pass":true,"statements":[{"sl":20},{"sl":22}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [128], [128], [], [128], [], [], [4660], [4660], [], [4660], [], [], [3638], [3638], [], [3638], [], []]

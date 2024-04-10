@@ -1,0 +1,326 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DefaultPasswordService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.authc.credential</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultPasswordService (org.apache.shiro.authc.credential)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultPasswordService</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/34)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/64)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; * http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.authc.credential;
+&nbsp;
+&nbsp;import java.security.MessageDigest;
+&nbsp;
+&nbsp;import org.apache.shiro.crypto.hash.DefaultHashService;
+&nbsp;import org.apache.shiro.crypto.hash.Hash;
+&nbsp;import org.apache.shiro.crypto.hash.HashRequest;
+&nbsp;import org.apache.shiro.crypto.hash.HashService;
+&nbsp;import org.apache.shiro.crypto.hash.format.*;
+&nbsp;import org.apache.shiro.util.ByteSource;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;/**
+&nbsp; * Default implementation of the {@link PasswordService} interface that relies on an internal
+&nbsp; * {@link HashService}, {@link HashFormat}, and {@link HashFormatFactory} to function:
+&nbsp; * &lt;h2&gt;Hashing Passwords&lt;/h2&gt;
+&nbsp; *
+&nbsp; * &lt;h2&gt;Comparing Passwords&lt;/h2&gt;
+&nbsp; * All hashing operations are performed by the internal {@link #getHashService() hashService}.  After the hash
+&nbsp; * is computed, it is formatted into a String value via the internal {@link #getHashFormat() hashFormat}.
+&nbsp; *
+&nbsp; * @since 1.2
+&nbsp; */
+&nbsp;public class DefaultPasswordService implements HashingPasswordService {
+&nbsp;
+&nbsp;    public static final String DEFAULT_HASH_ALGORITHM = &quot;SHA-256&quot;;
+&nbsp;    public static final int DEFAULT_HASH_ITERATIONS = 500000; //500,000
+&nbsp;
+<b class="nc">&nbsp;    private static final Logger log = LoggerFactory.getLogger(DefaultPasswordService.class);</b>
+&nbsp;
+&nbsp;    private HashService hashService;
+&nbsp;    private HashFormat hashFormat;
+&nbsp;    private HashFormatFactory hashFormatFactory;
+&nbsp;
+&nbsp;    private volatile boolean hashFormatWarned; //used to avoid excessive log noise
+&nbsp;
+<b class="nc">&nbsp;    public DefaultPasswordService() {</b>
+<b class="nc">&nbsp;        this.hashFormatWarned = false;</b>
+&nbsp;
+<b class="nc">&nbsp;        DefaultHashService hashService = new DefaultHashService();</b>
+<b class="nc">&nbsp;        hashService.setHashAlgorithmName(DEFAULT_HASH_ALGORITHM);</b>
+<b class="nc">&nbsp;        hashService.setHashIterations(DEFAULT_HASH_ITERATIONS);</b>
+<b class="nc">&nbsp;        hashService.setGeneratePublicSalt(true); //always want generated salts for user passwords to be most secure</b>
+<b class="nc">&nbsp;        this.hashService = hashService;</b>
+&nbsp;
+<b class="nc">&nbsp;        this.hashFormat = new Shiro1CryptFormat();</b>
+<b class="nc">&nbsp;        this.hashFormatFactory = new DefaultHashFormatFactory();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String encryptPassword(Object plaintext) {
+<b class="nc">&nbsp;        Hash hash = hashPassword(plaintext);</b>
+<b class="nc">&nbsp;        checkHashFormatDurability();</b>
+<b class="nc">&nbsp;        return this.hashFormat.format(hash);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Hash hashPassword(Object plaintext) {
+<b class="nc">&nbsp;        ByteSource plaintextBytes = createByteSource(plaintext);</b>
+<b class="nc">&nbsp;        if (plaintextBytes == null || plaintextBytes.isEmpty()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        HashRequest request = createHashRequest(plaintextBytes);</b>
+<b class="nc">&nbsp;        return hashService.computeHash(request);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean passwordsMatch(Object plaintext, Hash saved) {
+<b class="nc">&nbsp;        ByteSource plaintextBytes = createByteSource(plaintext);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (saved == null || saved.isEmpty()) {</b>
+<b class="nc">&nbsp;            return plaintextBytes == null || plaintextBytes.isEmpty();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (plaintextBytes == null || plaintextBytes.isEmpty()) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        HashRequest request = buildHashRequest(plaintextBytes, saved);</b>
+&nbsp;
+<b class="nc">&nbsp;        Hash computed = this.hashService.computeHash(request);</b>
+&nbsp;
+<b class="nc">&nbsp;        return constantEquals(saved.toString(), computed.toString());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean constantEquals(String savedHash, String computedHash) {
+&nbsp;
+<b class="nc">&nbsp;        byte[] savedHashByteArray = savedHash.getBytes();</b>
+<b class="nc">&nbsp;        byte[] computedHashByteArray = computedHash.getBytes();</b>
+&nbsp;
+<b class="nc">&nbsp;        return MessageDigest.isEqual(savedHashByteArray, computedHashByteArray);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void checkHashFormatDurability() {
+&nbsp;
+<b class="nc">&nbsp;        if (!this.hashFormatWarned) {</b>
+&nbsp;
+<b class="nc">&nbsp;            HashFormat format = this.hashFormat;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (!(format instanceof ParsableHashFormat) &amp;&amp; log.isWarnEnabled()) {</b>
+<b class="nc">&nbsp;                String msg = &quot;The configured hashFormat instance [&quot; + format.getClass().getName() + &quot;] is not a &quot; +</b>
+<b class="nc">&nbsp;                        ParsableHashFormat.class.getName() + &quot; implementation.  This is &quot; +</b>
+&nbsp;                        &quot;required if you wish to support backwards compatibility for saved password checking (almost &quot; +
+<b class="nc">&nbsp;                        &quot;always desirable).  Without a &quot; + ParsableHashFormat.class.getSimpleName() + &quot; instance, &quot; +</b>
+&nbsp;                        &quot;any hashService configuration changes will break previously hashed/saved passwords.&quot;;
+<b class="nc">&nbsp;                log.warn(msg);</b>
+<b class="nc">&nbsp;                this.hashFormatWarned = true;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected HashRequest createHashRequest(ByteSource plaintext) {
+<b class="nc">&nbsp;        return new HashRequest.Builder().setSource(plaintext).build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected ByteSource createByteSource(Object o) {
+<b class="nc">&nbsp;        return ByteSource.Util.bytes(o);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean passwordsMatch(Object submittedPlaintext, String saved) {
+<b class="nc">&nbsp;        ByteSource plaintextBytes = createByteSource(submittedPlaintext);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (saved == null || saved.length() == 0) {</b>
+<b class="nc">&nbsp;            return plaintextBytes == null || plaintextBytes.isEmpty();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (plaintextBytes == null || plaintextBytes.isEmpty()) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        //First check to see if we can reconstitute the original hash - this allows us to
+&nbsp;        //perform password hash comparisons even for previously saved passwords that don&#39;t
+&nbsp;        //match the current HashService configuration values.  This is a very nice feature
+&nbsp;        //for password comparisons because it ensures backwards compatibility even after
+&nbsp;        //configuration changes.
+<b class="nc">&nbsp;        HashFormat discoveredFormat = this.hashFormatFactory.getInstance(saved);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (discoveredFormat != null &amp;&amp; discoveredFormat instanceof ParsableHashFormat) {</b>
+&nbsp;
+<b class="nc">&nbsp;            ParsableHashFormat parsableHashFormat = (ParsableHashFormat)discoveredFormat;</b>
+<b class="nc">&nbsp;            Hash savedHash = parsableHashFormat.parse(saved);</b>
+&nbsp;
+<b class="nc">&nbsp;            return passwordsMatch(submittedPlaintext, savedHash);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //If we&#39;re at this point in the method&#39;s execution, We couldn&#39;t reconstitute the original hash.
+&nbsp;        //So, we need to hash the submittedPlaintext using current HashService configuration and then
+&nbsp;        //compare the formatted output with the saved string.  This will correctly compare passwords,
+&nbsp;        //but does not allow changing the HashService configuration without breaking previously saved
+&nbsp;        //passwords:
+&nbsp;
+&nbsp;        //The saved text value can&#39;t be reconstituted into a Hash instance.  We need to format the
+&nbsp;        //submittedPlaintext and then compare this formatted value with the saved value:
+<b class="nc">&nbsp;        HashRequest request = createHashRequest(plaintextBytes);</b>
+<b class="nc">&nbsp;        Hash computed = this.hashService.computeHash(request);</b>
+<b class="nc">&nbsp;        String formatted = this.hashFormat.format(computed);</b>
+&nbsp;
+<b class="nc">&nbsp;        return constantEquals(saved, formatted);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected HashRequest buildHashRequest(ByteSource plaintext, Hash saved) {
+&nbsp;        //keep everything from the saved hash except for the source:
+<b class="nc">&nbsp;        return new HashRequest.Builder().setSource(plaintext)</b>
+&nbsp;                //now use the existing saved data:
+<b class="nc">&nbsp;                .setAlgorithmName(saved.getAlgorithmName())</b>
+<b class="nc">&nbsp;                .setSalt(saved.getSalt())</b>
+<b class="nc">&nbsp;                .setIterations(saved.getIterations())</b>
+<b class="nc">&nbsp;                .build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public HashService getHashService() {
+<b class="nc">&nbsp;        return hashService;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setHashService(HashService hashService) {
+<b class="nc">&nbsp;        this.hashService = hashService;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public HashFormat getHashFormat() {
+<b class="nc">&nbsp;        return hashFormat;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setHashFormat(HashFormat hashFormat) {
+<b class="nc">&nbsp;        this.hashFormat = hashFormat;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public HashFormatFactory getHashFormatFactory() {
+<b class="nc">&nbsp;        return hashFormatFactory;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setHashFormatFactory(HashFormatFactory hashFormatFactory) {
+<b class="nc">&nbsp;        this.hashFormatFactory = hashFormatFactory;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:34</div>
+</div>
+</body>
+</html>

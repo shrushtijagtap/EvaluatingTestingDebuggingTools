@@ -1,0 +1,222 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DefaultWebEnvironment</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.web.env</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultWebEnvironment (org.apache.shiro.web.env)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultWebEnvironment</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.web.env;
+&nbsp;
+&nbsp;import org.apache.shiro.env.DefaultEnvironment;
+&nbsp;import org.apache.shiro.mgt.SecurityManager;
+&nbsp;import org.apache.shiro.web.config.ShiroFilterConfiguration;
+&nbsp;import org.apache.shiro.web.filter.mgt.FilterChainResolver;
+&nbsp;import org.apache.shiro.web.mgt.WebSecurityManager;
+&nbsp;
+&nbsp;import javax.servlet.ServletContext;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * Default {@link WebEnvironment} implementation based on a backing {@link Map} instance.
+&nbsp; *
+&nbsp; * @since 1.2
+&nbsp; */
+&nbsp;public class DefaultWebEnvironment extends DefaultEnvironment implements MutableWebEnvironment {
+&nbsp;
+&nbsp;    private static final String DEFAULT_FILTER_CHAIN_RESOLVER_NAME = &quot;filterChainResolver&quot;;
+&nbsp;    private static final String SHIRO_FILTER_CONFIG_NAME = &quot;shiroFilter&quot;;
+&nbsp;
+&nbsp;    private ServletContext servletContext;
+&nbsp;
+&nbsp;    public DefaultWebEnvironment() {
+<b class="nc">&nbsp;        super();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public FilterChainResolver getFilterChainResolver() {
+<b class="nc">&nbsp;        return getObject(DEFAULT_FILTER_CHAIN_RESOLVER_NAME, FilterChainResolver.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFilterChainResolver(FilterChainResolver filterChainResolver) {
+<b class="nc">&nbsp;        setObject(DEFAULT_FILTER_CHAIN_RESOLVER_NAME, filterChainResolver);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public SecurityManager getSecurityManager() throws IllegalStateException {
+<b class="nc">&nbsp;        return getWebSecurityManager();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setSecurityManager(SecurityManager securityManager) {
+<b class="nc">&nbsp;        assertWebSecurityManager(securityManager);</b>
+<b class="nc">&nbsp;        super.setSecurityManager(securityManager);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public WebSecurityManager getWebSecurityManager() {
+<b class="nc">&nbsp;        SecurityManager sm = super.getSecurityManager();</b>
+<b class="nc">&nbsp;        assertWebSecurityManager(sm);</b>
+<b class="nc">&nbsp;        return (WebSecurityManager)sm;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setWebSecurityManager(WebSecurityManager wsm) {
+<b class="nc">&nbsp;        super.setSecurityManager(wsm);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void assertWebSecurityManager(SecurityManager sm) {
+<b class="nc">&nbsp;        if (!(sm instanceof WebSecurityManager)) {</b>
+<b class="nc">&nbsp;            String msg = &quot;SecurityManager instance must be a &quot; + WebSecurityManager.class.getName() + &quot; instance.&quot;;</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(msg);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public ServletContext getServletContext() {
+<b class="nc">&nbsp;        return this.servletContext;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setServletContext(ServletContext servletContext) {
+<b class="nc">&nbsp;        this.servletContext = servletContext;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setShiroFilterConfiguration(ShiroFilterConfiguration filterConfiguration) {
+<b class="nc">&nbsp;        setObject(SHIRO_FILTER_CONFIG_NAME, filterConfiguration);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ShiroFilterConfiguration getShiroFilterConfiguration() {
+<b class="nc">&nbsp;        ShiroFilterConfiguration config = getObject(SHIRO_FILTER_CONFIG_NAME, ShiroFilterConfiguration.class);</b>
+&nbsp;        // Use the default configuration if config is null
+<b class="nc">&nbsp;        if (config == null) {</b>
+<b class="nc">&nbsp;            config = MutableWebEnvironment.super.getShiroFilterConfiguration();</b>
+<b class="nc">&nbsp;            setShiroFilterConfiguration(config);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return config;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

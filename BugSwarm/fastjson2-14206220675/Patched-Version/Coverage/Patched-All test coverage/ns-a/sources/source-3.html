@@ -1,0 +1,288 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BigDecimalWrite</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.fastcode</a>
+</div>
+
+<h1>Coverage Summary for Class: BigDecimalWrite (com.alibaba.fastjson2.benchmark.fastcode)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BigDecimalWrite</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/121)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.fastcode;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSON;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.fasterxml.jackson.databind.ObjectMapper;
+&nbsp;import com.fasterxml.jackson.databind.SerializationFeature;
+&nbsp;import org.openjdk.jmh.annotations.Benchmark;
+&nbsp;import org.openjdk.jmh.annotations.Mode;
+&nbsp;import org.openjdk.jmh.infra.Blackhole;
+&nbsp;import org.openjdk.jmh.runner.Runner;
+&nbsp;import org.openjdk.jmh.runner.RunnerException;
+&nbsp;import org.openjdk.jmh.runner.options.Options;
+&nbsp;import org.openjdk.jmh.runner.options.OptionsBuilder;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.util.concurrent.TimeUnit;
+&nbsp;
+<b class="nc">&nbsp;public class BigDecimalWrite {</b>
+&nbsp;    static final ObjectMapper mapperPlain;
+&nbsp;    static final ObjectMapper mapper;
+&nbsp;    static {
+<b class="nc">&nbsp;        mapperPlain = new ObjectMapper();</b>
+<b class="nc">&nbsp;        mapperPlain.configure(SerializationFeature.WRITE_BIGDECIMAL_AS_PLAIN, true);</b>
+&nbsp;
+<b class="nc">&nbsp;        mapper = new ObjectMapper();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void fastjson2(Blackhole bh) throws Throwable {
+<b class="nc">&nbsp;        bh.consume(JSON.toJSONString(decimals));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void fastjson2Plain(Blackhole bh) throws Throwable {
+<b class="nc">&nbsp;        bh.consume(JSON.toJSONString(decimals, JSONWriter.Feature.WriteBigDecimalAsPlain));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void jackson(Blackhole bh) throws Throwable {
+<b class="nc">&nbsp;        bh.consume(mapper.writeValueAsString(decimals));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void jacksonPlain(Blackhole bh) throws Throwable {
+<b class="nc">&nbsp;        bh.consume(mapperPlain.writeValueAsString(decimals));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void main(String[] args) throws RunnerException {
+<b class="nc">&nbsp;        Options options = new OptionsBuilder()</b>
+<b class="nc">&nbsp;                .include(BigDecimalWrite.class.getName())</b>
+<b class="nc">&nbsp;                .mode(Mode.Throughput)</b>
+<b class="nc">&nbsp;                .timeUnit(TimeUnit.MILLISECONDS)</b>
+<b class="nc">&nbsp;                .warmupIterations(1)</b>
+<b class="nc">&nbsp;                .forks(1)</b>
+<b class="nc">&nbsp;                .build();</b>
+<b class="nc">&nbsp;        new Runner(options).run();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static final BigDecimal[] decimals;
+<b class="nc">&nbsp;    static String[] strings = {</b>
+<b class="nc">&nbsp;            &quot;567988.735&quot;,</b>
+<b class="nc">&nbsp;            &quot;-811227.824&quot;,</b>
+<b class="nc">&nbsp;            &quot;17415.508&quot;,</b>
+<b class="nc">&nbsp;            &quot;668069.440&quot;,</b>
+<b class="nc">&nbsp;            &quot;77259.887&quot;,</b>
+<b class="nc">&nbsp;            &quot;733032.058&quot;,</b>
+<b class="nc">&nbsp;            &quot;44402.415&quot;,</b>
+<b class="nc">&nbsp;            &quot;99328.975&quot;,</b>
+<b class="nc">&nbsp;            &quot;759431.827&quot;,</b>
+<b class="nc">&nbsp;            &quot;651998.851&quot;,</b>
+<b class="nc">&nbsp;            &quot;595127.733&quot;,</b>
+<b class="nc">&nbsp;            &quot;872747.476&quot;,</b>
+<b class="nc">&nbsp;            &quot;976748.491&quot;,</b>
+<b class="nc">&nbsp;            &quot;63991.314&quot;,</b>
+<b class="nc">&nbsp;            &quot;436269.240&quot;,</b>
+<b class="nc">&nbsp;            &quot;509959.652&quot;,</b>
+<b class="nc">&nbsp;            &quot;648017.400&quot;,</b>
+<b class="nc">&nbsp;            &quot;86751.384&quot;,</b>
+<b class="nc">&nbsp;            &quot;800272.803&quot;,</b>
+<b class="nc">&nbsp;            &quot;639564.823&quot;,</b>
+<b class="nc">&nbsp;            &quot;88635.267&quot;,</b>
+<b class="nc">&nbsp;            &quot;409446.022&quot;,</b>
+<b class="nc">&nbsp;            &quot;228804.504&quot;,</b>
+<b class="nc">&nbsp;            &quot;640130.935&quot;,</b>
+<b class="nc">&nbsp;            &quot;941728.712&quot;,</b>
+<b class="nc">&nbsp;            &quot;668647.192&quot;,</b>
+<b class="nc">&nbsp;            &quot;746452.938&quot;,</b>
+<b class="nc">&nbsp;            &quot;88000.517&quot;,</b>
+<b class="nc">&nbsp;            &quot;175690.681&quot;,</b>
+<b class="nc">&nbsp;            &quot;442989.476&quot;,</b>
+<b class="nc">&nbsp;            &quot;714895.680&quot;,</b>
+<b class="nc">&nbsp;            &quot;271997.015&quot;,</b>
+<b class="nc">&nbsp;            &quot;784747.089&quot;,</b>
+<b class="nc">&nbsp;            &quot;357574.796&quot;,</b>
+<b class="nc">&nbsp;            &quot;497020.456&quot;,</b>
+<b class="nc">&nbsp;            &quot;361937.673&quot;,</b>
+<b class="nc">&nbsp;            &quot;731252.665&quot;,</b>
+<b class="nc">&nbsp;            &quot;328984.250&quot;,</b>
+<b class="nc">&nbsp;            &quot;402177.572&quot;,</b>
+<b class="nc">&nbsp;            &quot;511251.084&quot;,</b>
+<b class="nc">&nbsp;            &quot;290164.359&quot;,</b>
+<b class="nc">&nbsp;            &quot;844655.633&quot;,</b>
+<b class="nc">&nbsp;            &quot;238646.400&quot;,</b>
+<b class="nc">&nbsp;            &quot;209082.573&quot;,</b>
+<b class="nc">&nbsp;            &quot;800429.012&quot;,</b>
+<b class="nc">&nbsp;            &quot;612647.616&quot;,</b>
+<b class="nc">&nbsp;            &quot;434125.300&quot;,</b>
+<b class="nc">&nbsp;            &quot;308113.583&quot;,</b>
+<b class="nc">&nbsp;            &quot;481771.315&quot;,</b>
+<b class="nc">&nbsp;            &quot;394124.322&quot;,</b>
+<b class="nc">&nbsp;            &quot;818335.777&quot;,</b>
+<b class="nc">&nbsp;            &quot;339450.066&quot;,</b>
+<b class="nc">&nbsp;            &quot;334937.770&quot;,</b>
+<b class="nc">&nbsp;            &quot;304400.447&quot;,</b>
+<b class="nc">&nbsp;            &quot;533111.800&quot;,</b>
+<b class="nc">&nbsp;            &quot;743212.248&quot;,</b>
+<b class="nc">&nbsp;            &quot;328471.243&quot;,</b>
+<b class="nc">&nbsp;            &quot;193255.426&quot;,</b>
+<b class="nc">&nbsp;            &quot;892754.606&quot;,</b>
+<b class="nc">&nbsp;            &quot;951287.847&quot;,</b>
+<b class="nc">&nbsp;            &quot;272599.471&quot;,</b>
+<b class="nc">&nbsp;            &quot;262161.834&quot;,</b>
+<b class="nc">&nbsp;            &quot;290162.866&quot;,</b>
+<b class="nc">&nbsp;            &quot;320829.094&quot;,</b>
+<b class="nc">&nbsp;            &quot;412294.692&quot;,</b>
+<b class="nc">&nbsp;            &quot;521239.528&quot;,</b>
+<b class="nc">&nbsp;            &quot;841545.834&quot;,</b>
+<b class="nc">&nbsp;            &quot;252217.529&quot;,</b>
+<b class="nc">&nbsp;            &quot;271679.523&quot;,</b>
+<b class="nc">&nbsp;            &quot;291849.519&quot;,</b>
+<b class="nc">&nbsp;            &quot;563712.454&quot;,</b>
+<b class="nc">&nbsp;            &quot;374797.778&quot;,</b>
+<b class="nc">&nbsp;            &quot;467001.597&quot;,</b>
+<b class="nc">&nbsp;            &quot;760154.498&quot;,</b>
+<b class="nc">&nbsp;            &quot;426363.937&quot;,</b>
+<b class="nc">&nbsp;            &quot;706653.732&quot;,</b>
+<b class="nc">&nbsp;            &quot;578078.926&quot;,</b>
+<b class="nc">&nbsp;            &quot;460563.960&quot;,</b>
+<b class="nc">&nbsp;            &quot;158475.411&quot;,</b>
+<b class="nc">&nbsp;            &quot;655223.901&quot;,</b>
+<b class="nc">&nbsp;            &quot;263773.087&quot;,</b>
+<b class="nc">&nbsp;            &quot;169458.408&quot;,</b>
+<b class="nc">&nbsp;            &quot;324783.323&quot;,</b>
+<b class="nc">&nbsp;            &quot;331908.388&quot;,</b>
+<b class="nc">&nbsp;            &quot;64351.359&quot;,</b>
+<b class="nc">&nbsp;            &quot;262647.243&quot;,</b>
+<b class="nc">&nbsp;            &quot;573084.414&quot;,</b>
+<b class="nc">&nbsp;            &quot;55618.851&quot;,</b>
+<b class="nc">&nbsp;            &quot;742849.227&quot;,</b>
+<b class="nc">&nbsp;            &quot;726686.140&quot;,</b>
+<b class="nc">&nbsp;            &quot;468504.798&quot;,</b>
+<b class="nc">&nbsp;            &quot;983562.626&quot;,</b>
+<b class="nc">&nbsp;            &quot;754044.022&quot;,</b>
+<b class="nc">&nbsp;            &quot;239351.762&quot;,</b>
+<b class="nc">&nbsp;            &quot;72823.402&quot;,</b>
+<b class="nc">&nbsp;            &quot;517170.424&quot;,</b>
+<b class="nc">&nbsp;            &quot;759187.394&quot;,</b>
+<b class="nc">&nbsp;            &quot;624425.622&quot;,</b>
+<b class="nc">&nbsp;            &quot;742522.595&quot;,</b>
+<b class="nc">&nbsp;            &quot;713384.831&quot;</b>
+&nbsp;    };
+&nbsp;    static {
+<b class="nc">&nbsp;        decimals = new BigDecimal[strings.length];</b>
+<b class="nc">&nbsp;        init();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void init() {
+<b class="nc">&nbsp;        for (int i = 0; i &lt; strings.length; i++) {</b>
+<b class="nc">&nbsp;            decimals[i] = new BigDecimal(strings[i]);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:20</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,150 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AuthenticationInfo</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.authc</a>
+</div>
+
+<h1>Coverage Summary for Class: AuthenticationInfo (org.apache.shiro.authc)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">AuthenticationInfo</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package org.apache.shiro.authc;
+&nbsp;
+&nbsp;import org.apache.shiro.subject.PrincipalCollection;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;
+&nbsp;/**
+&nbsp; * &lt;code&gt;AuthenticationInfo&lt;/code&gt; represents a Subject&#39;s (aka user&#39;s) stored account information relevant to the
+&nbsp; * authentication/log-in process only.
+&nbsp; * &lt;p/&gt;
+&nbsp; * It is important to understand the difference between this interface and the
+&nbsp; * {@link AuthenticationToken AuthenticationToken} interface.  &lt;code&gt;AuthenticationInfo&lt;/code&gt; implementations
+&nbsp; * represent already-verified and stored account data, whereas an &lt;code&gt;AuthenticationToken&lt;/code&gt; represents data
+&nbsp; * submitted for any given login attempt (which may or may not successfully match the verified and stored account
+&nbsp; * &lt;code&gt;AuthenticationInfo&lt;/code&gt;).
+&nbsp; * &lt;p/&gt;
+&nbsp; * Because the act of authentication (log-in) is orthogonal to authorization (access control), this interface is
+&nbsp; * intended to represent only the account data needed by Shiro during an authentication attempt.  Shiro also
+&nbsp; * has a parallel {@link org.apache.shiro.authz.AuthorizationInfo AuthorizationInfo} interface for use during the
+&nbsp; * authorization process that references access control data such as roles and permissions.
+&nbsp; * &lt;p/&gt;
+&nbsp; * But because many if not most {@link org.apache.shiro.realm.Realm Realm}s store both sets of data for a Subject, it might be
+&nbsp; * convenient for a &lt;code&gt;Realm&lt;/code&gt; implementation to utilize an implementation of the {@link Account Account}
+&nbsp; * interface instead, which is a convenience interface that combines both &lt;code&gt;AuthenticationInfo&lt;/code&gt; and
+&nbsp; * &lt;code&gt;AuthorizationInfo&lt;/code&gt;.  Whether you choose to implement these two interfaces separately or implement the one
+&nbsp; * &lt;code&gt;Account&lt;/code&gt; interface for a given &lt;code&gt;Realm&lt;/code&gt; is entirely based on your application&#39;s needs or your
+&nbsp; * preferences.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;p&gt;&lt;b&gt;Please note:&lt;/b&gt;  Since Shiro sometimes logs authentication operations, please ensure your AuthenticationInfo&#39;s
+&nbsp; * &lt;code&gt;toString()&lt;/code&gt; implementation does &lt;em&gt;not&lt;/em&gt; print out account credentials (password, etc), as these might be viewable to
+&nbsp; * someone reading your logs.  This is good practice anyway, and account credentials should rarely (if ever) be printed
+&nbsp; * out for any reason.  If you&#39;re using Shiro&#39;s default implementations of this interface, they only ever print the
+&nbsp; * account {@link #getPrincipals() principals}, so you do not need to do anything additional.&lt;/p&gt;
+&nbsp; *
+&nbsp; * @see org.apache.shiro.authz.AuthorizationInfo AuthorizationInfo
+&nbsp; * @see Account
+&nbsp; * @since 0.9
+&nbsp; */
+&nbsp;public interface AuthenticationInfo extends Serializable {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns all principals associated with the corresponding Subject.  Each principal is an identifying piece of
+&nbsp;     * information useful to the application such as a username, or user id, a given name, etc - anything useful
+&nbsp;     * to the application to identify the current &lt;code&gt;Subject&lt;/code&gt;.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The returned PrincipalCollection should &lt;em&gt;not&lt;/em&gt; contain any credentials used to verify principals, such
+&nbsp;     * as passwords, private keys, etc.  Those should be instead returned by {@link #getCredentials() getCredentials()}.
+&nbsp;     *
+&nbsp;     * @return all principals associated with the corresponding Subject.
+&nbsp;     */
+&nbsp;    PrincipalCollection getPrincipals();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the credentials associated with the corresponding Subject.  A credential verifies one or more of the
+&nbsp;     * {@link #getPrincipals() principals} associated with the Subject, such as a password or private key.  Credentials
+&nbsp;     * are used by Shiro particularly during the authentication process to ensure that submitted credentials
+&nbsp;     * during a login attempt match exactly the credentials here in the &lt;code&gt;AuthenticationInfo&lt;/code&gt; instance.
+&nbsp;     *
+&nbsp;     * @return the credentials associated with the corresponding Subject.
+&nbsp;     */
+&nbsp;    Object getCredentials();
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:30</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,210 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AuthorizingAnnotationMethodInterceptor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.authz.aop</a>
+</div>
+
+<h1>Coverage Summary for Class: AuthorizingAnnotationMethodInterceptor (org.apache.shiro.authz.aop)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AuthorizingAnnotationMethodInterceptor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.authz.aop;
+&nbsp;
+&nbsp;import org.apache.shiro.aop.AnnotationMethodInterceptor;
+&nbsp;import org.apache.shiro.aop.AnnotationResolver;
+&nbsp;import org.apache.shiro.aop.MethodInvocation;
+&nbsp;import org.apache.shiro.authz.AuthorizationException;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * An &lt;tt&gt;AnnotationMethodInterceptor&lt;/tt&gt; that asserts the calling code is authorized to execute the method
+&nbsp; * before allowing the invocation to continue by inspecting code annotations to perform an access control check.
+&nbsp; *
+&nbsp; * @since 0.1
+&nbsp; */
+&nbsp;public abstract class AuthorizingAnnotationMethodInterceptor extends AnnotationMethodInterceptor
+&nbsp;{
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Constructor that ensures the internal &lt;code&gt;handler&lt;/code&gt; is set which will be used to perform the
+&nbsp;     * authorization assertion checks when a supported annotation is encountered.
+&nbsp;     * @param handler the internal &lt;code&gt;handler&lt;/code&gt; used to perform authorization assertion checks when a 
+&nbsp;     * supported annotation is encountered.
+&nbsp;     */
+&nbsp;    public AuthorizingAnnotationMethodInterceptor( AuthorizingAnnotationHandler handler ) {
+<b class="nc">&nbsp;        super(handler);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     *
+&nbsp;     * @param handler
+&nbsp;     * @param resolver
+&nbsp;     * @since 1.1
+&nbsp;     */
+&nbsp;    public AuthorizingAnnotationMethodInterceptor( AuthorizingAnnotationHandler handler,
+&nbsp;                                                   AnnotationResolver resolver) {
+<b class="nc">&nbsp;        super(handler, resolver);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ensures the &lt;code&gt;methodInvocation&lt;/code&gt; is allowed to execute first before proceeding by calling the
+&nbsp;     * {@link #assertAuthorized(org.apache.shiro.aop.MethodInvocation) assertAuthorized} method first.
+&nbsp;     *
+&nbsp;     * @param methodInvocation the method invocation to check for authorization prior to allowing it to proceed/execute.
+&nbsp;     * @return the return value from the method invocation (the value of {@link org.apache.shiro.aop.MethodInvocation#proceed() MethodInvocation.proceed()}).
+&nbsp;     * @throws org.apache.shiro.authz.AuthorizationException if the &lt;code&gt;MethodInvocation&lt;/code&gt; is not allowed to proceed.
+&nbsp;     * @throws Throwable if any other error occurs.
+&nbsp;     */
+&nbsp;    public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+<b class="nc">&nbsp;        assertAuthorized(methodInvocation);</b>
+<b class="nc">&nbsp;        return methodInvocation.proceed();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ensures the calling Subject is authorized to execute the specified &lt;code&gt;MethodInvocation&lt;/code&gt;.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * As this is an AnnotationMethodInterceptor, this implementation merely delegates to the internal
+&nbsp;     * {@link AuthorizingAnnotationHandler AuthorizingAnnotationHandler} by first acquiring the annotation by
+&nbsp;     * calling {@link #getAnnotation(MethodInvocation) getAnnotation(methodInvocation)} and then calls
+&nbsp;     * {@link AuthorizingAnnotationHandler#assertAuthorized(java.lang.annotation.Annotation) handler.assertAuthorized(annotation)}.
+&nbsp;     *
+&nbsp;     * @param mi the &lt;code&gt;MethodInvocation&lt;/code&gt; to check to see if it is allowed to proceed/execute.
+&nbsp;     * @throws AuthorizationException if the method invocation is not allowed to continue/execute.
+&nbsp;     */
+&nbsp;    public void assertAuthorized(MethodInvocation mi) throws AuthorizationException {
+&nbsp;        try {
+<b class="nc">&nbsp;            ((AuthorizingAnnotationHandler)getHandler()).assertAuthorized(getAnnotation(mi));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        catch(AuthorizationException ae) {</b>
+&nbsp;            // Annotation handler doesn&#39;t know why it was called, so add the information here if possible. 
+&nbsp;            // Don&#39;t wrap the exception here since we don&#39;t want to mask the specific exception, such as 
+&nbsp;            // UnauthenticatedException etc. 
+<b class="nc">&nbsp;            if (ae.getCause() == null) ae.initCause(new AuthorizationException(&quot;Not authorized to invoke method: &quot; + mi.getMethod()));</b>
+<b class="nc">&nbsp;            throw ae;</b>
+&nbsp;        }         
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

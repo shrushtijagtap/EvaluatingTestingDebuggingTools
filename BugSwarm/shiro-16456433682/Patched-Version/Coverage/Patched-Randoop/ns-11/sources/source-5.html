@@ -1,0 +1,282 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Shiro1CryptFormat</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.crypto.hash.format</a>
+</div>
+
+<h1>Coverage Summary for Class: Shiro1CryptFormat (org.apache.shiro.crypto.hash.format)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Shiro1CryptFormat</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/40)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.crypto.hash.format;
+&nbsp;
+&nbsp;import org.apache.shiro.codec.Base64;
+&nbsp;import org.apache.shiro.crypto.hash.Hash;
+&nbsp;import org.apache.shiro.crypto.hash.SimpleHash;
+&nbsp;import org.apache.shiro.util.ByteSource;
+&nbsp;import org.apache.shiro.util.StringUtils;
+&nbsp;
+&nbsp;/**
+&nbsp; * The {@code Shiro1CryptFormat} is a fully reversible
+&nbsp; * &lt;a href=&quot;http://packages.python.org/passlib/modular_crypt_format.html&quot;&gt;Modular Crypt Format&lt;/a&gt; (MCF).  Because it is
+&nbsp; * fully reversible (i.e. Hash -&amp;gt; String, String -&amp;gt; Hash), it does NOT use the traditional MCF encoding alphabet
+&nbsp; * (the traditional MCF encoding, aka H64, is bit-destructive and cannot be reversed).  Instead, it uses fully
+&nbsp; * reversible Base64 encoding for the Hash digest and any salt value.
+&nbsp; * &lt;h2&gt;Format&lt;/h2&gt;
+&nbsp; * &lt;p&gt;Hash instances formatted with this implementation will result in a String with the following dollar-sign ($)
+&nbsp; * delimited format:&lt;/p&gt;
+&nbsp; * &lt;pre&gt;
+&nbsp; * &lt;b&gt;$&lt;/b&gt;mcfFormatId&lt;b&gt;$&lt;/b&gt;algorithmName&lt;b&gt;$&lt;/b&gt;iterationCount&lt;b&gt;$&lt;/b&gt;base64EncodedSalt&lt;b&gt;$&lt;/b&gt;base64EncodedDigest
+&nbsp; * &lt;/pre&gt;
+&nbsp; * &lt;p&gt;Each token is defined as follows:&lt;/p&gt;
+&nbsp; * &lt;table&gt;
+&nbsp; *     &lt;tr&gt;
+&nbsp; *         &lt;th&gt;Position&lt;/th&gt;
+&nbsp; *         &lt;th&gt;Token&lt;/th&gt;
+&nbsp; *         &lt;th&gt;Description&lt;/th&gt;
+&nbsp; *         &lt;th&gt;Required?&lt;/th&gt;
+&nbsp; *     &lt;/tr&gt;
+&nbsp; *     &lt;tr&gt;
+&nbsp; *         &lt;td&gt;1&lt;/td&gt;
+&nbsp; *         &lt;td&gt;{@code mcfFormatId}&lt;/td&gt;
+&nbsp; *         &lt;td&gt;The Modular Crypt Format identifier for this implementation, equal to &lt;b&gt;{@code shiro1}&lt;/b&gt;.
+&nbsp; *             ( This implies that all {@code shiro1} MCF-formatted strings will always begin with the prefix
+&nbsp; *             {@code $shiro1$} ).&lt;/td&gt;
+&nbsp; *         &lt;td&gt;true&lt;/td&gt;
+&nbsp; *     &lt;/tr&gt;
+&nbsp; *     &lt;tr&gt;
+&nbsp; *         &lt;td&gt;2&lt;/td&gt;
+&nbsp; *         &lt;td&gt;{@code algorithmName}&lt;/td&gt;
+&nbsp; *         &lt;td&gt;The name of the hash algorithm used to perform the hash.  This is an algorithm name understood by
+&nbsp; *         {@code MessageDigest}.{@link java.security.MessageDigest#getInstance(String) getInstance}, for example
+&nbsp; *         {@code MD5}, {@code SHA-256}, {@code SHA-256}, etc.&lt;/td&gt;
+&nbsp; *         &lt;td&gt;true&lt;/td&gt;
+&nbsp; *     &lt;/tr&gt;
+&nbsp; *     &lt;tr&gt;
+&nbsp; *         &lt;td&gt;3&lt;/td&gt;
+&nbsp; *         &lt;td&gt;{@code iterationCount}&lt;/td&gt;
+&nbsp; *         &lt;td&gt;The number of hash iterations performed.&lt;/td&gt;
+&nbsp; *         &lt;td&gt;true (1 &lt;= N &lt;= Integer.MAX_VALUE)&lt;/td&gt;
+&nbsp; *     &lt;/tr&gt;
+&nbsp; *     &lt;tr&gt;
+&nbsp; *         &lt;td&gt;4&lt;/td&gt;
+&nbsp; *         &lt;td&gt;{@code base64EncodedSalt}&lt;/td&gt;
+&nbsp; *         &lt;td&gt;The Base64-encoded salt byte array.  This token only exists if a salt was used to perform the hash.&lt;/td&gt;
+&nbsp; *         &lt;td&gt;false&lt;/td&gt;
+&nbsp; *     &lt;/tr&gt;
+&nbsp; *     &lt;tr&gt;
+&nbsp; *         &lt;td&gt;5&lt;/td&gt;
+&nbsp; *         &lt;td&gt;{@code base64EncodedDigest}&lt;/td&gt;
+&nbsp; *         &lt;td&gt;The Base64-encoded digest byte array.  This is the actual hash result.&lt;/td&gt;
+&nbsp; *         &lt;td&gt;true&lt;/td&gt;
+&nbsp; *     &lt;/tr&gt;
+&nbsp; * &lt;/table&gt;
+&nbsp; *
+&nbsp; * @see ModularCryptFormat
+&nbsp; * @see ParsableHashFormat
+&nbsp; *
+&nbsp; * @since 1.2
+&nbsp; */
+&nbsp;public class Shiro1CryptFormat implements ModularCryptFormat, ParsableHashFormat {
+&nbsp;
+&nbsp;    public static final String ID = &quot;shiro1&quot;;
+&nbsp;    public static final String MCF_PREFIX = TOKEN_DELIMITER + ID + TOKEN_DELIMITER;
+&nbsp;
+<b class="nc">&nbsp;    public Shiro1CryptFormat() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getId() {
+<b class="nc">&nbsp;        return ID;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String format(Hash hash) {
+<b class="nc">&nbsp;        if (hash == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String algorithmName = hash.getAlgorithmName();</b>
+<b class="nc">&nbsp;        ByteSource salt = hash.getSalt();</b>
+<b class="nc">&nbsp;        int iterations = hash.getIterations();</b>
+<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder(MCF_PREFIX).append(algorithmName).append(TOKEN_DELIMITER).append(iterations).append(TOKEN_DELIMITER);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (salt != null) {</b>
+<b class="nc">&nbsp;            sb.append(salt.toBase64());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        sb.append(TOKEN_DELIMITER);</b>
+<b class="nc">&nbsp;        sb.append(hash.toBase64());</b>
+&nbsp;
+<b class="nc">&nbsp;        return sb.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Hash parse(String formatted) {
+<b class="nc">&nbsp;        if (formatted == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!formatted.startsWith(MCF_PREFIX)) {</b>
+&nbsp;            //TODO create a HashFormatException class
+<b class="nc">&nbsp;            String msg = &quot;The argument is not a valid &#39;&quot; + ID + &quot;&#39; formatted hash.&quot;;</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(msg);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String suffix = formatted.substring(MCF_PREFIX.length());</b>
+<b class="nc">&nbsp;        String[] parts = suffix.split(&quot;\\$&quot;);</b>
+&nbsp;
+&nbsp;        //last part is always the digest/checksum, Base64-encoded:
+<b class="nc">&nbsp;        int i = parts.length-1;</b>
+<b class="nc">&nbsp;        String digestBase64 = parts[i--];</b>
+&nbsp;        //second-to-last part is always the salt, Base64-encoded:
+<b class="nc">&nbsp;        String saltBase64 = parts[i--];</b>
+<b class="nc">&nbsp;        String iterationsString = parts[i--];</b>
+<b class="nc">&nbsp;        String algorithmName = parts[i];</b>
+&nbsp;
+<b class="nc">&nbsp;        byte[] digest = Base64.decode(digestBase64);</b>
+<b class="nc">&nbsp;        ByteSource salt = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (StringUtils.hasLength(saltBase64)) {</b>
+<b class="nc">&nbsp;            byte[] saltBytes = Base64.decode(saltBase64);</b>
+<b class="nc">&nbsp;            salt = ByteSource.Util.bytes(saltBytes);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int iterations;
+&nbsp;        try {
+<b class="nc">&nbsp;            iterations = Integer.parseInt(iterationsString);</b>
+<b class="nc">&nbsp;        } catch (NumberFormatException e) {</b>
+<b class="nc">&nbsp;            String msg = &quot;Unable to parse formatted hash string: &quot; + formatted;</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(msg, e);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        SimpleHash hash = new SimpleHash(algorithmName);</b>
+<b class="nc">&nbsp;        hash.setBytes(digest);</b>
+<b class="nc">&nbsp;        if (salt != null) {</b>
+<b class="nc">&nbsp;            hash.setSalt(salt);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        hash.setIterations(iterations);</b>
+&nbsp;
+<b class="nc">&nbsp;        return hash;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:33</div>
+</div>
+</body>
+</html>

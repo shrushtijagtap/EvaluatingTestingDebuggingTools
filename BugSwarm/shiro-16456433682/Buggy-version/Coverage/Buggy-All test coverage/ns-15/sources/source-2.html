@@ -1,0 +1,460 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DefaultHashService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.apache.shiro.crypto.hash</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultHashService (org.apache.shiro.crypto.hash)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultHashService</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/42)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/63)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Licensed to the Apache Software Foundation (ASF) under one
+&nbsp; * or more contributor license agreements.  See the NOTICE file
+&nbsp; * distributed with this work for additional information
+&nbsp; * regarding copyright ownership.  The ASF licenses this file
+&nbsp; * to you under the Apache License, Version 2.0 (the
+&nbsp; * &quot;License&quot;); you may not use this file except in compliance
+&nbsp; * with the License.  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; * http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing,
+&nbsp; * software distributed under the License is distributed on an
+&nbsp; * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&nbsp; * KIND, either express or implied.  See the License for the
+&nbsp; * specific language governing permissions and limitations
+&nbsp; * under the License.
+&nbsp; */
+&nbsp;package org.apache.shiro.crypto.hash;
+&nbsp;
+&nbsp;import org.apache.shiro.crypto.RandomNumberGenerator;
+&nbsp;import org.apache.shiro.crypto.SecureRandomNumberGenerator;
+&nbsp;import org.apache.shiro.util.ByteSource;
+&nbsp;
+&nbsp;/**
+&nbsp; * Default implementation of the {@link HashService} interface, supporting a customizable hash algorithm name,
+&nbsp; * secure-random salt generation, multiple hash iterations and an optional internal
+&nbsp; * {@link #setPrivateSalt(ByteSource) privateSalt}.
+&nbsp; * &lt;h2&gt;Hash Algorithm&lt;/h2&gt;
+&nbsp; * You may specify a hash algorithm via the {@link #setHashAlgorithmName(String)} property.  Any algorithm name
+&nbsp; * understood by the JDK
+&nbsp; * {@link java.security.MessageDigest#getInstance(String) MessageDigest.getInstance(String algorithmName)} method
+&nbsp; * will work.  The default is {@code SHA-512}.
+&nbsp; * &lt;h2&gt;Random Salts&lt;/h2&gt;
+&nbsp; * When a salt is not specified in a request, this implementation generates secure random salts via its
+&nbsp; * {@link #setRandomNumberGenerator(org.apache.shiro.crypto.RandomNumberGenerator) randomNumberGenerator} property.
+&nbsp; * Random salts (and potentially combined with the internal {@link #getPrivateSalt() privateSalt}) is a very strong
+&nbsp; * salting strategy, as salts should ideally never be based on known/guessable data.  The default instance is a
+&nbsp; * {@link SecureRandomNumberGenerator}.
+&nbsp; * &lt;h2&gt;Hash Iterations&lt;/h2&gt;
+&nbsp; * Secure hashing strategies often employ multiple hash iterations to slow down the hashing process.  This technique
+&nbsp; * is usually used for password hashing, since the longer it takes to compute a password hash, the longer it would
+&nbsp; * take for an attacker to compromise a password.  This
+&nbsp; * &lt;a href=&quot;http://www.stormpath.com/blog/strong-password-hashing-apache-shiro&quot;&gt;blog article&lt;/a&gt;
+&nbsp; * explains in greater detail why this is useful, as well as information on how many iterations is &#39;enough&#39;.
+&nbsp; * &lt;p/&gt;
+&nbsp; * You may set the number of hash iterations via the {@link #setHashIterations(int)} property.  The default is
+&nbsp; * {@code 1}, but should be increased significantly if the {@code HashService} is intended to be used for password
+&nbsp; * hashing. See the linked blog article for more info.
+&nbsp; * &lt;h2&gt;Private Salt&lt;/h2&gt;
+&nbsp; * If using this implementation as part of a password hashing strategy, it might be desirable to configure a
+&nbsp; * {@link #setPrivateSalt(ByteSource) private salt}:
+&nbsp; * &lt;p/&gt;
+&nbsp; * A hash and the salt used to compute it are often stored together.  If an attacker is ever able to access
+&nbsp; * the hash (e.g. during password cracking) and it has the full salt value, the attacker has all of the input necessary
+&nbsp; * to try to brute-force crack the hash (source + complete salt).
+&nbsp; * &lt;p/&gt;
+&nbsp; * However, if part of the salt is not available to the attacker (because it is not stored with the hash), it is
+&nbsp; * &lt;em&gt;much&lt;/em&gt; harder to crack the hash value since the attacker does not have the complete inputs necessary.
+&nbsp; * &lt;p/&gt;
+&nbsp; * The {@link #getPrivateSalt() privateSalt} property exists to satisfy this private-and-not-shared part of the salt.
+&nbsp; * If you configure this attribute, you can obtain this additional very important safety feature.
+&nbsp; * &lt;p/&gt;
+&nbsp; * &lt;b&gt;*&lt;/b&gt;By default, the {@link #getPrivateSalt() privateSalt} is null, since a sensible default cannot be used that
+&nbsp; * isn&#39;t easily compromised (because Shiro is an open-source project and any default could be easily seen and used).
+&nbsp; *
+&nbsp; * @since 1.2
+&nbsp; */
+<b class="nc">&nbsp;public class DefaultHashService implements ConfigurableHashService {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The RandomNumberGenerator to use to randomly generate the public part of the hash salt.
+&nbsp;     */
+&nbsp;    private RandomNumberGenerator rng;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The MessageDigest name of the hash algorithm to use for computing hashes.
+&nbsp;     */
+&nbsp;    private String algorithmName;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The &#39;private&#39; part of the hash salt.
+&nbsp;     */
+&nbsp;    private ByteSource privateSalt;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The number of hash iterations to perform when computing hashes.
+&nbsp;     */
+&nbsp;    private int iterations;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Whether or not to generate public salts if a request does not provide one.
+&nbsp;     */
+&nbsp;    private boolean generatePublicSalt;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new {@code DefaultHashService} instance with the following defaults:
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;{@link #setHashAlgorithmName(String) hashAlgorithmName} = {@code SHA-512}&lt;/li&gt;
+&nbsp;     * &lt;li&gt;{@link #setHashIterations(int) hashIterations} = {@code 1}&lt;/li&gt;
+&nbsp;     * &lt;li&gt;{@link #setRandomNumberGenerator(org.apache.shiro.crypto.RandomNumberGenerator) randomNumberGenerator} =
+&nbsp;     * new {@link SecureRandomNumberGenerator}()&lt;/li&gt;
+&nbsp;     * &lt;li&gt;{@link #setGeneratePublicSalt(boolean) generatePublicSalt} = {@code false}&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * If this hashService will be used for password hashing it is recommended to set the
+&nbsp;     * {@link #setPrivateSalt(ByteSource) privateSalt} and significantly increase the number of
+&nbsp;     * {@link #setHashIterations(int) hashIterations}.  See the class-level JavaDoc for more information.
+&nbsp;     */
+<b class="nc">&nbsp;    public DefaultHashService() {</b>
+<b class="nc">&nbsp;        this.algorithmName = &quot;SHA-512&quot;;</b>
+<b class="nc">&nbsp;        this.iterations = 1;</b>
+<b class="nc">&nbsp;        this.generatePublicSalt = false;</b>
+<b class="nc">&nbsp;        this.rng = new SecureRandomNumberGenerator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Computes and responds with a hash based on the specified request.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation functions as follows:
+&nbsp;     * &lt;ul&gt;
+&nbsp;     * &lt;li&gt;If the request&#39;s {@link org.apache.shiro.crypto.hash.HashRequest#getSalt() salt} is null:
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * A salt will be generated and used to compute the hash.  The salt is generated as follows:
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;Use the {@link #getRandomNumberGenerator() randomNumberGenerator} to generate a new random number.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;{@link #combine(ByteSource, ByteSource) combine} this random salt with any configured
+&nbsp;     * {@link #getPrivateSalt() privateSalt}
+&nbsp;     * &lt;/li&gt;
+&nbsp;     * &lt;li&gt;Use the combined value as the salt used during hash computation&lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     * &lt;/li&gt;
+&nbsp;     * &lt;li&gt;
+&nbsp;     * If the request salt is not null:
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This indicates that the hash computation is for comparison purposes (of a
+&nbsp;     * previously computed hash).  The request salt will be {@link #combine(ByteSource, ByteSource) combined} with any
+&nbsp;     * configured {@link #getPrivateSalt() privateSalt} and used as the complete salt during hash computation.
+&nbsp;     * &lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The returned {@code Hash}&#39;s {@link Hash#getSalt() salt} property
+&nbsp;     * will contain &lt;em&gt;only&lt;/em&gt; the &#39;public&#39; part of the salt and &lt;em&gt;NOT&lt;/em&gt; the privateSalt.  See the class-level
+&nbsp;     * JavaDoc explanation for more info.
+&nbsp;     *
+&nbsp;     * @param request the request to process
+&nbsp;     * @return the response containing the result of the hash computation, as well as any hash salt used that should be
+&nbsp;     *         exposed to the caller.
+&nbsp;     */
+&nbsp;    public Hash computeHash(HashRequest request) {
+<b class="nc">&nbsp;        if (request == null || request.getSource() == null || request.getSource().isEmpty()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String algorithmName = getAlgorithmName(request);</b>
+<b class="nc">&nbsp;        ByteSource source = request.getSource();</b>
+<b class="nc">&nbsp;        int iterations = getIterations(request);</b>
+&nbsp;
+<b class="nc">&nbsp;        ByteSource publicSalt = getPublicSalt(request);</b>
+<b class="nc">&nbsp;        ByteSource privateSalt = getPrivateSalt();</b>
+<b class="nc">&nbsp;        ByteSource salt = combine(privateSalt, publicSalt);</b>
+&nbsp;
+<b class="nc">&nbsp;        Hash computed = new SimpleHash(algorithmName, source, salt, iterations);</b>
+&nbsp;
+<b class="nc">&nbsp;        SimpleHash result = new SimpleHash(algorithmName);</b>
+<b class="nc">&nbsp;        result.setBytes(computed.getBytes());</b>
+<b class="nc">&nbsp;        result.setIterations(iterations);</b>
+&nbsp;        //Only expose the public salt - not the real/combined salt that might have been used:
+<b class="nc">&nbsp;        result.setSalt(publicSalt);</b>
+&nbsp;
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected String getAlgorithmName(HashRequest request) {
+<b class="nc">&nbsp;        String name = request.getAlgorithmName();</b>
+<b class="nc">&nbsp;        if (name == null) {</b>
+<b class="nc">&nbsp;            name = getHashAlgorithmName();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected int getIterations(HashRequest request) {
+<b class="nc">&nbsp;        int iterations = Math.max(0, request.getIterations());</b>
+<b class="nc">&nbsp;        if (iterations &lt; 1) {</b>
+<b class="nc">&nbsp;            iterations = Math.max(1, getHashIterations());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return iterations;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the public salt that should be used to compute a hash based on the specified request or
+&nbsp;     * {@code null} if no public salt should be used.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * This implementation functions as follows:
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;If the request salt is not null and non-empty, this will be used, return it.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;If the request salt is null or empty:
+&nbsp;     * &lt;ol&gt;
+&nbsp;     * &lt;li&gt;If a private salt has been set &lt;em&gt;OR&lt;/em&gt; {@link #isGeneratePublicSalt()} is {@code true},
+&nbsp;     * auto generate a random public salt via the configured
+&nbsp;     * {@link #getRandomNumberGenerator() randomNumberGenerator}.&lt;/li&gt;
+&nbsp;     * &lt;li&gt;If a private salt has not been configured and {@link #isGeneratePublicSalt()} is {@code false},
+&nbsp;     * do nothing - return {@code null} to indicate a salt should not be used during hash computation.&lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     * &lt;/li&gt;
+&nbsp;     * &lt;/ol&gt;
+&nbsp;     *
+&nbsp;     * @param request request the request to process
+&nbsp;     * @return the public salt that should be used to compute a hash based on the specified request or
+&nbsp;     *         {@code null} if no public salt should be used.
+&nbsp;     */
+&nbsp;    protected ByteSource getPublicSalt(HashRequest request) {
+&nbsp;
+<b class="nc">&nbsp;        ByteSource publicSalt = request.getSalt();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (publicSalt != null &amp;&amp; !publicSalt.isEmpty()) {</b>
+&nbsp;            //a public salt was explicitly requested to be used - go ahead and use it:
+<b class="nc">&nbsp;            return publicSalt;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        publicSalt = null;</b>
+&nbsp;
+&nbsp;        //check to see if we need to generate one:
+<b class="nc">&nbsp;        ByteSource privateSalt = getPrivateSalt();</b>
+<b class="nc">&nbsp;        boolean privateSaltExists = privateSalt != null &amp;&amp; !privateSalt.isEmpty();</b>
+&nbsp;
+&nbsp;        //If a private salt exists, we must generate a public salt to protect the integrity of the private salt.
+&nbsp;        //Or generate it if the instance is explicitly configured to do so:
+<b class="nc">&nbsp;        if (privateSaltExists || isGeneratePublicSalt()) {</b>
+<b class="nc">&nbsp;            publicSalt = getRandomNumberGenerator().nextBytes();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return publicSalt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Combines the specified &#39;private&#39; salt bytes with the specified additional extra bytes to use as the
+&nbsp;     * total salt during hash computation.  {@code privateSaltBytes} will be {@code null} }if no private salt has been
+&nbsp;     * configured.
+&nbsp;     *
+&nbsp;     * @param privateSalt the (possibly {@code null}) &#39;private&#39; salt to combine with the specified extra bytes
+&nbsp;     * @param publicSalt  the extra bytes to use in addition to the given private salt.
+&nbsp;     * @return a combination of the specified private salt bytes and extra bytes that will be used as the total
+&nbsp;     *         salt during hash computation.
+&nbsp;     */
+&nbsp;    protected ByteSource combine(ByteSource privateSalt, ByteSource publicSalt) {
+&nbsp;
+<b class="nc">&nbsp;        byte[] privateSaltBytes = privateSalt != null ? privateSalt.getBytes() : null;</b>
+<b class="nc">&nbsp;        int privateSaltLength = privateSaltBytes != null ? privateSaltBytes.length : 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        byte[] publicSaltBytes = publicSalt != null ? publicSalt.getBytes() : null;</b>
+<b class="nc">&nbsp;        int extraBytesLength = publicSaltBytes != null ? publicSaltBytes.length : 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int length = privateSaltLength + extraBytesLength;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (length &lt;= 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        byte[] combined = new byte[length];</b>
+&nbsp;
+<b class="nc">&nbsp;        int i = 0;</b>
+<b class="nc">&nbsp;        for (int j = 0; j &lt; privateSaltLength; j++) {</b>
+<b class="nc">&nbsp;            assert privateSaltBytes != null;</b>
+<b class="nc">&nbsp;            combined[i++] = privateSaltBytes[j];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        for (int j = 0; j &lt; extraBytesLength; j++) {</b>
+<b class="nc">&nbsp;            assert publicSaltBytes != null;</b>
+<b class="nc">&nbsp;            combined[i++] = publicSaltBytes[j];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return ByteSource.Util.bytes(combined);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setHashAlgorithmName(String name) {
+<b class="nc">&nbsp;        this.algorithmName = name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getHashAlgorithmName() {
+<b class="nc">&nbsp;        return this.algorithmName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPrivateSalt(ByteSource privateSalt) {
+<b class="nc">&nbsp;        this.privateSalt = privateSalt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteSource getPrivateSalt() {
+<b class="nc">&nbsp;        return this.privateSalt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setHashIterations(int count) {
+<b class="nc">&nbsp;        this.iterations = count;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getHashIterations() {
+<b class="nc">&nbsp;        return this.iterations;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setRandomNumberGenerator(RandomNumberGenerator rng) {
+<b class="nc">&nbsp;        this.rng = rng;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public RandomNumberGenerator getRandomNumberGenerator() {
+<b class="nc">&nbsp;        return this.rng;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns {@code true} if a public salt should be randomly generated and used to compute a hash if a
+&nbsp;     * {@link HashRequest} does not specify a salt, {@code false} otherwise.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The default value is {@code false} but should definitely be set to {@code true} if the
+&nbsp;     * {@code HashService} instance is being used for password hashing.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;NOTE:&lt;/b&gt; this property only has an effect if a {@link #getPrivateSalt() privateSalt} is NOT configured.  If a
+&nbsp;     * private salt has been configured and a request does not provide a salt, a random salt will always be generated
+&nbsp;     * to protect the integrity of the private salt (without a public salt, the private salt would be exposed as-is,
+&nbsp;     * which is undesirable).
+&nbsp;     *
+&nbsp;     * @return {@code true} if a public salt should be randomly generated and used to compute a hash if a
+&nbsp;     *         {@link HashRequest} does not specify a salt, {@code false} otherwise.
+&nbsp;     */
+&nbsp;    public boolean isGeneratePublicSalt() {
+<b class="nc">&nbsp;        return generatePublicSalt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets whether or not a public salt should be randomly generated and used to compute a hash if a
+&nbsp;     * {@link HashRequest} does not specify a salt.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * The default value is {@code false} but should definitely be set to {@code true} if the
+&nbsp;     * {@code HashService} instance is being used for password hashing.
+&nbsp;     * &lt;p/&gt;
+&nbsp;     * &lt;b&gt;NOTE:&lt;/b&gt; this property only has an effect if a {@link #getPrivateSalt() privateSalt} is NOT configured.  If a
+&nbsp;     * private salt has been configured and a request does not provide a salt, a random salt will always be generated
+&nbsp;     * to protect the integrity of the private salt (without a public salt, the private salt would be exposed as-is,
+&nbsp;     * which is undesirable).
+&nbsp;     *
+&nbsp;     * @param generatePublicSalt whether or not a public salt should be randomly generated and used to compute a hash
+&nbsp;     *                           if a {@link HashRequest} does not specify a salt.
+&nbsp;     */
+&nbsp;    public void setGeneratePublicSalt(boolean generatePublicSalt) {
+<b class="nc">&nbsp;        this.generatePublicSalt = generatePublicSalt;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:31</div>
+</div>
+</body>
+</html>
