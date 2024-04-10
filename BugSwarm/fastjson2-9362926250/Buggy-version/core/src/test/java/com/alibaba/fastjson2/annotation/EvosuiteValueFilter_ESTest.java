@@ -3,7 +3,7 @@
  * Mon Apr 08 14:31:39 GMT 2024
  */
 
-package com.alibaba.fastjson2.filter;
+package com.alibaba.fastjson2.annotation;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -21,7 +21,7 @@ import org.evosuite.runtime.EvoRunner;
 import org.evosuite.runtime.EvoRunnerParameters;
 import org.junit.runner.RunWith;
 
-@RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true, useJEE = true) 
+@RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true, useJEE = true)
 public class EvosuiteValueFilter_ESTest extends EvosuiteValueFilter_ESTest_scaffolding {
 
   @Test(timeout = 4000)
@@ -46,10 +46,10 @@ public class EvosuiteValueFilter_ESTest extends EvosuiteValueFilter_ESTest_scaff
       ValueFilter valueFilter0 = ValueFilter.of("PS5loa.YRI;QW#)K-1q", (Function) toBigInteger0);
       Object object0 = new Object();
       // Undeclared exception!
-      try { 
+      try {
         valueFilter0.apply(object0, "PS5loa.YRI;QW#)K-1q", object0);
         fail("Expecting exception: RuntimeException");
-      
+
       } catch(RuntimeException e) {
          //
          // can not cast to BigInteger class java.lang.Object
@@ -66,10 +66,10 @@ public class EvosuiteValueFilter_ESTest extends EvosuiteValueFilter_ESTest_scaff
       Object object1 = valueFilter0.apply((Object) null, (String) null, hashMap0);
       hashMap0.put(object0, object1);
       // Undeclared exception!
-      try { 
+      try {
         valueFilter0.apply(object1, (String) null, object1);
         fail("Expecting exception: StackOverflowError");
-      
+
       } catch(StackOverflowError e) {
          //
          // no message in exception (getMessage() returned null)
@@ -82,10 +82,10 @@ public class EvosuiteValueFilter_ESTest extends EvosuiteValueFilter_ESTest_scaff
       ToBigDecimal toBigDecimal0 = new ToBigDecimal();
       ValueFilter valueFilter0 = ValueFilter.of("", (Function) toBigDecimal0);
       // Undeclared exception!
-      try { 
+      try {
         valueFilter0.apply("", "", "");
         fail("Expecting exception: NumberFormatException");
-      
+
       } catch(NumberFormatException e) {
          //
          // no message in exception (getMessage() returned null)
@@ -98,10 +98,10 @@ public class EvosuiteValueFilter_ESTest extends EvosuiteValueFilter_ESTest_scaff
   public void test5()  throws Throwable  {
       ValueFilter valueFilter0 = ValueFilter.compose((ValueFilter) null, (ValueFilter) null);
       // Undeclared exception!
-      try { 
+      try {
         valueFilter0.apply((Object) null, "F", valueFilter0);
         fail("Expecting exception: NullPointerException");
-      
+
       } catch(NullPointerException e) {
          //
          // no message in exception (getMessage() returned null)
@@ -118,10 +118,10 @@ public class EvosuiteValueFilter_ESTest extends EvosuiteValueFilter_ESTest_scaff
       ValueFilter valueFilter1 = ValueFilter.of("", (Function) stringToAny0);
       Object object0 = new Object();
       // Undeclared exception!
-      try { 
+      try {
         valueFilter1.apply(object0, "", valueFilter0);
         fail("Expecting exception: ClassCastException");
-      
+
       } catch(ClassCastException e) {
          //
          // com.alibaba.fastjson2.filter.ValueFilter$$Lambda$63/640153847 cannot be cast to java.lang.String
