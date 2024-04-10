@@ -1,0 +1,144 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MethodCollector</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.internal.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: MethodCollector (com.alibaba.fastjson2.internal.asm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MethodCollector</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.internal.asm;
+&nbsp;
+&nbsp;/**
+&nbsp; * Created by wenshao on 05/08/2017.
+&nbsp; */
+&nbsp;public class MethodCollector {
+&nbsp;    private final int paramCount;
+&nbsp;
+&nbsp;    private final int ignoreCount;
+&nbsp;
+&nbsp;    private int currentParameter;
+&nbsp;
+&nbsp;    private final StringBuilder result;
+&nbsp;
+&nbsp;    protected boolean debugInfoPresent;
+&nbsp;
+<b class="nc">&nbsp;    protected MethodCollector(int ignoreCount, int paramCount) {</b>
+<b class="nc">&nbsp;        this.ignoreCount = ignoreCount;</b>
+<b class="nc">&nbsp;        this.paramCount = paramCount;</b>
+<b class="nc">&nbsp;        this.result = new StringBuilder();</b>
+<b class="nc">&nbsp;        this.currentParameter = 0;</b>
+&nbsp;        // if there are 0 parameters, there is no need for debug info
+<b class="nc">&nbsp;        this.debugInfoPresent = paramCount == 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void visitLocalVariable(String name, int index) {
+<b class="nc">&nbsp;        if (index &gt;= ignoreCount &amp;&amp; index &lt; ignoreCount + paramCount) {</b>
+<b class="nc">&nbsp;            if (!name.equals(&quot;arg&quot; + currentParameter)) {</b>
+<b class="nc">&nbsp;                debugInfoPresent = true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            result.append(&#39;,&#39;);</b>
+<b class="nc">&nbsp;            result.append(name);</b>
+<b class="nc">&nbsp;            currentParameter++;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected String getResult() {
+<b class="nc">&nbsp;        return result.length() != 0 ? result.substring(1) : &quot;&quot;;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 19:56</div>
+</div>
+</body>
+</html>

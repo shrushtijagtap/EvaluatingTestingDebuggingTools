@@ -1,0 +1,295 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FastJsonJsonView</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.support.spring</a>
+</div>
+
+<h1>Coverage Summary for Class: FastJsonJsonView (com.alibaba.fastjson.support.spring)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FastJsonJsonView</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/41)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson.support.spring;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.JSON;
+&nbsp;import com.alibaba.fastjson.support.config.FastJsonConfig;
+&nbsp;import org.springframework.http.MediaType;
+&nbsp;import org.springframework.util.CollectionUtils;
+&nbsp;import org.springframework.validation.BindingResult;
+&nbsp;import org.springframework.web.servlet.view.AbstractView;
+&nbsp;
+&nbsp;import javax.servlet.ServletOutputStream;
+&nbsp;import javax.servlet.http.HttpServletRequest;
+&nbsp;import javax.servlet.http.HttpServletResponse;
+&nbsp;
+&nbsp;import java.io.ByteArrayOutputStream;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;/**
+&nbsp; * Fastjson for Spring MVC View.
+&nbsp; * &lt;p&gt;
+&nbsp; * Compatible fastjson 1.2.x
+&nbsp; *
+&nbsp; * @author libinsong
+&nbsp; * @author VictorZeng
+&nbsp; * @see AbstractView
+&nbsp; * @since 2.0.2
+&nbsp; */
+&nbsp;
+&nbsp;public class FastJsonJsonView
+&nbsp;        extends AbstractView {
+&nbsp;    /**
+&nbsp;     * renderedAttributes
+&nbsp;     */
+&nbsp;    private Set&lt;String&gt; renderedAttributes;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * disableCaching
+&nbsp;     */
+<b class="nc">&nbsp;    private boolean disableCaching = true;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * extractValueFromSingleKeyModel
+&nbsp;     */
+&nbsp;    private boolean extractValueFromSingleKeyModel;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * with fastJson config
+&nbsp;     */
+<b class="nc">&nbsp;    private FastJsonConfig fastJsonConfig = new FastJsonConfig();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set default param.
+&nbsp;     */
+<b class="nc">&nbsp;    public FastJsonJsonView() {</b>
+<b class="nc">&nbsp;        setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);</b>
+<b class="nc">&nbsp;        setExposePathVariables(false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return the fastJsonConfig.
+&nbsp;     */
+&nbsp;    public FastJsonConfig getFastJsonConfig() {
+<b class="nc">&nbsp;        return fastJsonConfig;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param fastJsonConfig the fastJsonConfig to set.
+&nbsp;     */
+&nbsp;    public void setFastJsonConfig(FastJsonConfig fastJsonConfig) {
+<b class="nc">&nbsp;        this.fastJsonConfig = fastJsonConfig;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set renderedAttributes.
+&nbsp;     *
+&nbsp;     * @param renderedAttributes renderedAttributes
+&nbsp;     */
+&nbsp;    public void setRenderedAttributes(Set&lt;String&gt; renderedAttributes) {
+<b class="nc">&nbsp;        this.renderedAttributes = renderedAttributes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check extractValueFromSingleKeyModel.
+&nbsp;     *
+&nbsp;     * @return extractValueFromSingleKeyModel
+&nbsp;     */
+&nbsp;    public boolean isExtractValueFromSingleKeyModel() {
+<b class="nc">&nbsp;        return extractValueFromSingleKeyModel;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set extractValueFromSingleKeyModel.
+&nbsp;     */
+&nbsp;    public void setExtractValueFromSingleKeyModel(boolean extractValueFromSingleKeyModel) {
+<b class="nc">&nbsp;        this.extractValueFromSingleKeyModel = extractValueFromSingleKeyModel;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void renderMergedOutputModel(Map&lt;String, Object&gt; model, //
+&nbsp;                                           HttpServletRequest request, //
+&nbsp;                                           HttpServletResponse response) throws Exception {
+<b class="nc">&nbsp;        Object value = filterModel(model);</b>
+&nbsp;
+<b class="nc">&nbsp;        ByteArrayOutputStream outnew = new ByteArrayOutputStream();</b>
+&nbsp;
+<b class="nc">&nbsp;        int len = JSON.writeJSONString(outnew, value, fastJsonConfig.getSerializeFilters(), fastJsonConfig.getSerializerFeatures());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (fastJsonConfig.isWriteContentLength()) {</b>
+&nbsp;            // Write content length (determined via byte array).
+<b class="nc">&nbsp;            response.setContentLength(len);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Flush byte array to servlet output stream.
+<b class="nc">&nbsp;        ServletOutputStream out = response.getOutputStream();</b>
+<b class="nc">&nbsp;        outnew.writeTo(out);</b>
+<b class="nc">&nbsp;        outnew.close();</b>
+<b class="nc">&nbsp;        out.flush();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void prepareResponse(HttpServletRequest request, //
+&nbsp;                                   HttpServletResponse response) {
+<b class="nc">&nbsp;        setResponseContentType(request, response);</b>
+<b class="nc">&nbsp;        response.setCharacterEncoding(fastJsonConfig.getCharset().name());</b>
+<b class="nc">&nbsp;        if (this.disableCaching) {</b>
+<b class="nc">&nbsp;            response.addHeader(&quot;Pragma&quot;, &quot;no-cache&quot;);</b>
+<b class="nc">&nbsp;            response.addHeader(&quot;Cache-Control&quot;, &quot;no-cache, no-store, max-age=0&quot;);</b>
+<b class="nc">&nbsp;            response.addDateHeader(&quot;Expires&quot;, 1L);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Disables caching of the generated JSON.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Default is {@code true}, which will prevent the client from caching the
+&nbsp;     * generated JSON.
+&nbsp;     */
+&nbsp;    public void setDisableCaching(boolean disableCaching) {
+<b class="nc">&nbsp;        this.disableCaching = disableCaching;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Whether to update the &#39;Content-Length&#39; header of the response. When set
+&nbsp;     * to {@code true}, the response is buffered in order to determine the
+&nbsp;     * content length and set the &#39;Content-Length&#39; header of the response.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The default setting is {@code false}.
+&nbsp;     */
+&nbsp;    public void setUpdateContentLength(boolean updateContentLength) {
+<b class="nc">&nbsp;        this.fastJsonConfig.setWriteContentLength(updateContentLength);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Filters out undesired attributes from the given model. The return value
+&nbsp;     * can be either another {@link Map}, or a single value object.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Default implementation removes {@link BindingResult} instances and
+&nbsp;     * entries not included in the {@link #setRenderedAttributes(Set)
+&nbsp;     * renderedAttributes} property.
+&nbsp;     *
+&nbsp;     * @param model the model, as passed on to {@link #renderMergedOutputModel}
+&nbsp;     * @return the object to be rendered
+&nbsp;     */
+&nbsp;    protected Object filterModel(Map&lt;String, Object&gt; model) {
+<b class="nc">&nbsp;        Map&lt;String, Object&gt; result = new HashMap&lt;String, Object&gt;(model.size());</b>
+<b class="nc">&nbsp;        Set&lt;String&gt; renderedAttributes = !CollectionUtils.isEmpty(this.renderedAttributes) ? //</b>
+&nbsp;                this.renderedAttributes //
+<b class="nc">&nbsp;                : model.keySet();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (Map.Entry&lt;String, Object&gt; entry : model.entrySet()) {</b>
+<b class="nc">&nbsp;            if (!(entry.getValue() instanceof BindingResult)</b>
+<b class="nc">&nbsp;                    &amp;&amp; renderedAttributes.contains(entry.getKey())) {</b>
+<b class="nc">&nbsp;                result.put(entry.getKey(), entry.getValue());</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        if (extractValueFromSingleKeyModel) {</b>
+<b class="nc">&nbsp;            if (result.size() == 1) {</b>
+<b class="nc">&nbsp;                for (Map.Entry&lt;String, Object&gt; entry : result.entrySet()) {</b>
+<b class="nc">&nbsp;                    return entry.getValue();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void setResponseContentType(HttpServletRequest request, HttpServletResponse response) {
+<b class="nc">&nbsp;        super.setResponseContentType(request, response);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:54</div>
+</div>
+</body>
+</html>

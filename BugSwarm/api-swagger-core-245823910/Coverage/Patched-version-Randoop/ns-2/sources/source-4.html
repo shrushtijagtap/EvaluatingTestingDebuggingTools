@@ -1,0 +1,111 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ModelConverterContext</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.converter</a>
+</div>
+
+<h1>Coverage Summary for Class: ModelConverterContext (io.swagger.converter)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ModelConverterContext</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package io.swagger.converter;
+&nbsp;
+&nbsp;import io.swagger.oas.models.media.Schema;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Iterator;
+&nbsp;
+&nbsp;public interface ModelConverterContext {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * needs to be called whenever a Model is defined which can be referenced from another
+&nbsp;     * Model or Property
+&nbsp;     *
+&nbsp;     * @param name  the name of the model
+&nbsp;     * @param model the Model
+&nbsp;     */
+&nbsp;    public void defineModel(String name, Schema model);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * needs to be called whenever a Schema is defined which can be referenced from another
+&nbsp;     * Model or Property
+&nbsp;     *
+&nbsp;     * @param name     the name of the model
+&nbsp;     * @param model    the Model
+&nbsp;     * @param type     the Type
+&nbsp;     * @param prevName the (optional) previous name
+&nbsp;     */
+&nbsp;    public void defineModel(String name, Schema model, Type type, String prevName);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param type The Schema
+&nbsp;     * @return a Model representation of the Class. Any referenced models will be defined already.
+&nbsp;     */
+&nbsp;    public Schema resolve(Type type);
+&nbsp;
+&nbsp;    public Schema resolve(Type type, Annotation[] annotations);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return an Iterator of ModelConverters.  This iterator is not reused
+&nbsp;     */
+&nbsp;    public Iterator&lt;ModelConverter&gt; getConverters();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:28</div>
+</div>
+</body>
+</html>

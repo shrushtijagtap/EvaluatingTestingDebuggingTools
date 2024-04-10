@@ -1,0 +1,256 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JAXBAnnotationsHelper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.jackson</a>
+</div>
+
+<h1>Coverage Summary for Class: JAXBAnnotationsHelper (io.swagger.jackson)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JAXBAnnotationsHelper</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package io.swagger.jackson;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.introspect.AnnotatedMember;
+&nbsp;import io.swagger.oas.models.media.Schema;
+&nbsp;import org.apache.commons.lang3.StringUtils;
+&nbsp;
+&nbsp;import javax.xml.bind.annotation.XmlAttribute;
+&nbsp;import javax.xml.bind.annotation.XmlElement;
+&nbsp;import javax.xml.bind.annotation.XmlElementWrapper;
+&nbsp;
+&nbsp;/**
+&nbsp; * The &lt;code&gt;JAXBAnnotationsHelper&lt;/code&gt; class defines helper methods for
+&nbsp; * applying JAXB annotations to property definitions.
+&nbsp; */
+&nbsp;class JAXBAnnotationsHelper {
+&nbsp;    private static final String JAXB_DEFAULT = &quot;##default&quot;;
+&nbsp;
+&nbsp;    private JAXBAnnotationsHelper() {
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Applies annotations to property&#39;s {@link Xml} definition.
+&nbsp;     *
+&nbsp;     * @param member   annotations provider
+&nbsp;     * @param property property instance to be updated
+&nbsp;     */
+&nbsp;    public static void apply(AnnotatedMember member, Schema property) {
+<b class="nc">&nbsp;        if (member.hasAnnotation(XmlElementWrapper.class) || member.hasAnnotation(XmlElement.class)) {</b>
+<b class="nc">&nbsp;            applyElement(member, property);</b>
+<b class="nc">&nbsp;        } else if (member.hasAnnotation(XmlAttribute.class) &amp;&amp; isAttributeAllowed(property)) {</b>
+<b class="nc">&nbsp;            applyAttribute(member, property);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Puts definitions for XML element.
+&nbsp;     *
+&nbsp;     * @param member   annotations provider
+&nbsp;     * @param property property instance to be updated
+&nbsp;     */
+&nbsp;    private static void applyElement(AnnotatedMember member, Schema property) {
+<b class="nc">&nbsp;        final XmlElementWrapper wrapper = member.getAnnotation(XmlElementWrapper.class);</b>
+<b class="nc">&nbsp;        if (wrapper != null) {</b>
+&nbsp;            // TODO
+&nbsp;            /*
+&nbsp;            final Xml xml = getXml(property);
+&nbsp;            xml.setWrapped(true);
+&nbsp;            // No need to set the xml name if the name provided by xmlelementwrapper annotation is ##default or equal to the property name | https://github.com/swagger-api/swagger-core/pull/2050
+&nbsp;            if (!&quot;##default&quot;.equals(wrapper.name()) &amp;&amp; !wrapper.name().isEmpty() &amp;&amp; !wrapper.name().equals(property.getName())) {
+&nbsp;                xml.setName(wrapper.name());
+&nbsp;            }
+&nbsp;            */
+&nbsp;        }
+&nbsp;        else {
+<b class="nc">&nbsp;            final XmlElement element = member.getAnnotation(XmlElement.class);</b>
+<b class="nc">&nbsp;            if (element != null) {</b>
+<b class="nc">&nbsp;                setName(element.namespace(), element.name(), property);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Puts definitions for XML attribute.
+&nbsp;     *
+&nbsp;     * @param member   annotations provider
+&nbsp;     * @param property property instance to be updated
+&nbsp;     */
+&nbsp;    private static void applyAttribute(AnnotatedMember member, Schema property) {
+<b class="nc">&nbsp;        final XmlAttribute attribute = member.getAnnotation(XmlAttribute.class);</b>
+&nbsp;        if (attribute != null) {
+&nbsp;            // TODO
+&nbsp;            /*
+&nbsp;            final Xml xml = getXml(property);
+&nbsp;            xml.setAttribute(true);
+&nbsp;            setName(attribute.namespace(), attribute.name(), property);
+&nbsp;            */
+&nbsp;        }
+&nbsp;    }
+&nbsp;/*
+&nbsp;    private static Xml getXml(Property property) {
+&nbsp;        final Xml existing = property.getXml();
+&nbsp;        if (existing != null) {
+&nbsp;            return existing;
+&nbsp;        }
+&nbsp;        final Xml created = new Xml();
+&nbsp;        property.setXml(created);
+&nbsp;        return created;
+&nbsp;    }
+&nbsp;*/
+&nbsp;    /**
+&nbsp;     * Puts name space and name for XML node or attribute.
+&nbsp;     *
+&nbsp;     * @param ns       name space
+&nbsp;     * @param name     name
+&nbsp;     * @param property property instance to be updated
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt; if name space and name have been set
+&nbsp;     */
+&nbsp;    private static boolean setName(String ns, String name, Schema property) {
+<b class="nc">&nbsp;        boolean apply = false;</b>
+<b class="nc">&nbsp;        final String cleanName = StringUtils.trimToNull(name);</b>
+&nbsp;        final String useName;
+&nbsp;        // TODO
+&nbsp;        /*
+&nbsp;        if (!isEmpty(cleanName) &amp;&amp; !cleanName.equals(property.getName())) {
+&nbsp;            useName = cleanName;
+&nbsp;            apply = true;
+&nbsp;        } else {
+&nbsp;            useName = null;
+&nbsp;        }
+&nbsp;        */
+<b class="nc">&nbsp;        final String cleanNS = StringUtils.trimToNull(ns);</b>
+&nbsp;        final String useNS;
+<b class="nc">&nbsp;        if (!isEmpty(cleanNS)) {</b>
+<b class="nc">&nbsp;            useNS = cleanNS;</b>
+<b class="nc">&nbsp;            apply = true;</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            useNS = null;</b>
+&nbsp;        }
+&nbsp;        // Set everything or nothing
+&nbsp;        // TODO
+&nbsp;        /*
+&nbsp;        if (apply) {
+&nbsp;            getXml(property).name(useName).namespace(useNS);
+&nbsp;        }
+&nbsp;        */
+<b class="nc">&nbsp;        return apply;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks whether the passed property can be represented as node attribute.
+&nbsp;     *
+&nbsp;     * @param property property instance to be checked
+&nbsp;     * @return &lt;code&gt;true&lt;/code&gt; if the passed property can be represented as
+&nbsp;     * node attribute
+&nbsp;     */
+&nbsp;    private static boolean isAttributeAllowed(Schema property) {
+&nbsp;        // TODO
+&nbsp;        /*
+&nbsp;        for (Class&lt;?&gt; item : new Class&lt;?&gt;[]{ArrayProperty.class, MapProperty.class, ObjectProperty.class,
+&nbsp;                RefProperty.class}) {
+&nbsp;            if (item.isInstance(property)) {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;        }
+&nbsp;        */
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean isEmpty(String name) {
+<b class="nc">&nbsp;        return StringUtils.isEmpty(name) || JAXB_DEFAULT.equals(name);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:23</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,271 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PrimeFinder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.internal.trove.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: PrimeFinder (com.alibaba.fastjson2.internal.trove.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PrimeFinder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//   Copyright (c) 1999 CERN - European Organization for Nuclear Research.
+&nbsp;
+&nbsp;//   Permission to use, copy, modify, distribute and sell this software
+&nbsp;//   and its documentation for any purpose is hereby granted without fee,
+&nbsp;//   provided that the above copyright notice appear in all copies and
+&nbsp;//   that both that copyright notice and this permission notice appear in
+&nbsp;//   supporting documentation. CERN makes no representations about the
+&nbsp;//   suitability of this software for any purpose. It is provided &quot;as is&quot;
+&nbsp;//   without expressed or implied warranty.
+&nbsp;package com.alibaba.fastjson2.internal.trove.impl;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;/*
+&nbsp; * Modified for Trove to use the java.util.Arrays sort/search
+&nbsp; * algorithms instead of those provided with colt.
+&nbsp; */
+&nbsp;
+&nbsp;/**
+&nbsp; * Used to keep hash table capacities prime numbers.
+&nbsp; * Not of interest for users; only for implementors of hashtables.
+&nbsp; *
+&nbsp; * &lt;p&gt;Choosing prime numbers as hash table capacities is a good idea
+&nbsp; * to keep them working fast, particularly under hash table
+&nbsp; * expansions.
+&nbsp; *
+&nbsp; * &lt;p&gt;However, JDK 1.2, JGL 3.1 and many other toolkits do nothing to
+&nbsp; * keep capacities prime.  This class provides efficient means to
+&nbsp; * choose prime capacities.
+&nbsp; *
+&nbsp; * &lt;p&gt;Choosing a prime is &lt;tt&gt;O(log 300)&lt;/tt&gt; (binary search in a list
+&nbsp; * of 300 ints).  Memory requirements: 1 KB static memory.
+&nbsp; *
+&nbsp; * @author wolfgang.hoschek@cern.ch
+&nbsp; * @version 1.0, 09/24/99
+&nbsp; */
+<b class="nc">&nbsp;public final class PrimeFinder {</b>
+&nbsp;    /**
+&nbsp;     * The largest prime this class can generate; currently equal to
+&nbsp;     * &lt;tt&gt;2,004,663,929&lt;/tt&gt;.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * While Integer.MAX_VALUE is in fact the largest representable
+&nbsp;     * prime in the integer space, consumers of this class are
+&nbsp;     * intended to create arrays of size returned from
+&nbsp;     * {@link #nextPrime}. Since the VM needs to reserve a few bytes
+&nbsp;     * for internal overhead, new int[Integer.MAX_VALUE] fails with
+&nbsp;     * an &quot;exceeds VM limits&quot; exception. So, we pick the second-largest
+&nbsp;     * prime as the practical largest.
+&nbsp;     */
+&nbsp;    public static final int largestPrime;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The prime number list consists of 11 chunks.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Each chunk contains prime numbers.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * A chunk starts with a prime P1. The next element is a prime
+&nbsp;     * P2. P2 is the smallest prime for which holds: P2 &gt;= 2*P1.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The next element is P3, for which the same holds with respect
+&nbsp;     * to P2, and so on.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Chunks are chosen such that for any desired capacity &gt;= 1000
+&nbsp;     * the list includes a prime number &lt;= desired capacity * 1.11.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Therefore, primes can be retrieved which are quite close to any
+&nbsp;     * desired capacity, which in turn avoids wasting memory.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For example, the list includes
+&nbsp;     * 1039,1117,1201,1277,1361,1439,1523,1597,1759,1907,2081.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * So if you need a prime &gt;= 1040, you will find a prime &lt;=
+&nbsp;     * 1040*1.11=1154.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Chunks are chosen such that they are optimized for a hashtable
+&nbsp;     * growthfactor of 2.0;
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If your hashtable has such a growthfactor then, after initially
+&nbsp;     * &quot;rounding to a prime&quot; upon hashtable construction, it will
+&nbsp;     * later expand to prime capacities such that there exist no
+&nbsp;     * better primes.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * In total these are about 32*10=320 numbers -&gt; 1 KB of static
+&nbsp;     * memory needed.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If you are stingy, then delete every second or fourth chunk.
+&nbsp;     */
+&nbsp;
+<b class="nc">&nbsp;    private static final int[] primeCapacities = {</b>
+&nbsp;            //chunk #1
+&nbsp;            5, 11, 23, 47, 97, 197, 397, 797, 1597, 3203, 6421, 12853, 25717, 51437, 102877, 205759,
+&nbsp;            411527, 823117, 1646237, 3292489, 6584983, 13169977, 26339969, 52679969, 105359939,
+&nbsp;            210719881, 421439783, 842879579, 1685759167,
+&nbsp;
+&nbsp;            //chunk #2
+&nbsp;            433, 877, 1759, 3527, 7057, 14143, 28289, 56591, 113189, 226379, 452759, 905551, 1811107,
+&nbsp;            3622219, 7244441, 14488931, 28977863, 57955739, 115911563, 231823147, 463646329, 927292699,
+&nbsp;            1854585413,
+&nbsp;
+&nbsp;            //chunk #3
+&nbsp;            953, 1907, 3821, 7643, 15287, 30577, 61169, 122347, 244703, 489407, 978821, 1957651, 3915341,
+&nbsp;            7830701, 15661423, 31322867, 62645741, 125291483, 250582987, 501165979, 1002331963,
+&nbsp;            2004663929,
+&nbsp;
+&nbsp;            //chunk #4
+&nbsp;            1039, 2081, 4177, 8363, 16729, 33461, 66923, 133853, 267713, 535481, 1070981, 2141977, 4283963,
+&nbsp;            8567929, 17135863, 34271747, 68543509, 137087021, 274174111, 548348231, 1096696463,
+&nbsp;
+&nbsp;            //chunk #5
+&nbsp;            31, 67, 137, 277, 557, 1117, 2237, 4481, 8963, 17929, 35863, 71741, 143483, 286973, 573953,
+&nbsp;            1147921, 2295859, 4591721, 9183457, 18366923, 36733847, 73467739, 146935499, 293871013,
+&nbsp;            587742049, 1175484103,
+&nbsp;
+&nbsp;            //chunk #6
+&nbsp;            599, 1201, 2411, 4831, 9677, 19373, 38747, 77509, 155027, 310081, 620171, 1240361, 2480729,
+&nbsp;            4961459, 9922933, 19845871, 39691759, 79383533, 158767069, 317534141, 635068283, 1270136683,
+&nbsp;
+&nbsp;            //chunk #7
+&nbsp;            311, 631, 1277, 2557, 5119, 10243, 20507, 41017, 82037, 164089, 328213, 656429, 1312867,
+&nbsp;            2625761, 5251529, 10503061, 21006137, 42012281, 84024581, 168049163, 336098327, 672196673,
+&nbsp;            1344393353,
+&nbsp;
+&nbsp;            //chunk #8
+&nbsp;            3, 7, 17, 37, 79, 163, 331, 673, 1361, 2729, 5471, 10949, 21911, 43853, 87719, 175447, 350899,
+&nbsp;            701819, 1403641, 2807303, 5614657, 11229331, 22458671, 44917381, 89834777, 179669557,
+&nbsp;            359339171, 718678369, 1437356741,
+&nbsp;
+&nbsp;            //chunk #9
+&nbsp;            43, 89, 179, 359, 719, 1439, 2879, 5779, 11579, 23159, 46327, 92657, 185323, 370661, 741337,
+&nbsp;            1482707, 2965421, 5930887, 11861791, 23723597, 47447201, 94894427, 189788857, 379577741,
+&nbsp;            759155483, 1518310967,
+&nbsp;
+&nbsp;            //chunk #10
+&nbsp;            379, 761, 1523, 3049, 6101, 12203, 24407, 48817, 97649, 195311, 390647, 781301, 1562611,
+&nbsp;            3125257, 6250537, 12501169, 25002389, 50004791, 100009607, 200019221, 400038451, 800076929,
+&nbsp;            1600153859
+&nbsp;    };
+&nbsp;
+&nbsp;    static { //initializer
+&nbsp;        // The above prime numbers are formatted for human readability.
+&nbsp;        // To find numbers fast, we sort them once and for all.
+&nbsp;
+<b class="nc">&nbsp;        Arrays.sort(primeCapacities);</b>
+<b class="nc">&nbsp;        largestPrime = primeCapacities[primeCapacities.length - 1];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a prime number which is &lt;code&gt;&amp;gt;= desiredCapacity&lt;/code&gt;
+&nbsp;     * and very close to &lt;code&gt;desiredCapacity&lt;/code&gt; (within 11% if
+&nbsp;     * &lt;code&gt;desiredCapacity &amp;gt;= 1000&lt;/code&gt;).
+&nbsp;     *
+&nbsp;     * @param desiredCapacity the capacity desired by the user.
+&nbsp;     * @return the capacity which should be used for a hashtable.
+&nbsp;     */
+&nbsp;    public static int nextPrime(int desiredCapacity) {
+<b class="nc">&nbsp;        if (desiredCapacity &gt;= largestPrime) {</b>
+<b class="nc">&nbsp;            return largestPrime;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int i = Arrays.binarySearch(primeCapacities, desiredCapacity);</b>
+<b class="nc">&nbsp;        if (i &lt; 0) {</b>
+&nbsp;            // desired capacity not found, choose next prime greater
+&nbsp;            // than desired capacity
+<b class="nc">&nbsp;            i = -i - 1; // remember the semantics of binarySearch...</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return primeCapacities[i];</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:54</div>
+</div>
+</body>
+</html>

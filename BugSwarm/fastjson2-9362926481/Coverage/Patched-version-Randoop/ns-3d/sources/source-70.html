@@ -1,0 +1,298 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectWriterImplDate</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectWriterImplDate (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectWriterImplDate</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/96)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.codec.DateTimeCodec;
+&nbsp;import com.alibaba.fastjson2.util.IOUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.time.*;
+&nbsp;import java.time.format.DateTimeFormatter;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.Locale;
+&nbsp;
+&nbsp;final class ObjectWriterImplDate
+&nbsp;        extends DateTimeCodec
+&nbsp;        implements ObjectWriter {
+<b class="nc">&nbsp;    static final ObjectWriterImplDate INSTANCE = new ObjectWriterImplDate(null, null);</b>
+&nbsp;
+<b class="nc">&nbsp;    static final char[] PREFIX_CHARS = &quot;new Date(&quot;.toCharArray();</b>
+<b class="nc">&nbsp;    static final byte[] PREFIX_BYTES = &quot;new Date(&quot;.getBytes(StandardCharsets.UTF_8);</b>
+&nbsp;
+&nbsp;    public ObjectWriterImplDate(String format, Locale locale) {
+<b class="nc">&nbsp;        super(format, locale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeJSONB(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        jsonWriter.writeMillis(</b>
+<b class="nc">&nbsp;                ((Date) object).getTime());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONWriter.Context ctx = jsonWriter.getContext();</b>
+&nbsp;
+<b class="nc">&nbsp;        Date date = (Date) object;</b>
+<b class="nc">&nbsp;        long millis = date.getTime();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (jsonWriter.isWriteTypeInfo(object, fieldType)) {</b>
+<b class="nc">&nbsp;            if (jsonWriter.isUTF16()) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeRaw(PREFIX_CHARS);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                jsonWriter.writeRaw(PREFIX_BYTES);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            jsonWriter.writeInt64(millis);</b>
+<b class="nc">&nbsp;            jsonWriter.writeRaw(&#39;)&#39;);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (formatMillis || (format == null &amp;&amp; ctx.isDateFormatMillis())) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeInt64(millis);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (formatUnixTime || (format == null &amp;&amp; ctx.isDateFormatUnixTime())) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeInt64(millis / 1000);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ZoneId zoneId = ctx.getZoneId();</b>
+&nbsp;        int offsetSeconds;
+&nbsp;
+<b class="nc">&nbsp;        if (zoneId == IOUtils.SHANGHAI_ZONE_ID || zoneId.getRules() == IOUtils.SHANGHAI_ZONE_RULES) {</b>
+<b class="nc">&nbsp;            offsetSeconds = IOUtils.getShanghaiZoneOffsetTotalSeconds(</b>
+<b class="nc">&nbsp;                    Math.floorDiv(millis, 1000L)</b>
+&nbsp;            );
+<b class="nc">&nbsp;        } else if (zoneId == ZoneOffset.UTC || &quot;UTC&quot;.equals(zoneId.getId())) {</b>
+<b class="nc">&nbsp;            offsetSeconds = 0;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            ZonedDateTime zdt = ZonedDateTime.ofInstant(Instant.ofEpochMilli(millis), zoneId);</b>
+<b class="nc">&nbsp;            offsetSeconds = zdt.getOffset().getTotalSeconds();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        String dateFormat;
+<b class="nc">&nbsp;        boolean formatISO8601 = this.formatISO8601 || ctx.isDateFormatISO8601();</b>
+<b class="nc">&nbsp;        if (formatISO8601) {</b>
+<b class="nc">&nbsp;            dateFormat = null;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            dateFormat = this.format;</b>
+<b class="nc">&nbsp;            if (dateFormat == null) {</b>
+<b class="nc">&nbsp;                dateFormat = ctx.getDateFormat();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (dateFormat == null) {</b>
+<b class="nc">&nbsp;            final int SECONDS_PER_DAY = 60 * 60 * 24;</b>
+&nbsp;
+<b class="nc">&nbsp;            long epochSecond = Math.floorDiv(millis, 1000L);</b>
+&nbsp;            int offsetTotalSeconds;
+<b class="nc">&nbsp;            if (zoneId == IOUtils.SHANGHAI_ZONE_ID || zoneId.getRules() == IOUtils.SHANGHAI_ZONE_RULES) {</b>
+<b class="nc">&nbsp;                offsetTotalSeconds = IOUtils.getShanghaiZoneOffsetTotalSeconds(epochSecond);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                Instant instant = Instant.ofEpochMilli(millis);</b>
+<b class="nc">&nbsp;                offsetTotalSeconds = zoneId.getRules().getOffset(instant).getTotalSeconds();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            long localSecond = epochSecond + offsetTotalSeconds;</b>
+<b class="nc">&nbsp;            long localEpochDay = Math.floorDiv(localSecond, (long) SECONDS_PER_DAY);</b>
+<b class="nc">&nbsp;            int secsOfDay = (int) Math.floorMod(localSecond, (long) SECONDS_PER_DAY);</b>
+&nbsp;            int year, month, dayOfMonth;
+&nbsp;            {
+<b class="nc">&nbsp;                final int DAYS_PER_CYCLE = 146097;</b>
+<b class="nc">&nbsp;                final long DAYS_0000_TO_1970 = (DAYS_PER_CYCLE * 5L) - (30L * 365L + 7L);</b>
+&nbsp;
+<b class="nc">&nbsp;                long zeroDay = localEpochDay + DAYS_0000_TO_1970;</b>
+&nbsp;                // find the march-based year
+<b class="nc">&nbsp;                zeroDay -= 60;  // adjust to 0000-03-01 so leap day is at end of four year cycle</b>
+<b class="nc">&nbsp;                long adjust = 0;</b>
+<b class="nc">&nbsp;                if (zeroDay &lt; 0) {</b>
+&nbsp;                    // adjust negative years to positive for calculation
+<b class="nc">&nbsp;                    long adjustCycles = (zeroDay + 1) / DAYS_PER_CYCLE - 1;</b>
+<b class="nc">&nbsp;                    adjust = adjustCycles * 400;</b>
+<b class="nc">&nbsp;                    zeroDay += -adjustCycles * DAYS_PER_CYCLE;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                long yearEst = (400 * zeroDay + 591) / DAYS_PER_CYCLE;</b>
+<b class="nc">&nbsp;                long doyEst = zeroDay - (365 * yearEst + yearEst / 4 - yearEst / 100 + yearEst / 400);</b>
+<b class="nc">&nbsp;                if (doyEst &lt; 0) {</b>
+&nbsp;                    // fix estimate
+<b class="nc">&nbsp;                    yearEst--;</b>
+<b class="nc">&nbsp;                    doyEst = zeroDay - (365 * yearEst + yearEst / 4 - yearEst / 100 + yearEst / 400);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                yearEst += adjust;  // reset any negative year</b>
+<b class="nc">&nbsp;                int marchDoy0 = (int) doyEst;</b>
+&nbsp;
+&nbsp;                // convert march-based values back to january-based
+<b class="nc">&nbsp;                int marchMonth0 = (marchDoy0 * 5 + 2) / 153;</b>
+<b class="nc">&nbsp;                month = (marchMonth0 + 2) % 12 + 1;</b>
+<b class="nc">&nbsp;                dayOfMonth = marchDoy0 - (marchMonth0 * 306 + 5) / 10 + 1;</b>
+<b class="nc">&nbsp;                yearEst += marchMonth0 / 10;</b>
+&nbsp;
+&nbsp;                // check year now we are certain it is correct
+<b class="nc">&nbsp;                if (yearEst &lt; Year.MIN_VALUE || yearEst &gt; Year.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                    throw new DateTimeException(&quot;Invalid year &quot; + yearEst);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                year = (int) yearEst;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            int hour, minute, second;
+&nbsp;            {
+<b class="nc">&nbsp;                final int MINUTES_PER_HOUR = 60;</b>
+<b class="nc">&nbsp;                final int SECONDS_PER_MINUTE = 60;</b>
+<b class="nc">&nbsp;                final int SECONDS_PER_HOUR = SECONDS_PER_MINUTE * MINUTES_PER_HOUR;</b>
+&nbsp;
+<b class="nc">&nbsp;                long secondOfDay = secsOfDay;</b>
+<b class="nc">&nbsp;                if (secondOfDay &lt; 0 || secondOfDay &gt; 86399) {</b>
+<b class="nc">&nbsp;                    throw new DateTimeException(&quot;Invalid secondOfDay &quot; + secondOfDay);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                int hours = (int) (secondOfDay / SECONDS_PER_HOUR);</b>
+<b class="nc">&nbsp;                secondOfDay -= hours * SECONDS_PER_HOUR;</b>
+<b class="nc">&nbsp;                int minutes = (int) (secondOfDay / SECONDS_PER_MINUTE);</b>
+<b class="nc">&nbsp;                secondOfDay -= minutes * SECONDS_PER_MINUTE;</b>
+&nbsp;
+<b class="nc">&nbsp;                hour = hours;</b>
+<b class="nc">&nbsp;                minute = minutes;</b>
+<b class="nc">&nbsp;                second = (int) secondOfDay;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (year &gt;= 0 &amp;&amp; year &lt;= 9999) {</b>
+<b class="nc">&nbsp;                int mos = (int) Math.floorMod(millis, 1000L);</b>
+<b class="nc">&nbsp;                if (mos == 0 &amp;&amp; !formatISO8601) {</b>
+<b class="nc">&nbsp;                    if (hour == 0 &amp;&amp; minute == 0 &amp;&amp; second == 0 &amp;&amp; &quot;java.sql.Date&quot;.equals(date.getClass().getName())) {</b>
+<b class="nc">&nbsp;                        jsonWriter.writeDateYYYMMDD10(year, month, dayOfMonth);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        jsonWriter.writeDateTime19(year, month, dayOfMonth, hour, minute, second);</b>
+&nbsp;                    }
+&nbsp;                } else {
+<b class="nc">&nbsp;                    jsonWriter.writeDateTimeISO8601(year, month, dayOfMonth, hour, minute, second, mos, offsetSeconds, formatISO8601);</b>
+&nbsp;                }
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        DateTimeFormatter formatter;
+<b class="nc">&nbsp;        if (this.format != null) {</b>
+<b class="nc">&nbsp;            formatter = getDateFormatter();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            formatter = ctx.getDateFormatter();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        ZonedDateTime zdt = ZonedDateTime.ofInstant(Instant.ofEpochMilli(millis), zoneId);</b>
+<b class="nc">&nbsp;        String str = formatter.format(zdt);</b>
+<b class="nc">&nbsp;        jsonWriter.writeString(str);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 19:56</div>
+</div>
+</body>
+</html>

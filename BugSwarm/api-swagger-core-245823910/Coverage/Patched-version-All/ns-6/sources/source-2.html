@@ -1,0 +1,93 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReaderConfig</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.jaxrs2.config</a>
+</div>
+
+<h1>Coverage Summary for Class: ReaderConfig (io.swagger.jaxrs2.config)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ReaderConfig</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package io.swagger.jaxrs2.config;
+&nbsp;
+&nbsp;import java.util.Collection;
+&nbsp;
+&nbsp;/**
+&nbsp; * The {@code ReaderConfig} interface defines configuration settings for
+&nbsp; * JAX-RS annotations reader.
+&nbsp; */
+&nbsp;public interface ReaderConfig {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if all resources, but not those with the
+&nbsp;     * {@link} annotation has to be processed.
+&nbsp;     *
+&nbsp;     * @return {@code true} if all resource has to be processed
+&nbsp;     */
+&nbsp;    boolean isScanAllResources();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns paths of resources to be ignored.
+&nbsp;     *
+&nbsp;     * @return collection of paths
+&nbsp;     */
+&nbsp;    Collection&lt;String&gt; getIgnoredRoutes();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:26</div>
+</div>
+</body>
+</html>

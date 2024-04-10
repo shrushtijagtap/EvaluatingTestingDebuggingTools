@@ -1,0 +1,174 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Parameter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.oas.annotations</a>
+</div>
+
+<h1>Coverage Summary for Class: Parameter (io.swagger.oas.annotations)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Parameter</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/**
+&nbsp; * Copyright 2017 SmartBear Software
+&nbsp; * &lt;p&gt;
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; * &lt;p&gt;
+&nbsp; * http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; * &lt;p&gt;
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package io.swagger.oas.annotations;
+&nbsp;
+&nbsp;import io.swagger.oas.annotations.media.ArraySchema;
+&nbsp;import io.swagger.oas.annotations.media.Content;
+&nbsp;import io.swagger.oas.annotations.media.Schema;
+&nbsp;import io.swagger.oas.annotations.parameters.Parameters;
+&nbsp;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.lang.annotation.Inherited;
+&nbsp;import java.lang.annotation.Repeatable;
+&nbsp;import java.lang.annotation.Retention;
+&nbsp;import java.lang.annotation.RetentionPolicy;
+&nbsp;import java.lang.annotation.Target;
+&nbsp;
+&nbsp;/**
+&nbsp; * 
+&nbsp; *
+&nbsp; * 
+&nbsp; **/
+&nbsp;
+&nbsp;
+&nbsp;@Target({ ElementType.PARAMETER,
+&nbsp;          ElementType.METHOD })
+&nbsp;@Repeatable(Parameters.class)
+&nbsp;@Retention(RetentionPolicy.RUNTIME)
+&nbsp;@Inherited
+&nbsp;public @interface Parameter {
+&nbsp;  /**
+&nbsp;   * the name of the parameter
+&nbsp;   **/
+&nbsp;  String name() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * the location of the parameter.  Ignored when empty string
+&nbsp;   **/
+&nbsp;  String in() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Additional description data to provide on the purpose of the parameter
+&nbsp;   **/
+&nbsp;  String description() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Specifies that the parameter is not optional and must be present
+&nbsp;   **/
+&nbsp;  boolean required() default false;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * 
+&nbsp;   **/
+&nbsp;  boolean deprecated() default false;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * When true, allows sending an empty value.  If false, the parameter will be considered \&amp;quot;null\&amp;quot; if no value is present.  This may create validation errors when the parameter is required.
+&nbsp;   **/
+&nbsp;  boolean allowEmptyValue() default false;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * 
+&nbsp;   **/
+&nbsp;  String style() default &quot;&quot;;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * 
+&nbsp;   **/
+&nbsp;  boolean explode() default false;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * 
+&nbsp;   **/
+&nbsp;  boolean allowReserved() default false;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * 
+&nbsp;   **/
+&nbsp;  Schema schema() default @Schema();
+&nbsp;
+&nbsp;
+&nbsp;  ArraySchema array() default @ArraySchema();
+&nbsp;
+&nbsp;  /**
+&nbsp;   * 
+&nbsp;   **/
+&nbsp;  Content[] content() default @Content();
+&nbsp;
+&nbsp;  /**
+&nbsp;   * allows parameter to be marked as hidden
+&nbsp;   */
+&nbsp;  boolean hidden() default false;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:28</div>
+</div>
+</body>
+</html>

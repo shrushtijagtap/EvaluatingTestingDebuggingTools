@@ -1,0 +1,260 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Retrofit2ConverterFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.support.retrofit</a>
+</div>
+
+<h1>Coverage Summary for Class: Retrofit2ConverterFactory (com.alibaba.fastjson.support.retrofit)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Retrofit2ConverterFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Retrofit2ConverterFactory$RequestBodyConverter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Retrofit2ConverterFactory$ResponseBodyConverter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/28)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson.support.retrofit;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.JSON;
+&nbsp;import com.alibaba.fastjson.support.config.FastJsonConfig;
+&nbsp;import okhttp3.MediaType;
+&nbsp;import okhttp3.RequestBody;
+&nbsp;import okhttp3.ResponseBody;
+&nbsp;import retrofit2.Converter;
+&nbsp;import retrofit2.Retrofit;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;
+&nbsp;/**
+&nbsp; * Fastjson for Retrofit Converter Json Factory.
+&nbsp; * &lt;p&gt;
+&nbsp; * Compatible fastjson 1.2.x
+&nbsp; *
+&nbsp; * @author ligboy, wenshao
+&nbsp; * @author Victor.Zxy
+&nbsp; * @see Converter.Factory
+&nbsp; * @since 2.0.2
+&nbsp; */
+<b class="nc">&nbsp;public class Retrofit2ConverterFactory</b>
+&nbsp;        extends Converter.Factory {
+<b class="nc">&nbsp;    private static final MediaType MEDIA_TYPE = MediaType.parse(&quot;application/json; charset=UTF-8&quot;);</b>
+&nbsp;
+&nbsp;    private FastJsonConfig fastJsonConfig;
+&nbsp;
+<b class="nc">&nbsp;    public Retrofit2ConverterFactory() {</b>
+<b class="nc">&nbsp;        this.fastJsonConfig = new FastJsonConfig();</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public Retrofit2ConverterFactory(FastJsonConfig fastJsonConfig) {</b>
+<b class="nc">&nbsp;        this.fastJsonConfig = fastJsonConfig;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Retrofit2ConverterFactory create() {
+<b class="nc">&nbsp;        return create(new FastJsonConfig());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Retrofit2ConverterFactory create(FastJsonConfig fastJsonConfig) {
+<b class="nc">&nbsp;        if (fastJsonConfig == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(&quot;fastJsonConfig == null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new Retrofit2ConverterFactory(fastJsonConfig);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Converter&lt;ResponseBody, Object&gt; responseBodyConverter(Type type, //
+&nbsp;                                                                 Annotation[] annotations, //
+&nbsp;                                                                 Retrofit retrofit) {
+<b class="nc">&nbsp;        return new ResponseBodyConverter&lt;Object&gt;(type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Converter&lt;Object, RequestBody&gt; requestBodyConverter(Type type, //
+&nbsp;                                                               Annotation[] parameterAnnotations, //
+&nbsp;                                                               Annotation[] methodAnnotations, //
+&nbsp;                                                               Retrofit retrofit) {
+<b class="nc">&nbsp;        return new RequestBodyConverter&lt;Object&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public FastJsonConfig getFastJsonConfig() {
+<b class="nc">&nbsp;        return fastJsonConfig;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Retrofit2ConverterFactory setFastJsonConfig(FastJsonConfig fastJsonConfig) {
+<b class="nc">&nbsp;        this.fastJsonConfig = fastJsonConfig;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    final class ResponseBodyConverter&lt;T&gt;
+&nbsp;            implements Converter&lt;ResponseBody, T&gt; {
+&nbsp;        private final Type type;
+&nbsp;
+<b class="nc">&nbsp;        ResponseBodyConverter(Type type) {</b>
+<b class="nc">&nbsp;            this.type = type;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public T convert(ResponseBody value) throws IOException {
+&nbsp;            try {
+<b class="nc">&nbsp;                return JSON.parseObject(value.bytes(), type, fastJsonConfig.getFeatures()</b>
+&nbsp;                );
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                throw new IOException(&quot;JSON parse error: &quot; + e.getMessage(), e);</b>
+&nbsp;            } finally {
+<b class="nc">&nbsp;                value.close();</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    final class RequestBodyConverter&lt;T&gt;
+&nbsp;            implements Converter&lt;T, RequestBody&gt; {
+<b class="nc">&nbsp;        RequestBodyConverter() {</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public RequestBody convert(T value) throws IOException {
+&nbsp;            try {
+<b class="nc">&nbsp;                byte[] content = JSON.toJSONBytes(value,</b>
+<b class="nc">&nbsp;                        fastJsonConfig.getSerializeFilters(), fastJsonConfig.getSerializerFeatures());</b>
+<b class="nc">&nbsp;                return RequestBody.create(MEDIA_TYPE, content);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                throw new IOException(&quot;Could not write JSON: &quot; + e.getMessage(), e);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:17</div>
+</div>
+</body>
+</html>

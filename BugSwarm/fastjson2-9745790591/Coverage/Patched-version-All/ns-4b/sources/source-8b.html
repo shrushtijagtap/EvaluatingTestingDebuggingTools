@@ -1,0 +1,205 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectWriterImplOffsetDateTime</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectWriterImplOffsetDateTime (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectWriterImplOffsetDateTime</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    35.4%
+  </span>
+  <span class="absValue">
+    (17/48)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.codec.DateTimeCodec;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.time.OffsetDateTime;
+&nbsp;import java.time.format.DateTimeFormatter;
+&nbsp;import java.util.Locale;
+&nbsp;
+&nbsp;final class ObjectWriterImplOffsetDateTime
+&nbsp;        extends DateTimeCodec implements ObjectWriter {
+<b class="fc">&nbsp;    static final ObjectWriterImplOffsetDateTime INSTANCE = new ObjectWriterImplOffsetDateTime(null, null);</b>
+&nbsp;
+&nbsp;    public ObjectWriterImplOffsetDateTime(String format, Locale locale) {
+<b class="fc">&nbsp;        super(format, locale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="fc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        JSONWriter.Context ctx = jsonWriter.getContext();</b>
+&nbsp;
+<b class="fc">&nbsp;        OffsetDateTime odt = (OffsetDateTime) object;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (formatUnixTime || (format == null &amp;&amp; ctx.isDateFormatUnixTime())) {</b>
+<b class="nc">&nbsp;            long millis = odt</b>
+<b class="nc">&nbsp;                    .toInstant()</b>
+<b class="nc">&nbsp;                    .toEpochMilli();</b>
+<b class="nc">&nbsp;            jsonWriter.writeInt64(millis / 1000);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (formatMillis || (format == null &amp;&amp; ctx.isDateFormatMillis())) {</b>
+<b class="nc">&nbsp;            long millis = odt</b>
+<b class="nc">&nbsp;                    .toInstant()</b>
+<b class="nc">&nbsp;                    .toEpochMilli();</b>
+<b class="nc">&nbsp;            jsonWriter.writeInt64(millis);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        final int year = odt.getYear();</b>
+<b class="fc">&nbsp;        if (year &gt;= 0 &amp;&amp; year &lt;= 9999) {</b>
+<b class="fc">&nbsp;            if (formatISO8601 || ctx.isDateFormatISO8601()) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeDateTimeISO8601(</b>
+&nbsp;                        year,
+<b class="nc">&nbsp;                        odt.getMonthValue(),</b>
+<b class="nc">&nbsp;                        odt.getDayOfMonth(),</b>
+<b class="nc">&nbsp;                        odt.getHour(),</b>
+<b class="nc">&nbsp;                        odt.getMinute(),</b>
+<b class="nc">&nbsp;                        odt.getSecond(),</b>
+<b class="nc">&nbsp;                        odt.getNano() / 1000_000,</b>
+<b class="nc">&nbsp;                        odt.getOffset().getTotalSeconds(),</b>
+&nbsp;                        true
+&nbsp;                );
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (yyyyMMddhhmmss19) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeDateTime19(</b>
+&nbsp;                        year,
+<b class="nc">&nbsp;                        odt.getMonthValue(),</b>
+<b class="nc">&nbsp;                        odt.getDayOfMonth(),</b>
+<b class="nc">&nbsp;                        odt.getHour(),</b>
+<b class="nc">&nbsp;                        odt.getMinute(),</b>
+<b class="nc">&nbsp;                        odt.getSecond()</b>
+&nbsp;                );
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (yyyyMMddhhmmss14) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeDateTime14(</b>
+&nbsp;                        year,
+<b class="nc">&nbsp;                        odt.getMonthValue(),</b>
+<b class="nc">&nbsp;                        odt.getDayOfMonth(),</b>
+<b class="nc">&nbsp;                        odt.getHour(),</b>
+<b class="nc">&nbsp;                        odt.getMinute(),</b>
+<b class="nc">&nbsp;                        odt.getSecond()</b>
+&nbsp;                );
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        DateTimeFormatter formatter = this.getDateFormatter();</b>
+<b class="fc">&nbsp;        if (formatter == null) {</b>
+<b class="fc">&nbsp;            formatter = ctx.getDateFormatter();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (formatter == null) {</b>
+<b class="fc">&nbsp;            jsonWriter.writeString(odt.toString());</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String str = formatter.format(odt);</b>
+<b class="nc">&nbsp;        jsonWriter.writeString(str);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:07</div>
+</div>
+</body>
+</html>

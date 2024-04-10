@@ -1,0 +1,524 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderCreatorLambda</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderCreatorLambda (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderCreatorLambda</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/186)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSON;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONFactory;
+&nbsp;import com.alibaba.fastjson2.JSONObject;
+&nbsp;import com.alibaba.fastjson2.codec.BeanInfo;
+&nbsp;import com.alibaba.fastjson2.codec.FieldInfo;
+&nbsp;import com.alibaba.fastjson2.function.*;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectReaderAnnotationProcessor;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectReaderModule;
+&nbsp;import com.alibaba.fastjson2.schema.JSONSchema;
+&nbsp;import com.alibaba.fastjson2.util.BeanUtils;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriterCreatorLambda;
+&nbsp;
+&nbsp;import java.lang.invoke.*;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.atomic.AtomicReference;
+&nbsp;import java.util.function.*;
+&nbsp;
+<b class="nc">&nbsp;public class ObjectReaderCreatorLambda</b>
+&nbsp;        extends ObjectReaderCreator {
+&nbsp;    // Android not support
+<b class="nc">&nbsp;    private static final Map&lt;Class, Class&gt; classFunctionMapping = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;    private static final Map&lt;Class, MethodType&gt; methodTypeMapping = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;    private static final MethodType METHODTYPE_BiFunction = MethodType.methodType(BiConsumer.class);</b>
+<b class="nc">&nbsp;    private static final MethodType METHODTYPE_Function = MethodType.methodType(Function.class);</b>
+<b class="nc">&nbsp;    private static final MethodType METHODTYPE_VOID = MethodType.methodType(void.class);</b>
+&nbsp;
+&nbsp;    static {
+<b class="nc">&nbsp;        classFunctionMapping.put(boolean.class, ObjBoolConsumer.class);</b>
+<b class="nc">&nbsp;        classFunctionMapping.put(byte.class, ObjByteConsumer.class);</b>
+<b class="nc">&nbsp;        classFunctionMapping.put(short.class, ObjShortConsumer.class);</b>
+<b class="nc">&nbsp;        classFunctionMapping.put(int.class, ObjIntConsumer.class);</b>
+<b class="nc">&nbsp;        classFunctionMapping.put(long.class, ObjLongConsumer.class);</b>
+<b class="nc">&nbsp;        classFunctionMapping.put(char.class, ObjCharConsumer.class);</b>
+<b class="nc">&nbsp;        classFunctionMapping.put(float.class, ObjFloatConsumer.class);</b>
+<b class="nc">&nbsp;        classFunctionMapping.put(double.class, ObjDoubleConsumer.class);</b>
+&nbsp;
+<b class="nc">&nbsp;        classFunctionMapping.forEach((k, v) -&gt; methodTypeMapping.put(k, MethodType.methodType(v)));</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public static final ObjectReaderCreatorLambda INSTANCE = new ObjectReaderCreatorLambda();</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;T&gt; ObjectReader&lt;T&gt; createObjectReader(Class&lt;T&gt; objectClass, Type objectType, boolean fieldBased, ObjectReaderProvider provider) {
+<b class="nc">&nbsp;        BeanInfo beanInfo = new BeanInfo();</b>
+<b class="nc">&nbsp;        for (ObjectReaderModule module : provider.modules) {</b>
+<b class="nc">&nbsp;            ObjectReaderAnnotationProcessor annotationProcessor = module.getAnnotationProcessor();</b>
+<b class="nc">&nbsp;            if (annotationProcessor != null) {</b>
+<b class="nc">&nbsp;                annotationProcessor.getBeanInfo(beanInfo, objectClass);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (beanInfo.deserializer != null &amp;&amp; ObjectReader.class.isAssignableFrom(beanInfo.deserializer)) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                return (ObjectReader&lt;T&gt;) beanInfo.deserializer.newInstance();</b>
+<b class="nc">&nbsp;            } catch (InstantiationException | IllegalAccessException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;create deserializer error&quot;, e);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectReader annotatedObjectReader = getAnnotatedObjectReader(provider, objectClass, beanInfo);</b>
+<b class="nc">&nbsp;        if (annotatedObjectReader != null) {</b>
+<b class="nc">&nbsp;            return annotatedObjectReader;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Enum.class.isAssignableFrom(objectClass) &amp;&amp; (beanInfo.createMethod == null || beanInfo.createMethod.getParameterCount() == 1)) {</b>
+<b class="nc">&nbsp;            return createEnumReader(objectClass, beanInfo.createMethod, provider);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldBased &amp;&amp; (objectClass.isInterface() || objectClass.isInterface())) {</b>
+<b class="nc">&nbsp;            fieldBased = false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        AtomicReference&lt;Constructor&gt; constructorRef = new AtomicReference();</b>
+<b class="nc">&nbsp;        BeanUtils.constructor(objectClass, constructor -&gt; {</b>
+<b class="nc">&nbsp;            constructorRef.set(constructor);</b>
+&nbsp;        });
+&nbsp;
+<b class="nc">&nbsp;        int classModifiers = objectClass.getModifiers();</b>
+&nbsp;
+<b class="nc">&nbsp;        Constructor constructor = constructorRef.get();</b>
+<b class="nc">&nbsp;        if (constructor == null || !constructor.isAccessible() || Modifier.isAbstract(classModifiers) || Modifier.isInterface(classModifiers)) {</b>
+<b class="nc">&nbsp;            return super.createObjectReader(objectClass, objectType, fieldBased, provider);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        final Supplier&lt;T&gt; supplier;
+&nbsp;        try {
+<b class="nc">&nbsp;            supplier = lambdaConstrunctor(objectClass);</b>
+<b class="nc">&nbsp;        } catch (IllegalAccessException | NoSuchMethodException ignored) {</b>
+<b class="nc">&nbsp;            return super.createObjectReader(objectClass, objectType, fieldBased, provider);</b>
+<b class="nc">&nbsp;        } catch (Throwable e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;get constructor error, objectClass : &quot; + objectClass, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        Map&lt;String, FieldReader&gt; fieldReaders = new LinkedHashMap&lt;&gt;();</b>
+&nbsp;        // List&lt;ObjectReader.FieldReader&gt; fieldReaders = new ArrayList&lt;&gt;(methods.length);
+&nbsp;
+<b class="nc">&nbsp;        final FieldInfo fieldInfo = new FieldInfo();</b>
+&nbsp;
+<b class="nc">&nbsp;        BeanUtils.setters(objectClass, method -&gt; {</b>
+<b class="nc">&nbsp;            fieldInfo.init();</b>
+<b class="nc">&nbsp;            for (ObjectReaderModule module : provider.modules) {</b>
+<b class="nc">&nbsp;                ObjectReaderAnnotationProcessor annotationProcessor = module.getAnnotationProcessor();</b>
+<b class="nc">&nbsp;                if (annotationProcessor == null) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                annotationProcessor.getFieldInfo(fieldInfo, objectClass, method);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            String fieldName;
+<b class="nc">&nbsp;            if (method.getParameterCount() == 0) {</b>
+<b class="nc">&nbsp;                fieldName = BeanUtils.getterName(method.getName(), beanInfo.namingStrategy);</b>
+<b class="nc">&nbsp;                FieldReader fieldReader = super.createFieldReaderMethod(</b>
+&nbsp;                        objectClass,
+&nbsp;                        objectType,
+&nbsp;                        fieldName,
+&nbsp;                        fieldInfo.ordinal,
+&nbsp;                        fieldInfo.features,
+&nbsp;                        fieldInfo.format,
+&nbsp;                        fieldInfo.locale,
+&nbsp;                        fieldInfo.defaultValue,
+&nbsp;                        fieldInfo.schema,
+<b class="nc">&nbsp;                        method.getGenericReturnType(),</b>
+<b class="nc">&nbsp;                        method.getReturnType(),</b>
+&nbsp;                        method,
+&nbsp;                        null);
+<b class="nc">&nbsp;                FieldReader origin = fieldReaders.putIfAbsent(fieldName,</b>
+&nbsp;                        fieldReader
+&nbsp;                );
+<b class="nc">&nbsp;                if (origin != null &amp;&amp; origin.compareTo(fieldReader) &gt; 0) {</b>
+<b class="nc">&nbsp;                    fieldReaders.put(fieldName, fieldReader);</b>
+&nbsp;                }
+&nbsp;                return;
+&nbsp;            } else {
+<b class="nc">&nbsp;                fieldName = BeanUtils.setterName(method.getName(), beanInfo.namingStrategy);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Type fieldType = method.getGenericParameterTypes()[0];</b>
+<b class="nc">&nbsp;            Class fieldClass = method.getParameterTypes()[0];</b>
+<b class="nc">&nbsp;            FieldReader fieldReader = createFieldReaderLambda(</b>
+&nbsp;                    objectClass,
+&nbsp;                    objectType,
+&nbsp;                    fieldName,
+&nbsp;                    fieldInfo.ordinal,
+&nbsp;                    fieldInfo.features,
+&nbsp;                    fieldInfo.format,
+&nbsp;                    fieldInfo.locale,
+&nbsp;                    fieldInfo.defaultValue,
+&nbsp;                    fieldInfo.schema,
+&nbsp;                    fieldType,
+&nbsp;                    fieldClass,
+&nbsp;                    method,
+<b class="nc">&nbsp;                    fieldInfo.getInitReader()</b>
+&nbsp;            );
+<b class="nc">&nbsp;            FieldReader origin = fieldReaders.putIfAbsent(fieldName, fieldReader);</b>
+<b class="nc">&nbsp;            if (origin != null &amp;&amp; origin.compareTo(fieldReader) &gt; 0) {</b>
+<b class="nc">&nbsp;                fieldReaders.put(fieldName, fieldReader);</b>
+&nbsp;            }
+&nbsp;        });
+&nbsp;
+<b class="nc">&nbsp;        BeanUtils.fields(objectClass,</b>
+&nbsp;                field -&gt; {
+<b class="nc">&nbsp;                    fieldInfo.init();</b>
+<b class="nc">&nbsp;                    for (ObjectReaderModule module : provider.modules) {</b>
+<b class="nc">&nbsp;                        ObjectReaderAnnotationProcessor annotationProcessor = module.getAnnotationProcessor();</b>
+<b class="nc">&nbsp;                        if (annotationProcessor != null) {</b>
+<b class="nc">&nbsp;                            annotationProcessor.getFieldInfo(fieldInfo, objectClass, field);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    }</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (fieldInfo.ignore) {</b>
+&nbsp;                        return;
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    String fieldName = field.getName();</b>
+<b class="nc">&nbsp;                    FieldReader&lt;Object&gt; fieldReader = createFieldReader(</b>
+&nbsp;                            objectClass,
+&nbsp;                            objectClass,
+&nbsp;                            fieldName,
+&nbsp;                            fieldInfo.ordinal,
+&nbsp;                            fieldInfo.features,
+&nbsp;                            fieldInfo.format,
+&nbsp;                            fieldInfo.locale,
+&nbsp;                            fieldInfo.defaultValue,
+&nbsp;                            fieldInfo.schema,
+<b class="nc">&nbsp;                            field.getGenericType(),</b>
+<b class="nc">&nbsp;                            field.getType(),</b>
+&nbsp;                            field,
+<b class="nc">&nbsp;                            fieldInfo.getInitReader()</b>
+&nbsp;                    );
+<b class="nc">&nbsp;                    fieldReaders.put(fieldName, fieldReader);</b>
+&nbsp;                }
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        FieldReader[] fieldReaderArray = new FieldReader[fieldReaders.size()];</b>
+&nbsp;
+<b class="nc">&nbsp;        fieldReaders.values().toArray(fieldReaderArray);</b>
+<b class="nc">&nbsp;        Arrays.sort(fieldReaderArray);</b>
+&nbsp;
+<b class="nc">&nbsp;        Supplier&lt;T&gt; creator = createInstanceSupplier(objectClass);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (beanInfo.seeAlso != null &amp;&amp; beanInfo.seeAlso.length != 0) {</b>
+<b class="nc">&nbsp;            return createObjectReaderSeeAlso(objectClass, creator, beanInfo.typeKey, beanInfo.seeAlso, beanInfo.seeAlsoNames, fieldReaderArray);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return createObjectReader(objectClass, beanInfo.readerFeatures, supplier, null, fieldReaderArray);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;T&gt; FieldReader createFieldReaderMethod(
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            Type objectType,
+&nbsp;            String fieldName,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            Locale locale,
+&nbsp;            Object defaultValue,
+&nbsp;            String schema,
+&nbsp;            Type fieldType,
+&nbsp;            Class fieldClass,
+&nbsp;            Method method,
+&nbsp;            ObjectReader initReader
+&nbsp;    ) {
+<b class="nc">&nbsp;        if ((method != null &amp;&amp; (method.getReturnType() != void.class || method.getParameterCount() == 0))</b>
+<b class="nc">&nbsp;                || !Modifier.isPublic(objectClass.getModifiers())</b>
+<b class="nc">&nbsp;                || isExternalClass(objectClass)</b>
+&nbsp;                || initReader != null
+&nbsp;        ) {
+<b class="nc">&nbsp;            return super.createFieldReaderMethod(objectClass, objectType, fieldName, ordinal, features, format, locale, defaultValue, schema, fieldType, fieldClass, method, initReader);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return createFieldReaderLambda(objectClass, objectType, fieldName, ordinal, features, format, locale, defaultValue, schema, fieldType, fieldClass, method, initReader);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected &lt;T&gt; FieldReader createFieldReaderLambda(
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            Type objectType,
+&nbsp;            String fieldName,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            Locale locale,
+&nbsp;            Object defaultValue,
+&nbsp;            String schema,
+&nbsp;            Type fieldType,
+&nbsp;            Class fieldClass,
+&nbsp;            Method method,
+&nbsp;            ObjectReader initReader
+&nbsp;    ) {
+<b class="nc">&nbsp;        if (defaultValue != null &amp;&amp; defaultValue.getClass() != fieldClass) {</b>
+&nbsp;            Function typeConvert = JSONFactory
+<b class="nc">&nbsp;                    .getDefaultObjectReaderProvider()</b>
+<b class="nc">&nbsp;                    .getTypeConvert(defaultValue.getClass(), fieldType);</b>
+<b class="nc">&nbsp;            if (typeConvert != null) {</b>
+<b class="nc">&nbsp;                defaultValue = typeConvert.apply(defaultValue);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new JSONException(&quot;illegal defaultValue : &quot; + defaultValue + &quot;, class &quot; + fieldClass.getName());</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONSchema jsonSchema = null;</b>
+<b class="nc">&nbsp;        if (schema != null &amp;&amp; !schema.isEmpty()) {</b>
+<b class="nc">&nbsp;            JSONObject object = JSON.parseObject(schema);</b>
+<b class="nc">&nbsp;            if (!object.isEmpty()) {</b>
+<b class="nc">&nbsp;                jsonSchema = JSONSchema.of(object, fieldClass);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (initReader != null) {</b>
+<b class="nc">&nbsp;            BiConsumer function = (BiConsumer) lambdaFunction(objectClass, fieldClass, method);</b>
+<b class="nc">&nbsp;            return createFieldReader(objectClass, objectType, fieldName, fieldType, fieldClass, ordinal, features, format, defaultValue, jsonSchema, method, function, initReader);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == boolean.class) {</b>
+<b class="nc">&nbsp;            ObjBoolConsumer function = (ObjBoolConsumer) lambdaFunction(objectClass, fieldClass, method);</b>
+<b class="nc">&nbsp;            return new FieldReaderBoolValFunc&lt;&gt;(fieldName, ordinal, jsonSchema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == byte.class) {</b>
+<b class="nc">&nbsp;            ObjByteConsumer function = (ObjByteConsumer) lambdaFunction(objectClass, fieldClass, method);</b>
+<b class="nc">&nbsp;            return new FieldReaderInt8ValueFunc&lt;&gt;(fieldName, ordinal, jsonSchema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == short.class) {</b>
+<b class="nc">&nbsp;            ObjShortConsumer function = (ObjShortConsumer) lambdaFunction(objectClass, fieldClass, method);</b>
+<b class="nc">&nbsp;            return new FieldReaderInt16ValueFunc&lt;&gt;(fieldName, ordinal, features, format, locale, (Short) defaultValue, jsonSchema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == int.class) {</b>
+<b class="nc">&nbsp;            ObjIntConsumer function = (ObjIntConsumer) lambdaFunction(objectClass, fieldClass, method);</b>
+<b class="nc">&nbsp;            return new FieldReaderInt32ValueFunc&lt;&gt;(fieldName, ordinal, (Integer) defaultValue, jsonSchema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == long.class) {</b>
+<b class="nc">&nbsp;            ObjLongConsumer function = (ObjLongConsumer) lambdaFunction(objectClass, fieldClass, method);</b>
+<b class="nc">&nbsp;            return new FieldReaderInt64ValueFunc&lt;&gt;(fieldName, ordinal, (Long) defaultValue, jsonSchema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == char.class) {</b>
+<b class="nc">&nbsp;            ObjCharConsumer function = (ObjCharConsumer) lambdaFunction(objectClass, fieldClass, method);</b>
+<b class="nc">&nbsp;            return new FieldReaderCharValueFunc&lt;&gt;(fieldName, ordinal, format, (Character) defaultValue, jsonSchema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == float.class) {</b>
+<b class="nc">&nbsp;            ObjFloatConsumer function = (ObjFloatConsumer) lambdaFunction(objectClass, fieldClass, method);</b>
+<b class="nc">&nbsp;            return new FieldReaderFloatValueFunc&lt;&gt;(fieldName, ordinal, (Float) defaultValue, jsonSchema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == double.class) {</b>
+<b class="nc">&nbsp;            ObjDoubleConsumer function = (ObjDoubleConsumer) lambdaFunction(objectClass, fieldClass, method);</b>
+<b class="nc">&nbsp;            return new FieldReaderDoubleValueFunc&lt;&gt;(fieldName, ordinal, (Double) defaultValue, jsonSchema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        BiConsumer function = (BiConsumer) lambdaFunction(objectClass, fieldClass, method);</b>
+<b class="nc">&nbsp;        return createFieldReader(objectClass, objectType, fieldName, fieldType, fieldClass, ordinal, features, format, defaultValue, jsonSchema, method, function, initReader);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Object lambdaFunction(Class objectType, Class fieldClass, Method method) {
+<b class="nc">&nbsp;        MethodHandles.Lookup lookup = MethodHandles.lookup();</b>
+&nbsp;
+<b class="nc">&nbsp;        MethodType invokedType = methodTypeMapping.getOrDefault(fieldClass, METHODTYPE_BiFunction);</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            MethodHandle target = lookup.findVirtual(objectType,</b>
+<b class="nc">&nbsp;                    method.getName(),</b>
+<b class="nc">&nbsp;                    MethodType.methodType(void.class, fieldClass)</b>
+&nbsp;            );
+<b class="nc">&nbsp;            MethodType func = target.type();</b>
+&nbsp;
+<b class="nc">&nbsp;            CallSite callSite = LambdaMetafactory.metafactory(</b>
+&nbsp;                    lookup,
+&nbsp;                    &quot;accept&quot;,
+&nbsp;                    invokedType,
+<b class="nc">&nbsp;                    func.erase(),</b>
+&nbsp;                    target,
+&nbsp;                    func
+&nbsp;            );
+&nbsp;
+<b class="nc">&nbsp;            return callSite</b>
+<b class="nc">&nbsp;                    .getTarget()</b>
+<b class="nc">&nbsp;                    .invoke();</b>
+<b class="nc">&nbsp;        } catch (Throwable e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;create fieldReader error&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;T, R&gt; Function&lt;T, R&gt; createBuildFunction(Method builderMethod) {
+<b class="nc">&nbsp;        if (!Modifier.isPublic(builderMethod.getDeclaringClass().getModifiers())) {</b>
+<b class="nc">&nbsp;            return super.createBuildFunction(builderMethod);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        MethodHandles.Lookup lookup = MethodHandles.lookup();</b>
+<b class="nc">&nbsp;        MethodType invokedType = METHODTYPE_Function;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            MethodHandle target = lookup.findVirtual(builderMethod.getDeclaringClass(),</b>
+<b class="nc">&nbsp;                    builderMethod.getName(),</b>
+<b class="nc">&nbsp;                    MethodType.methodType(builderMethod.getReturnType())</b>
+&nbsp;            );
+<b class="nc">&nbsp;            MethodType func = target.type();</b>
+&nbsp;
+<b class="nc">&nbsp;            CallSite callSite = LambdaMetafactory.metafactory(</b>
+&nbsp;                    lookup,
+&nbsp;                    &quot;apply&quot;,
+&nbsp;                    invokedType,
+<b class="nc">&nbsp;                    func.erase(),</b>
+&nbsp;                    target,
+&nbsp;                    func
+&nbsp;            );
+&nbsp;
+<b class="nc">&nbsp;            Object object = callSite</b>
+<b class="nc">&nbsp;                    .getTarget()</b>
+<b class="nc">&nbsp;                    .invoke();</b>
+<b class="nc">&nbsp;            return (Function&lt;T, R&gt;) object;</b>
+<b class="nc">&nbsp;        } catch (Throwable e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;create fieldReader error&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static &lt;T&gt; Supplier&lt;T&gt; lambdaConstrunctor(Class&lt;T&gt; objectType) throws Throwable {
+<b class="nc">&nbsp;        if (objectType == List.class) {</b>
+<b class="nc">&nbsp;            return () -&gt; (T) new ArrayList();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        MethodHandles.Lookup lookup = MethodHandles.lookup();</b>
+&nbsp;
+<b class="nc">&nbsp;        MethodHandle mh = lookup.findConstructor(objectType, METHODTYPE_VOID);</b>
+<b class="nc">&nbsp;        CallSite callSite = LambdaMetafactory.metafactory(lookup,</b>
+&nbsp;                &quot;get&quot;,
+<b class="nc">&nbsp;                MethodType.methodType(Supplier.class),</b>
+<b class="nc">&nbsp;                mh.type().generic(), mh, mh.type());</b>
+&nbsp;
+<b class="nc">&nbsp;        return (Supplier&lt;T&gt;) callSite</b>
+<b class="nc">&nbsp;                .getTarget()</b>
+<b class="nc">&nbsp;                .invokeExact();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static boolean isExternalClass(Class&lt;?&gt; clazz) {
+<b class="nc">&nbsp;        ClassLoader classLoader = clazz.getClassLoader();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (classLoader == null) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ClassLoader current = ObjectWriterCreatorLambda.class.getClassLoader();</b>
+<b class="nc">&nbsp;        while (current != null) {</b>
+<b class="nc">&nbsp;            if (current == classLoader) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            current = current.getParent();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 19:48</div>
+</div>
+</body>
+</html>

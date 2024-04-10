@@ -1,0 +1,257 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TypeReference</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson</a>
+</div>
+
+<h1>Coverage Summary for Class: TypeReference (com.alibaba.fastjson)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TypeReference</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (32/48)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TypeReference$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    67.3%
+  </span>
+  <span class="absValue">
+    (33/49)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.util.ParameterizedTypeImpl;
+&nbsp;import com.alibaba.fastjson.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.GenericArrayType;
+&nbsp;import java.lang.reflect.ParameterizedType;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.lang.reflect.TypeVariable;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;import java.util.concurrent.ConcurrentMap;
+&nbsp;
+&nbsp;/**
+&nbsp; * Represents a generic type {@code T}. Java doesn&#39;t yet provide a way to
+&nbsp; * represent generic types, so this class does. Forces clients to create a
+&nbsp; * subclass of this class which enables retrieval the type information even at
+&nbsp; * runtime.
+&nbsp; *
+&nbsp; * &lt;p&gt;For example, to create a type literal for {@code List&lt;String&gt;}, you can
+&nbsp; * create an empty anonymous inner class:
+&nbsp; *
+&nbsp; * &lt;pre&gt;
+&nbsp; * TypeReference&amp;lt;List&amp;lt;String&amp;gt;&amp;gt; list = new TypeReference&amp;lt;List&amp;lt;String&amp;gt;&amp;gt;() {};
+&nbsp; * &lt;/pre&gt;
+&nbsp; * This syntax cannot be used to create type literals that have wildcard
+&nbsp; * parameters, such as {@code Class&lt;?&gt;} or {@code List&lt;? extends CharSequence&gt;}.
+&nbsp; */
+&nbsp;public class TypeReference&lt;T&gt; {
+&nbsp;    static ConcurrentMap&lt;Type, Type&gt; classTypeCache
+<b class="fc">&nbsp;            = new ConcurrentHashMap&lt;Type, Type&gt;(16, 0.75f, 1);</b>
+&nbsp;
+&nbsp;    protected final Type type;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new type literal. Derives represented class from type
+&nbsp;     * parameter.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;Clients create an empty anonymous subclass. Doing so embeds the type
+&nbsp;     * parameter in the anonymous class&#39;s type hierarchy so we can reconstitute it
+&nbsp;     * at runtime despite erasure.
+&nbsp;     */
+&nbsp;    protected TypeReference() {
+<b class="fc">&nbsp;        Type superClass = getClass().getGenericSuperclass();</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        Type type = ((ParameterizedType) superClass).getActualTypeArguments()[0];
+<b class="fc">&nbsp;</b>
+&nbsp;        Type cachedType = classTypeCache.get(type);
+<b class="fc">&nbsp;        if (cachedType == null) {</b>
+<b class="fc">&nbsp;            classTypeCache.putIfAbsent(type, type);</b>
+<b class="fc">&nbsp;            cachedType = classTypeCache.get(type);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        this.type = cachedType;
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.2.9
+&nbsp;     */
+&nbsp;    protected TypeReference(Type... actualTypeArguments) {
+&nbsp;        Class&lt;?&gt; thisClass = this.getClass();
+<b class="fc">&nbsp;        Type superClass = thisClass.getGenericSuperclass();</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        ParameterizedType argType = (ParameterizedType) ((ParameterizedType) superClass).getActualTypeArguments()[0];</b>
+&nbsp;        Type rawType = argType.getRawType();
+<b class="fc">&nbsp;        Type[] argTypes = argType.getActualTypeArguments();</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        int actualIndex = 0;</b>
+&nbsp;        for (int i = 0; i &lt; argTypes.length; ++i) {
+<b class="fc">&nbsp;            if (argTypes[i] instanceof TypeVariable &amp;&amp;</b>
+<b class="fc">&nbsp;                    actualIndex &lt; actualTypeArguments.length) {</b>
+<b class="fc">&nbsp;                argTypes[i] = actualTypeArguments[actualIndex++];</b>
+&nbsp;            }
+<b class="fc">&nbsp;            // fix for openjdk and android env</b>
+&nbsp;            if (argTypes[i] instanceof GenericArrayType) {
+&nbsp;                argTypes[i] = TypeUtils.checkPrimitiveArray(
+<b class="fc">&nbsp;                        (GenericArrayType) argTypes[i]);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            // 如果有多层泛型且该泛型已经注明实现的情况下，判断该泛型下一层是否还有泛型
+&nbsp;            if (argTypes[i] instanceof ParameterizedType) {
+&nbsp;                argTypes[i] = handlerParameterizedType((ParameterizedType) argTypes[i], actualTypeArguments, actualIndex);
+<b class="fc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        Type key = new ParameterizedTypeImpl(argTypes, thisClass, rawType);
+&nbsp;        Type cachedType = classTypeCache.get(key);
+<b class="fc">&nbsp;        if (cachedType == null) {</b>
+<b class="fc">&nbsp;            classTypeCache.putIfAbsent(key, key);</b>
+<b class="fc">&nbsp;            cachedType = classTypeCache.get(key);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        type = cachedType;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    private Type handlerParameterizedType(ParameterizedType type, Type[] actualTypeArguments, int actualIndex) {
+&nbsp;        Class&lt;?&gt; thisClass = this.getClass();
+&nbsp;        Type rawType = type.getRawType();
+<b class="fc">&nbsp;        Type[] argTypes = type.getActualTypeArguments();</b>
+<b class="fc">&nbsp;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; argTypes.length; ++i) {</b>
+<b class="nc">&nbsp;            if (argTypes[i] instanceof TypeVariable &amp;&amp; actualIndex &lt; actualTypeArguments.length) {</b>
+&nbsp;                argTypes[i] = actualTypeArguments[actualIndex++];
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+&nbsp;            // fix for openjdk and android env
+&nbsp;            if (argTypes[i] instanceof GenericArrayType) {
+&nbsp;                argTypes[i] = TypeUtils.checkPrimitiveArray(
+<b class="nc">&nbsp;                        (GenericArrayType) argTypes[i]);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;            // 如果有多层泛型且该泛型已经注明实现的情况下，判断该泛型下一层是否还有泛型
+<b class="nc">&nbsp;            if (argTypes[i] instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;                return handlerParameterizedType((ParameterizedType) argTypes[i], actualTypeArguments, actualIndex);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        Type key = new ParameterizedTypeImpl(argTypes, thisClass, rawType);
+<b class="nc">&nbsp;        return key;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets underlying {@code Type} instance.
+&nbsp;     */
+<b class="nc">&nbsp;    public Type getType() {</b>
+<b class="nc">&nbsp;        return type;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 19:50</div>
+</div>
+</body>
+</html>

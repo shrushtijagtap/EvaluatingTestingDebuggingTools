@@ -1,0 +1,215 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PathUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.util</a>
+</div>
+
+<h1>Coverage Summary for Class: PathUtils (io.swagger.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PathUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/64)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package io.swagger.util;
+&nbsp;
+&nbsp;import org.apache.commons.lang3.StringUtils;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;
+&nbsp;import java.text.CharacterIterator;
+&nbsp;import java.text.StringCharacterIterator;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.regex.Matcher;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+<b class="nc">&nbsp;public class PathUtils {</b>
+<b class="nc">&nbsp;    private static Logger LOGGER = LoggerFactory.getLogger(PathUtils.class);</b>
+&nbsp;    private static final char COLON = &#39;:&#39;;
+&nbsp;    private static final char OPEN = &#39;{&#39;;
+&nbsp;    private static final char CLOSE = &#39;}&#39;;
+&nbsp;    private static final char SLASH = &#39;/&#39;;
+<b class="nc">&nbsp;    private static final Pattern TRIM_PATTERN = Pattern.compile(&quot;^/*(.*?)/*$&quot;);</b>
+&nbsp;
+&nbsp;    public static String parsePath(String uri, Map&lt;String, String&gt; patterns) {
+<b class="nc">&nbsp;        if (uri == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+<b class="nc">&nbsp;        } else if (StringUtils.isBlank(uri)) {</b>
+<b class="nc">&nbsp;            return String.valueOf(SLASH);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        CharacterIterator ci = new StringCharacterIterator(uri);</b>
+<b class="nc">&nbsp;        StringBuilder pathBuffer = new StringBuilder();</b>
+<b class="nc">&nbsp;        char c = ci.first();</b>
+<b class="nc">&nbsp;        if (c == CharacterIterator.DONE) {</b>
+<b class="nc">&nbsp;            return String.valueOf(SLASH);</b>
+&nbsp;        }
+&nbsp;        do {
+<b class="nc">&nbsp;            if (c == OPEN) {</b>
+<b class="nc">&nbsp;                String regexBuffer = cutParameter(ci, patterns);</b>
+<b class="nc">&nbsp;                if (regexBuffer == null) {</b>
+<b class="nc">&nbsp;                    LOGGER.warn(&quot;Operation path \&quot;&quot; + uri + &quot;\&quot; contains syntax error.&quot;);</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                pathBuffer.append(regexBuffer);</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                int length = pathBuffer.length();</b>
+<b class="nc">&nbsp;                if (!(c == SLASH &amp;&amp; (length != 0 &amp;&amp; pathBuffer.charAt(length - 1) == SLASH))) {</b>
+<b class="nc">&nbsp;                    pathBuffer.append(c);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        } while ((c = ci.next()) != CharacterIterator.DONE);</b>
+<b class="nc">&nbsp;        return pathBuffer.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String collectPath(String... pathParts) {
+<b class="nc">&nbsp;        final StringBuilder sb = new StringBuilder();</b>
+<b class="nc">&nbsp;        for (String item : pathParts) {</b>
+<b class="nc">&nbsp;            if (StringUtils.isBlank(item)) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            final String path = trimPath(item);</b>
+<b class="nc">&nbsp;            if (StringUtils.isNotBlank(path)) {</b>
+<b class="nc">&nbsp;                sb.append(SLASH).append(path);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return sb.length() &gt; 0 ? sb.toString() : String.valueOf(SLASH);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String trimPath(String value) {
+<b class="nc">&nbsp;        final Matcher matcher = TRIM_PATTERN.matcher(value);</b>
+<b class="nc">&nbsp;        return matcher.find() &amp;&amp; StringUtils.isNotBlank(matcher.group(1)) ? matcher.group(1) : null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String cutParameter(CharacterIterator ci, Map&lt;String, String&gt; patterns) {
+<b class="nc">&nbsp;        StringBuilder regexBuffer = new StringBuilder();</b>
+<b class="nc">&nbsp;        int braceCount = 1;</b>
+<b class="nc">&nbsp;        for (char regexChar = ci.next(); regexChar != CharacterIterator.DONE; regexChar = ci.next()) {</b>
+<b class="nc">&nbsp;            if (regexChar == OPEN) {</b>
+<b class="nc">&nbsp;                braceCount++;</b>
+<b class="nc">&nbsp;            } else if (regexChar == CLOSE) {</b>
+<b class="nc">&nbsp;                braceCount--;</b>
+<b class="nc">&nbsp;                if (braceCount == 0) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            regexBuffer.append(regexChar);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (braceCount != 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String regex = StringUtils.trimToNull(regexBuffer.toString());</b>
+<b class="nc">&nbsp;        if (regex == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        StringBuilder pathBuffer = new StringBuilder();</b>
+<b class="nc">&nbsp;        pathBuffer.append(OPEN);</b>
+<b class="nc">&nbsp;        int index = regex.indexOf(COLON);</b>
+<b class="nc">&nbsp;        if (index != -1) {</b>
+<b class="nc">&nbsp;            final String name = StringUtils.trimToNull(regex.substring(0, index));</b>
+<b class="nc">&nbsp;            final String value = StringUtils.trimToNull(regex.substring(index + 1, regex.length()));</b>
+<b class="nc">&nbsp;            if (name != null) {</b>
+<b class="nc">&nbsp;                pathBuffer.append(name);</b>
+<b class="nc">&nbsp;                if (value != null) {</b>
+<b class="nc">&nbsp;                    patterns.put(name, value);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            pathBuffer.append(regex);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        pathBuffer.append(CLOSE);</b>
+<b class="nc">&nbsp;        return pathBuffer.toString();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:23</div>
+</div>
+</body>
+</html>

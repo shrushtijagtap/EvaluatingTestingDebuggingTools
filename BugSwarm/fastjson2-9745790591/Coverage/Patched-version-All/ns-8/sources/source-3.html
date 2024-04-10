@@ -1,0 +1,589 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FastJsonProvider</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.support.jaxrs</a>
+</div>
+
+<h1>Coverage Summary for Class: FastJsonProvider (com.alibaba.fastjson.support.jaxrs)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FastJsonProvider</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/106)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson.support.jaxrs;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.JSON;
+&nbsp;import com.alibaba.fastjson.JSONException;
+&nbsp;import com.alibaba.fastjson.parser.Feature;
+&nbsp;import com.alibaba.fastjson.serializer.*;
+&nbsp;import com.alibaba.fastjson.support.config.FastJsonConfig;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;
+&nbsp;import javax.ws.rs.Consumes;
+&nbsp;import javax.ws.rs.Produces;
+&nbsp;import javax.ws.rs.WebApplicationException;
+&nbsp;import javax.ws.rs.core.*;
+&nbsp;import javax.ws.rs.ext.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * Fastjson for JAX-RS Provider.
+&nbsp; *
+&nbsp; * @author smallnest
+&nbsp; * @author VictorZeng
+&nbsp; * @see MessageBodyReader
+&nbsp; * @see MessageBodyWriter
+&nbsp; * @since 1.2.9
+&nbsp; */
+&nbsp;
+&nbsp;@Provider
+&nbsp;@Consumes(MediaType.WILDCARD)
+&nbsp;@Produces(MediaType.WILDCARD)
+&nbsp;public class FastJsonProvider
+&nbsp;        implements MessageBodyReader&lt;Object&gt;, MessageBodyWriter&lt;Object&gt; {
+&nbsp;    /**
+&nbsp;     * These are classes that we never use for reading
+&nbsp;     * (never try to deserialize instances of these types).
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Class&lt;?&gt;[] DEFAULT_UNREADABLES = new Class&lt;?&gt;[]{</b>
+&nbsp;            InputStream.class, Reader.class
+&nbsp;    };
+&nbsp;
+&nbsp;    /**
+&nbsp;     * These are classes that we never use for writing
+&nbsp;     * (never try to serialize instances of these types).
+&nbsp;     */
+<b class="nc">&nbsp;    public static final Class&lt;?&gt;[] DEFAULT_UNWRITABLES = new Class&lt;?&gt;[]{</b>
+&nbsp;            InputStream.class,
+&nbsp;            OutputStream.class, Writer.class,
+&nbsp;            StreamingOutput.class, Response.class
+&nbsp;    };
+&nbsp;
+<b class="nc">&nbsp;    @Deprecated</b>
+<b class="nc">&nbsp;    protected Charset charset = Charset.forName(&quot;UTF-8&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;    @Deprecated</b>
+&nbsp;    protected SerializerFeature[] features = new SerializerFeature[0];
+&nbsp;
+<b class="nc">&nbsp;    @Deprecated</b>
+&nbsp;    protected SerializeFilter[] filters = new SerializeFilter[0];
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    protected String dateFormat;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Injectable context object used to locate configured
+&nbsp;     * instance of {@link FastJsonConfig} to use for actual
+&nbsp;     * serialization.
+&nbsp;     */
+&nbsp;    @Context
+&nbsp;    protected Providers providers;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * with fastJson config
+&nbsp;     */
+<b class="nc">&nbsp;    private FastJsonConfig fastJsonConfig = new FastJsonConfig();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * allow serialize/deserialize types in clazzes
+&nbsp;     */
+&nbsp;    private Class&lt;?&gt;[] clazzes;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * whether set PrettyFormat while exec WriteTo()
+&nbsp;     */
+&nbsp;    private boolean pretty;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return the fastJsonConfig.
+&nbsp;     * @since 1.2.11
+&nbsp;     */
+&nbsp;    public FastJsonConfig getFastJsonConfig() {
+<b class="nc">&nbsp;        return fastJsonConfig;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param fastJsonConfig the fastJsonConfig to set.
+&nbsp;     * @since 1.2.11
+&nbsp;     */
+&nbsp;    public void setFastJsonConfig(FastJsonConfig fastJsonConfig) {
+<b class="nc">&nbsp;        this.fastJsonConfig = fastJsonConfig;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Can serialize/deserialize all types.
+&nbsp;     */
+<b class="nc">&nbsp;    public FastJsonProvider() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Only serialize/deserialize all types in clazzes.
+&nbsp;     */
+<b class="nc">&nbsp;    public FastJsonProvider(Class&lt;?&gt;[] clazzes) {</b>
+<b class="nc">&nbsp;        this.clazzes = clazzes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set pretty format
+&nbsp;     */
+&nbsp;    public FastJsonProvider setPretty(boolean p) {
+<b class="nc">&nbsp;        this.pretty = p;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Instantiates a new Fast json provider.
+&nbsp;     *
+&nbsp;     * @param charset the charset
+&nbsp;     * @see FastJsonConfig#setCharset(Charset)
+&nbsp;     * @deprecated
+&nbsp;     */
+&nbsp;    @Deprecated
+<b class="nc">&nbsp;    public FastJsonProvider(String charset) {</b>
+<b class="nc">&nbsp;        this.fastJsonConfig.setCharset(Charset.forName(charset));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets charset.
+&nbsp;     *
+&nbsp;     * @return the charset
+&nbsp;     * @see FastJsonConfig#getCharset()
+&nbsp;     * @deprecated
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public Charset getCharset() {
+<b class="nc">&nbsp;        return this.fastJsonConfig.getCharset();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets charset.
+&nbsp;     *
+&nbsp;     * @param charset the charset
+&nbsp;     * @see FastJsonConfig#setCharset(Charset)
+&nbsp;     * @deprecated
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public void setCharset(Charset charset) {
+<b class="nc">&nbsp;        this.fastJsonConfig.setCharset(charset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets date format.
+&nbsp;     *
+&nbsp;     * @return the date format
+&nbsp;     * @see FastJsonConfig#getDateFormat()
+&nbsp;     * @deprecated
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public String getDateFormat() {
+<b class="nc">&nbsp;        return this.fastJsonConfig.getDateFormat();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets date format.
+&nbsp;     *
+&nbsp;     * @param dateFormat the date format
+&nbsp;     * @see FastJsonConfig#setDateFormat(String)
+&nbsp;     * @deprecated
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public void setDateFormat(String dateFormat) {
+<b class="nc">&nbsp;        this.fastJsonConfig.setDateFormat(dateFormat);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get features serializer feature [].
+&nbsp;     *
+&nbsp;     * @return the serializer feature []
+&nbsp;     * @see FastJsonConfig#getFeatures()
+&nbsp;     * @deprecated
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public SerializerFeature[] getFeatures() {
+<b class="nc">&nbsp;        return this.fastJsonConfig.getSerializerFeatures();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets features.
+&nbsp;     *
+&nbsp;     * @param features the features
+&nbsp;     * @see FastJsonConfig#setFeatures(Feature...)
+&nbsp;     * @deprecated
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public void setFeatures(SerializerFeature... features) {
+<b class="nc">&nbsp;        this.fastJsonConfig.setSerializerFeatures(features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get filters serialize filter [].
+&nbsp;     *
+&nbsp;     * @return the serialize filter []
+&nbsp;     * @see FastJsonConfig#getSerializeFilters()
+&nbsp;     * @deprecated
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public SerializeFilter[] getFilters() {
+<b class="nc">&nbsp;        return this.fastJsonConfig.getSerializeFilters();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets filters.
+&nbsp;     *
+&nbsp;     * @param filters the filters
+&nbsp;     * @see FastJsonConfig#setSerializeFilters(SerializeFilter...)
+&nbsp;     * @deprecated
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public void setFilters(SerializeFilter... filters) {
+<b class="nc">&nbsp;        this.fastJsonConfig.setSerializeFilters(filters);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check some are interface/abstract classes to exclude.
+&nbsp;     *
+&nbsp;     * @param type the type
+&nbsp;     * @param classes the classes
+&nbsp;     * @return the boolean
+&nbsp;     */
+&nbsp;    protected boolean isAssignableFrom(Class&lt;?&gt; type, Class&lt;?&gt;[] classes) {
+<b class="nc">&nbsp;        if (type == null) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //  there are some other abstract/interface types to exclude too:
+<b class="nc">&nbsp;        for (Class&lt;?&gt; cls : classes) {</b>
+<b class="nc">&nbsp;            if (cls.isAssignableFrom(type)) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check whether a class can be serialized or deserialized. It can check
+&nbsp;     * based on packages, annotations on entities or explicit classes.
+&nbsp;     *
+&nbsp;     * @param type class need to check
+&nbsp;     * @return true if valid
+&nbsp;     */
+&nbsp;    protected boolean isValidType(Class&lt;?&gt; type, Annotation[] classAnnotations) {
+<b class="nc">&nbsp;        if (type == null) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (clazzes != null) {</b>
+<b class="nc">&nbsp;            for (Class&lt;?&gt; cls : clazzes) { // must strictly equal. Don&#39;t check</b>
+&nbsp;                // inheritance
+<b class="nc">&nbsp;                if (cls == type) {</b>
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check media type like &quot;application/json&quot;.
+&nbsp;     *
+&nbsp;     * @param mediaType media type
+&nbsp;     * @return true if the media type is valid
+&nbsp;     */
+&nbsp;    protected boolean hasMatchingMediaType(MediaType mediaType) {
+<b class="nc">&nbsp;        if (mediaType != null) {</b>
+<b class="nc">&nbsp;            String subtype = mediaType.getSubtype();</b>
+&nbsp;
+<b class="nc">&nbsp;            return ((&quot;json&quot;.equalsIgnoreCase(subtype)) //</b>
+<b class="nc">&nbsp;                    || (subtype.endsWith(&quot;+json&quot;)) //</b>
+<b class="nc">&nbsp;                    || (&quot;javascript&quot;.equals(subtype)) //</b>
+<b class="nc">&nbsp;                    || (&quot;x-javascript&quot;.equals(subtype)) //</b>
+<b class="nc">&nbsp;                    || (&quot;x-json&quot;.equals(subtype)) //</b>
+<b class="nc">&nbsp;                    || (&quot;x-www-form-urlencoded&quot;.equalsIgnoreCase(subtype)) //</b>
+<b class="nc">&nbsp;                    || (subtype.endsWith(&quot;x-www-form-urlencoded&quot;)));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that JAX-RS container calls to try to check whether given value
+&nbsp;     * (of specified type) can be serialized by this provider.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean isWriteable(
+&nbsp;            Class&lt;?&gt; type,
+&nbsp;            Type genericType,
+&nbsp;            Annotation[] annotations,
+&nbsp;            MediaType mediaType) {
+<b class="nc">&nbsp;        if (!hasMatchingMediaType(mediaType)) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!isAssignableFrom(type, DEFAULT_UNWRITABLES)) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return isValidType(type, annotations);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that JAX-RS container calls to try to figure out serialized length
+&nbsp;     * of given value. always return -1 to denote &quot;not known&quot;.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public long getSize(
+&nbsp;            Object t,
+&nbsp;            Class&lt;?&gt; type,
+&nbsp;            Type genericType,
+&nbsp;            Annotation[] annotations,
+&nbsp;            MediaType mediaType) {
+<b class="nc">&nbsp;        return -1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that JAX-RS container calls to serialize given value.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void writeTo(
+&nbsp;            Object obj,
+&nbsp;            Class&lt;?&gt; type,
+&nbsp;            Type genericType,
+&nbsp;            Annotation[] annotations,
+&nbsp;            MediaType mediaType,
+&nbsp;            MultivaluedMap&lt;String, Object&gt; httpHeaders,
+&nbsp;            OutputStream entityStream
+&nbsp;    ) throws IOException, WebApplicationException {
+<b class="nc">&nbsp;        FastJsonConfig fastJsonConfig = locateConfigProvider(type, mediaType);</b>
+<b class="nc">&nbsp;        SerializerFeature[] serializerFeatures = fastJsonConfig.getSerializerFeatures();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (pretty) {</b>
+<b class="nc">&nbsp;            if (serializerFeatures == null) {</b>
+<b class="nc">&nbsp;                serializerFeatures = new SerializerFeature[]{SerializerFeature.PrettyFormat};</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                List&lt;SerializerFeature&gt; featureList = new ArrayList&lt;SerializerFeature&gt;(Arrays.asList(serializerFeatures));</b>
+<b class="nc">&nbsp;                featureList.add(SerializerFeature.PrettyFormat);</b>
+<b class="nc">&nbsp;                serializerFeatures = featureList.toArray(serializerFeatures);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            fastJsonConfig.setSerializerFeatures(serializerFeatures);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            writeJSONStringWithFastJsonConfig(</b>
+&nbsp;                    entityStream,
+<b class="nc">&nbsp;                    fastJsonConfig.getCharset(),</b>
+&nbsp;                    obj,
+<b class="nc">&nbsp;                    fastJsonConfig.getSerializeConfig(),</b>
+<b class="nc">&nbsp;                    fastJsonConfig.getSerializeFilters(),</b>
+<b class="nc">&nbsp;                    fastJsonConfig.getDateFormat(),</b>
+&nbsp;                    JSON.DEFAULT_GENERATE_FEATURE,
+<b class="nc">&nbsp;                    fastJsonConfig.getSerializerFeatures()</b>
+&nbsp;            );
+&nbsp;
+<b class="nc">&nbsp;            entityStream.flush();</b>
+<b class="nc">&nbsp;        } catch (JSONException ex) {</b>
+<b class="nc">&nbsp;            throw new WebApplicationException(ex);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static final int writeJSONStringWithFastJsonConfig(
+&nbsp;            OutputStream os,
+&nbsp;            Charset charset,
+&nbsp;            Object object,
+&nbsp;            SerializeConfig config,
+&nbsp;            SerializeFilter[] filters,
+&nbsp;            String dateFormat,
+&nbsp;            int defaultFeatures,
+&nbsp;            SerializerFeature... features) throws IOException {
+<b class="nc">&nbsp;        for (SerializerFeature feature : features) {</b>
+<b class="nc">&nbsp;            defaultFeatures |= feature.mask;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONWriter.Context context = JSON.createWriteContext(config, defaultFeatures, features);</b>
+<b class="nc">&nbsp;        com.alibaba.fastjson2.JSONWriter writer = com.alibaba.fastjson2.JSONWriter.ofUTF8(context);</b>
+<b class="nc">&nbsp;        context.setDateFormat(dateFormat);</b>
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            if (filters != null) {</b>
+<b class="nc">&nbsp;                for (SerializeFilter filter : filters) {</b>
+<b class="nc">&nbsp;                    JSON.configFilter(context, filter);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            writer.writeAny(object);</b>
+&nbsp;
+<b class="nc">&nbsp;            int len = writer.flushTo(os, charset);</b>
+<b class="nc">&nbsp;            return len;</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            writer.close();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that JAX-RS container calls to try to check whether values of
+&nbsp;     * given type (and media type) can be deserialized by this provider.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean isReadable(
+&nbsp;            Class&lt;?&gt; type,
+&nbsp;            Type genericType,
+&nbsp;            Annotation[] annotations,
+&nbsp;            MediaType mediaType) {
+<b class="nc">&nbsp;        if (!hasMatchingMediaType(mediaType)) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!isAssignableFrom(type, DEFAULT_UNREADABLES)) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return isValidType(type, annotations);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that JAX-RS container calls to deserialize given value.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Object readFrom(
+&nbsp;            Class&lt;Object&gt; type,
+&nbsp;            Type genericType,
+&nbsp;            Annotation[] annotations,
+&nbsp;            MediaType mediaType,
+&nbsp;            MultivaluedMap&lt;String, String&gt; httpHeaders,
+&nbsp;            InputStream entityStream
+&nbsp;    ) throws IOException, WebApplicationException {
+&nbsp;        try {
+<b class="nc">&nbsp;            FastJsonConfig fastJsonConfig = locateConfigProvider(type, mediaType);</b>
+&nbsp;
+<b class="nc">&nbsp;            return JSON.parseObject(entityStream,</b>
+<b class="nc">&nbsp;                    fastJsonConfig.getCharset(),</b>
+&nbsp;                    genericType,
+<b class="nc">&nbsp;                    fastJsonConfig.getParserConfig(),</b>
+<b class="nc">&nbsp;                    fastJsonConfig.getParseProcess(),</b>
+&nbsp;                    JSON.DEFAULT_PARSER_FEATURE,
+<b class="nc">&nbsp;                    fastJsonConfig.getFeatures());</b>
+<b class="nc">&nbsp;        } catch (JSONException ex) {</b>
+<b class="nc">&nbsp;            throw new WebApplicationException(ex);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper method that is called if no config has been explicitly configured.
+&nbsp;     */
+&nbsp;    protected FastJsonConfig locateConfigProvider(Class&lt;?&gt; type, MediaType mediaType) {
+<b class="nc">&nbsp;        if (providers != null) {</b>
+<b class="nc">&nbsp;            ContextResolver&lt;FastJsonConfig&gt; resolver = providers.getContextResolver(FastJsonConfig.class, mediaType);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (resolver == null) {</b>
+<b class="nc">&nbsp;                resolver = providers.getContextResolver(FastJsonConfig.class, null);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (resolver != null) {</b>
+<b class="nc">&nbsp;                return resolver.getContext(type);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return fastJsonConfig;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:07</div>
+</div>
+</body>
+</html>

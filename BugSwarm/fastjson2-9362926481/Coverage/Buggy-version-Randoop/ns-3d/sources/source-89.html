@@ -1,0 +1,726 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectWriterImplMap</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectWriterImplMap (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectWriterImplMap</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/352)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.filter.*;
+&nbsp;import com.alibaba.fastjson2.util.*;
+&nbsp;
+&nbsp;import java.lang.reflect.Array;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.ParameterizedType;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.UNSAFE_SUPPORT;
+&nbsp;import static com.alibaba.fastjson2.util.TypeUtils.CLASS_JSON_OBJECT_1x;
+&nbsp;
+&nbsp;public final class ObjectWriterImplMap
+&nbsp;        extends ObjectWriterBaseModule.PrimitiveImpl {
+<b class="nc">&nbsp;    static final byte[] TYPE_NAME_JSONObject1O = JSONB.toBytes(&quot;JO10&quot;);</b>
+<b class="nc">&nbsp;    static final long TYPE_HASH_JSONObject1O = Fnv.hashCode64(&quot;JO10&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;    static final ObjectWriterImplMap INSTANCE = new ObjectWriterImplMap(String.class, Object.class, JSONObject.class, JSONObject.class, 0);</b>
+&nbsp;    static final ObjectWriterImplMap INSTANCE_1x;
+&nbsp;
+&nbsp;    static {
+<b class="nc">&nbsp;        if (CLASS_JSON_OBJECT_1x == null) {</b>
+<b class="nc">&nbsp;            INSTANCE_1x = null;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            INSTANCE_1x = new ObjectWriterImplMap(String.class, Object.class, CLASS_JSON_OBJECT_1x, CLASS_JSON_OBJECT_1x, 0);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    final Type objectType;
+&nbsp;    final Class objectClass;
+&nbsp;
+&nbsp;    final Type keyType;
+&nbsp;    final Type valueType;
+&nbsp;    final boolean valueTypeRefDetect;
+&nbsp;    volatile ObjectWriter valueWriter;
+&nbsp;
+&nbsp;    final byte[] jsonbTypeInfo;
+&nbsp;    final long typeNameHash;
+&nbsp;    final long features;
+&nbsp;
+&nbsp;    final boolean jsonObject1; // fastjson 1 JSONObject
+&nbsp;    final Field jsonObject1InnerMap;
+<b class="nc">&nbsp;    long jsonObject1InnerMapOffset = -1;</b>
+&nbsp;
+&nbsp;    final char[] typeInfoUTF16;
+&nbsp;    final byte[] typeInfoUTF8;
+&nbsp;
+&nbsp;    public ObjectWriterImplMap(Class objectClass, long features) {
+<b class="nc">&nbsp;        this(null, null, objectClass, objectClass, features);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public ObjectWriterImplMap(Type keyType, Type valueType, Class objectClass, Type objectType, long features) {</b>
+<b class="nc">&nbsp;        this.keyType = keyType;</b>
+<b class="nc">&nbsp;        this.valueType = valueType;</b>
+<b class="nc">&nbsp;        this.objectClass = objectClass;</b>
+<b class="nc">&nbsp;        this.objectType = objectType;</b>
+<b class="nc">&nbsp;        this.features = features;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (valueType == null) {</b>
+<b class="nc">&nbsp;            this.valueTypeRefDetect = true;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            this.valueTypeRefDetect = !ObjectWriterProvider.isNotReferenceDetect(TypeUtils.getClass(valueType));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String typeName = TypeUtils.getTypeName(objectClass);</b>
+<b class="nc">&nbsp;        String typeInfoStr = &quot;\&quot;@type\&quot;:\&quot;&quot; + objectClass.getName() + &quot;\&quot;&quot;;</b>
+<b class="nc">&nbsp;        this.typeInfoUTF16 = typeInfoStr.toCharArray();</b>
+<b class="nc">&nbsp;        this.typeInfoUTF8 = typeInfoStr.getBytes(StandardCharsets.UTF_8);</b>
+&nbsp;
+<b class="nc">&nbsp;        jsonObject1 = &quot;JO1&quot;.equals(typeName);</b>
+<b class="nc">&nbsp;        this.jsonbTypeInfo = JSONB.toBytes(typeName);</b>
+<b class="nc">&nbsp;        this.typeNameHash = Fnv.hashCode64(typeName);</b>
+<b class="nc">&nbsp;        if (jsonObject1) {</b>
+<b class="nc">&nbsp;            jsonObject1InnerMap = BeanUtils.getDeclaredField(objectClass, &quot;map&quot;);</b>
+<b class="nc">&nbsp;            if (jsonObject1InnerMap != null) {</b>
+<b class="nc">&nbsp;                jsonObject1InnerMap.setAccessible(true);</b>
+<b class="nc">&nbsp;                if (UNSAFE_SUPPORT) {</b>
+<b class="nc">&nbsp;                    jsonObject1InnerMapOffset = UnsafeUtils.objectFieldOffset(jsonObject1InnerMap);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            jsonObject1InnerMap = null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ObjectWriterImplMap of(Class objectClass) {
+<b class="nc">&nbsp;        if (objectClass == JSONObject.class) {</b>
+<b class="nc">&nbsp;            return INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectClass == CLASS_JSON_OBJECT_1x) {</b>
+<b class="nc">&nbsp;            return INSTANCE_1x;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new ObjectWriterImplMap(null, null, objectClass, objectClass, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ObjectWriterImplMap of(Type type) {
+<b class="nc">&nbsp;        Class objectClass = TypeUtils.getClass(type);</b>
+<b class="nc">&nbsp;        return new ObjectWriterImplMap(objectClass, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ObjectWriterImplMap of(Type type, Class defineClass) {
+<b class="nc">&nbsp;        Type keyType = null, valueType = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (type instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;            ParameterizedType parameterizedType = (ParameterizedType) type;</b>
+<b class="nc">&nbsp;            Type rawType = parameterizedType.getRawType();</b>
+<b class="nc">&nbsp;            Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();</b>
+<b class="nc">&nbsp;            if (actualTypeArguments.length == 2) {</b>
+<b class="nc">&nbsp;                keyType = actualTypeArguments[0];</b>
+<b class="nc">&nbsp;                valueType = actualTypeArguments[1];</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new ObjectWriterImplMap(keyType, valueType, defineClass, type, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeArrayMappingJSONB(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;        Map map = (Map) object;</b>
+&nbsp;
+<b class="nc">&nbsp;        jsonWriter.startObject();</b>
+<b class="nc">&nbsp;        boolean writeNulls = jsonWriter.isWriteNulls();</b>
+<b class="nc">&nbsp;        for (Iterator&lt;Map.Entry&lt;String, Object&gt;&gt; it = map.entrySet().iterator(); it.hasNext(); ) {</b>
+<b class="nc">&nbsp;            Map.Entry&lt;String, Object&gt; entry = it.next();</b>
+<b class="nc">&nbsp;            String key = entry.getKey();</b>
+<b class="nc">&nbsp;            Object value = entry.getValue();</b>
+<b class="nc">&nbsp;            if (value == null) {</b>
+<b class="nc">&nbsp;                if (writeNulls) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeString(key);</b>
+<b class="nc">&nbsp;                    jsonWriter.writeNull();</b>
+&nbsp;                }
+&nbsp;                continue;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            jsonWriter.writeString(key);</b>
+&nbsp;
+<b class="nc">&nbsp;            Class&lt;?&gt; valueType = value.getClass();</b>
+<b class="nc">&nbsp;            if (valueType == String.class) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeString((String) value);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                ObjectWriter valueWriter = jsonWriter.getObjectWriter(valueType);</b>
+<b class="nc">&nbsp;                valueWriter.writeJSONB(jsonWriter, value, key, this.valueType, this.features);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        jsonWriter.endObject();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeJSONB(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;        if ((fieldType == this.objectType &amp;&amp; jsonWriter.isWriteMapTypeInfo(object, objectClass, features))</b>
+<b class="nc">&nbsp;                || jsonWriter.isWriteTypeInfo(object, fieldType, features)</b>
+&nbsp;        ) {
+<b class="nc">&nbsp;            boolean ordered = false;</b>
+<b class="nc">&nbsp;            if (jsonObject1InnerMap != null) {</b>
+<b class="nc">&nbsp;                if (jsonObject1InnerMapOffset != -1) {</b>
+<b class="nc">&nbsp;                    Object innerMap = UnsafeUtils.UNSAFE.getObject(object, jsonObject1InnerMapOffset);</b>
+<b class="nc">&nbsp;                    ordered = innerMap instanceof LinkedHashMap;</b>
+<b class="nc">&nbsp;                } else {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        Object innerMap = jsonObject1InnerMap.get(object);</b>
+<b class="nc">&nbsp;                        ordered = innerMap instanceof LinkedHashMap;</b>
+<b class="nc">&nbsp;                    } catch (IllegalAccessException ignored) {</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (ordered) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeTypeName(TYPE_NAME_JSONObject1O, TYPE_HASH_JSONObject1O);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                jsonWriter.writeTypeName(jsonbTypeInfo, typeNameHash);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Map map = (Map) object;</b>
+&nbsp;
+<b class="nc">&nbsp;        JSONWriter.Context context = jsonWriter.getContext();</b>
+<b class="nc">&nbsp;        jsonWriter.startObject();</b>
+&nbsp;
+<b class="nc">&nbsp;        Type fieldValueType = this.valueType;</b>
+<b class="nc">&nbsp;        if (fieldType == this.objectType) {</b>
+<b class="nc">&nbsp;            fieldValueType = this.valueType;</b>
+<b class="nc">&nbsp;        } else if (fieldType instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;            Type[] actualTypeArguments = ((ParameterizedType) fieldType).getActualTypeArguments();</b>
+<b class="nc">&nbsp;            if (actualTypeArguments.length == 2) {</b>
+<b class="nc">&nbsp;                fieldValueType = actualTypeArguments[1];</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long contextFeatures = context.getFeatures();</b>
+<b class="nc">&nbsp;        boolean writeNulls = (contextFeatures &amp; (JSONWriter.Feature.WriteNulls.mask | JSONWriter.Feature.NullAsDefaultValue.mask)) != 0;</b>
+<b class="nc">&nbsp;        boolean fieldBased = (contextFeatures &amp; JSONWriter.Feature.FieldBased.mask) != 0;</b>
+<b class="nc">&nbsp;        ObjectWriterProvider provider = context.getProvider();</b>
+&nbsp;
+<b class="nc">&nbsp;        Class itemClass = null;</b>
+<b class="nc">&nbsp;        ObjectWriter itemWriter = null;</b>
+<b class="nc">&nbsp;        SymbolTable symbolTable = jsonWriter.getSymbolTable();</b>
+<b class="nc">&nbsp;        boolean contextRefDetect = (contextFeatures &amp; JSONWriter.Feature.ReferenceDetection.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        int i = 0;</b>
+<b class="nc">&nbsp;        for (Iterator&lt;Map.Entry&gt; it = map.entrySet().iterator(); it.hasNext(); ++i) {</b>
+<b class="nc">&nbsp;            Map.Entry entry = it.next();</b>
+&nbsp;
+<b class="nc">&nbsp;            Object entryKey = entry.getKey();</b>
+&nbsp;
+<b class="nc">&nbsp;            Object value = entry.getValue();</b>
+<b class="nc">&nbsp;            if (value == null) {</b>
+<b class="nc">&nbsp;                if (writeNulls) {</b>
+<b class="nc">&nbsp;                    if (entryKey instanceof String) {</b>
+<b class="nc">&nbsp;                        jsonWriter.writeString((String) entryKey);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        Class&lt;?&gt; entryKeyClass = entryKey.getClass();</b>
+<b class="nc">&nbsp;                        boolean keyRefDetect = contextRefDetect</b>
+<b class="nc">&nbsp;                                &amp;&amp; !ObjectWriterProvider.isNotReferenceDetect(entryKeyClass);</b>
+&nbsp;
+<b class="nc">&nbsp;                        String refPath = null;</b>
+<b class="nc">&nbsp;                        if (keyRefDetect) {</b>
+<b class="nc">&nbsp;                            jsonWriter.setPath(i, entry);</b>
+<b class="nc">&nbsp;                            refPath = jsonWriter.setPath(&quot;key&quot;, entryKey);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        if (refPath != null) {</b>
+<b class="nc">&nbsp;                            jsonWriter.writeReference(refPath);</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            ObjectWriter keyWriter = provider.getObjectWriter(entryKeyClass, entryKeyClass, fieldBased);</b>
+<b class="nc">&nbsp;                            keyWriter.writeJSONB(jsonWriter, entryKey, null, null, 0);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        if (keyRefDetect) {</b>
+<b class="nc">&nbsp;                            jsonWriter.popPath(entry);</b>
+<b class="nc">&nbsp;                            jsonWriter.popPath(entryKey);</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                    jsonWriter.writeNull();</b>
+&nbsp;                }
+&nbsp;                continue;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (entryKey instanceof String || (contextFeatures &amp; JSONWriter.Feature.WriteClassName.mask) == 0) {</b>
+&nbsp;                String key;
+<b class="nc">&nbsp;                if (entryKey instanceof String) {</b>
+<b class="nc">&nbsp;                    key = (String) entryKey;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    key = entryKey.toString();</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (symbolTable != null) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeSymbol(key);</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (value instanceof String) {</b>
+<b class="nc">&nbsp;                        jsonWriter.writeSymbol((String) value);</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;                } else {
+<b class="nc">&nbsp;                    jsonWriter.writeString(key);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (entryKey == null) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeNull();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (contextRefDetect) {</b>
+<b class="nc">&nbsp;                    jsonWriter.config(JSONWriter.Feature.ReferenceDetection, false);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                Class&lt;?&gt; entryKeyClass = entryKey.getClass();</b>
+<b class="nc">&nbsp;                ObjectWriter keyWriter = provider.getObjectWriter(entryKeyClass, entryKeyClass, fieldBased);</b>
+<b class="nc">&nbsp;                keyWriter.writeJSONB(jsonWriter, entryKey, null, null, 0);</b>
+<b class="nc">&nbsp;                if (contextRefDetect) {</b>
+<b class="nc">&nbsp;                    jsonWriter.config(JSONWriter.Feature.ReferenceDetection, true);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Class&lt;?&gt; valueClass = value.getClass();</b>
+<b class="nc">&nbsp;            if (valueClass == String.class) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeString((String) value);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (valueClass == Integer.class) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeInt32((Integer) value);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (valueClass == Long.class) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeInt64((Long) value);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            boolean valueRefDetecChanged = false;</b>
+&nbsp;            boolean valueRefDetect;
+<b class="nc">&nbsp;            if (valueClass == this.valueType) {</b>
+<b class="nc">&nbsp;                valueRefDetect = contextRefDetect &amp;&amp; this.valueTypeRefDetect;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                valueRefDetect = contextRefDetect &amp;&amp; !ObjectWriterProvider.isNotReferenceDetect(valueClass);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (valueRefDetect) {</b>
+<b class="nc">&nbsp;                if (value == object) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeReference(&quot;..&quot;);</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                String refPath;
+<b class="nc">&nbsp;                if (entryKey instanceof String) {</b>
+<b class="nc">&nbsp;                    refPath = jsonWriter.setPath((String) entryKey, value);</b>
+<b class="nc">&nbsp;                } else if (ObjectWriterProvider.isPrimitiveOrEnum(entryKey.getClass())) {</b>
+<b class="nc">&nbsp;                    refPath = jsonWriter.setPath(entryKey.toString(), value);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    if (map.size() != 1 &amp;&amp; !(map instanceof SortedMap) &amp;&amp; !(map instanceof LinkedHashMap)) {</b>
+<b class="nc">&nbsp;                        refPath = null; // skip</b>
+<b class="nc">&nbsp;                        jsonWriter.config(JSONWriter.Feature.ReferenceDetection, false);</b>
+<b class="nc">&nbsp;                        valueRefDetecChanged = true;</b>
+<b class="nc">&nbsp;                        valueRefDetect = false;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        refPath = jsonWriter.setPath(i, value);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (refPath != null) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeReference(refPath);</b>
+<b class="nc">&nbsp;                    jsonWriter.popPath(value);</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            ObjectWriter valueWriter;
+<b class="nc">&nbsp;            if (valueClass == this.valueType &amp;&amp; this.valueWriter != null) {</b>
+<b class="nc">&nbsp;                valueWriter = this.valueWriter;</b>
+<b class="nc">&nbsp;            } else if (itemClass == valueClass) {</b>
+<b class="nc">&nbsp;                valueWriter = itemWriter;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (valueClass == JSONObject.class) {</b>
+<b class="nc">&nbsp;                    valueWriter = ObjectWriterImplMap.INSTANCE;</b>
+<b class="nc">&nbsp;                } else if (valueClass == CLASS_JSON_OBJECT_1x) {</b>
+<b class="nc">&nbsp;                    valueWriter = ObjectWriterImplMap.INSTANCE_1x;</b>
+<b class="nc">&nbsp;                } else if (valueClass == JSONArray.class) {</b>
+<b class="nc">&nbsp;                    valueWriter = ObjectWriterImplList.INSTANCE;</b>
+<b class="nc">&nbsp;                } else if (valueClass == TypeUtils.CLASS_JSON_ARRAY_1x) {</b>
+<b class="nc">&nbsp;                    valueWriter = ObjectWriterImplList.INSTANCE;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    valueWriter = provider.getObjectWriter(valueClass, valueClass, fieldBased);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (itemWriter == null) {</b>
+<b class="nc">&nbsp;                    itemWriter = valueWriter;</b>
+<b class="nc">&nbsp;                    itemClass = valueClass;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (valueClass == this.valueType) {</b>
+<b class="nc">&nbsp;                    this.valueWriter = valueWriter;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            valueWriter.writeJSONB(jsonWriter, value, entryKey, fieldValueType, this.features);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (valueRefDetecChanged) {</b>
+<b class="nc">&nbsp;                jsonWriter.config(JSONWriter.Feature.ReferenceDetection, true);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (valueRefDetect) {</b>
+<b class="nc">&nbsp;                    jsonWriter.popPath(value);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        jsonWriter.endObject();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean writeTypeInfo(JSONWriter jsonWriter) {
+<b class="nc">&nbsp;        if (jsonWriter.isUTF8()) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeNameRaw(typeInfoUTF8);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            jsonWriter.writeNameRaw(typeInfoUTF16);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;        if (jsonWriter.isJSONB()) {</b>
+<b class="nc">&nbsp;            writeJSONB(jsonWriter, object, fieldName, fieldType, features);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (hasFilter(jsonWriter)) {</b>
+<b class="nc">&nbsp;            writeWithFilter(jsonWriter, object, fieldName, fieldType, features);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean refDetect = jsonWriter.isRefDetect();</b>
+&nbsp;
+<b class="nc">&nbsp;        jsonWriter.startObject();</b>
+&nbsp;
+<b class="nc">&nbsp;        if ((fieldType == this.objectType &amp;&amp; jsonWriter.isWriteMapTypeInfo(object, objectClass, features))</b>
+<b class="nc">&nbsp;                || jsonWriter.isWriteTypeInfo(object, fieldType, features)</b>
+&nbsp;        ) {
+<b class="nc">&nbsp;            writeTypeInfo(jsonWriter);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Map map = (Map) object;</b>
+&nbsp;
+<b class="nc">&nbsp;        features |= jsonWriter.getFeatures();</b>
+<b class="nc">&nbsp;        if ((features &amp; JSONWriter.Feature.MapSortField.mask) != 0) {</b>
+<b class="nc">&nbsp;            if (!(map instanceof SortedMap) &amp;&amp; map.getClass() != LinkedHashMap.class) {</b>
+<b class="nc">&nbsp;                map = new TreeMap&lt;&gt;(map);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectWriterProvider provider = jsonWriter.getContext().getProvider();</b>
+<b class="nc">&nbsp;        for (Iterator&lt;Map.Entry&gt; it = map.entrySet().iterator(); it.hasNext(); ) {</b>
+<b class="nc">&nbsp;            Map.Entry entry = it.next();</b>
+<b class="nc">&nbsp;            Object value = entry.getValue();</b>
+<b class="nc">&nbsp;            Object key = entry.getKey();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (value == null) {</b>
+<b class="nc">&nbsp;                if ((features &amp; JSONWriter.Feature.WriteNulls.mask) != 0) {</b>
+<b class="nc">&nbsp;                    if (key == null) {</b>
+<b class="nc">&nbsp;                        jsonWriter.writeName(&quot;null&quot;);</b>
+<b class="nc">&nbsp;                    } else if (key instanceof String) {</b>
+<b class="nc">&nbsp;                        jsonWriter.writeName((String) key);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        if ((features &amp; JSONWriter.Feature.WriteNonStringKeyAsString.mask) != 0) {</b>
+<b class="nc">&nbsp;                            jsonWriter.writeName(key.toString());</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            if (key instanceof Integer) {</b>
+<b class="nc">&nbsp;                                jsonWriter.writeName(((Integer) key).intValue());</b>
+<b class="nc">&nbsp;                            } else if (key instanceof Long) {</b>
+<b class="nc">&nbsp;                                jsonWriter.writeName(((Long) key).longValue());</b>
+&nbsp;                            } else {
+<b class="nc">&nbsp;                                jsonWriter.writeNameAny(key);</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                    jsonWriter.writeColon();</b>
+<b class="nc">&nbsp;                    jsonWriter.writeNull();</b>
+&nbsp;                }
+&nbsp;                continue;
+<b class="nc">&nbsp;            } else if ((features &amp; JSONWriter.Feature.NotWriteEmptyArray.mask) != 0) {</b>
+<b class="nc">&nbsp;                if (value instanceof Collection &amp;&amp; ((Collection&lt;?&gt;) value).isEmpty()) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (value.getClass().isArray() &amp;&amp; Array.getLength(value) == 0) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String strKey = null;</b>
+<b class="nc">&nbsp;            if (key == null) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeName(&quot;null&quot;);</b>
+<b class="nc">&nbsp;            } else if (key instanceof String) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeName(strKey = (String) key);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if ((features &amp; JSONWriter.Feature.WriteNonStringKeyAsString.mask) != 0) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeName(strKey = key.toString());</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    if (key instanceof Integer) {</b>
+<b class="nc">&nbsp;                        jsonWriter.writeName(((Integer) key).intValue());</b>
+<b class="nc">&nbsp;                    } else if (key instanceof Long) {</b>
+<b class="nc">&nbsp;                        long longKey = (Long) key;</b>
+<b class="nc">&nbsp;                        jsonWriter.writeName(longKey);</b>
+<b class="nc">&nbsp;                    } else {</b>
+<b class="nc">&nbsp;                        jsonWriter.writeNameAny(key);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            jsonWriter.writeColon();</b>
+&nbsp;
+<b class="nc">&nbsp;            Class&lt;?&gt; valueClass = value.getClass();</b>
+<b class="nc">&nbsp;            if (valueClass == String.class) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeString((String) value);</b>
+<b class="nc">&nbsp;                continue;</b>
+<b class="nc">&nbsp;            } else if (valueClass == Integer.class) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeInt32((Integer) value);</b>
+<b class="nc">&nbsp;                continue;</b>
+<b class="nc">&nbsp;            } else if (valueClass == Long.class) {</b>
+<b class="nc">&nbsp;                if ((provider.userDefineMask &amp; ObjectWriterProvider.TYPE_INT64_MASK) == 0) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeInt64((Long) value);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    ObjectWriter valueWriter = jsonWriter.getObjectWriter(valueClass);</b>
+<b class="nc">&nbsp;                    valueWriter.write(jsonWriter, value, strKey, Long.class, features);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                continue;</b>
+<b class="nc">&nbsp;            } else if (valueClass == Boolean.class) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeBool((Boolean) value);</b>
+<b class="nc">&nbsp;                continue;</b>
+<b class="nc">&nbsp;            } else if (valueClass == BigDecimal.class) {</b>
+<b class="nc">&nbsp;                if ((provider.userDefineMask &amp; ObjectWriterProvider.TYPE_DECIMAL_MASK) == 0) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeDecimal((BigDecimal) value);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    ObjectWriter valueWriter = jsonWriter.getObjectWriter(valueClass);</b>
+<b class="nc">&nbsp;                    valueWriter.write(jsonWriter, value, key, this.valueType, this.features);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            boolean isPrimitiveOrEnum;
+&nbsp;            ObjectWriter valueWriter;
+<b class="nc">&nbsp;            if (valueClass == this.valueType) {</b>
+<b class="nc">&nbsp;                if (this.valueWriter != null) {</b>
+<b class="nc">&nbsp;                    valueWriter = this.valueWriter;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    valueWriter = this.valueWriter = jsonWriter.getObjectWriter(valueClass);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                isPrimitiveOrEnum = ObjectWriterProvider.isPrimitiveOrEnum(value.getClass());</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (valueClass == JSONObject.class) {</b>
+<b class="nc">&nbsp;                    valueWriter = ObjectWriterImplMap.INSTANCE;</b>
+<b class="nc">&nbsp;                    isPrimitiveOrEnum = false;</b>
+<b class="nc">&nbsp;                } else if (valueClass == CLASS_JSON_OBJECT_1x) {</b>
+<b class="nc">&nbsp;                    valueWriter = ObjectWriterImplMap.INSTANCE_1x;</b>
+<b class="nc">&nbsp;                    isPrimitiveOrEnum = false;</b>
+<b class="nc">&nbsp;                } else if (valueClass == JSONArray.class) {</b>
+<b class="nc">&nbsp;                    valueWriter = ObjectWriterImplList.INSTANCE;</b>
+<b class="nc">&nbsp;                    isPrimitiveOrEnum = false;</b>
+<b class="nc">&nbsp;                } else if (valueClass == TypeUtils.CLASS_JSON_ARRAY_1x) {</b>
+<b class="nc">&nbsp;                    valueWriter = ObjectWriterImplList.INSTANCE;</b>
+<b class="nc">&nbsp;                    isPrimitiveOrEnum = false;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    valueWriter = jsonWriter.getObjectWriter(valueClass);</b>
+<b class="nc">&nbsp;                    isPrimitiveOrEnum = ObjectWriterProvider.isPrimitiveOrEnum(value.getClass());</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            boolean valueRefDetect = refDetect &amp;&amp; strKey != null &amp;&amp; !isPrimitiveOrEnum;</b>
+<b class="nc">&nbsp;            if (valueRefDetect) {</b>
+<b class="nc">&nbsp;                if (value == object) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeReference(&quot;..&quot;);</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                String refPath = jsonWriter.setPath(strKey, value);</b>
+<b class="nc">&nbsp;                if (refPath != null) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeReference(refPath);</b>
+<b class="nc">&nbsp;                    jsonWriter.popPath(value);</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            valueWriter.write(jsonWriter, value, key, this.valueType, this.features);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (valueRefDetect) {</b>
+<b class="nc">&nbsp;                jsonWriter.popPath(value);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        jsonWriter.endObject();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeWithFilter(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;        if (object == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        jsonWriter.startObject();</b>
+<b class="nc">&nbsp;        Map map = (Map) object;</b>
+&nbsp;
+<b class="nc">&nbsp;        JSONWriter.Context context = jsonWriter.getContext();</b>
+&nbsp;
+<b class="nc">&nbsp;        BeforeFilter beforeFilter = context.getBeforeFilter();</b>
+<b class="nc">&nbsp;        if (beforeFilter != null) {</b>
+<b class="nc">&nbsp;            beforeFilter.writeBefore(jsonWriter, object);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        PropertyPreFilter propertyPreFilter = context.getPropertyPreFilter();</b>
+<b class="nc">&nbsp;        NameFilter nameFilter = context.getNameFilter();</b>
+<b class="nc">&nbsp;        ValueFilter valueFilter = context.getValueFilter();</b>
+<b class="nc">&nbsp;        PropertyFilter propertyFilter = context.getPropertyFilter();</b>
+<b class="nc">&nbsp;        AfterFilter afterFilter = context.getAfterFilter();</b>
+<b class="nc">&nbsp;        boolean writeNulls = context.isEnabled(JSONWriter.Feature.WriteNulls.mask);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (Iterator&lt;Map.Entry&gt; it = map.entrySet().iterator(); it.hasNext(); ) {</b>
+<b class="nc">&nbsp;            Map.Entry entry = it.next();</b>
+<b class="nc">&nbsp;            Object value = entry.getValue();</b>
+<b class="nc">&nbsp;            if (value == null &amp;&amp; !writeNulls) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String key = entry.getKey().toString();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (propertyPreFilter != null) {</b>
+<b class="nc">&nbsp;                if (!propertyPreFilter.process(jsonWriter, object, key)) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (nameFilter != null) {</b>
+<b class="nc">&nbsp;                key = nameFilter.process(object, key, value);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (propertyFilter != null) {</b>
+<b class="nc">&nbsp;                if (!propertyFilter.apply(object, key, value)) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (valueFilter != null) {</b>
+<b class="nc">&nbsp;                value = valueFilter.apply(object, key, value);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (value == null) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            jsonWriter.writeName(key);</b>
+<b class="nc">&nbsp;            jsonWriter.writeColon();</b>
+&nbsp;
+<b class="nc">&nbsp;            Class&lt;?&gt; valueType = value.getClass();</b>
+<b class="nc">&nbsp;            ObjectWriter valueWriter = jsonWriter.getObjectWriter(valueType);</b>
+<b class="nc">&nbsp;            valueWriter.write(jsonWriter, value, fieldName, fieldType, this.features);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (afterFilter != null) {</b>
+<b class="nc">&nbsp;            afterFilter.writeAfter(jsonWriter, object);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        jsonWriter.endObject();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 19:48</div>
+</div>
+</body>
+</html>

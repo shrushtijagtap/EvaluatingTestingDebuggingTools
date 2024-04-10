@@ -1,0 +1,220 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DateTimeValidator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.schema</a>
+</div>
+
+<h1>Coverage Summary for Class: DateTimeValidator (com.alibaba.fastjson2.schema)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DateTimeValidator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (57/57)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.schema;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;
+&nbsp;import java.time.DateTimeException;
+&nbsp;
+<b class="fc">&nbsp;final class DateTimeValidator</b>
+&nbsp;        implements FormatValidator {
+<b class="fc">&nbsp;    static final DateTimeValidator INSTANCE = new DateTimeValidator();</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isValid(String str) {
+<b class="fc">&nbsp;        if (str == null || str.isEmpty()) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        char c10;
+<b class="fc">&nbsp;        if (str.length() == 19</b>
+<b class="fc">&nbsp;                &amp;&amp; str.charAt(4) == &#39;-&#39;</b>
+<b class="fc">&nbsp;                &amp;&amp; str.charAt(7) == &#39;-&#39;</b>
+<b class="fc">&nbsp;                &amp;&amp; ((c10 = str.charAt(10)) == &#39; &#39; || c10 == &#39;T&#39;)</b>
+<b class="fc">&nbsp;                &amp;&amp; str.charAt(13) == &#39;:&#39;</b>
+<b class="fc">&nbsp;                &amp;&amp; str.charAt(16) == &#39;:&#39;</b>
+&nbsp;        ) {
+&nbsp;            // yyyy-MM-dd hh:mm:ss
+<b class="fc">&nbsp;            char y0 = str.charAt(0);</b>
+<b class="fc">&nbsp;            char y1 = str.charAt(1);</b>
+<b class="fc">&nbsp;            char y2 = str.charAt(2);</b>
+<b class="fc">&nbsp;            char y3 = str.charAt(3);</b>
+<b class="fc">&nbsp;            char m0 = str.charAt(5);</b>
+<b class="fc">&nbsp;            char m1 = str.charAt(6);</b>
+<b class="fc">&nbsp;            char d0 = str.charAt(8);</b>
+<b class="fc">&nbsp;            char d1 = str.charAt(9);</b>
+<b class="fc">&nbsp;            char h0 = str.charAt(11);</b>
+<b class="fc">&nbsp;            char h1 = str.charAt(12);</b>
+<b class="fc">&nbsp;            char i0 = str.charAt(14);</b>
+<b class="fc">&nbsp;            char i1 = str.charAt(15);</b>
+<b class="fc">&nbsp;            char s0 = str.charAt(17);</b>
+<b class="fc">&nbsp;            char s1 = str.charAt(18);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (y0 &lt; &#39;0&#39; || y0 &gt; &#39;9&#39;</b>
+&nbsp;                    || y1 &lt; &#39;0&#39; || y1 &gt; &#39;9&#39;
+&nbsp;                    || y2 &lt; &#39;0&#39; || y2 &gt; &#39;9&#39;
+&nbsp;                    || y3 &lt; &#39;0&#39; || y3 &gt; &#39;9&#39;
+&nbsp;                    || m0 &lt; &#39;0&#39; || m0 &gt; &#39;9&#39;
+&nbsp;                    || m1 &lt; &#39;0&#39; || m1 &gt; &#39;9&#39;
+&nbsp;                    || d0 &lt; &#39;0&#39; || d0 &gt; &#39;9&#39;
+&nbsp;                    || d1 &lt; &#39;0&#39; || d1 &gt; &#39;9&#39;
+&nbsp;                    || h0 &lt; &#39;0&#39; || h0 &gt; &#39;9&#39;
+&nbsp;                    || h1 &lt; &#39;0&#39; || h1 &gt; &#39;9&#39;
+&nbsp;                    || i0 &lt; &#39;0&#39; || i0 &gt; &#39;9&#39;
+&nbsp;                    || i1 &lt; &#39;0&#39; || i1 &gt; &#39;9&#39;
+&nbsp;                    || s0 &lt; &#39;0&#39; || s0 &gt; &#39;9&#39;
+&nbsp;                    || s1 &lt; &#39;0&#39; || s1 &gt; &#39;9&#39;
+&nbsp;            ) {
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            int yyyy = (y0 - &#39;0&#39;) * 1000 + (y1 - &#39;0&#39;) * 100 + (y2 - &#39;0&#39;) * 10 + (y3 - &#39;0&#39;);</b>
+<b class="fc">&nbsp;            int mm = (m0 - &#39;0&#39;) * 10 + (m1 - &#39;0&#39;);</b>
+<b class="fc">&nbsp;            int dd = (d0 - &#39;0&#39;) * 10 + (d1 - &#39;0&#39;);</b>
+<b class="fc">&nbsp;            int hh = (h0 - &#39;0&#39;) * 10 + (h1 - &#39;0&#39;);</b>
+<b class="fc">&nbsp;            int ii = (i0 - &#39;0&#39;) * 10 + (i1 - &#39;0&#39;);</b>
+<b class="fc">&nbsp;            int ss = (s0 - &#39;0&#39;) * 10 + (s1 - &#39;0&#39;);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (mm &gt; 12) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (dd &gt; 28) {</b>
+<b class="fc">&nbsp;                int dom = 31;</b>
+<b class="fc">&nbsp;                switch (mm) {</b>
+&nbsp;                    case 2:
+<b class="fc">&nbsp;                        boolean isLeapYear = ((yyyy &amp; 3) == 0) &amp;&amp; ((yyyy % 100) != 0 || (yyyy % 400) == 0);</b>
+<b class="fc">&nbsp;                        dom = isLeapYear ? 29 : 28;</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    case 4:
+&nbsp;                    case 6:
+&nbsp;                    case 9:
+&nbsp;                    case 11:
+<b class="fc">&nbsp;                        dom = 30;</b>
+&nbsp;                        break;
+&nbsp;                }
+<b class="fc">&nbsp;                if (dd &gt; dom) {</b>
+<b class="fc">&nbsp;                    return false;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (hh &gt; 24) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (ii &gt; 60) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (ss &gt; 61) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="fc">&nbsp;            char[] chars = new char[str.length() + 2];</b>
+<b class="fc">&nbsp;            chars[0] = &#39;&quot;&#39;;</b>
+<b class="fc">&nbsp;            str.getChars(0, str.length(), chars, 1);</b>
+<b class="fc">&nbsp;            chars[chars.length - 1] = &#39;&quot;&#39;;</b>
+&nbsp;
+<b class="fc">&nbsp;            return JSONReader.of(chars, JSONSchema.CONTEXT).isLocalDateTime();</b>
+<b class="fc">&nbsp;        } catch (DateTimeException | JSONException ignored) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:01</div>
+</div>
+</body>
+</html>

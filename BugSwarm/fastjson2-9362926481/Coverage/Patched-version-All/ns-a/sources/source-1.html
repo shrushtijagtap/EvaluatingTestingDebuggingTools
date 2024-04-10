@@ -1,0 +1,200 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MappingFastJsonMessageConverter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.support.spring.messaging</a>
+</div>
+
+<h1>Coverage Summary for Class: MappingFastJsonMessageConverter (com.alibaba.fastjson.support.spring.messaging)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MappingFastJsonMessageConverter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson.support.spring.messaging;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.JSON;
+&nbsp;import com.alibaba.fastjson.support.config.FastJsonConfig;
+&nbsp;import org.springframework.messaging.Message;
+&nbsp;import org.springframework.messaging.MessageHeaders;
+&nbsp;import org.springframework.messaging.converter.AbstractMessageConverter;
+&nbsp;import org.springframework.util.MimeType;
+&nbsp;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;
+&nbsp;/**
+&nbsp; * Fastjson for Spring Messaging Json Converter.
+&nbsp; * &lt;p&gt;
+&nbsp; * Compatible fastjson 1.2.x
+&nbsp; *
+&nbsp; * @author KimmKing
+&nbsp; * @author Victor.Zxy
+&nbsp; * @see AbstractMessageConverter
+&nbsp; * @since 2.0.2
+&nbsp; */
+&nbsp;public class MappingFastJsonMessageConverter
+&nbsp;        extends AbstractMessageConverter {
+&nbsp;    /**
+&nbsp;     * with fastJson config
+&nbsp;     */
+<b class="nc">&nbsp;    private FastJsonConfig fastJsonConfig = new FastJsonConfig();</b>
+&nbsp;
+&nbsp;    public MappingFastJsonMessageConverter() {
+<b class="nc">&nbsp;        super(new MimeType(&quot;application&quot;, &quot;json&quot;, StandardCharsets.UTF_8));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return the fastJsonConfig.
+&nbsp;     */
+&nbsp;    public FastJsonConfig getFastJsonConfig() {
+<b class="nc">&nbsp;        return fastJsonConfig;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param fastJsonConfig the fastJsonConfig to set.
+&nbsp;     */
+&nbsp;    public void setFastJsonConfig(FastJsonConfig fastJsonConfig) {
+<b class="nc">&nbsp;        this.fastJsonConfig = fastJsonConfig;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected boolean supports(Class&lt;?&gt; clazz) {
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected boolean canConvertFrom(Message&lt;?&gt; message, Class&lt;?&gt; targetClass) {
+<b class="nc">&nbsp;        return supports(targetClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected boolean canConvertTo(Object payload, MessageHeaders headers) {
+<b class="nc">&nbsp;        return supports(payload.getClass());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object convertFromInternal(Message&lt;?&gt; message, Class&lt;?&gt; targetClass, Object conversionHint) {
+&nbsp;        // parse byte[] or String payload to Java Object
+<b class="nc">&nbsp;        Object payload = message.getPayload();</b>
+<b class="nc">&nbsp;        Object obj = null;</b>
+<b class="nc">&nbsp;        if (payload instanceof byte[]) {</b>
+<b class="nc">&nbsp;            obj = JSON.parseObject((byte[]) payload, targetClass, fastJsonConfig.getFeatures());</b>
+<b class="nc">&nbsp;        } else if (payload instanceof String) {</b>
+<b class="nc">&nbsp;            obj = JSON.parseObject((String) payload, targetClass, fastJsonConfig.getFeatures());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return obj;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object convertToInternal(Object payload, MessageHeaders headers, Object conversionHint) {
+&nbsp;        // encode payload to json string or byte[]
+&nbsp;        Object obj;
+<b class="nc">&nbsp;        if (byte[].class == getSerializedPayloadClass()) {</b>
+<b class="nc">&nbsp;            if (payload instanceof String &amp;&amp; JSON.isValid((String) payload)) {</b>
+<b class="nc">&nbsp;                obj = ((String) payload).getBytes(fastJsonConfig.getCharset());</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                obj = JSON.toJSONBytes(payload, fastJsonConfig.getSerializeFilters(), fastJsonConfig.getSerializerFeatures());</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (payload instanceof String &amp;&amp; JSON.isValid((String) payload)) {</b>
+<b class="nc">&nbsp;                obj = payload;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                obj = JSON.toJSONString(payload, fastJsonConfig.getSerializeFilters(), fastJsonConfig.getSerializerFeatures());</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return obj;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 19:55</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ValueFilter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.serializer</a>
+</div>
+
+<h1>Coverage Summary for Class: ValueFilter (com.alibaba.fastjson.serializer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ValueFilter</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson.serializer;
+&nbsp;
+&nbsp;public interface ValueFilter
+&nbsp;        extends SerializeFilter, com.alibaba.fastjson2.filter.ValueFilter {
+&nbsp;    Object process(Object object, String name, Object value);
+&nbsp;
+&nbsp;    @Override
+&nbsp;    default Object apply(Object object, String name, Object value) {
+&nbsp;        return process(object, name, value);
+&nbsp;    }
+&nbsp;
+&nbsp;    static ValueFilter compose(ValueFilter before, ValueFilter after) {
+&nbsp;        return (object, name, value) -&gt;
+&nbsp;                after.process(
+&nbsp;                        object,
+&nbsp;                        name,
+&nbsp;                        before.process(object, name, value)
+&nbsp;                );
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:11</div>
+</div>
+</body>
+</html>

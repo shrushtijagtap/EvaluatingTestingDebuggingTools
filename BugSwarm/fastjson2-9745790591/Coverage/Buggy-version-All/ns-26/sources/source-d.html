@@ -1,0 +1,178 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LocalDate20</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.primitves</a>
+</div>
+
+<h1>Coverage Summary for Class: LocalDate20 (com.alibaba.fastjson2.benchmark.primitves)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LocalDate20</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.primitves;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSON;
+&nbsp;import com.alibaba.fastjson2.benchmark.primitves.vo.LocalDate20Field;
+&nbsp;import com.alibaba.fastjson2.benchmark.primitves.vo.LocalDateTime20Field;
+&nbsp;import com.fasterxml.jackson.databind.ObjectMapper;
+&nbsp;import org.openjdk.jmh.annotations.Benchmark;
+&nbsp;import org.openjdk.jmh.annotations.Mode;
+&nbsp;import org.openjdk.jmh.infra.Blackhole;
+&nbsp;import org.openjdk.jmh.runner.Runner;
+&nbsp;import org.openjdk.jmh.runner.RunnerException;
+&nbsp;import org.openjdk.jmh.runner.options.Options;
+&nbsp;import org.openjdk.jmh.runner.options.OptionsBuilder;
+&nbsp;
+&nbsp;import java.util.concurrent.TimeUnit;
+&nbsp;
+<b class="nc">&nbsp;public class LocalDate20 {</b>
+<b class="nc">&nbsp;    static String str = &quot;{\n&quot; +</b>
+&nbsp;            &quot;  \&quot;v0000\&quot; : \&quot;2001-07-01\&quot;,\n&quot; +
+&nbsp;            &quot;  \&quot;v0001\&quot; : \&quot;2011-06-02\&quot;,\n&quot; +
+&nbsp;            &quot;  \&quot;v0002\&quot; : \&quot;2021-11-03\&quot;,\n&quot; +
+&nbsp;            &quot;  \&quot;v0003\&quot; : \&quot;2001-11-14\&quot;,\n&quot; +
+&nbsp;            &quot;  \&quot;v0004\&quot; : \&quot;2002-10-07\&quot;,\n&quot; +
+&nbsp;            &quot;  \&quot;v0005\&quot; : \&quot;2003-09-12\&quot;,\n&quot; +
+&nbsp;            &quot;  \&quot;v0006\&quot; : \&quot;2006-08-16\&quot;,\n&quot; +
+&nbsp;            &quot;  \&quot;v0007\&quot; : \&quot;2002-01-30\&quot;,\n&quot; +
+&nbsp;            &quot;  \&quot;v0008\&quot; : \&quot;2009-02-27\&quot;,\n&quot; +
+&nbsp;            &quot;  \&quot;v0009\&quot; : \&quot;2011-04-26\&quot;,\n&quot; +
+&nbsp;            &quot;  \&quot;v0010\&quot; : \&quot;2012-06-23\&quot;,\n&quot; +
+&nbsp;            &quot;  \&quot;v0011\&quot; : \&quot;2022-02-18\&quot;,\n&quot; +
+&nbsp;            &quot;  \&quot;v0012\&quot; : \&quot;2021-08-17\&quot;,\n&quot; +
+&nbsp;            &quot;  \&quot;v0013\&quot; : \&quot;2021-01-17\&quot;,\n&quot; +
+&nbsp;            &quot;  \&quot;v0014\&quot; : \&quot;2020-03-14\&quot;,\n&quot; +
+&nbsp;            &quot;  \&quot;v0015\&quot; : \&quot;2019-02-14\&quot;,\n&quot; +
+&nbsp;            &quot;  \&quot;v0016\&quot; : \&quot;2018-12-14\&quot;,\n&quot; +
+&nbsp;            &quot;  \&quot;v0017\&quot; : \&quot;2007-10-14\&quot;,\n&quot; +
+&nbsp;            &quot;  \&quot;v0018\&quot; : \&quot;2008-02-14\&quot;,\n&quot; +
+&nbsp;            &quot;  \&quot;v0019\&quot; : \&quot;2011-03-14\&quot;\n&quot; +
+&nbsp;            &quot;}\n&quot;;
+&nbsp;
+<b class="nc">&nbsp;    static ObjectMapper mapper = new ObjectMapper();</b>
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void fastjson2(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                JSON.parseObject(str, LocalDate20Field.class, &quot;yyyy-MM-dd&quot;)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void fastjson1(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                com.alibaba.fastjson.JSON.parseObject(str, LocalDateTime20Field.class)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void jackson(Blackhole bh) throws Exception {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                mapper.readValue(str, LocalDate20Field.class)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void main(String[] args) throws RunnerException {
+<b class="nc">&nbsp;        Options options = new OptionsBuilder()</b>
+<b class="nc">&nbsp;                .include(LocalDate20.class.getName())</b>
+<b class="nc">&nbsp;                .mode(Mode.Throughput)</b>
+<b class="nc">&nbsp;                .timeUnit(TimeUnit.MILLISECONDS)</b>
+<b class="nc">&nbsp;                .warmupIterations(3)</b>
+<b class="nc">&nbsp;                .forks(1)</b>
+<b class="nc">&nbsp;                .build();</b>
+<b class="nc">&nbsp;        new Runner(options).run();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:01</div>
+</div>
+</body>
+</html>

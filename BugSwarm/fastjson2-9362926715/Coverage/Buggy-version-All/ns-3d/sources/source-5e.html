@@ -1,0 +1,308 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectWriterCreatorLambda</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectWriterCreatorLambda (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectWriterCreatorLambda</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82.7%
+  </span>
+  <span class="absValue">
+    (62/75)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ObjectWriterCreatorLambda$LambdaInfo</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (65/78)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.function.ToByteFunction;
+&nbsp;import com.alibaba.fastjson2.function.ToCharFunction;
+&nbsp;import com.alibaba.fastjson2.function.ToFloatFunction;
+&nbsp;import com.alibaba.fastjson2.function.ToShortFunction;
+&nbsp;
+&nbsp;import java.lang.invoke.*;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.function.*;
+&nbsp;
+<b class="fc">&nbsp;public class ObjectWriterCreatorLambda</b>
+&nbsp;        extends ObjectWriterCreator {
+&nbsp;    // Android not support
+<b class="fc">&nbsp;    public static ObjectWriterCreatorLambda INSTANCE = new ObjectWriterCreatorLambda();</b>
+&nbsp;
+&nbsp;    static boolean isExternalClass(Class&lt;?&gt; clazz) {
+<b class="fc">&nbsp;        ClassLoader classLoader = clazz.getClassLoader();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (classLoader == null) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        ClassLoader current = ObjectWriterCreatorLambda.class.getClassLoader();</b>
+<b class="fc">&nbsp;        while (current != null) {</b>
+<b class="fc">&nbsp;            if (current == classLoader) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            current = current.getParent();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;T&gt; FieldWriter&lt;T&gt; createFieldWriter(
+&nbsp;            ObjectWriterProvider provider,
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            String fieldName,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            String label,
+&nbsp;            Method method,
+&nbsp;            ObjectWriter initObjectWriter
+&nbsp;    ) {
+<b class="fc">&nbsp;        int modifiers = objectClass.getModifiers();</b>
+<b class="fc">&nbsp;        if (!Modifier.isPublic(modifiers) || isExternalClass(objectClass)) {</b>
+<b class="nc">&nbsp;            return super.createFieldWriter(provider, objectClass, fieldName, ordinal, features, format, label, method, initObjectWriter);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (initObjectWriter != null) {</b>
+<b class="nc">&nbsp;            Class&lt;?&gt; fieldClass = method.getReturnType();</b>
+<b class="nc">&nbsp;            Type fieldType = method.getGenericReturnType();</b>
+&nbsp;
+<b class="nc">&nbsp;            FieldWriterObjectMethod objMethod = new FieldWriterObjectMethod(fieldName, ordinal, features, format, label, fieldType, fieldClass, method);</b>
+<b class="nc">&nbsp;            objMethod.initValueClass = fieldClass;</b>
+<b class="nc">&nbsp;            if (initObjectWriter != ObjectWriterBaseModule.VoidObjectWriter.INSTANCE) {</b>
+<b class="nc">&nbsp;                objMethod.initObjectWriter = initObjectWriter;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return objMethod;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Class&lt;?&gt; returnClass = method.getReturnType();</b>
+<b class="fc">&nbsp;        Type returnType = method.getGenericReturnType();</b>
+<b class="fc">&nbsp;        Object lambda = lambdaSetter(objectClass, returnClass, method);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (returnClass == int.class) {</b>
+<b class="fc">&nbsp;            return new FieldWriterInt32ValFunc(fieldName, ordinal, features, format, label, method, (ToIntFunction&lt;T&gt;) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (returnClass == long.class) {</b>
+<b class="fc">&nbsp;            if (format == null || format.isEmpty()) {</b>
+<b class="fc">&nbsp;                return new FieldWriterInt64ValFunc(fieldName, ordinal, features, format, label, method, (ToLongFunction) lambda);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return new FieldWriterMillisFunc(fieldName, ordinal, features, format, label, method, (ToLongFunction) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (returnClass == boolean.class) {</b>
+<b class="fc">&nbsp;            return new FieldWriterBoolValFunc(fieldName, ordinal, features, format, label, method, (Predicate&lt;T&gt;) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (returnClass == Boolean.class) {</b>
+<b class="fc">&nbsp;            return new FieldWriterBooleanFunc(fieldName, ordinal, features, format, label, method, (Function) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (returnClass == short.class) {</b>
+<b class="fc">&nbsp;            return new FieldWriterInt16ValFunc(fieldName, ordinal, features, format, label, method, (ToShortFunction) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (returnClass == byte.class) {</b>
+<b class="fc">&nbsp;            return new FieldWriterInt8ValFunc(fieldName, ordinal, features, format, label, method, (ToByteFunction) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (returnClass == float.class) {</b>
+<b class="fc">&nbsp;            return new FieldWriterFloatValueFunc(fieldName, ordinal, features, format, label, method, (ToFloatFunction) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (returnClass == double.class) {</b>
+<b class="fc">&nbsp;            return new FieldWriterDoubleValueFunc(fieldName, ordinal, features, format, label, method, (ToDoubleFunction) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (returnClass == char.class) {</b>
+<b class="fc">&nbsp;            return new FieldWriterCharValFunc(fieldName, ordinal, features, format, label, method, (ToCharFunction) lambda);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function function = (Function) lambda;</b>
+&nbsp;
+<b class="fc">&nbsp;        return createFieldWriter(provider, objectClass, fieldName, ordinal, features, format, label, returnType, returnClass, method, function);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private static Map&lt;Class, LambdaInfo&gt; fieldReaderMapping = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;    private static Map&lt;Class, MethodType&gt; methodTypeMapping = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;    private static MethodType METHODTYPE_FUNCTION = MethodType.methodType(Function.class);</b>
+&nbsp;
+&nbsp;    static {
+<b class="fc">&nbsp;        fieldReaderMapping.put(boolean.class, new LambdaInfo(Predicate.class, &quot;test&quot;));</b>
+<b class="fc">&nbsp;        fieldReaderMapping.put(char.class, new LambdaInfo(ToCharFunction.class, &quot;applyAsChar&quot;));</b>
+<b class="fc">&nbsp;        fieldReaderMapping.put(byte.class, new LambdaInfo(ToByteFunction.class, &quot;applyAsByte&quot;));</b>
+<b class="fc">&nbsp;        fieldReaderMapping.put(short.class, new LambdaInfo(ToShortFunction.class, &quot;applyAsShort&quot;));</b>
+<b class="fc">&nbsp;        fieldReaderMapping.put(int.class, new LambdaInfo(ToIntFunction.class, &quot;applyAsInt&quot;));</b>
+<b class="fc">&nbsp;        fieldReaderMapping.put(long.class, new LambdaInfo(ToLongFunction.class, &quot;applyAsLong&quot;));</b>
+<b class="fc">&nbsp;        fieldReaderMapping.put(float.class, new LambdaInfo(ToFloatFunction.class, &quot;applyAsFloat&quot;));</b>
+<b class="fc">&nbsp;        fieldReaderMapping.put(double.class, new LambdaInfo(ToDoubleFunction.class, &quot;applyAsDouble&quot;));</b>
+&nbsp;
+<b class="fc">&nbsp;        fieldReaderMapping.forEach((k, v) -&gt; methodTypeMapping.put(k, MethodType.methodType(v.supplierClass)));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static class LambdaInfo {
+&nbsp;        final Class supplierClass;
+&nbsp;        final String methodName;
+&nbsp;
+<b class="fc">&nbsp;        LambdaInfo(Class supplierClass, String methodName) {</b>
+<b class="fc">&nbsp;            this.supplierClass = supplierClass;</b>
+<b class="fc">&nbsp;            this.methodName = methodName;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static Object lambdaSetter(Class objectType, Class fieldClass, Method method) {
+<b class="fc">&nbsp;        MethodHandles.Lookup lookup = MethodHandles.lookup();</b>
+&nbsp;
+<b class="fc">&nbsp;        LambdaInfo buildInfo = fieldReaderMapping.get(fieldClass);</b>
+<b class="fc">&nbsp;        if (buildInfo == null) {</b>
+<b class="fc">&nbsp;            buildInfo = new LambdaInfo(Function.class, &quot;apply&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        MethodType invokedType = methodTypeMapping.getOrDefault(fieldClass, METHODTYPE_FUNCTION);</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            MethodHandle target = lookup.findVirtual(objectType,</b>
+<b class="fc">&nbsp;                    method.getName(),</b>
+<b class="fc">&nbsp;                    MethodType.methodType(fieldClass)</b>
+&nbsp;            );
+<b class="fc">&nbsp;            MethodType func = target.type();</b>
+&nbsp;
+<b class="fc">&nbsp;            CallSite callSite = LambdaMetafactory.metafactory(</b>
+&nbsp;                    lookup,
+&nbsp;                    buildInfo.methodName,
+&nbsp;                    invokedType,
+<b class="fc">&nbsp;                    func.erase(),</b>
+&nbsp;                    target,
+&nbsp;                    func
+&nbsp;            );
+&nbsp;
+<b class="fc">&nbsp;            return callSite</b>
+<b class="fc">&nbsp;                    .getTarget()</b>
+<b class="fc">&nbsp;                    .invoke();</b>
+<b class="nc">&nbsp;        } catch (Throwable e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;create fieldLambdaGetter error, method : &quot; + method, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:45</div>
+</div>
+</body>
+</html>

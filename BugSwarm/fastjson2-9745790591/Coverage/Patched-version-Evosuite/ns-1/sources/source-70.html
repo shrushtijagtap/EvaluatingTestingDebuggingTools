@@ -1,0 +1,2336 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderCreator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderCreator (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderCreator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    7.7%
+  </span>
+  <span class="absValue">
+    (4/52)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2.4%
+  </span>
+  <span class="absValue">
+    (21/892)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.codec.BeanInfo;
+&nbsp;import com.alibaba.fastjson2.codec.FieldInfo;
+&nbsp;import com.alibaba.fastjson2.internal.asm.ASMUtils;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectReaderAnnotationProcessor;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectReaderModule;
+&nbsp;import com.alibaba.fastjson2.schema.JSONSchema;
+&nbsp;import com.alibaba.fastjson2.util.BeanUtils;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.*;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.atomic.*;
+&nbsp;import java.util.function.BiConsumer;
+&nbsp;import java.util.function.Function;
+&nbsp;import java.util.function.Supplier;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.codec.FieldInfo.JSON_AUTO_WIRED_ANNOTATED;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.UNSAFE_SUPPORT;
+&nbsp;
+<b class="fc">&nbsp;public class ObjectReaderCreator {</b>
+<b class="fc">&nbsp;    public static final ObjectReaderCreator INSTANCE = new ObjectReaderCreator();</b>
+&nbsp;
+&nbsp;    public &lt;T&gt; ObjectReader&lt;T&gt; createObjectReaderNoneDefaultConstructor(Constructor constructor, String... paramNames) {
+<b class="nc">&nbsp;        Function&lt;Map&lt;Long, Object&gt;, T&gt; function = createFunction(constructor, paramNames);</b>
+<b class="nc">&nbsp;        FieldReader[] fieldReaders = createFieldReaders(</b>
+<b class="nc">&nbsp;                JSONFactory.getDefaultObjectReaderProvider(),</b>
+&nbsp;                constructor,
+<b class="nc">&nbsp;                constructor.getParameters(),</b>
+&nbsp;                paramNames
+&nbsp;        );
+<b class="nc">&nbsp;        return createObjectReaderNoneDefaultConstructor(constructor.getDeclaringClass(), function, fieldReaders);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; ObjectReader&lt;T&gt; createObjectReaderNoneDefaultConstructor(
+&nbsp;            Class objectClass,
+&nbsp;            Constructor constructor,
+&nbsp;            String[] paramNames,
+&nbsp;            FieldReader[] paramFieldReaders,
+&nbsp;            FieldReader[] setterFieldReaders
+&nbsp;    ) {
+<b class="nc">&nbsp;        Function&lt;Map&lt;Long, Object&gt;, T&gt; function = createFunction(constructor, paramNames);</b>
+<b class="nc">&nbsp;        return new ObjectReaderNoneDefaultConstructor(objectClass, null, null, 0, function, null, paramNames, paramFieldReaders, setterFieldReaders);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; ObjectReader&lt;T&gt; createObjectReaderNoneDefaultConstructor(
+&nbsp;            Class objectClass,
+&nbsp;            Function&lt;Map&lt;Long, Object&gt;, T&gt; creator,
+&nbsp;            FieldReader... fieldReaders
+&nbsp;    ) {
+<b class="nc">&nbsp;        return new ObjectReaderNoneDefaultConstructor(objectClass, null, null, 0, creator, null, null, fieldReaders, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; ObjectReader&lt;T&gt; createObjectReaderFactoryMethod(Method factoryMethod, String... paramNames) {
+<b class="nc">&nbsp;        Function&lt;Map&lt;Long, Object&gt;, Object&gt; factoryFunction = createFactoryFunction(factoryMethod, paramNames);</b>
+<b class="nc">&nbsp;        FieldReader[] fieldReaders = createFieldReaders(</b>
+<b class="nc">&nbsp;                JSONFactory.getDefaultObjectReaderProvider(),</b>
+&nbsp;                factoryMethod,
+<b class="nc">&nbsp;                factoryMethod.getParameters(),</b>
+&nbsp;                paramNames
+&nbsp;        );
+<b class="nc">&nbsp;        return new ObjectReaderNoneDefaultConstructor(null, null, null, 0, factoryFunction, null, paramNames, fieldReaders, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public FieldReader[] createFieldReaders(
+&nbsp;            ObjectReaderProvider provider,
+&nbsp;            Executable owner,
+&nbsp;            Parameter[] parameters,
+&nbsp;            String... paramNames
+&nbsp;    ) {
+<b class="nc">&nbsp;        Class&lt;?&gt; declaringClass = null;</b>
+<b class="nc">&nbsp;        if (owner != null) {</b>
+<b class="nc">&nbsp;            declaringClass = owner.getDeclaringClass();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        FieldReader[] fieldReaders = new FieldReader[parameters.length];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; parameters.length; i++) {</b>
+<b class="nc">&nbsp;            FieldInfo fieldInfo = new FieldInfo();</b>
+&nbsp;
+<b class="nc">&nbsp;            Parameter parameter = parameters[i];</b>
+&nbsp;            String paramName;
+<b class="nc">&nbsp;            if (i &lt; paramNames.length) {</b>
+<b class="nc">&nbsp;                paramName = paramNames[i];</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                paramName = parameter.getName();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (owner instanceof Constructor) {</b>
+<b class="nc">&nbsp;                Field field = BeanUtils.getDeclaredField(declaringClass, paramName);</b>
+<b class="nc">&nbsp;                if (field != null) {</b>
+<b class="nc">&nbsp;                    provider.getFieldInfo(fieldInfo, declaringClass, field);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            String fieldName;
+<b class="nc">&nbsp;            if (fieldInfo.fieldName == null || fieldInfo.fieldName.isEmpty()) {</b>
+<b class="nc">&nbsp;                fieldName = paramName;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                fieldName = fieldInfo.fieldName;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            ObjectReader initReader = getInitReader(provider, parameter.getType(), fieldInfo);</b>
+<b class="nc">&nbsp;            Type paramType = parameter.getParameterizedType();</b>
+<b class="nc">&nbsp;            fieldReaders[i] = createFieldReaderParam(</b>
+&nbsp;                    null,
+&nbsp;                    null,
+&nbsp;                    fieldName,
+&nbsp;                    i,
+&nbsp;                    fieldInfo.features,
+&nbsp;                    fieldInfo.format,
+&nbsp;                    paramType,
+<b class="nc">&nbsp;                    parameter.getType(),</b>
+&nbsp;                    paramName,
+&nbsp;                    parameter,
+&nbsp;                    null,
+&nbsp;                    initReader
+&nbsp;            );
+&nbsp;        }
+<b class="nc">&nbsp;        return fieldReaders;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; Function&lt;Map&lt;Long, Object&gt;, T&gt; createFactoryFunction(Method factoryMethod, String... paramNames) {
+<b class="nc">&nbsp;        factoryMethod.setAccessible(true);</b>
+<b class="nc">&nbsp;        return new FactoryFunction(factoryMethod, paramNames);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; Function&lt;Map&lt;Long, Object&gt;, T&gt; createFunction(Constructor constructor, String... paramNames) {
+<b class="nc">&nbsp;        constructor.setAccessible(true);</b>
+<b class="nc">&nbsp;        return new ConstructorFunction(null, constructor, null, paramNames);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; Function&lt;Map&lt;Long, Object&gt;, T&gt; createFunction(Constructor constructor,
+&nbsp;                                                             Constructor markerConstructor,
+&nbsp;                                                             String... paramNames) {
+<b class="nc">&nbsp;        if (markerConstructor == null) {</b>
+<b class="nc">&nbsp;            constructor.setAccessible(true);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            markerConstructor.setAccessible(true);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new ConstructorFunction(null, constructor, markerConstructor, paramNames);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; ObjectReader&lt;T&gt; createObjectReader(
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            FieldReader... fieldReaders
+&nbsp;    ) {
+<b class="nc">&nbsp;        return createObjectReader(</b>
+&nbsp;                objectClass,
+&nbsp;                null,
+&nbsp;                0,
+&nbsp;                null,
+<b class="nc">&nbsp;                createInstanceSupplier(objectClass),</b>
+&nbsp;                null,
+&nbsp;                fieldReaders
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; ObjectReader&lt;T&gt; createObjectReader(
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            Supplier&lt;T&gt; defaultCreator,
+&nbsp;            FieldReader... fieldReaders
+&nbsp;    ) {
+<b class="nc">&nbsp;        return createObjectReader(objectClass, null, 0, null, defaultCreator, null, fieldReaders);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; ObjectReader&lt;T&gt; createObjectReaderSeeAlso(
+&nbsp;            Class&lt;T&gt; objectType,
+&nbsp;            Class[] seeAlso,
+&nbsp;            FieldReader... fieldReaders
+&nbsp;    ) {
+<b class="nc">&nbsp;        Supplier&lt;T&gt; instanceSupplier = createInstanceSupplier(objectType);</b>
+<b class="nc">&nbsp;        return new ObjectReaderSeeAlso(objectType, instanceSupplier, &quot;@type&quot;, seeAlso, null, fieldReaders);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; ObjectReader&lt;T&gt; createObjectReaderSeeAlso(
+&nbsp;            Class&lt;T&gt; objectType,
+&nbsp;            Supplier&lt;T&gt; defaultCreator,
+&nbsp;            String typeKey,
+&nbsp;            Class[] seeAlso,
+&nbsp;            String[] seeAlsoNames,
+&nbsp;            FieldReader... fieldReaders
+&nbsp;    ) {
+<b class="nc">&nbsp;        return new ObjectReaderSeeAlso(objectType, defaultCreator, typeKey, seeAlso, seeAlsoNames, fieldReaders);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected &lt;T&gt; ObjectReader&lt;T&gt; createObjectReaderWithBuilder(
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            Type objectType,
+&nbsp;            ObjectReaderProvider provider,
+&nbsp;            BeanInfo beanInfo
+&nbsp;    ) {
+<b class="nc">&nbsp;        Function&lt;Object, Object&gt; builderFunction = null;</b>
+<b class="nc">&nbsp;        if (beanInfo.buildMethod != null) {</b>
+<b class="nc">&nbsp;            builderFunction = createBuildFunction(beanInfo.buildMethod);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Class builderClass = beanInfo.builder;</b>
+&nbsp;
+<b class="nc">&nbsp;        String builderWithPrefix = beanInfo.builderWithPrefix;</b>
+<b class="nc">&nbsp;        if (builderWithPrefix == null || builderWithPrefix.isEmpty()) {</b>
+<b class="nc">&nbsp;            builderWithPrefix = &quot;with&quot;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int builderWithPrefixLenth = builderWithPrefix.length();</b>
+&nbsp;
+<b class="nc">&nbsp;        Map&lt;String, FieldReader&gt; fieldReaders = new LinkedHashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        final String prefix = builderWithPrefix;</b>
+<b class="nc">&nbsp;        final FieldInfo fieldInfo = new FieldInfo();</b>
+<b class="nc">&nbsp;        BeanUtils.setters(builderClass, false, method -&gt; {</b>
+<b class="nc">&nbsp;            fieldInfo.init();</b>
+<b class="nc">&nbsp;            for (ObjectReaderModule module : provider.modules) {</b>
+<b class="nc">&nbsp;                ObjectReaderAnnotationProcessor annotationProcessor = module.getAnnotationProcessor();</b>
+<b class="nc">&nbsp;                if (annotationProcessor == null) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                annotationProcessor.getFieldInfo(fieldInfo, objectClass, method);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            if (fieldInfo.ignore) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String methodName = method.getName();</b>
+&nbsp;            String fieldName;
+<b class="nc">&nbsp;            if (fieldInfo.fieldName == null || fieldInfo.fieldName.isEmpty()) {</b>
+<b class="nc">&nbsp;                final int methodNameLength = methodName.length();</b>
+<b class="nc">&nbsp;                if (methodNameLength &lt;= prefix.length() || !methodName.startsWith(prefix)) {</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                fieldName = BeanUtils.setterName(methodName, builderWithPrefixLenth);</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                fieldName = fieldInfo.fieldName;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (method.getParameterCount() == 0) {</b>
+<b class="nc">&nbsp;                FieldReader fieldReader = createFieldReaderMethod(</b>
+&nbsp;                        builderClass,
+&nbsp;                        builderClass,
+&nbsp;                        fieldName,
+&nbsp;                        fieldInfo.ordinal,
+&nbsp;                        fieldInfo.features,
+&nbsp;                        fieldInfo.format,
+&nbsp;                        fieldInfo.locale,
+&nbsp;                        fieldInfo.defaultValue,
+&nbsp;                        fieldInfo.schema,
+<b class="nc">&nbsp;                        method.getGenericReturnType(),</b>
+<b class="nc">&nbsp;                        method.getReturnType(),</b>
+&nbsp;                        method,
+&nbsp;                        null
+&nbsp;                );
+<b class="nc">&nbsp;                FieldReader origin = fieldReaders.putIfAbsent(fieldName,</b>
+&nbsp;                        fieldReader
+&nbsp;                );
+<b class="nc">&nbsp;                if (origin != null &amp;&amp; origin.compareTo(fieldReader) &gt; 0) {</b>
+<b class="nc">&nbsp;                    fieldReaders.put(fieldName, fieldReader);</b>
+&nbsp;                }
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Type fieldType = method.getGenericParameterTypes()[0];</b>
+<b class="nc">&nbsp;            Class fieldClass = method.getParameterTypes()[0];</b>
+&nbsp;
+<b class="nc">&nbsp;            method.setAccessible(true);</b>
+&nbsp;
+<b class="nc">&nbsp;            FieldReader fieldReader = createFieldReaderMethod(</b>
+&nbsp;                    builderClass,
+&nbsp;                    objectType,
+&nbsp;                    fieldName,
+&nbsp;                    fieldInfo.ordinal,
+&nbsp;                    fieldInfo.features,
+&nbsp;                    fieldInfo.format,
+&nbsp;                    fieldInfo.locale,
+&nbsp;                    fieldInfo.defaultValue,
+&nbsp;                    fieldInfo.schema,
+&nbsp;                    fieldType,
+&nbsp;                    fieldClass,
+&nbsp;                    method,
+&nbsp;                    null);
+&nbsp;
+<b class="nc">&nbsp;            FieldReader origin = fieldReaders.putIfAbsent(fieldName, fieldReader);</b>
+<b class="nc">&nbsp;            if (origin != null &amp;&amp; origin.compareTo(fieldReader) &gt; 0) {</b>
+<b class="nc">&nbsp;                fieldReaders.put(fieldName, fieldReader);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (fieldInfo.alternateNames != null) {</b>
+<b class="nc">&nbsp;                for (String alternateName : fieldInfo.alternateNames) {</b>
+<b class="nc">&nbsp;                    if (fieldName.equals(alternateName)) {</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    fieldReaders</b>
+<b class="nc">&nbsp;                            .putIfAbsent(alternateName,</b>
+<b class="nc">&nbsp;                                    createFieldReaderMethod(</b>
+&nbsp;                                            builderClass,
+&nbsp;                                            objectType,
+&nbsp;                                            alternateName,
+&nbsp;                                            fieldInfo.ordinal,
+&nbsp;                                            fieldInfo.features,
+&nbsp;                                            fieldInfo.format,
+&nbsp;                                            fieldInfo.locale,
+&nbsp;                                            fieldInfo.defaultValue,
+&nbsp;                                            fieldInfo.schema,
+&nbsp;                                            fieldType,
+&nbsp;                                            fieldClass,
+&nbsp;                                            method,
+&nbsp;                                            null));
+&nbsp;                }
+&nbsp;            }
+&nbsp;        });
+&nbsp;
+<b class="nc">&nbsp;        FieldReader[] fieldReaderArray = new FieldReader[fieldReaders.size()];</b>
+<b class="nc">&nbsp;        fieldReaders.values().toArray(fieldReaderArray);</b>
+<b class="nc">&nbsp;        Arrays.sort(fieldReaderArray);</b>
+&nbsp;
+<b class="nc">&nbsp;        Supplier instanceSupplier = createInstanceSupplier(builderClass);</b>
+<b class="nc">&nbsp;        return createObjectReader(builderClass, 0, instanceSupplier, builderFunction, fieldReaderArray);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected &lt;T&gt; ObjectReader&lt;T&gt; createObjectReaderWithCreator(
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            Type objectType,
+&nbsp;            ObjectReaderProvider provider,
+&nbsp;            BeanInfo beanInfo) {
+<b class="nc">&nbsp;        FieldInfo fieldInfo = new FieldInfo();</b>
+&nbsp;
+<b class="nc">&nbsp;        Map&lt;String, FieldReader&gt; fieldReaders = new LinkedHashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;        Parameter[] parameters;
+&nbsp;        String[] paramNames;
+<b class="nc">&nbsp;        if (beanInfo.creatorConstructor != null) {</b>
+<b class="nc">&nbsp;            parameters = beanInfo.creatorConstructor.getParameters();</b>
+<b class="nc">&nbsp;            paramNames = ASMUtils.lookupParameterNames(beanInfo.creatorConstructor);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            parameters = beanInfo.createMethod.getParameters();</b>
+<b class="nc">&nbsp;            paramNames = ASMUtils.lookupParameterNames(beanInfo.createMethod);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; parameters.length; i++) {</b>
+<b class="nc">&nbsp;            fieldInfo.init();</b>
+&nbsp;
+<b class="nc">&nbsp;            Parameter parameter = parameters[i];</b>
+&nbsp;
+<b class="nc">&nbsp;            if (beanInfo.creatorConstructor != null) {</b>
+<b class="nc">&nbsp;                provider.getFieldInfo(fieldInfo, objectClass, beanInfo.creatorConstructor, i, parameter);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                provider.getFieldInfo(fieldInfo, objectClass, beanInfo.createMethod, i, parameter);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (parameters.length == 1 &amp;&amp; (fieldInfo.features &amp; FieldInfo.VALUE_MASK) != 0) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String fieldName = fieldInfo.fieldName;</b>
+<b class="nc">&nbsp;            if (fieldName == null || fieldName.isEmpty()) {</b>
+<b class="nc">&nbsp;                if (beanInfo.createParameterNames != null &amp;&amp; i &lt; beanInfo.createParameterNames.length) {</b>
+<b class="nc">&nbsp;                    fieldName = beanInfo.createParameterNames[i];</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (fieldName == null || fieldName.isEmpty()) {</b>
+<b class="nc">&nbsp;                    fieldName = parameter.getName();</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            if (fieldName == null || fieldName.isEmpty()) {</b>
+<b class="nc">&nbsp;                fieldName = paramNames[i];</b>
+<b class="nc">&nbsp;            } else if (fieldName.startsWith(&quot;arg&quot;)) {</b>
+<b class="nc">&nbsp;                if (paramNames != null &amp;&amp; paramNames.length &gt; i) {</b>
+<b class="nc">&nbsp;                    fieldName = paramNames[i];</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                paramNames[i] = fieldName;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Type paramType = parameter.getParameterizedType();</b>
+<b class="nc">&nbsp;            fieldReaders.put(fieldName,</b>
+<b class="nc">&nbsp;                    createFieldReaderParam(</b>
+&nbsp;                            objectClass,
+&nbsp;                            objectType,
+&nbsp;                            fieldName,
+&nbsp;                            i,
+&nbsp;                            fieldInfo.features,
+&nbsp;                            fieldInfo.format,
+&nbsp;                            paramType,
+<b class="nc">&nbsp;                            parameter.getType(),</b>
+&nbsp;                            fieldName,
+&nbsp;                            parameter,
+&nbsp;                            null));
+&nbsp;
+<b class="nc">&nbsp;            if (fieldInfo.alternateNames != null) {</b>
+<b class="nc">&nbsp;                for (String alternateName : fieldInfo.alternateNames) {</b>
+<b class="nc">&nbsp;                    if (fieldName.equals(alternateName)) {</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    fieldReaders.putIfAbsent(alternateName,</b>
+<b class="nc">&nbsp;                            createFieldReaderParam(</b>
+&nbsp;                                    objectClass,
+&nbsp;                                    objectType,
+&nbsp;                                    alternateName,
+&nbsp;                                    i,
+&nbsp;                                    fieldInfo.features,
+&nbsp;                                    fieldInfo.format,
+&nbsp;                                    paramType,
+<b class="nc">&nbsp;                                    parameter.getType(),</b>
+&nbsp;                                    fieldName,
+&nbsp;                                    parameter,
+&nbsp;                                    null
+&nbsp;                            ));
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (parameters.length == 1 &amp;&amp; (fieldInfo.features &amp; FieldInfo.VALUE_MASK) != 0) {</b>
+<b class="nc">&nbsp;            Type valueType = beanInfo.creatorConstructor == null</b>
+<b class="nc">&nbsp;                    ? beanInfo.createMethod.getGenericParameterTypes()[0]</b>
+<b class="nc">&nbsp;                    : beanInfo.creatorConstructor.getGenericParameterTypes()[0];</b>
+<b class="nc">&nbsp;            Class valueClass = beanInfo.creatorConstructor == null</b>
+<b class="nc">&nbsp;                    ? beanInfo.createMethod.getParameterTypes()[0]</b>
+<b class="nc">&nbsp;                    : beanInfo.creatorConstructor.getParameterTypes()[0];</b>
+&nbsp;
+<b class="nc">&nbsp;            JSONSchema jsonSchema = null;</b>
+<b class="nc">&nbsp;            if (fieldInfo.schema != null &amp;&amp; !fieldInfo.schema.isEmpty()) {</b>
+<b class="nc">&nbsp;                JSONObject object = JSON.parseObject(fieldInfo.schema);</b>
+<b class="nc">&nbsp;                if (!object.isEmpty()) {</b>
+<b class="nc">&nbsp;                    jsonSchema = JSONSchema.of(object, valueClass);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Object defaultValue = fieldInfo.defaultValue;</b>
+<b class="nc">&nbsp;            if (defaultValue != null &amp;&amp; defaultValue.getClass() != valueClass) {</b>
+&nbsp;                Function typeConvert = JSONFactory
+<b class="nc">&nbsp;                        .getDefaultObjectReaderProvider()</b>
+<b class="nc">&nbsp;                        .getTypeConvert(defaultValue.getClass(), valueType);</b>
+<b class="nc">&nbsp;                if (typeConvert != null) {</b>
+<b class="nc">&nbsp;                    defaultValue = typeConvert.apply(defaultValue);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    throw new JSONException(&quot;illegal defaultValue : &quot; + defaultValue + &quot;, class &quot; + valueClass.getName());</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return new ObjectReaderImplValue(</b>
+&nbsp;                    objectClass,
+&nbsp;                    valueType,
+&nbsp;                    valueClass,
+&nbsp;                    fieldInfo.features,
+&nbsp;                    fieldInfo.format,
+&nbsp;                    defaultValue,
+&nbsp;                    jsonSchema,
+&nbsp;                    beanInfo.creatorConstructor,
+&nbsp;                    beanInfo.createMethod,
+&nbsp;                    null
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+&nbsp;        Function&lt;Map&lt;Long, Object&gt;, Object&gt; function;
+<b class="nc">&nbsp;        if (beanInfo.creatorConstructor != null) {</b>
+<b class="nc">&nbsp;            function = createFunction(beanInfo.creatorConstructor, beanInfo.markerConstructor, paramNames);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            function = createFactoryFunction(beanInfo.createMethod, paramNames);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        FieldReader[] fieldReaderArray = new FieldReader[fieldReaders.size()];</b>
+<b class="nc">&nbsp;        fieldReaders.values().toArray(fieldReaderArray);</b>
+<b class="nc">&nbsp;        Arrays.sort(fieldReaderArray);</b>
+&nbsp;
+<b class="nc">&nbsp;        FieldReader[] setterFieldReaders = createFieldReaders(objectClass, objectType);</b>
+<b class="nc">&nbsp;        Arrays.sort(setterFieldReaders);</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean[] flags = null;</b>
+<b class="nc">&nbsp;        int maskCount = 0;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; setterFieldReaders.length; i++) {</b>
+<b class="nc">&nbsp;            FieldReader setterFieldReader = setterFieldReaders[i];</b>
+<b class="nc">&nbsp;            if (fieldReaders.containsKey(setterFieldReader.fieldName)) {</b>
+<b class="nc">&nbsp;                if (flags == null) {</b>
+<b class="nc">&nbsp;                    flags = new boolean[setterFieldReaders.length];</b>
+&nbsp;                }
+<b class="nc">&nbsp;                flags[i] = true;</b>
+<b class="nc">&nbsp;                maskCount++;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (maskCount &gt; 0) {</b>
+<b class="nc">&nbsp;            FieldReader[] array = new FieldReader[setterFieldReaders.length - maskCount];</b>
+<b class="nc">&nbsp;            int index = 0;</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; setterFieldReaders.length; i++) {</b>
+<b class="nc">&nbsp;                if (!flags[i]) {</b>
+<b class="nc">&nbsp;                    array[index++] = setterFieldReaders[i];</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            setterFieldReaders = array;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return (ObjectReader&lt;T&gt;) new ObjectReaderNoneDefaultConstructor(</b>
+&nbsp;                objectClass,
+&nbsp;                beanInfo.typeKey,
+&nbsp;                beanInfo.typeName,
+&nbsp;                beanInfo.readerFeatures,
+&nbsp;                function,
+&nbsp;                null,
+&nbsp;                paramNames,
+&nbsp;                fieldReaderArray,
+&nbsp;                setterFieldReaders);
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; ObjectReader&lt;T&gt; createObjectReader(
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            long features,
+&nbsp;            Supplier&lt;T&gt; defaultCreator,
+&nbsp;            Function buildFunction,
+&nbsp;            FieldReader... fieldReaders
+&nbsp;    ) {
+<b class="nc">&nbsp;        return createObjectReader(objectClass, null, features, null, defaultCreator, buildFunction, fieldReaders);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; ObjectReader&lt;T&gt; createObjectReader(
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            String typeKey,
+&nbsp;            long features,
+&nbsp;            JSONSchema schema,
+&nbsp;            Supplier&lt;T&gt; defaultCreator,
+&nbsp;            Function buildFunction,
+&nbsp;            FieldReader... fieldReaders
+&nbsp;    ) {
+<b class="nc">&nbsp;        if (objectClass != null) {</b>
+<b class="nc">&nbsp;            int modifiers = objectClass.getModifiers();</b>
+<b class="nc">&nbsp;            if (Modifier.isAbstract(modifiers) || Modifier.isInterface(modifiers)) {</b>
+<b class="nc">&nbsp;                return new ObjectReaderAdapter(objectClass, typeKey, null, features, schema, defaultCreator, buildFunction, fieldReaders);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        switch (fieldReaders.length) {</b>
+&nbsp;            case 1:
+<b class="nc">&nbsp;                return new ObjectReader1(</b>
+&nbsp;                        objectClass,
+&nbsp;                        features,
+&nbsp;                        schema,
+&nbsp;                        defaultCreator,
+&nbsp;                        buildFunction,
+&nbsp;                        fieldReaders[0]
+&nbsp;                );
+&nbsp;            case 2:
+<b class="nc">&nbsp;                return new ObjectReader2(</b>
+&nbsp;                        objectClass,
+&nbsp;                        features,
+&nbsp;                        schema,
+&nbsp;                        defaultCreator,
+&nbsp;                        buildFunction,
+&nbsp;                        fieldReaders[0],
+&nbsp;                        fieldReaders[1]);
+&nbsp;            case 3:
+<b class="nc">&nbsp;                return new ObjectReader3(</b>
+&nbsp;                        objectClass,
+&nbsp;                        defaultCreator,
+&nbsp;                        features,
+&nbsp;                        schema,
+&nbsp;                        buildFunction,
+&nbsp;                        fieldReaders[0],
+&nbsp;                        fieldReaders[1],
+&nbsp;                        fieldReaders[2]
+&nbsp;                );
+&nbsp;            case 4:
+<b class="nc">&nbsp;                return new ObjectReader4(</b>
+&nbsp;                        objectClass,
+&nbsp;                        features,
+&nbsp;                        schema,
+&nbsp;                        defaultCreator,
+&nbsp;                        buildFunction,
+&nbsp;                        fieldReaders[0],
+&nbsp;                        fieldReaders[1],
+&nbsp;                        fieldReaders[2],
+&nbsp;                        fieldReaders[3]
+&nbsp;                );
+&nbsp;            case 5:
+<b class="nc">&nbsp;                return new ObjectReader5(</b>
+&nbsp;                        objectClass,
+&nbsp;                        defaultCreator,
+&nbsp;                        features,
+&nbsp;                        schema,
+&nbsp;                        buildFunction,
+&nbsp;                        fieldReaders[0],
+&nbsp;                        fieldReaders[1],
+&nbsp;                        fieldReaders[2],
+&nbsp;                        fieldReaders[3],
+&nbsp;                        fieldReaders[4]
+&nbsp;                );
+&nbsp;            case 6:
+<b class="nc">&nbsp;                return new ObjectReader6(</b>
+&nbsp;                        objectClass,
+&nbsp;                        defaultCreator,
+&nbsp;                        features,
+&nbsp;                        schema,
+&nbsp;                        buildFunction,
+&nbsp;                        fieldReaders[0],
+&nbsp;                        fieldReaders[1],
+&nbsp;                        fieldReaders[2],
+&nbsp;                        fieldReaders[3],
+&nbsp;                        fieldReaders[4],
+&nbsp;                        fieldReaders[5]
+&nbsp;                );
+&nbsp;            default:
+<b class="nc">&nbsp;                return new ObjectReaderAdapter(objectClass, typeKey, null, features, schema, defaultCreator, buildFunction, fieldReaders);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; ObjectReader&lt;T&gt; createObjectReader(Type objectType) {
+<b class="nc">&nbsp;        if (objectType instanceof Class) {</b>
+<b class="nc">&nbsp;            return createObjectReader((Class&lt;T&gt;) objectType);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Class&lt;T&gt; objectClass = (Class&lt;T&gt;) TypeUtils.getMapping(objectType);</b>
+<b class="nc">&nbsp;        FieldReader[] fieldReaderArray = createFieldReaders(objectClass, objectType);</b>
+<b class="nc">&nbsp;        return createObjectReader(</b>
+&nbsp;                objectClass,
+<b class="nc">&nbsp;                createInstanceSupplier(objectClass),</b>
+&nbsp;                fieldReaderArray);
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; ObjectReader&lt;T&gt; createObjectReader(Class&lt;T&gt; objectType) {
+<b class="nc">&nbsp;        return createObjectReader(</b>
+&nbsp;                objectType,
+&nbsp;                objectType,
+&nbsp;                false,
+<b class="nc">&nbsp;                JSONFactory.getDefaultObjectReaderProvider()</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; ObjectReader&lt;T&gt; createObjectReader(Class&lt;T&gt; objectType, boolean fieldBased) {
+<b class="nc">&nbsp;        return createObjectReader(</b>
+&nbsp;                objectType,
+&nbsp;                objectType,
+&nbsp;                fieldBased,
+<b class="nc">&nbsp;                JSONFactory.getDefaultObjectReaderProvider()</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    protected ObjectReader getAnnotatedObjectReader(ObjectReaderProvider provider,
+&nbsp;                                                    Class objectClass,
+&nbsp;                                                    BeanInfo beanInfo) {
+<b class="nc">&nbsp;        if ((beanInfo.readerFeatures &amp; JSON_AUTO_WIRED_ANNOTATED) == 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String fieldName = beanInfo.objectReaderFieldName;</b>
+<b class="nc">&nbsp;        if (fieldName == null) {</b>
+<b class="nc">&nbsp;            fieldName = &quot;objectReader&quot;;</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="nc">&nbsp;            Field field = null;</b>
+<b class="nc">&nbsp;            if (beanInfo.mixIn) {</b>
+<b class="nc">&nbsp;                Class mixinClass = provider.mixInCache.get(objectClass);</b>
+<b class="nc">&nbsp;                if (mixinClass != null) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        field = mixinClass.getDeclaredField(fieldName);</b>
+<b class="nc">&nbsp;                    } catch (NoSuchFieldException | SecurityException igored) {</b>
+&nbsp;                        // ignored
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (field == null) {</b>
+<b class="nc">&nbsp;                field = objectClass.getDeclaredField(fieldName);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (field != null</b>
+<b class="nc">&nbsp;                    &amp;&amp; ObjectReader.class.isAssignableFrom(field.getType())</b>
+<b class="nc">&nbsp;                    &amp;&amp; Modifier.isStatic(field.getModifiers())) {</b>
+<b class="nc">&nbsp;                field.setAccessible(true);</b>
+<b class="nc">&nbsp;                return (ObjectReader) field.get(null);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Throwable ignored) {</b>
+&nbsp;            // ignored
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; ObjectReader&lt;T&gt; createObjectReader(
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            Type objectType,
+&nbsp;            boolean fieldBased,
+&nbsp;            ObjectReaderProvider provider
+&nbsp;    ) {
+<b class="nc">&nbsp;        BeanInfo beanInfo = new BeanInfo();</b>
+<b class="nc">&nbsp;        if (fieldBased) {</b>
+<b class="nc">&nbsp;            beanInfo.readerFeatures |= JSONReader.Feature.FieldBased.mask;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (ObjectReaderModule module : provider.modules) {</b>
+<b class="nc">&nbsp;            ObjectReaderAnnotationProcessor annotationProcessor = module.getAnnotationProcessor();</b>
+<b class="nc">&nbsp;            if (annotationProcessor != null) {</b>
+<b class="nc">&nbsp;                annotationProcessor.getBeanInfo(beanInfo, objectClass);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (beanInfo.deserializer != null &amp;&amp; ObjectReader.class.isAssignableFrom(beanInfo.deserializer)) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                return (ObjectReader&lt;T&gt;) beanInfo.deserializer.newInstance();</b>
+<b class="nc">&nbsp;            } catch (InstantiationException | IllegalAccessException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;create deserializer error&quot;, e);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectReader annotatedObjectReader = getAnnotatedObjectReader(provider, objectClass, beanInfo);</b>
+<b class="nc">&nbsp;        if (annotatedObjectReader != null) {</b>
+<b class="nc">&nbsp;            return annotatedObjectReader;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldBased) {</b>
+<b class="nc">&nbsp;            beanInfo.readerFeatures |= JSONReader.Feature.FieldBased.mask;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Enum.class.isAssignableFrom(objectClass) &amp;&amp; (beanInfo.createMethod == null || beanInfo.createMethod.getParameterCount() == 1)) {</b>
+<b class="nc">&nbsp;            return createEnumReader(objectClass, beanInfo.createMethod, provider);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Throwable.class.isAssignableFrom(objectClass)) {</b>
+<b class="nc">&nbsp;            fieldBased = false;</b>
+<b class="nc">&nbsp;            beanInfo.readerFeatures |= JSONReader.Feature.IgnoreSetNullValue.mask;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldBased &amp;&amp; objectClass.isInterface()) {</b>
+<b class="nc">&nbsp;            fieldBased = false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        FieldReader[] fieldReaderArray = createFieldReaders(objectClass, objectType, beanInfo, fieldBased, provider);</b>
+<b class="nc">&nbsp;        boolean allReadOnlyOrZero = true;</b>
+<b class="nc">&nbsp;        for (FieldReader fieldReader : fieldReaderArray) {</b>
+<b class="nc">&nbsp;            if (!fieldReader.isReadOnly()) {</b>
+<b class="nc">&nbsp;                allReadOnlyOrZero = false;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (beanInfo.creatorConstructor != null || beanInfo.createMethod != null) {</b>
+<b class="nc">&nbsp;            return createObjectReaderWithCreator(objectClass, objectType, provider, beanInfo);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (beanInfo.builder != null) {</b>
+<b class="nc">&nbsp;            return createObjectReaderWithBuilder(objectClass, objectType, provider, beanInfo);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Constructor creatorConstructor = beanInfo.creatorConstructor;</b>
+&nbsp;
+<b class="nc">&nbsp;        final List&lt;Constructor&gt; alternateConstructors = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        BeanUtils.constructor(objectClass, constructor -&gt; {</b>
+<b class="nc">&nbsp;            alternateConstructors.add(constructor);</b>
+&nbsp;        });
+&nbsp;
+<b class="nc">&nbsp;        if (Throwable.class.isAssignableFrom(objectClass)) {</b>
+<b class="nc">&nbsp;            return new ObjectReaderException&lt;&gt;(objectClass, alternateConstructors, fieldReaderArray);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Constructor defaultConstructor = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        Class&lt;?&gt; declaringClass = objectClass.getDeclaringClass();</b>
+&nbsp;
+<b class="nc">&nbsp;        int index = -1;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; alternateConstructors.size(); i++) {</b>
+<b class="nc">&nbsp;            Constructor constructor = alternateConstructors.get(i);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (constructor.getParameterCount() == 0) {</b>
+<b class="nc">&nbsp;                defaultConstructor = constructor;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (declaringClass != null</b>
+<b class="nc">&nbsp;                    &amp;&amp; constructor.getParameterCount() == 1</b>
+<b class="nc">&nbsp;                    &amp;&amp; declaringClass.equals(constructor.getParameterTypes()[0])) {</b>
+<b class="nc">&nbsp;                creatorConstructor = constructor;</b>
+<b class="nc">&nbsp;                index = i;</b>
+<b class="nc">&nbsp;                break;</b>
+<b class="nc">&nbsp;            } else if (creatorConstructor == null) {</b>
+<b class="nc">&nbsp;                creatorConstructor = constructor;</b>
+<b class="nc">&nbsp;                index = i;</b>
+<b class="nc">&nbsp;            } else if (constructor.getParameterCount() == 0) {</b>
+<b class="nc">&nbsp;                creatorConstructor = constructor;</b>
+<b class="nc">&nbsp;                index = i;</b>
+<b class="nc">&nbsp;            } else if (creatorConstructor.getParameterCount() &lt; constructor.getParameterCount()) {</b>
+<b class="nc">&nbsp;                creatorConstructor = constructor;</b>
+<b class="nc">&nbsp;                index = i;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (index != -1) {</b>
+<b class="nc">&nbsp;            alternateConstructors.remove(index);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (creatorConstructor != null &amp;&amp; creatorConstructor.getParameterCount() != 0 &amp;&amp; beanInfo.seeAlso == null) {</b>
+<b class="nc">&nbsp;            creatorConstructor.setAccessible(true);</b>
+<b class="nc">&nbsp;            String[] parameterNames = beanInfo.createParameterNames;</b>
+<b class="nc">&nbsp;            if (parameterNames == null || parameterNames.length == 0) {</b>
+<b class="nc">&nbsp;                parameterNames = ASMUtils.lookupParameterNames(creatorConstructor);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            int matchCount = 0;</b>
+<b class="nc">&nbsp;            if (defaultConstructor != null) {</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; parameterNames.length; i++) {</b>
+<b class="nc">&nbsp;                    String parameterName = parameterNames[i];</b>
+<b class="nc">&nbsp;                    if (parameterName == null) {</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    for (int j = 0; j &lt; fieldReaderArray.length; j++) {</b>
+<b class="nc">&nbsp;                        FieldReader fieldReader = fieldReaderArray[j];</b>
+<b class="nc">&nbsp;                        if (fieldReader != null) {</b>
+<b class="nc">&nbsp;                            if (parameterName.equals(fieldReader.fieldName)) {</b>
+<b class="nc">&nbsp;                                matchCount++;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (!(fieldBased &amp;&amp; UNSAFE_SUPPORT)</b>
+<b class="nc">&nbsp;                    &amp;&amp; !(Throwable.class.isAssignableFrom(objectClass))</b>
+&nbsp;                    &amp;&amp; defaultConstructor == null
+&nbsp;                    &amp;&amp; matchCount != parameterNames.length) {
+<b class="nc">&nbsp;                if (creatorConstructor.getParameterCount() == 1) {</b>
+<b class="nc">&nbsp;                    FieldInfo fieldInfo = new FieldInfo();</b>
+<b class="nc">&nbsp;                    provider.getFieldInfo(fieldInfo, objectClass, creatorConstructor, 0, creatorConstructor.getParameters()[0]);</b>
+<b class="nc">&nbsp;                    if ((fieldInfo.features &amp; FieldInfo.VALUE_MASK) != 0) {</b>
+<b class="nc">&nbsp;                        Type valueType = creatorConstructor.getGenericParameterTypes()[0];</b>
+<b class="nc">&nbsp;                        Class valueClass = creatorConstructor.getParameterTypes()[0];</b>
+&nbsp;
+<b class="nc">&nbsp;                        JSONSchema jsonSchema = null;</b>
+<b class="nc">&nbsp;                        if (fieldInfo.schema != null &amp;&amp; !fieldInfo.schema.isEmpty()) {</b>
+<b class="nc">&nbsp;                            JSONObject object = JSON.parseObject(fieldInfo.schema);</b>
+<b class="nc">&nbsp;                            if (!object.isEmpty()) {</b>
+<b class="nc">&nbsp;                                jsonSchema = JSONSchema.of(object, valueClass);</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        Object defaultValue = fieldInfo.defaultValue;</b>
+<b class="nc">&nbsp;                        if (defaultValue != null &amp;&amp; defaultValue.getClass() != valueClass) {</b>
+&nbsp;                            Function typeConvert = JSONFactory
+<b class="nc">&nbsp;                                    .getDefaultObjectReaderProvider()</b>
+<b class="nc">&nbsp;                                    .getTypeConvert(defaultValue.getClass(), valueType);</b>
+<b class="nc">&nbsp;                            if (typeConvert != null) {</b>
+<b class="nc">&nbsp;                                defaultValue = typeConvert.apply(defaultValue);</b>
+&nbsp;                            } else {
+<b class="nc">&nbsp;                                throw new JSONException(&quot;illegal defaultValue : &quot; + defaultValue + &quot;, class &quot; + valueClass.getName());</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        return new ObjectReaderImplValue(</b>
+&nbsp;                                objectClass,
+&nbsp;                                valueType,
+&nbsp;                                valueClass,
+&nbsp;                                fieldInfo.features,
+&nbsp;                                fieldInfo.format,
+&nbsp;                                defaultValue,
+&nbsp;                                jsonSchema,
+&nbsp;                                creatorConstructor,
+&nbsp;                                null,
+&nbsp;                                null
+&nbsp;                        );
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (defaultConstructor == null</b>
+&nbsp;                        &amp;&amp; allReadOnlyOrZero
+&nbsp;                        &amp;&amp; fieldReaderArray.length != 0
+<b class="nc">&nbsp;                        &amp;&amp; alternateConstructors.isEmpty()</b>
+&nbsp;                ) {
+<b class="nc">&nbsp;                    for (int i = 0; i &lt; parameterNames.length; i++) {</b>
+<b class="nc">&nbsp;                        String paramName = parameterNames[i];</b>
+<b class="nc">&nbsp;                        for (FieldReader fieldReader : fieldReaderArray) {</b>
+<b class="nc">&nbsp;                            if (fieldReader.field != null</b>
+<b class="nc">&nbsp;                                    &amp;&amp; fieldReader.field.getName().equals(paramName)</b>
+<b class="nc">&nbsp;                                    &amp;&amp; !fieldReader.fieldName.equals(paramName)</b>
+&nbsp;                            ) {
+<b class="nc">&nbsp;                                parameterNames[i] = fieldReader.fieldName;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Function&lt;Map&lt;Long, Object&gt;, T&gt; function = new ConstructorFunction(alternateConstructors, creatorConstructor, null, parameterNames);</b>
+<b class="nc">&nbsp;                FieldReader[] paramFieldReaders = createFieldReaders(</b>
+&nbsp;                        provider,
+&nbsp;                        creatorConstructor,
+<b class="nc">&nbsp;                        creatorConstructor.getParameters(),</b>
+&nbsp;                        parameterNames
+&nbsp;                );
+<b class="nc">&nbsp;                return new ObjectReaderNoneDefaultConstructor(</b>
+&nbsp;                        objectClass,
+&nbsp;                        beanInfo.typeKey,
+&nbsp;                        beanInfo.typeName,
+&nbsp;                        beanInfo.readerFeatures,
+&nbsp;                        function,
+&nbsp;                        alternateConstructors,
+&nbsp;                        parameterNames,
+&nbsp;                        paramFieldReaders,
+&nbsp;                        fieldReaderArray
+&nbsp;                );
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Supplier&lt;T&gt; creator = createInstanceSupplier(objectClass);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (beanInfo.seeAlso != null &amp;&amp; beanInfo.seeAlso.length != 0) {</b>
+<b class="nc">&nbsp;            return createObjectReaderSeeAlso(objectClass, creator, beanInfo.typeKey, beanInfo.seeAlso, beanInfo.seeAlsoNames, fieldReaderArray);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (objectClass.isInterface()) {</b>
+<b class="nc">&nbsp;            return new ObjectReaderInterface(</b>
+&nbsp;                    objectClass,
+&nbsp;                    null,
+&nbsp;                    null,
+&nbsp;                    0L,
+&nbsp;                    null,
+&nbsp;                    null,
+&nbsp;                    fieldReaderArray
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONSchema jsonSchema = JSONSchema.of(JSON.parseObject(beanInfo.schema), objectClass);</b>
+<b class="nc">&nbsp;        return createObjectReader(</b>
+&nbsp;                objectClass,
+&nbsp;                beanInfo.typeKey,
+&nbsp;                beanInfo.readerFeatures,
+&nbsp;                jsonSchema,
+&nbsp;                creator,
+&nbsp;                null,
+&nbsp;                fieldReaderArray);
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldReader[] createFieldReaders(Class&lt;T&gt; objectClass) {
+<b class="nc">&nbsp;        return createFieldReaders(</b>
+&nbsp;                objectClass,
+&nbsp;                objectClass,
+&nbsp;                null,
+&nbsp;                false,
+<b class="nc">&nbsp;                JSONFactory.getDefaultObjectReaderProvider()</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldReader[] createFieldReaders(Class&lt;T&gt; objectClass, Type objectType) {
+<b class="nc">&nbsp;        return createFieldReaders(</b>
+&nbsp;                objectClass,
+&nbsp;                objectType,
+&nbsp;                null,
+&nbsp;                false,
+<b class="nc">&nbsp;                JSONFactory.getDefaultObjectReaderProvider()</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void createFieldReader(
+&nbsp;            Class objectClass,
+&nbsp;            Type objectType,
+&nbsp;            String namingStrategy,
+&nbsp;            FieldInfo fieldInfo,
+&nbsp;            Field field,
+&nbsp;            Map&lt;String, FieldReader&gt; fieldReaders,
+&nbsp;            ObjectReaderProvider provider
+&nbsp;    ) {
+<b class="nc">&nbsp;        for (ObjectReaderModule module : provider.modules) {</b>
+<b class="nc">&nbsp;            ObjectReaderAnnotationProcessor annotationProcessor = module.getAnnotationProcessor();</b>
+<b class="nc">&nbsp;            if (annotationProcessor != null) {</b>
+<b class="nc">&nbsp;                annotationProcessor.getFieldInfo(fieldInfo, objectClass, field);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (fieldInfo.ignore) {</b>
+<b class="nc">&nbsp;            return;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        String fieldName;
+<b class="nc">&nbsp;        if (fieldInfo.fieldName == null || fieldInfo.fieldName.isEmpty()) {</b>
+<b class="nc">&nbsp;            fieldName = field.getName();</b>
+<b class="nc">&nbsp;            if (namingStrategy != null) {</b>
+<b class="nc">&nbsp;                fieldName = BeanUtils.fieldName(fieldName, namingStrategy);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            fieldName = fieldInfo.fieldName;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Type fieldType = field.getGenericType();</b>
+<b class="nc">&nbsp;        Class&lt;?&gt; fieldClass = field.getType();</b>
+&nbsp;
+<b class="nc">&nbsp;        ObjectReader initReader = getInitReader(provider, fieldClass, fieldInfo);</b>
+<b class="nc">&nbsp;        String schema = fieldInfo.schema;</b>
+<b class="nc">&nbsp;        if (fieldInfo.required) {</b>
+<b class="nc">&nbsp;            if (schema == null) {</b>
+<b class="nc">&nbsp;                schema = &quot;{\&quot;required\&quot;:true}&quot;;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        FieldReader&lt;Object&gt; fieldReader = createFieldReader(</b>
+&nbsp;                objectClass,
+&nbsp;                objectType,
+&nbsp;                fieldName,
+&nbsp;                fieldInfo.ordinal,
+&nbsp;                fieldInfo.features,
+&nbsp;                fieldInfo.format,
+&nbsp;                fieldInfo.locale,
+&nbsp;                fieldInfo.defaultValue,
+&nbsp;                schema,
+&nbsp;                fieldType,
+&nbsp;                fieldClass,
+&nbsp;                field,
+&nbsp;                initReader
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        FieldReader previous = fieldReaders.putIfAbsent(fieldName, fieldReader);</b>
+<b class="nc">&nbsp;        if (previous != null) {</b>
+<b class="nc">&nbsp;            int cmp = fieldReader.compareTo(previous);</b>
+<b class="nc">&nbsp;            if (cmp &gt; 0) {</b>
+<b class="nc">&nbsp;                fieldReaders.put(fieldName, fieldReader);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldInfo.alternateNames != null) {</b>
+<b class="nc">&nbsp;            for (String alternateName : fieldInfo.alternateNames) {</b>
+<b class="nc">&nbsp;                if (fieldName.equals(alternateName)) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                FieldReader&lt;Object&gt; fieldReader1 = createFieldReader(</b>
+&nbsp;                        objectClass,
+&nbsp;                        objectType,
+&nbsp;                        alternateName,
+&nbsp;                        fieldInfo.ordinal,
+&nbsp;                        fieldInfo.features,
+&nbsp;                        null,
+&nbsp;                        fieldInfo.locale,
+&nbsp;                        fieldInfo.defaultValue,
+&nbsp;                        schema,
+&nbsp;                        fieldType,
+&nbsp;                        fieldClass,
+&nbsp;                        field,
+&nbsp;                        null
+&nbsp;                );
+<b class="nc">&nbsp;                fieldReaders.putIfAbsent(alternateName, fieldReader1);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    protected void createFieldReader(
+&nbsp;            Class objectClass,
+&nbsp;            Type objectType,
+&nbsp;            String namingStrategy,
+&nbsp;            String[] orders,
+&nbsp;            FieldInfo fieldInfo,
+&nbsp;            Method method,
+&nbsp;            Map&lt;String, FieldReader&gt; fieldReaders,
+&nbsp;            ObjectReaderProvider provider
+&nbsp;    ) {
+<b class="nc">&nbsp;        for (ObjectReaderModule module : provider.modules) {</b>
+<b class="nc">&nbsp;            ObjectReaderAnnotationProcessor annotationProcessor = module.getAnnotationProcessor();</b>
+<b class="nc">&nbsp;            if (annotationProcessor == null) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            annotationProcessor.getFieldInfo(fieldInfo, objectClass, method);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (fieldInfo.ignore) {</b>
+<b class="nc">&nbsp;            return;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        String fieldName;
+<b class="nc">&nbsp;        if (fieldInfo.fieldName == null || fieldInfo.fieldName.isEmpty()) {</b>
+<b class="nc">&nbsp;            String methodName = method.getName();</b>
+<b class="nc">&nbsp;            if (methodName.startsWith(&quot;set&quot;)) {</b>
+<b class="nc">&nbsp;                fieldName = BeanUtils.setterName(methodName, namingStrategy);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                fieldName = BeanUtils.getterName(method, namingStrategy);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            char c0 = &#39;\0&#39;, c1;</b>
+<b class="nc">&nbsp;            int len = fieldName.length();</b>
+<b class="nc">&nbsp;            if (len &gt; 0) {</b>
+<b class="nc">&nbsp;                c0 = fieldName.charAt(0);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if ((len == 1 &amp;&amp; c0 &gt;= &#39;a&#39; &amp;&amp; c0 &lt;= &#39;z&#39;)</b>
+<b class="nc">&nbsp;                    || (len &gt; 2 &amp;&amp; c0 &gt;= &#39;A&#39; &amp;&amp; c0 &lt;= &#39;Z&#39; &amp;&amp; (c1 = fieldName.charAt(1)) &gt;= &#39;A&#39; &amp;&amp; c1 &lt;= &#39;Z&#39;)</b>
+&nbsp;            ) {
+<b class="nc">&nbsp;                char[] chars = fieldName.toCharArray();</b>
+<b class="nc">&nbsp;                if (len == 1) {</b>
+<b class="nc">&nbsp;                    chars[0] = (char) (chars[0] - 32);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    chars[0] = (char) (chars[0] + 32);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                String fieldName1 = new String(chars);</b>
+<b class="nc">&nbsp;                Field field = BeanUtils.getDeclaredField(objectClass, fieldName1);</b>
+<b class="nc">&nbsp;                if (field != null) {</b>
+<b class="nc">&nbsp;                    if (Modifier.isPublic(field.getModifiers())) {</b>
+<b class="nc">&nbsp;                        fieldName = field.getName();</b>
+<b class="nc">&nbsp;                    } else if (len == 1) {</b>
+<b class="nc">&nbsp;                        fieldInfo.alternateNames = new String[]{fieldName};</b>
+<b class="nc">&nbsp;                        fieldName = field.getName();</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            fieldName = fieldInfo.fieldName;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (orders != null &amp;&amp; orders.length &gt; 0) {</b>
+<b class="nc">&nbsp;            boolean match = false;</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; orders.length; i++) {</b>
+<b class="nc">&nbsp;                if (fieldName.equals(orders[i])) {</b>
+<b class="nc">&nbsp;                    fieldInfo.ordinal = i;</b>
+<b class="nc">&nbsp;                    match = true;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            if (!match) {</b>
+<b class="nc">&nbsp;                if (fieldInfo.ordinal == 0) {</b>
+<b class="nc">&nbsp;                    fieldInfo.ordinal = orders.length;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int parameterCount = method.getParameterCount();</b>
+<b class="nc">&nbsp;        if (parameterCount == 0) {</b>
+<b class="nc">&nbsp;            FieldReader fieldReader = createFieldReaderMethod(</b>
+&nbsp;                    objectClass,
+&nbsp;                    objectType,
+&nbsp;                    fieldName,
+&nbsp;                    fieldInfo.ordinal,
+&nbsp;                    fieldInfo.features,
+&nbsp;                    fieldInfo.format,
+&nbsp;                    fieldInfo.locale,
+&nbsp;                    fieldInfo.defaultValue,
+&nbsp;                    fieldInfo.schema,
+<b class="nc">&nbsp;                    method.getGenericReturnType(),</b>
+<b class="nc">&nbsp;                    method.getReturnType(),</b>
+&nbsp;                    method,
+<b class="nc">&nbsp;                    fieldInfo.getInitReader()</b>
+&nbsp;            );
+<b class="nc">&nbsp;            FieldReader origin = fieldReaders.putIfAbsent(fieldName,</b>
+&nbsp;                    fieldReader
+&nbsp;            );
+<b class="nc">&nbsp;            if (origin != null &amp;&amp; origin.compareTo(fieldReader) &gt; 0) {</b>
+<b class="nc">&nbsp;                fieldReaders.put(fieldName, fieldReader);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (parameterCount == 2) {</b>
+<b class="nc">&nbsp;            Class&lt;?&gt; fieldClass = method.getParameterTypes()[1];</b>
+<b class="nc">&nbsp;            Type fieldType = method.getGenericParameterTypes()[1];</b>
+<b class="nc">&nbsp;            method.setAccessible(true);</b>
+<b class="nc">&nbsp;            FieldReaderAnySetter anySetter = new FieldReaderAnySetter(fieldType, fieldClass, fieldInfo.ordinal, fieldInfo.features, fieldInfo.format, null, method);</b>
+<b class="nc">&nbsp;            fieldReaders.put(anySetter.fieldName, anySetter);</b>
+<b class="nc">&nbsp;            return;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Type fieldType = method.getGenericParameterTypes()[0];</b>
+<b class="nc">&nbsp;        Class fieldClass = method.getParameterTypes()[0];</b>
+&nbsp;
+<b class="nc">&nbsp;        ObjectReader initReader = getInitReader(provider, fieldClass, fieldInfo);</b>
+<b class="nc">&nbsp;        FieldReader fieldReader = createFieldReaderMethod(</b>
+&nbsp;                objectClass,
+&nbsp;                objectType,
+&nbsp;                fieldName,
+&nbsp;                fieldInfo.ordinal,
+&nbsp;                fieldInfo.features,
+&nbsp;                fieldInfo.format,
+&nbsp;                fieldInfo.locale,
+&nbsp;                fieldInfo.defaultValue,
+&nbsp;                fieldInfo.schema,
+&nbsp;                fieldType,
+&nbsp;                fieldClass,
+&nbsp;                method,
+&nbsp;                initReader
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        FieldReader origin = fieldReaders.putIfAbsent(fieldName, fieldReader);</b>
+<b class="nc">&nbsp;        if (origin != null &amp;&amp; origin.compareTo(fieldReader) &gt; 0) {</b>
+<b class="nc">&nbsp;            fieldReaders.put(fieldName, fieldReader);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldInfo.alternateNames != null) {</b>
+<b class="nc">&nbsp;            for (String alternateName : fieldInfo.alternateNames) {</b>
+<b class="nc">&nbsp;                if (fieldName.equals(alternateName)) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                fieldReaders</b>
+<b class="nc">&nbsp;                        .putIfAbsent(alternateName,</b>
+<b class="nc">&nbsp;                                createFieldReaderMethod(</b>
+&nbsp;                                        objectClass,
+&nbsp;                                        objectType,
+&nbsp;                                        alternateName,
+&nbsp;                                        fieldInfo.ordinal,
+&nbsp;                                        fieldInfo.features,
+&nbsp;                                        fieldInfo.format,
+&nbsp;                                        fieldInfo.locale,
+&nbsp;                                        fieldInfo.defaultValue,
+&nbsp;                                        fieldInfo.schema,
+&nbsp;                                        fieldType,
+&nbsp;                                        fieldClass,
+&nbsp;                                        method,
+&nbsp;                                        initReader
+&nbsp;                                ));
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    protected &lt;T&gt; FieldReader[] createFieldReaders(
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            Type objectType,
+&nbsp;            BeanInfo beanInfo,
+&nbsp;            boolean fieldBased,
+&nbsp;            ObjectReaderProvider provider
+&nbsp;    ) {
+<b class="nc">&nbsp;        if (beanInfo == null) {</b>
+<b class="nc">&nbsp;            beanInfo = new BeanInfo();</b>
+<b class="nc">&nbsp;            for (ObjectReaderModule module : provider.modules) {</b>
+<b class="nc">&nbsp;                ObjectReaderAnnotationProcessor annotationProcessor = module.getAnnotationProcessor();</b>
+<b class="nc">&nbsp;                if (annotationProcessor != null) {</b>
+<b class="nc">&nbsp;                    annotationProcessor.getBeanInfo(beanInfo, objectClass);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final String namingStrategy = beanInfo.namingStrategy;</b>
+&nbsp;
+<b class="nc">&nbsp;        Map&lt;String, FieldReader&gt; fieldReaders = new LinkedHashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        BeanInfo finalBeanInfo = beanInfo;</b>
+<b class="nc">&nbsp;        final long beanFeatures = beanInfo.readerFeatures;</b>
+<b class="nc">&nbsp;        final FieldInfo fieldInfo = new FieldInfo();</b>
+<b class="nc">&nbsp;        final String[] orders = beanInfo.orders;</b>
+<b class="nc">&nbsp;        if (fieldBased) {</b>
+<b class="nc">&nbsp;            BeanUtils.declaredFields(objectClass, field -&gt; {</b>
+<b class="nc">&nbsp;                fieldInfo.init();</b>
+<b class="nc">&nbsp;                fieldInfo.features |= JSONReader.Feature.FieldBased.mask;</b>
+<b class="nc">&nbsp;                fieldInfo.features |= beanFeatures;</b>
+<b class="nc">&nbsp;                createFieldReader(objectClass, objectType, namingStrategy, fieldInfo, field, fieldReaders, provider);</b>
+&nbsp;            });
+&nbsp;        } else {
+<b class="nc">&nbsp;            BeanUtils.fields(objectClass, field -&gt; {</b>
+<b class="nc">&nbsp;                fieldInfo.init();</b>
+<b class="nc">&nbsp;                fieldInfo.features |= beanFeatures;</b>
+<b class="nc">&nbsp;                createFieldReader(objectClass, objectType, namingStrategy, fieldInfo, field, fieldReaders, provider);</b>
+<b class="nc">&nbsp;                if (fieldInfo.required) {</b>
+<b class="nc">&nbsp;                    String fieldName = fieldInfo.fieldName;</b>
+<b class="nc">&nbsp;                    if (fieldName == null || fieldName.isEmpty()) {</b>
+<b class="nc">&nbsp;                        fieldName = field.getName();</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    finalBeanInfo.required(fieldName);</b>
+&nbsp;                }
+&nbsp;            });
+&nbsp;
+<b class="nc">&nbsp;            BeanUtils.setters(objectClass, method -&gt; {</b>
+<b class="nc">&nbsp;                fieldInfo.init();</b>
+<b class="nc">&nbsp;                fieldInfo.features |= beanFeatures;</b>
+<b class="nc">&nbsp;                createFieldReader(objectClass, objectType, namingStrategy, orders, fieldInfo, method, fieldReaders, provider);</b>
+&nbsp;            });
+&nbsp;
+<b class="nc">&nbsp;            if (objectClass.isInterface()) {</b>
+<b class="nc">&nbsp;                BeanUtils.getters(objectClass, method -&gt; {</b>
+<b class="nc">&nbsp;                    fieldInfo.init();</b>
+<b class="nc">&nbsp;                    fieldInfo.features |= beanFeatures;</b>
+<b class="nc">&nbsp;                    createFieldReader(objectClass, objectType, namingStrategy, orders, fieldInfo, method, fieldReaders, provider);</b>
+&nbsp;                });
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        FieldReader[] fieldReaderArray = new FieldReader[fieldReaders.size()];</b>
+<b class="nc">&nbsp;        fieldReaders.values().toArray(fieldReaderArray);</b>
+<b class="nc">&nbsp;        Arrays.sort(fieldReaderArray);</b>
+<b class="nc">&nbsp;        return fieldReaderArray;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; Supplier&lt;T&gt; createInstanceSupplier(Class&lt;T&gt; objectClass) {
+<b class="nc">&nbsp;        if (objectClass.isInterface()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int modifiers = objectClass.getModifiers();</b>
+<b class="nc">&nbsp;        if (Modifier.isAbstract(modifiers)) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        final Constructor&lt;T&gt; constructor;
+&nbsp;        try {
+<b class="nc">&nbsp;            constructor = objectClass.getDeclaredConstructor();</b>
+<b class="nc">&nbsp;            constructor.setAccessible(true);</b>
+<b class="nc">&nbsp;        } catch (NoSuchMethodException ignored) {</b>
+<b class="nc">&nbsp;            return null;</b>
+<b class="nc">&nbsp;        } catch (Throwable e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;get constructor error, class &quot; + objectClass.getName(), e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return new ConstructorSupplier(constructor);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; Supplier&lt;T&gt; createInstanceSupplier(Constructor constructor) {
+<b class="nc">&nbsp;        return new ConstructorSupplier(constructor);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T, R&gt; Function&lt;T, R&gt; createBuildFunction(Method builderMethod) {
+<b class="nc">&nbsp;        builderMethod.setAccessible(true);</b>
+&nbsp;
+<b class="nc">&nbsp;        return (T o) -&gt; {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                return (R) builderMethod.invoke(o);</b>
+<b class="nc">&nbsp;            } catch (Throwable e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;create instance error&quot;, e);</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldReader createFieldReader(
+&nbsp;            Class&lt;T&gt; objectType,
+&nbsp;            String fieldName,
+&nbsp;            Type fieldType,
+&nbsp;            Class fieldClass,
+&nbsp;            Method method
+&nbsp;    ) {
+<b class="nc">&nbsp;        return createFieldReaderMethod(objectType, objectType, fieldName, 0, 0L, null, null, null, null, fieldType, fieldClass, method, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldReader createFieldReader(
+&nbsp;            Class&lt;T&gt; objectType,
+&nbsp;            String fieldName,
+&nbsp;            String format,
+&nbsp;            Type fieldType,
+&nbsp;            Class fieldClass,
+&nbsp;            Method method
+&nbsp;    ) {
+<b class="nc">&nbsp;        return createFieldReaderMethod(objectType, fieldName, format, fieldType, fieldClass, method);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldReader createFieldReaderMethod(
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            String fieldName,
+&nbsp;            String format,
+&nbsp;            Type fieldType,
+&nbsp;            Class fieldClass,
+&nbsp;            Method method
+&nbsp;    ) {
+<b class="nc">&nbsp;        return createFieldReaderMethod(objectClass, objectClass, fieldName, 0, 0L, format, null, null, null, fieldType, fieldClass, method, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldReader createFieldReaderParam(
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            Type objectType,
+&nbsp;            String fieldName,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            Type fieldType,
+&nbsp;            Class fieldClass,
+&nbsp;            String paramName,
+&nbsp;            Parameter parameter,
+&nbsp;            JSONSchema schema
+&nbsp;    ) {
+<b class="nc">&nbsp;        return createFieldReaderParam(</b>
+&nbsp;                objectClass,
+&nbsp;                objectType,
+&nbsp;                fieldName,
+&nbsp;                ordinal,
+&nbsp;                features,
+&nbsp;                format,
+&nbsp;                fieldType,
+&nbsp;                fieldClass,
+&nbsp;                paramName,
+&nbsp;                parameter,
+&nbsp;                schema,
+&nbsp;                null
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldReader createFieldReaderParam(
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            Type objectType,
+&nbsp;            String fieldName,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            Type fieldType,
+&nbsp;            Class fieldClass,
+&nbsp;            String paramName,
+&nbsp;            Parameter parameter,
+&nbsp;            JSONSchema schema,
+&nbsp;            ObjectReader initReader
+&nbsp;    ) {
+<b class="nc">&nbsp;        if (initReader != null) {</b>
+<b class="nc">&nbsp;            FieldReaderObjectParam paramReader = new FieldReaderObjectParam(</b>
+&nbsp;                    fieldName,
+&nbsp;                    fieldType,
+&nbsp;                    fieldClass,
+&nbsp;                    paramName,
+&nbsp;                    parameter,
+&nbsp;                    ordinal,
+&nbsp;                    features,
+&nbsp;                    format,
+&nbsp;                    schema
+&nbsp;            );
+<b class="nc">&nbsp;            paramReader.initReader = initReader;</b>
+<b class="nc">&nbsp;            return paramReader;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == byte.class || fieldType == Byte.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt8Param(fieldName, fieldClass, paramName, parameter, ordinal, features, format, schema);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == short.class || fieldType == Short.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt16Param(fieldName, fieldClass, paramName, parameter, ordinal, features, format, schema);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == int.class || fieldType == Integer.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt32Param(fieldName, fieldClass, paramName, parameter, ordinal, features, format, schema);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == long.class || fieldType == Long.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt64Param(fieldName, fieldClass, paramName, parameter, ordinal, features, format, schema);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new FieldReaderObjectParam(fieldName, fieldType, fieldClass, paramName, parameter, ordinal, features, format, schema);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldReader createFieldReaderMethod(
+&nbsp;            Class&lt;T&gt; objectClass,
+&nbsp;            Type objectType,
+&nbsp;            String fieldName,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            Locale locale,
+&nbsp;            Object defaultValue,
+&nbsp;            String schema,
+&nbsp;            Type fieldType,
+&nbsp;            Class fieldClass,
+&nbsp;            Method method,
+&nbsp;            ObjectReader initReader
+&nbsp;    ) {
+<b class="nc">&nbsp;        if (method != null) {</b>
+<b class="nc">&nbsp;            method.setAccessible(true);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (defaultValue != null &amp;&amp; defaultValue.getClass() != fieldClass) {</b>
+&nbsp;            Function typeConvert = JSONFactory
+<b class="nc">&nbsp;                    .getDefaultObjectReaderProvider()</b>
+<b class="nc">&nbsp;                    .getTypeConvert(defaultValue.getClass(), fieldType);</b>
+<b class="nc">&nbsp;            if (typeConvert != null) {</b>
+<b class="nc">&nbsp;                defaultValue = typeConvert.apply(defaultValue);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new JSONException(&quot;illegal defaultValue : &quot; + defaultValue + &quot;, class &quot; + fieldClass.getName());</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONSchema jsonSchema = null;</b>
+<b class="nc">&nbsp;        if (schema != null &amp;&amp; !schema.isEmpty()) {</b>
+<b class="nc">&nbsp;            JSONObject object = JSON.parseObject(schema);</b>
+<b class="nc">&nbsp;            if (!object.isEmpty()) {</b>
+<b class="nc">&nbsp;                jsonSchema = JSONSchema.of(object, fieldClass);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (initReader != null) {</b>
+<b class="nc">&nbsp;            FieldReaderObject fieldReaderObjectMethod = new FieldReaderObject(</b>
+&nbsp;                    fieldName,
+&nbsp;                    fieldType,
+&nbsp;                    fieldClass,
+&nbsp;                    ordinal,
+&nbsp;                    features | FieldInfo.READ_USING_MASK,
+&nbsp;                    format,
+&nbsp;                    locale,
+&nbsp;                    defaultValue,
+&nbsp;                    jsonSchema,
+&nbsp;                    method,
+&nbsp;                    null,
+&nbsp;                    null
+&nbsp;            );
+<b class="nc">&nbsp;            fieldReaderObjectMethod.initReader = initReader;</b>
+<b class="nc">&nbsp;            return fieldReaderObjectMethod;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == boolean.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderBoolValueMethod(fieldName, fieldType, fieldClass, ordinal, features, format, (Boolean) defaultValue, jsonSchema, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == Boolean.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderBoolMethod(fieldName, fieldType, fieldClass, ordinal, features, format, locale, (Boolean) defaultValue, jsonSchema, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == byte.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt8ValueMethod(fieldName, fieldType, fieldClass, ordinal, features, format, locale, (Byte) defaultValue, jsonSchema, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == short.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt16ValueMethod(fieldName, fieldType, fieldClass, ordinal, features, format, locale, (Short) defaultValue, jsonSchema, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == int.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt32ValueMethod(fieldName, fieldType, fieldClass, ordinal, features, format, (Integer) defaultValue, jsonSchema, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == long.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt64ValueMethod(fieldName, fieldType, fieldClass, ordinal, features, format, locale, (Long) defaultValue, jsonSchema, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == float.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderFloatValueMethod(fieldName, fieldType, fieldClass, ordinal, features, format, locale, (Float) defaultValue, jsonSchema, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == double.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderDoubleValueMethod(fieldName, fieldType, fieldClass, ordinal, features, format, locale, (Double) defaultValue, jsonSchema, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == Byte.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt8Method(fieldName, fieldType, fieldClass, ordinal, features, format, locale, (Byte) defaultValue, jsonSchema, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == Short.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt16Method(fieldName, fieldType, fieldClass, ordinal, features, format, locale, (Short) defaultValue, jsonSchema, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == Integer.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt32Method(fieldName, fieldType, fieldClass, ordinal, features, format, locale, (Integer) defaultValue, jsonSchema, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == Long.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt64Method(fieldName, fieldType, fieldClass, ordinal, features, format, locale, (Long) defaultValue, jsonSchema, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == Float.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderFloatMethod(fieldName, fieldType, fieldClass, ordinal, features, format, locale, (Float) defaultValue, jsonSchema, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == Double.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderDoubleMethod(fieldName, fieldType, fieldClass, ordinal, features, format, (Double) defaultValue, jsonSchema, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == BigDecimal.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderBigDecimalMethod(fieldName, fieldType, fieldClass, ordinal, features, format, locale, (BigDecimal) defaultValue, jsonSchema, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == BigInteger.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderBigIntegerMethod(fieldName, fieldType, fieldClass, ordinal, features, format, locale, (BigInteger) defaultValue, jsonSchema, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldType == String.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderStringMethod(fieldName, fieldType, fieldClass, ordinal, features, format, locale, (String) defaultValue, jsonSchema, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (method.getParameterCount() == 0) {</b>
+<b class="nc">&nbsp;            if (fieldClass == AtomicInteger.class) {</b>
+<b class="nc">&nbsp;                return new FieldReaderAtomicIntegerMethodReadOnly(fieldName, fieldClass, ordinal, jsonSchema, method);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (fieldClass == AtomicLong.class) {</b>
+<b class="nc">&nbsp;                return new FieldReaderAtomicLongReadOnly(fieldName, fieldClass, ordinal, jsonSchema, method);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (fieldClass == AtomicIntegerArray.class) {</b>
+<b class="nc">&nbsp;                return new FieldReaderAtomicIntegerArrayReadOnly(fieldName, fieldClass, ordinal, jsonSchema, method);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (fieldClass == AtomicLongArray.class) {</b>
+<b class="nc">&nbsp;                return new FieldReaderAtomicLongArrayReadOnly(fieldName, fieldClass, ordinal, jsonSchema, method);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (fieldClass == AtomicBoolean.class) {</b>
+<b class="nc">&nbsp;                return new FieldReaderAtomicBooleanMethodReadOnly(fieldName, fieldClass, ordinal, jsonSchema, method);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (fieldClass == AtomicReference.class) {</b>
+<b class="nc">&nbsp;                return new FieldReaderAtomicReferenceMethodReadOnly(fieldName, fieldType, fieldClass, ordinal, jsonSchema, method);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (Collection.class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;                Field field = null;</b>
+<b class="nc">&nbsp;                String methodName = method.getName();</b>
+<b class="nc">&nbsp;                if (methodName.startsWith(&quot;get&quot;)) {</b>
+<b class="nc">&nbsp;                    String getterName = BeanUtils.getterName(methodName, PropertyNamingStrategy.CamelCase.name());</b>
+<b class="nc">&nbsp;                    field = BeanUtils.getDeclaredField(method.getDeclaringClass(), getterName);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return new FieldReaderCollectionMethodReadOnly(</b>
+&nbsp;                        fieldName,
+&nbsp;                        fieldType,
+&nbsp;                        fieldClass,
+&nbsp;                        ordinal,
+&nbsp;                        features,
+&nbsp;                        format,
+&nbsp;                        jsonSchema,
+&nbsp;                        method,
+&nbsp;                        field
+&nbsp;                );
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (Map.class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;                Field field = null;</b>
+<b class="nc">&nbsp;                String methodName = method.getName();</b>
+<b class="nc">&nbsp;                if (methodName.startsWith(&quot;get&quot;)) {</b>
+<b class="nc">&nbsp;                    String getterName = BeanUtils.getterName(methodName, PropertyNamingStrategy.CamelCase.name());</b>
+<b class="nc">&nbsp;                    field = BeanUtils.getDeclaredField(method.getDeclaringClass(), getterName);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return new FieldReaderMapMethodReadOnly(</b>
+&nbsp;                        fieldName,
+&nbsp;                        fieldType,
+&nbsp;                        fieldClass,
+&nbsp;                        ordinal,
+&nbsp;                        features,
+&nbsp;                        format,
+&nbsp;                        jsonSchema,
+&nbsp;                        method,
+&nbsp;                        field
+&nbsp;                );
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (!objectClass.isInterface()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Type fieldTypeResolved = null;</b>
+<b class="nc">&nbsp;        Class fieldClassResolved = null;</b>
+<b class="nc">&nbsp;        if (!(fieldType instanceof Class)) {</b>
+<b class="nc">&nbsp;            fieldTypeResolved = BeanUtils.getFieldType(TypeReference.get(objectType), objectClass, method, fieldType);</b>
+<b class="nc">&nbsp;            fieldClassResolved = TypeUtils.getMapping(fieldTypeResolved);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == List.class || fieldClass == ArrayList.class) {</b>
+<b class="nc">&nbsp;            if (fieldTypeResolved instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;                ParameterizedType parameterizedType = (ParameterizedType) fieldTypeResolved;</b>
+<b class="nc">&nbsp;                Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();</b>
+<b class="nc">&nbsp;                if (actualTypeArguments.length == 1) {</b>
+<b class="nc">&nbsp;                    Type itemType = actualTypeArguments[0];</b>
+<b class="nc">&nbsp;                    Class itemClass = TypeUtils.getMapping(itemType);</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (itemClass == String.class) {</b>
+<b class="nc">&nbsp;                        return new FieldReaderList(fieldName, fieldTypeResolved, fieldClass, String.class, String.class, ordinal, features, format, locale, null, jsonSchema, method, null, null);</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    return new FieldReaderList(fieldName, fieldTypeResolved, fieldClassResolved, itemType, itemClass, ordinal, features, format, locale, null, jsonSchema, method, null, null);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return new FieldReaderList(fieldName, fieldType, fieldClass, Object.class, Object.class, ordinal, features, format, locale, null, jsonSchema, method, null, null);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Date.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderDateMethod(fieldName, fieldClass, ordinal, features, format, locale, jsonSchema, method);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == StackTraceElement[].class &amp;&amp; method != null &amp;&amp; method.getDeclaringClass() == Throwable.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderStackTrace(</b>
+&nbsp;                    fieldName,
+&nbsp;                    fieldTypeResolved != null ? fieldTypeResolved : fieldType,
+&nbsp;                    fieldClass,
+&nbsp;                    ordinal,
+&nbsp;                    features,
+&nbsp;                    format,
+&nbsp;                    locale,
+&nbsp;                    defaultValue,
+&nbsp;                    jsonSchema,
+&nbsp;                    method,
+&nbsp;                    null,
+&nbsp;                    (BiConsumer&lt;Throwable, StackTraceElement[]&gt;) Throwable::setStackTrace
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == StackTraceElement[].class &amp;&amp; method.getDeclaringClass() == Throwable.class) {</b>
+<b class="nc">&nbsp;            features |= JSONReader.Feature.IgnoreSetNullValue.mask;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new FieldReaderObject(</b>
+&nbsp;                fieldName,
+&nbsp;                fieldTypeResolved != null ? fieldTypeResolved : fieldType,
+&nbsp;                fieldClass,
+&nbsp;                ordinal,
+&nbsp;                features,
+&nbsp;                format,
+&nbsp;                locale,
+&nbsp;                defaultValue,
+&nbsp;                jsonSchema,
+&nbsp;                method,
+&nbsp;                null,
+&nbsp;                null
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldReader&lt;T&gt; createFieldReader(
+&nbsp;            String fieldName,
+&nbsp;            Type fieldType,
+&nbsp;            Field field
+&nbsp;    ) {
+<b class="nc">&nbsp;        return createFieldReader(fieldName, null, fieldType, field);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldReader&lt;T&gt; createFieldReader(
+&nbsp;            String fieldName,
+&nbsp;            String format,
+&nbsp;            Type fieldType,
+&nbsp;            Field field
+&nbsp;    ) {
+<b class="nc">&nbsp;        Class objectClass = field.getDeclaringClass();</b>
+<b class="nc">&nbsp;        return createFieldReader(objectClass, objectClass, fieldName, 0, format, fieldType, field.getType(), field);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldReader&lt;T&gt; createFieldReader(
+&nbsp;            Class objectClass,
+&nbsp;            Type objectType,
+&nbsp;            String fieldName,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            Type fieldType,
+&nbsp;            Class fieldClass,
+&nbsp;            Field field
+&nbsp;    ) {
+<b class="nc">&nbsp;        return createFieldReader(objectClass, objectType, fieldName, 0, features, format, null, null, null, fieldType, field.getType(), field, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; FieldReader&lt;T&gt; createFieldReader(
+&nbsp;            Class objectClass,
+&nbsp;            Type objectType,
+&nbsp;            String fieldName,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            Locale locale,
+&nbsp;            Object defaultValue,
+&nbsp;            String schema,
+&nbsp;            Type fieldType,
+&nbsp;            Class fieldClass,
+&nbsp;            Field field,
+&nbsp;            ObjectReader initReader
+&nbsp;    ) {
+<b class="nc">&nbsp;        if (defaultValue != null &amp;&amp; defaultValue.getClass() != fieldClass) {</b>
+&nbsp;            ObjectReaderProvider provider = JSONFactory
+<b class="nc">&nbsp;                    .getDefaultObjectReaderProvider();</b>
+<b class="nc">&nbsp;            Function typeConvert = provider.getTypeConvert(defaultValue.getClass(), fieldType);</b>
+<b class="nc">&nbsp;            if (typeConvert != null) {</b>
+<b class="nc">&nbsp;                defaultValue = typeConvert.apply(defaultValue);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new JSONException(&quot;illegal defaultValue : &quot; + defaultValue + &quot;, class &quot; + fieldClass.getName());</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONSchema jsonSchema = null;</b>
+<b class="nc">&nbsp;        if (schema != null &amp;&amp; !schema.isEmpty()) {</b>
+<b class="nc">&nbsp;            JSONObject object = JSON.parseObject(schema);</b>
+<b class="nc">&nbsp;            if (!object.isEmpty()) {</b>
+<b class="nc">&nbsp;                jsonSchema = JSONSchema.of(object, fieldClass);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (field != null) {</b>
+<b class="nc">&nbsp;            String objectClassName = objectClass.getName();</b>
+<b class="nc">&nbsp;            if (!objectClassName.startsWith(&quot;java.lang&quot;) &amp;&amp; !objectClassName.startsWith(&quot;java.time&quot;)) {</b>
+<b class="nc">&nbsp;                field.setAccessible(true);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (initReader != null) {</b>
+<b class="nc">&nbsp;            FieldReaderObjectField fieldReader = new FieldReaderObjectField(fieldName, fieldType, fieldClass, ordinal, features | FieldInfo.READ_USING_MASK, format, defaultValue, jsonSchema, field);</b>
+<b class="nc">&nbsp;            fieldReader.initReader = initReader;</b>
+<b class="nc">&nbsp;            return fieldReader;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == int.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt32ValueField(fieldName, fieldClass, ordinal, format, (Integer) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (fieldClass == Integer.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt32Field(fieldName, fieldClass, ordinal, features, format, (Integer) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == long.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt64ValueField(fieldName, fieldClass, ordinal, features, format, (Long) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (fieldClass == Long.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt64Field(fieldName, fieldClass, ordinal, features, format, (Long) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == short.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt16ValueField(fieldName, fieldClass, ordinal, features, format, (Short) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Short.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt16Field(fieldName, fieldClass, ordinal, features, format, (Short) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == boolean.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderBoolValueField(fieldName, fieldClass, ordinal, features, format, (Boolean) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Boolean.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderBoolField(fieldName, fieldClass, ordinal, features, format, (Boolean) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == byte.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt8ValueField(fieldName, fieldClass, ordinal, features, format, (Byte) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Byte.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt8Field(fieldName, fieldClass, ordinal, features, format, (Byte) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == float.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderFloatValueField(fieldName, fieldClass, ordinal, features, format, (Float) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (fieldClass == Float.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderFloatField(fieldName, fieldClass, ordinal, features, format, (Float) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == double.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderDoubleValueField(fieldName, fieldClass, ordinal, features, format, (Double) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (fieldClass == Double.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderDoubleField(fieldName, fieldClass, ordinal, features, format, (Double) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == char.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderCharValueField(fieldName, ordinal, features, format, (Character) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == BigDecimal.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderBigDecimalField(fieldName, fieldClass, ordinal, features, format, (BigDecimal) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == BigInteger.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderBigIntegerField(fieldName, fieldClass, ordinal, features, format, (BigInteger) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == String.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderStringField(fieldName, fieldClass, ordinal, features, format, (String) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == Date.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderDateField(fieldName, fieldClass, ordinal, features, format, locale, (Date) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == AtomicBoolean.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderAtomicBooleanFieldReadOnly(fieldName, fieldClass, ordinal, format, (AtomicBoolean) defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClass == AtomicReference.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderAtomicReferenceField(fieldName, fieldType, fieldClass, ordinal, format, jsonSchema, field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Type fieldTypeResolved = null;</b>
+<b class="nc">&nbsp;        Class fieldClassResolved = null;</b>
+<b class="nc">&nbsp;        if (!(fieldType instanceof Class)) {</b>
+<b class="nc">&nbsp;            fieldTypeResolved = BeanUtils.getFieldType(TypeReference.get(objectType), objectClass, field, fieldType);</b>
+<b class="nc">&nbsp;            fieldClassResolved = TypeUtils.getMapping(fieldTypeResolved);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean finalField = Modifier.isFinal(field.getModifiers());</b>
+<b class="nc">&nbsp;        if (Collection.class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;            if (fieldTypeResolved instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;                ParameterizedType parameterizedType = (ParameterizedType) fieldTypeResolved;</b>
+<b class="nc">&nbsp;                Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (actualTypeArguments.length == 1) {</b>
+<b class="nc">&nbsp;                    Type itemType = actualTypeArguments[0];</b>
+<b class="nc">&nbsp;                    Class itemClass = TypeUtils.getMapping(itemType);</b>
+<b class="nc">&nbsp;                    if (itemClass == String.class) {</b>
+<b class="nc">&nbsp;                        if (finalField) {</b>
+<b class="nc">&nbsp;                            if (UNSAFE_SUPPORT &amp;&amp; (features &amp; JSONReader.Feature.FieldBased.mask) != 0) {</b>
+<b class="nc">&nbsp;                                return new FieldReaderListFieldUF(fieldName, fieldTypeResolved, fieldClassResolved, String.class, String.class, ordinal, features, format, locale, null, jsonSchema, field);</b>
+&nbsp;                            }
+&nbsp;
+<b class="nc">&nbsp;                            return new FieldReaderCollectionFieldReadOnly(fieldName, fieldTypeResolved, fieldClassResolved, ordinal, features, format, jsonSchema, field);</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        if (UNSAFE_SUPPORT) {</b>
+<b class="nc">&nbsp;                            return new FieldReaderListFieldUF(fieldName, fieldTypeResolved, fieldClassResolved, String.class, String.class, ordinal, features, format, locale, null, jsonSchema, field);</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        return new FieldReaderList(fieldName, fieldTypeResolved, fieldClassResolved, String.class, String.class, ordinal, features, format, locale, null, jsonSchema, null, field, null);</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (UNSAFE_SUPPORT) {</b>
+<b class="nc">&nbsp;                        return new FieldReaderListFieldUF(</b>
+&nbsp;                                fieldName,
+&nbsp;                                fieldTypeResolved,
+&nbsp;                                fieldClassResolved,
+&nbsp;                                itemType,
+&nbsp;                                itemClass,
+&nbsp;                                ordinal,
+&nbsp;                                features,
+&nbsp;                                format,
+&nbsp;                                locale,
+&nbsp;                                (Collection) defaultValue,
+&nbsp;                                jsonSchema,
+&nbsp;                                field
+&nbsp;                        );
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    return new FieldReaderList(fieldName, fieldTypeResolved, fieldClassResolved, itemType, itemClass, ordinal, features, format, locale, (Collection) defaultValue, jsonSchema, null, field, null);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Type itemType = null;</b>
+<b class="nc">&nbsp;            if (fieldType instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;                Type[] actualTypeArguments = ((ParameterizedType) fieldType).getActualTypeArguments();</b>
+<b class="nc">&nbsp;                if (actualTypeArguments.length &gt; 0) {</b>
+<b class="nc">&nbsp;                    itemType = actualTypeArguments[0];</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            if (itemType == null) {</b>
+<b class="nc">&nbsp;                itemType = Object.class;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Class itemClass = TypeUtils.getClass(itemType);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (UNSAFE_SUPPORT) {</b>
+<b class="nc">&nbsp;                return new FieldReaderListFieldUF(</b>
+&nbsp;                        fieldName,
+&nbsp;                        fieldType,
+&nbsp;                        fieldClass,
+&nbsp;                        itemType,
+&nbsp;                        itemClass,
+&nbsp;                        ordinal,
+&nbsp;                        features,
+&nbsp;                        format,
+&nbsp;                        locale,
+&nbsp;                        (Collection) defaultValue,
+&nbsp;                        jsonSchema,
+&nbsp;                        field
+&nbsp;                );
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return new FieldReaderList(</b>
+&nbsp;                    fieldName,
+&nbsp;                    fieldType,
+&nbsp;                    fieldClass,
+&nbsp;                    itemType,
+&nbsp;                    itemClass,
+&nbsp;                    ordinal,
+&nbsp;                    features,
+&nbsp;                    format,
+&nbsp;                    locale,
+&nbsp;                    (Collection) defaultValue,
+&nbsp;                    jsonSchema,
+&nbsp;                    null,
+&nbsp;                    field,
+&nbsp;                    null
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (Map.class.isAssignableFrom(fieldClass)) {</b>
+<b class="nc">&nbsp;            if (fieldTypeResolved instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;                ParameterizedType parameterizedType = (ParameterizedType) fieldTypeResolved;</b>
+<b class="nc">&nbsp;                Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (actualTypeArguments.length == 2) {</b>
+<b class="nc">&nbsp;                    if (finalField &amp;&amp; (!UNSAFE_SUPPORT || (features &amp; JSONReader.Feature.FieldBased.mask) == 0)) {</b>
+<b class="nc">&nbsp;                        return new FieldReaderMapFieldReadOnly(fieldName, fieldTypeResolved, fieldClassResolved, ordinal, features, format, jsonSchema, field);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (finalField) {</b>
+<b class="nc">&nbsp;            if (fieldClass == int[].class) {</b>
+<b class="nc">&nbsp;                return new FieldReaderInt32ValueArrayFinalField(fieldName, fieldClass, ordinal, features, format, (int[]) defaultValue, jsonSchema, field);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (fieldClass == long[].class) {</b>
+<b class="nc">&nbsp;                return new FieldReaderInt64ValueArrayFinalField(fieldName, fieldClass, ordinal, features, format, (long[]) defaultValue, jsonSchema, field);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (fieldClassResolved != null) {</b>
+<b class="nc">&nbsp;            if (UNSAFE_SUPPORT) {</b>
+<b class="nc">&nbsp;                return new FieldReaderObjectFieldUF(</b>
+&nbsp;                        fieldName,
+&nbsp;                        fieldTypeResolved,
+&nbsp;                        fieldClass,
+&nbsp;                        ordinal,
+&nbsp;                        features,
+&nbsp;                        format,
+&nbsp;                        defaultValue,
+&nbsp;                        jsonSchema,
+&nbsp;                        field);
+&nbsp;            } else {
+<b class="nc">&nbsp;                return new FieldReaderObjectField(</b>
+&nbsp;                        fieldName,
+&nbsp;                        fieldTypeResolved,
+&nbsp;                        fieldClass,
+&nbsp;                        ordinal,
+&nbsp;                        features,
+&nbsp;                        format,
+&nbsp;                        defaultValue,
+&nbsp;                        jsonSchema,
+&nbsp;                        field);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (UNSAFE_SUPPORT) {</b>
+<b class="nc">&nbsp;            return new FieldReaderObjectFieldUF(fieldName, fieldType, fieldClass, ordinal, features, format, defaultValue, jsonSchema, field);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return new FieldReaderObjectField(fieldName, fieldType, fieldClass, ordinal, features, format, defaultValue, jsonSchema, field);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T, V&gt; FieldReader createFieldReader(
+&nbsp;            String fieldName,
+&nbsp;            Type fieldType,
+&nbsp;            Class&lt;V&gt; fieldClass,
+&nbsp;            Method method,
+&nbsp;            BiConsumer&lt;T, V&gt; function
+&nbsp;    ) {
+<b class="fc">&nbsp;        return createFieldReader(null, null, fieldName, fieldType, fieldClass, 0, 0, null, null, null, method, function, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T, V&gt; FieldReader createFieldReader(
+&nbsp;            Class objectClass,
+&nbsp;            Type objectType,
+&nbsp;            String fieldName,
+&nbsp;            Type fieldType,
+&nbsp;            Class&lt;V&gt; fieldClass,
+&nbsp;            int ordinal,
+&nbsp;            long features,
+&nbsp;            String format,
+&nbsp;            Object defaultValue,
+&nbsp;            JSONSchema schema,
+&nbsp;            Method method,
+&nbsp;            BiConsumer&lt;T, V&gt; function,
+&nbsp;            ObjectReader initReader
+&nbsp;    ) {
+<b class="fc">&nbsp;        if (fieldClass == Integer.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt32Func&lt;&gt;(fieldName, fieldClass, ordinal, features, format, null, defaultValue, schema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (fieldClass == Long.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt64Func&lt;&gt;(fieldName, fieldClass, ordinal, features, format, null, defaultValue, schema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (fieldClass == String.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderStringFunc&lt;&gt;(fieldName, fieldClass, ordinal, features, format, null, defaultValue, schema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (fieldClass == Boolean.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderBoolFunc&lt;&gt;(fieldName, fieldClass, ordinal, features, format, null, defaultValue, schema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (fieldClass == Short.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt16Func(fieldName, fieldClass, ordinal, features, format, null, defaultValue, schema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (fieldClass == Byte.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderInt8Func(fieldName, fieldClass, ordinal, features, format, null, defaultValue, schema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (fieldClass == BigDecimal.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderBigDecimalFunc(fieldName, fieldClass, ordinal, features, format, null, defaultValue, schema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (fieldClass == BigInteger.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderBigIntegerFunc(fieldName, fieldClass, ordinal, features, format, null, defaultValue, schema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (fieldClass == Float.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderFloatFunc(fieldName, fieldClass, ordinal, features, format, null, (Float) defaultValue, schema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (fieldClass == Double.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderDoubleFunc(fieldName, fieldClass, ordinal, features, format, null, (Double) defaultValue, schema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (fieldClass == Number.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderNumberFunc(fieldName, fieldClass, ordinal, features, format, null, (Number) defaultValue, schema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (fieldClass == Date.class) {</b>
+<b class="nc">&nbsp;            return new FieldReaderDateFunc(fieldName, fieldClass, ordinal, features, format, null, (Date) defaultValue, schema, method, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Type fieldTypeResolved = null;</b>
+<b class="fc">&nbsp;        Class fieldClassResolved = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (!(fieldType instanceof Class)) {</b>
+<b class="nc">&nbsp;            fieldTypeResolved = BeanUtils.getFieldType(TypeReference.get(objectType), objectClass, method, fieldType);</b>
+<b class="nc">&nbsp;            fieldClassResolved = TypeUtils.getMapping(fieldTypeResolved);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (fieldClass == List.class || fieldClass == ArrayList.class) {</b>
+<b class="nc">&nbsp;            Type itemType = Object.class;</b>
+<b class="nc">&nbsp;            Class itemClass = Object.class;</b>
+<b class="nc">&nbsp;            if (fieldTypeResolved instanceof ParameterizedType) {</b>
+<b class="nc">&nbsp;                ParameterizedType parameterizedType = (ParameterizedType) fieldTypeResolved;</b>
+<b class="nc">&nbsp;                Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (actualTypeArguments.length == 1) {</b>
+<b class="nc">&nbsp;                    itemType = actualTypeArguments[0];</b>
+<b class="nc">&nbsp;                    itemClass = TypeUtils.getMapping(itemType);</b>
+<b class="nc">&nbsp;                    if (itemClass == String.class) {</b>
+<b class="nc">&nbsp;                        return new FieldReaderList(fieldName, fieldTypeResolved, fieldClassResolved, String.class, String.class, ordinal, features, format, null, defaultValue, schema, method, null, function);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return new FieldReaderList(fieldName, fieldTypeResolved, fieldClassResolved, itemType, itemClass, ordinal, features, format, null, defaultValue, schema, method, null, function);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (fieldTypeResolved != null) {</b>
+<b class="nc">&nbsp;            return new FieldReaderObjectFunc&lt;&gt;(fieldName, fieldTypeResolved, fieldClass, ordinal, features, format, null, defaultValue, schema, method, function, initReader);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return new FieldReaderObjectFunc&lt;&gt;(fieldName, fieldType, fieldClass, ordinal, features, format, null, defaultValue, schema, method, function, initReader);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected ObjectReader createEnumReader(
+&nbsp;            Class objectClass,
+&nbsp;            Method createMethod,
+&nbsp;            ObjectReaderProvider provider
+&nbsp;    ) {
+<b class="nc">&nbsp;        FieldInfo fieldInfo = new FieldInfo();</b>
+&nbsp;
+<b class="nc">&nbsp;        Enum[] ordinalEnums = (Enum[]) objectClass.getEnumConstants();</b>
+&nbsp;
+<b class="nc">&nbsp;        Map&lt;Long, Enum&gt; enumMap = new HashMap();</b>
+<b class="nc">&nbsp;        for (int i = 0; ordinalEnums != null &amp;&amp; i &lt; ordinalEnums.length; ++i) {</b>
+<b class="nc">&nbsp;            Enum e = ordinalEnums[i];</b>
+<b class="nc">&nbsp;            String name = e.name();</b>
+<b class="nc">&nbsp;            long hash = Fnv.hashCode64(name);</b>
+<b class="nc">&nbsp;            enumMap.put(hash, e);</b>
+&nbsp;
+&nbsp;            try {
+<b class="nc">&nbsp;                fieldInfo.init();</b>
+<b class="nc">&nbsp;                Field field = objectClass.getField(name);</b>
+<b class="nc">&nbsp;                for (ObjectReaderModule module : provider.modules) {</b>
+<b class="nc">&nbsp;                    ObjectReaderAnnotationProcessor annotationProcessor = module.getAnnotationProcessor();</b>
+<b class="nc">&nbsp;                    if (annotationProcessor != null) {</b>
+<b class="nc">&nbsp;                        annotationProcessor.getFieldInfo(fieldInfo, objectClass, field);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;                String jsonFieldName = fieldInfo.fieldName;</b>
+<b class="nc">&nbsp;                if (jsonFieldName != null &amp;&amp; !jsonFieldName.isEmpty() &amp;&amp; !jsonFieldName.equals(name)) {</b>
+<b class="nc">&nbsp;                    long jsonFieldNameHash = Fnv.hashCode64(jsonFieldName);</b>
+<b class="nc">&nbsp;                    enumMap.putIfAbsent(jsonFieldNameHash, e);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (fieldInfo.alternateNames != null) {</b>
+<b class="nc">&nbsp;                    for (String alternateName : fieldInfo.alternateNames) {</b>
+<b class="nc">&nbsp;                        if (alternateName == null || alternateName.isEmpty()) {</b>
+<b class="nc">&nbsp;                            continue;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        long alternateNameHash = Fnv.hashCode64(alternateName);</b>
+<b class="nc">&nbsp;                        enumMap.putIfAbsent(alternateNameHash, e);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Exception ignored) {</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; ordinalEnums != null &amp;&amp; i &lt; ordinalEnums.length; ++i) {</b>
+<b class="nc">&nbsp;            Enum e = ordinalEnums[i];</b>
+<b class="nc">&nbsp;            String name = e.name();</b>
+<b class="nc">&nbsp;            long hashLCase = Fnv.hashCode64LCase(name);</b>
+<b class="nc">&nbsp;            enumMap.putIfAbsent(hashLCase, e);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long[] enumNameHashCodes = new long[enumMap.size()];</b>
+&nbsp;        {
+<b class="nc">&nbsp;            int i = 0;</b>
+<b class="nc">&nbsp;            for (Long h : enumMap.keySet()) {</b>
+<b class="nc">&nbsp;                enumNameHashCodes[i++] = h;</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            Arrays.sort(enumNameHashCodes);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Member enumValueField = BeanUtils.getEnumValueField(objectClass, provider);</b>
+<b class="nc">&nbsp;        if (enumValueField == null &amp;&amp; provider.modules.size() &gt; 0) {</b>
+<b class="nc">&nbsp;            if (provider != null) {</b>
+<b class="nc">&nbsp;                Class fieldClassMixInSource = provider.getMixIn(objectClass);</b>
+<b class="nc">&nbsp;                if (fieldClassMixInSource != null) {</b>
+<b class="nc">&nbsp;                    Member mixedValueField = BeanUtils.getEnumValueField(fieldClassMixInSource, provider);</b>
+<b class="nc">&nbsp;                    if (mixedValueField instanceof Field) {</b>
+&nbsp;                        try {
+<b class="nc">&nbsp;                            enumValueField = objectClass.getField(mixedValueField.getName());</b>
+<b class="nc">&nbsp;                        } catch (NoSuchFieldException ignored) {</b>
+<b class="nc">&nbsp;                        }</b>
+<b class="nc">&nbsp;                    } else if (mixedValueField instanceof Method) {</b>
+&nbsp;                        try {
+<b class="nc">&nbsp;                            enumValueField = objectClass.getMethod(mixedValueField.getName());</b>
+<b class="nc">&nbsp;                        } catch (NoSuchMethodException ignored) {</b>
+<b class="nc">&nbsp;                        }</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Enum[] enums = new Enum[enumNameHashCodes.length];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; enumNameHashCodes.length; ++i) {</b>
+<b class="nc">&nbsp;            long hash = enumNameHashCodes[i];</b>
+<b class="nc">&nbsp;            Enum e = enumMap.get(hash);</b>
+<b class="nc">&nbsp;            enums[i] = e;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (createMethod == null &amp;&amp; enumValueField == null) {</b>
+<b class="nc">&nbsp;            if (ordinalEnums != null &amp;&amp; ordinalEnums.length == 2) {</b>
+<b class="nc">&nbsp;                Enum first = ordinalEnums[0];</b>
+&nbsp;
+<b class="nc">&nbsp;                int matchCount = 0;</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; enums.length; i++) {</b>
+<b class="nc">&nbsp;                    if (enums[i] == first) {</b>
+<b class="nc">&nbsp;                        matchCount++;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (matchCount == 2) {</b>
+<b class="nc">&nbsp;                    return new ObjectReaderImplEnum2X4(objectClass, enums, ordinalEnums, enumNameHashCodes);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new ObjectReaderImplEnum(objectClass, createMethod, enumValueField, enums, ordinalEnums, enumNameHashCodes);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static ObjectReader getInitReader(ObjectReaderProvider provider, Class fieldClass, FieldInfo fieldInfo) {
+<b class="nc">&nbsp;        ObjectReader initReader = fieldInfo.getInitReader();</b>
+<b class="nc">&nbsp;        if (initReader == null) {</b>
+<b class="nc">&nbsp;            if (fieldClass == long.class || fieldClass == Long.class) {</b>
+<b class="nc">&nbsp;                ObjectReader objectReader = provider.getObjectReader(Long.class);</b>
+<b class="nc">&nbsp;                if (objectReader != ObjectReaderImplInt64.INSTANCE) {</b>
+<b class="nc">&nbsp;                    initReader = objectReader;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (fieldClass == BigDecimal.class) {</b>
+<b class="nc">&nbsp;                ObjectReader objectReader = provider.getObjectReader(BigDecimal.class);</b>
+<b class="nc">&nbsp;                if (objectReader != ObjectReaderImplBigDecimal.INSTANCE) {</b>
+<b class="nc">&nbsp;                    initReader = objectReader;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (fieldClass == BigInteger.class) {</b>
+<b class="nc">&nbsp;                ObjectReader objectReader = provider.getObjectReader(BigInteger.class);</b>
+<b class="nc">&nbsp;                if (objectReader != ObjectReaderImplBigInteger.INSTANCE) {</b>
+<b class="nc">&nbsp;                    initReader = objectReader;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return initReader;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:08</div>
+</div>
+</body>
+</html>

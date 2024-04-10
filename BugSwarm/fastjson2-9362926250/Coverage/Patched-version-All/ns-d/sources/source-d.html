@@ -1,0 +1,364 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Issue609</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark</a>
+</div>
+
+<h1>Coverage Summary for Class: Issue609 (com.alibaba.fastjson2.benchmark)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Issue609</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/57)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Issue609$Student</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/68)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.JSON;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import org.openjdk.jmh.annotations.Benchmark;
+&nbsp;import org.openjdk.jmh.annotations.BenchmarkMode;
+&nbsp;import org.openjdk.jmh.annotations.Mode;
+&nbsp;import org.openjdk.jmh.annotations.OutputTimeUnit;
+&nbsp;import org.openjdk.jmh.annotations.Scope;
+&nbsp;import org.openjdk.jmh.annotations.State;
+&nbsp;import org.openjdk.jmh.infra.Blackhole;
+&nbsp;import org.openjdk.jmh.runner.Runner;
+&nbsp;import org.openjdk.jmh.runner.RunnerException;
+&nbsp;import org.openjdk.jmh.runner.options.Options;
+&nbsp;import org.openjdk.jmh.runner.options.OptionsBuilder;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.concurrent.TimeUnit;
+&nbsp;
+&nbsp;@State(Scope.Thread)
+<b class="nc">&nbsp;public class Issue609 {</b>
+&nbsp;    private static final List&lt;Student&gt; objList;
+&nbsp;    private static final List&lt;String&gt; strList;
+&nbsp;    private static final String source;
+&nbsp;
+&nbsp;    static {
+<b class="nc">&nbsp;        objList = new ArrayList&lt;&gt;(100000);</b>
+<b class="nc">&nbsp;        strList = new ArrayList&lt;&gt;(100000);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; 100000; i++) {</b>
+<b class="nc">&nbsp;            Student student = new Student(&quot;学生姓名&quot; + i, i % 10, &quot;黑龙江省哈尔滨市南方区哈尔滨大街267号&quot; + i);</b>
+<b class="nc">&nbsp;            objList.add(student);</b>
+<b class="nc">&nbsp;            strList.add(JSON.toJSONString(student));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        source = JSON.toJSONString(objList);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void main(String[] args) throws RunnerException {
+<b class="nc">&nbsp;        Options opt = new OptionsBuilder()</b>
+<b class="nc">&nbsp;                .include(Issue609.class.getName())</b>
+<b class="nc">&nbsp;                .warmupIterations(3)</b>
+<b class="nc">&nbsp;                .measurementIterations(5)</b>
+<b class="nc">&nbsp;                .forks(1)</b>
+<b class="nc">&nbsp;                .jvmArgsAppend(&quot;-Xms128m&quot;, &quot;-Xmx128m&quot;)</b>
+<b class="nc">&nbsp;                .build();</b>
+&nbsp;
+<b class="nc">&nbsp;        new Runner(opt).run();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    @BenchmarkMode(Mode.Throughput)
+&nbsp;    @OutputTimeUnit(TimeUnit.SECONDS)
+&nbsp;    public void fastJSON1ObjSeThroughput(Blackhole bh) {
+<b class="nc">&nbsp;        for (Student student : objList) {</b>
+<b class="nc">&nbsp;            bh.consume(JSON.toJSONString(student));</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    @BenchmarkMode(Mode.Throughput)
+&nbsp;    @OutputTimeUnit(TimeUnit.SECONDS)
+&nbsp;    public void fastJSON1ObjDeThroughput(Blackhole bh) {
+<b class="nc">&nbsp;        for (String student : strList) {</b>
+<b class="nc">&nbsp;            bh.consume(JSON.parseObject(student, Student.class));</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    @BenchmarkMode(Mode.Throughput)
+&nbsp;    @OutputTimeUnit(TimeUnit.SECONDS)
+&nbsp;    public void fastJSON2ObjSeThroughput(Blackhole bh) {
+<b class="nc">&nbsp;        for (Student student : objList) {</b>
+<b class="nc">&nbsp;            bh.consume(</b>
+<b class="nc">&nbsp;                    com.alibaba.fastjson2.JSON.toJSONString(student)</b>
+&nbsp;            );
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    @BenchmarkMode(Mode.Throughput)
+&nbsp;    @OutputTimeUnit(TimeUnit.SECONDS)
+&nbsp;    public void fastJSON2ObjDeThroughput(Blackhole bh) {
+<b class="nc">&nbsp;        for (String student : strList) {</b>
+<b class="nc">&nbsp;            bh.consume(com.alibaba.fastjson2.JSON.parseObject(student, Student.class));</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    @BenchmarkMode(Mode.Throughput)
+&nbsp;    @OutputTimeUnit(TimeUnit.SECONDS)
+&nbsp;    public void fastJSON1ArraySeThroughput(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                JSON.toJSONString(objList)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    @BenchmarkMode(Mode.Throughput)
+&nbsp;    @OutputTimeUnit(TimeUnit.SECONDS)
+&nbsp;    public void fastJSON1ArrayDeThroughput(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                JSON.parseArray(source, Student.class)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    @BenchmarkMode(Mode.Throughput)
+&nbsp;    @OutputTimeUnit(TimeUnit.SECONDS)
+&nbsp;    public void fastJSON2ArraySeThroughput(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                com.alibaba.fastjson2.JSON.toJSONString(objList, JSONWriter.Feature.ReferenceDetection)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    @BenchmarkMode(Mode.Throughput)
+&nbsp;    @OutputTimeUnit(TimeUnit.SECONDS)
+&nbsp;    public void fastJSON2ArrayDeThroughput(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                com.alibaba.fastjson2.JSON.parseArray(source, Student.class)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    @BenchmarkMode(Mode.AverageTime)
+&nbsp;    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+&nbsp;    public void fastJSON1ObjSeTime(Blackhole bh) {
+<b class="nc">&nbsp;        for (Student student : objList) {</b>
+<b class="nc">&nbsp;            bh.consume(</b>
+<b class="nc">&nbsp;                    JSON.toJSONString(student)</b>
+&nbsp;            );
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    @BenchmarkMode(Mode.AverageTime)
+&nbsp;    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+&nbsp;    public void fastJSON1ObjDeTime(Blackhole bh) {
+<b class="nc">&nbsp;        for (String student : strList) {</b>
+<b class="nc">&nbsp;            bh.consume(</b>
+<b class="nc">&nbsp;                    JSON.parseObject(student, Student.class)</b>
+&nbsp;            );
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    @BenchmarkMode(Mode.AverageTime)
+&nbsp;    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+&nbsp;    public void fastJSON2ObjSeTime(Blackhole bh) {
+<b class="nc">&nbsp;        for (Student student : objList) {</b>
+<b class="nc">&nbsp;            bh.consume(</b>
+<b class="nc">&nbsp;                    com.alibaba.fastjson2.JSON.toJSONString(student)</b>
+&nbsp;            );
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    @BenchmarkMode(Mode.AverageTime)
+&nbsp;    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+&nbsp;    public void fastJSON2ObjDeTime(Blackhole bh) {
+<b class="nc">&nbsp;        for (String student : strList) {</b>
+<b class="nc">&nbsp;            bh.consume(com.alibaba.fastjson2.JSON.parseObject(student, Student.class));</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    @BenchmarkMode(Mode.AverageTime)
+&nbsp;    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+&nbsp;    public void fastJSON1ArraySeTime(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(JSON.toJSONString(objList));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    @BenchmarkMode(Mode.AverageTime)
+&nbsp;    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+&nbsp;    public void fastJSON1ArrayDeTime(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                JSON.parseArray(source, Student.class)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    @BenchmarkMode(Mode.AverageTime)
+&nbsp;    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+&nbsp;    public void fastJSON2ArraySeTime(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(com.alibaba.fastjson2.JSON.toJSONString(objList, JSONWriter.Feature.ReferenceDetection));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    @BenchmarkMode(Mode.AverageTime)
+&nbsp;    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+&nbsp;    public void fastJSON2ArrayDeTime(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(com.alibaba.fastjson2.JSON.parseArray(source, Student.class));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static class Student {
+&nbsp;        private String name;
+&nbsp;        private int age;
+&nbsp;        private String address;
+&nbsp;
+<b class="nc">&nbsp;        public Student() {</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        public Student(String name, int age, String address) {</b>
+<b class="nc">&nbsp;            this.name = name;</b>
+<b class="nc">&nbsp;            this.age = age;</b>
+<b class="nc">&nbsp;            this.address = address;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getName() {
+<b class="nc">&nbsp;            return name;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setName(String name) {
+<b class="nc">&nbsp;            this.name = name;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getAge() {
+<b class="nc">&nbsp;            return age;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setAge(int age) {
+<b class="nc">&nbsp;            this.age = age;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getAddress() {
+<b class="nc">&nbsp;            return address;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setAddress(String address) {
+<b class="nc">&nbsp;            this.address = address;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:16</div>
+</div>
+</body>
+</html>

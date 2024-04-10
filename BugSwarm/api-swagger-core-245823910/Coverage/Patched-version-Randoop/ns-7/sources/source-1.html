@@ -1,0 +1,166 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractOpenAPIExtension</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.jaxrs2.ext</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractOpenAPIExtension (io.swagger.jaxrs2.ext)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractOpenAPIExtension</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package io.swagger.jaxrs2.ext;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JavaType;
+&nbsp;import com.fasterxml.jackson.databind.type.TypeFactory;
+&nbsp;import io.swagger.oas.models.Operation;
+&nbsp;import io.swagger.oas.models.parameters.Parameter;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;
+<b class="nc">&nbsp;public abstract class AbstractOpenAPIExtension implements OpenAPIExtension {</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String extractOperationMethod(Operation operation, Method method, Iterator&lt;OpenAPIExtension&gt; chain) {
+<b class="nc">&nbsp;        if (chain.hasNext()) {</b>
+<b class="nc">&nbsp;            return chain.next().extractOperationMethod(operation, method, chain);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;Parameter&gt; extractParameters(List&lt;Annotation&gt; annotations, Type type, Set&lt;Type&gt; typesToSkip,
+&nbsp;                                             Iterator&lt;OpenAPIExtension&gt; chain) {
+<b class="nc">&nbsp;        if (chain.hasNext()) {</b>
+<b class="nc">&nbsp;            return chain.next().extractParameters(annotations, type, typesToSkip, chain);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return Collections.emptyList();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void decorateOperation(Operation operation, Method method, Iterator&lt;OpenAPIExtension&gt; chain) {
+<b class="nc">&nbsp;        if (chain.hasNext()) {</b>
+<b class="nc">&nbsp;            chain.next().decorateOperation(operation, method, chain);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean shouldIgnoreClass(Class&lt;?&gt; cls) {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean shouldIgnoreType(Type type, Set&lt;Type&gt; typesToSkip) {
+<b class="nc">&nbsp;        if (typesToSkip.contains(type)) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (shouldIgnoreClass(constructType(type).getRawClass())) {</b>
+<b class="nc">&nbsp;            typesToSkip.add(type);</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected JavaType constructType(Type type) {
+<b class="nc">&nbsp;        return TypeFactory.defaultInstance().constructType(type);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:28</div>
+</div>
+</body>
+</html>

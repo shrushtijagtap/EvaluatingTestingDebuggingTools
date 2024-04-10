@@ -1,0 +1,162 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Point</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.support.geo</a>
+</div>
+
+<h1>Coverage Summary for Class: Point (com.alibaba.fastjson.support.geo)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Point</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    42.9%
+  </span>
+  <span class="absValue">
+    (3/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    46.2%
+  </span>
+  <span class="absValue">
+    (6/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson.support.geo;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.annotation.JSONField;
+&nbsp;import com.alibaba.fastjson.annotation.JSONType;
+&nbsp;
+&nbsp;/**
+&nbsp; * @since 1.2.68
+&nbsp; */
+&nbsp;@JSONType(typeName = &quot;Point&quot;, orders = {&quot;type&quot;, &quot;bbox&quot;, &quot;coordinates&quot;})
+&nbsp;public class Point
+&nbsp;        extends Geometry {
+&nbsp;    private double longitude;
+&nbsp;    private double latitude;
+&nbsp;
+<b class="fc">&nbsp;    public Point() {</b>
+&nbsp;        super(&quot;Point&quot;);
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public double[] getCoordinates() {</b>
+&nbsp;        return new double[]{longitude, latitude};
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public void setCoordinates(double[] coordinates) {</b>
+<b class="nc">&nbsp;        if (coordinates == null || coordinates.length == 0) {</b>
+<b class="nc">&nbsp;            this.longitude = 0;</b>
+&nbsp;            this.latitude = 0;
+&nbsp;            return;
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="nc">&nbsp;        if (coordinates.length == 1) {</b>
+&nbsp;            this.longitude = coordinates[0];
+&nbsp;            return;
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        this.longitude = coordinates[0];</b>
+&nbsp;        this.latitude = coordinates[1];
+&nbsp;    }
+&nbsp;
+&nbsp;    @JSONField(serialize = false)
+<b class="nc">&nbsp;    public double getLongitude() {</b>
+&nbsp;        return longitude;
+&nbsp;    }
+&nbsp;
+&nbsp;    @JSONField(serialize = false)
+<b class="nc">&nbsp;    public double getLatitude() {</b>
+&nbsp;        return latitude;
+&nbsp;    }
+&nbsp;
+&nbsp;    @JSONField(deserialize = false)
+<b class="nc">&nbsp;    public void setLongitude(double longitude) {</b>
+&nbsp;        this.longitude = longitude;
+&nbsp;    }
+&nbsp;
+&nbsp;    @JSONField(deserialize = false)
+<b class="nc">&nbsp;    public void setLatitude(double latitude) {</b>
+&nbsp;        this.latitude = latitude;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:07</div>
+</div>
+</body>
+</html>

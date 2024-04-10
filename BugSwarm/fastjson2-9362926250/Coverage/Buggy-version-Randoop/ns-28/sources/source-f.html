@@ -1,0 +1,246 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Opcodes</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.internal.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: Opcodes (com.alibaba.fastjson2.internal.asm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Opcodes</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;// ASM: a very small and fast Java bytecode manipulation framework
+&nbsp;// Copyright (c) 2000-2011 INRIA, France Telecom
+&nbsp;// All rights reserved.
+&nbsp;//
+&nbsp;// Redistribution and use in source and binary forms, with or without
+&nbsp;// modification, are permitted provided that the following conditions
+&nbsp;// are met:
+&nbsp;// 1. Redistributions of source code must retain the above copyright
+&nbsp;//    notice, this list of conditions and the following disclaimer.
+&nbsp;// 2. Redistributions in binary form must reproduce the above copyright
+&nbsp;//    notice, this list of conditions and the following disclaimer in the
+&nbsp;//    documentation and/or other materials provided with the distribution.
+&nbsp;// 3. Neither the name of the copyright holders nor the names of its
+&nbsp;//    contributors may be used to endorse or promote products derived from
+&nbsp;//    this software without specific prior written permission.
+&nbsp;//
+&nbsp;// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+&nbsp;// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+&nbsp;// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+&nbsp;// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+&nbsp;// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+&nbsp;// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+&nbsp;// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+&nbsp;// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+&nbsp;// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+&nbsp;// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+&nbsp;// THE POSSIBILITY OF SUCH DAMAGE.
+&nbsp;package com.alibaba.fastjson2.internal.asm;
+&nbsp;
+&nbsp;/**
+&nbsp; * The JVM opcodes, access flags and array type codes. This interface does not define all the JVM
+&nbsp; * opcodes because some opcodes are automatically handled. For example, the xLOAD and xSTORE opcodes
+&nbsp; * are automatically replaced by xLOAD_n and xSTORE_n opcodes when possible. The xLOAD_n and
+&nbsp; * xSTORE_n opcodes are therefore not defined in this interface. Likewise for LDC, automatically
+&nbsp; * replaced by LDC_W or LDC2_W when necessary, WIDE, GOTO_W and JSR_W.
+&nbsp; *
+&nbsp; * @author Eric Bruneton
+&nbsp; * @author Eugene Kuleshov
+&nbsp; * @see &lt;a href=&quot;https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-6.html&quot;&gt;JVMS 6&lt;/a&gt;
+&nbsp; */
+&nbsp;// DontCheck(InterfaceIsType): can&#39;t be fixed (for backward binary compatibility).
+&nbsp;public interface Opcodes {
+&nbsp;    // Java ClassFile versions (the minor version is stored in the 16 most significant bits, and the
+&nbsp;    // major version in the 16 least significant bits).
+&nbsp;
+&nbsp;    int V1_8 = 0 &lt;&lt; 16 | 52;
+&nbsp;
+&nbsp;    // Access flags values, defined in
+&nbsp;    int ACC_PUBLIC = 0x0001; // class, field, method
+&nbsp;    int ACC_STATIC = 0x0008; // field, method
+&nbsp;    int ACC_FINAL = 0x0010; // class, field, method, parameter
+&nbsp;    int ACC_SUPER = 0x0020; // class
+&nbsp;
+&nbsp;    // The JVM opcode values (with the MethodVisitor method name used to visit them in comment, and
+&nbsp;    // where &#39;-&#39; means &#39;same method name as on the previous line&#39;).
+&nbsp;    // See https://docs.oracle.com/javase/specs/jvms/se9/html/jvms-6.html.
+&nbsp;
+&nbsp;    int NOP = 0; // visitInsn
+&nbsp;    int ACONST_NULL = 1; // -
+&nbsp;    int ICONST_M1 = 2; // -
+&nbsp;    int ICONST_0 = 3; // -
+&nbsp;    int ICONST_1 = 4; // -
+&nbsp;    int ICONST_2 = 5; // -
+&nbsp;    int ICONST_3 = 6; // -
+&nbsp;    int ICONST_4 = 7; // -
+&nbsp;    int ICONST_5 = 8; // -
+&nbsp;    int LCONST_0 = 9; // -
+&nbsp;    int LCONST_1 = 10; // -
+&nbsp;    int FCONST_0 = 11; // -
+&nbsp;    int FCONST_1 = 12; // -
+&nbsp;    int FCONST_2 = 13; // -
+&nbsp;    int DCONST_0 = 14; // -
+&nbsp;    int DCONST_1 = 15; // -
+&nbsp;    int BIPUSH = 16; // visitIntInsn
+&nbsp;    int SIPUSH = 17; // -
+&nbsp;    int LDC = 18; // visitLdcInsn
+&nbsp;    int ILOAD = 21; // visitVarInsn
+&nbsp;    int LLOAD = 22; // -
+&nbsp;    int FLOAD = 23; // -
+&nbsp;    int DLOAD = 24; // -
+&nbsp;    int ALOAD = 25; // -
+&nbsp;    int IALOAD = 46; // visitInsn
+&nbsp;    int LALOAD = 47; // -
+&nbsp;    int AALOAD = 50; // -
+&nbsp;    int BALOAD = 51; // -
+&nbsp;    int CALOAD = 52; // -
+&nbsp;    int SALOAD = 53; // -
+&nbsp;    int ISTORE = 54; // visitVarInsn
+&nbsp;    int LSTORE = 55; // -
+&nbsp;    int FSTORE = 56; // -
+&nbsp;    int DSTORE = 57; // -
+&nbsp;    int ASTORE = 58; // -
+&nbsp;    int POP = 87; // visitInsn
+&nbsp;    int POP2 = 88; // -
+&nbsp;    int DUP = 89; // -
+&nbsp;    int DUP2 = 92; // -
+&nbsp;    int SWAP = 95; // -
+&nbsp;    int IADD = 96; // -
+&nbsp;    int LADD = 97; // -
+&nbsp;    int ISUB = 100; // -
+&nbsp;    int LSUB = 101; // -
+&nbsp;    int IMUL = 104; // -
+&nbsp;    int LMUL = 105; // -
+&nbsp;    int IDIV = 108; // -
+&nbsp;    int LDIV = 109; // -
+&nbsp;    int IREM = 112; // -
+&nbsp;    int LREM = 113; // -
+&nbsp;    int INEG = 116; // -
+&nbsp;    int LNEG = 117; // -
+&nbsp;    int FNEG = 118; // -
+&nbsp;    int DNEG = 119; // -
+&nbsp;    int ISHL = 120; // -
+&nbsp;    int LSHL = 121; // -
+&nbsp;    int ISHR = 122; // -
+&nbsp;    int LSHR = 123; // -
+&nbsp;    int IUSHR = 124; // -
+&nbsp;    int LUSHR = 125; // -
+&nbsp;    int IAND = 126; // -
+&nbsp;    int LAND = 127; // -
+&nbsp;    int IOR = 128; // -
+&nbsp;    int LOR = 129; // -
+&nbsp;    int IXOR = 130; // -
+&nbsp;    int LXOR = 131; // -
+&nbsp;    int IINC = 132; // visitIincInsn
+&nbsp;    int L2I = 136; // visitInsn
+&nbsp;    int F2I = 139; // -
+&nbsp;    int D2I = 142; // -
+&nbsp;    int D2L = 143; // -
+&nbsp;    int I2B = 145; // -
+&nbsp;    int I2C = 146; // -
+&nbsp;    int I2S = 147; // -
+&nbsp;    int LCMP = 148; // -
+&nbsp;    int FCMPL = 149; // -
+&nbsp;    int FCMPG = 150; // -
+&nbsp;    int DCMPL = 151; // -
+&nbsp;    int DCMPG = 152; // -
+&nbsp;    int IFEQ = 153; // visitJumpInsn
+&nbsp;    int IFNE = 154; // -
+&nbsp;    int IFLT = 155; // -
+&nbsp;    int IFGE = 156; // -
+&nbsp;    int IFGT = 157; // -
+&nbsp;    int IFLE = 158; // -
+&nbsp;    int IF_ICMPEQ = 159; // -
+&nbsp;    int IF_ICMPNE = 160; // -
+&nbsp;    int IF_ICMPLT = 161; // -
+&nbsp;    int IF_ICMPGE = 162; // -
+&nbsp;    int IF_ICMPGT = 163; // -
+&nbsp;    int IF_ICMPLE = 164; // -
+&nbsp;    int IF_ACMPEQ = 165; // -
+&nbsp;    int IF_ACMPNE = 166; // -
+&nbsp;    int GOTO = 167; // -
+&nbsp;    int RET = 169; // visitVarInsn
+&nbsp;    int TABLESWITCH = 170; // visiTableSwitchInsn
+&nbsp;    int LOOKUPSWITCH = 171; // visitLookupSwitch
+&nbsp;    int IRETURN = 172; // visitInsn
+&nbsp;    int LRETURN = 173; // -
+&nbsp;    int FRETURN = 174; // -
+&nbsp;    int DRETURN = 175; // -
+&nbsp;    int ARETURN = 176; // -
+&nbsp;    int RETURN = 177; // -
+&nbsp;    int GETSTATIC = 178; // visitFieldInsn
+&nbsp;    int PUTSTATIC = 179; // -
+&nbsp;    int GETFIELD = 180; // -
+&nbsp;    int PUTFIELD = 181; // -
+&nbsp;    int INVOKEVIRTUAL = 182; // visitMethodInsn
+&nbsp;    int INVOKESPECIAL = 183; // -
+&nbsp;    int INVOKESTATIC = 184; // -
+&nbsp;    int INVOKEINTERFACE = 185; // -
+&nbsp;    int NEW = 187; // visitTypeInsn
+&nbsp;    int ARRAYLENGTH = 190; // visitInsn
+&nbsp;    int ATHROW = 191; // -
+&nbsp;    int CHECKCAST = 192; // visitTypeInsn
+&nbsp;    int INSTANCEOF = 193; // -
+&nbsp;    int MONITORENTER = 194; // visitInsn
+&nbsp;    int MONITOREXIT = 195; // -
+&nbsp;    int IFNULL = 198; // visitJumpInsn
+&nbsp;    int IFNONNULL = 199; // -
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:12</div>
+</div>
+</body>
+</html>

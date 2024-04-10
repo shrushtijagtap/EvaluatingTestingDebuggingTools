@@ -1,0 +1,368 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DefaultJSONParser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.parser</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultJSONParser (com.alibaba.fastjson.parser)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultJSONParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    37.9%
+  </span>
+  <span class="absValue">
+    (25/66)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    28.5%
+  </span>
+  <span class="absValue">
+    (272/954)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DefaultJSONParser$ResolveTask</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    38.8%
+  </span>
+  <span class="absValue">
+    (26/67)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    28.7%
+  </span>
+  <span class="absValue">
+    (275/957)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson.parser;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.JSONException;
+&nbsp;import com.alibaba.fastjson.JSONObject;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;
+&nbsp;import java.io.Closeable;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class DefaultJSONParser
+&nbsp;        implements Closeable {
+&nbsp;    private final JSONReader reader;
+&nbsp;    private final ParserConfig config;
+&nbsp;    private final JSONScanner lexer;
+&nbsp;    private Object input;
+&nbsp;
+&nbsp;    public DefaultJSONParser(String text) {
+&nbsp;        this(JSONReader.of(text), ParserConfig.global);
+&nbsp;        this.input = text;
+&nbsp;    }
+&nbsp;
+&nbsp;    public DefaultJSONParser(final Object input, final JSONLexer lexer, final ParserConfig config) {
+&nbsp;        this.lexer = (JSONScanner) lexer;
+&nbsp;        this.reader = lexer.getReader();
+&nbsp;        this.config = config;
+&nbsp;        this.input = input;
+&nbsp;    }
+&nbsp;
+&nbsp;    public ParserConfig getConfig() {
+&nbsp;        return config;
+&nbsp;    }
+&nbsp;
+&nbsp;    public DefaultJSONParser(String text, ParserConfig config) {
+&nbsp;        this(JSONReader.of(text), config);
+&nbsp;    }
+&nbsp;
+&nbsp;    public DefaultJSONParser(JSONReader reader, ParserConfig config) {
+&nbsp;        this.reader = reader;
+&nbsp;        this.config = config;
+&nbsp;        this.lexer = new JSONScanner(this.reader);
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public JSONLexer getLexer() {</b>
+&nbsp;        return lexer;
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public JSONReader getRawReader() {
+&nbsp;        return reader;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object parse() {
+&nbsp;        return reader.readAny();
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public &lt;T&gt; List&lt;T&gt; parseArray(Class&lt;T&gt; clazz) {
+&nbsp;        return reader.readArray(clazz);
+&nbsp;    }
+&nbsp;
+&nbsp;    public void parseArray(Type type, Collection array) {
+&nbsp;        reader.readArray(array, type);
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    public void parseArray(Class&lt;?&gt; clazz, @SuppressWarnings(&quot;rawtypes&quot;) Collection array) {</b>
+<b class="fc">&nbsp;        reader.readArray(array, clazz);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    public Object[] parseArray(Type[] types) {</b>
+&nbsp;        return reader.readArray(types);
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public final void parseArray(final Collection array) {
+&nbsp;        reader.readArray(array, Object.class);
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public &lt;T&gt; T parseObject(Class&lt;T&gt; clazz) {</b>
+&nbsp;        return reader.read(clazz);
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T parseObject(Type type) {
+&nbsp;        return reader.read(type);
+&nbsp;    }
+&nbsp;
+&nbsp;    public void parseObject(Object object) {
+&nbsp;        reader.readObject(object);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    public Object parse(Object fieldName) {
+&nbsp;        return reader.readAny();
+&nbsp;    }
+&nbsp;
+&nbsp;    @Deprecated
+&nbsp;    public void handleResovleTask(Object value) {
+&nbsp;        reader.handleResolveTasks(value);
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public void handleResolveTasks(Object value) {</b>
+&nbsp;        reader.handleResolveTasks(value);
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public final void accept(final int token) {</b>
+&nbsp;        char expect;
+&nbsp;        switch (token) {
+&nbsp;            case JSONToken.DOT:
+<b class="nc">&nbsp;                expect = &#39;.&#39;;</b>
+<b class="nc">&nbsp;                break;</b>
+<b class="nc">&nbsp;            case JSONToken.LBRACE:</b>
+&nbsp;                expect = &#39;{&#39;;
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case JSONToken.RBRACE:
+&nbsp;                expect = &#39;}&#39;;
+&nbsp;                break;
+<b class="nc">&nbsp;            case JSONToken.LBRACKET:</b>
+<b class="nc">&nbsp;                expect = &#39;[&#39;;</b>
+&nbsp;                break;
+&nbsp;            case JSONToken.RBRACKET:
+&nbsp;                expect = &#39;]&#39;;
+&nbsp;                break;
+&nbsp;            case JSONToken.LPAREN:
+&nbsp;                expect = &#39;(&#39;;
+&nbsp;                break;
+<b class="nc">&nbsp;            case JSONToken.RPAREN:</b>
+&nbsp;                expect = &#39;)&#39;;
+&nbsp;                break;
+&nbsp;            case JSONToken.COMMA:
+<b class="nc">&nbsp;                if (reader.hasComma() || reader.nextIfMatch(&#39;,&#39;)) {</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;                throw new JSONException(
+<b class="nc">&nbsp;                        &quot;syntax error, expect &#39;,&#39;, actual &quot; + reader.current()</b>
+&nbsp;                );
+&nbsp;            case JSONToken.COLON:
+&nbsp;                expect = &#39;:&#39;;
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case JSONToken.TRUE:
+&nbsp;                if (!reader.nextIfMatchIdent(&#39;t&#39;, &#39;r&#39;, &#39;u&#39;, &#39;e&#39;)) {
+&nbsp;                    throw new JSONException(
+<b class="fc">&nbsp;                            &quot;syntax error, expect true, actual &quot; + reader.current()</b>
+&nbsp;                    );
+&nbsp;                }
+&nbsp;                return;
+<b class="nc">&nbsp;            case JSONToken.FALSE:</b>
+&nbsp;                if (!reader.nextIfMatchIdent(&#39;f&#39;, &#39;a&#39;, &#39;l&#39;, &#39;s&#39;, &#39;e&#39;)) {
+&nbsp;                    throw new JSONException(
+&nbsp;                            &quot;syntax error, expect false, actual &quot; + reader.current()
+<b class="nc">&nbsp;                    );</b>
+&nbsp;                }
+&nbsp;                return;
+&nbsp;            case JSONToken.NULL:
+<b class="nc">&nbsp;                if (!reader.nextIfNull()) {</b>
+&nbsp;                    throw new JSONException(
+&nbsp;                            &quot;syntax error, expect false, actual &quot; + reader.current()
+<b class="fc">&nbsp;                    );</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;                return;</b>
+<b class="fc">&nbsp;            case JSONToken.LITERAL_STRING: {</b>
+<b class="fc">&nbsp;                char ch = reader.current();</b>
+&nbsp;                if (ch == &#39;\&quot;&#39; || ch == &#39;\&#39;&#39;) {
+<b class="fc">&nbsp;                    reader.readString();</b>
+<b class="fc">&nbsp;                    return;</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;                throw new JSONException(</b>
+<b class="fc">&nbsp;                        &quot;syntax error, expect string, actual &quot; + ch</b>
+<b class="fc">&nbsp;                );</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;            case JSONToken.SET:
+<b class="nc">&nbsp;                if (!reader.nextIfSet()) {</b>
+&nbsp;                    throw new JSONException(
+&nbsp;                            &quot;syntax error, expect set, actual &quot; + reader.current()
+&nbsp;                    );
+&nbsp;                }
+<b class="nc">&nbsp;                return;</b>
+&nbsp;            case JSONToken.LITERAL_INT:
+&nbsp;            case JSONToken.LITERAL_FLOAT:
+&nbsp;                char ch = reader.current();
+<b class="nc">&nbsp;                if (ch != &#39;-&#39; &amp;&amp; ch != &#39;+&#39; &amp;&amp; (ch &lt; &#39;0&#39; || ch &gt; &#39;9&#39;)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(</b>
+&nbsp;                            &quot;syntax error, expect int, actual &quot; + reader.current()
+<b class="nc">&nbsp;                    );</b>
+&nbsp;                }
+&nbsp;                Number number = reader.readNumber();
+&nbsp;                boolean isInt = number instanceof Integer || number instanceof Long || number instanceof BigInteger;
+&nbsp;                if (isInt) {
+<b class="fc">&nbsp;                    if (token == JSONToken.LITERAL_INT) {</b>
+&nbsp;                        return;
+<b class="fc">&nbsp;                    }</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    if (token == JSONToken.LITERAL_FLOAT) {</b>
+&nbsp;                        return;
+&nbsp;                    }
+<b class="fc">&nbsp;                }</b>
+<b class="nc">&nbsp;                throw new JSONException(</b>
+<b class="nc">&nbsp;                        &quot;syntax error, expect int, actual &quot; + reader.current()</b>
+&nbsp;                );
+&nbsp;            default:
+<b class="fc">&nbsp;                throw new JSONException(&quot;not support accept token &quot; + JSONToken.name(token));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        if (!reader.nextIfMatch(expect)) {
+&nbsp;            throw new JSONException(
+<b class="fc">&nbsp;                    &quot;syntax error, expect &quot; + JSONToken.name(token) + &quot;, actual &quot; + reader.current()</b>
+<b class="nc">&nbsp;            );</b>
+&nbsp;        }
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public JSONObject parseObject() {
+<b class="fc">&nbsp;        if (reader.nextIfNull()) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        JSONObject object = new JSONObject(lexer.isOrderedField());
+<b class="fc">&nbsp;        reader.read(object, 0L);</b>
+<b class="fc">&nbsp;        return object;</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="nc">&nbsp;    public void config(Feature feature, boolean state) {</b>
+<b class="nc">&nbsp;        lexer.config(feature, state);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void close() {
+<b class="fc">&nbsp;        this.reader.close();</b>
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public String getInput() {</b>
+<b class="fc">&nbsp;        if (input instanceof char[]) {</b>
+<b class="fc">&nbsp;            return new String((char[]) input);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return input.toString();</b>
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public boolean isEnabled(Feature feature) {</b>
+<b class="fc">&nbsp;        return lexer.isEnabled(feature);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:01</div>
+</div>
+</body>
+</html>

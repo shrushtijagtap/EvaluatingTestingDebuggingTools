@@ -1,0 +1,164 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ConstLong</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.schema</a>
+</div>
+
+<h1>Coverage Summary for Class: ConstLong (com.alibaba.fastjson2.schema)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConstLong</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (23/23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.schema;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.util.concurrent.atomic.AtomicInteger;
+&nbsp;import java.util.concurrent.atomic.AtomicLong;
+&nbsp;
+&nbsp;final class ConstLong
+&nbsp;        extends JSONSchema {
+&nbsp;    final long value;
+&nbsp;
+&nbsp;    ConstLong(long value) {
+<b class="fc">&nbsp;        super(null, null);</b>
+<b class="fc">&nbsp;        this.value = value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Type getType() {
+<b class="fc">&nbsp;        return Type.Const;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ValidateResult validate(Object value) {
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            return SUCCESS;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Byte</b>
+&nbsp;                || value instanceof Short
+&nbsp;                || value instanceof Integer
+&nbsp;                || value instanceof Long
+&nbsp;                || value instanceof BigInteger
+&nbsp;                || value instanceof AtomicInteger
+&nbsp;                || value instanceof AtomicLong
+&nbsp;        ) {
+<b class="fc">&nbsp;            if (this.value != ((Number) value).longValue()) {</b>
+<b class="fc">&nbsp;                return new ValidateResult(false, &quot;const not match, expect %s, but %s&quot;, this.value, value);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else if (value instanceof BigDecimal) {</b>
+<b class="fc">&nbsp;            BigDecimal decimal = (BigDecimal) value;</b>
+<b class="fc">&nbsp;            if (decimal.compareTo(BigDecimal.valueOf(this.value)) != 0) {</b>
+<b class="fc">&nbsp;                return new ValidateResult(false, &quot;const not match, expect %s, but %s&quot;, this.value, value);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else if (value instanceof Float) {</b>
+<b class="fc">&nbsp;            float floatValue = ((Float) value).floatValue();</b>
+<b class="fc">&nbsp;            if (this.value != floatValue) {</b>
+<b class="fc">&nbsp;                return new ValidateResult(false, &quot;const not match, expect %s, but %s&quot;, this.value, value);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else if (value instanceof Double) {</b>
+<b class="fc">&nbsp;            double doubleValue = ((Double) value).doubleValue();</b>
+<b class="fc">&nbsp;            if (this.value != doubleValue) {</b>
+<b class="fc">&nbsp;                return new ValidateResult(false, &quot;const not match, expect %s, but %s&quot;, this.value, value);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else {</b>
+<b class="fc">&nbsp;            return new ValidateResult(false, &quot;const not match, expect %s, but %s&quot;, this.value, value);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return SUCCESS;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:52</div>
+</div>
+</body>
+</html>

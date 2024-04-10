@@ -1,0 +1,344 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReaderUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.jaxrs2.util</a>
+</div>
+
+<h1>Coverage Summary for Class: ReaderUtils (io.swagger.jaxrs2.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReaderUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/116)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package io.swagger.jaxrs2.util;
+&nbsp;
+&nbsp;import com.google.common.base.Splitter;
+&nbsp;import com.google.common.collect.Iterables;
+&nbsp;import io.swagger.jaxrs2.config.ReaderConfig;
+&nbsp;import io.swagger.jaxrs2.ext.OpenAPIExtension;
+&nbsp;import io.swagger.jaxrs2.ext.OpenAPIExtensions;
+&nbsp;import io.swagger.oas.models.OpenAPI;
+&nbsp;import io.swagger.oas.models.Operation;
+&nbsp;import io.swagger.oas.models.parameters.Parameter;
+&nbsp;import io.swagger.util.ParameterProcessor;
+&nbsp;import io.swagger.util.ReflectionUtils;
+&nbsp;import org.apache.commons.lang3.StringUtils;
+&nbsp;
+&nbsp;import javax.ws.rs.DELETE;
+&nbsp;import javax.ws.rs.HttpMethod;
+&nbsp;import javax.ws.rs.core.Context;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.*;
+&nbsp;
+<b class="nc">&nbsp;public class ReaderUtils {</b>
+&nbsp;    private static final String GET_METHOD = &quot;get&quot;;
+&nbsp;    private static final String POST_METHOD = &quot;post&quot;;
+&nbsp;    private static final String PUT_METHOD = &quot;put&quot;;
+&nbsp;    private static final String DELETE_METHOD = &quot;delete&quot;;
+&nbsp;    private static final String HEAD_METHOD = &quot;head&quot;;
+&nbsp;    private static final String OPTIONS_METHOD = &quot;options&quot;;
+&nbsp;    private static final String PATH_DELIMITER = &quot;/&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Collects constructor-level parameters from class.
+&nbsp;     *
+&nbsp;     * @param cls     is a class for collecting
+&nbsp;     * @param openAPI is the instance of the OpenAPI
+&nbsp;     * @return the collection of supported parameters
+&nbsp;     */
+&nbsp;    public static List&lt;Parameter&gt; collectConstructorParameters(Class&lt;?&gt; cls, OpenAPI openAPI) {
+<b class="nc">&nbsp;        if (cls.isLocalClass() || (cls.isMemberClass() &amp;&amp; !Modifier.isStatic(cls.getModifiers()))) {</b>
+<b class="nc">&nbsp;            return Collections.emptyList();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Parameter&gt; selected = Collections.emptyList();</b>
+<b class="nc">&nbsp;        int maxParamsCount = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (Constructor&lt;?&gt; constructor : cls.getDeclaredConstructors()) {</b>
+<b class="nc">&nbsp;            if (!ReflectionUtils.isConstructorCompatible(constructor)</b>
+<b class="nc">&nbsp;                    &amp;&amp; !ReflectionUtils.isInject(Arrays.asList(constructor.getDeclaredAnnotations()))) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            final Type[] genericParameterTypes = constructor.getGenericParameterTypes();</b>
+<b class="nc">&nbsp;            final Annotation[][] annotations = constructor.getParameterAnnotations();</b>
+&nbsp;
+<b class="nc">&nbsp;            int paramsCount = 0;</b>
+<b class="nc">&nbsp;            final List&lt;Parameter&gt; parameters = new ArrayList&lt;Parameter&gt;();</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; genericParameterTypes.length; i++) {</b>
+<b class="nc">&nbsp;                final List&lt;Annotation&gt; tmpAnnotations = Arrays.asList(annotations[i]);</b>
+<b class="nc">&nbsp;                if (isContext(tmpAnnotations)) {</b>
+<b class="nc">&nbsp;                    paramsCount++;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    final Type genericParameterType = genericParameterTypes[i];</b>
+<b class="nc">&nbsp;                    final List&lt;Parameter&gt; tmpParameters = collectParameters(genericParameterType, tmpAnnotations);</b>
+<b class="nc">&nbsp;                    if (tmpParameters.size() &gt;= 1) {</b>
+<b class="nc">&nbsp;                        for (Parameter tmpParameter : tmpParameters) {</b>
+<b class="nc">&nbsp;                            if (ParameterProcessor.applyAnnotations(openAPI, tmpParameter, genericParameterType, tmpAnnotations) != null) {</b>
+<b class="nc">&nbsp;                                parameters.add(tmpParameter);</b>
+&nbsp;                            }
+<b class="nc">&nbsp;                        }</b>
+<b class="nc">&nbsp;                        paramsCount++;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (paramsCount &gt;= maxParamsCount) {</b>
+<b class="nc">&nbsp;                maxParamsCount = paramsCount;</b>
+<b class="nc">&nbsp;                selected = parameters;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return selected;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Collects field-level parameters from class.
+&nbsp;     *
+&nbsp;     * @param cls     is a class for collecting
+&nbsp;     * @param openAPI is the instance of the Swagger
+&nbsp;     * @return the collection of supported parameters
+&nbsp;     */
+&nbsp;    public static List&lt;Parameter&gt; collectFieldParameters(Class&lt;?&gt; cls, OpenAPI openAPI) {
+<b class="nc">&nbsp;        final List&lt;Parameter&gt; parameters = new ArrayList&lt;Parameter&gt;();</b>
+<b class="nc">&nbsp;        for (Field field : ReflectionUtils.getDeclaredFields(cls)) {</b>
+<b class="nc">&nbsp;            final List&lt;Annotation&gt; annotations = Arrays.asList(field.getAnnotations());</b>
+<b class="nc">&nbsp;            final Type genericType = field.getGenericType();</b>
+<b class="nc">&nbsp;            for (Parameter parameter : collectParameters(genericType, annotations)) {</b>
+<b class="nc">&nbsp;                if (ParameterProcessor.applyAnnotations(openAPI, parameter, genericType, annotations) != null) {</b>
+<b class="nc">&nbsp;                    parameters.add(parameter);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return parameters;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static List&lt;Parameter&gt; collectParameters(Type type, List&lt;Annotation&gt; annotations) {
+<b class="nc">&nbsp;        final Iterator&lt;OpenAPIExtension&gt; chain = OpenAPIExtensions.chain();</b>
+<b class="nc">&nbsp;        return chain.hasNext() ? chain.next().extractParameters(annotations, type, new HashSet&lt;&gt;(), chain) :</b>
+<b class="nc">&nbsp;                Collections.emptyList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean isContext(List&lt;Annotation&gt; annotations) {
+<b class="nc">&nbsp;        for (Annotation annotation : annotations) {</b>
+<b class="nc">&nbsp;            if (annotation instanceof Context) {</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Splits the provided array of strings into an array, using comma as the separator.
+&nbsp;     * Also removes leading and trailing whitespace and omits empty strings from the results.
+&nbsp;     *
+&nbsp;     * @param strings is the provided array of strings
+&nbsp;     * @return the resulted array of strings
+&nbsp;     */
+&nbsp;    public static String[] splitContentValues(String[] strings) {
+<b class="nc">&nbsp;        final Set&lt;String&gt; result = new LinkedHashSet&lt;String&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (String string : strings) {</b>
+<b class="nc">&nbsp;            Iterables.addAll(result, Splitter.on(&quot;,&quot;).trimResults().omitEmptyStrings().split(string));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return result.toArray(new String[result.size()]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public static Optional&lt;List&lt;String&gt;&gt; getStringListFromStringArray(String[] array) {
+<b class="nc">&nbsp;        if (array == null) {</b>
+<b class="nc">&nbsp;            return Optional.empty();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        List&lt;String&gt; list = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (String value : array) {</b>
+<b class="nc">&nbsp;            list.add(value);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Optional.of(list);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isIgnored(String path, ReaderConfig config) {
+<b class="nc">&nbsp;        for (String item : config.getIgnoredRoutes()) {</b>
+<b class="nc">&nbsp;            final int length = item.length();</b>
+<b class="nc">&nbsp;            if (path.startsWith(item) &amp;&amp; (path.length() == length || path.startsWith(PATH_DELIMITER, length))) {</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String getPath(javax.ws.rs.Path classLevelPath, javax.ws.rs.Path methodLevelPath, String parentPath) {
+<b class="nc">&nbsp;        if (classLevelPath == null &amp;&amp; methodLevelPath == null &amp;&amp; StringUtils.isEmpty(parentPath)) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        StringBuilder b = new StringBuilder();</b>
+<b class="nc">&nbsp;        if (parentPath != null &amp;&amp; !&quot;&quot;.equals(parentPath) &amp;&amp; !&quot;/&quot;.equals(parentPath)) {</b>
+<b class="nc">&nbsp;            if (!parentPath.startsWith(&quot;/&quot;)) {</b>
+<b class="nc">&nbsp;                parentPath = &quot;/&quot; + parentPath;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (parentPath.endsWith(&quot;/&quot;)) {</b>
+<b class="nc">&nbsp;                parentPath = parentPath.substring(0, parentPath.length() - 1);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            b.append(parentPath);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (classLevelPath != null) {</b>
+<b class="nc">&nbsp;            b.append(classLevelPath.value());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (methodLevelPath != null &amp;&amp; !&quot;/&quot;.equals(methodLevelPath.value())) {</b>
+<b class="nc">&nbsp;            String methodPath = methodLevelPath.value();</b>
+<b class="nc">&nbsp;            if (!methodPath.startsWith(&quot;/&quot;) &amp;&amp; !b.toString().endsWith(&quot;/&quot;)) {</b>
+<b class="nc">&nbsp;                b.append(&quot;/&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (methodPath.endsWith(&quot;/&quot;)) {</b>
+<b class="nc">&nbsp;                methodPath = methodPath.substring(0, methodPath.length() - 1);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            b.append(methodPath);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String output = b.toString();</b>
+<b class="nc">&nbsp;        if (!output.startsWith(&quot;/&quot;)) {</b>
+<b class="nc">&nbsp;            output = &quot;/&quot; + output;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (output.endsWith(&quot;/&quot;) &amp;&amp; output.length() &gt; 1) {</b>
+<b class="nc">&nbsp;            return output.substring(0, output.length() - 1);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return output;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String extractOperationMethod(Operation operation, Method method, Iterator&lt;OpenAPIExtension&gt; chain) {
+<b class="nc">&nbsp;        if (method.getAnnotation(javax.ws.rs.GET.class) != null) {</b>
+<b class="nc">&nbsp;            return GET_METHOD;</b>
+<b class="nc">&nbsp;        } else if (method.getAnnotation(javax.ws.rs.PUT.class) != null) {</b>
+<b class="nc">&nbsp;            return PUT_METHOD;</b>
+<b class="nc">&nbsp;        } else if (method.getAnnotation(javax.ws.rs.POST.class) != null) {</b>
+<b class="nc">&nbsp;            return POST_METHOD;</b>
+<b class="nc">&nbsp;        } else if (method.getAnnotation(javax.ws.rs.DELETE.class) != null) {</b>
+<b class="nc">&nbsp;            return DELETE_METHOD;</b>
+<b class="nc">&nbsp;        } else if (method.getAnnotation(javax.ws.rs.OPTIONS.class) != null) {</b>
+<b class="nc">&nbsp;            return OPTIONS_METHOD;</b>
+<b class="nc">&nbsp;        } else if (method.getAnnotation(javax.ws.rs.HEAD.class) != null) {</b>
+<b class="nc">&nbsp;            return HEAD_METHOD;</b>
+<b class="nc">&nbsp;        } else if (method.getAnnotation(DELETE.class) != null) {</b>
+<b class="nc">&nbsp;            return DELETE_METHOD;</b>
+<b class="nc">&nbsp;        } else if (method.getAnnotation(HttpMethod.class) != null) {</b>
+<b class="nc">&nbsp;            HttpMethod httpMethod = method.getAnnotation(HttpMethod.class);</b>
+<b class="nc">&nbsp;            return httpMethod.value().toLowerCase();</b>
+<b class="nc">&nbsp;        } else if (!StringUtils.isEmpty(getHttpMethodFromCustomAnnotations(method))) {</b>
+<b class="nc">&nbsp;            return getHttpMethodFromCustomAnnotations(method);</b>
+<b class="nc">&nbsp;        } else if ((ReflectionUtils.getOverriddenMethod(method)) != null) {</b>
+<b class="nc">&nbsp;            return extractOperationMethod(operation, ReflectionUtils.getOverriddenMethod(method), chain);</b>
+<b class="nc">&nbsp;        } else if (chain != null &amp;&amp; chain.hasNext()) {</b>
+<b class="nc">&nbsp;            return chain.next().extractOperationMethod(operation, method, chain);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String getHttpMethodFromCustomAnnotations(Method method) {
+<b class="nc">&nbsp;        for (Annotation methodAnnotation : method.getAnnotations()) {</b>
+<b class="nc">&nbsp;            HttpMethod httpMethod = methodAnnotation.annotationType().getAnnotation(HttpMethod.class);</b>
+<b class="nc">&nbsp;            if (httpMethod != null) {</b>
+<b class="nc">&nbsp;                return httpMethod.value().toLowerCase();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:26</div>
+</div>
+</body>
+</html>

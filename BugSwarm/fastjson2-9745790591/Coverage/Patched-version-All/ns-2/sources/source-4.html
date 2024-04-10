@@ -1,0 +1,380 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONScanner</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.parser</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONScanner (com.alibaba.fastjson.parser)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONScanner</td>
+<td class="coverageStat">
+  <span class="percent">
+    25.5%
+  </span>
+  <span class="absValue">
+    (13/51)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    3.8%
+  </span>
+  <span class="absValue">
+    (70/1854)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JSONScanner$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (13/52)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    3.8%
+  </span>
+  <span class="absValue">
+    (70/1855)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson.parser;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.JSON;
+&nbsp;import com.alibaba.fastjson.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;
+&nbsp;public class JSONScanner
+&nbsp;        extends JSONLexerBase {
+&nbsp;    private final JSONReader reader;
+&nbsp;    private boolean orderedField;
+&nbsp;
+&nbsp;    protected int token;
+&nbsp;    private String strVal;
+&nbsp;
+&nbsp;    public JSONScanner(JSONReader reader) {
+&nbsp;        this.reader = reader;
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONScanner(String str) {
+&nbsp;        this.reader = JSONReader.of(str);
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONScanner(String str, int features) {
+&nbsp;        this.reader = JSONReader.of(str, JSON.createReadContext(features));
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public JSONReader getReader() {
+&nbsp;        return reader;
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isOrderedField() {
+&nbsp;        return orderedField;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String stringVal() {
+&nbsp;        return strVal;
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public BigDecimal decimalValue() {
+&nbsp;        return reader.getBigDecimal();
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    public int token() {</b>
+<b class="fc">&nbsp;        return token;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    public void config(Feature feature, boolean state) {</b>
+<b class="fc">&nbsp;        JSONReader.Feature rawFeature = null;</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        boolean not = false;
+<b class="nc">&nbsp;        switch (feature) {</b>
+&nbsp;            case AllowUnQuotedFieldNames:
+&nbsp;                rawFeature = JSONReader.Feature.AllowUnQuotedFieldNames;
+<b class="fc">&nbsp;                break;</b>
+<b class="nc">&nbsp;            case SupportArrayToBean:</b>
+&nbsp;                rawFeature = JSONReader.Feature.SupportArrayToBean;
+&nbsp;                break;
+<b class="fc">&nbsp;            case DisableFieldSmartMatch:</b>
+&nbsp;                rawFeature = JSONReader.Feature.SupportSmartMatch;
+&nbsp;                not = true;
+&nbsp;                break;
+<b class="fc">&nbsp;            case SupportAutoType:</b>
+<b class="fc">&nbsp;                rawFeature = JSONReader.Feature.SupportAutoType;</b>
+&nbsp;                break;
+<b class="fc">&nbsp;            case NonStringKeyAsString:</b>
+&nbsp;                rawFeature = JSONReader.Feature.NonStringKeyAsString;
+&nbsp;                break;
+&nbsp;            case ErrorOnEnumNotMatch:
+<b class="nc">&nbsp;                rawFeature = JSONReader.Feature.ErrorOnEnumNotMatch;</b>
+&nbsp;                break;
+&nbsp;            case SupportClassForName:
+&nbsp;                rawFeature = JSONReader.Feature.SupportClassForName;
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case ErrorOnNotSupportAutoType:
+&nbsp;                rawFeature = JSONReader.Feature.ErrorOnNotSupportAutoType;
+&nbsp;                break;
+<b class="fc">&nbsp;            case UseNativeJavaObject:</b>
+&nbsp;                rawFeature = JSONReader.Feature.UseNativeObject;
+&nbsp;                break;
+&nbsp;            case UseBigDecimal:
+<b class="fc">&nbsp;                rawFeature = JSONReader.Feature.UseBigDecimalForDoubles;</b>
+<b class="fc">&nbsp;                not = true;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case OrderedField:
+&nbsp;                orderedField = state;
+<b class="fc">&nbsp;                break;</b>
+<b class="fc">&nbsp;            default:</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        if (rawFeature == null) {
+<b class="fc">&nbsp;            return;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        if (not) {
+<b class="fc">&nbsp;            state = !state;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        JSONReader.Context context = reader.getContext();
+<b class="fc">&nbsp;        context.config(rawFeature, state);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isEnabled(Feature feature) {
+<b class="fc">&nbsp;        JSONReader.Feature rawFeature = null;</b>
+&nbsp;
+&nbsp;        switch (feature) {
+&nbsp;            case AllowUnQuotedFieldNames:
+<b class="fc">&nbsp;                rawFeature = JSONReader.Feature.AllowUnQuotedFieldNames;</b>
+<b class="fc">&nbsp;                break;</b>
+<b class="fc">&nbsp;            case SupportArrayToBean:</b>
+<b class="nc">&nbsp;                rawFeature = JSONReader.Feature.SupportArrayToBean;</b>
+&nbsp;                break;
+&nbsp;            case DisableFieldSmartMatch:
+<b class="fc">&nbsp;                return !reader.isEnabled(JSONReader.Feature.SupportSmartMatch);</b>
+<b class="fc">&nbsp;            case SupportAutoType:</b>
+<b class="fc">&nbsp;                rawFeature = JSONReader.Feature.SupportAutoType;</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case NonStringKeyAsString:
+<b class="fc">&nbsp;                rawFeature = JSONReader.Feature.NonStringKeyAsString;</b>
+<b class="fc">&nbsp;                break;</b>
+<b class="fc">&nbsp;            case ErrorOnEnumNotMatch:</b>
+&nbsp;                rawFeature = JSONReader.Feature.ErrorOnEnumNotMatch;
+&nbsp;                break;
+<b class="fc">&nbsp;            case SupportClassForName:</b>
+&nbsp;                rawFeature = JSONReader.Feature.SupportClassForName;
+&nbsp;                break;
+<b class="fc">&nbsp;            case ErrorOnNotSupportAutoType:</b>
+<b class="fc">&nbsp;                rawFeature = JSONReader.Feature.ErrorOnNotSupportAutoType;</b>
+&nbsp;                break;
+<b class="nc">&nbsp;            case UseNativeJavaObject:</b>
+<b class="nc">&nbsp;                rawFeature = JSONReader.Feature.UseNativeObject;</b>
+&nbsp;                break;
+&nbsp;            case UseBigDecimal:
+&nbsp;                return !reader.isEnabled(JSONReader.Feature.UseBigDecimalForDoubles);
+&nbsp;            default:
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (rawFeature == null) {</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        return reader.isEnabled(rawFeature);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public boolean isBlankInput() {</b>
+<b class="nc">&nbsp;        return reader.isEnd();</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    @Override
+<b class="nc">&nbsp;    public int intValue() {</b>
+<b class="nc">&nbsp;        return reader.getInt32Value();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public long longValue() {</b>
+&nbsp;        return reader.getInt64Value();
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void nextToken() {
+<b class="nc">&nbsp;        strVal = null;</b>
+<b class="nc">&nbsp;        char ch = reader.current();</b>
+<b class="nc">&nbsp;        switch (ch) {</b>
+&nbsp;            case &#39;[&#39;:
+<b class="nc">&nbsp;                reader.next();</b>
+<b class="nc">&nbsp;                token = JSONToken.LBRACKET;</b>
+<b class="nc">&nbsp;                return;</b>
+&nbsp;            case &#39;]&#39;:
+&nbsp;                reader.next();
+&nbsp;                token = JSONToken.RBRACKET;
+&nbsp;                return;
+<b class="nc">&nbsp;            case &#39;{&#39;:</b>
+&nbsp;                reader.next();
+<b class="nc">&nbsp;                token = JSONToken.LBRACE;</b>
+<b class="nc">&nbsp;                return;</b>
+<b class="nc">&nbsp;            case &#39;}&#39;:</b>
+&nbsp;                reader.next();
+&nbsp;                token = JSONToken.RBRACE;
+<b class="nc">&nbsp;                return;</b>
+&nbsp;            case &#39;:&#39;:
+&nbsp;                reader.next();
+&nbsp;                token = JSONToken.COLON;
+<b class="nc">&nbsp;                return;</b>
+&nbsp;            case &#39;&quot;&#39;:
+<b class="nc">&nbsp;            case &#39;\&#39;&#39;:</b>
+<b class="nc">&nbsp;                strVal = reader.readString();</b>
+<b class="nc">&nbsp;                token = JSONToken.LITERAL_STRING;</b>
+&nbsp;                return;
+&nbsp;            case &#39;0&#39;:
+<b class="nc">&nbsp;            case &#39;1&#39;:</b>
+<b class="nc">&nbsp;            case &#39;2&#39;:</b>
+&nbsp;            case &#39;3&#39;:
+&nbsp;            case &#39;4&#39;:
+<b class="nc">&nbsp;            case &#39;5&#39;:</b>
+<b class="nc">&nbsp;            case &#39;6&#39;:</b>
+<b class="nc">&nbsp;            case &#39;7&#39;:</b>
+<b class="nc">&nbsp;            case &#39;8&#39;:</b>
+&nbsp;            case &#39;9&#39;:
+<b class="nc">&nbsp;            case &#39;-&#39;:</b>
+<b class="nc">&nbsp;            case &#39;+&#39;:</b>
+<b class="nc">&nbsp;                Number number = reader.readNumber();</b>
+&nbsp;                if (number instanceof BigDecimal || number instanceof Float || number instanceof Double) {
+&nbsp;                    token = JSONToken.LITERAL_FLOAT;
+&nbsp;                } else {
+&nbsp;                    token = JSONToken.LITERAL_INT;
+<b class="nc">&nbsp;                }</b>
+&nbsp;                return;
+&nbsp;            case &#39;t&#39;:
+&nbsp;            case &#39;f&#39;:
+<b class="nc">&nbsp;                boolean boolValue = reader.readBoolValue();</b>
+<b class="nc">&nbsp;                token = boolValue ? JSONToken.TRUE : JSONToken.FALSE;</b>
+&nbsp;                return;
+&nbsp;            case &#39;n&#39;:
+&nbsp;                reader.readNull();
+<b class="nc">&nbsp;                token = JSONToken.NULL;</b>
+<b class="nc">&nbsp;                return;</b>
+&nbsp;            case EOI:
+&nbsp;                token = JSONToken.EOF;
+<b class="nc">&nbsp;                return;</b>
+<b class="nc">&nbsp;            default:</b>
+<b class="nc">&nbsp;                break;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (reader.nextIfNull()) {</b>
+<b class="nc">&nbsp;            return;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;not support operation&quot;);</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    @Override</b>
+&nbsp;    public char getCurrent() {
+<b class="nc">&nbsp;        return reader.current();</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    @Override</b>
+<b class="nc">&nbsp;    public final void nextToken(int expect) {</b>
+<b class="nc">&nbsp;        nextToken();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public boolean isEOF() {</b>
+<b class="nc">&nbsp;        return reader.isEnd();</b>
+&nbsp;    }
+<b class="nc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:07</div>
+</div>
+</body>
+</html>

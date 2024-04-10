@@ -1,0 +1,1523 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TypeUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.util</a>
+</div>
+
+<h1>Coverage Summary for Class: TypeUtils (com.alibaba.fastjson2.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TypeUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.9%
+  </span>
+  <span class="absValue">
+    (31/33)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.9%
+  </span>
+  <span class="absValue">
+    (691/736)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TypeUtils$Cache</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    94.1%
+  </span>
+  <span class="absValue">
+    (32/34)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.9%
+  </span>
+  <span class="absValue">
+    (692/737)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.util;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.reader.*;
+&nbsp;
+&nbsp;import java.lang.reflect.*;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.time.*;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.*;
+&nbsp;import java.util.concurrent.atomic.AtomicBoolean;
+&nbsp;import java.util.concurrent.atomic.AtomicInteger;
+&nbsp;import java.util.concurrent.atomic.AtomicLong;
+&nbsp;import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
+&nbsp;import java.util.function.Function;
+&nbsp;
+<b class="nc">&nbsp;public class TypeUtils {</b>
+&nbsp;    public static final Class CLASS_JSON_OBJECT_1x;
+&nbsp;    public static final Field FIELD_JSON_OBJECT_1x_map;
+&nbsp;    public static final Class CLASS_JSON_ARRAY_1x;
+&nbsp;
+<b class="fc">&nbsp;    public static final Class CLASS_SINGLE_SET = Collections.singleton(1).getClass();</b>
+<b class="fc">&nbsp;    public static final Class CLASS_UNMODIFIABLE_COLLECTION = Collections.unmodifiableCollection(new ArrayList&lt;&gt;()).getClass();</b>
+<b class="fc">&nbsp;    public static final Class CLASS_UNMODIFIABLE_LIST = Collections.unmodifiableList(new ArrayList&lt;&gt;()).getClass();</b>
+<b class="fc">&nbsp;    public static final Class CLASS_UNMODIFIABLE_SET = Collections.unmodifiableSet(new HashSet&lt;&gt;()).getClass();</b>
+<b class="fc">&nbsp;    public static final Class CLASS_UNMODIFIABLE_SORTED_SET = Collections.unmodifiableSortedSet(new TreeSet&lt;&gt;()).getClass();</b>
+<b class="fc">&nbsp;    public static final Class CLASS_UNMODIFIABLE_NAVIGABLE_SET = Collections.unmodifiableNavigableSet(new TreeSet&lt;&gt;()).getClass();</b>
+&nbsp;
+<b class="fc">&nbsp;    static class Cache {</b>
+&nbsp;        volatile char[] chars;
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    static final Cache CACHE = new Cache();</b>
+<b class="fc">&nbsp;    static final AtomicReferenceFieldUpdater&lt;Cache, char[]&gt; CHARS_UPDATER</b>
+<b class="fc">&nbsp;            = AtomicReferenceFieldUpdater.newUpdater(Cache.class, char[].class, &quot;chars&quot;);</b>
+&nbsp;
+&nbsp;    public static Class&lt;?&gt; getMapping(Type type) {
+<b class="fc">&nbsp;        if (type == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type.getClass() == Class.class) {</b>
+<b class="fc">&nbsp;            return (Class&lt;?&gt;) type;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type instanceof ParameterizedType) {</b>
+<b class="fc">&nbsp;            return getMapping(((ParameterizedType) type).getRawType());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type instanceof TypeVariable) {</b>
+<b class="fc">&nbsp;            Type boundType = ((TypeVariable&lt;?&gt;) type).getBounds()[0];</b>
+<b class="fc">&nbsp;            if (boundType instanceof Class) {</b>
+<b class="fc">&nbsp;                return (Class) boundType;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return getMapping(boundType);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type instanceof WildcardType) {</b>
+<b class="fc">&nbsp;            Type[] upperBounds = ((WildcardType) type).getUpperBounds();</b>
+<b class="fc">&nbsp;            if (upperBounds.length == 1) {</b>
+<b class="fc">&nbsp;                return getMapping(upperBounds[0]);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type instanceof GenericArrayType) {</b>
+<b class="fc">&nbsp;            Type genericComponentType = ((GenericArrayType) type).getGenericComponentType();</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; componentClass = getClass(genericComponentType);</b>
+<b class="fc">&nbsp;            return getArrayClass(componentClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return Object.class;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Date toDate(Object obj) {
+<b class="fc">&nbsp;        if (obj == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (obj instanceof Date) {</b>
+<b class="nc">&nbsp;            return (Date) obj;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (obj instanceof Instant) {</b>
+<b class="fc">&nbsp;            Instant instant = (Instant) obj;</b>
+<b class="fc">&nbsp;            return new Date(</b>
+<b class="fc">&nbsp;                    instant.toEpochMilli());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (obj instanceof ZonedDateTime) {</b>
+<b class="fc">&nbsp;            ZonedDateTime zdt = (ZonedDateTime) obj;</b>
+<b class="fc">&nbsp;            return new Date(</b>
+<b class="fc">&nbsp;                    zdt.toInstant().toEpochMilli());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (obj instanceof LocalDate) {</b>
+<b class="fc">&nbsp;            LocalDate localDate = (LocalDate) obj;</b>
+<b class="fc">&nbsp;            ZonedDateTime zdt = localDate.atStartOfDay(ZoneId.systemDefault());</b>
+<b class="fc">&nbsp;            return new Date(</b>
+<b class="fc">&nbsp;                    zdt.toInstant().toEpochMilli());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (obj instanceof LocalDateTime) {</b>
+<b class="fc">&nbsp;            LocalDateTime ldt = (LocalDateTime) obj;</b>
+<b class="fc">&nbsp;            ZonedDateTime zdt = ldt.atZone(ZoneId.systemDefault());</b>
+<b class="fc">&nbsp;            return new Date(</b>
+<b class="fc">&nbsp;                    zdt.toInstant().toEpochMilli());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (obj instanceof String) {</b>
+<b class="fc">&nbsp;            return DateUtils.parseDate((String) obj);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (obj instanceof Long || obj instanceof Integer) {</b>
+<b class="fc">&nbsp;            return new Date(((Number) obj).longValue());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;can not cast to Date from &quot; + obj.getClass());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Instant toInstant(Object obj) {
+<b class="fc">&nbsp;        if (obj == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (obj instanceof Instant) {</b>
+<b class="nc">&nbsp;            return (Instant) obj;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (obj instanceof Date) {</b>
+<b class="fc">&nbsp;            return ((Date) obj).toInstant();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (obj instanceof ZonedDateTime) {</b>
+<b class="fc">&nbsp;            ZonedDateTime zdt = (ZonedDateTime) obj;</b>
+<b class="fc">&nbsp;            return zdt.toInstant();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (obj instanceof String) {</b>
+<b class="fc">&nbsp;            String str = (String) obj;</b>
+<b class="fc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            JSONReader jsonReader;
+<b class="fc">&nbsp;            if (str.charAt(0) != &#39;&quot;&#39;) {</b>
+<b class="fc">&nbsp;                jsonReader = JSONReader.of(&#39;&quot;&#39; + str + &#39;&quot;&#39;);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                jsonReader = JSONReader.of(str);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return jsonReader.read(Instant.class);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (obj instanceof Map) {</b>
+<b class="fc">&nbsp;            return (Instant) ObjectReaderImplInstant.INSTANCE.createInstance((Map) obj, 0L);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;can not cast to Date from &quot; + obj.getClass());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T cast(Object obj, Type type) {
+<b class="fc">&nbsp;        if (type instanceof Class) {</b>
+<b class="fc">&nbsp;            return (T) cast(obj, (Class) type);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (obj instanceof Collection) {</b>
+<b class="fc">&nbsp;            ObjectReader objectReader = provider.getObjectReader(type);</b>
+<b class="fc">&nbsp;            return (T) objectReader.createInstance((Collection) obj);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (obj instanceof Map) {</b>
+<b class="fc">&nbsp;            ObjectReader objectReader = provider.getObjectReader(type);</b>
+<b class="fc">&nbsp;            return (T) objectReader.createInstance((Map) obj, 0L);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String json = JSON.toJSONString(obj);</b>
+<b class="nc">&nbsp;        return JSON.parseObject(json, type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T cast(Object obj, Class&lt;T&gt; targetClass) {
+<b class="fc">&nbsp;        return cast(obj, targetClass, JSONFactory.getDefaultObjectReaderProvider());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T cast(Object obj, Class&lt;T&gt; targetClass, ObjectReaderProvider provider) {
+<b class="fc">&nbsp;        if (obj == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (targetClass.isInstance(obj)) {</b>
+<b class="fc">&nbsp;            return (T) obj;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (targetClass == Date.class) {</b>
+<b class="fc">&nbsp;            return (T) toDate(obj);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (targetClass == Instant.class) {</b>
+<b class="fc">&nbsp;            return (T) toInstant(obj);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (targetClass == String.class) {</b>
+<b class="fc">&nbsp;            if (obj instanceof Character) {</b>
+<b class="fc">&nbsp;                return (T) obj.toString();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return (T) JSON.toJSONString(obj);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (targetClass == AtomicInteger.class) {</b>
+<b class="fc">&nbsp;            return (T) new AtomicInteger(toIntValue(obj));</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (targetClass == AtomicLong.class) {</b>
+<b class="fc">&nbsp;            return (T) new AtomicLong(toLongValue(obj));</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (targetClass == AtomicBoolean.class) {</b>
+<b class="fc">&nbsp;            return (T) new AtomicBoolean((Boolean) obj);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (obj instanceof Map) {</b>
+<b class="fc">&nbsp;            ObjectReader objectReader = provider.getObjectReader(targetClass);</b>
+<b class="fc">&nbsp;            return (T) objectReader.createInstance((Map) obj, 0L);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function typeConvert = provider.getTypeConvert(obj.getClass(), targetClass);</b>
+<b class="fc">&nbsp;        if (typeConvert != null) {</b>
+<b class="fc">&nbsp;            return (T) typeConvert.apply(obj);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (obj instanceof String) {</b>
+<b class="fc">&nbsp;            String json = (String) obj;</b>
+<b class="fc">&nbsp;            if (json.isEmpty() || &quot;null&quot;.equals(json)) {</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            JSONReader jsonReader;
+<b class="fc">&nbsp;            char first = json.trim().charAt(0);</b>
+<b class="fc">&nbsp;            if (first == &#39;&quot;&#39; || first == &#39;{&#39; || first == &#39;[&#39;) {</b>
+<b class="fc">&nbsp;                jsonReader = JSONReader.of(json);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                jsonReader = JSONReader.of(</b>
+<b class="fc">&nbsp;                        JSON.toJSONString(json));</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            ObjectReader objectReader = JSONFactory
+<b class="fc">&nbsp;                    .getDefaultObjectReaderProvider()</b>
+<b class="fc">&nbsp;                    .getObjectReader(targetClass);</b>
+<b class="fc">&nbsp;            return (T) objectReader.readObject(jsonReader, null, null, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (targetClass.isEnum()) {</b>
+<b class="fc">&nbsp;            if (obj instanceof Integer) {</b>
+<b class="fc">&nbsp;                int ordinal = ((Integer) obj).intValue();</b>
+<b class="fc">&nbsp;                ObjectReader objectReader = JSONFactory.getDefaultObjectReaderProvider().getObjectReader(targetClass);</b>
+<b class="fc">&nbsp;                if (objectReader instanceof ObjectReaderImplEnum) {</b>
+<b class="fc">&nbsp;                    Enum e = ((ObjectReaderImplEnum) objectReader).getEnumByOrdinal(ordinal);</b>
+<b class="fc">&nbsp;                    return (T) e;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (obj instanceof Collection) {</b>
+<b class="fc">&nbsp;            ObjectReader objectReader = provider.getObjectReader(targetClass);</b>
+<b class="fc">&nbsp;            return (T) objectReader.createInstance((Collection) obj);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        throw new JSONException(&quot;can not cast to &quot; + targetClass.getName() + &quot;, from &quot; + obj.getClass());</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    static final Map&lt;Class, String&gt; NAME_MAPPINGS = new IdentityHashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;    static final Map&lt;String, Class&gt; TYPE_MAPPINGS = new ConcurrentHashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    static {
+<b class="fc">&nbsp;        CLASS_JSON_OBJECT_1x = loadClass(&quot;com.alibaba.fastjson.JSONObject&quot;);</b>
+&nbsp;        {
+<b class="fc">&nbsp;            Field field = null;</b>
+<b class="fc">&nbsp;            if (CLASS_JSON_OBJECT_1x != null) {</b>
+&nbsp;                try {
+<b class="fc">&nbsp;                    field = CLASS_JSON_OBJECT_1x.getDeclaredField(&quot;map&quot;);</b>
+<b class="fc">&nbsp;                    field.setAccessible(true);</b>
+<b class="nc">&nbsp;                } catch (Throwable ignore) {</b>
+&nbsp;                    // ignore
+<b class="fc">&nbsp;                }</b>
+&nbsp;            }
+<b class="fc">&nbsp;            FIELD_JSON_OBJECT_1x_map = field;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        CLASS_JSON_ARRAY_1x = loadClass(&quot;com.alibaba.fastjson.JSONArray&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(byte.class, &quot;B&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(short.class, &quot;S&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(int.class, &quot;I&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(long.class, &quot;J&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(float.class, &quot;F&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(double.class, &quot;D&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(char.class, &quot;C&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(boolean.class, &quot;Z&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Object[].class, &quot;[O&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Object[][].class, &quot;[[O&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(byte[].class, &quot;[B&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(byte[][].class, &quot;[[B&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(short[].class, &quot;[S&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(short[][].class, &quot;[[S&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(int[].class, &quot;[I&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(int[][].class, &quot;[[I&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(long[].class, &quot;[J&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(long[][].class, &quot;[[J&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(float[].class, &quot;[F&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(float[][].class, &quot;[[F&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(double[].class, &quot;[D&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(double[][].class, &quot;[[D&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(char[].class, &quot;[C&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(char[][].class, &quot;[[C&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(boolean[].class, &quot;[Z&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(boolean[][].class, &quot;[[Z&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Byte[].class, &quot;[Byte&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Byte[][].class, &quot;[[Byte&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Short[].class, &quot;[Short&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Short[][].class, &quot;[[Short&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Integer[].class, &quot;[Integer&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Integer[][].class, &quot;[[Integer&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Long[].class, &quot;[Long&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Long[][].class, &quot;[[Long&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Float[].class, &quot;[Float&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Float[][].class, &quot;[[Float&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Double[].class, &quot;[Double&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Double[][].class, &quot;[[Double&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Character[].class, &quot;[Character&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Character[][].class, &quot;[[Character&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Boolean[].class, &quot;[Boolean&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Boolean[][].class, &quot;[[Boolean&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(String[].class, &quot;[String&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(String[][].class, &quot;[[String&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(BigDecimal[].class, &quot;[BigDecimal&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(BigDecimal[][].class, &quot;[[BigDecimal&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(BigInteger[].class, &quot;[BigInteger&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(BigInteger[][].class, &quot;[[BigInteger&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(UUID[].class, &quot;[UUID&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(UUID[][].class, &quot;[[UUID&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Object.class, &quot;Object&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Object[].class, &quot;[O&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(HashMap.class, &quot;M&quot;);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;HashMap&quot;, HashMap.class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;java.util.HashMap&quot;, HashMap.class);</b>
+&nbsp;
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(LinkedHashMap.class, &quot;LM&quot;);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;LinkedHashMap&quot;, LinkedHashMap.class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;java.util.LinkedHashMap&quot;, LinkedHashMap.class);</b>
+&nbsp;
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(TreeMap.class, &quot;TM&quot;);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;TreeMap&quot;, TreeMap.class);</b>
+&nbsp;
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(ArrayList.class, &quot;A&quot;);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;ArrayList&quot;, ArrayList.class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;java.util.ArrayList&quot;, ArrayList.class);</b>
+&nbsp;
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(LinkedList.class, &quot;LA&quot;);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;LA&quot;, LinkedList.class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;LinkedList&quot;, LinkedList.class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;java.util.LinkedList&quot;, LinkedList.class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;java.util.concurrent.ConcurrentLinkedQueue&quot;, ConcurrentLinkedQueue.class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;java.util.concurrent.ConcurrentLinkedDeque&quot;, ConcurrentLinkedDeque.class);</b>
+&nbsp;
+&nbsp;        //java.util.LinkedHashMap.class,
+&nbsp;
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(HashSet.class, &quot;HashSet&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(TreeSet.class, &quot;TreeSet&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(LinkedHashSet.class, &quot;LinkedHashSet&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(ConcurrentHashMap.class, &quot;ConcurrentHashMap&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(ConcurrentLinkedQueue.class, &quot;ConcurrentLinkedQueue&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(ConcurrentLinkedDeque.class, &quot;ConcurrentLinkedDeque&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(JSONObject.class, &quot;JSONObject&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(JSONArray.class, &quot;JSONArray&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(Currency.class, &quot;Currency&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(TimeUnit.class, &quot;TimeUnit&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        Class&lt;?&gt;[] classes = new Class[]{</b>
+&nbsp;                Object.class,
+&nbsp;                Cloneable.class,
+&nbsp;                AutoCloseable.class,
+&nbsp;                java.lang.Exception.class,
+&nbsp;                java.lang.RuntimeException.class,
+&nbsp;                java.lang.IllegalAccessError.class,
+&nbsp;                java.lang.IllegalAccessException.class,
+&nbsp;                java.lang.IllegalArgumentException.class,
+&nbsp;                java.lang.IllegalMonitorStateException.class,
+&nbsp;                java.lang.IllegalStateException.class,
+&nbsp;                java.lang.IllegalThreadStateException.class,
+&nbsp;                java.lang.IndexOutOfBoundsException.class,
+&nbsp;                java.lang.InstantiationError.class,
+&nbsp;                java.lang.InstantiationException.class,
+&nbsp;                java.lang.InternalError.class,
+&nbsp;                java.lang.InterruptedException.class,
+&nbsp;                java.lang.LinkageError.class,
+&nbsp;                java.lang.NegativeArraySizeException.class,
+&nbsp;                java.lang.NoClassDefFoundError.class,
+&nbsp;                java.lang.NoSuchFieldError.class,
+&nbsp;                java.lang.NoSuchFieldException.class,
+&nbsp;                java.lang.NoSuchMethodError.class,
+&nbsp;                java.lang.NoSuchMethodException.class,
+&nbsp;                java.lang.NullPointerException.class,
+&nbsp;                java.lang.NumberFormatException.class,
+&nbsp;                java.lang.OutOfMemoryError.class,
+&nbsp;                java.lang.SecurityException.class,
+&nbsp;                java.lang.StackOverflowError.class,
+&nbsp;                java.lang.StringIndexOutOfBoundsException.class,
+&nbsp;                java.lang.TypeNotPresentException.class,
+&nbsp;                java.lang.VerifyError.class,
+&nbsp;                java.lang.StackTraceElement.class,
+&nbsp;                java.util.Hashtable.class,
+&nbsp;                java.util.TreeMap.class,
+&nbsp;                java.util.IdentityHashMap.class,
+&nbsp;                java.util.WeakHashMap.class,
+&nbsp;                java.util.HashSet.class,
+&nbsp;                java.util.LinkedHashSet.class,
+&nbsp;                java.util.TreeSet.class,
+&nbsp;                java.util.LinkedList.class,
+&nbsp;                java.util.concurrent.TimeUnit.class,
+&nbsp;                java.util.concurrent.ConcurrentHashMap.class,
+&nbsp;                java.util.concurrent.atomic.AtomicInteger.class,
+&nbsp;                java.util.concurrent.atomic.AtomicLong.class,
+<b class="fc">&nbsp;                java.util.Collections.EMPTY_MAP.getClass(),</b>
+&nbsp;                java.lang.Boolean.class,
+&nbsp;                java.lang.Character.class,
+&nbsp;                java.lang.Byte.class,
+&nbsp;                java.lang.Short.class,
+&nbsp;                java.lang.Integer.class,
+&nbsp;                java.lang.Long.class,
+&nbsp;                java.lang.Float.class,
+&nbsp;                java.lang.Double.class,
+&nbsp;                java.lang.Number.class,
+&nbsp;                java.lang.String.class,
+&nbsp;                java.math.BigDecimal.class,
+&nbsp;                java.math.BigInteger.class,
+&nbsp;                java.util.BitSet.class,
+&nbsp;                java.util.Calendar.class,
+&nbsp;                java.util.Date.class,
+&nbsp;                java.util.Locale.class,
+&nbsp;                java.util.UUID.class,
+&nbsp;                java.util.Currency.class,
+&nbsp;                java.text.SimpleDateFormat.class,
+&nbsp;                JSONObject.class,
+&nbsp;                JSONArray.class,
+&nbsp;                java.util.concurrent.ConcurrentSkipListMap.class,
+&nbsp;                java.util.concurrent.ConcurrentSkipListSet.class,
+&nbsp;        };
+<b class="fc">&nbsp;        for (Class clazz : classes) {</b>
+<b class="fc">&nbsp;            TYPE_MAPPINGS.put(clazz.getSimpleName(), clazz);</b>
+<b class="fc">&nbsp;            TYPE_MAPPINGS.put(clazz.getName(), clazz);</b>
+<b class="fc">&nbsp;            NAME_MAPPINGS.put(clazz, clazz.getSimpleName());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;JO10&quot;, JSONObject1O.class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;[O&quot;, Object[].class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;[Ljava.lang.Object;&quot;, Object[].class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;[java.lang.Object&quot;, Object[].class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;[Object&quot;, Object[].class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;StackTraceElement&quot;, StackTraceElement.class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;[StackTraceElement&quot;, StackTraceElement[].class);</b>
+&nbsp;
+<b class="fc">&nbsp;        String[] items = new String[]{</b>
+&nbsp;                &quot;java.util.Collections$UnmodifiableMap&quot;,
+&nbsp;                &quot;java.util.Collections$UnmodifiableCollection&quot;,
+&nbsp;        };
+&nbsp;
+<b class="fc">&nbsp;        for (String className : items) {</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; clazz = loadClass(className);</b>
+<b class="fc">&nbsp;            TYPE_MAPPINGS.put(clazz.getName(), clazz);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="fc">&nbsp;            if (CLASS_JSON_OBJECT_1x != null) {</b>
+<b class="fc">&nbsp;                TYPE_MAPPINGS.putIfAbsent(&quot;JO1&quot;, CLASS_JSON_OBJECT_1x);</b>
+<b class="fc">&nbsp;                TYPE_MAPPINGS.putIfAbsent(CLASS_JSON_OBJECT_1x.getName(), CLASS_JSON_OBJECT_1x);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (CLASS_JSON_ARRAY_1x != null) {</b>
+<b class="fc">&nbsp;                TYPE_MAPPINGS.putIfAbsent(&quot;JA1&quot;, CLASS_JSON_ARRAY_1x);</b>
+<b class="fc">&nbsp;                TYPE_MAPPINGS.putIfAbsent(CLASS_JSON_ARRAY_1x.getName(), CLASS_JSON_ARRAY_1x);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(new HashMap().keySet().getClass(), &quot;Set&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(new LinkedHashMap().keySet().getClass(), &quot;Set&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(new TreeMap&lt;&gt;().keySet().getClass(), &quot;Set&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(((Map) new ConcurrentHashMap()).keySet().getClass(), &quot;Set&quot;); // bug fix for android9</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(((Map) new ConcurrentSkipListMap()).keySet().getClass(), &quot;Set&quot;); // bug fix for android9</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;Set&quot;, HashSet.class);</b>
+&nbsp;
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(new HashMap().values().getClass(), &quot;List&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(new LinkedHashMap().values().getClass(), &quot;List&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(new TreeMap().values().getClass(), &quot;List&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(new ConcurrentHashMap().values().getClass(), &quot;List&quot;);</b>
+<b class="fc">&nbsp;        NAME_MAPPINGS.put(new ConcurrentSkipListMap().values().getClass(), &quot;List&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;List&quot;, ArrayList.class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;java.util.ImmutableCollections$Map1&quot;, HashMap.class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;java.util.ImmutableCollections$MapN&quot;, LinkedHashMap.class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;java.util.ImmutableCollections$Set12&quot;, LinkedHashSet.class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;java.util.ImmutableCollections$SetN&quot;, LinkedHashSet.class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;java.util.ImmutableCollections$List12&quot;, ArrayList.class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;java.util.ImmutableCollections$ListN&quot;, ArrayList.class);</b>
+<b class="fc">&nbsp;        TYPE_MAPPINGS.put(&quot;java.util.ImmutableCollections$SubList&quot;, ArrayList.class);</b>
+&nbsp;
+<b class="fc">&nbsp;        for (Map.Entry&lt;Class, String&gt; entry : NAME_MAPPINGS.entrySet()) {</b>
+<b class="fc">&nbsp;            TYPE_MAPPINGS.putIfAbsent(entry.getValue(), entry.getKey());</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String getTypeName(Class type) {
+<b class="fc">&nbsp;        String mapTypeName = NAME_MAPPINGS.get(type);</b>
+<b class="fc">&nbsp;        if (mapTypeName != null) {</b>
+<b class="fc">&nbsp;            return mapTypeName;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (Proxy.isProxyClass(type)) {</b>
+<b class="fc">&nbsp;            Class[] interfaces = type.getInterfaces();</b>
+<b class="fc">&nbsp;            if (interfaces.length &gt; 0) {</b>
+<b class="fc">&nbsp;                type = interfaces[0];</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        String typeName = type.getTypeName();</b>
+<b class="fc">&nbsp;        switch (typeName) {</b>
+&nbsp;            case &quot;com.alibaba.fastjson.JSONObject&quot;:
+<b class="fc">&nbsp;                NAME_MAPPINGS.putIfAbsent(type, &quot;JO1&quot;);</b>
+<b class="fc">&nbsp;                return NAME_MAPPINGS.get(type);</b>
+&nbsp;            case &quot;com.alibaba.fastjson.JSONArray&quot;:
+<b class="fc">&nbsp;                NAME_MAPPINGS.putIfAbsent(type, &quot;JA1&quot;);</b>
+<b class="fc">&nbsp;                return NAME_MAPPINGS.get(type);</b>
+&nbsp;//            case &quot;org.apache.commons.lang3.tuple.ImmutablePair&quot;:
+&nbsp;//                NAME_MAPPINGS.putIfAbsent(type, &quot;org.apache.commons.lang3.tuple.Pair&quot;);
+&nbsp;//                return NAME_MAPPINGS.get(type);
+&nbsp;            default:
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return typeName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Class getMapping(String typeName) {
+<b class="fc">&nbsp;        return TYPE_MAPPINGS.get(typeName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static BigDecimal toBigDecimal(Object value) {
+<b class="fc">&nbsp;        if (value == null || value instanceof BigDecimal) {</b>
+<b class="fc">&nbsp;            return (BigDecimal) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Byte || value instanceof Short || value instanceof Integer || value instanceof Long) {</b>
+<b class="fc">&nbsp;            return BigDecimal.valueOf(((Number) value).longValue());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof String) {</b>
+<b class="fc">&nbsp;            String str = (String) value;</b>
+<b class="fc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return new BigDecimal(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        throw new JSONException(&quot;can not cast to decimal from &quot; + value.getClass());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static BigInteger toBigInteger(Object value) {
+<b class="fc">&nbsp;        if (value == null || value instanceof BigInteger) {</b>
+<b class="fc">&nbsp;            return (BigInteger) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Byte || value instanceof Short || value instanceof Integer || value instanceof Long) {</b>
+<b class="fc">&nbsp;            return BigInteger.valueOf(((Number) value).longValue());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof String) {</b>
+<b class="fc">&nbsp;            String str = (String) value;</b>
+<b class="fc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return new BigInteger(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        throw new JSONException(&quot;can not cast to bigint&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Long toLong(Object value) {
+<b class="fc">&nbsp;        if (value == null || value instanceof Long) {</b>
+<b class="fc">&nbsp;            return (Long) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Number) {</b>
+<b class="fc">&nbsp;            return Long.valueOf(((Number) value).longValue());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof String) {</b>
+<b class="fc">&nbsp;            String str = (String) value;</b>
+<b class="fc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return Long.parseLong(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        throw new JSONException(&quot;can not cast to long, class &quot; + value.getClass());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static long toLongValue(Object value) {
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            return 0L;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Long) {</b>
+<b class="fc">&nbsp;            return (Long) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Number) {</b>
+<b class="fc">&nbsp;            return ((Number) value).longValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof String) {</b>
+<b class="fc">&nbsp;            String str = (String) value;</b>
+<b class="fc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="fc">&nbsp;                return 0;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return Long.parseLong(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        throw new JSONException(&quot;can not cast to long from &quot; + value.getClass());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Integer toInteger(Object value) {
+<b class="fc">&nbsp;        if (value == null || value instanceof Integer) {</b>
+<b class="fc">&nbsp;            return (Integer) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Number) {</b>
+<b class="fc">&nbsp;            return Integer.valueOf(((Number) value).intValue());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof String) {</b>
+<b class="fc">&nbsp;            String str = (String) value;</b>
+<b class="fc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return Integer.parseInt(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Map &amp;&amp; ((Map&lt;?, ?&gt;) value).isEmpty()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Boolean) {</b>
+<b class="nc">&nbsp;            return ((Boolean) value).booleanValue() ? 1 : 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        throw new JSONException(&quot;can not cast to integer&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Byte toByte(Object value) {
+<b class="fc">&nbsp;        if (value == null || value instanceof Byte) {</b>
+<b class="fc">&nbsp;            return (Byte) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Number) {</b>
+<b class="fc">&nbsp;            return ((Number) value).byteValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof String) {</b>
+<b class="fc">&nbsp;            String str = (String) value;</b>
+<b class="fc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return Byte.parseByte(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        throw new JSONException(&quot;can not cast to byte&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static byte toByteValue(Object value) {
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Byte) {</b>
+<b class="fc">&nbsp;            return (Byte) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Number) {</b>
+<b class="fc">&nbsp;            return ((Number) value).byteValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof String) {</b>
+<b class="fc">&nbsp;            String str = (String) value;</b>
+<b class="fc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="fc">&nbsp;                return 0;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return Byte.parseByte(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        throw new JSONException(&quot;can not cast to byte&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Short toShort(Object value) {
+<b class="fc">&nbsp;        if (value == null || value instanceof Short) {</b>
+<b class="fc">&nbsp;            return (Short) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Number) {</b>
+<b class="fc">&nbsp;            return ((Number) value).shortValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof String) {</b>
+<b class="fc">&nbsp;            String str = (String) value;</b>
+<b class="fc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return Short.parseShort(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        throw new JSONException(&quot;can not cast to byte&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static short toShortValue(Object value) {
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Short) {</b>
+<b class="fc">&nbsp;            return (Short) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Number) {</b>
+<b class="fc">&nbsp;            return (byte) ((Number) value).shortValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof String) {</b>
+<b class="fc">&nbsp;            String str = (String) value;</b>
+<b class="fc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="fc">&nbsp;                return 0;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return Short.parseShort(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        throw new JSONException(&quot;can not cast to byte&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int toIntValue(Object value) {
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Integer) {</b>
+<b class="fc">&nbsp;            return (Integer) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Number) {</b>
+<b class="fc">&nbsp;            return Integer.valueOf(((Number) value).intValue());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof String) {</b>
+<b class="fc">&nbsp;            String str = (String) value;</b>
+<b class="fc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="fc">&nbsp;                return 0;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (str.indexOf(&#39;.&#39;) != -1) {</b>
+<b class="nc">&nbsp;                return new BigDecimal(str).intValueExact();</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return Integer.parseInt(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        throw new JSONException(&quot;can not cast to decimal&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean toBooleanValue(Object value) {
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Boolean) {</b>
+<b class="fc">&nbsp;            return ((Boolean) value).booleanValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof String) {</b>
+<b class="fc">&nbsp;            String str = (String) value;</b>
+<b class="fc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return Boolean.parseBoolean(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Number) {</b>
+<b class="fc">&nbsp;            int intValue = ((Number) value).intValue();</b>
+<b class="fc">&nbsp;            if (intValue == 1) {</b>
+<b class="fc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (intValue == 0) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        throw new JSONException(&quot;can not cast to boolean&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Boolean toBoolean(Object value) {
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Boolean) {</b>
+<b class="fc">&nbsp;            return ((Boolean) value).booleanValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof String) {</b>
+<b class="fc">&nbsp;            String str = (String) value;</b>
+<b class="fc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return Boolean.parseBoolean(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Number) {</b>
+<b class="fc">&nbsp;            int intValue = ((Number) value).intValue();</b>
+<b class="fc">&nbsp;            if (intValue == 1) {</b>
+<b class="fc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (intValue == 0) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        throw new JSONException(&quot;can not cast to boolean&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static float toFloatValue(Object value) {
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            return 0F;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Float) {</b>
+<b class="fc">&nbsp;            return (Float) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Number) {</b>
+<b class="fc">&nbsp;            return ((Number) value).floatValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof String) {</b>
+<b class="fc">&nbsp;            String str = (String) value;</b>
+<b class="fc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="fc">&nbsp;                return 0;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return Float.parseFloat(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        throw new JSONException(&quot;can not cast to decimal&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Float toFloat(Object value) {
+<b class="fc">&nbsp;        if (value == null || value instanceof Float) {</b>
+<b class="fc">&nbsp;            return (Float) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Number) {</b>
+<b class="fc">&nbsp;            return ((Number) value).floatValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof String) {</b>
+<b class="fc">&nbsp;            String str = (String) value;</b>
+<b class="fc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return Float.parseFloat(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        throw new JSONException(&quot;can not cast to decimal&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static double toDoubleValue(Object value) {
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            return 0D;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Double) {</b>
+<b class="fc">&nbsp;            return (Double) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Number) {</b>
+<b class="fc">&nbsp;            return ((Number) value).doubleValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof String) {</b>
+<b class="fc">&nbsp;            String str = (String) value;</b>
+<b class="fc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="fc">&nbsp;                return 0D;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return Double.parseDouble(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        throw new JSONException(&quot;can not cast to decimal&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Double toDouble(Object value) {
+<b class="fc">&nbsp;        if (value == null || value instanceof Double) {</b>
+<b class="fc">&nbsp;            return (Double) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof Number) {</b>
+<b class="fc">&nbsp;            return ((Number) value).doubleValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value instanceof String) {</b>
+<b class="fc">&nbsp;            String str = (String) value;</b>
+<b class="fc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return Double.parseDouble(str);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        throw new JSONException(&quot;can not cast to decimal&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int compare(Object a, Object b) {
+<b class="fc">&nbsp;        if (a.getClass() == b.getClass()) {</b>
+<b class="fc">&nbsp;            return ((Comparable) a).compareTo(b);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Class typeA = a.getClass();</b>
+<b class="fc">&nbsp;        Class typeB = b.getClass();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (typeA == BigDecimal.class) {</b>
+<b class="fc">&nbsp;            if (typeB == Integer.class) {</b>
+<b class="fc">&nbsp;                b = new BigDecimal((Integer) b);</b>
+<b class="fc">&nbsp;            } else if (typeB == Long.class) {</b>
+<b class="fc">&nbsp;                b = new BigDecimal((Long) b);</b>
+<b class="fc">&nbsp;            } else if (typeB == Float.class) {</b>
+<b class="fc">&nbsp;                b = new BigDecimal((Float) b);</b>
+<b class="fc">&nbsp;            } else if (typeB == Double.class) {</b>
+<b class="fc">&nbsp;                b = new BigDecimal((Double) b);</b>
+<b class="fc">&nbsp;            } else if (typeB == BigInteger.class) {</b>
+<b class="fc">&nbsp;                b = new BigDecimal((BigInteger) b);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else if (typeA == BigInteger.class) {</b>
+<b class="fc">&nbsp;            if (typeB == Integer.class) {</b>
+<b class="fc">&nbsp;                b = BigInteger.valueOf((Integer) b);</b>
+<b class="fc">&nbsp;            } else if (typeB == Long.class) {</b>
+<b class="fc">&nbsp;                b = BigInteger.valueOf((Long) b);</b>
+<b class="fc">&nbsp;            } else if (typeB == Float.class) {</b>
+<b class="fc">&nbsp;                b = new BigDecimal((Float) b);</b>
+<b class="fc">&nbsp;                a = new BigDecimal((BigInteger) a);</b>
+<b class="fc">&nbsp;            } else if (typeB == Double.class) {</b>
+<b class="fc">&nbsp;                b = new BigDecimal((Double) b);</b>
+<b class="fc">&nbsp;                a = new BigDecimal((BigInteger) a);</b>
+<b class="fc">&nbsp;            } else if (typeB == BigDecimal.class) {</b>
+<b class="fc">&nbsp;                a = new BigDecimal((BigInteger) a);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else if (typeA == Long.class) {</b>
+<b class="fc">&nbsp;            if (typeB == Integer.class) {</b>
+<b class="fc">&nbsp;                b = new Long((Integer) b);</b>
+<b class="fc">&nbsp;            } else if (typeB == BigDecimal.class) {</b>
+<b class="fc">&nbsp;                a = new BigDecimal((Long) a);</b>
+<b class="fc">&nbsp;            } else if (typeB == Float.class) {</b>
+<b class="fc">&nbsp;                a = new Float((Long) a);</b>
+<b class="fc">&nbsp;            } else if (typeB == Double.class) {</b>
+<b class="fc">&nbsp;                a = new Double((Long) a);</b>
+<b class="fc">&nbsp;            } else if (typeB == BigInteger.class) {</b>
+<b class="fc">&nbsp;                a = BigInteger.valueOf((Long) a);</b>
+<b class="fc">&nbsp;            } else if (typeB == String.class) {</b>
+<b class="fc">&nbsp;                a = BigDecimal.valueOf((Long) a);</b>
+<b class="fc">&nbsp;                b = new BigDecimal((String) b);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else if (typeA == Integer.class) {</b>
+<b class="fc">&nbsp;            if (typeB == Long.class) {</b>
+<b class="fc">&nbsp;                a = new Long((Integer) a);</b>
+<b class="fc">&nbsp;            } else if (typeB == BigDecimal.class) {</b>
+<b class="fc">&nbsp;                a = new BigDecimal((Integer) a);</b>
+<b class="fc">&nbsp;            } else if (typeB == BigInteger.class) {</b>
+<b class="fc">&nbsp;                a = BigInteger.valueOf((Integer) a);</b>
+<b class="fc">&nbsp;            } else if (typeB == Float.class) {</b>
+<b class="fc">&nbsp;                a = new Float((Integer) a);</b>
+<b class="fc">&nbsp;            } else if (typeB == Double.class) {</b>
+<b class="fc">&nbsp;                a = new Double((Integer) a);</b>
+<b class="fc">&nbsp;            } else if (typeB == String.class) {</b>
+<b class="fc">&nbsp;                a = BigDecimal.valueOf((Integer) a);</b>
+<b class="fc">&nbsp;                b = new BigDecimal((String) b);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else if (typeA == Double.class) {</b>
+<b class="fc">&nbsp;            if (typeB == Integer.class) {</b>
+<b class="fc">&nbsp;                b = new Double((Integer) b);</b>
+<b class="fc">&nbsp;            } else if (typeB == Long.class) {</b>
+<b class="fc">&nbsp;                b = new Double((Long) b);</b>
+<b class="fc">&nbsp;            } else if (typeB == Float.class) {</b>
+<b class="fc">&nbsp;                b = new Double((Float) b);</b>
+<b class="fc">&nbsp;            } else if (typeB == BigDecimal.class) {</b>
+<b class="fc">&nbsp;                a = BigDecimal.valueOf((Double) a);</b>
+<b class="fc">&nbsp;            } else if (typeB == String.class) {</b>
+<b class="fc">&nbsp;                a = BigDecimal.valueOf((Double) a);</b>
+<b class="fc">&nbsp;                b = new BigDecimal((String) b);</b>
+<b class="fc">&nbsp;            } else if (typeB == BigInteger.class) {</b>
+<b class="fc">&nbsp;                a = BigDecimal.valueOf((Double) a);</b>
+<b class="fc">&nbsp;                b = new BigDecimal((BigInteger) b);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else if (typeA == Float.class) {</b>
+<b class="fc">&nbsp;            if (typeB == Integer.class) {</b>
+<b class="fc">&nbsp;                b = new Float((Integer) b);</b>
+<b class="fc">&nbsp;            } else if (typeB == Long.class) {</b>
+<b class="fc">&nbsp;                b = new Float((Long) b);</b>
+<b class="fc">&nbsp;            } else if (typeB == Double.class) {</b>
+<b class="fc">&nbsp;                a = new Double((Float) a);</b>
+<b class="fc">&nbsp;            } else if (typeB == BigDecimal.class) {</b>
+<b class="fc">&nbsp;                a = BigDecimal.valueOf((Float) a);</b>
+<b class="fc">&nbsp;            } else if (typeB == String.class) {</b>
+<b class="fc">&nbsp;                a = BigDecimal.valueOf((Float) a);</b>
+<b class="fc">&nbsp;                b = new BigDecimal((String) b);</b>
+<b class="fc">&nbsp;            } else if (typeB == BigInteger.class) {</b>
+<b class="fc">&nbsp;                a = BigDecimal.valueOf((Float) a);</b>
+<b class="fc">&nbsp;                b = new BigDecimal((BigInteger) b);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else if (typeA == String.class) {</b>
+<b class="fc">&nbsp;            String strA = (String) a;</b>
+<b class="fc">&nbsp;            if (typeB == Integer.class) {</b>
+<b class="fc">&nbsp;                NumberFormatException error = null;</b>
+&nbsp;                try {
+<b class="fc">&nbsp;                    a = Integer.parseInt(strA);</b>
+<b class="fc">&nbsp;                } catch (NumberFormatException ex) {</b>
+<b class="fc">&nbsp;                    error = ex;</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;                if (error != null) {</b>
+&nbsp;                    try {
+<b class="fc">&nbsp;                        a = Long.parseLong(strA);</b>
+<b class="fc">&nbsp;                        b = Long.valueOf((Integer) b);</b>
+<b class="fc">&nbsp;                        error = null;</b>
+<b class="fc">&nbsp;                    } catch (NumberFormatException ex) {</b>
+<b class="fc">&nbsp;                        error = ex;</b>
+<b class="fc">&nbsp;                    }</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if (error != null) {</b>
+<b class="fc">&nbsp;                    a = new BigDecimal(strA);</b>
+<b class="fc">&nbsp;                    b = BigDecimal.valueOf((Integer) b);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } else if (typeB == Long.class) {</b>
+<b class="fc">&nbsp;                a = new BigDecimal(strA);</b>
+<b class="fc">&nbsp;                b = BigDecimal.valueOf((Long) b);</b>
+<b class="fc">&nbsp;            } else if (typeB == Float.class) {</b>
+<b class="fc">&nbsp;                a = Float.parseFloat(strA);</b>
+<b class="fc">&nbsp;            } else if (typeB == Double.class) {</b>
+<b class="fc">&nbsp;                a = Double.parseDouble(strA);</b>
+<b class="fc">&nbsp;            } else if (typeB == BigInteger.class) {</b>
+<b class="fc">&nbsp;                a = new BigInteger(strA);</b>
+<b class="fc">&nbsp;            } else if (typeB == BigDecimal.class) {</b>
+<b class="fc">&nbsp;                a = new BigDecimal(strA);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return ((Comparable) a).compareTo(b);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Object getDefaultValue(Type paramType) {
+<b class="fc">&nbsp;        if (paramType == int.class) {</b>
+<b class="fc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (paramType == long.class) {</b>
+<b class="fc">&nbsp;            return 0L;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (paramType == float.class) {</b>
+<b class="fc">&nbsp;            return 0F;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (paramType == double.class) {</b>
+<b class="fc">&nbsp;            return 0D;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (paramType == boolean.class) {</b>
+<b class="fc">&nbsp;            return Boolean.FALSE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (paramType == short.class) {</b>
+<b class="fc">&nbsp;            return (short) 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (paramType == byte.class) {</b>
+<b class="fc">&nbsp;            return (byte) 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (paramType == char.class) {</b>
+<b class="fc">&nbsp;            return (char) 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (paramType == Optional.class) {</b>
+<b class="fc">&nbsp;            return Optional.empty();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (paramType == OptionalInt.class) {</b>
+<b class="fc">&nbsp;            return OptionalInt.empty();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (paramType == OptionalLong.class) {</b>
+<b class="fc">&nbsp;            return OptionalLong.empty();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (paramType == OptionalDouble.class) {</b>
+<b class="fc">&nbsp;            return OptionalDouble.empty();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Class loadClass(String className) {
+<b class="fc">&nbsp;        if (className.length() &gt;= 192) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        switch (className) {</b>
+&nbsp;            case &quot;O&quot;:
+&nbsp;            case &quot;Object&quot;:
+&nbsp;            case &quot;java.lang.Object&quot;:
+<b class="fc">&nbsp;                return Object.class;</b>
+&nbsp;            case &quot;class java.util.Collections$EmptyMap&quot;:
+<b class="nc">&nbsp;                return Collections.EMPTY_MAP.getClass();</b>
+&nbsp;            case &quot;java.util.Collections$EmptyList&quot;:
+<b class="fc">&nbsp;                return Collections.EMPTY_LIST.getClass();</b>
+&nbsp;            case &quot;java.util.Collections$EmptySet&quot;:
+<b class="fc">&nbsp;                return Collections.EMPTY_SET.getClass();</b>
+&nbsp;            case &quot;java.util.Optional&quot;:
+<b class="nc">&nbsp;                return Optional.class;</b>
+&nbsp;            case &quot;java.util.OptionalInt&quot;:
+<b class="nc">&nbsp;                return OptionalInt.class;</b>
+&nbsp;            case &quot;java.util.OptionalLong&quot;:
+<b class="nc">&nbsp;                return OptionalLong.class;</b>
+&nbsp;            case &quot;List&quot;:
+&nbsp;            case &quot;java.util.List&quot;:
+<b class="nc">&nbsp;                return List.class;</b>
+&nbsp;            case &quot;A&quot;:
+&nbsp;            case &quot;ArrayList&quot;:
+&nbsp;            case &quot;java.util.ArrayList&quot;:
+<b class="fc">&nbsp;                return ArrayList.class;</b>
+&nbsp;            case &quot;LA&quot;:
+&nbsp;            case &quot;LinkedList&quot;:
+&nbsp;            case &quot;java.util.LinkedList&quot;:
+<b class="fc">&nbsp;                return LinkedList.class;</b>
+&nbsp;            case &quot;Map&quot;:
+&nbsp;            case &quot;java.util.Map&quot;:
+<b class="fc">&nbsp;                return Map.class;</b>
+&nbsp;            case &quot;M&quot;:
+&nbsp;            case &quot;HashMap&quot;:
+&nbsp;            case &quot;java.util.HashMap&quot;:
+<b class="fc">&nbsp;                return HashMap.class;</b>
+&nbsp;            case &quot;LM&quot;:
+&nbsp;            case &quot;LinkedHashMap&quot;:
+&nbsp;            case &quot;java.util.LinkedHashMap&quot;:
+<b class="fc">&nbsp;                return LinkedHashMap.class;</b>
+&nbsp;            case &quot;ConcurrentHashMap&quot;:
+<b class="fc">&nbsp;                return ConcurrentHashMap.class;</b>
+&nbsp;            case &quot;ConcurrentLinkedQueue&quot;:
+<b class="fc">&nbsp;                return ConcurrentLinkedQueue.class;</b>
+&nbsp;            case &quot;ConcurrentLinkedDeque&quot;:
+<b class="fc">&nbsp;                return ConcurrentLinkedDeque.class;</b>
+&nbsp;            case &quot;JSONObject&quot;:
+<b class="fc">&nbsp;                return JSONObject.class;</b>
+&nbsp;            case &quot;JO1&quot;:
+<b class="fc">&nbsp;                className = &quot;com.alibaba.fastjson.JSONObject&quot;;</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case &quot;Set&quot;:
+&nbsp;            case &quot;java.util.Set&quot;:
+<b class="nc">&nbsp;                return Set.class;</b>
+&nbsp;            case &quot;HashSet&quot;:
+&nbsp;            case &quot;java.util.HashSet&quot;:
+<b class="fc">&nbsp;                return HashSet.class;</b>
+&nbsp;            case &quot;LinkedHashSet&quot;:
+&nbsp;            case &quot;java.util.LinkedHashSet&quot;:
+<b class="fc">&nbsp;                return LinkedHashSet.class;</b>
+&nbsp;            case &quot;TreeSet&quot;:
+&nbsp;            case &quot;java.util.TreeSet&quot;:
+<b class="fc">&nbsp;                return TreeSet.class;</b>
+&nbsp;            case &quot;java.lang.Class&quot;:
+<b class="fc">&nbsp;                return Class.class;</b>
+&nbsp;            case &quot;java.lang.Integer&quot;:
+<b class="fc">&nbsp;                return Integer.class;</b>
+&nbsp;            case &quot;java.lang.Long&quot;:
+<b class="fc">&nbsp;                return Long.class;</b>
+&nbsp;            case &quot;String&quot;:
+&nbsp;            case &quot;java.lang.String&quot;:
+<b class="fc">&nbsp;                return String.class;</b>
+&nbsp;            case &quot;[String&quot;:
+<b class="nc">&nbsp;                return String[].class;</b>
+&nbsp;            case &quot;I&quot;:
+&nbsp;            case &quot;int&quot;:
+<b class="fc">&nbsp;                return int.class;</b>
+&nbsp;            case &quot;S&quot;:
+&nbsp;            case &quot;short&quot;:
+<b class="fc">&nbsp;                return short.class;</b>
+&nbsp;            case &quot;J&quot;:
+&nbsp;            case &quot;long&quot;:
+<b class="fc">&nbsp;                return long.class;</b>
+&nbsp;            case &quot;Z&quot;:
+&nbsp;            case &quot;boolean&quot;:
+<b class="fc">&nbsp;                return boolean.class;</b>
+&nbsp;            case &quot;B&quot;:
+&nbsp;            case &quot;byte&quot;:
+<b class="fc">&nbsp;                return byte.class;</b>
+&nbsp;            case &quot;F&quot;:
+&nbsp;            case &quot;float&quot;:
+<b class="fc">&nbsp;                return float.class;</b>
+&nbsp;            case &quot;D&quot;:
+&nbsp;            case &quot;double&quot;:
+<b class="fc">&nbsp;                return double.class;</b>
+&nbsp;            case &quot;C&quot;:
+&nbsp;            case &quot;char&quot;:
+<b class="fc">&nbsp;                return char.class;</b>
+&nbsp;            case &quot;[B&quot;:
+&nbsp;            case &quot;byte[]&quot;:
+<b class="nc">&nbsp;                return byte[].class;</b>
+&nbsp;            case &quot;[S&quot;:
+&nbsp;            case &quot;short[]&quot;:
+<b class="nc">&nbsp;                return short[].class;</b>
+&nbsp;            case &quot;[I&quot;:
+&nbsp;            case &quot;int[]&quot;:
+<b class="nc">&nbsp;                return int[].class;</b>
+&nbsp;            case &quot;[J&quot;:
+&nbsp;            case &quot;long[]&quot;:
+<b class="nc">&nbsp;                return long[].class;</b>
+&nbsp;            case &quot;[F&quot;:
+&nbsp;            case &quot;float[]&quot;:
+<b class="nc">&nbsp;                return float[].class;</b>
+&nbsp;            case &quot;[D&quot;:
+&nbsp;            case &quot;double[]&quot;:
+<b class="nc">&nbsp;                return double[].class;</b>
+&nbsp;            case &quot;[C&quot;:
+&nbsp;            case &quot;char[]&quot;:
+<b class="fc">&nbsp;                return char[].class;</b>
+&nbsp;            case &quot;[Z&quot;:
+&nbsp;            case &quot;boolean[]&quot;:
+<b class="nc">&nbsp;                return boolean[].class;</b>
+&nbsp;            case &quot;[O&quot;:
+<b class="fc">&nbsp;                return Object[].class;</b>
+&nbsp;            case &quot;UUID&quot;:
+<b class="fc">&nbsp;                return UUID.class;</b>
+&nbsp;            case &quot;Date&quot;:
+<b class="fc">&nbsp;                return Date.class;</b>
+&nbsp;            case &quot;Calendar&quot;:
+<b class="fc">&nbsp;                return Calendar.class;</b>
+&nbsp;            case &quot;java.io.IOException&quot;:
+<b class="fc">&nbsp;                return java.io.IOException.class;</b>
+&nbsp;            case &quot;java.util.Collections$UnmodifiableRandomAccessList&quot;:
+<b class="nc">&nbsp;                return CLASS_UNMODIFIABLE_LIST;</b>
+&nbsp;            case &quot;java.util.Collections$SingletonSet&quot;:
+<b class="fc">&nbsp;                return CLASS_SINGLE_SET;</b>
+&nbsp;            default:
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Class mapping = TYPE_MAPPINGS.get(className);</b>
+<b class="fc">&nbsp;        if (mapping != null) {</b>
+<b class="fc">&nbsp;            return mapping;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (className.charAt(0) == &#39;L&#39; &amp;&amp; className.charAt(className.length() - 1) == &#39;;&#39;) {</b>
+<b class="nc">&nbsp;            className = className.substring(1, className.length() - 1);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (className.charAt(0) == &#39;[&#39; || className.endsWith(&quot;[]&quot;)) {</b>
+<b class="fc">&nbsp;            String itemClassName = className.charAt(0) == &#39;[&#39; ? className.substring(1) : className.substring(0, className.length() - 2);</b>
+<b class="fc">&nbsp;            Class itemClass = loadClass(itemClassName);</b>
+<b class="fc">&nbsp;            if (itemClass == null) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;load class error &quot; + className);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return Array.newInstance(itemClass, 0).getClass();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();</b>
+<b class="fc">&nbsp;        if (contextClassLoader != null) {</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                return contextClassLoader.loadClass(className);</b>
+<b class="fc">&nbsp;            } catch (ClassNotFoundException ignored) {</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="fc">&nbsp;            return JSON.class.getClassLoader().loadClass(className);</b>
+<b class="fc">&nbsp;        } catch (ClassNotFoundException ignored) {</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="fc">&nbsp;            return Class.forName(className);</b>
+<b class="fc">&nbsp;        } catch (ClassNotFoundException ignored) {</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Class&lt;?&gt; getArrayClass(Class componentClass) {
+<b class="fc">&nbsp;        if (componentClass == int.class) {</b>
+<b class="fc">&nbsp;            return int[].class;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (componentClass == byte.class) {</b>
+<b class="fc">&nbsp;            return byte[].class;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (componentClass == short.class) {</b>
+<b class="fc">&nbsp;            return short[].class;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (componentClass == long.class) {</b>
+<b class="fc">&nbsp;            return long[].class;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (componentClass == String.class) {</b>
+<b class="fc">&nbsp;            return String[].class;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (componentClass == Object.class) {</b>
+<b class="fc">&nbsp;            return Object[].class;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return Array.newInstance(componentClass, 1).getClass();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Class&lt;?&gt; getClass(Type type) {
+<b class="fc">&nbsp;        if (type == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type.getClass() == Class.class) {</b>
+<b class="fc">&nbsp;            return (Class&lt;?&gt;) type;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type instanceof ParameterizedType) {</b>
+<b class="fc">&nbsp;            return getClass(((ParameterizedType) type).getRawType());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type instanceof TypeVariable) {</b>
+<b class="fc">&nbsp;            Type boundType = ((TypeVariable&lt;?&gt;) type).getBounds()[0];</b>
+<b class="fc">&nbsp;            if (boundType instanceof Class) {</b>
+<b class="fc">&nbsp;                return (Class) boundType;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return getClass(boundType);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type instanceof WildcardType) {</b>
+<b class="fc">&nbsp;            Type[] upperBounds = ((WildcardType) type).getUpperBounds();</b>
+<b class="fc">&nbsp;            if (upperBounds.length == 1) {</b>
+<b class="fc">&nbsp;                return getClass(upperBounds[0]);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type instanceof GenericArrayType) {</b>
+<b class="fc">&nbsp;            GenericArrayType genericArrayType = (GenericArrayType) type;</b>
+<b class="fc">&nbsp;            Type componentType = genericArrayType.getGenericComponentType();</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; componentClass = getClass(componentType);</b>
+<b class="fc">&nbsp;            return getArrayClass(componentClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return Object.class;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isProxy(Class&lt;?&gt; clazz) {
+<b class="fc">&nbsp;        for (Class&lt;?&gt; item : clazz.getInterfaces()) {</b>
+<b class="fc">&nbsp;            String interfaceName = item.getName();</b>
+<b class="fc">&nbsp;            switch (interfaceName) {</b>
+&nbsp;                case &quot;org.springframework.cglib.proxy.Factory&quot;:
+&nbsp;                case &quot;javassist.util.proxy.ProxyObject&quot;:
+&nbsp;                case &quot;org.apache.ibatis.javassist.util.proxy.ProxyObject&quot;:
+&nbsp;                case &quot;org.hibernate.proxy.HibernateProxy&quot;:
+&nbsp;                case &quot;org.springframework.context.annotation.ConfigurationClassEnhancer$EnhancedConfiguration&quot;:
+&nbsp;                case &quot;org.mockito.cglib.proxy.Factory&quot;:
+<b class="fc">&nbsp;                    return true;</b>
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Map getInnerMap(Map object) {
+<b class="nc">&nbsp;        if (object == null || CLASS_JSON_OBJECT_1x == null || !CLASS_JSON_OBJECT_1x.isInstance(object) || FIELD_JSON_OBJECT_1x_map == null) {</b>
+<b class="nc">&nbsp;            return object;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            object = (Map) FIELD_JSON_OBJECT_1x_map.get(object);</b>
+<b class="nc">&nbsp;        } catch (IllegalAccessException ignore) {</b>
+&nbsp;            // ignore
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return object;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:16</div>
+</div>
+</body>
+</html>

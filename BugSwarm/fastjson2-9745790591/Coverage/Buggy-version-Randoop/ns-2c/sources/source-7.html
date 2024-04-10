@@ -1,0 +1,182 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LongTextParse2Escape</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.wast</a>
+</div>
+
+<h1>Coverage Summary for Class: LongTextParse2Escape (com.alibaba.fastjson2.benchmark.wast)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LongTextParse2Escape</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/38)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.wast;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.ObjectMapper;
+&nbsp;import org.openjdk.jmh.annotations.Mode;
+&nbsp;import org.openjdk.jmh.infra.Blackhole;
+&nbsp;import org.openjdk.jmh.runner.Runner;
+&nbsp;import org.openjdk.jmh.runner.RunnerException;
+&nbsp;import org.openjdk.jmh.runner.options.Options;
+&nbsp;import org.openjdk.jmh.runner.options.OptionsBuilder;
+&nbsp;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.concurrent.TimeUnit;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author wangy
+&nbsp; * date 2022/6/3 8:45
+&nbsp; */
+<b class="nc">&nbsp;public class LongTextParse2Escape {</b>
+<b class="nc">&nbsp;    static final ObjectMapper mapper = new ObjectMapper();</b>
+&nbsp;    private static String escapeResult;
+&nbsp;
+&nbsp;    static {
+<b class="nc">&nbsp;        int length = 1000;</b>
+<b class="nc">&nbsp;        StringBuffer value = new StringBuffer();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; length; i++) {</b>
+<b class="nc">&nbsp;            char ch = (char) (i % 32);</b>
+<b class="nc">&nbsp;            value.append(ch);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Map map = new HashMap();</b>
+<b class="nc">&nbsp;        map.put(&quot;a&quot;, value);</b>
+<b class="nc">&nbsp;        map.put(&quot;b&quot;, value);</b>
+<b class="nc">&nbsp;        map.put(&quot;c&quot;, value);</b>
+<b class="nc">&nbsp;        map.put(&quot;d&quot;, value);</b>
+<b class="nc">&nbsp;        map.put(&quot;e&quot;, value);</b>
+<b class="nc">&nbsp;        map.put(&quot;f&quot;, value);</b>
+<b class="nc">&nbsp;        map.put(&quot;g&quot;, value);</b>
+<b class="nc">&nbsp;        map.put(&quot;h&quot;, value);</b>
+<b class="nc">&nbsp;        map.put(&quot;i&quot;, value);</b>
+<b class="nc">&nbsp;        map.put(&quot;j&quot;, value);</b>
+<b class="nc">&nbsp;        map.put(&quot;k&quot;, value);</b>
+<b class="nc">&nbsp;        map.put(&quot;l&quot;, value);</b>
+<b class="nc">&nbsp;        map.put(&quot;m&quot;, value);</b>
+<b class="nc">&nbsp;        map.put(&quot;n&quot;, value);</b>
+<b class="nc">&nbsp;        map.put(&quot;o&quot;, value);</b>
+<b class="nc">&nbsp;        map.put(&quot;p&quot;, value);</b>
+<b class="nc">&nbsp;        map.put(&quot;q&quot;, value);</b>
+<b class="nc">&nbsp;        map.put(&quot;r&quot;, value);</b>
+&nbsp;
+<b class="nc">&nbsp;        escapeResult = io.github.wycst.wast.json.JSON.toJsonString(map);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //    @Benchmark
+&nbsp;    public void fastjson2(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(com.alibaba.fastjson2.JSON.parseObject(escapeResult, Map.class));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //    @Benchmark
+&nbsp;    public void jackson(Blackhole bh) throws Exception {
+<b class="nc">&nbsp;        bh.consume(mapper.readValue(escapeResult, Map.class));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //    @Benchmark
+&nbsp;    public void wastjson(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(io.github.wycst.wast.json.JSON.parseObject(escapeResult, Map.class));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void main(String[] args) throws RunnerException {
+<b class="nc">&nbsp;        Options options = new OptionsBuilder()</b>
+<b class="nc">&nbsp;                .include(LongTextParse2Escape.class.getName())</b>
+<b class="nc">&nbsp;                .mode(Mode.Throughput)</b>
+<b class="nc">&nbsp;                .timeUnit(TimeUnit.SECONDS)</b>
+<b class="nc">&nbsp;                .warmupIterations(3)</b>
+<b class="nc">&nbsp;                .forks(1)</b>
+<b class="nc">&nbsp;                .build();</b>
+<b class="nc">&nbsp;        new Runner(options).run();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:02</div>
+</div>
+</body>
+</html>

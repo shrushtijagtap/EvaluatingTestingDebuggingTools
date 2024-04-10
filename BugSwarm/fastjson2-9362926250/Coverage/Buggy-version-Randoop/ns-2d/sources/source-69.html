@@ -1,0 +1,505 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderAdapter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderAdapter (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderAdapter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/185)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONB;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.schema.JSONSchema;
+&nbsp;import com.alibaba.fastjson2.util.BeanUtils;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.InvocationTargetException;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.function.Function;
+&nbsp;import java.util.function.Supplier;
+&nbsp;
+&nbsp;public class ObjectReaderAdapter&lt;T&gt;
+&nbsp;        extends ObjectReaderBean&lt;T&gt; {
+&nbsp;    protected final String typeKey;
+&nbsp;    protected final long typeKeyHashCode;
+&nbsp;
+&nbsp;    final FieldReader[] fieldReaders;
+&nbsp;    final long[] hashCodes;
+&nbsp;    final short[] mapping;
+&nbsp;
+&nbsp;    final long[] hashCodesLCase;
+&nbsp;    final short[] mappingLCase;
+&nbsp;
+&nbsp;    final Constructor constructor;
+&nbsp;    volatile boolean instantiationError;
+&nbsp;
+&nbsp;    public ObjectReaderAdapter(Class objectClass, Supplier&lt;T&gt; creator, FieldReader... fieldReaders) {
+<b class="nc">&nbsp;        this(objectClass, null, null, 0, null, creator, null, fieldReaders);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReaderAdapter(
+&nbsp;            Class objectClass,
+&nbsp;            String typeKey,
+&nbsp;            String typeName,
+&nbsp;            long features,
+&nbsp;            JSONSchema schema,
+&nbsp;            Supplier&lt;T&gt; creator,
+&nbsp;            Function buildFunction,
+&nbsp;            FieldReader... fieldReaders
+&nbsp;    ) {
+<b class="nc">&nbsp;        super(objectClass, creator, typeName, features, schema, buildFunction);</b>
+&nbsp;
+<b class="nc">&nbsp;        this.constructor = objectClass == null</b>
+&nbsp;                ? null
+<b class="nc">&nbsp;                : BeanUtils.getDefaultConstructor(objectClass, true);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (constructor != null) {</b>
+<b class="nc">&nbsp;            constructor.setAccessible(true);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (typeKey == null || typeKey.isEmpty()) {</b>
+<b class="nc">&nbsp;            this.typeKey = &quot;@type&quot;;</b>
+<b class="nc">&nbsp;            typeKeyHashCode = HASH_TYPE;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            this.typeKey = typeKey;</b>
+<b class="nc">&nbsp;            typeKeyHashCode = Fnv.hashCode64(typeKey);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.fieldReaders = fieldReaders;</b>
+&nbsp;
+<b class="nc">&nbsp;        long[] hashCodes = new long[fieldReaders.length];</b>
+<b class="nc">&nbsp;        long[] hashCodesLCase = new long[fieldReaders.length];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; fieldReaders.length; i++) {</b>
+<b class="nc">&nbsp;            FieldReader fieldReader = fieldReaders[i];</b>
+<b class="nc">&nbsp;            String fieldName = fieldReader.fieldName;</b>
+<b class="nc">&nbsp;            hashCodes[i] = fieldReader.fieldNameHash;</b>
+<b class="nc">&nbsp;            hashCodesLCase[i] = fieldReader.fieldNameHashLCase;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (fieldReader.isUnwrapped()) {</b>
+<b class="nc">&nbsp;                this.extraFieldReader = fieldReader;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (fieldReader.defaultValue != null) {</b>
+<b class="nc">&nbsp;                this.hasDefaultValue = true;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.hashCodes = Arrays.copyOf(hashCodes, hashCodes.length);</b>
+<b class="nc">&nbsp;        Arrays.sort(this.hashCodes);</b>
+&nbsp;
+<b class="nc">&nbsp;        mapping = new short[this.hashCodes.length];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; hashCodes.length; i++) {</b>
+<b class="nc">&nbsp;            long hashCode = hashCodes[i];</b>
+<b class="nc">&nbsp;            int index = Arrays.binarySearch(this.hashCodes, hashCode);</b>
+<b class="nc">&nbsp;            mapping[index] = (short) i;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.hashCodesLCase = Arrays.copyOf(hashCodesLCase, hashCodesLCase.length);</b>
+<b class="nc">&nbsp;        Arrays.sort(this.hashCodesLCase);</b>
+&nbsp;
+<b class="nc">&nbsp;        mappingLCase = new short[this.hashCodesLCase.length];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; hashCodesLCase.length; i++) {</b>
+<b class="nc">&nbsp;            long hashCode = hashCodesLCase[i];</b>
+<b class="nc">&nbsp;            int index = Arrays.binarySearch(this.hashCodesLCase, hashCode);</b>
+<b class="nc">&nbsp;            mappingLCase[index] = (short) i;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final String getTypeKey() {
+<b class="nc">&nbsp;        return typeKey;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final long getTypeKeyHash() {
+<b class="nc">&nbsp;        return typeKeyHashCode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final long getFeatures() {
+<b class="nc">&nbsp;        return features;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object auoType(JSONReader jsonReader, Class expectClass, long features) {
+<b class="nc">&nbsp;        long typeHash = jsonReader.readTypeHashCode();</b>
+<b class="nc">&nbsp;        JSONReader.Context context = jsonReader.getContext();</b>
+<b class="nc">&nbsp;        ObjectReader autoTypeObjectReader = context.getObjectReaderAutoType(typeHash);</b>
+<b class="nc">&nbsp;        if (autoTypeObjectReader == null) {</b>
+<b class="nc">&nbsp;            String typeName = jsonReader.getString();</b>
+<b class="nc">&nbsp;            autoTypeObjectReader = context.getObjectReaderAutoType(typeName, expectClass, this.features | features | context.getFeatures());</b>
+&nbsp;
+<b class="nc">&nbsp;            if (autoTypeObjectReader == null) {</b>
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;auotype not support : &quot; + typeName));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return autoTypeObjectReader.readObject(jsonReader, null, null, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final Function getBuildFunction() {
+<b class="nc">&nbsp;        return buildFunction;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public T readArrayMappingObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        if (!serializable) {</b>
+<b class="nc">&nbsp;            jsonReader.errorOnNoneSerializable(objectClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        jsonReader.nextIfMatch(&#39;[&#39;);</b>
+<b class="nc">&nbsp;        Object object = creator.get();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (FieldReader fieldReader : fieldReaders) {</b>
+<b class="nc">&nbsp;            fieldReader.readFieldValue(jsonReader, object);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!jsonReader.nextIfMatch(&#39;]&#39;)) {</b>
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info(&quot;array to bean end error&quot;));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        jsonReader.nextIfMatch(&#39;,&#39;);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (buildFunction != null) {</b>
+<b class="nc">&nbsp;            return (T) buildFunction.apply(object);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return (T) object;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public T readArrayMappingJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        if (!serializable) {</b>
+<b class="nc">&nbsp;            jsonReader.errorOnNoneSerializable(objectClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectReader autoTypeReader = checkAutoType(jsonReader, this.objectClass, this.features | features);</b>
+<b class="nc">&nbsp;        if (autoTypeReader != null &amp;&amp; autoTypeReader != this &amp;&amp; autoTypeReader.getObjectClass() != this.objectClass) {</b>
+<b class="nc">&nbsp;            return (T) autoTypeReader.readArrayMappingJSONBObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int entryCnt = jsonReader.startArray();</b>
+<b class="nc">&nbsp;        Object object = createInstance(0);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; fieldReaders.length; i++) {</b>
+<b class="nc">&nbsp;            if (i &gt;= entryCnt) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            FieldReader fieldReader = fieldReaders[i];</b>
+<b class="nc">&nbsp;            fieldReader.readFieldValue(jsonReader, object);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = fieldReaders.length; i &lt; entryCnt; i++) {</b>
+<b class="nc">&nbsp;            jsonReader.skipValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (buildFunction != null) {</b>
+<b class="nc">&nbsp;            return (T) buildFunction.apply(object);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return (T) object;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Object createInstance0(long features) throws InstantiationException {
+<b class="nc">&nbsp;        if ((features &amp; JSONReader.Feature.UseDefaultConstructorAsPossible.mask) != 0</b>
+&nbsp;                &amp;&amp; constructor != null
+<b class="nc">&nbsp;                &amp;&amp; constructor.getParameterCount() == 0) {</b>
+&nbsp;            T object;
+&nbsp;            try {
+<b class="nc">&nbsp;                object = (T) constructor.newInstance();</b>
+<b class="nc">&nbsp;            } catch (InstantiationException | IllegalAccessException | InvocationTargetException ex) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;create instance error, &quot; + objectClass, ex);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            if (hasDefaultValue) {</b>
+<b class="nc">&nbsp;                initDefaultValue(object);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return object;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (creator == null) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;create instance error, &quot; + objectClass);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return creator.get();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void initDefaultValue(T object) {
+<b class="nc">&nbsp;        for (FieldReader fieldReader : fieldReaders) {</b>
+<b class="nc">&nbsp;            Object defaultValue = fieldReader.defaultValue;</b>
+<b class="nc">&nbsp;            if (defaultValue != null) {</b>
+<b class="nc">&nbsp;                fieldReader.accept(object, defaultValue);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public T createInstance(long features) {
+<b class="nc">&nbsp;        if (instantiationError &amp;&amp; constructor != null) {</b>
+&nbsp;            T object;
+&nbsp;            try {
+<b class="nc">&nbsp;                object = (T) constructor.newInstance();</b>
+<b class="nc">&nbsp;            } catch (InstantiationException | IllegalAccessException | InvocationTargetException ex) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;create instance error, &quot; + objectClass, ex);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            if (hasDefaultValue) {</b>
+<b class="nc">&nbsp;                initDefaultValue(object);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return object;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        InstantiationException error;
+&nbsp;        try {
+<b class="nc">&nbsp;            T object = (T) createInstance0(features);</b>
+<b class="nc">&nbsp;            if (hasDefaultValue) {</b>
+<b class="nc">&nbsp;                initDefaultValue(object);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return object;</b>
+<b class="nc">&nbsp;        } catch (InstantiationException ex) {</b>
+<b class="nc">&nbsp;            error = ex;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        instantiationError = true;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (constructor != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                T object = (T) constructor.newInstance();</b>
+<b class="nc">&nbsp;                if (hasDefaultValue) {</b>
+<b class="nc">&nbsp;                    initDefaultValue(object);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return object;</b>
+<b class="nc">&nbsp;            } catch (InstantiationException | IllegalAccessException | InvocationTargetException ex) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;create instance error, &quot; + objectClass, ex);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;create instance error, &quot; + objectClass, error);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public FieldReader getFieldReader(long hashCode) {
+<b class="nc">&nbsp;        int m = Arrays.binarySearch(hashCodes, hashCode);</b>
+<b class="nc">&nbsp;        if (m &lt; 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int index = this.mapping[m];</b>
+<b class="nc">&nbsp;        return fieldReaders[index];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public FieldReader getFieldReaderLCase(long hashCode) {
+<b class="nc">&nbsp;        int m = Arrays.binarySearch(hashCodesLCase, hashCode);</b>
+<b class="nc">&nbsp;        if (m &lt; 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int index = this.mappingLCase[m];</b>
+<b class="nc">&nbsp;        return fieldReaders[index];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected T autoType(JSONReader jsonReader) {
+<b class="nc">&nbsp;        long typeHash = jsonReader.readTypeHashCode();</b>
+<b class="nc">&nbsp;        JSONReader.Context context = jsonReader.getContext();</b>
+<b class="nc">&nbsp;        ObjectReader autoTypeObjectReader = autoType(context, typeHash);</b>
+<b class="nc">&nbsp;        if (autoTypeObjectReader == null) {</b>
+<b class="nc">&nbsp;            String typeName = jsonReader.getString();</b>
+<b class="nc">&nbsp;            autoTypeObjectReader = context.getObjectReaderAutoType(typeName, null);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (autoTypeObjectReader == null) {</b>
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;auotype not support : &quot; + typeName));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return (T) autoTypeObjectReader.readJSONBObject(jsonReader, null, null, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public T readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        if (jsonReader.nextIfNull()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectReader autoTypeReader = jsonReader.checkAutoType(this.objectClass, this.typeNameHash, this.features | features);</b>
+<b class="nc">&nbsp;        if (autoTypeReader != null &amp;&amp; autoTypeReader.getObjectClass() != this.objectClass) {</b>
+<b class="nc">&nbsp;            return (T) autoTypeReader.readJSONBObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!serializable) {</b>
+<b class="nc">&nbsp;            jsonReader.errorOnNoneSerializable(objectClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (jsonReader.isArray()) {</b>
+<b class="nc">&nbsp;            if (jsonReader.isSupportBeanArray()) {</b>
+<b class="nc">&nbsp;                return readArrayMappingJSONBObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;expect object, but &quot; + JSONB.typeName(jsonReader.getType())));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean objectStart = jsonReader.nextIfObjectStart();</b>
+&nbsp;
+<b class="nc">&nbsp;        Object object = null;</b>
+<b class="nc">&nbsp;        for (int i = 0; ; ++i) {</b>
+<b class="nc">&nbsp;            if (jsonReader.nextIfObjectEnd()) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            long hash = jsonReader.readFieldNameHashCode();</b>
+<b class="nc">&nbsp;            if (hash == typeKeyHashCode &amp;&amp; i == 0) {</b>
+<b class="nc">&nbsp;                long typeHash = jsonReader.readValueHashCode();</b>
+<b class="nc">&nbsp;                JSONReader.Context context = jsonReader.getContext();</b>
+<b class="nc">&nbsp;                ObjectReader autoTypeObjectReader = autoType(context, typeHash);</b>
+<b class="nc">&nbsp;                if (autoTypeObjectReader == null) {</b>
+<b class="nc">&nbsp;                    String typeName = jsonReader.getString();</b>
+<b class="nc">&nbsp;                    autoTypeObjectReader = context.getObjectReaderAutoType(typeName, null);</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (autoTypeObjectReader == null) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(jsonReader.info(&quot;auotype not support : &quot; + typeName));</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (autoTypeObjectReader == this) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                jsonReader.setTypeRedirect(true);</b>
+<b class="nc">&nbsp;                return (T) autoTypeObjectReader.readJSONBObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (hash == 0) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            FieldReader fieldReader = getFieldReader(hash);</b>
+<b class="nc">&nbsp;            if (fieldReader == null &amp;&amp; jsonReader.isSupportSmartMatch(features | this.features)) {</b>
+<b class="nc">&nbsp;                long nameHashCodeLCase = jsonReader.getNameHashCodeLCase();</b>
+<b class="nc">&nbsp;                if (nameHashCodeLCase != hash) {</b>
+<b class="nc">&nbsp;                    fieldReader = getFieldReaderLCase(nameHashCodeLCase);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            if (fieldReader == null) {</b>
+<b class="nc">&nbsp;                processExtra(jsonReader, object);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (object == null) {</b>
+<b class="nc">&nbsp;                object = createInstance(jsonReader.getContext().getFeatures() | features);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            fieldReader.readFieldValue(jsonReader, object);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            object = createInstance(jsonReader.getContext().getFeatures() | features);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (schema != null) {</b>
+<b class="nc">&nbsp;            schema.assertValidate(object);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return (T) object;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:12</div>
+</div>
+</body>
+</html>

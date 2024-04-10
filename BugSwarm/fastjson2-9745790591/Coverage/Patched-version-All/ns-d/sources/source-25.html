@@ -1,0 +1,199 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONPathTypedMultiNamesPrefixName1</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONPathTypedMultiNamesPrefixName1 (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONPathTypedMultiNamesPrefixName1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.1%
+  </span>
+  <span class="absValue">
+    (39/41)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.reader.FieldReader;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.time.ZoneId;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;public class JSONPathTypedMultiNamesPrefixName1
+&nbsp;        extends JSONPathTypedMultiNames {
+&nbsp;    final JSONPathSingleName prefixName;
+&nbsp;    final long prefixNameHash;
+&nbsp;
+&nbsp;    JSONPathTypedMultiNamesPrefixName1(
+&nbsp;            JSONPath[] paths,
+&nbsp;            JSONPath prefix,
+&nbsp;            JSONPath[] namePaths,
+&nbsp;            Type[] types,
+&nbsp;            String[] formats,
+&nbsp;            long[] pathFeatures,
+&nbsp;            ZoneId zoneId,
+&nbsp;            long features) {
+<b class="fc">&nbsp;        super(paths, prefix, namePaths, types, formats, pathFeatures, zoneId, features);</b>
+<b class="fc">&nbsp;        prefixName = (JSONPathSingleName) prefix;</b>
+<b class="fc">&nbsp;        prefixNameHash = prefixName.nameHashCode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object extract(JSONReader jsonReader) {
+<b class="fc">&nbsp;        if (jsonReader.nextIfNull()) {</b>
+<b class="fc">&nbsp;            return new Object[paths.length];</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (!jsonReader.nextIfObjectStart()) {</b>
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info(&quot;illegal input, expect &#39;[&#39;, but &quot; + jsonReader.current()));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        while (true) {
+<b class="fc">&nbsp;            if (jsonReader.nextIfObjectEnd()) {</b>
+<b class="fc">&nbsp;                return new Object[paths.length];</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (jsonReader.isEnd()) {</b>
+<b class="fc">&nbsp;                throw new JSONException(jsonReader.info(&quot;illegal input, expect &#39;[&#39;, but &quot; + jsonReader.current()));</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            long nameHashCode = jsonReader.readFieldNameHashCode();</b>
+<b class="fc">&nbsp;            boolean match = nameHashCode == prefixNameHash;</b>
+<b class="fc">&nbsp;            if (!match) {</b>
+<b class="fc">&nbsp;                jsonReader.skipValue();</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            break;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (jsonReader.nextIfNull()) {</b>
+<b class="fc">&nbsp;            return new Object[paths.length];</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (!jsonReader.nextIfObjectStart()) {</b>
+<b class="nc">&nbsp;            throw new JSONException(jsonReader.info(&quot;illegal input, expect &#39;[&#39;, but &quot; + jsonReader.current()));</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Object[] values = new Object[paths.length];</b>
+<b class="fc">&nbsp;        while (!jsonReader.nextIfObjectEnd()) {</b>
+<b class="fc">&nbsp;            long nameHashCode = jsonReader.readFieldNameHashCode();</b>
+&nbsp;
+<b class="fc">&nbsp;            int m = Arrays.binarySearch(hashCodes, nameHashCode);</b>
+<b class="fc">&nbsp;            if (m &lt; 0) {</b>
+<b class="fc">&nbsp;                jsonReader.skipValue();</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            int index = this.mapping[m];</b>
+<b class="fc">&nbsp;            FieldReader fieldReader = fieldReaders[index];</b>
+&nbsp;            Object fieldValue;
+&nbsp;            try {
+<b class="fc">&nbsp;                fieldValue = fieldReader.readFieldValue(jsonReader);</b>
+<b class="fc">&nbsp;            } catch (Exception e) {</b>
+<b class="fc">&nbsp;                long features = 0;</b>
+<b class="fc">&nbsp;                if (index &lt; this.pathFeatures.length) {</b>
+<b class="fc">&nbsp;                    features = this.pathFeatures[index];</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if ((features &amp; Feature.NullOnError.mask) == 0) {</b>
+<b class="fc">&nbsp;                    throw e;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                fieldValue = null;</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            values[index] = fieldValue;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return values;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:07</div>
+</div>
+</body>
+</html>

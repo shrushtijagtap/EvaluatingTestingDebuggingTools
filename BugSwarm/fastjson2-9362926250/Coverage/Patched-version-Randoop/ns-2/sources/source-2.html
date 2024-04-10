@@ -1,0 +1,298 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Feature</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.parser</a>
+</div>
+
+<h1>Coverage Summary for Class: Feature (com.alibaba.fastjson.parser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Feature</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/41)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 1999-2017 Alibaba Group.
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.alibaba.fastjson.parser;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author wenshao[szujobs@hotmail.com]
+&nbsp; */
+<b class="nc">&nbsp;public enum Feature {</b>
+&nbsp;    /**
+&nbsp;     *
+&nbsp;     */
+<b class="nc">&nbsp;    AutoCloseSource,</b>
+&nbsp;    /**
+&nbsp;     *
+&nbsp;     */
+<b class="nc">&nbsp;    AllowComment,</b>
+&nbsp;    /**
+&nbsp;     *
+&nbsp;     */
+<b class="nc">&nbsp;    AllowUnQuotedFieldNames,</b>
+&nbsp;    /**
+&nbsp;     *
+&nbsp;     */
+<b class="nc">&nbsp;    AllowSingleQuotes,</b>
+&nbsp;    /**
+&nbsp;     *
+&nbsp;     */
+<b class="nc">&nbsp;    InternFieldNames,</b>
+&nbsp;    /**
+&nbsp;     *
+&nbsp;     */
+<b class="nc">&nbsp;    AllowISO8601DateFormat,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {&quot;a&quot;:1,,,&quot;b&quot;:2}
+&nbsp;     */
+<b class="nc">&nbsp;    AllowArbitraryCommas,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     *
+&nbsp;     */
+<b class="nc">&nbsp;    UseBigDecimal,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.1.2
+&nbsp;     */
+<b class="nc">&nbsp;    IgnoreNotMatch,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.1.3
+&nbsp;     */
+<b class="nc">&nbsp;    SortFeidFastMatch,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.1.3
+&nbsp;     */
+<b class="nc">&nbsp;    DisableASM,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.1.7
+&nbsp;     */
+<b class="nc">&nbsp;    DisableCircularReferenceDetect,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.1.10
+&nbsp;     */
+<b class="nc">&nbsp;    InitStringFieldAsEmpty,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.1.35
+&nbsp;     */
+<b class="nc">&nbsp;    SupportArrayToBean,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.2.3
+&nbsp;     */
+<b class="nc">&nbsp;    OrderedField,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.2.5
+&nbsp;     */
+<b class="nc">&nbsp;    DisableSpecialKeyDetect,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.2.9
+&nbsp;     */
+<b class="nc">&nbsp;    UseObjectArray,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.2.22, 1.1.54.android
+&nbsp;     */
+<b class="nc">&nbsp;    SupportNonPublicField,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.2.29
+&nbsp;     * &lt;p&gt;
+&nbsp;     * disable autotype key &#39;@type&#39;
+&nbsp;     */
+<b class="nc">&nbsp;    IgnoreAutoType,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.2.30
+&nbsp;     * &lt;p&gt;
+&nbsp;     * disable field smart match, improve performance in some scenarios.
+&nbsp;     */
+<b class="nc">&nbsp;    DisableFieldSmartMatch,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.2.41, backport to 1.1.66.android
+&nbsp;     */
+<b class="nc">&nbsp;    SupportAutoType,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.2.42
+&nbsp;     */
+<b class="nc">&nbsp;    NonStringKeyAsString,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.2.45
+&nbsp;     */
+<b class="nc">&nbsp;    CustomMapDeserializer,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 1.2.55
+&nbsp;     */
+<b class="nc">&nbsp;    ErrorOnEnumNotMatch,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0.4
+&nbsp;     */
+<b class="nc">&nbsp;    TrimStringFieldValue,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0.4
+&nbsp;     */
+<b class="nc">&nbsp;    SupportClassForName,</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @since 2.0.6
+&nbsp;     */
+<b class="nc">&nbsp;    ErrorOnNotSupportAutoType,</b>
+<b class="nc">&nbsp;    UseNativeJavaObject;</b>
+&nbsp;
+&nbsp;    public final int mask;
+&nbsp;
+&nbsp;    Feature() {
+&nbsp;        mask = (1 &lt;&lt; ordinal());
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isEnabled(int features, Feature feature) {
+<b class="nc">&nbsp;        return (features &amp; feature.mask) != 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int config(int features, Feature feature, boolean state) {
+<b class="nc">&nbsp;        if (state) {</b>
+<b class="nc">&nbsp;            features |= feature.mask;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            features &amp;= ~feature.mask;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return features;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int of(Feature[] features) {
+<b class="nc">&nbsp;        if (features == null) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int value = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (Feature feature : features) {</b>
+<b class="nc">&nbsp;            value |= feature.mask;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final int getMask() {
+<b class="nc">&nbsp;        return mask;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:17</div>
+</div>
+</body>
+</html>

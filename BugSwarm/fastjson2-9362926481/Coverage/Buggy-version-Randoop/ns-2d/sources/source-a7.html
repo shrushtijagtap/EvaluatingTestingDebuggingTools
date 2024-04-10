@@ -1,0 +1,407 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderImplObject</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderImplObject (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderImplObject</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/139)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.function.Supplier;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONB.Constants.*;
+&nbsp;
+&nbsp;public final class ObjectReaderImplObject
+&nbsp;        extends ObjectReaderPrimitive {
+<b class="nc">&nbsp;    public static final ObjectReaderImplObject INSTANCE = new ObjectReaderImplObject();</b>
+&nbsp;
+&nbsp;    public ObjectReaderImplObject() {
+<b class="nc">&nbsp;        super(Object.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createInstance(long features) {
+<b class="nc">&nbsp;        return new JSONObject();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createInstance(Map map, long features) {
+<b class="nc">&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+<b class="nc">&nbsp;        Object typeKey = map.get(getTypeKey());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (typeKey instanceof String) {</b>
+<b class="nc">&nbsp;            String typeName = (String) typeKey;</b>
+<b class="nc">&nbsp;            long typeHash = Fnv.hashCode64(typeName);</b>
+<b class="nc">&nbsp;            ObjectReader reader = null;</b>
+<b class="nc">&nbsp;            if ((features &amp; JSONReader.Feature.SupportAutoType.mask) != 0) {</b>
+<b class="nc">&nbsp;                reader = autoType(provider, typeHash);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (reader == null) {</b>
+<b class="nc">&nbsp;                reader = provider.getObjectReader(</b>
+<b class="nc">&nbsp;                        typeName, getObjectClass(), features | getFeatures()</b>
+&nbsp;                );
+&nbsp;
+<b class="nc">&nbsp;                if (reader == null) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;No suitable ObjectReader found for&quot; + typeName);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (reader != this) {</b>
+<b class="nc">&nbsp;                return reader.createInstance(map, features);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return map;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        if (jsonReader.isJSONB()) {</b>
+<b class="nc">&nbsp;            return jsonReader.readAny();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONReader.Context context = jsonReader.getContext();</b>
+&nbsp;
+<b class="nc">&nbsp;        String typeName = null;</b>
+<b class="nc">&nbsp;        if (jsonReader.isObject()) {</b>
+<b class="nc">&nbsp;            jsonReader.nextIfObjectStart();</b>
+&nbsp;
+<b class="nc">&nbsp;            long hash = 0;</b>
+<b class="nc">&nbsp;            if (jsonReader.isString()) {</b>
+<b class="nc">&nbsp;                hash = jsonReader.readFieldNameHashCode();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (hash == HASH_TYPE) {</b>
+<b class="nc">&nbsp;                    boolean supportAutoType = context.isEnabled(JSONReader.Feature.SupportAutoType);</b>
+&nbsp;
+&nbsp;                    ObjectReader autoTypeObjectReader;
+&nbsp;
+<b class="nc">&nbsp;                    if (supportAutoType) {</b>
+<b class="nc">&nbsp;                        long typeHash = jsonReader.readTypeHashCode();</b>
+<b class="nc">&nbsp;                        autoTypeObjectReader = context.getObjectReaderAutoType(typeHash);</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (autoTypeObjectReader != null) {</b>
+<b class="nc">&nbsp;                            Class objectClass = autoTypeObjectReader.getObjectClass();</b>
+<b class="nc">&nbsp;                            if (objectClass != null) {</b>
+<b class="nc">&nbsp;                                ClassLoader objectClassLoader = objectClass.getClassLoader();</b>
+<b class="nc">&nbsp;                                ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();</b>
+<b class="nc">&nbsp;                                if (objectClassLoader != contextClassLoader) {</b>
+<b class="nc">&nbsp;                                    Class contextClass = null;</b>
+&nbsp;
+<b class="nc">&nbsp;                                    typeName = jsonReader.getString();</b>
+&nbsp;                                    try {
+<b class="nc">&nbsp;                                        contextClass = contextClassLoader.loadClass(typeName);</b>
+<b class="nc">&nbsp;                                    } catch (ClassNotFoundException ignored) {</b>
+<b class="nc">&nbsp;                                    }</b>
+&nbsp;
+<b class="nc">&nbsp;                                    if (!objectClass.equals(contextClass)) {</b>
+<b class="nc">&nbsp;                                        autoTypeObjectReader = context.getObjectReader(contextClass);</b>
+&nbsp;                                    }
+&nbsp;                                }
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        if (autoTypeObjectReader == null) {</b>
+<b class="nc">&nbsp;                            typeName = jsonReader.getString();</b>
+<b class="nc">&nbsp;                            autoTypeObjectReader = context.getObjectReaderAutoType(typeName, null);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    } else {</b>
+<b class="nc">&nbsp;                        typeName = jsonReader.readString();</b>
+<b class="nc">&nbsp;                        autoTypeObjectReader = context.getObjectReaderAutoType(typeName, null);</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (autoTypeObjectReader == null &amp;&amp; jsonReader.getContext().isEnabled(JSONReader.Feature.ErrorOnNotSupportAutoType)) {</b>
+<b class="nc">&nbsp;                            throw new JSONException(jsonReader.info(&quot;autoType not support : &quot; + typeName));</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (autoTypeObjectReader != null) {</b>
+<b class="nc">&nbsp;                        jsonReader.setTypeRedirect(true);</b>
+&nbsp;
+<b class="nc">&nbsp;                        return autoTypeObjectReader.readObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            Map object;
+<b class="nc">&nbsp;            Supplier&lt;Map&gt; objectSupplier = jsonReader.getContext().getObjectSupplier();</b>
+<b class="nc">&nbsp;            if (objectSupplier != null) {</b>
+<b class="nc">&nbsp;                object = objectSupplier.get();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (((features | context.getFeatures()) &amp; JSONReader.Feature.UseNativeObject.mask) != 0) {</b>
+<b class="nc">&nbsp;                    object = new HashMap();</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    object = (Map) ObjectReaderImplMap.INSTANCE_OBJECT.createInstance(jsonReader.features(features));</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (typeName != null) {</b>
+<b class="nc">&nbsp;                switch (typeName) {</b>
+&nbsp;                    case &quot;java.util.ImmutableCollections$Map1&quot;:
+&nbsp;                    case &quot;java.util.ImmutableCollections$MapN&quot;:
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    default:
+<b class="nc">&nbsp;                        object.put(&quot;@type&quot;, typeName);</b>
+&nbsp;                        break;
+&nbsp;                }
+<b class="nc">&nbsp;                hash = 0;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; ; ++i) {</b>
+<b class="nc">&nbsp;                if (jsonReader.nextIfMatch(&#39;}&#39;)) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                Object name;
+<b class="nc">&nbsp;                if (i == 0 &amp;&amp; typeName == null &amp;&amp; hash != 0) {</b>
+<b class="nc">&nbsp;                    name = jsonReader.getFieldName();</b>
+<b class="nc">&nbsp;                } else if (jsonReader.isNumber()) {</b>
+<b class="nc">&nbsp;                    name = jsonReader.readNumber();</b>
+<b class="nc">&nbsp;                    jsonReader.nextIfMatch(&#39;:&#39;);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    name = jsonReader.readFieldName();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (name == null) {</b>
+<b class="nc">&nbsp;                    name = jsonReader.readFieldNameUnquote();</b>
+<b class="nc">&nbsp;                    if (jsonReader.current() == &#39;:&#39;) {</b>
+<b class="nc">&nbsp;                        jsonReader.next();</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                Object value;
+<b class="nc">&nbsp;                switch (jsonReader.current()) {</b>
+&nbsp;                    case &#39;-&#39;:
+&nbsp;                    case &#39;+&#39;:
+&nbsp;                    case &#39;0&#39;:
+&nbsp;                    case &#39;1&#39;:
+&nbsp;                    case &#39;2&#39;:
+&nbsp;                    case &#39;3&#39;:
+&nbsp;                    case &#39;4&#39;:
+&nbsp;                    case &#39;5&#39;:
+&nbsp;                    case &#39;6&#39;:
+&nbsp;                    case &#39;7&#39;:
+&nbsp;                    case &#39;8&#39;:
+&nbsp;                    case &#39;9&#39;:
+&nbsp;                    case &#39;.&#39;:
+<b class="nc">&nbsp;                        value = jsonReader.readNumber();</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;[&#39;:
+<b class="nc">&nbsp;                        value = jsonReader.readArray();</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;{&#39;:
+<b class="nc">&nbsp;                        value = jsonReader.readObject();</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;&quot;&#39;:
+&nbsp;                    case &#39;\&#39;&#39;:
+<b class="nc">&nbsp;                        value = jsonReader.readString();</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;t&#39;:
+&nbsp;                    case &#39;f&#39;:
+<b class="nc">&nbsp;                        value = jsonReader.readBoolValue();</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;n&#39;:
+<b class="nc">&nbsp;                        jsonReader.readNull();</b>
+<b class="nc">&nbsp;                        value = null;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;S&#39;:
+<b class="nc">&nbsp;                        if (jsonReader.nextIfSet()) {</b>
+<b class="nc">&nbsp;                            value = jsonReader.read(HashSet.class);</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            throw new JSONException(jsonReader.info());</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    default:
+<b class="nc">&nbsp;                        throw new JSONException(jsonReader.info());</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Object origin = object.put(name, value);</b>
+<b class="nc">&nbsp;                if (origin != null) {</b>
+<b class="nc">&nbsp;                    long contextFeatures = features | context.getFeatures();</b>
+<b class="nc">&nbsp;                    if ((contextFeatures &amp; JSONReader.Feature.DuplicateKeyValueAsArray.mask) != 0) {</b>
+<b class="nc">&nbsp;                        if (origin instanceof Collection) {</b>
+<b class="nc">&nbsp;                            ((Collection) origin).add(value);</b>
+<b class="nc">&nbsp;                            object.put(name, value);</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            JSONArray array = JSONArray.of(origin, value);</b>
+<b class="nc">&nbsp;                            object.put(name, array);</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            jsonReader.nextIfMatch(&#39;,&#39;);</b>
+&nbsp;
+<b class="nc">&nbsp;            return object;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        Object value;
+<b class="nc">&nbsp;        switch (jsonReader.current()) {</b>
+&nbsp;            case &#39;-&#39;:
+&nbsp;            case &#39;+&#39;:
+&nbsp;            case &#39;0&#39;:
+&nbsp;            case &#39;1&#39;:
+&nbsp;            case &#39;2&#39;:
+&nbsp;            case &#39;3&#39;:
+&nbsp;            case &#39;4&#39;:
+&nbsp;            case &#39;5&#39;:
+&nbsp;            case &#39;6&#39;:
+&nbsp;            case &#39;7&#39;:
+&nbsp;            case &#39;8&#39;:
+&nbsp;            case &#39;9&#39;:
+&nbsp;            case &#39;.&#39;:
+<b class="nc">&nbsp;                value = jsonReader.readNumber();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;[&#39;:
+<b class="nc">&nbsp;                value = jsonReader.readArray();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;&quot;&#39;:
+&nbsp;            case &#39;\&#39;&#39;:
+<b class="nc">&nbsp;                value = jsonReader.readString();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;t&#39;:
+&nbsp;            case &#39;f&#39;:
+<b class="nc">&nbsp;                value = jsonReader.readBoolValue();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;n&#39;:
+<b class="nc">&nbsp;                value = jsonReader.readNullOrNewDate();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &#39;S&#39;:
+<b class="nc">&nbsp;                if (jsonReader.nextIfSet()) {</b>
+<b class="nc">&nbsp;                    HashSet&lt;Object&gt; set = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;                    jsonReader.read(set);</b>
+<b class="nc">&nbsp;                    value = set;</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info());</b>
+&nbsp;                }
+&nbsp;                break;
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        byte type = jsonReader.getType();</b>
+<b class="nc">&nbsp;        if (type &gt;= BC_STR_ASCII_FIX_MIN &amp;&amp; type &lt;= BC_STR_UTF16BE) {</b>
+<b class="nc">&nbsp;            return jsonReader.readString();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == BC_TYPED_ANY) {</b>
+<b class="nc">&nbsp;            ObjectReader autoTypeObjectReader = jsonReader.checkAutoType(Object.class, 0, features);</b>
+<b class="nc">&nbsp;            return autoTypeObjectReader.readJSONBObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (type == BC_NULL) {</b>
+<b class="nc">&nbsp;            jsonReader.next();</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return jsonReader.readAny();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 19:48</div>
+</div>
+</body>
+</html>

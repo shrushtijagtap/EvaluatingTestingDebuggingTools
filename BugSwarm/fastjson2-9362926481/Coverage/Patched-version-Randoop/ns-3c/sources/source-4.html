@@ -1,0 +1,2888 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DateUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.util</a>
+</div>
+
+<h1>Coverage Summary for Class: DateUtils (com.alibaba.fastjson2.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DateUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1734)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.util;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReaderImplDate;
+&nbsp;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.time.*;
+&nbsp;import java.time.format.DateTimeParseException;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.TimeZone;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.util.IOUtils.*;
+&nbsp;import static com.alibaba.fastjson2.util.IOUtils.OFFSET_0800_TOTAL_SECONDS;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.*;
+&nbsp;import static java.time.ZoneOffset.UTC;
+&nbsp;
+<b class="nc">&nbsp;public class DateUtils {</b>
+&nbsp;    public static Date parseDate(String str) {
+<b class="nc">&nbsp;        if (str == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final int strlen = str.length();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (strlen == 0 || &quot;null&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (strlen &gt; 2) {</b>
+<b class="nc">&nbsp;            char first = str.charAt(0);</b>
+<b class="nc">&nbsp;            char last = str.charAt(strlen - 1);</b>
+<b class="nc">&nbsp;            if (first == &#39;&quot;&#39; &amp;&amp; last == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                try (JSONReader jsonReader = JSONReader.of(str)) {</b>
+<b class="nc">&nbsp;                    return (Date) ObjectReaderImplDate.INSTANCE.readObject(jsonReader, null, null, 0);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        long millis;
+<b class="nc">&nbsp;        if (strlen == 19) {</b>
+<b class="nc">&nbsp;            millis = DateUtils.toMillis19(str, 0, DEFAULT_ZONE_ID);</b>
+<b class="nc">&nbsp;        } else if (strlen &gt; 19) {</b>
+<b class="nc">&nbsp;            ZonedDateTime zdt = DateUtils.parseZonedDateTime(str, 0, strlen, DEFAULT_ZONE_ID);</b>
+<b class="nc">&nbsp;            millis = zdt.toInstant().toEpochMilli();</b>
+<b class="nc">&nbsp;        } else if (IOUtils.isNumber(str)) {</b>
+<b class="nc">&nbsp;            millis = Long.parseLong(str);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            char last = str.charAt(strlen - 1);</b>
+<b class="nc">&nbsp;            ZoneId zoneId = last == &#39;Z&#39; ? UTC : DEFAULT_ZONE_ID;</b>
+<b class="nc">&nbsp;            LocalDateTime ldt = DateUtils.parseLocalDateTime(str, 0, strlen);</b>
+<b class="nc">&nbsp;            ZonedDateTime zdt = ZonedDateTime.ofLocal(ldt, zoneId, null);</b>
+<b class="nc">&nbsp;            long seconds = zdt.toEpochSecond();</b>
+<b class="nc">&nbsp;            int nanos = ldt.getNano();</b>
+<b class="nc">&nbsp;            if (seconds &lt; 0 &amp;&amp; nanos &gt; 0) {</b>
+<b class="nc">&nbsp;                millis = (seconds + 1) * 1000 + nanos / 1000_000 - 1000;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                millis = seconds * 1000L + nanos / 1000_000;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return new Date(millis);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static LocalDateTime parseLocalDateTime(String str) {
+<b class="nc">&nbsp;        if (str == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return parseLocalDateTime(str, 0, str.length());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static LocalDateTime parseLocalDateTime(String str, int off, int len) {
+<b class="nc">&nbsp;        if (str == null || len == 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        switch (len) {</b>
+&nbsp;            case 4:
+<b class="nc">&nbsp;                if (str.regionMatches(0, &quot;null&quot;, off, len)) {</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                String input = str.substring(off, len);</b>
+<b class="nc">&nbsp;                throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;            case 8: {
+<b class="nc">&nbsp;                LocalDate localDate = parseLocalDate8(str, off);</b>
+<b class="nc">&nbsp;                if (localDate == null) {</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;            }
+&nbsp;            case 9: {
+<b class="nc">&nbsp;                LocalDate localDate = parseLocalDate9(str, off);</b>
+<b class="nc">&nbsp;                if (localDate == null) {</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;            }
+&nbsp;            case 10: {
+<b class="nc">&nbsp;                LocalDate localDate = parseLocalDate10(str, off);</b>
+<b class="nc">&nbsp;                if (localDate == null) {</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;            }
+&nbsp;            case 11: {
+<b class="nc">&nbsp;                LocalDate localDate = parseLocalDate11(str, off);</b>
+<b class="nc">&nbsp;                return LocalDateTime.of(localDate, LocalTime.MIN);</b>
+&nbsp;            }
+&nbsp;            case 12:
+<b class="nc">&nbsp;                return parseLocalDateTime12(str, off);</b>
+&nbsp;            case 14:
+<b class="nc">&nbsp;                return parseLocalDateTime14(str, off);</b>
+&nbsp;            case 16:
+<b class="nc">&nbsp;                return parseLocalDateTime16(str, off);</b>
+&nbsp;            case 17:
+<b class="nc">&nbsp;                return parseLocalDateTime17(str, off);</b>
+&nbsp;            case 18:
+<b class="nc">&nbsp;                return parseLocalDateTime18(str, off);</b>
+&nbsp;            case 19:
+<b class="nc">&nbsp;                return parseLocalDateTime19(str, off);</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                return parseLocalDateTimeX(str, off, len);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static LocalDate parseLocalDate(String str) {
+<b class="nc">&nbsp;        if (str == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return parseLocalDate(str, 0, str.length());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static LocalDate parseLocalDate(String str, int off, int len) {
+<b class="nc">&nbsp;        if (str == null || len == 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (off + len &gt; str.length()) {</b>
+<b class="nc">&nbsp;            String input = str.substring(off);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        switch (len) {</b>
+&nbsp;            case 8:
+<b class="nc">&nbsp;                return parseLocalDate8(str, off);</b>
+&nbsp;            case 9:
+<b class="nc">&nbsp;                return parseLocalDate9(str, off);</b>
+&nbsp;            case 10:
+<b class="nc">&nbsp;                return parseLocalDate10(str, off);</b>
+&nbsp;            case 11:
+<b class="nc">&nbsp;                return parseLocalDate11(str, off);</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                String input = str.substring(off, off + len);</b>
+<b class="nc">&nbsp;                if (&quot;null&quot;.equals(input)) {</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * yyyy-m-d
+&nbsp;     * yyyyMMdd
+&nbsp;     */
+&nbsp;    public static LocalDate parseLocalDate8(String str, int off) {
+<b class="nc">&nbsp;        if (off + 8 &gt; str.length()) {</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input&quot;, str.substring(off), 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char c0 = str.charAt(off + 0);</b>
+<b class="nc">&nbsp;        char c1 = str.charAt(off + 1);</b>
+<b class="nc">&nbsp;        char c2 = str.charAt(off + 2);</b>
+<b class="nc">&nbsp;        char c3 = str.charAt(off + 3);</b>
+<b class="nc">&nbsp;        char c4 = str.charAt(off + 4);</b>
+<b class="nc">&nbsp;        char c5 = str.charAt(off + 5);</b>
+<b class="nc">&nbsp;        char c6 = str.charAt(off + 6);</b>
+<b class="nc">&nbsp;        char c7 = str.charAt(off + 7);</b>
+&nbsp;
+&nbsp;        char y0, y1, y2, y3, m0, m1, d0, d1;
+<b class="nc">&nbsp;        if (c4 == &#39;-&#39; &amp;&amp; c6 == &#39;-&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            m1 = c5;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            d1 = c7;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c4;</b>
+<b class="nc">&nbsp;            m1 = c5;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c6;</b>
+<b class="nc">&nbsp;            d1 = c7;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int year;
+<b class="nc">&nbsp;        if (y0 &gt;= &#39;0&#39; &amp;&amp; y0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; y1 &gt;= &#39;0&#39; &amp;&amp; y1 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y2 &gt;= &#39;0&#39; &amp;&amp; y2 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y3 &gt;= &#39;0&#39; &amp;&amp; y3 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            year = (y0 - &#39;0&#39;) * 1000 + (y1 - &#39;0&#39;) * 100 + (y2 - &#39;0&#39;) * 10 + (y3 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 8);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int month;
+<b class="nc">&nbsp;        if (m0 &gt;= &#39;0&#39; &amp;&amp; m0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; m1 &gt;= &#39;0&#39; &amp;&amp; m1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            month = (m0 - &#39;0&#39;) * 10 + (m1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 8);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int dom;
+<b class="nc">&nbsp;        if (d0 &gt;= &#39;0&#39; &amp;&amp; d0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; d1 &gt;= &#39;0&#39; &amp;&amp; d1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            dom = (d0 - &#39;0&#39;) * 10 + (d1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 8);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (year == 0 &amp;&amp; month == 0 &amp;&amp; dom == 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return LocalDate.of(year, month, dom);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * yyyy-MM-d
+&nbsp;     * yyyy-M-dd
+&nbsp;     */
+&nbsp;    public static LocalDate parseLocalDate9(String str, int off) {
+<b class="nc">&nbsp;        if (off + 9 &gt; str.length()) {</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input&quot;, str.substring(off), 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char c0 = str.charAt(off + 0);</b>
+<b class="nc">&nbsp;        char c1 = str.charAt(off + 1);</b>
+<b class="nc">&nbsp;        char c2 = str.charAt(off + 2);</b>
+<b class="nc">&nbsp;        char c3 = str.charAt(off + 3);</b>
+<b class="nc">&nbsp;        char c4 = str.charAt(off + 4);</b>
+<b class="nc">&nbsp;        char c5 = str.charAt(off + 5);</b>
+<b class="nc">&nbsp;        char c6 = str.charAt(off + 6);</b>
+<b class="nc">&nbsp;        char c7 = str.charAt(off + 7);</b>
+<b class="nc">&nbsp;        char c8 = str.charAt(off + 8);</b>
+&nbsp;
+&nbsp;        char y0, y1, y2, y3, m0, m1, d0, d1;
+<b class="nc">&nbsp;        if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            d1 = c8;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;-&#39; &amp;&amp; c6 == &#39;-&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            m1 = c5;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c7;</b>
+<b class="nc">&nbsp;            d1 = c8;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;/&#39; &amp;&amp; c7 == &#39;/&#39;) { // tw : yyyy/mm/d</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            d1 = c8;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;/&#39; &amp;&amp; c6 == &#39;/&#39;) { // tw : yyyy/m/dd</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            m1 = c5;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c7;</b>
+<b class="nc">&nbsp;            d1 = c8;</b>
+<b class="nc">&nbsp;        } else if (c1 == &#39;.&#39; &amp;&amp; c4 == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;            d0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            d1 = c0;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c2;</b>
+<b class="nc">&nbsp;            m1 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            y0 = c5;</b>
+<b class="nc">&nbsp;            y1 = c6;</b>
+<b class="nc">&nbsp;            y2 = c7;</b>
+<b class="nc">&nbsp;            y3 = c8;</b>
+<b class="nc">&nbsp;        } else if (c2 == &#39;.&#39; &amp;&amp; c4 == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;            d0 = c0;</b>
+<b class="nc">&nbsp;            d1 = c1;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            m1 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            y0 = c5;</b>
+<b class="nc">&nbsp;            y1 = c6;</b>
+<b class="nc">&nbsp;            y2 = c7;</b>
+<b class="nc">&nbsp;            y3 = c8;</b>
+<b class="nc">&nbsp;        } else if (c1 == &#39;-&#39; &amp;&amp; c4 == &#39;-&#39;) {</b>
+<b class="nc">&nbsp;            d0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            d1 = c0;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c2;</b>
+<b class="nc">&nbsp;            m1 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            y0 = c5;</b>
+<b class="nc">&nbsp;            y1 = c6;</b>
+<b class="nc">&nbsp;            y2 = c7;</b>
+<b class="nc">&nbsp;            y3 = c8;</b>
+<b class="nc">&nbsp;        } else if (c2 == &#39;-&#39; &amp;&amp; c4 == &#39;-&#39;) {</b>
+<b class="nc">&nbsp;            d0 = c0;</b>
+<b class="nc">&nbsp;            d1 = c1;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            m1 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            y0 = c5;</b>
+<b class="nc">&nbsp;            y1 = c6;</b>
+<b class="nc">&nbsp;            y2 = c7;</b>
+<b class="nc">&nbsp;            y3 = c8;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;年&#39; &amp;&amp; c6 == &#39;月&#39; &amp;&amp; c8 == &#39;日&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            m1 = c5;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            d1 = c7;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;년&#39; &amp;&amp; c6 == &#39;월&#39; &amp;&amp; c8 == &#39;일&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            m1 = c5;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            d1 = c7;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 9);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int year;
+<b class="nc">&nbsp;        if (y0 &gt;= &#39;0&#39; &amp;&amp; y0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; y1 &gt;= &#39;0&#39; &amp;&amp; y1 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y2 &gt;= &#39;0&#39; &amp;&amp; y2 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y3 &gt;= &#39;0&#39; &amp;&amp; y3 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            year = (y0 - &#39;0&#39;) * 1000 + (y1 - &#39;0&#39;) * 100 + (y2 - &#39;0&#39;) * 10 + (y3 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 9);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int month;
+<b class="nc">&nbsp;        if (m0 &gt;= &#39;0&#39; &amp;&amp; m0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; m1 &gt;= &#39;0&#39; &amp;&amp; m1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            month = (m0 - &#39;0&#39;) * 10 + (m1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 9);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int dom;
+<b class="nc">&nbsp;        if (d0 &gt;= &#39;0&#39; &amp;&amp; d0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; d1 &gt;= &#39;0&#39; &amp;&amp; d1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            dom = (d0 - &#39;0&#39;) * 10 + (d1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 9);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (year == 0 &amp;&amp; month == 0 &amp;&amp; dom == 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return LocalDate.of(year, month, dom);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * yyyy-MM-dd
+&nbsp;     * yyyy/MM/dd
+&nbsp;     * dd.MM.yyyy
+&nbsp;     * yyyy年M月dd日
+&nbsp;     * yyyy年MM月d日
+&nbsp;     */
+&nbsp;    public static LocalDate parseLocalDate10(String str, int off) {
+<b class="nc">&nbsp;        if (off + 10 &gt; str.length()) {</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input&quot;, str.substring(off), 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char c0 = str.charAt(off + 0);</b>
+<b class="nc">&nbsp;        char c1 = str.charAt(off + 1);</b>
+<b class="nc">&nbsp;        char c2 = str.charAt(off + 2);</b>
+<b class="nc">&nbsp;        char c3 = str.charAt(off + 3);</b>
+<b class="nc">&nbsp;        char c4 = str.charAt(off + 4);</b>
+<b class="nc">&nbsp;        char c5 = str.charAt(off + 5);</b>
+<b class="nc">&nbsp;        char c6 = str.charAt(off + 6);</b>
+<b class="nc">&nbsp;        char c7 = str.charAt(off + 7);</b>
+<b class="nc">&nbsp;        char c8 = str.charAt(off + 8);</b>
+<b class="nc">&nbsp;        char c9 = str.charAt(off + 9);</b>
+&nbsp;
+&nbsp;        char y0, y1, y2, y3, m0, m1, d0, d1;
+<b class="nc">&nbsp;        if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;/&#39; &amp;&amp; c7 == &#39;/&#39;) { // tw : yyyy/mm/dd</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+<b class="nc">&nbsp;        } else if (c2 == &#39;.&#39; &amp;&amp; c5 == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;            d0 = c0;</b>
+<b class="nc">&nbsp;            d1 = c1;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c3;</b>
+<b class="nc">&nbsp;            m1 = c4;</b>
+&nbsp;
+<b class="nc">&nbsp;            y0 = c6;</b>
+<b class="nc">&nbsp;            y1 = c7;</b>
+<b class="nc">&nbsp;            y2 = c8;</b>
+<b class="nc">&nbsp;            y3 = c9;</b>
+<b class="nc">&nbsp;        } else if (c2 == &#39;-&#39; &amp;&amp; c5 == &#39;-&#39;) {</b>
+<b class="nc">&nbsp;            d0 = c0;</b>
+<b class="nc">&nbsp;            d1 = c1;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c3;</b>
+<b class="nc">&nbsp;            m1 = c4;</b>
+&nbsp;
+<b class="nc">&nbsp;            y0 = c6;</b>
+<b class="nc">&nbsp;            y1 = c7;</b>
+<b class="nc">&nbsp;            y2 = c8;</b>
+<b class="nc">&nbsp;            y3 = c9;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;年&#39; &amp;&amp; c6 == &#39;月&#39; &amp;&amp; c9 == &#39;日&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            m1 = c5;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c7;</b>
+<b class="nc">&nbsp;            d1 = c8;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;년&#39; &amp;&amp; c6 == &#39;월&#39; &amp;&amp; c9 == &#39;일&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            m1 = c5;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c7;</b>
+<b class="nc">&nbsp;            d1 = c8;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;年&#39; &amp;&amp; c7 == &#39;月&#39; &amp;&amp; c9 == &#39;日&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            d1 = c8;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;년&#39; &amp;&amp; c7 == &#39;월&#39; &amp;&amp; c9 == &#39;일&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            d1 = c8;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input&quot;, str.substring(off, off + 10), 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int year;
+<b class="nc">&nbsp;        if (y0 &gt;= &#39;0&#39; &amp;&amp; y0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; y1 &gt;= &#39;0&#39; &amp;&amp; y1 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y2 &gt;= &#39;0&#39; &amp;&amp; y2 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y3 &gt;= &#39;0&#39; &amp;&amp; y3 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            year = (y0 - &#39;0&#39;) * 1000 + (y1 - &#39;0&#39;) * 100 + (y2 - &#39;0&#39;) * 10 + (y3 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input&quot;, str.substring(off, off + 10), 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int month;
+<b class="nc">&nbsp;        if (m0 &gt;= &#39;0&#39; &amp;&amp; m0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; m1 &gt;= &#39;0&#39; &amp;&amp; m1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            month = (m0 - &#39;0&#39;) * 10 + (m1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input&quot;, str.substring(off, off + 10), 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int dom;
+<b class="nc">&nbsp;        if (d0 &gt;= &#39;0&#39; &amp;&amp; d0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; d1 &gt;= &#39;0&#39; &amp;&amp; d1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            dom = (d0 - &#39;0&#39;) * 10 + (d1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input&quot;, str.substring(off, off + 10), 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (year == 0 &amp;&amp; month == 0 &amp;&amp; dom == 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return LocalDate.of(year, month, dom);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * yyyy年MM月dd日
+&nbsp;     * yyyy년MM월dd일
+&nbsp;     */
+&nbsp;    public static LocalDate parseLocalDate11(String str, int off) {
+<b class="nc">&nbsp;        if (off + 11 &gt; str.length()) {</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input&quot;, str.substring(off), 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char c0 = str.charAt(off + 0);</b>
+<b class="nc">&nbsp;        char c1 = str.charAt(off + 1);</b>
+<b class="nc">&nbsp;        char c2 = str.charAt(off + 2);</b>
+<b class="nc">&nbsp;        char c3 = str.charAt(off + 3);</b>
+<b class="nc">&nbsp;        char c4 = str.charAt(off + 4);</b>
+<b class="nc">&nbsp;        char c5 = str.charAt(off + 5);</b>
+<b class="nc">&nbsp;        char c6 = str.charAt(off + 6);</b>
+<b class="nc">&nbsp;        char c7 = str.charAt(off + 7);</b>
+<b class="nc">&nbsp;        char c8 = str.charAt(off + 8);</b>
+<b class="nc">&nbsp;        char c9 = str.charAt(off + 9);</b>
+<b class="nc">&nbsp;        char c10 = str.charAt(off + 10);</b>
+&nbsp;
+&nbsp;        char y0, y1, y2, y3, m0, m1, d0, d1;
+<b class="nc">&nbsp;        if (c4 == &#39;年&#39; &amp;&amp; c7 == &#39;月&#39; &amp;&amp; c10 == &#39;日&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;년&#39; &amp;&amp; c7 == &#39;월&#39; &amp;&amp; c10 == &#39;일&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 11);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int year;
+<b class="nc">&nbsp;        if (y0 &gt;= &#39;0&#39; &amp;&amp; y0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; y1 &gt;= &#39;0&#39; &amp;&amp; y1 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y2 &gt;= &#39;0&#39; &amp;&amp; y2 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y3 &gt;= &#39;0&#39; &amp;&amp; y3 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            year = (y0 - &#39;0&#39;) * 1000 + (y1 - &#39;0&#39;) * 100 + (y2 - &#39;0&#39;) * 10 + (y3 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 11);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int month;
+<b class="nc">&nbsp;        if (m0 &gt;= &#39;0&#39; &amp;&amp; m0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; m1 &gt;= &#39;0&#39; &amp;&amp; m1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            month = (m0 - &#39;0&#39;) * 10 + (m1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 11);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int dom;
+<b class="nc">&nbsp;        if (d0 &gt;= &#39;0&#39; &amp;&amp; d0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; d1 &gt;= &#39;0&#39; &amp;&amp; d1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            dom = (d0 - &#39;0&#39;) * 10 + (d1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 11);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (year == 0 &amp;&amp; month == 0 &amp;&amp; dom == 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return LocalDate.of(year, month, dom);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * yyyyMMddHHmm
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    public static LocalDateTime parseLocalDateTime12(String str, int off) {
+<b class="nc">&nbsp;        if (off + 12 &gt; str.length()) {</b>
+<b class="nc">&nbsp;            String input = str.substring(off);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char y0 = str.charAt(off + 0);</b>
+<b class="nc">&nbsp;        char y1 = str.charAt(off + 1);</b>
+<b class="nc">&nbsp;        char y2 = str.charAt(off + 2);</b>
+<b class="nc">&nbsp;        char y3 = str.charAt(off + 3);</b>
+<b class="nc">&nbsp;        char m0 = str.charAt(off + 4);</b>
+<b class="nc">&nbsp;        char m1 = str.charAt(off + 5);</b>
+<b class="nc">&nbsp;        char d0 = str.charAt(off + 6);</b>
+<b class="nc">&nbsp;        char d1 = str.charAt(off + 7);</b>
+<b class="nc">&nbsp;        char h0 = str.charAt(off + 8);</b>
+<b class="nc">&nbsp;        char h1 = str.charAt(off + 9);</b>
+<b class="nc">&nbsp;        char i0 = str.charAt(off + 10);</b>
+<b class="nc">&nbsp;        char i1 = str.charAt(off + 11);</b>
+&nbsp;
+&nbsp;        int year;
+<b class="nc">&nbsp;        if (y0 &gt;= &#39;0&#39; &amp;&amp; y0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; y1 &gt;= &#39;0&#39; &amp;&amp; y1 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y2 &gt;= &#39;0&#39; &amp;&amp; y2 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y3 &gt;= &#39;0&#39; &amp;&amp; y3 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            year = (y0 - &#39;0&#39;) * 1000 + (y1 - &#39;0&#39;) * 100 + (y2 - &#39;0&#39;) * 10 + (y3 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 12);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int month;
+<b class="nc">&nbsp;        if (m0 &gt;= &#39;0&#39; &amp;&amp; m0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; m1 &gt;= &#39;0&#39; &amp;&amp; m1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            month = (m0 - &#39;0&#39;) * 10 + (m1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 12);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int dom;
+<b class="nc">&nbsp;        if (d0 &gt;= &#39;0&#39; &amp;&amp; d0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; d1 &gt;= &#39;0&#39; &amp;&amp; d1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            dom = (d0 - &#39;0&#39;) * 10 + (d1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 12);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int hour;
+<b class="nc">&nbsp;        if (h0 &gt;= &#39;0&#39; &amp;&amp; h0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; h1 &gt;= &#39;0&#39; &amp;&amp; h1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            hour = (h0 - &#39;0&#39;) * 10 + (h1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 12);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int minute;
+<b class="nc">&nbsp;        if (i0 &gt;= &#39;0&#39; &amp;&amp; i0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; i1 &gt;= &#39;0&#39; &amp;&amp; i1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            minute = (i0 - &#39;0&#39;) * 10 + (i1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 12);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (year == 0 &amp;&amp; month == 0 &amp;&amp; dom == 0 &amp;&amp; hour == 0 &amp;&amp; minute == 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return LocalDateTime.of(year, month, dom, hour, minute, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * yyyyMMddHHmmss
+&nbsp;     */
+&nbsp;    public static LocalDateTime parseLocalDateTime14(String str, int off) {
+<b class="nc">&nbsp;        if (off + 14 &gt; str.length()) {</b>
+<b class="nc">&nbsp;            String input = str.substring(off);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char y0 = str.charAt(off + 0);</b>
+<b class="nc">&nbsp;        char y1 = str.charAt(off + 1);</b>
+<b class="nc">&nbsp;        char y2 = str.charAt(off + 2);</b>
+<b class="nc">&nbsp;        char y3 = str.charAt(off + 3);</b>
+<b class="nc">&nbsp;        char m0 = str.charAt(off + 4);</b>
+<b class="nc">&nbsp;        char m1 = str.charAt(off + 5);</b>
+<b class="nc">&nbsp;        char d0 = str.charAt(off + 6);</b>
+<b class="nc">&nbsp;        char d1 = str.charAt(off + 7);</b>
+<b class="nc">&nbsp;        char h0 = str.charAt(off + 8);</b>
+<b class="nc">&nbsp;        char h1 = str.charAt(off + 9);</b>
+<b class="nc">&nbsp;        char i0 = str.charAt(off + 10);</b>
+<b class="nc">&nbsp;        char i1 = str.charAt(off + 11);</b>
+<b class="nc">&nbsp;        char s0 = str.charAt(off + 12);</b>
+<b class="nc">&nbsp;        char s1 = str.charAt(off + 13);</b>
+&nbsp;
+&nbsp;        int year;
+<b class="nc">&nbsp;        if (y0 &gt;= &#39;0&#39; &amp;&amp; y0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; y1 &gt;= &#39;0&#39; &amp;&amp; y1 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y2 &gt;= &#39;0&#39; &amp;&amp; y2 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y3 &gt;= &#39;0&#39; &amp;&amp; y3 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            year = (y0 - &#39;0&#39;) * 1000 + (y1 - &#39;0&#39;) * 100 + (y2 - &#39;0&#39;) * 10 + (y3 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 14);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int month;
+<b class="nc">&nbsp;        if (m0 &gt;= &#39;0&#39; &amp;&amp; m0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; m1 &gt;= &#39;0&#39; &amp;&amp; m1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            month = (m0 - &#39;0&#39;) * 10 + (m1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 14);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int dom;
+<b class="nc">&nbsp;        if (d0 &gt;= &#39;0&#39; &amp;&amp; d0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; d1 &gt;= &#39;0&#39; &amp;&amp; d1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            dom = (d0 - &#39;0&#39;) * 10 + (d1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 14);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int hour;
+<b class="nc">&nbsp;        if (h0 &gt;= &#39;0&#39; &amp;&amp; h0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; h1 &gt;= &#39;0&#39; &amp;&amp; h1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            hour = (h0 - &#39;0&#39;) * 10 + (h1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 14);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int minute;
+<b class="nc">&nbsp;        if (i0 &gt;= &#39;0&#39; &amp;&amp; i0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; i1 &gt;= &#39;0&#39; &amp;&amp; i1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            minute = (i0 - &#39;0&#39;) * 10 + (i1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 14);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int second;
+<b class="nc">&nbsp;        if (s0 &gt;= &#39;0&#39; &amp;&amp; s0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; s1 &gt;= &#39;0&#39; &amp;&amp; s1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            second = (s0 - &#39;0&#39;) * 10 + (s1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 14);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return LocalDateTime.of(year, month, dom, hour, minute, second);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * yyyy-MM-ddTHH:mm
+&nbsp;     * yyyy-MM-dd HH:mm
+&nbsp;     * yyyyMMddTHHmmssZ
+&nbsp;     * yyyy-MM-ddTH:m:s
+&nbsp;     * yyyy-MM-dd H:m:s
+&nbsp;     */
+&nbsp;    public static LocalDateTime parseLocalDateTime16(String str, int off) {
+<b class="nc">&nbsp;        if (off + 16 &gt; str.length()) {</b>
+<b class="nc">&nbsp;            String input = str.substring(off);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char c0 = str.charAt(off + 0);</b>
+<b class="nc">&nbsp;        char c1 = str.charAt(off + 1);</b>
+<b class="nc">&nbsp;        char c2 = str.charAt(off + 2);</b>
+<b class="nc">&nbsp;        char c3 = str.charAt(off + 3);</b>
+<b class="nc">&nbsp;        char c4 = str.charAt(off + 4);</b>
+<b class="nc">&nbsp;        char c5 = str.charAt(off + 5);</b>
+<b class="nc">&nbsp;        char c6 = str.charAt(off + 6);</b>
+<b class="nc">&nbsp;        char c7 = str.charAt(off + 7);</b>
+<b class="nc">&nbsp;        char c8 = str.charAt(off + 8);</b>
+<b class="nc">&nbsp;        char c9 = str.charAt(off + 9);</b>
+<b class="nc">&nbsp;        char c10 = str.charAt(off + 10);</b>
+<b class="nc">&nbsp;        char c11 = str.charAt(off + 11);</b>
+<b class="nc">&nbsp;        char c12 = str.charAt(off + 12);</b>
+<b class="nc">&nbsp;        char c13 = str.charAt(off + 13);</b>
+<b class="nc">&nbsp;        char c14 = str.charAt(off + 14);</b>
+<b class="nc">&nbsp;        char c15 = str.charAt(off + 15);</b>
+&nbsp;
+<b class="nc">&nbsp;        char y0, y1, y2, y3, m0, m1, d0, d1, h0, h1, i0, i1, s0 = &#39;0&#39;, s1 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;        if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39;T&#39; || c10 == &#39; &#39;) &amp;&amp; c13 == &#39;:&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+<b class="nc">&nbsp;        } else if (c8 == &#39;T&#39; &amp;&amp; c15 == &#39;Z&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+<b class="nc">&nbsp;            m0 = c4;</b>
+<b class="nc">&nbsp;            m1 = c5;</b>
+<b class="nc">&nbsp;            d0 = c6;</b>
+<b class="nc">&nbsp;            d1 = c7;</b>
+<b class="nc">&nbsp;            h0 = c9;</b>
+<b class="nc">&nbsp;            h1 = c10;</b>
+<b class="nc">&nbsp;            i0 = c11;</b>
+<b class="nc">&nbsp;            i1 = c12;</b>
+<b class="nc">&nbsp;            s0 = c13;</b>
+<b class="nc">&nbsp;            s1 = c14;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39;T&#39; || c10 == &#39; &#39;) &amp;&amp; c12 == &#39;:&#39; &amp;&amp; c14 == &#39;:&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            h1 = c11;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            i1 = c13;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            s1 = c15;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 16);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int year;
+<b class="nc">&nbsp;        if (y0 &gt;= &#39;0&#39; &amp;&amp; y0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; y1 &gt;= &#39;0&#39; &amp;&amp; y1 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y2 &gt;= &#39;0&#39; &amp;&amp; y2 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y3 &gt;= &#39;0&#39; &amp;&amp; y3 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            year = (y0 - &#39;0&#39;) * 1000 + (y1 - &#39;0&#39;) * 100 + (y2 - &#39;0&#39;) * 10 + (y3 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 16);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int month;
+<b class="nc">&nbsp;        if (m0 &gt;= &#39;0&#39; &amp;&amp; m0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; m1 &gt;= &#39;0&#39; &amp;&amp; m1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            month = (m0 - &#39;0&#39;) * 10 + (m1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 16);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int dom;
+<b class="nc">&nbsp;        if (d0 &gt;= &#39;0&#39; &amp;&amp; d0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; d1 &gt;= &#39;0&#39; &amp;&amp; d1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            dom = (d0 - &#39;0&#39;) * 10 + (d1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 16);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int hour;
+<b class="nc">&nbsp;        if (h0 &gt;= &#39;0&#39; &amp;&amp; h0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; h1 &gt;= &#39;0&#39; &amp;&amp; h1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            hour = (h0 - &#39;0&#39;) * 10 + (h1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 16);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int minute;
+<b class="nc">&nbsp;        if (i0 &gt;= &#39;0&#39; &amp;&amp; i0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; i1 &gt;= &#39;0&#39; &amp;&amp; i1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            minute = (i0 - &#39;0&#39;) * 10 + (i1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 16);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int second;
+<b class="nc">&nbsp;        if (s0 &gt;= &#39;0&#39; &amp;&amp; s0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; s1 &gt;= &#39;0&#39; &amp;&amp; s1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            second = (s0 - &#39;0&#39;) * 10 + (s1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 16);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return LocalDateTime.of(year, month, dom, hour, minute, second);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * yyyy-MM-ddTHH:mmZ
+&nbsp;     * yyyy-MM-dd HH:mmZ
+&nbsp;     * yyyy-M-dTHH:mm:ss
+&nbsp;     * yyyy-M-d HH:mm:ss
+&nbsp;     */
+&nbsp;    public static LocalDateTime parseLocalDateTime17(String str, int off) {
+<b class="nc">&nbsp;        if (off + 17 &gt; str.length()) {</b>
+<b class="nc">&nbsp;            String input = str.substring(off);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char c0 = str.charAt(off + 0);</b>
+<b class="nc">&nbsp;        char c1 = str.charAt(off + 1);</b>
+<b class="nc">&nbsp;        char c2 = str.charAt(off + 2);</b>
+<b class="nc">&nbsp;        char c3 = str.charAt(off + 3);</b>
+<b class="nc">&nbsp;        char c4 = str.charAt(off + 4);</b>
+<b class="nc">&nbsp;        char c5 = str.charAt(off + 5);</b>
+<b class="nc">&nbsp;        char c6 = str.charAt(off + 6);</b>
+<b class="nc">&nbsp;        char c7 = str.charAt(off + 7);</b>
+<b class="nc">&nbsp;        char c8 = str.charAt(off + 8);</b>
+<b class="nc">&nbsp;        char c9 = str.charAt(off + 9);</b>
+<b class="nc">&nbsp;        char c10 = str.charAt(off + 10);</b>
+<b class="nc">&nbsp;        char c11 = str.charAt(off + 11);</b>
+<b class="nc">&nbsp;        char c12 = str.charAt(off + 12);</b>
+<b class="nc">&nbsp;        char c13 = str.charAt(off + 13);</b>
+<b class="nc">&nbsp;        char c14 = str.charAt(off + 14);</b>
+<b class="nc">&nbsp;        char c15 = str.charAt(off + 15);</b>
+<b class="nc">&nbsp;        char c16 = str.charAt(off + 16);</b>
+&nbsp;
+&nbsp;        char y0, y1, y2, y3, m0, m1, d0, d1, h0, h1, i0, i1, s0, s1;
+<b class="nc">&nbsp;        if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39;T&#39; || c10 == &#39; &#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;Z&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            s1 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;-&#39; &amp;&amp; c6 == &#39;-&#39; &amp;&amp; (c8 == &#39; &#39; || c8 == &#39;T&#39;) &amp;&amp; c11 == &#39;:&#39; &amp;&amp; c14 == &#39;:&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            m1 = c5;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            d1 = c7;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c9;</b>
+<b class="nc">&nbsp;            h1 = c10;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c12;</b>
+<b class="nc">&nbsp;            i1 = c13;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c15;</b>
+<b class="nc">&nbsp;            s1 = c16;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 17);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int year;
+<b class="nc">&nbsp;        if (y0 &gt;= &#39;0&#39; &amp;&amp; y0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; y1 &gt;= &#39;0&#39; &amp;&amp; y1 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y2 &gt;= &#39;0&#39; &amp;&amp; y2 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y3 &gt;= &#39;0&#39; &amp;&amp; y3 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            year = (y0 - &#39;0&#39;) * 1000 + (y1 - &#39;0&#39;) * 100 + (y2 - &#39;0&#39;) * 10 + (y3 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 17);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int month;
+<b class="nc">&nbsp;        if (m0 &gt;= &#39;0&#39; &amp;&amp; m0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; m1 &gt;= &#39;0&#39; &amp;&amp; m1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            month = (m0 - &#39;0&#39;) * 10 + (m1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 17);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int dom;
+<b class="nc">&nbsp;        if (d0 &gt;= &#39;0&#39; &amp;&amp; d0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; d1 &gt;= &#39;0&#39; &amp;&amp; d1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            dom = (d0 - &#39;0&#39;) * 10 + (d1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 17);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int hour;
+<b class="nc">&nbsp;        if (h0 &gt;= &#39;0&#39; &amp;&amp; h0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; h1 &gt;= &#39;0&#39; &amp;&amp; h1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            hour = (h0 - &#39;0&#39;) * 10 + (h1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 17);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int minute;
+<b class="nc">&nbsp;        if (i0 &gt;= &#39;0&#39; &amp;&amp; i0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; i1 &gt;= &#39;0&#39; &amp;&amp; i1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            minute = (i0 - &#39;0&#39;) * 10 + (i1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 17);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int second;
+<b class="nc">&nbsp;        if (s0 &gt;= &#39;0&#39; &amp;&amp; s0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; s1 &gt;= &#39;0&#39; &amp;&amp; s1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            second = (s0 - &#39;0&#39;) * 10 + (s1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 17);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return LocalDateTime.of(year, month, dom, hour, minute, second);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * yyyy-M-ddTHH:mm:ss
+&nbsp;     * yyyy-M-dd HH:mm:ss
+&nbsp;     * yyyy-MM-dTHH:mm:ss
+&nbsp;     * yyyy-MM-d HH:mm:ss
+&nbsp;     * yyyy-MM-ddTH:mm:ss
+&nbsp;     * yyyy-MM-dd H:mm:ss
+&nbsp;     * yyyy-MM-ddTHH:m:ss
+&nbsp;     * yyyy-MM-dd HH:m:ss
+&nbsp;     * yyyy-MM-ddTHH:mm:s
+&nbsp;     * yyyy-MM-dd HH:mm:s
+&nbsp;     */
+&nbsp;    public static LocalDateTime parseLocalDateTime18(String str, int off) {
+<b class="nc">&nbsp;        if (off + 18 &gt; str.length()) {</b>
+<b class="nc">&nbsp;            String input = str.substring(off);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char c0 = str.charAt(off + 0);</b>
+<b class="nc">&nbsp;        char c1 = str.charAt(off + 1);</b>
+<b class="nc">&nbsp;        char c2 = str.charAt(off + 2);</b>
+<b class="nc">&nbsp;        char c3 = str.charAt(off + 3);</b>
+<b class="nc">&nbsp;        char c4 = str.charAt(off + 4);</b>
+<b class="nc">&nbsp;        char c5 = str.charAt(off + 5);</b>
+<b class="nc">&nbsp;        char c6 = str.charAt(off + 6);</b>
+<b class="nc">&nbsp;        char c7 = str.charAt(off + 7);</b>
+<b class="nc">&nbsp;        char c8 = str.charAt(off + 8);</b>
+<b class="nc">&nbsp;        char c9 = str.charAt(off + 9);</b>
+<b class="nc">&nbsp;        char c10 = str.charAt(off + 10);</b>
+<b class="nc">&nbsp;        char c11 = str.charAt(off + 11);</b>
+<b class="nc">&nbsp;        char c12 = str.charAt(off + 12);</b>
+<b class="nc">&nbsp;        char c13 = str.charAt(off + 13);</b>
+<b class="nc">&nbsp;        char c14 = str.charAt(off + 14);</b>
+<b class="nc">&nbsp;        char c15 = str.charAt(off + 15);</b>
+<b class="nc">&nbsp;        char c16 = str.charAt(off + 16);</b>
+<b class="nc">&nbsp;        char c17 = str.charAt(off + 17);</b>
+&nbsp;
+&nbsp;        char y0, y1, y2, y3, m0, m1, d0, d1, h0, h1, i0, i1, s0, s1;
+<b class="nc">&nbsp;        if (c4 == &#39;-&#39; &amp;&amp; c6 == &#39;-&#39; &amp;&amp; (c9 == &#39; &#39; || c9 == &#39;T&#39;) &amp;&amp; c12 == &#39;:&#39; &amp;&amp; c15 == &#39;:&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            m1 = c5;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c7;</b>
+<b class="nc">&nbsp;            d1 = c8;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c10;</b>
+<b class="nc">&nbsp;            h1 = c11;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c13;</b>
+<b class="nc">&nbsp;            i1 = c14;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c16;</b>
+<b class="nc">&nbsp;            s1 = c17;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c9 == &#39; &#39; || c9 == &#39;T&#39;) &amp;&amp; c12 == &#39;:&#39; &amp;&amp; c15 == &#39;:&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            d1 = c8;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c10;</b>
+<b class="nc">&nbsp;            h1 = c11;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c13;</b>
+<b class="nc">&nbsp;            i1 = c14;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c16;</b>
+<b class="nc">&nbsp;            s1 = c17;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c12 == &#39;:&#39; &amp;&amp; c15 == &#39;:&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            h1 = c11;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c13;</b>
+<b class="nc">&nbsp;            i1 = c14;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c16;</b>
+<b class="nc">&nbsp;            s1 = c17;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c15 == &#39;:&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            i1 = c14;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c16;</b>
+<b class="nc">&nbsp;            s1 = c17;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;:&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            s1 = c17;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 18);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int year;
+<b class="nc">&nbsp;        if (y0 &gt;= &#39;0&#39; &amp;&amp; y0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; y1 &gt;= &#39;0&#39; &amp;&amp; y1 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y2 &gt;= &#39;0&#39; &amp;&amp; y2 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y3 &gt;= &#39;0&#39; &amp;&amp; y3 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            year = (y0 - &#39;0&#39;) * 1000 + (y1 - &#39;0&#39;) * 100 + (y2 - &#39;0&#39;) * 10 + (y3 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 18);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int month;
+<b class="nc">&nbsp;        if (m0 &gt;= &#39;0&#39; &amp;&amp; m0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; m1 &gt;= &#39;0&#39; &amp;&amp; m1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            month = (m0 - &#39;0&#39;) * 10 + (m1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 18);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int dom;
+<b class="nc">&nbsp;        if (d0 &gt;= &#39;0&#39; &amp;&amp; d0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; d1 &gt;= &#39;0&#39; &amp;&amp; d1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            dom = (d0 - &#39;0&#39;) * 10 + (d1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 18);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int hour;
+<b class="nc">&nbsp;        if (h0 &gt;= &#39;0&#39; &amp;&amp; h0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; h1 &gt;= &#39;0&#39; &amp;&amp; h1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            hour = (h0 - &#39;0&#39;) * 10 + (h1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 18);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int minute;
+<b class="nc">&nbsp;        if (i0 &gt;= &#39;0&#39; &amp;&amp; i0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; i1 &gt;= &#39;0&#39; &amp;&amp; i1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            minute = (i0 - &#39;0&#39;) * 10 + (i1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 18);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int second;
+<b class="nc">&nbsp;        if (s0 &gt;= &#39;0&#39; &amp;&amp; s0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; s1 &gt;= &#39;0&#39; &amp;&amp; s1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            second = (s0 - &#39;0&#39;) * 10 + (s1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 18);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return LocalDateTime.of(year, month, dom, hour, minute, second);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * yyyy-MM-ddTHH:mm:ss
+&nbsp;     * yyyy-MM-dd HH:mm:ss
+&nbsp;     * yyyy/MM/ddTHH:mm:ss
+&nbsp;     * yyyy/MM/dd HH:mm:ss
+&nbsp;     */
+&nbsp;    public static LocalDateTime parseLocalDateTime19(String str, int off) {
+<b class="nc">&nbsp;        if (off + 19 &gt; str.length()) {</b>
+<b class="nc">&nbsp;            String input = str.substring(off);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char c0 = str.charAt(off + 0);</b>
+<b class="nc">&nbsp;        char c1 = str.charAt(off + 1);</b>
+<b class="nc">&nbsp;        char c2 = str.charAt(off + 2);</b>
+<b class="nc">&nbsp;        char c3 = str.charAt(off + 3);</b>
+<b class="nc">&nbsp;        char c4 = str.charAt(off + 4);</b>
+<b class="nc">&nbsp;        char c5 = str.charAt(off + 5);</b>
+<b class="nc">&nbsp;        char c6 = str.charAt(off + 6);</b>
+<b class="nc">&nbsp;        char c7 = str.charAt(off + 7);</b>
+<b class="nc">&nbsp;        char c8 = str.charAt(off + 8);</b>
+<b class="nc">&nbsp;        char c9 = str.charAt(off + 9);</b>
+<b class="nc">&nbsp;        char c10 = str.charAt(off + 10);</b>
+<b class="nc">&nbsp;        char c11 = str.charAt(off + 11);</b>
+<b class="nc">&nbsp;        char c12 = str.charAt(off + 12);</b>
+<b class="nc">&nbsp;        char c13 = str.charAt(off + 13);</b>
+<b class="nc">&nbsp;        char c14 = str.charAt(off + 14);</b>
+<b class="nc">&nbsp;        char c15 = str.charAt(off + 15);</b>
+<b class="nc">&nbsp;        char c16 = str.charAt(off + 16);</b>
+<b class="nc">&nbsp;        char c17 = str.charAt(off + 17);</b>
+<b class="nc">&nbsp;        char c18 = str.charAt(off + 18);</b>
+&nbsp;
+&nbsp;        char y0, y1, y2, y3, m0, m1, d0, d1, h0, h1, i0, i1, s0, s1;
+<b class="nc">&nbsp;        if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;:&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c17;</b>
+<b class="nc">&nbsp;            s1 = c18;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;/&#39; &amp;&amp; c7 == &#39;/&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;:&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c17;</b>
+<b class="nc">&nbsp;            s1 = c18;</b>
+<b class="nc">&nbsp;        } else if (c2 == &#39;/&#39; &amp;&amp; c5 == &#39;/&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;:&#39;) {</b>
+<b class="nc">&nbsp;            d0 = c0;</b>
+<b class="nc">&nbsp;            d1 = c1;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c3;</b>
+<b class="nc">&nbsp;            m1 = c4;</b>
+&nbsp;
+<b class="nc">&nbsp;            y0 = c6;</b>
+<b class="nc">&nbsp;            y1 = c7;</b>
+<b class="nc">&nbsp;            y2 = c8;</b>
+<b class="nc">&nbsp;            y3 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c17;</b>
+<b class="nc">&nbsp;            s1 = c18;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(off, off + 19);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        LocalDateTime ldt = localDateTime(y0, y1, y2, y3, m0, m1, d0, d1, h0, h1, i0, i1, s0, s1, &#39;0&#39;, &#39;0&#39;, &#39;0&#39;, &#39;0&#39;, &#39;0&#39;, &#39;0&#39;, &#39;0&#39;, &#39;0&#39;, &#39;0&#39;);</b>
+<b class="nc">&nbsp;        if (ldt == null) {</b>
+<b class="nc">&nbsp;            String input = str.substring(off, off + 19);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return ldt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static LocalDateTime parseLocalDateTimeX(String str, int offset, int len) {
+<b class="nc">&nbsp;        if (str == null || len == 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (len &lt; 21 || len &gt; 29) {</b>
+<b class="nc">&nbsp;            String input = str.substring(offset, len);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char c0 = str.charAt(offset + 0);</b>
+<b class="nc">&nbsp;        char c1 = str.charAt(offset + 1);</b>
+<b class="nc">&nbsp;        char c2 = str.charAt(offset + 2);</b>
+<b class="nc">&nbsp;        char c3 = str.charAt(offset + 3);</b>
+<b class="nc">&nbsp;        char c4 = str.charAt(offset + 4);</b>
+<b class="nc">&nbsp;        char c5 = str.charAt(offset + 5);</b>
+<b class="nc">&nbsp;        char c6 = str.charAt(offset + 6);</b>
+<b class="nc">&nbsp;        char c7 = str.charAt(offset + 7);</b>
+<b class="nc">&nbsp;        char c8 = str.charAt(offset + 8);</b>
+<b class="nc">&nbsp;        char c9 = str.charAt(offset + 9);</b>
+<b class="nc">&nbsp;        char c10 = str.charAt(offset + 10);</b>
+<b class="nc">&nbsp;        char c11 = str.charAt(offset + 11);</b>
+<b class="nc">&nbsp;        char c12 = str.charAt(offset + 12);</b>
+<b class="nc">&nbsp;        char c13 = str.charAt(offset + 13);</b>
+<b class="nc">&nbsp;        char c14 = str.charAt(offset + 14);</b>
+<b class="nc">&nbsp;        char c15 = str.charAt(offset + 15);</b>
+<b class="nc">&nbsp;        char c16 = str.charAt(offset + 16);</b>
+<b class="nc">&nbsp;        char c17 = str.charAt(offset + 17);</b>
+<b class="nc">&nbsp;        char c18 = str.charAt(offset + 18);</b>
+<b class="nc">&nbsp;        char c19 = str.charAt(offset + 19);</b>
+<b class="nc">&nbsp;        char c20, c21 = &#39;0&#39;, c22 = &#39;0&#39;, c23 = &#39;0&#39;, c24 = &#39;0&#39;, c25 = &#39;0&#39;, c26 = &#39;0&#39;, c27 = &#39;0&#39;, c28 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;        switch (len) {</b>
+&nbsp;            case 21:
+<b class="nc">&nbsp;                c20 = str.charAt(offset + 20);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 22:
+<b class="nc">&nbsp;                c20 = str.charAt(offset + 20);</b>
+<b class="nc">&nbsp;                c21 = str.charAt(offset + 21);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 23:
+<b class="nc">&nbsp;                c20 = str.charAt(offset + 20);</b>
+<b class="nc">&nbsp;                c21 = str.charAt(offset + 21);</b>
+<b class="nc">&nbsp;                c22 = str.charAt(offset + 22);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 24:
+<b class="nc">&nbsp;                c20 = str.charAt(offset + 20);</b>
+<b class="nc">&nbsp;                c21 = str.charAt(offset + 21);</b>
+<b class="nc">&nbsp;                c22 = str.charAt(offset + 22);</b>
+<b class="nc">&nbsp;                c23 = str.charAt(offset + 23);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 25:
+<b class="nc">&nbsp;                c20 = str.charAt(offset + 20);</b>
+<b class="nc">&nbsp;                c21 = str.charAt(offset + 21);</b>
+<b class="nc">&nbsp;                c22 = str.charAt(offset + 22);</b>
+<b class="nc">&nbsp;                c23 = str.charAt(offset + 23);</b>
+<b class="nc">&nbsp;                c24 = str.charAt(offset + 24);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 26:
+<b class="nc">&nbsp;                c20 = str.charAt(offset + 20);</b>
+<b class="nc">&nbsp;                c21 = str.charAt(offset + 21);</b>
+<b class="nc">&nbsp;                c22 = str.charAt(offset + 22);</b>
+<b class="nc">&nbsp;                c23 = str.charAt(offset + 23);</b>
+<b class="nc">&nbsp;                c24 = str.charAt(offset + 24);</b>
+<b class="nc">&nbsp;                c25 = str.charAt(offset + 25);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 27:
+<b class="nc">&nbsp;                c20 = str.charAt(offset + 20);</b>
+<b class="nc">&nbsp;                c21 = str.charAt(offset + 21);</b>
+<b class="nc">&nbsp;                c22 = str.charAt(offset + 22);</b>
+<b class="nc">&nbsp;                c23 = str.charAt(offset + 23);</b>
+<b class="nc">&nbsp;                c24 = str.charAt(offset + 24);</b>
+<b class="nc">&nbsp;                c25 = str.charAt(offset + 25);</b>
+<b class="nc">&nbsp;                c26 = str.charAt(offset + 26);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 28:
+<b class="nc">&nbsp;                c20 = str.charAt(offset + 20);</b>
+<b class="nc">&nbsp;                c21 = str.charAt(offset + 21);</b>
+<b class="nc">&nbsp;                c22 = str.charAt(offset + 22);</b>
+<b class="nc">&nbsp;                c23 = str.charAt(offset + 23);</b>
+<b class="nc">&nbsp;                c24 = str.charAt(offset + 24);</b>
+<b class="nc">&nbsp;                c25 = str.charAt(offset + 25);</b>
+<b class="nc">&nbsp;                c26 = str.charAt(offset + 26);</b>
+<b class="nc">&nbsp;                c27 = str.charAt(offset + 27);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                c20 = str.charAt(offset + 20);</b>
+<b class="nc">&nbsp;                c21 = str.charAt(offset + 21);</b>
+<b class="nc">&nbsp;                c22 = str.charAt(offset + 22);</b>
+<b class="nc">&nbsp;                c23 = str.charAt(offset + 23);</b>
+<b class="nc">&nbsp;                c24 = str.charAt(offset + 24);</b>
+<b class="nc">&nbsp;                c25 = str.charAt(offset + 25);</b>
+<b class="nc">&nbsp;                c26 = str.charAt(offset + 26);</b>
+<b class="nc">&nbsp;                c27 = str.charAt(offset + 27);</b>
+<b class="nc">&nbsp;                c28 = str.charAt(offset + 28);</b>
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+&nbsp;        char y0, y1, y2, y3, m0, m1, d0, d1, h0, h1, i0, i1, s0, s1, S0, S1, S2, S3, S4, S5, S6, S7, S8;
+<b class="nc">&nbsp;        if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;:&#39; &amp;&amp; c19 == &#39;.&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c17;</b>
+<b class="nc">&nbsp;            s1 = c18;</b>
+&nbsp;
+<b class="nc">&nbsp;            S0 = c20;</b>
+<b class="nc">&nbsp;            S1 = c21;</b>
+<b class="nc">&nbsp;            S2 = c22;</b>
+<b class="nc">&nbsp;            S3 = c23;</b>
+<b class="nc">&nbsp;            S4 = c24;</b>
+<b class="nc">&nbsp;            S5 = c25;</b>
+<b class="nc">&nbsp;            S6 = c26;</b>
+<b class="nc">&nbsp;            S7 = c27;</b>
+<b class="nc">&nbsp;            S8 = c28;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(offset, len);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, offset);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        LocalDateTime ldt = localDateTime(y0, y1, y2, y3, m0, m1, d0, d1, h0, h1, i0, i1, s0, s1, S0, S1, S2, S3, S4, S5, S6, S7, S8);</b>
+<b class="nc">&nbsp;        if (ldt == null) {</b>
+<b class="nc">&nbsp;            String input = str.substring(offset, len);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, offset);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return ldt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ZonedDateTime parseZonedDateTime(String str) {
+<b class="nc">&nbsp;        return parseZonedDateTime(str, 0, str.length(), null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ZonedDateTime parseZonedDateTime(String str, int offset, int len) {
+<b class="nc">&nbsp;        return parseZonedDateTime(str, offset, len, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ZonedDateTime parseZonedDateTime(String str, int offset, int len, ZoneId defaultZoneId) {
+<b class="nc">&nbsp;        if (str == null || len == 0) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (len &lt; 19) {</b>
+<b class="nc">&nbsp;            String input = str.substring(offset, len);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char c0 = str.charAt(offset + 0);</b>
+<b class="nc">&nbsp;        char c1 = str.charAt(offset + 1);</b>
+<b class="nc">&nbsp;        char c2 = str.charAt(offset + 2);</b>
+<b class="nc">&nbsp;        char c3 = str.charAt(offset + 3);</b>
+<b class="nc">&nbsp;        char c4 = str.charAt(offset + 4);</b>
+<b class="nc">&nbsp;        char c5 = str.charAt(offset + 5);</b>
+<b class="nc">&nbsp;        char c6 = str.charAt(offset + 6);</b>
+<b class="nc">&nbsp;        char c7 = str.charAt(offset + 7);</b>
+<b class="nc">&nbsp;        char c8 = str.charAt(offset + 8);</b>
+<b class="nc">&nbsp;        char c9 = str.charAt(offset + 9);</b>
+<b class="nc">&nbsp;        char c10 = str.charAt(offset + 10);</b>
+<b class="nc">&nbsp;        char c11 = str.charAt(offset + 11);</b>
+<b class="nc">&nbsp;        char c12 = str.charAt(offset + 12);</b>
+<b class="nc">&nbsp;        char c13 = str.charAt(offset + 13);</b>
+<b class="nc">&nbsp;        char c14 = str.charAt(offset + 14);</b>
+<b class="nc">&nbsp;        char c15 = str.charAt(offset + 15);</b>
+<b class="nc">&nbsp;        char c16 = str.charAt(offset + 16);</b>
+<b class="nc">&nbsp;        char c17 = str.charAt(offset + 17);</b>
+<b class="nc">&nbsp;        char c18 = str.charAt(offset + 18);</b>
+<b class="nc">&nbsp;        char c19 = len == 19 ? &#39; &#39; : str.charAt(offset + 19);</b>
+&nbsp;
+<b class="nc">&nbsp;        char c20, c21 = &#39;0&#39;, c22 = &#39;0&#39;, c23 = &#39;0&#39;, c24 = &#39;0&#39;, c25 = &#39;0&#39;, c26 = &#39;0&#39;, c27 = &#39;0&#39;, c28 = &#39;0&#39;, c29 = &#39;\0&#39;;</b>
+<b class="nc">&nbsp;        switch (len) {</b>
+&nbsp;            case 19:
+&nbsp;            case 20:
+<b class="nc">&nbsp;                c20 = &#39;\0&#39;;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 21:
+<b class="nc">&nbsp;                c20 = str.charAt(offset + 20);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 22:
+<b class="nc">&nbsp;                c20 = str.charAt(offset + 20);</b>
+<b class="nc">&nbsp;                c21 = str.charAt(offset + 21);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 23:
+<b class="nc">&nbsp;                c20 = str.charAt(offset + 20);</b>
+<b class="nc">&nbsp;                c21 = str.charAt(offset + 21);</b>
+<b class="nc">&nbsp;                c22 = str.charAt(offset + 22);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 24:
+<b class="nc">&nbsp;                c20 = str.charAt(offset + 20);</b>
+<b class="nc">&nbsp;                c21 = str.charAt(offset + 21);</b>
+<b class="nc">&nbsp;                c22 = str.charAt(offset + 22);</b>
+<b class="nc">&nbsp;                c23 = str.charAt(offset + 23);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 25:
+<b class="nc">&nbsp;                c20 = str.charAt(offset + 20);</b>
+<b class="nc">&nbsp;                c21 = str.charAt(offset + 21);</b>
+<b class="nc">&nbsp;                c22 = str.charAt(offset + 22);</b>
+<b class="nc">&nbsp;                c23 = str.charAt(offset + 23);</b>
+<b class="nc">&nbsp;                c24 = str.charAt(offset + 24);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 26:
+<b class="nc">&nbsp;                c20 = str.charAt(offset + 20);</b>
+<b class="nc">&nbsp;                c21 = str.charAt(offset + 21);</b>
+<b class="nc">&nbsp;                c22 = str.charAt(offset + 22);</b>
+<b class="nc">&nbsp;                c23 = str.charAt(offset + 23);</b>
+<b class="nc">&nbsp;                c24 = str.charAt(offset + 24);</b>
+<b class="nc">&nbsp;                c25 = str.charAt(offset + 25);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 27:
+<b class="nc">&nbsp;                c20 = str.charAt(offset + 20);</b>
+<b class="nc">&nbsp;                c21 = str.charAt(offset + 21);</b>
+<b class="nc">&nbsp;                c22 = str.charAt(offset + 22);</b>
+<b class="nc">&nbsp;                c23 = str.charAt(offset + 23);</b>
+<b class="nc">&nbsp;                c24 = str.charAt(offset + 24);</b>
+<b class="nc">&nbsp;                c25 = str.charAt(offset + 25);</b>
+<b class="nc">&nbsp;                c26 = str.charAt(offset + 26);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 28:
+<b class="nc">&nbsp;                c20 = str.charAt(offset + 20);</b>
+<b class="nc">&nbsp;                c21 = str.charAt(offset + 21);</b>
+<b class="nc">&nbsp;                c22 = str.charAt(offset + 22);</b>
+<b class="nc">&nbsp;                c23 = str.charAt(offset + 23);</b>
+<b class="nc">&nbsp;                c24 = str.charAt(offset + 24);</b>
+<b class="nc">&nbsp;                c25 = str.charAt(offset + 25);</b>
+<b class="nc">&nbsp;                c26 = str.charAt(offset + 26);</b>
+<b class="nc">&nbsp;                c27 = str.charAt(offset + 27);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 29:
+<b class="nc">&nbsp;                c20 = str.charAt(offset + 20);</b>
+<b class="nc">&nbsp;                c21 = str.charAt(offset + 21);</b>
+<b class="nc">&nbsp;                c22 = str.charAt(offset + 22);</b>
+<b class="nc">&nbsp;                c23 = str.charAt(offset + 23);</b>
+<b class="nc">&nbsp;                c24 = str.charAt(offset + 24);</b>
+<b class="nc">&nbsp;                c25 = str.charAt(offset + 25);</b>
+<b class="nc">&nbsp;                c26 = str.charAt(offset + 26);</b>
+<b class="nc">&nbsp;                c27 = str.charAt(offset + 27);</b>
+<b class="nc">&nbsp;                c28 = str.charAt(offset + 28);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                c20 = str.charAt(offset + 20);</b>
+<b class="nc">&nbsp;                c21 = str.charAt(offset + 21);</b>
+<b class="nc">&nbsp;                c22 = str.charAt(offset + 22);</b>
+<b class="nc">&nbsp;                c23 = str.charAt(offset + 23);</b>
+<b class="nc">&nbsp;                c24 = str.charAt(offset + 24);</b>
+<b class="nc">&nbsp;                c25 = str.charAt(offset + 25);</b>
+<b class="nc">&nbsp;                c26 = str.charAt(offset + 26);</b>
+<b class="nc">&nbsp;                c27 = str.charAt(offset + 27);</b>
+<b class="nc">&nbsp;                c28 = str.charAt(offset + 28);</b>
+<b class="nc">&nbsp;                c29 = str.charAt(offset + 29);</b>
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+&nbsp;        char y0, y1, y2, y3, m0, m1, d0, d1, h0, h1, i0, i1, s0, s1, S0, S1, S2, S3, S4, S5, S6, S7, S8;
+&nbsp;        int zoneIdBegin;
+<b class="nc">&nbsp;        boolean isTimeZone = false;</b>
+<b class="nc">&nbsp;        if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;:&#39;</b>
+&nbsp;                &amp;&amp; (c19 == &#39;[&#39; || c19 == &#39;Z&#39; || c19 == &#39;+&#39; || c19 == &#39;-&#39; || c19 == &#39; &#39;)
+&nbsp;        ) {
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c17;</b>
+<b class="nc">&nbsp;            s1 = c18;</b>
+&nbsp;
+<b class="nc">&nbsp;            S0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S1 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S2 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S3 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S4 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S5 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S6 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S7 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S8 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            zoneIdBegin = 19;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;:&#39; &amp;&amp; c19 == &#39;.&#39;</b>
+&nbsp;                &amp;&amp; (len == 21 || c21 == &#39;[&#39; || c21 == &#39;+&#39; || c21 == &#39;-&#39; || c21 == &#39;Z&#39;)) {
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c17;</b>
+<b class="nc">&nbsp;            s1 = c18;</b>
+&nbsp;
+<b class="nc">&nbsp;            S0 = c20;</b>
+<b class="nc">&nbsp;            S1 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S2 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S3 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S4 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S5 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S6 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S7 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S8 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            zoneIdBegin = 21;</b>
+<b class="nc">&nbsp;            isTimeZone = c21 == &#39;|&#39;;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;:&#39; &amp;&amp; c19 == &#39;.&#39;</b>
+&nbsp;                &amp;&amp; (len == 22 || c22 == &#39;[&#39; || c22 == &#39;+&#39; || c22 == &#39;-&#39; || c22 == &#39;Z&#39;)) {
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c17;</b>
+<b class="nc">&nbsp;            s1 = c18;</b>
+&nbsp;
+<b class="nc">&nbsp;            S0 = c20;</b>
+<b class="nc">&nbsp;            S1 = c21;</b>
+<b class="nc">&nbsp;            S2 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S3 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S4 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S5 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S6 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S7 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S8 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            zoneIdBegin = 22;</b>
+<b class="nc">&nbsp;            isTimeZone = c22 == &#39;|&#39;;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;Z&#39; &amp;&amp; c17 == &#39;[&#39;</b>
+&nbsp;                &amp;&amp; len == 22 &amp;&amp; c21 == &#39;]&#39;) {
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            s1 = &#39;0&#39;;</b>
+&nbsp;
+<b class="nc">&nbsp;            S0 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S1 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S2 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S3 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S4 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S5 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S6 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S7 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S8 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            isTimeZone = true;</b>
+<b class="nc">&nbsp;            zoneIdBegin = 17;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;:&#39; &amp;&amp; c19 == &#39;.&#39;</b>
+&nbsp;                &amp;&amp; (len == 23 || c23 == &#39;[&#39; || c23 == &#39;|&#39; || c23 == &#39;+&#39; || c23 == &#39;-&#39; || c23 == &#39;Z&#39;)) {
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c17;</b>
+<b class="nc">&nbsp;            s1 = c18;</b>
+&nbsp;
+<b class="nc">&nbsp;            S0 = c20;</b>
+<b class="nc">&nbsp;            S1 = c21;</b>
+<b class="nc">&nbsp;            S2 = c22;</b>
+<b class="nc">&nbsp;            S3 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S4 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S5 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S6 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S7 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S8 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            zoneIdBegin = 23;</b>
+<b class="nc">&nbsp;            isTimeZone = c23 == &#39;|&#39;;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;:&#39; &amp;&amp; c19 == &#39;.&#39;</b>
+&nbsp;                &amp;&amp; (len == 24 || c24 == &#39;[&#39; || c24 == &#39;|&#39; || c24 == &#39;+&#39; || c24 == &#39;-&#39; || c24 == &#39;Z&#39;)) {
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c17;</b>
+<b class="nc">&nbsp;            s1 = c18;</b>
+&nbsp;
+<b class="nc">&nbsp;            S0 = c20;</b>
+<b class="nc">&nbsp;            S1 = c21;</b>
+<b class="nc">&nbsp;            S2 = c22;</b>
+<b class="nc">&nbsp;            S3 = c23;</b>
+<b class="nc">&nbsp;            S4 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S5 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S6 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S7 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S8 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            zoneIdBegin = 24;</b>
+<b class="nc">&nbsp;            isTimeZone = c24 == &#39;|&#39;;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;:&#39; &amp;&amp; c19 == &#39;.&#39;</b>
+&nbsp;                &amp;&amp; (len == 25 || c25 == &#39;[&#39; || c25 == &#39;|&#39; || c25 == &#39;+&#39; || c25 == &#39;-&#39; || c25 == &#39;Z&#39;)) {
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c17;</b>
+<b class="nc">&nbsp;            s1 = c18;</b>
+&nbsp;
+<b class="nc">&nbsp;            S0 = c20;</b>
+<b class="nc">&nbsp;            S1 = c21;</b>
+<b class="nc">&nbsp;            S2 = c22;</b>
+<b class="nc">&nbsp;            S3 = c23;</b>
+<b class="nc">&nbsp;            S4 = c24;</b>
+<b class="nc">&nbsp;            S5 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S6 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S7 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S8 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            zoneIdBegin = 25;</b>
+<b class="nc">&nbsp;            isTimeZone = c25 == &#39;|&#39;;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;:&#39; &amp;&amp; c19 == &#39;.&#39;</b>
+&nbsp;                &amp;&amp; (len == 26 || c26 == &#39;[&#39; || c26 == &#39;|&#39; || c26 == &#39;+&#39; || c26 == &#39;-&#39; || c26 == &#39;Z&#39;)) {
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c17;</b>
+<b class="nc">&nbsp;            s1 = c18;</b>
+&nbsp;
+<b class="nc">&nbsp;            S0 = c20;</b>
+<b class="nc">&nbsp;            S1 = c21;</b>
+<b class="nc">&nbsp;            S2 = c22;</b>
+<b class="nc">&nbsp;            S3 = c23;</b>
+<b class="nc">&nbsp;            S4 = c24;</b>
+<b class="nc">&nbsp;            S5 = c25;</b>
+<b class="nc">&nbsp;            S6 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S7 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S8 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            zoneIdBegin = 26;</b>
+<b class="nc">&nbsp;            isTimeZone = c26 == &#39;|&#39;;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;:&#39; &amp;&amp; c19 == &#39;.&#39;</b>
+&nbsp;                &amp;&amp; (len == 27 || c27 == &#39;[&#39; || c27 == &#39;|&#39; || c27 == &#39;+&#39; || c27 == &#39;-&#39; || c27 == &#39;Z&#39;)) {
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c17;</b>
+<b class="nc">&nbsp;            s1 = c18;</b>
+&nbsp;
+<b class="nc">&nbsp;            S0 = c20;</b>
+<b class="nc">&nbsp;            S1 = c21;</b>
+<b class="nc">&nbsp;            S2 = c22;</b>
+<b class="nc">&nbsp;            S3 = c23;</b>
+<b class="nc">&nbsp;            S4 = c24;</b>
+<b class="nc">&nbsp;            S5 = c25;</b>
+<b class="nc">&nbsp;            S6 = c26;</b>
+<b class="nc">&nbsp;            S7 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            S8 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            zoneIdBegin = 27;</b>
+<b class="nc">&nbsp;            isTimeZone = c27 == &#39;|&#39;;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;:&#39; &amp;&amp; c19 == &#39;.&#39;</b>
+&nbsp;                &amp;&amp; (len == 28 || c28 == &#39;[&#39; || c28 == &#39;|&#39; || c28 == &#39;+&#39; || c28 == &#39;-&#39; || c28 == &#39;Z&#39;)) {
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c17;</b>
+<b class="nc">&nbsp;            s1 = c18;</b>
+&nbsp;
+<b class="nc">&nbsp;            S0 = c20;</b>
+<b class="nc">&nbsp;            S1 = c21;</b>
+<b class="nc">&nbsp;            S2 = c22;</b>
+<b class="nc">&nbsp;            S3 = c23;</b>
+<b class="nc">&nbsp;            S4 = c24;</b>
+<b class="nc">&nbsp;            S5 = c25;</b>
+<b class="nc">&nbsp;            S6 = c26;</b>
+<b class="nc">&nbsp;            S7 = c27;</b>
+<b class="nc">&nbsp;            S8 = &#39;0&#39;;</b>
+<b class="nc">&nbsp;            zoneIdBegin = 28;</b>
+<b class="nc">&nbsp;            isTimeZone = c28 == &#39;|&#39;;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;:&#39; &amp;&amp; c19 == &#39;.&#39;</b>
+&nbsp;                &amp;&amp; (len == 29 || c29 == &#39;[&#39; || c29 == &#39;|&#39; || c29 == &#39;+&#39; || c29 == &#39;-&#39; || c29 == &#39;Z&#39;)) {
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c17;</b>
+<b class="nc">&nbsp;            s1 = c18;</b>
+&nbsp;
+<b class="nc">&nbsp;            S0 = c20;</b>
+<b class="nc">&nbsp;            S1 = c21;</b>
+<b class="nc">&nbsp;            S2 = c22;</b>
+<b class="nc">&nbsp;            S3 = c23;</b>
+<b class="nc">&nbsp;            S4 = c24;</b>
+<b class="nc">&nbsp;            S5 = c25;</b>
+<b class="nc">&nbsp;            S6 = c26;</b>
+<b class="nc">&nbsp;            S7 = c27;</b>
+<b class="nc">&nbsp;            S8 = c28;</b>
+<b class="nc">&nbsp;            zoneIdBegin = 29;</b>
+<b class="nc">&nbsp;            isTimeZone = c29 == &#39;|&#39;;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String input = str.substring(offset, len);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        LocalDateTime ldt = localDateTime(y0, y1, y2, y3, m0, m1, d0, d1, h0, h1, i0, i1, s0, s1, S0, S1, S2, S3, S4, S5, S6, S7, S8);</b>
+<b class="nc">&nbsp;        if (ldt == null) {</b>
+<b class="nc">&nbsp;            String input = str.substring(offset, len);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        ZoneId zoneId;
+<b class="nc">&nbsp;        if (isTimeZone) {</b>
+<b class="nc">&nbsp;            String tzStr = str.substring(offset + zoneIdBegin, offset + len);</b>
+<b class="nc">&nbsp;            switch (tzStr) {</b>
+&nbsp;                case &quot;UTC&quot;:
+&nbsp;                case &quot;[UTC]&quot;:
+<b class="nc">&nbsp;                    zoneId = UTC;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+<b class="nc">&nbsp;                    TimeZone timeZone = TimeZone.getTimeZone(tzStr);</b>
+<b class="nc">&nbsp;                    zoneId = timeZone.toZoneId();</b>
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;            // String tzStr = new String(chars, this.offset + zoneIdBegin, len - zoneIdBegin);
+<b class="nc">&nbsp;        } else if (zoneIdBegin == len) {</b>
+<b class="nc">&nbsp;            zoneId = DEFAULT_ZONE_ID;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            char first = str.charAt(offset + zoneIdBegin);</b>
+<b class="nc">&nbsp;            if (first == &#39;Z&#39;) {</b>
+<b class="nc">&nbsp;                zoneId = UTC;</b>
+&nbsp;            } else {
+&nbsp;                String zoneIdStr;
+<b class="nc">&nbsp;                if (first == &#39;+&#39; || first == &#39;-&#39;) {</b>
+<b class="nc">&nbsp;                    zoneIdStr = str.substring(offset + zoneIdBegin, offset + len);</b>
+&nbsp;                    //                    zoneIdStr = new String(chars, offset + zoneIdBegin, len - zoneIdBegin);
+<b class="nc">&nbsp;                } else if (first == &#39; &#39;) {</b>
+<b class="nc">&nbsp;                    zoneIdStr = str.substring(offset + zoneIdBegin + 1, offset + len);</b>
+&nbsp;                } else { // &#39;[
+<b class="nc">&nbsp;                    if (zoneIdBegin &lt; len) {</b>
+<b class="nc">&nbsp;                        zoneIdStr = str.substring(offset + zoneIdBegin + 1, offset + len - 1);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        zoneIdStr = null;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                zoneId = getZoneId(zoneIdStr, defaultZoneId);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return ZonedDateTime.ofLocal(ldt, zoneId, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ZoneId getZoneId(String zoneIdStr, ZoneId defaultZoneId) {
+<b class="nc">&nbsp;        if (zoneIdStr == null) {</b>
+<b class="nc">&nbsp;            return defaultZoneId != null ? defaultZoneId : DEFAULT_ZONE_ID;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        ZoneId zoneId;
+&nbsp;        int p0, p1;
+<b class="nc">&nbsp;        if (&quot;000&quot;.equals(zoneIdStr)) {</b>
+<b class="nc">&nbsp;            zoneId = ZoneOffset.UTC;</b>
+<b class="nc">&nbsp;        } else if ((p0 = zoneIdStr.indexOf(&#39;[&#39;)) &gt; 0 &amp;&amp; (p1 = zoneIdStr.indexOf(&#39;]&#39;, p0)) &gt; 0) {</b>
+<b class="nc">&nbsp;            String str = zoneIdStr.substring(p0 + 1, p1);</b>
+<b class="nc">&nbsp;            zoneId = ZoneId.of(str);</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            zoneId = ZoneId.of(zoneIdStr);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return zoneId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static long toMillis19(String str, int off, ZoneId zoneId) {
+<b class="nc">&nbsp;        if (str == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (off + 19 &gt; str.length()) {</b>
+<b class="nc">&nbsp;            String input = str.substring(off);</b>
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input &quot; + input, input, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char c0 = str.charAt(off + 0);</b>
+<b class="nc">&nbsp;        char c1 = str.charAt(off + 1);</b>
+<b class="nc">&nbsp;        char c2 = str.charAt(off + 2);</b>
+<b class="nc">&nbsp;        char c3 = str.charAt(off + 3);</b>
+<b class="nc">&nbsp;        char c4 = str.charAt(off + 4);</b>
+<b class="nc">&nbsp;        char c5 = str.charAt(off + 5);</b>
+<b class="nc">&nbsp;        char c6 = str.charAt(off + 6);</b>
+<b class="nc">&nbsp;        char c7 = str.charAt(off + 7);</b>
+<b class="nc">&nbsp;        char c8 = str.charAt(off + 8);</b>
+<b class="nc">&nbsp;        char c9 = str.charAt(off + 9);</b>
+<b class="nc">&nbsp;        char c10 = str.charAt(off + 10);</b>
+<b class="nc">&nbsp;        char c11 = str.charAt(off + 11);</b>
+<b class="nc">&nbsp;        char c12 = str.charAt(off + 12);</b>
+<b class="nc">&nbsp;        char c13 = str.charAt(off + 13);</b>
+<b class="nc">&nbsp;        char c14 = str.charAt(off + 14);</b>
+<b class="nc">&nbsp;        char c15 = str.charAt(off + 15);</b>
+<b class="nc">&nbsp;        char c16 = str.charAt(off + 16);</b>
+<b class="nc">&nbsp;        char c17 = str.charAt(off + 17);</b>
+<b class="nc">&nbsp;        char c18 = str.charAt(off + 18);</b>
+&nbsp;
+&nbsp;        char y0, y1, y2, y3, m0, m1, d0, d1, h0, h1, i0, i1, s0, s1;
+<b class="nc">&nbsp;        if (c4 == &#39;-&#39; &amp;&amp; c7 == &#39;-&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;:&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c17;</b>
+<b class="nc">&nbsp;            s1 = c18;</b>
+<b class="nc">&nbsp;        } else if (c4 == &#39;/&#39; &amp;&amp; c7 == &#39;/&#39; &amp;&amp; (c10 == &#39; &#39; || c10 == &#39;T&#39;) &amp;&amp; c13 == &#39;:&#39; &amp;&amp; c16 == &#39;:&#39;) {</b>
+<b class="nc">&nbsp;            y0 = c0;</b>
+<b class="nc">&nbsp;            y1 = c1;</b>
+<b class="nc">&nbsp;            y2 = c2;</b>
+<b class="nc">&nbsp;            y3 = c3;</b>
+&nbsp;
+<b class="nc">&nbsp;            m0 = c5;</b>
+<b class="nc">&nbsp;            m1 = c6;</b>
+&nbsp;
+<b class="nc">&nbsp;            d0 = c8;</b>
+<b class="nc">&nbsp;            d1 = c9;</b>
+&nbsp;
+<b class="nc">&nbsp;            h0 = c11;</b>
+<b class="nc">&nbsp;            h1 = c12;</b>
+&nbsp;
+<b class="nc">&nbsp;            i0 = c14;</b>
+<b class="nc">&nbsp;            i1 = c15;</b>
+&nbsp;
+<b class="nc">&nbsp;            s0 = c17;</b>
+<b class="nc">&nbsp;            s1 = c18;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input&quot;, str.substring(off, off + 19), 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int year;
+<b class="nc">&nbsp;        if (y0 &gt;= &#39;0&#39; &amp;&amp; y0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; y1 &gt;= &#39;0&#39; &amp;&amp; y1 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y2 &gt;= &#39;0&#39; &amp;&amp; y2 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y3 &gt;= &#39;0&#39; &amp;&amp; y3 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            year = (y0 - &#39;0&#39;) * 1000 + (y1 - &#39;0&#39;) * 100 + (y2 - &#39;0&#39;) * 10 + (y3 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input&quot;, str.substring(off, off + 19), 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int month;
+<b class="nc">&nbsp;        if (m0 &gt;= &#39;0&#39; &amp;&amp; m0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; m1 &gt;= &#39;0&#39; &amp;&amp; m1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            month = (m0 - &#39;0&#39;) * 10 + (m1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input&quot;, str.substring(off, off + 19), 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int dom;
+<b class="nc">&nbsp;        if (d0 &gt;= &#39;0&#39; &amp;&amp; d0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; d1 &gt;= &#39;0&#39; &amp;&amp; d1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            dom = (d0 - &#39;0&#39;) * 10 + (d1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input&quot;, str.substring(off, off + 19), 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int hour;
+<b class="nc">&nbsp;        if (h0 &gt;= &#39;0&#39; &amp;&amp; h0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; h1 &gt;= &#39;0&#39; &amp;&amp; h1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            hour = (h0 - &#39;0&#39;) * 10 + (h1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input&quot;, str.substring(off, off + 19), 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int minute;
+<b class="nc">&nbsp;        if (i0 &gt;= &#39;0&#39; &amp;&amp; i0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; i1 &gt;= &#39;0&#39; &amp;&amp; i1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            minute = (i0 - &#39;0&#39;) * 10 + (i1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input&quot;, str.substring(off, off + 19), 0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int second;
+<b class="nc">&nbsp;        if (s0 &gt;= &#39;0&#39; &amp;&amp; s0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; s1 &gt;= &#39;0&#39; &amp;&amp; s1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            second = (s0 - &#39;0&#39;) * 10 + (s1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new DateTimeParseException(&quot;illegal input&quot;, str.substring(off, off + 19), 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (year == 0 &amp;&amp; month == 0 &amp;&amp; dom == 0) {</b>
+<b class="nc">&nbsp;            year = 1970;</b>
+<b class="nc">&nbsp;            month = 1;</b>
+<b class="nc">&nbsp;            dom = 1;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return millis(zoneId, year, month, dom, hour, minute, second, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static LocalDateTime localDateTime(
+&nbsp;            char y0,
+&nbsp;            char y1,
+&nbsp;            char y2,
+&nbsp;            char y3,
+&nbsp;            char m0,
+&nbsp;            char m1,
+&nbsp;            char d0,
+&nbsp;            char d1,
+&nbsp;            char h0,
+&nbsp;            char h1,
+&nbsp;            char i0,
+&nbsp;            char i1,
+&nbsp;            char s0,
+&nbsp;            char s1,
+&nbsp;            char S0,
+&nbsp;            char S1,
+&nbsp;            char S2,
+&nbsp;            char S3,
+&nbsp;            char S4,
+&nbsp;            char S5,
+&nbsp;            char S6,
+&nbsp;            char S7,
+&nbsp;            char S8) {
+&nbsp;        int year;
+<b class="nc">&nbsp;        if (y0 &gt;= &#39;0&#39; &amp;&amp; y0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; y1 &gt;= &#39;0&#39; &amp;&amp; y1 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y2 &gt;= &#39;0&#39; &amp;&amp; y2 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; y3 &gt;= &#39;0&#39; &amp;&amp; y3 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            year = (y0 - &#39;0&#39;) * 1000 + (y1 - &#39;0&#39;) * 100 + (y2 - &#39;0&#39;) * 10 + (y3 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int month;
+<b class="nc">&nbsp;        if (m0 &gt;= &#39;0&#39; &amp;&amp; m0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; m1 &gt;= &#39;0&#39; &amp;&amp; m1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            month = (m0 - &#39;0&#39;) * 10 + (m1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int dom;
+<b class="nc">&nbsp;        if (d0 &gt;= &#39;0&#39; &amp;&amp; d0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; d1 &gt;= &#39;0&#39; &amp;&amp; d1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            dom = (d0 - &#39;0&#39;) * 10 + (d1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int hour;
+<b class="nc">&nbsp;        if (h0 &gt;= &#39;0&#39; &amp;&amp; h0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; h1 &gt;= &#39;0&#39; &amp;&amp; h1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            hour = (h0 - &#39;0&#39;) * 10 + (h1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int minute;
+<b class="nc">&nbsp;        if (i0 &gt;= &#39;0&#39; &amp;&amp; i0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; i1 &gt;= &#39;0&#39; &amp;&amp; i1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            minute = (i0 - &#39;0&#39;) * 10 + (i1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int second;
+<b class="nc">&nbsp;        if (s0 &gt;= &#39;0&#39; &amp;&amp; s0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; s1 &gt;= &#39;0&#39; &amp;&amp; s1 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            second = (s0 - &#39;0&#39;) * 10 + (s1 - &#39;0&#39;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int nanos;
+<b class="nc">&nbsp;        if (S0 &gt;= &#39;0&#39; &amp;&amp; S0 &lt;= &#39;9&#39;</b>
+&nbsp;                &amp;&amp; S1 &gt;= &#39;0&#39; &amp;&amp; S1 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; S2 &gt;= &#39;0&#39; &amp;&amp; S2 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; S3 &gt;= &#39;0&#39; &amp;&amp; S3 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; S4 &gt;= &#39;0&#39; &amp;&amp; S4 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; S5 &gt;= &#39;0&#39; &amp;&amp; S5 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; S6 &gt;= &#39;0&#39; &amp;&amp; S6 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; S7 &gt;= &#39;0&#39; &amp;&amp; S7 &lt;= &#39;9&#39;
+&nbsp;                &amp;&amp; S8 &gt;= &#39;0&#39; &amp;&amp; S8 &lt;= &#39;9&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            nanos = (S0 - &#39;0&#39;) * 1000_000_00</b>
+&nbsp;                    + (S1 - &#39;0&#39;) * 1000_000_0
+&nbsp;                    + (S2 - &#39;0&#39;) * 1000_000
+&nbsp;                    + (S3 - &#39;0&#39;) * 1000_00
+&nbsp;                    + (S4 - &#39;0&#39;) * 1000_0
+&nbsp;                    + (S5 - &#39;0&#39;) * 1000
+&nbsp;                    + (S6 - &#39;0&#39;) * 100
+&nbsp;                    + (S7 - &#39;0&#39;) * 10
+&nbsp;                    + (S8 - &#39;0&#39;);
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        LocalDateTime ldt = LocalDateTime.of(year, month, dom, hour, minute, second, nanos);</b>
+<b class="nc">&nbsp;        return ldt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static long millis(
+&nbsp;            ZoneId zoneId,
+&nbsp;            int year,
+&nbsp;            int month,
+&nbsp;            int dom,
+&nbsp;            int hour,
+&nbsp;            int minute,
+&nbsp;            int second,
+&nbsp;            int nanoOfSecond
+&nbsp;    ) {
+<b class="nc">&nbsp;        if (zoneId == null) {</b>
+<b class="nc">&nbsp;            zoneId = DEFAULT_ZONE_ID;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (zoneId == SHANGHAI_ZONE_ID || zoneId.getRules() == SHANGHAI_ZONE_RULES) {</b>
+<b class="nc">&nbsp;            long SECONDS_1991_09_15_02 = 684900000; // utcMillis(1991, 9, 15, 2, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1991_04_14_03 = 671598000; // utcMillis(1991, 4, 14, 3, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1990_09_16_02 = 653450400; // utcMillis(1990, 9, 16, 2, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1990_04_15_03 = 640148400; // utcMillis(1990, 4, 15, 3, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1989_09_17_02 = 622000800; // utcMillis(1989, 9, 17, 2, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1989_04_16_03 = 608698800; // utcMillis(1989, 4, 16, 3, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1988_09_11_02 = 589946400; // utcMillis(1988, 9, 11, 2, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1988_04_17_03 = 577249200; // utcMillis(1988, 4, 17, 3, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1987_09_13_02 = 558496800; // utcMillis(1987, 9, 13, 2, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1987_04_12_03 = 545194800; // utcMillis(1987, 4, 12, 3, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1986_09_14_02 = 527047200; // utcMillis(1986, 9, 14, 2, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1986_05_04_03 = 515559600; // utcMillis(1986, 5, 4, 3, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1949_05_28_00 = -649987200; // utcMillis(1949, 5, 28, 0, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1949_05_01_01 = -652316400; // utcMillis(1949, 5, 1, 1, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1948_10_01_00 = -670636800; // utcMillis(1948, 10, 1, 0, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1948_05_01_01 = -683852400; // utcMillis(1948, 5, 1, 1, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1947_11_01_00 = -699580800; // utcMillis(1947, 11, 1, 0, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1947_04_15_01 = -716857200; // utcMillis(1947, 4, 15, 1, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1946_10_01_00 = -733795200; // utcMillis(1946, 10, 1, 0, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1946_05_15_01 = -745801200; // utcMillis(1946, 5, 15, 1, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1945_09_02_00 = -767836800; // utcMillis(1945, 9, 2, 0, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1942_01_31_01 = -881017200; // utcMillis(1942, 1, 31, 1, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1941_11_02_00 = -888796800; // utcMillis(1941, 11, 2, 0, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1941_03_15_01 = -908838000; // utcMillis(1941, 3, 15, 1, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1940_10_13_00 = -922060800; // utcMillis(1940, 10, 13, 0, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1940_06_01_01 = -933634800L; //utcMillis(1940, 6, 1, 1, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1919_10_01_00 = -1585872000L; // utcMillis(1919, 10, 1, 0, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1919_04_13_01 = -1600642800L; // utcMillis(1919, 4, 13, 1, 0, 0);</b>
+<b class="nc">&nbsp;            long SECONDS_1901_01_01_00 = -2177452800L; // utcMillis(1901, 1, 1, 0, 0, 0);</b>
+&nbsp;
+<b class="nc">&nbsp;            final int OFFSET_0900_TOTAL_SECONDS = 32400;</b>
+<b class="nc">&nbsp;            final int OFFSET_0543_TOTAL_SECONDS = 29143;</b>
+&nbsp;
+<b class="nc">&nbsp;            long seconds = utcSeconds(year, month, dom, hour, minute, second);</b>
+&nbsp;
+&nbsp;            int zoneOffsetTotalSeconds;
+<b class="nc">&nbsp;            if (seconds &gt;= SECONDS_1991_09_15_02) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0800_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1991_04_14_03) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0900_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1990_09_16_02) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0800_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1990_04_15_03) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0900_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1989_09_17_02) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0800_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1989_04_16_03) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0900_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1988_09_11_02) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0800_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1988_04_17_03) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0900_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1987_09_13_02) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0800_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1987_04_12_03) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0900_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1986_09_14_02) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0800_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1986_05_04_03) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0900_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1949_05_28_00) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0800_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1949_05_01_01) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0900_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1948_10_01_00) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0800_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1948_05_01_01) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0900_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1947_11_01_00) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0800_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1947_04_15_01) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0900_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1946_10_01_00) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0800_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1946_05_15_01) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0900_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1945_09_02_00) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0800_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1942_01_31_01) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0900_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1941_11_02_00) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0800_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1941_03_15_01) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0900_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1940_10_13_00) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0800_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1940_06_01_01) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0900_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1919_10_01_00) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0800_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1919_04_13_01) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0900_TOTAL_SECONDS;</b>
+<b class="nc">&nbsp;            } else if (seconds &gt;= SECONDS_1901_01_01_00) {</b>
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0800_TOTAL_SECONDS;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                zoneOffsetTotalSeconds = OFFSET_0543_TOTAL_SECONDS;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            seconds -= zoneOffsetTotalSeconds;</b>
+&nbsp;
+<b class="nc">&nbsp;            return seconds * 1000L + nanoOfSecond / 1000_000;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (zoneId == ZoneOffset.UTC || &quot;UTC&quot;.equals(zoneId.getId())) {</b>
+<b class="nc">&nbsp;            long seconds = utcSeconds(year, month, dom, hour, minute, second);</b>
+<b class="nc">&nbsp;            return seconds * 1000L + nanoOfSecond / 1000_000;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        LocalDate localDate = LocalDate.of(year, month, dom);</b>
+<b class="nc">&nbsp;        LocalTime localTime = LocalTime.of(hour, minute, second, nanoOfSecond);</b>
+<b class="nc">&nbsp;        LocalDateTime ldt = LocalDateTime.of(localDate, localTime);</b>
+<b class="nc">&nbsp;        ZonedDateTime zdt = ZonedDateTime.ofLocal(ldt, zoneId, null);</b>
+<b class="nc">&nbsp;        long seconds = zdt.toEpochSecond();</b>
+<b class="nc">&nbsp;        int nanos = nanoOfSecond;</b>
+<b class="nc">&nbsp;        if (seconds &lt; 0 &amp;&amp; nanos &gt; 0) {</b>
+<b class="nc">&nbsp;            return (seconds + 1) * 1000 + nanos / 1000_000 - 1000;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return seconds * 1000L + nanos / 1000_000;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static long utcSeconds(
+&nbsp;            int year,
+&nbsp;            int month,
+&nbsp;            int dom,
+&nbsp;            int hour,
+&nbsp;            int minute,
+&nbsp;            int second
+&nbsp;    ) {
+<b class="nc">&nbsp;        final int DAYS_PER_CYCLE = 146097;</b>
+<b class="nc">&nbsp;        final long DAYS_0000_TO_1970 = (DAYS_PER_CYCLE * 5L) - (30L * 365L + 7L);</b>
+&nbsp;
+<b class="nc">&nbsp;        long total = (365 * year)</b>
+&nbsp;                + ((year + 3) / 4 - (year + 99) / 100 + (year + 399) / 400)
+&nbsp;                + ((367 * month - 362) / 12)
+&nbsp;                + (dom - 1);
+&nbsp;
+<b class="nc">&nbsp;        if (month &gt; 2) {</b>
+<b class="nc">&nbsp;            total--;</b>
+<b class="nc">&nbsp;            boolean leapYear = (year &amp; 3) == 0 &amp;&amp; ((year % 100) != 0 || (year % 400) == 0);</b>
+<b class="nc">&nbsp;            if (leapYear == false) {</b>
+<b class="nc">&nbsp;                total--;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long epochDay = total - DAYS_0000_TO_1970;</b>
+<b class="nc">&nbsp;        return epochDay * 86400</b>
+&nbsp;                + hour * 3600
+&nbsp;                + minute * 60
+&nbsp;                + second;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String toString(Date date) {
+<b class="nc">&nbsp;        return toString(date.getTime(), false, DEFAULT_ZONE_ID);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String toString(long timeMillis, boolean timeZone, ZoneId zoneId) {
+<b class="nc">&nbsp;        final int SECONDS_PER_DAY = 60 * 60 * 24;</b>
+&nbsp;
+<b class="nc">&nbsp;        long epochSecond = Math.floorDiv(timeMillis, 1000L);</b>
+&nbsp;        int offsetTotalSeconds;
+<b class="nc">&nbsp;        if (zoneId == IOUtils.SHANGHAI_ZONE_ID || zoneId.getRules() == IOUtils.SHANGHAI_ZONE_RULES) {</b>
+<b class="nc">&nbsp;            offsetTotalSeconds = IOUtils.getShanghaiZoneOffsetTotalSeconds(epochSecond);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            Instant instant = Instant.ofEpochMilli(timeMillis);</b>
+<b class="nc">&nbsp;            offsetTotalSeconds = zoneId.getRules().getOffset(instant).getTotalSeconds();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long localSecond = epochSecond + offsetTotalSeconds;</b>
+<b class="nc">&nbsp;        long localEpochDay = Math.floorDiv(localSecond, (long) SECONDS_PER_DAY);</b>
+<b class="nc">&nbsp;        int secsOfDay = (int) Math.floorMod(localSecond, (long) SECONDS_PER_DAY);</b>
+&nbsp;        int year, month, dayOfMonth;
+&nbsp;        {
+<b class="nc">&nbsp;            final int DAYS_PER_CYCLE = 146097;</b>
+<b class="nc">&nbsp;            final long DAYS_0000_TO_1970 = (DAYS_PER_CYCLE * 5L) - (30L * 365L + 7L);</b>
+&nbsp;
+<b class="nc">&nbsp;            long zeroDay = localEpochDay + DAYS_0000_TO_1970;</b>
+&nbsp;            // find the march-based year
+<b class="nc">&nbsp;            zeroDay -= 60;  // adjust to 0000-03-01 so leap day is at end of four year cycle</b>
+<b class="nc">&nbsp;            long adjust = 0;</b>
+<b class="nc">&nbsp;            if (zeroDay &lt; 0) {</b>
+&nbsp;                // adjust negative years to positive for calculation
+<b class="nc">&nbsp;                long adjustCycles = (zeroDay + 1) / DAYS_PER_CYCLE - 1;</b>
+<b class="nc">&nbsp;                adjust = adjustCycles * 400;</b>
+<b class="nc">&nbsp;                zeroDay += -adjustCycles * DAYS_PER_CYCLE;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            long yearEst = (400 * zeroDay + 591) / DAYS_PER_CYCLE;</b>
+<b class="nc">&nbsp;            long doyEst = zeroDay - (365 * yearEst + yearEst / 4 - yearEst / 100 + yearEst / 400);</b>
+<b class="nc">&nbsp;            if (doyEst &lt; 0) {</b>
+&nbsp;                // fix estimate
+<b class="nc">&nbsp;                yearEst--;</b>
+<b class="nc">&nbsp;                doyEst = zeroDay - (365 * yearEst + yearEst / 4 - yearEst / 100 + yearEst / 400);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            yearEst += adjust;  // reset any negative year</b>
+<b class="nc">&nbsp;            int marchDoy0 = (int) doyEst;</b>
+&nbsp;
+&nbsp;            // convert march-based values back to january-based
+<b class="nc">&nbsp;            int marchMonth0 = (marchDoy0 * 5 + 2) / 153;</b>
+<b class="nc">&nbsp;            month = (marchMonth0 + 2) % 12 + 1;</b>
+<b class="nc">&nbsp;            dayOfMonth = marchDoy0 - (marchMonth0 * 306 + 5) / 10 + 1;</b>
+<b class="nc">&nbsp;            yearEst += marchMonth0 / 10;</b>
+&nbsp;
+&nbsp;            // check year now we are certain it is correct
+<b class="nc">&nbsp;            if (yearEst &lt; Year.MIN_VALUE || yearEst &gt; Year.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                throw new DateTimeException(&quot;Invalid year &quot; + yearEst);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            year = (int) yearEst;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int hour, minute, second;
+&nbsp;        {
+<b class="nc">&nbsp;            final int MINUTES_PER_HOUR = 60;</b>
+<b class="nc">&nbsp;            final int SECONDS_PER_MINUTE = 60;</b>
+<b class="nc">&nbsp;            final int SECONDS_PER_HOUR = SECONDS_PER_MINUTE * MINUTES_PER_HOUR;</b>
+&nbsp;
+<b class="nc">&nbsp;            long secondOfDay = secsOfDay;</b>
+<b class="nc">&nbsp;            if (secondOfDay &lt; 0 || secondOfDay &gt; 86399) {</b>
+<b class="nc">&nbsp;                throw new DateTimeException(&quot;Invalid secondOfDay &quot; + secondOfDay);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            int hours = (int) (secondOfDay / SECONDS_PER_HOUR);</b>
+<b class="nc">&nbsp;            secondOfDay -= hours * SECONDS_PER_HOUR;</b>
+<b class="nc">&nbsp;            int minutes = (int) (secondOfDay / SECONDS_PER_MINUTE);</b>
+<b class="nc">&nbsp;            secondOfDay -= minutes * SECONDS_PER_MINUTE;</b>
+&nbsp;
+<b class="nc">&nbsp;            hour = hours;</b>
+<b class="nc">&nbsp;            minute = minutes;</b>
+<b class="nc">&nbsp;            second = (int) secondOfDay;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int millis = (int) Math.floorMod(timeMillis, 1000L);</b>
+&nbsp;
+&nbsp;        int millislen;
+<b class="nc">&nbsp;        if (millis == 0) {</b>
+<b class="nc">&nbsp;            millislen = 0;</b>
+<b class="nc">&nbsp;        } else if (millis &lt; 10) {</b>
+<b class="nc">&nbsp;            millislen = 4;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (millis % 100 == 0) {</b>
+<b class="nc">&nbsp;                millislen = 2;</b>
+<b class="nc">&nbsp;            } else if (millis % 10 == 0) {</b>
+<b class="nc">&nbsp;                millislen = 3;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                millislen = 4;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        int zonelen;
+<b class="nc">&nbsp;        if (timeZone) {</b>
+<b class="nc">&nbsp;            zonelen = offsetTotalSeconds == 0 ? 1 : 6;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            zonelen = 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int len = 19 + millislen + zonelen;</b>
+<b class="nc">&nbsp;        if (STRING_CREATOR_JDK8 != null) {</b>
+<b class="nc">&nbsp;            char[] chars = new char[len];</b>
+<b class="nc">&nbsp;            chars[0] = (char) (year / 1000 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;            chars[1] = (char) ((year / 100) % 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;            chars[2] = (char) ((year / 10) % 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;            chars[3] = (char) (year % 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;            chars[4] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;            chars[5] = (char) (month / 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;            chars[6] = (char) (month % 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;            chars[7] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;            chars[8] = (char) (dayOfMonth / 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;            chars[9] = (char) (dayOfMonth % 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;            chars[10] = &#39; &#39;;</b>
+<b class="nc">&nbsp;            chars[11] = (char) (hour / 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;            chars[12] = (char) (hour % 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;            chars[13] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;            chars[14] = (char) (minute / 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;            chars[15] = (char) (minute % 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;            chars[16] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;            chars[17] = (char) (second / 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;            chars[18] = (char) (second % 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;            if (millislen &gt; 0) {</b>
+<b class="nc">&nbsp;                chars[19] = &#39;.&#39;;</b>
+<b class="nc">&nbsp;                for (int i = 20; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;                    chars[i] = &#39;0&#39;;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (millis &lt; 10) {</b>
+<b class="nc">&nbsp;                    IOUtils.getChars(millis, 19 + millislen, chars);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    if (millis % 100 == 0) {</b>
+<b class="nc">&nbsp;                        IOUtils.getChars(millis / 100, 19 + millislen, chars);</b>
+<b class="nc">&nbsp;                    } else if (millis % 10 == 0) {</b>
+<b class="nc">&nbsp;                        IOUtils.getChars(millis / 10, 19 + millislen, chars);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        IOUtils.getChars(millis, 19 + millislen, chars);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            if (timeZone) {</b>
+<b class="nc">&nbsp;                int timeZoneOffset = offsetTotalSeconds / 3600;</b>
+<b class="nc">&nbsp;                if (offsetTotalSeconds == 0) {</b>
+<b class="nc">&nbsp;                    chars[19 + millislen] = &#39;Z&#39;;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    int offsetAbs = Math.abs(timeZoneOffset);</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (timeZoneOffset &gt;= 0) {</b>
+<b class="nc">&nbsp;                        chars[19 + millislen] = &#39;+&#39;;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        chars[19 + millislen] = &#39;-&#39;;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    chars[19 + millislen + 1] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    IOUtils.getChars(offsetAbs, 19 + millislen + 3, chars);</b>
+<b class="nc">&nbsp;                    chars[19 + millislen + 3] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;                    chars[19 + millislen + 4] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                    int offsetMinutes = (offsetTotalSeconds - timeZoneOffset * 3600) / 60;</b>
+<b class="nc">&nbsp;                    if (offsetMinutes &lt; 0) {</b>
+<b class="nc">&nbsp;                        offsetMinutes = -offsetMinutes;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    IOUtils.getChars(offsetMinutes, 19 + millislen + zonelen, chars);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return STRING_CREATOR_JDK8.apply(chars, Boolean.TRUE);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        byte[] bytes = new byte[len];</b>
+<b class="nc">&nbsp;        bytes[0] = (byte) (year / 1000 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        bytes[1] = (byte) ((year / 100) % 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        bytes[2] = (byte) ((year / 10) % 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        bytes[3] = (byte) (year % 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        bytes[4] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;        bytes[5] = (byte) (month / 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        bytes[6] = (byte) (month % 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        bytes[7] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;        bytes[8] = (byte) (dayOfMonth / 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        bytes[9] = (byte) (dayOfMonth % 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        bytes[10] = &#39; &#39;;</b>
+<b class="nc">&nbsp;        bytes[11] = (byte) (hour / 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        bytes[12] = (byte) (hour % 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        bytes[13] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;        bytes[14] = (byte) (minute / 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        bytes[15] = (byte) (minute % 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        bytes[16] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;        bytes[17] = (byte) (second / 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        bytes[18] = (byte) (second % 10 + &#39;0&#39;);</b>
+<b class="nc">&nbsp;        if (millislen &gt; 0) {</b>
+<b class="nc">&nbsp;            bytes[19] = &#39;.&#39;;</b>
+<b class="nc">&nbsp;            for (int i = 20; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;                bytes[i] = &#39;0&#39;;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (millis &lt; 10) {</b>
+<b class="nc">&nbsp;                IOUtils.getChars(millis, 19 + millislen, bytes);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (millis % 100 == 0) {</b>
+<b class="nc">&nbsp;                    IOUtils.getChars(millis / 100, 19 + millislen, bytes);</b>
+<b class="nc">&nbsp;                } else if (millis % 10 == 0) {</b>
+<b class="nc">&nbsp;                    IOUtils.getChars(millis / 10, 19 + millislen, bytes);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    IOUtils.getChars(millis, 19 + millislen, bytes);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (timeZone) {</b>
+<b class="nc">&nbsp;            int timeZoneOffset = offsetTotalSeconds / 3600;</b>
+<b class="nc">&nbsp;            if (offsetTotalSeconds == 0) {</b>
+<b class="nc">&nbsp;                bytes[19 + millislen] = &#39;Z&#39;;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                int offsetAbs = Math.abs(timeZoneOffset);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (timeZoneOffset &gt;= 0) {</b>
+<b class="nc">&nbsp;                    bytes[19 + millislen] = &#39;+&#39;;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    bytes[19 + millislen] = &#39;-&#39;;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                bytes[19 + millislen + 1] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                IOUtils.getChars(offsetAbs, 19 + millislen + 3, bytes);</b>
+<b class="nc">&nbsp;                bytes[19 + millislen + 3] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;                bytes[19 + millislen + 4] = &#39;0&#39;;</b>
+<b class="nc">&nbsp;                int offsetMinutes = (offsetTotalSeconds - timeZoneOffset * 3600) / 60;</b>
+<b class="nc">&nbsp;                if (offsetMinutes &lt; 0) {</b>
+<b class="nc">&nbsp;                    offsetMinutes = -offsetMinutes;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                IOUtils.getChars(offsetMinutes, 19 + millislen + zonelen, bytes);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (STRING_CREATOR_JDK11 != null) {</b>
+<b class="nc">&nbsp;            return STRING_CREATOR_JDK11.apply(bytes, LATIN1);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new String(bytes, 0, bytes.length, StandardCharsets.ISO_8859_1);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 19:56</div>
+</div>
+</body>
+</html>

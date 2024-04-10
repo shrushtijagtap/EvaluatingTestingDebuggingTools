@@ -1,0 +1,176 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONWritable</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.support.odps</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONWritable (com.alibaba.fastjson2.support.odps)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONWritable</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.support.odps;
+&nbsp;
+&nbsp;import com.aliyun.odps.io.Writable;
+&nbsp;import com.aliyun.odps.io.WritableUtils;
+&nbsp;
+&nbsp;import java.io.DataInput;
+&nbsp;import java.io.DataOutput;
+&nbsp;import java.io.IOException;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;
+&nbsp;public class JSONWritable
+&nbsp;        implements Writable {
+<b class="nc">&nbsp;    private static final byte[] EMPTY_BYTES = new byte[0];</b>
+&nbsp;
+&nbsp;    byte[] bytes;
+&nbsp;    int off;
+&nbsp;    int length;
+&nbsp;
+<b class="nc">&nbsp;    public JSONWritable() {</b>
+<b class="nc">&nbsp;        bytes = EMPTY_BYTES;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public JSONWritable(byte[] bytes) {</b>
+<b class="nc">&nbsp;        this.bytes = bytes;</b>
+<b class="nc">&nbsp;        this.off = 0;</b>
+<b class="nc">&nbsp;        this.length = bytes.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(DataOutput out) throws IOException {
+<b class="nc">&nbsp;        WritableUtils.writeVInt(out, length);</b>
+<b class="nc">&nbsp;        out.write(bytes, off, length);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void readFields(DataInput in) throws IOException {
+<b class="nc">&nbsp;        int newLength = WritableUtils.readVInt(in);</b>
+<b class="nc">&nbsp;        setCapacity(newLength, false);</b>
+<b class="nc">&nbsp;        in.readFully(bytes, 0, newLength);</b>
+<b class="nc">&nbsp;        length = newLength;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    void setCapacity(int len, boolean keepData) {
+<b class="nc">&nbsp;        if (bytes == null || bytes.length &lt; len) {</b>
+<b class="nc">&nbsp;            byte[] newBytes = new byte[len];</b>
+<b class="nc">&nbsp;            if (bytes != null &amp;&amp; keepData) {</b>
+<b class="nc">&nbsp;                System.arraycopy(bytes, 0, newBytes, 0, length);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            bytes = newBytes;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void set(String string) {
+<b class="nc">&nbsp;        this.bytes = string.getBytes(StandardCharsets.UTF_8);</b>
+<b class="nc">&nbsp;        this.length = bytes.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void set(byte[] utf8) {
+<b class="nc">&nbsp;        set(utf8, 0, utf8.length);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void set(byte[] utf8, int start, int len) {
+<b class="nc">&nbsp;        setCapacity(len, false);</b>
+<b class="nc">&nbsp;        System.arraycopy(utf8, start, bytes, 0, len);</b>
+<b class="nc">&nbsp;        this.length = len;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return new String(bytes, off, length, StandardCharsets.UTF_8);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:45</div>
+</div>
+</body>
+</html>

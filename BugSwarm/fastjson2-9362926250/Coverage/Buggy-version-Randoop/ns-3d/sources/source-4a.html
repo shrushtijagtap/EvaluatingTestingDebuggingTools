@@ -1,0 +1,271 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectWriter (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/75)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.filter.*;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public interface ObjectWriter&lt;T&gt; {
+&nbsp;    default long getFeatures() {
+<b class="nc">&nbsp;        return 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default List&lt;FieldWriter&gt; getFieldWriters() {
+<b class="nc">&nbsp;        return Collections.emptyList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default FieldWriter getFieldWriter(long hashCode) {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default FieldWriter getFieldWriter(String name) {
+<b class="nc">&nbsp;        long nameHash = Fnv.hashCode64(name);</b>
+<b class="nc">&nbsp;        FieldWriter fieldWriter = getFieldWriter(nameHash);</b>
+<b class="nc">&nbsp;        if (fieldWriter == null) {</b>
+<b class="nc">&nbsp;            long nameHashLCase = Fnv.hashCode64LCase(name);</b>
+<b class="nc">&nbsp;            if (nameHashLCase != nameHash) {</b>
+<b class="nc">&nbsp;                fieldWriter = getFieldWriter(nameHashLCase);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return fieldWriter;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default boolean writeTypeInfo(JSONWriter jsonWriter) {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default void writeJSONB(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;        write(jsonWriter, object, fieldName, fieldType, features);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default void writeArrayMappingJSONB(JSONWriter jsonWriter, Object object) {
+<b class="nc">&nbsp;        writeArrayMappingJSONB(jsonWriter, object, null, null, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default void writeArrayMappingJSONB(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;        List&lt;FieldWriter&gt; fieldWriters = getFieldWriters();</b>
+<b class="nc">&nbsp;        int size = fieldWriters.size();</b>
+<b class="nc">&nbsp;        jsonWriter.startArray(size);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; size; ++i) {</b>
+<b class="nc">&nbsp;            FieldWriter fieldWriter = fieldWriters.get(i);</b>
+<b class="nc">&nbsp;            fieldWriter.writeValue(jsonWriter, object);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    default void writeArrayMapping(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;        if (jsonWriter.isJSONB()) {</b>
+<b class="nc">&nbsp;            writeArrayMappingJSONB(jsonWriter, object, fieldName, fieldType, features);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        List&lt;FieldWriter&gt; fieldWriters = getFieldWriters();</b>
+<b class="nc">&nbsp;        jsonWriter.startArray();</b>
+<b class="nc">&nbsp;        boolean hasFilter = hasFilter(jsonWriter);</b>
+<b class="nc">&nbsp;        if (!hasFilter) {</b>
+<b class="nc">&nbsp;            for (int i = 0, size = fieldWriters.size(); i &lt; size; ++i) {</b>
+<b class="nc">&nbsp;                if (i != 0) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeComma();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                FieldWriter fieldWriter = fieldWriters.get(i);</b>
+<b class="nc">&nbsp;                fieldWriter.writeValue(jsonWriter, object);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            JSONWriter.Context ctx = jsonWriter.getContext();</b>
+<b class="nc">&nbsp;            PropertyPreFilter propertyPreFilter = ctx.getPropertyPreFilter();</b>
+<b class="nc">&nbsp;            ValueFilter valueFilter = ctx.getValueFilter();</b>
+<b class="nc">&nbsp;            PropertyFilter propertyFilter = ctx.getPropertyFilter();</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0, size = fieldWriters.size(); i &lt; size; ++i) {</b>
+<b class="nc">&nbsp;                if (i != 0) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeComma();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                FieldWriter fieldWriter = fieldWriters.get(i);</b>
+<b class="nc">&nbsp;                if (propertyPreFilter != null &amp;&amp; !propertyPreFilter.process(jsonWriter, object, fieldWriter.fieldName)) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeNull();</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Object fieldValue = fieldWriter.getFieldValue(object);</b>
+<b class="nc">&nbsp;                if (propertyFilter != null &amp;&amp; !propertyFilter.apply(object, fieldWriter.fieldName, fieldValue)) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeNull();</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (valueFilter != null) {</b>
+<b class="nc">&nbsp;                    Object processValue = valueFilter.apply(object, fieldWriter.fieldName, fieldValue);</b>
+<b class="nc">&nbsp;                    if (processValue == null) {</b>
+<b class="nc">&nbsp;                        jsonWriter.writeNull();</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    ObjectWriter processValueWriter = fieldWriter.getObjectWriter(jsonWriter, processValue.getClass());</b>
+<b class="nc">&nbsp;                    processValueWriter.write(jsonWriter, fieldValue);</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    if (fieldValue == null) {</b>
+<b class="nc">&nbsp;                        jsonWriter.writeNull();</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    ObjectWriter fieldValueWriter = fieldWriter.getObjectWriter(jsonWriter, fieldValue.getClass());</b>
+<b class="nc">&nbsp;                    fieldValueWriter.write(jsonWriter, fieldValue);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        jsonWriter.endArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default boolean hasFilter(JSONWriter jsonWriter) {
+<b class="nc">&nbsp;        return jsonWriter.hasFilter(JSONWriter.Feature.IgnoreNonFieldGetter.mask);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default void write(JSONWriter jsonWriter, Object object) {
+<b class="nc">&nbsp;        write(jsonWriter, object, null, null, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features);
+&nbsp;
+&nbsp;    default void writeWithFilter(JSONWriter jsonWriter, Object object) {
+<b class="nc">&nbsp;        writeWithFilter(jsonWriter, object, null, null, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default void writeWithFilter(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="nc">&nbsp;        throw new UnsupportedOperationException();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default void setPropertyFilter(PropertyFilter propertyFilter) {
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    default void setValueFilter(ValueFilter valueFilter) {
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    default void setNameFilter(NameFilter nameFilter) {
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    default void setPropertyPreFilter(PropertyPreFilter propertyPreFilter) {
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    default void setFilter(Filter filter) {
+<b class="nc">&nbsp;        if (filter instanceof PropertyFilter) {</b>
+<b class="nc">&nbsp;            setPropertyFilter((PropertyFilter) filter);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (filter instanceof ValueFilter) {</b>
+<b class="nc">&nbsp;            setValueFilter((ValueFilter) filter);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (filter instanceof NameFilter) {</b>
+<b class="nc">&nbsp;            setNameFilter((NameFilter) filter);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (filter instanceof PropertyPreFilter) {</b>
+<b class="nc">&nbsp;            setPropertyPreFilter((PropertyPreFilter) filter);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:12</div>
+</div>
+</body>
+</html>

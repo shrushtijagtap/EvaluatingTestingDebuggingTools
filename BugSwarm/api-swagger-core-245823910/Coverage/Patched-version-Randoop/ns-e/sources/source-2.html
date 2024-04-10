@@ -1,0 +1,321 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Info</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.oas.models.info</a>
+</div>
+
+<h1>Coverage Summary for Class: Info (io.swagger.oas.models.info)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Info</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/63)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/**
+&nbsp; * Copyright 2017 SmartBear Software
+&nbsp; * &lt;p&gt;
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; * &lt;p&gt;
+&nbsp; * http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; * &lt;p&gt;
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package io.swagger.oas.models.info;
+&nbsp;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;/**
+&nbsp; *
+&nbsp; * @see &quot;https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#infoObject&quot;
+&nbsp; */
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;public class Info {</b>
+<b class="nc">&nbsp;  private String title = null;</b>
+<b class="nc">&nbsp;  private String description = null;</b>
+<b class="nc">&nbsp;  private String termsOfService = null;</b>
+<b class="nc">&nbsp;  private Contact contact = null;</b>
+<b class="nc">&nbsp;  private License license = null;</b>
+<b class="nc">&nbsp;  private String version = null;</b>
+<b class="nc">&nbsp;  private java.util.Map&lt;String, Object&gt; extensions = null;</b>
+&nbsp;
+&nbsp;  /**
+&nbsp;   * returns the title property from a Info instance.
+&nbsp;   *
+&nbsp;   * @return String title
+&nbsp;   **/
+&nbsp;
+&nbsp;  public String getTitle() {
+<b class="nc">&nbsp;    return title;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setTitle(String title) {
+<b class="nc">&nbsp;    this.title = title;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Info title(String title) {
+<b class="nc">&nbsp;    this.title = title;</b>
+<b class="nc">&nbsp;    return this;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * returns the description property from a Info instance.
+&nbsp;   *
+&nbsp;   * @return String description
+&nbsp;   **/
+&nbsp;
+&nbsp;  public String getDescription() {
+<b class="nc">&nbsp;    return description;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setDescription(String description) {
+<b class="nc">&nbsp;    this.description = description;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Info description(String description) {
+<b class="nc">&nbsp;    this.description = description;</b>
+<b class="nc">&nbsp;    return this;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * returns the termsOfService property from a Info instance.
+&nbsp;   *
+&nbsp;   * @return String termsOfService
+&nbsp;   **/
+&nbsp;
+&nbsp;  public String getTermsOfService() {
+<b class="nc">&nbsp;    return termsOfService;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setTermsOfService(String termsOfService) {
+<b class="nc">&nbsp;    this.termsOfService = termsOfService;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Info termsOfService(String termsOfService) {
+<b class="nc">&nbsp;    this.termsOfService = termsOfService;</b>
+<b class="nc">&nbsp;    return this;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * returns the contact property from a Info instance.
+&nbsp;   *
+&nbsp;   * @return Contact contact
+&nbsp;   **/
+&nbsp;
+&nbsp;  public Contact getContact() {
+<b class="nc">&nbsp;    return contact;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setContact(Contact contact) {
+<b class="nc">&nbsp;    this.contact = contact;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Info contact(Contact contact) {
+<b class="nc">&nbsp;    this.contact = contact;</b>
+<b class="nc">&nbsp;    return this;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * returns the license property from a Info instance.
+&nbsp;   *
+&nbsp;   * @return License license
+&nbsp;   **/
+&nbsp;
+&nbsp;  public License getLicense() {
+<b class="nc">&nbsp;    return license;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setLicense(License license) {
+<b class="nc">&nbsp;    this.license = license;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Info license(License license) {
+<b class="nc">&nbsp;    this.license = license;</b>
+<b class="nc">&nbsp;    return this;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * returns the version property from a Info instance.
+&nbsp;   *
+&nbsp;   * @return String version
+&nbsp;   **/
+&nbsp;
+&nbsp;  public String getVersion() {
+<b class="nc">&nbsp;    return version;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setVersion(String version) {
+<b class="nc">&nbsp;    this.version = version;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public Info version(String version) {
+<b class="nc">&nbsp;    this.version = version;</b>
+<b class="nc">&nbsp;    return this;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public boolean equals(java.lang.Object o) {
+<b class="nc">&nbsp;    if (this == o) {</b>
+<b class="nc">&nbsp;      return true;</b>
+&nbsp;    }
+<b class="nc">&nbsp;    if (o == null || getClass() != o.getClass()) {</b>
+<b class="nc">&nbsp;      return false;</b>
+&nbsp;    }
+<b class="nc">&nbsp;    Info info = (Info) o;</b>
+<b class="nc">&nbsp;    return Objects.equals(this.title, info.title) &amp;&amp;</b>
+<b class="nc">&nbsp;        Objects.equals(this.description, info.description) &amp;&amp;</b>
+<b class="nc">&nbsp;        Objects.equals(this.termsOfService, info.termsOfService) &amp;&amp;</b>
+<b class="nc">&nbsp;        Objects.equals(this.contact, info.contact) &amp;&amp;</b>
+<b class="nc">&nbsp;        Objects.equals(this.license, info.license) &amp;&amp;</b>
+<b class="nc">&nbsp;        Objects.equals(this.version, info.version) &amp;&amp;</b>
+<b class="nc">&nbsp;        Objects.equals(this.extensions, info.extensions);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public int hashCode() {
+<b class="nc">&nbsp;    return Objects.hash(title, description, termsOfService, contact, license, version, extensions);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;
+&nbsp;  public java.util.Map&lt;String, Object&gt; getExtensions() {
+<b class="nc">&nbsp;    return extensions;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void addExtension(String name, Object value) {
+<b class="nc">&nbsp;    if(this.extensions == null) {</b>
+<b class="nc">&nbsp;      this.extensions = new java.util.HashMap&lt;&gt;();</b>
+&nbsp;    }
+<b class="nc">&nbsp;    this.extensions.put(name, value);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void setExtensions(java.util.Map&lt;String, Object&gt; extensions) {
+<b class="nc">&nbsp;    this.extensions = extensions;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public String toString() {
+<b class="nc">&nbsp;    StringBuilder sb = new StringBuilder();</b>
+<b class="nc">&nbsp;    sb.append(&quot;class Info {\n&quot;);</b>
+&nbsp;    
+<b class="nc">&nbsp;    sb.append(&quot;    title: &quot;).append(toIndentedString(title)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;    sb.append(&quot;    description: &quot;).append(toIndentedString(description)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;    sb.append(&quot;    termsOfService: &quot;).append(toIndentedString(termsOfService)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;    sb.append(&quot;    contact: &quot;).append(toIndentedString(contact)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;    sb.append(&quot;    license: &quot;).append(toIndentedString(license)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;    sb.append(&quot;    version: &quot;).append(toIndentedString(version)).append(&quot;\n&quot;);</b>
+<b class="nc">&nbsp;    sb.append(&quot;}&quot;);</b>
+<b class="nc">&nbsp;    return sb.toString();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Convert the given object to string with each line indented by 4 spaces
+&nbsp;   * (except the first line).
+&nbsp;   */
+&nbsp;  private String toIndentedString(java.lang.Object o) {
+<b class="nc">&nbsp;    if (o == null) {</b>
+<b class="nc">&nbsp;      return &quot;null&quot;;</b>
+&nbsp;    }
+<b class="nc">&nbsp;    return o.toString().replace(&quot;\n&quot;, &quot;\n    &quot;);</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:28</div>
+</div>
+</body>
+</html>

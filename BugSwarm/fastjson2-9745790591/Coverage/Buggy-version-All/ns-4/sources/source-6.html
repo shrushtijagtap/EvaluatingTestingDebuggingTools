@@ -1,0 +1,301 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.serializer</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONSerializer (com.alibaba.fastjson.serializer)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    29.5%
+  </span>
+  <span class="absValue">
+    (13/44)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    19.7%
+  </span>
+  <span class="absValue">
+    (35/178)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JSONSerializer$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    28.9%
+  </span>
+  <span class="absValue">
+    (13/45)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    19.6%
+  </span>
+  <span class="absValue">
+    (35/179)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson.serializer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.JSON;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriter;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class JSONSerializer {
+&nbsp;    public final SerializeWriter out;
+&nbsp;    final JSONWriter raw;
+&nbsp;    SerialContext context;
+&nbsp;
+&nbsp;    public JSONSerializer() {
+&nbsp;        this(new SerializeWriter());
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONSerializer(SerializeConfig config) {
+&nbsp;        this(new SerializeWriter(config));
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONSerializer(JSONWriter raw) {
+&nbsp;        this(new SerializeWriter(raw));
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONSerializer(SerializeWriter out) {
+&nbsp;        this.out = out;
+&nbsp;        this.raw = out.raw;
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONSerializer(SerializeWriter out, SerializeConfig config) {
+&nbsp;        this.out = out;
+&nbsp;        this.raw = out.raw;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void config(SerializerFeature feature, boolean state) {
+&nbsp;        if (!state) {
+<b class="fc">&nbsp;            throw new JSONException(&quot;not support&quot;);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        JSONWriter.Context ctx = raw.getContext();
+&nbsp;
+<b class="nc">&nbsp;        switch (feature) {</b>
+&nbsp;            case UseISO8601DateFormat:
+&nbsp;                ctx.setDateFormat(&quot;iso8601&quot;);
+&nbsp;                break;
+&nbsp;            case WriteMapNullValue:
+&nbsp;                ctx.config(JSONWriter.Feature.WriteNulls);
+&nbsp;                break;
+&nbsp;            case WriteNullListAsEmpty:
+&nbsp;                ctx.config(JSONWriter.Feature.WriteNullListAsEmpty);
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case WriteNullStringAsEmpty:
+&nbsp;                ctx.config(JSONWriter.Feature.WriteNullStringAsEmpty);
+<b class="fc">&nbsp;                break;</b>
+<b class="fc">&nbsp;            case WriteNullNumberAsZero:</b>
+&nbsp;                ctx.config(JSONWriter.Feature.WriteNullNumberAsZero);
+&nbsp;                break;
+<b class="nc">&nbsp;            case WriteNullBooleanAsFalse:</b>
+&nbsp;                ctx.config(JSONWriter.Feature.WriteNullBooleanAsFalse);
+&nbsp;                break;
+&nbsp;            case BrowserCompatible:
+<b class="fc">&nbsp;                ctx.config(JSONWriter.Feature.BrowserCompatible);</b>
+&nbsp;                break;
+&nbsp;            case WriteClassName:
+&nbsp;                ctx.config(JSONWriter.Feature.WriteClassName);
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case WriteNonStringValueAsString:
+&nbsp;                ctx.config(JSONWriter.Feature.WriteNonStringValueAsString);
+<b class="fc">&nbsp;                break;</b>
+<b class="fc">&nbsp;            case WriteEnumUsingToString:</b>
+<b class="fc">&nbsp;                ctx.config(JSONWriter.Feature.WriteEnumUsingToString);</b>
+&nbsp;                break;
+&nbsp;            case NotWriteRootClassName:
+&nbsp;                ctx.config(JSONWriter.Feature.NotWriteRootClassName);
+<b class="nc">&nbsp;                break;</b>
+<b class="nc">&nbsp;            case IgnoreErrorGetter:</b>
+&nbsp;                ctx.config(JSONWriter.Feature.IgnoreErrorGetter);
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case WriteDateUseDateFormat:
+&nbsp;                ctx.setDateFormat(JSON.DEFFAULT_DATE_FORMAT);
+&nbsp;                break;
+<b class="nc">&nbsp;            case BeanToArray:</b>
+<b class="nc">&nbsp;                ctx.config(JSONWriter.Feature.BeanToArray);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case UseSingleQuotes:
+&nbsp;                ctx.config(JSONWriter.Feature.UseSingleQuotes);
+&nbsp;                break;
+<b class="nc">&nbsp;            default:</b>
+&nbsp;                break;
+&nbsp;        }
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public void write(boolean value) {</b>
+&nbsp;        raw.writeBool(value);
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void writeInt(int i) {
+&nbsp;        raw.writeInt32(i);
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public void write(String text) {</b>
+&nbsp;        raw.writeString(text);
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeLong(long i) {
+<b class="nc">&nbsp;        raw.writeInt64(i);</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public void writeNull() {
+&nbsp;        raw.writeNull();
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void write(Object object) {
+&nbsp;        raw.writeAny(object);
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void writeAs(Object object, Class type) {
+<b class="nc">&nbsp;        ObjectWriter objectWriter = raw.getObjectWriter(type);</b>
+&nbsp;        objectWriter.write(raw, 0);
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    @Override</b>
+&nbsp;    public String toString() {
+&nbsp;        return this.raw.toString();
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public List&lt;PropertyFilter&gt; getPropertyFilters() {
+&nbsp;        return this.out.getPropertyFilters();
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public List&lt;ValueFilter&gt; getValueFilters() {
+&nbsp;        return this.out.getValueFilters();
+&nbsp;    }
+<b class="fc">&nbsp;    public List&lt;NameFilter&gt; getNameFilters() {</b>
+&nbsp;        return this.out.getNameFilters();
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public List&lt;BeforeFilter&gt; getBeforeFilters() {</b>
+&nbsp;        return this.out.getBeforeFilters();
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public List&lt;AfterFilter&gt; getAfterFilters() {</b>
+<b class="fc">&nbsp;        return this.out.getAfterFilters();</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    public SerializeConfig getMapping() {</b>
+&nbsp;        return out.config;
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public SerializeWriter getWriter() {</b>
+&nbsp;        return out;
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public ObjectSerializer getObjectWriter(Class&lt;?&gt; clazz) {</b>
+<b class="nc">&nbsp;        return out.config.getObjectWriter(clazz);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void write(SerializeWriter out, Object object) {
+&nbsp;        out.raw.writeAny(object);
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="nc">&nbsp;    public SerialContext getContext() {</b>
+&nbsp;        return context;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setContext(SerialContext context) {
+<b class="fc">&nbsp;        this.context = context;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:01</div>
+</div>
+</body>
+</html>

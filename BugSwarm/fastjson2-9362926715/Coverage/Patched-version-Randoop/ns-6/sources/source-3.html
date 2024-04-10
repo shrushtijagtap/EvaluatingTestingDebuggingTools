@@ -1,0 +1,145 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Geometry</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.support.geo</a>
+</div>
+
+<h1>Coverage Summary for Class: Geometry (com.alibaba.fastjson.support.geo)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Geometry</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson.support.geo;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.annotation.JSONType;
+&nbsp;
+&nbsp;/**
+&nbsp; * @since 1.2.68
+&nbsp; */
+&nbsp;@JSONType(
+&nbsp;        seeAlso = {
+&nbsp;            GeometryCollection.class,
+&nbsp;            LineString.class,
+&nbsp;            MultiLineString.class,
+&nbsp;            Point.class,
+&nbsp;            MultiPoint.class,
+&nbsp;            Polygon.class,
+&nbsp;            MultiPolygon.class,
+&nbsp;            Feature.class,
+&nbsp;            FeatureCollection.class
+&nbsp;        },
+&nbsp;        typeKey = &quot;type&quot;
+&nbsp;)
+&nbsp;public abstract class Geometry {
+&nbsp;    private final String type;
+&nbsp;    private double[] bbox;
+&nbsp;
+<b class="nc">&nbsp;    protected Geometry(String type) {</b>
+<b class="nc">&nbsp;        this.type = type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getType() {
+<b class="nc">&nbsp;        return type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double[] getBbox() {
+<b class="nc">&nbsp;        return bbox;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setBbox(double[] bbox) {
+<b class="nc">&nbsp;        this.bbox = bbox;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:54</div>
+</div>
+</body>
+</html>

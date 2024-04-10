@@ -1,0 +1,267 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EmailValidator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.schema</a>
+</div>
+
+<h1>Coverage Summary for Class: EmailValidator (com.alibaba.fastjson2.schema)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EmailValidator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/87)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.schema;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.List;
+&nbsp;import java.util.regex.Matcher;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+<b class="nc">&nbsp;final class EmailValidator</b>
+&nbsp;        implements FormatValidator {
+<b class="nc">&nbsp;    static final Pattern EMAIL_PATTERN = Pattern.compile(&quot;^\\s*?(.+)@(.+?)\\s*$&quot;);</b>
+<b class="nc">&nbsp;    static final Pattern IP_DOMAIN_PATTERN = Pattern.compile(&quot;^\\[(.*)\\]$&quot;);</b>
+<b class="nc">&nbsp;    static final Pattern USER_PATTERN = Pattern.compile(&quot;^\\s*(((\\\\.)|[^\\s\\p{Cntrl}\\(\\)&lt;&gt;@,;:&#39;\\\\\\\&quot;\\.\\[\\]]|&#39;)+|(\&quot;[^\&quot;]*\&quot;))(\\.(((\\\\.)|[^\\s\\p{Cntrl}\\(\\)&lt;&gt;@,;:&#39;\\\\\\\&quot;\\.\\[\\]]|&#39;)+|(\&quot;[^\&quot;]*\&quot;)))*$&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;    static final EmailValidator INSTANCE = new EmailValidator();</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isValid(String email) {
+<b class="nc">&nbsp;        if (email == null) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (email.endsWith(&quot;.&quot;)) { // check this first - it&#39;s cheap!</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Check the whole email address structure
+<b class="nc">&nbsp;        Matcher emailMatcher = EMAIL_PATTERN.matcher(email);</b>
+<b class="nc">&nbsp;        if (!emailMatcher.matches()) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!isValidUser(emailMatcher.group(1))) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!isValidDomain(emailMatcher.group(2))) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static boolean isValidDomain(String domain) {
+&nbsp;        // see if domain is an IP address in brackets
+<b class="nc">&nbsp;        Matcher ipDomainMatcher = IP_DOMAIN_PATTERN.matcher(domain);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (ipDomainMatcher.matches()) {</b>
+<b class="nc">&nbsp;            String inetAddress = ipDomainMatcher.group(1);</b>
+<b class="nc">&nbsp;            return isValidInet4Address(inetAddress) || isValidInet6Address(inetAddress);</b>
+&nbsp;        }
+&nbsp;        // Domain is symbolic name
+<b class="nc">&nbsp;        return DomainValidator.isValid(domain) || DomainValidator.isValidTld(domain);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static boolean isValidUser(String user) {
+<b class="nc">&nbsp;        if (user == null || user.length() &gt; 64) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return USER_PATTERN.matcher(user).matches();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static boolean isValidInet4Address(String inet4Address) {
+&nbsp;        // verify that address conforms to generic IPv4 format
+<b class="nc">&nbsp;        String[] groups = inet4Address.split(&quot;\\.&quot;);</b>
+&nbsp;
+&nbsp;        // verify that address subgroups are legal
+<b class="nc">&nbsp;        for (int i = 0; i &lt;= 3; i++) {</b>
+<b class="nc">&nbsp;            String ipSegment = groups[i];</b>
+<b class="nc">&nbsp;            if (ipSegment == null || ipSegment.length() == 0) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            int iIpSegment = 0;</b>
+&nbsp;
+&nbsp;            try {
+<b class="nc">&nbsp;                iIpSegment = Integer.parseInt(ipSegment);</b>
+<b class="nc">&nbsp;            } catch (NumberFormatException e) {</b>
+<b class="nc">&nbsp;                return false;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            if (iIpSegment &gt; 255) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (ipSegment.length() &gt; 1 &amp;&amp; ipSegment.startsWith(&quot;0&quot;)) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static boolean isValidInet6Address(String inet6Address) {
+<b class="nc">&nbsp;        boolean containsCompressedZeroes = inet6Address.contains(&quot;::&quot;);</b>
+<b class="nc">&nbsp;        if (containsCompressedZeroes &amp;&amp; (inet6Address.indexOf(&quot;::&quot;) != inet6Address.lastIndexOf(&quot;::&quot;))) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if ((inet6Address.startsWith(&quot;:&quot;) &amp;&amp; !inet6Address.startsWith(&quot;::&quot;))</b>
+<b class="nc">&nbsp;                || (inet6Address.endsWith(&quot;:&quot;) &amp;&amp; !inet6Address.endsWith(&quot;::&quot;))) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String[] octets = inet6Address.split(&quot;:&quot;);</b>
+<b class="nc">&nbsp;        if (containsCompressedZeroes) {</b>
+<b class="nc">&nbsp;            List&lt;String&gt; octetList = new ArrayList&lt;String&gt;(Arrays.asList(octets));</b>
+<b class="nc">&nbsp;            if (inet6Address.endsWith(&quot;::&quot;)) {</b>
+&nbsp;                // String.split() drops ending empty segments
+<b class="nc">&nbsp;                octetList.add(&quot;&quot;);</b>
+<b class="nc">&nbsp;            } else if (inet6Address.startsWith(&quot;::&quot;) &amp;&amp; !octetList.isEmpty()) {</b>
+<b class="nc">&nbsp;                octetList.remove(0);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            octets = octetList.toArray(new String[octetList.size()]);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (octets.length &gt; 8) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int validOctets = 0;</b>
+<b class="nc">&nbsp;        int emptyOctets = 0;</b>
+<b class="nc">&nbsp;        for (int index = 0; index &lt; octets.length; index++) {</b>
+<b class="nc">&nbsp;            String octet = (String) octets[index];</b>
+<b class="nc">&nbsp;            if (octet.length() == 0) {</b>
+<b class="nc">&nbsp;                emptyOctets++;</b>
+<b class="nc">&nbsp;                if (emptyOctets &gt; 1) {</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                emptyOctets = 0;</b>
+<b class="nc">&nbsp;                if (octet.contains(&quot;.&quot;)) { // contains is Java 1.5+</b>
+<b class="nc">&nbsp;                    if (!inet6Address.endsWith(octet)) {</b>
+<b class="nc">&nbsp;                        return false;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (index &gt; octets.length - 1 || index &gt; 6) {</b>
+&nbsp;                        // IPV4 occupies last two octets
+<b class="nc">&nbsp;                        return false;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (!isValidInet4Address(octet)) {</b>
+<b class="nc">&nbsp;                        return false;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    validOctets += 2;</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (octet.length() &gt; 4) {</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                int octetInt = 0;</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    octetInt = Integer.valueOf(octet, 16).intValue();</b>
+<b class="nc">&nbsp;                } catch (NumberFormatException e) {</b>
+<b class="nc">&nbsp;                    return false;</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;                if (octetInt &lt; 0 || octetInt &gt; 0xffff) {</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            validOctets++;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (validOctets &lt; 8 &amp;&amp; !containsCompressedZeroes) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:45</div>
+</div>
+</body>
+</html>

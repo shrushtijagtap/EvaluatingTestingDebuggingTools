@@ -1,0 +1,149 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ValueFilter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.filter</a>
+</div>
+
+<h1>Coverage Summary for Class: ValueFilter (com.alibaba.fastjson2.filter)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ValueFilter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.filter;
+&nbsp;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.function.Function;
+&nbsp;import java.util.function.Predicate;
+&nbsp;
+&nbsp;public interface ValueFilter
+&nbsp;        extends Filter {
+&nbsp;    Object apply(Object object, String name, Object value);
+&nbsp;
+&nbsp;    static ValueFilter compose(ValueFilter before, ValueFilter after) {
+<b class="fc">&nbsp;        return (object, name, value) -&gt;</b>
+<b class="fc">&nbsp;                after.apply(</b>
+&nbsp;                        object,
+&nbsp;                        name,
+<b class="fc">&nbsp;                        before.apply(object, name, value)</b>
+&nbsp;                );
+&nbsp;    }
+&nbsp;
+&nbsp;    static ValueFilter of(final String name, Function function) {
+<b class="fc">&nbsp;        return (object, fieldName, fieldValue)</b>
+<b class="fc">&nbsp;                -&gt; name == null || name.equals(fieldName)</b>
+<b class="fc">&nbsp;                ? function.apply(fieldValue)</b>
+&nbsp;                : fieldValue;
+&nbsp;    }
+&nbsp;
+&nbsp;    static ValueFilter of(final String name, Map map) {
+<b class="fc">&nbsp;        return (object, fieldName, fieldValue) -&gt; {</b>
+<b class="fc">&nbsp;            if (name == null || name.equals(fieldName)) {</b>
+<b class="fc">&nbsp;                Object o = map.get(fieldValue);</b>
+<b class="fc">&nbsp;                if (o != null || map.containsKey(fieldValue)) {</b>
+<b class="fc">&nbsp;                    return o;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            return fieldValue;</b>
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    static ValueFilter of(Predicate&lt;String&gt; nameMatcher, Function function) {
+<b class="fc">&nbsp;        return (object, fieldName, fieldValue)</b>
+<b class="fc">&nbsp;                -&gt; nameMatcher == null || nameMatcher.test(fieldName)</b>
+<b class="fc">&nbsp;                ? function.apply(fieldValue)</b>
+&nbsp;                : fieldValue;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:16</div>
+</div>
+</body>
+</html>

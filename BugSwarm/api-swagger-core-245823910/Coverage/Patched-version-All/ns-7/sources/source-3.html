@@ -1,0 +1,95 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > OpenAPIExtension</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.jaxrs2.ext</a>
+</div>
+
+<h1>Coverage Summary for Class: OpenAPIExtension (io.swagger.jaxrs2.ext)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">OpenAPIExtension</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package io.swagger.jaxrs2.ext;
+&nbsp;
+&nbsp;import io.swagger.oas.models.Operation;
+&nbsp;import io.swagger.oas.models.parameters.Parameter;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;public interface OpenAPIExtension {
+&nbsp;
+&nbsp;    String extractOperationMethod(Operation apiOperation, Method method, Iterator&lt;OpenAPIExtension&gt; chain);
+&nbsp;
+&nbsp;    List&lt;Parameter&gt; extractParameters(List&lt;Annotation&gt; annotations, Type type, Set&lt;Type&gt; typesToSkip, Iterator&lt;OpenAPIExtension&gt; chain);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Decorates operation with additional vendor based extensions.
+&nbsp;     *
+&nbsp;     * @param operation the operation, build from swagger definition
+&nbsp;     * @param method the method for additional scan
+&nbsp;     * @param chain the chain with swagger extensions to process
+&nbsp;     */
+&nbsp;    void decorateOperation(Operation operation, Method method, Iterator&lt;OpenAPIExtension&gt; chain);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:26</div>
+</div>
+</body>
+</html>

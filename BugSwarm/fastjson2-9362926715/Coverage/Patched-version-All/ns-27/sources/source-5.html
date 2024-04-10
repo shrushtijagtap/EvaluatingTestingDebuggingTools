@@ -1,0 +1,135 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ToByte</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.function.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: ToByte (com.alibaba.fastjson2.function.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ToByte</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.function.impl;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;public class ToByte
+&nbsp;        implements Function {
+&nbsp;    final Byte defaultValue;
+&nbsp;
+<b class="fc">&nbsp;    public ToByte(Byte defaultValue) {</b>
+<b class="fc">&nbsp;        this.defaultValue = defaultValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object apply(Object o) {
+<b class="fc">&nbsp;        if (o == null) {</b>
+<b class="fc">&nbsp;            return defaultValue;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (o instanceof Boolean) {</b>
+<b class="fc">&nbsp;            return ((Boolean) o).booleanValue() ? (byte) 1 : (byte) 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (o instanceof Number) {</b>
+<b class="fc">&nbsp;            return ((Number) o).byteValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        throw new JSONException(&quot;can not cast to Byte &quot; + o.getClass());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:52</div>
+</div>
+</body>
+</html>

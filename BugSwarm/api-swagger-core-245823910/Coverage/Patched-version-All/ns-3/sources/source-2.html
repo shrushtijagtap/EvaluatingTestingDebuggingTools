@@ -1,0 +1,422 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SpecFilter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.swagger.core.filter</a>
+</div>
+
+<h1>Coverage Summary for Class: SpecFilter (io.swagger.core.filter)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SpecFilter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/115)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package io.swagger.core.filter;
+&nbsp;
+&nbsp;import io.swagger.model.ApiDescription;
+&nbsp;import io.swagger.oas.models.OpenAPI;
+&nbsp;import io.swagger.oas.models.Operation;
+&nbsp;import io.swagger.oas.models.PathItem;
+&nbsp;import io.swagger.oas.models.media.Schema;
+&nbsp;import io.swagger.oas.models.parameters.Parameter;
+&nbsp;import io.swagger.oas.models.responses.ApiResponse;
+&nbsp;import io.swagger.oas.models.tags.Tag;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.TreeSet;
+&nbsp;
+<b class="nc">&nbsp;public class SpecFilter {</b>
+&nbsp;    public OpenAPI filter(OpenAPI swagger, SwaggerSpecFilter filter, Map&lt;String, List&lt;String&gt;&gt; params, Map&lt;String, String&gt; cookies, Map&lt;String, List&lt;String&gt;&gt; headers) {
+<b class="nc">&nbsp;        OpenAPI clone = new OpenAPI();</b>
+<b class="nc">&nbsp;        clone.info(swagger.getInfo())</b>
+<b class="nc">&nbsp;                .tags(swagger.getTags() == null ? null : new ArrayList&lt;Tag&gt;(swagger.getTags())</b>
+&nbsp;//                .host(swagger.getHost())
+&nbsp;//                .basePath(swagger.getBasePath())
+&nbsp;//                .schemes(swagger.getSchemes())
+&nbsp;//                .consumes(swagger.getConsumes())
+&nbsp;//                .produces(swagger.getProduces())
+&nbsp;//                .externalDocs(swagger.getExternalDocs())
+&nbsp;//                .vendorExtensions(swagger.getVendorExtensions()
+&nbsp;                );
+&nbsp;
+<b class="nc">&nbsp;        final Set&lt;String&gt; filteredTags = new HashSet&lt;String&gt;();</b>
+<b class="nc">&nbsp;        final Set&lt;String&gt; allowedTags = new HashSet&lt;String&gt;();</b>
+<b class="nc">&nbsp;        for (String resourcePath : swagger.getPaths().keySet()) {</b>
+<b class="nc">&nbsp;            PathItem path = swagger.getPaths().get(resourcePath);</b>
+<b class="nc">&nbsp;            Map&lt;String, Operation&gt; ops = new HashMap&lt;String, Operation&gt;();</b>
+<b class="nc">&nbsp;            ops.put(&quot;get&quot;, path.getGet());</b>
+<b class="nc">&nbsp;            ops.put(&quot;head&quot;, path.getHead());</b>
+<b class="nc">&nbsp;            ops.put(&quot;put&quot;, path.getPut());</b>
+<b class="nc">&nbsp;            ops.put(&quot;post&quot;, path.getPost());</b>
+<b class="nc">&nbsp;            ops.put(&quot;delete&quot;, path.getDelete());</b>
+<b class="nc">&nbsp;            ops.put(&quot;patch&quot;, path.getPatch());</b>
+<b class="nc">&nbsp;            ops.put(&quot;options&quot;, path.getOptions());</b>
+&nbsp;
+<b class="nc">&nbsp;            PathItem clonedPath = new PathItem();</b>
+<b class="nc">&nbsp;            for (String key : ops.keySet()) {</b>
+<b class="nc">&nbsp;                Operation op = ops.get(key);</b>
+<b class="nc">&nbsp;                if (op != null) {</b>
+&nbsp;                    final Set&lt;String&gt; tags;
+<b class="nc">&nbsp;                    ApiDescription description = new ApiDescription(resourcePath, key);</b>
+<b class="nc">&nbsp;                    if (filter.isOperationAllowed(op, description, params, cookies, headers)) {</b>
+&nbsp;                        // TODO
+&nbsp;//                        clonedPath.set(key, filterOperation(filter, op, params, cookies, headers));
+<b class="nc">&nbsp;                        tags = allowedTags;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        tags = filteredTags;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (op.getTags() != null) {</b>
+<b class="nc">&nbsp;                        tags.addAll(op.getTags());</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;            // TODO
+&nbsp;//            if (!clonedPath.isEmpty()) {
+&nbsp;//                clone.path(resourcePath, clonedPath);
+&nbsp;//            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        final List&lt;Tag&gt; tags = clone.getTags();</b>
+<b class="nc">&nbsp;        filteredTags.removeAll(allowedTags);</b>
+<b class="nc">&nbsp;        if (tags != null &amp;&amp; !filteredTags.isEmpty()) {</b>
+<b class="nc">&nbsp;            for (Iterator&lt;Tag&gt; it = tags.iterator(); it.hasNext(); ) {</b>
+<b class="nc">&nbsp;                if (filteredTags.contains(it.next().getName())) {</b>
+<b class="nc">&nbsp;                    it.remove();</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            if (clone.getTags().isEmpty()) {</b>
+<b class="nc">&nbsp;                clone.setTags(null);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Map&lt;String, Schema&gt; definitions = filterDefinitions(filter, swagger.getComponents().getSchemas(), params, cookies, headers);</b>
+&nbsp;        // TODO
+&nbsp;//        clone.setSecurityDefinitions(swagger.getSecurityDefinitions());
+<b class="nc">&nbsp;        clone.setSecurity(swagger.getSecurity());</b>
+&nbsp;        // TODO
+&nbsp;//        clone.setDefinitions(definitions);
+&nbsp;
+&nbsp;        // isRemovingUnreferencedDefinitions is not defined in SwaggerSpecFilter to avoid breaking compatibility with
+&nbsp;        // existing client filters directly implementing SwaggerSpecFilter.
+<b class="nc">&nbsp;        if (filter instanceof AbstractSpecFilter) {</b>
+<b class="nc">&nbsp;            if (((AbstractSpecFilter)filter).isRemovingUnreferencedDefinitions()) {</b>
+<b class="nc">&nbsp;                clone = removeBrokenReferenceDefinitions (clone);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return clone;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private OpenAPI removeBrokenReferenceDefinitions (OpenAPI swagger) {
+&nbsp;
+<b class="nc">&nbsp;        if (swagger.getComponents().getSchemas() == null || swagger.getComponents().getSchemas().isEmpty()) return swagger;</b>
+&nbsp;
+<b class="nc">&nbsp;        Set&lt;String&gt; referencedDefinitions =  new TreeSet&lt;String&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (swagger.getComponents().getResponses() != null) {</b>
+<b class="nc">&nbsp;            for (ApiResponse response: swagger.getComponents().getResponses().values()) {</b>
+&nbsp;                // TODO
+&nbsp;//                String propertyRef = getPropertyRef(response.getSchema());
+&nbsp;//                if (propertyRef != null) {
+&nbsp;//                    referencedDefinitions.add(propertyRef);
+&nbsp;//                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (swagger.getComponents().getParameters() != null) {</b>
+<b class="nc">&nbsp;            for (Parameter p: swagger.getComponents().getParameters().values()) {</b>
+&nbsp;                // TODO
+&nbsp;//                if (p instanceof BodyParameter) {
+&nbsp;//                    BodyParameter bp = (BodyParameter) p;
+&nbsp;//                    Set&lt;String&gt;  modelRef = getModelRef(bp.getSchema());
+&nbsp;//                    if (modelRef != null) {
+&nbsp;//                        referencedDefinitions.addAll(modelRef);
+&nbsp;//                    }
+&nbsp;//                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (swagger.getPaths() != null) {</b>
+<b class="nc">&nbsp;            for (PathItem path : swagger.getPaths().values()) {</b>
+<b class="nc">&nbsp;                if (path.getParameters() != null) {</b>
+<b class="nc">&nbsp;                    for (Parameter p: path.getParameters()) {</b>
+&nbsp;                        // TODO
+&nbsp;//                        if (p instanceof BodyParameter) {
+&nbsp;//                            BodyParameter bp = (BodyParameter) p;
+&nbsp;//                            Set&lt;String&gt;  modelRef = getModelRef(bp.getSchema());
+&nbsp;//                            if (modelRef != null) {
+&nbsp;//                                referencedDefinitions.addAll(modelRef);
+&nbsp;//                            }
+&nbsp;//                        }
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;                /*
+&nbsp;                if (path.getOperations() != null) {
+&nbsp;                    for (Operation op: path.getOperations()) {
+&nbsp;                        if (op.getResponses() != null) {
+&nbsp;                            for (ApiResponse response: op.getResponses().values()) {
+&nbsp;                                String propertyRef = getPropertyRef(response.getSchema());
+&nbsp;                                if (propertyRef != null) {
+&nbsp;                                    referencedDefinitions.add(propertyRef);
+&nbsp;                                }
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                        if (op.getParameters() != null) {
+&nbsp;                            for (Parameter p: op.getParameters()) {
+&nbsp;                                if (p instanceof BodyParameter) {
+&nbsp;                                    BodyParameter bp = (BodyParameter) p;
+&nbsp;                                    Set&lt;String&gt; modelRef = getModelRef(bp.getSchema());
+&nbsp;                                    if (modelRef != null) {
+&nbsp;                                        referencedDefinitions.addAll(modelRef);
+&nbsp;                                    }
+&nbsp;                                }
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;                */
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (swagger.getComponents().getSchemas() != null) {</b>
+<b class="nc">&nbsp;            Set&lt;String&gt; nestedReferencedDefinitions =  new TreeSet&lt;String&gt;();</b>
+<b class="nc">&nbsp;            for (String ref : referencedDefinitions){</b>
+<b class="nc">&nbsp;                locateReferencedDefinitions(ref, nestedReferencedDefinitions, swagger);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            referencedDefinitions.addAll(nestedReferencedDefinitions);</b>
+<b class="nc">&nbsp;            swagger.getComponents().getSchemas().keySet().retainAll(referencedDefinitions);</b>
+&nbsp;        }
+&nbsp;        
+<b class="nc">&nbsp;        return swagger;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void locateReferencedDefinitions (Map&lt;String, Schema&gt; props, Set&lt;String&gt; nestedReferencedDefinitions, OpenAPI swagger) {
+<b class="nc">&nbsp;        if (props == null) return;</b>
+<b class="nc">&nbsp;        for (String keyProp: props.keySet()) {</b>
+<b class="nc">&nbsp;            Schema p = props.get(keyProp);</b>
+<b class="nc">&nbsp;            String ref = getPropertyRef(p);</b>
+<b class="nc">&nbsp;            if (ref != null) {</b>
+<b class="nc">&nbsp;                locateReferencedDefinitions(ref, nestedReferencedDefinitions, swagger);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void locateReferencedDefinitions(String ref, Set&lt;String&gt; nestedReferencedDefinitions, OpenAPI swagger) {
+&nbsp;        // if not already processed so as to avoid infinite loops
+<b class="nc">&nbsp;        if (!nestedReferencedDefinitions.contains(ref)) {</b>
+<b class="nc">&nbsp;            nestedReferencedDefinitions.add(ref);</b>
+&nbsp;
+<b class="nc">&nbsp;            Schema model = swagger.getComponents().getSchemas().get(ref);</b>
+<b class="nc">&nbsp;            if (model != null) {</b>
+<b class="nc">&nbsp;                locateReferencedDefinitions(model.getProperties(), nestedReferencedDefinitions, swagger);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;String, Schema&gt; filterDefinitions(SwaggerSpecFilter filter, Map&lt;String, Schema&gt; definitions, Map&lt;String, List&lt;String&gt;&gt; params, Map&lt;String, String&gt; cookies, Map&lt;String, List&lt;String&gt;&gt; headers) {
+<b class="nc">&nbsp;        if (definitions == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Map&lt;String, Schema&gt; clonedDefinitions = new LinkedHashMap&lt;String, Schema&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (String key : definitions.keySet()) {</b>
+<b class="nc">&nbsp;            Schema definition = definitions.get(key);</b>
+<b class="nc">&nbsp;            Map&lt;String, Schema&gt; clonedProperties = new LinkedHashMap&lt;String, Schema&gt;();</b>
+<b class="nc">&nbsp;            if (definition.getProperties() != null) {</b>
+<b class="nc">&nbsp;                for (String propName : (Set&lt;String&gt;)definition.getProperties().keySet()) {</b>
+<b class="nc">&nbsp;                    Schema property = (Schema)definition.getProperties().get(propName);</b>
+<b class="nc">&nbsp;                    if (property != null) {</b>
+<b class="nc">&nbsp;                        boolean shouldInclude = filter.isPropertyAllowed(definition, property, propName, params, cookies, headers);</b>
+<b class="nc">&nbsp;                        if (shouldInclude) {</b>
+<b class="nc">&nbsp;                            clonedProperties.put(propName, property);</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;
+&nbsp;//            Model clonedModel = (Model) definition.clone();
+&nbsp;//            if (clonedModel.getProperties() != null) {
+&nbsp;//                clonedModel.getProperties().clear();
+&nbsp;//            }
+&nbsp;//            if( definition.getVendorExtensions() != null &amp;&amp; clonedModel.getVendorExtensions() != null ){
+&nbsp;//                clonedModel.getVendorExtensions().putAll( definition.getVendorExtensions());
+&nbsp;//            }
+&nbsp;//
+&nbsp;//            clonedModel.setProperties(clonedProperties);
+&nbsp;//            clonedDefinitions.put(key, clonedModel);
+&nbsp;            // TODO this is not a valid clone!
+<b class="nc">&nbsp;            clonedDefinitions.put(key, definition);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return clonedDefinitions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Operation filterOperation(SwaggerSpecFilter filter, Operation op, ApiDescription description, Map&lt;String, List&lt;String&gt;&gt; params, Map&lt;String, String&gt; cookies, Map&lt;String, List&lt;String&gt;&gt; headers) {
+<b class="nc">&nbsp;        Operation clonedOperation = new Operation()</b>
+<b class="nc">&nbsp;                .summary(op.getSummary())</b>
+<b class="nc">&nbsp;                .description(op.getDescription())</b>
+<b class="nc">&nbsp;                .operationId(op.getOperationId())</b>
+&nbsp;//                .schemes(op.getSchemes())
+&nbsp;//                .consumes(op.getConsumes())
+&nbsp;//                .produces(op.getProduces())
+<b class="nc">&nbsp;                .tags(op.getTags())</b>
+<b class="nc">&nbsp;                .externalDocs(op.getExternalDocs())</b>
+&nbsp;//                .vendorExtensions(op.getVendorExtensions())
+&nbsp;//                .deprecated(op.isDeprecated())
+&nbsp;                ;
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Parameter&gt; clonedParams = new ArrayList&lt;Parameter&gt;();</b>
+<b class="nc">&nbsp;        if (op.getParameters() != null) {</b>
+<b class="nc">&nbsp;            for (Parameter param : op.getParameters()) {</b>
+<b class="nc">&nbsp;                if (filter.isParamAllowed(param, op, description, params, cookies, headers)) {</b>
+<b class="nc">&nbsp;                    clonedParams.add(param);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;        clonedOperation.setParameters(clonedParams);</b>
+<b class="nc">&nbsp;        clonedOperation.setSecurity(op.getSecurity());</b>
+<b class="nc">&nbsp;        clonedOperation.setResponses(op.getResponses());</b>
+&nbsp;
+<b class="nc">&nbsp;        return clonedOperation;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String getPropertyRef(Schema property) {
+&nbsp;        /*
+&nbsp;        if (property instanceof ArrayProperty &amp;&amp;
+&nbsp;                ((ArrayProperty) property).getItems() != null) {
+&nbsp;            return getPropertyRef(((ArrayProperty) property).getItems());
+&nbsp;        } else if (property instanceof MapProperty &amp;&amp;
+&nbsp;                ((MapProperty) property).getAdditionalProperties() != null) {
+&nbsp;            return getPropertyRef(((MapProperty) property).getAdditionalProperties());
+&nbsp;        } else if (property instanceof RefProperty) {
+&nbsp;            return ((RefProperty) property).getSimpleRef();
+&nbsp;        }*/
+<b class="nc">&nbsp;        if(property.get$ref() != null) {</b>
+<b class="nc">&nbsp;            return property.get$ref();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Set&lt;String&gt; getModelRef(Schema model) {
+&nbsp;        /*
+&nbsp;        if (model instanceof ArrayModel &amp;&amp;
+&nbsp;                ((ArrayModel) model).getItems() != null) {
+&nbsp;            String propertyRef = getPropertyRef(((ArrayModel) model).getItems());
+&nbsp;            if (propertyRef != null) {
+&nbsp;                return new HashSet&lt;String&gt;(Arrays.asList(propertyRef));
+&nbsp;            }
+&nbsp;        } else if (model instanceof ComposedModel &amp;&amp;
+&nbsp;                ((ComposedModel) model).getAllOf() != null) {
+&nbsp;            Set&lt;String&gt; refs = new LinkedHashSet&lt;String&gt;();
+&nbsp;            ComposedModel cModel = (ComposedModel) model;
+&nbsp;            for (Model ref: cModel.getAllOf()) {
+&nbsp;                if (ref instanceof RefModel) {
+&nbsp;                    refs.add(((RefModel)ref).getSimpleRef());
+&nbsp;                }
+&nbsp;            }
+&nbsp;            return refs;
+&nbsp;        } else if (model instanceof RefModel) {
+&nbsp;            return new HashSet&lt;String&gt;(Arrays.asList(((RefModel) model).getSimpleRef()));
+&nbsp;        }
+&nbsp;        */
+<b class="nc">&nbsp;        if(model.get$ref() != null) {</b>
+<b class="nc">&nbsp;            return new HashSet&lt;String&gt;(Arrays.asList((model.get$ref())));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:26</div>
+</div>
+</body>
+</html>

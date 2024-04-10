@@ -1,0 +1,239 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONExtractScalar</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.support.odps</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONExtractScalar (com.alibaba.fastjson2.support.odps)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONExtractScalar</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JSONExtractScalar$ExtractValueConsumer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.support.odps;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSON;
+&nbsp;import com.alibaba.fastjson2.JSONPath;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.reader.ValueConsumer;
+&nbsp;import com.alibaba.fastjson2.util.IOUtils;
+&nbsp;import com.aliyun.odps.io.Text;
+&nbsp;import com.aliyun.odps.io.Writable;
+&nbsp;import com.aliyun.odps.udf.UDF;
+&nbsp;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;public class JSONExtractScalar
+&nbsp;        extends UDF {
+<b class="nc">&nbsp;    static final byte[] BYTES_TRUE = &quot;true&quot;.getBytes(StandardCharsets.UTF_8);</b>
+<b class="nc">&nbsp;    static final byte[] BYTES_FALSE = &quot;false&quot;.getBytes(StandardCharsets.UTF_8);</b>
+<b class="nc">&nbsp;    static final byte[] BYTES_NULL = &quot;null&quot;.getBytes(StandardCharsets.UTF_8);</b>
+&nbsp;
+&nbsp;    final JSONPath path;
+<b class="nc">&nbsp;    JSONWritable text = new JSONWritable();</b>
+&nbsp;
+<b class="nc">&nbsp;    ExtractValueConsumer valueConsumer = new ExtractValueConsumer();</b>
+&nbsp;
+<b class="nc">&nbsp;    public JSONExtractScalar(String path) {</b>
+<b class="nc">&nbsp;        this.path = JSONPath.of(path);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Writable eval(Text input) {
+<b class="nc">&nbsp;        JSONReader parser = JSONReader.of(input.getBytes(),</b>
+&nbsp;                0,
+<b class="nc">&nbsp;                input.getLength(), StandardCharsets.UTF_8</b>
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        path.extractScalar(parser, valueConsumer);</b>
+<b class="nc">&nbsp;        return text;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    class ExtractValueConsumer</b>
+&nbsp;            implements ValueConsumer {
+&nbsp;        @Override
+&nbsp;        public void accept(byte[] bytes, int off, int len) {
+<b class="nc">&nbsp;            text.bytes = bytes;</b>
+<b class="nc">&nbsp;            text.off = off;</b>
+<b class="nc">&nbsp;            text.length = len;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void acceptNull() {
+<b class="nc">&nbsp;            text.set(BYTES_NULL);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(boolean val) {
+<b class="nc">&nbsp;            text.set(val ? BYTES_TRUE : BYTES_FALSE);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(int val) {
+<b class="nc">&nbsp;            int size = (val &lt; 0) ? IOUtils.stringSize(-val) + 1 : IOUtils.stringSize(val);</b>
+<b class="nc">&nbsp;            text.setCapacity(size, false);</b>
+<b class="nc">&nbsp;            byte[] bytes = text.bytes;</b>
+<b class="nc">&nbsp;            IOUtils.getChars(val, size, bytes);</b>
+<b class="nc">&nbsp;            text.length = size;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(long val) {
+<b class="nc">&nbsp;            int size = (val &lt; 0) ? IOUtils.stringSize(-val) + 1 : IOUtils.stringSize(val);</b>
+<b class="nc">&nbsp;            text.setCapacity(size, false);</b>
+<b class="nc">&nbsp;            byte[] bytes = text.bytes;</b>
+<b class="nc">&nbsp;            IOUtils.getChars(val, size, bytes);</b>
+<b class="nc">&nbsp;            text.length = size;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(Number val) {
+<b class="nc">&nbsp;            if (val instanceof Integer) {</b>
+<b class="nc">&nbsp;                accept(val.intValue());</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (val instanceof Long) {</b>
+<b class="nc">&nbsp;                accept(val.longValue());</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String str = val.toString();</b>
+<b class="nc">&nbsp;            text.set(str);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(String val) {
+<b class="nc">&nbsp;            text.set(val);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(Map object) {
+<b class="nc">&nbsp;            text.set(JSON.toJSONBytes(object));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void accept(List array) {
+<b class="nc">&nbsp;            text.set(JSON.toJSONBytes(array));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 22:08</div>
+</div>
+</body>
+</html>

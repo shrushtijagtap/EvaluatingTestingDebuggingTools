@@ -1,0 +1,209 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectWriterImplEnum</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectWriterImplEnum (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectWriterImplEnum</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.1%
+  </span>
+  <span class="absValue">
+    (37/42)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONB;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.Member;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;
+&nbsp;final class ObjectWriterImplEnum&lt;E extends Enum&lt;E&gt;&gt;
+&nbsp;        extends ObjectWriterBaseModule.PrimitiveImpl {
+&nbsp;    final Member valueField;
+&nbsp;
+&nbsp;    final Class defineClass;
+&nbsp;    final Class enumType;
+&nbsp;    final long features;
+&nbsp;
+&nbsp;    byte[] typeNameJSONB;
+&nbsp;    long typeNameHash;
+&nbsp;
+&nbsp;    final Enum[] enumConstants;
+&nbsp;    final String[] names;
+&nbsp;    final long[] hashCodes;
+&nbsp;
+&nbsp;    byte[][] jsonbNames;
+&nbsp;
+<b class="fc">&nbsp;    public ObjectWriterImplEnum(Class defineClass, Class enumType, Member valueField, long features) {</b>
+<b class="fc">&nbsp;        this.defineClass = defineClass;</b>
+<b class="fc">&nbsp;        this.enumType = enumType;</b>
+<b class="fc">&nbsp;        this.features = features;</b>
+<b class="fc">&nbsp;        this.valueField = valueField;</b>
+&nbsp;
+<b class="fc">&nbsp;        this.enumConstants = (Enum[]) enumType.getEnumConstants();</b>
+<b class="fc">&nbsp;        this.names = new String[enumConstants.length];</b>
+<b class="fc">&nbsp;        this.hashCodes = new long[enumConstants.length];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; enumConstants.length; i++) {</b>
+<b class="fc">&nbsp;            String name = enumConstants[i].name();</b>
+<b class="fc">&nbsp;            this.names[i] = name;</b>
+<b class="fc">&nbsp;            hashCodes[i] = Fnv.hashCode64(name);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeJSONB(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="fc">&nbsp;        if (jsonWriter.isWriteTypeInfo(object, fieldType, features)) {</b>
+<b class="fc">&nbsp;            if (typeNameJSONB == null) {</b>
+<b class="fc">&nbsp;                String typeName = TypeUtils.getTypeName(enumType);</b>
+<b class="fc">&nbsp;                typeNameJSONB</b>
+<b class="fc">&nbsp;                        = JSONB.toBytes(</b>
+&nbsp;                        typeName);
+<b class="fc">&nbsp;                typeNameHash = Fnv.hashCode64(typeName);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            jsonWriter.writeTypeName(typeNameJSONB, typeNameHash);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Enum e = (Enum) object;</b>
+<b class="fc">&nbsp;        if (jsonWriter.isEnabled(JSONWriter.Feature.WriteEnumUsingToString)) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeString(e.toString());</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            if (jsonbNames == null) {</b>
+<b class="fc">&nbsp;                jsonbNames = new byte[this.names.length][];</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            int ordinal = e.ordinal();</b>
+<b class="fc">&nbsp;            byte[] jsonbName = this.jsonbNames[ordinal];</b>
+<b class="fc">&nbsp;            if (jsonbName == null) {</b>
+<b class="fc">&nbsp;                jsonbName = JSONB.toBytes(this.names[ordinal]);</b>
+<b class="fc">&nbsp;                this.jsonbNames[ordinal] = jsonbName;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            jsonWriter.writeRaw(jsonbName);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="fc">&nbsp;        Enum e = (Enum) object;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (valueField != null) {</b>
+&nbsp;            Object fieldValue;
+&nbsp;            try {
+<b class="fc">&nbsp;                if (valueField instanceof Field) {</b>
+<b class="nc">&nbsp;                    fieldValue = ((Field) valueField).get(object);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    fieldValue = ((Method) valueField).invoke(object);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                jsonWriter.writeAny(fieldValue);</b>
+&nbsp;                return;
+<b class="nc">&nbsp;            } catch (Exception error) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;getEnumValue error&quot;, error);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        String str;
+<b class="fc">&nbsp;        if (jsonWriter.isEnabled(JSONWriter.Feature.WriteEnumUsingToString)) {</b>
+<b class="nc">&nbsp;            str = e.toString();</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            str = e.name();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        jsonWriter.writeString(str);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 20:16</div>
+</div>
+</body>
+</html>

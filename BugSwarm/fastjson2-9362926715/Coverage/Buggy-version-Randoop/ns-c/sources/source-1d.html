@@ -1,0 +1,2241 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONWriterJSONB</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONWriterJSONB (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONWriterJSONB</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/78)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1142)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.internal.trove.map.hash.TLongIntHashMap;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.IOUtils;
+&nbsp;import com.alibaba.fastjson2.util.JDKUtils;
+&nbsp;import com.alibaba.fastjson2.util.UnsafeUtils;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriter;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.OutputStream;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.time.*;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONB.Constants.*;
+&nbsp;import static com.alibaba.fastjson2.JSONFactory.CACHE_SIZE;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.*;
+&nbsp;
+&nbsp;final class JSONWriterJSONB
+&nbsp;        extends JSONWriter {
+<b class="nc">&nbsp;    static final BigInteger BIGINT_INT64_MIN = BigInteger.valueOf(Long.MIN_VALUE);</b>
+<b class="nc">&nbsp;    static final BigInteger BIGINT_INT64_MAX = BigInteger.valueOf(Long.MAX_VALUE);</b>
+&nbsp;
+&nbsp;    private final int cachedIndex;
+&nbsp;
+&nbsp;    private byte[] bytes;
+&nbsp;    private SymbolTable symbolTable;
+&nbsp;
+&nbsp;    TLongIntHashMap symbols;
+&nbsp;    private int symbolIndex;
+&nbsp;
+&nbsp;    JSONWriterJSONB(Context ctx, SymbolTable symbolTable) {
+<b class="nc">&nbsp;        super(ctx, StandardCharsets.UTF_8);</b>
+<b class="nc">&nbsp;        cachedIndex = System.identityHashCode(Thread.currentThread()) &amp; (CACHE_SIZE - 1);</b>
+<b class="nc">&nbsp;        bytes = JSONFactory.allocateByteArray(cachedIndex);</b>
+<b class="nc">&nbsp;        this.symbolTable = symbolTable;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void close() {
+<b class="nc">&nbsp;        JSONFactory.releaseByteArray(cachedIndex, bytes);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isUTF8() {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isUTF16() {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isJSONB() {
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public SymbolTable getSymbolTable() {
+<b class="nc">&nbsp;        return symbolTable;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeAny(Object value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean fieldBased = (context.features &amp; Feature.FieldBased.mask) != 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        Class&lt;?&gt; valueClass = value.getClass();</b>
+<b class="nc">&nbsp;        ObjectWriter objectWriter = context.provider.getObjectWriter(valueClass, valueClass, fieldBased);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (isBeanToArray()) {</b>
+<b class="nc">&nbsp;            objectWriter.writeArrayMappingJSONB(this, value, null, null, 0);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            objectWriter.writeJSONB(this, value, null, null, 0);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void startObject() {
+<b class="nc">&nbsp;        level++;</b>
+<b class="nc">&nbsp;        if (off == bytes.length) {</b>
+<b class="nc">&nbsp;            int minCapacity = off + 1;</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        bytes[off++] = BC_OBJECT;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void endObject() {
+<b class="nc">&nbsp;        level--;</b>
+<b class="nc">&nbsp;        if (off == bytes.length) {</b>
+<b class="nc">&nbsp;            int minCapacity = off + 1;</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        bytes[off++] = BC_OBJECT_END;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void startArray() {
+<b class="nc">&nbsp;        throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void startArray(Object array, int size) {
+<b class="nc">&nbsp;        if (isWriteTypeInfo(array)) {</b>
+<b class="nc">&nbsp;            writeTypeName(array.getClass().getName());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        level++;</b>
+<b class="nc">&nbsp;        if (off == bytes.length) {</b>
+<b class="nc">&nbsp;            int minCapacity = off + 1;</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (size &lt;= ARRAY_FIX_LEN) {</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (BC_ARRAY_FIX_MIN + size);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            bytes[off++] = BC_ARRAY;</b>
+<b class="nc">&nbsp;            writeInt32(size);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void startArray(int size) {
+<b class="nc">&nbsp;        level++;</b>
+<b class="nc">&nbsp;        if (off == bytes.length) {</b>
+<b class="nc">&nbsp;            int minCapacity = off + 1;</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (size &lt;= ARRAY_FIX_LEN) {</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (BC_ARRAY_FIX_MIN + size);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            bytes[off++] = BC_ARRAY;</b>
+<b class="nc">&nbsp;            writeInt32(size);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeRaw(byte b) {
+<b class="nc">&nbsp;        if (off == bytes.length) {</b>
+<b class="nc">&nbsp;            int minCapacity = off + 1;</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        bytes[off++] = b;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeChar(char ch) {
+<b class="nc">&nbsp;        if (off == bytes.length) {</b>
+<b class="nc">&nbsp;            int minCapacity = off + 1;</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        bytes[off++] = BC_CHAR;</b>
+<b class="nc">&nbsp;        writeInt32(ch);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeName(String name) {
+<b class="nc">&nbsp;        writeString(name);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeNull() {
+<b class="nc">&nbsp;        if (off == bytes.length) {</b>
+<b class="nc">&nbsp;            int minCapacity = off + 1;</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        bytes[off++] = BC_NULL;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeStringNull() {
+<b class="nc">&nbsp;        if (off == bytes.length) {</b>
+<b class="nc">&nbsp;            int minCapacity = off + 1;</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        bytes[off++] = BC_NULL;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void endArray() {
+<b class="nc">&nbsp;        level--;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeComma() {
+<b class="nc">&nbsp;        throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void write0(char ch) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeString(char[] chars, int off, int len, boolean quote) {
+<b class="nc">&nbsp;        if (chars == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean ascii = true;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;            if (chars[i + off] &gt; 0x007F) {</b>
+<b class="nc">&nbsp;                ascii = false;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (ascii) {</b>
+<b class="nc">&nbsp;            if (len &lt;= STR_ASCII_FIX_LEN) {</b>
+<b class="nc">&nbsp;                bytes[this.off++] = (byte) (len + BC_STR_ASCII_FIX_MIN);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                bytes[this.off++] = BC_STR_ASCII;</b>
+<b class="nc">&nbsp;                writeInt32(len);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            for (int i = 0; i &lt; len; ++i) {</b>
+<b class="nc">&nbsp;                bytes[this.off++] = (byte) chars[off + i];</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        writeString(new String(chars, off, len));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeString(char[] str) {
+<b class="nc">&nbsp;        if (str == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final int strlen = str.length;</b>
+<b class="nc">&nbsp;        boolean ascii = true;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; strlen; ++i) {</b>
+<b class="nc">&nbsp;            if (str[i] &gt; 0x007F) {</b>
+<b class="nc">&nbsp;                ascii = false;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (ascii) {</b>
+<b class="nc">&nbsp;            if (strlen &lt;= STR_ASCII_FIX_LEN) {</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) (strlen + BC_STR_ASCII_FIX_MIN);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                bytes[off++] = BC_STR_ASCII;</b>
+<b class="nc">&nbsp;                writeInt32(strlen);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            for (int i = 0; i &lt; strlen; ++i) {</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) str[i];</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        writeString(new String(str));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeSymbol(String str) {
+<b class="nc">&nbsp;        if (str == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (symbolTable != null) {</b>
+<b class="nc">&nbsp;            int ordinal = symbolTable.getOrdinal(str);</b>
+<b class="nc">&nbsp;            if (ordinal &gt;= 0) {</b>
+<b class="nc">&nbsp;                writeRaw(BC_STR_ASCII);</b>
+<b class="nc">&nbsp;                writeInt32(-ordinal);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        writeString(str);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeTypeName(String typeName) {
+<b class="nc">&nbsp;        if (off == bytes.length) {</b>
+<b class="nc">&nbsp;            int minCapacity = off + 1;</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.bytes[off++] = BC_TYPED_ANY;</b>
+&nbsp;
+<b class="nc">&nbsp;        long hash = Fnv.hashCode64(typeName);</b>
+&nbsp;
+<b class="nc">&nbsp;        int symbol = -1;</b>
+<b class="nc">&nbsp;        if (symbolTable != null) {</b>
+<b class="nc">&nbsp;            symbol = symbolTable.getOrdinalByHashCode(hash);</b>
+<b class="nc">&nbsp;            if (symbol == -1 &amp;&amp; symbols != null) {</b>
+<b class="nc">&nbsp;                symbol = symbols.get(hash);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (symbols != null) {</b>
+<b class="nc">&nbsp;            symbol = symbols.get(hash);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (symbol == -1) {</b>
+<b class="nc">&nbsp;            if (symbols == null) {</b>
+<b class="nc">&nbsp;                symbols = new TLongIntHashMap();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            symbols.put(hash, symbol = symbolIndex++);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            if (off == bytes.length) {</b>
+<b class="nc">&nbsp;                int minCapacity = off + 1;</b>
+<b class="nc">&nbsp;                int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                    newCapacity = minCapacity;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                    throw new OutOfMemoryError();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            writeInt32(symbol);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        writeString(typeName);</b>
+<b class="nc">&nbsp;        writeInt32(symbol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean writeTypeName(byte[] typeName, long hash) {
+<b class="nc">&nbsp;        if (symbolTable != null) {</b>
+<b class="nc">&nbsp;            int symbol = symbolTable.getOrdinalByHashCode(hash);</b>
+<b class="nc">&nbsp;            if (symbol != -1) {</b>
+<b class="nc">&nbsp;                int minCapacity = off + 2;</b>
+<b class="nc">&nbsp;                if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                    int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                    if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                        newCapacity = minCapacity;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                        throw new OutOfMemoryError();</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                    bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                this.bytes[off++] = BC_TYPED_ANY;</b>
+<b class="nc">&nbsp;                writeInt32(-symbol);</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean symbolExists = false;</b>
+&nbsp;        int symbol;
+<b class="nc">&nbsp;        if (symbols != null) {</b>
+<b class="nc">&nbsp;            symbol = symbols.putIfAbsent(hash, symbolIndex);</b>
+<b class="nc">&nbsp;            if (symbol != symbolIndex) {</b>
+<b class="nc">&nbsp;                symbolExists = true;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                symbolIndex++;</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            symbols = new TLongIntHashMap(hash, symbol = symbolIndex++);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (symbolExists) {</b>
+<b class="nc">&nbsp;            if (off == bytes.length) {</b>
+<b class="nc">&nbsp;                int minCapacity = off + 1;</b>
+<b class="nc">&nbsp;                int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                    newCapacity = minCapacity;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                    throw new OutOfMemoryError();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            this.bytes[off++] = BC_TYPED_ANY;</b>
+<b class="nc">&nbsp;            writeInt32(symbol);</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int minCapacity = off + 2 + typeName.length;</b>
+<b class="nc">&nbsp;        if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.bytes[off++] = BC_TYPED_ANY;</b>
+<b class="nc">&nbsp;        System.arraycopy(typeName, 0, this.bytes, off, typeName.length);</b>
+<b class="nc">&nbsp;        off += typeName.length;</b>
+<b class="nc">&nbsp;        if (symbol &gt;= BC_INT32_NUM_MIN &amp;&amp; symbol &lt;= BC_INT32_NUM_MAX) {</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) symbol;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            writeInt32(symbol);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static int sizeOfInt(int i) {
+<b class="nc">&nbsp;        if (i &gt;= BC_INT32_NUM_MIN &amp;&amp; i &lt;= BC_INT32_NUM_MAX) {</b>
+<b class="nc">&nbsp;            return 1;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (i &gt;= INT32_BYTE_MIN &amp;&amp; i &lt;= INT32_BYTE_MAX) {</b>
+<b class="nc">&nbsp;            return 2;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (i &gt;= INT32_SHORT_MIN &amp;&amp; i &lt;= INT32_SHORT_MAX) {</b>
+<b class="nc">&nbsp;            return 3;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return 5;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeString(String str) {
+<b class="nc">&nbsp;        if (str == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (JVM_VERSION &gt; 8 &amp;&amp; (UNSAFE_SUPPORT || STRING_CODER != null)) {</b>
+<b class="nc">&nbsp;            int coder = STRING_CODER != null</b>
+<b class="nc">&nbsp;                    ? STRING_CODER.applyAsInt(str)</b>
+<b class="nc">&nbsp;                    : UnsafeUtils.getStringCoder(str);</b>
+<b class="nc">&nbsp;            byte[] value = STRING_VALUE != null</b>
+<b class="nc">&nbsp;                    ? STRING_VALUE.apply(str)</b>
+<b class="nc">&nbsp;                    : UnsafeUtils.getStringValue(str);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (coder == 0) {</b>
+<b class="nc">&nbsp;                int strlen = str.length();</b>
+<b class="nc">&nbsp;                int minCapacity = str.length()</b>
+&nbsp;                        + off
+&nbsp;                        + 5 /*max str len*/
+&nbsp;                        + 1;
+&nbsp;
+<b class="nc">&nbsp;                if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                    int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                    if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                        newCapacity = minCapacity;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                        throw new OutOfMemoryError();</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                    bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (strlen &lt;= STR_ASCII_FIX_LEN) {</b>
+<b class="nc">&nbsp;                    bytes[off++] = (byte) (strlen + BC_STR_ASCII_FIX_MIN);</b>
+<b class="nc">&nbsp;                } else if (strlen &gt;= INT32_BYTE_MIN &amp;&amp; strlen &lt;= INT32_BYTE_MAX) {</b>
+<b class="nc">&nbsp;                    bytes[off++] = BC_STR_ASCII;</b>
+<b class="nc">&nbsp;                    bytes[off++] = (byte) (BC_INT32_BYTE_ZERO + (strlen &gt;&gt; 8));</b>
+<b class="nc">&nbsp;                    bytes[off++] = (byte) (strlen);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    bytes[off++] = BC_STR_ASCII;</b>
+<b class="nc">&nbsp;                    writeInt32(strlen);</b>
+&nbsp;                }
+&nbsp;//                str.getBytes(0, strlen, bytes, off);
+<b class="nc">&nbsp;                System.arraycopy(value, 0, bytes, off, value.length);</b>
+<b class="nc">&nbsp;                off += strlen;</b>
+&nbsp;                return;
+&nbsp;            } else {
+<b class="nc">&nbsp;                int check_cnt = 128;</b>
+<b class="nc">&nbsp;                if (check_cnt &gt; value.length) {</b>
+<b class="nc">&nbsp;                    check_cnt = value.length;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if ((check_cnt &amp; 1) == 1) {</b>
+<b class="nc">&nbsp;                    check_cnt -= 1;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                int asciiCount = 0;</b>
+<b class="nc">&nbsp;                for (int i = 0; i + 2 &lt;= check_cnt; i += 2) {</b>
+<b class="nc">&nbsp;                    byte b0 = value[i];</b>
+<b class="nc">&nbsp;                    byte b1 = value[i + 1];</b>
+<b class="nc">&nbsp;                    if (b0 == 0 || b1 == 0) {</b>
+<b class="nc">&nbsp;                        asciiCount++;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                boolean utf16 = value.length != 0 &amp;&amp; (asciiCount == 0 || (check_cnt &gt;&gt; 1) / asciiCount &gt;= 3); // utf16字符占比&gt;=1/3</b>
+&nbsp;
+<b class="nc">&nbsp;                if (!utf16) {</b>
+<b class="nc">&nbsp;                    int maxSize = value.length * 3;</b>
+<b class="nc">&nbsp;                    int lenByteCnt = sizeOfInt(maxSize);</b>
+<b class="nc">&nbsp;                    ensureCapacity(off + maxSize + lenByteCnt + 1);</b>
+<b class="nc">&nbsp;                    int result = IOUtils.encodeUTF8(value, 0, value.length, bytes, off + lenByteCnt + 1);</b>
+&nbsp;
+<b class="nc">&nbsp;                    int utf8len = result - off - lenByteCnt - 1;</b>
+<b class="nc">&nbsp;                    if (utf8len &gt; value.length) {</b>
+<b class="nc">&nbsp;                        utf16 = true;</b>
+<b class="nc">&nbsp;                    } else if (result != -1) {</b>
+&nbsp;                        final byte strtype;
+<b class="nc">&nbsp;                        if (utf8len * 2 == value.length) {</b>
+<b class="nc">&nbsp;                            if (asciiCount &lt;= STR_ASCII_FIX_LEN) {</b>
+<b class="nc">&nbsp;                                bytes[off++] = (byte) (BC_STR_ASCII_FIX_MIN + utf8len);</b>
+<b class="nc">&nbsp;                                System.arraycopy(bytes, off + lenByteCnt, bytes, off, utf8len);</b>
+<b class="nc">&nbsp;                                off += utf8len;</b>
+&nbsp;                                return;
+&nbsp;                            }
+<b class="nc">&nbsp;                            strtype = BC_STR_ASCII;</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            strtype = BC_STR_UTF8;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        int utf8lenByteCnt = sizeOfInt(utf8len);</b>
+<b class="nc">&nbsp;                        if (lenByteCnt != utf8lenByteCnt) {</b>
+<b class="nc">&nbsp;                            System.arraycopy(bytes, off + lenByteCnt + 1, bytes, off + utf8lenByteCnt + 1, utf8len);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        bytes[off++] = strtype;</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (utf8len &lt;= BC_INT32_NUM_MAX) {</b>
+<b class="nc">&nbsp;                            bytes[off++] = (byte) utf8len;</b>
+<b class="nc">&nbsp;                        } else if (utf8len &lt;= INT32_BYTE_MAX) {</b>
+<b class="nc">&nbsp;                            bytes[off++] = (byte) (BC_INT32_BYTE_ZERO + (utf8len &gt;&gt; 8));</b>
+<b class="nc">&nbsp;                            bytes[off++] = (byte) utf8len;</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            writeInt32(utf8len);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        off += utf8len;</b>
+&nbsp;                        return;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (utf16) {</b>
+<b class="nc">&nbsp;                    ensureCapacity(off + 6 + value.length);</b>
+<b class="nc">&nbsp;                    bytes[off++] = JDKUtils.BIG_ENDIAN ? BC_STR_UTF16BE : BC_STR_UTF16LE;</b>
+<b class="nc">&nbsp;                    if (value.length &lt;= BC_INT32_NUM_MAX) {</b>
+<b class="nc">&nbsp;                        bytes[off++] = (byte) value.length;</b>
+<b class="nc">&nbsp;                    } else if (value.length &lt;= INT32_BYTE_MAX) {</b>
+<b class="nc">&nbsp;                        bytes[off++] = (byte) (BC_INT32_BYTE_ZERO + (value.length &gt;&gt; 8));</b>
+<b class="nc">&nbsp;                        bytes[off++] = (byte) value.length;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        writeInt32(value.length);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    System.arraycopy(value, 0, bytes, off, value.length);</b>
+<b class="nc">&nbsp;                    off += value.length;</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char[] chars = JDKUtils.getCharArray(str);</b>
+<b class="nc">&nbsp;        final int strlen = chars.length;</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean ascii = true;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (chars.length &lt; STR_ASCII_FIX_LEN) {</b>
+<b class="nc">&nbsp;            final int mark = off;</b>
+&nbsp;
+<b class="nc">&nbsp;            int minCapacity = off + 1 + strlen;</b>
+<b class="nc">&nbsp;            if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                    newCapacity = minCapacity;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                    throw new OutOfMemoryError();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            bytes[off++] = (byte) (strlen + BC_STR_ASCII_FIX_MIN);</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; chars.length; i++) {</b>
+<b class="nc">&nbsp;                char ch = chars[i];</b>
+<b class="nc">&nbsp;                if (ch &gt; 0x007F) {</b>
+<b class="nc">&nbsp;                    ascii = false;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                bytes[off++] = (byte) ch;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (ascii) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            off = mark;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            int i = 0;</b>
+<b class="nc">&nbsp;            int upperBound = chars.length &amp; ~3;</b>
+<b class="nc">&nbsp;            for (; i &lt; upperBound; i += 4) {</b>
+<b class="nc">&nbsp;                char c0 = chars[i];</b>
+<b class="nc">&nbsp;                char c1 = chars[i + 1];</b>
+<b class="nc">&nbsp;                char c2 = chars[i + 2];</b>
+<b class="nc">&nbsp;                char c3 = chars[i + 3];</b>
+<b class="nc">&nbsp;                if (c0 &gt; 0x007F || c1 &gt; 0x007F || c2 &gt; 0x007F || c3 &gt; 0x007F) {</b>
+<b class="nc">&nbsp;                    ascii = false;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            if (ascii) {</b>
+<b class="nc">&nbsp;                for (; i &lt; chars.length; ++i) {</b>
+<b class="nc">&nbsp;                    if (chars[i] &gt; 0x007F) {</b>
+<b class="nc">&nbsp;                        ascii = false;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int minCapacity = (ascii ? strlen : strlen * 3)</b>
+&nbsp;                + off
+&nbsp;                + 5 /*max str len*/
+&nbsp;                + 1;
+&nbsp;
+<b class="nc">&nbsp;        if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (ascii) {</b>
+<b class="nc">&nbsp;            if (strlen &lt;= STR_ASCII_FIX_LEN) {</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) (strlen + BC_STR_ASCII_FIX_MIN);</b>
+<b class="nc">&nbsp;            } else if (strlen &gt;= INT32_BYTE_MIN &amp;&amp; strlen &lt;= INT32_BYTE_MAX) {</b>
+<b class="nc">&nbsp;                bytes[off++] = BC_STR_ASCII;</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) (BC_INT32_BYTE_ZERO + (strlen &gt;&gt; 8));</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) (strlen);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                bytes[off++] = BC_STR_ASCII;</b>
+<b class="nc">&nbsp;                writeInt32(strlen);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            for (int i = 0; i &lt; chars.length; i++) {</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) chars[i];</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            int maxSize = chars.length * 3;</b>
+<b class="nc">&nbsp;            int lenByteCnt = sizeOfInt(maxSize);</b>
+<b class="nc">&nbsp;            ensureCapacity(off + maxSize + lenByteCnt + 1);</b>
+<b class="nc">&nbsp;            int result = IOUtils.encodeUTF8(chars, 0, chars.length, bytes, off + lenByteCnt + 1);</b>
+&nbsp;
+<b class="nc">&nbsp;            int utf8len = result - off - lenByteCnt - 1;</b>
+<b class="nc">&nbsp;            int utf8lenByteCnt = sizeOfInt(utf8len);</b>
+<b class="nc">&nbsp;            if (lenByteCnt != utf8lenByteCnt) {</b>
+<b class="nc">&nbsp;                System.arraycopy(bytes, off + lenByteCnt + 1, bytes, off + utf8lenByteCnt + 1, utf8len);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            bytes[off++] = BC_STR_UTF8;</b>
+<b class="nc">&nbsp;            if (utf8len &gt;= BC_INT32_NUM_MIN &amp;&amp; utf8len &lt;= BC_INT32_NUM_MAX) {</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) utf8len;</b>
+<b class="nc">&nbsp;            } else if (utf8len &gt;= INT32_BYTE_MIN &amp;&amp; utf8len &lt;= INT32_BYTE_MAX) {</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) (BC_INT32_BYTE_ZERO + (utf8len &gt;&gt; 8));</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) (utf8len);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                writeInt32(utf8len);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            off += utf8len;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    void ensureCapacity(int minCapacity) {
+<b class="nc">&nbsp;        if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeMillis(long millis) {
+<b class="nc">&nbsp;        if (millis % 1000 == 0) {</b>
+<b class="nc">&nbsp;            long seconds = (millis / 1000);</b>
+<b class="nc">&nbsp;            if (seconds &gt;= Integer.MIN_VALUE &amp;&amp; seconds &lt;= Integer.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                int secondsInt = (int) seconds;</b>
+&nbsp;
+<b class="nc">&nbsp;                int minCapacity = off + 5;</b>
+<b class="nc">&nbsp;                if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                    int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                    if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                        newCapacity = minCapacity;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                        throw new OutOfMemoryError();</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                    bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                bytes[off++] = BC_TIMESTAMP_SECONDS;</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) (secondsInt &gt;&gt;&gt; 24);</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) (secondsInt &gt;&gt;&gt; 16);</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) (secondsInt &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) secondsInt;</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (seconds % 60000 == 0) {</b>
+<b class="nc">&nbsp;                long minutes = seconds / 60;</b>
+<b class="nc">&nbsp;                if (minutes &gt;= Integer.MIN_VALUE &amp;&amp; minutes &lt;= Integer.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                    int minutesInt = (int) minutes;</b>
+&nbsp;
+<b class="nc">&nbsp;                    int minCapacity = off + 5;</b>
+<b class="nc">&nbsp;                    if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                        int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                        int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                        if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                            newCapacity = minCapacity;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                            throw new OutOfMemoryError();</b>
+&nbsp;                        }
+&nbsp;
+&nbsp;                        // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                        bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    bytes[off++] = BC_TIMESTAMP_MINUTES;</b>
+<b class="nc">&nbsp;                    bytes[off++] = (byte) (minutesInt &gt;&gt;&gt; 24);</b>
+<b class="nc">&nbsp;                    bytes[off++] = (byte) (minutesInt &gt;&gt;&gt; 16);</b>
+<b class="nc">&nbsp;                    bytes[off++] = (byte) (minutesInt &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;                    bytes[off++] = (byte) minutesInt;</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int minCapacity = off + 9;</b>
+<b class="nc">&nbsp;        if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        bytes[off++] = BC_TIMESTAMP_MILLIS;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (millis &gt;&gt;&gt; 56);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (millis &gt;&gt;&gt; 48);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (millis &gt;&gt;&gt; 40);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (millis &gt;&gt;&gt; 32);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (millis &gt;&gt;&gt; 24);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (millis &gt;&gt;&gt; 16);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (millis &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) millis;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeInt64(long val) {
+<b class="nc">&nbsp;        if (val &gt;= INT64_NUM_LOW_VALUE &amp;&amp; val &lt;= INT64_NUM_HIGH_VALUE) {</b>
+&nbsp;            // inline ensureCapacity(off + 1);
+<b class="nc">&nbsp;            if (off == bytes.length) {</b>
+<b class="nc">&nbsp;                int minCapacity = off + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;                int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                    newCapacity = minCapacity;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                    throw new OutOfMemoryError();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            bytes[off++] = (byte) (BC_INT64_NUM_MIN + (val - INT64_NUM_LOW_VALUE));</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (val &gt;= INT64_BYTE_MIN &amp;&amp; val &lt;= INT64_BYTE_MAX) {</b>
+<b class="nc">&nbsp;            int minCapacity = off + 2;</b>
+<b class="nc">&nbsp;            if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                    newCapacity = minCapacity;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                    throw new OutOfMemoryError();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            bytes[off++] = (byte) (BC_INT64_BYTE_ZERO + (val &gt;&gt; 8));</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (val);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (val &gt;= INT64_SHORT_MIN &amp;&amp; val &lt;= INT64_SHORT_MAX) {</b>
+<b class="nc">&nbsp;            int minCapacity = off + 3;</b>
+<b class="nc">&nbsp;            if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                    newCapacity = minCapacity;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                    throw new OutOfMemoryError();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            bytes[off++] = (byte) (BC_INT64_SHORT_ZERO + (val &gt;&gt; 16));</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (val &gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (val);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (val &gt;= Integer.MIN_VALUE &amp;&amp; val &lt;= Integer.MAX_VALUE) {</b>
+<b class="nc">&nbsp;            int minCapacity = off + 5;</b>
+<b class="nc">&nbsp;            if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                    newCapacity = minCapacity;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                    throw new OutOfMemoryError();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            bytes[off++] = BC_INT64_INT;</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (val &gt;&gt;&gt; 24);</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (val &gt;&gt;&gt; 16);</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (val &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) val;</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int minCapacity = off + 9;</b>
+<b class="nc">&nbsp;        if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        bytes[off++] = BC_INT64;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (val &gt;&gt;&gt; 56);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (val &gt;&gt;&gt; 48);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (val &gt;&gt;&gt; 40);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (val &gt;&gt;&gt; 32);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (val &gt;&gt;&gt; 24);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (val &gt;&gt;&gt; 16);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (val &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) val;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeInt64(long[] value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            writeArrayNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        // inline startArray(value.length);
+<b class="nc">&nbsp;        int size = value.length;</b>
+<b class="nc">&nbsp;        level++;</b>
+<b class="nc">&nbsp;        if (off == bytes.length) {</b>
+<b class="nc">&nbsp;            int minCapacity = off + 1;</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (size &lt;= ARRAY_FIX_LEN) {</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (BC_ARRAY_FIX_MIN + size);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            bytes[off++] = BC_ARRAY;</b>
+<b class="nc">&nbsp;            writeInt32(size);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; value.length; i++) {</b>
+<b class="nc">&nbsp;            long val = value[i];</b>
+<b class="nc">&nbsp;            if (val &gt;= BC_INT32_NUM_MIN &amp;&amp; val &lt;= BC_INT32_NUM_MAX) {</b>
+&nbsp;                // inline ensureCapacity(off + 1);
+<b class="nc">&nbsp;                if (off == bytes.length) {</b>
+<b class="nc">&nbsp;                    int minCapacity = off + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;                    int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                    if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                        newCapacity = minCapacity;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                        throw new OutOfMemoryError();</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                    bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                bytes[off++] = (byte) val;</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (val &gt;= INT64_BYTE_MIN &amp;&amp; val &lt;= INT64_BYTE_MAX) {</b>
+<b class="nc">&nbsp;                int minCapacity = off + 2;</b>
+<b class="nc">&nbsp;                if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                    int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                    if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                        newCapacity = minCapacity;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                        throw new OutOfMemoryError();</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                    bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                bytes[off++] = (byte) (BC_INT64_BYTE_ZERO + (val &gt;&gt; 8));</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) (val);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (val &gt;= INT64_SHORT_MIN &amp;&amp; val &lt;= INT64_SHORT_MAX) {</b>
+<b class="nc">&nbsp;                int minCapacity = off + 3;</b>
+<b class="nc">&nbsp;                if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                    int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                    if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                        newCapacity = minCapacity;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                        throw new OutOfMemoryError();</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                    bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                bytes[off++] = (byte) (BC_INT64_SHORT_ZERO + (val &gt;&gt; 16));</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) (val &gt;&gt; 8);</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) (val);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            int minCapacity = off + 9;</b>
+<b class="nc">&nbsp;            if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                    newCapacity = minCapacity;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                    throw new OutOfMemoryError();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            bytes[off++] = BC_INT64;</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (val &gt;&gt;&gt; 56);</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (val &gt;&gt;&gt; 48);</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (val &gt;&gt;&gt; 40);</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (val &gt;&gt;&gt; 32);</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (val &gt;&gt;&gt; 24);</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (val &gt;&gt;&gt; 16);</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (val &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) val;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // inline endArray();
+<b class="nc">&nbsp;        level--;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeFloat(float value) {
+<b class="nc">&nbsp;        if (value &gt;= INT32_SHORT_MIN &amp;&amp; value &lt;= INT32_SHORT_MAX) {</b>
+<b class="nc">&nbsp;            int int32Value = (int) value;</b>
+<b class="nc">&nbsp;            if (int32Value == value) {</b>
+<b class="nc">&nbsp;                ensureCapacity(off + 1);</b>
+<b class="nc">&nbsp;                bytes[off++] = BC_FLOAT_INT;</b>
+<b class="nc">&nbsp;                writeInt32(int32Value);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ensureCapacity(off + 5);</b>
+<b class="nc">&nbsp;        bytes[off++] = BC_FLOAT;</b>
+<b class="nc">&nbsp;        int i = Float.floatToIntBits(value);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (i &gt;&gt;&gt; 24);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (i &gt;&gt;&gt; 16);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (i &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) i;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeFloat(float[] value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        startArray(value.length);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; value.length; i++) {</b>
+<b class="nc">&nbsp;            writeFloat(value[i]);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        endArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeDouble(double value) {
+<b class="nc">&nbsp;        if (value == 0) {</b>
+<b class="nc">&nbsp;            ensureCapacity(off + 1);</b>
+<b class="nc">&nbsp;            bytes[off++] = BC_DOUBLE_NUM_0;</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value == 1) {</b>
+<b class="nc">&nbsp;            ensureCapacity(off + 1);</b>
+<b class="nc">&nbsp;            bytes[off++] = BC_DOUBLE_NUM_1;</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value &gt;= Integer.MIN_VALUE &amp;&amp; value &lt;= Integer.MAX_VALUE) {</b>
+<b class="nc">&nbsp;            long longValue = (long) value;</b>
+<b class="nc">&nbsp;            if (longValue == value) {</b>
+<b class="nc">&nbsp;                ensureCapacity(off + 1);</b>
+<b class="nc">&nbsp;                bytes[off++] = BC_DOUBLE_LONG;</b>
+<b class="nc">&nbsp;                writeInt64(longValue);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ensureCapacity(off + 9);</b>
+<b class="nc">&nbsp;        bytes[off++] = BC_DOUBLE;</b>
+<b class="nc">&nbsp;        long i = Double.doubleToLongBits(value);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (i &gt;&gt;&gt; 56);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (i &gt;&gt;&gt; 48);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (i &gt;&gt;&gt; 40);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (i &gt;&gt;&gt; 32);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (i &gt;&gt;&gt; 24);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (i &gt;&gt;&gt; 16);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (i &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) i;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeDouble(double[] value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        startArray(value.length);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; value.length; i++) {</b>
+<b class="nc">&nbsp;            writeDouble(value[i]);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        endArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeInt16(short[] value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        startArray(value.length);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; value.length; i++) {</b>
+<b class="nc">&nbsp;            writeInt32(value[i]);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        endArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeInt32(int[] values) {
+<b class="nc">&nbsp;        if (values == null) {</b>
+<b class="nc">&nbsp;            writeArrayNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        // inline startArray(value.length);
+<b class="nc">&nbsp;        int size = values.length;</b>
+<b class="nc">&nbsp;        level++;</b>
+<b class="nc">&nbsp;        if (off == bytes.length) {</b>
+<b class="nc">&nbsp;            int minCapacity = off + 1;</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (size &lt;= ARRAY_FIX_LEN) {</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (BC_ARRAY_FIX_MIN + size);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            bytes[off++] = BC_ARRAY;</b>
+<b class="nc">&nbsp;            writeInt32(size);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; values.length; i++) {</b>
+<b class="nc">&nbsp;            int val = values[i];</b>
+&nbsp;
+<b class="nc">&nbsp;            if (val &gt;= BC_INT32_NUM_MIN &amp;&amp; val &lt;= BC_INT32_NUM_MAX) {</b>
+<b class="nc">&nbsp;                if (off == bytes.length) {</b>
+<b class="nc">&nbsp;                    int minCapacity = off + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;                    int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                    if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                        newCapacity = minCapacity;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                        throw new OutOfMemoryError();</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                    bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                bytes[off++] = (byte) val;</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (val &gt;= INT32_BYTE_MIN &amp;&amp; val &lt;= INT32_BYTE_MAX) {</b>
+<b class="nc">&nbsp;                int minCapacity = off + 2;</b>
+<b class="nc">&nbsp;                if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                    int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                    if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                        newCapacity = minCapacity;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                        throw new OutOfMemoryError();</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                    bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                bytes[off++] = (byte) (BC_INT32_BYTE_ZERO + (val &gt;&gt; 8));</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) (val);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (val &gt;= INT32_SHORT_MIN &amp;&amp; val &lt;= INT32_SHORT_MAX) {</b>
+<b class="nc">&nbsp;                int minCapacity = off + 3;</b>
+<b class="nc">&nbsp;                if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                    int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                    if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                        newCapacity = minCapacity;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                        throw new OutOfMemoryError();</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                    bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                bytes[off++] = (byte) (BC_INT32_SHORT_ZERO + (val &gt;&gt; 16));</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) (val &gt;&gt; 8);</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) (val);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            int minCapacity = off + 5;</b>
+<b class="nc">&nbsp;            if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                    newCapacity = minCapacity;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                    throw new OutOfMemoryError();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            bytes[off++] = BC_INT32;</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (val &gt;&gt;&gt; 24);</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (val &gt;&gt;&gt; 16);</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (val &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) val;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // inline endArray();
+<b class="nc">&nbsp;        level--;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeInt8(byte val) {
+<b class="nc">&nbsp;        int minCapacity = off + 2;</b>
+<b class="nc">&nbsp;        if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        bytes[off++] = BC_INT8;</b>
+<b class="nc">&nbsp;        bytes[off++] = val;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeInt16(short val) {
+<b class="nc">&nbsp;        int minCapacity = off + 3;</b>
+<b class="nc">&nbsp;        if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        bytes[off++] = BC_INT16;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (val &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) val;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeEnum(Enum e) {
+<b class="nc">&nbsp;        if (e == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if ((context.features &amp; Feature.WriteEnumUsingToString.mask) != 0) {</b>
+<b class="nc">&nbsp;            writeString(e.toString());</b>
+<b class="nc">&nbsp;        } else if ((context.features &amp; Feature.WriteEnumsUsingName.mask) != 0) {</b>
+<b class="nc">&nbsp;            writeString(e.name());</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            int val = e.ordinal();</b>
+<b class="nc">&nbsp;            if (val &gt;= BC_INT32_NUM_MIN &amp;&amp; val &lt;= BC_INT32_NUM_MAX) {</b>
+<b class="nc">&nbsp;                if (off == bytes.length) {</b>
+<b class="nc">&nbsp;                    int minCapacity = off + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;                    int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                    if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                        newCapacity = minCapacity;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                        throw new OutOfMemoryError();</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                    bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                bytes[off++] = (byte) val;</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;            writeInt32(val);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeInt32(int val) {
+<b class="nc">&nbsp;        if (val &gt;= BC_INT32_NUM_MIN &amp;&amp; val &lt;= BC_INT32_NUM_MAX) {</b>
+<b class="nc">&nbsp;            if (off == bytes.length) {</b>
+<b class="nc">&nbsp;                int minCapacity = off + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;                int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                    newCapacity = minCapacity;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                    throw new OutOfMemoryError();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            bytes[off++] = (byte) val;</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (val &gt;= INT32_BYTE_MIN &amp;&amp; val &lt;= INT32_BYTE_MAX) {</b>
+<b class="nc">&nbsp;            int minCapacity = off + 2;</b>
+<b class="nc">&nbsp;            if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                    newCapacity = minCapacity;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                    throw new OutOfMemoryError();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            bytes[off++] = (byte) (BC_INT32_BYTE_ZERO + (val &gt;&gt; 8));</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (val);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (val &gt;= INT32_SHORT_MIN &amp;&amp; val &lt;= INT32_SHORT_MAX) {</b>
+<b class="nc">&nbsp;            int minCapacity = off + 3;</b>
+<b class="nc">&nbsp;            if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                    newCapacity = minCapacity;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                    throw new OutOfMemoryError();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            bytes[off++] = (byte) (BC_INT32_SHORT_ZERO + (val &gt;&gt; 16));</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (val &gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) (val);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int minCapacity = off + 5;</b>
+<b class="nc">&nbsp;        if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        bytes[off++] = BC_INT32;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (val &gt;&gt;&gt; 24);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (val &gt;&gt;&gt; 16);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (val &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) val;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeArrayNull() {
+<b class="nc">&nbsp;        if (off == bytes.length) {</b>
+<b class="nc">&nbsp;            int minCapacity = off + 1;</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if ((this.context.features &amp; (Feature.NullAsDefaultValue.mask | Feature.WriteNullListAsEmpty.mask)) != 0) {</b>
+<b class="nc">&nbsp;            bytes[off++] = BC_ARRAY_FIX_MIN;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            bytes[off++] = BC_NULL;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeRaw(String str) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeRaw(byte[] bytes) {
+<b class="nc">&nbsp;        int minCapacity = this.off + bytes.length;</b>
+<b class="nc">&nbsp;        if (minCapacity - this.bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;            int oldCapacity = this.bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            this.bytes = Arrays.copyOf(this.bytes, newCapacity);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        System.arraycopy(bytes, 0, this.bytes, off, bytes.length);</b>
+<b class="nc">&nbsp;        off += bytes.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeNameRaw(byte[] name, long nameHash) {
+<b class="nc">&nbsp;        if (symbolTable != null) {</b>
+<b class="nc">&nbsp;            int symbol = symbolTable.getOrdinalByHashCode(nameHash);</b>
+<b class="nc">&nbsp;            if (symbol != -1) {</b>
+<b class="nc">&nbsp;                int minCapacity = off + 2;</b>
+<b class="nc">&nbsp;                if (minCapacity - bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                    int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                    if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                        newCapacity = minCapacity;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                        throw new OutOfMemoryError();</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                    bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                this.bytes[off++] = BC_SYMBOL;</b>
+<b class="nc">&nbsp;                writeInt32(-symbol);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if ((context.features &amp; Feature.WriteNameAsSymbol.mask) == 0) {</b>
+<b class="nc">&nbsp;            int minCapacity = this.off + name.length;</b>
+<b class="nc">&nbsp;            if (minCapacity - this.bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                int oldCapacity = this.bytes.length;</b>
+<b class="nc">&nbsp;                int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                    newCapacity = minCapacity;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                    throw new OutOfMemoryError();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                this.bytes = Arrays.copyOf(this.bytes, newCapacity);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            System.arraycopy(name, 0, this.bytes, off, name.length);</b>
+<b class="nc">&nbsp;            off += name.length;</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean symbolExists = false;</b>
+&nbsp;        int symbol;
+<b class="nc">&nbsp;        if (symbols != null) {</b>
+<b class="nc">&nbsp;            symbol = symbols.putIfAbsent(nameHash, symbolIndex);</b>
+<b class="nc">&nbsp;            if (symbol != symbolIndex) {</b>
+<b class="nc">&nbsp;                symbolExists = true;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                symbolIndex++;</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            symbols = new TLongIntHashMap();</b>
+<b class="nc">&nbsp;            symbols.put(nameHash, symbol = symbolIndex++);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (symbolExists) {</b>
+<b class="nc">&nbsp;            int minCapacity = this.off + 2;</b>
+<b class="nc">&nbsp;            if (minCapacity - this.bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;                int oldCapacity = this.bytes.length;</b>
+<b class="nc">&nbsp;                int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                    newCapacity = minCapacity;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                    throw new OutOfMemoryError();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                this.bytes = Arrays.copyOf(this.bytes, newCapacity);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            this.bytes[off++] = BC_SYMBOL;</b>
+<b class="nc">&nbsp;            if (symbol &gt;= BC_INT32_NUM_MIN &amp;&amp; symbol &lt;= BC_INT32_NUM_MAX) {</b>
+<b class="nc">&nbsp;                bytes[off++] = (byte) symbol;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                writeInt32(symbol);</b>
+&nbsp;            }
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int minCapacity = this.off + 2 + name.length;</b>
+<b class="nc">&nbsp;        if (minCapacity - this.bytes.length &gt; 0) {</b>
+<b class="nc">&nbsp;            int oldCapacity = this.bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            this.bytes = Arrays.copyOf(this.bytes, newCapacity);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.bytes[off++] = BC_SYMBOL;</b>
+<b class="nc">&nbsp;        System.arraycopy(name, 0, this.bytes, off, name.length);</b>
+<b class="nc">&nbsp;        off += name.length;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (symbol &gt;= BC_INT32_NUM_MIN &amp;&amp; symbol &lt;= BC_INT32_NUM_MAX) {</b>
+<b class="nc">&nbsp;            bytes[off++] = (byte) symbol;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            writeInt32(symbol);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeLocalDate(LocalDate date) {
+<b class="nc">&nbsp;        if (date == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ensureCapacity(off + 5);</b>
+&nbsp;
+<b class="nc">&nbsp;        bytes[off++] = BC_LOCAL_DATE;</b>
+<b class="nc">&nbsp;        int year = date.getYear();</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (year &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) year;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) date.getMonthValue();</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) date.getDayOfMonth();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeLocalTime(LocalTime time) {
+<b class="nc">&nbsp;        if (time == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ensureCapacity(off + 4);</b>
+&nbsp;
+<b class="nc">&nbsp;        bytes[off++] = BC_LOCAL_TIME;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) time.getHour();</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) time.getMinute();</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) time.getSecond();</b>
+&nbsp;
+<b class="nc">&nbsp;        int nano = time.getNano();</b>
+<b class="nc">&nbsp;        writeInt32(nano);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeLocalDateTime(LocalDateTime dateTime) {
+<b class="nc">&nbsp;        if (dateTime == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ensureCapacity(off + 8);</b>
+&nbsp;
+<b class="nc">&nbsp;        bytes[off++] = BC_LOCAL_DATETIME;</b>
+<b class="nc">&nbsp;        int year = dateTime.getYear();</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (year &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) year;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) dateTime.getMonthValue();</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) dateTime.getDayOfMonth();</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) dateTime.getHour();</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) dateTime.getMinute();</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) dateTime.getSecond();</b>
+&nbsp;
+<b class="nc">&nbsp;        int nano = dateTime.getNano();</b>
+<b class="nc">&nbsp;        writeInt32(nano);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeZonedDateTime(ZonedDateTime dateTime) {
+<b class="nc">&nbsp;        if (dateTime == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ensureCapacity(off + 8);</b>
+&nbsp;
+<b class="nc">&nbsp;        bytes[off++] = BC_TIMESTAMP_WITH_TIMEZONE;</b>
+<b class="nc">&nbsp;        int year = dateTime.getYear();</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (year &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) year;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) dateTime.getMonthValue();</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) dateTime.getDayOfMonth();</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) dateTime.getHour();</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) dateTime.getMinute();</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) dateTime.getSecond();</b>
+&nbsp;
+<b class="nc">&nbsp;        int nano = dateTime.getNano();</b>
+<b class="nc">&nbsp;        writeInt32(nano);</b>
+&nbsp;
+<b class="nc">&nbsp;        String zoneId = dateTime.getZone().getId();</b>
+<b class="nc">&nbsp;        writeString(zoneId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeInstant(Instant instant) {
+<b class="nc">&nbsp;        if (instant == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ensureCapacity(off + 1);</b>
+<b class="nc">&nbsp;        bytes[off++] = BC_TIMESTAMP;</b>
+<b class="nc">&nbsp;        long second = instant.getEpochSecond();</b>
+<b class="nc">&nbsp;        int nano = instant.getNano();</b>
+<b class="nc">&nbsp;        writeInt64(second);</b>
+<b class="nc">&nbsp;        writeInt32(nano);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeUUID(UUID value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long msb = value.getMostSignificantBits();</b>
+<b class="nc">&nbsp;        long lsb = value.getLeastSignificantBits();</b>
+&nbsp;
+<b class="nc">&nbsp;        ensureCapacity(off + 18);</b>
+<b class="nc">&nbsp;        bytes[off++] = BC_BINARY;</b>
+<b class="nc">&nbsp;        bytes[off++] = BC_INT32_NUM_16;</b>
+&nbsp;
+<b class="nc">&nbsp;        bytes[off++] = (byte) (msb &gt;&gt;&gt; 56);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (msb &gt;&gt;&gt; 48);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (msb &gt;&gt;&gt; 40);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (msb &gt;&gt;&gt; 32);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (msb &gt;&gt;&gt; 24);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (msb &gt;&gt;&gt; 16);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (msb &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) msb;</b>
+&nbsp;
+<b class="nc">&nbsp;        bytes[off++] = (byte) (lsb &gt;&gt;&gt; 56);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (lsb &gt;&gt;&gt; 48);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (lsb &gt;&gt;&gt; 40);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (lsb &gt;&gt;&gt; 32);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (lsb &gt;&gt;&gt; 24);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (lsb &gt;&gt;&gt; 16);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (lsb &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) lsb;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeBigInt(BigInteger value, long features) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value.compareTo(BIGINT_INT64_MIN) &gt;= 0 &amp;&amp; value.compareTo(BIGINT_INT64_MAX) &lt;= 0) {</b>
+<b class="nc">&nbsp;            if (off == bytes.length) {</b>
+<b class="nc">&nbsp;                int minCapacity = off + 1;</b>
+<b class="nc">&nbsp;                int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;                int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;                if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                    newCapacity = minCapacity;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                    throw new OutOfMemoryError();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;                bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            bytes[off++] = BC_BIGINT_LONG;</b>
+<b class="nc">&nbsp;            long int64Value = value.longValue();</b>
+<b class="nc">&nbsp;            writeInt64(int64Value);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        byte[] bytes = value.toByteArray();</b>
+<b class="nc">&nbsp;        ensureCapacity(off + 5 + bytes.length);</b>
+&nbsp;
+<b class="nc">&nbsp;        this.bytes[off++] = BC_BIGINT;</b>
+<b class="nc">&nbsp;        writeInt32(bytes.length);</b>
+<b class="nc">&nbsp;        System.arraycopy(bytes, 0, this.bytes, off, bytes.length);</b>
+<b class="nc">&nbsp;        off += bytes.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeBinary(byte[] bytes) {
+<b class="nc">&nbsp;        if (bytes == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ensureCapacity(off + 6 + bytes.length);</b>
+<b class="nc">&nbsp;        this.bytes[off++] = BC_BINARY;</b>
+<b class="nc">&nbsp;        writeInt32(bytes.length);</b>
+&nbsp;
+<b class="nc">&nbsp;        System.arraycopy(bytes, 0, this.bytes, off, bytes.length);</b>
+<b class="nc">&nbsp;        off += bytes.length;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeDecimal(BigDecimal value, long features) {
+<b class="nc">&nbsp;        writeDecimal(value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeDecimal(BigDecimal value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        BigInteger unscaledValue = value.unscaledValue();</b>
+<b class="nc">&nbsp;        int scale = value.scale();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (scale == 0</b>
+<b class="nc">&nbsp;                &amp;&amp; unscaledValue.compareTo(BIGINT_INT64_MIN) &gt;= 0</b>
+<b class="nc">&nbsp;                &amp;&amp; unscaledValue.compareTo(BIGINT_INT64_MAX) &lt;= 0) {</b>
+<b class="nc">&nbsp;            ensureCapacity(off + 1);</b>
+<b class="nc">&nbsp;            this.bytes[off++] = BC_DECIMAL_LONG;</b>
+<b class="nc">&nbsp;            writeInt64(</b>
+<b class="nc">&nbsp;                    unscaledValue.longValue()</b>
+&nbsp;            );
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ensureCapacity(off + 1);</b>
+<b class="nc">&nbsp;        this.bytes[off++] = BC_DECIMAL;</b>
+<b class="nc">&nbsp;        writeInt32(scale);</b>
+<b class="nc">&nbsp;        writeBigInt(unscaledValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeBool(boolean value) {
+<b class="nc">&nbsp;        if (off == bytes.length) {</b>
+<b class="nc">&nbsp;            int minCapacity = off + 1;</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.bytes[off++] = value ? BC_TRUE : BC_FALSE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeBool(boolean[] value) {
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        startArray(value.length);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; value.length; i++) {</b>
+<b class="nc">&nbsp;            writeBool(value[i]);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        endArray();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeReference(String path) {
+<b class="nc">&nbsp;        if (off == bytes.length) {</b>
+<b class="nc">&nbsp;            int minCapacity = off + 1;</b>
+<b class="nc">&nbsp;            int oldCapacity = bytes.length;</b>
+<b class="nc">&nbsp;            int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</b>
+<b class="nc">&nbsp;            if (newCapacity - minCapacity &lt; 0) {</b>
+<b class="nc">&nbsp;                newCapacity = minCapacity;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (newCapacity - maxArraySize &gt; 0) {</b>
+<b class="nc">&nbsp;                throw new OutOfMemoryError();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // minCapacity is usually close to size, so this is a win:
+<b class="nc">&nbsp;            bytes = Arrays.copyOf(bytes, newCapacity);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        bytes[off++] = BC_REFERENCE;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (path == this.lastReference) {</b>
+<b class="nc">&nbsp;            writeString(&quot;#-1&quot;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            writeString(path);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.lastReference = path;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeDateTime14(
+&nbsp;            int year,
+&nbsp;            int month,
+&nbsp;            int dayOfMonth,
+&nbsp;            int hour,
+&nbsp;            int minute,
+&nbsp;            int second) {
+<b class="nc">&nbsp;        ensureCapacity(off + 8);</b>
+&nbsp;
+<b class="nc">&nbsp;        bytes[off++] = BC_LOCAL_DATETIME;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (year &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) year;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) month;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) dayOfMonth;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) hour;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) minute;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) second;</b>
+&nbsp;
+<b class="nc">&nbsp;        int nano = 0;</b>
+<b class="nc">&nbsp;        writeInt32(nano);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeDateTime19(
+&nbsp;            int year,
+&nbsp;            int month,
+&nbsp;            int dayOfMonth,
+&nbsp;            int hour,
+&nbsp;            int minute,
+&nbsp;            int second) {
+<b class="nc">&nbsp;        ensureCapacity(off + 8);</b>
+&nbsp;
+<b class="nc">&nbsp;        bytes[off++] = BC_LOCAL_DATETIME;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) (year &gt;&gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) year;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) month;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) dayOfMonth;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) hour;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) minute;</b>
+<b class="nc">&nbsp;        bytes[off++] = (byte) second;</b>
+&nbsp;
+<b class="nc">&nbsp;        int nano = 0;</b>
+<b class="nc">&nbsp;        writeInt32(nano);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeDateTimeISO8601(
+&nbsp;            int year,
+&nbsp;            int month,
+&nbsp;            int dayOfMonth,
+&nbsp;            int hour,
+&nbsp;            int minute,
+&nbsp;            int second,
+&nbsp;            int millis,
+&nbsp;            int offsetSeconds,
+&nbsp;            boolean timeZone
+&nbsp;    ) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeDateYYYMMDD8(int year, int month, int dayOfMonth) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeDateYYYMMDD10(int year, int month, int dayOfMonth) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeTimeHHMMSS8(int hour, int minute, int second) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;unsupported operation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeBase64(byte[] bytes) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;UnsupportedOperation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeRaw(char ch) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;UnsupportedOperation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeNameRaw(byte[] bytes) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;UnsupportedOperation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeNameRaw(char[] chars) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;UnsupportedOperation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeNameRaw(char[] bytes, int offset, int len) {
+<b class="nc">&nbsp;        throw new JSONException(&quot;UnsupportedOperation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeColon() {
+<b class="nc">&nbsp;        throw new JSONException(&quot;UnsupportedOperation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(List array) {
+<b class="nc">&nbsp;        if (array == null) {</b>
+<b class="nc">&nbsp;            writeArrayNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final int size = array.size();</b>
+<b class="nc">&nbsp;        startArray(size);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; size; i++) {</b>
+<b class="nc">&nbsp;            Object item = array.get(i);</b>
+<b class="nc">&nbsp;            writeAny(item);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(Map map) {
+<b class="nc">&nbsp;        if (map == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        startObject();</b>
+<b class="nc">&nbsp;        for (Iterator&lt;Map.Entry&gt; it = map.entrySet().iterator(); it.hasNext();) {</b>
+<b class="nc">&nbsp;            Map.Entry entry = it.next();</b>
+<b class="nc">&nbsp;            writeAny(entry.getKey());</b>
+<b class="nc">&nbsp;            writeAny(entry.getValue());</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        endObject();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(JSONObject object) {
+<b class="nc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        startObject();</b>
+<b class="nc">&nbsp;        for (Iterator&lt;Map.Entry&lt;String, Object&gt;&gt; it = object.entrySet().iterator(); it.hasNext();) {</b>
+<b class="nc">&nbsp;            Map.Entry entry = it.next();</b>
+<b class="nc">&nbsp;            writeAny(entry.getKey());</b>
+<b class="nc">&nbsp;            writeAny(entry.getValue());</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        endObject();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public byte[] getBytes() {
+<b class="nc">&nbsp;        return Arrays.copyOf(bytes, off);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int flushTo(OutputStream to) throws IOException {
+<b class="nc">&nbsp;        int len = off;</b>
+<b class="nc">&nbsp;        to.write(bytes, 0, off);</b>
+<b class="nc">&nbsp;        off = 0;</b>
+<b class="nc">&nbsp;        return len;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int flushTo(OutputStream out, Charset charset) throws IOException {
+<b class="nc">&nbsp;        throw new JSONException(&quot;UnsupportedOperation&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        if (bytes.length == 0) {</b>
+<b class="nc">&nbsp;            return &quot;&lt;empty&gt;&quot;;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        byte[] jsonbBytes = getBytes();</b>
+<b class="nc">&nbsp;        JSONReader reader = JSONReader.ofJSONB(jsonbBytes);</b>
+<b class="nc">&nbsp;        JSONWriter writer = JSONWriter.of();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            Object object = reader.readAny();</b>
+<b class="nc">&nbsp;            writer.writeAny(object);</b>
+<b class="nc">&nbsp;            return writer.toString();</b>
+<b class="nc">&nbsp;        } catch (Exception ex) {</b>
+<b class="nc">&nbsp;            return JSONB.typeName(bytes[0]) + &quot;, bytes length &quot; + off;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 21:45</div>
+</div>
+</body>
+</html>
