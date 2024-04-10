@@ -1,12 +1,268 @@
 {
   "Bears-106": {
-    "LD R": { "src/org/traccar/protocol/TelicProtocolDecoder.java": 202 },
-    "LD E": { "src/org/traccar/protocol/TelicProtocolDecoder.java": 202 },
-    "CodeBLEU R": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 6,
+    "LD": { "src/org/traccar/protocol/TelicProtocolDecoder.java": 202 },
+    "CB": 17,
+    "CP": 18,
+    "CC": 1,
+    "CodeBLEU": {
       "src/org/traccar/protocol/TelicProtocolDecoder.java": 0.8858053432540345
+    }
+  },
+  "Bears-108": {
+    "CChange": 1,
+    "MChange": 2,
+    "LChange": 14,
+    "LD": { "src/org/traccar/protocol/CguardProtocolDecoder.java": 24 },
+    "CB": 16,
+    "CP": 16,
+    "CC": 0,
+    "CodeBLEU": {
+      "src/org/traccar/protocol/CguardProtocolDecoder.java": 0.8789840639402652
+    }
+  },
+  "Bears-115": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 5,
+    "LD": { "src/org/traccar/protocol/WatchProtocolDecoder.java": 76 },
+    "CB": 35,
+    "CP": 35,
+    "CC": 0,
+    "CodeBLEU": {
+      "src/org/traccar/protocol/WatchProtocolDecoder.java": 0.891517885345519
+    }
+  },
+  "Bears-118": {
+    "CChange": 2,
+    "MChange": 2,
+    "LChange": 10,
+    "LD": {
+      "src/org/traccar/FilterHandler.java": 154,
+      "src/org/traccar/protocol/WondexProtocolDecoder.java": 113
     },
-    "CodeBLEU E": {
-      "src/org/traccar/protocol/TelicProtocolDecoder.java": 0.8858053432540345
+    "CB": 61,
+    "CP": 57,
+    "CC": 4,
+    "CodeBLEU": {
+      "src/org/traccar/FilterHandler.java": 0.9711594196844798,
+      "src/org/traccar/protocol/WondexProtocolDecoder.java": 0.9669854716504043
+    }
+  },
+  "Bears-123": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 20,
+    "LD": { "src/org/traccar/reports/ReportUtils.java": 517 },
+    "CB": 77,
+    "CP": 66,
+    "CC": 11,
+    "CodeBLEU": {
+      "src/org/traccar/reports/ReportUtils.java": 0.9552598395188383
+    }
+  },
+  "Bears-127": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 4,
+    "LD": { "src/org/traccar/protocol/EelinkProtocolDecoder.java": 70 },
+    "CB": 52,
+    "CP": 51,
+    "CC": 1,
+    "CodeBLEU": {
+      "src/org/traccar/protocol/EelinkProtocolDecoder.java": 0.9900589684442878
+    }
+  },
+  "Bears-128": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 3,
+    "LD": { "src/org/traccar/protocol/H02ProtocolDecoder.java": 36 },
+    "CB": 54,
+    "CP": 54,
+    "CC": 0,
+    "CodeBLEU": {
+      "src/org/traccar/protocol/H02ProtocolDecoder.java": 0.921806028079368
+    }
+  },
+  "Bears-129": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 2,
+    "LD": { "src/org/traccar/protocol/Gl200TextProtocolDecoder.java": 2 },
+    "CB": 95,
+    "CP": 95,
+    "CC": 0,
+    "CodeBLEU": {
+      "src/org/traccar/protocol/Gl200TextProtocolDecoder.java": 0.9961397978906734
+    }
+  },
+  "Bears-130": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 2,
+    "LD": { "src/org/traccar/protocol/MeitrackProtocolDecoder.java": 2 },
+    "CB": 47,
+    "CP": 47,
+    "CC": 0,
+    "CodeBLEU": {
+      "src/org/traccar/protocol/MeitrackProtocolDecoder.java": 0.8956325728497623
+    }
+  },
+  "Bears-137": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 4,
+    "LD": { "src/org/traccar/protocol/TotemFrameDecoder.java": 52 },
+    "CB": 7,
+    "CP": 7,
+    "CC": 0,
+    "CodeBLEU": {
+      "src/org/traccar/protocol/TotemFrameDecoder.java": 0.9367372423628006
+    }
+  },
+  "Bears-141": {
+    "CChange": 2,
+    "MChange": 3,
+    "LChange": 7,
+    "LD": {
+      "src/main/java/edu/harvard/h2ms/domain/core/User.java": 45,
+      "src/main/java/edu/harvard/h2ms/service/UserDetailsServiceImpl.java": 14
+    },
+    "CB": 38,
+    "CP": 37,
+    "CC": 1,
+    "CodeBLEU": {
+      "src/main/java/edu/harvard/h2ms/domain/core/User.java": 0.9564673008006656,
+      "src/main/java/edu/harvard/h2ms/service/UserDetailsServiceImpl.java": 0.9256821641059231
+    }
+  },
+  "Bears-143": {
+    "CChange": 1,
+    "MChange": 7,
+    "LChange": 4,
+    "LD": { "src/main/java/edu/harvard/h2ms/domain/core/User.java": 24 },
+    "CB": 38,
+    "CP": 38,
+    "CC": 0,
+    "CodeBLEU": {
+      "src/main/java/edu/harvard/h2ms/domain/core/User.java": 0.9956845206441504
+    }
+  },
+  "Bears-197": {
+    "CChange": 2,
+    "MChange": 7,
+    "LChange": 31,
+    "LD": {
+      "cas-client-core/src/main/java/org/jasig/cas/client/util/CommonUtils.java": 585,
+      "cas-client-core/src/main/java/org/jasig/cas/client/util/URIBuilder.java": 77
+    },
+    "CB": 296,
+    "CP": 298,
+    "CC": 2,
+    "CodeBLEU": {
+      "cas-client-core/src/main/java/org/jasig/cas/client/util/CommonUtils.java": 0.9218394776043408,
+      "cas-client-core/src/main/java/org/jasig/cas/client/util/URIBuilder.java": 0.9977412659568882
+    }
+  },
+  "Bears-198": {
+    "CChange": 1,
+    "MChange": 2,
+    "LChange": 2,
+    "LD": {
+      "src/main/java/com/amazonaws/encryptionsdk/model/DecryptionMaterialsRequest.java": 18
+    },
+    "CB": 16,
+    "CP": 16,
+    "CC": 0,
+    "CodeBLEU": {
+      "src/main/java/com/amazonaws/encryptionsdk/model/DecryptionMaterialsRequest.java": 0.9849899955462712
+    }
+  },
+  "Bears-21": {
+    "CChange": 1,
+    "MChange": 2,
+    "LChange": 93,
+    "LD": {
+      "src/main/java/com/fasterxml/jackson/databind/ser/std/DateTimeSerializerBase.java": 1887
+    },
+    "CB": 31,
+    "CP": 25,
+    "CC": 6,
+    "CodeBLEU": {
+      "src/main/java/com/fasterxml/jackson/databind/ser/std/DateTimeSerializerBase.java": 0.6657721419835544
+    }
+  },
+  "Bears-222": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 7,
+    "LD": {
+      "jgrapht-core/src/main/java/org/jgrapht/generate/WattsStrogatzGraphGenerator.java": 63
+    },
+    "CB": 21,
+    "CP": 21,
+    "CC": 0,
+    "CodeBLEU": {
+      "jgrapht-core/src/main/java/org/jgrapht/generate/WattsStrogatzGraphGenerator.java": 0.9810423975541167
+    }
+  },
+  "Bears-226": {
+    "CChange": 0,
+    "MChange": 1,
+    "LChange": 8,
+    "LD": {
+      "src/main/java/com/milaboratory/core/alignment/batch/BatchAlignerWithBaseParameters.java": 50
+    },
+    "CB": 0,
+    "CP": 0,
+    "CC": 0,
+    "CodeBLEU": {
+      "src/main/java/com/milaboratory/core/alignment/batch/BatchAlignerWithBaseParameters.java": 0.964368793325027
+    }
+  },
+  "Bears-245": {
+    "CChange": 1,
+    "MChange": 2,
+    "LChange": 3,
+    "LD": { "src/main/java/com/squareup/javapoet/ParameterSpec.java": 147 },
+    "CB": 29,
+    "CP": 28,
+    "CC": 1,
+    "CodeBLEU": {
+      "src/main/java/com/squareup/javapoet/ParameterSpec.java": 0.9734039610141686
+    }
+  },
+  "Bears-246": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 2,
+    "LD": {
+      "src/main/java/com/wrapper/spotify/requests/data/player/StartResumeUsersPlaybackRequest.java": 4
+    },
+    "CB": 9,
+    "CP": 9,
+    "CC": 0,
+    "CodeBLEU": {
+      "src/main/java/com/wrapper/spotify/requests/data/player/StartResumeUsersPlaybackRequest.java": 0.9736186333145036
+    }
+  },
+  "Bears-99": {
+    "CChange": 2,
+    "MChange": 1,
+    "LChange": 16,
+    "LD": {
+      "src/org/traccar/protocol/H02FrameDecoder.java": 179,
+      "src/org/traccar/protocol/H02ProtocolDecoder.java": 104
+    },
+    "CB": 61,
+    "CP": 57,
+    "CC": 4,
+    "CodeBLEU": {
+      "src/org/traccar/protocol/H02FrameDecoder.java": 0.9179902031255208,
+      "src/org/traccar/protocol/H02ProtocolDecoder.java": 0.9882921449436118
     }
   }
 }

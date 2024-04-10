@@ -4,16 +4,15 @@ from dash import html
 import dash_bootstrap_components as dbc
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 
 import json
 
 repo_data_path = path.abspath(path.join(path.dirname(__file__), '..'))
 
 y_labels = {
-    'LD R': 'Levenshtein Distance for Randoop',
-    'LD E': 'Levenshtein Distance for Evosuite',
-    'CodeBLEU R': 'CodeBLEU for Randoop',
-    'CodeBLEU E': 'CodeBLEU for Evosuite'
+    'LD': 'Levenshtein Distance',
+    'CodeBLEU': 'CodeBLEU'
 }
 
 
@@ -34,23 +33,24 @@ def load_json_data(file_path) -> list:
     for bug_id, metrics in data.items():
         entry = {'Bug ID': bug_id}
         for metric, value in metrics.items():
-            entry[metric] = ', '.join([f'{num}' for file, num in value.items()])
+            if metric in ['LD', 'CodeBLEU']:
+                entry[metric] = ', '.join([f'{num}' for file, num in value.items()])
 
         metrics_summary.append(entry)
 
     return metrics_summary
 
 
-def create_box_plot(df, metric):
+def create_box_plot(df, metric, y_label=""):
     if metric in ['LD', 'CodeBLEU']:
-        df_metric = preprocess_special_metric(df, metric)
-        fig = px.box(df_metric, y=metric, title=f'{metric}')
+        fig = go.Figure()
+        fig.add_trace(go.Box(y=df[metric], name=metric))
     else:
-        fig = px.box(df, y=metric, title=f'{metric}')
-
+        fig = go.Figure()
+        fig.add_trace(go.Box(y=df[metric], name=metric))
     fig.update_layout(
         title_x=0.5,
-        yaxis_title=y_labels.get(metric, ""),
+        yaxis_title=y_label,
     )
     return fig
 
@@ -92,9 +92,65 @@ def make_tab(tab_name: str):
         # Create pandas dataframe
         df_metrics = pd.DataFrame(data)
 
-    metrics = ['LD R', 'LD E', 'CodeBLEU R', 'CodeBLEU E']
+    # metrics = ['LD R', 'LD E', 'CodeBLEU R', 'CodeBLEU E']
 
-    plots = [dcc.Graph(figure=create_box_plot(df_metrics, metric)) for metric in metrics]
+    randoopFailingTests = []
+    evosuiteFailingTests = []
+    
+    if "Bears" in tab_name:
+        randoopFailingTests = ["Bears-99", "Bears-141", "Bears-123"]
+        evosuiteFailingTests = ["Bears-143", "Bears-246"]
+    elif "BugSwarm" in tab_name:
+        randoopFailingTests = []
+        evosuiteFailingTests = []
+    elif "Defects4J" in tab_name:
+        evosuiteFailingTests = ["Chart_1", "Chart_4", "Compress_1", "Compress_3", "Compress_4", "Csv_2", "Gson_2", "Gson_4", "JacksonCore_1", "JacksonCore_2", "JacksonDatabind_2", "JacksonDatabind_3", "JacksonDatabind_4", "JacksonXml_4", "Jsoup_4", "JxPath_1", "JxPath_3", "Lang_5", "Math_1", "Math_3", "Math_4", "Mockito_2", "Time_1", "Time_2", "Time_4"]
+        randoopFailingTests = ["Chart_4", "Codec_4", "Compress_1", "Compress_4", "JacksonCore_1", "JacksonCore_3", "JacksonXml_4", "Math_1", "Math_4", "Time_1", "Time_2"]
+    elif "QuixBugs" in tab_name:
+        randoopFailingTests = ['GCD', 'BUCKETSORT', 'KNAPSACK', 'LEVENSHTEIN', 'FIND_IN_SORTED', 'LIS', 'BREADTH_FIRST_SEARCH', 'POSSIBLE_CHANGE', 'SHORTEST_PATH_LENGTH', 'DEPTH_FIRST_SEARCH', 'FLATTEN', 'SIEVE', 'NEXT_PALINDROME', 'SHORTEST_PATHS', 'NEXT_PERMUTATION', 'REVERSE_LINKED_LIST', 'MERGESORT']
+        evosuiteFailingTests = ['BUCKETSORT', 'LEVENSHTEIN', 'QUICKSORT', 'FIND_IN_SORTED', 'BREADTH_FIRST_SEARCH', 'POSSIBLE_CHANGE', 'LCS_LENGTH', 'SHORTEST_PATH_LENGTH', 'DEPTH_FIRST_SEARCH', 'FLATTEN', 'TO_BASE', 'SIEVE', 'NEXT_PALINDROME', 'IS_VALID_PARENTHESIZATION', 'SHORTEST_PATHS', 'SHUNTING_YARD', 'NEXT_PERMUTATION', 'REVERSE_LINKED_LIST', 'GET_FACTORS']
+
+    
+    df_metricsRandoopFailing = df_metrics[df_metrics['Bug ID'].isin(randoopFailingTests)]
+    df_metricsRandoopOther = df_metrics[~df_metrics['Bug ID'].isin(randoopFailingTests)]
+    df_metricsEvosuiteFailing = df_metrics[df_metrics['Bug ID'].isin(evosuiteFailingTests)]        
+    df_metricsEvosuiteOther = df_metrics[~df_metrics['Bug ID'].isin(evosuiteFailingTests)]
+
+    plots = []
+    if "LD" in df_metricsRandoopFailing.columns:
+        fig = create_box_plot(df_metricsRandoopFailing, "LD", 'Randoop Failing Tests LD')
+        plots.append(dcc.Graph(figure=fig))
+
+    if "CodeBLEU" in df_metricsRandoopFailing.columns:
+        fig = create_box_plot(df_metricsRandoopFailing, "CodeBLEU", 'Randoop Failing Tests CodeBLEU')
+        plots.append(dcc.Graph(figure=fig))
+
+    if "LD" in df_metricsRandoopOther.columns:
+        fig = create_box_plot(df_metricsRandoopOther, "LD", 'Randoop Other LD')
+        plots.append(dcc.Graph(figure=fig))
+
+    if "CodeBLEU" in df_metricsRandoopOther.columns:
+        fig = create_box_plot(df_metricsRandoopOther, "CodeBLEU", 'Randoop Other CodeBLEU')
+        plots.append(dcc.Graph(figure=fig))
+
+    if "LD" in df_metricsEvosuiteFailing.columns:
+        fig = create_box_plot(df_metricsEvosuiteFailing, "LD", 'Evosuite Failing Tests LD')
+        plots.append(dcc.Graph(figure=fig))
+
+    if "CodeBLEU" in df_metricsEvosuiteFailing.columns:
+        fig = create_box_plot(df_metricsEvosuiteFailing, "CodeBLEU", 'Evosuite Failing Tests CodeBLEU')
+        plots.append(dcc.Graph(figure=fig))
+
+    if "LD" in df_metricsEvosuiteOther.columns:
+        fig = create_box_plot(df_metricsEvosuiteOther, "LD", 'Evosuite Other LD')
+        plots.append(dcc.Graph(figure=fig))
+
+    if "CodeBLEU" in df_metricsEvosuiteOther.columns:
+        fig = create_box_plot(df_metricsEvosuiteOther, "CodeBLEU", 'Evosuite Other CodeBLEU')
+        plots.append(dcc.Graph(figure=fig))
+    
+
+    # plots = [dcc.Graph(figure=create_box_plot(df_metrics, metric)) for metric in metrics]
 
     # Arrange plots in rows of 2
     plots_layout = html.Div([
