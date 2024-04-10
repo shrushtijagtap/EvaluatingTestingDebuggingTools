@@ -1,0 +1,359 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UUIDUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.fastcode</a>
+</div>
+
+<h1>Coverage Summary for Class: UUIDUtils (com.alibaba.fastjson2.benchmark.fastcode)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UUIDUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/215)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.fastcode;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.util.JDKUtils;
+&nbsp;
+&nbsp;import java.util.UUID;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.LATIN1;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.UTF16;
+&nbsp;
+<b class="nc">&nbsp;public class UUIDUtils {</b>
+&nbsp;    static final char[] HEX256;
+&nbsp;
+&nbsp;    static {
+<b class="nc">&nbsp;        HEX256 = new char[256];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; 256; i++) {</b>
+<b class="nc">&nbsp;            int hi = (i &gt;&gt; 4) &amp; 15;</b>
+<b class="nc">&nbsp;            int lo = i &amp; 15;</b>
+<b class="nc">&nbsp;            HEX256[i] = (char) (((hi &lt; 10 ? &#39;0&#39; + hi : &#39;a&#39; + hi - 10) &lt;&lt; 8)</b>
+&nbsp;                    + (lo &lt; 10 ? &#39;0&#39; + lo : &#39;a&#39; + lo - 10));
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String fastUUID(UUID uuid) {
+<b class="nc">&nbsp;        long hi = uuid.getMostSignificantBits();</b>
+<b class="nc">&nbsp;        long lo = uuid.getLeastSignificantBits();</b>
+&nbsp;
+<b class="nc">&nbsp;        final char[] hex256 = UUIDUtils.HEX256;</b>
+<b class="nc">&nbsp;        char i = hex256[((int) (hi &gt;&gt; 56)) &amp; 255];</b>
+<b class="nc">&nbsp;        char i1 = hex256[((int) (hi &gt;&gt; 48)) &amp; 255];</b>
+<b class="nc">&nbsp;        char i2 = hex256[((int) (hi &gt;&gt; 40)) &amp; 255];</b>
+<b class="nc">&nbsp;        char i3 = hex256[((int) (hi &gt;&gt; 32)) &amp; 255];</b>
+<b class="nc">&nbsp;        char i4 = hex256[(((int) hi) &gt;&gt; 24) &amp; 255];</b>
+<b class="nc">&nbsp;        char i5 = hex256[(((int) hi) &gt;&gt; 16) &amp; 255];</b>
+<b class="nc">&nbsp;        char i6 = hex256[(((int) hi) &gt;&gt; 8) &amp; 255];</b>
+<b class="nc">&nbsp;        char i7 = hex256[((int) hi) &amp; 255];</b>
+<b class="nc">&nbsp;        char i8 = hex256[(((int) (lo &gt;&gt; 56))) &amp; 255];</b>
+<b class="nc">&nbsp;        char i9 = hex256[(((int) (lo &gt;&gt; 48))) &amp; 255];</b>
+<b class="nc">&nbsp;        char i10 = hex256[(((int) (lo &gt;&gt; 40))) &amp; 255];</b>
+<b class="nc">&nbsp;        char i11 = hex256[((int) (lo &gt;&gt; 32)) &amp; 255];</b>
+<b class="nc">&nbsp;        char i12 = hex256[(((int) lo) &gt;&gt; 24) &amp; 255];</b>
+<b class="nc">&nbsp;        char i13 = hex256[(((int) lo) &gt;&gt; 16) &amp; 255];</b>
+<b class="nc">&nbsp;        char i14 = hex256[(((int) lo) &gt;&gt; 8) &amp; 255];</b>
+<b class="nc">&nbsp;        char i15 = hex256[((int) lo) &amp; 255];</b>
+&nbsp;
+<b class="nc">&nbsp;        byte[] bytes = new byte[36];</b>
+<b class="nc">&nbsp;        bytes[0] = (byte) (i &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[1] = (byte) i;</b>
+<b class="nc">&nbsp;        bytes[2] = (byte) (i1 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[3] = (byte) i1;</b>
+<b class="nc">&nbsp;        bytes[4] = (byte) (i2 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[5] = (byte) i2;</b>
+<b class="nc">&nbsp;        bytes[6] = (byte) (i3 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[7] = (byte) i3;</b>
+<b class="nc">&nbsp;        bytes[8] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;        bytes[9] = (byte) (i4 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[10] = (byte) i4;</b>
+<b class="nc">&nbsp;        bytes[11] = (byte) (i5 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[12] = (byte) i5;</b>
+<b class="nc">&nbsp;        bytes[13] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;        bytes[14] = (byte) (i6 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[15] = (byte) i6;</b>
+<b class="nc">&nbsp;        bytes[16] = (byte) (i7 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[17] = (byte) i7;</b>
+<b class="nc">&nbsp;        bytes[18] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;        bytes[19] = (byte) (i8 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[20] = (byte) i8;</b>
+<b class="nc">&nbsp;        bytes[21] = (byte) (i9 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[22] = (byte) i9;</b>
+<b class="nc">&nbsp;        bytes[23] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;        bytes[24] = (byte) (i10 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[25] = (byte) i10;</b>
+<b class="nc">&nbsp;        bytes[26] = (byte) (i11 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[27] = (byte) i11;</b>
+<b class="nc">&nbsp;        bytes[28] = (byte) (i12 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[29] = (byte) i12;</b>
+<b class="nc">&nbsp;        bytes[30] = (byte) (i13 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[31] = (byte) i13;</b>
+<b class="nc">&nbsp;        bytes[32] = (byte) (i14 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[33] = (byte) i14;</b>
+<b class="nc">&nbsp;        bytes[34] = (byte) (i15 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        bytes[35] = (byte) i15;</b>
+<b class="nc">&nbsp;        return JDKUtils.STRING_CREATOR_JDK11.apply(bytes, LATIN1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String fastUUID2(UUID uuid) {
+<b class="nc">&nbsp;        return fastUUID(uuid.getLeastSignificantBits(), uuid.getMostSignificantBits(), false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static String fastUUID(long lsb, long msb) {
+<b class="nc">&nbsp;        char i = HEX256[((int) (msb &gt;&gt; 56)) &amp; 255];</b>
+<b class="nc">&nbsp;        char i1 = HEX256[((int) (msb &gt;&gt; 48)) &amp; 255];</b>
+<b class="nc">&nbsp;        char i2 = HEX256[((int) (msb &gt;&gt; 40)) &amp; 255];</b>
+<b class="nc">&nbsp;        char i3 = HEX256[((int) (msb &gt;&gt; 32)) &amp; 255];</b>
+<b class="nc">&nbsp;        char i4 = HEX256[(((int) msb) &gt;&gt; 24) &amp; 255];</b>
+<b class="nc">&nbsp;        char i5 = HEX256[(((int) msb) &gt;&gt; 16) &amp; 255];</b>
+<b class="nc">&nbsp;        char i6 = HEX256[(((int) msb) &gt;&gt; 8) &amp; 255];</b>
+<b class="nc">&nbsp;        char i7 = HEX256[((int) msb) &amp; 255];</b>
+<b class="nc">&nbsp;        char i8 = HEX256[(((int) (lsb &gt;&gt; 56))) &amp; 255];</b>
+<b class="nc">&nbsp;        char i9 = HEX256[(((int) (lsb &gt;&gt; 48))) &amp; 255];</b>
+<b class="nc">&nbsp;        char i10 = HEX256[(((int) (lsb &gt;&gt; 40))) &amp; 255];</b>
+<b class="nc">&nbsp;        char i11 = HEX256[((int) (lsb &gt;&gt; 32)) &amp; 255];</b>
+<b class="nc">&nbsp;        char i12 = HEX256[(((int) lsb) &gt;&gt; 24) &amp; 255];</b>
+<b class="nc">&nbsp;        char i13 = HEX256[(((int) lsb) &gt;&gt; 16) &amp; 255];</b>
+<b class="nc">&nbsp;        char i14 = HEX256[(((int) lsb) &gt;&gt; 8) &amp; 255];</b>
+<b class="nc">&nbsp;        char i15 = HEX256[((int) lsb) &amp; 255];</b>
+&nbsp;
+<b class="nc">&nbsp;        byte[] buf = new byte[36];</b>
+<b class="nc">&nbsp;        buf[0] = (byte) (i &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        buf[1] = (byte) i;</b>
+<b class="nc">&nbsp;        buf[2] = (byte) (i1 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        buf[3] = (byte) i1;</b>
+<b class="nc">&nbsp;        buf[4] = (byte) (i2 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        buf[5] = (byte) i2;</b>
+<b class="nc">&nbsp;        buf[6] = (byte) (i3 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        buf[7] = (byte) i3;</b>
+<b class="nc">&nbsp;        buf[8] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;        buf[9] = (byte) (i4 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        buf[10] = (byte) i4;</b>
+<b class="nc">&nbsp;        buf[11] = (byte) (i5 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        buf[12] = (byte) i5;</b>
+<b class="nc">&nbsp;        buf[13] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;        buf[14] = (byte) (i6 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        buf[15] = (byte) i6;</b>
+<b class="nc">&nbsp;        buf[16] = (byte) (i7 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        buf[17] = (byte) i7;</b>
+<b class="nc">&nbsp;        buf[18] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;        buf[19] = (byte) (i8 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        buf[20] = (byte) i8;</b>
+<b class="nc">&nbsp;        buf[21] = (byte) (i9 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        buf[22] = (byte) i9;</b>
+<b class="nc">&nbsp;        buf[23] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;        buf[24] = (byte) (i10 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        buf[25] = (byte) i10;</b>
+<b class="nc">&nbsp;        buf[26] = (byte) (i11 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        buf[27] = (byte) i11;</b>
+<b class="nc">&nbsp;        buf[28] = (byte) (i12 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        buf[29] = (byte) i12;</b>
+<b class="nc">&nbsp;        buf[30] = (byte) (i13 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        buf[31] = (byte) i13;</b>
+<b class="nc">&nbsp;        buf[32] = (byte) (i14 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        buf[33] = (byte) i14;</b>
+<b class="nc">&nbsp;        buf[34] = (byte) (i15 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;        buf[35] = (byte) i15;</b>
+<b class="nc">&nbsp;        return new String(buf, LATIN1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static String fastUUID(long lo, long hi, boolean COMPACT_STRINGS) {
+<b class="nc">&nbsp;        final char[] hex256 = UUIDUtils.HEX256;</b>
+<b class="nc">&nbsp;        char i = hex256[((int) (hi &gt;&gt; 56)) &amp; 255];</b>
+<b class="nc">&nbsp;        char i1 = hex256[((int) (hi &gt;&gt; 48)) &amp; 255];</b>
+<b class="nc">&nbsp;        char i2 = hex256[((int) (hi &gt;&gt; 40)) &amp; 255];</b>
+<b class="nc">&nbsp;        char i3 = hex256[((int) (hi &gt;&gt; 32)) &amp; 255];</b>
+<b class="nc">&nbsp;        char i4 = hex256[(((int) hi) &gt;&gt; 24) &amp; 255];</b>
+<b class="nc">&nbsp;        char i5 = hex256[(((int) hi) &gt;&gt; 16) &amp; 255];</b>
+<b class="nc">&nbsp;        char i6 = hex256[(((int) hi) &gt;&gt; 8) &amp; 255];</b>
+<b class="nc">&nbsp;        char i7 = hex256[((int) hi) &amp; 255];</b>
+<b class="nc">&nbsp;        char i8 = hex256[(((int) (lo &gt;&gt; 56))) &amp; 255];</b>
+<b class="nc">&nbsp;        char i9 = hex256[(((int) (lo &gt;&gt; 48))) &amp; 255];</b>
+<b class="nc">&nbsp;        char i10 = hex256[(((int) (lo &gt;&gt; 40))) &amp; 255];</b>
+<b class="nc">&nbsp;        char i11 = hex256[((int) (lo &gt;&gt; 32)) &amp; 255];</b>
+<b class="nc">&nbsp;        char i12 = hex256[(((int) lo) &gt;&gt; 24) &amp; 255];</b>
+<b class="nc">&nbsp;        char i13 = hex256[(((int) lo) &gt;&gt; 16) &amp; 255];</b>
+<b class="nc">&nbsp;        char i14 = hex256[(((int) lo) &gt;&gt; 8) &amp; 255];</b>
+<b class="nc">&nbsp;        char i15 = hex256[((int) lo) &amp; 255];</b>
+&nbsp;
+<b class="nc">&nbsp;        if (COMPACT_STRINGS) {</b>
+<b class="nc">&nbsp;            byte[] bytes = new byte[36];</b>
+<b class="nc">&nbsp;            bytes[0] = (byte) (i &gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[1] = (byte) i;</b>
+<b class="nc">&nbsp;            bytes[2] = (byte) (i1 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[3] = (byte) i1;</b>
+<b class="nc">&nbsp;            bytes[4] = (byte) (i2 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[5] = (byte) i2;</b>
+<b class="nc">&nbsp;            bytes[6] = (byte) (i3 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[7] = (byte) i3;</b>
+<b class="nc">&nbsp;            bytes[8] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;            bytes[9] = (byte) (i4 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[10] = (byte) i4;</b>
+<b class="nc">&nbsp;            bytes[11] = (byte) (i5 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[12] = (byte) i5;</b>
+<b class="nc">&nbsp;            bytes[13] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;            bytes[14] = (byte) (i6 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[15] = (byte) i6;</b>
+<b class="nc">&nbsp;            bytes[16] = (byte) (i7 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[17] = (byte) i7;</b>
+<b class="nc">&nbsp;            bytes[18] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;            bytes[19] = (byte) (i8 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[20] = (byte) i8;</b>
+<b class="nc">&nbsp;            bytes[21] = (byte) (i9 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[22] = (byte) i9;</b>
+<b class="nc">&nbsp;            bytes[23] = &#39;-&#39;;</b>
+<b class="nc">&nbsp;            bytes[24] = (byte) (i10 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[25] = (byte) i10;</b>
+<b class="nc">&nbsp;            bytes[26] = (byte) (i11 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[27] = (byte) i11;</b>
+<b class="nc">&nbsp;            bytes[28] = (byte) (i12 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[29] = (byte) i12;</b>
+<b class="nc">&nbsp;            bytes[30] = (byte) (i13 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[31] = (byte) i13;</b>
+<b class="nc">&nbsp;            bytes[32] = (byte) (i14 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[33] = (byte) i14;</b>
+<b class="nc">&nbsp;            bytes[34] = (byte) (i15 &gt;&gt; 8);</b>
+<b class="nc">&nbsp;            bytes[35] = (byte) i15;</b>
+<b class="nc">&nbsp;            return JDKUtils.STRING_CREATOR_JDK11.apply(bytes, LATIN1);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            byte[] buf = new byte[72];</b>
+<b class="nc">&nbsp;            putChar(buf, 0, (byte) (i &gt;&gt; 8));</b>
+<b class="nc">&nbsp;            putChar(buf, 1, (byte) i);</b>
+<b class="nc">&nbsp;            putChar(buf, 2, (byte) (i1 &gt;&gt; 8));</b>
+<b class="nc">&nbsp;            putChar(buf, 3, (byte) i1);</b>
+<b class="nc">&nbsp;            putChar(buf, 4, (byte) (i2 &gt;&gt; 8));</b>
+<b class="nc">&nbsp;            putChar(buf, 5, (byte) i2);</b>
+<b class="nc">&nbsp;            putChar(buf, 6, (byte) (i3 &gt;&gt; 8));</b>
+<b class="nc">&nbsp;            putChar(buf, 7, (byte) i3);</b>
+<b class="nc">&nbsp;            putChar(buf, 8, &#39;-&#39;);</b>
+<b class="nc">&nbsp;            putChar(buf, 9, (byte) (i4 &gt;&gt; 8));</b>
+<b class="nc">&nbsp;            putChar(buf, 10, (byte) i4);</b>
+<b class="nc">&nbsp;            putChar(buf, 11, (byte) (i5 &gt;&gt; 8));</b>
+<b class="nc">&nbsp;            putChar(buf, 12, (byte) i5);</b>
+<b class="nc">&nbsp;            putChar(buf, 13, &#39;-&#39;);</b>
+<b class="nc">&nbsp;            putChar(buf, 14, (byte) (i6 &gt;&gt; 8));</b>
+<b class="nc">&nbsp;            putChar(buf, 15, (byte) i6);</b>
+<b class="nc">&nbsp;            putChar(buf, 16, (byte) (i7 &gt;&gt; 8));</b>
+<b class="nc">&nbsp;            putChar(buf, 17, (byte) i7);</b>
+<b class="nc">&nbsp;            putChar(buf, 18, &#39;-&#39;);</b>
+<b class="nc">&nbsp;            putChar(buf, 19, (byte) (i8 &gt;&gt; 8));</b>
+<b class="nc">&nbsp;            putChar(buf, 20, (byte) i8);</b>
+<b class="nc">&nbsp;            putChar(buf, 21, (byte) (i9 &gt;&gt; 8));</b>
+<b class="nc">&nbsp;            putChar(buf, 22, (byte) i9);</b>
+<b class="nc">&nbsp;            putChar(buf, 23, &#39;-&#39;);</b>
+<b class="nc">&nbsp;            putChar(buf, 24, (byte) (i10 &gt;&gt; 8));</b>
+<b class="nc">&nbsp;            putChar(buf, 25, (byte) i10);</b>
+<b class="nc">&nbsp;            putChar(buf, 26, (byte) (i11 &gt;&gt; 8));</b>
+<b class="nc">&nbsp;            putChar(buf, 27, (byte) i11);</b>
+<b class="nc">&nbsp;            putChar(buf, 28, (byte) (i12 &gt;&gt; 8));</b>
+<b class="nc">&nbsp;            putChar(buf, 29, (byte) i12);</b>
+<b class="nc">&nbsp;            putChar(buf, 30, (byte) (i13 &gt;&gt; 8));</b>
+<b class="nc">&nbsp;            putChar(buf, 31, (byte) i13);</b>
+<b class="nc">&nbsp;            putChar(buf, 32, (byte) (i14 &gt;&gt; 8));</b>
+<b class="nc">&nbsp;            putChar(buf, 33, (byte) i14);</b>
+<b class="nc">&nbsp;            putChar(buf, 34, (byte) (i15 &gt;&gt; 8));</b>
+<b class="nc">&nbsp;            putChar(buf, 35, (byte) i15);</b>
+<b class="nc">&nbsp;            return JDKUtils.STRING_CREATOR_JDK11.apply(buf, UTF16);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final int HI_BYTE_SHIFT = 0;
+&nbsp;    static final int LO_BYTE_SHIFT = 8;
+&nbsp;
+&nbsp;    static void putChar(byte[] val, int index, int c) {
+<b class="nc">&nbsp;        index &lt;&lt;= 1;</b>
+<b class="nc">&nbsp;        val[index++] = (byte) (c &gt;&gt; HI_BYTE_SHIFT);</b>
+<b class="nc">&nbsp;        val[index] = (byte) (c &gt;&gt; LO_BYTE_SHIFT);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:37</div>
+</div>
+</body>
+</html>

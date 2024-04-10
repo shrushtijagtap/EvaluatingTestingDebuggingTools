@@ -1,0 +1,406 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ApacheLang3Support</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.util</a>
+</div>
+
+<h1>Coverage Summary for Class: ApacheLang3Support (com.alibaba.fastjson2.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">ApacheLang3Support$PairReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    70.5%
+  </span>
+  <span class="absValue">
+    (55/78)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ApacheLang3Support$PairWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88%
+  </span>
+  <span class="absValue">
+    (44/50)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ApacheLang3Support$TripleMixIn</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.5%
+  </span>
+  <span class="absValue">
+    (100/129)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.util;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONB;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.annotation.JSONCreator;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReader;
+&nbsp;import com.alibaba.fastjson2.support.LambdaMiscCodec;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriter;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.function.BiFunction;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONB.Constants.BC_TYPED_ANY;
+&nbsp;
+&nbsp;public interface ApacheLang3Support {
+&nbsp;    interface TripleMixIn&lt;L, M, R&gt; {
+&nbsp;        @JSONCreator
+&nbsp;        static &lt;L, M, R&gt; Object of(L left, M middle, R right) {
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    class PairReader
+&nbsp;            implements ObjectReader {
+<b class="fc">&nbsp;        static final long LEFT = Fnv.hashCode64(&quot;left&quot;);</b>
+<b class="fc">&nbsp;        static final long RIGHT = Fnv.hashCode64(&quot;right&quot;);</b>
+&nbsp;
+&nbsp;        final Class objectClass;
+&nbsp;        final Type leftType;
+&nbsp;        final Type rightType;
+&nbsp;
+&nbsp;        final BiFunction of;
+&nbsp;
+<b class="fc">&nbsp;        public PairReader(Class objectClass, Type leftType, Type rightType) {</b>
+<b class="fc">&nbsp;            this.objectClass = objectClass;</b>
+<b class="fc">&nbsp;            this.leftType = leftType;</b>
+<b class="fc">&nbsp;            this.rightType = rightType;</b>
+&nbsp;
+&nbsp;            try {
+<b class="fc">&nbsp;                of = LambdaMiscCodec.createBiFunction(</b>
+<b class="fc">&nbsp;                        objectClass.getMethod(&quot;of&quot;, Object.class, Object.class)</b>
+&nbsp;                );
+<b class="nc">&nbsp;            } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;Pair.of method not found&quot;, e);</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="fc">&nbsp;            if (jsonReader.nextIfNull()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (jsonReader.nextIfMatch(BC_TYPED_ANY)) {</b>
+<b class="fc">&nbsp;                long typeHash = jsonReader.readTypeHashCode();</b>
+&nbsp;
+<b class="fc">&nbsp;                final long PAIR = 4645080105124911238L; // Fnv.hashCode64(&quot;org.apache.commons.lang3.tuple.Pair&quot;);</b>
+<b class="fc">&nbsp;                final long MUTABLE_PAIR = 8310287657375596772L; // Fnv.hashCode64(&quot;org.apache.commons.lang3.tuple.MutablePair&quot;);</b>
+<b class="fc">&nbsp;                final long IMMUTABLE_PAIR = -2802985644706367574L; // Fnv.hashCode64(&quot;org.apache.commons.lang3.tuple.ImmutablePair&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;                if (typeHash != PAIR &amp;&amp; typeHash != IMMUTABLE_PAIR &amp;&amp; typeHash != MUTABLE_PAIR) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;not support inputType : &quot; + jsonReader.getString());</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Object left = null, right = null;</b>
+<b class="fc">&nbsp;            if (jsonReader.nextIfObjectStart()) {</b>
+<b class="fc">&nbsp;                for (int i = 0; i &lt; 100; i++) {</b>
+<b class="fc">&nbsp;                    if (jsonReader.nextIfObjectEnd()) {</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    if (jsonReader.isString()) {</b>
+<b class="fc">&nbsp;                        long hashCode = jsonReader.readFieldNameHashCode();</b>
+<b class="fc">&nbsp;                        if (hashCode == LEFT) {</b>
+<b class="fc">&nbsp;                            left = jsonReader.read(leftType);</b>
+<b class="fc">&nbsp;                        } else if (hashCode == RIGHT) {</b>
+<b class="fc">&nbsp;                            right = jsonReader.read(rightType);</b>
+<b class="fc">&nbsp;                        } else if (i == 0) {</b>
+<b class="fc">&nbsp;                            left = jsonReader.getFieldName();</b>
+<b class="fc">&nbsp;                            right = jsonReader.read(rightType);</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            jsonReader.skipValue();</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                    } else if (i == 0) {</b>
+<b class="nc">&nbsp;                        left = jsonReader.read(leftType);</b>
+<b class="nc">&nbsp;                        right = jsonReader.read(rightType);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        throw new JSONException(jsonReader.info(&quot;not support input&quot;));</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (jsonReader.isArray()) {</b>
+<b class="nc">&nbsp;                int len = jsonReader.startArray();</b>
+<b class="nc">&nbsp;                if (len != 2) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info(&quot;not support input&quot;));</b>
+&nbsp;                }
+<b class="nc">&nbsp;                left = jsonReader.read(leftType);</b>
+<b class="nc">&nbsp;                right = jsonReader.read(rightType);</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;not support input&quot;));</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return of.apply(left, right);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="fc">&nbsp;            if (jsonReader.nextIfNull()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Object left = null, right = null;</b>
+<b class="fc">&nbsp;            if (jsonReader.nextIfObjectStart()) {</b>
+<b class="fc">&nbsp;                for (int i = 0; i &lt; 100; i++) {</b>
+<b class="fc">&nbsp;                    if (jsonReader.nextIfObjectEnd()) {</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    if (jsonReader.isString()) {</b>
+<b class="fc">&nbsp;                        long hashCode = jsonReader.readFieldNameHashCode();</b>
+<b class="fc">&nbsp;                        if (hashCode == LEFT) {</b>
+<b class="fc">&nbsp;                            left = jsonReader.read(leftType);</b>
+<b class="fc">&nbsp;                        } else if (hashCode == RIGHT) {</b>
+<b class="fc">&nbsp;                            right = jsonReader.read(rightType);</b>
+<b class="fc">&nbsp;                        } else if (i == 0) {</b>
+<b class="fc">&nbsp;                            left = jsonReader.getFieldName();</b>
+<b class="fc">&nbsp;                            jsonReader.nextIfMatch(&#39;:&#39;);</b>
+<b class="fc">&nbsp;                            right = jsonReader.read(rightType);</b>
+&nbsp;                        } else {
+<b class="fc">&nbsp;                            jsonReader.skipValue();</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                    } else if (i == 0) {</b>
+<b class="nc">&nbsp;                        left = jsonReader.read(leftType);</b>
+<b class="nc">&nbsp;                        jsonReader.nextIfMatch(&#39;:&#39;);</b>
+<b class="nc">&nbsp;                        right = jsonReader.read(rightType);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        throw new JSONException(jsonReader.info(&quot;not support input&quot;));</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;            } else if (jsonReader.nextIfArrayStart()) {</b>
+<b class="fc">&nbsp;                left = jsonReader.read(leftType);</b>
+<b class="fc">&nbsp;                right = jsonReader.read(rightType);</b>
+<b class="fc">&nbsp;                if (!jsonReader.nextIfArrayEnd()) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info(&quot;not support input&quot;));</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;not support input&quot;));</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return of.apply(left, right);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    class PairWriter
+&nbsp;            implements ObjectWriter {
+&nbsp;        final Class objectClass;
+&nbsp;        final String typeName;
+&nbsp;        final long typeNameHash;
+&nbsp;        Function left;
+&nbsp;        Function right;
+&nbsp;
+&nbsp;        byte[] typeNameJSONB;
+&nbsp;
+<b class="fc">&nbsp;        static final byte[] leftName = JSONB.toBytes(&quot;left&quot;);</b>
+<b class="fc">&nbsp;        static final byte[] rightName = JSONB.toBytes(&quot;right&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        public PairWriter(Class objectClass) {</b>
+<b class="fc">&nbsp;            this.objectClass = objectClass;</b>
+<b class="fc">&nbsp;            this.typeName = objectClass.getName();</b>
+<b class="fc">&nbsp;            this.typeNameHash = Fnv.hashCode64(typeName);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void writeJSONB(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="fc">&nbsp;            if (object == null) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeNull();</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if ((jsonWriter.getFeatures(features) &amp; JSONWriter.Feature.WriteClassName.mask) != 0) {</b>
+<b class="fc">&nbsp;                if (typeNameJSONB == null) {</b>
+<b class="fc">&nbsp;                    typeNameJSONB = JSONB.toBytes(typeName);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                jsonWriter.writeTypeName(typeNameJSONB, typeNameHash);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            jsonWriter.startObject();</b>
+&nbsp;
+<b class="fc">&nbsp;            Object left = getLeft(object);</b>
+<b class="fc">&nbsp;            Object right = getRight(object);</b>
+&nbsp;
+<b class="fc">&nbsp;            jsonWriter.writeNameRaw(leftName, PairReader.LEFT);</b>
+<b class="fc">&nbsp;            jsonWriter.writeAny(left);</b>
+&nbsp;
+<b class="fc">&nbsp;            jsonWriter.writeNameRaw(rightName, PairReader.RIGHT);</b>
+<b class="fc">&nbsp;            jsonWriter.writeAny(right);</b>
+<b class="fc">&nbsp;            jsonWriter.endObject();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="fc">&nbsp;            if (object == null) {</b>
+<b class="nc">&nbsp;                jsonWriter.writeNull();</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Object left = getLeft(object);</b>
+<b class="fc">&nbsp;            Object right = getRight(object);</b>
+&nbsp;
+<b class="fc">&nbsp;            jsonWriter.startObject();</b>
+<b class="fc">&nbsp;            if ((jsonWriter.getFeatures(features) &amp; JSONWriter.Feature.WritePairAsJavaBean.mask) != 0) {</b>
+<b class="fc">&nbsp;                jsonWriter.writeName(&quot;left&quot;);</b>
+<b class="fc">&nbsp;                jsonWriter.writeColon();</b>
+<b class="fc">&nbsp;                jsonWriter.writeAny(left);</b>
+&nbsp;
+<b class="fc">&nbsp;                jsonWriter.writeName(&quot;right&quot;);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                jsonWriter.writeNameAny(left);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            jsonWriter.writeColon();</b>
+<b class="fc">&nbsp;            jsonWriter.writeAny(right);</b>
+&nbsp;
+<b class="fc">&nbsp;            jsonWriter.endObject();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        Object getLeft(Object object) {
+<b class="fc">&nbsp;            Class&lt;?&gt; objectClass = object.getClass();</b>
+<b class="fc">&nbsp;            if (left == null) {</b>
+&nbsp;                try {
+<b class="fc">&nbsp;                    left = LambdaMiscCodec.createFunction(</b>
+<b class="fc">&nbsp;                            objectClass.getMethod(&quot;getLeft&quot;)</b>
+&nbsp;                    );
+<b class="nc">&nbsp;                } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;getLeft method not found&quot;, e);</b>
+<b class="fc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return left.apply(object);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        Object getRight(Object object) {
+<b class="fc">&nbsp;            Class&lt;?&gt; objectClass = object.getClass();</b>
+<b class="fc">&nbsp;            if (right == null) {</b>
+&nbsp;                try {
+<b class="fc">&nbsp;                    right = LambdaMiscCodec.createFunction(</b>
+<b class="fc">&nbsp;                            objectClass.getMethod(&quot;getRight&quot;)</b>
+&nbsp;                    );
+<b class="nc">&nbsp;                } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;getRight method not found&quot;, e);</b>
+<b class="fc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return right.apply(object);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:27</div>
+</div>
+</body>
+</html>

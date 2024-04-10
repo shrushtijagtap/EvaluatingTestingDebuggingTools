@@ -1,0 +1,2959 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BeanUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.util</a>
+</div>
+
+<h1>Coverage Summary for Class: BeanUtils (com.alibaba.fastjson2.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BeanUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.7%
+  </span>
+  <span class="absValue">
+    (88/91)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88%
+  </span>
+  <span class="absValue">
+    (1177/1337)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BeanUtils$GenericArrayTypeImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BeanUtils$ParameterizedTypeImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (28/28)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BeanUtils$WildcardTypeImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (22/22)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    97.2%
+  </span>
+  <span class="absValue">
+    (106/109)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.5%
+  </span>
+  <span class="absValue">
+    (1234/1394)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.util;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.annotation.JSONField;
+&nbsp;import com.alibaba.fastjson2.annotation.JSONType;
+&nbsp;import com.alibaba.fastjson2.codec.BeanInfo;
+&nbsp;import com.alibaba.fastjson2.codec.FieldInfo;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectCodecProvider;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.annotation.Inherited;
+&nbsp;import java.lang.reflect.*;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;import java.util.concurrent.ConcurrentMap;
+&nbsp;import java.util.concurrent.atomic.*;
+&nbsp;import java.util.function.Consumer;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.JVM_VERSION;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author Bob Lee
+&nbsp; * @author Jesse Wilson
+&nbsp; * @author Shaojin Wen
+&nbsp; */
+<b class="nc">&nbsp;public abstract class BeanUtils {</b>
+<b class="fc">&nbsp;    static final Type[] EMPTY_TYPE_ARRAY = new Type[]{};</b>
+&nbsp;
+<b class="fc">&nbsp;    static final ConcurrentMap&lt;Class, Field[]&gt; fieldCache = new ConcurrentHashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;    static final ConcurrentMap&lt;Class, Map&lt;String, Field&gt;&gt; fieldMapCache = new ConcurrentHashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;    static final ConcurrentMap&lt;Class, Field[]&gt; declaredFieldCache = new ConcurrentHashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;    static final ConcurrentMap&lt;Class, Method[]&gt; methodCache = new ConcurrentHashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;    static final ConcurrentMap&lt;Class, Constructor[]&gt; constructorCache = new ConcurrentHashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    private static volatile Class RECORD_CLASS;
+&nbsp;    private static volatile Method RECORD_GET_RECORD_COMPONENTS;
+&nbsp;    private static volatile Method RECORD_COMPONENT_GET_NAME;
+&nbsp;
+&nbsp;    public static final String SUPER = &quot;$super$&quot;;
+&nbsp;
+<b class="fc">&nbsp;    static final long[] IGNORE_CLASS_HASH_CODES = {</b>
+&nbsp;            -9214723784238596577L,
+&nbsp;            -9030616758866828325L,
+&nbsp;            -8335274122997354104L,
+&nbsp;            -6963030519018899258L,
+&nbsp;            -4863137578837233966L,
+&nbsp;            -3653547262287832698L,
+&nbsp;            -2819277587813726773L,
+&nbsp;            -2291619803571459675L,
+&nbsp;            -1811306045128064037L,
+&nbsp;            -864440709753525476L,
+&nbsp;            8731803887940231L,
+&nbsp;            1616814008855344660L,
+&nbsp;            2164749833121980361L,
+&nbsp;            3724195282986200606L,
+&nbsp;            3977020351318456359L, // sun.nio.ch.FileChannelImpl
+&nbsp;            4882459834864833642L,
+&nbsp;            7981148566008458638L,
+&nbsp;            8344106065386396833L,
+&nbsp;    };
+&nbsp;
+&nbsp;    public static String[] getRecordFieldNames(Class&lt;?&gt; recordType) {
+<b class="fc">&nbsp;        if (JVM_VERSION &lt; 14) {</b>
+<b class="fc">&nbsp;            return new String[0];</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            if (RECORD_GET_RECORD_COMPONENTS == null) {</b>
+<b class="nc">&nbsp;                RECORD_GET_RECORD_COMPONENTS = Class.class.getMethod(&quot;getRecordComponents&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (RECORD_COMPONENT_GET_NAME == null) {</b>
+<b class="nc">&nbsp;                Class&lt;?&gt; c = Class.forName(&quot;java.lang.reflect.RecordComponent&quot;);</b>
+<b class="nc">&nbsp;                RECORD_COMPONENT_GET_NAME = c.getMethod(&quot;getName&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            final Object[] components = (Object[]) RECORD_GET_RECORD_COMPONENTS.invoke(recordType);</b>
+<b class="nc">&nbsp;            final String[] names = new String[components.length];</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; components.length; i++) {</b>
+<b class="nc">&nbsp;                names[i] = (String) RECORD_COMPONENT_GET_NAME.invoke(components[i]);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return names;</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(String.format(</b>
+&nbsp;                    &quot;Failed to access Methods needed to support `java.lang.Record`: (%s) %s&quot;,
+<b class="nc">&nbsp;                    e.getClass().getName(), e.getMessage()), e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void fields(Class objectClass, Consumer&lt;Field&gt; fieldReaders) {
+<b class="fc">&nbsp;        if (TypeUtils.isProxy(objectClass)) {</b>
+<b class="nc">&nbsp;            Class superclass = objectClass.getSuperclass();</b>
+<b class="nc">&nbsp;            fields(superclass, fieldReaders);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Field[] fields = fieldCache.get(objectClass);</b>
+<b class="fc">&nbsp;        if (fields == null) {</b>
+<b class="fc">&nbsp;            fields = objectClass.getFields();</b>
+<b class="fc">&nbsp;            fieldCache.putIfAbsent(objectClass, fields);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        boolean enumClass = Enum.class.isAssignableFrom(objectClass);</b>
+<b class="fc">&nbsp;        for (Field field : fields) {</b>
+<b class="fc">&nbsp;            int modifiers = field.getModifiers();</b>
+<b class="fc">&nbsp;            if (Modifier.isStatic(modifiers) &amp;&amp; !enumClass) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            fieldReaders.accept(field);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Method getMethod(Class objectClass, String methodName) {
+<b class="fc">&nbsp;        Method[] methods = methodCache.get(objectClass);</b>
+<b class="fc">&nbsp;        if (methods == null) {</b>
+<b class="fc">&nbsp;            methods = getMethods(objectClass);</b>
+<b class="fc">&nbsp;            methodCache.putIfAbsent(objectClass, methods);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (Method method : methods) {</b>
+<b class="fc">&nbsp;            if (method.getName().equals(methodName)) {</b>
+<b class="fc">&nbsp;                return method;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Method fluentSetter(Class objectClass, String methodName, Class paramType) {
+<b class="fc">&nbsp;        Method[] methods = methodCache.get(objectClass);</b>
+<b class="fc">&nbsp;        if (methods == null) {</b>
+<b class="nc">&nbsp;            methods = getMethods(objectClass);</b>
+<b class="nc">&nbsp;            methodCache.putIfAbsent(objectClass, methods);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (Method method : methods) {</b>
+<b class="fc">&nbsp;            if (method.getName().equals(methodName)</b>
+<b class="fc">&nbsp;                    &amp;&amp; method.getReturnType() == objectClass</b>
+<b class="fc">&nbsp;                    &amp;&amp; method.getParameterCount() == 1</b>
+<b class="fc">&nbsp;                    &amp;&amp; method.getParameterTypes()[0] == paramType</b>
+&nbsp;            ) {
+<b class="fc">&nbsp;                return method;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Method getMethod(Class objectClass, Method signature) {
+<b class="fc">&nbsp;        if (objectClass == null</b>
+&nbsp;                || objectClass == Object.class
+&nbsp;                || objectClass == Serializable.class
+&nbsp;        ) {
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Method[] methods = methodCache.get(objectClass);</b>
+<b class="fc">&nbsp;        if (methods == null) {</b>
+<b class="fc">&nbsp;            methods = getMethods(objectClass);</b>
+<b class="fc">&nbsp;            methodCache.putIfAbsent(objectClass, methods);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (Method method : methods) {</b>
+<b class="fc">&nbsp;            if (!method.getName().equals(signature.getName())) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (method.getParameterCount() != signature.getParameterCount()) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            Class&lt;?&gt;[] parameterTypes0 = method.getParameterTypes();</b>
+<b class="fc">&nbsp;            Class&lt;?&gt;[] parameterTypes1 = signature.getParameterTypes();</b>
+<b class="fc">&nbsp;            boolean paramMatch = true;</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; parameterTypes0.length; i++) {</b>
+<b class="fc">&nbsp;                if (!parameterTypes0[i].equals(parameterTypes1[i])) {</b>
+<b class="fc">&nbsp;                    paramMatch = false;</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            if (paramMatch) {</b>
+<b class="fc">&nbsp;                return method;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Field getDeclaredField(Class objectClass, String fieldName) {
+<b class="fc">&nbsp;        Map&lt;String, Field&gt; fieldMap = fieldMapCache.get(objectClass);</b>
+<b class="fc">&nbsp;        if (fieldMap == null) {</b>
+<b class="fc">&nbsp;            Map&lt;String, Field&gt; map = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;            declaredFields(objectClass, field -&gt; map.put(field.getName(), field));</b>
+&nbsp;
+<b class="fc">&nbsp;            fieldMapCache.putIfAbsent(objectClass, map);</b>
+<b class="fc">&nbsp;            fieldMap = fieldMapCache.get(objectClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return fieldMap.get(fieldName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Method getSetter(Class objectClass, String methodName) {
+<b class="nc">&nbsp;        Method[] methods = new Method[1];</b>
+<b class="nc">&nbsp;        setters(objectClass, e -&gt; {</b>
+<b class="nc">&nbsp;            if (!methodName.equals(e.getName())) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            methods[0] = e;</b>
+&nbsp;        });
+<b class="nc">&nbsp;        return methods[0];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * ignore static fields
+&nbsp;     */
+&nbsp;    public static void declaredFields(Class objectClass, Consumer&lt;Field&gt; fieldConsumer) {
+<b class="fc">&nbsp;        if (objectClass == null || fieldConsumer == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (ignore(objectClass)) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (TypeUtils.isProxy(objectClass)) {</b>
+<b class="nc">&nbsp;            Class superclass = objectClass.getSuperclass();</b>
+<b class="nc">&nbsp;            declaredFields(superclass, fieldConsumer);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Class superClass = objectClass.getSuperclass();</b>
+&nbsp;
+<b class="fc">&nbsp;        boolean protobufMessageV3 = false;</b>
+<b class="fc">&nbsp;        if (superClass != null</b>
+&nbsp;                &amp;&amp; superClass != Object.class
+&nbsp;        ) {
+<b class="fc">&nbsp;            protobufMessageV3 = superClass.getName().equals(&quot;com.google.protobuf.GeneratedMessageV3&quot;);</b>
+<b class="fc">&nbsp;            if (!protobufMessageV3) {</b>
+<b class="fc">&nbsp;                declaredFields(superClass, fieldConsumer);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Field[] fields = declaredFieldCache.get(objectClass);</b>
+<b class="fc">&nbsp;        if (fields == null) {</b>
+<b class="fc">&nbsp;            Field[] declaredFields = null;</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                declaredFields = objectClass.getDeclaredFields();</b>
+<b class="fc">&nbsp;                declaredFieldCache.put(objectClass, declaredFields);</b>
+<b class="nc">&nbsp;            } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;                declaredFields = new Field[0];</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+<b class="fc">&nbsp;            boolean allMatch = true;</b>
+<b class="fc">&nbsp;            for (Field field : declaredFields) {</b>
+<b class="fc">&nbsp;                int modifiers = field.getModifiers();</b>
+<b class="fc">&nbsp;                if (Modifier.isStatic(modifiers)) {</b>
+<b class="fc">&nbsp;                    allMatch = false;</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (allMatch) {</b>
+<b class="fc">&nbsp;                fields = declaredFields;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                List&lt;Field&gt; list = new ArrayList&lt;&gt;(declaredFields.length);</b>
+<b class="fc">&nbsp;                for (Field field : declaredFields) {</b>
+<b class="fc">&nbsp;                    int modifiers = field.getModifiers();</b>
+<b class="fc">&nbsp;                    if (Modifier.isStatic(modifiers)) {</b>
+<b class="fc">&nbsp;                        continue;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    list.add(field);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                fields = list.toArray(new Field[list.size()]);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            fieldCache.putIfAbsent(objectClass, fields);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (Field field : fields) {</b>
+<b class="fc">&nbsp;            int modifiers = field.getModifiers();</b>
+<b class="fc">&nbsp;            if ((modifiers &amp; Modifier.STATIC) != 0) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (protobufMessageV3) {</b>
+<b class="fc">&nbsp;                String fieldName = field.getName();</b>
+<b class="fc">&nbsp;                Class&lt;?&gt; fieldClass = field.getType();</b>
+<b class="fc">&nbsp;                if (&quot;cardsmap_&quot;.equals(fieldName)</b>
+<b class="fc">&nbsp;                        &amp;&amp; fieldClass.getName().equals(&quot;com.google.protobuf.MapField&quot;)) {</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Class&lt;?&gt; declaringClass = field.getDeclaringClass();</b>
+<b class="fc">&nbsp;            if (declaringClass == AbstractMap.class</b>
+&nbsp;                    || declaringClass == HashMap.class
+&nbsp;                    || declaringClass == LinkedHashMap.class
+&nbsp;                    || declaringClass == TreeMap.class
+&nbsp;                    || declaringClass == ConcurrentHashMap.class
+&nbsp;            ) {
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            fieldConsumer.accept(field);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void staticMethod(Class objectClass, Consumer&lt;Method&gt; methodConsumer) {
+<b class="fc">&nbsp;        Method[] methods = methodCache.get(objectClass);</b>
+<b class="fc">&nbsp;        if (methods == null) {</b>
+<b class="fc">&nbsp;            methods = getMethods(objectClass);</b>
+<b class="fc">&nbsp;            methodCache.putIfAbsent(objectClass, methods);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (Method method : methods) {</b>
+<b class="fc">&nbsp;            int modifiers = method.getModifiers();</b>
+<b class="fc">&nbsp;            if (!Modifier.isStatic(modifiers)) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            methodConsumer.accept(method);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Method buildMethod(Class objectClass, String methodName) {
+<b class="fc">&nbsp;        Method[] methods = methodCache.get(objectClass);</b>
+<b class="fc">&nbsp;        if (methods == null) {</b>
+<b class="fc">&nbsp;            methods = getMethods(objectClass);</b>
+<b class="fc">&nbsp;            methodCache.putIfAbsent(objectClass, methods);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (Method method : methods) {</b>
+<b class="fc">&nbsp;            int modifiers = method.getModifiers();</b>
+<b class="fc">&nbsp;            if (Modifier.isStatic(modifiers)) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (method.getParameterCount() != 0) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (method.getName().equals(methodName)) {</b>
+<b class="fc">&nbsp;                return method;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void constructor(Class objectClass, Consumer&lt;Constructor&gt; constructorConsumer) {
+<b class="fc">&nbsp;        Constructor[] constructors = constructorCache.get(objectClass);</b>
+<b class="fc">&nbsp;        if (constructors == null) {</b>
+<b class="fc">&nbsp;            constructors = objectClass.getDeclaredConstructors();</b>
+<b class="fc">&nbsp;            constructorCache.putIfAbsent(objectClass, constructors);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        boolean record = isRecord(objectClass);</b>
+<b class="fc">&nbsp;        for (Constructor constructor : constructors) {</b>
+<b class="fc">&nbsp;            if (record &amp;&amp; constructor.getParameterCount() == 0) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            constructorConsumer.accept(constructor);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Constructor[] getConstructor(Class objectClass) {
+<b class="fc">&nbsp;        Constructor[] constructors = constructorCache.get(objectClass);</b>
+<b class="fc">&nbsp;        if (constructors == null) {</b>
+<b class="fc">&nbsp;            constructors = objectClass.getDeclaredConstructors();</b>
+<b class="fc">&nbsp;            constructorCache.putIfAbsent(objectClass, constructors);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return constructors;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Constructor getDefaultConstructor(Class objectClass, boolean includeNoneStaticMember) {
+<b class="fc">&nbsp;        if ((objectClass == StackTraceElement.class &amp;&amp; JVM_VERSION &gt;= 9) || (isRecord(objectClass))) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Constructor[] constructors = constructorCache.get(objectClass);</b>
+<b class="fc">&nbsp;        if (constructors == null) {</b>
+<b class="fc">&nbsp;            constructors = objectClass.getDeclaredConstructors();</b>
+<b class="fc">&nbsp;            constructorCache.putIfAbsent(objectClass, constructors);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (Constructor constructor : constructors) {</b>
+<b class="fc">&nbsp;            if (constructor.getParameterCount() == 0) {</b>
+<b class="fc">&nbsp;                return constructor;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (!includeNoneStaticMember) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Class declaringClass = objectClass.getDeclaringClass();</b>
+<b class="fc">&nbsp;        if (declaringClass != null) {</b>
+<b class="fc">&nbsp;            for (Constructor constructor : constructors) {</b>
+<b class="fc">&nbsp;                if (constructor.getParameterCount() == 1) {</b>
+<b class="fc">&nbsp;                    Class firstParamType = constructor.getParameterTypes()[0];</b>
+<b class="fc">&nbsp;                    if (declaringClass.equals(firstParamType)) {</b>
+<b class="fc">&nbsp;                        return constructor;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setters(Class objectClass, Consumer&lt;Method&gt; methodConsumer) {
+<b class="fc">&nbsp;        setters(objectClass, null, methodConsumer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setters(Class objectClass, Class mixin, Consumer&lt;Method&gt; methodConsumer) {
+<b class="fc">&nbsp;        if (ignore(objectClass)) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Method[] methods = methodCache.get(objectClass);</b>
+<b class="fc">&nbsp;        if (methods == null) {</b>
+<b class="fc">&nbsp;            methods = getMethods(objectClass);</b>
+<b class="fc">&nbsp;            methodCache.putIfAbsent(objectClass, methods);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (Method method : methods) {</b>
+<b class="fc">&nbsp;            int mods = method.getModifiers();</b>
+<b class="fc">&nbsp;            if (Modifier.isStatic(mods)) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (method.getDeclaringClass() == Object.class) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            String methodName = method.getName();</b>
+&nbsp;
+<b class="fc">&nbsp;            boolean methodSkip = false;</b>
+<b class="fc">&nbsp;            switch (methodName) {</b>
+&nbsp;                case &quot;equals&quot;:
+&nbsp;                case &quot;hashCode&quot;:
+&nbsp;                case &quot;toString&quot;:
+<b class="fc">&nbsp;                    methodSkip = true;</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (methodSkip) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            int paramCount = method.getParameterCount();</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; returnType = method.getReturnType();</b>
+&nbsp;
+&nbsp;            // read only getter
+<b class="fc">&nbsp;            if (paramCount == 0) {</b>
+<b class="fc">&nbsp;                if (methodName.length() &lt;= 3 || !methodName.startsWith(&quot;get&quot;)) {</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (returnType == AtomicInteger.class</b>
+&nbsp;                        || returnType == AtomicLong.class
+&nbsp;                        || returnType == AtomicBoolean.class
+&nbsp;                        || returnType == AtomicIntegerArray.class
+&nbsp;                        || returnType == AtomicLongArray.class
+&nbsp;                        || returnType == AtomicReference.class
+<b class="fc">&nbsp;                        || Collection.class.isAssignableFrom(returnType)</b>
+<b class="fc">&nbsp;                        || Map.class.isAssignableFrom(returnType)</b>
+&nbsp;                ) {
+<b class="fc">&nbsp;                    methodConsumer.accept(method);</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (paramCount == 2</b>
+<b class="fc">&nbsp;                    &amp;&amp; method.getReturnType() == Void.TYPE</b>
+<b class="fc">&nbsp;                    &amp;&amp; method.getParameterTypes()[0] == String.class</b>
+&nbsp;            ) {
+<b class="fc">&nbsp;                Annotation[] annotations = getAnnotations(method);</b>
+&nbsp;
+<b class="fc">&nbsp;                boolean unwrapped = false;</b>
+<b class="fc">&nbsp;                for (Annotation annotation : annotations) {</b>
+<b class="fc">&nbsp;                    Class&lt;? extends Annotation&gt; annotationType = annotation.annotationType();</b>
+<b class="fc">&nbsp;                    JSONField jsonField = findAnnotation(annotation, JSONField.class);</b>
+<b class="fc">&nbsp;                    if (jsonField != null) {</b>
+<b class="fc">&nbsp;                        if (jsonField.unwrapped()) {</b>
+<b class="fc">&nbsp;                            unwrapped = true;</b>
+<b class="fc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        continue;
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    switch (annotationType.getName()) {</b>
+&nbsp;                        case &quot;com.fasterxml.jackson.annotation.JsonAnySetter&quot;:
+&nbsp;                        case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonAnySetter&quot;:
+<b class="fc">&nbsp;                            if (JSONFactory.isUseJacksonAnnotation()) {</b>
+<b class="fc">&nbsp;                                unwrapped = true;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        default:
+&nbsp;                            break;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (unwrapped) {</b>
+<b class="fc">&nbsp;                    methodConsumer.accept(method);</b>
+&nbsp;                }
+&nbsp;                continue;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (paramCount != 1) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            final int methodNameLength = methodName.length();</b>
+<b class="fc">&nbsp;            boolean nameMatch = methodNameLength &gt; 3 &amp;&amp; (methodName.startsWith(&quot;set&quot;) || returnType == objectClass);</b>
+<b class="fc">&nbsp;            if (!nameMatch) {</b>
+<b class="fc">&nbsp;                if (mixin != null) {</b>
+<b class="fc">&nbsp;                    Method mixinMethod = getMethod(mixin, method);</b>
+<b class="fc">&nbsp;                    if (mixinMethod != null) {</b>
+<b class="fc">&nbsp;                        Annotation[] annotations = getAnnotations(mixinMethod);</b>
+<b class="fc">&nbsp;                        for (Annotation annotation : annotations) {</b>
+<b class="fc">&nbsp;                            if (annotation.annotationType() == JSONField.class) {</b>
+<b class="fc">&nbsp;                                JSONField jsonField = (JSONField) annotation;</b>
+<b class="fc">&nbsp;                                if (!jsonField.unwrapped()) {</b>
+<b class="fc">&nbsp;                                    nameMatch = true;</b>
+&nbsp;                                }
+&nbsp;                                break;
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (!nameMatch) {</b>
+<b class="fc">&nbsp;                Annotation[] annotations = getAnnotations(method);</b>
+<b class="fc">&nbsp;                for (Annotation annotation : annotations) {</b>
+<b class="fc">&nbsp;                    if (annotation.annotationType() == JSONField.class) {</b>
+<b class="fc">&nbsp;                        JSONField jsonField = (JSONField) annotation;</b>
+<b class="fc">&nbsp;                        if (!jsonField.unwrapped()) {</b>
+<b class="fc">&nbsp;                            nameMatch = true;</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (!nameMatch) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            methodConsumer.accept(method);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setters(Class objectClass, boolean checkPrefix, Consumer&lt;Method&gt; methodConsumer) {
+<b class="fc">&nbsp;        if (ignore(objectClass)) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Method[] methods = methodCache.get(objectClass);</b>
+<b class="fc">&nbsp;        if (methods == null) {</b>
+<b class="fc">&nbsp;            methods = getMethods(objectClass);</b>
+<b class="fc">&nbsp;            methodCache.putIfAbsent(objectClass, methods);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (Method method : methods) {</b>
+<b class="fc">&nbsp;            int paramType = method.getParameterCount();</b>
+&nbsp;
+&nbsp;            // read only getter
+<b class="fc">&nbsp;            if (paramType == 0) {</b>
+<b class="fc">&nbsp;                String methodName = method.getName();</b>
+<b class="fc">&nbsp;                if (checkPrefix &amp;&amp; (methodName.length() &lt;= 3 || !methodName.startsWith(&quot;get&quot;))) {</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                Class&lt;?&gt; returnType = method.getReturnType();</b>
+<b class="fc">&nbsp;                if (returnType == AtomicInteger.class</b>
+&nbsp;                        || returnType == AtomicLong.class
+&nbsp;                        || returnType == AtomicBoolean.class
+&nbsp;                        || returnType == AtomicIntegerArray.class
+&nbsp;                        || returnType == AtomicLongArray.class
+<b class="fc">&nbsp;                        || Collection.class.isAssignableFrom(returnType)</b>
+&nbsp;                ) {
+<b class="fc">&nbsp;                    methodConsumer.accept(method);</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (paramType != 1) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            int mods = method.getModifiers();</b>
+<b class="fc">&nbsp;            if (Modifier.isStatic(mods)) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            String methodName = method.getName();</b>
+<b class="fc">&nbsp;            final int methodNameLength = methodName.length();</b>
+<b class="fc">&nbsp;            if (checkPrefix &amp;&amp; (methodNameLength &lt;= 3 || !methodName.startsWith(&quot;set&quot;))) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            methodConsumer.accept(method);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void annotationMethods(Class objectClass, Consumer&lt;Method&gt; methodConsumer) {
+<b class="fc">&nbsp;        Method[] methods = methodCache.get(objectClass);</b>
+<b class="fc">&nbsp;        if (methods == null) {</b>
+<b class="fc">&nbsp;            methods = getMethods(objectClass);</b>
+<b class="fc">&nbsp;            methodCache.putIfAbsent(objectClass, methods);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (Method method : methods) {</b>
+<b class="fc">&nbsp;            if (method.getParameterCount() != 0) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            Class&lt;?&gt; declaringClass = method.getDeclaringClass();</b>
+<b class="fc">&nbsp;            if (declaringClass == Object.class) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            switch (method.getName()) {</b>
+&nbsp;                case &quot;toString&quot;:
+&nbsp;                case &quot;hashCode&quot;:
+&nbsp;                case &quot;annotationType&quot;:
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            methodConsumer.accept(method);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isWriteEnumAsJavaBean(Class clazz) {
+<b class="fc">&nbsp;        Annotation[] annotations = getAnnotations(clazz);</b>
+<b class="fc">&nbsp;        for (Annotation annotation : annotations) {</b>
+<b class="fc">&nbsp;            JSONType jsonType = findAnnotation(annotation, JSONType.class);</b>
+<b class="fc">&nbsp;            if (jsonType != null) {</b>
+<b class="fc">&nbsp;                return jsonType.writeEnumAsJavaBean();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Class&lt;? extends Annotation&gt; annotationType = annotation.annotationType();</b>
+<b class="nc">&nbsp;            String name = annotationType.getName();</b>
+<b class="nc">&nbsp;            if (&quot;com.alibaba.fastjson.annotation.JSONType&quot;.equals(name)) {</b>
+<b class="nc">&nbsp;                BeanInfo beanInfo = new BeanInfo();</b>
+<b class="nc">&nbsp;                BeanUtils.annotationMethods(annotationType, method -&gt; BeanUtils.processJSONType1x(beanInfo, annotation, method));</b>
+<b class="nc">&nbsp;                if (beanInfo.writeEnumAsJavaBean) {</b>
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String[] getEnumAnnotationNames(Class enumClass) {
+<b class="fc">&nbsp;        Enum[] enumConstants = (Enum[]) enumClass.getEnumConstants();</b>
+<b class="fc">&nbsp;        String[] annotationNames = new String[enumConstants.length];</b>
+<b class="fc">&nbsp;        BeanUtils.fields(enumClass, field -&gt; {</b>
+<b class="fc">&nbsp;            String fieldName = field.getName();</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; enumConstants.length; i++) {</b>
+<b class="fc">&nbsp;                Enum e = enumConstants[i];</b>
+<b class="fc">&nbsp;                String enumName = e.name();</b>
+<b class="fc">&nbsp;                if (fieldName.equals(enumName)) {</b>
+<b class="fc">&nbsp;                    JSONField annotation = field.getAnnotation(JSONField.class);</b>
+<b class="fc">&nbsp;                    if (annotation != null) {</b>
+<b class="fc">&nbsp;                        String annotationName = annotation.name();</b>
+<b class="fc">&nbsp;                        if (annotationName.length() != 0 &amp;&amp; !annotationName.equals(enumName)) {</b>
+<b class="fc">&nbsp;                            annotationNames[i] = annotationName;</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                    }</b>
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        });
+&nbsp;
+<b class="fc">&nbsp;        int nulls = 0;</b>
+<b class="fc">&nbsp;        for (String annotationName : annotationNames) {</b>
+<b class="fc">&nbsp;            if (annotationName == null) {</b>
+<b class="fc">&nbsp;                nulls++;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (nulls == annotationNames.length) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return annotationNames;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Member getEnumValueField(Class enumClass, ObjectCodecProvider mixinProvider) {
+<b class="fc">&nbsp;        if (enumClass == null) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Class[] interfaces = enumClass.getInterfaces();</b>
+&nbsp;
+<b class="fc">&nbsp;        Method[] methods = methodCache.get(enumClass);</b>
+<b class="fc">&nbsp;        if (methods == null) {</b>
+<b class="fc">&nbsp;            methods = enumClass.getMethods();</b>
+<b class="fc">&nbsp;            methodCache.putIfAbsent(enumClass, methods);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (Method method : methods) {</b>
+<b class="fc">&nbsp;            if (method.getReturnType() == Void.class) {</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (method.getParameterCount() != 0) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Class&lt;?&gt; declaringClass = method.getDeclaringClass();</b>
+<b class="fc">&nbsp;            if (declaringClass == Enum.class || declaringClass == Object.class) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            String methodName = method.getName();</b>
+<b class="fc">&nbsp;            if (methodName.equals(&quot;values&quot;)) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (isJSONField(method)) {</b>
+<b class="fc">&nbsp;                return method;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (methodName.startsWith(&quot;get&quot;)) {</b>
+<b class="fc">&nbsp;                String fieldName = BeanUtils.getterName(methodName, null);</b>
+<b class="fc">&nbsp;                Field field = BeanUtils.getDeclaredField(enumClass, fieldName);</b>
+<b class="fc">&nbsp;                if (field != null &amp;&amp; isJSONField(field)) {</b>
+<b class="fc">&nbsp;                    return method;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            AtomicReference&lt;Member&gt; memberRef = new AtomicReference&lt;&gt;();</b>
+<b class="fc">&nbsp;            for (Class enumInterface : interfaces) {</b>
+<b class="fc">&nbsp;                getters(enumInterface, e -&gt; {</b>
+<b class="fc">&nbsp;                    if (e.getName().equals(methodName)) {</b>
+<b class="fc">&nbsp;                        if (isJSONField(e)) {</b>
+<b class="fc">&nbsp;                            memberRef.set(method);</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                });
+&nbsp;
+&nbsp;                Class mixIn;
+<b class="fc">&nbsp;                if (mixinProvider != null) {</b>
+<b class="fc">&nbsp;                    mixIn = mixinProvider.getMixIn(enumInterface);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    mixIn = JSONFactory.getDefaultObjectWriterProvider().getMixIn(enumInterface);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (mixIn != null) {</b>
+<b class="fc">&nbsp;                    getters(mixIn, e -&gt; {</b>
+<b class="fc">&nbsp;                        if (e.getName().equals(methodName)) {</b>
+<b class="fc">&nbsp;                            if (isJSONField(e)) {</b>
+<b class="fc">&nbsp;                                memberRef.set(method);</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    });
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            Member refMember = memberRef.get();</b>
+<b class="fc">&nbsp;            if (refMember != null) {</b>
+<b class="fc">&nbsp;                return refMember;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Field[] fields = fieldCache.get(enumClass);</b>
+<b class="fc">&nbsp;        if (fields == null) {</b>
+<b class="fc">&nbsp;            fields = enumClass.getFields();</b>
+<b class="fc">&nbsp;            fieldCache.putIfAbsent(enumClass, fields);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Member member = null;</b>
+<b class="fc">&nbsp;        Enum[] enumConstants = (Enum[]) enumClass.getEnumConstants();</b>
+<b class="fc">&nbsp;        for (Field field : fields) {</b>
+<b class="fc">&nbsp;            boolean found = false;</b>
+<b class="fc">&nbsp;            if (enumConstants != null) {</b>
+<b class="fc">&nbsp;                String fieldName = field.getName();</b>
+<b class="fc">&nbsp;                for (Enum e : enumConstants) {</b>
+<b class="fc">&nbsp;                    if (fieldName.equals(e.name())) {</b>
+<b class="fc">&nbsp;                        found = true;</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (isJSONField(field)) {</b>
+<b class="fc">&nbsp;                if (!found) {</b>
+<b class="fc">&nbsp;                    member = field;</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return member;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void getters(Class objectClass, Consumer&lt;Method&gt; methodConsumer) {
+<b class="fc">&nbsp;        getters(objectClass, null, methodConsumer);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void getters(Class objectClass, Class mixinSource, Consumer&lt;Method&gt; methodConsumer) {
+<b class="fc">&nbsp;        if (objectClass == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (Proxy.isProxyClass(objectClass)) {</b>
+<b class="fc">&nbsp;            Class[] interfaces = objectClass.getInterfaces();</b>
+<b class="fc">&nbsp;            if (interfaces.length == 1) {</b>
+<b class="fc">&nbsp;                getters(interfaces[0], methodConsumer);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (ignore(objectClass)) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Class superClass = objectClass.getSuperclass();</b>
+<b class="fc">&nbsp;        if (TypeUtils.isProxy(objectClass)) {</b>
+<b class="nc">&nbsp;            getters(superClass, methodConsumer);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        boolean record = isRecord(objectClass);</b>
+&nbsp;
+<b class="fc">&nbsp;        String[] recordFieldNames = null;</b>
+<b class="fc">&nbsp;        if (record) {</b>
+<b class="nc">&nbsp;            recordFieldNames = getRecordFieldNames(objectClass);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Method[] methods = methodCache.get(objectClass);</b>
+<b class="fc">&nbsp;        if (methods == null) {</b>
+<b class="fc">&nbsp;            methods = getMethods(objectClass);</b>
+<b class="fc">&nbsp;            methodCache.putIfAbsent(objectClass, methods);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        boolean protobufMessageV3 = superClass != null &amp;&amp; superClass.getName().equals(&quot;com.google.protobuf.GeneratedMessageV3&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        for (Method method : methods) {</b>
+<b class="fc">&nbsp;            int paramType = method.getParameterCount();</b>
+<b class="fc">&nbsp;            if (paramType != 0) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            int mods = method.getModifiers();</b>
+<b class="fc">&nbsp;            if (Modifier.isStatic(mods)) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Class&lt;?&gt; returnClass = method.getReturnType();</b>
+<b class="fc">&nbsp;            if (returnClass == Void.class) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Class&lt;?&gt; declaringClass = method.getDeclaringClass();</b>
+<b class="fc">&nbsp;            if (declaringClass == Enum.class || declaringClass == Object.class) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            String methodName = method.getName();</b>
+&nbsp;
+<b class="fc">&nbsp;            boolean methodSkip = false;</b>
+<b class="fc">&nbsp;            switch (methodName) {</b>
+&nbsp;                case &quot;isInitialized&quot;:
+&nbsp;                case &quot;getInitializationErrorString&quot;:
+&nbsp;                case &quot;getSerializedSize&quot;:
+<b class="fc">&nbsp;                    if (protobufMessageV3) {</b>
+<b class="fc">&nbsp;                        methodSkip = true;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                case &quot;equals&quot;:
+&nbsp;                case &quot;hashCode&quot;:
+&nbsp;                case &quot;toString&quot;:
+<b class="fc">&nbsp;                    methodSkip = true;</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (methodSkip) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (protobufMessageV3) {</b>
+<b class="fc">&nbsp;                if ((methodName.endsWith(&quot;Type&quot;) || methodName.endsWith(&quot;Bytes&quot;))</b>
+<b class="fc">&nbsp;                        &amp;&amp; returnClass.getName().equals(&quot;com.google.protobuf.ByteString&quot;)) {</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            // skip thrift isSetXXX
+<b class="fc">&nbsp;            if (methodName.startsWith(&quot;isSet&quot;) &amp;&amp; returnClass == boolean.class) {</b>
+<b class="fc">&nbsp;                boolean setterFound = false, unsetFound = false, getterFound = false;</b>
+<b class="fc">&nbsp;                String setterName = BeanUtils.getterName(methodName, null);</b>
+<b class="fc">&nbsp;                String getterName = &quot;g&quot; + setterName.substring(1);</b>
+&nbsp;
+<b class="fc">&nbsp;                String unsetName = &quot;un&quot; + setterName;</b>
+<b class="fc">&nbsp;                for (Method m : methods) {</b>
+<b class="fc">&nbsp;                    if (m.getName().equals(setterName)</b>
+<b class="fc">&nbsp;                            &amp;&amp; m.getParameterCount() == 1</b>
+<b class="fc">&nbsp;                            &amp;&amp; m.getReturnType() == void.class) {</b>
+<b class="fc">&nbsp;                        setterFound = true;</b>
+<b class="fc">&nbsp;                    } else if (m.getName().equals(getterName)</b>
+<b class="fc">&nbsp;                            &amp;&amp; m.getParameterCount() == 0) {</b>
+<b class="fc">&nbsp;                        getterFound = true;</b>
+<b class="fc">&nbsp;                    } else if (m.getName().equals(unsetName)</b>
+<b class="fc">&nbsp;                            &amp;&amp; m.getParameterCount() == 0</b>
+<b class="fc">&nbsp;                            &amp;&amp; m.getReturnType() == void.class) {</b>
+<b class="fc">&nbsp;                        unsetFound = true;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (setterFound &amp;&amp; unsetFound &amp;&amp; getterFound</b>
+<b class="fc">&nbsp;                        &amp;&amp; findAnnotation(method, JSONField.class) == null) {</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (record) {</b>
+<b class="nc">&nbsp;                boolean match = false;</b>
+<b class="nc">&nbsp;                for (String recordFieldName : recordFieldNames) {</b>
+<b class="nc">&nbsp;                    if (methodName.equals(recordFieldName)) {</b>
+<b class="nc">&nbsp;                        match = true;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (match) {</b>
+<b class="nc">&nbsp;                    methodConsumer.accept(method);</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            final int methodNameLength = methodName.length();</b>
+<b class="fc">&nbsp;            boolean nameMatch = methodNameLength &gt; 3 &amp;&amp; methodName.startsWith(&quot;get&quot;);</b>
+<b class="fc">&nbsp;            if (nameMatch) {</b>
+<b class="fc">&nbsp;                char firstChar = methodName.charAt(3);</b>
+<b class="fc">&nbsp;                if (firstChar &gt;= &#39;a&#39; &amp;&amp; firstChar &lt;= &#39;z&#39; &amp;&amp; methodNameLength == 4) {</b>
+<b class="fc">&nbsp;                    nameMatch = false;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } else if (returnClass == boolean.class || returnClass == Boolean.class) {</b>
+<b class="fc">&nbsp;                nameMatch = methodNameLength &gt; 2 &amp;&amp; methodName.startsWith(&quot;is&quot;);</b>
+<b class="fc">&nbsp;                if (nameMatch) {</b>
+<b class="fc">&nbsp;                    char firstChar = methodName.charAt(2);</b>
+<b class="fc">&nbsp;                    if (firstChar &gt;= &#39;a&#39; &amp;&amp; firstChar &lt;= &#39;z&#39; &amp;&amp; methodNameLength == 3) {</b>
+<b class="fc">&nbsp;                        nameMatch = false;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (!nameMatch) {</b>
+<b class="fc">&nbsp;                if (isJSONField(method)) {</b>
+<b class="fc">&nbsp;                    nameMatch = true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (!nameMatch &amp;&amp; mixinSource != null) {</b>
+<b class="fc">&nbsp;                Method mixinMethod = getMethod(mixinSource, method);</b>
+<b class="fc">&nbsp;                if (mixinMethod != null) {</b>
+<b class="fc">&nbsp;                    if (isJSONField(mixinMethod)) {</b>
+<b class="fc">&nbsp;                        nameMatch = true;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (!nameMatch &amp;&amp; fluentSetter(objectClass, methodName, returnClass) != null) {</b>
+<b class="fc">&nbsp;                nameMatch = true;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (!nameMatch) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (protobufMessageV3) {</b>
+<b class="fc">&nbsp;                if (method.getDeclaringClass() == superClass) {</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                Class&lt;?&gt; returnType = method.getReturnType();</b>
+<b class="fc">&nbsp;                boolean ignore = false;</b>
+<b class="fc">&nbsp;                switch (methodName) {</b>
+&nbsp;                    case &quot;getUnknownFields&quot;:
+&nbsp;                    case &quot;getSerializedSize&quot;:
+&nbsp;                    case &quot;getParserForType&quot;:
+&nbsp;                    case &quot;getMessageBytes&quot;:
+&nbsp;                    case &quot;getDefaultInstanceForType&quot;:
+<b class="fc">&nbsp;                        ignore = returnType.getName().startsWith(&quot;com.google.protobuf.&quot;) || returnType == objectClass;</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    default:
+&nbsp;                        break;
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (ignore) {</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            methodConsumer.accept(method);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Method[] getMethods(Class objectClass) {
+&nbsp;        Method[] methods;
+&nbsp;        try {
+<b class="fc">&nbsp;            methods = objectClass.getMethods();</b>
+<b class="nc">&nbsp;        } catch (NoClassDefFoundError ignored) {</b>
+<b class="nc">&nbsp;            methods = new Method[0];</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return methods;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean isJSONField(AnnotatedElement element) {
+<b class="fc">&nbsp;        Annotation[] annotations = element.getAnnotations();</b>
+<b class="fc">&nbsp;        for (Annotation annotation : annotations) {</b>
+<b class="fc">&nbsp;            String annotationTypeName = annotation.annotationType().getName();</b>
+<b class="fc">&nbsp;            switch (annotationTypeName) {</b>
+&nbsp;                case &quot;com.alibaba.fastjson.annotation.JSONField&quot;:
+&nbsp;                case &quot;com.alibaba.fastjson2.annotation.JSONField&quot;:
+<b class="fc">&nbsp;                    return true;</b>
+&nbsp;                case &quot;com.fasterxml.jackson.annotation.JsonValue&quot;:
+&nbsp;                case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonValue&quot;:
+&nbsp;                case &quot;com.fasterxml.jackson.annotation.JsonRawValue&quot;:
+&nbsp;                case &quot;com.fasterxml.jackson.annotation.JsonProperty&quot;:
+&nbsp;                case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonProperty&quot;:
+<b class="fc">&nbsp;                    if (JSONFactory.isUseJacksonAnnotation()) {</b>
+<b class="fc">&nbsp;                        return true;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static boolean ignore(Class objectClass) {
+<b class="fc">&nbsp;        if (objectClass == null) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return Arrays.binarySearch(</b>
+&nbsp;                IGNORE_CLASS_HASH_CODES,
+<b class="fc">&nbsp;                Fnv.hashCode64(</b>
+<b class="fc">&nbsp;                        objectClass.getName()</b>
+&nbsp;                )
+&nbsp;        ) &gt;= 0;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isRecord(Class objectClass) {
+<b class="fc">&nbsp;        Class superclass = objectClass.getSuperclass();</b>
+<b class="fc">&nbsp;        if (superclass == null) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (RECORD_CLASS == null) {</b>
+<b class="fc">&nbsp;            String superclassName = superclass.getName();</b>
+<b class="fc">&nbsp;            if (&quot;java.lang.Record&quot;.equals(superclassName)) {</b>
+<b class="nc">&nbsp;                RECORD_CLASS = superclass;</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return superclass == RECORD_CLASS;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String setterName(String methodName, String namingStrategy) {
+<b class="fc">&nbsp;        if (namingStrategy == null) {</b>
+<b class="fc">&nbsp;            namingStrategy = &quot;CamelCase&quot;;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int methodNameLength = methodName.length();</b>
+<b class="fc">&nbsp;        if (methodNameLength &lt;= 3) {</b>
+<b class="fc">&nbsp;            return methodName;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int prefixLength = methodName.startsWith(&quot;set&quot;) ? 3 : 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        switch (namingStrategy) {</b>
+&nbsp;            case &quot;NeverUseThisValueExceptDefaultValue&quot;:
+&nbsp;            case &quot;CamelCase&quot;: {
+<b class="fc">&nbsp;                char[] chars = new char[methodNameLength - prefixLength];</b>
+<b class="fc">&nbsp;                methodName.getChars(prefixLength, methodNameLength, chars, 0);</b>
+<b class="fc">&nbsp;                char c0 = chars[0];</b>
+<b class="fc">&nbsp;                boolean c1UCase = chars.length &gt; 1 &amp;&amp; chars[1] &gt;= &#39;A&#39; &amp;&amp; chars[1] &lt;= &#39;Z&#39;;</b>
+<b class="fc">&nbsp;                if (c0 &gt;= &#39;A&#39; &amp;&amp; c0 &lt;= &#39;Z&#39; &amp;&amp; !c1UCase) {</b>
+<b class="fc">&nbsp;                    chars[0] = (char) (c0 + 32);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                return new String(chars);</b>
+&nbsp;            }
+&nbsp;            case &quot;PascalCase&quot;:
+<b class="fc">&nbsp;                return pascal(methodName, methodNameLength, prefixLength);</b>
+&nbsp;            case &quot;SnakeCase&quot;: {
+<b class="fc">&nbsp;                return snakeCase(methodName, prefixLength);</b>
+&nbsp;            }
+&nbsp;            case &quot;UpperCaseWithUnderScores&quot;: {
+<b class="fc">&nbsp;                return underScores(methodName, prefixLength, true);</b>
+&nbsp;            }
+&nbsp;            case &quot;UpperCase&quot;: {
+<b class="fc">&nbsp;                char[] chars = new char[methodNameLength - prefixLength];</b>
+<b class="fc">&nbsp;                methodName.getChars(prefixLength, methodNameLength, chars, 0);</b>
+<b class="fc">&nbsp;                char c0 = chars[0];</b>
+<b class="fc">&nbsp;                for (int i = 0; i &lt; chars.length; i++) {</b>
+<b class="fc">&nbsp;                    char ch = chars[i];</b>
+<b class="fc">&nbsp;                    if (ch &gt;= &#39;a&#39; &amp;&amp; c0 &lt;= &#39;z&#39;) {</b>
+<b class="fc">&nbsp;                        chars[i] = (char) (ch - 32);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                return new String(chars);</b>
+&nbsp;            }
+&nbsp;            default:
+<b class="fc">&nbsp;                throw new JSONException(&quot;TODO : &quot; + namingStrategy);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String setterName(String methodName, int prefixLength) {
+<b class="fc">&nbsp;        int methodNameLength = methodName.length();</b>
+<b class="fc">&nbsp;        char[] chars = new char[methodNameLength - prefixLength];</b>
+<b class="fc">&nbsp;        methodName.getChars(prefixLength, methodNameLength, chars, 0);</b>
+<b class="fc">&nbsp;        char c0 = chars[0];</b>
+<b class="fc">&nbsp;        boolean c1UCase = chars.length &gt; 1 &amp;&amp; chars[1] &gt;= &#39;A&#39; &amp;&amp; chars[1] &lt;= &#39;Z&#39;;</b>
+<b class="fc">&nbsp;        if (c0 &gt;= &#39;A&#39; &amp;&amp; c0 &lt;= &#39;Z&#39; &amp;&amp; !c1UCase) {</b>
+<b class="fc">&nbsp;            chars[0] = (char) (c0 + 32);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new String(chars);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String getterName(Method method, String namingStrategy) {
+<b class="fc">&nbsp;        String fieldName = getterName(method.getName(), namingStrategy);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (fieldName.length() &gt; 2</b>
+<b class="fc">&nbsp;                &amp;&amp; fieldName.charAt(0) &gt;= &#39;A&#39; &amp;&amp; fieldName.charAt(0) &lt;= &#39;Z&#39;</b>
+<b class="fc">&nbsp;                &amp;&amp; fieldName.charAt(1) &gt;= &#39;A&#39; &amp;&amp; fieldName.charAt(1) &lt;= &#39;Z&#39;</b>
+&nbsp;        ) {
+<b class="fc">&nbsp;            char[] chars = fieldName.toCharArray();</b>
+<b class="fc">&nbsp;            chars[0] = (char) (chars[0] + 32);</b>
+<b class="fc">&nbsp;            String fieldName1 = new String(chars);</b>
+<b class="fc">&nbsp;            Field field = BeanUtils.getDeclaredField(method.getDeclaringClass(), fieldName1);</b>
+<b class="fc">&nbsp;            if (field != null &amp;&amp; Modifier.isPublic(field.getModifiers())) {</b>
+<b class="fc">&nbsp;                fieldName = field.getName();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return fieldName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Field getField(Class objectClass, Method method) {
+<b class="fc">&nbsp;        String methodName = method.getName();</b>
+<b class="fc">&nbsp;        final int len = methodName.length();</b>
+<b class="fc">&nbsp;        Class&lt;?&gt; returnType = method.getReturnType();</b>
+&nbsp;
+<b class="fc">&nbsp;        boolean is = false, get = false, set = false;</b>
+<b class="fc">&nbsp;        if (len &gt; 2) {</b>
+<b class="fc">&nbsp;            char c0 = methodName.charAt(0);</b>
+<b class="fc">&nbsp;            char c1 = methodName.charAt(1);</b>
+<b class="fc">&nbsp;            char c2 = methodName.charAt(2);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (c0 == &#39;i&#39; &amp;&amp; c1 == &#39;s&#39;) {</b>
+<b class="fc">&nbsp;                is = returnType == Boolean.class || returnType == boolean.class;</b>
+<b class="fc">&nbsp;            } else if (c0 == &#39;g&#39; &amp;&amp; c1 == &#39;e&#39; &amp;&amp; c2 == &#39;t&#39;) {</b>
+<b class="fc">&nbsp;                get = len &gt; 3;</b>
+<b class="fc">&nbsp;            } else if (c0 == &#39;s&#39; &amp;&amp; c1 == &#39;e&#39; &amp;&amp; c2 == &#39;t&#39;) {</b>
+<b class="fc">&nbsp;                set = len &gt; 3 &amp;&amp; method.getParameterCount() == 1;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Field[] fields = new Field[2];</b>
+<b class="fc">&nbsp;        if (is || get || set) {</b>
+<b class="fc">&nbsp;            Class type = (is || get) ? returnType : method.getParameterTypes()[0];</b>
+<b class="fc">&nbsp;            int prefix = is ? 2 : 3;</b>
+<b class="fc">&nbsp;            char[] chars = new char[len - prefix];</b>
+<b class="fc">&nbsp;            methodName.getChars(prefix, len, chars, 0);</b>
+<b class="fc">&nbsp;            char c0 = chars[0];</b>
+<b class="fc">&nbsp;            declaredFields(objectClass, field -&gt; {</b>
+<b class="fc">&nbsp;                if (field.getDeclaringClass() != method.getDeclaringClass()) {</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                String fieldName = field.getName();</b>
+<b class="fc">&nbsp;                int fieldNameLength = fieldName.length();</b>
+<b class="fc">&nbsp;                if (fieldNameLength == len - prefix</b>
+<b class="fc">&nbsp;                        &amp;&amp; (field.getType() == type || type.isAssignableFrom(field.getType()))) {</b>
+<b class="fc">&nbsp;                    if (c0 &gt;= &#39;A&#39; &amp;&amp; c0 &lt;= &#39;Z&#39; &amp;&amp; (c0 + 32) == fieldName.charAt(0)</b>
+<b class="fc">&nbsp;                            &amp;&amp; fieldName.regionMatches(1, methodName, prefix + 1, fieldNameLength - 1)</b>
+&nbsp;                    ) {
+<b class="fc">&nbsp;                        fields[0] = field;</b>
+<b class="fc">&nbsp;                    } else if (fieldName.regionMatches(0, methodName, prefix, fieldNameLength)) {</b>
+<b class="fc">&nbsp;                        fields[1] = field;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            });
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Field field = fields[0] != null ? fields[0] : fields[1];</b>
+<b class="fc">&nbsp;        if (Throwable.class.isAssignableFrom(objectClass)) {</b>
+<b class="fc">&nbsp;            if (returnType == String.class &amp;&amp; (field == null &amp;&amp; methodName.equals(&quot;getMessage&quot;) || field == null &amp;&amp; methodName.equals(&quot;getLocalizedMessage&quot;))) {</b>
+<b class="fc">&nbsp;                field = getDeclaredField(objectClass, &quot;detailMessage&quot;);</b>
+<b class="fc">&nbsp;            } else if (returnType == Throwable[].class &amp;&amp; methodName.equals(&quot;getSuppressed&quot;)) {</b>
+<b class="fc">&nbsp;                field = getDeclaredField(objectClass, &quot;suppressedExceptions&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return field;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String getterName(String methodName, String namingStrategy) {
+<b class="fc">&nbsp;        if (namingStrategy == null) {</b>
+<b class="fc">&nbsp;            namingStrategy = &quot;CamelCase&quot;;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        final int methodNameLength = methodName.length();</b>
+<b class="fc">&nbsp;        boolean is = methodName.startsWith(&quot;is&quot;);</b>
+<b class="fc">&nbsp;        boolean get = methodName.startsWith(&quot;get&quot;);</b>
+&nbsp;
+&nbsp;        final int prefixLength;
+<b class="fc">&nbsp;        if (is) {</b>
+<b class="fc">&nbsp;            prefixLength = 2;</b>
+<b class="fc">&nbsp;        } else if (get) {</b>
+<b class="fc">&nbsp;            prefixLength = 3;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            prefixLength = 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (methodNameLength == prefixLength) {</b>
+<b class="fc">&nbsp;            return methodName;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        switch (namingStrategy) {</b>
+&nbsp;            case &quot;NeverUseThisValueExceptDefaultValue&quot;:
+&nbsp;            case &quot;CamelCase&quot;: {
+<b class="fc">&nbsp;                char[] chars = new char[methodNameLength - prefixLength];</b>
+<b class="fc">&nbsp;                methodName.getChars(prefixLength, methodNameLength, chars, 0);</b>
+<b class="fc">&nbsp;                char c0 = chars[0];</b>
+<b class="fc">&nbsp;                boolean c1UCase = chars.length &gt; 1 &amp;&amp; chars[1] &gt;= &#39;A&#39; &amp;&amp; chars[1] &lt;= &#39;Z&#39;;</b>
+<b class="fc">&nbsp;                if (c0 &gt;= &#39;A&#39; &amp;&amp; c0 &lt;= &#39;Z&#39; &amp;&amp; !c1UCase) {</b>
+<b class="fc">&nbsp;                    chars[0] = (char) (c0 + 32);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                return new String(chars);</b>
+&nbsp;            }
+&nbsp;            case &quot;CamelCase1x&quot;: {
+<b class="fc">&nbsp;                char[] chars = new char[methodNameLength - prefixLength];</b>
+<b class="fc">&nbsp;                methodName.getChars(prefixLength, methodNameLength, chars, 0);</b>
+<b class="fc">&nbsp;                char c0 = chars[0];</b>
+<b class="fc">&nbsp;                if (c0 &gt;= &#39;A&#39; &amp;&amp; c0 &lt;= &#39;Z&#39;) {</b>
+<b class="fc">&nbsp;                    chars[0] = (char) (c0 + 32);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                return new String(chars);</b>
+&nbsp;            }
+&nbsp;            case &quot;PascalCase&quot;: {
+<b class="fc">&nbsp;                return pascal(methodName, methodNameLength, prefixLength);</b>
+&nbsp;            }
+&nbsp;            case &quot;SnakeCase&quot;: {
+<b class="fc">&nbsp;                return snakeCase(methodName, prefixLength);</b>
+&nbsp;            }
+&nbsp;            case &quot;UpperCaseWithUnderScores&quot;: {
+<b class="fc">&nbsp;                return underScores(methodName, prefixLength, true);</b>
+&nbsp;            }
+&nbsp;            case &quot;UpperCamelCaseWithSpaces&quot;:
+<b class="fc">&nbsp;                return upperCamelWith(methodName, prefixLength, &#39; &#39;);</b>
+&nbsp;            case &quot;UpperCase&quot;:
+<b class="fc">&nbsp;                return methodName.substring(prefixLength).toUpperCase();</b>
+&nbsp;            case &quot;UpperCaseWithDashes&quot;:
+<b class="fc">&nbsp;                return dashes(methodName, prefixLength, true);</b>
+&nbsp;            case &quot;UpperCaseWithDots&quot;:
+<b class="fc">&nbsp;                return dots(methodName, prefixLength, true);</b>
+&nbsp;            case &quot;KebabCase&quot;: {
+<b class="fc">&nbsp;                StringBuilder buf = new StringBuilder();</b>
+&nbsp;                final int firstIndex;
+<b class="fc">&nbsp;                if (is) {</b>
+<b class="fc">&nbsp;                    firstIndex = 2;</b>
+<b class="fc">&nbsp;                } else if (get) {</b>
+<b class="fc">&nbsp;                    firstIndex = 3;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    firstIndex = 0;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                for (int i = firstIndex; i &lt; methodName.length(); ++i) {</b>
+<b class="fc">&nbsp;                    char ch = methodName.charAt(i);</b>
+<b class="fc">&nbsp;                    if (ch &gt;= &#39;A&#39; &amp;&amp; ch &lt;= &#39;Z&#39;) {</b>
+<b class="fc">&nbsp;                        char u = (char) (ch + 32);</b>
+<b class="fc">&nbsp;                        if (i &gt; firstIndex) {</b>
+<b class="fc">&nbsp;                            buf.append(&#39;-&#39;);</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                        buf.append(u);</b>
+<b class="fc">&nbsp;                    } else {</b>
+<b class="fc">&nbsp;                        buf.append(ch);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                return buf.toString();</b>
+&nbsp;            }
+&nbsp;            default:
+<b class="fc">&nbsp;                throw new JSONException(&quot;TODO : &quot; + namingStrategy);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String pascal(String methodName, int methodNameLength, int prefixLength) {
+<b class="fc">&nbsp;        char[] chars = new char[methodNameLength - prefixLength];</b>
+<b class="fc">&nbsp;        methodName.getChars(prefixLength, methodNameLength, chars, 0);</b>
+<b class="fc">&nbsp;        char c0 = chars[0];</b>
+<b class="fc">&nbsp;        if (c0 &gt;= &#39;a&#39; &amp;&amp; c0 &lt;= &#39;z&#39; &amp;&amp; chars.length &gt; 1) {</b>
+<b class="fc">&nbsp;            chars[0] = (char) (c0 - 32);</b>
+<b class="fc">&nbsp;        } else if (c0 == &#39;_&#39; &amp;&amp; chars.length &gt; 2) {</b>
+<b class="fc">&nbsp;            char c1 = chars[1];</b>
+<b class="fc">&nbsp;            if (c1 &gt;= &#39;a&#39; &amp;&amp; c1 &lt;= &#39;z&#39; &amp;&amp; chars[2] &gt;= &#39;a&#39; &amp;&amp; chars[2] &lt;= &#39;z&#39;) {</b>
+<b class="fc">&nbsp;                chars[1] = (char) (c1 - 32);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return new String(chars);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String fieldName(String methodName, String namingStrategy) {
+<b class="fc">&nbsp;        if (namingStrategy == null) {</b>
+<b class="nc">&nbsp;            namingStrategy = &quot;CamelCase&quot;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (methodName == null || methodName.isEmpty()) {</b>
+<b class="fc">&nbsp;            return methodName;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        switch (namingStrategy) {</b>
+&nbsp;            case &quot;NoChange&quot;:
+&nbsp;            case &quot;NeverUseThisValueExceptDefaultValue&quot;:
+&nbsp;            case &quot;CamelCase&quot;: {
+<b class="fc">&nbsp;                char c0 = methodName.charAt(0);</b>
+<b class="fc">&nbsp;                char c1 = methodName.length() &gt; 1 ? methodName.charAt(1) : &#39;\0&#39;;</b>
+<b class="fc">&nbsp;                if (c0 &gt;= &#39;A&#39; &amp;&amp; c0 &lt;= &#39;Z&#39;</b>
+<b class="fc">&nbsp;                        &amp;&amp; methodName.length() &gt; 1</b>
+&nbsp;                        &amp;&amp; (c1 &lt; &#39;A&#39; || c1 &gt; &#39;Z&#39;)) {
+<b class="fc">&nbsp;                    char[] chars = methodName.toCharArray();</b>
+<b class="fc">&nbsp;                    chars[0] = (char) (c0 + 32);</b>
+<b class="fc">&nbsp;                    return new String(chars);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                return methodName;</b>
+&nbsp;            }
+&nbsp;            case &quot;CamelCase1x&quot;: {
+<b class="nc">&nbsp;                char c0 = methodName.charAt(0);</b>
+<b class="nc">&nbsp;                if (c0 &gt;= &#39;A&#39; &amp;&amp; c0 &lt;= &#39;Z&#39; &amp;&amp; methodName.length() &gt; 1) {</b>
+<b class="nc">&nbsp;                    char[] chars = methodName.toCharArray();</b>
+<b class="nc">&nbsp;                    chars[0] = (char) (c0 + 32);</b>
+<b class="nc">&nbsp;                    return new String(chars);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return methodName;</b>
+&nbsp;            }
+&nbsp;            case &quot;PascalCase&quot;: {
+<b class="fc">&nbsp;                char c0 = methodName.charAt(0);</b>
+&nbsp;                char c1;
+<b class="fc">&nbsp;                if (c0 &gt;= &#39;a&#39; &amp;&amp; c0 &lt;= &#39;z&#39;</b>
+<b class="fc">&nbsp;                        &amp;&amp; methodName.length() &gt; 1</b>
+<b class="fc">&nbsp;                        &amp;&amp; (c1 = methodName.charAt(1)) &gt;= &#39;a&#39;</b>
+&nbsp;                        &amp;&amp; c1 &lt;= &#39;z&#39;) {
+<b class="fc">&nbsp;                    char[] chars = methodName.toCharArray();</b>
+<b class="fc">&nbsp;                    chars[0] = (char) (c0 - 32);</b>
+<b class="fc">&nbsp;                    return new String(chars);</b>
+<b class="fc">&nbsp;                } else if (c0 == &#39;_&#39;</b>
+<b class="fc">&nbsp;                        &amp;&amp; methodName.length() &gt; 1</b>
+<b class="fc">&nbsp;                        &amp;&amp; (c1 = methodName.charAt(1)) &gt;= &#39;a&#39;</b>
+&nbsp;                        &amp;&amp; c1 &lt;= &#39;z&#39;) {
+<b class="fc">&nbsp;                    char[] chars = methodName.toCharArray();</b>
+<b class="fc">&nbsp;                    chars[1] = (char) (c1 - 32);</b>
+<b class="fc">&nbsp;                    return new String(chars);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                return methodName;</b>
+&nbsp;            }
+&nbsp;            case &quot;SnakeCase&quot;:
+<b class="fc">&nbsp;                return snakeCase(methodName, 0);</b>
+&nbsp;            case &quot;UpperCaseWithUnderScores&quot;:
+<b class="fc">&nbsp;                return underScores(methodName, 0, true);</b>
+&nbsp;            case &quot;LowerCaseWithUnderScores&quot;:
+<b class="fc">&nbsp;                return underScores(methodName, 0, false);</b>
+&nbsp;            case &quot;UpperCaseWithDashes&quot;:
+<b class="fc">&nbsp;                return dashes(methodName, 0, true);</b>
+&nbsp;            case &quot;LowerCaseWithDashes&quot;:
+<b class="fc">&nbsp;                return dashes(methodName, 0, false);</b>
+&nbsp;            case &quot;UpperCaseWithDots&quot;:
+<b class="fc">&nbsp;                return dots(methodName, 0, true);</b>
+&nbsp;            case &quot;LowerCaseWithDots&quot;:
+<b class="fc">&nbsp;                return dots(methodName, 0, false);</b>
+&nbsp;            case &quot;UpperCase&quot;:
+<b class="fc">&nbsp;                return methodName.toUpperCase();</b>
+&nbsp;            case &quot;LowerCase&quot;:
+<b class="fc">&nbsp;                return methodName.toLowerCase();</b>
+&nbsp;            case &quot;UpperCamelCaseWithSpaces&quot;:
+<b class="fc">&nbsp;                return upperCamelWith(methodName, 0, &#39; &#39;);</b>
+&nbsp;            case &quot;UpperCamelCaseWithUnderScores&quot;:
+<b class="fc">&nbsp;                return upperCamelWith(methodName, 0, &#39;_&#39;);</b>
+&nbsp;            case &quot;UpperCamelCaseWithDashes&quot;:
+<b class="fc">&nbsp;                return upperCamelWith(methodName, 0, &#39;-&#39;);</b>
+&nbsp;            case &quot;UpperCamelCaseWithDots&quot;:
+<b class="fc">&nbsp;                return upperCamelWith(methodName, 0, &#39;.&#39;);</b>
+&nbsp;            case &quot;KebabCase&quot;: {
+<b class="fc">&nbsp;                StringBuilder buf = new StringBuilder();</b>
+<b class="fc">&nbsp;                for (int i = 0; i &lt; methodName.length(); ++i) {</b>
+<b class="fc">&nbsp;                    char ch = methodName.charAt(i);</b>
+<b class="fc">&nbsp;                    if (ch &gt;= &#39;A&#39; &amp;&amp; ch &lt;= &#39;Z&#39;) {</b>
+<b class="fc">&nbsp;                        char u = (char) (ch + 32);</b>
+<b class="fc">&nbsp;                        if (i &gt; 0) {</b>
+<b class="fc">&nbsp;                            buf.append(&#39;-&#39;);</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                        buf.append(u);</b>
+<b class="fc">&nbsp;                    } else {</b>
+<b class="fc">&nbsp;                        buf.append(ch);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                return buf.toString();</b>
+&nbsp;            }
+&nbsp;            default:
+<b class="fc">&nbsp;                throw new JSONException(&quot;TODO : &quot; + namingStrategy);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static String snakeCase(String methodName, int prefixLength) {
+<b class="fc">&nbsp;        final int methodNameLength = methodName.length();</b>
+&nbsp;
+<b class="fc">&nbsp;        char[] buf = TypeUtils.CHARS_UPDATER.getAndSet(TypeUtils.CACHE, null);</b>
+<b class="fc">&nbsp;        if (buf == null) {</b>
+<b class="fc">&nbsp;            buf = new char[128];</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="fc">&nbsp;            int off = 0;</b>
+<b class="fc">&nbsp;            for (int i = prefixLength; i &lt; methodNameLength; ++i) {</b>
+<b class="fc">&nbsp;                char ch = methodName.charAt(i);</b>
+<b class="fc">&nbsp;                if (ch &gt;= &#39;A&#39; &amp;&amp; ch &lt;= &#39;Z&#39;) {</b>
+<b class="fc">&nbsp;                    char u = (char) (ch + 32);</b>
+<b class="fc">&nbsp;                    if (i &gt; prefixLength) {</b>
+<b class="fc">&nbsp;                        buf[off++] = &#39;_&#39;;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    buf[off++] = u;</b>
+<b class="fc">&nbsp;                } else {</b>
+<b class="fc">&nbsp;                    buf[off++] = ch;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            return new String(buf, 0, off);</b>
+&nbsp;        } finally {
+<b class="fc">&nbsp;            TypeUtils.CHARS_UPDATER.set(TypeUtils.CACHE, buf);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static String upperCamelWith(String methodName, int prefixLength, char separator) {
+<b class="fc">&nbsp;        final int methodNameLength = methodName.length();</b>
+&nbsp;
+<b class="fc">&nbsp;        char[] buf = TypeUtils.CHARS_UPDATER.getAndSet(TypeUtils.CACHE, null);</b>
+<b class="fc">&nbsp;        if (buf == null) {</b>
+<b class="fc">&nbsp;            buf = new char[128];</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="fc">&nbsp;            int off = 0;</b>
+<b class="fc">&nbsp;            for (int i = prefixLength; i &lt; methodNameLength; ++i) {</b>
+<b class="fc">&nbsp;                char ch = methodName.charAt(i);</b>
+&nbsp;                char c1;
+<b class="fc">&nbsp;                if (i == prefixLength) {</b>
+<b class="fc">&nbsp;                    if (ch &gt;= &#39;a&#39; &amp;&amp; ch &lt;= &#39;z&#39;</b>
+&nbsp;                            &amp;&amp; i + 1 &lt; methodNameLength
+<b class="fc">&nbsp;                            &amp;&amp; (c1 = methodName.charAt(i + 1)) &gt;= &#39;a&#39;</b>
+&nbsp;                            &amp;&amp; c1 &lt;= &#39;z&#39;) {
+<b class="fc">&nbsp;                        buf[off++] = (char) (ch - 32);</b>
+<b class="fc">&nbsp;                    } else if (ch == &#39;_&#39; &amp;&amp; i + 1 &lt; methodNameLength</b>
+<b class="fc">&nbsp;                            &amp;&amp; (c1 = methodName.charAt(i + 1)) &gt;= &#39;a&#39;</b>
+&nbsp;                            &amp;&amp; c1 &lt;= &#39;z&#39;) {
+<b class="fc">&nbsp;                        buf[off] = ch;</b>
+<b class="fc">&nbsp;                        buf[off + 1] = (char) (c1 - 32);</b>
+<b class="fc">&nbsp;                        off += 2;</b>
+<b class="fc">&nbsp;                        ++i;</b>
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        buf[off++] = ch;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                } else if (ch &gt;= &#39;A&#39; &amp;&amp; ch &lt;= &#39;Z&#39;</b>
+&nbsp;                        &amp;&amp; i + 1 &lt; methodNameLength
+<b class="fc">&nbsp;                        &amp;&amp; ((c1 = methodName.charAt(i + 1)) &lt; &#39;A&#39; || c1 &gt; &#39;Z&#39;)) {</b>
+<b class="fc">&nbsp;                    if (i &gt; prefixLength) {</b>
+<b class="fc">&nbsp;                        buf[off++] = separator;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    buf[off++] = ch;</b>
+<b class="fc">&nbsp;                } else if (ch &gt;= &#39;A&#39; &amp;&amp; ch &lt;= &#39;Z&#39;</b>
+&nbsp;                        &amp;&amp; i &gt; prefixLength
+&nbsp;                        &amp;&amp; i + 1 &lt; methodNameLength
+<b class="fc">&nbsp;                        &amp;&amp; (c1 = methodName.charAt(i + 1)) &gt;= &#39;A&#39;</b>
+&nbsp;                        &amp;&amp; c1 &lt;= &#39;Z&#39;
+<b class="fc">&nbsp;                        &amp;&amp; (c1 = methodName.charAt(i - 1)) &gt;= &#39;a&#39;</b>
+&nbsp;                        &amp;&amp; c1 &lt;= &#39;z&#39;) {
+<b class="fc">&nbsp;                    buf[off++] = separator;</b>
+<b class="fc">&nbsp;                    buf[off++] = ch;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    buf[off++] = ch;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            return new String(buf, 0, off);</b>
+&nbsp;        } finally {
+<b class="fc">&nbsp;            TypeUtils.CHARS_UPDATER.set(TypeUtils.CACHE, buf);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static String underScores(String methodName, int prefixLength, boolean upper) {
+<b class="fc">&nbsp;        final int methodNameLength = methodName.length();</b>
+&nbsp;
+<b class="fc">&nbsp;        char[] buf = TypeUtils.CHARS_UPDATER.getAndSet(TypeUtils.CACHE, null);</b>
+<b class="fc">&nbsp;        if (buf == null) {</b>
+<b class="fc">&nbsp;            buf = new char[128];</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="fc">&nbsp;            int off = 0;</b>
+<b class="fc">&nbsp;            for (int i = prefixLength; i &lt; methodNameLength; ++i) {</b>
+<b class="fc">&nbsp;                char ch = methodName.charAt(i);</b>
+<b class="fc">&nbsp;                if (upper) {</b>
+<b class="fc">&nbsp;                    if (ch &lt; &#39;A&#39; || ch &gt; &#39;Z&#39;) {</b>
+<b class="fc">&nbsp;                        if (ch &gt;= &#39;a&#39; &amp;&amp; ch &lt;= &#39;z&#39;) {</b>
+<b class="fc">&nbsp;                            ch -= 32;</b>
+&nbsp;                        }
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        if (i &gt; prefixLength) {</b>
+<b class="fc">&nbsp;                            buf[off++] = &#39;_&#39;;</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="fc">&nbsp;                    buf[off++] = ch;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    if (ch &gt;= &#39;A&#39; &amp;&amp; ch &lt;= &#39;Z&#39;) {</b>
+<b class="fc">&nbsp;                        if (i &gt; prefixLength) {</b>
+<b class="fc">&nbsp;                            buf[off++] = &#39;_&#39;;</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                        buf[off++] = (char) (ch + 32);</b>
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        buf[off++] = ch;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            return new String(buf, 0, off);</b>
+&nbsp;        } finally {
+<b class="fc">&nbsp;            TypeUtils.CHARS_UPDATER.set(TypeUtils.CACHE, buf);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static String dashes(String methodName, int prefixLength, boolean upper) {
+<b class="fc">&nbsp;        final int methodNameLength = methodName.length();</b>
+&nbsp;
+<b class="fc">&nbsp;        char[] buf = TypeUtils.CHARS_UPDATER.getAndSet(TypeUtils.CACHE, null);</b>
+<b class="fc">&nbsp;        if (buf == null) {</b>
+<b class="fc">&nbsp;            buf = new char[128];</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="fc">&nbsp;            int off = 0;</b>
+<b class="fc">&nbsp;            for (int i = prefixLength; i &lt; methodNameLength; ++i) {</b>
+<b class="fc">&nbsp;                char ch = methodName.charAt(i);</b>
+<b class="fc">&nbsp;                if (upper) {</b>
+<b class="fc">&nbsp;                    if (ch &gt;= &#39;A&#39; &amp;&amp; ch &lt;= &#39;Z&#39;) {</b>
+<b class="fc">&nbsp;                        if (i &gt; prefixLength) {</b>
+<b class="fc">&nbsp;                            buf[off++] = &#39;-&#39;;</b>
+&nbsp;                        }
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        if (ch &gt;= &#39;a&#39; &amp;&amp; ch &lt;= &#39;z&#39;) {</b>
+<b class="fc">&nbsp;                            ch -= 32;</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="fc">&nbsp;                    buf[off++] = ch;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    if (ch &gt;= &#39;A&#39; &amp;&amp; ch &lt;= &#39;Z&#39;) {</b>
+<b class="fc">&nbsp;                        if (i &gt; prefixLength) {</b>
+<b class="fc">&nbsp;                            buf[off++] = &#39;-&#39;;</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                        buf[off++] = (char) (ch + 32);</b>
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        buf[off++] = ch;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            return new String(buf, 0, off);</b>
+&nbsp;        } finally {
+<b class="fc">&nbsp;            TypeUtils.CHARS_UPDATER.set(TypeUtils.CACHE, buf);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static String dots(String methodName, int prefixLength, boolean upper) {
+<b class="fc">&nbsp;        final int methodNameLength = methodName.length();</b>
+&nbsp;
+<b class="fc">&nbsp;        char[] buf = TypeUtils.CHARS_UPDATER.getAndSet(TypeUtils.CACHE, null);</b>
+<b class="fc">&nbsp;        if (buf == null) {</b>
+<b class="fc">&nbsp;            buf = new char[128];</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="fc">&nbsp;            int off = 0;</b>
+<b class="fc">&nbsp;            for (int i = prefixLength; i &lt; methodNameLength; ++i) {</b>
+<b class="fc">&nbsp;                char ch = methodName.charAt(i);</b>
+<b class="fc">&nbsp;                if (upper) {</b>
+<b class="fc">&nbsp;                    if (ch &gt;= &#39;A&#39; &amp;&amp; ch &lt;= &#39;Z&#39;) {</b>
+<b class="fc">&nbsp;                        if (i &gt; prefixLength) {</b>
+<b class="fc">&nbsp;                            buf[off++] = &#39;.&#39;;</b>
+&nbsp;                        }
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        if (ch &gt;= &#39;a&#39; &amp;&amp; ch &lt;= &#39;z&#39;) {</b>
+<b class="fc">&nbsp;                            ch -= 32;</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="fc">&nbsp;                    buf[off++] = ch;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    if (ch &gt;= &#39;A&#39; &amp;&amp; ch &lt;= &#39;Z&#39;) {</b>
+<b class="fc">&nbsp;                        if (i &gt; prefixLength) {</b>
+<b class="fc">&nbsp;                            buf[off++] = &#39;.&#39;;</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                        buf[off++] = (char) (ch + 32);</b>
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        buf[off++] = ch;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            return new String(buf, 0, off);</b>
+&nbsp;        } finally {
+<b class="fc">&nbsp;            TypeUtils.CHARS_UPDATER.set(TypeUtils.CACHE, buf);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Type getFieldType(TypeReference typeReference, Class&lt;?&gt; raw, Member field, Type fieldType) {
+&nbsp;        Class&lt;?&gt; declaringClass;
+<b class="fc">&nbsp;        if (field == null) {</b>
+<b class="fc">&nbsp;            declaringClass = null;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            declaringClass = field.getDeclaringClass();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        while (raw != Object.class) {</b>
+<b class="fc">&nbsp;            Type type = typeReference == null ? null : typeReference.getType();</b>
+<b class="fc">&nbsp;            if (declaringClass == raw) {</b>
+<b class="fc">&nbsp;                return resolve(type, declaringClass, fieldType);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            Type superType = raw.getGenericSuperclass();</b>
+&nbsp;            // interface has no generic super class
+<b class="fc">&nbsp;            if (superType == null) {</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            typeReference = TypeReference.get(resolve(type, raw, superType));</b>
+<b class="fc">&nbsp;            raw = typeReference.getRawType();</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Type getParamType(TypeReference type,
+&nbsp;                                    Class&lt;?&gt; raw,
+&nbsp;                                    Class declaringClass,
+&nbsp;                                    Parameter field,
+&nbsp;                                    Type fieldType) {
+<b class="fc">&nbsp;        while (raw != Object.class) {</b>
+<b class="fc">&nbsp;            if (declaringClass == raw) {</b>
+<b class="fc">&nbsp;                return resolve(type.getType(), declaringClass, fieldType);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            type = TypeReference.get(resolve(type.getType(), raw, raw.getGenericSuperclass()));</b>
+<b class="fc">&nbsp;            raw = type.getRawType();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a new parameterized type, applying {@code typeArguments} to
+&nbsp;     * {@code rawType} and enclosed by {@code ownerType}.
+&nbsp;     *
+&nbsp;     * @return a {@link java.io.Serializable serializable} parameterized type.
+&nbsp;     */
+&nbsp;    public static ParameterizedType newParameterizedTypeWithOwner(
+&nbsp;            Type ownerType, Type rawType, Type... typeArguments) {
+<b class="fc">&nbsp;        return new ParameterizedTypeImpl(ownerType, rawType, typeArguments);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an array type whose elements are all instances of
+&nbsp;     * {@code componentType}.
+&nbsp;     *
+&nbsp;     * @return a {@link java.io.Serializable serializable} generic array type.
+&nbsp;     */
+&nbsp;    public static GenericArrayType arrayOf(Type componentType) {
+<b class="fc">&nbsp;        return new GenericArrayTypeImpl(componentType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a type that represents an unknown type that extends {@code bound}.
+&nbsp;     * For example, if {@code bound} is {@code CharSequence.class}, this returns
+&nbsp;     * {@code ? extends CharSequence}. If {@code bound} is {@code Object.class},
+&nbsp;     * this returns {@code ?}, which is shorthand for {@code ? extends Object}.
+&nbsp;     */
+&nbsp;    public static WildcardType subtypeOf(Type bound) {
+&nbsp;        Type[] upperBounds;
+<b class="fc">&nbsp;        if (bound instanceof WildcardType) {</b>
+<b class="fc">&nbsp;            upperBounds = ((WildcardType) bound).getUpperBounds();</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            upperBounds = new Type[]{bound};</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new WildcardTypeImpl(upperBounds, EMPTY_TYPE_ARRAY);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a type that represents an unknown supertype of {@code bound}. For
+&nbsp;     * example, if {@code bound} is {@code String.class}, this returns {@code ?
+&nbsp;     * super String}.
+&nbsp;     */
+&nbsp;    public static WildcardType supertypeOf(Type bound) {
+&nbsp;        Type[] lowerBounds;
+<b class="fc">&nbsp;        if (bound instanceof WildcardType) {</b>
+<b class="fc">&nbsp;            lowerBounds = ((WildcardType) bound).getLowerBounds();</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            lowerBounds = new Type[]{bound};</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new WildcardTypeImpl(new Type[]{Object.class}, lowerBounds);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a type that is functionally equal but not necessarily equal
+&nbsp;     * according to {@link Object#equals(Object) Object.equals()}. The returned
+&nbsp;     * type is {@link java.io.Serializable}.
+&nbsp;     */
+&nbsp;    public static Type canonicalize(Type type) {
+<b class="fc">&nbsp;        if (type instanceof Class) {</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; c = (Class&lt;?&gt;) type;</b>
+<b class="fc">&nbsp;            return c.isArray() ? new GenericArrayTypeImpl(canonicalize(c.getComponentType())) : c;</b>
+<b class="fc">&nbsp;        } else if (type instanceof ParameterizedType) {</b>
+<b class="fc">&nbsp;            ParameterizedType p = (ParameterizedType) type;</b>
+<b class="fc">&nbsp;            return new ParameterizedTypeImpl(p.getOwnerType(),</b>
+<b class="fc">&nbsp;                    p.getRawType(), p.getActualTypeArguments());</b>
+<b class="fc">&nbsp;        } else if (type instanceof GenericArrayType) {</b>
+<b class="fc">&nbsp;            GenericArrayType g = (GenericArrayType) type;</b>
+<b class="fc">&nbsp;            return new GenericArrayTypeImpl(g.getGenericComponentType());</b>
+<b class="fc">&nbsp;        } else if (type instanceof WildcardType) {</b>
+<b class="fc">&nbsp;            WildcardType w = (WildcardType) type;</b>
+<b class="fc">&nbsp;            return new WildcardTypeImpl(w.getUpperBounds(), w.getLowerBounds());</b>
+&nbsp;        } else {
+&nbsp;            // type is either serializable as-is or unsupported
+<b class="fc">&nbsp;            return type;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Class&lt;?&gt; getRawType(Type type) {
+<b class="fc">&nbsp;        if (type instanceof Class&lt;?&gt;) {</b>
+&nbsp;            // type is a normal class.
+<b class="fc">&nbsp;            return (Class&lt;?&gt;) type;</b>
+<b class="fc">&nbsp;        } else if (type instanceof ParameterizedType) {</b>
+<b class="fc">&nbsp;            ParameterizedType parameterizedType = (ParameterizedType) type;</b>
+&nbsp;
+&nbsp;            // I&#39;m not exactly sure why getRawType() returns Type instead of Class.
+&nbsp;            // Neal isn&#39;t either but suspects some pathological case related
+&nbsp;            // to nested classes exists.
+<b class="fc">&nbsp;            Type rawType = parameterizedType.getRawType();</b>
+<b class="fc">&nbsp;            checkArgument(rawType instanceof Class);</b>
+<b class="fc">&nbsp;            return (Class&lt;?&gt;) rawType;</b>
+<b class="fc">&nbsp;        } else if (type instanceof GenericArrayType) {</b>
+<b class="fc">&nbsp;            Type componentType = ((GenericArrayType) type).getGenericComponentType();</b>
+<b class="fc">&nbsp;            return Array.newInstance(getRawType(componentType), 0).getClass();</b>
+<b class="fc">&nbsp;        } else if (type instanceof TypeVariable) {</b>
+&nbsp;            // we could use the variable&#39;s bounds, but that won&#39;t work if there are multiple.
+&nbsp;            // having a raw type that&#39;s more general than necessary is okay
+<b class="fc">&nbsp;            return Object.class;</b>
+<b class="fc">&nbsp;        } else if (type instanceof WildcardType) {</b>
+<b class="fc">&nbsp;            return getRawType(((WildcardType) type).getUpperBounds()[0]);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String className = type == null ? &quot;null&quot; : type.getClass().getName();</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Expected a Class, ParameterizedType, or &quot;</b>
+&nbsp;                    + &quot;GenericArrayType, but &lt;&quot; + type + &quot;&gt; is of type &quot; + className);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static boolean equal(Object a, Object b) {
+<b class="fc">&nbsp;        return Objects.equals(a, b);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if {@code a} and {@code b} are equal.
+&nbsp;     */
+&nbsp;    public static boolean equals(Type a, Type b) {
+<b class="fc">&nbsp;        if (a == b) {</b>
+&nbsp;            // also handles (a == null &amp;&amp; b == null)
+<b class="fc">&nbsp;            return true;</b>
+<b class="fc">&nbsp;        } else if (a instanceof Class) {</b>
+&nbsp;            // Class already specifies equals().
+<b class="fc">&nbsp;            return a.equals(b);</b>
+<b class="fc">&nbsp;        } else if (a instanceof ParameterizedType) {</b>
+<b class="fc">&nbsp;            if (!(b instanceof ParameterizedType)) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // TODO: save a .clone() call
+<b class="fc">&nbsp;            ParameterizedType pa = (ParameterizedType) a;</b>
+<b class="fc">&nbsp;            ParameterizedType pb = (ParameterizedType) b;</b>
+<b class="fc">&nbsp;            return equal(pa.getOwnerType(), pb.getOwnerType())</b>
+<b class="fc">&nbsp;                    &amp;&amp; pa.getRawType().equals(pb.getRawType())</b>
+<b class="fc">&nbsp;                    &amp;&amp; Arrays.equals(pa.getActualTypeArguments(), pb.getActualTypeArguments());</b>
+<b class="fc">&nbsp;        } else if (a instanceof GenericArrayType) {</b>
+<b class="fc">&nbsp;            if (!(b instanceof GenericArrayType)) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            GenericArrayType ga = (GenericArrayType) a;</b>
+<b class="fc">&nbsp;            GenericArrayType gb = (GenericArrayType) b;</b>
+<b class="fc">&nbsp;            return equals(ga.getGenericComponentType(), gb.getGenericComponentType());</b>
+<b class="fc">&nbsp;        } else if (a instanceof WildcardType) {</b>
+<b class="fc">&nbsp;            if (!(b instanceof WildcardType)) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            WildcardType wa = (WildcardType) a;</b>
+<b class="fc">&nbsp;            WildcardType wb = (WildcardType) b;</b>
+<b class="fc">&nbsp;            return Arrays.equals(wa.getUpperBounds(), wb.getUpperBounds())</b>
+<b class="fc">&nbsp;                    &amp;&amp; Arrays.equals(wa.getLowerBounds(), wb.getLowerBounds());</b>
+<b class="fc">&nbsp;        } else if (a instanceof TypeVariable) {</b>
+<b class="fc">&nbsp;            if (!(b instanceof TypeVariable)) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            TypeVariable&lt;?&gt; va = (TypeVariable&lt;?&gt;) a;</b>
+<b class="fc">&nbsp;            TypeVariable&lt;?&gt; vb = (TypeVariable&lt;?&gt;) b;</b>
+<b class="fc">&nbsp;            return va.getGenericDeclaration() == vb.getGenericDeclaration()</b>
+<b class="nc">&nbsp;                    &amp;&amp; va.getName().equals(vb.getName());</b>
+&nbsp;        } else {
+&nbsp;            // This isn&#39;t a type we support. Could be a generic array type, wildcard type, etc.
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static int hashCodeOrZero(Object o) {
+<b class="fc">&nbsp;        return o != null ? o.hashCode() : 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String typeToString(Type type) {
+<b class="fc">&nbsp;        return type instanceof Class ? ((Class&lt;?&gt;) type).getName() : type.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the generic supertype for {@code supertype}. For example, given a class {@code
+&nbsp;     * IntegerSet}, the result for when supertype is {@code Set.class} is {@code Set&lt;Integer&gt;} and the
+&nbsp;     * result when the supertype is {@code Collection.class} is {@code Collection&lt;Integer&gt;}.
+&nbsp;     */
+&nbsp;    static Type getGenericSupertype(Type context, Class&lt;?&gt; rawType, Class&lt;?&gt; toResolve) {
+<b class="fc">&nbsp;        if (toResolve == rawType) {</b>
+<b class="fc">&nbsp;            return context;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // we skip searching through interfaces if unknown is an interface
+<b class="fc">&nbsp;        if (toResolve.isInterface()) {</b>
+<b class="fc">&nbsp;            Class&lt;?&gt;[] interfaces = rawType.getInterfaces();</b>
+<b class="fc">&nbsp;            for (int i = 0, length = interfaces.length; i &lt; length; i++) {</b>
+<b class="fc">&nbsp;                if (interfaces[i] == toResolve) {</b>
+<b class="fc">&nbsp;                    return rawType.getGenericInterfaces()[i];</b>
+<b class="nc">&nbsp;                } else if (toResolve.isAssignableFrom(interfaces[i])) {</b>
+<b class="nc">&nbsp;                    return getGenericSupertype(rawType.getGenericInterfaces()[i], interfaces[i], toResolve);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // check our supertypes
+<b class="fc">&nbsp;        if (rawType != null &amp;&amp; !rawType.isInterface()) {</b>
+<b class="fc">&nbsp;            while (rawType != Object.class) {</b>
+<b class="fc">&nbsp;                Class&lt;?&gt; rawSupertype = rawType.getSuperclass();</b>
+<b class="fc">&nbsp;                if (rawSupertype == toResolve) {</b>
+<b class="nc">&nbsp;                    return rawType.getGenericSuperclass();</b>
+<b class="fc">&nbsp;                } else if (toResolve.isAssignableFrom(rawSupertype)) {</b>
+<b class="nc">&nbsp;                    return getGenericSupertype(rawType.getGenericSuperclass(), rawSupertype, toResolve);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                rawType = rawSupertype;</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // we can&#39;t resolve this further
+<b class="fc">&nbsp;        return toResolve;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Type resolve(Type context, Class&lt;?&gt; contextRawType, Type toResolve) {
+<b class="fc">&nbsp;        return resolve(context, contextRawType, toResolve, new HashMap&lt;&gt;());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Type resolve(Type context, Class&lt;?&gt; contextRawType, Type toResolve,
+&nbsp;                                Map&lt;TypeVariable&lt;?&gt;, Type&gt; visitedTypeVariables) {
+&nbsp;        // this implementation is made a little more complicated in an attempt to avoid object-creation
+<b class="fc">&nbsp;        TypeVariable&lt;?&gt; resolving = null;</b>
+&nbsp;        while (true) {
+<b class="fc">&nbsp;            if (toResolve instanceof TypeVariable) {</b>
+<b class="fc">&nbsp;                TypeVariable&lt;?&gt; typeVariable = (TypeVariable&lt;?&gt;) toResolve;</b>
+<b class="fc">&nbsp;                Type previouslyResolved = visitedTypeVariables.get(typeVariable);</b>
+<b class="fc">&nbsp;                if (previouslyResolved != null) {</b>
+&nbsp;                    // cannot reduce due to infinite recursion
+<b class="nc">&nbsp;                    return (previouslyResolved == Void.TYPE) ? toResolve : previouslyResolved;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // Insert a placeholder to mark the fact that we are in the process of resolving this type
+<b class="fc">&nbsp;                visitedTypeVariables.put(typeVariable, Void.TYPE);</b>
+<b class="fc">&nbsp;                if (resolving == null) {</b>
+<b class="fc">&nbsp;                    resolving = typeVariable;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                toResolve = resolveTypeVariable(context, contextRawType, typeVariable);</b>
+<b class="fc">&nbsp;                if (toResolve == typeVariable) {</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } else if (toResolve instanceof Class &amp;&amp; ((Class&lt;?&gt;) toResolve).isArray()) {</b>
+<b class="fc">&nbsp;                Class&lt;?&gt; original = (Class&lt;?&gt;) toResolve;</b>
+<b class="fc">&nbsp;                Type componentType = original.getComponentType();</b>
+<b class="fc">&nbsp;                Type newComponentType = resolve(context, contextRawType, componentType, visitedTypeVariables);</b>
+<b class="fc">&nbsp;                toResolve = equal(componentType, newComponentType)</b>
+&nbsp;                        ? original
+<b class="nc">&nbsp;                        : arrayOf(newComponentType);</b>
+<b class="fc">&nbsp;                break;</b>
+<b class="fc">&nbsp;            } else if (toResolve instanceof GenericArrayType) {</b>
+<b class="fc">&nbsp;                GenericArrayType original = (GenericArrayType) toResolve;</b>
+<b class="fc">&nbsp;                Type componentType = original.getGenericComponentType();</b>
+<b class="fc">&nbsp;                Type newComponentType = resolve(context, contextRawType, componentType, visitedTypeVariables);</b>
+<b class="fc">&nbsp;                toResolve = equal(componentType, newComponentType)</b>
+&nbsp;                        ? original
+<b class="fc">&nbsp;                        : arrayOf(newComponentType);</b>
+<b class="fc">&nbsp;                break;</b>
+<b class="fc">&nbsp;            } else if (toResolve instanceof ParameterizedType) {</b>
+<b class="fc">&nbsp;                ParameterizedType original = (ParameterizedType) toResolve;</b>
+<b class="fc">&nbsp;                Type ownerType = original.getOwnerType();</b>
+<b class="fc">&nbsp;                Type newOwnerType = resolve(context, contextRawType, ownerType, visitedTypeVariables);</b>
+<b class="fc">&nbsp;                boolean changed = !equal(newOwnerType, ownerType);</b>
+&nbsp;
+<b class="fc">&nbsp;                Type[] args = original.getActualTypeArguments();</b>
+<b class="fc">&nbsp;                for (int t = 0, length = args.length; t &lt; length; t++) {</b>
+<b class="fc">&nbsp;                    Type resolvedTypeArgument = resolve(context, contextRawType, args[t], visitedTypeVariables);</b>
+<b class="fc">&nbsp;                    if (!equal(resolvedTypeArgument, args[t])) {</b>
+<b class="fc">&nbsp;                        if (!changed) {</b>
+<b class="fc">&nbsp;                            args = args.clone();</b>
+<b class="fc">&nbsp;                            changed = true;</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                        args[t] = resolvedTypeArgument;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                toResolve = changed</b>
+<b class="fc">&nbsp;                        ? newParameterizedTypeWithOwner(newOwnerType, original.getRawType(), args)</b>
+&nbsp;                        : original;
+<b class="fc">&nbsp;                break;</b>
+<b class="fc">&nbsp;            } else if (toResolve instanceof WildcardType) {</b>
+<b class="fc">&nbsp;                WildcardType original = (WildcardType) toResolve;</b>
+<b class="fc">&nbsp;                Type[] originalLowerBound = original.getLowerBounds();</b>
+<b class="fc">&nbsp;                Type[] originalUpperBound = original.getUpperBounds();</b>
+&nbsp;
+<b class="fc">&nbsp;                if (originalLowerBound.length == 1) {</b>
+<b class="nc">&nbsp;                    Type lowerBound = resolve(context, contextRawType, originalLowerBound[0], visitedTypeVariables);</b>
+<b class="nc">&nbsp;                    if (lowerBound != originalLowerBound[0]) {</b>
+<b class="nc">&nbsp;                        toResolve = supertypeOf(lowerBound);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } else if (originalUpperBound.length == 1) {</b>
+<b class="fc">&nbsp;                    Type upperBound = resolve(context, contextRawType, originalUpperBound[0], visitedTypeVariables);</b>
+<b class="fc">&nbsp;                    if (upperBound != originalUpperBound[0]) {</b>
+<b class="nc">&nbsp;                        toResolve = subtypeOf(upperBound);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                }</b>
+&nbsp;                break;
+&nbsp;            } else {
+&nbsp;                break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // ensure that any in-process resolution gets updated with the final result
+<b class="fc">&nbsp;        if (resolving != null) {</b>
+<b class="fc">&nbsp;            visitedTypeVariables.put(resolving, toResolve);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return toResolve;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static Type resolveTypeVariable(Type context, Class&lt;?&gt; contextRawType, TypeVariable&lt;?&gt; unknown) {
+<b class="fc">&nbsp;        Class&lt;?&gt; declaredByRaw = declaringClassOf(unknown);</b>
+&nbsp;
+&nbsp;        // we can&#39;t reduce this further
+<b class="fc">&nbsp;        if (declaredByRaw == null) {</b>
+<b class="fc">&nbsp;            return unknown;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Type declaredBy = getGenericSupertype(context, contextRawType, declaredByRaw);</b>
+<b class="fc">&nbsp;        if (declaredBy instanceof ParameterizedType) {</b>
+<b class="fc">&nbsp;            int index = indexOf(declaredByRaw.getTypeParameters(), unknown);</b>
+<b class="fc">&nbsp;            return ((ParameterizedType) declaredBy).getActualTypeArguments()[index];</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return unknown;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int indexOf(Object[] array, Object toFind) {
+<b class="fc">&nbsp;        for (int i = 0, length = array.length; i &lt; length; i++) {</b>
+<b class="fc">&nbsp;            if (toFind.equals(array[i])) {</b>
+<b class="fc">&nbsp;                return i;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        throw new NoSuchElementException();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the declaring class of {@code typeVariable}, or {@code null} if it was not declared by
+&nbsp;     * a class.
+&nbsp;     */
+&nbsp;    private static Class&lt;?&gt; declaringClassOf(TypeVariable&lt;?&gt; typeVariable) {
+<b class="fc">&nbsp;        GenericDeclaration genericDeclaration = typeVariable.getGenericDeclaration();</b>
+<b class="fc">&nbsp;        return genericDeclaration instanceof Class</b>
+&nbsp;                ? (Class&lt;?&gt;) genericDeclaration
+&nbsp;                : null;
+&nbsp;    }
+&nbsp;
+&nbsp;    static void checkNotPrimitive(Type type) {
+<b class="fc">&nbsp;        checkArgument(!(type instanceof Class&lt;?&gt;) || !((Class&lt;?&gt;) type).isPrimitive());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Find the first annotation of {@code annotationType} that is either
+&nbsp;     * &lt;em&gt;directly present&lt;/em&gt;, &lt;em&gt;meta-present&lt;/em&gt;, or &lt;em&gt;indirectly
+&nbsp;     * present&lt;/em&gt; on the supplied {@code element}.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;If the element is a class and the annotation is neither &lt;em&gt;directly
+&nbsp;     * present&lt;/em&gt; nor &lt;em&gt;meta-present&lt;/em&gt; on the class, this method will additionally search on
+&nbsp;     * interfaces implemented by the class before finding an annotation that is &lt;em&gt;indirectly
+&nbsp;     * present&lt;/em&gt; on the class.
+&nbsp;     *
+&nbsp;     * @param element the element on which to search for the annotation
+&nbsp;     * @param annotationType the annotation type of need to search
+&nbsp;     * @param &lt;A&gt; the annotation
+&nbsp;     * @return the searched annotation type
+&nbsp;     */
+&nbsp;    public static &lt;A extends Annotation&gt; A findAnnotation(AnnotatedElement element, Class&lt;A&gt; annotationType) {
+<b class="fc">&nbsp;        if (annotationType == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(&quot;annotationType must not be null&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        boolean inherited = annotationType.isAnnotationPresent(Inherited.class);</b>
+<b class="fc">&nbsp;        return findAnnotation(element, annotationType, inherited, new HashSet&lt;&gt;());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If the {@code annotation}&#39;s annotationType is not {@code annotationType}, then to find the
+&nbsp;     * first annotation of {@code annotationType} that is either
+&nbsp;     * &lt;em&gt;directly present&lt;/em&gt;, &lt;em&gt;meta-present&lt;/em&gt;, or &lt;em&gt;indirectly
+&nbsp;     * present&lt;/em&gt; on the supplied {@code element}.
+&nbsp;     *
+&nbsp;     * @param annotation annotation
+&nbsp;     * @param annotationType the annotation type of need to search
+&nbsp;     * @param &lt;A&gt; the searched annotation type
+&nbsp;     * @return the searched annotation
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    public static &lt;A extends Annotation&gt; A findAnnotation(Annotation annotation, Class&lt;A&gt; annotationType) {
+<b class="fc">&nbsp;        if (annotation == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(&quot;annotation must not be null&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (annotationType == null) {</b>
+<b class="nc">&nbsp;            throw new NullPointerException(&quot;annotationType must not be null&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Class&lt;? extends Annotation&gt; annotationTypeClass = annotation.annotationType();</b>
+<b class="fc">&nbsp;        if (annotationTypeClass == annotationType) {</b>
+<b class="fc">&nbsp;            return (A) annotation;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        boolean inherited = annotationType.isAnnotationPresent(Inherited.class);</b>
+<b class="fc">&nbsp;        return findAnnotation(annotationTypeClass, annotationType, inherited, new HashSet&lt;&gt;());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Find the first annotation of {@code annotationType} that is either
+&nbsp;     * &lt;em&gt;directly present&lt;/em&gt;, &lt;em&gt;meta-present&lt;/em&gt;, or &lt;em&gt;indirectly
+&nbsp;     * present&lt;/em&gt; on the supplied {@code element}.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;If the element is a class and the annotation is neither &lt;em&gt;directly
+&nbsp;     * present&lt;/em&gt; nor &lt;em&gt;meta-present&lt;/em&gt; on the class, this method will additionally search on
+&nbsp;     * interfaces implemented by the class before finding an annotation that is &lt;em&gt;indirectly
+&nbsp;     * present&lt;/em&gt; on the class.
+&nbsp;     *
+&nbsp;     * @param element the element on which to search for the annotation
+&nbsp;     * @param annotationType the annotation type of need to search
+&nbsp;     * @param inherited whether has {@link Inherited}
+&nbsp;     * @param visited this annotation whether visited
+&nbsp;     * @param &lt;A&gt; the annotation type
+&nbsp;     * @return the searched annotation
+&nbsp;     */
+&nbsp;    private static &lt;A extends Annotation&gt; A findAnnotation(
+&nbsp;            AnnotatedElement element,
+&nbsp;            Class&lt;A&gt; annotationType,
+&nbsp;            boolean inherited,
+&nbsp;            Set&lt;Annotation&gt; visited
+&nbsp;    ) {
+<b class="fc">&nbsp;        if (element == null || annotationType == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        A annotation = element.getDeclaredAnnotation(annotationType);</b>
+<b class="fc">&nbsp;        if (annotation != null) {</b>
+<b class="fc">&nbsp;            return annotation;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Annotation[] declaredAnnotations = element.getDeclaredAnnotations();</b>
+<b class="fc">&nbsp;        A directMetaAnnotation = findMetaAnnotation(annotationType, declaredAnnotations, inherited, visited);</b>
+<b class="fc">&nbsp;        if (directMetaAnnotation != null) {</b>
+<b class="fc">&nbsp;            return directMetaAnnotation;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (element instanceof Class) {</b>
+<b class="fc">&nbsp;            Class&lt;?&gt; clazz = (Class&lt;?&gt;) element;</b>
+&nbsp;
+<b class="fc">&nbsp;            for (Class&lt;?&gt; ifc : clazz.getInterfaces()) {</b>
+<b class="fc">&nbsp;                if (ifc != Annotation.class) {</b>
+<b class="nc">&nbsp;                    A annotationOnInterface = findAnnotation(ifc, annotationType, inherited, visited);</b>
+<b class="nc">&nbsp;                    if (annotationOnInterface != null) {</b>
+<b class="nc">&nbsp;                        return annotationOnInterface;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (inherited) {</b>
+<b class="nc">&nbsp;                Class&lt;?&gt; superclass = clazz.getSuperclass();</b>
+<b class="nc">&nbsp;                if (superclass != null &amp;&amp; superclass != Object.class) {</b>
+<b class="nc">&nbsp;                    A annotationOnSuperclass = findAnnotation(superclass, annotationType, true, visited);</b>
+<b class="nc">&nbsp;                    if (annotationOnSuperclass != null) {</b>
+<b class="nc">&nbsp;                        return annotationOnSuperclass;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return findMetaAnnotation(annotationType, getAnnotations(element), inherited, visited);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Find meta-present on indirectly present annotations.
+&nbsp;     *
+&nbsp;     * @param annotationType the annotation type of need to search
+&nbsp;     * @param candidates annotations for candidates
+&nbsp;     * @param inherited whether has {@link Inherited}
+&nbsp;     * @param visited this annotation whether visited
+&nbsp;     * @param &lt;A&gt; the annotation type
+&nbsp;     * @return the searched annotation
+&nbsp;     */
+&nbsp;    private static &lt;A extends Annotation&gt; A findMetaAnnotation(
+&nbsp;            Class&lt;A&gt; annotationType,
+&nbsp;            Annotation[] candidates,
+&nbsp;            boolean inherited,
+&nbsp;            Set&lt;Annotation&gt; visited
+&nbsp;    ) {
+<b class="fc">&nbsp;        for (Annotation candidateAnnotation : candidates) {</b>
+<b class="fc">&nbsp;            Class&lt;? extends Annotation&gt; candidateAnnotationType = candidateAnnotation.annotationType();</b>
+<b class="fc">&nbsp;            String name = candidateAnnotationType.getName();</b>
+<b class="fc">&nbsp;            boolean isInJavaLangAnnotationPackage = name.startsWith(&quot;java.lang.annotation&quot;) || name.startsWith(&quot;kotlin.&quot;);</b>
+<b class="fc">&nbsp;            if (!isInJavaLangAnnotationPackage &amp;&amp; visited.add(candidateAnnotation)) {</b>
+<b class="fc">&nbsp;                A metaAnnotation = findAnnotation(candidateAnnotationType, annotationType, inherited, visited);</b>
+<b class="fc">&nbsp;                if (metaAnnotation != null) {</b>
+<b class="fc">&nbsp;                    return metaAnnotation;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Annotation[] getAnnotations(AnnotatedElement element) {
+&nbsp;        try {
+<b class="fc">&nbsp;            return element.getDeclaredAnnotations();</b>
+<b class="nc">&nbsp;        } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;            return new Annotation[0];</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class ParameterizedTypeImpl
+&nbsp;            implements ParameterizedType, Serializable {
+&nbsp;        private final Type ownerType;
+&nbsp;        private final Type rawType;
+&nbsp;        private final Type[] typeArguments;
+&nbsp;
+<b class="fc">&nbsp;        public ParameterizedTypeImpl(Type ownerType, Type rawType, Type... typeArguments) {</b>
+&nbsp;            // require an owner type if the raw type needs it
+<b class="fc">&nbsp;            if (rawType instanceof Class&lt;?&gt;) {</b>
+<b class="fc">&nbsp;                Class&lt;?&gt; rawTypeAsClass = (Class&lt;?&gt;) rawType;</b>
+<b class="fc">&nbsp;                boolean isStaticOrTopLevelClass = Modifier.isStatic(rawTypeAsClass.getModifiers())</b>
+<b class="fc">&nbsp;                        || rawTypeAsClass.getEnclosingClass() == null;</b>
+<b class="fc">&nbsp;                checkArgument(ownerType != null || isStaticOrTopLevelClass);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            this.ownerType = ownerType == null ? null : canonicalize(ownerType);</b>
+<b class="fc">&nbsp;            this.rawType = canonicalize(rawType);</b>
+<b class="fc">&nbsp;            this.typeArguments = typeArguments.clone();</b>
+<b class="fc">&nbsp;            for (int t = 0, length = this.typeArguments.length; t &lt; length; t++) {</b>
+<b class="fc">&nbsp;                checkNotPrimitive(this.typeArguments[t]);</b>
+<b class="fc">&nbsp;                this.typeArguments[t] = canonicalize(this.typeArguments[t]);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Type[] getActualTypeArguments() {
+<b class="fc">&nbsp;            return typeArguments.clone();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Type getRawType() {
+<b class="fc">&nbsp;            return rawType;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Type getOwnerType() {
+<b class="fc">&nbsp;            return ownerType;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean equals(Object other) {
+<b class="fc">&nbsp;            return other instanceof ParameterizedType</b>
+<b class="fc">&nbsp;                    &amp;&amp; BeanUtils.equals(this, (ParameterizedType) other);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public int hashCode() {
+<b class="fc">&nbsp;            return Arrays.hashCode(typeArguments)</b>
+<b class="fc">&nbsp;                    ^ rawType.hashCode()</b>
+<b class="fc">&nbsp;                    ^ hashCodeOrZero(ownerType);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString() {
+<b class="fc">&nbsp;            int length = typeArguments.length;</b>
+<b class="fc">&nbsp;            if (length == 0) {</b>
+<b class="fc">&nbsp;                return typeToString(rawType);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            StringBuilder stringBuilder = new StringBuilder(30 * (length + 1));</b>
+<b class="fc">&nbsp;            stringBuilder.append(typeToString(rawType)).append(&quot;&lt;&quot;).append(typeToString(typeArguments[0]));</b>
+<b class="fc">&nbsp;            for (int i = 1; i &lt; length; i++) {</b>
+<b class="fc">&nbsp;                stringBuilder.append(&quot;, &quot;).append(typeToString(typeArguments[i]));</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return stringBuilder.append(&quot;&gt;&quot;).toString();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static final long serialVersionUID = 0;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final class GenericArrayTypeImpl
+&nbsp;            implements GenericArrayType, Serializable {
+&nbsp;        private final Type componentType;
+&nbsp;
+<b class="fc">&nbsp;        public GenericArrayTypeImpl(Type componentType) {</b>
+<b class="fc">&nbsp;            this.componentType = canonicalize(componentType);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Type getGenericComponentType() {
+<b class="fc">&nbsp;            return componentType;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean equals(Object o) {
+<b class="fc">&nbsp;            return o instanceof GenericArrayType</b>
+<b class="fc">&nbsp;                    &amp;&amp; BeanUtils.equals(this, (GenericArrayType) o);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public int hashCode() {
+<b class="fc">&nbsp;            return componentType.hashCode();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString() {
+<b class="fc">&nbsp;            return typeToString(componentType) + &quot;[]&quot;;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static final long serialVersionUID = 0;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The WildcardType interface supports multiple upper bounds and multiple
+&nbsp;     * lower bounds. We only support what the Java 6 language needs - at most one
+&nbsp;     * bound. If a lower bound is set, the upper bound must be Object.class.
+&nbsp;     */
+&nbsp;    static final class WildcardTypeImpl
+&nbsp;            implements WildcardType, Serializable {
+&nbsp;        private final Type upperBound;
+&nbsp;        private final Type lowerBound;
+&nbsp;
+<b class="fc">&nbsp;        public WildcardTypeImpl(Type[] upperBounds, Type[] lowerBounds) {</b>
+<b class="fc">&nbsp;            checkArgument(lowerBounds.length &lt;= 1);</b>
+<b class="fc">&nbsp;            checkArgument(upperBounds.length == 1);</b>
+&nbsp;
+<b class="fc">&nbsp;            if (lowerBounds.length == 1) {</b>
+<b class="fc">&nbsp;                checkNotPrimitive(lowerBounds[0]);</b>
+<b class="fc">&nbsp;                checkArgument(upperBounds[0] == Object.class);</b>
+<b class="fc">&nbsp;                this.lowerBound = canonicalize(lowerBounds[0]);</b>
+<b class="fc">&nbsp;                this.upperBound = Object.class;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                checkNotPrimitive(upperBounds[0]);</b>
+<b class="fc">&nbsp;                this.lowerBound = null;</b>
+<b class="fc">&nbsp;                this.upperBound = canonicalize(upperBounds[0]);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Type[] getUpperBounds() {
+<b class="fc">&nbsp;            return new Type[]{upperBound};</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Type[] getLowerBounds() {
+<b class="fc">&nbsp;            return lowerBound != null ? new Type[]{lowerBound} : EMPTY_TYPE_ARRAY;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean equals(Object other) {
+<b class="fc">&nbsp;            return other instanceof WildcardType</b>
+<b class="fc">&nbsp;                    &amp;&amp; BeanUtils.equals(this, (WildcardType) other);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public int hashCode() {
+&nbsp;            // this equals Arrays.hashCode(getLowerBounds()) ^ Arrays.hashCode(getUpperBounds());
+<b class="fc">&nbsp;            return (lowerBound != null ? 31 + lowerBound.hashCode() : 1)</b>
+<b class="fc">&nbsp;                    ^ (31 + upperBound.hashCode());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString() {
+<b class="fc">&nbsp;            if (lowerBound != null) {</b>
+<b class="fc">&nbsp;                return &quot;? super &quot; + typeToString(lowerBound);</b>
+<b class="fc">&nbsp;            } else if (upperBound == Object.class) {</b>
+<b class="fc">&nbsp;                return &quot;?&quot;;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                return &quot;? extends &quot; + typeToString(upperBound);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        private static final long serialVersionUID = 0;
+&nbsp;    }
+&nbsp;
+&nbsp;    static void checkArgument(boolean condition) {
+<b class="fc">&nbsp;        if (!condition) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void processJacksonJsonIgnore(FieldInfo fieldInfo, Annotation annotation) {
+<b class="fc">&nbsp;        fieldInfo.ignore = true;</b>
+<b class="fc">&nbsp;        Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="fc">&nbsp;        BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="fc">&nbsp;            String name = m.getName();</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                Object result = m.invoke(annotation);</b>
+<b class="fc">&nbsp;                if (name.equals(&quot;value&quot;)) {</b>
+<b class="fc">&nbsp;                    fieldInfo.ignore = (boolean) (Boolean) result;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Throwable ignored) {</b>
+&nbsp;                // ignored
+<b class="fc">&nbsp;            }</b>
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isNoneStaticMemberClass(Class objectClass, Class memberClass) {
+<b class="fc">&nbsp;        if (memberClass == null</b>
+<b class="fc">&nbsp;                || memberClass.isPrimitive()</b>
+&nbsp;                || memberClass == String.class
+&nbsp;                || memberClass == List.class
+&nbsp;        ) {
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Class enclosingClass = memberClass.getEnclosingClass();</b>
+<b class="fc">&nbsp;        if (enclosingClass == null) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (objectClass != null &amp;&amp; !objectClass.equals(enclosingClass)) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Constructor[] constructors = constructorCache.get(memberClass);</b>
+<b class="fc">&nbsp;        if (constructors == null) {</b>
+<b class="fc">&nbsp;            constructors = memberClass.getDeclaredConstructors();</b>
+<b class="fc">&nbsp;            constructorCache.putIfAbsent(memberClass, constructors);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (constructors.length == 0) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Constructor firstConstructor = constructors[0];</b>
+<b class="fc">&nbsp;        if (firstConstructor.getParameterCount() == 0) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Class[] parameterTypes = firstConstructor.getParameterTypes();</b>
+<b class="fc">&nbsp;        return enclosingClass.equals(parameterTypes[0]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setNoneStaticMemberClassParent(Object object, Object parent) {
+<b class="fc">&nbsp;        Class objectClass = object.getClass();</b>
+<b class="fc">&nbsp;        Field[] fields = declaredFieldCache.get(objectClass);</b>
+<b class="fc">&nbsp;        if (fields == null) {</b>
+<b class="nc">&nbsp;            Field[] declaredFields = objectClass.getDeclaredFields();</b>
+&nbsp;
+<b class="nc">&nbsp;            boolean allMatch = true;</b>
+<b class="nc">&nbsp;            for (Field field : declaredFields) {</b>
+<b class="nc">&nbsp;                int modifiers = field.getModifiers();</b>
+<b class="nc">&nbsp;                if (Modifier.isStatic(modifiers)) {</b>
+<b class="nc">&nbsp;                    allMatch = false;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (allMatch) {</b>
+<b class="nc">&nbsp;                fields = declaredFields;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                List&lt;Field&gt; list = new ArrayList&lt;&gt;(declaredFields.length);</b>
+<b class="nc">&nbsp;                for (Field field : declaredFields) {</b>
+<b class="nc">&nbsp;                    int modifiers = field.getModifiers();</b>
+<b class="nc">&nbsp;                    if (Modifier.isStatic(modifiers)) {</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    list.add(field);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                fields = list.toArray(new Field[list.size()]);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            fieldCache.putIfAbsent(objectClass, fields);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Field this0 = null;</b>
+<b class="fc">&nbsp;        for (Field field : fields) {</b>
+<b class="fc">&nbsp;            if (&quot;this$0&quot;.equals(field.getName())) {</b>
+<b class="fc">&nbsp;                this0 = field;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (this0 != null) {</b>
+<b class="fc">&nbsp;            this0.setAccessible(true);</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                this0.set(object, parent);</b>
+<b class="nc">&nbsp;            } catch (IllegalAccessException e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;setNoneStaticMemberClassParent error, class &quot; + objectClass);</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void cleanupCache(Class objectClass) {
+<b class="fc">&nbsp;        if (objectClass == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        fieldCache.remove(objectClass);</b>
+<b class="fc">&nbsp;        fieldMapCache.remove(objectClass);</b>
+<b class="fc">&nbsp;        declaredFieldCache.remove(objectClass);</b>
+<b class="fc">&nbsp;        methodCache.remove(objectClass);</b>
+<b class="fc">&nbsp;        constructorCache.remove(objectClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void cleanupCache(ClassLoader classLoader) {
+<b class="fc">&nbsp;        for (Iterator&lt;Map.Entry&lt;Class, Field[]&gt;&gt; it = fieldCache.entrySet().iterator(); it.hasNext(); ) {</b>
+<b class="fc">&nbsp;            Map.Entry&lt;Class, Field[]&gt; entry = it.next();</b>
+<b class="fc">&nbsp;            Class entryKey = entry.getKey();</b>
+<b class="fc">&nbsp;            if (entryKey.getClassLoader() == classLoader) {</b>
+<b class="fc">&nbsp;                it.remove();</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        for (Iterator&lt;Map.Entry&lt;Class, Map&lt;String, Field&gt;&gt;&gt; it = fieldMapCache.entrySet().iterator(); it.hasNext(); ) {</b>
+<b class="fc">&nbsp;            Map.Entry&lt;Class, Map&lt;String, Field&gt;&gt; entry = it.next();</b>
+<b class="fc">&nbsp;            Class entryKey = entry.getKey();</b>
+<b class="fc">&nbsp;            if (entryKey.getClassLoader() == classLoader) {</b>
+<b class="fc">&nbsp;                it.remove();</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        for (Iterator&lt;Map.Entry&lt;Class, Field[]&gt;&gt; it = declaredFieldCache.entrySet().iterator(); it.hasNext(); ) {</b>
+<b class="fc">&nbsp;            Map.Entry&lt;Class, Field[]&gt; entry = it.next();</b>
+<b class="fc">&nbsp;            Class entryKey = entry.getKey();</b>
+<b class="fc">&nbsp;            if (entryKey.getClassLoader() == classLoader) {</b>
+<b class="fc">&nbsp;                it.remove();</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        for (Iterator&lt;Map.Entry&lt;Class, Method[]&gt;&gt; it = methodCache.entrySet().iterator(); it.hasNext(); ) {</b>
+<b class="fc">&nbsp;            Map.Entry&lt;Class, Method[]&gt; entry = it.next();</b>
+<b class="fc">&nbsp;            Class entryKey = entry.getKey();</b>
+<b class="fc">&nbsp;            if (entryKey.getClassLoader() == classLoader) {</b>
+<b class="fc">&nbsp;                it.remove();</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        for (Iterator&lt;Map.Entry&lt;Class, Constructor[]&gt;&gt; it = constructorCache.entrySet().iterator(); it.hasNext(); ) {</b>
+<b class="fc">&nbsp;            Map.Entry&lt;Class, Constructor[]&gt; entry = it.next();</b>
+<b class="fc">&nbsp;            Class entryKey = entry.getKey();</b>
+<b class="fc">&nbsp;            if (entryKey.getClassLoader() == classLoader) {</b>
+<b class="fc">&nbsp;                it.remove();</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void processJSONType1x(BeanInfo beanInfo, Annotation jsonType1x, Method method) {
+&nbsp;        try {
+<b class="fc">&nbsp;            Object result = method.invoke(jsonType1x);</b>
+<b class="fc">&nbsp;            switch (method.getName()) {</b>
+&nbsp;                case &quot;seeAlso&quot;: {
+<b class="fc">&nbsp;                    Class&lt;?&gt;[] classes = (Class[]) result;</b>
+<b class="fc">&nbsp;                    if (classes.length != 0) {</b>
+<b class="fc">&nbsp;                        beanInfo.seeAlso = classes;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case &quot;typeName&quot;: {
+<b class="fc">&nbsp;                    String typeName = (String) result;</b>
+<b class="fc">&nbsp;                    if (!typeName.isEmpty()) {</b>
+<b class="fc">&nbsp;                        beanInfo.typeName = typeName;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case &quot;typeKey&quot;: {
+<b class="fc">&nbsp;                    String typeKey = (String) result;</b>
+<b class="fc">&nbsp;                    if (!typeKey.isEmpty()) {</b>
+<b class="fc">&nbsp;                        beanInfo.typeKey = typeKey;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case &quot;alphabetic&quot;: {
+<b class="fc">&nbsp;                    Boolean alphabetic = (Boolean) result;</b>
+<b class="fc">&nbsp;                    if (!alphabetic) {</b>
+<b class="nc">&nbsp;                        beanInfo.alphabetic = false;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case &quot;serializeFeatures&quot;:
+&nbsp;                case &quot;serialzeFeatures&quot;: {
+<b class="fc">&nbsp;                    Enum[] serializeFeatures = (Enum[]) result;</b>
+<b class="fc">&nbsp;                    for (Enum feature : serializeFeatures) {</b>
+<b class="fc">&nbsp;                        switch (feature.name()) {</b>
+&nbsp;                            case &quot;WriteMapNullValue&quot;:
+<b class="nc">&nbsp;                                beanInfo.writerFeatures |= JSONWriter.Feature.WriteNulls.mask;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case &quot;WriteNullListAsEmpty&quot;:
+<b class="nc">&nbsp;                                beanInfo.writerFeatures |= JSONWriter.Feature.WriteNullListAsEmpty.mask;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case &quot;WriteNullStringAsEmpty&quot;:
+<b class="nc">&nbsp;                                beanInfo.writerFeatures |= JSONWriter.Feature.WriteNullStringAsEmpty.mask;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case &quot;WriteNullNumberAsZero&quot;:
+<b class="nc">&nbsp;                                beanInfo.writerFeatures |= JSONWriter.Feature.WriteNullNumberAsZero.mask;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case &quot;WriteNullBooleanAsFalse&quot;:
+<b class="nc">&nbsp;                                beanInfo.writerFeatures |= JSONWriter.Feature.WriteNullBooleanAsFalse.mask;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case &quot;BrowserCompatible&quot;:
+<b class="fc">&nbsp;                                beanInfo.writerFeatures |= JSONWriter.Feature.BrowserCompatible.mask;</b>
+<b class="fc">&nbsp;                                break;</b>
+&nbsp;                            case &quot;WriteClassName&quot;:
+<b class="nc">&nbsp;                                beanInfo.writerFeatures |= JSONWriter.Feature.WriteClassName.mask;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case &quot;WriteNonStringValueAsString&quot;:
+<b class="nc">&nbsp;                                beanInfo.writerFeatures |= JSONWriter.Feature.WriteNonStringValueAsString.mask;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case &quot;WriteEnumUsingToString&quot;:
+<b class="nc">&nbsp;                                beanInfo.writerFeatures |= JSONWriter.Feature.WriteEnumUsingToString.mask;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case &quot;NotWriteRootClassName&quot;:
+<b class="nc">&nbsp;                                beanInfo.writerFeatures |= JSONWriter.Feature.NotWriteRootClassName.mask;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case &quot;IgnoreErrorGetter&quot;:
+<b class="nc">&nbsp;                                beanInfo.writerFeatures |= JSONWriter.Feature.IgnoreErrorGetter.mask;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            default:
+&nbsp;                                break;
+&nbsp;                        }
+&nbsp;                    }
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;                case &quot;serializeEnumAsJavaBean&quot;: {
+<b class="fc">&nbsp;                    boolean serializeEnumAsJavaBean = (Boolean) result;</b>
+<b class="fc">&nbsp;                    if (serializeEnumAsJavaBean) {</b>
+<b class="fc">&nbsp;                        beanInfo.writeEnumAsJavaBean = true;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case &quot;naming&quot;: {
+<b class="fc">&nbsp;                    Enum naming = (Enum) result;</b>
+<b class="fc">&nbsp;                    beanInfo.namingStrategy = naming.name();</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;                case &quot;ignores&quot;: {
+<b class="fc">&nbsp;                    String[] fields = (String[]) result;</b>
+<b class="fc">&nbsp;                    if (fields.length != 0) {</b>
+<b class="fc">&nbsp;                        if (beanInfo.ignores == null) {</b>
+<b class="fc">&nbsp;                            beanInfo.ignores = fields;</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            LinkedHashSet&lt;String&gt; ignoresSet = new LinkedHashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;                            ignoresSet.addAll(Arrays.asList(beanInfo.ignores));</b>
+<b class="nc">&nbsp;                            ignoresSet.addAll(Arrays.asList(fields));</b>
+<b class="nc">&nbsp;                            beanInfo.ignores = ignoresSet.toArray(new String[ignoresSet.size()]);</b>
+<b class="nc">&nbsp;                        }</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case &quot;includes&quot;: {
+<b class="fc">&nbsp;                    String[] fields = (String[]) result;</b>
+<b class="fc">&nbsp;                    if (fields.length != 0) {</b>
+<b class="fc">&nbsp;                        beanInfo.includes = fields;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case &quot;orders&quot;: {
+<b class="fc">&nbsp;                    String[] fields = (String[]) result;</b>
+<b class="fc">&nbsp;                    if (fields.length != 0) {</b>
+<b class="fc">&nbsp;                        beanInfo.orders = fields;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Throwable ignored) {</b>
+&nbsp;            // ignored
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void processJacksonJsonFormat(FieldInfo fieldInfo, Annotation annotation) {
+<b class="fc">&nbsp;        Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="fc">&nbsp;        BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="fc">&nbsp;            String name = m.getName();</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                Object result = m.invoke(annotation);</b>
+<b class="fc">&nbsp;                switch (name) {</b>
+&nbsp;                    case &quot;pattern&quot;: {
+<b class="fc">&nbsp;                        String pattern = (String) result;</b>
+<b class="fc">&nbsp;                        if (pattern.length() != 0) {</b>
+<b class="fc">&nbsp;                            fieldInfo.format = pattern;</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    }
+&nbsp;                    case &quot;shape&quot;: {
+<b class="fc">&nbsp;                        String shape = ((Enum) result).name();</b>
+<b class="fc">&nbsp;                        if (shape.equals(&quot;STRING&quot;)) {</b>
+<b class="fc">&nbsp;                            fieldInfo.features |= JSONWriter.Feature.WriteNonStringValueAsString.mask;</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    }
+&nbsp;                    default:
+&nbsp;                        break;
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Throwable ignored) {</b>
+&nbsp;                // ignored
+<b class="fc">&nbsp;            }</b>
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void processJacksonJsonFormat(BeanInfo beanInfo, Annotation annotation) {
+<b class="fc">&nbsp;        Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="fc">&nbsp;        BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="fc">&nbsp;            String name = m.getName();</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                Object result = m.invoke(annotation);</b>
+<b class="fc">&nbsp;                if (name.equals(&quot;pattern&quot;)) {</b>
+<b class="fc">&nbsp;                    String pattern = (String) result;</b>
+<b class="fc">&nbsp;                    if (pattern.length() != 0) {</b>
+<b class="fc">&nbsp;                        beanInfo.format = pattern;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Throwable ignored) {</b>
+&nbsp;                // ignored
+<b class="fc">&nbsp;            }</b>
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void processJacksonJsonInclude(BeanInfo beanInfo, Annotation annotation) {
+<b class="fc">&nbsp;        Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="fc">&nbsp;        BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="fc">&nbsp;            String name = m.getName();</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                Object result = m.invoke(annotation);</b>
+<b class="fc">&nbsp;                if (name.equals(&quot;value&quot;)) {</b>
+<b class="fc">&nbsp;                    String include = ((Enum) result).name();</b>
+<b class="fc">&nbsp;                    switch (include) {</b>
+&nbsp;                        case &quot;ALWAYS&quot;:
+<b class="nc">&nbsp;                            beanInfo.writerFeatures |= JSONWriter.Feature.WriteNulls.mask;</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        case &quot;NON_DEFAULT&quot;:
+<b class="nc">&nbsp;                            beanInfo.writerFeatures |= JSONWriter.Feature.NotWriteDefaultValue.mask;</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        default:
+&nbsp;                            break;
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Throwable ignored) {</b>
+&nbsp;                // ignored
+<b class="fc">&nbsp;            }</b>
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void processJacksonJsonTypeName(BeanInfo beanInfo, Annotation annotation) {
+<b class="fc">&nbsp;        Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="fc">&nbsp;        BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="fc">&nbsp;            String name = m.getName();</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                Object result = m.invoke(annotation);</b>
+<b class="fc">&nbsp;                if (name.equals(&quot;value&quot;)) {</b>
+<b class="fc">&nbsp;                    String value = (String) result;</b>
+<b class="fc">&nbsp;                    if (!value.isEmpty()) {</b>
+<b class="fc">&nbsp;                        beanInfo.typeName = value;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Throwable ignored) {</b>
+&nbsp;                // ignored
+<b class="fc">&nbsp;            }</b>
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void processJacksonJsonSubTypesType(BeanInfo beanInfo, int index, Annotation annotation) {
+<b class="fc">&nbsp;        Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="fc">&nbsp;        BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="fc">&nbsp;            String name = m.getName();</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                Object result = m.invoke(annotation);</b>
+<b class="fc">&nbsp;                switch (name) {</b>
+&nbsp;                    case &quot;value&quot;: {
+<b class="fc">&nbsp;                        Class value = (Class) result;</b>
+<b class="fc">&nbsp;                        beanInfo.seeAlso[index] = value;</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case &quot;name&quot;: {
+<b class="fc">&nbsp;                        String value = (String) result;</b>
+<b class="fc">&nbsp;                        beanInfo.seeAlsoNames[index] = value;</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    default:
+&nbsp;                        break;
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Throwable ignored) {</b>
+&nbsp;                // ignored
+<b class="fc">&nbsp;            }</b>
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void processGsonSerializedName(FieldInfo fieldInfo, Annotation annotation) {
+<b class="fc">&nbsp;        Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="fc">&nbsp;        BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="fc">&nbsp;            String name = m.getName();</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                Object result = m.invoke(annotation);</b>
+<b class="fc">&nbsp;                switch (name) {</b>
+&nbsp;                    case &quot;value&quot;:
+<b class="fc">&nbsp;                        String value = (String) result;</b>
+<b class="fc">&nbsp;                        if (!value.isEmpty()) {</b>
+<b class="fc">&nbsp;                            fieldInfo.fieldName = value;</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;alternate&quot;:
+<b class="fc">&nbsp;                        String[] alternate = (String[]) result;</b>
+<b class="fc">&nbsp;                        if (alternate.length != 0) {</b>
+<b class="fc">&nbsp;                            fieldInfo.alternateNames = alternate;</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    default:
+&nbsp;                        break;
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Throwable ignored) {</b>
+&nbsp;                // ignored
+<b class="fc">&nbsp;            }</b>
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isExtendedMap(Class objectClass) {
+<b class="fc">&nbsp;        if (objectClass == HashMap.class</b>
+&nbsp;                || objectClass == LinkedHashMap.class
+&nbsp;                || objectClass == TreeMap.class
+<b class="fc">&nbsp;                || &quot;&quot;.equals(objectClass.getSimpleName())</b>
+&nbsp;        ) {
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Class superclass = objectClass.getSuperclass();</b>
+<b class="fc">&nbsp;        if (superclass != HashMap.class</b>
+&nbsp;                &amp;&amp; superclass != LinkedHashMap.class
+&nbsp;                &amp;&amp; superclass != TreeMap.class
+&nbsp;        ) {
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Constructor defaultConstructor = getDefaultConstructor(objectClass, false);</b>
+<b class="fc">&nbsp;        if (defaultConstructor != null) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        List&lt;Field&gt; fields = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        BeanUtils.declaredFields(objectClass, field -&gt; {</b>
+<b class="fc">&nbsp;            int modifiers = field.getModifiers();</b>
+<b class="fc">&nbsp;            if (Modifier.isStatic(modifiers)</b>
+<b class="fc">&nbsp;                    || Modifier.isTransient(modifiers)</b>
+<b class="fc">&nbsp;                    || field.getDeclaringClass().isAssignableFrom(superclass)</b>
+<b class="fc">&nbsp;                    || field.getName().equals(&quot;this$0&quot;)</b>
+&nbsp;            ) {
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            fields.add(field);</b>
+&nbsp;        });
+&nbsp;
+<b class="fc">&nbsp;        return !fields.isEmpty();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:38</div>
+</div>
+</body>
+</html>

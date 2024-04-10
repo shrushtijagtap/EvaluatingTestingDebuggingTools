@@ -1,0 +1,336 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Analysis</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.internal.processor</a>
+</div>
+
+<h1>Coverage Summary for Class: Analysis (com.alibaba.fastjson2.internal.processor)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Analysis</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/107)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Analysis$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/108)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.internal.processor;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.annotation.JSONCompiled;
+&nbsp;import com.alibaba.fastjson2.annotation.JSONField;
+&nbsp;import com.alibaba.fastjson2.annotation.JSONType;
+&nbsp;import com.alibaba.fastjson2.codec.FieldInfo;
+&nbsp;import com.alibaba.fastjson2.util.BeanUtils;
+&nbsp;
+&nbsp;import javax.annotation.processing.ProcessingEnvironment;
+&nbsp;import javax.lang.model.element.*;
+&nbsp;import javax.lang.model.type.DeclaredType;
+&nbsp;import javax.lang.model.type.TypeMirror;
+&nbsp;import javax.lang.model.util.ElementFilter;
+&nbsp;import javax.lang.model.util.Elements;
+&nbsp;import javax.lang.model.util.Types;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;public class Analysis {
+&nbsp;    final ProcessingEnvironment processingEnv;
+&nbsp;    final Elements elements;
+&nbsp;    private final Types types;
+&nbsp;    final TypeElement jsonCompiledElement;
+&nbsp;    final TypeElement jsonTypeElement;
+&nbsp;    public final DeclaredType compiledJsonType;
+<b class="nc">&nbsp;    final Map&lt;String, StructInfo&gt; structs = new LinkedHashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;    public Analysis(ProcessingEnvironment processingEnv) {</b>
+<b class="nc">&nbsp;        this.processingEnv = processingEnv;</b>
+<b class="nc">&nbsp;        this.elements = processingEnv.getElementUtils();</b>
+<b class="nc">&nbsp;        this.types = processingEnv.getTypeUtils();</b>
+<b class="nc">&nbsp;        this.jsonCompiledElement = elements.getTypeElement(JSONCompiled.class.getName());</b>
+<b class="nc">&nbsp;        this.compiledJsonType = types.getDeclaredType(jsonCompiledElement);</b>
+<b class="nc">&nbsp;        this.jsonTypeElement = elements.getTypeElement(JSONType.class.getName());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void processAnnotation(DeclaredType currentAnnotationType, Set&lt;? extends Element&gt; targets) {
+<b class="nc">&nbsp;        Stack&lt;String&gt; path = new Stack&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (Element el : targets) {</b>
+&nbsp;            Element classElement;
+<b class="nc">&nbsp;            ExecutableElement factory = null;</b>
+<b class="nc">&nbsp;            ExecutableElement builder = null;</b>
+<b class="nc">&nbsp;            if (el instanceof TypeElement) {</b>
+<b class="nc">&nbsp;                classElement = el;</b>
+<b class="nc">&nbsp;            } else if (el instanceof ExecutableElement &amp;&amp; el.getKind() == ElementKind.METHOD) {</b>
+<b class="nc">&nbsp;                ExecutableElement ee = (ExecutableElement) el;</b>
+<b class="nc">&nbsp;                Element returnClass = types.asElement(ee.getReturnType());</b>
+<b class="nc">&nbsp;                Element enclosing = ee.getEnclosingElement();</b>
+<b class="nc">&nbsp;                if (!el.getModifiers().contains(Modifier.STATIC)</b>
+<b class="nc">&nbsp;                        &amp;&amp; !types.isSameType(ee.getReturnType(), enclosing.asType())</b>
+<b class="nc">&nbsp;                        &amp;&amp; returnClass.toString().equals(enclosing.getEnclosingElement().toString())) {</b>
+<b class="nc">&nbsp;                    builder = ee;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                factory = ee;</b>
+<b class="nc">&nbsp;                classElement = returnClass;</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                classElement = el.getEnclosingElement();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            findStructs(classElement, currentAnnotationType, currentAnnotationType + &quot; requires accessible public constructor&quot;, path, factory, builder);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void findStructs(
+&nbsp;            Element el,
+&nbsp;            DeclaredType discoveredBy,
+&nbsp;            String errorMessage,
+&nbsp;            Stack&lt;String&gt; path,
+&nbsp;            ExecutableElement factory,
+&nbsp;            ExecutableElement builder
+&nbsp;    ) {
+<b class="nc">&nbsp;        if (!(el instanceof TypeElement)) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String typeName = el.toString();</b>
+&nbsp;
+<b class="nc">&nbsp;        final TypeElement element = (TypeElement) el;</b>
+<b class="nc">&nbsp;        String name = &quot;struct&quot; + structs.size();</b>
+<b class="nc">&nbsp;        String binaryName = elements.getBinaryName(element).toString();</b>
+<b class="nc">&nbsp;        StructInfo info = new StructInfo(types, element, discoveredBy, name, binaryName);</b>
+<b class="nc">&nbsp;        structs.put(typeName, info);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static int getModifiers(Set&lt;Modifier&gt; modifiers) {
+<b class="nc">&nbsp;        int modifierValue = 0;</b>
+<b class="nc">&nbsp;        for (Modifier modifier : modifiers) {</b>
+<b class="nc">&nbsp;            switch (modifier) {</b>
+&nbsp;                case PUBLIC:
+<b class="nc">&nbsp;                    modifierValue |= java.lang.reflect.Modifier.PUBLIC;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case PRIVATE:
+<b class="nc">&nbsp;                    modifierValue |= java.lang.reflect.Modifier.PRIVATE;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case FINAL:
+<b class="nc">&nbsp;                    modifierValue |= java.lang.reflect.Modifier.FINAL;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return modifierValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;String, StructInfo&gt; analyze() {
+<b class="nc">&nbsp;        findRelatedReferences();</b>
+&nbsp;
+<b class="nc">&nbsp;        return structs;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void findRelatedReferences() {
+<b class="nc">&nbsp;        for (Map.Entry&lt;String, StructInfo&gt; entry : structs.entrySet()) {</b>
+<b class="nc">&nbsp;            StructInfo info = entry.getValue();</b>
+&nbsp;
+<b class="nc">&nbsp;            for (TypeElement inheritance : getTypeHierarchy(info.element)) {</b>
+<b class="nc">&nbsp;                for (VariableElement field : ElementFilter.fieldsIn(inheritance.getEnclosedElements())) {</b>
+<b class="nc">&nbsp;                    Set&lt;Modifier&gt; modifiers = field.getModifiers();</b>
+<b class="nc">&nbsp;                    if (modifiers.contains(Modifier.TRANSIENT)) {</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (modifiers.contains(Modifier.STATIC)) {</b>
+&nbsp;                        // TODO enum
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    FieldInfo fieldInfo = new FieldInfo();</b>
+&nbsp;
+<b class="nc">&nbsp;                    String name = field.getSimpleName().toString();</b>
+<b class="nc">&nbsp;                    JSONField[] annotations = field.getAnnotationsByType(JSONField.class);</b>
+<b class="nc">&nbsp;                    for (JSONField annotation : annotations) {</b>
+<b class="nc">&nbsp;                        CodeGenUtils.getFieldInfo(fieldInfo, annotation, false);</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (fieldInfo.fieldName != null) {</b>
+<b class="nc">&nbsp;                        name = fieldInfo.fieldName;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    info.getAttributeByField(name, field);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+<b class="nc">&nbsp;                for (ExecutableElement method : ElementFilter.methodsIn(inheritance.getEnclosedElements())) {</b>
+<b class="nc">&nbsp;                    List&lt;? extends VariableElement&gt; parameters = method.getParameters();</b>
+<b class="nc">&nbsp;                    int parameterCount = parameters.size();</b>
+<b class="nc">&nbsp;                    String methodName = method.getSimpleName().toString();</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (parameterCount &gt; 2) {</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    boolean ignored = false;</b>
+<b class="nc">&nbsp;                    if (parameterCount == 0) {</b>
+<b class="nc">&nbsp;                        switch (methodName) {</b>
+&nbsp;                            case &quot;hashCode&quot;:
+<b class="nc">&nbsp;                                ignored = true;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            default:
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    } else if (parameterCount == 1) {</b>
+<b class="nc">&nbsp;                        ignored = methodName.equals(&quot;equals&quot;);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (ignored) {</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    ExecutableElement getter = null, setter = null;</b>
+<b class="nc">&nbsp;                    TypeMirror type = null;</b>
+<b class="nc">&nbsp;                    String name = null;</b>
+<b class="nc">&nbsp;                    if (parameters.size() == 0 &amp;&amp; (methodName.startsWith(&quot;get&quot;) || methodName.startsWith(&quot;is&quot;))) {</b>
+<b class="nc">&nbsp;                        name = BeanUtils.getterName(methodName, null);</b>
+<b class="nc">&nbsp;                        getter = method;</b>
+<b class="nc">&nbsp;                        type = method.getReturnType();</b>
+<b class="nc">&nbsp;                    } else if (methodName.startsWith(&quot;set&quot;) &amp;&amp; method.getParameters().size() == 1) {</b>
+<b class="nc">&nbsp;                        name = BeanUtils.setterName(methodName, null);</b>
+<b class="nc">&nbsp;                        setter = method;</b>
+<b class="nc">&nbsp;                        type = method.getParameters().get(0).asType();</b>
+&nbsp;                    } else {
+&nbsp;                        continue;
+&nbsp;                    }
+<b class="nc">&nbsp;                    AttributeInfo attr = info.getAttributeByMethod(name, type, getter, setter);</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private List&lt;TypeElement&gt; getTypeHierarchy(TypeElement element) {
+<b class="nc">&nbsp;        List&lt;TypeElement&gt; result = new ArrayList&lt;TypeElement&gt;();</b>
+<b class="nc">&nbsp;        getAllTypes(element, result, new HashSet&lt;TypeElement&gt;());</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void getAllTypes(TypeElement element, List&lt;TypeElement&gt; result, Set&lt;TypeElement&gt; processed) {
+<b class="nc">&nbsp;        if (!processed.add(element) || element.getQualifiedName().contentEquals(&quot;java.lang.Object&quot;)) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        result.add(element);</b>
+<b class="nc">&nbsp;        for (TypeMirror type : types.directSupertypes(element.asType())) {</b>
+<b class="nc">&nbsp;            Element current = types.asElement(type);</b>
+<b class="nc">&nbsp;            if (current instanceof TypeElement) {</b>
+<b class="nc">&nbsp;                getAllTypes((TypeElement) current, result, processed);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:38</div>
+</div>
+</body>
+</html>

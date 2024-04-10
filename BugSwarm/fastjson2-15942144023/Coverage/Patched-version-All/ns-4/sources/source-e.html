@@ -1,0 +1,399 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SerializeWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.serializer</a>
+</div>
+
+<h1>Coverage Summary for Class: SerializeWriter (com.alibaba.fastjson.serializer)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SerializeWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    31.6%
+  </span>
+  <span class="absValue">
+    (24/76)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    11%
+  </span>
+  <span class="absValue">
+    (154/1406)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SerializeWriter$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">SerializeWriter$ListWrapper</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    30.4%
+  </span>
+  <span class="absValue">
+    (24/79)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    10.8%
+  </span>
+  <span class="absValue">
+    (154/1424)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson.serializer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.JSON;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.filter.LabelFilter;
+&nbsp;import com.alibaba.fastjson2.filter.PropertyPreFilter;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.Writer;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class SerializeWriter
+&nbsp;        implements Cloneable {
+&nbsp;    SerializeConfig config;
+&nbsp;    final JSONWriter raw;
+&nbsp;
+&nbsp;    final ListWrapper&lt;PropertyFilter&gt; propertyFilters;
+&nbsp;    final ListWrapper&lt;ValueFilter&gt; valueFilters;
+&nbsp;    final ListWrapper&lt;NameFilter&gt; nameFilters;
+&nbsp;    final ListWrapper&lt;BeforeFilter&gt; beforeFilters;
+&nbsp;    final ListWrapper&lt;AfterFilter&gt; afterFilters;
+&nbsp;
+&nbsp;    public SerializeWriter() {
+&nbsp;        this(JSONWriter.of());
+&nbsp;    }
+&nbsp;
+&nbsp;    public SerializeWriter(SerializerFeature... features) {
+&nbsp;        this(
+&nbsp;                JSONWriter.of(
+&nbsp;                        JSON.createWriteContext(
+&nbsp;                                SerializeConfig.global,
+&nbsp;                                JSON.DEFAULT_PARSER_FEATURE,
+&nbsp;                                features
+&nbsp;                        )
+<b class="fc">&nbsp;                )</b>
+<b class="fc">&nbsp;        );</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public SerializeWriter(SerializeConfig config, SerializerFeature... features) {</b>
+&nbsp;        this(
+&nbsp;                JSONWriter.of(
+&nbsp;                        JSON.createWriteContext(
+<b class="fc">&nbsp;                                config,</b>
+<b class="fc">&nbsp;                                JSON.DEFAULT_PARSER_FEATURE,</b>
+<b class="nc">&nbsp;                                features</b>
+<b class="nc">&nbsp;                        )</b>
+<b class="nc">&nbsp;                )</b>
+&nbsp;        );
+&nbsp;        this.config = config;
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    public SerializeWriter(JSONWriter raw) {</b>
+&nbsp;        this.raw = raw;
+&nbsp;        this.propertyFilters = new ListWrapper&lt;&gt;();
+&nbsp;        this.valueFilters = new ListWrapper&lt;&gt;();
+&nbsp;        this.nameFilters = new ListWrapper&lt;&gt;();
+&nbsp;        this.beforeFilters = new ListWrapper&lt;&gt;();
+&nbsp;        this.afterFilters = new ListWrapper&lt;&gt;();
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeNull() {
+&nbsp;        this.raw.writeNull();
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeNull(SerializerFeature feature) {
+&nbsp;        this.raw.writeNull();
+&nbsp;    }
+&nbsp;
+&nbsp;    public void writeString(String text) {
+&nbsp;        this.raw.writeString(text);
+&nbsp;    }
+&nbsp;
+&nbsp;    public void write(String text) {
+&nbsp;        this.raw.writeRaw(text);
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;PropertyFilter&gt; getPropertyFilters() {
+&nbsp;        return propertyFilters;
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public List&lt;ValueFilter&gt; getValueFilters() {
+&nbsp;        return valueFilters;
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public List&lt;NameFilter&gt; getNameFilters() {</b>
+&nbsp;        return nameFilters;
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public List&lt;BeforeFilter&gt; getBeforeFilters() {</b>
+&nbsp;        return beforeFilters;
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public List&lt;AfterFilter&gt; getAfterFilters() {</b>
+&nbsp;        return afterFilters;
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    class ListWrapper&lt;T&gt;</b>
+&nbsp;            extends ArrayList&lt;T&gt; {
+&nbsp;        @Override
+&nbsp;        public boolean add(T filter) {
+<b class="nc">&nbsp;            JSONWriter.Context context = raw.getContext();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (filter instanceof PropertyFilter) {</b>
+<b class="nc">&nbsp;                context.setPropertyFilter((PropertyFilter) filter);</b>
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+<b class="pc">&nbsp;            if (filter instanceof ValueFilter) {</b>
+<b class="nc">&nbsp;                context.setValueFilter((ValueFilter) filter);</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+<b class="pc">&nbsp;            if (filter instanceof NameFilter) {</b>
+<b class="pc">&nbsp;                context.setNameFilter((NameFilter) filter);</b>
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+<b class="nc">&nbsp;            if (filter instanceof PropertyPreFilter) {</b>
+<b class="nc">&nbsp;                context.setPropertyPreFilter((PropertyPreFilter) filter);</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+<b class="pc">&nbsp;            if (filter instanceof BeforeFilter) {</b>
+<b class="nc">&nbsp;                context.setBeforeFilter((BeforeFilter) filter);</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+<b class="pc">&nbsp;            if (filter instanceof AfterFilter) {</b>
+<b class="nc">&nbsp;                context.setAfterFilter((AfterFilter) filter);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (filter instanceof LabelFilter) {</b>
+<b class="nc">&nbsp;                context.setLabelFilter((LabelFilter) filter);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return super.add(filter);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public void write(int c) {</b>
+&nbsp;        raw.writeRaw((char) c);
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public void write(char c) {</b>
+&nbsp;        raw.writeRaw(c);
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public void writeInt(int i) {</b>
+&nbsp;        raw.writeInt32(i);
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public void writeLong(long i) {</b>
+&nbsp;        raw.writeInt64(i);
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public void writeFieldName(String key) {
+<b class="nc">&nbsp;        raw.writeName(key);</b>
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+&nbsp;    @Override
+&nbsp;    public String toString() {
+&nbsp;        return raw.toString();
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public byte[] toBytes(Charset charset) {
+<b class="nc">&nbsp;        return raw.getBytes(charset);</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public byte[] toBytes(String charsetName) {</b>
+&nbsp;        return raw.getBytes(Charset.forName(charsetName));
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+&nbsp;    public void close() {
+&nbsp;        raw.close();
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void writeTo(Writer out) throws IOException {
+<b class="fc">&nbsp;        raw.flushTo(out);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isEnabled(SerializerFeature feature) {
+&nbsp;        JSONWriter.Feature rawFeature = null;
+<b class="nc">&nbsp;        switch (feature) {</b>
+&nbsp;            case BeanToArray:
+&nbsp;                rawFeature = JSONWriter.Feature.BeanToArray;
+&nbsp;                break;
+&nbsp;            case WriteMapNullValue:
+&nbsp;                rawFeature = JSONWriter.Feature.WriteMapNullValue;
+&nbsp;                break;
+<b class="fc">&nbsp;            case WriteEnumUsingToString:</b>
+<b class="fc">&nbsp;                rawFeature = JSONWriter.Feature.WriteEnumUsingToString;</b>
+<b class="fc">&nbsp;                break;</b>
+<b class="fc">&nbsp;            case WriteEnumUsingName:</b>
+<b class="fc">&nbsp;                rawFeature = JSONWriter.Feature.WriteEnumsUsingName;</b>
+<b class="fc">&nbsp;                break;</b>
+<b class="fc">&nbsp;            case WriteNullListAsEmpty:</b>
+<b class="fc">&nbsp;                rawFeature = JSONWriter.Feature.WriteNullListAsEmpty;</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case WriteNullStringAsEmpty:
+<b class="fc">&nbsp;                rawFeature = JSONWriter.Feature.WriteNullStringAsEmpty;</b>
+&nbsp;                break;
+&nbsp;            case WriteNullNumberAsZero:
+&nbsp;                rawFeature = JSONWriter.Feature.WriteNullNumberAsZero;
+&nbsp;                break;
+<b class="fc">&nbsp;            case WriteNullBooleanAsFalse:</b>
+&nbsp;                rawFeature = JSONWriter.Feature.WriteNullBooleanAsFalse;
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case WriteClassName:
+<b class="fc">&nbsp;                rawFeature = JSONWriter.Feature.WriteClassName;</b>
+&nbsp;                break;
+&nbsp;            case NotWriteRootClassName:
+&nbsp;                rawFeature = JSONWriter.Feature.NotWriteRootClassName;
+&nbsp;                break;
+&nbsp;            case WriteNonStringKeyAsString:
+&nbsp;                rawFeature = JSONWriter.Feature.WriteNonStringKeyAsString;
+&nbsp;                break;
+&nbsp;            case NotWriteDefaultValue:
+&nbsp;                rawFeature = JSONWriter.Feature.NotWriteDefaultValue;
+&nbsp;                break;
+&nbsp;            case BrowserCompatible:
+&nbsp;                rawFeature = JSONWriter.Feature.BrowserCompatible;
+&nbsp;                break;
+&nbsp;            case BrowserSecure:
+<b class="fc">&nbsp;                rawFeature = JSONWriter.Feature.BrowserSecure;</b>
+&nbsp;                break;
+&nbsp;            case IgnoreNonFieldGetter:
+&nbsp;                rawFeature = JSONWriter.Feature.IgnoreNonFieldGetter;
+&nbsp;                break;
+&nbsp;            case WriteNonStringValueAsString:
+<b class="nc">&nbsp;                rawFeature = JSONWriter.Feature.WriteNonStringValueAsString;</b>
+&nbsp;                break;
+&nbsp;            case IgnoreErrorGetter:
+&nbsp;                rawFeature = JSONWriter.Feature.IgnoreErrorGetter;
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case WriteBigDecimalAsPlain:
+&nbsp;                rawFeature = JSONWriter.Feature.WriteBigDecimalAsPlain;
+&nbsp;                break;
+<b class="fc">&nbsp;            default:</b>
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (rawFeature != null) {</b>
+&nbsp;            return raw.isEnabled(rawFeature);
+&nbsp;        }
+&nbsp;
+&nbsp;        return false;
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public SerializeWriter append(char c) {</b>
+<b class="fc">&nbsp;        raw.writeRaw(c);</b>
+<b class="nc">&nbsp;        return this;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:37</div>
+</div>
+</body>
+</html>

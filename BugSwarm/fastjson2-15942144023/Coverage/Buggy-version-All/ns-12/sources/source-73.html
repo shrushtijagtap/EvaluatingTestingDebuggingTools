@@ -1,0 +1,2316 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderBaseModule</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderBaseModule (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderBaseModule</td>
+<td class="coverageStat">
+  <span class="percent">
+    81%
+  </span>
+  <span class="absValue">
+    (17/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.7%
+  </span>
+  <span class="absValue">
+    (435/502)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ObjectReaderBaseModule$ReaderAnnotationProcessor</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.3%
+  </span>
+  <span class="absValue">
+    (29/34)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.7%
+  </span>
+  <span class="absValue">
+    (428/524)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    83.6%
+  </span>
+  <span class="absValue">
+    (46/55)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84.1%
+  </span>
+  <span class="absValue">
+    (863/1026)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.annotation.*;
+&nbsp;import com.alibaba.fastjson2.codec.BeanInfo;
+&nbsp;import com.alibaba.fastjson2.codec.FieldInfo;
+&nbsp;import com.alibaba.fastjson2.function.impl.*;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectReaderAnnotationProcessor;
+&nbsp;import com.alibaba.fastjson2.modules.ObjectReaderModule;
+&nbsp;import com.alibaba.fastjson2.support.LambdaMiscCodec;
+&nbsp;import com.alibaba.fastjson2.support.money.MoneySupport;
+&nbsp;import com.alibaba.fastjson2.util.*;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.*;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.net.*;
+&nbsp;import java.nio.ByteBuffer;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.nio.file.Path;
+&nbsp;import java.nio.file.Paths;
+&nbsp;import java.text.SimpleDateFormat;
+&nbsp;import java.time.*;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.*;
+&nbsp;import java.util.concurrent.atomic.*;
+&nbsp;import java.util.function.Function;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.util.BeanUtils.*;
+&nbsp;
+<b class="fc">&nbsp;public class ObjectReaderBaseModule</b>
+&nbsp;        implements ObjectReaderModule {
+&nbsp;    final ObjectReaderProvider provider;
+&nbsp;    final ReaderAnnotationProcessor annotationProcessor;
+&nbsp;
+<b class="fc">&nbsp;    public ObjectReaderBaseModule(ObjectReaderProvider provider) {</b>
+<b class="fc">&nbsp;        this.provider = provider;</b>
+<b class="fc">&nbsp;        this.annotationProcessor = new ReaderAnnotationProcessor();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObjectReaderProvider getProvider() {
+<b class="nc">&nbsp;        return provider;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void init(ObjectReaderProvider provider) {
+<b class="fc">&nbsp;        provider.registerTypeConvert(Character.class, char.class, o -&gt; o);</b>
+&nbsp;
+<b class="fc">&nbsp;        Class[] numberTypes = new Class[]{</b>
+&nbsp;                Boolean.class,
+&nbsp;                Byte.class,
+&nbsp;                Short.class,
+&nbsp;                Integer.class,
+&nbsp;                Long.class,
+&nbsp;                Number.class,
+&nbsp;                Float.class,
+&nbsp;                Double.class,
+&nbsp;                BigInteger.class,
+&nbsp;                BigDecimal.class,
+&nbsp;                AtomicInteger.class,
+&nbsp;                AtomicLong.class,
+&nbsp;        };
+&nbsp;
+<b class="fc">&nbsp;        Function&lt;Object, Boolean&gt; TO_BOOLEAN = new ToBoolean(null);</b>
+<b class="fc">&nbsp;        for (Class type : numberTypes) {</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(type, Boolean.class, TO_BOOLEAN);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function&lt;Object, Boolean&gt; TO_BOOLEAN_VALUE = new ToBoolean(Boolean.FALSE);</b>
+<b class="fc">&nbsp;        for (Class type : numberTypes) {</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(type, boolean.class, TO_BOOLEAN_VALUE);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function&lt;Object, String&gt; TO_STRING = new ToString();</b>
+<b class="fc">&nbsp;        for (Class type : numberTypes) {</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(type, String.class, TO_STRING);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function&lt;Object, BigDecimal&gt; TO_DECIMAL = new ToBigDecimal();</b>
+<b class="fc">&nbsp;        for (Class type : numberTypes) {</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(type, BigDecimal.class, TO_DECIMAL);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function&lt;Object, BigInteger&gt; TO_BIGINT = new ToBigInteger();</b>
+<b class="fc">&nbsp;        for (Class type : numberTypes) {</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(type, BigInteger.class, TO_BIGINT);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function&lt;Object, Byte&gt; TO_BYTE = new ToByte(null);</b>
+<b class="fc">&nbsp;        for (Class type : numberTypes) {</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(type, Byte.class, TO_BYTE);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function&lt;Object, Byte&gt; TO_BYTE_VALUE = new ToByte((byte) 0);</b>
+<b class="fc">&nbsp;        for (Class type : numberTypes) {</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(type, byte.class, TO_BYTE_VALUE);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function&lt;Object, Short&gt; TO_SHORT = new ToShort(null);</b>
+<b class="fc">&nbsp;        for (Class type : numberTypes) {</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(type, Short.class, TO_SHORT);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function&lt;Object, Short&gt; TO_SHORT_VALUE = new ToShort((short) 0);</b>
+<b class="fc">&nbsp;        for (Class type : numberTypes) {</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(type, short.class, TO_SHORT_VALUE);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function&lt;Object, Integer&gt; TO_INTEGER = new ToInteger(null);</b>
+<b class="fc">&nbsp;        for (Class type : numberTypes) {</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(type, Integer.class, TO_INTEGER);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function&lt;Object, Integer&gt; TO_INT = new ToInteger(0);</b>
+<b class="fc">&nbsp;        for (Class type : numberTypes) {</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(type, int.class, TO_INT);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function&lt;Object, Long&gt; TO_LONG = new ToLong(null);</b>
+<b class="fc">&nbsp;        for (Class type : numberTypes) {</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(type, Long.class, TO_LONG);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function&lt;Object, Long&gt; TO_LONG_VALUE = new ToLong(0L);</b>
+<b class="fc">&nbsp;        for (Class type : numberTypes) {</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(type, long.class, TO_LONG_VALUE);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function&lt;Object, Float&gt; TO_FLOAT = new ToFloat(null);</b>
+<b class="fc">&nbsp;        for (Class type : numberTypes) {</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(type, Float.class, TO_FLOAT);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function&lt;Object, Float&gt; TO_FLOAT_VALUE = new ToFloat(0F);</b>
+<b class="fc">&nbsp;        for (Class type : numberTypes) {</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(type, float.class, TO_FLOAT_VALUE);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function&lt;Object, Double&gt; TO_DOUBLE = new ToDouble(null);</b>
+<b class="fc">&nbsp;        for (Class type : numberTypes) {</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(type, Double.class, TO_DOUBLE);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function&lt;Object, Double&gt; TO_DOUBLE_VALUE = new ToDouble(0D);</b>
+<b class="fc">&nbsp;        for (Class type : numberTypes) {</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(type, double.class, TO_DOUBLE_VALUE);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Function&lt;Object, Number&gt; TO_NUMBER = new ToNumber(0D);</b>
+<b class="fc">&nbsp;        for (Class type : numberTypes) {</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(type, Number.class, TO_NUMBER);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+&nbsp;            // String to Any
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, char.class, new StringToAny(char.class, &#39;0&#39;));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, boolean.class, new StringToAny(boolean.class, false));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, float.class, new StringToAny(float.class, (float) 0));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, double.class, new StringToAny(double.class, (double) 0));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, byte.class, new StringToAny(byte.class, (byte) 0));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, short.class, new StringToAny(short.class, (short) 0));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, int.class, new StringToAny(int.class, 0));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, long.class, new StringToAny(long.class, 0L));</b>
+&nbsp;
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, Character.class, new StringToAny(Character.class, null));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, Boolean.class, new StringToAny(Boolean.class, null));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, Double.class, new StringToAny(Double.class, null));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, Float.class, new StringToAny(Float.class, null));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, Byte.class, new StringToAny(Byte.class, null));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, Short.class, new StringToAny(Short.class, null));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, Integer.class, new StringToAny(Integer.class, null));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, Long.class, new StringToAny(Long.class, null));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, BigDecimal.class, new StringToAny(BigDecimal.class, null));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, BigInteger.class, new StringToAny(BigInteger.class, null));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, Number.class, new StringToAny(BigDecimal.class, null));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, Collection.class, new StringToAny(Collection.class, null));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, List.class, new StringToAny(List.class, null));</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, JSONArray.class, new StringToAny(JSONArray.class, null));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="fc">&nbsp;            provider.registerTypeConvert(Boolean.class, boolean.class, o -&gt; o);</b>
+&nbsp;        }
+&nbsp;        {
+<b class="fc">&nbsp;            Function function = o -&gt; o == null || &quot;null&quot;.equals(o) || o.equals(0L)</b>
+&nbsp;                    ? null
+<b class="nc">&nbsp;                    : LocalDateTime.ofInstant(Instant.ofEpochMilli((Long) o), ZoneId.systemDefault());</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(Long.class, LocalDateTime.class, function);</b>
+&nbsp;        }
+&nbsp;        {
+<b class="fc">&nbsp;            Function function = o -&gt; o == null || &quot;null&quot;.equals(o) || &quot;&quot;.equals(o)</b>
+&nbsp;                    ? null
+<b class="fc">&nbsp;                    : UUID.fromString((String) o);</b>
+<b class="fc">&nbsp;            provider.registerTypeConvert(String.class, UUID.class, function);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public class ReaderAnnotationProcessor</b>
+&nbsp;            implements ObjectReaderAnnotationProcessor {
+&nbsp;        @Override
+&nbsp;        public void getBeanInfo(BeanInfo beanInfo, Class&lt;?&gt; objectClass) {
+<b class="fc">&nbsp;            Class mixInSource = provider.mixInCache.get(objectClass);</b>
+<b class="fc">&nbsp;            if (mixInSource == null) {</b>
+<b class="fc">&nbsp;                String typeName = objectClass.getName();</b>
+<b class="fc">&nbsp;                if (typeName.equals(&quot;org.apache.commons.lang3.tuple.Triple&quot;)) {</b>
+<b class="fc">&nbsp;                    provider.mixIn(objectClass, mixInSource = ApacheLang3Support.TripleMixIn.class);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (mixInSource != null &amp;&amp; mixInSource != objectClass) {</b>
+<b class="fc">&nbsp;                beanInfo.mixIn = true;</b>
+<b class="fc">&nbsp;                getBeanInfo(beanInfo, getAnnotations(mixInSource));</b>
+&nbsp;
+<b class="fc">&nbsp;                BeanUtils.staticMethod(mixInSource,</b>
+<b class="fc">&nbsp;                        method -&gt; getCreator(beanInfo, objectClass, method)</b>
+&nbsp;                );
+&nbsp;
+<b class="fc">&nbsp;                BeanUtils.constructor(mixInSource, constructor -&gt;</b>
+<b class="fc">&nbsp;                        getCreator(beanInfo, objectClass, constructor)</b>
+&nbsp;                );
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Class seeAlsoClass = null;</b>
+<b class="fc">&nbsp;            for (Class superClass = objectClass.getSuperclass(); ; superClass = superClass.getSuperclass()) {</b>
+<b class="fc">&nbsp;                if (superClass == null || superClass == Object.class || superClass == Enum.class) {</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                BeanInfo superBeanInfo = new BeanInfo();</b>
+<b class="fc">&nbsp;                getBeanInfo(superBeanInfo, superClass);</b>
+<b class="fc">&nbsp;                if (superBeanInfo.seeAlso != null) {</b>
+<b class="fc">&nbsp;                    boolean inSeeAlso = false;</b>
+<b class="fc">&nbsp;                    for (Class seeAlsoItem : superBeanInfo.seeAlso) {</b>
+<b class="fc">&nbsp;                        if (seeAlsoItem == objectClass) {</b>
+<b class="fc">&nbsp;                            inSeeAlso = true;</b>
+<b class="fc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="fc">&nbsp;                    if (!inSeeAlso) {</b>
+<b class="fc">&nbsp;                        seeAlsoClass = superClass;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (seeAlsoClass != null) {</b>
+<b class="fc">&nbsp;                getBeanInfo(beanInfo, seeAlsoClass);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Annotation[] annotations = getAnnotations(objectClass);</b>
+<b class="fc">&nbsp;            getBeanInfo(beanInfo, annotations);</b>
+&nbsp;
+<b class="fc">&nbsp;            for (Annotation annotation : annotations) {</b>
+<b class="fc">&nbsp;                boolean useJacksonAnnotation = JSONFactory.isUseJacksonAnnotation();</b>
+<b class="fc">&nbsp;                Class&lt;? extends Annotation&gt; annotationType = annotation.annotationType();</b>
+<b class="fc">&nbsp;                String annotationTypeName = annotationType.getName();</b>
+<b class="fc">&nbsp;                switch (annotationTypeName) {</b>
+&nbsp;                    case &quot;com.alibaba.fastjson.annotation.JSONType&quot;:
+<b class="fc">&nbsp;                        getBeanInfo1x(beanInfo, annotation);</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonTypeInfo&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonTypeInfo&quot;:
+<b class="fc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="fc">&nbsp;                            processJacksonJsonTypeInfo(beanInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.databind.annotation.JsonDeserialize&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.databind.annotation.JsonDeserialize&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonDeserializer(beanInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonTypeName&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonTypeName&quot;:
+<b class="fc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="fc">&nbsp;                            processJacksonJsonTypeName(beanInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonFormat&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonFormat&quot;:
+<b class="fc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="fc">&nbsp;                            processJacksonJsonFormat(beanInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonInclude&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonInclude&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonInclude(beanInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonSubTypes&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonSubTypes&quot;:
+<b class="fc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="fc">&nbsp;                            processJacksonJsonSubTypes(beanInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;kotlin.Metadata&quot;:
+<b class="fc">&nbsp;                        beanInfo.kotlin = true;</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    default:
+&nbsp;                        break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            BeanUtils.staticMethod(objectClass,</b>
+<b class="fc">&nbsp;                    method -&gt; getCreator(beanInfo, objectClass, method)</b>
+&nbsp;            );
+&nbsp;
+<b class="fc">&nbsp;            BeanUtils.constructor(objectClass, constructor -&gt;</b>
+<b class="fc">&nbsp;                    getCreator(beanInfo, objectClass, constructor)</b>
+&nbsp;            );
+&nbsp;
+<b class="fc">&nbsp;            if (beanInfo.creatorConstructor == null</b>
+&nbsp;                    &amp;&amp; (beanInfo.readerFeatures &amp; JSONReader.Feature.FieldBased.mask) == 0
+&nbsp;                    &amp;&amp; beanInfo.kotlin) {
+<b class="fc">&nbsp;                KotlinUtils.getConstructor(objectClass, beanInfo);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        private void processJacksonJsonSubTypes(BeanInfo beanInfo, Annotation annotation) {
+<b class="fc">&nbsp;            Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="fc">&nbsp;            BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="fc">&nbsp;                String name = m.getName();</b>
+&nbsp;                try {
+<b class="fc">&nbsp;                    Object result = m.invoke(annotation);</b>
+<b class="fc">&nbsp;                    if (name.equals(&quot;value&quot;)) {</b>
+<b class="fc">&nbsp;                        Object[] value = (Object[]) result;</b>
+<b class="fc">&nbsp;                        if (value.length != 0) {</b>
+<b class="fc">&nbsp;                            beanInfo.seeAlso = new Class[value.length];</b>
+<b class="fc">&nbsp;                            beanInfo.seeAlsoNames = new String[value.length];</b>
+<b class="fc">&nbsp;                            for (int i = 0; i &lt; value.length; i++) {</b>
+<b class="fc">&nbsp;                                Annotation subTypeAnn = (Annotation) value[i];</b>
+<b class="fc">&nbsp;                                processJacksonJsonSubTypesType(beanInfo, i, subTypeAnn);</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+<b class="fc">&nbsp;                }</b>
+&nbsp;            });
+&nbsp;        }
+&nbsp;
+&nbsp;        private void processJacksonJsonDeserializer(BeanInfo beanInfo, Annotation annotation) {
+<b class="nc">&nbsp;            Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="nc">&nbsp;            BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="nc">&nbsp;                String name = m.getName();</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    Object result = m.invoke(annotation);</b>
+<b class="nc">&nbsp;                    if (name.equals(&quot;using&quot;)) {</b>
+<b class="nc">&nbsp;                        Class using = processUsing((Class) result);</b>
+<b class="nc">&nbsp;                        if (using != null) {</b>
+<b class="nc">&nbsp;                            beanInfo.deserializer = using;</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+<b class="nc">&nbsp;                }</b>
+&nbsp;            });
+&nbsp;        }
+&nbsp;
+&nbsp;        private void processJacksonJsonTypeInfo(BeanInfo beanInfo, Annotation annotation) {
+<b class="fc">&nbsp;            Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="fc">&nbsp;            BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="fc">&nbsp;                String name = m.getName();</b>
+&nbsp;                try {
+<b class="fc">&nbsp;                    Object result = m.invoke(annotation);</b>
+<b class="fc">&nbsp;                    if (name.equals(&quot;property&quot;)) {</b>
+<b class="fc">&nbsp;                        String value = (String) result;</b>
+<b class="fc">&nbsp;                        if (!value.isEmpty()) {</b>
+<b class="fc">&nbsp;                            beanInfo.typeKey = value;</b>
+<b class="fc">&nbsp;                            beanInfo.readerFeatures |= JSONReader.Feature.SupportAutoType.mask;</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+<b class="fc">&nbsp;                }</b>
+&nbsp;            });
+&nbsp;        }
+&nbsp;
+&nbsp;        private void getBeanInfo(BeanInfo beanInfo, Annotation[] annotations) {
+<b class="fc">&nbsp;            for (Annotation annotation : annotations) {</b>
+<b class="fc">&nbsp;                Class&lt;? extends Annotation&gt; annotationType = annotation.annotationType();</b>
+<b class="fc">&nbsp;                JSONType jsonType = findAnnotation(annotation, JSONType.class);</b>
+<b class="fc">&nbsp;                if (jsonType != null) {</b>
+<b class="fc">&nbsp;                    getBeanInfo1x(beanInfo, annotation);</b>
+<b class="fc">&nbsp;                    if (jsonType == annotation) {</b>
+<b class="fc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (annotationType == JSONCompiler.class) {</b>
+<b class="fc">&nbsp;                    JSONCompiler compiler = (JSONCompiler) annotation;</b>
+<b class="fc">&nbsp;                    if (compiler.value() == JSONCompiler.CompilerOption.LAMBDA) {</b>
+<b class="fc">&nbsp;                        beanInfo.readerFeatures |= FieldInfo.JIT;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        void getBeanInfo1x(BeanInfo beanInfo, Annotation annotation) {
+<b class="fc">&nbsp;            Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="fc">&nbsp;            BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="fc">&nbsp;                String name = m.getName();</b>
+&nbsp;                try {
+<b class="fc">&nbsp;                    Object result = m.invoke(annotation);</b>
+&nbsp;
+<b class="fc">&nbsp;                    switch (name) {</b>
+&nbsp;                        case &quot;seeAlso&quot;: {
+<b class="fc">&nbsp;                            Class&lt;?&gt;[] classes = (Class&lt;?&gt;[]) result;</b>
+<b class="fc">&nbsp;                            if (classes.length != 0) {</b>
+<b class="fc">&nbsp;                                beanInfo.seeAlso = classes;</b>
+<b class="fc">&nbsp;                                beanInfo.seeAlsoNames = new String[classes.length];</b>
+<b class="fc">&nbsp;                                for (int i = 0; i &lt; classes.length; i++) {</b>
+<b class="fc">&nbsp;                                    Class&lt;?&gt; item = classes[i];</b>
+&nbsp;
+<b class="fc">&nbsp;                                    BeanInfo itemBeanInfo = new BeanInfo();</b>
+<b class="fc">&nbsp;                                    processSeeAlsoAnnotation(itemBeanInfo, item);</b>
+<b class="fc">&nbsp;                                    String typeName = itemBeanInfo.typeName;</b>
+<b class="fc">&nbsp;                                    if (typeName == null || typeName.isEmpty()) {</b>
+<b class="fc">&nbsp;                                        typeName = item.getSimpleName();</b>
+&nbsp;                                    }
+<b class="fc">&nbsp;                                    beanInfo.seeAlsoNames[i] = typeName;</b>
+&nbsp;                                }
+<b class="fc">&nbsp;                                beanInfo.readerFeatures |= JSONReader.Feature.SupportAutoType.mask;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;seeAlsoDefault&quot;: {
+<b class="fc">&nbsp;                            Class&lt;?&gt; seeAlsoDefault = (Class&lt;?&gt;) result;</b>
+<b class="fc">&nbsp;                            if (seeAlsoDefault != Void.class) {</b>
+<b class="fc">&nbsp;                                beanInfo.seeAlsoDefault = seeAlsoDefault;</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                        case &quot;typeKey&quot;: {
+<b class="fc">&nbsp;                            String jsonTypeKey = (String) result;</b>
+<b class="fc">&nbsp;                            if (!jsonTypeKey.isEmpty()) {</b>
+<b class="fc">&nbsp;                                beanInfo.typeKey = jsonTypeKey;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;typeName&quot;: {
+<b class="fc">&nbsp;                            String typeName = (String) result;</b>
+<b class="fc">&nbsp;                            if (!typeName.isEmpty()) {</b>
+<b class="fc">&nbsp;                                beanInfo.typeName = typeName;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;naming&quot;: {
+<b class="fc">&nbsp;                            Enum naming = (Enum) result;</b>
+<b class="fc">&nbsp;                            beanInfo.namingStrategy = naming.name();</b>
+<b class="fc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case &quot;ignores&quot;: {
+<b class="fc">&nbsp;                            String[] ignores = (String[]) result;</b>
+<b class="fc">&nbsp;                            if (ignores.length &gt; 0) {</b>
+<b class="fc">&nbsp;                                beanInfo.ignores = ignores;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;orders&quot;: {
+<b class="fc">&nbsp;                            String[] fields = (String[]) result;</b>
+<b class="fc">&nbsp;                            if (fields.length != 0) {</b>
+<b class="fc">&nbsp;                                beanInfo.orders = fields;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;schema&quot;: {
+<b class="fc">&nbsp;                            String schema = (String) result;</b>
+<b class="fc">&nbsp;                            schema = schema.trim();</b>
+<b class="fc">&nbsp;                            if (!schema.isEmpty()) {</b>
+<b class="fc">&nbsp;                                beanInfo.schema = schema;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;deserializer&quot;: {
+<b class="fc">&nbsp;                            Class&lt;?&gt; deserializer = (Class) result;</b>
+<b class="fc">&nbsp;                            if (ObjectReader.class.isAssignableFrom(deserializer)) {</b>
+<b class="fc">&nbsp;                                beanInfo.deserializer = deserializer;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;parseFeatures&quot;: {
+<b class="fc">&nbsp;                            Enum[] features = (Enum[]) result;</b>
+<b class="fc">&nbsp;                            for (Enum feature : features) {</b>
+<b class="nc">&nbsp;                                switch (feature.name()) {</b>
+&nbsp;                                    case &quot;SupportAutoType&quot;:
+<b class="nc">&nbsp;                                        beanInfo.readerFeatures |= JSONReader.Feature.SupportAutoType.mask;</b>
+<b class="nc">&nbsp;                                        break;</b>
+&nbsp;                                    case &quot;SupportArrayToBean&quot;:
+<b class="nc">&nbsp;                                        beanInfo.readerFeatures |= JSONReader.Feature.SupportArrayToBean.mask;</b>
+<b class="nc">&nbsp;                                        break;</b>
+&nbsp;                                    case &quot;InitStringFieldAsEmpty&quot;:
+<b class="nc">&nbsp;                                        beanInfo.readerFeatures |= JSONReader.Feature.InitStringFieldAsEmpty.mask;</b>
+<b class="nc">&nbsp;                                        break;</b>
+&nbsp;                                    case &quot;TrimStringFieldValue&quot;:
+&nbsp;//                                        beanInfo.readerFeatures |= JSONReader.Feature.TrimStringFieldValue.mask;
+<b class="nc">&nbsp;                                        break;</b>
+&nbsp;                                    default:
+&nbsp;                                        break;
+&nbsp;                                }
+&nbsp;                            }
+<b class="fc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case &quot;deserializeFeatures&quot;: {
+<b class="fc">&nbsp;                            JSONReader.Feature[] features = (JSONReader.Feature[]) result;</b>
+<b class="fc">&nbsp;                            for (JSONReader.Feature feature : features) {</b>
+<b class="fc">&nbsp;                                beanInfo.readerFeatures |= feature.mask;</b>
+&nbsp;                            }
+<b class="fc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case &quot;builder&quot;: {
+<b class="fc">&nbsp;                            Class&lt;?&gt; builderClass = (Class) result;</b>
+<b class="fc">&nbsp;                            if (builderClass != void.class &amp;&amp; builderClass != Void.class) {</b>
+<b class="fc">&nbsp;                                beanInfo.builder = builderClass;</b>
+&nbsp;
+<b class="fc">&nbsp;                                for (Annotation builderAnnotation : getAnnotations(builderClass)) {</b>
+<b class="fc">&nbsp;                                    Class&lt;? extends Annotation&gt; builderAnnotationClass = builderAnnotation.annotationType();</b>
+<b class="fc">&nbsp;                                    String builderAnnotationName = builderAnnotationClass.getName();</b>
+&nbsp;
+<b class="fc">&nbsp;                                    if (builderAnnotationName.equals(&quot;com.alibaba.fastjson.annotation.JSONPOJOBuilder&quot;)) {</b>
+<b class="fc">&nbsp;                                        getBeanInfo1xJSONPOJOBuilder(beanInfo, builderClass, builderAnnotation, builderAnnotationClass);</b>
+&nbsp;                                    } else {
+<b class="fc">&nbsp;                                        JSONBuilder jsonBuilder = findAnnotation(builderClass, JSONBuilder.class);</b>
+<b class="fc">&nbsp;                                        if (jsonBuilder != null) {</b>
+<b class="fc">&nbsp;                                            String buildMethodName = jsonBuilder.buildMethod();</b>
+<b class="fc">&nbsp;                                            beanInfo.buildMethod = buildMethod(builderClass, buildMethodName);</b>
+<b class="fc">&nbsp;                                            String withPrefix = jsonBuilder.withPrefix();</b>
+<b class="fc">&nbsp;                                            if (!withPrefix.isEmpty()) {</b>
+<b class="fc">&nbsp;                                                beanInfo.builderWithPrefix = withPrefix;</b>
+&nbsp;                                            }
+&nbsp;                                        }
+&nbsp;                                    }
+&nbsp;                                }
+&nbsp;
+<b class="fc">&nbsp;                                if (beanInfo.buildMethod == null) {</b>
+<b class="fc">&nbsp;                                    beanInfo.buildMethod = BeanUtils.buildMethod(builderClass, &quot;build&quot;);</b>
+&nbsp;                                }
+&nbsp;
+<b class="fc">&nbsp;                                if (beanInfo.buildMethod == null) {</b>
+<b class="fc">&nbsp;                                    beanInfo.buildMethod = BeanUtils.buildMethod(builderClass, &quot;create&quot;);</b>
+&nbsp;                                }
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;deserializeUsing&quot;: {
+<b class="nc">&nbsp;                            Class&lt;?&gt; deserializeUsing = (Class) result;</b>
+<b class="nc">&nbsp;                            if (ObjectReader.class.isAssignableFrom(deserializeUsing)) {</b>
+<b class="nc">&nbsp;                                beanInfo.deserializer = deserializeUsing;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;autoTypeBeforeHandler&quot;:
+&nbsp;                        case &quot;autoTypeCheckHandler&quot;: {
+<b class="fc">&nbsp;                            Class&lt;?&gt; autoTypeCheckHandler = (Class) result;</b>
+<b class="fc">&nbsp;                            if (JSONReader.AutoTypeBeforeHandler.class.isAssignableFrom(autoTypeCheckHandler)) {</b>
+<b class="fc">&nbsp;                                beanInfo.autoTypeBeforeHandler = (Class&lt;JSONReader.AutoTypeBeforeHandler&gt;) autoTypeCheckHandler;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        default:
+&nbsp;                            break;
+&nbsp;                    }
+<b class="fc">&nbsp;                } catch (Throwable ignored) {</b>
+<b class="fc">&nbsp;                }</b>
+&nbsp;            });
+&nbsp;        }
+&nbsp;
+&nbsp;        private void processSeeAlsoAnnotation(BeanInfo beanInfo, Class&lt;?&gt; objectClass) {
+<b class="fc">&nbsp;            Class mixInSource = provider.mixInCache.get(objectClass);</b>
+<b class="fc">&nbsp;            if (mixInSource == null) {</b>
+<b class="fc">&nbsp;                String typeName = objectClass.getName();</b>
+<b class="fc">&nbsp;                if (typeName.equals(&quot;org.apache.commons.lang3.tuple.Triple&quot;)) {</b>
+<b class="nc">&nbsp;                    provider.mixIn(objectClass, mixInSource = ApacheLang3Support.TripleMixIn.class);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (mixInSource != null &amp;&amp; mixInSource != objectClass) {</b>
+<b class="fc">&nbsp;                beanInfo.mixIn = true;</b>
+<b class="fc">&nbsp;                processSeeAlsoAnnotation(beanInfo, getAnnotations(mixInSource));</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            processSeeAlsoAnnotation(beanInfo, getAnnotations(objectClass));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private void processSeeAlsoAnnotation(BeanInfo beanInfo, Annotation[] annotations) {
+<b class="fc">&nbsp;            for (Annotation annotation : annotations) {</b>
+<b class="fc">&nbsp;                Class&lt;? extends Annotation&gt; itemAnnotationType = annotation.annotationType();</b>
+<b class="fc">&nbsp;                BeanUtils.annotationMethods(itemAnnotationType, m -&gt; {</b>
+<b class="fc">&nbsp;                    String name = m.getName();</b>
+&nbsp;                    try {
+<b class="fc">&nbsp;                        Object result = m.invoke(annotation);</b>
+<b class="fc">&nbsp;                        if (name.equals(&quot;typeName&quot;)) {</b>
+<b class="fc">&nbsp;                            String typeName = (String) result;</b>
+<b class="fc">&nbsp;                            if (!typeName.isEmpty()) {</b>
+<b class="fc">&nbsp;                                beanInfo.typeName = typeName;</b>
+&nbsp;                            }
+&nbsp;                        }
+<b class="nc">&nbsp;                    } catch (Throwable ignored) {</b>
+&nbsp;                        // ignored
+<b class="fc">&nbsp;                    }</b>
+&nbsp;                });
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void getFieldInfo(
+&nbsp;                FieldInfo fieldInfo,
+&nbsp;                Class objectClass,
+&nbsp;                Constructor constructor,
+&nbsp;                int paramIndex,
+&nbsp;                Parameter parameter
+&nbsp;        ) {
+<b class="fc">&nbsp;            if (objectClass != null) {</b>
+<b class="fc">&nbsp;                Class mixInSource = provider.mixInCache.get(objectClass);</b>
+<b class="fc">&nbsp;                if (mixInSource != null &amp;&amp; mixInSource != objectClass) {</b>
+<b class="fc">&nbsp;                    Constructor mixInConstructor = null;</b>
+&nbsp;                    try {
+<b class="fc">&nbsp;                        mixInConstructor = mixInSource.getDeclaredConstructor(constructor.getParameterTypes());</b>
+<b class="fc">&nbsp;                    } catch (NoSuchMethodException ignored) {</b>
+<b class="fc">&nbsp;                    }</b>
+<b class="fc">&nbsp;                    if (mixInConstructor != null) {</b>
+<b class="fc">&nbsp;                        Parameter mixInParam = mixInConstructor.getParameters()[paramIndex];</b>
+<b class="fc">&nbsp;                        processAnnotation(fieldInfo, getAnnotations(mixInParam));</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            boolean staticClass = Modifier.isStatic(constructor.getDeclaringClass().getModifiers());</b>
+<b class="fc">&nbsp;            Annotation[] annotations = null;</b>
+<b class="fc">&nbsp;            if (staticClass) {</b>
+&nbsp;                try {
+<b class="fc">&nbsp;                    annotations = getAnnotations(parameter);</b>
+<b class="nc">&nbsp;                } catch (ArrayIndexOutOfBoundsException ignored) {</b>
+&nbsp;                    // ignored
+<b class="fc">&nbsp;                }</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                Annotation[][] parameterAnnotations = constructor.getParameterAnnotations();</b>
+&nbsp;                int paIndex;
+<b class="fc">&nbsp;                if (parameterAnnotations.length == constructor.getParameterCount()) {</b>
+<b class="fc">&nbsp;                    paIndex = paramIndex;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    paIndex = paramIndex - 1;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if (paIndex &gt;= 0 &amp;&amp; paIndex &lt; parameterAnnotations.length) {</b>
+<b class="fc">&nbsp;                    annotations = parameterAnnotations[paIndex];</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (annotations != null &amp;&amp; annotations.length &gt; 0) {</b>
+<b class="fc">&nbsp;                processAnnotation(fieldInfo, annotations);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void getFieldInfo(
+&nbsp;                FieldInfo fieldInfo,
+&nbsp;                Class objectClass,
+&nbsp;                Method method,
+&nbsp;                int paramIndex,
+&nbsp;                Parameter parameter
+&nbsp;        ) {
+<b class="fc">&nbsp;            if (objectClass != null) {</b>
+<b class="fc">&nbsp;                Class mixInSource = provider.mixInCache.get(objectClass);</b>
+<b class="fc">&nbsp;                if (mixInSource != null &amp;&amp; mixInSource != objectClass) {</b>
+<b class="fc">&nbsp;                    Method mixInMethod = null;</b>
+&nbsp;                    try {
+<b class="fc">&nbsp;                        mixInMethod = mixInSource.getMethod(method.getName(), method.getParameterTypes());</b>
+<b class="nc">&nbsp;                    } catch (NoSuchMethodException ignored) {</b>
+<b class="fc">&nbsp;                    }</b>
+<b class="fc">&nbsp;                    if (mixInMethod != null) {</b>
+<b class="fc">&nbsp;                        Parameter mixInParam = mixInMethod.getParameters()[paramIndex];</b>
+<b class="fc">&nbsp;                        processAnnotation(fieldInfo, getAnnotations(mixInParam));</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            processAnnotation(fieldInfo, getAnnotations(parameter));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void getFieldInfo(FieldInfo fieldInfo, Class objectClass, Field field) {
+<b class="fc">&nbsp;            if (objectClass != null) {</b>
+<b class="fc">&nbsp;                Class mixInSource = provider.mixInCache.get(objectClass);</b>
+<b class="fc">&nbsp;                if (mixInSource != null &amp;&amp; mixInSource != objectClass) {</b>
+<b class="fc">&nbsp;                    Field mixInField = null;</b>
+&nbsp;                    try {
+<b class="fc">&nbsp;                        mixInField = mixInSource.getDeclaredField(field.getName());</b>
+<b class="fc">&nbsp;                    } catch (Exception ignored) {</b>
+<b class="fc">&nbsp;                    }</b>
+&nbsp;
+<b class="fc">&nbsp;                    if (mixInField != null) {</b>
+<b class="fc">&nbsp;                        getFieldInfo(fieldInfo, mixInSource, mixInField);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Annotation[] annotations = getAnnotations(field);</b>
+<b class="fc">&nbsp;            processAnnotation(fieldInfo, annotations);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void getFieldInfo(FieldInfo fieldInfo, Class objectClass, Method method) {
+<b class="fc">&nbsp;            String methodName = method.getName();</b>
+&nbsp;
+<b class="fc">&nbsp;            if (objectClass != null) {</b>
+<b class="fc">&nbsp;                Class superclass = objectClass.getSuperclass();</b>
+<b class="fc">&nbsp;                Method supperMethod = BeanUtils.getMethod(superclass, method);</b>
+<b class="fc">&nbsp;                if (supperMethod != null) {</b>
+<b class="fc">&nbsp;                    getFieldInfo(fieldInfo, superclass, supperMethod);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                Class[] interfaces = objectClass.getInterfaces();</b>
+<b class="fc">&nbsp;                for (Class i : interfaces) {</b>
+<b class="fc">&nbsp;                    if (i == Serializable.class) {</b>
+<b class="fc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    Method interfaceMethod = BeanUtils.getMethod(i, method);</b>
+<b class="fc">&nbsp;                    if (interfaceMethod != null) {</b>
+<b class="fc">&nbsp;                        getFieldInfo(fieldInfo, superclass, interfaceMethod);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                Class mixInSource = provider.mixInCache.get(objectClass);</b>
+<b class="fc">&nbsp;                if (mixInSource != null &amp;&amp; mixInSource != objectClass) {</b>
+<b class="fc">&nbsp;                    Method mixInMethod = null;</b>
+&nbsp;                    try {
+<b class="fc">&nbsp;                        mixInMethod = mixInSource.getDeclaredMethod(methodName, method.getParameterTypes());</b>
+<b class="fc">&nbsp;                    } catch (Exception ignored) {</b>
+<b class="fc">&nbsp;                    }</b>
+&nbsp;
+<b class="fc">&nbsp;                    if (mixInMethod != null) {</b>
+<b class="fc">&nbsp;                        getFieldInfo(fieldInfo, mixInSource, mixInMethod);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            String jsonFieldName = null;</b>
+&nbsp;
+<b class="fc">&nbsp;            Annotation[] annotations = getAnnotations(method);</b>
+<b class="fc">&nbsp;            for (Annotation annotation : annotations) {</b>
+<b class="fc">&nbsp;                Class&lt;? extends Annotation&gt; annotationType = annotation.annotationType();</b>
+<b class="fc">&nbsp;                JSONField jsonField = findAnnotation(annotation, JSONField.class);</b>
+<b class="fc">&nbsp;                if (jsonField != null) {</b>
+<b class="fc">&nbsp;                    getFieldInfo(fieldInfo, jsonField);</b>
+<b class="fc">&nbsp;                    jsonFieldName = jsonField.name();</b>
+<b class="fc">&nbsp;                    if (jsonField == annotation) {</b>
+<b class="fc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (annotationType == JSONCompiler.class) {</b>
+<b class="fc">&nbsp;                    JSONCompiler compiler = (JSONCompiler) annotation;</b>
+<b class="fc">&nbsp;                    if (compiler.value() == JSONCompiler.CompilerOption.LAMBDA) {</b>
+<b class="fc">&nbsp;                        fieldInfo.features |= FieldInfo.JIT;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                boolean useJacksonAnnotation = JSONFactory.isUseJacksonAnnotation();</b>
+<b class="fc">&nbsp;                String annotationTypeName = annotationType.getName();</b>
+<b class="fc">&nbsp;                switch (annotationTypeName) {</b>
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonIgnore&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonIgnore&quot;:
+<b class="fc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="fc">&nbsp;                            processJacksonJsonIgnore(fieldInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.databind.annotation.JsonDeserialize&quot;:
+&nbsp;                    case &quot;com.fasterxml.jackson.databind.annotation.JsonDeserialize&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonDeserialize(fieldInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonFormat&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonFormat&quot;:
+<b class="fc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="fc">&nbsp;                            processJacksonJsonFormat(fieldInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonAnySetter&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonAnySetter&quot;:
+<b class="fc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="fc">&nbsp;                            fieldInfo.features |= FieldInfo.UNWRAPPED_MASK;</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.alibaba.fastjson.annotation.JSONField&quot;:
+<b class="fc">&nbsp;                        processJSONField1x(fieldInfo, annotation);</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonProperty&quot;:
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonProperty&quot;:
+<b class="fc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="fc">&nbsp;                            processJacksonJsonProperty(fieldInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonAlias&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonAlias&quot;:
+<b class="fc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="fc">&nbsp;                            processJacksonJsonAlias(fieldInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.google.gson.annotations.SerializedName&quot;:
+<b class="nc">&nbsp;                        processGsonSerializedName(fieldInfo, annotation);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    default:
+&nbsp;                        break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            String fieldName;
+<b class="fc">&nbsp;            if (methodName.startsWith(&quot;set&quot;)) {</b>
+<b class="fc">&nbsp;                fieldName = BeanUtils.setterName(methodName, null);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                fieldName = BeanUtils.getterName(methodName, null); // readOnlyProperty</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            String fieldName1, fieldName2;
+&nbsp;            char c0, c1;
+<b class="fc">&nbsp;            if (fieldName.length() &gt; 1</b>
+<b class="fc">&nbsp;                    &amp;&amp; (c0 = fieldName.charAt(0)) &gt;= &#39;A&#39; &amp;&amp; c0 &lt;= &#39;Z&#39;</b>
+<b class="fc">&nbsp;                    &amp;&amp; (c1 = fieldName.charAt(1)) &gt;= &#39;A&#39; &amp;&amp; c1 &lt;= &#39;Z&#39;</b>
+<b class="fc">&nbsp;                    &amp;&amp; (jsonFieldName == null || jsonFieldName.isEmpty())) {</b>
+<b class="fc">&nbsp;                char[] chars = fieldName.toCharArray();</b>
+<b class="fc">&nbsp;                chars[0] = (char) (chars[0] + 32);</b>
+<b class="fc">&nbsp;                fieldName1 = new String(chars);</b>
+&nbsp;
+<b class="fc">&nbsp;                chars[1] = (char) (chars[1] + 32);</b>
+<b class="fc">&nbsp;                fieldName2 = new String(chars);</b>
+<b class="fc">&nbsp;            } else {</b>
+<b class="fc">&nbsp;                fieldName1 = null;</b>
+<b class="fc">&nbsp;                fieldName2 = null;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            BeanUtils.declaredFields(objectClass, field -&gt; {</b>
+<b class="fc">&nbsp;                if (field.getName().equals(fieldName)) {</b>
+<b class="fc">&nbsp;                    int modifiers = field.getModifiers();</b>
+<b class="fc">&nbsp;                    if ((!Modifier.isPublic(modifiers)) &amp;&amp; !Modifier.isStatic(modifiers)) {</b>
+<b class="fc">&nbsp;                        getFieldInfo(fieldInfo, objectClass, field);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    fieldInfo.features |= FieldInfo.FIELD_MASK;</b>
+<b class="fc">&nbsp;                } else if (field.getName().equals(fieldName1)) {</b>
+<b class="fc">&nbsp;                    int modifiers = field.getModifiers();</b>
+<b class="fc">&nbsp;                    if ((!Modifier.isPublic(modifiers)) &amp;&amp; !Modifier.isStatic(modifiers)) {</b>
+<b class="fc">&nbsp;                        getFieldInfo(fieldInfo, objectClass, field);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    fieldInfo.features |= FieldInfo.FIELD_MASK;</b>
+<b class="fc">&nbsp;                } else if (field.getName().equals(fieldName2)) {</b>
+<b class="nc">&nbsp;                    int modifiers = field.getModifiers();</b>
+<b class="nc">&nbsp;                    if ((!Modifier.isPublic(modifiers)) &amp;&amp; !Modifier.isStatic(modifiers)) {</b>
+<b class="nc">&nbsp;                        getFieldInfo(fieldInfo, objectClass, field);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    fieldInfo.features |= FieldInfo.FIELD_MASK;</b>
+&nbsp;                }
+&nbsp;            });
+&nbsp;
+<b class="fc">&nbsp;            if (fieldName1 != null &amp;&amp; fieldInfo.fieldName == null &amp;&amp; fieldInfo.alternateNames == null) {</b>
+<b class="fc">&nbsp;                fieldInfo.alternateNames = new String[]{fieldName1, fieldName2};</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        private void processAnnotation(FieldInfo fieldInfo, Annotation[] annotations) {
+<b class="fc">&nbsp;            for (Annotation annotation : annotations) {</b>
+<b class="fc">&nbsp;                Class&lt;? extends Annotation&gt; annotationType = annotation.annotationType();</b>
+<b class="fc">&nbsp;                JSONField jsonField = findAnnotation(annotation, JSONField.class);</b>
+<b class="fc">&nbsp;                if (jsonField != null) {</b>
+<b class="fc">&nbsp;                    getFieldInfo(fieldInfo, jsonField);</b>
+<b class="fc">&nbsp;                    if (jsonField == annotation) {</b>
+<b class="fc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (annotationType == JSONCompiler.class) {</b>
+<b class="nc">&nbsp;                    JSONCompiler compiler = (JSONCompiler) annotation;</b>
+<b class="nc">&nbsp;                    if (compiler.value() == JSONCompiler.CompilerOption.LAMBDA) {</b>
+<b class="nc">&nbsp;                        fieldInfo.features |= FieldInfo.JIT;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                boolean useJacksonAnnotation = JSONFactory.isUseJacksonAnnotation();</b>
+<b class="fc">&nbsp;                String annotationTypeName = annotationType.getName();</b>
+<b class="fc">&nbsp;                switch (annotationTypeName) {</b>
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonIgnore&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonIgnore&quot;:
+<b class="fc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="fc">&nbsp;                            processJacksonJsonIgnore(fieldInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonAnyGetter&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonAnyGetter&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            fieldInfo.features |= FieldInfo.UNWRAPPED_MASK;</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.alibaba.fastjson.annotation.JSONField&quot;:
+<b class="fc">&nbsp;                        processJSONField1x(fieldInfo, annotation);</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonProperty&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonProperty&quot;:
+<b class="fc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="fc">&nbsp;                            processJacksonJsonProperty(fieldInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonFormat&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonFormat&quot;:
+<b class="fc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="fc">&nbsp;                            processJacksonJsonFormat(fieldInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.databind.annotation.JsonDeserialize&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.databind.annotation.JsonDeserialize&quot;:
+<b class="nc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="nc">&nbsp;                            processJacksonJsonDeserialize(fieldInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.fasterxml.jackson.annotation.JsonAlias&quot;:
+&nbsp;                    case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonAlias&quot;:
+<b class="fc">&nbsp;                        if (useJacksonAnnotation) {</b>
+<b class="fc">&nbsp;                            processJacksonJsonAlias(fieldInfo, annotation);</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    case &quot;com.google.gson.annotations.SerializedName&quot;:
+<b class="fc">&nbsp;                        processGsonSerializedName(fieldInfo, annotation);</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    default:
+&nbsp;                        break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        private void processJacksonJsonDeserialize(FieldInfo fieldInfo, Annotation annotation) {
+<b class="nc">&nbsp;            if (!JSONFactory.isUseJacksonAnnotation()) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="nc">&nbsp;            BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="nc">&nbsp;                String name = m.getName();</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    Object result = m.invoke(annotation);</b>
+<b class="nc">&nbsp;                    switch (name) {</b>
+&nbsp;                        case &quot;using&quot;: {
+<b class="nc">&nbsp;                            Class using = processUsing((Class) result);</b>
+<b class="nc">&nbsp;                            if (using != null) {</b>
+<b class="nc">&nbsp;                                fieldInfo.readUsing = using;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;keyUsing&quot;: {
+<b class="nc">&nbsp;                            Class keyUsing = processUsing((Class) result);</b>
+<b class="nc">&nbsp;                            if (keyUsing != null) {</b>
+<b class="nc">&nbsp;                                fieldInfo.keyUsing = keyUsing;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;valueUsing&quot;: {
+<b class="nc">&nbsp;                            Class valueUsing = processUsing((Class) result);</b>
+<b class="nc">&nbsp;                            if (valueUsing != null) {</b>
+<b class="nc">&nbsp;                                fieldInfo.keyUsing = valueUsing;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        default:
+&nbsp;                            break;
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+<b class="nc">&nbsp;                }</b>
+&nbsp;            });
+&nbsp;        }
+&nbsp;
+&nbsp;        private Class processUsing(Class using) {
+<b class="nc">&nbsp;            String usingName = using.getName();</b>
+<b class="nc">&nbsp;            String noneClassName0 = &quot;com.fasterxml.jackson.databind.JsonDeserializer$None&quot;;</b>
+<b class="nc">&nbsp;            String noneClassName1 = &quot;com.alibaba.fastjson2.adapter.jackson.databind.JsonDeserializer$None&quot;;</b>
+<b class="nc">&nbsp;            if (!noneClassName0.equals(usingName)</b>
+<b class="nc">&nbsp;                    &amp;&amp; !noneClassName1.equals(usingName)</b>
+<b class="nc">&nbsp;                    &amp;&amp; ObjectReader.class.isAssignableFrom(using)</b>
+&nbsp;            ) {
+<b class="nc">&nbsp;                return using;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private void processJacksonJsonProperty(FieldInfo fieldInfo, Annotation annotation) {
+<b class="fc">&nbsp;            if (!JSONFactory.isUseJacksonAnnotation()) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="fc">&nbsp;            BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="fc">&nbsp;                String name = m.getName();</b>
+&nbsp;                try {
+<b class="fc">&nbsp;                    Object result = m.invoke(annotation);</b>
+<b class="fc">&nbsp;                    switch (name) {</b>
+&nbsp;                        case &quot;value&quot;: {
+<b class="fc">&nbsp;                            String value = (String) result;</b>
+<b class="fc">&nbsp;                            if (!value.isEmpty()) {</b>
+<b class="fc">&nbsp;                                fieldInfo.fieldName = value;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;access&quot;: {
+<b class="fc">&nbsp;                            String access = ((Enum) result).name();</b>
+<b class="fc">&nbsp;                            fieldInfo.ignore = access.equals(&quot;READ_ONLY&quot;);</b>
+<b class="fc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case &quot;required&quot;:
+<b class="fc">&nbsp;                            boolean required = (Boolean) result;</b>
+<b class="fc">&nbsp;                            if (required) {</b>
+<b class="fc">&nbsp;                                fieldInfo.required = true;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        default:
+&nbsp;                            break;
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+<b class="fc">&nbsp;                }</b>
+&nbsp;            });
+&nbsp;        }
+&nbsp;
+&nbsp;        private void processJacksonJsonAlias(FieldInfo fieldInfo, Annotation annotation) {
+<b class="fc">&nbsp;            Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="fc">&nbsp;            BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="fc">&nbsp;                String name = m.getName();</b>
+&nbsp;                try {
+<b class="fc">&nbsp;                    Object result = m.invoke(annotation);</b>
+<b class="fc">&nbsp;                    if (name.equals(&quot;value&quot;)) {</b>
+<b class="fc">&nbsp;                        String[] values = (String[]) result;</b>
+<b class="fc">&nbsp;                        if (values.length != 0) {</b>
+<b class="fc">&nbsp;                            fieldInfo.alternateNames = values;</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+<b class="fc">&nbsp;                }</b>
+&nbsp;            });
+&nbsp;        }
+&nbsp;
+&nbsp;        private void processJSONField1x(FieldInfo fieldInfo, Annotation annotation) {
+<b class="fc">&nbsp;            Class&lt;? extends Annotation&gt; annotationClass = annotation.getClass();</b>
+<b class="fc">&nbsp;            BeanUtils.annotationMethods(annotationClass, m -&gt; {</b>
+<b class="fc">&nbsp;                String name = m.getName();</b>
+&nbsp;                try {
+<b class="fc">&nbsp;                    Object result = m.invoke(annotation);</b>
+<b class="fc">&nbsp;                    switch (name) {</b>
+&nbsp;                        case &quot;name&quot;: {
+<b class="fc">&nbsp;                            String value = (String) result;</b>
+<b class="fc">&nbsp;                            if (!value.isEmpty()) {</b>
+<b class="fc">&nbsp;                                fieldInfo.fieldName = value;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;format&quot;: {
+<b class="fc">&nbsp;                            String format = (String) result;</b>
+<b class="fc">&nbsp;                            if (!format.isEmpty()) {</b>
+<b class="fc">&nbsp;                                format = format.trim();</b>
+&nbsp;
+<b class="fc">&nbsp;                                if (format.indexOf(&#39;T&#39;) != -1 &amp;&amp; !format.contains(&quot;&#39;T&#39;&quot;)) {</b>
+<b class="nc">&nbsp;                                    format = format.replaceAll(&quot;T&quot;, &quot;&#39;T&#39;&quot;);</b>
+&nbsp;                                }
+&nbsp;
+<b class="fc">&nbsp;                                fieldInfo.format = format;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;label&quot;: {
+<b class="fc">&nbsp;                            String label = (String) result;</b>
+<b class="fc">&nbsp;                            if (!label.isEmpty()) {</b>
+<b class="nc">&nbsp;                                fieldInfo.label = label;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;defaultValue&quot;: {
+<b class="fc">&nbsp;                            String value = (String) result;</b>
+<b class="fc">&nbsp;                            if (!value.isEmpty()) {</b>
+<b class="nc">&nbsp;                                fieldInfo.defaultValue = value;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;alternateNames&quot;: {
+<b class="fc">&nbsp;                            String[] alternateNames = (String[]) result;</b>
+<b class="fc">&nbsp;                            if (alternateNames.length != 0) {</b>
+<b class="nc">&nbsp;                                if (fieldInfo.alternateNames == null) {</b>
+<b class="nc">&nbsp;                                    fieldInfo.alternateNames = alternateNames;</b>
+&nbsp;                                } else {
+<b class="nc">&nbsp;                                    Set&lt;String&gt; nameSet = new LinkedHashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;                                    nameSet.addAll(Arrays.asList(alternateNames));</b>
+<b class="nc">&nbsp;                                    nameSet.addAll(Arrays.asList(fieldInfo.alternateNames));</b>
+<b class="nc">&nbsp;                                    fieldInfo.alternateNames = nameSet.toArray(new String[nameSet.size()]);</b>
+<b class="nc">&nbsp;                                }</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;ordinal&quot;: {
+<b class="fc">&nbsp;                            int ordinal = (Integer) result;</b>
+<b class="fc">&nbsp;                            if (ordinal != 0) {</b>
+<b class="fc">&nbsp;                                fieldInfo.ordinal = ordinal;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;deserialize&quot;: {
+<b class="fc">&nbsp;                            boolean serialize = (Boolean) result;</b>
+<b class="fc">&nbsp;                            if (!serialize) {</b>
+<b class="fc">&nbsp;                                fieldInfo.ignore = true;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        case &quot;parseFeatures&quot;: {
+<b class="fc">&nbsp;                            Enum[] features = (Enum[]) result;</b>
+<b class="fc">&nbsp;                            for (Enum feature : features) {</b>
+<b class="fc">&nbsp;                                switch (feature.name()) {</b>
+&nbsp;                                    case &quot;SupportAutoType&quot;:
+<b class="fc">&nbsp;                                        fieldInfo.features |= JSONReader.Feature.SupportAutoType.mask;</b>
+<b class="fc">&nbsp;                                        break;</b>
+&nbsp;                                    case &quot;SupportArrayToBean&quot;:
+<b class="nc">&nbsp;                                        fieldInfo.features |= JSONReader.Feature.SupportArrayToBean.mask;</b>
+<b class="nc">&nbsp;                                        break;</b>
+&nbsp;                                    case &quot;InitStringFieldAsEmpty&quot;:
+<b class="nc">&nbsp;                                        fieldInfo.features |= JSONReader.Feature.InitStringFieldAsEmpty.mask;</b>
+<b class="nc">&nbsp;                                        break;</b>
+&nbsp;                                    default:
+&nbsp;                                        break;
+&nbsp;                                }
+&nbsp;                            }
+<b class="fc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case &quot;deserializeUsing&quot;: {
+<b class="fc">&nbsp;                            Class&lt;?&gt; deserializeUsing = (Class) result;</b>
+<b class="fc">&nbsp;                            if (ObjectReader.class.isAssignableFrom(deserializeUsing)) {</b>
+<b class="nc">&nbsp;                                fieldInfo.readUsing = deserializeUsing;</b>
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                        default:
+&nbsp;                            break;
+&nbsp;                    }
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    // ignored
+<b class="fc">&nbsp;                }</b>
+&nbsp;            });
+&nbsp;        }
+&nbsp;
+&nbsp;        private void getFieldInfo(FieldInfo fieldInfo, JSONField jsonField) {
+<b class="fc">&nbsp;            if (jsonField == null) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            String jsonFieldName = jsonField.name();</b>
+<b class="fc">&nbsp;            if (!jsonFieldName.isEmpty()) {</b>
+<b class="fc">&nbsp;                fieldInfo.fieldName = jsonFieldName;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            String jsonFieldFormat = jsonField.format();</b>
+<b class="fc">&nbsp;            if (!jsonFieldFormat.isEmpty()) {</b>
+<b class="fc">&nbsp;                jsonFieldFormat = jsonFieldFormat.trim();</b>
+<b class="fc">&nbsp;                if (jsonFieldFormat.indexOf(&#39;T&#39;) != -1 &amp;&amp; !jsonFieldFormat.contains(&quot;&#39;T&#39;&quot;)) {</b>
+<b class="nc">&nbsp;                    jsonFieldFormat = jsonFieldFormat.replaceAll(&quot;T&quot;, &quot;&#39;T&#39;&quot;);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                fieldInfo.format = jsonFieldFormat;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            String label = jsonField.label();</b>
+<b class="fc">&nbsp;            if (!label.isEmpty()) {</b>
+<b class="nc">&nbsp;                label = label.trim();</b>
+<b class="nc">&nbsp;                fieldInfo.label = label;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            String defaultValue = jsonField.defaultValue();</b>
+<b class="fc">&nbsp;            if (!defaultValue.isEmpty()) {</b>
+<b class="fc">&nbsp;                fieldInfo.defaultValue = defaultValue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            String locale = jsonField.locale();</b>
+<b class="fc">&nbsp;            if (!locale.isEmpty()) {</b>
+<b class="fc">&nbsp;                String[] parts = locale.split(&quot;_&quot;);</b>
+<b class="fc">&nbsp;                if (parts.length == 2) {</b>
+<b class="fc">&nbsp;                    fieldInfo.locale = new Locale(parts[0], parts[1]);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            String[] alternateNames = jsonField.alternateNames();</b>
+<b class="fc">&nbsp;            if (alternateNames.length != 0) {</b>
+<b class="fc">&nbsp;                if (fieldInfo.alternateNames == null) {</b>
+<b class="fc">&nbsp;                    fieldInfo.alternateNames = alternateNames;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    Set&lt;String&gt; nameSet = new LinkedHashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;                    nameSet.addAll(Arrays.asList(alternateNames));</b>
+<b class="nc">&nbsp;                    nameSet.addAll(Arrays.asList(fieldInfo.alternateNames));</b>
+<b class="nc">&nbsp;                    fieldInfo.alternateNames = nameSet.toArray(new String[nameSet.size()]);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (!fieldInfo.ignore) {</b>
+<b class="fc">&nbsp;                fieldInfo.ignore = !jsonField.deserialize();</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            for (JSONReader.Feature feature : jsonField.deserializeFeatures()) {</b>
+<b class="fc">&nbsp;                fieldInfo.features |= feature.mask;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            int ordinal = jsonField.ordinal();</b>
+<b class="fc">&nbsp;            if (ordinal != 0) {</b>
+<b class="fc">&nbsp;                fieldInfo.ordinal = ordinal;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            boolean value = jsonField.value();</b>
+<b class="fc">&nbsp;            if (value) {</b>
+<b class="fc">&nbsp;                fieldInfo.features |= FieldInfo.VALUE_MASK;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (jsonField.unwrapped()) {</b>
+<b class="fc">&nbsp;                fieldInfo.features |= FieldInfo.UNWRAPPED_MASK;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (jsonField.required()) {</b>
+<b class="fc">&nbsp;                fieldInfo.required = true;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            String schema = jsonField.schema().trim();</b>
+<b class="fc">&nbsp;            if (!schema.isEmpty()) {</b>
+<b class="fc">&nbsp;                fieldInfo.schema = schema;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Class deserializeUsing = jsonField.deserializeUsing();</b>
+<b class="fc">&nbsp;            if (ObjectReader.class.isAssignableFrom(deserializeUsing)) {</b>
+<b class="fc">&nbsp;                fieldInfo.readUsing = deserializeUsing;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void getBeanInfo1xJSONPOJOBuilder(BeanInfo beanInfo,
+&nbsp;                                              Class&lt;?&gt; builderClass,
+&nbsp;                                              Annotation builderAnnatation,
+&nbsp;                                              Class&lt;? extends Annotation&gt; builderAnnatationClass) {
+<b class="fc">&nbsp;        BeanUtils.annotationMethods(builderAnnatationClass, method -&gt; {</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                String methodName = method.getName();</b>
+<b class="fc">&nbsp;                switch (methodName) {</b>
+&nbsp;                    case &quot;buildMethod&quot;: {
+<b class="fc">&nbsp;                        String buildMethodName = (String) method.invoke(builderAnnatation);</b>
+<b class="fc">&nbsp;                        beanInfo.buildMethod = BeanUtils.buildMethod(builderClass, buildMethodName);</b>
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case &quot;withPrefix&quot;: {
+<b class="fc">&nbsp;                        String withPrefix = (String) method.invoke(builderAnnatation);</b>
+<b class="fc">&nbsp;                        if (!withPrefix.isEmpty()) {</b>
+<b class="fc">&nbsp;                            beanInfo.builderWithPrefix = withPrefix;</b>
+&nbsp;                        }
+&nbsp;                        break;
+&nbsp;                    }
+&nbsp;                    default:
+&nbsp;                        break;
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (Throwable ignored) {</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    private void getCreator(BeanInfo beanInfo, Class&lt;?&gt; objectClass, Constructor constructor) {
+<b class="fc">&nbsp;        if (objectClass.isEnum()) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Annotation[] annotations = getAnnotations(constructor);</b>
+&nbsp;
+<b class="fc">&nbsp;        boolean creatorMethod = false;</b>
+<b class="fc">&nbsp;        for (Annotation annotation : annotations) {</b>
+<b class="fc">&nbsp;            Class&lt;? extends Annotation&gt; annotationType = annotation.annotationType();</b>
+&nbsp;
+<b class="fc">&nbsp;            JSONCreator jsonCreator = findAnnotation(annotation, JSONCreator.class);</b>
+<b class="fc">&nbsp;            if (jsonCreator != null) {</b>
+<b class="fc">&nbsp;                String[] createParameterNames = jsonCreator.parameterNames();</b>
+<b class="fc">&nbsp;                if (createParameterNames.length != 0) {</b>
+<b class="fc">&nbsp;                    beanInfo.createParameterNames = createParameterNames;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                creatorMethod = true;</b>
+<b class="fc">&nbsp;                if (jsonCreator == annotation) {</b>
+<b class="fc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            switch (annotationType.getName()) {</b>
+&nbsp;                case &quot;com.alibaba.fastjson.annotation.JSONCreator&quot;:
+<b class="fc">&nbsp;                    creatorMethod = true;</b>
+<b class="fc">&nbsp;                    BeanUtils.annotationMethods(annotationType, m1 -&gt; {</b>
+&nbsp;                        try {
+<b class="nc">&nbsp;                            if (m1.getName().equals(&quot;parameterNames&quot;)) {</b>
+<b class="nc">&nbsp;                                String[] createParameterNames = (String[]) m1.invoke(annotation);</b>
+<b class="nc">&nbsp;                                if (createParameterNames.length != 0) {</b>
+<b class="nc">&nbsp;                                    beanInfo.createParameterNames = createParameterNames;</b>
+&nbsp;                                }
+&nbsp;                            }
+<b class="nc">&nbsp;                        } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;                        }</b>
+&nbsp;                    });
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &quot;com.fasterxml.jackson.annotation.JsonCreator&quot;:
+&nbsp;                case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonCreator&quot;:
+<b class="fc">&nbsp;                    if (JSONFactory.isUseJacksonAnnotation()) {</b>
+<b class="fc">&nbsp;                        creatorMethod = true;</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (!creatorMethod) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Constructor&lt;?&gt; targetConstructor = null;</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            targetConstructor = objectClass.getDeclaredConstructor(constructor.getParameterTypes());</b>
+<b class="nc">&nbsp;        } catch (NoSuchMethodException ignored) {</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        if (targetConstructor != null) {</b>
+<b class="fc">&nbsp;            beanInfo.creatorConstructor = targetConstructor;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void getCreator(BeanInfo beanInfo, Class&lt;?&gt; objectClass, Method method) {
+<b class="fc">&nbsp;        if (method.getDeclaringClass() == Enum.class) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        String methodName = method.getName();</b>
+<b class="fc">&nbsp;        if (objectClass.isEnum()) {</b>
+<b class="fc">&nbsp;            if (methodName.equals(&quot;values&quot;)) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Annotation[] annotations = getAnnotations(method);</b>
+&nbsp;
+<b class="fc">&nbsp;        boolean creatorMethod = false;</b>
+<b class="fc">&nbsp;        JSONCreator jsonCreator = null;</b>
+<b class="fc">&nbsp;        for (Annotation annotation : annotations) {</b>
+<b class="fc">&nbsp;            Class&lt;? extends Annotation&gt; annotationType = annotation.annotationType();</b>
+<b class="fc">&nbsp;            jsonCreator = findAnnotation(annotation, JSONCreator.class);</b>
+<b class="fc">&nbsp;            if (jsonCreator == annotation) {</b>
+<b class="fc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            switch (annotationType.getName()) {</b>
+&nbsp;                case &quot;com.alibaba.fastjson.annotation.JSONCreator&quot;:
+<b class="nc">&nbsp;                    creatorMethod = true;</b>
+<b class="nc">&nbsp;                    BeanUtils.annotationMethods(annotationType, m1 -&gt; {</b>
+&nbsp;                        try {
+<b class="nc">&nbsp;                            if (m1.getName().equals(&quot;parameterNames&quot;)) {</b>
+<b class="nc">&nbsp;                                String[] createParameterNames = (String[]) m1.invoke(annotation);</b>
+<b class="nc">&nbsp;                                if (createParameterNames.length != 0) {</b>
+<b class="nc">&nbsp;                                    beanInfo.createParameterNames = createParameterNames;</b>
+&nbsp;                                }
+&nbsp;                            }
+<b class="nc">&nbsp;                        } catch (Throwable ignored) {</b>
+<b class="nc">&nbsp;                        }</b>
+&nbsp;                    });
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case &quot;com.fasterxml.jackson.annotation.JsonCreator&quot;:
+&nbsp;                case &quot;com.alibaba.fastjson2.adapter.jackson.annotation.JsonCreator&quot;:
+<b class="fc">&nbsp;                    if (JSONFactory.isUseJacksonAnnotation()) {</b>
+<b class="fc">&nbsp;                        creatorMethod = true;</b>
+<b class="fc">&nbsp;                        BeanUtils.annotationMethods(annotationType, m1 -&gt; {</b>
+&nbsp;                            try {
+<b class="fc">&nbsp;                                if (m1.getName().equals(&quot;parameterNames&quot;)) {</b>
+<b class="nc">&nbsp;                                    String[] createParameterNames = (String[]) m1.invoke(annotation);</b>
+<b class="nc">&nbsp;                                    if (createParameterNames.length != 0) {</b>
+<b class="nc">&nbsp;                                        beanInfo.createParameterNames = createParameterNames;</b>
+&nbsp;                                    }
+&nbsp;                                }
+<b class="nc">&nbsp;                            } catch (Throwable ignored) {</b>
+<b class="fc">&nbsp;                            }</b>
+&nbsp;                        });
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (jsonCreator != null) {</b>
+<b class="fc">&nbsp;            String[] createParameterNames = jsonCreator.parameterNames();</b>
+<b class="fc">&nbsp;            if (createParameterNames.length != 0) {</b>
+<b class="fc">&nbsp;                beanInfo.createParameterNames = createParameterNames;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            creatorMethod = true;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (!creatorMethod) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Method targetMethod = null;</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            targetMethod = objectClass.getDeclaredMethod(methodName, method.getParameterTypes());</b>
+<b class="nc">&nbsp;        } catch (NoSuchMethodException ignored) {</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        if (targetMethod != null) {</b>
+<b class="fc">&nbsp;            beanInfo.createMethod = targetMethod;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ReaderAnnotationProcessor getAnnotationProcessor() {
+<b class="fc">&nbsp;        return annotationProcessor;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void getBeanInfo(BeanInfo beanInfo, Class&lt;?&gt; objectClass) {
+<b class="fc">&nbsp;        if (annotationProcessor != null) {</b>
+<b class="fc">&nbsp;            annotationProcessor.getBeanInfo(beanInfo, objectClass);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void getFieldInfo(FieldInfo fieldInfo, Class objectClass, Field field) {
+<b class="fc">&nbsp;        if (annotationProcessor != null) {</b>
+<b class="fc">&nbsp;            annotationProcessor.getFieldInfo(fieldInfo, objectClass, field);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObjectReader getObjectReader(ObjectReaderProvider provider, Type type) {
+<b class="fc">&nbsp;        if (type == String.class || type == CharSequence.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplString.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == char.class || type == Character.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplCharacter.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == boolean.class || type == Boolean.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplBoolean.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == byte.class || type == Byte.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplByte.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == short.class || type == Short.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplShort.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == int.class || type == Integer.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplInteger.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == long.class || type == Long.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplInt64.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == float.class || type == Float.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplFloat.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == double.class || type == Double.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplDouble.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == BigInteger.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplBigInteger.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == BigDecimal.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplBigDecimal.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Number.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplNumber.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == BitSet.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplBitSet.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == OptionalInt.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplOptionalInt.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == OptionalLong.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplOptionalLong.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == OptionalDouble.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplOptionalDouble.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Optional.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplOptional.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == UUID.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplUUID.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Duration.class) {</b>
+<b class="fc">&nbsp;            return new ObjectReaderImplFromString(Duration.class, (Function&lt;String, Duration&gt;) Duration::parse);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == AtomicBoolean.class) {</b>
+<b class="fc">&nbsp;            return new ObjectReaderImplFromBoolean(</b>
+&nbsp;                    AtomicBoolean.class,
+&nbsp;                    (Function&lt;Boolean, AtomicBoolean&gt;) AtomicBoolean::new
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == URI.class) {</b>
+<b class="fc">&nbsp;            return new ObjectReaderImplFromString&lt;&gt;(</b>
+&nbsp;                    URI.class,
+&nbsp;                    URI::create
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Charset.class) {</b>
+<b class="nc">&nbsp;            return new ObjectReaderImplFromString&lt;&gt;(Charset.class, Charset::forName);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == File.class) {</b>
+<b class="fc">&nbsp;            return new ObjectReaderImplFromString&lt;&gt;(File.class, File::new);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Path.class) {</b>
+<b class="fc">&nbsp;            return new ObjectReaderImplFromString&lt;&gt;(</b>
+&nbsp;                    Path.class,
+<b class="fc">&nbsp;                    Paths::get</b>
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == URL.class) {</b>
+<b class="fc">&nbsp;            return new ObjectReaderImplFromString&lt;&gt;(</b>
+&nbsp;                    URL.class,
+&nbsp;                    e -&gt; {
+&nbsp;                        try {
+<b class="fc">&nbsp;                            return new URL(e);</b>
+<b class="nc">&nbsp;                        } catch (MalformedURLException ex) {</b>
+<b class="nc">&nbsp;                            throw new JSONException(&quot;read URL error&quot;, ex);</b>
+&nbsp;                        }
+&nbsp;                    });
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Pattern.class) {</b>
+<b class="nc">&nbsp;            return new ObjectReaderImplFromString&lt;&gt;(Pattern.class, Pattern::compile);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Class.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplClass.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Method.class) {</b>
+<b class="fc">&nbsp;            return new ObjectReaderImplMethod();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Field.class) {</b>
+<b class="fc">&nbsp;            return new ObjectReaderImplField();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Type.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplClass.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        String internalMixin = null;</b>
+<b class="fc">&nbsp;        String typeName = type.getTypeName();</b>
+<b class="fc">&nbsp;        switch (typeName) {</b>
+&nbsp;            case &quot;com.google.common.collect.AbstractMapBasedMultimap$WrappedSet&quot;:
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            case &quot;org.springframework.util.LinkedMultiValueMap&quot;:
+<b class="nc">&nbsp;                return ObjectReaderImplMap.of(type, (Class) type, 0L);</b>
+&nbsp;            case &quot;org.springframework.security.core.authority.RememberMeAuthenticationToken&quot;:
+<b class="nc">&nbsp;                internalMixin = &quot;org.springframework.security.jackson2.AnonymousAuthenticationTokenMixin&quot;;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;org.springframework.security.core.authority.AnonymousAuthenticationToken&quot;:
+<b class="nc">&nbsp;                internalMixin = &quot;org.springframework.security.jackson2.RememberMeAuthenticationTokenMixin&quot;;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;org.springframework.security.core.authority.SimpleGrantedAuthority&quot;:
+<b class="nc">&nbsp;                internalMixin = &quot;org.springframework.security.jackson2.SimpleGrantedAuthorityMixin&quot;;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;org.springframework.security.core.userdetails.User&quot;:
+<b class="nc">&nbsp;                internalMixin = &quot;org.springframework.security.jackson2.UserMixin&quot;;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;org.springframework.security.authentication.UsernamePasswordAuthenticationToken&quot;:
+<b class="nc">&nbsp;                internalMixin = &quot;org.springframework.security.jackson2.UsernamePasswordAuthenticationTokenMixin&quot;;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;org.springframework.security.authentication.BadCredentialsException&quot;:
+<b class="nc">&nbsp;                internalMixin = &quot;org.springframework.security.jackson2.BadCredentialsExceptionMixin&quot;;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;org.springframework.security.web.csrf.DefaultCsrfToken&quot;:
+<b class="nc">&nbsp;                internalMixin = &quot;org.springframework.security.web.jackson2.DefaultCsrfTokenMixin&quot;;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;org.springframework.security.web.savedrequest.SavedCookie&quot;:
+<b class="nc">&nbsp;                internalMixin = &quot;org.springframework.security.web.jackson2.SavedCookieMixin&quot;;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;org.springframework.security.web.authentication.WebAuthenticationDetails&quot;:
+<b class="nc">&nbsp;                internalMixin = &quot;org.springframework.security.web.jackson2.WebAuthenticationDetailsMixin&quot;;</b>
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (internalMixin != null) {</b>
+<b class="nc">&nbsp;            Class mixin = provider.mixInCache.get(type);</b>
+<b class="nc">&nbsp;            if (mixin == null) {</b>
+<b class="nc">&nbsp;                mixin = TypeUtils.loadClass(internalMixin);</b>
+<b class="nc">&nbsp;                if (mixin == null) {</b>
+<b class="nc">&nbsp;                    if (internalMixin.equals(&quot;org.springframework.security.jackson2.SimpleGrantedAuthorityMixin&quot;)) {</b>
+<b class="nc">&nbsp;                        mixin = TypeUtils.loadClass(&quot;com.alibaba.fastjson2.internal.mixin.spring.SimpleGrantedAuthorityMixin&quot;);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (mixin != null) {</b>
+<b class="nc">&nbsp;                    provider.mixInCache.putIfAbsent((Class) type, mixin);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Map.class || type == AbstractMap.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplMap.of(null, (Class) type, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == ConcurrentMap.class || type == ConcurrentHashMap.class) {</b>
+<b class="fc">&nbsp;            return typedMap((Class) type, ConcurrentHashMap.class, null, Object.class);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == ConcurrentNavigableMap.class</b>
+&nbsp;                || type == ConcurrentSkipListMap.class
+&nbsp;        ) {
+<b class="fc">&nbsp;            return typedMap((Class) type, ConcurrentSkipListMap.class, null, Object.class);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == SortedMap.class</b>
+&nbsp;                || type == NavigableMap.class
+&nbsp;                || type == TreeMap.class
+&nbsp;        ) {
+<b class="fc">&nbsp;            return typedMap((Class) type, TreeMap.class, null, Object.class);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Calendar.class || &quot;javax.xml.datatype.XMLGregorianCalendar&quot;.equals(typeName)) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplCalendar.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Date.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplDate.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == LocalDate.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplLocalDate.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == LocalTime.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplLocalTime.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == LocalDateTime.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplLocalDateTime.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == ZonedDateTime.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplZonedDateTime.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == OffsetDateTime.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplOffsetDateTime.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == OffsetTime.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplOffsetTime.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Instant.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplInstant.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Locale.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplLocale.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Currency.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplCurrency.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == ZoneId.class) {</b>
+&nbsp;//            return ZoneIdImpl.INSTANCE;
+&nbsp;            // ZoneId.of(strVal)
+<b class="fc">&nbsp;            return new ObjectReaderImplFromString&lt;&gt;(ZoneId.class, ZoneId::of);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == TimeZone.class) {</b>
+<b class="fc">&nbsp;            return new ObjectReaderImplFromString&lt;&gt;(TimeZone.class, TimeZone::getTimeZone);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == char[].class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplCharValueArray.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == float[].class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplFloatValueArray.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == double[].class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplDoubleValueArray.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == boolean[].class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplBoolValueArray.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == byte[].class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplInt8ValueArray.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == short[].class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplInt16ValueArray.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == int[].class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplInt32ValueArray.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == long[].class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplInt64ValueArray.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Byte[].class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplInt8Array.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Short[].class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplInt16Array.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Integer[].class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplInt32Array.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Long[].class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplInt64Array.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Float[].class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplFloatArray.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Double[].class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplDoubleArray.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Number[].class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplNumberArray.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == String[].class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplStringArray.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == AtomicInteger.class) {</b>
+<b class="fc">&nbsp;            return new ObjectReaderImplFromInt(AtomicInteger.class, AtomicInteger::new);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == AtomicLong.class) {</b>
+<b class="fc">&nbsp;            return new ObjectReaderImplFromLong(AtomicLong.class, AtomicLong::new);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == AtomicIntegerArray.class) {</b>
+<b class="fc">&nbsp;            return new ObjectReaderImplInt32ValueArray(AtomicIntegerArray.class, AtomicIntegerArray::new);</b>
+&nbsp;            //return ObjectReaderImplAtomicIntegerArray.INSTANCE;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == AtomicLongArray.class) {</b>
+<b class="fc">&nbsp;            return new ObjectReaderImplInt64ValueArray(AtomicLongArray.class, AtomicLongArray::new);</b>
+&nbsp;//            return ObjectReaderImplAtomicLongArray.INSTANCE;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == AtomicReference.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaderImplAtomicReference.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type instanceof MultiType) {</b>
+<b class="fc">&nbsp;            return new ObjectArrayReaderMultiType((MultiType) type);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type instanceof MapMultiValueType) {</b>
+<b class="fc">&nbsp;            return new ObjectReaderImplMapMultiValueType((MapMultiValueType) type);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == StringBuffer.class || type == StringBuilder.class) {</b>
+&nbsp;            try {
+<b class="fc">&nbsp;                Class objectClass = (Class) type;</b>
+<b class="fc">&nbsp;                return new ObjectReaderImplValue(</b>
+&nbsp;                        objectClass,
+&nbsp;                        String.class,
+&nbsp;                        String.class,
+&nbsp;                        0,
+&nbsp;                        null,
+&nbsp;                        null,
+&nbsp;                        null,
+<b class="fc">&nbsp;                        objectClass.getConstructor(String.class),</b>
+&nbsp;                        null,
+&nbsp;                        null
+&nbsp;                );
+<b class="nc">&nbsp;            } catch (NoSuchMethodException e) {</b>
+<b class="nc">&nbsp;                throw new RuntimeException(e);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Iterable.class</b>
+&nbsp;                || type == Collection.class
+&nbsp;                || type == List.class
+&nbsp;                || type == AbstractCollection.class
+&nbsp;                || type == AbstractList.class
+&nbsp;                || type == ArrayList.class
+&nbsp;        ) {
+<b class="fc">&nbsp;            return ObjectReaderImplList.of(type, null, 0);</b>
+&nbsp;            // return new ObjectReaderImplList(type, (Class) type, ArrayList.class, Object.class, null);
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Queue.class</b>
+&nbsp;                || type == Deque.class
+&nbsp;                || type == AbstractSequentialList.class
+&nbsp;                || type == LinkedList.class) {
+&nbsp;//            return new ObjectReaderImplList(type, (Class) type, LinkedList.class, Object.class, null);
+<b class="fc">&nbsp;            return ObjectReaderImplList.of(type, null, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Set.class || type == AbstractSet.class || type == EnumSet.class) {</b>
+&nbsp;//            return new ObjectReaderImplList(type, (Class) type, HashSet.class, Object.class, null);
+<b class="fc">&nbsp;            return ObjectReaderImplList.of(type, null, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == NavigableSet.class || type == SortedSet.class) {</b>
+&nbsp;//            return new ObjectReaderImplList(type, (Class) type, TreeSet.class, Object.class, null);
+<b class="fc">&nbsp;            return ObjectReaderImplList.of(type, null, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == ConcurrentLinkedDeque.class</b>
+&nbsp;                || type == ConcurrentLinkedQueue.class
+&nbsp;                || type == ConcurrentSkipListSet.class
+&nbsp;                || type == LinkedHashSet.class
+&nbsp;                || type == HashSet.class
+&nbsp;                || type == TreeSet.class
+&nbsp;                || type == CopyOnWriteArrayList.class
+&nbsp;        ) {
+&nbsp;//            return new ObjectReaderImplList(type, (Class) type, (Class) type, Object.class, null);
+<b class="fc">&nbsp;            return ObjectReaderImplList.of(type, null, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == ObjectReaderImplList.CLASS_EMPTY_SET</b>
+&nbsp;                || type == ObjectReaderImplList.CLASS_EMPTY_LIST
+&nbsp;                || type == ObjectReaderImplList.CLASS_SINGLETON
+&nbsp;                || type == ObjectReaderImplList.CLASS_SINGLETON_LIST
+&nbsp;                || type == ObjectReaderImplList.CLASS_ARRAYS_LIST
+&nbsp;                || type == ObjectReaderImplList.CLASS_UNMODIFIABLE_COLLECTION
+&nbsp;                || type == ObjectReaderImplList.CLASS_UNMODIFIABLE_LIST
+&nbsp;                || type == ObjectReaderImplList.CLASS_UNMODIFIABLE_SET
+&nbsp;                || type == ObjectReaderImplList.CLASS_UNMODIFIABLE_SORTED_SET
+&nbsp;                || type == ObjectReaderImplList.CLASS_UNMODIFIABLE_NAVIGABLE_SET
+&nbsp;        ) {
+&nbsp;//            return new ObjectReaderImplList(type, (Class) type, (Class) type, Object.class, null);
+<b class="fc">&nbsp;            return ObjectReaderImplList.of(type, null, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == TypeUtils.CLASS_SINGLE_SET) {</b>
+&nbsp;//            return SingletonSetImpl.INSTANCE;
+<b class="nc">&nbsp;            return ObjectReaderImplList.of(type, null, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Object.class</b>
+&nbsp;                || type == Cloneable.class
+&nbsp;                || type == Closeable.class
+&nbsp;                || type == Serializable.class
+&nbsp;                || type == Comparable.class
+&nbsp;        ) {
+<b class="fc">&nbsp;            return ObjectReaderImplObject.INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == Map.Entry.class) {</b>
+<b class="fc">&nbsp;            return new ObjectReaderImplMapEntry(null, null);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type instanceof Class) {</b>
+<b class="fc">&nbsp;            Class objectClass = (Class) type;</b>
+&nbsp;
+<b class="fc">&nbsp;            if (isExtendedMap(objectClass)) {</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (Map.class.isAssignableFrom(objectClass)) {</b>
+<b class="fc">&nbsp;                return ObjectReaderImplMap.of(null, objectClass, 0);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (Collection.class.isAssignableFrom(objectClass)) {</b>
+<b class="fc">&nbsp;                return ObjectReaderImplList.of(objectClass, objectClass, 0);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (objectClass.isArray()) {</b>
+<b class="fc">&nbsp;                Class componentType = objectClass.getComponentType();</b>
+<b class="fc">&nbsp;                if (componentType == Object.class) {</b>
+<b class="fc">&nbsp;                    return ObjectArrayReader.INSTANCE;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                return new ObjectArrayTypedReader(objectClass);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (JSONPObject.class.isAssignableFrom(objectClass)) {</b>
+<b class="fc">&nbsp;                return new ObjectReaderImplJSONP(objectClass);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            ObjectReaderCreator creator = JSONFactory
+<b class="fc">&nbsp;                    .getDefaultObjectReaderProvider()</b>
+<b class="fc">&nbsp;                    .getCreator();</b>
+&nbsp;
+<b class="fc">&nbsp;            if (objectClass == StackTraceElement.class) {</b>
+&nbsp;                try {
+<b class="fc">&nbsp;                    Constructor constructor = objectClass.getConstructor(</b>
+&nbsp;                            String.class,
+&nbsp;                            String.class,
+&nbsp;                            String.class,
+&nbsp;                            int.class);
+&nbsp;
+<b class="fc">&nbsp;                    return creator</b>
+<b class="fc">&nbsp;                            .createObjectReaderNoneDefaultConstructor(</b>
+&nbsp;                                    constructor,
+&nbsp;                                    &quot;className&quot;,
+&nbsp;                                    &quot;methodName&quot;,
+&nbsp;                                    &quot;fileName&quot;,
+&nbsp;                                    &quot;lineNumber&quot;);
+<b class="nc">&nbsp;                } catch (Throwable ignored) {</b>
+&nbsp;                    //
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type instanceof ParameterizedType) {</b>
+<b class="fc">&nbsp;            ParameterizedType parameterizedType = (ParameterizedType) type;</b>
+<b class="fc">&nbsp;            Type rawType = parameterizedType.getRawType();</b>
+&nbsp;
+<b class="fc">&nbsp;            Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();</b>
+&nbsp;
+<b class="fc">&nbsp;            if (actualTypeArguments.length == 2) {</b>
+<b class="fc">&nbsp;                Type actualTypeParam0 = actualTypeArguments[0];</b>
+<b class="fc">&nbsp;                Type actualTypeParam1 = actualTypeArguments[1];</b>
+&nbsp;
+<b class="fc">&nbsp;                if (rawType == Map.class</b>
+&nbsp;                        || rawType == AbstractMap.class
+&nbsp;                        || rawType == HashMap.class
+&nbsp;                ) {
+<b class="fc">&nbsp;                    return typedMap((Class) rawType, HashMap.class, actualTypeParam0, actualTypeParam1);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (rawType == ConcurrentMap.class</b>
+&nbsp;                        || rawType == ConcurrentHashMap.class
+&nbsp;                ) {
+<b class="fc">&nbsp;                    return typedMap((Class) rawType, ConcurrentHashMap.class, actualTypeParam0, actualTypeParam1);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (rawType == ConcurrentNavigableMap.class</b>
+&nbsp;                        || rawType == ConcurrentSkipListMap.class
+&nbsp;                ) {
+<b class="fc">&nbsp;                    return typedMap((Class) rawType, ConcurrentSkipListMap.class, actualTypeParam0, actualTypeParam1);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (rawType == LinkedHashMap.class</b>
+&nbsp;                        || rawType == TreeMap.class
+&nbsp;                        || rawType == Hashtable.class) {
+<b class="fc">&nbsp;                    return typedMap((Class) rawType, (Class) rawType, actualTypeParam0, actualTypeParam1);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (rawType == Map.Entry.class) {</b>
+<b class="fc">&nbsp;                    return new ObjectReaderImplMapEntry(actualTypeParam0, actualTypeParam1);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                switch (rawType.getTypeName()) {</b>
+&nbsp;                    case &quot;com.google.common.collect.ImmutableMap&quot;:
+&nbsp;                    case &quot;com.google.common.collect.RegularImmutableMap&quot;:
+<b class="nc">&nbsp;                        return new ObjectReaderImplMapTyped((Class) rawType, HashMap.class, actualTypeParam0, actualTypeParam1, 0, GuavaSupport.immutableMapConverter());</b>
+&nbsp;                    case &quot;com.google.common.collect.SingletonImmutableBiMap&quot;:
+<b class="nc">&nbsp;                        return new ObjectReaderImplMapTyped((Class) rawType, HashMap.class, actualTypeParam0, actualTypeParam1, 0, GuavaSupport.singletonBiMapConverter());</b>
+&nbsp;                    case &quot;org.springframework.util.LinkedMultiValueMap&quot;:
+<b class="nc">&nbsp;                        return ObjectReaderImplMap.of(type, (Class) rawType, 0L);</b>
+&nbsp;                    case &quot;org.apache.commons.lang3.tuple.Pair&quot;:
+&nbsp;                    case &quot;org.apache.commons.lang3.tuple.ImmutablePair&quot;:
+<b class="fc">&nbsp;                        return new ApacheLang3Support.PairReader((Class) rawType, actualTypeParam0, actualTypeParam1);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            } else if (actualTypeArguments.length == 1) {</b>
+<b class="fc">&nbsp;                Type itemType = actualTypeArguments[0];</b>
+<b class="fc">&nbsp;                Class itemClass = TypeUtils.getMapping(itemType);</b>
+&nbsp;
+<b class="fc">&nbsp;                if (rawType == Iterable.class</b>
+&nbsp;                        || rawType == Collection.class
+&nbsp;                        || rawType == List.class
+&nbsp;                        || rawType == AbstractCollection.class
+&nbsp;                        || rawType == AbstractList.class
+&nbsp;                        || rawType == ArrayList.class) {
+<b class="fc">&nbsp;                    if (itemClass == String.class) {</b>
+<b class="fc">&nbsp;                        return new ObjectReaderImplListStr((Class) rawType, ArrayList.class);</b>
+<b class="fc">&nbsp;                    } else if (itemClass == Long.class) {</b>
+<b class="fc">&nbsp;                        return new ObjectReaderImplListInt64((Class) rawType, ArrayList.class);</b>
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        return ObjectReaderImplList.of(type, null, 0);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (rawType == Queue.class</b>
+&nbsp;                        || rawType == Deque.class
+&nbsp;                        || rawType == AbstractSequentialList.class
+&nbsp;                        || rawType == LinkedList.class) {
+<b class="fc">&nbsp;                    if (itemClass == String.class) {</b>
+<b class="fc">&nbsp;                        return new ObjectReaderImplListStr((Class) rawType, LinkedList.class);</b>
+<b class="fc">&nbsp;                    } else if (itemClass == Long.class) {</b>
+<b class="fc">&nbsp;                        return new ObjectReaderImplListInt64((Class) rawType, LinkedList.class);</b>
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        return ObjectReaderImplList.of(type, null, 0);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (rawType == Set.class || rawType == AbstractSet.class || rawType == EnumSet.class) {</b>
+<b class="fc">&nbsp;                    if (itemClass == String.class) {</b>
+<b class="fc">&nbsp;                        return new ObjectReaderImplListStr((Class) rawType, HashSet.class);</b>
+<b class="fc">&nbsp;                    } else if (itemClass == Long.class) {</b>
+<b class="fc">&nbsp;                        return new ObjectReaderImplListInt64((Class) rawType, HashSet.class);</b>
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        return ObjectReaderImplList.of(type, null, 0);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (rawType == NavigableSet.class || rawType == SortedSet.class) {</b>
+<b class="fc">&nbsp;                    if (itemType == String.class) {</b>
+<b class="fc">&nbsp;                        return new ObjectReaderImplListStr((Class) rawType, TreeSet.class);</b>
+<b class="fc">&nbsp;                    } else if (itemClass == Long.class) {</b>
+<b class="fc">&nbsp;                        return new ObjectReaderImplListInt64((Class) rawType, TreeSet.class);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        return ObjectReaderImplList.of(type, null, 0);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (rawType == ConcurrentLinkedDeque.class</b>
+&nbsp;                        || rawType == ConcurrentLinkedQueue.class
+&nbsp;                        || rawType == ConcurrentSkipListSet.class
+&nbsp;                        || rawType == LinkedHashSet.class
+&nbsp;                        || rawType == HashSet.class
+&nbsp;                        || rawType == TreeSet.class
+&nbsp;                        || rawType == CopyOnWriteArrayList.class
+&nbsp;                ) {
+<b class="fc">&nbsp;                    if (itemType == String.class) {</b>
+<b class="fc">&nbsp;                        return new ObjectReaderImplListStr((Class) rawType, (Class) rawType);</b>
+<b class="fc">&nbsp;                    } else if (itemClass == Long.class) {</b>
+<b class="fc">&nbsp;                        return new ObjectReaderImplListInt64((Class) rawType, (Class) rawType);</b>
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        return ObjectReaderImplList.of(type, null, 0);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                switch (rawType.getTypeName()) {</b>
+&nbsp;                    case &quot;com.google.common.collect.ImmutableList&quot;:
+&nbsp;                    case &quot;com.google.common.collect.ImmutableSet&quot;:
+&nbsp;                    case &quot;com.google.common.collect.SingletonImmutableSet&quot;:
+<b class="nc">&nbsp;                        return ObjectReaderImplList.of(type, null, 0);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (rawType == Optional.class) {</b>
+<b class="fc">&nbsp;                    return ObjectReaderImplOptional.of(type, null, null);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (rawType == AtomicReference.class) {</b>
+<b class="fc">&nbsp;                    return new ObjectReaderImplAtomicReference(itemType);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                if (itemType instanceof WildcardType) {</b>
+<b class="fc">&nbsp;                    return getObjectReader(provider, rawType);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type instanceof GenericArrayType) {</b>
+<b class="fc">&nbsp;            return new ObjectReaderImplGenericArray((GenericArrayType) type);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type instanceof WildcardType) {</b>
+<b class="fc">&nbsp;            Type[] upperBounds = ((WildcardType) type).getUpperBounds();</b>
+<b class="fc">&nbsp;            if (upperBounds.length == 1) {</b>
+<b class="fc">&nbsp;                return getObjectReader(provider, upperBounds[0]);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (type == ParameterizedType.class) {</b>
+<b class="fc">&nbsp;            return ObjectReaders.ofReflect(ParameterizedTypeImpl.class);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        switch (typeName) {</b>
+&nbsp;            case &quot;java.sql.Time&quot;:
+<b class="fc">&nbsp;                return JdbcSupport.createTimeReader((Class) type, null, null);</b>
+&nbsp;            case &quot;java.sql.Timestamp&quot;:
+<b class="fc">&nbsp;                return JdbcSupport.createTimestampReader((Class) type, null, null);</b>
+&nbsp;            case &quot;java.sql.Date&quot;:
+<b class="fc">&nbsp;                return JdbcSupport.createDateReader((Class) type, null, null);</b>
+&nbsp;            case &quot;java.util.RegularEnumSet&quot;:
+&nbsp;            case &quot;java.util.JumboEnumSet&quot;:
+<b class="nc">&nbsp;                return ObjectReaderImplList.of(type, TypeUtils.getClass(type), 0);</b>
+&nbsp;            case &quot;org.joda.time.Chronology&quot;:
+<b class="fc">&nbsp;                return JodaSupport.createChronologyReader((Class) type);</b>
+&nbsp;            case &quot;org.joda.time.LocalDate&quot;:
+<b class="fc">&nbsp;                return JodaSupport.createLocalDateReader((Class) type);</b>
+&nbsp;            case &quot;org.joda.time.LocalDateTime&quot;:
+<b class="fc">&nbsp;                return JodaSupport.createLocalDateTimeReader((Class) type);</b>
+&nbsp;            case &quot;org.joda.time.Instant&quot;:
+<b class="fc">&nbsp;                return JodaSupport.createInstantReader((Class) type);</b>
+&nbsp;            case &quot;org.joda.time.DateTime&quot;:
+<b class="fc">&nbsp;                return new ObjectReaderImplZonedDateTime(new JodaSupport.DateTimeFromZDT());</b>
+&nbsp;            case &quot;javax.money.CurrencyUnit&quot;:
+<b class="fc">&nbsp;                return MoneySupport.createCurrencyUnitReader();</b>
+&nbsp;            case &quot;javax.money.MonetaryAmount&quot;:
+&nbsp;            case &quot;javax.money.Money&quot;:
+<b class="fc">&nbsp;                return MoneySupport.createMonetaryAmountReader();</b>
+&nbsp;            case &quot;javax.money.NumberValue&quot;:
+<b class="fc">&nbsp;                return MoneySupport.createNumberValueReader();</b>
+&nbsp;            case &quot;java.net.InetSocketAddress&quot;:
+<b class="fc">&nbsp;                return new ObjectReaderMisc((Class) type);</b>
+&nbsp;            case &quot;java.net.InetAddress&quot;:
+<b class="fc">&nbsp;                return ObjectReaderImplValue.of((Class&lt;InetAddress&gt;) type, String.class, address -&gt; {</b>
+&nbsp;                    try {
+<b class="fc">&nbsp;                        return InetAddress.getByName(address);</b>
+<b class="nc">&nbsp;                    } catch (UnknownHostException e) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(&quot;create address error&quot;, e);</b>
+&nbsp;                    }
+&nbsp;                });
+&nbsp;            case &quot;java.text.SimpleDateFormat&quot;:
+<b class="fc">&nbsp;                return ObjectReaderImplValue.of((Class&lt;SimpleDateFormat&gt;) type, String.class, SimpleDateFormat::new);</b>
+&nbsp;            case &quot;java.lang.Throwable&quot;:
+&nbsp;            case &quot;java.lang.Exception&quot;:
+&nbsp;            case &quot;java.lang.IllegalStateException&quot;:
+&nbsp;            case &quot;java.lang.RuntimeException&quot;:
+&nbsp;            case &quot;java.io.IOException&quot;:
+&nbsp;            case &quot;java.io.UncheckedIOException&quot;:
+<b class="fc">&nbsp;                return new ObjectReaderException((Class) type);</b>
+&nbsp;            case &quot;java.nio.HeapByteBuffer&quot;:
+&nbsp;            case &quot;java.nio.ByteBuffer&quot;:
+<b class="fc">&nbsp;                return new ObjectReaderImplInt8ValueArray(ByteBuffer::wrap, null);</b>
+&nbsp;            case &quot;org.apache.commons.lang3.tuple.Pair&quot;:
+&nbsp;            case &quot;org.apache.commons.lang3.tuple.ImmutablePair&quot;:
+<b class="fc">&nbsp;                return new ApacheLang3Support.PairReader((Class) type, Object.class, Object.class);</b>
+&nbsp;            case &quot;com.google.common.collect.ImmutableList&quot;:
+&nbsp;            case &quot;com.google.common.collect.ImmutableSet&quot;:
+&nbsp;            case &quot;com.google.common.collect.SingletonImmutableSet&quot;:
+&nbsp;            case &quot;com.google.common.collect.RegularImmutableSet&quot;:
+&nbsp;            case &quot;com.google.common.collect.AbstractMapBasedMultimap$RandomAccessWrappedList&quot;:
+<b class="nc">&nbsp;                return ObjectReaderImplList.of(type, null, 0);</b>
+&nbsp;            case &quot;com.carrotsearch.hppc.ByteArrayList&quot;:
+&nbsp;            case &quot;com.carrotsearch.hppc.ShortArrayList&quot;:
+&nbsp;            case &quot;com.carrotsearch.hppc.IntArrayList&quot;:
+&nbsp;            case &quot;com.carrotsearch.hppc.IntHashSet&quot;:
+&nbsp;            case &quot;com.carrotsearch.hppc.LongArrayList&quot;:
+&nbsp;            case &quot;com.carrotsearch.hppc.LongHashSet&quot;:
+&nbsp;            case &quot;com.carrotsearch.hppc.CharArrayList&quot;:
+&nbsp;            case &quot;com.carrotsearch.hppc.CharHashSet&quot;:
+&nbsp;            case &quot;com.carrotsearch.hppc.FloatArrayList&quot;:
+&nbsp;            case &quot;com.carrotsearch.hppc.DoubleArrayList&quot;:
+&nbsp;            case &quot;gnu.trove.list.array.TByteArrayList&quot;:
+&nbsp;            case &quot;gnu.trove.list.array.TCharArrayList&quot;:
+&nbsp;            case &quot;gnu.trove.list.array.TShortArrayList&quot;:
+&nbsp;            case &quot;gnu.trove.list.array.TIntArrayList&quot;:
+&nbsp;            case &quot;gnu.trove.list.array.TLongArrayList&quot;:
+&nbsp;            case &quot;gnu.trove.list.array.TFloatArrayList&quot;:
+&nbsp;            case &quot;gnu.trove.list.array.TDoubleArrayList&quot;:
+&nbsp;            case &quot;gnu.trove.set.hash.TByteHashSet&quot;:
+&nbsp;            case &quot;gnu.trove.set.hash.TShortHashSet&quot;:
+&nbsp;            case &quot;gnu.trove.set.hash.TIntHashSet&quot;:
+&nbsp;            case &quot;gnu.trove.set.hash.TLongHashSet&quot;:
+&nbsp;            case &quot;org.bson.types.Decimal128&quot;:
+<b class="fc">&nbsp;                return LambdaMiscCodec.getObjectReader((Class) type);</b>
+&nbsp;            default:
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ObjectReader typedMap(Class mapType, Class instanceType, Type keyType, Type valueType) {
+<b class="fc">&nbsp;        if ((keyType == null || keyType == String.class) &amp;&amp; valueType == String.class) {</b>
+<b class="fc">&nbsp;            return new ObjectReaderImplMapString(mapType, instanceType, 0);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new ObjectReaderImplMapTyped(mapType, instanceType, keyType, valueType, 0, null);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:27</div>
+</div>
+</body>
+</html>

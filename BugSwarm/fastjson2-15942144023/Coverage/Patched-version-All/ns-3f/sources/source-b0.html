@@ -1,0 +1,203 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderImplOptional</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderImplOptional (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderImplOptional</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75.6%
+  </span>
+  <span class="absValue">
+    (31/41)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.ParameterizedType;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Locale;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;class ObjectReaderImplOptional
+&nbsp;        extends ObjectReaderPrimitive {
+<b class="fc">&nbsp;    static final ObjectReaderImplOptional INSTANCE = new ObjectReaderImplOptional(null, null, null);</b>
+&nbsp;
+&nbsp;    final String format;
+&nbsp;    final Locale locale;
+&nbsp;
+&nbsp;    final Type itemType;
+&nbsp;    final Class itemClass;
+&nbsp;    ObjectReader itemObjectReader;
+&nbsp;
+&nbsp;    static ObjectReaderImplOptional of(Type type, String format, Locale locale) {
+<b class="fc">&nbsp;        if (type == null) {</b>
+<b class="nc">&nbsp;            return INSTANCE;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return new ObjectReaderImplOptional(type, format, locale);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjectReaderImplOptional(Type type, String format, Locale locale) {
+<b class="fc">&nbsp;        super(Optional.class);</b>
+&nbsp;
+<b class="fc">&nbsp;        Type itemType = null;</b>
+<b class="fc">&nbsp;        if (type instanceof ParameterizedType) {</b>
+<b class="fc">&nbsp;            ParameterizedType parameterizedType = (ParameterizedType) type;</b>
+<b class="fc">&nbsp;            Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();</b>
+<b class="fc">&nbsp;            if (actualTypeArguments.length == 1) {</b>
+<b class="fc">&nbsp;                itemType = actualTypeArguments[0];</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        this.itemType = itemType;</b>
+<b class="fc">&nbsp;        this.itemClass = TypeUtils.getClass(itemType);</b>
+<b class="fc">&nbsp;        this.format = format;</b>
+<b class="fc">&nbsp;        this.locale = locale;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+&nbsp;        Object value;
+<b class="fc">&nbsp;        if (itemType == null) {</b>
+<b class="nc">&nbsp;            value = jsonReader.readAny();</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            if (itemObjectReader == null) {</b>
+<b class="nc">&nbsp;                ObjectReader formattedObjectReader = null;</b>
+<b class="nc">&nbsp;                if (format != null) {</b>
+<b class="nc">&nbsp;                    formattedObjectReader = FieldReader.createFormattedObjectReader(itemType, itemClass, format, locale);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (formattedObjectReader == null) {</b>
+<b class="nc">&nbsp;                    itemObjectReader = jsonReader.getObjectReader(itemType);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    itemObjectReader = formattedObjectReader;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            value = itemObjectReader.readJSONBObject(jsonReader, itemType, fieldName, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return Optional.empty();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return Optional.of(value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+&nbsp;        Object value;
+<b class="fc">&nbsp;        if (itemType == null) {</b>
+<b class="nc">&nbsp;            value = jsonReader.readAny();</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            if (itemObjectReader == null) {</b>
+<b class="fc">&nbsp;                ObjectReader formattedObjectReader = null;</b>
+<b class="fc">&nbsp;                if (format != null) {</b>
+<b class="fc">&nbsp;                    formattedObjectReader = FieldReader.createFormattedObjectReader(itemType, itemClass, format, locale);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                if (formattedObjectReader == null) {</b>
+<b class="fc">&nbsp;                    itemObjectReader = jsonReader.getObjectReader(itemType);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    itemObjectReader = formattedObjectReader;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            value = itemObjectReader.readObject(jsonReader, itemType, fieldName, 0);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (value == null) {</b>
+<b class="fc">&nbsp;            return Optional.empty();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return Optional.of(value);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:37</div>
+</div>
+</body>
+</html>

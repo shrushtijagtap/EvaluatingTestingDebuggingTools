@@ -1,0 +1,624 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FDBigInteger</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.util</a>
+</div>
+
+<h1>Coverage Summary for Class: FDBigInteger (com.alibaba.fastjson2.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FDBigInteger</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.3%
+  </span>
+  <span class="absValue">
+    (21/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.5%
+  </span>
+  <span class="absValue">
+    (269/322)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.util;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;
+<b class="fc">&nbsp;public final class FDBigInteger {</b>
+<b class="fc">&nbsp;    private static final int[] SMALL_5_POW = {</b>
+&nbsp;            1,
+&nbsp;            5,
+&nbsp;            5 * 5,
+&nbsp;            5 * 5 * 5,
+&nbsp;            5 * 5 * 5 * 5,
+&nbsp;            5 * 5 * 5 * 5 * 5,
+&nbsp;            5 * 5 * 5 * 5 * 5 * 5,
+&nbsp;            5 * 5 * 5 * 5 * 5 * 5 * 5,
+&nbsp;            5 * 5 * 5 * 5 * 5 * 5 * 5 * 5,
+&nbsp;            5 * 5 * 5 * 5 * 5 * 5 * 5 * 5 * 5,
+&nbsp;            5 * 5 * 5 * 5 * 5 * 5 * 5 * 5 * 5 * 5,
+&nbsp;            5 * 5 * 5 * 5 * 5 * 5 * 5 * 5 * 5 * 5 * 5,
+&nbsp;            5 * 5 * 5 * 5 * 5 * 5 * 5 * 5 * 5 * 5 * 5 * 5,
+&nbsp;            5 * 5 * 5 * 5 * 5 * 5 * 5 * 5 * 5 * 5 * 5 * 5 * 5
+&nbsp;    };
+&nbsp;
+&nbsp;    private static final int MAX_FIVE_POW = 340;
+&nbsp;
+&nbsp;    private static final FDBigInteger[] POW_5_CACHE;
+&nbsp;
+&nbsp;    static {
+<b class="fc">&nbsp;        POW_5_CACHE = new FDBigInteger[MAX_FIVE_POW];</b>
+<b class="fc">&nbsp;        int i = 0;</b>
+<b class="fc">&nbsp;        while (i &lt; SMALL_5_POW.length) {</b>
+<b class="fc">&nbsp;            FDBigInteger pow5 = new FDBigInteger(new int[]{SMALL_5_POW[i]}, 0);</b>
+<b class="fc">&nbsp;            pow5.makeImmutable();</b>
+<b class="fc">&nbsp;            POW_5_CACHE[i] = pow5;</b>
+<b class="fc">&nbsp;            i++;</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        FDBigInteger prev = POW_5_CACHE[i - 1];</b>
+<b class="fc">&nbsp;        while (i &lt; MAX_FIVE_POW) {</b>
+<b class="fc">&nbsp;            POW_5_CACHE[i] = prev = prev.mult(5);</b>
+<b class="fc">&nbsp;            prev.makeImmutable();</b>
+<b class="fc">&nbsp;            i++;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private int[] data;  // value: data[0] is least significant
+&nbsp;    private int offset;  // number of least significant zero padding ints
+&nbsp;    private int nWords;  // data[nWords-1]!=0, all values above are zero
+&nbsp;    private boolean isImmutable;
+&nbsp;
+<b class="fc">&nbsp;    private FDBigInteger(int[] data, int offset) {</b>
+<b class="fc">&nbsp;        this.data = data;</b>
+<b class="fc">&nbsp;        this.offset = offset;</b>
+<b class="fc">&nbsp;        this.nWords = data.length;</b>
+<b class="fc">&nbsp;        trimLeadingZeros();</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public FDBigInteger(long lValue, char[] digits, int kDigits, int nDigits) {</b>
+<b class="fc">&nbsp;        int n = Math.max((nDigits + 8) / 9, 2);        // estimate size needed.</b>
+<b class="fc">&nbsp;        data = new int[n];      // allocate enough space</b>
+<b class="fc">&nbsp;        data[0] = (int) lValue;    // starting value</b>
+<b class="fc">&nbsp;        data[1] = (int) (lValue &gt;&gt;&gt; 32);</b>
+<b class="fc">&nbsp;        offset = 0;</b>
+<b class="fc">&nbsp;        nWords = 2;</b>
+<b class="fc">&nbsp;        int i = kDigits;</b>
+<b class="fc">&nbsp;        int limit = nDigits - 5;       // slurp digits 5 at a time.</b>
+&nbsp;        int v;
+<b class="fc">&nbsp;        while (i &lt; limit) {</b>
+<b class="fc">&nbsp;            int ilim = i + 5;</b>
+<b class="fc">&nbsp;            v = (int) digits[i++] - (int) &#39;0&#39;;</b>
+<b class="fc">&nbsp;            while (i &lt; ilim) {</b>
+<b class="fc">&nbsp;                v = 10 * v + (int) digits[i++] - (int) &#39;0&#39;;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            multAddMe(100000, v); // ... where 100000 is 10^5.</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        int factor = 1;</b>
+<b class="fc">&nbsp;        v = 0;</b>
+<b class="fc">&nbsp;        while (i &lt; nDigits) {</b>
+<b class="fc">&nbsp;            v = 10 * v + (int) digits[i++] - (int) &#39;0&#39;;</b>
+<b class="fc">&nbsp;            factor *= 10;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (factor != 1) {</b>
+<b class="fc">&nbsp;            multAddMe(factor, v);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        trimLeadingZeros();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void makeImmutable() {
+<b class="fc">&nbsp;        this.isImmutable = true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void multAddMe(int iv, int addend) {
+<b class="fc">&nbsp;        long v = iv &amp; 0XFFFFFFFFL;</b>
+&nbsp;        // unroll 0th iteration, doing addition.
+<b class="fc">&nbsp;        long p = v * (data[0] &amp; 0XFFFFFFFFL) + (addend &amp; 0XFFFFFFFFL);</b>
+<b class="fc">&nbsp;        data[0] = (int) p;</b>
+<b class="fc">&nbsp;        p &gt;&gt;&gt;= 32;</b>
+<b class="fc">&nbsp;        for (int i = 1; i &lt; nWords; i++) {</b>
+<b class="fc">&nbsp;            p += v * (data[i] &amp; 0XFFFFFFFFL);</b>
+<b class="fc">&nbsp;            data[i] = (int) p;</b>
+<b class="fc">&nbsp;            p &gt;&gt;&gt;= 32;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (p != 0L) {</b>
+<b class="fc">&nbsp;            data[nWords++] = (int) p; // will fail noisily if illegal!</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void trimLeadingZeros() {
+<b class="fc">&nbsp;        int i = nWords;</b>
+<b class="fc">&nbsp;        if (i &gt; 0 &amp;&amp; (data[--i] == 0)) {</b>
+&nbsp;            //for (; i &gt; 0 &amp;&amp; data[i - 1] == 0; i--) ;
+<b class="fc">&nbsp;            while (i &gt; 0 &amp;&amp; data[i - 1] == 0) {</b>
+<b class="fc">&nbsp;                i--;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            this.nWords = i;</b>
+<b class="fc">&nbsp;            if (i == 0) { // all words are zero</b>
+<b class="nc">&nbsp;                this.offset = 0;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private int size() {
+<b class="fc">&nbsp;        return nWords + offset;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public FDBigInteger multByPow52(int p5, int p2) {
+<b class="fc">&nbsp;        if (this.nWords == 0) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        FDBigInteger res = this;</b>
+<b class="fc">&nbsp;        if (p5 != 0) {</b>
+&nbsp;            int[] r;
+<b class="fc">&nbsp;            int extraSize = (p2 != 0) ? 1 : 0;</b>
+<b class="fc">&nbsp;            if (p5 &lt; SMALL_5_POW.length) {</b>
+<b class="fc">&nbsp;                r = new int[this.nWords + 1 + extraSize];</b>
+<b class="fc">&nbsp;                mult(this.data, this.nWords, SMALL_5_POW[p5], r);</b>
+<b class="fc">&nbsp;                res = new FDBigInteger(r, this.offset);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                FDBigInteger pow5 = big5pow(p5);</b>
+<b class="fc">&nbsp;                r = new int[this.nWords + pow5.size() + extraSize];</b>
+<b class="fc">&nbsp;                mult(this.data, this.nWords, pow5.data, pow5.nWords, r);</b>
+<b class="fc">&nbsp;                res = new FDBigInteger(r, this.offset + pow5.offset);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return res.leftShift(p2);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static FDBigInteger big5pow(int p) {
+<b class="fc">&nbsp;        assert p &gt;= 0 : p; // negative power of 5</b>
+<b class="fc">&nbsp;        if (p &lt; MAX_FIVE_POW) {</b>
+<b class="fc">&nbsp;            return POW_5_CACHE[p];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return big5powRec(p);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private FDBigInteger mult(int i) {
+<b class="fc">&nbsp;        if (this.nWords == 0) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        int[] r = new int[nWords + 1];</b>
+<b class="fc">&nbsp;        mult(data, nWords, i, r);</b>
+<b class="fc">&nbsp;        return new FDBigInteger(r, offset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private FDBigInteger mult(FDBigInteger other) {
+<b class="nc">&nbsp;        if (this.nWords == 0) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (this.size() == 1) {</b>
+<b class="nc">&nbsp;            return other.mult(data[0]);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (other.nWords == 0) {</b>
+<b class="nc">&nbsp;            return other;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (other.size() == 1) {</b>
+<b class="nc">&nbsp;            return this.mult(other.data[0]);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int[] r = new int[nWords + other.nWords];</b>
+<b class="nc">&nbsp;        mult(this.data, this.nWords, other.data, other.nWords, r);</b>
+<b class="nc">&nbsp;        return new FDBigInteger(r, this.offset + other.offset);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void mult(int[] src, int srcLen, int value, int[] dst) {
+<b class="fc">&nbsp;        long val = value &amp; 0XFFFFFFFFL;</b>
+<b class="fc">&nbsp;        long carry = 0;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; srcLen; i++) {</b>
+<b class="fc">&nbsp;            long product = (src[i] &amp; 0XFFFFFFFFL) * val + carry;</b>
+<b class="fc">&nbsp;            dst[i] = (int) product;</b>
+<b class="fc">&nbsp;            carry = product &gt;&gt;&gt; 32;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        dst[srcLen] = (int) carry;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void mult(int[] s1, int s1Len, int[] s2, int s2Len, int[] dst) {
+<b class="fc">&nbsp;        for (int i = 0; i &lt; s1Len; i++) {</b>
+<b class="fc">&nbsp;            long v = s1[i] &amp; 0XFFFFFFFFL;</b>
+<b class="fc">&nbsp;            long p = 0L;</b>
+<b class="fc">&nbsp;            for (int j = 0; j &lt; s2Len; j++) {</b>
+<b class="fc">&nbsp;                p += (dst[i + j] &amp; 0XFFFFFFFFL) + v * (s2[j] &amp; 0XFFFFFFFFL);</b>
+<b class="fc">&nbsp;                dst[i + j] = (int) p;</b>
+<b class="fc">&nbsp;                p &gt;&gt;&gt;= 32;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            dst[i + s2Len] = (int) p;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void mult(int[] src, int srcLen, int v0, int v1, int[] dst) {
+<b class="fc">&nbsp;        long v = v0 &amp; 0XFFFFFFFFL;</b>
+<b class="fc">&nbsp;        long carry = 0;</b>
+<b class="fc">&nbsp;        for (int j = 0; j &lt; srcLen; j++) {</b>
+<b class="fc">&nbsp;            long product = v * (src[j] &amp; 0XFFFFFFFFL) + carry;</b>
+<b class="fc">&nbsp;            dst[j] = (int) product;</b>
+<b class="fc">&nbsp;            carry = product &gt;&gt;&gt; 32;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        dst[srcLen] = (int) carry;</b>
+<b class="fc">&nbsp;        v = v1 &amp; 0XFFFFFFFFL;</b>
+<b class="fc">&nbsp;        carry = 0;</b>
+<b class="fc">&nbsp;        for (int j = 0; j &lt; srcLen; j++) {</b>
+<b class="fc">&nbsp;            long product = (dst[j + 1] &amp; 0XFFFFFFFFL) + v * (src[j] &amp; 0XFFFFFFFFL) + carry;</b>
+<b class="fc">&nbsp;            dst[j + 1] = (int) product;</b>
+<b class="fc">&nbsp;            carry = product &gt;&gt;&gt; 32;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        dst[srcLen + 1] = (int) carry;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void leftShift(int[] src, int idx, int[] result, int bitcount, int anticount, int prev) {
+<b class="fc">&nbsp;        for (; idx &gt; 0; idx--) {</b>
+<b class="fc">&nbsp;            int v = (prev &lt;&lt; bitcount);</b>
+<b class="fc">&nbsp;            prev = src[idx - 1];</b>
+<b class="fc">&nbsp;            v |= (prev &gt;&gt;&gt; anticount);</b>
+<b class="fc">&nbsp;            result[idx] = v;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        int v = prev &lt;&lt; bitcount;</b>
+<b class="fc">&nbsp;        result[0] = v;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public FDBigInteger leftShift(int shift) {
+<b class="fc">&nbsp;        if (shift == 0 || nWords == 0) {</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        int wordcount = shift &gt;&gt; 5;</b>
+<b class="fc">&nbsp;        int bitcount = shift &amp; 0x1f;</b>
+<b class="fc">&nbsp;        if (this.isImmutable) {</b>
+<b class="fc">&nbsp;            if (bitcount == 0) {</b>
+<b class="fc">&nbsp;                return new FDBigInteger(Arrays.copyOf(data, nWords), offset + wordcount);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                int anticount = 32 - bitcount;</b>
+<b class="fc">&nbsp;                int idx = nWords - 1;</b>
+<b class="fc">&nbsp;                int prev = data[idx];</b>
+<b class="fc">&nbsp;                int hi = prev &gt;&gt;&gt; anticount;</b>
+&nbsp;                int[] result;
+<b class="fc">&nbsp;                if (hi != 0) {</b>
+<b class="fc">&nbsp;                    result = new int[nWords + 1];</b>
+<b class="fc">&nbsp;                    result[nWords] = hi;</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    result = new int[nWords];</b>
+&nbsp;                }
+<b class="fc">&nbsp;                leftShift(data, idx, result, bitcount, anticount, prev);</b>
+<b class="fc">&nbsp;                return new FDBigInteger(result, offset + wordcount);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="fc">&nbsp;            if (bitcount != 0) {</b>
+<b class="fc">&nbsp;                int anticount = 32 - bitcount;</b>
+<b class="fc">&nbsp;                if ((data[0] &lt;&lt; bitcount) == 0) {</b>
+<b class="nc">&nbsp;                    int idx = 0;</b>
+<b class="nc">&nbsp;                    int prev = data[idx];</b>
+<b class="nc">&nbsp;                    for (; idx &lt; nWords - 1; idx++) {</b>
+<b class="nc">&nbsp;                        int v = (prev &gt;&gt;&gt; anticount);</b>
+<b class="nc">&nbsp;                        prev = data[idx + 1];</b>
+<b class="nc">&nbsp;                        v |= (prev &lt;&lt; bitcount);</b>
+<b class="nc">&nbsp;                        data[idx] = v;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    int v = prev &gt;&gt;&gt; anticount;</b>
+<b class="nc">&nbsp;                    data[idx] = v;</b>
+<b class="nc">&nbsp;                    if (v == 0) {</b>
+<b class="nc">&nbsp;                        nWords--;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    offset++;</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="fc">&nbsp;                    int idx = nWords - 1;</b>
+<b class="fc">&nbsp;                    int prev = data[idx];</b>
+<b class="fc">&nbsp;                    int hi = prev &gt;&gt;&gt; anticount;</b>
+<b class="fc">&nbsp;                    int[] result = data;</b>
+<b class="fc">&nbsp;                    int[] src = data;</b>
+<b class="fc">&nbsp;                    if (hi != 0) {</b>
+<b class="fc">&nbsp;                        if (nWords == data.length) {</b>
+<b class="nc">&nbsp;                            data = result = new int[nWords + 1];</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                        result[nWords++] = hi;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    leftShift(src, idx, result, bitcount, anticount, prev);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            offset += wordcount;</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static FDBigInteger big5powRec(int p) {
+<b class="nc">&nbsp;        if (p &lt; MAX_FIVE_POW) {</b>
+<b class="nc">&nbsp;            return POW_5_CACHE[p];</b>
+&nbsp;        }
+&nbsp;        // construct the value.
+&nbsp;        // recursively.
+&nbsp;        int q, r;
+&nbsp;        // in order to compute 5^p,
+&nbsp;        // compute its square root, 5^(p/2) and square.
+&nbsp;        // or, let q = p / 2, r = p -q, then
+&nbsp;        // 5^p = 5^(q+r) = 5^q * 5^r
+<b class="nc">&nbsp;        q = p &gt;&gt; 1;</b>
+<b class="nc">&nbsp;        r = p - q;</b>
+<b class="nc">&nbsp;        FDBigInteger bigq = big5powRec(q);</b>
+<b class="nc">&nbsp;        if (r &lt; SMALL_5_POW.length) {</b>
+<b class="nc">&nbsp;            return bigq.mult(SMALL_5_POW[r]);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return bigq.mult(big5powRec(r));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static FDBigInteger valueOfMulPow52(long value, int p5, int p2) {
+<b class="fc">&nbsp;        assert p5 &gt;= 0 : p5;</b>
+<b class="fc">&nbsp;        assert p2 &gt;= 0 : p2;</b>
+<b class="fc">&nbsp;        int v0 = (int) value;</b>
+<b class="fc">&nbsp;        int v1 = (int) (value &gt;&gt;&gt; 32);</b>
+<b class="fc">&nbsp;        int wordcount = p2 &gt;&gt; 5;</b>
+<b class="fc">&nbsp;        int bitcount = p2 &amp; 0x1f;</b>
+<b class="fc">&nbsp;        if (p5 != 0) {</b>
+<b class="fc">&nbsp;            if (p5 &lt; SMALL_5_POW.length) {</b>
+<b class="fc">&nbsp;                long pow5 = SMALL_5_POW[p5] &amp; 0XFFFFFFFFL;</b>
+<b class="fc">&nbsp;                long carry = (v0 &amp; 0XFFFFFFFFL) * pow5;</b>
+<b class="fc">&nbsp;                v0 = (int) carry;</b>
+<b class="fc">&nbsp;                carry &gt;&gt;&gt;= 32;</b>
+<b class="fc">&nbsp;                carry = (v1 &amp; 0XFFFFFFFFL) * pow5 + carry;</b>
+<b class="fc">&nbsp;                v1 = (int) carry;</b>
+<b class="fc">&nbsp;                int v2 = (int) (carry &gt;&gt;&gt; 32);</b>
+<b class="fc">&nbsp;                if (bitcount == 0) {</b>
+<b class="nc">&nbsp;                    return new FDBigInteger(new int[]{v0, v1, v2}, wordcount);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    return new FDBigInteger(new int[]{</b>
+&nbsp;                            v0 &lt;&lt; bitcount,
+&nbsp;                            (v1 &lt;&lt; bitcount) | (v0 &gt;&gt;&gt; (32 - bitcount)),
+&nbsp;                            (v2 &lt;&lt; bitcount) | (v1 &gt;&gt;&gt; (32 - bitcount)),
+&nbsp;                            v2 &gt;&gt;&gt; (32 - bitcount)
+&nbsp;                    }, wordcount);
+&nbsp;                }
+&nbsp;            } else {
+<b class="fc">&nbsp;                FDBigInteger pow5 = big5pow(p5);</b>
+&nbsp;                int[] r;
+<b class="fc">&nbsp;                if (v1 == 0) {</b>
+<b class="fc">&nbsp;                    r = new int[pow5.nWords + 1 + ((p2 != 0) ? 1 : 0)];</b>
+<b class="fc">&nbsp;                    mult(pow5.data, pow5.nWords, v0, r);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    r = new int[pow5.nWords + 2 + ((p2 != 0) ? 1 : 0)];</b>
+<b class="fc">&nbsp;                    mult(pow5.data, pow5.nWords, v0, v1, r);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                return (new FDBigInteger(r, pow5.offset)).leftShift(p2);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else if (p2 != 0) {</b>
+<b class="fc">&nbsp;            if (bitcount == 0) {</b>
+<b class="nc">&nbsp;                return new FDBigInteger(new int[]{v0, v1}, wordcount);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                return new FDBigInteger(new int[]{</b>
+&nbsp;                        v0 &lt;&lt; bitcount,
+&nbsp;                        (v1 &lt;&lt; bitcount) | (v0 &gt;&gt;&gt; (32 - bitcount)),
+&nbsp;                        v1 &gt;&gt;&gt; (32 - bitcount)
+&nbsp;                }, wordcount);
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return new FDBigInteger(new int[]{v0, v1}, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int cmp(FDBigInteger other) {
+<b class="fc">&nbsp;        int aSize = nWords + offset;</b>
+<b class="fc">&nbsp;        int bSize = other.nWords + other.offset;</b>
+<b class="fc">&nbsp;        if (aSize &gt; bSize) {</b>
+<b class="fc">&nbsp;            return 1;</b>
+<b class="fc">&nbsp;        } else if (aSize &lt; bSize) {</b>
+<b class="fc">&nbsp;            return -1;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        int aLen = nWords;</b>
+<b class="fc">&nbsp;        int bLen = other.nWords;</b>
+<b class="fc">&nbsp;        while (aLen &gt; 0 &amp;&amp; bLen &gt; 0) {</b>
+<b class="fc">&nbsp;            int a = data[--aLen];</b>
+<b class="fc">&nbsp;            int b = other.data[--bLen];</b>
+<b class="fc">&nbsp;            if (a != b) {</b>
+<b class="fc">&nbsp;                return ((a &amp; 0XFFFFFFFFL) &lt; (b &amp; 0XFFFFFFFFL)) ? -1 : 1;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        if (aLen &gt; 0) {</b>
+<b class="fc">&nbsp;            return checkZeroTail(data, aLen);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (bLen &gt; 0) {</b>
+<b class="nc">&nbsp;            return -checkZeroTail(other.data, bLen);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int checkZeroTail(int[] a, int from) {
+<b class="fc">&nbsp;        while (from &gt; 0) {</b>
+<b class="fc">&nbsp;            if (a[--from] != 0) {</b>
+<b class="fc">&nbsp;                return 1;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public FDBigInteger leftInplaceSub(FDBigInteger subtrahend) {
+<b class="fc">&nbsp;        assert this.size() &gt;= subtrahend.size() : &quot;result should be positive&quot;;</b>
+&nbsp;        FDBigInteger minuend;
+<b class="fc">&nbsp;        if (this.isImmutable) {</b>
+<b class="nc">&nbsp;            minuend = new FDBigInteger(this.data.clone(), this.offset);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            minuend = this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        int offsetDiff = subtrahend.offset - minuend.offset;</b>
+<b class="fc">&nbsp;        int[] sData = subtrahend.data;</b>
+<b class="fc">&nbsp;        int[] mData = minuend.data;</b>
+<b class="fc">&nbsp;        int subLen = subtrahend.nWords;</b>
+<b class="fc">&nbsp;        int minLen = minuend.nWords;</b>
+<b class="fc">&nbsp;        if (offsetDiff &lt; 0) {</b>
+&nbsp;            // need to expand minuend
+<b class="fc">&nbsp;            int rLen = minLen - offsetDiff;</b>
+<b class="fc">&nbsp;            if (rLen &lt; mData.length) {</b>
+<b class="nc">&nbsp;                System.arraycopy(mData, 0, mData, -offsetDiff, minLen);</b>
+<b class="nc">&nbsp;                Arrays.fill(mData, 0, -offsetDiff, 0);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                int[] r = new int[rLen];</b>
+<b class="fc">&nbsp;                System.arraycopy(mData, 0, r, -offsetDiff, minLen);</b>
+<b class="fc">&nbsp;                minuend.data = mData = r;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            minuend.offset = subtrahend.offset;</b>
+<b class="fc">&nbsp;            minuend.nWords = minLen = rLen;</b>
+<b class="fc">&nbsp;            offsetDiff = 0;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        long borrow = 0L;</b>
+<b class="fc">&nbsp;        int mIndex = offsetDiff;</b>
+<b class="fc">&nbsp;        for (int sIndex = 0; sIndex &lt; subLen &amp;&amp; mIndex &lt; minLen; sIndex++, mIndex++) {</b>
+<b class="fc">&nbsp;            long diff = (mData[mIndex] &amp; 0XFFFFFFFFL) - (sData[sIndex] &amp; 0XFFFFFFFFL) + borrow;</b>
+<b class="fc">&nbsp;            mData[mIndex] = (int) diff;</b>
+<b class="fc">&nbsp;            borrow = diff &gt;&gt; 32; // signed shift</b>
+&nbsp;        }
+<b class="fc">&nbsp;        for (; borrow != 0 &amp;&amp; mIndex &lt; minLen; mIndex++) {</b>
+<b class="nc">&nbsp;            long diff = (mData[mIndex] &amp; 0XFFFFFFFFL) + borrow;</b>
+<b class="nc">&nbsp;            mData[mIndex] = (int) diff;</b>
+<b class="nc">&nbsp;            borrow = diff &gt;&gt; 32; // signed shift</b>
+&nbsp;        }
+<b class="fc">&nbsp;        assert borrow == 0L : borrow; // borrow out of subtract,</b>
+&nbsp;        // result should be positive
+<b class="fc">&nbsp;        minuend.trimLeadingZeros();</b>
+<b class="fc">&nbsp;        return minuend;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public FDBigInteger rightInplaceSub(FDBigInteger subtrahend) {
+<b class="fc">&nbsp;        assert this.size() &gt;= subtrahend.size() : &quot;result should be positive&quot;;</b>
+<b class="fc">&nbsp;        FDBigInteger minuend = this;</b>
+<b class="fc">&nbsp;        if (subtrahend.isImmutable) {</b>
+<b class="nc">&nbsp;            subtrahend = new FDBigInteger(subtrahend.data.clone(), subtrahend.offset);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        int offsetDiff = minuend.offset - subtrahend.offset;</b>
+<b class="fc">&nbsp;        int[] sData = subtrahend.data;</b>
+<b class="fc">&nbsp;        int[] mData = minuend.data;</b>
+<b class="fc">&nbsp;        int subLen = subtrahend.nWords;</b>
+<b class="fc">&nbsp;        int minLen = minuend.nWords;</b>
+<b class="fc">&nbsp;        if (offsetDiff &lt; 0) {</b>
+<b class="fc">&nbsp;            if (minLen &lt; sData.length) {</b>
+<b class="nc">&nbsp;                System.arraycopy(sData, 0, sData, -offsetDiff, subLen);</b>
+<b class="nc">&nbsp;                Arrays.fill(sData, 0, -offsetDiff, 0);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                int[] r = new int[minLen];</b>
+<b class="fc">&nbsp;                System.arraycopy(sData, 0, r, -offsetDiff, subLen);</b>
+<b class="fc">&nbsp;                subtrahend.data = sData = r;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            subtrahend.offset = minuend.offset;</b>
+<b class="fc">&nbsp;            subLen -= offsetDiff;</b>
+<b class="fc">&nbsp;            offsetDiff = 0;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            int rLen = minLen + offsetDiff;</b>
+<b class="fc">&nbsp;            if (rLen &gt;= sData.length) {</b>
+<b class="nc">&nbsp;                subtrahend.data = sData = Arrays.copyOf(sData, rLen);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        int sIndex = 0;</b>
+<b class="fc">&nbsp;        long borrow = 0L;</b>
+<b class="fc">&nbsp;        for (; sIndex &lt; offsetDiff; sIndex++) {</b>
+<b class="fc">&nbsp;            long diff = -(sData[sIndex] &amp; 0XFFFFFFFFL) + borrow;</b>
+<b class="fc">&nbsp;            sData[sIndex] = (int) diff;</b>
+<b class="fc">&nbsp;            borrow = diff &gt;&gt; 32; // signed shift</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (int mIndex = 0; mIndex &lt; minLen; sIndex++, mIndex++) {</b>
+<b class="fc">&nbsp;            long diff = (mData[mIndex] &amp; 0XFFFFFFFFL) - (sData[sIndex] &amp; 0XFFFFFFFFL) + borrow;</b>
+<b class="fc">&nbsp;            sData[sIndex] = (int) diff;</b>
+<b class="fc">&nbsp;            borrow = diff &gt;&gt; 32; // signed shift</b>
+&nbsp;        }
+<b class="fc">&nbsp;        assert borrow == 0L : borrow; // borrow out of subtract,</b>
+&nbsp;        // result should be positive
+<b class="fc">&nbsp;        subtrahend.nWords = sIndex;</b>
+<b class="fc">&nbsp;        subtrahend.trimLeadingZeros();</b>
+<b class="fc">&nbsp;        return subtrahend;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int cmpPow52(int p5, int p2) {
+<b class="fc">&nbsp;        if (p5 == 0) {</b>
+<b class="fc">&nbsp;            int wordcount = p2 &gt;&gt; 5;</b>
+<b class="fc">&nbsp;            int bitcount = p2 &amp; 0x1f;</b>
+<b class="fc">&nbsp;            int size = this.nWords + this.offset;</b>
+<b class="fc">&nbsp;            if (size &gt; wordcount + 1) {</b>
+<b class="nc">&nbsp;                return 1;</b>
+<b class="fc">&nbsp;            } else if (size &lt; wordcount + 1) {</b>
+<b class="nc">&nbsp;                return -1;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            int a = this.data[this.nWords - 1];</b>
+<b class="fc">&nbsp;            int b = 1 &lt;&lt; bitcount;</b>
+<b class="fc">&nbsp;            if (a != b) {</b>
+<b class="fc">&nbsp;                return ((a &amp; 0XFFFFFFFFL) &lt; (b &amp; 0XFFFFFFFFL)) ? -1 : 1;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return checkZeroTail(this.data, this.nWords - 1);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return this.cmp(big5pow(p5).leftShift(p2));</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:27</div>
+</div>
+</body>
+</html>

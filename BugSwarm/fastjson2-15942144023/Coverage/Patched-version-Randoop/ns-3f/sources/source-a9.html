@@ -1,0 +1,506 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectReaderImplMapTyped</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.reader</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectReaderImplMapTyped (com.alibaba.fastjson2.reader)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectReaderImplMapTyped</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/211)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.reader;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.*;
+&nbsp;import com.alibaba.fastjson2.util.ReferenceKey;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.ConcurrentMap;
+&nbsp;import java.util.function.Function;
+&nbsp;import java.util.function.Supplier;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONB.Constants.*;
+&nbsp;import static com.alibaba.fastjson2.util.TypeUtils.CLASS_JSON_ARRAY_1x;
+&nbsp;import static com.alibaba.fastjson2.util.TypeUtils.CLASS_JSON_OBJECT_1x;
+&nbsp;
+&nbsp;class ObjectReaderImplMapTyped
+&nbsp;        implements ObjectReader {
+&nbsp;    final Class mapType;
+&nbsp;    final Class instanceType;
+&nbsp;    final Type keyType;
+&nbsp;    final Type valueType;
+&nbsp;    final Class valueClass;
+&nbsp;    final long features;
+&nbsp;    final Function builder;
+&nbsp;
+&nbsp;    final Constructor defaultConstructor;
+&nbsp;
+&nbsp;    ObjectReader valueObjectReader;
+&nbsp;    ObjectReader keyObjectReader;
+&nbsp;
+<b class="nc">&nbsp;    public ObjectReaderImplMapTyped(Class mapType, Class instanceType, Type keyType, Type valueType, long features, Function builder) {</b>
+<b class="nc">&nbsp;        if (keyType == Object.class) {</b>
+<b class="nc">&nbsp;            keyType = null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.mapType = mapType;</b>
+<b class="nc">&nbsp;        this.instanceType = instanceType;</b>
+<b class="nc">&nbsp;        this.keyType = keyType;</b>
+<b class="nc">&nbsp;        this.valueType = valueType;</b>
+<b class="nc">&nbsp;        this.valueClass = TypeUtils.getClass(valueType);</b>
+<b class="nc">&nbsp;        this.features = features;</b>
+<b class="nc">&nbsp;        this.builder = builder;</b>
+&nbsp;
+<b class="nc">&nbsp;        Constructor defaultConstructor = null;</b>
+<b class="nc">&nbsp;        Constructor[] constructors = this.instanceType.getDeclaredConstructors();</b>
+<b class="nc">&nbsp;        for (Constructor constructor : constructors) {</b>
+<b class="nc">&nbsp;            if (constructor.getParameterCount() == 0</b>
+<b class="nc">&nbsp;                    &amp;&amp; !Modifier.isPublic(constructor.getModifiers())) {</b>
+<b class="nc">&nbsp;                constructor.setAccessible(true);</b>
+<b class="nc">&nbsp;                defaultConstructor = constructor;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        this.defaultConstructor = defaultConstructor;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Class getObjectClass() {
+<b class="nc">&nbsp;        return mapType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createInstance(Map input, long features) {
+<b class="nc">&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+&nbsp;
+&nbsp;        Map object;
+<b class="nc">&nbsp;        if (instanceType == Map.class || instanceType == HashMap.class) {</b>
+<b class="nc">&nbsp;            object = new HashMap();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            object = (Map&lt;String, Object&gt;) createInstance(features);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (Map.Entry entry : (Iterable&lt;Map.Entry&gt;) input.entrySet()) {</b>
+<b class="nc">&nbsp;            Object key = entry.getKey();</b>
+<b class="nc">&nbsp;            Object fieldValue = entry.getValue();</b>
+&nbsp;            Object fieldName;
+<b class="nc">&nbsp;            if (keyType == null || keyType == String.class) {</b>
+<b class="nc">&nbsp;                fieldName = key.toString();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                fieldName = TypeUtils.cast(key, keyType);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            Function typeConvert;
+<b class="nc">&nbsp;            Object value = fieldValue;</b>
+<b class="nc">&nbsp;            if (value != null) {</b>
+<b class="nc">&nbsp;                Class&lt;?&gt; valueClass = value.getClass();</b>
+<b class="nc">&nbsp;                if (valueType == Object.class) {</b>
+&nbsp;                    // do nothing
+<b class="nc">&nbsp;                } else if (valueClass == JSONObject.class || valueClass == CLASS_JSON_OBJECT_1x) {</b>
+<b class="nc">&nbsp;                    if (valueObjectReader == null) {</b>
+<b class="nc">&nbsp;                        valueObjectReader = provider.getObjectReader(valueType);</b>
+&nbsp;                    }
+&nbsp;                    try {
+<b class="nc">&nbsp;                        value = valueObjectReader.createInstance((JSONObject) value, features);</b>
+<b class="nc">&nbsp;                    } catch (Exception ignored) {</b>
+&nbsp;                        // ignored
+<b class="nc">&nbsp;                    }</b>
+<b class="nc">&nbsp;                } else if ((valueClass == JSONArray.class || valueClass == CLASS_JSON_ARRAY_1x)</b>
+&nbsp;                        &amp;&amp; this.valueClass == List.class
+&nbsp;                ) {
+<b class="nc">&nbsp;                    if (valueObjectReader == null) {</b>
+<b class="nc">&nbsp;                        valueObjectReader = provider.getObjectReader(valueType);</b>
+&nbsp;                    }
+&nbsp;                    try {
+<b class="nc">&nbsp;                        value = valueObjectReader.createInstance((JSONArray) value);</b>
+<b class="nc">&nbsp;                    } catch (Exception ignored) {</b>
+&nbsp;                        // ignored
+<b class="nc">&nbsp;                    }</b>
+<b class="nc">&nbsp;                } else if ((typeConvert = provider.getTypeConvert(valueClass, valueType)) != null) {</b>
+<b class="nc">&nbsp;                    value = typeConvert.apply(value);</b>
+<b class="nc">&nbsp;                } else if (value instanceof Map) {</b>
+<b class="nc">&nbsp;                    Map map = (Map) value;</b>
+<b class="nc">&nbsp;                    if (valueObjectReader == null) {</b>
+<b class="nc">&nbsp;                        valueObjectReader = provider.getObjectReader(valueType);</b>
+&nbsp;                    }
+&nbsp;                    try {
+<b class="nc">&nbsp;                        value = valueObjectReader.createInstance(map, features);</b>
+<b class="nc">&nbsp;                    } catch (Exception ignored) {</b>
+&nbsp;                        // ignored
+<b class="nc">&nbsp;                    }</b>
+<b class="nc">&nbsp;                } else if (value instanceof Collection) {</b>
+<b class="nc">&nbsp;                    if (valueObjectReader == null) {</b>
+<b class="nc">&nbsp;                        valueObjectReader = provider.getObjectReader(valueType);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    value = valueObjectReader.createInstance((Collection) value);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    if (!valueClass.isInstance(value)) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(&quot;can not convert from &quot; + valueClass + &quot; to &quot; + valueType);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            object.put(fieldName, value);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (builder != null) {</b>
+<b class="nc">&nbsp;            return builder.apply(object);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return object;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object createInstance(long features) {
+<b class="nc">&nbsp;        if (instanceType != null &amp;&amp; !instanceType.isInterface()) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                if (defaultConstructor != null) {</b>
+<b class="nc">&nbsp;                    return defaultConstructor.newInstance();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return instanceType.newInstance();</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                throw new JSONException(&quot;create map error&quot;, e);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return new HashMap();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        ObjectReader objectReader = null;</b>
+<b class="nc">&nbsp;        Function builder = this.builder;</b>
+<b class="nc">&nbsp;        if (jsonReader.getType() == BC_TYPED_ANY) {</b>
+<b class="nc">&nbsp;            objectReader = jsonReader.checkAutoType(mapType, 0, this.features | features);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (objectReader != null &amp;&amp; objectReader != this) {</b>
+<b class="nc">&nbsp;                builder = objectReader.getBuildFunction();</b>
+<b class="nc">&nbsp;                if (!(objectReader instanceof ObjectReaderImplMap) &amp;&amp; !(objectReader instanceof ObjectReaderImplMapTyped)) {</b>
+<b class="nc">&nbsp;                    return objectReader.readJSONBObject(jsonReader, fieldType, fieldName, features);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        byte firstType = jsonReader.getType();</b>
+<b class="nc">&nbsp;        if (firstType == BC_NULL) {</b>
+<b class="nc">&nbsp;            jsonReader.next();</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (firstType == BC_OBJECT) {</b>
+<b class="nc">&nbsp;            jsonReader.next();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONReader.Context context = jsonReader.getContext();</b>
+<b class="nc">&nbsp;        long contextFeatures = features | context.getFeatures();</b>
+&nbsp;
+&nbsp;        Map object;
+<b class="nc">&nbsp;        if (objectReader != null) {</b>
+<b class="nc">&nbsp;            object = (Map) objectReader.createInstance(contextFeatures);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            object = instanceType == HashMap.class</b>
+&nbsp;                    ? new HashMap&lt;&gt;()
+<b class="nc">&nbsp;                    : (Map) createInstance();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; ; ++i) {</b>
+<b class="nc">&nbsp;            byte type = jsonReader.getType();</b>
+<b class="nc">&nbsp;            if (type == BC_OBJECT_END) {</b>
+<b class="nc">&nbsp;                jsonReader.next();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            Object name;
+<b class="nc">&nbsp;            if (keyType == String.class || jsonReader.isString()) {</b>
+<b class="nc">&nbsp;                name = jsonReader.readFieldName();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (jsonReader.isReference()) {</b>
+<b class="nc">&nbsp;                    String reference = jsonReader.readReference();</b>
+<b class="nc">&nbsp;                    name = new ReferenceKey(i);</b>
+<b class="nc">&nbsp;                    jsonReader.addResolveTask(object, name, JSONPath.of(reference));</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    if (keyObjectReader == null &amp;&amp; keyType != null) {</b>
+<b class="nc">&nbsp;                        keyObjectReader = jsonReader.getObjectReader(keyType);</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    if (keyObjectReader == null) {</b>
+<b class="nc">&nbsp;                        name = jsonReader.readAny();</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        name = keyObjectReader.readJSONBObject(jsonReader, null, null, features);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (jsonReader.isReference()) {</b>
+<b class="nc">&nbsp;                String reference = jsonReader.readReference();</b>
+<b class="nc">&nbsp;                if (&quot;..&quot;.equals(reference)) {</b>
+<b class="nc">&nbsp;                    object.put(name, object);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    jsonReader.addResolveTask(object, name, JSONPath.of(reference));</b>
+<b class="nc">&nbsp;                    if (!(object instanceof ConcurrentMap)) {</b>
+<b class="nc">&nbsp;                        object.put(name, null);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;                continue;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (jsonReader.nextIfNull()) {</b>
+<b class="nc">&nbsp;                object.put(name, null);</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            Object value;
+<b class="nc">&nbsp;            if (valueType == Object.class) {</b>
+<b class="nc">&nbsp;                value = jsonReader.readAny();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                ObjectReader autoTypeValueReader = jsonReader.checkAutoType(valueClass, 0, features);</b>
+<b class="nc">&nbsp;                if (autoTypeValueReader != null &amp;&amp; autoTypeValueReader != this) {</b>
+<b class="nc">&nbsp;                    value = autoTypeValueReader.readJSONBObject(jsonReader, valueType, name, features);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    if (valueObjectReader == null) {</b>
+<b class="nc">&nbsp;                        valueObjectReader = jsonReader.getObjectReader(valueType);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    value = valueObjectReader.readJSONBObject(jsonReader, valueType, name, features);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            object.put(name, value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (builder != null) {</b>
+<b class="nc">&nbsp;            if (builder == ObjectReaderImplMap.ENUM_MAP_BUILDER &amp;&amp; object.isEmpty()) {</b>
+<b class="nc">&nbsp;                return new EnumMap((Class) keyType);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return builder.apply(object);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return object;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+<b class="nc">&nbsp;        int index = 0;</b>
+<b class="nc">&nbsp;        if (!jsonReader.nextIfObjectStart()) {</b>
+<b class="nc">&nbsp;            if (jsonReader.isTypeRedirect()) {</b>
+<b class="nc">&nbsp;                index = 1;</b>
+<b class="nc">&nbsp;                jsonReader.setTypeRedirect(false);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (jsonReader.nextIfNullOrEmptyString()) {</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                throw new JSONException(jsonReader.info(&quot;expect &#39;{&#39;, but &#39;&quot; + jsonReader.current() + &quot;&#39;&quot;));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONReader.Context context = jsonReader.getContext();</b>
+<b class="nc">&nbsp;        long contextFeatures = context.getFeatures() | features;</b>
+<b class="nc">&nbsp;        Map object, innerMap = null;</b>
+<b class="nc">&nbsp;        if (instanceType == HashMap.class) {</b>
+<b class="nc">&nbsp;            Supplier&lt;Map&gt; objectSupplier = context.getObjectSupplier();</b>
+<b class="nc">&nbsp;            if (mapType == Map.class &amp;&amp; objectSupplier != null) {</b>
+<b class="nc">&nbsp;                object = objectSupplier.get();</b>
+<b class="nc">&nbsp;                innerMap = TypeUtils.getInnerMap(object);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                object = new HashMap&lt;&gt;();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            object = (Map) createInstance(contextFeatures);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        Object name;
+<b class="nc">&nbsp;        for (; ; index++) {</b>
+<b class="nc">&nbsp;            if (jsonReader.nextIfObjectEnd() || jsonReader.isEnd()) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (jsonReader.nextIfNull()) {</b>
+<b class="nc">&nbsp;                if (!jsonReader.nextIfMatch(&#39;:&#39;)) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(jsonReader.info(&quot;illegal json&quot;));</b>
+&nbsp;                }
+<b class="nc">&nbsp;                name = null;</b>
+<b class="nc">&nbsp;            } else if (keyType == String.class) {</b>
+<b class="nc">&nbsp;                name = jsonReader.readFieldName();</b>
+<b class="nc">&nbsp;                if (index == 0</b>
+&nbsp;                        &amp;&amp; (contextFeatures &amp; JSONReader.Feature.SupportAutoType.mask) != 0
+<b class="nc">&nbsp;                        &amp;&amp; name.equals(getTypeKey())</b>
+&nbsp;                ) {
+<b class="nc">&nbsp;                    long typeHashCode = jsonReader.readTypeHashCode();</b>
+<b class="nc">&nbsp;                    ObjectReader objectReaderAutoType = jsonReader.getObjectReaderAutoType(typeHashCode, mapType, features);</b>
+<b class="nc">&nbsp;                    if (objectReaderAutoType != null) {</b>
+<b class="nc">&nbsp;                        if (objectReaderAutoType instanceof ObjectReaderImplMap) {</b>
+<b class="nc">&nbsp;                            if (!object.getClass().equals(((ObjectReaderImplMap) objectReaderAutoType).instanceType)) {</b>
+<b class="nc">&nbsp;                                object = (Map) objectReaderAutoType.createInstance(features);</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                    continue;
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (name == null) {</b>
+<b class="nc">&nbsp;                    name = jsonReader.readString();</b>
+<b class="nc">&nbsp;                    if (!jsonReader.nextIfMatch(&#39;:&#39;)) {</b>
+<b class="nc">&nbsp;                        throw new JSONException(jsonReader.info(&quot;illegal json&quot;));</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (index == 0</b>
+<b class="nc">&nbsp;                        &amp;&amp; jsonReader.isEnabled(JSONReader.Feature.SupportAutoType)</b>
+<b class="nc">&nbsp;                        &amp;&amp; jsonReader.current() == &#39;&quot;&#39;</b>
+<b class="nc">&nbsp;                        &amp;&amp; !(keyType instanceof Class &amp;&amp; Enum.class.isAssignableFrom((Class) keyType))</b>
+&nbsp;                ) {
+<b class="nc">&nbsp;                    name = jsonReader.readFieldName();</b>
+<b class="nc">&nbsp;                    if (name.equals(getTypeKey())) {</b>
+<b class="nc">&nbsp;                        long typeHashCode = jsonReader.readTypeHashCode();</b>
+<b class="nc">&nbsp;                        ObjectReader objectReaderAutoType = jsonReader.getObjectReaderAutoType(typeHashCode, mapType, features);</b>
+<b class="nc">&nbsp;                        if (objectReaderAutoType != null) {</b>
+<b class="nc">&nbsp;                            if (objectReaderAutoType instanceof ObjectReaderImplMap) {</b>
+<b class="nc">&nbsp;                                if (!object.getClass().equals(((ObjectReaderImplMap) objectReaderAutoType).instanceType)) {</b>
+<b class="nc">&nbsp;                                    object = (Map) objectReaderAutoType.createInstance(features);</b>
+&nbsp;                                }
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                        continue;
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        name = TypeUtils.cast(name, keyType);</b>
+&nbsp;                    }
+&nbsp;                } else {
+<b class="nc">&nbsp;                    if (keyObjectReader != null) {</b>
+<b class="nc">&nbsp;                        name = keyObjectReader.readObject(jsonReader, null, null, 0);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        name = jsonReader.read(keyType);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (index == 0</b>
+&nbsp;                            &amp;&amp; (contextFeatures &amp; JSONReader.Feature.SupportAutoType.mask) != 0
+<b class="nc">&nbsp;                            &amp;&amp; name.equals(getTypeKey())) {</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    jsonReader.nextIfMatch(&#39;:&#39;);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            if (valueObjectReader == null) {</b>
+<b class="nc">&nbsp;                valueObjectReader = jsonReader.getObjectReader(valueType);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Object value = valueObjectReader.readObject(jsonReader, valueType, fieldName, 0);</b>
+&nbsp;            Object origin;
+<b class="nc">&nbsp;            if (innerMap != null) {</b>
+<b class="nc">&nbsp;                origin = innerMap.put(name, value);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                origin = object.put(name, value);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (origin != null) {</b>
+<b class="nc">&nbsp;                if ((contextFeatures &amp; JSONReader.Feature.DuplicateKeyValueAsArray.mask) != 0) {</b>
+<b class="nc">&nbsp;                    if (origin instanceof Collection) {</b>
+<b class="nc">&nbsp;                        ((Collection) origin).add(value);</b>
+<b class="nc">&nbsp;                        object.put(name, origin);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        JSONArray array = JSONArray.of(origin, value);</b>
+<b class="nc">&nbsp;                        object.put(name, array);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        jsonReader.nextIfComma();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (builder != null) {</b>
+<b class="nc">&nbsp;            return builder.apply(object);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return object;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:35</div>
+</div>
+</body>
+</html>

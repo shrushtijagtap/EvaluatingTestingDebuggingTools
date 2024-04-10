@@ -1,0 +1,206 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ClassWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.internal.codegen</a>
+</div>
+
+<h1>Coverage Summary for Class: ClassWriter (com.alibaba.fastjson2.internal.codegen)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClassWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/51)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.internal.codegen;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.TreeSet;
+&nbsp;
+&nbsp;public class ClassWriter {
+&nbsp;    final String packageName;
+&nbsp;    final String name;
+&nbsp;    final Class superClass;
+&nbsp;    final Class[] interfaces;
+&nbsp;
+<b class="nc">&nbsp;    private Set&lt;String&gt; imports = new TreeSet&lt;&gt;();</b>
+<b class="nc">&nbsp;    private List&lt;FieldWriter&gt; fields = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;    private List&lt;MethodWriter&gt; methods = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;    public ClassWriter(String packageName, String name, Class superClass, Class[] interfaces) {</b>
+<b class="nc">&nbsp;        this.packageName = packageName;</b>
+<b class="nc">&nbsp;        this.name = name;</b>
+<b class="nc">&nbsp;        this.superClass = superClass;</b>
+<b class="nc">&nbsp;        this.interfaces = interfaces;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MethodWriter method(int modifiers, String name, Class returnType, Class[] paramTypes, String[] paramNames) {
+<b class="nc">&nbsp;        MethodWriter mw = new MethodWriter(this, modifiers, name, returnType, paramTypes, paramNames);</b>
+<b class="nc">&nbsp;        methods.add(mw);</b>
+<b class="nc">&nbsp;        return mw;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static String getTypeName(Class type) {
+<b class="nc">&nbsp;        Package pkg = type.getPackage();</b>
+<b class="nc">&nbsp;        if (pkg != null &amp;&amp; pkg.getName().equals(&quot;java.lang&quot;) &amp;&amp; !type.isArray()) {</b>
+<b class="nc">&nbsp;            return type.getSimpleName();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        String className;
+<b class="nc">&nbsp;        if (type.isArray()) {</b>
+<b class="nc">&nbsp;            className = getTypeName(type.getComponentType()) + &quot;[]&quot;;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            className = type.getName();</b>
+<b class="nc">&nbsp;            className = className.replace(&#39;$&#39;, &#39;.&#39;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return className;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public FieldWriter field(int modifier, String name, Class fieldClass) {
+<b class="nc">&nbsp;        FieldWriter fw = new FieldWriter(modifier, name, fieldClass);</b>
+<b class="nc">&nbsp;        fields.add(fw);</b>
+<b class="nc">&nbsp;        return fw;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void toString(StringBuilder buf) {
+<b class="nc">&nbsp;        if (packageName != null &amp;&amp; !packageName.isEmpty()) {</b>
+<b class="nc">&nbsp;            buf.append(&quot;package &quot;).append(packageName).append(&quot;;\n\n&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!imports.isEmpty()) {</b>
+<b class="nc">&nbsp;            for (String item : imports) {</b>
+<b class="nc">&nbsp;                buf.append(&quot;import &quot;).append(item).append(&quot;;\n&quot;);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        buf.append(&quot;public final class &quot;).append(name);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (superClass != null) {</b>
+<b class="nc">&nbsp;            buf.append(&quot;\n\t\textends &quot;).append(getTypeName(superClass));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        buf.append(&quot; {\n&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (FieldWriter fw : fields) {</b>
+<b class="nc">&nbsp;            buf.append(&#39;\t&#39;)</b>
+<b class="nc">&nbsp;                    .append(getTypeName(fw.fieldClass))</b>
+<b class="nc">&nbsp;                    .append(&#39; &#39;)</b>
+<b class="nc">&nbsp;                    .append(fw.name)</b>
+<b class="nc">&nbsp;                    .append(&quot;;\n&quot;);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (!fields.isEmpty()) {</b>
+<b class="nc">&nbsp;            buf.append(&quot;\n&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; methods.size(); i++) {</b>
+<b class="nc">&nbsp;            if (i != 0) {</b>
+<b class="nc">&nbsp;                buf.append(&quot;\n&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            MethodWriter mw = methods.get(i);</b>
+<b class="nc">&nbsp;            mw.toString(buf);</b>
+<b class="nc">&nbsp;            buf.append(&quot;\n&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        buf.append(&quot;}&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        StringBuilder buf = new StringBuilder();</b>
+<b class="nc">&nbsp;        toString(buf);</b>
+<b class="nc">&nbsp;        return buf.toString();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:37</div>
+</div>
+</body>
+</html>

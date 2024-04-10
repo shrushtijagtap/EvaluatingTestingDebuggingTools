@@ -1,0 +1,1173 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONCompiledAnnotationProcessor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.internal.processor</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONCompiledAnnotationProcessor (com.alibaba.fastjson2.internal.processor)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONCompiledAnnotationProcessor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/642)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.internal.processor;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONPath;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.internal.asm.Label;
+&nbsp;import com.alibaba.fastjson2.internal.codegen.Block;
+&nbsp;import com.alibaba.fastjson2.internal.codegen.ClassWriter;
+&nbsp;import com.alibaba.fastjson2.internal.codegen.MethodWriter;
+&nbsp;import com.alibaba.fastjson2.internal.codegen.Opcodes;
+&nbsp;import com.alibaba.fastjson2.reader.*;
+&nbsp;
+&nbsp;import javax.annotation.processing.*;
+&nbsp;import javax.lang.model.SourceVersion;
+&nbsp;import javax.lang.model.element.Element;
+&nbsp;import javax.lang.model.element.TypeElement;
+&nbsp;import javax.tools.Diagnostic;
+&nbsp;import javax.tools.JavaFileObject;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.Writer;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.internal.codegen.Opcodes.*;
+&nbsp;import static com.alibaba.fastjson2.internal.processor.CodeGenUtils.fieldObjectReader;
+&nbsp;import static com.alibaba.fastjson2.internal.processor.CodeGenUtils.fieldReader;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.ARRAY_BYTE_BASE_OFFSET;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.UNSAFE;
+&nbsp;
+&nbsp;@SupportedSourceVersion(SourceVersion.RELEASE_8)
+&nbsp;@SupportedAnnotationTypes({
+&nbsp;        &quot;com.alibaba.fastjson2.annotation.JSONCompiled&quot;,
+&nbsp;        &quot;com.alibaba.fastjson2.annotation.JSONBuilder&quot;,
+&nbsp;        &quot;com.alibaba.fastjson2.annotation.JSONCreator&quot;,
+&nbsp;        &quot;com.alibaba.fastjson2.annotation.JSONField&quot;,
+&nbsp;        &quot;com.alibaba.fastjson2.annotation.JSONType&quot;
+&nbsp;})
+<b class="nc">&nbsp;public class JSONCompiledAnnotationProcessor</b>
+&nbsp;        extends AbstractProcessor {
+&nbsp;    @Override
+&nbsp;    public synchronized void init(ProcessingEnvironment processingEnv) {
+<b class="nc">&nbsp;        super.init(processingEnv);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean process(Set&lt;? extends TypeElement&gt; annotations, RoundEnvironment roundEnv) {
+<b class="nc">&nbsp;        if (roundEnv.processingOver() || annotations.isEmpty()) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Analysis analysis = new Analysis(processingEnv);</b>
+<b class="nc">&nbsp;        Set&lt;? extends Element&gt; compiledJsons = roundEnv.getElementsAnnotatedWith(analysis.jsonCompiledElement);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (!compiledJsons.isEmpty()) {</b>
+<b class="nc">&nbsp;            analysis.processAnnotation(analysis.compiledJsonType, compiledJsons);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Map&lt;String, StructInfo&gt; structs = analysis.analyze();</b>
+<b class="nc">&nbsp;        final Map&lt;String, StructInfo&gt; generatedFiles = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        final List&lt;Element&gt; originatingElements = new ArrayList&lt;&gt;();</b>
+&nbsp;//        Set&lt;? extends Element&gt; jsonConverters = roundEnv.getElementsAnnotatedWith(analysis.converterElement);
+&nbsp;//        Map&lt;String, Element&gt; configurations = analysis.processConverters(jsonConverters);
+&nbsp;
+<b class="nc">&nbsp;        for (Map.Entry&lt;String, StructInfo&gt; entry : structs.entrySet()) {</b>
+<b class="nc">&nbsp;            String typeName = entry.getKey();</b>
+<b class="nc">&nbsp;            StructInfo info = entry.getValue();</b>
+&nbsp;
+<b class="nc">&nbsp;            String classNamePath = findConverterName(info);</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                JavaFileObject converterFile = processingEnv.getFiler().createSourceFile(classNamePath, info.element);</b>
+<b class="nc">&nbsp;                try (Writer writer = converterFile.openWriter()) {</b>
+<b class="nc">&nbsp;                    buildCode(writer, processingEnv, entry.getKey(), info, structs);</b>
+<b class="nc">&nbsp;                    generatedFiles.put(classNamePath, info);</b>
+<b class="nc">&nbsp;                    originatingElements.add(info.element);</b>
+<b class="nc">&nbsp;                } catch (IOException e) {</b>
+<b class="nc">&nbsp;                    processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR,</b>
+&nbsp;                            &quot;Failed saving compiled json serialization file &quot; + classNamePath);
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            } catch (IOException e) {</b>
+<b class="nc">&nbsp;                processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR,</b>
+&nbsp;                        &quot;Failed creating compiled json serialization file &quot; + classNamePath);
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static String findConverterName(StructInfo structInfo) {
+<b class="nc">&nbsp;        int dotIndex = structInfo.binaryName.lastIndexOf(&#39;.&#39;);</b>
+<b class="nc">&nbsp;        String className = structInfo.binaryName.substring(dotIndex + 1);</b>
+<b class="nc">&nbsp;        if (dotIndex == -1) {</b>
+<b class="nc">&nbsp;            return className + &quot;_FASTJOSNReader&quot;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String packageName = structInfo.binaryName.substring(0, dotIndex);</b>
+<b class="nc">&nbsp;        return packageName + &#39;.&#39; + className + &quot;_FASTJOSNReader&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void buildCode(
+&nbsp;            final Writer code,
+&nbsp;            final ProcessingEnvironment environment,
+&nbsp;            final String className,
+&nbsp;            final StructInfo si,
+&nbsp;            final Map&lt;String, StructInfo&gt; structs
+&nbsp;    ) throws IOException {
+<b class="nc">&nbsp;        final String generateFullClassName = findConverterName(si);</b>
+<b class="nc">&nbsp;        final int dotIndex = generateFullClassName.lastIndexOf(&#39;.&#39;);</b>
+<b class="nc">&nbsp;        final String generateClassName = generateFullClassName.substring(dotIndex + 1);</b>
+&nbsp;
+<b class="nc">&nbsp;        String packageName = null;</b>
+<b class="nc">&nbsp;        if (dotIndex != -1) {</b>
+<b class="nc">&nbsp;            packageName = generateFullClassName.substring(0, dotIndex);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        List&lt;AttributeInfo&gt; fields = si.getReaderAttributes();</b>
+&nbsp;
+<b class="nc">&nbsp;        Class supperClass = CodeGenUtils.getSupperClass(fields.size());</b>
+<b class="nc">&nbsp;        ClassWriter cw = new ClassWriter(packageName, generateClassName, supperClass, new Class[0]);</b>
+&nbsp;
+<b class="nc">&nbsp;        final boolean generatedFields = fields.size() &lt; 128;</b>
+<b class="nc">&nbsp;        if (generatedFields) {</b>
+<b class="nc">&nbsp;            genFields(fields, cw, supperClass);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            MethodWriter mw = cw.method(</b>
+&nbsp;                    Modifier.PUBLIC,
+&nbsp;                    &quot;&lt;init&gt;&quot;,
+&nbsp;                    void.class,
+&nbsp;                    new Class[]{},
+&nbsp;                    new String[]{}
+&nbsp;            );
+&nbsp;
+<b class="nc">&nbsp;            Op[] fieldReaders = new Op[fields.size()];</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; fields.size(); i++) {</b>
+<b class="nc">&nbsp;                AttributeInfo attr = fields.get(i);</b>
+<b class="nc">&nbsp;                String fieldType = attr.type.toString();</b>
+<b class="nc">&nbsp;                boolean fieldTypeIsClass = fieldType.indexOf(&#39;&lt;&#39;) == -1;</b>
+&nbsp;                Op fieldReader;
+<b class="nc">&nbsp;                if (attr.setMethod != null) {</b>
+<b class="nc">&nbsp;                    String methodName = attr.setMethod.getSimpleName().toString();</b>
+<b class="nc">&nbsp;                    fieldReader = invokeStatic(</b>
+&nbsp;                            ObjectReaders.class,
+&nbsp;                            &quot;fieldReaderWithMethod&quot;,
+<b class="nc">&nbsp;                            ldc(attr.name),</b>
+<b class="nc">&nbsp;                            getStatic(className, &quot;class&quot;),</b>
+<b class="nc">&nbsp;                            ldc(methodName)</b>
+&nbsp;                    );
+<b class="nc">&nbsp;                } else if (attr.field != null) {</b>
+<b class="nc">&nbsp;                    String fieldName = attr.field.getSimpleName().toString();</b>
+<b class="nc">&nbsp;                    if (fieldName.equals(attr.name)) {</b>
+<b class="nc">&nbsp;                        fieldReader = invokeStatic(</b>
+&nbsp;                                ObjectReaders.class,
+&nbsp;                                &quot;fieldReaderWithField&quot;,
+<b class="nc">&nbsp;                                ldc(fieldName),</b>
+<b class="nc">&nbsp;                                getStatic(className, &quot;class&quot;)</b>
+&nbsp;                        );
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        fieldReader = invokeStatic(</b>
+&nbsp;                                ObjectReaders.class,
+&nbsp;                                &quot;fieldReaderWithField&quot;,
+<b class="nc">&nbsp;                                ldc(attr.name),</b>
+<b class="nc">&nbsp;                                getStatic(className, &quot;class&quot;),</b>
+<b class="nc">&nbsp;                                ldc(fieldName)</b>
+&nbsp;                        );
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    fieldReaders[i] = fieldReader;</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    throw new IOException(&quot;TODO&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                fieldReaders[i] = fieldReader;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            mw.invoke(SUPER,</b>
+&nbsp;                    &quot;&lt;init&gt;&quot;,
+<b class="nc">&nbsp;                    getStatic(className, &quot;class&quot;),</b>
+<b class="nc">&nbsp;                    Opcodes.ldc(si.typeKey),</b>
+<b class="nc">&nbsp;                    Opcodes.ldc(null),</b>
+<b class="nc">&nbsp;                    Opcodes.ldc(si.readerFeatures),</b>
+<b class="nc">&nbsp;                    Opcodes.methodRef(className, &quot;new&quot;),</b>
+<b class="nc">&nbsp;                    Opcodes.ldc(null),</b>
+<b class="nc">&nbsp;                    Opcodes.allocateArray(FieldReader.class, null, fieldReaders)</b>
+&nbsp;            );
+&nbsp;
+<b class="nc">&nbsp;            genInitFields(fields.size(), generatedFields, &quot;fieldReaders&quot;, mw, supperClass);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        {
+<b class="nc">&nbsp;            MethodWriter mw = cw.method(</b>
+&nbsp;                    Modifier.PUBLIC,
+&nbsp;                    &quot;createInstance&quot;,
+&nbsp;                    Object.class,
+&nbsp;                    new Class[]{long.class},
+&nbsp;                    new String[]{&quot;features&quot;}
+&nbsp;            );
+&nbsp;
+<b class="nc">&nbsp;            mw.ret(</b>
+<b class="nc">&nbsp;                    allocate(className)</b>
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        genMethodReadObject(className, si, fields, cw, false);</b>
+&nbsp;
+<b class="nc">&nbsp;        code.write(cw.toString());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static void genInitFields(
+&nbsp;            int fieldReaderArray,
+&nbsp;            boolean generatedFields,
+&nbsp;            String fieldReaders,
+&nbsp;            MethodWriter mw,
+&nbsp;            Class objectReaderSuper
+&nbsp;    ) {
+<b class="nc">&nbsp;        if (objectReaderSuper != ObjectReaderAdapter.class || !generatedFields) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; fieldReaderArray; i++) {</b>
+<b class="nc">&nbsp;            mw.putField(fieldReader(i), Opcodes.arrayGet(var(fieldReaders), Opcodes.ldc(i)));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static void genFields(List&lt;AttributeInfo&gt; fields, ClassWriter cw, Class objectReaderSuper) {
+<b class="nc">&nbsp;        int fieldCount = fields.size();</b>
+<b class="nc">&nbsp;        if (objectReaderSuper == ObjectReaderAdapter.class) {</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; fieldCount; i++) {</b>
+<b class="nc">&nbsp;                cw.field(Modifier.PUBLIC, fieldReader(i), FieldReader.class);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; fieldCount; i++) {</b>
+<b class="nc">&nbsp;                cw.field(Modifier.PUBLIC, fieldObjectReader(i), ObjectReader.class);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; fields.size(); i++) {</b>
+<b class="nc">&nbsp;            AttributeInfo field = fields.get(i);</b>
+<b class="nc">&nbsp;            String fieldType = field.type.toString();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (fieldType.startsWith(&quot;java.util.List&lt;&quot;)</b>
+<b class="nc">&nbsp;                    || fieldType.startsWith(&quot;java.util.Map&lt;java.lang.String,&quot;)</b>
+&nbsp;            ) {
+<b class="nc">&nbsp;                cw.field(Modifier.PUBLIC, CodeGenUtils.fieldItemObjectReader(i), ObjectReader.class);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void genMethodReadObject(
+&nbsp;            String className,
+&nbsp;            StructInfo si,
+&nbsp;            List&lt;AttributeInfo&gt; fields,
+&nbsp;            ClassWriter cw,
+&nbsp;            boolean jsonb
+&nbsp;    ) {
+<b class="nc">&nbsp;        int fieldNameLengthMin = 0, fieldNameLengthMax = 0;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; fields.size(); ++i) {</b>
+<b class="nc">&nbsp;            String fieldName = fields.get(i).name;</b>
+&nbsp;
+<b class="nc">&nbsp;            int fieldNameLength = fieldName.getBytes(StandardCharsets.UTF_8).length;</b>
+<b class="nc">&nbsp;            if (i == 0) {</b>
+<b class="nc">&nbsp;                fieldNameLengthMin = fieldNameLength;</b>
+<b class="nc">&nbsp;                fieldNameLengthMax = fieldNameLength;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                fieldNameLengthMin = Math.min(fieldNameLength, fieldNameLengthMin);</b>
+<b class="nc">&nbsp;                fieldNameLengthMax = Math.max(fieldNameLength, fieldNameLengthMax);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        MethodWriter mw = cw.method(</b>
+&nbsp;                Modifier.PUBLIC,
+&nbsp;                &quot;readObject&quot;,
+&nbsp;                Object.class,
+&nbsp;                new Class[]{JSONReader.class, Type.class, Object.class, long.class},
+&nbsp;                new String[]{&quot;jsonReader&quot;, &quot;fieldType&quot;, &quot;fieldName&quot;, &quot;features&quot;}
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        Op jsonReader = var(&quot;jsonReader&quot;);</b>
+<b class="nc">&nbsp;        Op features = var(&quot;features&quot;);</b>
+<b class="nc">&nbsp;        Op fieldType = var(&quot;fieldType&quot;);</b>
+<b class="nc">&nbsp;        Op fieldName = var(&quot;fieldName&quot;);</b>
+<b class="nc">&nbsp;        OpName object = var(&quot;object&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.ifStmt(invoke(jsonReader, &quot;nextIfNull&quot;))</b>
+<b class="nc">&nbsp;                .ret(Opcodes.ldc(null));</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.newLine();</b>
+<b class="nc">&nbsp;        mw.stmt(invoke(jsonReader, &quot;nextIfObjectStart&quot;));</b>
+&nbsp;
+<b class="nc">&nbsp;        OpName features2 = var(&quot;features2&quot;);</b>
+<b class="nc">&nbsp;        mw.declare(long.class, features2, bitOr(var(&quot;features&quot;), getField(THIS, &quot;features&quot;)));</b>
+<b class="nc">&nbsp;        mw.newLine();</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.declare(className, object, allocate(className));</b>
+<b class="nc">&nbsp;        mw.newLine();</b>
+&nbsp;
+<b class="nc">&nbsp;        String forLabel = null;</b>
+<b class="nc">&nbsp;        if (fields.size() &gt; 6) {</b>
+<b class="nc">&nbsp;            forLabel = &quot;_while&quot;;</b>
+<b class="nc">&nbsp;            mw.label(forLabel);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Block.WhileStmt whileStmt = mw.whileStmtStmt(</b>
+<b class="nc">&nbsp;                not(invoke(jsonReader, &quot;nextIfObjectEnd&quot;))</b>
+&nbsp;        );
+&nbsp;
+<b class="nc">&nbsp;        if (fieldNameLengthMin &gt;= 2 &amp;&amp; fieldNameLengthMax &lt;= 43) {</b>
+<b class="nc">&nbsp;            genRead243(si, whileStmt, forLabel, fields, jsonReader, object);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        OpName hashCode64 = var(&quot;hashCode64&quot;);</b>
+<b class="nc">&nbsp;        whileStmt.declare(long.class, hashCode64, invoke(jsonReader, &quot;readFieldNameHashCode&quot;));</b>
+<b class="nc">&nbsp;        whileStmt.newLine();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (fields.size() &lt;= 6) {</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; fields.size(); ++i) {</b>
+<b class="nc">&nbsp;                AttributeInfo field = fields.get(i);</b>
+<b class="nc">&nbsp;                long fieldNameHash = field.nameHashCode;</b>
+<b class="nc">&nbsp;                Block.IfStmt ifStmt = whileStmt.ifStmt(eq(hashCode64, ldc(fieldNameHash)));</b>
+<b class="nc">&nbsp;                genReadFieldValue(ifStmt, i, si, field, jsonReader, object, forLabel, jsonb);</b>
+<b class="nc">&nbsp;                ifStmt.continueStmt();</b>
+<b class="nc">&nbsp;                whileStmt.newLine();</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            Map&lt;Integer, List&lt;Long&gt;&gt; map = new TreeMap();</b>
+<b class="nc">&nbsp;            Map&lt;Long, AttributeInfo&gt; mapping = new TreeMap();</b>
+<b class="nc">&nbsp;            Map&lt;Long, Integer&gt; mappingIndex = new TreeMap();</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; fields.size(); i++) {</b>
+<b class="nc">&nbsp;                AttributeInfo field = fields.get(i);</b>
+<b class="nc">&nbsp;                long fieldNameHash = field.nameHashCode;</b>
+<b class="nc">&nbsp;                int hashCode32 = (int) (fieldNameHash ^ (fieldNameHash &gt;&gt;&gt; 32));</b>
+<b class="nc">&nbsp;                List&lt;Long&gt; hashCode64List = map.computeIfAbsent(hashCode32, k -&gt; new ArrayList&lt;&gt;());</b>
+<b class="nc">&nbsp;                hashCode64List.add(fieldNameHash);</b>
+<b class="nc">&nbsp;                mapping.put(fieldNameHash, field);</b>
+<b class="nc">&nbsp;                mappingIndex.put(fieldNameHash, i);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            int[] hashCode32Keys = new int[map.size()];</b>
+&nbsp;            {
+<b class="nc">&nbsp;                int off = 0;</b>
+<b class="nc">&nbsp;                for (Integer key : map.keySet()) {</b>
+<b class="nc">&nbsp;                    hashCode32Keys[off++] = key;</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Arrays.sort(hashCode32Keys);</b>
+&nbsp;
+&nbsp;            // int hashCode32 = (int)(hashCode64 ^ (hashCode64 &gt;&gt;&gt; 32));
+<b class="nc">&nbsp;            OpName hashCode32 = var(&quot;hashCode32&quot;);</b>
+<b class="nc">&nbsp;            whileStmt.declare(int.class, hashCode32, cast(eor(hashCode64, urs(hashCode64, ldc(32))), int.class));</b>
+<b class="nc">&nbsp;            Block.SwitchStmt switchStmt = whileStmt.switchStmt(hashCode32, hashCode32Keys);</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; switchStmt.labels(); i++) {</b>
+<b class="nc">&nbsp;                Block label = switchStmt.label(i);</b>
+<b class="nc">&nbsp;                List&lt;Long&gt; hashCode64Array = map.get(switchStmt.labelKey(i));</b>
+&nbsp;
+<b class="nc">&nbsp;                if (hashCode64Array.size() == 1 &amp;&amp; hashCode64Array.get(0) == hashCode32Keys[i]) {</b>
+<b class="nc">&nbsp;                    Long fieldNameHash = hashCode64Array.get(0);</b>
+<b class="nc">&nbsp;                    int index = mappingIndex.get(fieldNameHash);</b>
+<b class="nc">&nbsp;                    AttributeInfo field = mapping.get(fieldNameHash);</b>
+<b class="nc">&nbsp;                    genReadFieldValue(label, index, si, field, jsonReader, object, forLabel, jsonb);</b>
+<b class="nc">&nbsp;                    label.continueStmt(forLabel);</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    for (int j = 0; j &lt; hashCode64Array.size(); ++j) {</b>
+<b class="nc">&nbsp;                        Long fieldNameHash = hashCode64Array.get(j);</b>
+<b class="nc">&nbsp;                        int index = mappingIndex.get(fieldNameHash);</b>
+<b class="nc">&nbsp;                        AttributeInfo field = mapping.get(fieldNameHash);</b>
+<b class="nc">&nbsp;                        Block.IfStmt ifStmt = label.ifStmt(eq(hashCode64, ldc(fieldNameHash)));</b>
+<b class="nc">&nbsp;                        genReadFieldValue(ifStmt, index, si, field, jsonReader, object, forLabel, jsonb);</b>
+<b class="nc">&nbsp;                        ifStmt.continueStmt(forLabel);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    label.breakStmt();</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            whileStmt.newLine();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (si.smartMatch) {</b>
+<b class="nc">&nbsp;            whileStmt.ifStmt(invoke(THIS, &quot;readFieldValueWithLCase&quot;, jsonReader, object, hashCode64, features2))</b>
+<b class="nc">&nbsp;                    .continueStmt(forLabel);</b>
+<b class="nc">&nbsp;            whileStmt.newLine();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        whileStmt.stmt(invoke(null, &quot;processExtra&quot;, jsonReader, object));</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.newLine();</b>
+<b class="nc">&nbsp;        mw.invoke(jsonReader, &quot;nextIfComma&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        mw.newLine();</b>
+<b class="nc">&nbsp;        mw.ret(object);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void genRead243(
+&nbsp;            StructInfo info,
+&nbsp;            Block.WhileStmt whileStmt,
+&nbsp;            String forLabel,
+&nbsp;            List&lt;AttributeInfo&gt; fields,
+&nbsp;            Op jsonReader,
+&nbsp;            Op object
+&nbsp;    ) {
+<b class="nc">&nbsp;        IdentityHashMap&lt;AttributeInfo, Integer&gt; readerIndexMap = new IdentityHashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        Map&lt;Integer, List&lt;AttributeInfo&gt;&gt; name0Map = new TreeMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; fields.size(); ++i) {</b>
+<b class="nc">&nbsp;            AttributeInfo field = fields.get(i);</b>
+<b class="nc">&nbsp;            readerIndexMap.put(field, i);</b>
+&nbsp;
+<b class="nc">&nbsp;            byte[] fieldName = field.name.getBytes(StandardCharsets.UTF_8);</b>
+<b class="nc">&nbsp;            byte[] name0Bytes = new byte[4];</b>
+<b class="nc">&nbsp;            name0Bytes[0] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;            if (fieldName.length == 2) {</b>
+<b class="nc">&nbsp;                System.arraycopy(fieldName, 0, name0Bytes, 1, 2);</b>
+<b class="nc">&nbsp;                name0Bytes[3] = &#39;&quot;&#39;;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                System.arraycopy(fieldName, 0, name0Bytes, 1, 3);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            int name0 = UNSAFE.getInt(name0Bytes, ARRAY_BYTE_BASE_OFFSET);</b>
+&nbsp;
+<b class="nc">&nbsp;            List&lt;AttributeInfo&gt; fieldReaders = name0Map.get(name0);</b>
+<b class="nc">&nbsp;            if (fieldReaders == null) {</b>
+<b class="nc">&nbsp;                fieldReaders = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                name0Map.put(name0, fieldReaders);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            fieldReaders.add(field);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int[] switchKeys = new int[name0Map.size()];</b>
+<b class="nc">&nbsp;        Label[] labels = new Label[name0Map.size()];</b>
+&nbsp;        {
+<b class="nc">&nbsp;            Iterator it = name0Map.keySet().iterator();</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; labels.length; i++) {</b>
+<b class="nc">&nbsp;                labels[i] = new Label();</b>
+<b class="nc">&nbsp;                switchKeys[i] = (Integer) it.next();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Op getRawInt = invoke(jsonReader, &quot;getRawInt&quot;);</b>
+<b class="nc">&nbsp;        Block.SwitchStmt switchStmt = whileStmt.switchStmt(getRawInt, switchKeys);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; labels.length; i++) {</b>
+<b class="nc">&nbsp;            int name0 = switchKeys[i];</b>
+&nbsp;
+<b class="nc">&nbsp;            Block label = switchStmt.label(i);</b>
+&nbsp;
+<b class="nc">&nbsp;            List&lt;AttributeInfo&gt; fieldReaders = name0Map.get(name0);</b>
+<b class="nc">&nbsp;            for (int j = 0; j &lt; fieldReaders.size(); j++) {</b>
+<b class="nc">&nbsp;                AttributeInfo fieldReader = fieldReaders.get(j);</b>
+<b class="nc">&nbsp;                int fieldReaderIndex = readerIndexMap.get(fieldReader);</b>
+<b class="nc">&nbsp;                byte[] fieldName = fieldReader.name.getBytes(StandardCharsets.UTF_8);</b>
+<b class="nc">&nbsp;                int fieldNameLength = fieldName.length;</b>
+&nbsp;                Opcodes.Op nextIfMatch;
+<b class="nc">&nbsp;                switch (fieldNameLength) {</b>
+&nbsp;                    case 2:
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match2&quot;);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 3:
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match3&quot;);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 4:
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match4&quot;, ldc(fieldName[3]));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 5: {
+<b class="nc">&nbsp;                        byte[] bytes4 = new byte[4];</b>
+<b class="nc">&nbsp;                        bytes4[0] = fieldName[3];</b>
+<b class="nc">&nbsp;                        bytes4[1] = fieldName[4];</b>
+<b class="nc">&nbsp;                        bytes4[2] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        bytes4[3] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;                        int name1 = UNSAFE.getInt(bytes4, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match5&quot;, ldc(name1));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 6: {
+<b class="nc">&nbsp;                        byte[] bytes4 = new byte[4];</b>
+<b class="nc">&nbsp;                        bytes4[0] = fieldName[3];</b>
+<b class="nc">&nbsp;                        bytes4[1] = fieldName[4];</b>
+<b class="nc">&nbsp;                        bytes4[2] = fieldName[5];</b>
+<b class="nc">&nbsp;                        bytes4[3] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        int name1 = UNSAFE.getInt(bytes4, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match6&quot;, ldc(name1));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 7: {
+<b class="nc">&nbsp;                        int name1 = UNSAFE.getInt(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match7&quot;, ldc(name1));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 8: {
+<b class="nc">&nbsp;                        int name1 = UNSAFE.getInt(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match8&quot;, ldc(name1), ldc(fieldName[7]));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 9: {
+<b class="nc">&nbsp;                        byte[] bytes8 = new byte[8];</b>
+<b class="nc">&nbsp;                        System.arraycopy(fieldName, 3, bytes8, 0, 6);</b>
+<b class="nc">&nbsp;                        bytes8[6] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        bytes8[7] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(bytes8, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match9&quot;, ldc(name1));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 10: {
+<b class="nc">&nbsp;                        byte[] bytes8 = new byte[8];</b>
+<b class="nc">&nbsp;                        System.arraycopy(fieldName, 3, bytes8, 0, 7);</b>
+<b class="nc">&nbsp;                        bytes8[7] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(bytes8, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match10&quot;, ldc(name1));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 11: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match11&quot;, ldc(name1));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 12: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match12&quot;, ldc(name1), ldc(fieldName[11]));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 13: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        byte[] bytes4 = new byte[4];</b>
+<b class="nc">&nbsp;                        bytes4[0] = fieldName[11];</b>
+<b class="nc">&nbsp;                        bytes4[1] = fieldName[12];</b>
+<b class="nc">&nbsp;                        bytes4[2] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        bytes4[3] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;                        int name2 = UNSAFE.getInt(bytes4, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match13&quot;, ldc(name1), ldc(name2));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 14: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        byte[] bytes4 = new byte[4];</b>
+<b class="nc">&nbsp;                        bytes4[0] = fieldName[11];</b>
+<b class="nc">&nbsp;                        bytes4[1] = fieldName[12];</b>
+<b class="nc">&nbsp;                        bytes4[2] = fieldName[13];</b>
+<b class="nc">&nbsp;                        bytes4[3] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        int name2 = UNSAFE.getInt(bytes4, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match14&quot;, ldc(name1), ldc(name2));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 15: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        int name2 = UNSAFE.getInt(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match15&quot;, ldc(name1), ldc(name2));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 16: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        int name2 = UNSAFE.getInt(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match16&quot;, ldc(name1), ldc(name2), ldc(fieldName[15]));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 17: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        byte[] bytes8 = new byte[8];</b>
+<b class="nc">&nbsp;                        System.arraycopy(fieldName, 11, bytes8, 0, 6);</b>
+<b class="nc">&nbsp;                        bytes8[6] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        bytes8[7] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(bytes8, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match17&quot;, ldc(name1), ldc(name2));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 18: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        byte[] bytes8 = new byte[8];</b>
+<b class="nc">&nbsp;                        System.arraycopy(fieldName, 11, bytes8, 0, 7);</b>
+<b class="nc">&nbsp;                        bytes8[7] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(bytes8, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match18&quot;, ldc(name1), ldc(name2));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 19: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match19&quot;, ldc(name1), ldc(name2));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 20: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match20&quot;, ldc(name1), ldc(name2), ldc(fieldName[19]));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 21: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        byte[] bytes4 = new byte[4];</b>
+<b class="nc">&nbsp;                        bytes4[0] = fieldName[19];</b>
+<b class="nc">&nbsp;                        bytes4[1] = fieldName[20];</b>
+<b class="nc">&nbsp;                        bytes4[2] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        bytes4[3] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;                        int name3 = UNSAFE.getInt(bytes4, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match21&quot;, ldc(name1), ldc(name2), ldc(name3));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 22: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        byte[] bytes4 = new byte[4];</b>
+<b class="nc">&nbsp;                        bytes4[0] = fieldName[19];</b>
+<b class="nc">&nbsp;                        bytes4[1] = fieldName[20];</b>
+<b class="nc">&nbsp;                        bytes4[2] = fieldName[21];</b>
+<b class="nc">&nbsp;                        bytes4[3] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        int name3 = UNSAFE.getInt(bytes4, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match22&quot;, ldc(name1), ldc(name2), ldc(name3));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 23: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        int name3 = UNSAFE.getInt(fieldName, ARRAY_BYTE_BASE_OFFSET + 19);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match23&quot;, ldc(name1), ldc(name2), ldc(name3));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 24: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        int name3 = UNSAFE.getInt(fieldName, ARRAY_BYTE_BASE_OFFSET + 19);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match24&quot;, ldc(name1), ldc(name2), ldc(name3), ldc(fieldName[23]));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 25: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        byte[] bytes8 = new byte[8];</b>
+<b class="nc">&nbsp;                        System.arraycopy(fieldName, 19, bytes8, 0, 6);</b>
+<b class="nc">&nbsp;                        bytes8[6] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        bytes8[7] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;                        long name3 = UNSAFE.getLong(bytes8, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match25&quot;, ldc(name1), ldc(name2), ldc(name3));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 26: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        byte[] bytes8 = new byte[8];</b>
+<b class="nc">&nbsp;                        System.arraycopy(fieldName, 19, bytes8, 0, 7);</b>
+<b class="nc">&nbsp;                        bytes8[7] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        long name3 = UNSAFE.getLong(bytes8, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match26&quot;, ldc(name1), ldc(name2), ldc(name3));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 27: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        long name3 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 19);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match27&quot;, ldc(name1), ldc(name2), ldc(name3));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 28: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        long name3 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 19);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match28&quot;, ldc(name1), ldc(name2), ldc(name3));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 29: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        long name3 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 19);</b>
+<b class="nc">&nbsp;                        byte[] bytes4 = new byte[4];</b>
+<b class="nc">&nbsp;                        bytes4[0] = fieldName[27];</b>
+<b class="nc">&nbsp;                        bytes4[1] = fieldName[28];</b>
+<b class="nc">&nbsp;                        bytes4[2] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        bytes4[3] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;                        int name4 = UNSAFE.getInt(bytes4, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match29&quot;, ldc(name1), ldc(name2), ldc(name3), ldc(name4));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 30: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        long name3 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 19);</b>
+<b class="nc">&nbsp;                        byte[] bytes4 = new byte[4];</b>
+<b class="nc">&nbsp;                        bytes4[0] = fieldName[27];</b>
+<b class="nc">&nbsp;                        bytes4[1] = fieldName[28];</b>
+<b class="nc">&nbsp;                        bytes4[2] = fieldName[29];</b>
+<b class="nc">&nbsp;                        bytes4[3] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        int name4 = UNSAFE.getInt(bytes4, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match30&quot;, ldc(name1), ldc(name2), ldc(name3), ldc(name4));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 31: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        long name3 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 19);</b>
+<b class="nc">&nbsp;                        int name4 = UNSAFE.getInt(fieldName, ARRAY_BYTE_BASE_OFFSET + 27);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match31&quot;, ldc(name1), ldc(name2), ldc(name3), ldc(name4));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 32: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        long name3 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 19);</b>
+<b class="nc">&nbsp;                        int name4 = UNSAFE.getInt(fieldName, ARRAY_BYTE_BASE_OFFSET + 27);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match32&quot;, ldc(name1), ldc(name2), ldc(name3), ldc(name4), ldc(fieldName[31]));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 33: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        long name3 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 19);</b>
+<b class="nc">&nbsp;                        byte[] bytes8 = new byte[8];</b>
+<b class="nc">&nbsp;                        System.arraycopy(fieldName, 27, bytes8, 0, 6);</b>
+<b class="nc">&nbsp;                        bytes8[6] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        bytes8[7] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;                        long name4 = UNSAFE.getLong(bytes8, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match33&quot;, ldc(name1), ldc(name2), ldc(name3), ldc(name4));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 34: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        long name3 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 19);</b>
+<b class="nc">&nbsp;                        byte[] bytes8 = new byte[8];</b>
+<b class="nc">&nbsp;                        System.arraycopy(fieldName, 27, bytes8, 0, 7);</b>
+<b class="nc">&nbsp;                        bytes8[7] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        long name4 = UNSAFE.getLong(bytes8, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match34&quot;, ldc(name1), ldc(name2), ldc(name3), ldc(name4));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 35: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        long name3 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 19);</b>
+<b class="nc">&nbsp;                        long name4 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 27);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match35&quot;, ldc(name1), ldc(name2), ldc(name3), ldc(name4));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 36: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        long name3 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 19);</b>
+<b class="nc">&nbsp;                        long name4 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 27);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match36&quot;, ldc(name1), ldc(name2), ldc(name3), ldc(name4), ldc(fieldName[35]));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 37: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        long name3 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 19);</b>
+<b class="nc">&nbsp;                        long name4 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 27);</b>
+<b class="nc">&nbsp;                        byte[] bytes4 = new byte[4];</b>
+<b class="nc">&nbsp;                        bytes4[0] = fieldName[35];</b>
+<b class="nc">&nbsp;                        bytes4[1] = fieldName[36];</b>
+<b class="nc">&nbsp;                        bytes4[2] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        bytes4[3] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;                        int name5 = UNSAFE.getInt(bytes4, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match37&quot;, ldc(name1), ldc(name2), ldc(name3), ldc(name4), ldc(name5));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 38: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        long name3 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 19);</b>
+<b class="nc">&nbsp;                        long name4 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 27);</b>
+<b class="nc">&nbsp;                        byte[] bytes4 = new byte[4];</b>
+<b class="nc">&nbsp;                        bytes4[0] = fieldName[35];</b>
+<b class="nc">&nbsp;                        bytes4[1] = fieldName[36];</b>
+<b class="nc">&nbsp;                        bytes4[2] = fieldName[37];</b>
+<b class="nc">&nbsp;                        bytes4[3] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        int name5 = UNSAFE.getInt(bytes4, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match38&quot;, ldc(name1), ldc(name2), ldc(name3), ldc(name4), ldc(name5));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 39: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        long name3 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 19);</b>
+<b class="nc">&nbsp;                        long name4 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 27);</b>
+<b class="nc">&nbsp;                        int name5 = UNSAFE.getInt(fieldName, ARRAY_BYTE_BASE_OFFSET + 35);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match39&quot;, ldc(name1), ldc(name2), ldc(name3), ldc(name4), ldc(name5));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 40: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        long name3 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 19);</b>
+<b class="nc">&nbsp;                        long name4 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 27);</b>
+<b class="nc">&nbsp;                        int name5 = UNSAFE.getInt(fieldName, ARRAY_BYTE_BASE_OFFSET + 35);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match40&quot;, ldc(name1), ldc(name2), ldc(name3), ldc(name4), ldc(name5), ldc(fieldName[39]));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 41: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        long name3 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 19);</b>
+<b class="nc">&nbsp;                        long name4 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 27);</b>
+&nbsp;
+<b class="nc">&nbsp;                        byte[] bytes8 = new byte[8];</b>
+<b class="nc">&nbsp;                        System.arraycopy(fieldName, 35, bytes8, 0, 6);</b>
+<b class="nc">&nbsp;                        bytes8[6] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        bytes8[7] = &#39;:&#39;;</b>
+<b class="nc">&nbsp;                        long name5 = UNSAFE.getLong(bytes8, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match41&quot;, ldc(name1), ldc(name2), ldc(name3), ldc(name4), ldc(name5));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 42: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        long name3 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 19);</b>
+<b class="nc">&nbsp;                        long name4 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 27);</b>
+<b class="nc">&nbsp;                        byte[] bytes8 = new byte[8];</b>
+<b class="nc">&nbsp;                        System.arraycopy(fieldName, 35, bytes8, 0, 7);</b>
+<b class="nc">&nbsp;                        bytes8[7] = &#39;&quot;&#39;;</b>
+<b class="nc">&nbsp;                        long name5 = UNSAFE.getLong(bytes8, ARRAY_BYTE_BASE_OFFSET);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match42&quot;, ldc(name1), ldc(name2), ldc(name3), ldc(name4), ldc(name5));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case 43: {
+<b class="nc">&nbsp;                        long name1 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 3);</b>
+<b class="nc">&nbsp;                        long name2 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 11);</b>
+<b class="nc">&nbsp;                        long name3 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 19);</b>
+<b class="nc">&nbsp;                        long name4 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 27);</b>
+<b class="nc">&nbsp;                        long name5 = UNSAFE.getLong(fieldName, ARRAY_BYTE_BASE_OFFSET + 35);</b>
+<b class="nc">&nbsp;                        nextIfMatch = invoke(jsonReader, &quot;nextIfName4Match43&quot;, ldc(name1), ldc(name2), ldc(name3), ldc(name4), ldc(name5));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    default:
+<b class="nc">&nbsp;                        throw new IllegalStateException(&quot;fieldNameLength &quot; + fieldNameLength);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Block.IfStmt nextIfMatchStmt = label.ifStmt(nextIfMatch);</b>
+<b class="nc">&nbsp;                genReadFieldValue(nextIfMatchStmt, fieldReaderIndex, info, fieldReader, jsonReader, object, forLabel, false);</b>
+<b class="nc">&nbsp;                nextIfMatchStmt.continueStmt(forLabel);</b>
+<b class="nc">&nbsp;                label.breakStmt();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static void genReadFieldValue(
+&nbsp;            Block mw,
+&nbsp;            int i,
+&nbsp;            StructInfo info,
+&nbsp;            AttributeInfo field,
+&nbsp;            Op jsonReader,
+&nbsp;            Op object,
+&nbsp;            String continueLabel,
+&nbsp;            boolean jsonb
+&nbsp;    ) {
+<b class="nc">&nbsp;        Op value = null;</b>
+<b class="nc">&nbsp;        String type = field.type.toString();</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean referenceDetect = info.referenceDetect;</b>
+<b class="nc">&nbsp;        if (referenceDetect) {</b>
+<b class="nc">&nbsp;            referenceDetect = CodeGenUtils.isReference(type);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (referenceDetect) {</b>
+<b class="nc">&nbsp;            Block.IfStmt isRef = mw.ifStmt(invoke(jsonReader, &quot;isReference&quot;));</b>
+&nbsp;
+<b class="nc">&nbsp;            OpName ref = var(&quot;ref&quot;);</b>
+<b class="nc">&nbsp;            isRef.declare(String.class, ref, invoke(jsonReader, &quot;readReference&quot;));</b>
+<b class="nc">&nbsp;            isRef.stmt(invoke(var(CodeGenUtils.fieldReader(i)), &quot;addResolveTask&quot;, jsonReader, object, ref));</b>
+<b class="nc">&nbsp;            isRef.continueStmt(continueLabel);</b>
+<b class="nc">&nbsp;            mw.newLine();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String readDirectMethod = CodeGenUtils.getReadDirectMethod(type);</b>
+<b class="nc">&nbsp;        if (readDirectMethod != null) {</b>
+<b class="nc">&nbsp;            value = Opcodes.invoke(jsonReader, readDirectMethod);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            String fieldName = field.name;</b>
+<b class="nc">&nbsp;            OpName fieldValue = var(fieldName);</b>
+<b class="nc">&nbsp;            mw.declare(type, fieldValue);</b>
+&nbsp;
+<b class="nc">&nbsp;            boolean list = type.startsWith(&quot;java.util.List&lt;&quot;);</b>
+<b class="nc">&nbsp;            boolean mapStr = type.startsWith(&quot;java.util.Map&lt;java.lang.String,&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (list) {</b>
+<b class="nc">&nbsp;                value = genReadFieldValueList(mw, i, jsonReader, type, fieldName, value, fieldValue, referenceDetect);</b>
+<b class="nc">&nbsp;            } else if (mapStr) {</b>
+<b class="nc">&nbsp;                genReadFieldValueMap(mw, i, jsonReader, type, fieldName, fieldValue, referenceDetect);</b>
+<b class="nc">&nbsp;                value = fieldValue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (value == null) {</b>
+<b class="nc">&nbsp;                mw.ifNull(var(CodeGenUtils.fieldObjectReader(i)))</b>
+<b class="nc">&nbsp;                        .putField(</b>
+<b class="nc">&nbsp;                                CodeGenUtils.fieldObjectReader(i),</b>
+<b class="nc">&nbsp;                                invoke(var(CodeGenUtils.fieldReader(i)), &quot;getObjectReader&quot;, jsonReader)</b>
+&nbsp;                        );
+<b class="nc">&nbsp;                mw.stmt(</b>
+<b class="nc">&nbsp;                        assign(</b>
+&nbsp;                                fieldValue,
+<b class="nc">&nbsp;                                cast(</b>
+<b class="nc">&nbsp;                                        invoke(</b>
+<b class="nc">&nbsp;                                                var(fieldObjectReader(i)),</b>
+&nbsp;                                                jsonb ? &quot;readJSONBObject&quot; : &quot;readObject&quot;,
+&nbsp;                                                jsonReader,
+<b class="nc">&nbsp;                                                getField(var(fieldReader(i)), &quot;fieldType&quot;),</b>
+<b class="nc">&nbsp;                                                ldc(field.name),</b>
+<b class="nc">&nbsp;                                                ldc(field.readerFeatures)</b>
+&nbsp;                                        ),
+&nbsp;                                        type
+&nbsp;                                )
+&nbsp;                        )
+&nbsp;                );
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            value = fieldValue;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (field.setMethod != null) {</b>
+<b class="nc">&nbsp;            mw.invoke(object, field.setMethod.getSimpleName().toString(), value);</b>
+<b class="nc">&nbsp;        } else if (field.field != null) {</b>
+<b class="nc">&nbsp;            mw.putField(object, field.field.getSimpleName().toString(), value);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new JSONException(&quot;TODO&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Op genReadFieldValueList(
+&nbsp;            Block mw,
+&nbsp;            int i,
+&nbsp;            Op jsonReader,
+&nbsp;            String type,
+&nbsp;            String fieldName,
+&nbsp;            Op value,
+&nbsp;            OpName fieldValue,
+&nbsp;            boolean referenceDetect
+&nbsp;    ) {
+<b class="nc">&nbsp;        String itemType = type.substring(15, type.length() - 1);</b>
+<b class="nc">&nbsp;        boolean itemTypeIsClass = itemType.indexOf(&#39;&lt;&#39;) == -1;</b>
+<b class="nc">&nbsp;        if (itemTypeIsClass) {</b>
+<b class="nc">&nbsp;            Block.IfStmt nextIfNull = mw.ifStmt(invoke(jsonReader, &quot;nextIfNull&quot;));</b>
+<b class="nc">&nbsp;            nextIfNull.stmt(assign(fieldValue, ldc(null)));</b>
+<b class="nc">&nbsp;            Block nextIfNullElse = nextIfNull.elseStmt();</b>
+<b class="nc">&nbsp;            nextIfNullElse.stmt(assign(fieldValue, allocate(ArrayList.class)));</b>
+&nbsp;
+<b class="nc">&nbsp;            String readDirectMethod = CodeGenUtils.getReadDirectMethod(itemType);</b>
+<b class="nc">&nbsp;            OpName itemReader = var(CodeGenUtils.fieldItemObjectReader(i));</b>
+<b class="nc">&nbsp;            if (readDirectMethod == null) {</b>
+<b class="nc">&nbsp;                nextIfNullElse.ifNull(itemReader).stmt(</b>
+<b class="nc">&nbsp;                        assign(</b>
+&nbsp;                                itemReader,
+<b class="nc">&nbsp;                                invoke(getField(THIS, fieldReader(i)), &quot;getItemObjectReader&quot;, jsonReader)</b>
+&nbsp;                        )
+&nbsp;                );
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (referenceDetect) {</b>
+<b class="nc">&nbsp;                referenceDetect = CodeGenUtils.isReference(itemType);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            OpName for_i;
+<b class="nc">&nbsp;            if (fieldName.equals(&quot;i&quot;)) {</b>
+<b class="nc">&nbsp;                for_i = var(&quot;j&quot;);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                for_i = var(&quot;i&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Block.IfStmt nextIfMatch = nextIfNullElse.ifStmt(invoke(jsonReader, &quot;nextIfArrayStart&quot;));</b>
+&nbsp;            Block whileStmt;
+<b class="nc">&nbsp;            if (referenceDetect) {</b>
+<b class="nc">&nbsp;                whileStmt = nextIfMatch.forStmt(int.class, assign(for_i, ldc(0)), not(invoke(jsonReader, &quot;nextIfArrayEnd&quot;)), increment(for_i));</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                whileStmt = nextIfMatch.whileStmtStmt(not(invoke(jsonReader, &quot;nextIfArrayEnd&quot;)));</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            Op item;
+<b class="nc">&nbsp;            if (readDirectMethod != null) {</b>
+<b class="nc">&nbsp;                item = invoke(jsonReader, readDirectMethod);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                item = cast(invoke(itemReader, &quot;readObject&quot;, jsonReader, ldc(null), ldc(null), ldc(0L)), itemType);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (referenceDetect) {</b>
+<b class="nc">&nbsp;                OpName listItem = var(fieldName + &quot;_item&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Block.IfStmt isReference = whileStmt.ifStmt(invoke(jsonReader, &quot;isReference&quot;));</b>
+<b class="nc">&nbsp;                OpName ref = var(&quot;ref&quot;);</b>
+<b class="nc">&nbsp;                isReference.declare(String.class, ref, invoke(jsonReader, &quot;readReference&quot;));</b>
+<b class="nc">&nbsp;                isReference.invoke(jsonReader, &quot;addResolveTask&quot;, fieldValue, for_i, invokeStatic(JSONPath.class, &quot;of&quot;, ref));</b>
+<b class="nc">&nbsp;                isReference.stmt(invoke(fieldValue, &quot;add&quot;, ldc(null)));</b>
+<b class="nc">&nbsp;                isReference.continueStmt();</b>
+<b class="nc">&nbsp;                whileStmt.newLine();</b>
+&nbsp;
+<b class="nc">&nbsp;                whileStmt.declare(itemType, listItem, item);</b>
+<b class="nc">&nbsp;                item = listItem;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            whileStmt.stmt(invoke(fieldValue, &quot;add&quot;, item));</b>
+&nbsp;
+<b class="nc">&nbsp;            value = fieldValue;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void genReadFieldValueMap(
+&nbsp;            Block mw, int i,
+&nbsp;            Op jsonReader,
+&nbsp;            String type,
+&nbsp;            String fieldName,
+&nbsp;            OpName fieldValue,
+&nbsp;            boolean referenceDetect
+&nbsp;    ) {
+&nbsp;        // TODO referenceDetect
+<b class="nc">&nbsp;        String itemType = type.substring(31, type.length() - 1);</b>
+<b class="nc">&nbsp;        boolean itemTypeIsClass = itemType.indexOf(&#39;&lt;&#39;) == -1;</b>
+&nbsp;//                    if (itemTypeIsClass) {
+&nbsp;//                    }
+<b class="nc">&nbsp;        Block.IfStmt nextIfNull = mw.ifStmt(invoke(jsonReader, &quot;nextIfNull&quot;));</b>
+<b class="nc">&nbsp;        nextIfNull.stmt(assign(fieldValue, ldc(null)));</b>
+<b class="nc">&nbsp;        Block nextIfNullElse = nextIfNull.elseStmt();</b>
+<b class="nc">&nbsp;        OpName itemReader = var(CodeGenUtils.fieldItemObjectReader(i));</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean readDirect = CodeGenUtils.supportReadDirect(itemType);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (!readDirect) {</b>
+<b class="nc">&nbsp;            nextIfNullElse.ifNull(itemReader).stmt(</b>
+<b class="nc">&nbsp;                    assign(</b>
+&nbsp;                            itemReader,
+<b class="nc">&nbsp;                            invoke(jsonReader, &quot;getObjectReader&quot;, getStatic(itemType, &quot;class&quot;))</b>
+&nbsp;                    )
+&nbsp;            );
+<b class="nc">&nbsp;            nextIfNullElse.newLine();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        nextIfNullElse.stmt(assign(fieldValue, allocate(HashMap.class)));</b>
+&nbsp;
+<b class="nc">&nbsp;        nextIfNullElse.newLine();</b>
+<b class="nc">&nbsp;        nextIfNullElse.invoke(jsonReader, &quot;nextIfObjectStart&quot;);</b>
+<b class="nc">&nbsp;        Block.WhileStmt readMapWhile = nextIfNullElse.whileStmtStmt(not(invoke(jsonReader, &quot;nextIfObjectEnd&quot;)));</b>
+&nbsp;
+<b class="nc">&nbsp;        if (referenceDetect) {</b>
+<b class="nc">&nbsp;            referenceDetect = CodeGenUtils.isReference(itemType);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        Op mapEntryValue;
+<b class="nc">&nbsp;        if (readDirect) {</b>
+<b class="nc">&nbsp;            String method = CodeGenUtils.getReadDirectMethod(itemType);</b>
+<b class="nc">&nbsp;            mapEntryValue = invoke(jsonReader, method);</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            mapEntryValue = cast(</b>
+<b class="nc">&nbsp;                    invoke(itemReader, &quot;readObject&quot;, jsonReader, getStatic(itemType, &quot;class&quot;), ldc(fieldName), var(&quot;features&quot;)),</b>
+&nbsp;                    itemType
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Op mapEntryKey = invoke(jsonReader, &quot;readFieldName&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (referenceDetect) {</b>
+<b class="nc">&nbsp;            OpName mapKey = var(fieldName + &quot;_key&quot;);</b>
+<b class="nc">&nbsp;            OpName mapValue = var(fieldName + &quot;_value&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            readMapWhile.declare(String.class, mapKey, mapEntryKey);</b>
+<b class="nc">&nbsp;            mapEntryKey = mapKey;</b>
+&nbsp;
+<b class="nc">&nbsp;            readMapWhile.newLine();</b>
+<b class="nc">&nbsp;            Block.IfStmt isReference = readMapWhile.ifStmt(invoke(jsonReader, &quot;isReference&quot;));</b>
+<b class="nc">&nbsp;            OpName ref = var(&quot;ref&quot;);</b>
+<b class="nc">&nbsp;            isReference.declare(String.class, ref, invoke(jsonReader, &quot;readReference&quot;));</b>
+<b class="nc">&nbsp;            isReference.invoke(jsonReader, &quot;addResolveTask&quot;, fieldValue, mapKey, invokeStatic(JSONPath.class, &quot;of&quot;, ref));</b>
+<b class="nc">&nbsp;            isReference.continueStmt();</b>
+<b class="nc">&nbsp;            readMapWhile.newLine();</b>
+&nbsp;
+<b class="nc">&nbsp;            readMapWhile.declare(itemType, mapValue, mapEntryValue);</b>
+<b class="nc">&nbsp;            mapEntryValue = mapValue;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        readMapWhile.invoke(</b>
+&nbsp;                fieldValue,
+&nbsp;                &quot;put&quot;,
+&nbsp;                mapEntryKey,
+&nbsp;                mapEntryValue
+&nbsp;        );
+<b class="nc">&nbsp;        nextIfNullElse.newLine();</b>
+<b class="nc">&nbsp;        nextIfNullElse.invoke(jsonReader, &quot;nextIfComma&quot;);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:38</div>
+</div>
+</body>
+</html>

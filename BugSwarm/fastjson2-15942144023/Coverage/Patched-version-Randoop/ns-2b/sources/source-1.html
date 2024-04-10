@@ -1,0 +1,364 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Twitter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.twitter</a>
+</div>
+
+<h1>Coverage Summary for Class: Twitter (com.alibaba.fastjson2.benchmark.twitter)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Twitter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Twitter$Entities</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Twitter$Hashtag</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Twitter$RetweetedStatus</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Twitter$User</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Twitter$UserMention</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.twitter;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+<b class="nc">&nbsp;public class Twitter {</b>
+&nbsp;    public String text;
+&nbsp;    public Boolean truncated;
+&nbsp;    @JsonProperty(&quot;in_reply_to_user_id&quot;)
+&nbsp;    public String inReplyToUserId;
+&nbsp;    @JsonProperty(&quot;in_reply_to_status_id&quot;)
+&nbsp;    public String inReplyToStatusId;
+&nbsp;    public Boolean favorited;
+&nbsp;    public String source;
+&nbsp;    @JsonProperty(&quot;in_reply_to_screen_name&quot;)
+&nbsp;    public String inReplyToScreenName;
+&nbsp;    @JsonProperty(&quot;in_reply_to_status_id_str&quot;)
+&nbsp;    public String inReplyToStatusIdStr;
+&nbsp;    @JsonProperty(&quot;id_str&quot;)
+&nbsp;    public String idStr;
+&nbsp;    public Entities entities;
+&nbsp;    public String contributors;
+&nbsp;    public Boolean retweeted;
+&nbsp;    @JsonProperty(&quot;in_reply_to_user_id_str&quot;)
+&nbsp;    public String inReplyToUserIdStr;
+&nbsp;    public String place;
+&nbsp;    @JsonProperty(&quot;retweet_count&quot;)
+&nbsp;    public Integer retweetCount;
+&nbsp;    @JsonProperty(&quot;created_at&quot;)
+&nbsp;    public String createdAt;
+&nbsp;
+&nbsp;    @JsonProperty(&quot;retweeted_status&quot;)
+&nbsp;    public RetweetedStatus retweetedStatus;
+&nbsp;    public User user;
+&nbsp;    public Long id;
+&nbsp;    public String coordinates;
+&nbsp;    public String geo;
+&nbsp;
+<b class="nc">&nbsp;    public static class UserMention {</b>
+&nbsp;        public List&lt;Integer&gt; indices;
+&nbsp;        @JsonProperty(&quot;screen_name&quot;)
+&nbsp;        public String screenName;
+&nbsp;        @JsonProperty(&quot;id_str&quot;)
+&nbsp;        public String idStr;
+&nbsp;        public String name;
+&nbsp;        public Integer id;
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public static class Entities {</b>
+&nbsp;        @JsonProperty(&quot;user_mentions&quot;)
+&nbsp;        public List&lt;UserMention&gt; userMentions;
+&nbsp;        public List urls;
+&nbsp;        public List hashtags;
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public static class Hashtag {</b>
+&nbsp;        public String text;
+&nbsp;        public List&lt;Integer&gt; indices;
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public static class User {</b>
+&nbsp;        public String notifications;
+&nbsp;        @JsonProperty(&quot;profile_use_background_image&quot;)
+&nbsp;        public Boolean profileUseBackgroundImage;
+&nbsp;        @JsonProperty(&quot;statuses_count&quot;)
+&nbsp;        public Integer statusesCount;
+&nbsp;        @JsonProperty(&quot;profile_background_color&quot;)
+&nbsp;        public String profileBackgroundColor;
+&nbsp;        @JsonProperty(&quot;followers_count&quot;)
+&nbsp;        public Integer followersCount;
+&nbsp;        @JsonProperty(&quot;profile_image_url&quot;)
+&nbsp;        public String profileImageUrl;
+&nbsp;        @JsonProperty(&quot;listed_count&quot;)
+&nbsp;        public Integer listedCount;
+&nbsp;        @JsonProperty(&quot;profile_background_image_url&quot;)
+&nbsp;        public String profileBackgroundImageUrl;
+&nbsp;        public String description;
+&nbsp;        @JsonProperty(&quot;screen_name&quot;)
+&nbsp;        public String screenName;
+&nbsp;        @JsonProperty(&quot;default_profile&quot;)
+&nbsp;        public Boolean defaultProfile;
+&nbsp;        public Boolean verified;
+&nbsp;        @JsonProperty(&quot;time_zone&quot;)
+&nbsp;        public String timeZone;
+&nbsp;        @JsonProperty(&quot;profile_text_color&quot;)
+&nbsp;        public String profileTextColor;
+&nbsp;        @JsonProperty(&quot;is_translator&quot;)
+&nbsp;        public Boolean isTranslator;
+&nbsp;        @JsonProperty(&quot;profile_sidebar_fill_color&quot;)
+&nbsp;        public String profileSidebarFillColor;
+&nbsp;        public String location;
+&nbsp;        @JsonProperty(&quot;id_str&quot;)
+&nbsp;        public String idStr;
+&nbsp;        @JsonProperty(&quot;default_profile_image&quot;)
+&nbsp;        public Boolean defaultProfileImage;
+&nbsp;        @JsonProperty(&quot;profile_background_tile&quot;)
+&nbsp;        public Boolean profileBackgroundTile;
+&nbsp;        public String lang;
+&nbsp;        @JsonProperty(&quot;friends_count&quot;)
+&nbsp;        public Integer friendsCount;
+&nbsp;        @JsonProperty(&quot;protected&quot;)
+&nbsp;        public Boolean isProtected;
+&nbsp;        @JsonProperty(&quot;favourites_count&quot;)
+&nbsp;        public Integer favouritesCount;
+&nbsp;        @JsonProperty(&quot;created_at&quot;)
+&nbsp;        public String createdAt;
+&nbsp;        @JsonProperty(&quot;profile_link_color&quot;)
+&nbsp;        public String profileLinkColor;
+&nbsp;        public String name;
+&nbsp;        @JsonProperty(&quot;show_all_inline_media&quot;)
+&nbsp;        public Boolean showAllInlineMedia;
+&nbsp;        @JsonProperty(&quot;follow_request_sent&quot;)
+&nbsp;        public String followRequestSent;
+&nbsp;        @JsonProperty(&quot;geo_enabled&quot;)
+&nbsp;        public Boolean geoEnabled;
+&nbsp;        @JsonProperty(&quot;profile_sidebar_border_color&quot;)
+&nbsp;        public String profileSidebarBorderColor;
+&nbsp;        public String url;
+&nbsp;        public Integer id;
+&nbsp;        @JsonProperty(&quot;contributors_enabled&quot;)
+&nbsp;        public Boolean contributorsEnabled;
+&nbsp;        public String following;
+&nbsp;        @JsonProperty(&quot;utc_offset&quot;)
+&nbsp;        public String utcOffset;
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public static class RetweetedStatus {</b>
+&nbsp;        public String text;
+&nbsp;        public Boolean truncated;
+&nbsp;        @JsonProperty(&quot;in_reply_to_user_id&quot;)
+&nbsp;        public String inReplyToUserId;
+&nbsp;        @JsonProperty(&quot;in_reply_to_status_id&quot;)
+&nbsp;        public String inReplyToStatusId;
+&nbsp;        public Boolean favorited;
+&nbsp;        public String source;
+&nbsp;        @JsonProperty(&quot;in_reply_to_screen_name&quot;)
+&nbsp;        public String inReplyToScreenName;
+&nbsp;        @JsonProperty(&quot;in_reply_to_status_id_str&quot;)
+&nbsp;        public String inReplyToStatusIdStr;
+&nbsp;        @JsonProperty(&quot;id_str&quot;)
+&nbsp;        public String idStr;
+&nbsp;        public Entities entities;
+&nbsp;        public String contributors;
+&nbsp;        public Boolean retweeted;
+&nbsp;        @JsonProperty(&quot;in_reply_to_user_id_str&quot;)
+&nbsp;        public String inReplyToUserIdStr;
+&nbsp;        public String place;
+&nbsp;        @JsonProperty(&quot;retweet_count&quot;)
+&nbsp;        public Integer retweetCount;
+&nbsp;        @JsonProperty(&quot;created_at&quot;)
+&nbsp;        public String createdAt;
+&nbsp;        public User user;
+&nbsp;        public Long id;
+&nbsp;        public String coordinates;
+&nbsp;        public String geo;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:35</div>
+</div>
+</body>
+</html>

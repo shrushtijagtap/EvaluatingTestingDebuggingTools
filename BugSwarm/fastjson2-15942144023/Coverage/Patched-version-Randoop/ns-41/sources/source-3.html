@@ -1,0 +1,284 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONStreamReaderUTF8</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.stream</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONStreamReaderUTF8 (com.alibaba.fastjson2.stream)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONStreamReaderUTF8</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/99)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.stream;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONFactory;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReaderAdapter;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;
+&nbsp;class JSONStreamReaderUTF8&lt;T&gt;
+&nbsp;        extends JSONStreamReader&lt;T&gt; {
+&nbsp;    byte[] buf;
+&nbsp;    final InputStream input;
+&nbsp;    final Charset charset;
+&nbsp;    final JSONReader.Context context;
+&nbsp;
+&nbsp;    JSONStreamReaderUTF8(InputStream input, Charset charset, Type[] types) {
+<b class="nc">&nbsp;        super(types);</b>
+<b class="nc">&nbsp;        this.charset = charset;</b>
+<b class="nc">&nbsp;        this.input = input;</b>
+<b class="nc">&nbsp;        this.context = JSONFactory.createReadContext();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    JSONStreamReaderUTF8(InputStream input, Charset charset, ObjectReaderAdapter objectReader) {
+<b class="nc">&nbsp;        super(objectReader);</b>
+<b class="nc">&nbsp;        this.charset = charset;</b>
+<b class="nc">&nbsp;        this.input = input;</b>
+<b class="nc">&nbsp;        this.context = JSONFactory.createReadContext();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean seekLine() throws IOException {
+<b class="nc">&nbsp;        if (buf == null) {</b>
+<b class="nc">&nbsp;            if (input != null) {</b>
+<b class="nc">&nbsp;                buf = new byte[SIZE_512K];</b>
+<b class="nc">&nbsp;                int cnt = input.read(buf);</b>
+<b class="nc">&nbsp;                if (cnt == -1) {</b>
+<b class="nc">&nbsp;                    inputEnd = true;</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                this.end = cnt;</b>
+&nbsp;
+<b class="nc">&nbsp;                if (end &gt; 3) {</b>
+<b class="nc">&nbsp;                    if (buf[0] == -17 &amp;&amp; buf[1] == -69 &amp;&amp; buf[2] == -65) {</b>
+<b class="nc">&nbsp;                        off = 3;</b>
+<b class="nc">&nbsp;                        lineNextStart = off;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int k = 0; k &lt; 3; ++k) {</b>
+<b class="nc">&nbsp;            lineTerminated = false;</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = off; i &lt; end; i++) {</b>
+<b class="nc">&nbsp;                if (i + 4 &lt; end) {</b>
+<b class="nc">&nbsp;                    byte b0 = buf[i];</b>
+<b class="nc">&nbsp;                    byte b1 = buf[i + 1];</b>
+<b class="nc">&nbsp;                    byte b2 = buf[i + 2];</b>
+<b class="nc">&nbsp;                    byte b3 = buf[i + 3];</b>
+<b class="nc">&nbsp;                    if (b0 &gt; &#39;&quot;&#39; &amp;&amp; b1 &gt; &#39;&quot;&#39; &amp;&amp; b2 &gt; &#39;&quot;&#39; &amp;&amp; b3 &gt; &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                        lineSize += 4;</b>
+<b class="nc">&nbsp;                        i += 3;</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                byte ch = buf[i];</b>
+<b class="nc">&nbsp;                if (ch == &#39;\n&#39;) {</b>
+<b class="nc">&nbsp;                    if (lineSize &gt; 0 || (features &amp; Feature.IgnoreEmptyLine.mask) == 0) {</b>
+<b class="nc">&nbsp;                        rowCount++;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    lineTerminated = true;</b>
+<b class="nc">&nbsp;                    lineSize = 0;</b>
+<b class="nc">&nbsp;                    lineEnd = i;</b>
+<b class="nc">&nbsp;                    lineStart = lineNextStart;</b>
+<b class="nc">&nbsp;                    lineNextStart = off = i + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;                    break;</b>
+<b class="nc">&nbsp;                } else if (ch == &#39;\r&#39;) {</b>
+<b class="nc">&nbsp;                    if (lineSize &gt; 0 || (features &amp; Feature.IgnoreEmptyLine.mask) == 0) {</b>
+<b class="nc">&nbsp;                        rowCount++;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    lineTerminated = true;</b>
+<b class="nc">&nbsp;                    lineSize = 0;</b>
+<b class="nc">&nbsp;                    lineEnd = i;</b>
+&nbsp;
+<b class="nc">&nbsp;                    int n = i + 1;</b>
+<b class="nc">&nbsp;                    if (n &gt;= end) {</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (buf[n] == &#39;\n&#39;) {</b>
+<b class="nc">&nbsp;                        i++;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    lineStart = lineNextStart;</b>
+<b class="nc">&nbsp;                    lineNextStart = off = i + 1;</b>
+&nbsp;
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    lineSize++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (!lineTerminated) {</b>
+<b class="nc">&nbsp;                if (input != null &amp;&amp; !inputEnd) {</b>
+<b class="nc">&nbsp;                    int len = end - off;</b>
+<b class="nc">&nbsp;                    if (off &gt; 0) {</b>
+<b class="nc">&nbsp;                        if (len &gt; 0) {</b>
+<b class="nc">&nbsp;                            System.arraycopy(buf, off, buf, 0, len);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        lineStart = lineNextStart = 0;</b>
+<b class="nc">&nbsp;                        off = 0;</b>
+<b class="nc">&nbsp;                        end = len;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    int cnt = input.read(buf, end, buf.length - end);</b>
+<b class="nc">&nbsp;                    if (cnt == -1) {</b>
+<b class="nc">&nbsp;                        inputEnd = true;</b>
+<b class="nc">&nbsp;                        if (off == end) {</b>
+<b class="nc">&nbsp;                            return false;</b>
+&nbsp;                        }
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        end += cnt;</b>
+<b class="nc">&nbsp;                        continue;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                lineStart = lineNextStart;</b>
+<b class="nc">&nbsp;                lineEnd = end;</b>
+<b class="nc">&nbsp;                rowCount++;</b>
+<b class="nc">&nbsp;                lineSize = 0;</b>
+<b class="nc">&nbsp;                off = end;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            lineTerminated = off == end;</b>
+<b class="nc">&nbsp;            break;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T readLineObject() {
+&nbsp;        try {
+<b class="nc">&nbsp;            if (inputEnd) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (input == null) {</b>
+<b class="nc">&nbsp;                if (off &gt;= end) {</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            boolean result = seekLine();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (!result) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;seekLine error&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        JSONReader reader = JSONReader.of(buf, lineStart, lineEnd - lineStart, charset, context);</b>
+&nbsp;
+&nbsp;        Object object;
+<b class="nc">&nbsp;        if (objectReader != null) {</b>
+<b class="nc">&nbsp;            object = objectReader.readObject(reader, null, null, features);</b>
+<b class="nc">&nbsp;        } else if (reader.isArray() &amp;&amp; types != null &amp;&amp; types.length != 0) {</b>
+<b class="nc">&nbsp;            object = reader.readList(types);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            object = reader.readAny();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return (T) object;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:35</div>
+</div>
+</body>
+</html>

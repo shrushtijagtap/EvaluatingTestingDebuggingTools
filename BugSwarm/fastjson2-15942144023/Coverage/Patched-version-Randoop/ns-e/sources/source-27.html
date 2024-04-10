@@ -1,0 +1,1833 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONReaderASCII</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONReaderASCII (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONReaderASCII</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/922)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.util.Fnv;
+&nbsp;import com.alibaba.fastjson2.util.JDKUtils;
+&nbsp;import com.alibaba.fastjson2.util.TypeUtils;
+&nbsp;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.JSONFactory.*;
+&nbsp;import static com.alibaba.fastjson2.util.JDKUtils.*;
+&nbsp;
+&nbsp;class JSONReaderASCII
+&nbsp;        extends JSONReaderUTF8 {
+&nbsp;    final String str;
+&nbsp;
+&nbsp;    JSONReaderASCII(Context ctx, String str, byte[] bytes, int offset, int length) {
+<b class="nc">&nbsp;        super(ctx, str, bytes, offset, length);</b>
+<b class="nc">&nbsp;        this.str = str;</b>
+<b class="nc">&nbsp;        nameAscii = true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final void next() {
+<b class="nc">&nbsp;        int offset = this.offset;</b>
+<b class="nc">&nbsp;        if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;            ch = EOI;</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final byte[] bytes = this.bytes;</b>
+<b class="nc">&nbsp;        byte ch = bytes[offset];</b>
+<b class="nc">&nbsp;        while (ch == &#39;\0&#39; || (ch &lt;= &#39; &#39; &amp;&amp; ((1L &lt;&lt; ch) &amp; SPACE) != 0)) {</b>
+<b class="nc">&nbsp;            offset++;</b>
+<b class="nc">&nbsp;            if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;                this.offset = offset;</b>
+<b class="nc">&nbsp;                this.ch = EOI;</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;            ch = bytes[offset];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.offset = offset + 1;</b>
+<b class="nc">&nbsp;        this.ch = (char) (ch &amp; 0xFF);</b>
+&nbsp;
+<b class="nc">&nbsp;        while (this.ch == &#39;/&#39; &amp;&amp; this.offset &lt; bytes.length &amp;&amp; bytes[this.offset] == &#39;/&#39;) {</b>
+<b class="nc">&nbsp;            skipLineComment();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public final boolean nextIfObjectStart() {
+<b class="nc">&nbsp;        int ch = this.ch;</b>
+<b class="nc">&nbsp;        if (ch != &#39;{&#39;) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int offset = this.offset;</b>
+<b class="nc">&nbsp;        if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;            this.ch = EOI;</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        byte[] bytes = this.bytes;</b>
+&nbsp;
+<b class="nc">&nbsp;        ch = bytes[offset++];</b>
+<b class="nc">&nbsp;        while (ch == &#39;\0&#39; || (ch &lt;= &#39; &#39; &amp;&amp; ((1L &lt;&lt; ch) &amp; SPACE) != 0)) {</b>
+<b class="nc">&nbsp;            if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;                this.ch = EOI;</b>
+<b class="nc">&nbsp;                this.offset = offset;</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            ch = bytes[offset++];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.ch = (char) (ch &amp; 0xFF);</b>
+<b class="nc">&nbsp;        this.offset = offset;</b>
+&nbsp;
+<b class="nc">&nbsp;        while (this.ch == &#39;/&#39; &amp;&amp; this.offset &lt; bytes.length &amp;&amp; bytes[this.offset] == &#39;/&#39;) {</b>
+<b class="nc">&nbsp;            skipLineComment();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final boolean nextIfObjectEnd() {
+<b class="nc">&nbsp;        int ch = this.ch;</b>
+<b class="nc">&nbsp;        if (ch == &#39;]&#39; || ch == EOI) {</b>
+<b class="nc">&nbsp;            throw new JSONException(info(&quot;Illegal syntax: `&quot; + (char) ch + &#39;`&#39;));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (ch != &#39;}&#39;) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int offset = this.offset;</b>
+<b class="nc">&nbsp;        if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;            this.ch = EOI;</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        byte[] bytes = this.bytes;</b>
+&nbsp;
+<b class="nc">&nbsp;        ch = bytes[offset++];</b>
+<b class="nc">&nbsp;        while (ch == &#39;\0&#39; || (ch &lt;= &#39; &#39; &amp;&amp; ((1L &lt;&lt; ch) &amp; SPACE) != 0)) {</b>
+<b class="nc">&nbsp;            if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;                this.ch = EOI;</b>
+<b class="nc">&nbsp;                this.offset = offset;</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            ch = bytes[offset++];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (ch == &#39;,&#39;) {</b>
+<b class="nc">&nbsp;            comma = true;</b>
+<b class="nc">&nbsp;            ch = bytes[offset++];</b>
+<b class="nc">&nbsp;            while (ch == &#39;\0&#39; || (ch &lt;= &#39; &#39; &amp;&amp; ((1L &lt;&lt; ch) &amp; SPACE) != 0)) {</b>
+<b class="nc">&nbsp;                if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;                    this.ch = EOI;</b>
+<b class="nc">&nbsp;                    this.offset = offset;</b>
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                ch = bytes[offset++];</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.ch = (char) (ch &amp; 0xFF);</b>
+<b class="nc">&nbsp;        this.offset = offset;</b>
+&nbsp;
+<b class="nc">&nbsp;        while (this.ch == &#39;/&#39; &amp;&amp; this.offset &lt; bytes.length &amp;&amp; bytes[this.offset] == &#39;/&#39;) {</b>
+<b class="nc">&nbsp;            skipLineComment();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final boolean nextIfComma() {
+<b class="nc">&nbsp;        final byte[] bytes = this.bytes;</b>
+<b class="nc">&nbsp;        int offset = this.offset;</b>
+<b class="nc">&nbsp;        int ch = this.ch;</b>
+<b class="nc">&nbsp;        if (ch != &#39;,&#39;) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        comma = true;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;            this.offset = offset;</b>
+<b class="nc">&nbsp;            this.ch = EOI;</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ch = bytes[offset];</b>
+<b class="nc">&nbsp;        while (ch == &#39;\0&#39; || (ch &lt;= &#39; &#39; &amp;&amp; ((1L &lt;&lt; ch) &amp; SPACE) != 0)) {</b>
+<b class="nc">&nbsp;            offset++;</b>
+<b class="nc">&nbsp;            if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;                this.offset = offset;</b>
+<b class="nc">&nbsp;                this.ch = EOI;</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            ch = bytes[offset];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.offset = offset + 1;</b>
+<b class="nc">&nbsp;        this.ch = (char) (ch &amp; 0xFF);</b>
+&nbsp;
+<b class="nc">&nbsp;        while (this.ch == &#39;/&#39; &amp;&amp; this.offset &lt; bytes.length &amp;&amp; bytes[this.offset] == &#39;/&#39;) {</b>
+<b class="nc">&nbsp;            skipLineComment();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final boolean nextIfMatch(char m) {
+<b class="nc">&nbsp;        final byte[] bytes = this.bytes;</b>
+<b class="nc">&nbsp;        int offset = this.offset;</b>
+<b class="nc">&nbsp;        int ch = this.ch;</b>
+<b class="nc">&nbsp;        while (ch &lt;= &#39; &#39; &amp;&amp; ((1L &lt;&lt; ch) &amp; SPACE) != 0) {</b>
+<b class="nc">&nbsp;            if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;                ch = EOI;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                ch = bytes[offset++];</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (ch != m) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        comma = m == &#39;,&#39;;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;            this.offset = offset;</b>
+<b class="nc">&nbsp;            this.ch = EOI;</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ch = bytes[offset];</b>
+<b class="nc">&nbsp;        while (ch == &#39;\0&#39; || (ch &lt;= &#39; &#39; &amp;&amp; ((1L &lt;&lt; ch) &amp; SPACE) != 0)) {</b>
+<b class="nc">&nbsp;            offset++;</b>
+<b class="nc">&nbsp;            if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;                this.offset = offset;</b>
+<b class="nc">&nbsp;                this.ch = EOI;</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            ch = bytes[offset];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.offset = offset + 1;</b>
+<b class="nc">&nbsp;        this.ch = (char) (ch &amp; 0xFF);</b>
+&nbsp;
+<b class="nc">&nbsp;        while (this.ch == &#39;/&#39; &amp;&amp; this.offset &lt; bytes.length &amp;&amp; bytes[this.offset] == &#39;/&#39;) {</b>
+<b class="nc">&nbsp;            skipLineComment();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final boolean nextIfArrayStart() {
+<b class="nc">&nbsp;        int ch = this.ch;</b>
+<b class="nc">&nbsp;        if (ch != &#39;[&#39;) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int offset = this.offset;</b>
+<b class="nc">&nbsp;        if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;            this.ch = EOI;</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        byte[] bytes = this.bytes;</b>
+&nbsp;
+<b class="nc">&nbsp;        ch = bytes[offset++];</b>
+<b class="nc">&nbsp;        while (ch == &#39;\0&#39; || (ch &lt;= &#39; &#39; &amp;&amp; ((1L &lt;&lt; ch) &amp; SPACE) != 0)) {</b>
+<b class="nc">&nbsp;            if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;                this.ch = EOI;</b>
+<b class="nc">&nbsp;                this.offset = offset;</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            ch = bytes[offset++];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.ch = (char) (ch &amp; 0xFF);</b>
+<b class="nc">&nbsp;        this.offset = offset;</b>
+&nbsp;
+<b class="nc">&nbsp;        while (this.ch == &#39;/&#39; &amp;&amp; this.offset &lt; bytes.length &amp;&amp; bytes[this.offset] == &#39;/&#39;) {</b>
+<b class="nc">&nbsp;            skipLineComment();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final boolean nextIfArrayEnd() {
+<b class="nc">&nbsp;        int ch = this.ch;</b>
+<b class="nc">&nbsp;        if (ch == &#39;}&#39; || ch == EOI) {</b>
+<b class="nc">&nbsp;            throw new JSONException(info(&quot;Illegal syntax: `&quot; + (char) ch + &#39;`&#39;));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (ch != &#39;]&#39;) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int offset = this.offset;</b>
+<b class="nc">&nbsp;        if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;            this.ch = EOI;</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        byte[] bytes = this.bytes;</b>
+&nbsp;
+<b class="nc">&nbsp;        ch = bytes[offset++];</b>
+<b class="nc">&nbsp;        while (ch == &#39;\0&#39; || (ch &lt;= &#39; &#39; &amp;&amp; ((1L &lt;&lt; ch) &amp; SPACE) != 0)) {</b>
+<b class="nc">&nbsp;            if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;                this.ch = EOI;</b>
+<b class="nc">&nbsp;                this.offset = offset;</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            ch = bytes[offset++];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (ch == &#39;,&#39;) {</b>
+<b class="nc">&nbsp;            comma = true;</b>
+<b class="nc">&nbsp;            ch = bytes[offset++];</b>
+<b class="nc">&nbsp;            while (ch == &#39;\0&#39; || (ch &lt;= &#39; &#39; &amp;&amp; ((1L &lt;&lt; ch) &amp; SPACE) != 0)) {</b>
+<b class="nc">&nbsp;                if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;                    this.ch = EOI;</b>
+<b class="nc">&nbsp;                    this.offset = offset;</b>
+<b class="nc">&nbsp;                    return true;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                ch = bytes[offset++];</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.ch = (char) (ch &amp; 0xFF);</b>
+<b class="nc">&nbsp;        this.offset = offset;</b>
+&nbsp;
+<b class="nc">&nbsp;        while (this.ch == &#39;/&#39; &amp;&amp; this.offset &lt; bytes.length &amp;&amp; bytes[this.offset] == &#39;/&#39;) {</b>
+<b class="nc">&nbsp;            skipLineComment();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final boolean nextIfNullOrEmptyString() {
+<b class="nc">&nbsp;        final char first = this.ch;</b>
+<b class="nc">&nbsp;        final int end = this.end;</b>
+<b class="nc">&nbsp;        int offset = this.offset;</b>
+<b class="nc">&nbsp;        byte[] bytes = this.bytes;</b>
+<b class="nc">&nbsp;        if (first == &#39;n&#39;</b>
+&nbsp;                &amp;&amp; offset + 2 &lt; end
+&nbsp;                &amp;&amp; bytes[offset] == &#39;u&#39;
+&nbsp;                &amp;&amp; bytes[offset + 1] == &#39;l&#39;
+&nbsp;                &amp;&amp; bytes[offset + 2] == &#39;l&#39;
+&nbsp;        ) {
+<b class="nc">&nbsp;            offset += 3;</b>
+<b class="nc">&nbsp;        } else if ((first == &#39;&quot;&#39; || first == &#39;\&#39;&#39;) &amp;&amp; offset &lt; end &amp;&amp; bytes[offset] == first) {</b>
+<b class="nc">&nbsp;            offset++;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char ch = offset == end ? EOI : (char) bytes[offset];</b>
+&nbsp;
+<b class="nc">&nbsp;        while (ch &lt;= &#39; &#39; &amp;&amp; ((1L &lt;&lt; ch) &amp; SPACE) != 0) {</b>
+<b class="nc">&nbsp;            offset++;</b>
+<b class="nc">&nbsp;            if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;                this.ch = EOI;</b>
+<b class="nc">&nbsp;                this.offset = offset;</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            ch = (char) bytes[offset];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (comma = (ch == &#39;,&#39;)) {</b>
+<b class="nc">&nbsp;            offset++;</b>
+<b class="nc">&nbsp;            if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;                ch = EOI;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                ch = (char) bytes[offset];</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;            this.ch = EOI;</b>
+<b class="nc">&nbsp;            this.offset = offset;</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        while (ch &lt;= &#39; &#39; &amp;&amp; ((1L &lt;&lt; ch) &amp; SPACE) != 0) {</b>
+<b class="nc">&nbsp;            offset++;</b>
+<b class="nc">&nbsp;            if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;                this.ch = EOI;</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            ch = (char) bytes[offset];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        this.offset = offset + 1;</b>
+<b class="nc">&nbsp;        this.ch = ch;</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final long readFieldNameHashCode() {
+<b class="nc">&nbsp;        final byte[] bytes = this.bytes;</b>
+<b class="nc">&nbsp;        if (ch != &#39;&quot;&#39; &amp;&amp; ch != &#39;\&#39;&#39;) {</b>
+<b class="nc">&nbsp;            if ((context.features &amp; Feature.AllowUnQuotedFieldNames.mask) != 0 &amp;&amp; isFirstIdentifier(ch)) {</b>
+<b class="nc">&nbsp;                return readFieldNameHashCodeUnquote();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (ch == &#39;}&#39; || isNull()) {</b>
+<b class="nc">&nbsp;                return -1;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            String errorMsg, preFieldName;
+<b class="nc">&nbsp;            if (ch == &#39;[&#39; &amp;&amp; nameBegin &gt; 0 &amp;&amp; (preFieldName = getFieldName()) != null) {</b>
+<b class="nc">&nbsp;                errorMsg = &quot;illegal fieldName input &quot; + ch + &quot;, previous fieldName &quot; + preFieldName;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                errorMsg = &quot;illegal fieldName input&quot; + ch;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            throw new JSONException(info(errorMsg));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char quote = ch;</b>
+&nbsp;
+<b class="nc">&nbsp;        this.stringValue = null;</b>
+<b class="nc">&nbsp;        this.nameEscape = false;</b>
+<b class="nc">&nbsp;        int offset = this.nameBegin = this.offset;</b>
+&nbsp;
+<b class="nc">&nbsp;        long nameValue = 0;</b>
+<b class="nc">&nbsp;        if (offset + 9 &lt; end) {</b>
+&nbsp;            byte c0, c1, c2, c3, c4, c5, c6, c7;
+&nbsp;
+<b class="nc">&nbsp;            if ((c0 = bytes[offset]) == quote) {</b>
+<b class="nc">&nbsp;                nameValue = 0;</b>
+<b class="nc">&nbsp;            } else if ((c1 = bytes[offset + 1]) == quote &amp;&amp; c0 != 0 &amp;&amp; c0 != &#39;\\&#39;) {</b>
+<b class="nc">&nbsp;                nameValue = c0;</b>
+<b class="nc">&nbsp;                this.nameLength = 1;</b>
+<b class="nc">&nbsp;                this.nameEnd = offset + 1;</b>
+<b class="nc">&nbsp;                offset += 2;</b>
+<b class="nc">&nbsp;            } else if ((c2 = bytes[offset + 2]) == quote &amp;&amp; c1 != 0</b>
+&nbsp;                    &amp;&amp; c0 != &#39;\\&#39; &amp;&amp; c1 != &#39;\\&#39;
+&nbsp;            ) {
+<b class="nc">&nbsp;                nameValue = (c1 &lt;&lt; 8)</b>
+&nbsp;                        + (c0 &amp; 0xFF);
+<b class="nc">&nbsp;                this.nameLength = 2;</b>
+<b class="nc">&nbsp;                this.nameEnd = offset + 2;</b>
+<b class="nc">&nbsp;                offset += 3;</b>
+<b class="nc">&nbsp;            } else if ((c3 = bytes[offset + 3]) == quote &amp;&amp; c2 != 0</b>
+&nbsp;                    &amp;&amp; c0 != &#39;\\&#39; &amp;&amp; c1 != &#39;\\&#39; &amp;&amp; c2 != &#39;\\&#39;
+&nbsp;            ) {
+<b class="nc">&nbsp;                nameValue</b>
+&nbsp;                        = (c2 &lt;&lt; 16)
+&nbsp;                        + ((c1 &amp; 0xFF) &lt;&lt; 8)
+&nbsp;                        + (c0 &amp; 0xFF);
+<b class="nc">&nbsp;                this.nameLength = 3;</b>
+<b class="nc">&nbsp;                this.nameEnd = offset + 3;</b>
+<b class="nc">&nbsp;                offset += 4;</b>
+<b class="nc">&nbsp;            } else if ((c4 = bytes[offset + 4]) == quote &amp;&amp; c3 != 0</b>
+&nbsp;                    &amp;&amp; c0 != &#39;\\&#39; &amp;&amp; c1 != &#39;\\&#39; &amp;&amp; c2 != &#39;\\&#39; &amp;&amp; c3 != &#39;\\&#39;
+&nbsp;            ) {
+<b class="nc">&nbsp;                nameValue</b>
+&nbsp;                        = (c3 &lt;&lt; 24)
+&nbsp;                        + ((c2 &amp; 0xFF) &lt;&lt; 16)
+&nbsp;                        + ((c1 &amp; 0xFF) &lt;&lt; 8)
+&nbsp;                        + (c0 &amp; 0xFF);
+<b class="nc">&nbsp;                this.nameLength = 4;</b>
+<b class="nc">&nbsp;                this.nameEnd = offset + 4;</b>
+<b class="nc">&nbsp;                offset += 5;</b>
+<b class="nc">&nbsp;            } else if ((c5 = bytes[offset + 5]) == quote &amp;&amp; c4 != 0</b>
+&nbsp;                    &amp;&amp; c0 != &#39;\\&#39; &amp;&amp; c1 != &#39;\\&#39; &amp;&amp; c2 != &#39;\\&#39; &amp;&amp; c3 != &#39;\\&#39; &amp;&amp; c4 != &#39;\\&#39;
+&nbsp;            ) {
+<b class="nc">&nbsp;                nameValue</b>
+&nbsp;                        = (((long) c4) &lt;&lt; 32)
+&nbsp;                        + ((c3 &amp; 0xFFL) &lt;&lt; 24)
+&nbsp;                        + ((c2 &amp; 0xFFL) &lt;&lt; 16)
+&nbsp;                        + ((c1 &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                        + (c0 &amp; 0xFFL);
+<b class="nc">&nbsp;                this.nameLength = 5;</b>
+<b class="nc">&nbsp;                this.nameEnd = offset + 5;</b>
+<b class="nc">&nbsp;                offset += 6;</b>
+<b class="nc">&nbsp;            } else if ((c6 = bytes[offset + 6]) == quote &amp;&amp; c5 != 0</b>
+&nbsp;                    &amp;&amp; c0 != &#39;\\&#39; &amp;&amp; c1 != &#39;\\&#39; &amp;&amp; c2 != &#39;\\&#39; &amp;&amp; c3 != &#39;\\&#39; &amp;&amp; c4 != &#39;\\&#39; &amp;&amp; c5 != &#39;\\&#39;
+&nbsp;            ) {
+<b class="nc">&nbsp;                nameValue</b>
+&nbsp;                        = (((long) c5) &lt;&lt; 40)
+&nbsp;                        + ((c4 &amp; 0xFFL) &lt;&lt; 32)
+&nbsp;                        + ((c3 &amp; 0xFFL) &lt;&lt; 24)
+&nbsp;                        + ((c2 &amp; 0xFFL) &lt;&lt; 16)
+&nbsp;                        + ((c1 &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                        + (c0 &amp; 0xFFL);
+<b class="nc">&nbsp;                this.nameLength = 6;</b>
+<b class="nc">&nbsp;                this.nameEnd = offset + 6;</b>
+<b class="nc">&nbsp;                offset += 7;</b>
+<b class="nc">&nbsp;            } else if ((c7 = bytes[offset + 7]) == quote &amp;&amp; c6 != 0</b>
+&nbsp;                    &amp;&amp; c0 != &#39;\\&#39; &amp;&amp; c1 != &#39;\\&#39; &amp;&amp; c2 != &#39;\\&#39; &amp;&amp; c3 != &#39;\\&#39; &amp;&amp; c4 != &#39;\\&#39; &amp;&amp; c5 != &#39;\\&#39; &amp;&amp; c6 != &#39;\\&#39;
+&nbsp;            ) {
+<b class="nc">&nbsp;                nameValue</b>
+&nbsp;                        = (((long) c6) &lt;&lt; 48)
+&nbsp;                        + ((c5 &amp; 0xFFL) &lt;&lt; 40)
+&nbsp;                        + ((c4 &amp; 0xFFL) &lt;&lt; 32)
+&nbsp;                        + ((c3 &amp; 0xFFL) &lt;&lt; 24)
+&nbsp;                        + ((c2 &amp; 0xFFL) &lt;&lt; 16)
+&nbsp;                        + ((c1 &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                        + (c0 &amp; 0xFFL);
+<b class="nc">&nbsp;                this.nameLength = 7;</b>
+<b class="nc">&nbsp;                this.nameEnd = offset + 7;</b>
+<b class="nc">&nbsp;                offset += 8;</b>
+<b class="nc">&nbsp;            } else if (bytes[offset + 8] == quote &amp;&amp; c7 != 0</b>
+&nbsp;                    &amp;&amp; c0 != &#39;\\&#39; &amp;&amp; c1 != &#39;\\&#39; &amp;&amp; c2 != &#39;\\&#39; &amp;&amp; c3 != &#39;\\&#39; &amp;&amp; c4 != &#39;\\&#39; &amp;&amp; c5 != &#39;\\&#39; &amp;&amp; c6 != &#39;\\&#39; &amp;&amp; c7 != &#39;\\&#39;
+&nbsp;            ) {
+<b class="nc">&nbsp;                nameValue = getLong(bytes, offset);</b>
+<b class="nc">&nbsp;                this.nameLength = 8;</b>
+<b class="nc">&nbsp;                this.nameEnd = offset + 8;</b>
+<b class="nc">&nbsp;                offset += 9;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (nameValue == 0) {</b>
+<b class="nc">&nbsp;            for (int i = 0; offset &lt; end; offset++, i++) {</b>
+<b class="nc">&nbsp;                int c = bytes[offset];</b>
+&nbsp;
+<b class="nc">&nbsp;                if (c == quote) {</b>
+<b class="nc">&nbsp;                    if (i == 0) {</b>
+<b class="nc">&nbsp;                        offset = this.nameBegin;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;
+<b class="nc">&nbsp;                    this.nameLength = i;</b>
+<b class="nc">&nbsp;                    this.nameEnd = offset;</b>
+<b class="nc">&nbsp;                    offset++;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (c == &#39;\\&#39;) {</b>
+<b class="nc">&nbsp;                    nameEscape = true;</b>
+<b class="nc">&nbsp;                    c = bytes[offset + 1];</b>
+<b class="nc">&nbsp;                    switch (c) {</b>
+&nbsp;                        case &#39;u&#39;: {
+<b class="nc">&nbsp;                            byte c1 = bytes[offset + 2];</b>
+<b class="nc">&nbsp;                            byte c2 = bytes[offset + 3];</b>
+<b class="nc">&nbsp;                            byte c3 = bytes[offset + 4];</b>
+<b class="nc">&nbsp;                            byte c4 = bytes[offset + 5];</b>
+<b class="nc">&nbsp;                            c = char4(c1, c2, c3, c4);</b>
+<b class="nc">&nbsp;                            offset += 5;</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case &#39;x&#39;: {
+<b class="nc">&nbsp;                            byte c1 = bytes[offset + 2];</b>
+<b class="nc">&nbsp;                            byte c2 = bytes[offset + 3];</b>
+<b class="nc">&nbsp;                            c = char2(c1, c2);</b>
+<b class="nc">&nbsp;                            offset += 3;</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case &#39;\\&#39;:
+&nbsp;                        case &#39;&quot;&#39;:
+&nbsp;                        default:
+<b class="nc">&nbsp;                            c = char1(c);</b>
+<b class="nc">&nbsp;                            offset += 1;</b>
+&nbsp;                            break;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (c &gt; 0xFF || i &gt;= 8 || (i == 0 &amp;&amp; c == 0)) {</b>
+<b class="nc">&nbsp;                    nameValue = 0;</b>
+<b class="nc">&nbsp;                    offset = this.nameBegin;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                switch (i) {</b>
+&nbsp;                    case 0:
+<b class="nc">&nbsp;                        nameValue = (byte) c;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 1:
+<b class="nc">&nbsp;                        nameValue = (((byte) c) &lt;&lt; 8) + (nameValue &amp; 0xFFL);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 2:
+<b class="nc">&nbsp;                        nameValue = (((byte) c) &lt;&lt; 16) + (nameValue &amp; 0xFFFFL);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 3:
+<b class="nc">&nbsp;                        nameValue = (((byte) c) &lt;&lt; 24) + (nameValue &amp; 0xFFFFFFL);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 4:
+<b class="nc">&nbsp;                        nameValue = (((long) (byte) c) &lt;&lt; 32) + (nameValue &amp; 0xFFFFFFFFL);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 5:
+<b class="nc">&nbsp;                        nameValue = (((long) (byte) c) &lt;&lt; 40L) + (nameValue &amp; 0xFFFFFFFFFFL);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 6:
+<b class="nc">&nbsp;                        nameValue = (((long) (byte) c) &lt;&lt; 48L) + (nameValue &amp; 0xFFFFFFFFFFFFL);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case 7:
+<b class="nc">&nbsp;                        nameValue = (((long) (byte) c) &lt;&lt; 56L) + (nameValue &amp; 0xFFFFFFFFFFFFFFL);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    default:
+&nbsp;                        break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        long hashCode;
+<b class="nc">&nbsp;        if (nameValue != 0) {</b>
+<b class="nc">&nbsp;            hashCode = nameValue;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            hashCode = Fnv.MAGIC_HASH_CODE;</b>
+<b class="nc">&nbsp;            for (int i = 0; ; ++i) {</b>
+<b class="nc">&nbsp;                int c = bytes[offset];</b>
+<b class="nc">&nbsp;                if (c == &#39;\\&#39;) {</b>
+<b class="nc">&nbsp;                    nameEscape = true;</b>
+<b class="nc">&nbsp;                    c = bytes[++offset];</b>
+<b class="nc">&nbsp;                    switch (c) {</b>
+&nbsp;                        case &#39;u&#39;: {
+<b class="nc">&nbsp;                            byte c1 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            byte c2 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            byte c3 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            byte c4 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            c = char4(c1, c2, c3, c4);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case &#39;x&#39;: {
+<b class="nc">&nbsp;                            byte c1 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            byte c2 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            c = char2(c1, c2);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case &#39;\\&#39;:
+&nbsp;                        case &#39;&quot;&#39;:
+&nbsp;                        default:
+<b class="nc">&nbsp;                            c = char1(c);</b>
+&nbsp;                            break;
+&nbsp;                    }
+<b class="nc">&nbsp;                    offset++;</b>
+<b class="nc">&nbsp;                    hashCode ^= c;</b>
+<b class="nc">&nbsp;                    hashCode *= Fnv.MAGIC_PRIME;</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (c == quote) {</b>
+<b class="nc">&nbsp;                    this.nameLength = i;</b>
+<b class="nc">&nbsp;                    this.nameEnd = offset;</b>
+<b class="nc">&nbsp;                    offset++;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                offset++;</b>
+<b class="nc">&nbsp;                hashCode ^= (c &amp; 0xFF);</b>
+<b class="nc">&nbsp;                hashCode *= Fnv.MAGIC_PRIME;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        byte c;
+<b class="nc">&nbsp;        if (offset &lt; end) {</b>
+<b class="nc">&nbsp;            c = bytes[offset];</b>
+&nbsp;
+<b class="nc">&nbsp;            while (c &lt;= &#39; &#39; &amp;&amp; ((1L &lt;&lt; c) &amp; SPACE) != 0) {</b>
+<b class="nc">&nbsp;                offset++;</b>
+<b class="nc">&nbsp;                c = bytes[offset];</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            c = EOI;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (c != &#39;:&#39;) {</b>
+<b class="nc">&nbsp;            throw new JSONException(info(&quot;expect &#39;:&#39;, but &quot; + c));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        offset++;</b>
+<b class="nc">&nbsp;        if (offset == end) {</b>
+<b class="nc">&nbsp;            c = EOI;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            c = bytes[offset];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        while (c &lt;= &#39; &#39; &amp;&amp; ((1L &lt;&lt; c) &amp; SPACE) != 0) {</b>
+<b class="nc">&nbsp;            offset++;</b>
+<b class="nc">&nbsp;            c = bytes[offset];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.offset = offset + 1;</b>
+<b class="nc">&nbsp;        this.ch = (char) c;</b>
+&nbsp;
+<b class="nc">&nbsp;        return hashCode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int getInt(byte[] bytes, int off) {
+<b class="nc">&nbsp;        return UNSAFE.getInt(</b>
+&nbsp;                bytes,
+&nbsp;                ARRAY_BYTE_BASE_OFFSET + off
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public static long getLong(byte[] bytes, int off) {
+<b class="nc">&nbsp;        return UNSAFE.getLong(</b>
+&nbsp;                bytes,
+&nbsp;                ARRAY_BYTE_BASE_OFFSET + off
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final long readValueHashCode() {
+<b class="nc">&nbsp;        if (ch != &#39;&quot;&#39; &amp;&amp; ch != &#39;\&#39;&#39;) {</b>
+<b class="nc">&nbsp;            return -1;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char quote = ch;</b>
+&nbsp;
+<b class="nc">&nbsp;        this.nameEscape = false;</b>
+<b class="nc">&nbsp;        int offset = this.nameBegin = this.offset;</b>
+<b class="nc">&nbsp;        long nameValue = 0;</b>
+<b class="nc">&nbsp;        for (int i = 0; offset &lt; end; offset++, i++) {</b>
+<b class="nc">&nbsp;            int c = bytes[offset];</b>
+&nbsp;
+<b class="nc">&nbsp;            if (c == quote) {</b>
+<b class="nc">&nbsp;                if (i == 0) {</b>
+<b class="nc">&nbsp;                    nameValue = 0;</b>
+<b class="nc">&nbsp;                    offset = this.nameBegin;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                this.nameLength = i;</b>
+<b class="nc">&nbsp;                this.nameEnd = offset;</b>
+<b class="nc">&nbsp;                offset++;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (c == &#39;\\&#39;) {</b>
+<b class="nc">&nbsp;                nameEscape = true;</b>
+<b class="nc">&nbsp;                c = bytes[++offset];</b>
+<b class="nc">&nbsp;                switch (c) {</b>
+&nbsp;                    case &#39;u&#39;: {
+<b class="nc">&nbsp;                        byte c1 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        byte c2 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        byte c3 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        byte c4 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        c = char4(c1, c2, c3, c4);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case &#39;x&#39;: {
+<b class="nc">&nbsp;                        byte c1 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        byte c2 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        c = char2(c1, c2);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case &#39;\\&#39;:
+&nbsp;                    case &#39;&quot;&#39;:
+&nbsp;                    default:
+<b class="nc">&nbsp;                        c = char1(c);</b>
+&nbsp;                        break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (c &gt; 0xFF || i &gt;= 8 || (i == 0 &amp;&amp; c == 0)) {</b>
+<b class="nc">&nbsp;                nameValue = 0;</b>
+<b class="nc">&nbsp;                offset = this.nameBegin;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            switch (i) {</b>
+&nbsp;                case 0:
+<b class="nc">&nbsp;                    nameValue = (byte) c;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 1:
+<b class="nc">&nbsp;                    nameValue = (((byte) c) &lt;&lt; 8) + (nameValue &amp; 0xFFL);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 2:
+<b class="nc">&nbsp;                    nameValue = (((byte) c) &lt;&lt; 16) + (nameValue &amp; 0xFFFFL);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 3:
+<b class="nc">&nbsp;                    nameValue = (((byte) c) &lt;&lt; 24) + (nameValue &amp; 0xFFFFFFL);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 4:
+<b class="nc">&nbsp;                    nameValue = (((long) (byte) c) &lt;&lt; 32) + (nameValue &amp; 0xFFFFFFFFL);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 5:
+<b class="nc">&nbsp;                    nameValue = (((long) (byte) c) &lt;&lt; 40L) + (nameValue &amp; 0xFFFFFFFFFFL);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 6:
+<b class="nc">&nbsp;                    nameValue = (((long) (byte) c) &lt;&lt; 48L) + (nameValue &amp; 0xFFFFFFFFFFFFL);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 7:
+<b class="nc">&nbsp;                    nameValue = (((long) (byte) c) &lt;&lt; 56L) + (nameValue &amp; 0xFFFFFFFFFFFFFFL);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        long hashCode;
+<b class="nc">&nbsp;        if (nameValue != 0) {</b>
+<b class="nc">&nbsp;            hashCode = nameValue;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            hashCode = Fnv.MAGIC_HASH_CODE;</b>
+<b class="nc">&nbsp;            for (int i = 0; ; ++i) {</b>
+<b class="nc">&nbsp;                int c = bytes[offset];</b>
+<b class="nc">&nbsp;                if (c == &#39;\\&#39;) {</b>
+<b class="nc">&nbsp;                    nameEscape = true;</b>
+<b class="nc">&nbsp;                    c = bytes[++offset];</b>
+<b class="nc">&nbsp;                    switch (c) {</b>
+&nbsp;                        case &#39;u&#39;: {
+<b class="nc">&nbsp;                            byte c1 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            byte c2 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            byte c3 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            byte c4 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            c = char4(c1, c2, c3, c4);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case &#39;x&#39;: {
+<b class="nc">&nbsp;                            byte c1 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            byte c2 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            c = char2(c1, c2);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case &#39;\\&#39;:
+&nbsp;                        case &#39;&quot;&#39;:
+&nbsp;                        default:
+<b class="nc">&nbsp;                            c = char1(c);</b>
+&nbsp;                            break;
+&nbsp;                    }
+<b class="nc">&nbsp;                    offset++;</b>
+<b class="nc">&nbsp;                    hashCode ^= c;</b>
+<b class="nc">&nbsp;                    hashCode *= Fnv.MAGIC_PRIME;</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (c == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                    this.nameLength = i;</b>
+<b class="nc">&nbsp;                    this.nameEnd = offset;</b>
+<b class="nc">&nbsp;                    this.stringValue = null;</b>
+<b class="nc">&nbsp;                    offset++;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                offset++;</b>
+<b class="nc">&nbsp;                hashCode ^= c &lt; 0 ? (c &amp; 0xFF) : c;</b>
+<b class="nc">&nbsp;                hashCode *= Fnv.MAGIC_PRIME;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        byte c;
+<b class="nc">&nbsp;        if (offset == end) {</b>
+<b class="nc">&nbsp;            c = EOI;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            c = bytes[offset];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        while (c &lt;= &#39; &#39; &amp;&amp; ((1L &lt;&lt; c) &amp; SPACE) != 0) {</b>
+<b class="nc">&nbsp;            offset++;</b>
+<b class="nc">&nbsp;            c = bytes[offset];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (comma = (c == &#39;,&#39;)) {</b>
+<b class="nc">&nbsp;            offset++;</b>
+<b class="nc">&nbsp;            if (offset == end) {</b>
+<b class="nc">&nbsp;                c = EOI;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                c = bytes[offset];</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            while (c &lt;= &#39; &#39; &amp;&amp; ((1L &lt;&lt; c) &amp; SPACE) != 0) {</b>
+<b class="nc">&nbsp;                offset++;</b>
+<b class="nc">&nbsp;                c = bytes[offset];</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.offset = offset + 1;</b>
+<b class="nc">&nbsp;        this.ch = (char) c;</b>
+&nbsp;
+<b class="nc">&nbsp;        return hashCode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final long getNameHashCodeLCase() {
+<b class="nc">&nbsp;        int offset = nameBegin;</b>
+<b class="nc">&nbsp;        long nameValue = 0;</b>
+<b class="nc">&nbsp;        for (int i = 0; offset &lt; end; offset++) {</b>
+<b class="nc">&nbsp;            int c = bytes[offset];</b>
+&nbsp;
+<b class="nc">&nbsp;            if (c == &#39;\\&#39;) {</b>
+<b class="nc">&nbsp;                c = bytes[++offset];</b>
+<b class="nc">&nbsp;                switch (c) {</b>
+&nbsp;                    case &#39;u&#39;: {
+<b class="nc">&nbsp;                        int c1 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        int c2 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        int c3 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        int c4 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        c = char4(c1, c2, c3, c4);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case &#39;x&#39;: {
+<b class="nc">&nbsp;                        int c1 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        int c2 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        c = char2(c1, c2);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case &#39;\\&#39;:
+&nbsp;                    case &#39;&quot;&#39;:
+&nbsp;                    default:
+<b class="nc">&nbsp;                        c = char1(c);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (c == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (c &gt; 0xFF || c &lt; 0 || i &gt;= 8 || (i == 0 &amp;&amp; c == 0)) {</b>
+<b class="nc">&nbsp;                nameValue = 0;</b>
+<b class="nc">&nbsp;                offset = this.nameBegin;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (c == &#39;_&#39; || c == &#39;-&#39; || c == &#39; &#39;) {</b>
+<b class="nc">&nbsp;                byte c1 = bytes[offset + 1];</b>
+<b class="nc">&nbsp;                if (c1 != &#39;&quot;&#39; &amp;&amp; c1 != &#39;\&#39;&#39; &amp;&amp; c1 != c) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (c &gt;= &#39;A&#39; &amp;&amp; c &lt;= &#39;Z&#39;) {</b>
+<b class="nc">&nbsp;                c = (char) (c + 32);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            switch (i) {</b>
+&nbsp;                case 0:
+<b class="nc">&nbsp;                    nameValue = (byte) c;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 1:
+<b class="nc">&nbsp;                    nameValue = (((byte) c) &lt;&lt; 8) + (nameValue &amp; 0xFFL);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 2:
+<b class="nc">&nbsp;                    nameValue = (((byte) c) &lt;&lt; 16) + (nameValue &amp; 0xFFFFL);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 3:
+<b class="nc">&nbsp;                    nameValue = (((byte) c) &lt;&lt; 24) + (nameValue &amp; 0xFFFFFFL);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 4:
+<b class="nc">&nbsp;                    nameValue = (((long) (byte) c) &lt;&lt; 32) + (nameValue &amp; 0xFFFFFFFFL);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 5:
+<b class="nc">&nbsp;                    nameValue = (((long) (byte) c) &lt;&lt; 40) + (nameValue &amp; 0xFFFFFFFFFFL);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 6:
+<b class="nc">&nbsp;                    nameValue = (((long) (byte) c) &lt;&lt; 48) + (nameValue &amp; 0xFFFFFFFFFFFFL);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 7:
+<b class="nc">&nbsp;                    nameValue = (((long) (byte) c) &lt;&lt; 56) + (nameValue &amp; 0xFFFFFFFFFFFFFFL);</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+<b class="nc">&nbsp;            ++i;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (nameValue != 0) {</b>
+<b class="nc">&nbsp;            return nameValue;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long hashCode = Fnv.MAGIC_HASH_CODE;</b>
+<b class="nc">&nbsp;        while (offset &lt; end) {</b>
+<b class="nc">&nbsp;            int c = bytes[offset];</b>
+&nbsp;
+<b class="nc">&nbsp;            if (c == &#39;\\&#39;) {</b>
+<b class="nc">&nbsp;                c = bytes[++offset];</b>
+<b class="nc">&nbsp;                switch (c) {</b>
+&nbsp;                    case &#39;u&#39;: {
+<b class="nc">&nbsp;                        int c1 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        int c2 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        int c3 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        int c4 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        c = char4(c1, c2, c3, c4);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case &#39;x&#39;: {
+<b class="nc">&nbsp;                        int c1 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        int c2 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        c = char2(c1, c2);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case &#39;\\&#39;:
+&nbsp;                    case &#39;&quot;&#39;:
+&nbsp;                    default:
+<b class="nc">&nbsp;                        c = char1(c);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (c == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            offset++;</b>
+<b class="nc">&nbsp;            if (c == &#39;_&#39; || c == &#39;-&#39; || c == &#39; &#39;) {</b>
+<b class="nc">&nbsp;                byte c1 = bytes[offset];</b>
+<b class="nc">&nbsp;                if (c1 != &#39;&quot;&#39; &amp;&amp; c1 != &#39;\&#39;&#39; &amp;&amp; c1 != c) {</b>
+<b class="nc">&nbsp;                    continue;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (c &gt;= &#39;A&#39; &amp;&amp; c &lt;= &#39;Z&#39;) {</b>
+<b class="nc">&nbsp;                c = (char) (c + 32);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            hashCode ^= c &lt; 0 ? (c &amp; 0xFF) : c;</b>
+<b class="nc">&nbsp;            hashCode *= Fnv.MAGIC_PRIME;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return hashCode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final String getFieldName() {
+<b class="nc">&nbsp;        int length = nameEnd - nameBegin;</b>
+<b class="nc">&nbsp;        if (!nameEscape) {</b>
+<b class="nc">&nbsp;            if (this.str != null) {</b>
+<b class="nc">&nbsp;                return this.str.substring(nameBegin, nameEnd);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return new String(bytes, nameBegin, length, StandardCharsets.ISO_8859_1);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (JDKUtils.STRING_CREATOR_JDK11 != null) {</b>
+<b class="nc">&nbsp;            byte[] chars = new byte[nameLength];</b>
+&nbsp;
+<b class="nc">&nbsp;            int offset = nameBegin;</b>
+&nbsp;            forStmt:
+<b class="nc">&nbsp;            for (int i = 0; offset &lt; nameEnd; ++i) {</b>
+<b class="nc">&nbsp;                byte b = bytes[offset];</b>
+&nbsp;
+<b class="nc">&nbsp;                if (b == &#39;\\&#39;) {</b>
+<b class="nc">&nbsp;                    b = bytes[++offset];</b>
+<b class="nc">&nbsp;                    switch (b) {</b>
+&nbsp;                        case &#39;u&#39;: {
+<b class="nc">&nbsp;                            int c1 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            int c2 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            int c3 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            int c4 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            char c = char4(c1, c2, c3, c4);</b>
+<b class="nc">&nbsp;                            if (c &gt; 0xFF) {</b>
+<b class="nc">&nbsp;                                chars = null;</b>
+<b class="nc">&nbsp;                                break forStmt;</b>
+&nbsp;                            }
+<b class="nc">&nbsp;                            b = (byte) c;</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case &#39;x&#39;: {
+<b class="nc">&nbsp;                            int c1 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            int c2 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            char c = char2(c1, c2);</b>
+<b class="nc">&nbsp;                            if (c &gt; 0xFF) {</b>
+<b class="nc">&nbsp;                                chars = null;</b>
+<b class="nc">&nbsp;                                break forStmt;</b>
+&nbsp;                            }
+<b class="nc">&nbsp;                            b = (byte) c;</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case &#39;\\&#39;:
+&nbsp;                        case &#39;&quot;&#39;:
+&nbsp;                        case &#39;.&#39;:
+&nbsp;                        case &#39;-&#39;:
+&nbsp;                        case &#39;+&#39;:
+&nbsp;                        case &#39;*&#39;:
+&nbsp;                        case &#39;/&#39;:
+&nbsp;                        case &#39;&gt;&#39;:
+&nbsp;                        case &#39;&lt;&#39;:
+&nbsp;                        case &#39;=&#39;:
+&nbsp;                        case &#39;@&#39;:
+&nbsp;                        case &#39;:&#39;:
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        default:
+<b class="nc">&nbsp;                            b = (byte) char1(b);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } else if (b == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                chars[i] = b;</b>
+<b class="nc">&nbsp;                offset++;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (chars != null) {</b>
+<b class="nc">&nbsp;                return STRING_CREATOR_JDK11.apply(chars, LATIN1);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        char[] chars = new char[nameLength];</b>
+&nbsp;
+<b class="nc">&nbsp;        int offset = nameBegin;</b>
+<b class="nc">&nbsp;        for (int i = 0; offset &lt; nameEnd; ++i) {</b>
+<b class="nc">&nbsp;            char c = (char) (bytes[offset] &amp; 0xff);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (c == &#39;\\&#39;) {</b>
+<b class="nc">&nbsp;                c = (char) bytes[++offset];</b>
+<b class="nc">&nbsp;                switch (c) {</b>
+&nbsp;                    case &#39;u&#39;: {
+<b class="nc">&nbsp;                        int c1 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        int c2 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        int c3 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        int c4 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        c = char4(c1, c2, c3, c4);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case &#39;x&#39;: {
+<b class="nc">&nbsp;                        int c1 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        int c2 = bytes[++offset];</b>
+<b class="nc">&nbsp;                        c = char2(c1, c2);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case &#39;.&#39;:
+&nbsp;                    case &#39;-&#39;:
+&nbsp;                    case &#39;+&#39;:
+&nbsp;                    case &#39;*&#39;:
+&nbsp;                    case &#39;/&#39;:
+&nbsp;                    case &#39;&gt;&#39;:
+&nbsp;                    case &#39;&lt;&#39;:
+&nbsp;                    case &#39;=&#39;:
+&nbsp;                    case &#39;@&#39;:
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    default:
+<b class="nc">&nbsp;                        c = char1(c);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (c == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            chars[i] = c;</b>
+<b class="nc">&nbsp;            offset++;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new String(chars);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public final String readFieldName() {
+<b class="nc">&nbsp;        if (ch != &#39;&quot;&#39; &amp;&amp; ch != &#39;\&#39;&#39;) {</b>
+<b class="nc">&nbsp;            if ((context.features &amp; Feature.AllowUnQuotedFieldNames.mask) != 0 &amp;&amp; isFirstIdentifier(ch)) {</b>
+<b class="nc">&nbsp;                return readFieldNameUnquote();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final char quote = ch;</b>
+&nbsp;
+<b class="nc">&nbsp;        this.nameEscape = false;</b>
+<b class="nc">&nbsp;        int offset = this.nameBegin = this.offset;</b>
+<b class="nc">&nbsp;        for (int i = 0; offset &lt; end; ++i) {</b>
+<b class="nc">&nbsp;            int c = bytes[offset];</b>
+<b class="nc">&nbsp;            if (c == &#39;\\&#39;) {</b>
+<b class="nc">&nbsp;                nameEscape = true;</b>
+<b class="nc">&nbsp;                c = bytes[++offset];</b>
+<b class="nc">&nbsp;                switch (c) {</b>
+&nbsp;                    case &#39;u&#39;: {
+<b class="nc">&nbsp;                        offset += 4;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case &#39;x&#39;: {
+<b class="nc">&nbsp;                        offset += 2;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    default:
+&nbsp;                        // skip
+&nbsp;                        break;
+&nbsp;                }
+<b class="nc">&nbsp;                offset++;</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (c == quote) {</b>
+<b class="nc">&nbsp;                this.nameLength = i;</b>
+<b class="nc">&nbsp;                this.nameEnd = offset;</b>
+<b class="nc">&nbsp;                offset++;</b>
+<b class="nc">&nbsp;                c = bytes[offset];</b>
+&nbsp;
+<b class="nc">&nbsp;                while (c &lt;= &#39; &#39; &amp;&amp; ((1L &lt;&lt; c) &amp; SPACE) != 0) {</b>
+<b class="nc">&nbsp;                    offset++;</b>
+<b class="nc">&nbsp;                    c = bytes[offset];</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (c != &#39;:&#39;) {</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;syntax error : &quot; + offset);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                offset++;</b>
+<b class="nc">&nbsp;                if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;                    this.ch = EOI;</b>
+<b class="nc">&nbsp;                    throw new JSONException(&quot;syntax error : &quot; + offset);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                c = bytes[offset];</b>
+&nbsp;
+<b class="nc">&nbsp;                while (c &lt;= &#39; &#39; &amp;&amp; ((1L &lt;&lt; c) &amp; SPACE) != 0) {</b>
+<b class="nc">&nbsp;                    offset++;</b>
+<b class="nc">&nbsp;                    c = bytes[offset];</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                this.offset = offset + 1;</b>
+<b class="nc">&nbsp;                this.ch = (char) c;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            offset++;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (nameEnd &lt; nameBegin) {</b>
+<b class="nc">&nbsp;            throw new JSONException(&quot;syntax error : &quot; + offset);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!nameEscape) {</b>
+<b class="nc">&nbsp;            long nameValue0 = -1, nameValue1 = -1;</b>
+<b class="nc">&nbsp;            int length = nameEnd - nameBegin;</b>
+<b class="nc">&nbsp;            switch (length) {</b>
+&nbsp;                case 1:
+<b class="nc">&nbsp;                    return TypeUtils.toString(bytes[nameBegin]);</b>
+&nbsp;                case 2:
+<b class="nc">&nbsp;                    return TypeUtils.toString(</b>
+&nbsp;                            bytes[nameBegin],
+&nbsp;                            bytes[nameBegin + 1]
+&nbsp;                    );
+&nbsp;                case 3:
+<b class="nc">&nbsp;                    nameValue0</b>
+&nbsp;                            = (bytes[nameBegin + 2] &lt;&lt; 16)
+&nbsp;                            + ((bytes[nameBegin + 1] &amp; 0xFF) &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin] &amp; 0xFF);
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 4:
+<b class="nc">&nbsp;                    nameValue0</b>
+&nbsp;                            = (bytes[nameBegin + 3] &lt;&lt; 24)
+&nbsp;                            + ((bytes[nameBegin + 2] &amp; 0xFF) &lt;&lt; 16)
+&nbsp;                            + ((bytes[nameBegin + 1] &amp; 0xFF) &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin] &amp; 0xFF);
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 5:
+<b class="nc">&nbsp;                    nameValue0</b>
+&nbsp;                            = (((long) bytes[nameBegin + 4]) &lt;&lt; 32)
+&nbsp;                            + ((bytes[nameBegin + 3] &amp; 0xFFL) &lt;&lt; 24)
+&nbsp;                            + ((bytes[nameBegin + 2] &amp; 0xFFL) &lt;&lt; 16)
+&nbsp;                            + ((bytes[nameBegin + 1] &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin] &amp; 0xFFL);
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 6:
+<b class="nc">&nbsp;                    nameValue0</b>
+&nbsp;                            = (((long) bytes[nameBegin + 5]) &lt;&lt; 40)
+&nbsp;                            + ((bytes[nameBegin + 4] &amp; 0xFFL) &lt;&lt; 32)
+&nbsp;                            + ((bytes[nameBegin + 3] &amp; 0xFFL) &lt;&lt; 24)
+&nbsp;                            + ((bytes[nameBegin + 2] &amp; 0xFFL) &lt;&lt; 16)
+&nbsp;                            + ((bytes[nameBegin + 1] &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin] &amp; 0xFFL);
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 7:
+<b class="nc">&nbsp;                    nameValue0</b>
+&nbsp;                            = (((long) bytes[nameBegin + 6]) &lt;&lt; 48)
+&nbsp;                            + ((bytes[nameBegin + 5] &amp; 0xFFL) &lt;&lt; 40)
+&nbsp;                            + ((bytes[nameBegin + 4] &amp; 0xFFL) &lt;&lt; 32)
+&nbsp;                            + ((bytes[nameBegin + 3] &amp; 0xFFL) &lt;&lt; 24)
+&nbsp;                            + ((bytes[nameBegin + 2] &amp; 0xFFL) &lt;&lt; 16)
+&nbsp;                            + ((bytes[nameBegin + 1] &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin] &amp; 0xFFL);
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 8:
+<b class="nc">&nbsp;                    nameValue0</b>
+&nbsp;                            = (((long) bytes[nameBegin + 7]) &lt;&lt; 56)
+&nbsp;                            + ((bytes[nameBegin + 6] &amp; 0xFFL) &lt;&lt; 48)
+&nbsp;                            + ((bytes[nameBegin + 5] &amp; 0xFFL) &lt;&lt; 40)
+&nbsp;                            + ((bytes[nameBegin + 4] &amp; 0xFFL) &lt;&lt; 32)
+&nbsp;                            + ((bytes[nameBegin + 3] &amp; 0xFFL) &lt;&lt; 24)
+&nbsp;                            + ((bytes[nameBegin + 2] &amp; 0xFFL) &lt;&lt; 16)
+&nbsp;                            + ((bytes[nameBegin + 1] &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin] &amp; 0xFFL);
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 9:
+<b class="nc">&nbsp;                    nameValue0 = bytes[nameBegin];</b>
+<b class="nc">&nbsp;                    nameValue1</b>
+&nbsp;                            = (((long) bytes[nameBegin + 8]) &lt;&lt; 56)
+&nbsp;                            + ((bytes[nameBegin + 7] &amp; 0xFFL) &lt;&lt; 48)
+&nbsp;                            + ((bytes[nameBegin + 6] &amp; 0xFFL) &lt;&lt; 40)
+&nbsp;                            + ((bytes[nameBegin + 5] &amp; 0xFFL) &lt;&lt; 32)
+&nbsp;                            + ((bytes[nameBegin + 4] &amp; 0xFFL) &lt;&lt; 24)
+&nbsp;                            + ((bytes[nameBegin + 3] &amp; 0xFFL) &lt;&lt; 16)
+&nbsp;                            + ((bytes[nameBegin + 2] &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin + 1] &amp; 0xFFL);
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 10:
+<b class="nc">&nbsp;                    nameValue0</b>
+&nbsp;                            = (bytes[nameBegin + 1] &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin]);
+<b class="nc">&nbsp;                    nameValue1</b>
+&nbsp;                            = (((long) bytes[nameBegin + 9]) &lt;&lt; 56)
+&nbsp;                            + ((bytes[nameBegin + 8] &amp; 0xFFL) &lt;&lt; 48)
+&nbsp;                            + ((bytes[nameBegin + 7] &amp; 0xFFL) &lt;&lt; 40)
+&nbsp;                            + ((bytes[nameBegin + 6] &amp; 0xFFL) &lt;&lt; 32)
+&nbsp;                            + ((bytes[nameBegin + 5] &amp; 0xFFL) &lt;&lt; 24)
+&nbsp;                            + ((bytes[nameBegin + 4] &amp; 0xFFL) &lt;&lt; 16)
+&nbsp;                            + ((bytes[nameBegin + 3] &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin + 2] &amp; 0xFFL);
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 11:
+<b class="nc">&nbsp;                    nameValue0</b>
+&nbsp;                            = (bytes[nameBegin + 2] &lt;&lt; 16)
+&nbsp;                            + (bytes[nameBegin + 1] &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin]);
+<b class="nc">&nbsp;                    nameValue1</b>
+&nbsp;                            = (((long) bytes[nameBegin + 10]) &lt;&lt; 56)
+&nbsp;                            + ((bytes[nameBegin + 9] &amp; 0xFFL) &lt;&lt; 48)
+&nbsp;                            + ((bytes[nameBegin + 8] &amp; 0xFFL) &lt;&lt; 40)
+&nbsp;                            + ((bytes[nameBegin + 7] &amp; 0xFFL) &lt;&lt; 32)
+&nbsp;                            + ((bytes[nameBegin + 6] &amp; 0xFFL) &lt;&lt; 24)
+&nbsp;                            + ((bytes[nameBegin + 5] &amp; 0xFFL) &lt;&lt; 16)
+&nbsp;                            + ((bytes[nameBegin + 4] &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin + 3] &amp; 0xFFL);
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 12:
+<b class="nc">&nbsp;                    nameValue0</b>
+&nbsp;                            = (bytes[nameBegin + 3] &lt;&lt; 24)
+&nbsp;                            + (bytes[nameBegin + 2] &lt;&lt; 16)
+&nbsp;                            + (bytes[nameBegin + 1] &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin]);
+<b class="nc">&nbsp;                    nameValue1</b>
+&nbsp;                            = (((long) bytes[nameBegin + 11]) &lt;&lt; 56)
+&nbsp;                            + ((bytes[nameBegin + 10] &amp; 0xFFL) &lt;&lt; 48)
+&nbsp;                            + ((bytes[nameBegin + 9] &amp; 0xFFL) &lt;&lt; 40)
+&nbsp;                            + ((bytes[nameBegin + 8] &amp; 0xFFL) &lt;&lt; 32)
+&nbsp;                            + ((bytes[nameBegin + 7] &amp; 0xFFL) &lt;&lt; 24)
+&nbsp;                            + ((bytes[nameBegin + 6] &amp; 0xFFL) &lt;&lt; 16)
+&nbsp;                            + ((bytes[nameBegin + 5] &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin + 4] &amp; 0xFFL);
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 13:
+<b class="nc">&nbsp;                    nameValue0</b>
+&nbsp;                            = (((long) bytes[nameBegin + 4]) &lt;&lt; 32)
+&nbsp;                            + (((long) bytes[nameBegin + 3]) &lt;&lt; 24)
+&nbsp;                            + (((long) bytes[nameBegin + 2]) &lt;&lt; 16)
+&nbsp;                            + (((long) bytes[nameBegin + 1]) &lt;&lt; 8)
+&nbsp;                            + ((long) bytes[nameBegin]);
+<b class="nc">&nbsp;                    nameValue1</b>
+&nbsp;                            = (((long) bytes[nameBegin + 12]) &lt;&lt; 56)
+&nbsp;                            + ((bytes[nameBegin + 11] &amp; 0xFFL) &lt;&lt; 48)
+&nbsp;                            + ((bytes[nameBegin + 10] &amp; 0xFFL) &lt;&lt; 40)
+&nbsp;                            + ((bytes[nameBegin + 9] &amp; 0xFFL) &lt;&lt; 32)
+&nbsp;                            + ((bytes[nameBegin + 8] &amp; 0xFFL) &lt;&lt; 24)
+&nbsp;                            + ((bytes[nameBegin + 7] &amp; 0xFFL) &lt;&lt; 16)
+&nbsp;                            + ((bytes[nameBegin + 6] &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin + 5] &amp; 0xFFL);
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 14:
+<b class="nc">&nbsp;                    nameValue0</b>
+&nbsp;                            = (((long) bytes[nameBegin + 5]) &lt;&lt; 40)
+&nbsp;                            + ((bytes[nameBegin + 4] &amp; 0xFFL) &lt;&lt; 32)
+&nbsp;                            + ((bytes[nameBegin + 3] &amp; 0xFFL) &lt;&lt; 24)
+&nbsp;                            + ((bytes[nameBegin + 2] &amp; 0xFFL) &lt;&lt; 16)
+&nbsp;                            + ((bytes[nameBegin + 1] &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin] &amp; 0xFFL);
+<b class="nc">&nbsp;                    nameValue1</b>
+&nbsp;                            = (((long) bytes[nameBegin + 13]) &lt;&lt; 56)
+&nbsp;                            + ((bytes[nameBegin + 12] &amp; 0xFFL) &lt;&lt; 48)
+&nbsp;                            + ((bytes[nameBegin + 11] &amp; 0xFFL) &lt;&lt; 40)
+&nbsp;                            + ((bytes[nameBegin + 10] &amp; 0xFFL) &lt;&lt; 32)
+&nbsp;                            + ((bytes[nameBegin + 9] &amp; 0xFFL) &lt;&lt; 24)
+&nbsp;                            + ((bytes[nameBegin + 8] &amp; 0xFFL) &lt;&lt; 16)
+&nbsp;                            + ((bytes[nameBegin + 7] &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin + 6] &amp; 0xFFL);
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 15:
+<b class="nc">&nbsp;                    nameValue0</b>
+&nbsp;                            = (((long) bytes[nameBegin + 6]) &lt;&lt; 48)
+&nbsp;                            + ((bytes[nameBegin + 5] &amp; 0xFFL) &lt;&lt; 40)
+&nbsp;                            + ((bytes[nameBegin + 4] &amp; 0xFFL) &lt;&lt; 32)
+&nbsp;                            + ((bytes[nameBegin + 3] &amp; 0xFFL) &lt;&lt; 24)
+&nbsp;                            + ((bytes[nameBegin + 2] &amp; 0xFFL) &lt;&lt; 16)
+&nbsp;                            + ((bytes[nameBegin + 1] &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin] &amp; 0xFFL);
+<b class="nc">&nbsp;                    nameValue1</b>
+&nbsp;                            = (((long) bytes[nameBegin + 14]) &lt;&lt; 56)
+&nbsp;                            + ((bytes[nameBegin + 13] &amp; 0xFFL) &lt;&lt; 48)
+&nbsp;                            + ((bytes[nameBegin + 12] &amp; 0xFFL) &lt;&lt; 40)
+&nbsp;                            + ((bytes[nameBegin + 11] &amp; 0xFFL) &lt;&lt; 32)
+&nbsp;                            + ((bytes[nameBegin + 10] &amp; 0xFFL) &lt;&lt; 24)
+&nbsp;                            + ((bytes[nameBegin + 9] &amp; 0xFFL) &lt;&lt; 16)
+&nbsp;                            + ((bytes[nameBegin + 8] &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin + 7] &amp; 0xFFL);
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case 16:
+<b class="nc">&nbsp;                    nameValue0</b>
+&nbsp;                            = (((long) bytes[nameBegin + 7]) &lt;&lt; 56)
+&nbsp;                            + ((bytes[nameBegin + 6] &amp; 0xFFL) &lt;&lt; 48)
+&nbsp;                            + ((bytes[nameBegin + 5] &amp; 0xFFL) &lt;&lt; 40)
+&nbsp;                            + ((bytes[nameBegin + 4] &amp; 0xFFL) &lt;&lt; 32)
+&nbsp;                            + ((bytes[nameBegin + 3] &amp; 0xFFL) &lt;&lt; 24)
+&nbsp;                            + ((bytes[nameBegin + 2] &amp; 0xFFL) &lt;&lt; 16)
+&nbsp;                            + ((bytes[nameBegin + 1] &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin] &amp; 0xFFL);
+<b class="nc">&nbsp;                    nameValue1</b>
+&nbsp;                            = (((long) bytes[nameBegin + 15]) &lt;&lt; 56)
+&nbsp;                            + ((bytes[nameBegin + 14] &amp; 0xFFL) &lt;&lt; 48)
+&nbsp;                            + ((bytes[nameBegin + 13] &amp; 0xFFL) &lt;&lt; 40)
+&nbsp;                            + ((bytes[nameBegin + 12] &amp; 0xFFL) &lt;&lt; 32)
+&nbsp;                            + ((bytes[nameBegin + 11] &amp; 0xFFL) &lt;&lt; 24)
+&nbsp;                            + ((bytes[nameBegin + 10] &amp; 0xFFL) &lt;&lt; 16)
+&nbsp;                            + ((bytes[nameBegin + 9] &amp; 0xFFL) &lt;&lt; 8)
+&nbsp;                            + (bytes[nameBegin + 8] &amp; 0xFFL);
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (nameValue0 != -1) {</b>
+<b class="nc">&nbsp;                if (nameValue1 != -1) {</b>
+<b class="nc">&nbsp;                    int indexMask = ((int) nameValue1) &amp; (NAME_CACHE2.length - 1);</b>
+<b class="nc">&nbsp;                    JSONFactory.NameCacheEntry2 entry = NAME_CACHE2[indexMask];</b>
+<b class="nc">&nbsp;                    if (entry == null) {</b>
+<b class="nc">&nbsp;                        char[] chars = new char[length];</b>
+<b class="nc">&nbsp;                        for (int i = 0; i &lt; length; ++i) {</b>
+<b class="nc">&nbsp;                            chars[i] = (char) (bytes[nameBegin + i] &amp; 0xFF);</b>
+&nbsp;                        }
+&nbsp;
+&nbsp;                        String name;
+<b class="nc">&nbsp;                        if (STRING_CREATOR_JDK8 != null) {</b>
+<b class="nc">&nbsp;                            name = STRING_CREATOR_JDK8.apply(chars, Boolean.TRUE);</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            name = new String(chars);</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        NAME_CACHE2[indexMask] = new JSONFactory.NameCacheEntry2(name, nameValue0, nameValue1);</b>
+<b class="nc">&nbsp;                        return name;</b>
+<b class="nc">&nbsp;                    } else if (entry.value0 == nameValue0 &amp;&amp; entry.value1 == nameValue1) {</b>
+<b class="nc">&nbsp;                        return entry.name;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    int indexMask = ((int) nameValue0) &amp; (NAME_CACHE.length - 1);</b>
+<b class="nc">&nbsp;                    JSONFactory.NameCacheEntry entry = NAME_CACHE[indexMask];</b>
+<b class="nc">&nbsp;                    if (entry == null) {</b>
+<b class="nc">&nbsp;                        char[] chars = new char[length];</b>
+<b class="nc">&nbsp;                        for (int i = 0; i &lt; length; ++i) {</b>
+<b class="nc">&nbsp;                            chars[i] = (char) (bytes[nameBegin + i] &amp; 0xFF);</b>
+&nbsp;                        }
+&nbsp;
+&nbsp;                        String name;
+<b class="nc">&nbsp;                        if (STRING_CREATOR_JDK8 != null) {</b>
+<b class="nc">&nbsp;                            name = STRING_CREATOR_JDK8.apply(chars, Boolean.TRUE);</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            name = new String(chars);</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        NAME_CACHE[indexMask] = new JSONFactory.NameCacheEntry(name, nameValue0);</b>
+<b class="nc">&nbsp;                        return name;</b>
+<b class="nc">&nbsp;                    } else if (entry.value == nameValue0) {</b>
+<b class="nc">&nbsp;                        return entry.name;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return getFieldName();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected final void readString0() {
+<b class="nc">&nbsp;        char quote = this.ch;</b>
+<b class="nc">&nbsp;        int start = offset;</b>
+&nbsp;        int valueLength;
+<b class="nc">&nbsp;        valueEscape = false;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; ; ++i) {</b>
+<b class="nc">&nbsp;            int c = bytes[offset];</b>
+<b class="nc">&nbsp;            if (c == &#39;\\&#39;) {</b>
+<b class="nc">&nbsp;                valueEscape = true;</b>
+<b class="nc">&nbsp;                c = bytes[++offset];</b>
+<b class="nc">&nbsp;                switch (c) {</b>
+&nbsp;                    case &#39;u&#39;: {
+<b class="nc">&nbsp;                        offset += 4;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    case &#39;x&#39;: {
+<b class="nc">&nbsp;                        offset += 2;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                    default:
+&nbsp;                        break;
+&nbsp;                }
+<b class="nc">&nbsp;                offset++;</b>
+<b class="nc">&nbsp;                continue;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (c == quote) {</b>
+<b class="nc">&nbsp;                valueLength = i;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            offset++;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        String str;
+<b class="nc">&nbsp;        if (valueEscape) {</b>
+<b class="nc">&nbsp;            char[] chars = new char[valueLength];</b>
+<b class="nc">&nbsp;            offset = start;</b>
+<b class="nc">&nbsp;            for (int i = 0; ; ++i) {</b>
+<b class="nc">&nbsp;                char c = (char) (bytes[offset] &amp; 0xff);</b>
+<b class="nc">&nbsp;                if (c == &#39;\\&#39;) {</b>
+<b class="nc">&nbsp;                    c = (char) (bytes[++offset]);</b>
+<b class="nc">&nbsp;                    switch (c) {</b>
+&nbsp;                        case &#39;u&#39;: {
+<b class="nc">&nbsp;                            byte c1 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            byte c2 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            byte c3 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            byte c4 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            c = char4(c1, c2, c3, c4);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case &#39;x&#39;: {
+<b class="nc">&nbsp;                            byte c1 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            byte c2 = bytes[++offset];</b>
+<b class="nc">&nbsp;                            c = char2(c1, c2);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case &#39;\\&#39;:
+&nbsp;                        case &#39;&quot;&#39;:
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        default:
+<b class="nc">&nbsp;                            c = char1(c);</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                } else if (c == &#39;&quot;&#39;) {</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                chars[i] = c;</b>
+<b class="nc">&nbsp;                offset++;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            str = new String(chars);</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            if (STRING_CREATOR_JDK11 != null) {</b>
+<b class="nc">&nbsp;                byte[] bytes = Arrays.copyOfRange(this.bytes, start, offset);</b>
+<b class="nc">&nbsp;                str = STRING_CREATOR_JDK11.apply(bytes, LATIN1);</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                str = new String(bytes, start, this.offset - start, StandardCharsets.ISO_8859_1);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int b = bytes[++offset];</b>
+<b class="nc">&nbsp;        while (b &lt;= &#39; &#39; &amp;&amp; ((1L &lt;&lt; b) &amp; SPACE) != 0) {</b>
+<b class="nc">&nbsp;            b = bytes[++offset];</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (comma = (b == &#39;,&#39;)) {</b>
+<b class="nc">&nbsp;            this.offset = offset + 1;</b>
+<b class="nc">&nbsp;            next();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            this.offset = offset + 1;</b>
+<b class="nc">&nbsp;            this.ch = (char) b;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        stringValue = str;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String readString() {
+<b class="nc">&nbsp;        if (ch == &#39;&quot;&#39; || ch == &#39;\&#39;&#39;) {</b>
+<b class="nc">&nbsp;            final byte quote = (byte) ch;</b>
+<b class="nc">&nbsp;            final byte slash = (byte) &#39;\\&#39;;</b>
+&nbsp;
+<b class="nc">&nbsp;            int offset = this.offset;</b>
+<b class="nc">&nbsp;            int start = offset;</b>
+&nbsp;            int valueLength;
+<b class="nc">&nbsp;            boolean valueEscape = false;</b>
+&nbsp;
+&nbsp;            _for:
+&nbsp;            {
+<b class="nc">&nbsp;                int i = 0;</b>
+<b class="nc">&nbsp;                byte c0 = 0, c1 = 0, c2 = 0, c3 = 0;</b>
+&nbsp;
+&nbsp;                // vector optimize
+<b class="nc">&nbsp;                boolean quoted = false;</b>
+<b class="nc">&nbsp;                int upperBound = offset + ((end - offset) &amp; ~3);</b>
+<b class="nc">&nbsp;                while (offset &lt; upperBound) {</b>
+<b class="nc">&nbsp;                    c0 = bytes[offset];</b>
+<b class="nc">&nbsp;                    c1 = bytes[offset + 1];</b>
+<b class="nc">&nbsp;                    c2 = bytes[offset + 2];</b>
+<b class="nc">&nbsp;                    c3 = bytes[offset + 3];</b>
+<b class="nc">&nbsp;                    if (c0 == slash || c1 == slash || c2 == slash || c3 == slash) {</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (c0 == quote || c1 == quote || c2 == quote || c3 == quote) {</b>
+<b class="nc">&nbsp;                        quoted = true;</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    offset += 4;</b>
+<b class="nc">&nbsp;                    i += 4;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (quoted) {</b>
+<b class="nc">&nbsp;                    if (c0 == quote) {</b>
+&nbsp;                        // skip
+<b class="nc">&nbsp;                    } else if (c1 == quote) {</b>
+<b class="nc">&nbsp;                        offset++;</b>
+<b class="nc">&nbsp;                        i++;</b>
+<b class="nc">&nbsp;                    } else if (c2 == quote) {</b>
+<b class="nc">&nbsp;                        offset += 2;</b>
+<b class="nc">&nbsp;                        i += 2;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        offset += 3;</b>
+<b class="nc">&nbsp;                        i += 3;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    valueLength = i;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    for (; ; ++i) {</b>
+<b class="nc">&nbsp;                        if (offset &gt;= end) {</b>
+<b class="nc">&nbsp;                            throw new JSONException(&quot;invalid escape character EOI&quot;);</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        byte c = bytes[offset];</b>
+<b class="nc">&nbsp;                        if (c == slash) {</b>
+<b class="nc">&nbsp;                            valueEscape = true;</b>
+<b class="nc">&nbsp;                            c = bytes[++offset];</b>
+<b class="nc">&nbsp;                            switch (c) {</b>
+&nbsp;                                case &#39;u&#39;: {
+<b class="nc">&nbsp;                                    offset += 4;</b>
+<b class="nc">&nbsp;                                    break;</b>
+&nbsp;                                }
+&nbsp;                                case &#39;x&#39;: {
+<b class="nc">&nbsp;                                    offset += 2;</b>
+<b class="nc">&nbsp;                                    break;</b>
+&nbsp;                                }
+&nbsp;                                default:
+&nbsp;                                    // skip
+&nbsp;                                    break;
+&nbsp;                            }
+<b class="nc">&nbsp;                            offset++;</b>
+<b class="nc">&nbsp;                            continue;</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        if (c == quote) {</b>
+<b class="nc">&nbsp;                            valueLength = i;</b>
+<b class="nc">&nbsp;                            break _for;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        offset++;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            String str;
+<b class="nc">&nbsp;            if (valueEscape) {</b>
+<b class="nc">&nbsp;                char[] chars = new char[valueLength];</b>
+<b class="nc">&nbsp;                offset = start;</b>
+<b class="nc">&nbsp;                for (int i = 0; ; ++i) {</b>
+<b class="nc">&nbsp;                    char c = (char) (bytes[offset] &amp; 0xff);</b>
+<b class="nc">&nbsp;                    if (c == &#39;\\&#39;) {</b>
+<b class="nc">&nbsp;                        c = (char) bytes[++offset];</b>
+<b class="nc">&nbsp;                        switch (c) {</b>
+&nbsp;                            case &#39;u&#39;: {
+<b class="nc">&nbsp;                                char c1 = (char) this.bytes[++offset];</b>
+<b class="nc">&nbsp;                                char c2 = (char) this.bytes[++offset];</b>
+<b class="nc">&nbsp;                                char c3 = (char) this.bytes[++offset];</b>
+<b class="nc">&nbsp;                                char c4 = (char) this.bytes[++offset];</b>
+<b class="nc">&nbsp;                                c = char4(c1, c2, c3, c4);</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            }
+&nbsp;                            case &#39;x&#39;: {
+<b class="nc">&nbsp;                                char c1 = (char) this.bytes[++offset];</b>
+<b class="nc">&nbsp;                                char c2 = (char) this.bytes[++offset];</b>
+<b class="nc">&nbsp;                                c = char2(c1, c2);</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            }
+&nbsp;                            case &#39;\\&#39;:
+&nbsp;                            case &#39;&quot;&#39;:
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case &#39;b&#39;:
+<b class="nc">&nbsp;                                c = &#39;\b&#39;;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case &#39;t&#39;:
+<b class="nc">&nbsp;                                c = &#39;\t&#39;;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case &#39;n&#39;:
+<b class="nc">&nbsp;                                c = &#39;\n&#39;;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case &#39;f&#39;:
+<b class="nc">&nbsp;                                c = &#39;\f&#39;;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case &#39;r&#39;:
+<b class="nc">&nbsp;                                c = &#39;\r&#39;;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            default:
+<b class="nc">&nbsp;                                c = char1(c);</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    } else if (c == quote) {</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    chars[i] = c;</b>
+<b class="nc">&nbsp;                    offset++;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                str = new String(chars);</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                if (this.str != null) {</b>
+<b class="nc">&nbsp;                    str = this.str.substring(this.offset, offset);</b>
+<b class="nc">&nbsp;                } else if (STRING_CREATOR_JDK11 != null) {</b>
+<b class="nc">&nbsp;                    byte[] bytes = Arrays.copyOfRange(this.bytes, this.offset, offset);</b>
+<b class="nc">&nbsp;                    str = STRING_CREATOR_JDK11.apply(bytes, LATIN1);</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    str = new String(bytes, this.offset, offset - this.offset, StandardCharsets.ISO_8859_1);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if ((context.features &amp; Feature.TrimString.mask) != 0) {</b>
+<b class="nc">&nbsp;                str = str.trim();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            clear:
+<b class="nc">&nbsp;            if (++offset != end) {</b>
+<b class="nc">&nbsp;                byte e = bytes[offset++];</b>
+<b class="nc">&nbsp;                while (e &lt;= &#39; &#39; &amp;&amp; (1L &lt;&lt; e &amp; SPACE) != 0) {</b>
+<b class="nc">&nbsp;                    if (offset == end) {</b>
+<b class="nc">&nbsp;                        break clear;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        e = bytes[offset++];</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (comma = e == &#39;,&#39;) {</b>
+<b class="nc">&nbsp;                    if (offset == end) {</b>
+<b class="nc">&nbsp;                        e = EOI;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        e = bytes[offset++];</b>
+<b class="nc">&nbsp;                        while (e &lt;= &#39; &#39; &amp;&amp; (1L &lt;&lt; e &amp; SPACE) != 0) {</b>
+<b class="nc">&nbsp;                            if (offset == end) {</b>
+<b class="nc">&nbsp;                                e = EOI;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            } else {
+<b class="nc">&nbsp;                                e = bytes[offset++];</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                this.ch = (char) e;</b>
+<b class="nc">&nbsp;                this.offset = offset;</b>
+<b class="nc">&nbsp;                return str;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            this.ch = EOI;</b>
+<b class="nc">&nbsp;            this.comma = false;</b>
+<b class="nc">&nbsp;            this.offset = offset;</b>
+<b class="nc">&nbsp;            return str;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        switch (ch) {</b>
+&nbsp;            case &#39;[&#39;:
+<b class="nc">&nbsp;                return toString(</b>
+<b class="nc">&nbsp;                        readArray());</b>
+&nbsp;            case &#39;{&#39;:
+<b class="nc">&nbsp;                return toString(</b>
+<b class="nc">&nbsp;                        readObject());</b>
+&nbsp;            case &#39;-&#39;:
+&nbsp;            case &#39;+&#39;:
+&nbsp;            case &#39;0&#39;:
+&nbsp;            case &#39;1&#39;:
+&nbsp;            case &#39;2&#39;:
+&nbsp;            case &#39;3&#39;:
+&nbsp;            case &#39;4&#39;:
+&nbsp;            case &#39;5&#39;:
+&nbsp;            case &#39;6&#39;:
+&nbsp;            case &#39;7&#39;:
+&nbsp;            case &#39;8&#39;:
+&nbsp;            case &#39;9&#39;:
+<b class="nc">&nbsp;                readNumber0();</b>
+<b class="nc">&nbsp;                Number number = getNumber();</b>
+<b class="nc">&nbsp;                return number.toString();</b>
+&nbsp;            case &#39;t&#39;:
+&nbsp;            case &#39;f&#39;:
+<b class="nc">&nbsp;                boolValue = readBoolValue();</b>
+<b class="nc">&nbsp;                return boolValue ? &quot;true&quot; : &quot;false&quot;;</b>
+&nbsp;            case &#39;n&#39;: {
+<b class="nc">&nbsp;                readNull();</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new JSONException(info(&quot;illegal input : &quot; + ch));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:35</div>
+</div>
+</body>
+</html>

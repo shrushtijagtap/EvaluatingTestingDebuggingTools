@@ -1,0 +1,209 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONPResponseBodyAdvice</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.support.spring</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONPResponseBodyAdvice (com.alibaba.fastjson.support.spring)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONPResponseBodyAdvice</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson.support.spring;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.JSONPObject;
+&nbsp;import com.alibaba.fastjson.support.spring.annotation.ResponseJSONP;
+&nbsp;import com.alibaba.fastjson.util.IOUtils;
+&nbsp;import org.apache.commons.logging.Log;
+&nbsp;import org.apache.commons.logging.LogFactory;
+&nbsp;import org.springframework.core.MethodParameter;
+&nbsp;import org.springframework.core.annotation.Order;
+&nbsp;import org.springframework.http.MediaType;
+&nbsp;import org.springframework.http.converter.HttpMessageConverter;
+&nbsp;import org.springframework.http.server.ServerHttpRequest;
+&nbsp;import org.springframework.http.server.ServerHttpResponse;
+&nbsp;import org.springframework.http.server.ServletServerHttpRequest;
+&nbsp;import org.springframework.web.bind.annotation.ControllerAdvice;
+&nbsp;import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
+&nbsp;
+&nbsp;import javax.servlet.http.HttpServletRequest;
+&nbsp;
+&nbsp;/**
+&nbsp; * Created by SongLing.Dong on 7/22/2017.
+&nbsp; * &lt;p&gt;
+&nbsp; * Wrap with the return object from method annotated by &lt;code&gt;@ResponseJSONP&lt;/code&gt;
+&nbsp; * in order to be serialized into jsonp format.
+&nbsp; * &lt;/p&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * &lt;p&gt;
+&nbsp; * url: /path/to/your/api?&lt;b&gt;callback=functionName&lt;/b&gt;
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * @see JSONPObject
+&nbsp; * @see ResponseJSONP
+&nbsp; * @since Spring 4.2 when ResponseBodyAdvice is supported.
+&nbsp; * &lt;p&gt;
+&nbsp; * In Spring 3.x, use method directly return a &lt;code&gt;JSONPObject&lt;/code&gt; instead.
+&nbsp; * &lt;/p&gt;
+&nbsp; */
+&nbsp;@Order(Integer.MIN_VALUE)//before FastJsonViewResponseBodyAdvice
+&nbsp;@ControllerAdvice
+&nbsp;public class JSONPResponseBodyAdvice
+&nbsp;        implements ResponseBodyAdvice&lt;Object&gt; {
+<b class="nc">&nbsp;    public final Log logger = LogFactory.getLog(this.getClass());</b>
+&nbsp;
+<b class="nc">&nbsp;    public JSONPResponseBodyAdvice() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean supports(MethodParameter returnType, Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt; converterType) {
+<b class="nc">&nbsp;        return FastJsonHttpMessageConverter.class.isAssignableFrom(converterType)</b>
+&nbsp;                &amp;&amp;
+<b class="nc">&nbsp;                (returnType.getContainingClass().isAnnotationPresent(ResponseJSONP.class) || returnType.hasMethodAnnotation(ResponseJSONP.class));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object beforeBodyWrite(
+&nbsp;            Object body,
+&nbsp;            MethodParameter returnType,
+&nbsp;            MediaType selectedContentType,
+&nbsp;            Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt; selectedConverterType,
+&nbsp;            ServerHttpRequest request,
+&nbsp;            ServerHttpResponse response
+&nbsp;    ) {
+<b class="nc">&nbsp;        ResponseJSONP responseJsonp = returnType.getMethodAnnotation(ResponseJSONP.class);</b>
+<b class="nc">&nbsp;        if (responseJsonp == null) {</b>
+<b class="nc">&nbsp;            responseJsonp = returnType.getContainingClass().getAnnotation(ResponseJSONP.class);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        HttpServletRequest servletRequest = ((ServletServerHttpRequest) request).getServletRequest();</b>
+<b class="nc">&nbsp;        String callbackMethodName = servletRequest.getParameter(responseJsonp.callback());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (!IOUtils.isValidJsonpQueryParam(callbackMethodName)) {</b>
+<b class="nc">&nbsp;            if (logger.isDebugEnabled()) {</b>
+<b class="nc">&nbsp;                logger.debug(&quot;Invalid jsonp parameter value:&quot; + callbackMethodName);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            callbackMethodName = null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        JSONPObject jsonpObject = new JSONPObject(callbackMethodName);</b>
+<b class="nc">&nbsp;        jsonpObject.addParameter(body);</b>
+<b class="nc">&nbsp;        beforeBodyWriteInternal(jsonpObject, selectedContentType, returnType, request, response);</b>
+<b class="nc">&nbsp;        return jsonpObject;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void beforeBodyWriteInternal(
+&nbsp;            JSONPObject jsonpObject,
+&nbsp;            MediaType contentType,
+&nbsp;            MethodParameter returnType,
+&nbsp;            ServerHttpRequest request,
+&nbsp;            ServerHttpResponse response
+&nbsp;    ) {
+&nbsp;        //MediaType contentTypeToUse = getContentType(contentType, request, response);
+&nbsp;        //response.getHeaders().setContentType(contentTypeToUse);
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the content type to set the response to.
+&nbsp;     * This implementation always returns &quot;application/javascript&quot;.
+&nbsp;     *
+&nbsp;     * @param contentType the content type selected through content negotiation
+&nbsp;     * @param request the current request
+&nbsp;     * @param response the current response
+&nbsp;     * @return the content type to set the response to
+&nbsp;     */
+&nbsp;    protected MediaType getContentType(MediaType contentType, ServerHttpRequest request, ServerHttpResponse response) {
+<b class="nc">&nbsp;        return FastJsonHttpMessageConverter.APPLICATION_JAVASCRIPT;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:37</div>
+</div>
+</body>
+</html>

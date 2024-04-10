@@ -1,0 +1,181 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MethodWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.internal.codegen</a>
+</div>
+
+<h1>Coverage Summary for Class: MethodWriter (com.alibaba.fastjson2.internal.codegen)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MethodWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.internal.codegen;
+&nbsp;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.internal.codegen.ClassWriter.getTypeName;
+&nbsp;
+&nbsp;public class MethodWriter
+&nbsp;        extends Block {
+&nbsp;    final ClassWriter classWriter;
+&nbsp;    final int modifiers;
+&nbsp;    final String name;
+&nbsp;    final Class returnType;
+&nbsp;    final Class[] paramTypes;
+&nbsp;    final String[] paramNames;
+&nbsp;
+<b class="nc">&nbsp;    MethodWriter(ClassWriter classWriter, int modifiers, String name, Class returnType, Class[] paramTypes, String[] paramNames) {</b>
+<b class="nc">&nbsp;        this.classWriter = classWriter;</b>
+<b class="nc">&nbsp;        this.modifiers = modifiers;</b>
+<b class="nc">&nbsp;        this.name = name;</b>
+<b class="nc">&nbsp;        this.returnType = returnType;</b>
+<b class="nc">&nbsp;        this.paramTypes = paramTypes;</b>
+<b class="nc">&nbsp;        this.paramNames = paramNames;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void toString(StringBuilder buf) {
+<b class="nc">&nbsp;        if (Modifier.isPublic(modifiers)) {</b>
+<b class="nc">&nbsp;            buf.append(&quot;\tpublic &quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (name.equals(&quot;&lt;init&gt;&quot;)) {</b>
+<b class="nc">&nbsp;            buf.append(classWriter.name);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            buf.append(getTypeName(returnType)).append(&#39; &#39;).append(name);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        boolean newLine = paramTypes.length &gt; 3;</b>
+<b class="nc">&nbsp;        buf.append(&#39;(&#39;);</b>
+<b class="nc">&nbsp;        if (newLine) {</b>
+<b class="nc">&nbsp;            buf.append(&quot;\n\t\t\t&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; paramTypes.length; i++) {</b>
+<b class="nc">&nbsp;            if (i != 0) {</b>
+<b class="nc">&nbsp;                if (newLine) {</b>
+<b class="nc">&nbsp;                    buf.append(&quot;,\n\t\t\t&quot;);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    buf.append(&quot;, &quot;);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            Class paramType = paramTypes[i];</b>
+<b class="nc">&nbsp;            String paramName = paramNames[i];</b>
+<b class="nc">&nbsp;            buf.append(getTypeName(paramType)).append(&#39; &#39;).append(paramName);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (newLine) {</b>
+<b class="nc">&nbsp;            buf.append(&quot;\n\t&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        buf.append(&quot;) {\n&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; statements.size(); i++) {</b>
+<b class="nc">&nbsp;            if (i != 0) {</b>
+<b class="nc">&nbsp;                buf.append(&#39;\n&#39;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Statement stmt = statements.get(i);</b>
+<b class="nc">&nbsp;            stmt.toString(this, buf, 2);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        buf.append(&quot;\n\t}&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void ident(StringBuilder buf, int indent) {
+<b class="nc">&nbsp;        for (int i = 0; i &lt; indent; i++) {</b>
+<b class="nc">&nbsp;            buf.append(&#39;\t&#39;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:37</div>
+</div>
+</body>
+</html>

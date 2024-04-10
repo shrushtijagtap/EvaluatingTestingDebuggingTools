@@ -1,0 +1,141 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JavaBeanSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson.serializer</a>
+</div>
+
+<h1>Coverage Summary for Class: JavaBeanSerializer (com.alibaba.fastjson.serializer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JavaBeanSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    38.7%
+  </span>
+  <span class="absValue">
+    (12/31)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    29.5%
+  </span>
+  <span class="absValue">
+    (130/441)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson.serializer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.writer.FieldWriter;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriter;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;
+&nbsp;public class JavaBeanSerializer
+&nbsp;        implements ObjectSerializer {
+&nbsp;    private final ObjectWriter raw;
+&nbsp;
+&nbsp;    public JavaBeanSerializer(ObjectWriter raw) {
+&nbsp;        this.raw = raw;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(
+&nbsp;            JSONSerializer serializer,
+&nbsp;            Object object,
+&nbsp;            Object fieldName,
+&nbsp;            Type fieldType,
+&nbsp;            int features
+&nbsp;    ) throws IOException {
+&nbsp;        JSONWriter jsonWriter = serializer.out.raw;
+&nbsp;        raw.write(jsonWriter, object, fieldName, fieldType, 0L);
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object getFieldValue(Object object, String key) {
+&nbsp;        FieldWriter fieldWriter = raw.getFieldWriter(key);
+&nbsp;        if (fieldWriter == null) {
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;        return fieldWriter.getFieldValue(object);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:27</div>
+</div>
+</body>
+</html>

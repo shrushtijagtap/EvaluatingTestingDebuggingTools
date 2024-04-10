@@ -1,0 +1,212 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Constants</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.internal.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: Constants (com.alibaba.fastjson2.internal.asm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Constants</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;// ASM: a very small and fast Java bytecode manipulation framework
+&nbsp;// Copyright (c) 2000-2011 INRIA, France Telecom
+&nbsp;// All rights reserved.
+&nbsp;//
+&nbsp;// Redistribution and use in source and binary forms, with or without
+&nbsp;// modification, are permitted provided that the following conditions
+&nbsp;// are met:
+&nbsp;// 1. Redistributions of source code must retain the above copyright
+&nbsp;//    notice, this list of conditions and the following disclaimer.
+&nbsp;// 2. Redistributions in binary form must reproduce the above copyright
+&nbsp;//    notice, this list of conditions and the following disclaimer in the
+&nbsp;//    documentation and/or other materials provided with the distribution.
+&nbsp;// 3. Neither the name of the copyright holders nor the names of its
+&nbsp;//    contributors may be used to endorse or promote products derived from
+&nbsp;//    this software without specific prior written permission.
+&nbsp;//
+&nbsp;// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+&nbsp;// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+&nbsp;// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+&nbsp;// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+&nbsp;// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+&nbsp;// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+&nbsp;// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+&nbsp;// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+&nbsp;// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+&nbsp;// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+&nbsp;// THE POSSIBILITY OF SUCH DAMAGE.
+&nbsp;package com.alibaba.fastjson2.internal.asm;
+&nbsp;
+&nbsp;/**
+&nbsp; * Defines additional JVM opcodes, access flags and constants which are not part of the ASM public
+&nbsp; * API.
+&nbsp; *
+&nbsp; * @author Eric Bruneton
+&nbsp; * @see &lt;a href=&quot;https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-6.html&quot;&gt;JVMS 6&lt;/a&gt;
+&nbsp; */
+&nbsp;final class Constants {
+&nbsp;    // The ClassFile attribute names, in the order they are defined in
+&nbsp;    // https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.7-300.
+&nbsp;
+&nbsp;//    static final String CONSTANT_VALUE = &quot;ConstantValue&quot;;
+&nbsp;    static final String CODE = &quot;Code&quot;;
+&nbsp;    static final String STACK_MAP_TABLE = &quot;StackMapTable&quot;;
+&nbsp;//    static final String EXCEPTIONS = &quot;Exceptions&quot;;
+&nbsp;//    static final String INNER_CLASSES = &quot;InnerClasses&quot;;
+&nbsp;//    static final String ENCLOSING_METHOD = &quot;EnclosingMethod&quot;;
+&nbsp;//    static final String SYNTHETIC = &quot;Synthetic&quot;;
+&nbsp;//    static final String SIGNATURE = &quot;Signature&quot;;
+&nbsp;//    static final String SOURCE_FILE = &quot;SourceFile&quot;;
+&nbsp;//    static final String SOURCE_DEBUG_EXTENSION = &quot;SourceDebugExtension&quot;;
+&nbsp;//    static final String LINE_NUMBER_TABLE = &quot;LineNumberTable&quot;;
+&nbsp;//    static final String LOCAL_VARIABLE_TABLE = &quot;LocalVariableTable&quot;;
+&nbsp;//    static final String LOCAL_VARIABLE_TYPE_TABLE = &quot;LocalVariableTypeTable&quot;;
+&nbsp;//    static final String DEPRECATED = &quot;Deprecated&quot;;
+&nbsp;//    static final String RUNTIME_VISIBLE_ANNOTATIONS = &quot;RuntimeVisibleAnnotations&quot;;
+&nbsp;//    static final String RUNTIME_INVISIBLE_ANNOTATIONS = &quot;RuntimeInvisibleAnnotations&quot;;
+&nbsp;//    static final String RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS = &quot;RuntimeVisibleParameterAnnotations&quot;;
+&nbsp;//    static final String RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS =
+&nbsp;//            &quot;RuntimeInvisibleParameterAnnotations&quot;;
+&nbsp;//    static final String RUNTIME_VISIBLE_TYPE_ANNOTATIONS = &quot;RuntimeVisibleTypeAnnotations&quot;;
+&nbsp;//    static final String RUNTIME_INVISIBLE_TYPE_ANNOTATIONS = &quot;RuntimeInvisibleTypeAnnotations&quot;;
+&nbsp;//    static final String ANNOTATION_DEFAULT = &quot;AnnotationDefault&quot;;
+&nbsp;//    static final String BOOTSTRAP_METHODS = &quot;BootstrapMethods&quot;;
+&nbsp;//    static final String METHOD_PARAMETERS = &quot;MethodParameters&quot;;
+&nbsp;//    static final String MODULE = &quot;Module&quot;;
+&nbsp;//    static final String MODULE_PACKAGES = &quot;ModulePackages&quot;;
+&nbsp;//    static final String MODULE_MAIN_CLASS = &quot;ModuleMainClass&quot;;
+&nbsp;//    static final String NEST_HOST = &quot;NestHost&quot;;
+&nbsp;//    static final String NEST_MEMBERS = &quot;NestMembers&quot;;
+&nbsp;//    static final String PERMITTED_SUBCLASSES = &quot;PermittedSubclasses&quot;;
+&nbsp;//    static final String RECORD = &quot;Record&quot;;
+&nbsp;
+&nbsp;    // ASM specific access flags.
+&nbsp;    // WARNING: the 16 least significant bits must NOT be used, to avoid conflicts with standard
+&nbsp;    // access flags, and also to make sure that these flags are automatically filtered out when
+&nbsp;    // written in class files (because access flags are stored using 16 bits only).
+&nbsp;
+&nbsp;    static final int ACC_CONSTRUCTOR = 0x40000; // method access flag.
+&nbsp;    // The JVM opcode values which are not part of the ASM public API.
+&nbsp;    // See https://docs.oracle.com/javase/specs/jvms/se9/html/jvms-6.html.
+&nbsp;
+&nbsp;    static final int LDC_W = 19;
+&nbsp;    static final int LDC2_W = 20;
+&nbsp;    static final int ILOAD_0 = 26;
+&nbsp;//    static final int ILOAD_1 = 27;
+&nbsp;//    static final int ILOAD_2 = 28;
+&nbsp;//    static final int ILOAD_3 = 29;
+&nbsp;//    static final int LLOAD_0 = 30;
+&nbsp;//    static final int LLOAD_1 = 31;
+&nbsp;//    static final int LLOAD_2 = 32;
+&nbsp;//    static final int LLOAD_3 = 33;
+&nbsp;//    static final int FLOAD_0 = 34;
+&nbsp;//    static final int FLOAD_1 = 35;
+&nbsp;//    static final int FLOAD_2 = 36;
+&nbsp;//    static final int FLOAD_3 = 37;
+&nbsp;//    static final int DLOAD_0 = 38;
+&nbsp;//    static final int DLOAD_1 = 39;
+&nbsp;//    static final int DLOAD_2 = 40;
+&nbsp;//    static final int DLOAD_3 = 41;
+&nbsp;//    static final int ALOAD_0 = 42;
+&nbsp;//    static final int ALOAD_1 = 43;
+&nbsp;//    static final int ALOAD_2 = 44;
+&nbsp;//    static final int ALOAD_3 = 45;
+&nbsp;    static final int ISTORE_0 = 59;
+&nbsp;//    static final int ISTORE_1 = 60;
+&nbsp;//    static final int ISTORE_2 = 61;
+&nbsp;//    static final int ISTORE_3 = 62;
+&nbsp;//    static final int LSTORE_0 = 63;
+&nbsp;//    static final int LSTORE_1 = 64;
+&nbsp;//    static final int LSTORE_2 = 65;
+&nbsp;//    static final int LSTORE_3 = 66;
+&nbsp;//    static final int FSTORE_0 = 67;
+&nbsp;//    static final int FSTORE_1 = 68;
+&nbsp;//    static final int FSTORE_2 = 69;
+&nbsp;//    static final int FSTORE_3 = 70;
+&nbsp;//    static final int DSTORE_0 = 71;
+&nbsp;//    static final int DSTORE_1 = 72;
+&nbsp;//    static final int DSTORE_2 = 73;
+&nbsp;//    static final int DSTORE_3 = 74;
+&nbsp;//    static final int ASTORE_0 = 75;
+&nbsp;//    static final int ASTORE_1 = 76;
+&nbsp;//    static final int ASTORE_2 = 77;
+&nbsp;//    static final int ASTORE_3 = 78;
+&nbsp;    static final int WIDE = 196;
+&nbsp;    static final int GOTO_W = 200;
+&nbsp;//    static final int JSR_W = 201;
+&nbsp;
+&nbsp;    // Constants to convert between normal and wide jump instructions.
+&nbsp;
+&nbsp;    // The delta between the GOTO_W and JSR_W opcodes and GOTO and JUMP.
+&nbsp;    static final int WIDE_JUMP_OPCODE_DELTA = GOTO_W - Opcodes.GOTO;
+&nbsp;
+&nbsp;    // Constants to convert JVM opcodes to the equivalent ASM specific opcodes, and vice versa.
+&nbsp;
+&nbsp;    // The delta between the ASM_IFEQ, ..., ASM_IF_ACMPNE, ASM_GOTO and ASM_JSR opcodes
+&nbsp;    // and IFEQ, ..., IF_ACMPNE, GOTO and JSR.
+&nbsp;    static final int ASM_OPCODE_DELTA = 49;
+&nbsp;
+&nbsp;    // The delta between the ASM_IFNULL and ASM_IFNONNULL opcodes and IFNULL and IFNONNULL.
+&nbsp;    static final int ASM_IFNULL_OPCODE_DELTA = 20;
+&nbsp;
+&nbsp;    private Constants() {
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:27</div>
+</div>
+</body>
+</html>

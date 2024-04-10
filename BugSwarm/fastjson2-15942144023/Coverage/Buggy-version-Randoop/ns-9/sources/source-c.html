@@ -1,0 +1,593 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SymbolTable</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.internal.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: SymbolTable (com.alibaba.fastjson2.internal.asm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SymbolTable</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/122)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;// ASM: a very small and fast Java bytecode manipulation framework
+&nbsp;// Copyright (c) 2000-2011 INRIA, France Telecom
+&nbsp;// All rights reserved.
+&nbsp;//
+&nbsp;// Redistribution and use in source and binary forms, with or without
+&nbsp;// modification, are permitted provided that the following conditions
+&nbsp;// are met:
+&nbsp;// 1. Redistributions of source code must retain the above copyright
+&nbsp;//    notice, this list of conditions and the following disclaimer.
+&nbsp;// 2. Redistributions in binary form must reproduce the above copyright
+&nbsp;//    notice, this list of conditions and the following disclaimer in the
+&nbsp;//    documentation and/or other materials provided with the distribution.
+&nbsp;// 3. Neither the name of the copyright holders nor the names of its
+&nbsp;//    contributors may be used to endorse or promote products derived from
+&nbsp;//    this software without specific prior written permission.
+&nbsp;//
+&nbsp;// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+&nbsp;// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+&nbsp;// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+&nbsp;// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+&nbsp;// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+&nbsp;// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+&nbsp;// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+&nbsp;// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+&nbsp;// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+&nbsp;// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+&nbsp;// THE POSSIBILITY OF SUCH DAMAGE.
+&nbsp;package com.alibaba.fastjson2.internal.asm;
+&nbsp;
+&nbsp;/**
+&nbsp; * The constant pool entries, the BootstrapMethods attribute entries and the (ASM specific) type
+&nbsp; * table entries of a class.
+&nbsp; *
+&nbsp; * @author Eric Bruneton
+&nbsp; * @see &lt;a href=&quot;https://docs.oracle.com/javase/specs/jvms/se9/html/jvms-4.html#jvms-4.4&quot;&gt;JVMS
+&nbsp; * 4.4&lt;/a&gt;
+&nbsp; * @see &lt;a href=&quot;https://docs.oracle.com/javase/specs/jvms/se9/html/jvms-4.html#jvms-4.7.23&quot;&gt;JVMS
+&nbsp; * 4.7.23&lt;/a&gt;
+&nbsp; */
+&nbsp;final class SymbolTable {
+&nbsp;    final ClassWriter classWriter;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The internal name of the class to which this symbol table belongs.
+&nbsp;     */
+&nbsp;    String className;
+&nbsp;
+&nbsp;    private int entryCount;
+&nbsp;    private Symbol[] entries;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The number of constant pool items in {@link #constantPool}, plus 1. The first constant pool
+&nbsp;     * item has index 1, and long and double items count for two items.
+&nbsp;     */
+&nbsp;    int constantPoolCount;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The content of the ClassFile&#39;s constant_pool JVMS structure corresponding to this SymbolTable.
+&nbsp;     * The ClassFile&#39;s constant_pool_count field is &lt;i&gt;not&lt;/i&gt; included.
+&nbsp;     */
+&nbsp;    final ByteVector constantPool;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The actual number of elements in {@link #typeTable}. These elements are stored from index 0 to
+&nbsp;     * typeCount (excluded). The other array entries are empty.
+&nbsp;     */
+&nbsp;    private int typeCount;
+&nbsp;    Symbol[] typeTable;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new, empty SymbolTable for the given ClassWriter.
+&nbsp;     *
+&nbsp;     * @param classWriter a ClassWriter.
+&nbsp;     */
+<b class="nc">&nbsp;    SymbolTable(final ClassWriter classWriter) {</b>
+<b class="nc">&nbsp;        this.classWriter = classWriter;</b>
+<b class="nc">&nbsp;        this.entries = new Symbol[256];</b>
+<b class="nc">&nbsp;        this.constantPoolCount = 1;</b>
+<b class="nc">&nbsp;        this.constantPool = new ByteVector(4096);</b>
+&nbsp;    }
+&nbsp;//
+&nbsp;//    /**
+&nbsp;//     * Returns the internal name of the class to which this symbol table belongs.
+&nbsp;//     *
+&nbsp;//     * @return the internal name of the class to which this symbol table belongs.
+&nbsp;//     */
+&nbsp;//    String getClassName() {
+&nbsp;//        return className;
+&nbsp;//    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the major version and the name of the class to which this symbol table belongs. Also adds
+&nbsp;     * the class name to the constant pool.
+&nbsp;     *
+&nbsp;     * @param majorVersion a major ClassFile version number.
+&nbsp;     * @param className    an internal class name.
+&nbsp;     * @return the constant pool index of a new or already existing Symbol with the given class name.
+&nbsp;     */
+&nbsp;    int setMajorVersionAndClassName(final int majorVersion, final String className) {
+&nbsp;        /**
+&nbsp;         * The major version number of the class to which this symbol table belongs.
+&nbsp;         */
+<b class="nc">&nbsp;        this.className = className;</b>
+<b class="nc">&nbsp;        return addConstantUtf8Reference(/*CONSTANT_CLASS_TAG*/ 7, className).index;</b>
+&nbsp;    }
+&nbsp;//
+&nbsp;//    /**
+&nbsp;//     * Returns the length in bytes of this symbol table&#39;s constant_pool array.
+&nbsp;//     *
+&nbsp;//     * @return the length in bytes of this symbol table&#39;s constant_pool array.
+&nbsp;//     */
+&nbsp;//    int getConstantPoolLength() {
+&nbsp;//        return constantPool.length;
+&nbsp;//    }
+&nbsp;
+&nbsp;//    /**
+&nbsp;//     * Puts this symbol table&#39;s constant_pool array in the given ByteVector, preceded by the
+&nbsp;//     * constant_pool_count value.
+&nbsp;//     *
+&nbsp;//     * @param output where the JVMS ClassFile&#39;s constant_pool array must be put.
+&nbsp;//     */
+&nbsp;//    void putConstantPool(final ByteVector output) {
+&nbsp;//        output.putShort(constantPoolCount).putByteArray(constantPool.data, 0, constantPool.length);
+&nbsp;//    }
+&nbsp;//
+&nbsp;//    /**
+&nbsp;//     * Returns the size in bytes of this symbol table&#39;s BootstrapMethods attribute. Also adds the
+&nbsp;//     * attribute name in the constant pool.
+&nbsp;//     *
+&nbsp;//     * @return the size in bytes of this symbol table&#39;s BootstrapMethods attribute.
+&nbsp;//     */
+&nbsp;//    int computeBootstrapMethodsSize() {
+&nbsp;//        return 0;
+&nbsp;//    }
+&nbsp;//
+&nbsp;//    /**
+&nbsp;//     * Puts this symbol table&#39;s BootstrapMethods attribute in the given ByteVector. This includes the
+&nbsp;//     * 6 attribute header bytes and the num_bootstrap_methods value.
+&nbsp;//     *
+&nbsp;//     * @param output where the JVMS BootstrapMethods attribute must be put.
+&nbsp;//     */
+&nbsp;//    void putBootstrapMethods(final ByteVector output) {
+&nbsp;//    }
+&nbsp;
+&nbsp;    // -----------------------------------------------------------------------------------------------
+&nbsp;    // Generic symbol table entries management.
+&nbsp;    // -----------------------------------------------------------------------------------------------
+&nbsp;//
+&nbsp;//    /**
+&nbsp;//     * Returns the list of entries which can potentially have the given hash code.
+&nbsp;//     *
+&nbsp;//     * @param hashCode a {@link Entry#hashCode} value.
+&nbsp;//     * @return the list of entries which can potentially have the given hash code. The list is stored
+&nbsp;//     * via the {@link Entry#next} field.
+&nbsp;//     */
+&nbsp;//    private Entry get(final int hashCode) {
+&nbsp;//        return entries[hashCode % entries.length];
+&nbsp;//    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Puts the given entry in the {@link #entries} hash set. This method does &lt;i&gt;not&lt;/i&gt; check
+&nbsp;     * whether {@link #entries} already contains a similar entry or not. {@link #entries} is resized
+&nbsp;     * if necessary to avoid hash collisions (multiple entries needing to be stored at the same {@link
+&nbsp;     * #entries} array index) as much as possible, with reasonable memory usage.
+&nbsp;     *
+&nbsp;     * @param entry an Entry (which must not already be contained in {@link #entries}).
+&nbsp;     * @return the given entry
+&nbsp;     */
+&nbsp;    private Symbol put(final Symbol entry) {
+<b class="nc">&nbsp;        if (entryCount &gt; (entries.length * 3) / 4) {</b>
+<b class="nc">&nbsp;            int currentCapacity = entries.length;</b>
+<b class="nc">&nbsp;            int newCapacity = currentCapacity * 2 + 1;</b>
+<b class="nc">&nbsp;            Symbol[] newEntries = new Symbol[newCapacity];</b>
+<b class="nc">&nbsp;            for (int i = currentCapacity - 1; i &gt;= 0; --i) {</b>
+<b class="nc">&nbsp;                Symbol currentEntry = entries[i];</b>
+<b class="nc">&nbsp;                while (currentEntry != null) {</b>
+<b class="nc">&nbsp;                    int newCurrentEntryIndex = currentEntry.hashCode % newCapacity;</b>
+<b class="nc">&nbsp;                    Symbol nextEntry = currentEntry.next;</b>
+<b class="nc">&nbsp;                    currentEntry.next = newEntries[newCurrentEntryIndex];</b>
+<b class="nc">&nbsp;                    newEntries[newCurrentEntryIndex] = currentEntry;</b>
+<b class="nc">&nbsp;                    currentEntry = nextEntry;</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+<b class="nc">&nbsp;            entries = newEntries;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        entryCount++;</b>
+<b class="nc">&nbsp;        int index = entry.hashCode % entries.length;</b>
+<b class="nc">&nbsp;        entry.next = entries[index];</b>
+<b class="nc">&nbsp;        return entries[index] = entry;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // -----------------------------------------------------------------------------------------------
+&nbsp;    // Constant pool entries management.
+&nbsp;    // -----------------------------------------------------------------------------------------------
+&nbsp;
+&nbsp;//  /**
+&nbsp;//   * Adds a number or string constant to the constant pool of this symbol table. Does nothing if the
+&nbsp;//   * constant pool already contains a similar item.
+&nbsp;//   *
+&nbsp;//   * @param value the value of the constant to be added to the constant pool. This parameter must be
+&nbsp;//   *     an {@link Integer}, {@link Byte}, {@link Character}, {@link Short}, {@link Boolean}, {@link
+&nbsp;//   *     Float}, {@link Long}, {@link Double}, {@link String}, {@link Type}.
+&nbsp;//   * @return a new or already existing Symbol with the given value.
+&nbsp;//   */
+&nbsp;//  Symbol addConstant(final Object value) {
+&nbsp;//    if (value instanceof Integer) {
+&nbsp;//      return addConstantIntegerOrFloat(Symbol.CONSTANT_INTEGER_TAG, ((Integer) value).intValue());
+&nbsp;//    } else if (value instanceof Byte) {
+&nbsp;//      return addConstantIntegerOrFloat(Symbol.CONSTANT_INTEGER_TAG, ((Byte) value).intValue());
+&nbsp;//    } else if (value instanceof Character) {
+&nbsp;//      return addConstantIntegerOrFloat(Symbol.CONSTANT_INTEGER_TAG, ((Character) value).charValue());
+&nbsp;//    } else if (value instanceof Short) {
+&nbsp;//      return addConstantIntegerOrFloat(Symbol.CONSTANT_INTEGER_TAG, ((Short) value).intValue());
+&nbsp;//    } else if (value instanceof Boolean) {
+&nbsp;//      return addConstantIntegerOrFloat(Symbol.CONSTANT_INTEGER_TAG, ((Boolean) value).booleanValue() ? 1 : 0);
+&nbsp;//    } else if (value instanceof Float) {
+&nbsp;//      float floatValue = ((Float) value).floatValue();
+&nbsp;//      return addConstantIntegerOrFloat(Symbol.CONSTANT_FLOAT_TAG, Float.floatToRawIntBits(floatValue));
+&nbsp;//    } else if (value instanceof Long) {
+&nbsp;//      return addConstantLongOrDouble(Symbol.CONSTANT_LONG_TAG, ((Long) value).longValue());
+&nbsp;//    } else if (value instanceof Double) {
+&nbsp;//      double doubleValue = ((Double) value).doubleValue();
+&nbsp;//      return addConstantLongOrDouble(Symbol.CONSTANT_DOUBLE_TAG, Double.doubleToRawLongBits(doubleValue));
+&nbsp;//    } else if (value instanceof String) {
+&nbsp;//      return addConstantUtf8Reference(Symbol.CONSTANT_STRING_TAG, (String) value);
+&nbsp;//    } else if (value instanceof Type) {
+&nbsp;//      Type type = (Type) value;
+&nbsp;//      int typeSort = type.getSort();
+&nbsp;//      if (typeSort == Type.OBJECT) {
+&nbsp;//        return addConstantClass(type.getInternalName());
+&nbsp;//      } else if (typeSort == Type.METHOD) {
+&nbsp;//        return addConstantUtf8Reference(Symbol.CONSTANT_METHOD_TYPE_TAG, type.getDescriptor());
+&nbsp;//      } else { // type is a primitive or array type.
+&nbsp;//        return addConstantClass(type.getDescriptor());
+&nbsp;//      }
+&nbsp;//    } else {
+&nbsp;//      throw new IllegalArgumentException(&quot;value &quot; + value);
+&nbsp;//    }
+&nbsp;//  }
+&nbsp;//
+&nbsp;//    /**
+&nbsp;//     * Adds a CONSTANT_Class_info to the constant pool of this symbol table. Does nothing if the
+&nbsp;//     * constant pool already contains a similar item.
+&nbsp;//     *
+&nbsp;//     * @param value the internal name of a class.
+&nbsp;//     * @return a new or already existing Symbol with the given value.
+&nbsp;//     */
+&nbsp;//    Symbol addConstantClass(final String value) {
+&nbsp;//        final int CONSTANT_CLASS_TAG = 7;
+&nbsp;//        return addConstantUtf8Reference(CONSTANT_CLASS_TAG, value);
+&nbsp;//    }
+&nbsp;//
+&nbsp;//    /**
+&nbsp;//     * Adds a CONSTANT_Fieldref_info to the constant pool of this symbol table. Does nothing if the
+&nbsp;//     * constant pool already contains a similar item.
+&nbsp;//     *
+&nbsp;//     * @param owner      the internal name of a class.
+&nbsp;//     * @param name       a field name.
+&nbsp;//     * @param descriptor a field descriptor.
+&nbsp;//     * @return a new or already existing Symbol with the given value.
+&nbsp;//     */
+&nbsp;//    Symbol addConstantFieldref(final String owner, final String name, final String descriptor) {
+&nbsp;//        return addConstantMemberReference(CONSTANT_FIELDREF_TAG, owner, name, descriptor);
+&nbsp;//    }
+&nbsp;//
+&nbsp;//    /**
+&nbsp;//     * Adds a CONSTANT_Methodref_info or CONSTANT_InterfaceMethodref_info to the constant pool of this
+&nbsp;//     * symbol table. Does nothing if the constant pool already contains a similar item.
+&nbsp;//     *
+&nbsp;//     * @param owner       the internal name of a class.
+&nbsp;//     * @param name        a method name.
+&nbsp;//     * @param descriptor  a method descriptor.
+&nbsp;//     * @param isInterface whether owner is an interface or not.
+&nbsp;//     * @return a new or already existing Symbol with the given value.
+&nbsp;//     */
+&nbsp;//    Symbol addConstantMethodref(
+&nbsp;//            final String owner, final String name, final String descriptor, final boolean isInterface) {
+&nbsp;//        final int CONSTANT_METHODREF_TAG = 10;
+&nbsp;//        final int CONSTANT_INTERFACE_METHODREF_TAG = 11;
+&nbsp;//        int tag = isInterface ? /*CONSTANT_INTERFACE_METHODREF_TAG*/ 11 : /*CONSTANT_METHODREF_TAG*/ 10;
+&nbsp;//        return addConstantMemberReference(
+&nbsp;//                isInterface ? /*CONSTANT_INTERFACE_METHODREF_TAG*/ 11 : /*CONSTANT_METHODREF_TAG*/ 10
+&nbsp;//                , owner, name, descriptor
+&nbsp;//        );
+&nbsp;//    }
+&nbsp;
+&nbsp;    Symbol addConstantMemberReference(
+&nbsp;            final int tag, final String owner, final String name, final String descriptor) {
+&nbsp;//    int hashCode = hash(tag, owner, name, descriptor);
+<b class="nc">&nbsp;        int hashCode = 0x7FFFFFFF &amp; (tag + owner.hashCode() * name.hashCode() * descriptor.hashCode());</b>
+<b class="nc">&nbsp;        Symbol entry = entries[hashCode % entries.length];</b>
+<b class="nc">&nbsp;        while (entry != null) {</b>
+<b class="nc">&nbsp;            if (entry.tag == tag</b>
+&nbsp;                    &amp;&amp; entry.hashCode == hashCode
+<b class="nc">&nbsp;                    &amp;&amp; entry.owner.equals(owner)</b>
+<b class="nc">&nbsp;                    &amp;&amp; entry.name.equals(name)</b>
+<b class="nc">&nbsp;                    &amp;&amp; entry.value.equals(descriptor)) {</b>
+<b class="nc">&nbsp;                return entry;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            entry = entry.next;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        constantPool.put122(</b>
+<b class="nc">&nbsp;                tag, addConstantUtf8Reference(/*CONSTANT_CLASS_TAG*/ 7, owner).index, addConstantNameAndType(name, descriptor));</b>
+<b class="nc">&nbsp;        return put(new Symbol(constantPoolCount++, tag, owner, name, descriptor, 0, hashCode));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    Symbol addConstantIntegerOrFloat(final int value) {
+<b class="nc">&nbsp;        int hashCode = 0x7FFFFFFF &amp; (3 + value);</b>
+<b class="nc">&nbsp;        Symbol entry = entries[hashCode % entries.length];</b>
+<b class="nc">&nbsp;        while (entry != null) {</b>
+<b class="nc">&nbsp;            if (entry.tag == 3 &amp;&amp; entry.hashCode == hashCode &amp;&amp; entry.data == value) {</b>
+<b class="nc">&nbsp;                return entry;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            entry = entry.next;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        constantPool.putByte(3).putInt(value);</b>
+<b class="nc">&nbsp;        return put(new Symbol(constantPoolCount++, 3, null, null, null, value, hashCode));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    Symbol addConstantLongOrDouble(final long value) {
+<b class="nc">&nbsp;        int hashCode = 0x7FFFFFFF &amp; (5 + (int) value + (int) (value &gt;&gt;&gt; 32));</b>
+<b class="nc">&nbsp;        Symbol entry = entries[hashCode % entries.length];</b>
+<b class="nc">&nbsp;        while (entry != null) {</b>
+<b class="nc">&nbsp;            if (entry.tag == 5 &amp;&amp; entry.hashCode == hashCode &amp;&amp; entry.data == value) {</b>
+<b class="nc">&nbsp;                return entry;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            entry = entry.next;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int index = constantPoolCount;</b>
+<b class="nc">&nbsp;        constantPool.putByte(5).putLong(value);</b>
+<b class="nc">&nbsp;        constantPoolCount += 2;</b>
+<b class="nc">&nbsp;        return put(new Symbol(index, 5, null, null, null, value, hashCode));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a CONSTANT_NameAndType_info to the constant pool of this symbol table. Does nothing if the
+&nbsp;     * constant pool already contains a similar item.
+&nbsp;     *
+&nbsp;     * @param name       a field or method name.
+&nbsp;     * @param descriptor a field or method descriptor.
+&nbsp;     * @return a new or already existing Symbol with the given value.
+&nbsp;     */
+&nbsp;    int addConstantNameAndType(final String name, final String descriptor) {
+<b class="nc">&nbsp;        final int tag = 12; // CONSTANT_NAME_AND_TYPE_TAG</b>
+<b class="nc">&nbsp;        int hashCode = 0x7FFFFFFF &amp; (tag + name.hashCode() * descriptor.hashCode());</b>
+<b class="nc">&nbsp;        Symbol entry = entries[hashCode % entries.length];</b>
+<b class="nc">&nbsp;        while (entry != null) {</b>
+<b class="nc">&nbsp;            if (entry.tag == tag</b>
+&nbsp;                    &amp;&amp; entry.hashCode == hashCode
+<b class="nc">&nbsp;                    &amp;&amp; entry.name.equals(name)</b>
+<b class="nc">&nbsp;                    &amp;&amp; entry.value.equals(descriptor)) {</b>
+<b class="nc">&nbsp;                return entry.index;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            entry = entry.next;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        constantPool.put122(tag, addConstantUtf8(name), addConstantUtf8(descriptor));</b>
+<b class="nc">&nbsp;        return put(new Symbol(constantPoolCount++, tag, null, name, descriptor, 0, hashCode)).index;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a CONSTANT_Utf8_info to the constant pool of this symbol table. Does nothing if the
+&nbsp;     * constant pool already contains a similar item.
+&nbsp;     *
+&nbsp;     * @param value a string.
+&nbsp;     * @return a new or already existing Symbol with the given value.
+&nbsp;     */
+&nbsp;    int addConstantUtf8(final String value) {
+<b class="nc">&nbsp;        final int CONSTANT_UTF8_TAG = 1;</b>
+&nbsp;
+<b class="nc">&nbsp;        int hashCode = 0x7FFFFFFF &amp; (CONSTANT_UTF8_TAG + value.hashCode());</b>
+<b class="nc">&nbsp;        Symbol entry = entries[hashCode % entries.length];</b>
+<b class="nc">&nbsp;        while (entry != null) {</b>
+<b class="nc">&nbsp;            if (entry.tag == CONSTANT_UTF8_TAG</b>
+&nbsp;                    &amp;&amp; entry.hashCode == hashCode
+<b class="nc">&nbsp;                    &amp;&amp; entry.value.equals(value)) {</b>
+<b class="nc">&nbsp;                return entry.index;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            entry = entry.next;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        constantPool.putByte(CONSTANT_UTF8_TAG).putUTF8(value);</b>
+<b class="nc">&nbsp;        return put(new Symbol(constantPoolCount++, CONSTANT_UTF8_TAG, null, null, value, 0, hashCode)).index;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    Symbol addConstantUtf8Reference(final int tag, final String value) {
+<b class="nc">&nbsp;        int hashCode = 0x7FFFFFFF &amp; (tag + value.hashCode());</b>
+<b class="nc">&nbsp;        Symbol entry = entries[hashCode % entries.length];</b>
+<b class="nc">&nbsp;        while (entry != null) {</b>
+<b class="nc">&nbsp;            if (entry.tag == tag &amp;&amp; entry.hashCode == hashCode &amp;&amp; entry.value.equals(value)) {</b>
+<b class="nc">&nbsp;                return entry;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            entry = entry.next;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        constantPool.put12(tag, addConstantUtf8(value));</b>
+<b class="nc">&nbsp;        return put(new Symbol(constantPoolCount++, tag, null, null, value, 0, hashCode));</b>
+&nbsp;    }
+&nbsp;//
+&nbsp;//    /**
+&nbsp;//     * Returns the type table element whose index is given.
+&nbsp;//     *
+&nbsp;//     * @param typeIndex a type table index.
+&nbsp;//     * @return the type table element whose index is given.
+&nbsp;//     */
+&nbsp;//    Symbol getType(final int typeIndex) {
+&nbsp;//        return typeTable[typeIndex];
+&nbsp;//    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a type in the type table of this symbol table. Does nothing if the type table already
+&nbsp;     * contains a similar type.
+&nbsp;     *
+&nbsp;     * @param value an internal class name.
+&nbsp;     * @return the index of a new or already existing type Symbol with the given value.
+&nbsp;     */
+&nbsp;    int addType(final String value) {
+<b class="nc">&nbsp;        final int TYPE_TAG = 128;</b>
+&nbsp;
+<b class="nc">&nbsp;        int hashCode = 0x7FFFFFFF &amp; (TYPE_TAG + value.hashCode());</b>
+<b class="nc">&nbsp;        Symbol entry = entries[hashCode % entries.length];</b>
+<b class="nc">&nbsp;        while (entry != null) {</b>
+<b class="nc">&nbsp;            if (entry.tag == TYPE_TAG &amp;&amp; entry.hashCode == hashCode &amp;&amp; entry.value.equals(value)) {</b>
+<b class="nc">&nbsp;                return entry.index;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            entry = entry.next;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return addTypeInternal(new Symbol(typeCount, TYPE_TAG, null, null, value, 0, hashCode));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds an {@link Frame#ITEM_UNINITIALIZED} type in the type table of this symbol table. Does
+&nbsp;     * nothing if the type table already contains a similar type.
+&nbsp;     *
+&nbsp;     * @param value          an internal class name.
+&nbsp;     * @param bytecodeOffset the bytecode offset of the NEW instruction that created this {@link
+&nbsp;     *                       Frame#ITEM_UNINITIALIZED} type value.
+&nbsp;     * @return the index of a new or already existing type Symbol with the given value.
+&nbsp;     */
+&nbsp;    int addUninitializedType(final String value, final int bytecodeOffset) {
+<b class="nc">&nbsp;        final int UNINITIALIZED_TYPE_TAG = 129;</b>
+&nbsp;
+<b class="nc">&nbsp;        int hashCode = 0x7FFFFFFF &amp; (UNINITIALIZED_TYPE_TAG + value.hashCode() + bytecodeOffset);</b>
+<b class="nc">&nbsp;        Symbol entry = entries[hashCode % entries.length];</b>
+<b class="nc">&nbsp;        while (entry != null) {</b>
+<b class="nc">&nbsp;            if (entry.tag == UNINITIALIZED_TYPE_TAG</b>
+&nbsp;                    &amp;&amp; entry.hashCode == hashCode
+&nbsp;                    &amp;&amp; entry.data == bytecodeOffset
+<b class="nc">&nbsp;                    &amp;&amp; entry.value.equals(value)) {</b>
+<b class="nc">&nbsp;                return entry.index;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            entry = entry.next;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return addTypeInternal(</b>
+&nbsp;                new Symbol(typeCount, UNINITIALIZED_TYPE_TAG, null, null, value, bytecodeOffset, hashCode));
+&nbsp;    }
+&nbsp;
+&nbsp;    int addMergedType(final int typeTableIndex1, final int typeTableIndex2) {
+<b class="nc">&nbsp;        final int MERGED_TYPE_TAG = 130;</b>
+&nbsp;
+<b class="nc">&nbsp;        long data =</b>
+&nbsp;                typeTableIndex1 &lt; typeTableIndex2
+&nbsp;                        ? typeTableIndex1 | (((long) typeTableIndex2) &lt;&lt; 32)
+&nbsp;                        : typeTableIndex2 | (((long) typeTableIndex1) &lt;&lt; 32);
+<b class="nc">&nbsp;        int hashCode = 0x7FFFFFFF &amp; (MERGED_TYPE_TAG + typeTableIndex1 + typeTableIndex2);</b>
+<b class="nc">&nbsp;        Symbol entry = entries[hashCode % entries.length];</b>
+<b class="nc">&nbsp;        while (entry != null) {</b>
+<b class="nc">&nbsp;            if (entry.tag == MERGED_TYPE_TAG &amp;&amp; entry.hashCode == hashCode &amp;&amp; entry.data == data) {</b>
+<b class="nc">&nbsp;                return entry.info;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            entry = entry.next;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String type1 = typeTable[typeTableIndex1].value;</b>
+<b class="nc">&nbsp;        String type2 = typeTable[typeTableIndex2].value;</b>
+<b class="nc">&nbsp;        int commonSuperTypeIndex = addType(classWriter.getCommonSuperClass(type1, type2));</b>
+<b class="nc">&nbsp;        put(new Symbol(typeCount, MERGED_TYPE_TAG, null, null, null, data, hashCode)).info = commonSuperTypeIndex;</b>
+<b class="nc">&nbsp;        return commonSuperTypeIndex;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private int addTypeInternal(final Symbol entry) {
+<b class="nc">&nbsp;        if (typeTable == null) {</b>
+<b class="nc">&nbsp;            typeTable = new Symbol[16];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (typeCount == typeTable.length) {</b>
+<b class="nc">&nbsp;            Symbol[] newTypeTable = new Symbol[2 * typeTable.length];</b>
+<b class="nc">&nbsp;            System.arraycopy(typeTable, 0, newTypeTable, 0, typeTable.length);</b>
+<b class="nc">&nbsp;            typeTable = newTypeTable;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        typeTable[typeCount++] = entry;</b>
+<b class="nc">&nbsp;        return put(entry).index;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:22</div>
+</div>
+</body>
+</html>

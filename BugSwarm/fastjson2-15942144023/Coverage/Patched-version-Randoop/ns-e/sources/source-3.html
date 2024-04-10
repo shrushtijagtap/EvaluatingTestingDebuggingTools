@@ -1,0 +1,234 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONArrayKt</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONArrayKt (com.alibaba.fastjson2)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONArrayKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JSONArrayKt$into$$inlined$reference$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">JSONArrayKt$into$$inlined$reference$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;@file:Suppress(
+&nbsp;    &quot;HasPlatformType&quot;
+&nbsp;)
+&nbsp;
+&nbsp;package com.alibaba.fastjson2
+&nbsp;
+&nbsp;/**
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val data = &quot;...&quot;.parseArray()
+<b class="nc">&nbsp; *   val users = data.to&lt;Users&gt;()</b>
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun &lt;reified T&gt; JSONArray.to() =
+<b class="nc">&nbsp;    to(T::class.java)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Implemented using [TypeReference]
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val data = &quot;...&quot;.parseArray()
+&nbsp; *   val users = data.into&lt;List&lt;User&gt;&gt;()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun &lt;reified T : Any&gt; JSONArray.into() =
+<b class="nc">&nbsp;    to&lt;T&gt;(reference&lt;T&gt;().getType())</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val data = &quot;...&quot;.parseArray()
+&nbsp; *   val users = data.to&lt;User&gt;(6)
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.4
+&nbsp; */
+&nbsp;inline fun &lt;reified T&gt; JSONArray.to(
+&nbsp;    index: Int,
+&nbsp;    vararg features: JSONReader.Feature
+<b class="nc">&nbsp;) = getObject(</b>
+<b class="nc">&nbsp;    index, T::class.java, *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Implemented using [TypeReference]
+&nbsp; *
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val data = &quot;...&quot;.parseArray()
+&nbsp; *   val users = data.into&lt;Map&lt;String, User&gt;&gt;(6)
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.4
+&nbsp; */
+&nbsp;inline fun &lt;reified T : Any&gt; JSONArray.into(
+&nbsp;    index: Int,
+&nbsp;    vararg features: JSONReader.Feature
+<b class="nc">&nbsp;) = getObject&lt;T&gt;(</b>
+<b class="nc">&nbsp;    index, reference&lt;T&gt;().getType(), *features</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * E.g.
+&nbsp; * ```
+&nbsp; *   val data = &quot;...&quot;.parseArray()
+&nbsp; *   val user = data.toList&lt;User&gt;()
+&nbsp; * ```
+&nbsp; *
+&nbsp; * @return [T]?
+&nbsp; * @since 2.0.3
+&nbsp; */
+&nbsp;inline fun &lt;reified T&gt; JSONArray.toList(
+&nbsp;    vararg features: JSONReader.Feature
+<b class="nc">&nbsp;) = toList(</b>
+<b class="nc">&nbsp;    T::class.java, *features</b>
+&nbsp;)
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:35</div>
+</div>
+</body>
+</html>

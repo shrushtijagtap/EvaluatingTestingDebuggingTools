@@ -1,0 +1,252 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BigDecimal20</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.primitves</a>
+</div>
+
+<h1>Coverage Summary for Class: BigDecimal20 (com.alibaba.fastjson2.benchmark.primitves)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BigDecimal20</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/49)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.primitves;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSON;
+&nbsp;import com.alibaba.fastjson2.JSONB;
+&nbsp;import com.alibaba.fastjson2.benchmark.primitves.vo.BigDecimal20Field;
+&nbsp;import com.caucho.hessian.io.Hessian2Input;
+&nbsp;import com.caucho.hessian.io.Hessian2Output;
+&nbsp;import com.esotericsoftware.kryo.Kryo;
+&nbsp;import com.esotericsoftware.kryo.io.Input;
+&nbsp;import com.esotericsoftware.kryo.io.Output;
+&nbsp;import com.fasterxml.jackson.databind.ObjectMapper;
+&nbsp;import com.google.gson.Gson;
+&nbsp;import org.apache.commons.io.IOUtils;
+&nbsp;import org.openjdk.jmh.annotations.Benchmark;
+&nbsp;import org.openjdk.jmh.annotations.Mode;
+&nbsp;import org.openjdk.jmh.infra.Blackhole;
+&nbsp;import org.openjdk.jmh.runner.Runner;
+&nbsp;import org.openjdk.jmh.runner.RunnerException;
+&nbsp;import org.openjdk.jmh.runner.options.Options;
+&nbsp;import org.openjdk.jmh.runner.options.OptionsBuilder;
+&nbsp;
+&nbsp;import java.io.ByteArrayInputStream;
+&nbsp;import java.io.ByteArrayOutputStream;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.util.concurrent.TimeUnit;
+&nbsp;
+&nbsp;public class BigDecimal20 {
+&nbsp;    static String str;
+&nbsp;    static byte[] jsonbBytes;
+<b class="nc">&nbsp;    static ObjectMapper mapper = new ObjectMapper();</b>
+<b class="nc">&nbsp;    static Gson gson = new Gson();</b>
+&nbsp;    static Kryo kryo;
+&nbsp;    static byte[] kryoBytes;
+&nbsp;
+&nbsp;    static byte[] hessianBytes;
+&nbsp;
+&nbsp;//    static io.fury.ThreadSafeFury furyCompatible = io.fury.Fury.builder()
+&nbsp;//            .withLanguage(io.fury.Language.JAVA)
+&nbsp;//            .withReferenceTracking(true)
+&nbsp;//            .disableSecureMode()
+&nbsp;//            .withCompatibleMode(io.fury.serializers.CompatibleMode.COMPATIBLE)
+&nbsp;//            .buildThreadSafeFury();
+&nbsp;//    static byte[] furyCompatibleBytes;
+&nbsp;
+<b class="nc">&nbsp;    public BigDecimal20() {</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            InputStream is = BigDecimal20.class.getClassLoader().getResourceAsStream(&quot;data/dec20.json&quot;);</b>
+<b class="nc">&nbsp;            str = IOUtils.toString(is, &quot;UTF-8&quot;);</b>
+<b class="nc">&nbsp;            BigDecimal20Field bean = JSON.parseObject(str, BigDecimal20Field.class);</b>
+<b class="nc">&nbsp;            jsonbBytes = JSONB.toBytes(bean);</b>
+&nbsp;
+<b class="nc">&nbsp;            kryo = new Kryo();</b>
+<b class="nc">&nbsp;            kryo.register(BigDecimal20Field.class);</b>
+<b class="nc">&nbsp;            kryo.register(BigDecimal.class);</b>
+&nbsp;
+<b class="nc">&nbsp;            Output output = new Output(1024, -1);</b>
+<b class="nc">&nbsp;            kryo.writeObject(output, bean);</b>
+<b class="nc">&nbsp;            kryoBytes = output.toBytes();</b>
+&nbsp;
+&nbsp;            {
+<b class="nc">&nbsp;                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();</b>
+<b class="nc">&nbsp;                Hessian2Output hessian2Output = new Hessian2Output(byteArrayOutputStream);</b>
+<b class="nc">&nbsp;                hessian2Output.writeObject(bean);</b>
+<b class="nc">&nbsp;                hessian2Output.flush();</b>
+<b class="nc">&nbsp;                hessianBytes = byteArrayOutputStream.toByteArray();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;//            furyCompatibleBytes = furyCompatible.serialize(bean);
+<b class="nc">&nbsp;        } catch (Exception ex) {</b>
+<b class="nc">&nbsp;            ex.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void fastjson1(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                com.alibaba.fastjson.JSON.parseObject(str, BigDecimal20Field.class)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void fastjson2(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                JSON.parseObject(str, BigDecimal20Field.class)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void jsonb(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                JSONB.parseObject(jsonbBytes, BigDecimal20Field.class)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void kryo(Blackhole bh) {
+<b class="nc">&nbsp;        Input input = new Input(kryoBytes);</b>
+<b class="nc">&nbsp;        BigDecimal20Field object = kryo.readObject(input, BigDecimal20Field.class);</b>
+<b class="nc">&nbsp;        bh.consume(object);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void hessian(Blackhole bh) throws Exception {
+<b class="nc">&nbsp;        ByteArrayInputStream bytesIn = new ByteArrayInputStream(hessianBytes);</b>
+<b class="nc">&nbsp;        Hessian2Input hessian2Input = new Hessian2Input(bytesIn);</b>
+<b class="nc">&nbsp;        bh.consume(hessian2Input.readObject());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;//    @Benchmark
+&nbsp;    public void fury(Blackhole bh) {
+&nbsp;//        Object object = furyCompatible.deserialize(furyCompatibleBytes);
+&nbsp;//        bh.consume(object);
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void jackson(Blackhole bh) throws Exception {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                mapper.readValue(str, BigDecimal20Field.class)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void gson(Blackhole bh) throws Exception {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                gson.fromJson(str, BigDecimal20Field.class)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void wastjson(Blackhole bh) throws Exception {
+<b class="nc">&nbsp;        bh.consume(</b>
+<b class="nc">&nbsp;                io.github.wycst.wast.json.JSON.parseObject(str, BigDecimal20Field.class)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void main(String[] args) throws RunnerException {
+<b class="nc">&nbsp;        Options options = new OptionsBuilder()</b>
+<b class="nc">&nbsp;                .include(BigDecimal20.class.getName())</b>
+<b class="nc">&nbsp;                .exclude(BigDecimal20Tree.class.getName())</b>
+<b class="nc">&nbsp;                .mode(Mode.Throughput)</b>
+<b class="nc">&nbsp;                .timeUnit(TimeUnit.MILLISECONDS)</b>
+<b class="nc">&nbsp;                .warmupIterations(3)</b>
+<b class="nc">&nbsp;                .forks(1)</b>
+<b class="nc">&nbsp;                .build();</b>
+<b class="nc">&nbsp;        new Runner(options).run();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:35</div>
+</div>
+</body>
+</html>

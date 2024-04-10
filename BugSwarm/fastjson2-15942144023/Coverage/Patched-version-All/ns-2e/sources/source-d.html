@@ -1,0 +1,187 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SimpleBeanWriteCase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.benchmark.wast</a>
+</div>
+
+<h1>Coverage Summary for Class: SimpleBeanWriteCase (com.alibaba.fastjson2.benchmark.wast)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SimpleBeanWriteCase</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.benchmark.wast;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.fasterxml.jackson.core.JsonProcessingException;
+&nbsp;import com.fasterxml.jackson.databind.ObjectMapper;
+&nbsp;import io.github.wycst.wast.json.JSON;
+&nbsp;import io.github.wycst.wast.json.options.WriteOption;
+&nbsp;import org.openjdk.jmh.annotations.Benchmark;
+&nbsp;import org.openjdk.jmh.annotations.Mode;
+&nbsp;import org.openjdk.jmh.infra.Blackhole;
+&nbsp;import org.openjdk.jmh.runner.Runner;
+&nbsp;import org.openjdk.jmh.runner.RunnerException;
+&nbsp;import org.openjdk.jmh.runner.options.Options;
+&nbsp;import org.openjdk.jmh.runner.options.OptionsBuilder;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.concurrent.TimeUnit;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author wangy
+&nbsp; * 2022/1/15 23:17
+&nbsp; */
+<b class="nc">&nbsp;public class SimpleBeanWriteCase {</b>
+&nbsp;    private static String result;
+<b class="nc">&nbsp;    static ObjectMapper mapper = new ObjectMapper();</b>
+&nbsp;    private static Object simpleBean;
+&nbsp;
+&nbsp;    static {
+<b class="nc">&nbsp;        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);</b>
+&nbsp;
+<b class="nc">&nbsp;        Map simpleMap = new HashMap();</b>
+<b class="nc">&nbsp;        simpleMap.put(&quot;id&quot;, 1);</b>
+<b class="nc">&nbsp;        simpleMap.put(&quot;date&quot;, new Date());</b>
+<b class="nc">&nbsp;        simpleMap.put(&quot;name&quot;, &quot;simple&quot;);</b>
+<b class="nc">&nbsp;        simpleMap.put(&quot;percent&quot;, 12.34);</b>
+<b class="nc">&nbsp;        simpleMap.put(&quot;version&quot;, System.currentTimeMillis());</b>
+&nbsp;
+<b class="nc">&nbsp;        Map mapType = new HashMap();</b>
+<b class="nc">&nbsp;        mapType.put(&quot;v1&quot;, &quot;v1 helldsdsd &quot;);</b>
+<b class="nc">&nbsp;        mapType.put(&quot;v2&quot;, &quot;v2 helldsdsd &quot;);</b>
+<b class="nc">&nbsp;        simpleMap.put(&quot;mapInstance&quot;, mapType);</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Object&gt; versions = new ArrayList&lt;Object&gt;();</b>
+<b class="nc">&nbsp;        versions.add(&quot;v0.0.1&quot;);</b>
+<b class="nc">&nbsp;        versions.add(&quot;v0.0.2&quot;);</b>
+<b class="nc">&nbsp;        versions.add(&quot;v0.0.3&quot;);</b>
+<b class="nc">&nbsp;        simpleMap.put(&quot;versions&quot;, versions);</b>
+&nbsp;
+<b class="nc">&nbsp;        result = JSON.toJsonString(simpleMap, WriteOption.FormatOut);</b>
+<b class="nc">&nbsp;        simpleBean = JSON.parseObject(result, SimpleBean.class);</b>
+<b class="nc">&nbsp;        System.out.println(com.alibaba.fastjson2.JSON.toJSONString(simpleBean));</b>
+<b class="nc">&nbsp;        System.out.println(JSON.toJsonString(simpleBean));</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            System.out.println(mapper.writeValueAsString(simpleBean));</b>
+<b class="nc">&nbsp;        } catch (JsonProcessingException e) {</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void fastjson2(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(com.alibaba.fastjson2.JSON.toJSONString(simpleBean));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void wastjson(Blackhole bh) {
+<b class="nc">&nbsp;        bh.consume(JSON.toJsonString(simpleBean));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Benchmark
+&nbsp;    public void jackson(Blackhole bh) throws Exception {
+<b class="nc">&nbsp;        bh.consume(mapper.writeValueAsString(simpleBean));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void main(String[] args) throws RunnerException {
+<b class="nc">&nbsp;        Options options = new OptionsBuilder()</b>
+<b class="nc">&nbsp;                .include(SimpleBeanWriteCase.class.getName())</b>
+<b class="nc">&nbsp;                .mode(Mode.Throughput)</b>
+<b class="nc">&nbsp;                .timeUnit(TimeUnit.MILLISECONDS)</b>
+<b class="nc">&nbsp;                .forks(1)</b>
+<b class="nc">&nbsp;                .build();</b>
+<b class="nc">&nbsp;        new Runner(options).run();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:38</div>
+</div>
+</body>
+</html>

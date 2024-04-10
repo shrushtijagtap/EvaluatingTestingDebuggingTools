@@ -1,0 +1,1168 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JSONObject</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson</a>
+</div>
+
+<h1>Coverage Summary for Class: JSONObject (com.alibaba.fastjson)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JSONObject</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/56)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/216)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JSONObject$SecureObjectInputStream</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/61)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/252)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 1999-2017 Alibaba Group.
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package com.alibaba.fastjson;
+&nbsp;
+&nbsp;import com.alibaba.fastjson.annotation.JSONField;
+&nbsp;import com.alibaba.fastjson.parser.Feature;
+&nbsp;import com.alibaba.fastjson.parser.ParserConfig;
+&nbsp;import com.alibaba.fastjson.util.IOUtils;
+&nbsp;import com.alibaba.fastjson.util.TypeUtils;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONFactory;
+&nbsp;import com.alibaba.fastjson2.JSONReader;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReader;
+&nbsp;import com.alibaba.fastjson2.reader.ObjectReaderProvider;
+&nbsp;import com.alibaba.fastjson2.util.Wrapper;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriter;
+&nbsp;import com.alibaba.fastjson2.writer.ObjectWriterAdapter;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.lang.reflect.InvocationHandler;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.BigInteger;
+&nbsp;import java.sql.Timestamp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.function.Function;
+&nbsp;
+&nbsp;import static com.alibaba.fastjson2.util.TypeUtils.toBigDecimal;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author wenshao[szujobs@hotmail.com]
+&nbsp; */
+&nbsp;public class JSONObject
+&nbsp;        extends JSON
+&nbsp;        implements Map&lt;String, Object&gt;, Cloneable, Serializable, InvocationHandler, Wrapper {
+&nbsp;    static ObjectReader&lt;JSONArray&gt; arrayReader;
+&nbsp;    static ObjectReader&lt;JSONObject&gt; objectReader;
+&nbsp;
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;    private static final int DEFAULT_INITIAL_CAPACITY = 16;
+&nbsp;
+<b class="nc">&nbsp;    private final Map&lt;String, Object&gt; map;</b>
+&nbsp;
+&nbsp;    public JSONObject() {
+<b class="nc">&nbsp;        this(DEFAULT_INITIAL_CAPACITY, false);</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public JSONObject(Map&lt;String, Object&gt; map) {
+<b class="nc">&nbsp;        if (map == null) {</b>
+&nbsp;            throw new IllegalArgumentException(&quot;map is null.&quot;);
+&nbsp;        }
+&nbsp;        this.map = map;
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public JSONObject(boolean ordered) {
+&nbsp;        this(DEFAULT_INITIAL_CAPACITY, ordered);
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public JSONObject(int initialCapacity) {
+<b class="nc">&nbsp;        this(initialCapacity, false);</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public JSONObject(int initialCapacity, boolean ordered) {
+<b class="nc">&nbsp;        if (ordered) {</b>
+&nbsp;            map = new LinkedHashMap&lt;String, Object&gt;(initialCapacity);
+&nbsp;        } else {
+&nbsp;            map = new HashMap&lt;String, Object&gt;(initialCapacity);
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static &lt;T&gt; T toJavaObject(JSON json, Class&lt;T&gt; clazz) {
+&nbsp;        return com.alibaba.fastjson2.util.TypeUtils.cast(json, clazz, JSONFactory.getDefaultObjectReaderProvider());
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int size() {
+<b class="nc">&nbsp;        return map.size();</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    @Override
+&nbsp;    public boolean isEmpty() {
+&nbsp;        return map.isEmpty();
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+&nbsp;    @Override
+&nbsp;    public boolean containsKey(Object key) {
+<b class="nc">&nbsp;        boolean result = map.containsKey(key);</b>
+&nbsp;        if (!result) {
+&nbsp;            if (key instanceof Number
+&nbsp;                    || key instanceof Character
+<b class="nc">&nbsp;                    || key instanceof Boolean</b>
+&nbsp;                    || key instanceof UUID
+&nbsp;            ) {
+&nbsp;                result = map.containsKey(key.toString());
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean containsValue(Object value) {
+&nbsp;        return map.containsValue(value);
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object get(Object key) {
+<b class="nc">&nbsp;        Object val = map.get(key);</b>
+&nbsp;
+&nbsp;        if (val == null
+&nbsp;                &amp;&amp; (key instanceof Number || key instanceof Boolean || key instanceof Character)) {
+&nbsp;            val = map.get(key.toString());
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        return val;
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+&nbsp;    public JSONObject getJSONObject(String key) {
+<b class="nc">&nbsp;        Object value = map.get(key);</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value instanceof JSONObject) {
+&nbsp;            return (JSONObject) value;
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value instanceof String) {
+&nbsp;            String str = (String) value;
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+&nbsp;                return null;
+&nbsp;            }
+<b class="nc">&nbsp;</b>
+&nbsp;            JSONReader reader = JSONReader.of(str);
+&nbsp;            if (objectReader == null) {
+&nbsp;                objectReader = reader.getObjectReader(JSONObject.class);
+<b class="nc">&nbsp;            }</b>
+&nbsp;            return objectReader.readObject(reader, null, null, 0);
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value instanceof Map) {
+&nbsp;            return new JSONObject((Map) value);
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value == null) {
+&nbsp;            return null;
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        Class valueClass = value.getClass();
+&nbsp;        ObjectWriter objectWriter = JSONFactory.getDefaultObjectWriterProvider().getObjectWriter(valueClass);
+<b class="nc">&nbsp;        if (objectWriter instanceof ObjectWriterAdapter) {</b>
+&nbsp;            ObjectWriterAdapter writerAdapter = (ObjectWriterAdapter) objectWriter;
+&nbsp;            return new JSONObject(writerAdapter.toJSONObject(value));
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONArray getJSONArray(String key) {
+<b class="nc">&nbsp;        Object value = map.get(key);</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value == null || value instanceof JSONArray) {
+&nbsp;            return (JSONArray) value;
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+&nbsp;                return null;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            JSONReader reader = JSONReader.of(str);</b>
+&nbsp;            if (arrayReader == null) {
+<b class="nc">&nbsp;                arrayReader = reader.getObjectReader(JSONArray.class);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;            return arrayReader.readObject(reader, null, null, 0);
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value instanceof List) {
+&nbsp;            return new JSONArray((List) value);
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+&nbsp;        String jsonString = JSON.toJSONString(value);
+<b class="nc">&nbsp;        return JSON.parseArray(jsonString);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public &lt;T&gt; T getObject(String key, Class&lt;T&gt; clazz) {
+<b class="nc">&nbsp;        return getObject(key, clazz, new Feature[0]);</b>
+&nbsp;    }
+&nbsp;    //
+&nbsp;    public &lt;T&gt; T getObject(String key, Class&lt;T&gt; clazz, Feature... features) {
+<b class="nc">&nbsp;        Object obj = map.get(key);</b>
+&nbsp;        if (obj == null) {
+<b class="nc">&nbsp;            return null;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        if (clazz == Object.class &amp;&amp; obj instanceof JSONObject) {
+&nbsp;            return (T) obj;
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        if (clazz != Object.class &amp;&amp; clazz.isInstance(obj)) {
+&nbsp;            return (T) obj;
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+&nbsp;        Function typeConvert = provider.getTypeConvert(obj.getClass(), clazz);
+&nbsp;        if (typeConvert != null) {
+&nbsp;            return (T) typeConvert.apply(obj);
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (obj instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) obj;</b>
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+&nbsp;                return null;
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        String json = JSON.toJSONString(obj);
+&nbsp;        JSONReader jsonReader = JSONReader.of(
+<b class="nc">&nbsp;                json,</b>
+&nbsp;                JSON.createReadContext(
+<b class="nc">&nbsp;                        JSONFactory.getDefaultObjectReaderProvider(),</b>
+&nbsp;                        JSON.DEFAULT_PARSER_FEATURE, features
+&nbsp;                )
+&nbsp;        );
+<b class="nc">&nbsp;</b>
+&nbsp;        boolean fieldBased = jsonReader.getContext().isEnabled(JSONReader.Feature.FieldBased);
+<b class="nc">&nbsp;        ObjectReader objectReader = provider.getObjectReader(clazz, fieldBased);</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        String defaultDateFormat = JSON.DEFFAULT_DATE_FORMAT;</b>
+&nbsp;        if (!&quot;yyyy-MM-dd HH:mm:ss&quot;.equals(defaultDateFormat)) {
+&nbsp;            jsonReader
+<b class="nc">&nbsp;                    .getContext()</b>
+&nbsp;                    .setDateFormat(defaultDateFormat);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return (T) objectReader.readObject(jsonReader, null, null, 0);</b>
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+&nbsp;    public &lt;T&gt; T getObject(String key, TypeReference typeReference) {
+&nbsp;        Object obj = map.get(key);
+&nbsp;        if (typeReference == null) {
+<b class="nc">&nbsp;            return (T) obj;</b>
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        Type type = typeReference.getType();</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        if (type instanceof Class) {
+&nbsp;            Class clazz = (Class) type;
+<b class="nc">&nbsp;            if (clazz != Object.class &amp;&amp; clazz.isInstance(obj)) {</b>
+&nbsp;                return (T) obj;
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();
+<b class="nc">&nbsp;        Function typeConvert = provider.getTypeConvert(obj.getClass(), type);</b>
+&nbsp;        if (typeConvert != null) {
+&nbsp;            return (T) typeConvert.apply(obj);
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+&nbsp;        if (obj instanceof String) {
+<b class="nc">&nbsp;            String str = (String) obj;</b>
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equals(str)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+&nbsp;        String json = JSON.toJSONString(obj);
+&nbsp;        ObjectReader objectReader = provider.getObjectReader(type);
+&nbsp;        JSONReader jsonReader = JSONReader.of(json);
+<b class="nc">&nbsp;</b>
+&nbsp;        String defaultDateFormat = JSON.DEFFAULT_DATE_FORMAT;
+<b class="nc">&nbsp;        if (!&quot;yyyy-MM-dd HH:mm:ss&quot;.equals(defaultDateFormat)) {</b>
+&nbsp;            jsonReader
+&nbsp;                    .getContext()
+&nbsp;                    .setDateFormat(defaultDateFormat);
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return (T) objectReader.readObject(jsonReader, null, null, 0);</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    public Boolean getBoolean(String key) {
+&nbsp;        Object value = map.get(key);
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value == null) {
+&nbsp;            return null;
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value instanceof Boolean) {
+<b class="nc">&nbsp;            return (Boolean) value;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof Number) {
+<b class="nc">&nbsp;            return ((Number) value).intValue() == 1;</b>
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            return &quot;true&quot;.equalsIgnoreCase(str) || &quot;1&quot;.equals(str);
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Boolean&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Byte getByte(String key) {
+<b class="nc">&nbsp;        Object value = map.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+&nbsp;            return ((Number) value).byteValue();
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value instanceof String) {
+&nbsp;            String str = (String) value;
+<b class="nc">&nbsp;</b>
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+&nbsp;                return null;
+&nbsp;            }
+<b class="nc">&nbsp;</b>
+&nbsp;            return Byte.parseByte(str);
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Byte&quot;);
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+&nbsp;    public byte[] getBytes(String key) {
+<b class="nc">&nbsp;        Object value = get(key);</b>
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            return null;
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof byte[]) {</b>
+&nbsp;            return (byte[]) value;
+&nbsp;        }
+&nbsp;        if (value instanceof String) {
+<b class="nc">&nbsp;            return IOUtils.decodeBase64((String) value);</b>
+&nbsp;        }
+&nbsp;        throw new com.alibaba.fastjson.JSONException(&quot;can not cast to byte[], value : &quot; + value);
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public &lt;T&gt; T getObject(String key, Type type) {</b>
+&nbsp;        return getObject(key, type, new Feature[0]);
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public &lt;T&gt; T getObject(String key, Type type, Feature... features) {</b>
+&nbsp;        Object obj = map.get(key);
+&nbsp;        if (obj == null) {
+&nbsp;            return null;
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        if (type instanceof Class) {
+&nbsp;            Class clazz = (Class) type;
+&nbsp;            if (clazz != Object.class &amp;&amp; clazz.isInstance(obj)) {
+<b class="nc">&nbsp;                return (T) obj;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();</b>
+<b class="nc">&nbsp;        Function typeConvert = provider.getTypeConvert(obj.getClass(), type);</b>
+&nbsp;        if (typeConvert != null) {
+&nbsp;            return (T) typeConvert.apply(obj);
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+&nbsp;        if (obj instanceof String &amp;&amp; ((String) obj).isEmpty()) {
+&nbsp;            return null;
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        String json = JSON.toJSONString(obj);</b>
+&nbsp;        JSONReader jsonReader = JSONReader.of(
+&nbsp;                json,
+&nbsp;                JSON.createReadContext(
+<b class="nc">&nbsp;                        JSONFactory.getDefaultObjectReaderProvider(),</b>
+&nbsp;                        DEFAULT_PARSER_FEATURE,
+&nbsp;                        features
+&nbsp;                )
+<b class="nc">&nbsp;        );</b>
+&nbsp;
+&nbsp;        boolean fieldBased = jsonReader.getContext().isEnabled(JSONReader.Feature.FieldBased);
+&nbsp;        ObjectReader objectReader = provider.getObjectReader(type, fieldBased);
+<b class="nc">&nbsp;</b>
+&nbsp;        String defaultDateFormat = JSON.DEFFAULT_DATE_FORMAT;
+&nbsp;        if (!&quot;yyyy-MM-dd HH:mm:ss&quot;.equals(defaultDateFormat)) {
+&nbsp;            jsonReader
+&nbsp;                    .getContext()
+<b class="nc">&nbsp;                    .setDateFormat(defaultDateFormat);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        return (T) objectReader.readObject(jsonReader, null, null, 0);
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean getBooleanValue(String key) {
+&nbsp;        Object value = get(key);
+<b class="nc">&nbsp;        Boolean booleanVal = com.alibaba.fastjson2.util.TypeUtils.toBoolean(value);</b>
+<b class="nc">&nbsp;        if (booleanVal == null) {</b>
+&nbsp;            return false;
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        return booleanVal.booleanValue();</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public byte getByteValue(String key) {</b>
+&nbsp;        Object value = map.get(key);
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            return 0;
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        if (value instanceof Number) {
+&nbsp;            return ((Number) value).byteValue();
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+<b class="nc">&nbsp;                return 0;</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;            return Byte.parseByte(str);
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to byte value&quot;);</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public Short getShort(String key) {</b>
+&nbsp;        Object value = map.get(key);
+&nbsp;
+&nbsp;        if (value == null) {
+<b class="nc">&nbsp;            return null;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Short) {</b>
+<b class="nc">&nbsp;            return (Short) value;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) value).shortValue();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+&nbsp;            String str = (String) value;
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return Short.parseShort(str);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Short&quot;);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public short getShortValue(String key) {</b>
+<b class="nc">&nbsp;        Object value = map.get(key);</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof Number) {
+<b class="nc">&nbsp;            return ((Number) value).shortValue();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+<b class="nc">&nbsp;</b>
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+<b class="nc">&nbsp;                return 0;</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;            return Short.parseShort(str);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to short value&quot;);</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public Integer getInteger(String key) {</b>
+<b class="nc">&nbsp;        Object value = map.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Integer) {</b>
+<b class="nc">&nbsp;            return ((Integer) value);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+&nbsp;            return ((Number) value).intValue();
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+&nbsp;            String str = (String) value;
+&nbsp;
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+&nbsp;                return null;
+&nbsp;            }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;            if (str.indexOf(&#39;.&#39;) != -1) {</b>
+<b class="nc">&nbsp;                return (int) Double.parseDouble(str);</b>
+&nbsp;            }
+<b class="nc">&nbsp;</b>
+&nbsp;            return Integer.parseInt(str);
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Integer&quot;);
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    //</b>
+<b class="nc">&nbsp;    public int getIntValue(String key) {</b>
+<b class="nc">&nbsp;        Object value = map.get(key);</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (value == null) {</b>
+&nbsp;            return 0;
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+<b class="nc">&nbsp;            return ((Number) value).intValue();</b>
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value instanceof String) {
+&nbsp;            String str = (String) value;
+&nbsp;
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+&nbsp;                return 0;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (str.indexOf(&#39;.&#39;) != -1) {</b>
+&nbsp;                return (int) Double.parseDouble(str);
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;            return Integer.parseInt(str);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to int value&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //
+<b class="nc">&nbsp;    public Long getLong(String key) {</b>
+<b class="nc">&nbsp;        Object value = map.get(key);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        if (value instanceof Long) {
+&nbsp;            return ((Long) value);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+&nbsp;            return ((Number) value).longValue();
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (value instanceof String) {</b>
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return null;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            if (str.indexOf(&#39;.&#39;) != -1) {
+&nbsp;                return (long) Double.parseDouble(str);
+&nbsp;            }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;            return Long.parseLong(str);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Long&quot;);</b>
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public long getLongValue(String key) {</b>
+&nbsp;        Object value = map.get(key);
+&nbsp;
+<b class="nc">&nbsp;        if (value == null) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (value instanceof Number) {</b>
+&nbsp;            return ((Number) value).longValue();
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof String) {
+<b class="nc">&nbsp;            String str = (String) value;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {</b>
+<b class="nc">&nbsp;                return 0;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (str.indexOf(&#39;.&#39;) != -1) {</b>
+&nbsp;                return (long) Double.parseDouble(str);
+&nbsp;            }
+&nbsp;
+&nbsp;            return Long.parseLong(str);
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to long value&quot;);
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public Float getFloat(String key) {</b>
+<b class="nc">&nbsp;        Object value = map.get(key);</b>
+&nbsp;
+&nbsp;        if (value == null) {
+<b class="nc">&nbsp;            return null;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        if (value instanceof Float) {
+<b class="nc">&nbsp;            return (Float) value;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof Number) {
+<b class="nc">&nbsp;            return ((Number) value).floatValue();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        if (value instanceof String) {
+<b class="nc">&nbsp;            String str = (String) value;</b>
+<b class="nc">&nbsp;</b>
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+&nbsp;                return null;
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            return Float.parseFloat(str);
+&nbsp;        }
+&nbsp;
+&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Float&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    public float getFloatValue(String key) {
+&nbsp;        Object value = map.get(key);
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            return 0F;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof Number) {
+&nbsp;            return ((Number) value).floatValue();
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof String) {
+&nbsp;            String str = (String) value;
+&nbsp;
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+&nbsp;                return 0F;
+&nbsp;            }
+&nbsp;
+&nbsp;            return Float.parseFloat(str);
+&nbsp;        }
+&nbsp;
+&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to float value&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    public Double getDouble(String key) {
+&nbsp;        Object value = map.get(key);
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof Double) {
+&nbsp;            return (Double) value;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof Number) {
+&nbsp;            return ((Number) value).doubleValue();
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof String) {
+&nbsp;            String str = (String) value;
+&nbsp;
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+&nbsp;                return null;
+&nbsp;            }
+&nbsp;
+&nbsp;            return Double.parseDouble(str);
+&nbsp;        }
+&nbsp;
+&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to Double&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getDoubleValue(String key) {
+&nbsp;        Object value = map.get(key);
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            return 0D;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof Number) {
+&nbsp;            return ((Number) value).doubleValue();
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof String) {
+&nbsp;            String str = (String) value;
+&nbsp;
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+&nbsp;                return 0D;
+&nbsp;            }
+&nbsp;
+&nbsp;            return Double.parseDouble(str);
+&nbsp;        }
+&nbsp;
+&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to double value&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    public BigDecimal getBigDecimal(String key) {
+&nbsp;        Object value = map.get(key);
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof Number) {
+&nbsp;            if (value instanceof BigDecimal) {
+&nbsp;                return (BigDecimal) value;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (value instanceof BigInteger) {
+&nbsp;                return new BigDecimal((BigInteger) value);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (value instanceof Float) {
+&nbsp;                float floatValue = ((Float) value).floatValue();
+&nbsp;                return toBigDecimal(floatValue);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (value instanceof Double) {
+&nbsp;                double doubleValue = ((Double) value).doubleValue();
+&nbsp;                return toBigDecimal(doubleValue);
+&nbsp;            }
+&nbsp;
+&nbsp;            long longValue = ((Number) value).longValue();
+&nbsp;            return BigDecimal.valueOf(longValue);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof String) {
+&nbsp;            return toBigDecimal((String) value);
+&nbsp;        }
+&nbsp;
+&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to BigDecimal&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    public BigInteger getBigInteger(String key) {
+&nbsp;        Object value = map.get(key);
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof BigInteger) {
+&nbsp;            return (BigInteger) value;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof Number) {
+&nbsp;            if (value instanceof BigDecimal) {
+&nbsp;                return ((BigDecimal) value).toBigInteger();
+&nbsp;            }
+&nbsp;
+&nbsp;            long longValue = ((Number) value).longValue();
+&nbsp;            return BigInteger.valueOf(longValue);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof String) {
+&nbsp;            String str = (String) value;
+&nbsp;
+&nbsp;            if (str.isEmpty() || &quot;null&quot;.equalsIgnoreCase(str)) {
+&nbsp;                return null;
+&nbsp;            }
+&nbsp;
+&nbsp;            return new BigInteger(str);
+&nbsp;        }
+&nbsp;
+&nbsp;        throw new JSONException(&quot;Can not cast &#39;&quot; + value.getClass() + &quot;&#39; to BigInteger&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getString(String key) {
+&nbsp;        Object value = get(key);
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;
+&nbsp;        return value.toString();
+&nbsp;    }
+&nbsp;
+&nbsp;    public Date getDate(String key) {
+&nbsp;        Object value = get(key);
+&nbsp;        return com.alibaba.fastjson2.util.TypeUtils.toDate(value);
+&nbsp;    }
+&nbsp;
+&nbsp;    public java.sql.Date getSqlDate(String key) {
+&nbsp;        Object value = get(key);
+&nbsp;        return com.alibaba.fastjson2.util.TypeUtils.cast(
+&nbsp;                value,
+&nbsp;                java.sql.Date.class,
+&nbsp;                JSONFactory.getDefaultObjectReaderProvider()
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public java.sql.Timestamp getTimestamp(String key) {
+&nbsp;        Object value = get(key);
+&nbsp;        return com.alibaba.fastjson2.util.TypeUtils.cast(
+&nbsp;                value,
+&nbsp;                Timestamp.class,
+&nbsp;                JSONFactory.getDefaultObjectReaderProvider()
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object put(String key, Object value) {
+&nbsp;        return map.put(key, value);
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONObject fluentPut(String key, Object value) {
+&nbsp;        map.put(key, value);
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void putAll(Map&lt;? extends String, ? extends Object&gt; m) {
+&nbsp;        map.putAll(m);
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONObject fluentPutAll(Map&lt;? extends String, ? extends Object&gt; m) {
+&nbsp;        map.putAll(m);
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void clear() {
+&nbsp;        map.clear();
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONObject fluentClear() {
+&nbsp;        map.clear();
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object remove(Object key) {
+&nbsp;        return map.remove(key);
+&nbsp;    }
+&nbsp;
+&nbsp;    public JSONObject fluentRemove(Object key) {
+&nbsp;        map.remove(key);
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Set&lt;String&gt; keySet() {
+&nbsp;        return map.keySet();
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Collection&lt;Object&gt; values() {
+&nbsp;        return map.values();
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Set&lt;Entry&lt;String, Object&gt;&gt; entrySet() {
+&nbsp;        return map.entrySet();
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object clone() {
+&nbsp;        return new JSONObject(map instanceof LinkedHashMap //
+&nbsp;                ? new LinkedHashMap&lt;String, Object&gt;(map) //
+&nbsp;                : new HashMap&lt;String, Object&gt;(map)
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object obj) {
+&nbsp;        return this.map.equals(obj);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+&nbsp;        return this.map.hashCode();
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+&nbsp;        Class&lt;?&gt;[] parameterTypes = method.getParameterTypes();
+&nbsp;        if (parameterTypes.length == 1) {
+&nbsp;            if (&quot;equals&quot;.equals(method.getName())) {
+&nbsp;                return this.equals(args[0]);
+&nbsp;            }
+&nbsp;
+&nbsp;            Class&lt;?&gt; returnType = method.getReturnType();
+&nbsp;            if (returnType != void.class) {
+&nbsp;                throw new JSONException(&quot;illegal setter&quot;);
+&nbsp;            }
+&nbsp;
+&nbsp;            String name = null;
+&nbsp;            JSONField annotation = method.getAnnotation(JSONField.class);
+&nbsp;            if (annotation != null) {
+&nbsp;                if (annotation.name().length() != 0) {
+&nbsp;                    name = annotation.name();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            if (name == null) {
+&nbsp;                name = method.getName();
+&nbsp;
+&nbsp;                if (!name.startsWith(&quot;set&quot;)) {
+&nbsp;                    throw new JSONException(&quot;illegal setter&quot;);
+&nbsp;                }
+&nbsp;
+&nbsp;                name = name.substring(3);
+&nbsp;                if (name.length() == 0) {
+&nbsp;                    throw new JSONException(&quot;illegal setter&quot;);
+&nbsp;                }
+&nbsp;                name = Character.toLowerCase(name.charAt(0)) + name.substring(1);
+&nbsp;            }
+&nbsp;
+&nbsp;            map.put(name, args[0]);
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (parameterTypes.length == 0) {
+&nbsp;            Class&lt;?&gt; returnType = method.getReturnType();
+&nbsp;            if (returnType == void.class) {
+&nbsp;                throw new JSONException(&quot;illegal getter&quot;);
+&nbsp;            }
+&nbsp;
+&nbsp;            String name = null;
+&nbsp;            JSONField annotation = method.getAnnotation(JSONField.class);
+&nbsp;            if (annotation != null) {
+&nbsp;                if (annotation.name().length() != 0) {
+&nbsp;                    name = annotation.name();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            if (name == null) {
+&nbsp;                name = method.getName();
+&nbsp;                if (name.startsWith(&quot;get&quot;)) {
+&nbsp;                    name = name.substring(3);
+&nbsp;                    if (name.length() == 0) {
+&nbsp;                        throw new JSONException(&quot;illegal getter&quot;);
+&nbsp;                    }
+&nbsp;                    name = Character.toLowerCase(name.charAt(0)) + name.substring(1);
+&nbsp;                } else if (name.startsWith(&quot;is&quot;)) {
+&nbsp;                    name = name.substring(2);
+&nbsp;                    if (name.length() == 0) {
+&nbsp;                        throw new JSONException(&quot;illegal getter&quot;);
+&nbsp;                    }
+&nbsp;                    name = Character.toLowerCase(name.charAt(0)) + name.substring(1);
+&nbsp;                } else if (name.startsWith(&quot;hashCode&quot;)) {
+&nbsp;                    return this.hashCode();
+&nbsp;                } else if (name.startsWith(&quot;toString&quot;)) {
+&nbsp;                    return this.toString();
+&nbsp;                } else {
+&nbsp;                    throw new JSONException(&quot;illegal getter&quot;);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            Object value = map.get(name);
+&nbsp;            return TypeUtils.cast(value, method.getGenericReturnType(), ParserConfig.getGlobalInstance());
+&nbsp;        }
+&nbsp;
+&nbsp;        throw new UnsupportedOperationException(method.toGenericString());
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;String, Object&gt; getInnerMap() {
+&nbsp;        return this.map;
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T toJavaObject(Type type) {
+&nbsp;        if (type instanceof Class) {
+&nbsp;            return (T) JSONFactory.getDefaultObjectReaderProvider().getObjectReader(type).createInstance(this, 0L);
+&nbsp;        }
+&nbsp;        String str = com.alibaba.fastjson2.JSON.toJSONString(this);
+&nbsp;        return com.alibaba.fastjson2.JSON.parseObject(str, type);
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T toJavaObject(Class&lt;T&gt; clazz) {
+&nbsp;        if (clazz == Map.class) {
+&nbsp;            return (T) this;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (clazz == Object.class &amp;&amp; !containsKey(JSON.DEFAULT_TYPE_KEY)) {
+&nbsp;            return (T) this;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (clazz.isInstance(this)) {
+&nbsp;            return (T) this;
+&nbsp;        }
+&nbsp;
+&nbsp;        ObjectReaderProvider provider = JSONFactory.getDefaultObjectReaderProvider();
+&nbsp;        ObjectReader objectReader = provider.getObjectReader(clazz);
+&nbsp;        return (T) objectReader.createInstance(this, JSONReader.Feature.SupportSmartMatch.mask);
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T toJavaObject(Class&lt;T&gt; clazz, ParserConfig config, int features) {
+&nbsp;        if (clazz == Map.class) {
+&nbsp;            return (T) this;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (clazz == Object.class &amp;&amp; !containsKey(JSON.DEFAULT_TYPE_KEY)) {
+&nbsp;            return (T) this;
+&nbsp;        }
+&nbsp;
+&nbsp;        return TypeUtils.castToJavaBean(this, clazz, config);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+&nbsp;        return com.alibaba.fastjson2.JSON.toJSONString(this, JSONWriter.Feature.ReferenceDetection);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;T&gt; T unwrap(Class&lt;T&gt; iface) {
+&nbsp;        if (iface == Map.class) {
+&nbsp;            return (T) map;
+&nbsp;        }
+&nbsp;        return (T) this;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:22</div>
+</div>
+</body>
+</html>

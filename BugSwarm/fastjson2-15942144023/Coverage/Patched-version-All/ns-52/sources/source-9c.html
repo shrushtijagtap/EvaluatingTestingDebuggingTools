@@ -1,0 +1,172 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ObjectWriterMisc</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.alibaba.fastjson2.writer</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjectWriterMisc (com.alibaba.fastjson2.writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjectWriterMisc</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82.8%
+  </span>
+  <span class="absValue">
+    (24/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.alibaba.fastjson2.writer;
+&nbsp;
+&nbsp;import com.alibaba.fastjson2.JSONException;
+&nbsp;import com.alibaba.fastjson2.JSONWriter;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;
+<b class="fc">&nbsp;final class ObjectWriterMisc</b>
+&nbsp;        implements ObjectWriter {
+<b class="fc">&nbsp;    static final ObjectWriterMisc INSTANCE = new ObjectWriterMisc();</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
+<b class="fc">&nbsp;        if (object == null) {</b>
+<b class="nc">&nbsp;            jsonWriter.writeNull();</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Class&lt;?&gt; objectClass = object.getClass();</b>
+<b class="fc">&nbsp;        String objectClassName = objectClass.getName();</b>
+&nbsp;
+&nbsp;        String str;
+<b class="fc">&nbsp;        switch (objectClassName) {</b>
+&nbsp;            case &quot;net.sf.json.JSONNull&quot;:
+<b class="fc">&nbsp;                jsonWriter.writeNull();</b>
+&nbsp;                return;
+&nbsp;            case &quot;java.net.Inet4Address&quot;:
+&nbsp;            case &quot;java.net.Inet6Address&quot;:
+<b class="fc">&nbsp;                str = ((java.net.InetAddress) object).getHostName();</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case &quot;java.text.SimpleDateFormat&quot;:
+<b class="fc">&nbsp;                str = ((java.text.SimpleDateFormat) object).toPattern();</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case &quot;java.util.regex.Pattern&quot;:
+<b class="nc">&nbsp;                str = ((java.util.regex.Pattern) object).pattern();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;java.net.InetSocketAddress&quot;: {
+<b class="fc">&nbsp;                java.net.InetSocketAddress address = (java.net.InetSocketAddress) object;</b>
+&nbsp;
+<b class="fc">&nbsp;                jsonWriter.startObject();</b>
+&nbsp;
+<b class="fc">&nbsp;                jsonWriter.writeName(&quot;address&quot;);</b>
+<b class="fc">&nbsp;                jsonWriter.writeColon();</b>
+<b class="fc">&nbsp;                jsonWriter.writeAny(address.getAddress());</b>
+&nbsp;
+<b class="fc">&nbsp;                jsonWriter.writeName(&quot;port&quot;);</b>
+<b class="fc">&nbsp;                jsonWriter.writeColon();</b>
+<b class="fc">&nbsp;                jsonWriter.writeInt32(address.getPort());</b>
+&nbsp;
+<b class="fc">&nbsp;                jsonWriter.endObject();</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;            case &quot;com.fasterxml.jackson.databind.node.ArrayNode&quot;:
+<b class="fc">&nbsp;                str = object.toString();</b>
+<b class="fc">&nbsp;                if (jsonWriter.isUTF8()) {</b>
+<b class="nc">&nbsp;                    jsonWriter.writeRaw(str.getBytes(StandardCharsets.UTF_8));</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    jsonWriter.writeRaw(str);</b>
+&nbsp;                }
+&nbsp;                return;
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new JSONException(&quot;not support class : &quot; + objectClassName);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        jsonWriter.writeString(str);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-09 23:37</div>
+</div>
+</body>
+</html>
