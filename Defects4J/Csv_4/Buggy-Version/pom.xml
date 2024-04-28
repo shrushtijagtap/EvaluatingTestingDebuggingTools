@@ -54,6 +54,12 @@ CSV files of various types.
       <version>1.3.168</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.evosuite</groupId>
+      <artifactId>evosuite-standalone-runtime</artifactId>
+      <version>1.0.6</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <developers>
@@ -167,8 +173,27 @@ CSV files of various types.
           <headerLocation>${checkstyle.header.file}</headerLocation>
         </configuration>
       </plugin>
+	    <plugin>
+        <groupId>org.evosuite.plugins</groupId>
+        <artifactId>evosuite-maven-plugin</artifactId>
+        <version>1.0.6</version>
+      </plugin>
+      <plugin>
+            <groupId>org.openclover</groupId>
+            <artifactId>clover-maven-plugin</artifactId>
+            <version>4.5.2</version>
+      </plugin>
+
     </plugins>
   </build>
+
+<pluginRepositories>
+  <pluginRepository>
+    <id>EvoSuite</id>
+    <name>EvoSuite Repository</name>
+    <url>http://www.evosuite.org/m2</url>
+  </pluginRepository>
+</pluginRepositories>
 
   <reporting>
     <plugins>
