@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="java_programs.EvosuiteGET_FACTORS_ESTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-04-26T23:29:35" hostname="wirelessprv-10-195-233-59.near.illinois.edu" time="0.01">
+  <properties/>
+  <testcase name="test3" classname="java_programs.EvosuiteGET_FACTORS_ESTest" time="0.005"/>
+  <testcase name="test2" classname="java_programs.EvosuiteGET_FACTORS_ESTest" time="0.001"/>
+  <testcase name="test1" classname="java_programs.EvosuiteGET_FACTORS_ESTest" time="0.003"/>
+  <testcase name="test0" classname="java_programs.EvosuiteGET_FACTORS_ESTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

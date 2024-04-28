@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="RandoopRegressionTest0" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-04-25T05:47:00" hostname="Sejals-MacBook-Air.local" time="0.001">
+  <properties/>
+  <testcase name="test1" classname="RandoopRegressionTest0" time="0.001"/>
+  <testcase name="test2" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test3" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test4" classname="RandoopRegressionTest0" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

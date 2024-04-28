@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="java_testcases.junit.KNAPSACK_TEST" tests="10" skipped="0" failures="6" errors="0" timestamp="2024-04-01T04:29:56" hostname="Sejals-MacBook-Air.local" time="0.483">
+<testsuite name="java_testcases.junit.KNAPSACK_TEST" tests="10" skipped="0" failures="6" errors="0" timestamp="2024-04-25T05:48:13" hostname="Sejals-MacBook-Air.local" time="0.578">
   <properties/>
-  <testcase name="test_0" classname="java_testcases.junit.KNAPSACK_TEST" time="0.001"/>
-  <testcase name="test_1" classname="java_testcases.junit.KNAPSACK_TEST" time="0.002">
+  <testcase name="test_0" classname="java_testcases.junit.KNAPSACK_TEST" time="0.0"/>
+  <testcase name="test_1" classname="java_testcases.junit.KNAPSACK_TEST" time="0.001">
     <failure message="java.lang.AssertionError: expected:&lt;30&gt; but was:&lt;20&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;30&gt; but was:&lt;20&gt;
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:834)
@@ -23,7 +23,7 @@
 	at java.lang.Thread.run(Thread.java:750)
 </failure>
   </testcase>
-  <testcase name="test_2" classname="java_testcases.junit.KNAPSACK_TEST" time="0.0"/>
+  <testcase name="test_2" classname="java_testcases.junit.KNAPSACK_TEST" time="0.001"/>
   <testcase name="test_3" classname="java_testcases.junit.KNAPSACK_TEST" time="0.0">
     <failure message="java.lang.AssertionError: expected:&lt;51&gt; but was:&lt;47&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;51&gt; but was:&lt;47&gt;
 	at org.junit.Assert.fail(Assert.java:88)
@@ -45,7 +45,7 @@
 	at java.lang.Thread.run(Thread.java:750)
 </failure>
   </testcase>
-  <testcase name="test_4" classname="java_testcases.junit.KNAPSACK_TEST" time="0.001">
+  <testcase name="test_4" classname="java_testcases.junit.KNAPSACK_TEST" time="0.0">
     <failure message="java.lang.AssertionError: expected:&lt;107&gt; but was:&lt;102&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;107&gt; but was:&lt;102&gt;
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:834)
@@ -108,7 +108,7 @@
 	at java.lang.Thread.run(Thread.java:750)
 </failure>
   </testcase>
-  <testcase name="test_7" classname="java_testcases.junit.KNAPSACK_TEST" time="0.001">
+  <testcase name="test_7" classname="java_testcases.junit.KNAPSACK_TEST" time="0.0">
     <failure message="java.lang.AssertionError: expected:&lt;309&gt; but was:&lt;284&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;309&gt; but was:&lt;284&gt;
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:834)
@@ -129,8 +129,8 @@
 	at java.lang.Thread.run(Thread.java:750)
 </failure>
   </testcase>
-  <testcase name="test_8" classname="java_testcases.junit.KNAPSACK_TEST" time="0.0"/>
-  <testcase name="test_9" classname="java_testcases.junit.KNAPSACK_TEST" time="0.478"/>
+  <testcase name="test_8" classname="java_testcases.junit.KNAPSACK_TEST" time="0.001"/>
+  <testcase name="test_9" classname="java_testcases.junit.KNAPSACK_TEST" time="0.575"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

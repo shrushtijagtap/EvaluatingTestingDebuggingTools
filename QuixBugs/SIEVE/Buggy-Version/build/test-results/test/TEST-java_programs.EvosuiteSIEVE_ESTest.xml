@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="java_programs.EvosuiteSIEVE_ESTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2024-04-25T05:55:48" hostname="Sejals-MacBook-Air.local" time="0.017">
+  <properties/>
+  <testcase name="test07" classname="java_programs.EvosuiteSIEVE_ESTest" time="0.003"/>
+  <testcase name="test06" classname="java_programs.EvosuiteSIEVE_ESTest" time="0.001"/>
+  <testcase name="test09" classname="java_programs.EvosuiteSIEVE_ESTest" time="0.0"/>
+  <testcase name="test08" classname="java_programs.EvosuiteSIEVE_ESTest" time="0.003"/>
+  <testcase name="test10" classname="java_programs.EvosuiteSIEVE_ESTest" time="0.0"/>
+  <testcase name="test01" classname="java_programs.EvosuiteSIEVE_ESTest" time="0.001"/>
+  <testcase name="test12" classname="java_programs.EvosuiteSIEVE_ESTest" time="0.001"/>
+  <testcase name="test00" classname="java_programs.EvosuiteSIEVE_ESTest" time="0.0"/>
+  <testcase name="test11" classname="java_programs.EvosuiteSIEVE_ESTest" time="0.001"/>
+  <testcase name="test03" classname="java_programs.EvosuiteSIEVE_ESTest" time="0.004"/>
+  <testcase name="test02" classname="java_programs.EvosuiteSIEVE_ESTest" time="0.001"/>
+  <testcase name="test13" classname="java_programs.EvosuiteSIEVE_ESTest" time="0.001"/>
+  <testcase name="test05" classname="java_programs.EvosuiteSIEVE_ESTest" time="0.0"/>
+  <testcase name="test04" classname="java_programs.EvosuiteSIEVE_ESTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

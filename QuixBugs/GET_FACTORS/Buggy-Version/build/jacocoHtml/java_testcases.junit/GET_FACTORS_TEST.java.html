@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GET_FACTORS_TEST.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Buggy-Version</a> &gt; <a href="index.source.html" class="el_package">java_testcases.junit</a> &gt; <span class="el_source">GET_FACTORS_TEST.java</span></div><h1>GET_FACTORS_TEST.java</h1><pre class="source lang-java linenums">package java_testcases.junit;
+
+
+<span class="fc" id="L4">public class GET_FACTORS_TEST {</span>
+    @org.junit.Test(timeout = 3000)
+    public void test_0() throws java.lang.Exception {
+<span class="fc" id="L7">        java.util.ArrayList result = java_programs.GET_FACTORS.get_factors((int)1);</span>
+<span class="fc" id="L8">        String resultFormatted = java_testcases.junit.QuixFixOracleHelper.format(result,true);</span>
+<span class="fc" id="L9">        org.junit.Assert.assertEquals(&quot;[]&quot;, resultFormatted);</span>
+<span class="fc" id="L10">    }</span>
+
+    @org.junit.Test(timeout = 3000)
+    public void test_1() throws java.lang.Exception {
+<span class="fc" id="L14">        java.util.ArrayList result = java_programs.GET_FACTORS.get_factors((int)100);</span>
+<span class="fc" id="L15">        String resultFormatted = java_testcases.junit.QuixFixOracleHelper.format(result,true);</span>
+<span class="nc" id="L16">        org.junit.Assert.assertEquals(&quot;[2,2,5,5]&quot;, resultFormatted);</span>
+<span class="nc" id="L17">    }</span>
+
+    @org.junit.Test(timeout = 3000)
+    public void test_2() throws java.lang.Exception {
+<span class="fc" id="L21">        java.util.ArrayList result = java_programs.GET_FACTORS.get_factors((int)101);</span>
+<span class="fc" id="L22">        String resultFormatted = java_testcases.junit.QuixFixOracleHelper.format(result,true);</span>
+<span class="nc" id="L23">        org.junit.Assert.assertEquals(&quot;[101]&quot;, resultFormatted);</span>
+<span class="nc" id="L24">    }</span>
+
+    @org.junit.Test(timeout = 3000)
+    public void test_3() throws java.lang.Exception {
+<span class="fc" id="L28">        java.util.ArrayList result = java_programs.GET_FACTORS.get_factors((int)104);</span>
+<span class="fc" id="L29">        String resultFormatted = java_testcases.junit.QuixFixOracleHelper.format(result,true);</span>
+<span class="nc" id="L30">        org.junit.Assert.assertEquals(&quot;[2,2,2,13]&quot;, resultFormatted);</span>
+<span class="nc" id="L31">    }</span>
+
+    @org.junit.Test(timeout = 3000)
+    public void test_4() throws java.lang.Exception {
+<span class="fc" id="L35">        java.util.ArrayList result = java_programs.GET_FACTORS.get_factors((int)2);</span>
+<span class="fc" id="L36">        String resultFormatted = java_testcases.junit.QuixFixOracleHelper.format(result,true);</span>
+<span class="nc" id="L37">        org.junit.Assert.assertEquals(&quot;[2]&quot;, resultFormatted);</span>
+<span class="nc" id="L38">    }</span>
+
+    @org.junit.Test(timeout = 3000)
+    public void test_5() throws java.lang.Exception {
+<span class="fc" id="L42">        java.util.ArrayList result = java_programs.GET_FACTORS.get_factors((int)3);</span>
+<span class="fc" id="L43">        String resultFormatted = java_testcases.junit.QuixFixOracleHelper.format(result,true);</span>
+<span class="nc" id="L44">        org.junit.Assert.assertEquals(&quot;[3]&quot;, resultFormatted);</span>
+<span class="nc" id="L45">    }</span>
+
+    @org.junit.Test(timeout = 3000)
+    public void test_6() throws java.lang.Exception {
+<span class="fc" id="L49">        java.util.ArrayList result = java_programs.GET_FACTORS.get_factors((int)17);</span>
+<span class="fc" id="L50">        String resultFormatted = java_testcases.junit.QuixFixOracleHelper.format(result,true);</span>
+<span class="nc" id="L51">        org.junit.Assert.assertEquals(&quot;[17]&quot;, resultFormatted);</span>
+<span class="nc" id="L52">    }</span>
+
+    @org.junit.Test(timeout = 3000)
+    public void test_7() throws java.lang.Exception {
+<span class="fc" id="L56">        java.util.ArrayList result = java_programs.GET_FACTORS.get_factors((int)63);</span>
+<span class="fc" id="L57">        String resultFormatted = java_testcases.junit.QuixFixOracleHelper.format(result,true);</span>
+<span class="nc" id="L58">        org.junit.Assert.assertEquals(&quot;[3,3,7]&quot;, resultFormatted);</span>
+<span class="nc" id="L59">    }</span>
+
+    @org.junit.Test(timeout = 3000)
+    public void test_8() throws java.lang.Exception {
+<span class="fc" id="L63">        java.util.ArrayList result = java_programs.GET_FACTORS.get_factors((int)74);</span>
+<span class="fc" id="L64">        String resultFormatted = java_testcases.junit.QuixFixOracleHelper.format(result,true);</span>
+<span class="nc" id="L65">        org.junit.Assert.assertEquals(&quot;[2,37]&quot;, resultFormatted);</span>
+<span class="nc" id="L66">    }</span>
+
+    @org.junit.Test(timeout = 3000)
+    public void test_9() throws java.lang.Exception {
+<span class="fc" id="L70">        java.util.ArrayList result = java_programs.GET_FACTORS.get_factors((int)73);</span>
+<span class="fc" id="L71">        String resultFormatted = java_testcases.junit.QuixFixOracleHelper.format(result,true);</span>
+<span class="nc" id="L72">        org.junit.Assert.assertEquals(&quot;[73]&quot;, resultFormatted);</span>
+<span class="nc" id="L73">    }</span>
+
+    @org.junit.Test(timeout = 3000)
+    public void test_10() throws java.lang.Exception {
+<span class="fc" id="L77">        java.util.ArrayList result = java_programs.GET_FACTORS.get_factors((int)9837);</span>
+<span class="fc" id="L78">        String resultFormatted = java_testcases.junit.QuixFixOracleHelper.format(result,true);</span>
+<span class="nc" id="L79">        org.junit.Assert.assertEquals(&quot;[3,3,1093]&quot;, resultFormatted);</span>
+<span class="nc" id="L80">    }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

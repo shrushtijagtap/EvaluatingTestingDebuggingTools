@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="randoop-tests/|java_testcases/junit/|evosuite-tests/" kind="src" path=""/>
+	<classpathentry kind="src" path="evosuite-tests"/>
+	<classpathentry kind="src" path="java_testcases/junit"/>
+	<classpathentry kind="src" path="randoop-tests"/>
+	<classpathentry kind="output" path="build/classes/java/main"/>
+</classpath>

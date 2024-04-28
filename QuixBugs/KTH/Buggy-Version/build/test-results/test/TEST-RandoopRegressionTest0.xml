@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="RandoopRegressionTest0" tests="37" skipped="0" failures="0" errors="0" timestamp="2024-04-25T05:48:41" hostname="Sejals-MacBook-Air.local" time="0.004">
+  <properties/>
+  <testcase name="test01" classname="RandoopRegressionTest0" time="0.001"/>
+  <testcase name="test02" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test03" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test04" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test05" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test06" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test07" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test08" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test09" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test10" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test11" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test12" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test13" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test14" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test15" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test16" classname="RandoopRegressionTest0" time="0.001"/>
+  <testcase name="test17" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test18" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test19" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test20" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test21" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test22" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test23" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test24" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test25" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test26" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test27" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test28" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test29" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test30" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test31" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test32" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test33" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test34" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test35" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test36" classname="RandoopRegressionTest0" time="0.0"/>
+  <testcase name="test37" classname="RandoopRegressionTest0" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

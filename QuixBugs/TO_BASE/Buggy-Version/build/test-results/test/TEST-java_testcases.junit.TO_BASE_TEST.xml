@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="java_testcases.junit.TO_BASE_TEST" tests="7" skipped="0" failures="7" errors="0" timestamp="2024-04-01T06:58:26" hostname="Sejals-MacBook-Air.local" time="0.012">
+<testsuite name="java_testcases.junit.TO_BASE_TEST" tests="7" skipped="0" failures="7" errors="0" timestamp="2024-04-25T22:58:08" hostname="Sejals-MacBook-Air.local" time="0.005">
   <properties/>
-  <testcase name="test_0" classname="java_testcases.junit.TO_BASE_TEST" time="0.007">
+  <testcase name="test_0" classname="java_testcases.junit.TO_BASE_TEST" time="0.002">
     <failure message="org.junit.ComparisonFailure: expected:&lt;[1F]&gt; but was:&lt;[F1]&gt;" type="org.junit.ComparisonFailure">org.junit.ComparisonFailure: expected:&lt;[1F]&gt; but was:&lt;[F1]&gt;
 	at org.junit.Assert.assertEquals(Assert.java:115)
 	at org.junit.Assert.assertEquals(Assert.java:144)
@@ -20,7 +20,7 @@
 	at java.lang.Thread.run(Thread.java:750)
 </failure>
   </testcase>
-  <testcase name="test_1" classname="java_testcases.junit.TO_BASE_TEST" time="0.001">
+  <testcase name="test_1" classname="java_testcases.junit.TO_BASE_TEST" time="0.0">
     <failure message="org.junit.ComparisonFailure: expected:&lt;10[10]01&gt; but was:&lt;10[01]01&gt;" type="org.junit.ComparisonFailure">org.junit.ComparisonFailure: expected:&lt;10[10]01&gt; but was:&lt;10[01]01&gt;
 	at org.junit.Assert.assertEquals(Assert.java:115)
 	at org.junit.Assert.assertEquals(Assert.java:144)
@@ -77,7 +77,7 @@
 	at java.lang.Thread.run(Thread.java:750)
 </failure>
   </testcase>
-  <testcase name="test_4" classname="java_testcases.junit.TO_BASE_TEST" time="0.0">
+  <testcase name="test_4" classname="java_testcases.junit.TO_BASE_TEST" time="0.001">
     <failure message="org.junit.ComparisonFailure: expected:&lt;[2A]&gt; but was:&lt;[A2]&gt;" type="org.junit.ComparisonFailure">org.junit.ComparisonFailure: expected:&lt;[2A]&gt; but was:&lt;[A2]&gt;
 	at org.junit.Assert.assertEquals(Assert.java:115)
 	at org.junit.Assert.assertEquals(Assert.java:144)
@@ -96,7 +96,7 @@
 	at java.lang.Thread.run(Thread.java:750)
 </failure>
   </testcase>
-  <testcase name="test_5" classname="java_testcases.junit.TO_BASE_TEST" time="0.001">
+  <testcase name="test_5" classname="java_testcases.junit.TO_BASE_TEST" time="0.0">
     <failure message="org.junit.ComparisonFailure: expected:&lt;[E75]&gt; but was:&lt;[57E]&gt;" type="org.junit.ComparisonFailure">org.junit.ComparisonFailure: expected:&lt;[E75]&gt; but was:&lt;[57E]&gt;
 	at org.junit.Assert.assertEquals(Assert.java:115)
 	at org.junit.Assert.assertEquals(Assert.java:144)
@@ -115,7 +115,7 @@
 	at java.lang.Thread.run(Thread.java:750)
 </failure>
   </testcase>
-  <testcase name="test_6" classname="java_testcases.junit.TO_BASE_TEST" time="0.001">
+  <testcase name="test_6" classname="java_testcases.junit.TO_BASE_TEST" time="0.0">
     <failure message="org.junit.ComparisonFailure: expected:&lt;[749]&gt; but was:&lt;[947]&gt;" type="org.junit.ComparisonFailure">org.junit.ComparisonFailure: expected:&lt;[749]&gt; but was:&lt;[947]&gt;
 	at org.junit.Assert.assertEquals(Assert.java:115)
 	at org.junit.Assert.assertEquals(Assert.java:144)

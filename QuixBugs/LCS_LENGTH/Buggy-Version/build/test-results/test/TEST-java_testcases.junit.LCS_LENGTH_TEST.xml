@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="java_testcases.junit.LCS_LENGTH_TEST" tests="9" skipped="0" failures="8" errors="0" timestamp="2024-04-01T04:52:30" hostname="Sejals-MacBook-Air.local" time="0.005">
+<testsuite name="java_testcases.junit.LCS_LENGTH_TEST" tests="9" skipped="0" failures="8" errors="0" timestamp="2024-04-25T07:34:41" hostname="Sejals-MacBook-Air.local" time="0.004">
   <properties/>
-  <testcase name="test_0" classname="java_testcases.junit.LCS_LENGTH_TEST" time="0.002">
+  <testcase name="test_0" classname="java_testcases.junit.LCS_LENGTH_TEST" time="0.001">
     <failure message="java.lang.AssertionError: expected:&lt;2&gt; but was:&lt;1&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;2&gt; but was:&lt;1&gt;
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:834)
@@ -22,7 +22,7 @@
 	at java.lang.Thread.run(Thread.java:750)
 </failure>
   </testcase>
-  <testcase name="test_1" classname="java_testcases.junit.LCS_LENGTH_TEST" time="0.001">
+  <testcase name="test_1" classname="java_testcases.junit.LCS_LENGTH_TEST" time="0.0">
     <failure message="java.lang.AssertionError: expected:&lt;4&gt; but was:&lt;1&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;4&gt; but was:&lt;1&gt;
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:834)
@@ -107,7 +107,7 @@
 	at java.lang.Thread.run(Thread.java:750)
 </failure>
   </testcase>
-  <testcase name="test_6" classname="java_testcases.junit.LCS_LENGTH_TEST" time="0.0">
+  <testcase name="test_6" classname="java_testcases.junit.LCS_LENGTH_TEST" time="0.001">
     <failure message="java.lang.AssertionError: expected:&lt;6&gt; but was:&lt;1&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;6&gt; but was:&lt;1&gt;
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:834)
@@ -149,7 +149,7 @@
 	at java.lang.Thread.run(Thread.java:750)
 </failure>
   </testcase>
-  <testcase name="test_8" classname="java_testcases.junit.LCS_LENGTH_TEST" time="0.0">
+  <testcase name="test_8" classname="java_testcases.junit.LCS_LENGTH_TEST" time="0.001">
     <failure message="java.lang.AssertionError: expected:&lt;3&gt; but was:&lt;1&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;3&gt; but was:&lt;1&gt;
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:834)

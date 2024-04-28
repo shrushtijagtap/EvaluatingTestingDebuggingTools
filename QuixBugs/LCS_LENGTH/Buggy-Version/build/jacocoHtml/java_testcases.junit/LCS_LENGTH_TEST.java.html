@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LCS_LENGTH_TEST.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Buggy-Version</a> &gt; <a href="index.source.html" class="el_package">java_testcases.junit</a> &gt; <span class="el_source">LCS_LENGTH_TEST.java</span></div><h1>LCS_LENGTH_TEST.java</h1><pre class="source lang-java linenums">package java_testcases.junit;
+
+
+<span class="fc" id="L4">public class LCS_LENGTH_TEST {</span>
+    @org.junit.Test(timeout = 3000)
+    public void test_0() throws java.lang.Exception {
+<span class="fc" id="L7">        java.lang.Integer result = java_programs.LCS_LENGTH.lcs_length((java.lang.String)&quot;witch&quot;,(java.lang.String)&quot;sandwich&quot;);</span>
+<span class="nc" id="L8">        org.junit.Assert.assertEquals( (java.lang.Integer) 2, result);</span>
+<span class="nc" id="L9">    }</span>
+
+    @org.junit.Test(timeout = 3000)
+    public void test_1() throws java.lang.Exception {
+<span class="fc" id="L13">        java.lang.Integer result = java_programs.LCS_LENGTH.lcs_length((java.lang.String)&quot;meow&quot;,(java.lang.String)&quot;homeowner&quot;);</span>
+<span class="nc" id="L14">        org.junit.Assert.assertEquals( (java.lang.Integer) 4, result);</span>
+<span class="nc" id="L15">    }</span>
+
+    @org.junit.Test(timeout = 3000)
+    public void test_2() throws java.lang.Exception {
+<span class="fc" id="L19">        java.lang.Integer result = java_programs.LCS_LENGTH.lcs_length((java.lang.String)&quot;fun&quot;,(java.lang.String)&quot;&quot;);</span>
+<span class="fc" id="L20">        org.junit.Assert.assertEquals( (java.lang.Integer) 0, result);</span>
+<span class="fc" id="L21">    }</span>
+
+    @org.junit.Test(timeout = 3000)
+    public void test_3() throws java.lang.Exception {
+<span class="fc" id="L25">        java.lang.Integer result = java_programs.LCS_LENGTH.lcs_length((java.lang.String)&quot;fun&quot;,(java.lang.String)&quot;function&quot;);</span>
+<span class="nc" id="L26">        org.junit.Assert.assertEquals( (java.lang.Integer) 3, result);</span>
+<span class="nc" id="L27">    }</span>
+
+    @org.junit.Test(timeout = 3000)
+    public void test_4() throws java.lang.Exception {
+<span class="fc" id="L31">        java.lang.Integer result = java_programs.LCS_LENGTH.lcs_length((java.lang.String)&quot;cyborg&quot;,(java.lang.String)&quot;cyber&quot;);</span>
+<span class="nc" id="L32">        org.junit.Assert.assertEquals( (java.lang.Integer) 3, result);</span>
+<span class="nc" id="L33">    }</span>
+
+    @org.junit.Test(timeout = 3000)
+    public void test_5() throws java.lang.Exception {
+<span class="fc" id="L37">        java.lang.Integer result = java_programs.LCS_LENGTH.lcs_length((java.lang.String)&quot;physics&quot;,(java.lang.String)&quot;physics&quot;);</span>
+<span class="nc" id="L38">        org.junit.Assert.assertEquals( (java.lang.Integer) 7, result);</span>
+<span class="nc" id="L39">    }</span>
+
+    @org.junit.Test(timeout = 3000)
+    public void test_6() throws java.lang.Exception {
+<span class="fc" id="L43">        java.lang.Integer result = java_programs.LCS_LENGTH.lcs_length((java.lang.String)&quot;space age&quot;,(java.lang.String)&quot;pace a&quot;);</span>
+<span class="nc" id="L44">        org.junit.Assert.assertEquals( (java.lang.Integer) 6, result);</span>
+<span class="nc" id="L45">    }</span>
+
+    @org.junit.Test(timeout = 3000)
+    public void test_7() throws java.lang.Exception {
+<span class="fc" id="L49">        java.lang.Integer result = java_programs.LCS_LENGTH.lcs_length((java.lang.String)&quot;flippy&quot;,(java.lang.String)&quot;floppy&quot;);</span>
+<span class="nc" id="L50">        org.junit.Assert.assertEquals( (java.lang.Integer) 3, result);</span>
+<span class="nc" id="L51">    }</span>
+
+    @org.junit.Test(timeout = 3000)
+    public void test_8() throws java.lang.Exception {
+<span class="fc" id="L55">        java.lang.Integer result = java_programs.LCS_LENGTH.lcs_length((java.lang.String)&quot;acbdegcedbg&quot;,(java.lang.String)&quot;begcfeubk&quot;);</span>
+<span class="nc" id="L56">        org.junit.Assert.assertEquals( (java.lang.Integer) 3, result);</span>
+<span class="nc" id="L57">    }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="java_programs.EvosuiteLCS_LENGTH_ESTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2024-04-25T07:34:41" hostname="Sejals-MacBook-Air.local" time="0.011">
+  <properties/>
+  <testcase name="test4" classname="java_programs.EvosuiteLCS_LENGTH_ESTest" time="0.004"/>
+  <testcase name="test5" classname="java_programs.EvosuiteLCS_LENGTH_ESTest" time="0.001"/>
+  <testcase name="test2" classname="java_programs.EvosuiteLCS_LENGTH_ESTest" time="0.004"/>
+  <testcase name="test3" classname="java_programs.EvosuiteLCS_LENGTH_ESTest" time="0.001"/>
+  <testcase name="test0" classname="java_programs.EvosuiteLCS_LENGTH_ESTest" time="0.001"/>
+  <testcase name="test1" classname="java_programs.EvosuiteLCS_LENGTH_ESTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

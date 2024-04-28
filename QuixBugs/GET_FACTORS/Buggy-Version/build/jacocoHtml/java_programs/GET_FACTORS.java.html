@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GET_FACTORS.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Buggy-Version</a> &gt; <a href="index.source.html" class="el_package">java_programs</a> &gt; <span class="el_source">GET_FACTORS.java</span></div><h1>GET_FACTORS.java</h1><pre class="source lang-java linenums">package java_programs;
+import java.util.*;
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author derricklin
+ */
+<span class="fc" id="L13">public class GET_FACTORS {</span>
+    public static ArrayList&lt;Integer&gt; get_factors(int n) {
+<span class="fc bfc" id="L15" title="All 2 branches covered.">        if (n == 1) {</span>
+<span class="fc" id="L16">            return new ArrayList&lt;Integer&gt;();</span>
+        }
+<span class="fc" id="L18">        int max = (int)(Math.sqrt(n) + 1.0);</span>
+<span class="fc bfc" id="L19" title="All 2 branches covered.">        for (int i=2; i &lt; max; i++) {</span>
+<span class="fc bfc" id="L20" title="All 2 branches covered.">            if (n % i == 0) {</span>
+<span class="fc" id="L21">                ArrayList&lt;Integer&gt; prepend = new ArrayList&lt;Integer&gt;(0);</span>
+<span class="fc" id="L22">                prepend.add(i);</span>
+<span class="fc" id="L23">                prepend.addAll(get_factors(n / i));</span>
+<span class="fc" id="L24">                return prepend;</span>
+            }
+        }
+<span class="fc" id="L27">        return new ArrayList&lt;Integer&gt;();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
