@@ -1,11 +1,11 @@
 Bug Name,Bug ID,AR,FR
-Defects4J,Csv_2,3,3
-Defects4J,Csv_1,3,3
-Defects4J,Compress_1,2,2
-Defects4J,Csv_3,9,9
+Defects4J,Csv_2,4,4
+Defects4J,Csv_1,6,6
+Defects4J,Compress_1,89,89
+Defects4J,Csv_3,25,25
 Defects4J,Csv_4,1,1
-Defects4J,Codec_2,5,5
-Defects4J,Codec_3,56,56
+Defects4J,Codec_2,9,9
+Defects4J,Codec_3,206,206
 QuixBugs,FLATTEN,2.5,2
 QuixBugs,LCS_LENGTH,1,1
 QuixBugs,SHUNTING_YARD,3,3
