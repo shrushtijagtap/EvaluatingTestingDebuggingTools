@@ -19,7 +19,7 @@ Bears,Bears-137,1,1
 Bears,Bears-131,2,1
 Bears,Bears-130,1,1
 Bears,Bears-21,2.5,1
-BugSwarm,commons-lang-224267191,19,21.57142857
+BugSwarm,commons-lang-224267191,21.57142857,19
 BugSwarm,owlapi-158989792,11,11
-Bugswarm,byte-buddy-140517155,23,24.73333333
-Bugswarm,mp4parser-107859078,1,100.50
+Bugswarm,byte-buddy-140517155,24.73333333,23
+Bugswarm,mp4parser-107859078,100.50,1
