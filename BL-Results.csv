@@ -6,11 +6,11 @@ Defects4J,Csv_3,25,25
 Defects4J,Csv_4,1,1
 Defects4J,Codec_2,9,9
 Defects4J,Codec_3,206,206
-QuixBugs,FLATTEN,2.5,2
+QuixBugs,FLATTEN,5.5,5
 QuixBugs,LCS_LENGTH,1,1
-QuixBugs,SHUNTING_YARD,3,3
+QuixBugs,SHUNTING_YARD,15,15
 QuixBugs,IS_VALID_PARENTHESIZATION,2,2
-QuixBugs,SUBSEQUENCES,4,4
+QuixBugs,SUBSEQUENCES,9,9
 QuixBugs,TO_BASE,1,1
 QuixBugs,GET_FACTORS,2,2
 Bears,Bears-141,4,2
